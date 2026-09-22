@@ -1,0 +1,65 @@
+/* Assurance + FAQ. Own class names so the legacy .landing-assurance/.landing-faq overrides in globals.css don't apply. */
+.section {
+  --line: #dfe1e7;
+  --muted: #686870;
+  --ease: cubic-bezier(.2, 0, 0, 1);
+  --gutter: clamp(1.5rem, 3.5vw, 3.5rem);
+  position: relative;
+  border-top: 0 !important; /* beats global `.landing-page section` full-width rule */
+  padding: clamp(5rem, 9vw, 8rem) calc(var(--page-rail, 1rem) + var(--gutter));
+  background: #fff;
+}
+/* Divider runs rail to rail, matching the page's dashed guides. */
+.section::before { content: ""; position: absolute; top: 0; left: var(--page-rail, 0); right: var(--page-rail, 0); border-top: 1px dashed #d9d9dd; }
+.section h2 {
+  margin: 1rem 0 0;
+  max-width: 22ch;
+  color: #08080a;
+  font: 600 clamp(1.75rem, 2.8vw, 2.75rem) / 1.15 var(--font-be-vietnam-pro), sans-serif;
+  letter-spacing: -.045em;
+}
+.lead { margin: 0; max-width: 38ch; color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+/* Assurance: heading row, then three columns. */
+.trustHead { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 2rem clamp(3rem, 8vw, 7rem); align-items: end; }
+.trustHead .lead { justify-self: end; }
+.points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: clamp(3.5rem, 6vw, 5rem) 0 0; padding: 0; list-style: none; border-top: 1px solid #111; }
+.points li { display: flex; flex-direction: column; gap: .85rem; padding: 2.25rem clamp(1.5rem, 3vw, 2.75rem) .5rem 0; transition: transform 180ms var(--ease); }
+.points li + li { padding-left: clamp(1.5rem, 3vw, 2.75rem); border-left: 1px solid var(--line); }
+.points li:hover { transform: translateY(-3px); }
+.points b { color: #1c5cff; font-size: .7rem; letter-spacing: .08em; }
+.points strong { color: #111; font-size: 1.15rem; font-weight: 600; letter-spacing: -.02em; }
+.points small { color: var(--muted); font-size: .85rem; line-height: 1.6; }
+
+/* FAQ: sticky heading beside the list. */
+.faq { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: clamp(3rem, 8vw, 7rem); align-items: start; }
+.faqHead { position: sticky; top: 6rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.faqHead h2 { margin-top: .25rem; }
+.faqHead h2 { margin-bottom: 0; }
+.contact { align-self: flex-start; margin-top: .5rem; padding-bottom: .2rem; border-bottom: 1px solid #111; color: #111; font-size: .8rem; font-weight: 600; transition: color 160ms var(--ease), border-color 160ms var(--ease); }
+.contact:hover { color: #1c5cff; border-color: #1c5cff; }
+.list { border-top: 1px solid #111; }
+.list details { border-bottom: 1px solid var(--line); }
+.list summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; padding-block: 1.4rem; color: #111; font-size: .92rem; font-weight: 600; list-style: none; cursor: pointer; transition: color 160ms var(--ease); }
+.list summary::-webkit-details-marker { display: none; }
+.list summary::after { content: "+"; flex: none; font-size: 1.25rem; font-weight: 400; transition: transform 200ms var(--ease); }
+.list details[open] summary::after { transform: rotate(45deg); }
+.list summary:hover { color: #1c5cff; }
+.list details p { margin: -.25rem 0 1.6rem; max-width: 52ch; color: var(--muted); font-size: .85rem; line-height: 1.7; animation: fadeUp 280ms var(--ease) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(4px); } }
+
+@media (max-width: 760px) {
+  .trustHead, .faq { grid-template-columns: 1fr; }
+  .trustHead .lead { justify-self: start; }
+  .points { grid-template-columns: 1fr; }
+  .section { --gutter: .5rem; padding-block: 4.5rem; }
+  .points li, .points li + li { padding: 1.75rem 0; border-left: 0; }
+  .points li + li { border-top: 1px solid var(--line); }
+  .faqHead { position: static; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .points li, .list summary::after { transition: none; }
+  .points li:hover { transform: none; }
+  .list details p { animation: none; }
+}

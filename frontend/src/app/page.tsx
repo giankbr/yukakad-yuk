@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AosInit } from "@/components/landing/AosInit";
 import density from "./landing-density.module.css";
+import trust from "./landing-trust.module.css";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -241,14 +242,18 @@ export default async function Home() {
         </section>
       )}
 
-      <section className="landing-assurance">
-        <div data-aos="fade-right"><p className="landing-section-kicker">Dibuat untuk momen pribadi</p><h2>Detail acara kalian tetap berada dalam kendali.</h2><p>Bagikan hanya yang tamu perlu lihat, kelola tamu dari satu dashboard, dan biarkan informasi penting tersusun rapi sampai hari acara.</p></div>
-        <div className="landing-assurance-list" data-aos="fade-left"><div><b>01</b><span><strong>Link yang mudah dikirim</strong><small>Satu tautan undangan yang siap dibagikan di kanal apa pun.</small></span></div><div><b>02</b><span><strong>Data tamu tertata</strong><small>Catatan RSVP dan check-in tersimpan dalam workspace kalian.</small></span></div><div><b>03</b><span><strong>Kontrol di tangan kalian</strong><small>Ubah informasi undangan kapan pun diperlukan.</small></span></div></div>
+      <section className={trust.section}>
+        <div className={trust.trustHead} data-aos="fade-up"><div><p className="landing-section-kicker">Dibuat untuk momen pribadi</p><h2>Detail acara kalian tetap berada dalam kendali.</h2></div><p className={trust.lead}>Bagikan hanya yang tamu perlu lihat, kelola tamu dari satu dashboard, dan biarkan informasi penting tersusun rapi sampai hari acara.</p></div>
+        <ul className={trust.points} data-aos="fade-up" data-aos-delay="80">
+          <li><b>01</b><strong>Link yang mudah dikirim</strong><small>Satu tautan undangan yang siap dibagikan di kanal apa pun.</small></li>
+          <li><b>02</b><strong>Data tamu tertata</strong><small>Catatan RSVP dan check-in tersimpan dalam workspace kalian.</small></li>
+          <li><b>03</b><strong>Kontrol di tangan kalian</strong><small>Ubah informasi undangan kapan pun diperlukan.</small></li>
+        </ul>
       </section>
 
-      <section className="landing-faq" aria-labelledby="faq-title">
-        <div data-aos="fade-up"><p className="landing-section-kicker">FAQ</p><h2 id="faq-title">Masih ada yang ingin ditanyakan?</h2><p>Jawaban singkat untuk hal-hal yang biasanya ingin kalian pastikan sebelum mulai.</p></div>
-        <div className="landing-faq-list" data-aos="fade-up" data-aos-delay="80"><details open><summary>Apakah bisa mulai tanpa membayar?</summary><p>Bisa. Paket Mulai dapat dipakai untuk membuat undangan pertama tanpa biaya.</p></details><details><summary>Apakah tamu perlu membuat akun?</summary><p>Tidak. Tamu cukup membuka link undangan dan mengisi konfirmasi hadir.</p></details><details><summary>Bisakah detail acara diubah setelah link dibagikan?</summary><p>Bisa. Perubahan yang kalian simpan akan langsung tampil di link undangan.</p></details><details><summary>Apakah tersedia RSVP dan check-in?</summary><p>Ya. Yukakad membantu mencatat RSVP dan memudahkan check-in di hari acara.</p></details></div>
+      <section className={`${trust.section} ${trust.faq}`} aria-labelledby="faq-title">
+        <div className={trust.faqHead} data-aos="fade-up"><p className="landing-section-kicker">FAQ</p><h2 id="faq-title">Masih ada yang ingin ditanyakan?</h2><p className={trust.lead}>Jawaban singkat untuk hal-hal yang biasanya ingin kalian pastikan sebelum mulai.</p><a className={trust.contact} href={waLink ?? "#kontak"} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Tanya langsung ke tim kami ↗</a></div>
+        <div className={trust.list} data-aos="fade-up" data-aos-delay="80"><details open><summary>Apakah bisa mulai tanpa membayar?</summary><p>Bisa. Paket Mulai dapat dipakai untuk membuat undangan pertama tanpa biaya.</p></details><details><summary>Apakah tamu perlu membuat akun?</summary><p>Tidak. Tamu cukup membuka link undangan dan mengisi konfirmasi hadir.</p></details><details><summary>Bisakah detail acara diubah setelah link dibagikan?</summary><p>Bisa. Perubahan yang kalian simpan akan langsung tampil di link undangan.</p></details><details><summary>Apakah tersedia RSVP dan check-in?</summary><p>Ya. Yukakad membantu mencatat RSVP dan memudahkan check-in di hari acara.</p></details></div>
       </section>
 
       <section className="landing-cta-banner" id="kontak" data-aos="fade-up">
