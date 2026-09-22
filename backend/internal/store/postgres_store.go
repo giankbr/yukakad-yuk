@@ -487,15 +487,14 @@ func (s *PostgresStore) UpdateGiftTransactionStatus(id, status, reference string
 	return tx, nil
 }
 func (s *PostgresStore) ListTemplates() []*Template {
-	rows, err := s.db.Query(`SELECT id, name, slug, category, COALESCE(preview_image, ''), is_premium, status FROM templates WHERE status = 'active' ORDER BY name`)
+	rows, err := s.db.Query(`SELECT ` + templateColumns + ` FROM templates WHERE status = 'active' ORDER BY sort_order,name`)
 	if err != nil {
 		return []*Template{}
 	}
 	defer rows.Close()
 	items := make([]*Template, 0)
 	for rows.Next() {
-		item := &Template{}
-		if rows.Scan(&item.ID, &item.Name, &item.Slug, &item.Category, &item.PreviewImage, &item.Premium, &item.Status) == nil {
+		if item, err := scanTemplate(rows); err == nil {
 			items = append(items, item)
 		}
 	}

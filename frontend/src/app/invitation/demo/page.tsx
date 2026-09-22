@@ -10,17 +10,18 @@ import { RSVPSection } from "@/components/invitation/RSVPSection";
 import { StorySection } from "@/components/invitation/StorySection";
 import { WishesSection } from "@/components/invitation/WishesSection";
 import type { InvitationData } from "@/components/invitation/types";
+import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
 
 const invitation: InvitationData = {
   couple: { bride: "Alya", groom: "Rizky", note: "We met in a room full of people and somehow left with a life full of small, shared rituals. This next chapter feels better with you in it." },
-  date: "15 November 2026 · Yogyakarta",
+  date: "2026-11-15T08:00:00+07:00",
   place: "Pendopo Ndalem Yudhaningratan",
   address: "Jl. Ibu Ruswo No. 35, Yogyakarta",
   mapsUrl: "https://maps.google.com/?q=Pendopo+Ndalem+Yudhaningratan",
   story: { title: "Mereka yang bertemu di waktu yang tepat", body: "Dari satu obrolan kecil, lalu menjadi banyak cerita. Kami belajar bahwa rumah bukan selalu sebuah tempat, kadang ia adalah seseorang yang membuat hari biasa terasa pulang." },
   events: [
-    { name: "Akad nikah", date: "Sabtu, 15 November", time: "08.00 — 09.00", venue: "Pendopo utama" },
-    { name: "Resepsi", date: "Sabtu, 15 November", time: "11.00 — 15.00", venue: "Pendopo utama" },
+    { name: "Akad nikah", date: "2026-11-15T08:00:00+07:00", time: "08.00 — 09.00 WIB", venue: "Pendopo utama" },
+    { name: "Resepsi", date: "2026-11-15T11:00:00+07:00", time: "11.00 — 15.00 WIB", venue: "Pendopo utama" },
   ],
   gallery: [
     "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=85",
@@ -34,7 +35,9 @@ const invitation: InvitationData = {
 };
 const invitationSlug = "alya-rizky";
 
-export default function InvitationDemoPage() {
+export default async function InvitationDemoPage({ searchParams }: { searchParams: Promise<{ template?: string }> }) {
+  const { template } = await searchParams;
+  if (isWeddingStyle(template)) return <WeddingTemplate variant={template} data={invitation} slug={invitationSlug} demo />;
   return <main className="invitation-page template-editorial">
     <CoverSection data={invitation} />
     <div className="invitation-body">

@@ -10,12 +10,14 @@ import { RSVPSection } from "@/components/invitation/RSVPSection";
 import { StorySection } from "@/components/invitation/StorySection";
 import { WishesSection } from "@/components/invitation/WishesSection";
 import type { GiftMethod, InvitationData } from "@/components/invitation/types";
+import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 type PublicInvitation = {
   slug?: string;
   title: string;
+  template_id?: string;
   couple?: { bride_name?: string; groom_name?: string };
   event?: { title?: string; venue?: string; date?: string; maps_url?: string };
   sections?: string[];
@@ -77,6 +79,7 @@ export default async function PublicInvitationPage({
     guestName: guestName ? guestName.replace(/-/g, " ") : undefined,
   };
 
+  if (isWeddingStyle(result.template_id)) return <WeddingTemplate variant={result.template_id} data={invitation} slug={slug} guestToken={guestToken} />;
   const template = settings.theme === "adat" || settings.theme === "modern" || settings.theme === "motion" ? settings.theme : "editorial";
   return <main className={`invitation-page template-${template}`}>
     <CoverSection data={invitation} />

@@ -977,6 +977,9 @@ func (s *MemoryStore) SeedTemplates() {
 		return
 	}
 	defaults := []*Template{
+		{ID: "alyra", Name: "Alyra", Slug: "alyra", Category: "editorial", EventType: "wedding", Tier: "free", PreviewImage: "/templates/alyra-preview.png", PreviewURL: "/invitation/demo?template=alyra", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 1},
+		{ID: "weddings", Name: "Weddings", Slug: "weddings", Category: "modern", EventType: "wedding", Tier: "free", PreviewImage: "/templates/weddings-preview.png", PreviewURL: "/invitation/demo?template=weddings", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 2},
+		{ID: "veloria", Name: "Veloria", Slug: "veloria", Category: "editorial", EventType: "wedding", Tier: "free", PreviewImage: "/templates/veloria-preview.png", PreviewURL: "/invitation/demo?template=veloria", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 3},
 		{ID: "classic", Name: "Classic", Slug: "classic", EventType: "wedding", Category: "elegant", Tags: []string{"minimal", "elegant"}, Tier: "free", SupportsPhoto: true, SupportsRSVP: true, Status: "active", SortOrder: 10},
 		{ID: "botanical", Name: "Botanical", Slug: "botanical", EventType: "wedding", Category: "nature", Tags: []string{"floral", "garden"}, Tier: "free", SupportsPhoto: true, SupportsMusic: true, SupportsRSVP: true, Status: "active", SortOrder: 20},
 		{ID: "minimal", Name: "Minimal", Slug: "minimal", EventType: "wedding", Category: "modern", Tags: []string{"minimal", "clean"}, Tier: "free", SupportsPhoto: true, SupportsRSVP: true, Status: "active", SortOrder: 30},

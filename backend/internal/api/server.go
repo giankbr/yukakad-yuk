@@ -793,11 +793,12 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		watermark = plan.HasWatermark
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
-		"id":        invitation.ID,
-		"slug":      invitation.Slug,
-		"title":     invitation.Title,
-		"watermark": watermark,
-		"status":    map[string]bool{"published": invitation.Published},
+		"id":          invitation.ID,
+		"slug":        invitation.Slug,
+		"title":       invitation.Title,
+		"watermark":   watermark,
+		"template_id": invitation.TemplateID,
+		"status":      map[string]bool{"published": invitation.Published},
 		"couple": map[string]any{
 			"groom_name": invitation.Couple.GroomName,
 			"bride_name": invitation.Couple.BrideName,

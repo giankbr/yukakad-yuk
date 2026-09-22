@@ -9,6 +9,7 @@ type Template = {
   slug: string;
   category: string;
   preview_image?: string;
+  preview_url?: string;
   is_premium: boolean;
 };
 
@@ -27,22 +28,27 @@ export function TemplatePicker({
   const [category, setCategory] = useState("all");
   const [selected, setSelected] = useState(selectedTemplateId ?? "");
   const [saving, setSaving] = useState<string | null>(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch(`${API_URL}/api/templates`)
       .then((response) => response.json())
       .then((body: { items?: Template[] }) => setTemplates(body.items ?? []))
-      .catch(() => {});
+      .catch(() => setError("Template gagal dimuat. Coba muat ulang halaman."));
   }, []);
 
   async function selectTemplate(templateId: string) {
     setSaving(templateId);
+    setError("");
     try {
       const response = await apiFetch(`/api/invitations/${invitationId}/template`, token, {
         method: "PUT",
         body: JSON.stringify({ template_id: templateId }),
       });
-      if (response.ok) setSelected(templateId);
+      if (!response.ok) throw new Error("Template belum tersimpan. Coba lagi.");
+      setSelected(templateId);
+    } catch {
+      setError("Template belum tersimpan. Periksa koneksi lalu coba lagi.");
     } finally {
       setSaving(null);
     }
@@ -52,6 +58,7 @@ export function TemplatePicker({
 
   return (
     <div>
+      {error && <p role="alert" className="dashboard-state dashboard-state-error">{error}</p>}
       <div className="form-row" style={{ gridTemplateColumns: "repeat(5, auto)", gap: ".4rem" }}>
         {categories.map((cat) => (
           <button
@@ -77,10 +84,11 @@ export function TemplatePicker({
               {template.is_premium && <span className="badge badge-premium">Premium</span>}
             </div>
             <span className="badge" style={{ width: "fit-content", textTransform: "capitalize" }}>{template.category}</span>
+            {template.preview_url && <a className="table-action" href={template.preview_url} target="_blank" rel="noreferrer">Preview template ↗</a>}
             <button
               type="button"
               className="table-action"
-              disabled={saving === template.id}
+              disabled={saving !== null}
               onClick={() => selectTemplate(template.id)}
             >
               {selected === template.id ? "Selected ✓" : saving === template.id ? "Saving..." : "Use this template"}
