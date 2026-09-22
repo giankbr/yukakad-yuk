@@ -5,6 +5,7 @@ import { CountdownSection } from "./CountdownSection";
 import { GiftSection } from "./GiftSection";
 import { RSVPSection } from "./RSVPSection";
 import styles from "./WeddingTemplate.module.css";
+import { WeddingsOnePage } from "./WeddingsOnePage";
 
 export const weddingTemplates = ["alyra", "weddings", "veloria"] as const;
 export type WeddingStyle = typeof weddingTemplates[number];
@@ -24,15 +25,16 @@ function dateLabel(value: string) {
 export function WeddingTemplate({ variant, data, slug, guestToken, demo = false }: {
   variant: WeddingStyle; data: InvitationData; slug: string; guestToken?: string; demo?: boolean;
 }) {
+  if (variant === "weddings") return <WeddingsOnePage data={data} slug={slug} guestToken={guestToken} demo={demo} />;
   const { bride, groom } = data.couple;
   const initials = `${bride.slice(0, 1)} & ${groom.slice(0, 1)}`;
   const date = dateLabel(data.date);
   return <main className={`${styles.page} ${styles[variant]}`}>
     {/* Fonts are intentionally scoped to invitation routes (App Router). */}
     {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,wght@0,400;1,400&family=Carattere&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Newsreader:ital,wght@0,400;1,400&family=Carattere&display=swap" />
     {demo && <aside className={styles.preview}>Preview template {variant} · Data contoh <Link href="/dashboard/invitations/create">Buat undangan sendiri ↗</Link></aside>}
-    {variant === "weddings" && <div className={styles.announcement}>Kami mengundangmu merayakan hari bahagia kami · {date}</div>}
+    {variant === "veloria" && <div className={styles.veloriaRail}><span>Wedding day · {date}</span><span>Celebrate love</span><span>{data.place}</span></div>}
     <nav className={styles.nav} aria-label="Navigasi undangan">
       <a href="#home" className={styles.monogram}>{initials}</a>
       <div><a href="#story">Cerita kami</a><a href="#day">Hari bahagia</a><a href="#memories">Galeri</a></div>
@@ -43,12 +45,28 @@ export function WeddingTemplate({ variant, data, slug, guestToken, demo = false 
         <p className={styles.eyebrow}>The wedding of</p>
         <div className={styles.alyraNames}><h1><span>{bride} &</span><span>{groom}</span></h1><div className={styles.alyraPhoto}><Photo src={data.gallery[0]} alt={`${bride} dan ${groom}`} eager /></div></div>
         <div className={styles.heroBottom}><p>{date}<br />{data.place}</p><p>Satu cerita. Seumur hidup.<br /><a href="#story">Kenali cerita kami ↗</a></p><a className={styles.circle} href="#rsvp">RSVP<br />↗</a></div>
-      </> : variant === "weddings" ? <>
-        <p className={styles.eyebrow}>{date}</p><h1>{bride}<em>&</em>{groom}</h1>
-        <div className={styles.weddingsPhotos}><Photo src={data.gallery[0]} alt={`Momen ${bride} dan ${groom}`} eager /><a href="#rsvp" className={styles.circle}>We&apos;re getting<br />married! ↗</a><Photo src={data.gallery[1] ?? data.gallery[0]} alt="Cerita cinta kami" eager /></div>
       </> : <>
-        <div className={styles.veloriaPortrait}><Photo src={data.gallery[0]} alt={`Pernikahan ${bride} dan ${groom}`} eager /></div>
-        <div className={styles.veloriaCopy}><p className={styles.eyebrow}>A celebration of love</p><h1>{bride}<em>&</em>{groom}</h1><p className={styles.script}>Together, forever.</p><a className={styles.button} href="#rsvp">Rayakan bersama kami <span>↗</span></a><div className={styles.veloriaNote}><Photo src={data.gallery[2] ?? data.gallery[0]} alt="Detail hari bahagia" /><p>{date}<br />{data.place}</p></div></div>
+        <div className={styles.veloriaHero}>
+          <div className={styles.veloriaStack}>
+            <figure className={styles.veloriaMainPhoto}><Photo src={data.gallery[0]} alt={`Pernikahan ${bride} dan ${groom}`} eager /></figure>
+            <figure className={styles.veloriaFloatTop}><Photo src={data.gallery[1] ?? data.gallery[0]} alt="" eager /></figure>
+            <figure className={styles.veloriaFloatRing}><Photo src={data.gallery[2] ?? data.gallery[0]} alt="" /></figure>
+          </div>
+          <div className={styles.veloriaCopy}>
+            <p className={styles.eyebrow}>Celebrate love, stress-free</p>
+            <h1>{bride}<em>&</em>{groom}</h1>
+            <p className={styles.veloriaLead}>Crafting a beautiful wedding day with passion &amp; precision — kami mengundangmu menjadi bagian dari cerita ini.</p>
+            <div className={styles.veloriaCtas}>
+              <a className={styles.button} href="#rsvp">Rayakan bersama kami <span>→</span></a>
+              <a className={styles.veloriaGhost} href="#day">Lihat rangkaian acara</a>
+            </div>
+            <div className={styles.veloriaStats}>
+              <div><strong>01</strong><span>{date}</span></div>
+              <div><strong>02</strong><span>{data.place}</span></div>
+              <div><strong>03</strong><span>RSVP terbuka</span></div>
+            </div>
+          </div>
+        </div>
       </>}
     </header>
     {data.guestName && <div className={styles.guest}>Dengan penuh cinta, kami mengundang <strong>{data.guestName}</strong></div>}

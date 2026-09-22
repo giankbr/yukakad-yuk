@@ -3,6 +3,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
+export async function sendRSVP(slug: string, body: { guest_token?: string; attendance: FormDataEntryValue | null; attendees_count: number; message: string }) {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"}/api/public/invitation/${encodeURIComponent(slug)}/rsvp`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!response.ok) throw new Error("RSVP not saved");
+}
+
 export function RSVPSection({ slug, guestToken, demo = false }: { slug: string; guestToken?: string; demo?: boolean }) {
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
@@ -18,8 +23,7 @@ export function RSVPSection({ slug, guestToken, demo = false }: { slug: string; 
         const form = new FormData(event.currentTarget);
         setPending(true);
         try {
-          const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"}/api/public/invitation/${encodeURIComponent(slug)}/rsvp`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ guest_token: guestToken, attendance: form.get("attendance"), attendees_count: 1, message: `${form.get("name")}: ${form.get("message") ?? ""}` }) });
-          if (!response.ok) throw new Error("RSVP not saved");
+          await sendRSVP(slug, { guest_token: guestToken, attendance: form.get("attendance"), attendees_count: 1, message: `${form.get("name")}: ${form.get("message") ?? ""}` });
           setSent(true);
         } catch { setError("We could not save your answer. Please check your connection and try again."); }
         finally { setPending(false); }

@@ -73,37 +73,292 @@
 .footer > div { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--line); margin-top: 64px; padding-top: 24px; font-size: 12px; }
 .emptyPhoto { width: 100%; height: 100%; min-height: 200px; background: #ddd4c5; display: grid; place-items: center; border: 1px solid var(--line); }
 .emptyPhoto span { font: 40px 'Carattere', cursive; }
-.weddings { --paper: #fff; --ink: #262823; --display: 'Instrument Serif', Georgia, serif; }
-.announcement { background: #252723; color: white; padding: 10px 20px; text-align: center; font-size: 12px; }
-.weddings .hero { background: #f5f3e9; text-align: center; padding: 48px 5% 0; }
-.weddings .hero h1 { font-size: clamp(60px, 9vw, 142px); max-width: 1000px; margin: auto; }
-.weddings .hero h1 em { display: inline-block; padding-inline: .2em; }
-.weddingsPhotos { display: grid; grid-template-columns: 1fr 140px 1fr; gap: 32px; align-items: center; margin-top: 40px; }
-.weddingsPhotos > img { height: 330px; object-position: center; }
-.weddingsPhotos > img:first-child { border-radius: 50% 50% 0 0; }
-.weddings .story { border: 0; }
-.weddings .story figure { height: 450px; border-radius: 180px 180px 0 0; }
-.weddings .story figure img { border-radius: inherit; }
-.weddings .day { background: #f5f3e9; padding: 70px 4%; }
-.weddings .gallery figure { margin-top: 0; }
-.weddings .gallery img { aspect-ratio: 1; }
-.weddings .footer { background: #f5f3e9; }
-.veloria { --paper: #e4ddd2; --ink: #49452b; --accent: #666243; --line: #49452b35; --display: 'Newsreader', Georgia, serif; }
-.veloria .nav { border-bottom: 1px solid var(--line); }
-.veloria .hero { display: grid; grid-template-columns: .8fr 1fr; gap: 7%; padding-block: 44px 72px; }
-.veloriaPortrait { min-height: 580px; }
-.veloriaCopy { padding-top: 24px; }
-.veloriaCopy h1 { font-size: clamp(64px, 8vw, 130px); }
-.veloriaCopy h1 em { font-family: 'Carattere', cursive; padding-inline: .15em; }
-.veloriaCopy .button { margin-top: 30px; background: var(--ink); color: var(--paper); border-radius: 80px; }
-.veloriaNote { display: flex; align-items: center; gap: 28px; margin-top: 44px; }
-.veloriaNote img { width: 120px; height: 140px; border-radius: 80px 80px 0 0; }
-.veloria .story figure { order: -1; }
-.veloria .story figure img { border-radius: 180px 180px 0 0; }
-.veloria .day { border-block: 1px solid var(--line); }
-.veloria .gallery img { border-radius: 180px 180px 0 0; }
-.veloria .footer { background: var(--ink); color: var(--paper); }
-@media (prefers-reduced-motion: no-preference) { .hero { animation: appear .7s ease-out both; } @keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } } }
+
+/* Veloria — closer to https://veloria-template.webflow.io/ agency language:
+   warm cream canvas, olive ink, asymmetric photo collage, arch frames, dark bands. */
+.veloria {
+	--paper: #f2ebe2;
+	--ink: #2f2c1f;
+	--accent: #6a6548;
+	--muted: #6f6a58;
+	--line: #2f2c1f22;
+	--display: "Newsreader", Georgia, serif;
+	--band: #2f2c1f;
+	background:
+		radial-gradient(42% 36% at 88% 8%, #ebe1d2 0%, transparent 70%),
+		radial-gradient(38% 30% at 8% 70%, #e7dfd2 0%, transparent 72%),
+		var(--paper);
+}
+.veloriaRail {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 10px 5%;
+	background: var(--band);
+	color: #efe8dc;
+	font-size: 11px;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+}
+.veloria .nav {
+	width: min(1180px, 92%);
+	border-bottom: 0;
+	padding-block: 22px;
+}
+.veloria .monogram {
+	font-size: 28px;
+	letter-spacing: -.04em;
+}
+.veloria .navRsvp {
+	padding: 10px 16px;
+	border: 1px solid var(--ink);
+	border-radius: 999px;
+	letter-spacing: .1em;
+}
+.veloria .navRsvp:hover {
+	background: var(--ink);
+	color: var(--paper);
+	text-decoration: none;
+}
+.veloria .hero {
+	width: min(1180px, 92%);
+	padding-block: 28px 72px;
+}
+.veloriaHero {
+	display: grid;
+	grid-template-columns: 1.05fr .95fr;
+	gap: clamp(28px, 5vw, 72px);
+	align-items: center;
+}
+.veloriaStack {
+	position: relative;
+	min-height: 620px;
+}
+.veloriaMainPhoto {
+	position: absolute;
+	inset: 8% 18% 0 0;
+	margin: 0;
+	border-radius: 220px 220px 28px 28px;
+	overflow: hidden;
+	box-shadow: 0 28px 60px #2f2c1f1a;
+}
+.veloriaFloatTop {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 42%;
+	aspect-ratio: 4/5;
+	margin: 0;
+	border-radius: 180px 180px 18px 18px;
+	overflow: hidden;
+	box-shadow: 0 18px 40px #2f2c1f18;
+	transform: rotate(3deg);
+}
+.veloriaFloatRing {
+	position: absolute;
+	left: 0;
+	bottom: 4%;
+	width: 34%;
+	aspect-ratio: 1;
+	margin: 0;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 8px solid var(--paper);
+	box-shadow: 0 16px 36px #2f2c1f16;
+}
+.veloriaCopy {
+	padding-top: 8px;
+}
+.veloriaCopy .eyebrow {
+	color: var(--accent);
+	margin-bottom: 18px;
+}
+.veloriaCopy h1 {
+	font-size: clamp(58px, 7.4vw, 118px);
+	line-height: .92;
+	max-width: 9ch;
+	letter-spacing: -.05em;
+}
+.veloriaCopy h1 em {
+	display: inline-block;
+	font-family: "Carattere", cursive;
+	font-size: .72em;
+	padding-inline: .12em;
+	color: var(--accent);
+	transform: translateY(.08em);
+}
+.veloriaLead {
+	max-width: 34ch;
+	margin-top: 22px;
+	color: var(--muted);
+	font-size: 15px;
+	line-height: 1.7;
+}
+.veloriaCtas {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 14px;
+	margin-top: 28px;
+}
+.veloriaCopy .button {
+	background: var(--ink);
+	color: var(--paper);
+	border-radius: 999px;
+	gap: 18px;
+	padding: 15px 22px;
+	border-color: var(--ink);
+}
+.veloriaCopy .button:hover {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: #f7f2ea;
+}
+.veloriaGhost {
+	font-size: 13px;
+	border-bottom: 1px solid currentColor;
+	padding-bottom: 2px;
+}
+.veloriaStats {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+	margin-top: 40px;
+	padding-top: 22px;
+	border-top: 1px solid var(--line);
+}
+.veloriaStats strong {
+	display: block;
+	font-family: var(--display);
+	font-size: 22px;
+	font-weight: 400;
+	letter-spacing: -.03em;
+	margin-bottom: 6px;
+}
+.veloriaStats span {
+	display: block;
+	color: var(--muted);
+	font-size: 12px;
+	line-height: 1.45;
+}
+.veloria .guest {
+	width: min(1180px, 92%);
+	margin-inline: auto;
+	border: 1px solid var(--line);
+	background: #ebe3d7;
+}
+.veloria .story,
+.veloria .day,
+.veloria .memories,
+.veloria .response,
+.veloria .gifts,
+.veloria .countdown {
+	width: min(1180px, 92%);
+}
+.veloria .story {
+	border-top: 0;
+	padding-block: 88px;
+	gap: 8%;
+}
+.veloria .story figure {
+	order: -1;
+	height: 560px;
+}
+.veloria .story figure img,
+.veloria .story .emptyPhoto {
+	border-radius: 220px 220px 24px 24px;
+}
+.veloria .story .script {
+	color: var(--accent);
+}
+.veloria .countdown {
+	background: var(--band);
+	color: #efe8dc;
+	border: 0;
+	padding: 36px 4%;
+	width: 100%;
+	max-width: none;
+}
+.veloria .countdown h2,
+.veloria .countdown strong {
+	color: #efe8dc !important;
+}
+.veloria .day {
+	padding-block: 96px;
+}
+.veloria .sectionHeading h2 em {
+	font-family: "Carattere", cursive;
+	color: var(--accent);
+}
+.veloria .events {
+	border: 1px solid var(--line);
+	background: #ebe4d8;
+}
+.veloria .events article {
+	padding: 32px 28px;
+}
+.veloria .location {
+	margin-top: 8px;
+	padding: 28px;
+	border: 1px solid var(--line);
+	background: #f7f1e8;
+}
+.veloria .location .button {
+	border-radius: 999px;
+}
+.veloria .memories {
+	background: var(--band);
+	color: #efe8dc;
+	width: 100%;
+	max-width: none;
+	padding: 88px 4%;
+}
+.veloria .memories .eyebrow,
+.veloria .memories figcaption {
+	color: #c9c2b0;
+}
+.veloria .memories h2 em {
+	font-family: "Carattere", cursive;
+	color: #d9c9a4;
+}
+.veloria .gallery {
+	width: min(1180px, 100%);
+	margin-inline: auto;
+	gap: 18px;
+}
+.veloria .gallery img,
+.veloria .gallery .emptyPhoto {
+	border-radius: 180px 180px 16px 16px;
+}
+.veloria .gallery figure:nth-child(3n + 2) {
+	margin-top: 48px;
+}
+.veloria .response {
+	border-top: 0;
+	padding-block: 88px;
+}
+.veloria .response button,
+.veloria .gifts button {
+	border-radius: 999px;
+}
+.veloria .footer {
+	background: var(--band);
+	color: #efe8dc;
+	border-top: 0;
+	padding-top: 88px;
+}
+.veloria .footer h2 em {
+	font-family: "Carattere", cursive;
+	color: #d9c9a4;
+}
+.veloria .footer > div {
+	border-color: #efe8dc28;
+	color: #c9c2b0;
+}
+@media (prefers-reduced-motion: no-preference) {
+	.hero { animation: appear .7s ease-out both; }
+	@keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+}
 @media (max-width: 700px) {
   .nav { gap: 14px; padding-block: 18px; flex-wrap: wrap; }
   .nav > div { order: 3; width: 100%; justify-content: center; gap: 22px; font-size: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
@@ -114,7 +369,7 @@
   .heroBottom > p:nth-child(2) { display: none; }
   .circle { width: 90px; font-size: 11px; }
   .story { grid-template-columns: 1fr; gap: 36px; padding-block: 56px; }
-  .story figure, .weddings .story figure { height: 360px; margin-bottom: 20px; }
+  .story figure { height: 360px; margin-bottom: 20px; }
   .day, .memories { padding-block: 56px; }
   .sectionHeading { margin-bottom: 32px; }
   .events article { padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
@@ -127,13 +382,15 @@
   .response { padding-block: 56px; }
   .response :global(.invitation-section), .gifts :global(.invitation-section) { grid-template-columns: 1fr; gap: 32px; }
   .footer > div { flex-wrap: wrap; justify-content: center; }
-  .weddings .hero { padding: 32px 18px 0; }
-  .weddingsPhotos { grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 26px; position: relative; }
-  .weddingsPhotos > img { height: 240px; }
-  .weddingsPhotos .circle { position: absolute; left: calc(50% - 45px); bottom: 16px; background: var(--paper); }
-  .veloria .hero { grid-template-columns: 1fr; gap: 30px; }
-  .veloriaPortrait { min-height: 0; height: 380px; }
-  .veloriaCopy { padding-top: 0; }
-  .veloriaCopy h1 { font-size: 70px; }
-  .veloriaNote { margin-top: 28px; }
+  .veloriaRail { flex-wrap: wrap; justify-content: center; gap: 8px 18px; text-align: center; }
+  .veloriaHero { grid-template-columns: 1fr; gap: 28px; }
+  .veloriaStack { min-height: 420px; }
+  .veloriaMainPhoto { inset: 10% 12% 0 8%; border-radius: 160px 160px 18px 18px; }
+  .veloriaFloatTop { width: 38%; }
+  .veloriaFloatRing { width: 30%; border-width: 5px; }
+  .veloriaCopy h1 { font-size: clamp(48px, 14vw, 78px); max-width: none; }
+  .veloriaStats { grid-template-columns: 1fr; gap: 12px; }
+  .veloria .story figure { height: 360px; }
+  .veloria .gallery figure:nth-child(3n + 2) { margin-top: 0; }
+  .veloria .countdown, .veloria .memories { padding-inline: 18px; }
 }
