@@ -13,6 +13,9 @@ const Clock = () => <svg {...icon}><circle cx="12" cy="12" r="9" /><path d="M12 
 const Pin = () => <svg {...icon}><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg>;
 const Spark = () => <svg {...icon}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" /></svg>;
 
+// Scroll reveal attributes, animated by AosInit (disabled for reduced motion).
+const aos = (effect = "fade-up", delay = 0) => ({ "data-aos": effect, "data-aos-delay": delay });
+
 function Photo({ src, alt, eager = false }: { src?: string; alt: string; eager?: boolean }) {
   return src ? <img className={styles.image} src={src} alt={alt} loading={eager ? "eager" : "lazy"} /> : <div className={styles.image} role="img" aria-label={alt} />;
 }
@@ -32,11 +35,11 @@ function Slider({ images, alt }: { images: string[]; alt: string }) {
   const captions = ["Awal dari semuanya", "Hari-hari sederhana", "Tawa yang kami simpan", "Menuju selamanya"];
   return <div className={styles.slider}>
     <div ref={track} className={styles.sliderTrack} tabIndex={0} aria-label="Galeri foto">
-      {images.map((src, index) => <figure key={`${src}-${index}`} className={styles.slide}>
-        <Photo src={src} alt={`${alt}, foto ${index + 1}`} /><figcaption className={styles.label}>{captions[index % captions.length]}</figcaption>
+      {images.map((src, index) => <figure key={`${src}-${index}`} className={styles.slide} {...aos("fade-left", Math.min(index, 3) * 90)}>
+        <div className={styles.media}><Photo src={src} alt={`${alt}, foto ${index + 1}`} /></div><figcaption className={styles.label}>{captions[index % captions.length]}</figcaption>
       </figure>)}
     </div>
-    {images.length > 1 && <div className={styles.sliderArrows}>
+    {images.length > 1 && <div className={styles.sliderArrows} {...aos("fade-up", 120)}>
       <button type="button" onClick={() => move(-1)} aria-label="Foto sebelumnya">←</button>
       <button type="button" onClick={() => move(1)} aria-label="Foto berikutnya">→</button>
     </div>}
@@ -48,7 +51,7 @@ function RSVPForm({ slug, guestToken, guestName, demo }: { slug: string; guestTo
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
   if (sent) return <p className={styles.state} role="status">{demo ? "Preview berhasil. Jawaban contoh tidak dikirim." : "Terima kasih! Jawabanmu sudah kami terima."}</p>;
-  return <form className={styles.form} onSubmit={async (event) => {
+  return <form className={styles.form} {...aos("fade-up", 100)} onSubmit={async (event) => {
     event.preventDefault();
     if (pending) return;
     setError("");
@@ -85,8 +88,8 @@ function Tabs({ data }: { data: InvitationData }) {
   ].filter((tab) => tab.body);
   const image = (index: number) => data.gallery.length ? data.gallery[(index + 1) % data.gallery.length] : undefined;
   return <div className={styles.tabs}>
-    <div className={styles.tabImage}><Photo src={image(active)} alt={tabs[active]?.title ?? "Cerita kami"} /></div>
-    <div className={styles.tabMenu} role="tablist">
+    <div className={styles.tabImage} {...aos("fade-right")}><Photo key={active} src={image(active)} alt={tabs[active]?.title ?? "Cerita kami"} /></div>
+    <div className={styles.tabMenu} role="tablist" {...aos("fade-left", 120)}>
       {tabs.map((tab, index) => <button key={tab.title} type="button" role="tab" aria-selected={active === index} className={styles.tabLink} onClick={() => setActive(index)}>
         <span className={styles.displayXs}>{tab.title}</span><span className={styles.body}>{tab.body}</span>
       </button>)}
@@ -111,6 +114,7 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
     {/* eslint-disable-next-line @next/next/no-page-custom-font -- Fonts are scoped to invitation routes (App Router). */}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" />
     {demo && <aside className={styles.preview}>Preview template weddings · Data contoh <Link href="/dashboard/invitations/create">Buat undangan sendiri ↗</Link></aside>}
+    <div className={styles.progress} aria-hidden />
     <div className={styles.topBar}><p className={styles.bodyS}>Selamat datang di pernikahan kami pada {date} di {data.place}</p></div>
     <nav className={styles.nav} aria-label="Navigasi undangan">
       <div className={styles.navLinks}><a href="#info">Info</a><a href="#timeline">Timeline</a><a href="#story">Cerita</a><a href="#faq">FAQ</a></div>
@@ -133,11 +137,11 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
 
     <section id="info" className={`${styles.section} ${styles.info}`}>
       <div className={styles.container}>
-        <p className={styles.displayL}>Kami dipertemukan di waktu yang tepat, dan kini menghitung hari menuju kata <em>sah</em>.</p>
+        <p className={styles.displayL} {...aos()}>Kami dipertemukan di waktu yang tepat, dan kini menghitung hari menuju kata <em>sah</em>.</p>
         <ul className={styles.infoList}>
-          <li><Clock /><span className={styles.label}>{date}{time !== data.date && ` pukul ${time}`}</span></li>
-          <li><Pin /><span className={styles.label}>{data.place}, {data.address}</span></li>
-          {mapsUrl && <li><Spark /><a className={styles.label} href={mapsUrl} target="_blank" rel="noreferrer">Petunjuk lokasi ↗</a></li>}
+          <li {...aos("fade-up", 0)}><Clock /><span className={styles.label}>{date}{time !== data.date && ` pukul ${time}`}</span></li>
+          <li {...aos("fade-up", 90)}><Pin /><span className={styles.label}>{data.place}, {data.address}</span></li>
+          {mapsUrl && <li {...aos("fade-up", 180)}><Spark /><a className={styles.label} href={mapsUrl} target="_blank" rel="noreferrer">Petunjuk lokasi ↗</a></li>}
         </ul>
         {photos.length > 0 && <Slider images={photos} alt={`Kenangan ${bride} dan ${groom}`} />}
       </div>
@@ -145,9 +149,9 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
 
     <section id="timeline" className={styles.section}>
       <div className={`${styles.container} ${styles.stack}`}>
-        <div className={styles.title}><p className={styles.label}>Timeline</p><p className={styles.displayL}>Dari akad hingga perpisahan terakhir, inilah rangkaian hari bahagia yang akan kita lalui bersama.</p></div>
+        <div className={styles.title} {...aos()}><p className={styles.label}>Timeline</p><p className={styles.displayL}>Dari akad hingga perpisahan terakhir, inilah rangkaian hari bahagia yang akan kita lalui bersama.</p></div>
         <div className={styles.timetable}>
-          {data.events.map((event, index) => <article key={`${event.name}-${index}`} className={styles.timelineItem}>
+          {data.events.map((event, index) => <article key={`${event.name}-${index}`} className={styles.timelineItem} {...aos("fade-up", Math.min(index, 4) * 80)}>
             <p className={styles.displayXs}>{event.time}</p>
             <div className={styles.timelineBody}>
               <h3 className={styles.displayXs}>{event.name}</h3>
@@ -160,8 +164,8 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
     </section>
 
     <section id="rsvp" className={`${styles.section} ${styles.rsvp}`}>
-      <div className={styles.containerL}><div className={styles.rsvpImage}><Photo src={photos[2] ?? photos[0]} alt={`${bride} dan ${groom}`} /></div></div>
-      <div className={`${styles.container} ${styles.rsvpTitle}`}>
+      <div className={styles.containerL}><div className={styles.rsvpImage} {...aos("zoom-out")}><Photo src={photos[2] ?? photos[0]} alt={`${bride} dan ${groom}`} /></div></div>
+      <div className={`${styles.container} ${styles.rsvpTitle}`} {...aos()}>
         <p className={styles.subheader}><Spark /><span className={styles.label}>RSVP</span></p>
         <h2 className={styles.displayXl}>Kami akan senang sekali jika kamu bisa hadir di hari istimewa kami</h2>
         <p className={styles.body}>Mohon isi form di bawah sebelum {format(data.date, { day: "numeric", month: "long", year: "numeric" })}</p>
@@ -172,19 +176,19 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
 
     <section id="story" className={styles.section}>
       <div className={`${styles.container} ${styles.stack}`}>
-        <div className={`${styles.title} ${styles.titleS}`}><p className={styles.label}>Cerita kami</p><p className={styles.displayXl}>Terima kasih sudah menjadi bagian dari perjalanan kami</p></div>
+        <div className={`${styles.title} ${styles.titleS}`} {...aos()}><p className={styles.label}>Cerita kami</p><p className={styles.displayXl}>Terima kasih sudah menjadi bagian dari perjalanan kami</p></div>
         <Tabs data={data} />
       </div>
     </section>
 
     {data.gifts.length > 0 && <section id="gifts" className={styles.section}>
       <div className={`${styles.container} ${styles.stack}`}>
-        <div className={styles.title}><p className={styles.label}>Tanda kasih</p><p className={styles.displayL}>Doa restumu adalah hadiah terindah. Bila ingin berbagi lebih, berikut caranya.</p></div>
-        <div className={styles.gifts}>{data.gifts.map((gift) => {
+        <div className={styles.title} {...aos()}><p className={styles.label}>Tanda kasih</p><p className={styles.displayL}>Doa restumu adalah hadiah terindah. Bila ingin berbagi lebih, berikut caranya.</p></div>
+        <div className={styles.gifts}>{data.gifts.map((gift, index) => {
           const [name, value, extra] = gift.type === "bank" ? [gift.bank_name, gift.account_number, gift.account_name && `a.n. ${gift.account_name}`]
             : gift.type === "ewallet" ? [gift.ewallet_provider, gift.ewallet_number, undefined]
             : gift.type === "address" ? ["Alamat kirim hadiah", gift.address, undefined] : ["QRIS", undefined, undefined];
-          return <div key={gift.id} className={styles.gift}>
+          return <div key={gift.id} className={styles.gift} {...aos("fade-up", Math.min(index, 3) * 90)}>
             <p className={styles.label}>{name}</p>
             {value && <p className={styles.displayS}>{value}</p>}
             {extra && <p className={styles.body}>{extra}</p>}
@@ -197,17 +201,17 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
 
     <section id="faq" className={styles.section}>
       <div className={styles.container}>
-        <div className={styles.faqHeader}><p className={styles.displayXs}>Tanya & jawab</p></div>
-        {faqs.map((faq, index) => <details key={faq.q} className={styles.faqItem}>
+        <div className={styles.faqHeader} {...aos()}><p className={styles.displayXs}>Tanya & jawab</p></div>
+        {faqs.map((faq, index) => <details key={faq.q} className={styles.faqItem} {...aos("fade-up", Math.min(index, 4) * 70)}>
           <summary><span className={styles.displayXs}>({String(index + 1).padStart(2, "0")})</span><span className={styles.displayXs}>{faq.q}</span><span className={styles.faqIcon} aria-hidden>+</span></summary>
           <div className={styles.faqBody}><p className={styles.bodyL}>{faq.a}</p>{faq.link && <a className={styles.link} href={faq.link.href} {...(faq.link.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}>{faq.link.label}</a>}</div>
         </details>)}
-        <div className={styles.faqLast}><p className={`${styles.displayM} ${styles.light}`}>Masih ada pertanyaan?</p><a className={styles.displayM} href="#rsvp">Tulis di pesan RSVP</a></div>
+        <div className={styles.faqLast} {...aos()}><p className={`${styles.displayM} ${styles.light}`}>Masih ada pertanyaan?</p><a className={styles.displayM} href="#rsvp">Tulis di pesan RSVP</a></div>
       </div>
     </section>
 
     <footer className={`${styles.section} ${styles.footer}`}>
-      <div className={`${styles.container} ${styles.footerGrid}`}>
+      <div className={`${styles.container} ${styles.footerGrid}`} {...aos()}>
         <div className={styles.footerItem}><span className={styles.footerBrand}>{bride.slice(0, 1)}&amp;{groom.slice(0, 1)}</span><p className={styles.body}>{data.couple.note}</p><p className={styles.body}>Dibuat dengan cinta · <Link className={styles.link} href="/">Yukakad</Link></p></div>
         <div className={styles.footerMenu}><p className={styles.label}>Undangan</p><a href="#info">Info</a><a href="#timeline">Timeline</a><a href="#rsvp">RSVP</a><a href="#story">Cerita</a><a href="#faq">FAQ</a></div>
         <div className={styles.footerMenu}><p className={styles.label}>Hari bahagia</p><span>{date}</span><span>{data.place}</span><a href="#home">Kembali ke atas ↑</a></div>
