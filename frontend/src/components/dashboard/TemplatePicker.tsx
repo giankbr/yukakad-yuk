@@ -84,15 +84,21 @@ export function TemplatePicker({
               {template.is_premium && <span className="badge badge-premium">Premium</span>}
             </div>
             <span className="badge" style={{ width: "fit-content", textTransform: "capitalize" }}>{template.category}</span>
-            {template.preview_url && <a className="table-action" href={template.preview_url} target="_blank" rel="noreferrer">Preview template ↗</a>}
-            <button
-              type="button"
-              className="table-action"
-              disabled={saving !== null}
-              onClick={() => selectTemplate(template.id)}
-            >
-              {selected === template.id ? "Selected ✓" : saving === template.id ? "Saving..." : "Use this template"}
-            </button>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: ".4rem" }}>
+              {template.preview_url && (
+                <a className="table-action" href={template.preview_url} target="_blank" rel="noreferrer">
+                  Demo ↗
+                </a>
+              )}
+              <button
+                type="button"
+                className="table-action"
+                disabled={saving !== null}
+                onClick={() => selectTemplate(template.id)}
+              >
+                {selected === template.id ? "Selected ✓" : saving === template.id ? "Saving..." : "Pakai template"}
+              </button>
+            </div>
           </div>
         ))}
         {visible.length === 0 && <p className="dashboard-state">No templates in this category yet.</p>}

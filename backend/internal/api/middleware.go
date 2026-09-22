@@ -24,8 +24,8 @@ func (s *Server) securityHeadersMiddleware(next http.Handler) http.Handler {
 
 func (s *Server) corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if origin := s.config.FrontendOrigin; origin != "" {
-			w.Header().Set("Access-Control-Allow-Origin", origin)
+		if allowed := allowedCORSOrigin(s.config.FrontendOrigin, r.Header.Get("Origin")); allowed != "" {
+			w.Header().Set("Access-Control-Allow-Origin", allowed)
 			w.Header().Set("Vary", "Origin")
 		}
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")
@@ -36,6 +36,20 @@ func (s *Server) corsMiddleware(next http.Handler) http.Handler {
 		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+// allowedCORSOrigin picks the request Origin when it appears in FRONTEND_ORIGIN
+// (comma-separated for local multi-port frontends like :3000 and :3001).
+func allowedCORSOrigin(configured, request string) string {
+	if configured == "" || request == "" {
+		return ""
+	}
+	for _, origin := range strings.Split(configured, ",") {
+		if strings.TrimSpace(origin) == request {
+			return request
+		}
+	}
+	return ""
 }
 
 func (s *Server) rateLimitMiddleware(next http.Handler) http.Handler {

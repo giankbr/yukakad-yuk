@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import theme from "@/components/ui/workspace-theme.module.css";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className="auth-page">
+    <main className={`auth-page ${theme.auth}`}>
       <div className="auth-aside"><Link href="/" className="auth-brand"><span>y</span> yukakad.</Link><p>Undangan yang terasa seperti kalian.</p><small>Mulai dari template. Selesai dengan cerita.</small></div>
       <div className="auth-panel">
         <div className="auth-heading">
@@ -52,8 +53,10 @@ export default function RegisterPage() {
         
         <form onSubmit={handleSubmit} className="auth-form">
           <div>
-            <label>Nama lengkap</label>
+            <label htmlFor="register-name">Nama lengkap</label>
             <input
+              id="register-name"
+              autoComplete="name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -63,8 +66,10 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label>Email</label>
+            <label htmlFor="register-email">Email</label>
             <input
+              id="register-email"
+              autoComplete="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -74,8 +79,11 @@ export default function RegisterPage() {
           </div>
 
           <div>
-            <label>Kata sandi</label>
+            <label htmlFor="register-password">Kata sandi</label>
             <input
+              id="register-password"
+              autoComplete="new-password"
+              minLength={8}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -84,7 +92,7 @@ export default function RegisterPage() {
             />
           </div>
 
-          {error && <div className="auth-error">{error}</div>}
+          {error && <div className="auth-error" role="alert">{error}</div>}
 
           <button
             type="submit"
@@ -96,7 +104,7 @@ export default function RegisterPage() {
         </form>
 
         <p className="auth-switch">
-          Sudah punya akun? <a href="/auth/login">Masuk di sini</a>
+          Sudah punya akun? <Link href="/auth/login">Masuk di sini</Link>
         </p>
       </div>
     </main>

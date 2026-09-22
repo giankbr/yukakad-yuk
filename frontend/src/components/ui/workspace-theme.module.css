@@ -1,0 +1,102 @@
+/* Product surfaces share the landing page's type, monochrome base and blue accent.
+   Important declarations are limited to legacy global rules that already use it. */
+.auth, .workspace { --ink: #101013; --muted: #666870; --line: #e2e3e8; --accent: #1554e8; --paper: #fff; font-family: "Be Vietnam Pro", Arial, sans-serif; color: var(--ink); }
+.auth *, .workspace * { font-family: inherit; box-sizing: border-box; }
+.auth :global(.auth-heading) h1, .auth :global(.auth-aside) p, .workspace :is(h1, h2, h3) { font-family: "Be Vietnam Pro", Arial, sans-serif; }
+.auth :is(a, button, input):focus-visible, .workspace :is(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.auth { min-height: 100dvh; background: #fff; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.auth :global(.auth-aside) { background: #08080a; padding: 36px clamp(28px, 4vw, 64px); position: relative; overflow: hidden; gap: 24px; justify-content: flex-start; border-right: 1px solid #25262c; }
+.auth :global(.auth-brand) { font-size: 26px; letter-spacing: -.055em; gap: 10px; }
+.auth :global(.auth-brand) span { background: white; color: #08080a; border-radius: 0; width: 32px; height: 32px; font: 700 24px Georgia, serif; }
+.auth :global(.auth-aside) > p { font-size: clamp(32px, 3.6vw, 54px); line-height: 1.12; font-weight: 500; letter-spacing: -.055em; max-width: 15ch; margin: 56px 0 0; }
+.auth :global(.auth-aside) > small { color: #a7a8b2; font-size: 13px; line-height: 1.7; }
+.auth :global(.auth-aside)::after { content: ""; display: block; width: 100%; min-height: 230px; flex: 1; max-height: 360px; margin-top: 16px; background: #0b4fe8 url('/agentlab-hero-visual.png') center / cover; border: 1px solid #ffffff20; }
+.auth :global(.auth-panel) { width: min(100%, 540px); padding: 48px; justify-self: center; align-self: center; }
+.auth :global(.auth-heading) { margin-bottom: 30px; }
+.auth :global(.auth-kicker) { color: var(--accent); font-size: 10px; letter-spacing: .1em; margin-bottom: 16px; }
+.auth :global(.auth-heading) h1 { font-size: clamp(28px, 2.6vw, 38px); line-height: 1.16; font-weight: 600; letter-spacing: -.045em; max-width: 19ch; margin-bottom: 16px; }
+.auth :global(.auth-heading) > p:last-child { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.auth :global(.auth-form) { gap: 20px; }
+.auth :global(.auth-form) label { color: var(--ink); font-size: 12px; font-weight: 500; }
+.auth :global(.auth-form) input { width: 100%; min-height: 48px; padding: 12px 14px; border: 1px solid #d8dae1; border-radius: 4px; background: #fff; color: var(--ink); font-size: 14px; }
+.auth :global(.auth-form) input::placeholder { color: #868892; }
+.auth :global(.auth-form) input:focus { border-color: var(--accent); outline: 2px solid #1554e833; outline-offset: 2px; }
+.auth :global(.auth-submit) { min-height: 50px; background: #08080a; border-radius: 4px; font-size: 13px; margin-top: 4px; transition: background-color 150ms, transform 150ms cubic-bezier(.2,0,0,1); }
+.auth :global(.auth-submit):hover { background: #1554e8; transform: none; }
+.auth :global(.auth-submit):active:not(:disabled) { transform: scale(.96); }
+.auth :global(.auth-switch) { color: var(--muted); font-size: 12px; line-height: 1.8; margin-top: 24px; }
+.auth :global(.auth-switch) a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.auth :global(.auth-error) { border-radius: 4px; }
+.workspace { grid-template-columns: 240px minmax(0, 1fr) !important; background: #fafafa !important; }
+.workspace :global(.dashboard-rail) { background: #08080a !important; border-right: 1px solid #27272c !important; }
+.workspace :global(.dashboard-logo) { font-size: 23px !important; letter-spacing: -.055em !important; margin-bottom: 24px !important; }
+.workspace :global(.dashboard-logo) span { color: white !important; }
+.workspace :global(.dashboard-logo-icon) { border-radius: 0; background: #fff; color: #08080a !important; font: 700 24px Georgia, serif; }
+.workspace :global(.db-nav-label) { color: #868791; font-size: 10px; letter-spacing: .1em; }
+.workspace :global(.dashboard-rail) nav a { color: #b3b4be !important; min-height: 44px; border-radius: 4px !important; font-size: 12px !important; }
+.workspace :global(.dashboard-rail) nav a:hover { color: white !important; background: #202126 !important; }
+.workspace :global(.dashboard-rail) nav a:global(.active) { background: #1554e8 !important; color: #fff !important; }
+.workspace :global(.rail-user) strong { color: #fff !important; }
+.workspace :global(.rail-user) span { color: #a0a1ac !important; }
+.workspace :global(.rail-user-avatar) { background: #202b49; color: #93b4ff; border-radius: 4px; }
+.workspace :global(.rail-user) button { color: #b3b4be !important; min-width: 40px; min-height: 40px; justify-content: center; }
+.workspace :global(.dashboard-content) { min-width: 0; padding: 28px clamp(20px, 3vw, 44px) !important; }
+.workspace :global(.dashboard-content):has(> :global(.db-topbar)) { padding: 0 !important; }
+.workspace :global(.db-topbar) { padding: 24px 32px; border-color: var(--line); }
+.workspace :global(.db-topbar-left) h1, .workspace :global(.dashboard-header) h1 { color: var(--ink); font-size: clamp(24px, 2.5vw, 32px); line-height: 1.2; letter-spacing: -.045em; font-weight: 600; }
+.workspace :global(.dashboard-header) { margin-bottom: 24px; }
+.workspace :is(:global(.dashboard-subtitle), :global(.db-topbar-left) p, :global(.db-stat-label), :global(.db-stat-delta), :global(.db-empty), :global(.form-hint), :global(.db-quick-link-text) small) { color: var(--muted); }
+.workspace :is(:global(.dashboard-kicker), :global(.db-card-action), :global(.db-table-action)) { color: var(--accent); }
+.workspace :is(:global(.db-stat-card), :global(.db-card), :global(.dashboard-card), :global(.dashboard-stat), :global(.dashboard-table-wrap)) { border: 1px solid var(--line); border-radius: 5px; background: white; box-shadow: none; }
+.workspace :is(:global(.db-stat-value), :global(.db-card-title), :global(.dashboard-section-heading) h2, :global(.dashboard-card) h3, :global(.dashboard-stat) strong, :global(.db-quick-link-text) span) { color: var(--ink); font-family: inherit; letter-spacing: -.035em; }
+.workspace :global(.db-stat-value) { font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.workspace :is(:global(.db-stat-icon-box), :global(.db-quick-link-icon)) { background: #edf2ff; color: var(--accent); border-radius: 4px; }
+.workspace :global(.db-inner) { padding: 28px 32px; align-content: start; gap: 24px; }
+.workspace :global(.db-content-grid) { grid-template-columns: minmax(0, 1fr) 280px; }
+.workspace :global(.db-card-header), .workspace :global(.db-quick-link) { border-color: var(--line); }
+.workspace :global(.db-upgrade-card) { background: #08080a; border-radius: 5px; padding: 24px; }
+.workspace :global(.db-upgrade-card) p { color: #b0b1ba; }
+.workspace :global(.db-upgrade-tag) { background: #18316d; color: #bad0ff; }
+.workspace :global(.db-upgrade-btn) { background: #fff; color: #101013; border-radius: 4px; min-height: 44px; }
+.workspace :global(.db-upgrade-btn):hover { background: #e8efff; }
+.workspace :is(:global(.db-primary-btn), :global(.dashboard-action)) { background: #08080a; color: #fff; border-radius: 4px; min-height: 44px; justify-content: center; }
+.workspace :is(:global(.db-primary-btn), :global(.dashboard-action)):hover { background: var(--accent); color: white; }
+.workspace :global(.db-icon-btn) { min-width: 44px; min-height: 44px; color: var(--muted); border-color: var(--line); }
+.workspace :is(:global(.db-table), :global(.dashboard-table)) th { background: #f7f7f9; color: var(--muted); border-color: var(--line); }
+.workspace :is(:global(.db-table), :global(.dashboard-table)) td { color: #44464e; border-color: var(--line); }
+.workspace :global(.db-table) { display: block; overflow-x: auto; }
+.workspace :is(input, textarea, select) { color: var(--ink); background: #fff; border: 1px solid #d8dae1; border-radius: 4px; min-height: 44px; max-width: 100%; }
+.workspace :global(.form-field) { color: #44464e; }
+.workspace :global(.dashboard-form) { max-width: 760px; padding-top: 0; }
+.workspace :global(.dashboard-form) button[type=submit] { background: #08080a; color: #fff; border-radius: 4px; min-height: 44px; }
+.workspace :global(.table-action) { border-radius: 4px; color: var(--ink); border-color: var(--line); min-height: 40px; }
+.workspace :global(.dashboard-note) { background: #edf2ff; border-color: #cfddff; }
+.workspace :global(.dashboard-note) h2 { color: var(--ink); font-family: inherit; font-size: 24px; }
+.workspace button, .workspace a { transition-property: background-color, color, border-color; transition-duration: 150ms; }
+@media (max-width: 960px) {
+  .workspace { grid-template-columns: minmax(0, 1fr) !important; }
+  .workspace :global(.dashboard-rail) { align-items: center; gap: 12px !important; padding: 16px 20px !important; }
+  .workspace :global(.db-nav-section) { display: block !important; width: 100%; padding-top: 0; }
+  .workspace :global(.db-nav-label) { display: none; }
+  .workspace :global(.dashboard-rail) nav { flex-wrap: nowrap !important; overflow-x: auto; }
+  .workspace :global(.dashboard-rail) nav a { flex-shrink: 0; }
+  .workspace :global(.rail-user) { display: block !important; margin: 0 0 0 auto !important; padding: 0 !important; border: 0 !important; }
+  .workspace :global(.rail-user-inner) > div { display: none; }
+  .workspace :global(.dashboard-logo) { margin-bottom: 0 !important; }
+  .workspace :global(.db-content-grid) { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 700px) {
+  .auth { grid-template-columns: minmax(0, 1fr); }
+  .auth :global(.auth-aside) { min-height: 0; padding: 24px; gap: 12px; }
+  .auth :global(.auth-aside) > p { margin-top: 12px; max-width: 24ch; font-size: 26px; }
+  .auth :global(.auth-aside) > small, .auth :global(.auth-aside)::after { display: none; }
+  .auth :global(.auth-panel) { padding: 32px 24px 48px; }
+  .auth :global(.auth-form) input { font-size: 16px; }
+  .workspace :global(.db-topbar) { flex-wrap: wrap; gap: 20px; }
+  .workspace :global(.db-stat-grid) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px; }
+  .workspace :global(.db-stat-card) { padding: 16px; }
+  .workspace :global(.db-stat-icon-box) { display: none; }
+  .workspace :global(.form-row) { grid-template-columns: minmax(0, 1fr); }
+  .workspace :global(.dashboard-header) { flex-wrap: wrap; gap: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .auth :global(.auth-submit):active:not(:disabled) { transform: none; } .auth button, .workspace button, .workspace a { transition: none; } }

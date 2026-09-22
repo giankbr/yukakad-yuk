@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { useState } from "react";
+import theme from "@/components/ui/workspace-theme.module.css";
 
 /* ── Inline SVG icons ─────────────────────────────────────────── */
 function IGrid() {
@@ -184,27 +185,6 @@ function ISearch() {
 		</svg>
 	);
 }
-/* Yukakad diamond logo mark */
-function YKLogo() {
-	return (
-		<svg
-			width="16"
-			height="16"
-			viewBox="0 0 24 24"
-			fill="none"
-			stroke="currentColor"
-			strokeWidth="2.5"
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			aria-hidden="true"
-		>
-			<path d="M12 2L2 7l10 5 10-5-10-5z" />
-			<path d="M2 17l10 5 10-5" />
-			<path d="M2 12l10 5 10-5" />
-		</svg>
-	);
-}
-
 /* ── Navigation config ────────────────────────────────────────── */
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -370,13 +350,13 @@ export function DashboardShell({
 	}
 
 	return (
-		<main className="dashboard-shell">
+		<main className={`dashboard-shell ${theme.workspace}`}>
 			{/* ── Dark sidebar ───────────────────────────────────────── */}
 			<aside className="dashboard-rail">
 				{/* Logo */}
 				<Link href="/dashboard" className="dashboard-logo">
 					<span className="dashboard-logo-icon">
-						<YKLogo />
+						y
 					</span>
 					yukakad<span>.</span>
 				</Link>
@@ -418,6 +398,7 @@ export function DashboardShell({
 								<Link
 									key={item.key}
 									href={item.href}
+									aria-current={active === item.key ? "page" : undefined}
 									className={active === item.key ? "active" : undefined}
 								>
 									{item.icon}
