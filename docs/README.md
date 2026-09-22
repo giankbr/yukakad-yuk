@@ -19,4 +19,5 @@ Dokumen ini berisi ringkasan dan panduan project rebuild Yukakad.
 - Storage: S3-compatible object storage
 
 ## Catatan penting
-Legacy repository hanya dipakai sebagai reference behavior, bukan source yang langsung ditransfer.
+Kode CodeIgniter tersedia di branch `main` sebagai referensi perilaku aplikasi lama.
+Branch `dev` hanya memuat stack Go dan Next.js beserta dokumentasi dan infrastruktur development.
