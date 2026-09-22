@@ -1,13 +1,45 @@
 /* Product surfaces share the landing page's type, monochrome base and blue accent.
    Important declarations are limited to legacy global rules that already use it. */
-.auth, .workspace { --ink: #101013; --muted: #666870; --line: #e2e3e8; --accent: #1554e8; --paper: #fff; font-family: "Be Vietnam Pro", Arial, sans-serif; color: var(--ink); }
-.auth *, .workspace * { font-family: inherit; box-sizing: border-box; }
-.auth :global(.auth-heading) h1, .auth :global(.auth-aside) p, .workspace :is(h1, h2, h3) { font-family: "Be Vietnam Pro", Arial, sans-serif; }
+.auth, .workspace {
+	--ink: #101013;
+	--muted: #666870;
+	--line: #e2e3e8;
+	--accent: #1554e8;
+	--paper: #fff;
+	--font-be-vietnam-pro: "Be Vietnam Pro", Arial, sans-serif;
+	font-family: "Be Vietnam Pro", Arial, sans-serif;
+	color: var(--ink);
+}
+.auth :global(*),
+.workspace :global(*) {
+	font-family: inherit !important;
+	box-sizing: border-box;
+}
+.auth :global(.auth-heading) h1,
+.auth :global(.auth-aside) p,
+.auth :global(.auth-brand),
+.workspace :global(h1),
+.workspace :global(h2),
+.workspace :global(h3),
+.workspace :global(button),
+.workspace :global(input),
+.workspace :global(select),
+.workspace :global(textarea),
+.workspace :global(a),
+.workspace :global(span),
+.workspace :global(p),
+.workspace :global(label),
+.workspace :global(strong),
+.workspace :global(small),
+.workspace :global(th),
+.workspace :global(td) {
+	font-family: "Be Vietnam Pro", Arial, sans-serif !important;
+}
 .auth :is(a, button, input):focus-visible, .workspace :is(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .auth { min-height: 100dvh; background: #fff; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .auth :global(.auth-aside) { background: #08080a; padding: 36px clamp(28px, 4vw, 64px); position: relative; overflow: hidden; gap: 24px; justify-content: flex-start; border-right: 1px solid #25262c; }
 .auth :global(.auth-brand) { font-size: 26px; letter-spacing: -.055em; gap: 10px; }
-.auth :global(.auth-brand) span { background: white; color: #08080a; border-radius: 0; width: 32px; height: 32px; font: 700 24px Georgia, serif; }
+.auth :global(.auth-brand) span { background: white; color: #08080a; border-radius: 0; width: 32px; height: 32px; font: 700 18px/1 "Be Vietnam Pro", Arial, sans-serif; }
 .auth :global(.auth-aside) > p { font-size: clamp(32px, 3.6vw, 54px); line-height: 1.12; font-weight: 500; letter-spacing: -.055em; max-width: 15ch; margin: 56px 0 0; }
 .auth :global(.auth-aside) > small { color: #a7a8b2; font-size: 13px; line-height: 1.7; }
 .auth :global(.auth-aside)::after { content: ""; display: block; width: 100%; min-height: 230px; flex: 1; max-height: 360px; margin-top: 16px; background: #0b4fe8 url('/agentlab-hero-visual.png') center / cover; border: 1px solid #ffffff20; }
@@ -31,7 +63,7 @@
 .workspace :global(.dashboard-rail) { background: #08080a !important; border-right: 1px solid #27272c !important; }
 .workspace :global(.dashboard-logo) { font-size: 23px !important; letter-spacing: -.055em !important; margin-bottom: 24px !important; }
 .workspace :global(.dashboard-logo) span { color: white !important; }
-.workspace :global(.dashboard-logo-icon) { border-radius: 0; background: #fff; color: #08080a !important; font: 700 24px Georgia, serif; }
+.workspace :global(.dashboard-logo-icon) { border-radius: 0; background: #fff; color: #08080a !important; font: 700 16px/1 "Be Vietnam Pro", Arial, sans-serif; display: grid; place-items: center; }
 .workspace :global(.db-nav-label) { color: #868791; font-size: 10px; letter-spacing: .1em; }
 .workspace :global(.dashboard-rail) nav a { color: #b3b4be !important; min-height: 44px; border-radius: 4px !important; font-size: 12px !important; }
 .workspace :global(.dashboard-rail) nav a:hover { color: white !important; background: #202126 !important; }

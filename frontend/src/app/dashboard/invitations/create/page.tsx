@@ -26,6 +26,8 @@ export default function CreateInvitationPage() {
   const [submitting, setSubmitting] = useState(false);
 
   if (!ready) return null;
+  // Set by "Pakai template" on /dashboard/templates. Safe to read: `ready` is only true client-side.
+  const templateId = new URLSearchParams(window.location.search).get("template");
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
@@ -39,6 +41,10 @@ export default function CreateInvitationPage() {
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error ?? "Could not create invitation");
+      if (templateId) {
+        // Non-blocking: the template can still be picked later from the invitation settings.
+        await apiFetch(`/api/invitations/${body.id}/template`, token, { method: "PUT", body: JSON.stringify({ template_id: templateId }) }).catch(() => undefined);
+      }
       router.push(`/dashboard/invitations/${body.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -78,6 +84,7 @@ export default function CreateInvitationPage() {
           placeholder="alya-rizky"
         />
         <p className="form-hint">yukakad.com/invitation/{slug || "your-slug"}</p>
+        {templateId && <p className="form-hint">Template: <strong>{templateId}</strong></p>}
         {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
         <div className="form-actions">
           <Button type="submit" disabled={submitting || !title || !slug} className="bg-[#173c3a] text-white">
