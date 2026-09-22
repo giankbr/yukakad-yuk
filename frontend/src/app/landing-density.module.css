@@ -1,0 +1,104 @@
+/* Scoped sizing wins over legacy landing overrides without changing other routes. */
+.compact {
+  --section-space: clamp(2.5rem, 4vw, 4rem);
+}
+
+.compact > :is(:global(.landing-problem), :global(.landing-system), :global(.landing-showcase), :global(.landing-pricing), :global(.landing-voices), :global(.landing-assurance), :global(.landing-faq), :global(.landing-cta-banner)) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: var(--section-space) var(--page-rail) !important;
+  min-height: 0 !important;
+}
+
+.compact :is(:global(.landing-problem-heading), :global(.landing-system-heading), :global(.landing-showcase-heading), :global(.landing-pricing-heading)) {
+  gap: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.compact :is(:global(.landing-problem-heading), :global(.landing-system-heading), :global(.landing-showcase-heading), :global(.landing-pricing-heading), :global(.landing-voices), :global(.landing-assurance), :global(.landing-faq)) h2 {
+  font-size: clamp(1.75rem, 2.8vw, 2.75rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -.045em !important;
+  max-width: 26ch !important;
+}
+
+.compact :global(.landing-agent-frame) {
+  min-height: 0;
+  padding-top: 2.5rem;
+}
+.compact :global(.landing-launch-note) { display: none; }
+.compact :global(.landing-agent-copy) h1 {
+  font-size: clamp(2rem, 4.2vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -.055em;
+  max-width: 24ch;
+}
+.compact :global(.landing-agent-copy) p { max-width: 46rem; line-height: 1.6; }
+.compact :global(.landing-agent-visual) { margin-top: 2rem; height: 280px; }
+.compact :global(.landing-agent-logos) { padding-block: 1.5rem; min-height: 0; }
+
+.compact :global(.landing-problem-card) { min-height: 0; padding: 1.25rem; }
+.compact :global(.landing-problem-card) h3 { margin-top: 1.5rem; line-height: 1.35; }
+.compact :global(.landing-system-card):nth-child(n) {
+  min-height: 0;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-block: 1.5rem;
+}
+.compact :global(.landing-system-card):nth-child(n) h3 {
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  line-height: 1.2;
+  margin-block: .65rem;
+}
+.compact :global(.landing-system-card):nth-child(n) :global(.system-card-stage) {
+  min-height: 0;
+  height: clamp(13rem, 20vw, 17rem);
+}
+.compact :global(.landing-steps) { padding-block: 1.5rem !important; }
+.compact :global(.landing-steps) > div { min-height: 0; padding-block: 1rem !important; }
+.compact :global(.landing-steps) strong { font-size: 2.5rem; margin-block: .75rem !important; }
+.compact :global(.landing-steps) h3 { font-size: .75rem; letter-spacing: .025em; }
+.compact :global(.landing-template-card):nth-child(n) :global(.landing-template-preview) { height: 14rem; }
+.compact :global(.landing-template-grid) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+}
+.compact :global(.landing-pricing-grid) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+}
+.compact :global(.landing-plan-card):nth-child(n) { grid-column: auto; }
+.compact :global(.landing-plan-card) { padding: 1.5rem; min-height: 0; }
+.compact :global(.landing-plan-price) { font-size: clamp(2rem, 3vw, 3rem); }
+.compact :global(.landing-testimonial-card):nth-child(n) { min-height: 0 !important; }
+
+.compact :is(:global(.landing-assurance), :global(.landing-faq), :global(.landing-voices)) {
+  gap: clamp(1.5rem, 4vw, 4rem) !important;
+  align-items: start;
+}
+.compact :is(:global(.landing-assurance), :global(.landing-faq)) > div {
+  min-width: 0;
+  max-width: none !important;
+}
+.compact :global(.landing-faq) summary { padding-block: 1rem; }
+.compact :global(.landing-cta-copy) { text-align: left; }
+.compact :global(.landing-cta-copy) h2 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem) !important;
+  line-height: 1.12 !important;
+  max-width: 22ch !important;
+}
+.compact :global(.landing-cta-actions) :global(.landing-cta-button) { background: #fff; color: #111; }
+.compact :global(.landing-footer) {
+  min-height: 0 !important;
+  padding-block: 2.5rem !important;
+  gap: 2rem !important;
+}
+.compact :global(.landing-footer-watermark) { display: none; }
+
+@media (max-width: 760px) {
+  .compact :is(:global(.landing-template-grid), :global(.landing-pricing-grid)) { grid-template-columns: 1fr; }
+  .compact :global(.landing-agent-frame) { padding: 2rem .5rem 0; }
+  .compact :global(.landing-agent-visual) { height: 220px; }
+  .compact :global(.landing-system-card):nth-child(n) { gap: 1rem; }
+  .compact :global(.landing-system-card):nth-child(n) :global(.system-card-stage) { height: 220px; }
+  .compact :is(:global(.landing-assurance-list), :global(.landing-faq-list)) { margin-top: 1.5rem !important; }
+  .compact :global(.landing-hero-actions) { flex-wrap: wrap; }
+}

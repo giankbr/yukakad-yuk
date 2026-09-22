@@ -1,0 +1,159 @@
+openapi: 3.0.3
+info:
+  title: Yukakad API
+  version: 1.0.0
+  description: API SaaS undangan digital Yukakad.
+servers:
+  - url: /api/v1
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      security: []
+      responses:
+        '200': { description: OK }
+  /auth/register:
+    post:
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/RegisterRequest' } } }
+      responses: { '201': { description: Created } }
+  /auth/login:
+    post:
+      security: []
+      responses: { '200': { description: OK } }
+  /invitations:
+    get: { responses: { '200': { description: Invitation list } } }
+    post: { responses: { '201': { description: Created } } }
+  /invitations/{id}:
+    parameters: [{ $ref: '#/components/parameters/InvitationID' }]
+    get: { responses: { '200': { description: Invitation detail } } }
+    patch: { responses: { '200': { description: Updated } } }
+    delete: { responses: { '204': { description: Deleted } } }
+  /invitations/{id}/guests:
+    parameters: [{ $ref: '#/components/parameters/InvitationID' }]
+    get: { responses: { '200': { description: Guest list } } }
+    post: { responses: { '201': { description: Created } } }
+  /invitations/{id}/rsvps:
+    parameters: [{ $ref: '#/components/parameters/InvitationID' }]
+    get: { responses: { '200': { description: RSVP list } } }
+  /billing/plan:
+    get: { responses: { '200': { description: Active plan } } }
+    post: { responses: { '200': { description: Changed to Free or checkout created } } }
+  /billing/checkout:
+    post: { responses: { '201': { description: Pending subscription and payment URL } } }
+  /billing/subscriptions:
+    get: { responses: { '200': { description: Subscription history } } }
+  /billing/invoices:
+    get: { responses: { '200': { description: Invoice history } } }
+  /billing/entitlements:
+    get: { responses: { '200': { description: Effective account entitlements } } }
+  /webhooks/payment:
+    post:
+      security: []
+      parameters:
+        - name: X-Webhook-Signature
+          in: header
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: '#/components/schemas/PaymentWebhook' } } }
+      responses:
+        '200': { description: Subscription activated }
+        '401': { description: Invalid signature }
+  /invitations/{id}/domains:
+    parameters: [{ $ref: '#/components/parameters/InvitationID' }]
+    get: { responses: { '200': { description: Custom domain list } } }
+    post: { responses: { '201': { description: Custom domain created } } }
+  /invitations/{id}/domains/{domain_id}/verify:
+    parameters:
+      - { $ref: '#/components/parameters/InvitationID' }
+      - name: domain_id
+        in: path
+        required: true
+        schema: { type: string }
+    post: { responses: { '200': { description: Domain verified } } }
+  /templates:
+    get:
+      security: []
+      parameters:
+        - { name: event_type, in: query, schema: { type: string } }
+        - { name: category, in: query, schema: { type: string } }
+        - { name: tier, in: query, schema: { type: string, enum: [free, premium, signature] } }
+        - { name: tag, in: query, schema: { type: string } }
+        - { name: search, in: query, schema: { type: string } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses: { '200': { description: Filtered template catalog } }
+  /templates/{id}:
+    parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+    get:
+      security: []
+      responses: { '200': { description: Template detail and preview metadata } }
+  /templates/slug/{slug}:
+    parameters: [{ name: slug, in: path, required: true, schema: { type: string } }]
+    get:
+      security: []
+      responses: { '200': { description: Template detail resolved by public slug } }
+  /admin/templates:
+    get:
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [draft, active, archived] } }
+        - { name: event_type, in: query, schema: { type: string } }
+        - { name: tier, in: query, schema: { type: string, enum: [free, premium, signature] } }
+        - { name: search, in: query, schema: { type: string } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1 } }
+        - { name: page_size, in: query, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses: { '200': { description: Admin template catalog } }
+    post: { responses: { '201': { description: Template created } } }
+  /admin/templates/{id}:
+    parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+    get: { responses: { '200': { description: Template detail } } }
+    patch: { responses: { '200': { description: Template updated } } }
+    delete: { responses: { '204': { description: Template deleted } } }
+  /admin/templates/{id}/preview:
+    parameters: [{ name: id, in: path, required: true, schema: { type: string } }]
+    post:
+      requestBody:
+        required: true
+        content: { multipart/form-data: { schema: { type: object, required: [file], properties: { file: { type: string, format: binary } } } } }
+      responses: { '200': { description: Preview uploaded } }
+  /public/invitation/{slug}:
+    parameters: [{ $ref: '#/components/parameters/Slug' }]
+    get:
+      security: []
+      responses: { '200': { description: Public invitation } }
+  /public/current:
+    get:
+      security: []
+      description: Resolve the verified invitation from the request Host header.
+      responses:
+        '200': { description: Public invitation resolved from custom domain }
+        '404': { description: Custom domain not found }
+  /public/invitation/{slug}/rsvp:
+    post:
+      security: []
+      responses: { '201': { description: RSVP submitted } }
+components:
+  securitySchemes:
+    bearerAuth: { type: http, scheme: bearer }
+  parameters:
+    InvitationID: { name: id, in: path, required: true, schema: { type: string } }
+    Slug: { name: slug, in: path, required: true, schema: { type: string } }
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [name, email, password]
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8 }
+    PaymentWebhook:
+      type: object
+      required: [reference, status]
+      properties:
+        reference: { type: string }
+        status: { type: string, enum: [confirmed] }
