@@ -16,18 +16,18 @@ export function AnnouncementBar() {
   return (
     <div className={styles.announcement}>
       <span>Baru: Undangan Video 3D &amp; QR Check-in untuk semua paket Premium</span>
-      <Link href="/#fitur">Lihat sekarang <IconArrowRight size={14} /></Link>
+      <Link href="/produk/video-ucapan-3d">Lihat sekarang <IconArrowRight size={14} /></Link>
     </div>
   );
 }
 
-type NavKey = "tema" | "fitur" | "harga" | undefined;
+export type NavKey = "tema" | "fitur" | "harga" | "tentang" | "produk" | undefined;
 
 export function SiteHeader({ current }: { current?: NavKey }) {
   const links: { key: NavKey; href: string; label: string; menu?: boolean }[] = [
     { key: "tema", href: "/templates", label: "Tema", menu: true },
-    { key: "fitur", href: "/#fitur", label: "Fitur" },
-    { key: "harga", href: "/#harga", label: "Harga", menu: true },
+    { key: "fitur", href: "/fitur", label: "Fitur" },
+    { key: "harga", href: "/harga", label: "Harga", menu: true },
   ];
   return (
     <header className={styles.header}>
@@ -54,10 +54,10 @@ type FooterProps = { tagline?: string; copyright?: string; instagram?: string; w
 
 export function SiteFooter({ tagline, copyright, instagram, whatsappHref }: FooterProps) {
   const columns = [
-    { title: "Produk", links: [["Undangan Website", "/templates"], ["Video Ucapan 3D", "/#fitur"], ["QR Check-in", "/#fitur"], ["Undangan Cetak", "/#harga"]] },
+    { title: "Produk", links: [["Undangan Website", "/produk/undangan-website"], ["Video Ucapan 3D", "/produk/video-ucapan-3d"], ["QR Check-in", "/produk/qr-checkin"], ["Undangan Cetak", "/produk/undangan-cetak"]] },
     { title: "Acara", links: [["Pernikahan", "/templates"], ["Khitan", "/templates"], ["Aqiqah", "/templates"], ["Ulang Tahun", "/templates"], ["Syukuran", "/templates"]] },
-    { title: "Perusahaan", links: [["Tentang kami", "/#faq"], ["Program Reseller", "/#harga"], ["Blog", "/"], ["Karier", "/"]] },
-    { title: "Bantuan", links: [["Pusat bantuan", "/#faq"], ["Panduan membuat", "/#cara-kerja"], ["Hubungi kami", whatsappHref ?? "/#faq"]] },
+    { title: "Perusahaan", links: [["Tentang kami", "/tentang"], ["Program Reseller", "/tentang#kontak"], ["Tim", "/tentang#tim"], ["Fitur", "/fitur"]] },
+    { title: "Bantuan", links: [["Pusat bantuan", "/harga#faq"], ["Panduan membuat", "/fitur#cara-kerja"], ["Hubungi kami", whatsappHref ?? "/tentang#kontak"]] },
   ];
   const instagramHref = instagram ? `https://instagram.com/${instagram.replace(/^@/, "")}` : undefined;
   return (

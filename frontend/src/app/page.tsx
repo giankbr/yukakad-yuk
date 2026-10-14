@@ -1,41 +1,12 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AosInit } from "@/components/landing/AosInit";
 import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/landing/SiteChrome";
+import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@/components/landing/Sections";
+import { getJSON, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
 import { ThemeGallery, VoiceWall, type Voice } from "@/components/landing/TemplateInteractions";
-import {
-  IconArrowRight, IconCheck, IconHeadset, IconInfinity, IconLink, IconLock, IconMinus, IconPause,
-  IconPlus, IconQr, IconSend, IconShield, IconTimer,
-} from "@/components/brand/icons";
+import { IconArrowRight, IconLink, IconLock, IconPause, IconQr, IconSend } from "@/components/brand/icons";
 import styles from "./landing.module.css";
-
-const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
-
-type Hero = { heading?: string; subheading?: string; cta_label?: string; cta_href?: string };
-type Kontak = { heading?: string; subheading?: string; whatsapp?: string };
-type Footer = { heading?: string; copyright?: string; instagram?: string };
-type Feature = { id: string; title: string; description: string; icon?: string };
-type Testimonial = { id: string; name: string; role?: string; quote: string; avatar_url?: string; is_sample?: boolean };
-type Template = { id: string; name: string; slug: string; category: string; preview_image?: string; preview_url?: string; is_premium: boolean };
-type Plan = { id: string; name: string; max_guests: number; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; price: number; duration_days?: number | null };
-
-const defaultTemplates: Template[] = [
-  { id: "alyra", name: "Alyra", slug: "alyra", category: "Editorial", preview_url: "/invitation/demo?template=alyra", is_premium: false },
-  { id: "weddings", name: "Weddings", slug: "weddings", category: "Modern", preview_url: "/invitation/demo?template=weddings", is_premium: false },
-  { id: "veloria", name: "Veloria", slug: "veloria", category: "Editorial", preview_url: "/invitation/demo?template=veloria", is_premium: false },
-];
-
-const defaultPlans: Plan[] = [
-  { id: "free", name: "Mulai", max_guests: 100, has_watermark: true, custom_domain_allowed: false, payment_gateway_allowed: false, price: 0 },
-  { id: "pro", name: "Rayakan", max_guests: 1000, has_watermark: false, custom_domain_allowed: true, payment_gateway_allowed: true, price: 149000, duration_days: 30 },
-];
-
-const templateImages: Record<string, string> = {
-  alyra: "/templates/alyra-preview.png",
-  weddings: "/templates/weddings-preview.png",
-  veloria: "/templates/veloria-preview.png",
-};
 
 const sampleVoices: Voice[] = [
   { id: "s-dinda", name: "Dinda & Arif", role: "Pernikahan · Bandung", messages: ["Kak, undangannya udah kesebar ke 600 tamu 😭", "Hemat 4 juta dari cetak, makasih banyak!"], time: "19.42", isSample: true },
@@ -46,60 +17,15 @@ const sampleVoices: Voice[] = [
   { id: "s-raka", name: "Bu Ratna", role: "Khitan · Solo", messages: ["Tamu tinggal klik link, lokasi langsung kebuka di Maps. Praktis banget."], time: "16.08", isSample: true },
 ];
 
-const faqs = [
-  ["Apakah bisa mencoba gratis?", "Bisa. Kamu dapat membuat dan melihat pratinjau undangan tanpa biaya. Pembayaran hanya diperlukan saat undangan siap dibagikan ke tamu."],
-  ["Apakah ada batas jumlah tamu?", "Setiap paket punya kapasitas tamu yang berbeda. Lihat detailnya di bagian harga sebelum memilih paket."],
-  ["Berapa lama proses pembuatannya?", "Rata-rata sekitar 10 menit: pilih tema, isi data acara, lalu bagikan link ke tamu."],
-  ["Apa maksud masa aktif undangan?", "Masa aktif adalah lama link undanganmu bisa dibuka tamu. Setelah lewat, kamu tetap bisa memperpanjang dari dashboard."],
-  ["Apakah tema bisa di-custom?", "Bisa. Ubah foto, warna, teks, musik, dan urutan bagian undangan, lalu lihat pratinjaunya seketika."],
-  ["Apakah tersedia program reseller?", "Ya. Vendor WO dan EO bisa menghubungi tim kami lewat WhatsApp untuk informasi program reseller."],
-];
-
-async function getJSON<T>(path: string, fallback: T): Promise<T> {
-  try {
-    const response = await fetch(`${API_BASE}${path}`, { next: { revalidate: 60 } });
-    if (!response.ok) return fallback;
-    return response.json();
-  } catch {
-    return fallback;
-  }
-}
-
-function shortPrice(amount: number) {
-  if (amount <= 0) return { value: "Gratis", unit: "" };
-  if (amount % 1000 === 0) return { value: `${(amount / 1000).toLocaleString("id-ID")}rb`, unit: "Rp" };
-  return { value: amount.toLocaleString("id-ID"), unit: "Rp" };
-}
-
-function planPerks(plan: Plan) {
-  const perks = [`Hingga ${plan.max_guests.toLocaleString("id-ID")} tamu`, "RSVP & buku ucapan", "Kirim via WhatsApp"];
-  perks.push(plan.has_watermark ? "Dengan watermark Rawuh" : "Tanpa watermark");
-  if (plan.custom_domain_allowed) perks.push("Domain pribadi .id");
-  if (plan.payment_gateway_allowed) perks.push("Amplop digital");
-  perks.push(plan.duration_days ? `Aktif ${plan.duration_days} hari` : "Gratis selamanya untuk 1 undangan");
-  return perks;
-}
-
-function EventSignup({ label = "Buat gratis" }: { label?: string }) {
-  const id = `event-${label.toLowerCase().replace(/\s+/g, "-")}`;
-  return (
-    <form className={styles.signup} action="/auth/register" method="get">
-      <label htmlFor={id} className="sr-only">Nama acaramu</label>
-      <input id={id} name="event" placeholder="Nama acaramu, mis. Rina & Bima" autoComplete="off" />
-      <button type="submit" className={styles.btnPrimary}>{label}</button>
-    </form>
-  );
-}
-
 export default async function Home() {
-  const [hero, kontak, footer, featuresResult, testimonialsResult, templatesResult, plansResult] = await Promise.all([
+  const [hero, kontak, footer, featuresResult, testimonialsResult, templates, plans] = await Promise.all([
     getJSON<Hero>("/api/public/site-content/hero", {}),
     getJSON<Kontak>("/api/public/site-content/kontak", {}),
-    getJSON<Footer>("/api/public/site-content/footer", {}),
+    getJSON<FooterContent>("/api/public/site-content/footer", {}),
     getJSON<{ items?: Feature[] }>("/api/public/features", {}),
     getJSON<{ items?: Testimonial[] }>("/api/public/testimonials", {}),
-    getJSON<{ items?: Template[] }>("/api/templates", {}),
-    getJSON<{ items?: Plan[] }>("/api/public/plans", {}),
+    getTemplates(),
+    getPlans(),
   ]);
 
   const extraFeatures = featuresResult.items ?? [];
@@ -107,9 +33,6 @@ export default async function Home() {
     id: item.id, name: item.name, role: item.role, messages: [item.quote], isSample: item.is_sample,
   }));
   const voices = [...realVoices, ...sampleVoices.slice(0, Math.max(0, 6 - realVoices.length))];
-  const templates = templatesResult.items?.length ? templatesResult.items : defaultTemplates;
-  const plans = (plansResult.items?.length ? plansResult.items : defaultPlans).slice().sort((a, b) => a.price - b.price);
-  const featuredIndex = plans.length >= 3 ? 1 : plans.length - 1;
   const waLink = kontak.whatsapp ? `https://wa.me/${kontak.whatsapp.replace(/[^0-9]/g, "")}` : undefined;
   const heroCta = hero.cta_href && hero.cta_label;
 
@@ -123,7 +46,7 @@ export default async function Home() {
       <div className={styles.rail} id="konten">
         {/* Hero */}
         <section className={styles.hero} aria-labelledby="hero-title">
-          <Link href="/#fitur" className={styles.pill}><b>BARU</b> Undangan Video 3D sudah hadir <IconArrowRight size={14} /></Link>
+          <Link href="/produk/video-ucapan-3d" className={styles.pill}><b>BARU</b> Undangan Video 3D sudah hadir <IconArrowRight size={14} /></Link>
           <h1 id="hero-title" className={styles.heroTitle}>
             {hero.heading ? <span>{hero.heading}</span> : <><span>Undangan yang</span><span>terasa personal.</span></>}
           </h1>
@@ -220,32 +143,13 @@ export default async function Home() {
         <section className={styles.section} id="tema" style={{ paddingBottom: 0 }}>
           <ThemeGallery clip templates={templates.map(template => ({
             id: template.id, name: template.name, category: template.category || "Umum",
-            preview: template.preview_image || templateImages[template.slug],
-            demoHref: template.preview_url || `/invitation/demo?template=${encodeURIComponent(template.id)}`,
+            preview: templatePreview(template), href: `/templates/${template.slug}`,
+            demoHref: templateDemoHref(template),
             isPremium: template.is_premium,
           }))} />
         </section>
 
-        {/* How it works */}
-        <section className={`${styles.section} ${styles.surface}`} id="cara-kerja" aria-labelledby="steps-title">
-          <div className={styles.steps}>
-            <div className={styles.titleGroup}>
-              <p className={styles.eyebrow}>Cara kerja</p>
-              <h2 id="steps-title" className={styles.sectionTitle}>Siap kirim dalam tiga langkah.</h2>
-              <p className={styles.lead}>Tidak perlu desainer, tidak perlu laptop. Semua bisa dari HP sambil menunggu fitting baju.</p>
-              <Link href="/auth/register" className={styles.btnPrimary}>Mulai buat undangan <IconArrowRight size={14} /></Link>
-            </div>
-            <ol className={styles.stepList}>
-              {[
-                ["Pilih tema", "Jelajahi tema, lihat demo langsung, lalu pilih yang paling kamu banget."],
-                ["Isi data acara", "Masukkan nama, tanggal, lokasi, foto, dan cerita kalian. Pratinjau berubah seketika."],
-                ["Kirim & pantau", "Bagikan ke tamu lewat WhatsApp dan pantau RSVP serta ucapan secara real-time."],
-              ].map(([title, desc], index) => (
-                <li key={title} data-aos="fade-up" data-aos-delay={index * 60}><b>{String(index + 1).padStart(2, "0")}</b><div><h3>{title}</h3><p>{desc}</p></div></li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <StepsSection />
 
         {/* Pricing */}
         <section className={styles.section} id="harga" aria-labelledby="harga-title">
@@ -255,38 +159,7 @@ export default async function Home() {
               <h2 id="harga-title" className={styles.pricingTitle}><span>Sekali bayar, </span><span>tanpa langganan.</span></h2>
               <p className={styles.pricingDesc}>Hemat hingga 90% dibanding undangan cetak. Bayar hanya saat undangan siap dikirim.</p>
             </div>
-            <div className={styles.plans} style={{ "--plans": plans.length } as CSSProperties}>
-              {plans.map((plan, index) => {
-                const featured = index === featuredIndex && plans.length > 1;
-                const price = shortPrice(plan.price);
-                const href = plan.price > 0 ? `/auth/login?plan=${encodeURIComponent(plan.id)}` : "/auth/register";
-                return (
-                  <article key={plan.id} className={`${styles.plan} ${featured ? styles.planFeatured : ""}`}>
-                    {featured && <div className={styles.planRibbon}>✦ PALING DIPILIH</div>}
-                    <div className={styles.planHead}>
-                      <h3>{plan.name}</h3>
-                      <p>{plan.price <= 0 ? "Untuk mencoba & acara sederhana." : featured ? "Paling dipilih untuk pernikahan." : "Lebih lengkap untuk acara besar."}</p>
-                      <div className={styles.price}>
-                        {price.unit && <small>{price.unit}</small>}<strong>{price.value}</strong>
-                        <span>{plan.price > 0 ? "sekali bayar" : "tanpa biaya"}</span>
-                      </div>
-                      <Link href={href} className={featured ? styles.btnPrimary : styles.btnOutline}>{plan.price > 0 ? `Pilih ${plan.name}` : "Mulai gratis"}</Link>
-                    </div>
-                    <div className={styles.planBody}>
-                      <p>{index === 0 ? "Yang kamu dapat" : `Semua di ${plans[index - 1].name}, plus`}</p>
-                      <ul>{planPerks(plan).map(perk => <li key={perk}><IconCheck size={14} strokeWidth={2.4} />{perk}</li>)}</ul>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-            <div className={styles.assurance}>
-              <b>Semua paket:</b>
-              <span><IconInfinity size={16} /> Revisi sepuasnya</span>
-              <span><IconSend size={16} /> Kirim via WhatsApp</span>
-              <span><IconShield size={16} /> Garansi 7 hari uang kembali</span>
-              <a href={waLink ?? "#faq"} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Vendor WO? Program reseller <IconArrowRight size={14} /></a>
-            </div>
+            <PricingPlans plans={plans} waLink={waLink} />
           </div>
         </section>
 
@@ -301,53 +174,11 @@ export default async function Home() {
             { src: "/rawuh/story-birthday.webp", caption: "Tema Ceria", afterIndex: 3 },
             { src: "/rawuh/story-khitan.webp", caption: "Khitanan · Tema Arunika", afterIndex: 2 },
           ]} />
-          <a href={waLink ?? "#faq"} className={`${styles.btnOutline} ${styles.voicesMore}`} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Ceritakan pengalamanmu</a>
+          <a href={waLink ?? "/tentang#kontak"} className={`${styles.btnOutline} ${styles.voicesMore}`} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Ceritakan pengalamanmu</a>
         </section>
 
-        {/* FAQ */}
-        <section className={styles.section} id="faq" aria-labelledby="faq-title">
-          <div className={styles.faq}>
-            <div className={styles.titleGroup}>
-              <p className={styles.eyebrow}>FAQ</p>
-              <h2 id="faq-title" className={styles.sectionTitle}>Pertanyaan yang sering muncul.</h2>
-              <p className={styles.lead}>Masih ragu? Tim kami siap bantu lewat WhatsApp setiap hari, 08.00–22.00.</p>
-              <a href={waLink ?? "#kontak"} className={styles.btnOutline} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Chat tim support <IconArrowRight size={14} /></a>
-            </div>
-            <div className={styles.faqList}>
-              {faqs.map(([question, answer], index) => (
-                <details key={question} open={index === 0}>
-                  <summary>{question}<span className={styles.faqToggle} aria-hidden><IconPlus className={styles.plus} size={16} /><IconMinus className={styles.minus} size={16} /></span></summary>
-                  <p>{answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className={`${styles.section} ${styles.surface} ${styles.cta}`} id="kontak" aria-labelledby="cta-title">
-          <div className={styles.titleGroup}>
-            <p className={styles.eyebrow}>Mulai sekarang</p>
-            <h2 id="cta-title" className={styles.ctaTitle}>
-              {kontak.heading ? <span style={{ color: "var(--rw-ink)" }}>{kontak.heading}</span> : <><span>Tamu menunggu kabar bahagiamu.</span><span>Kirim undangannya hari ini.</span></>}
-            </h2>
-            {kontak.subheading && <p className={styles.lead}>{kontak.subheading}</p>}
-            <EventSignup label="Buat sekarang" />
-            <div className={styles.trust}>
-              <span><IconShield size={14} /> Pembayaran aman</span>
-              <span><IconTimer size={14} /> Siap dalam 10 menit</span>
-              <span><IconHeadset size={14} /> Dibantu tim support</span>
-            </div>
-          </div>
-          <div className={styles.ctaVisual} aria-hidden>
-            <Image src="/rawuh/cta-photo.webp" alt="" fill sizes="(max-width: 900px) 100vw, 480px" />
-            <div className={styles.sentCard}>
-              <div>Undangan terkirim<span>600 / 600</span></div>
-              <div className={styles.bar}><i style={{ width: "100%" }} /></div>
-              <small>Dibuka 512 tamu · 248 RSVP hadir</small>
-            </div>
-          </div>
-        </section>
+        <FaqSection waLink={waLink} />
+        <FinalCta heading={kontak.heading} subheading={kontak.subheading} />
       </div>
 
       <SiteFooter copyright={footer.copyright} instagram={footer.instagram} whatsappHref={waLink} />

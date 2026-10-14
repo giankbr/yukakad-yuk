@@ -12,7 +12,7 @@ import { WishesSection } from "@/components/invitation/WishesSection";
 import type { InvitationData } from "@/components/invitation/types";
 import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
 
-const invitation: InvitationData = {
+const defaultInvitation: InvitationData = {
   couple: { bride: "Alya", groom: "Rizky", note: "We met in a room full of people and somehow left with a life full of small, shared rituals. This next chapter feels better with you in it." },
   date: "2026-11-15T08:00:00+07:00",
   place: "Pendopo Ndalem Yudhaningratan",
@@ -35,8 +35,16 @@ const invitation: InvitationData = {
 };
 const invitationSlug = "alya-rizky";
 
-export default async function InvitationDemoPage({ searchParams }: { searchParams: Promise<{ template?: string }> }) {
-  const { template } = await searchParams;
+// "?names=Nina & Dimas" lets marketing pages preview a theme with the visitor's own names.
+function withNames(names?: string): InvitationData {
+  const [bride, groom] = (names ?? "").split(/\s*(?:&|dan)\s*/i).map(part => part.trim().slice(0, 40));
+  if (!bride || !groom) return defaultInvitation;
+  return { ...defaultInvitation, couple: { ...defaultInvitation.couple, bride, groom } };
+}
+
+export default async function InvitationDemoPage({ searchParams }: { searchParams: Promise<{ template?: string; names?: string }> }) {
+  const { template, names } = await searchParams;
+  const invitation = withNames(names);
   if (isWeddingStyle(template)) return <WeddingTemplate variant={template} data={invitation} slug={invitationSlug} demo />;
   return <main className="invitation-page template-editorial">
     <CoverSection data={invitation} />
@@ -51,7 +59,7 @@ export default async function InvitationDemoPage({ searchParams }: { searchParam
       <WishesSection slug={invitationSlug} />
       <GiftSection data={invitation} />
       <ClosingSection data={invitation} />
-      <footer className="invitation-footer">With love, Alya &amp; Rizky · 2026</footer>
+      <footer className="invitation-footer">With love, {invitation.couple.bride} &amp; {invitation.couple.groom} · 2026</footer>
     </div>
   </main>;
 }

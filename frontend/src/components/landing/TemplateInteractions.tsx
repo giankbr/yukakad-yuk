@@ -19,16 +19,17 @@ export function MobileMenu() {
       if ((event.target as HTMLElement).closest("a") && menu.current) menu.current.open = false;
     }}>
       <Link href="/templates">Tema</Link>
-      <Link href="/#fitur">Fitur</Link>
-      <Link href="/#harga">Harga</Link>
-      <Link href="/#faq">FAQ</Link>
+      <Link href="/fitur">Fitur</Link>
+      <Link href="/harga">Harga</Link>
+      <Link href="/produk/undangan-website">Produk</Link>
+      <Link href="/tentang">Tentang kami</Link>
       <Link href="/auth/login">Masuk</Link>
     </div>
   </details>;
 }
 
 export type GalleryTemplate = {
-  id: string; name: string; category: string; preview?: string; demoHref: string; isPremium: boolean;
+  id: string; name: string; category: string; preview?: string; demoHref: string; isPremium: boolean; href?: string; price?: string;
 };
 
 const heights = [340, 260, 380, 280, 260, 360, 300, 340];
@@ -97,7 +98,7 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
                 </div>
               </div>
               <div className={styles.themeMeta}>
-                <h3>{template.name}</h3>
+                <h3>{template.href ? <Link href={template.href}>{template.name}</Link> : template.name}</h3>
                 <span className={template.isPremium ? styles.premium : undefined}>{template.isPremium ? "Premium" : template.category}</span>
               </div>
             </article>
