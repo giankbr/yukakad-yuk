@@ -52,7 +52,12 @@ export function SiteHeader({ current }: { current?: NavKey }) {
 
 type FooterProps = { tagline?: string; copyright?: string; instagram?: string; whatsappHref?: string };
 
-export function SiteFooter({ tagline, copyright, instagram, whatsappHref }: FooterProps) {
+// Content saved before the rebrand may still say "Yukakad"; fall back to Rawuh defaults instead of showing it.
+const legacyBrand = (value?: string) => value && !/yukakad/i.test(value) ? value : undefined;
+
+export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawInstagram, whatsappHref }: FooterProps) {
+  const copyright = legacyBrand(rawCopyright);
+  const instagram = legacyBrand(rawInstagram);
   const columns = [
     { title: "Produk", links: [["Undangan Website", "/produk/undangan-website"], ["Video Ucapan 3D", "/produk/video-ucapan-3d"], ["QR Check-in", "/produk/qr-checkin"], ["Undangan Cetak", "/produk/undangan-cetak"]] },
     { title: "Acara", links: [["Pernikahan", "/templates"], ["Khitan", "/templates"], ["Aqiqah", "/templates"], ["Ulang Tahun", "/templates"], ["Syukuran", "/templates"]] },
@@ -89,10 +94,10 @@ export function SiteFooter({ tagline, copyright, instagram, whatsappHref }: Foot
             <span>{copyright ?? `© ${new Date().getFullYear()} Rawuh.id`}</span>
           </div>
         </div>
+        <svg className={styles.giant} viewBox="0 0 1280 240" aria-hidden="true" focusable="false">
+          <text x="0" y="232" textLength="1280" lengthAdjust="spacingAndGlyphs" fontSize="300">rawuh.</text>
+        </svg>
       </div>
-      <svg className={styles.giant} viewBox="0 0 1200 250" aria-hidden="true" focusable="false">
-        <text x="600" y="235" textAnchor="middle" fontSize="330" letterSpacing="-14">rawuh.</text>
-      </svg>
     </footer>
   );
 }

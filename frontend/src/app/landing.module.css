@@ -124,6 +124,8 @@
 .cardCopy { display: grid; gap: 6px; }
 .cardCopy h3 { color: var(--rw-ink); font-size: 18px; font-weight: 600; letter-spacing: -.025em; }
 .cardCopy p { color: var(--rw-muted); font-size: 16px; line-height: 1.62; }
+.cardMini { grid-column: span var(--span, 2); min-height: 0; flex-direction: row; align-items: flex-start; justify-content: flex-start; gap: 18px; padding: 24px 28px; }
+.featureIcon { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border: 1px solid #f6d6cc; border-radius: var(--rw-radius-md); background: var(--rw-primary-soft); color: var(--rw-primary); }
 .cardDark .cardCopy h3 { color: #fff; }
 .cardDark .cardCopy p { color: var(--rw-muted-2); }
 
@@ -168,6 +170,10 @@
 .tags button[aria-pressed="true"] { border-color: var(--rw-ink); background: var(--rw-ink); color: #fff; }
 .masonry { position: relative; columns: 4 220px; column-gap: 16px; }
 .masonry[data-clipped] { max-height: 860px; overflow: hidden; }
+/* Few themes: lay them out as an even row instead of leaving empty masonry columns. */
+.masonry[data-few] { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); column-gap: 16px; columns: auto; }
+.masonry[data-few] .themePreview img { object-position: top; }
+.masonry[data-few] .themePreview { height: 380px !important; }
 .masonry[data-clipped]::after { content: ""; position: absolute; inset: auto 0 0; height: 220px; background: linear-gradient(rgba(255, 255, 255, 0), #fff 85%); pointer-events: none; }
 .themeCard { display: grid; gap: 10px; break-inside: avoid; margin-bottom: 20px; }
 .themePreview { position: relative; display: block; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); overflow: hidden; background: var(--rw-surface); }
@@ -298,7 +304,7 @@ details[open] .faqToggle { background: var(--rw-primary); color: #fff; }
 .payments span { padding: 3px 10px; border-radius: 999px; background: var(--rw-surface); color: var(--rw-ink-2); font-size: 12px; font-weight: 500; }
 .legal { display: flex; flex-wrap: wrap; gap: 24px; }
 .legal a:hover { color: var(--rw-ink); }
-.giant { display: block; width: 100%; height: auto; margin-top: 24px; margin-bottom: -6%; color: var(--rw-surface); }
+.giant { display: block; width: 100%; height: auto; margin: 40px 0 -5%; color: var(--rw-surface); overflow: visible; }
 .giant text { fill: currentColor; font-family: var(--rw-font-mono); }
 
 /* ── Theme page ──────────────────────────── */
@@ -324,7 +330,9 @@ details[open] .faqToggle { background: var(--rw-primary); color: #fff; }
   .sectionHeader { flex-direction: column; align-items: start; gap: 20px; }
   .features .lead { max-width: none; }
   .bento { grid-template-columns: minmax(0, 1fr); }
-  .card, .cardWide, .cardDark { grid-column: auto; min-height: 300px; }
+  .card, .cardWide, .cardDark { grid-column: auto; min-height: 0; }
+  .cardVisual { min-height: 150px; }
+  .cardMini { grid-column: auto; min-height: 0; }
   .phoneFan { height: 340px; }
   .phone { width: 190px; height: 370px; border-radius: 28px; border-width: 5px; }
   .phoneLeft { left: calc(50% - 290px); }

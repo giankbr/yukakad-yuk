@@ -84,7 +84,7 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
       {visible.length === 0 ? (
         <p className={styles.empty} role="status">Belum ada tema yang cocok. Coba kata kunci lain.</p>
       ) : (
-        <div id="theme-results" className={styles.masonry} data-clipped={clipped ? "" : undefined}>
+        <div id="theme-results" className={styles.masonry} data-clipped={clipped ? "" : undefined} data-few={visible.length < 4 ? visible.length : undefined}>
           {visible.map((template, index) => (
             <article className={styles.themeCard} key={template.id}>
               <div className={styles.themePreview} style={{ height: heights[index % heights.length] }}>

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AosInit } from "@/components/landing/AosInit";
@@ -5,7 +6,23 @@ import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/landing/Si
 import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@/components/landing/Sections";
 import { getJSON, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
 import { ThemeGallery, VoiceWall, type Voice } from "@/components/landing/TemplateInteractions";
-import { IconArrowRight, IconLink, IconLock, IconPause, IconQr, IconSend } from "@/components/brand/icons";
+import {
+  IconArrowRight, IconCalendar, IconGift, IconGlobe, IconImages, IconLink, IconLock, IconMusic, IconPause, IconPin, IconQr, IconSend, IconSparkle, IconUsers,
+} from "@/components/brand/icons";
+
+/** Admin features store an emoji; pick a matching line icon so cards match the design system. */
+function FeatureIcon({ title }: { title: string }) {
+  const t = title.toLowerCase();
+  if (/amplop|hadiah|gift|kado/.test(t)) return <IconGift size={20} />;
+  if (/whatsapp|bagikan|kirim|share/.test(t)) return <IconSend size={20} />;
+  if (/galeri|foto|video/.test(t)) return <IconImages size={20} />;
+  if (/musik|lagu/.test(t)) return <IconMusic size={20} />;
+  if (/peta|lokasi|maps/.test(t)) return <IconPin size={20} />;
+  if (/tamu|guest/.test(t)) return <IconUsers size={20} />;
+  if (/acara|jadwal|hitung|tanggal/.test(t)) return <IconCalendar size={20} />;
+  if (/domain|link|website/.test(t)) return <IconGlobe size={20} />;
+  return <IconSparkle size={20} />;
+}
 import styles from "./landing.module.css";
 
 const sampleVoices: Voice[] = [
@@ -28,7 +45,10 @@ export default async function Home() {
     getPlans(),
   ]);
 
-  const extraFeatures = featuresResult.items ?? [];
+  // Admin-managed features render under the bento; skip ones the fixed cards above already cover.
+  const builtIn = /rsvp|qr|check-?in|musik|domain|kirim sekali/i;
+  const extraFeatures = (featuresResult.items ?? []).filter(feature => !builtIn.test(feature.title));
+  const extraSpan = extraFeatures.length > 0 && extraFeatures.length < 3 ? 6 / extraFeatures.length : 2;
   const realVoices: Voice[] = (testimonialsResult.items ?? []).map(item => ({
     id: item.id, name: item.name, role: item.role, messages: [item.quote], isSample: item.is_sample,
   }));
@@ -130,8 +150,8 @@ export default async function Home() {
                 <div className={styles.cardCopy}><h3>Domain pribadi</h3><p>Alamat undangan atas nama kalian sendiri.</p></div>
               </article>
               {extraFeatures.map((feature, index) => (
-                <article key={feature.id} className={styles.card} style={{ minHeight: 0 }} data-aos="fade-up" data-aos-delay={Math.min(index * 60, 180)}>
-                  {feature.icon && <div className={styles.cardVisual} aria-hidden><span className={styles.play}>{feature.icon}</span></div>}
+                <article key={feature.id} className={`${styles.card} ${styles.cardMini}`} style={{ "--span": extraSpan } as CSSProperties} data-aos="fade-up" data-aos-delay={Math.min(index * 60, 180)}>
+                  <span className={styles.featureIcon} aria-hidden><FeatureIcon title={feature.title} /></span>
                   <div className={styles.cardCopy}><h3>{feature.title}</h3><p>{feature.description}</p></div>
                 </article>
               ))}
