@@ -64,7 +64,7 @@ export default function FiturPage() {
             <p className={styles.lead}>Upload daftar tamu dari Excel atau kontak HP. Setiap tamu dapat link dengan namanya sendiri — tanpa copy-paste satu per satu.</p>
             <Checks items={["Kirim massal via WhatsApp", "Nama tamu otomatis di sampul undangan", "Pantau siapa yang sudah membuka"]} />
           </div>
-          <div className={styles.stage} aria-hidden data-aos="fade-up">
+          <div className={styles.stage} aria-hidden>
             <div className={styles.panel}>
               <div className={styles.panelHead}>Daftar tamu · 248<span>Kirim ke 3 terpilih</span></div>
               {guests.map(([name, group, status, tone, checked]) => (
@@ -88,7 +88,7 @@ export default function FiturPage() {
             <p className={styles.lead}>Tamu konfirmasi kehadiran &amp; jumlah orang langsung dari undangan. Kamu pantau semuanya real-time dari HP.</p>
             <Checks items={["Konfirmasi hadir + jumlah rombongan", "Buku ucapan yang bisa dibaca ulang", "Rekap kehadiran untuk WO & katering"]} />
           </div>
-          <div className={styles.stage} aria-hidden data-aos="fade-up">
+          <div className={styles.stage} aria-hidden>
             <div className={styles.rsvpStack}>
               <div className={styles.tiles}>
                 <div className={styles.tile}><small>Hadir</small><strong>186</strong><em data-good="">+12 hari ini</em></div>
@@ -116,7 +116,7 @@ export default function FiturPage() {
             <p className={styles.lead}>Tamu yang berhalangan tetap bisa memberi. Rekening bank dan e-wallet kalian tampil rapi, lengkap dengan tombol salin.</p>
             <Checks items={["Rekening bank & e-wallet", "Tombol salin nomor sekali tap", "Alamat kirim kado fisik"]} />
           </div>
-          <div className={`${styles.stage} ${styles.stageSoft}`} aria-hidden data-aos="fade-up">
+          <div className={`${styles.stage} ${styles.stageSoft}`} aria-hidden>
             <div className={styles.giftLayout}>
               <div className={styles.giftCard}>
                 Kirim hadiah untuk<br />Nina &amp; Dimas
@@ -142,7 +142,7 @@ export default function FiturPage() {
             <p className={styles.lead}>Tidak perlu antre tanda tangan. Penerima tamu cukup scan QR dari HP, nama &amp; jumlah rombongan langsung tercatat.</p>
             <Checks items={["Scan dengan HP, tanpa alat khusus", "Nama tamu langsung muncul saat scan", "Pantau kehadiran live dari dashboard"]} />
           </div>
-          <div className={`${styles.stage} ${styles.stagePhoto}`} data-aos="fade-up">
+          <div className={`${styles.stage} ${styles.stagePhoto}`}>
             <Image src="/rawuh/product-checkin.webp" alt="Penerima tamu memindai QR undangan di meja penyambutan" fill sizes="(max-width: 900px) 100vw, 560px" />
             <div className={styles.floatTop} aria-hidden><strong>312 / 400</strong><small>tamu sudah hadir</small></div>
             <div className={styles.floatBottom} aria-hidden><span><IconCheck size={16} strokeWidth={3} /></span><div><strong>Budi Santoso + 3 orang</strong><small>Meja 12 · check-in 18:42</small></div></div>
@@ -150,7 +150,7 @@ export default function FiturPage() {
         </div>
       </section>
 
-      <section className={base.section} id="lainnya" style={{ background: "var(--rw-surface-2)" }} aria-labelledby="extras-title">
+      <section className={base.section} id="lainnya" aria-labelledby="extras-title">
         <div className={base.titleGroup} style={{ marginBottom: 40 }}>
           <p className={base.eyebrow}>Dan masih banyak lagi</p>
           <SplitTitle id="extras-title" className={base.splitInline} lead="Detail kecil," mono="kesan besar." />

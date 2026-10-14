@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AosInit } from "@/components/landing/AosInit";
+import { CountUp, MotionInit } from "@/components/landing/Motion";
 import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/landing/SiteChrome";
 import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@/components/landing/Sections";
 import { getJSON, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
@@ -58,14 +58,14 @@ export default async function Home() {
 
   return (
     <main className={styles.page}>
-      <AosInit />
+      <MotionInit />
       <a className={styles.skip} href="#konten">Lewati navigasi</a>
       <AnnouncementBar />
       <SiteHeader />
 
       <div className={styles.rail} id="konten">
         {/* Hero */}
-        <section className={styles.hero} aria-labelledby="hero-title">
+        <section className={styles.hero} aria-labelledby="hero-title" data-noreveal>
           <Link href="/produk/video-ucapan-3d" className={styles.pill}><b>BARU</b> Undangan Video 3D sudah hadir <IconArrowRight size={14} /></Link>
           <h1 id="hero-title" className={styles.heroTitle}>
             {hero.heading ? <span>{hero.heading}</span> : <><span>Undangan yang</span><span>terasa personal.</span></>}
@@ -94,12 +94,16 @@ export default async function Home() {
             ["500+", "tema siap pakai untuk pernikahan, khitan, aqiqah, hingga ulang tahun."],
             ["10 mnt", "rata-rata waktu dari pilih tema sampai undangan siap dikirim."],
             ["4.9/5", "rating dari 18.000+ ulasan pengguna di Google Play."],
-          ].map(([value, label], index) => (
-            <div key={value} className={styles.stat} data-aos="fade-up" data-aos-delay={index * 60}><strong>{value}</strong><p>{label}</p></div>
+          ].map(([value, label]) => (
+            <div key={value} className={styles.stat}><strong><CountUp value={value} /></strong><p>{label}</p></div>
           ))}
         </section>
 
-        <div className={styles.banner}><IconLink size={16} /> Semua acaramu, satu link</div>
+        <div className={styles.banner} aria-label="Semua acaramu, satu link">
+          <div className={styles.marquee} aria-hidden>
+            {Array.from({ length: 2 }, (_, copy) => ["Semua acaramu, satu link", "Pernikahan", "Khitan", "Aqiqah", "Ulang tahun", "Syukuran"].map(text => <span key={`${copy}-${text}`}>{text === "Semua acaramu, satu link" && <IconLink size={16} />}{text}</span>))}
+          </div>
+        </div>
 
         {/* Features */}
         <section className={`${styles.section} ${styles.surface}`} id="fitur" aria-labelledby="fitur-title">
@@ -112,7 +116,7 @@ export default async function Home() {
               <p className={styles.lead}>Dari kirim undangan sampai tamu datang — satu dashboard, tanpa spreadsheet.</p>
             </div>
             <div className={styles.bento}>
-              <article className={`${styles.card} ${styles.cardWide}`} data-aos="fade-up">
+              <article className={`${styles.card} ${styles.cardWide}`}>
                 <div className={styles.cardVisual} aria-hidden>
                   <div className={styles.sendList}>
                     {[["Budi Santoso", "Terkirim", ""], ["Keluarga Pak RT", "Dibaca", "info"], ["Sinta & suami", "Terkirim", ""], ["Om Hendra", "Mengirim…", "warn"]].map(([name, status, tone]) => (
@@ -125,18 +129,18 @@ export default async function Home() {
                 </div>
                 <div className={styles.cardCopy}><h3>Kirim sekali klik</h3><p>Ratusan tamu, masing-masing dengan namanya — langsung lewat WhatsApp.</p></div>
               </article>
-              <article className={`${styles.card} ${styles.cardDark}`} data-aos="fade-up" data-aos-delay="60">
+              <article className={`${styles.card} ${styles.cardDark}`}>
                 <div className={`${styles.cardVisual} ${styles.rsvpCount}`} aria-hidden>
                   <strong>248</strong><span>dari 320 tamu konfirmasi hadir</span>
                   <div className={styles.bar}><i style={{ width: "78%" }} /></div>
                 </div>
                 <div className={styles.cardCopy}><h3>RSVP real-time</h3><p>Pantau siapa yang hadir, jumlah tamu, dan pesan menu.</p></div>
               </article>
-              <article className={styles.card} data-aos="fade-up">
+              <article className={styles.card}>
                 <div className={styles.cardVisual} aria-hidden><div className={styles.qrBox}><IconQr /></div></div>
                 <div className={styles.cardCopy}><h3>QR Check-in</h3><p>Scan di pintu masuk, daftar hadir terisi otomatis.</p></div>
               </article>
-              <article className={styles.card} data-aos="fade-up" data-aos-delay="60">
+              <article className={styles.card}>
                 <div className={styles.cardVisual} aria-hidden>
                   <div className={styles.player}>
                     <span className={styles.play}><IconPause size={16} /></span>
@@ -145,12 +149,12 @@ export default async function Home() {
                 </div>
                 <div className={styles.cardCopy}><h3>Musik latar</h3><p>Ratusan lagu, atau unggah lagu kalian sendiri.</p></div>
               </article>
-              <article className={styles.card} data-aos="fade-up" data-aos-delay="120">
+              <article className={styles.card}>
                 <div className={styles.cardVisual} aria-hidden><div className={styles.url}><IconLock size={14} /><b>rinadanbima</b><span>.id</span></div></div>
                 <div className={styles.cardCopy}><h3>Domain pribadi</h3><p>Alamat undangan atas nama kalian sendiri.</p></div>
               </article>
-              {extraFeatures.map((feature, index) => (
-                <article key={feature.id} className={`${styles.card} ${styles.cardMini}`} style={{ "--span": extraSpan } as CSSProperties} data-aos="fade-up" data-aos-delay={Math.min(index * 60, 180)}>
+              {extraFeatures.map((feature) => (
+                <article key={feature.id} className={`${styles.card} ${styles.cardMini}`} style={{ "--span": extraSpan } as CSSProperties}>
                   <span className={styles.featureIcon} aria-hidden><FeatureIcon title={feature.title} /></span>
                   <div className={styles.cardCopy}><h3>{feature.title}</h3><p>{feature.description}</p></div>
                 </article>

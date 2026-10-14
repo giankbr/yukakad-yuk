@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: PageProps<"/produk/[slug]"
         </ol>
       </section>
 
-      <section className={base.section} style={{ background: "var(--rw-surface-2)" }} aria-labelledby="perks-title">
+      <section className={base.section} aria-labelledby="perks-title">
         <div className={styles.perkLayout}>
           <div className={base.titleGroup} style={{ alignContent: "start" }}>
             <p className={base.eyebrow}>Yang kamu dapat</p>

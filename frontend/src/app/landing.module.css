@@ -62,7 +62,7 @@
 /* ── Rail ────────────────────────────────── */
 .rail { width: min(100%, 1280px); margin: 0 auto; border-inline: 1px solid var(--rw-border-warm); }
 .section { padding: 104px var(--gutter); border-bottom: 1px solid var(--rw-border-warm); }
-.surface { background: var(--rw-surface); }
+.surface { background: var(--rw-bg); }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
 .eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--rw-primary); }
 .sectionTitle { color: var(--rw-ink); font-size: clamp(28px, 3.2vw, 36px); font-weight: 400; line-height: 1.11; letter-spacing: -.025em; text-wrap: balance; }
@@ -239,7 +239,7 @@
 .voiceTabs button { padding: 8px 16px; border: 0; border-radius: 6px; background: transparent; color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
 .voiceTabs button[aria-pressed="true"] { background: var(--rw-surface); color: var(--rw-ink); }
 .wall { position: relative; width: 100%; columns: 3 260px; column-gap: 20px; max-height: 760px; overflow: hidden; }
-.wall::after { content: ""; position: absolute; inset: auto 0 0; height: 200px; background: linear-gradient(rgba(240, 239, 235, 0), var(--rw-surface) 85%); pointer-events: none; }
+.wall::after { content: ""; position: absolute; inset: auto 0 0; height: 200px; background: linear-gradient(rgba(255, 255, 255, 0), #fff 85%); pointer-events: none; }
 .chat { display: grid; gap: 12px; break-inside: avoid; margin-bottom: 20px; padding: 16px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); background: #fff; }
 .chatHead { display: flex; align-items: center; gap: 10px; }
 .chatHead > svg { margin-left: auto; color: var(--rw-success); }
@@ -385,3 +385,63 @@ details[open] .faqToggle { background: var(--rw-primary); color: #fff; }
 .splitTitle span:last-child { color: var(--rw-ink-2); font-family: var(--rw-font-mono); letter-spacing: -.03em; }
 .splitInline { display: block; }
 .splitInline span { display: inline; }
+
+/* ── Motion ──────────────────────────────── */
+@keyframes rw-rise { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: none; } }
+@keyframes rw-fan-left { from { opacity: 0; transform: translate(120px, 60px) rotate(0deg); } to { opacity: 1; transform: rotate(-8deg); } }
+@keyframes rw-fan-right { from { opacity: 0; transform: translate(-120px, 60px) rotate(0deg); } to { opacity: 1; transform: rotate(8deg); } }
+@keyframes rw-fan-center { from { opacity: 0; transform: translateY(80px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes rw-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes rw-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes rw-shine { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(220%) skewX(-20deg); } }
+@keyframes rw-pulse { 0%, 100% { box-shadow: 0 0 0 4px rgba(230, 85, 50, .06); } 50% { box-shadow: 0 0 0 8px rgba(230, 85, 50, .1); } }
+
+.hero > * { animation: rw-rise 800ms cubic-bezier(.2, .7, .2, 1) both; }
+.hero > *:nth-child(2) { animation-delay: 90ms; }
+.hero > *:nth-child(3) { animation-delay: 180ms; }
+.hero > *:nth-child(4) { animation-delay: 270ms; }
+.hero > *:nth-child(5) { animation-delay: 360ms; }
+.hero > .phoneFan { animation: none; }
+.hero .signup { animation: rw-pulse 3.2s 1.4s ease-in-out infinite; }
+.phoneLeft { animation: rw-fan-left 1100ms 350ms cubic-bezier(.2, .7, .2, 1) both, rw-bob 7s 1.6s ease-in-out infinite; }
+.phoneRight { animation: rw-fan-right 1100ms 350ms cubic-bezier(.2, .7, .2, 1) both, rw-bob 7s 2.4s ease-in-out infinite; }
+.phoneCenter { animation: rw-fan-center 1000ms 250ms cubic-bezier(.2, .7, .2, 1) both, rw-bob 6s 1.4s ease-in-out infinite; }
+.chip { animation: rw-rise 700ms 1100ms both, chip-float 6s 1.8s ease-in-out infinite; }
+.chipRight { animation-delay: 1250ms, 4.8s; }
+.phone:hover { z-index: 3; }
+
+.banner { overflow: hidden; padding-inline: 0; }
+.marquee { display: flex; width: max-content; animation: rw-marquee 28s linear infinite; }
+.marquee span { display: inline-flex; align-items: center; gap: 10px; padding: 0 28px; white-space: nowrap; }
+.marquee span::after { content: "✦"; margin-left: 28px; opacity: .7; }
+.banner:hover .marquee { animation-play-state: paused; }
+
+.btnPrimary { position: relative; overflow: hidden; }
+.btnPrimary::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 40%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent); transform: translateX(-120%) skewX(-20deg); pointer-events: none; }
+.btnPrimary:hover::after { animation: rw-shine 700ms ease-out; }
+.btnPrimary:hover, .btnOutline:hover { translate: 0 -1px; }
+.card { transition: transform 260ms cubic-bezier(.2, 0, 0, 1), box-shadow 260ms, border-color 260ms; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(17, 16, 16, .08); border-color: var(--rw-primary-border); }
+.cardDark:hover { border-color: var(--rw-black); }
+.wave i[data-on] { animation: rw-wave 1.2s ease-in-out infinite alternate; transform-origin: center; }
+.wave i[data-on]:nth-child(2n) { animation-delay: -.4s; }
+.wave i[data-on]:nth-child(3n) { animation-delay: -.8s; }
+@keyframes rw-wave { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
+.bar i { transform-origin: left; animation: rw-grow 1.4s cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
+@keyframes rw-grow { from { transform: scaleX(0); } to { transform: none; } }
+.stat { transition: border-color 200ms; }
+.stat:hover { border-left-color: var(--rw-ink); }
+.themeCard { transition: translate 260ms cubic-bezier(.2, 0, 0, 1); }
+.themeCard:hover { translate: 0 -4px; }
+.faqList details p { animation: rw-rise 360ms cubic-bezier(.2, .7, .2, 1) both; }
+.faqToggle { transition: background-color 150ms, color 150ms, rotate 250ms; }
+details[open] .faqToggle { rotate: 180deg; }
+.giant text { transition: fill 400ms; }
+.footer:hover .giant { color: var(--rw-primary-soft); }
+.giant { transition: color 600ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero > *, .phoneLeft, .phoneRight, .phoneCenter, .chip, .marquee, .hero .signup, .wave i[data-on], .bar i, .faqList details p { animation: none !important; }
+  .btnPrimary:hover::after { animation: none; }
+  .card:hover, .themeCard:hover, .btnPrimary:hover, .btnOutline:hover { transform: none; translate: none; }
+}

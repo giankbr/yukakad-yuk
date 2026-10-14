@@ -74,7 +74,7 @@ export default async function TentangPage() {
         </div>
       </section>
 
-      <section className={base.section} style={{ background: "var(--rw-surface-2)" }} aria-labelledby="principles-title">
+      <section className={base.section} aria-labelledby="principles-title">
         <div className={base.titleGroup} style={{ marginBottom: 40 }}>
           <p className={base.eyebrow}>Yang kami pegang</p>
           <SplitTitle id="principles-title" className={base.splitInline} lead="Empat prinsip," mono="setiap hari." />

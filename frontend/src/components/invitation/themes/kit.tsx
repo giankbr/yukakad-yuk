@@ -10,6 +10,7 @@
 import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { GiftMethod, InvitationData } from "../types";
 import kit from "./kit.module.css";
+import { autoReveal, revealChildren } from "@/lib/reveal";
 
 export type ThemeProps = {
   data: InvitationData;
@@ -44,8 +45,24 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
   fonts?: string[];
 }) {
   const [opened, setOpened] = useState(skipCover);
+  const [coverMounted, setCoverMounted] = useState(!skipCover);
+  const coverRef = useRef<HTMLDivElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
+  // Cover: stagger its content in on first paint.
+  useEffect(() => {
+    const root = coverRef.current?.firstElementChild;
+    if (root instanceof HTMLElement) revealChildren(root);
+  }, []);
+  // Main page: scroll-reveal every section once the invitation is open.
+  useEffect(() => {
+    if (!opened || !mainRef.current) return;
+    return autoReveal(mainRef.current);
+  }, [opened]);
   const open = useCallback(() => {
     setOpened(true);
+    // Let the cover slide away before unmounting it.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => setCoverMounted(false), reduce ? 0 : 650);
     window.scrollTo({ top: 0 });
     // Opening the cover is a user gesture, so background music may start now (see <MusicPlayer>).
     window.dispatchEvent(new Event(OPEN_EVENT));
@@ -62,12 +79,13 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
       {/* Fonts are scoped to the invitation route. */}
       {fontHref && <link rel="stylesheet" href={fontHref} />}
       <div className={className} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh", overflowX: "clip", ...style }}>
-        {!opened && (
-          <div role="dialog" aria-modal="true" aria-label="Sampul undangan" style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", justifyContent: "center", background, overflowY: "auto" }}>
-            <div style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh" }}>{cover(open)}</div>
+        {coverMounted && (
+          <div role="dialog" aria-modal="true" aria-label="Sampul undangan" className={opened ? kit.coverLeave : undefined}
+            style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", justifyContent: "center", background: opened ? "transparent" : background, overflowY: "auto", pointerEvents: opened ? "none" : undefined }}>
+            <div ref={coverRef} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh" }}>{cover(open)}</div>
           </div>
         )}
-        <div aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}>{children}</div>
+        <div ref={mainRef} aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}>{children}</div>
       </div>
     </div>
   );

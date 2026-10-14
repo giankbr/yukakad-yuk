@@ -108,7 +108,7 @@ export default async function HargaPage() {
         </div>
       </section>
 
-      <section className={base.section} style={{ background: "var(--rw-surface-2)" }} aria-labelledby="addons-title">
+      <section className={base.section} aria-labelledby="addons-title">
         <div className={styles.headRow} style={{ marginBottom: 40 }}>
           <div className={base.titleGroup}>
             <p className={base.eyebrow}>Tambahan</p>

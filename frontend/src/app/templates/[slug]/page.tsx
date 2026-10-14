@@ -78,7 +78,7 @@ export default async function TemplateDetailPage({ params }: PageProps<"/templat
         </div>
       </section>
 
-      <section className={base.section} style={{ background: "var(--rw-surface-2)" }} aria-labelledby="sections-title">
+      <section className={base.section} aria-labelledby="sections-title">
         <div className={base.titleGroup} style={{ marginBottom: 40 }}>
           <p className={base.eyebrow}>Isi undangan</p>
           <SplitTitle id="sections-title" className={base.splitInline} lead={`${sections.length} bagian,`} mono="satu gulir." />

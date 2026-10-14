@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@/app/landing.module.css";
 import { AnnouncementBar, SiteFooter, SiteHeader, type NavKey } from "@/components/landing/SiteChrome";
-import { AosInit } from "@/components/landing/AosInit";
+import { MotionInit } from "@/components/landing/Motion";
 import {
   IconArrowRight, IconCheck, IconChevronRight, IconHeadset, IconInfinity, IconMinus, IconPlus, IconSend, IconShield, IconTimer,
 } from "@/components/brand/icons";
@@ -14,7 +14,7 @@ export async function MarketingPage({ current, children }: { current?: NavKey; c
   const { footer, waLink } = await getSiteContact();
   return (
     <main className={styles.page}>
-      <AosInit />
+      <MotionInit />
       <a className={styles.skip} href="#konten">Lewati navigasi</a>
       <AnnouncementBar />
       <SiteHeader current={current} />
@@ -71,7 +71,7 @@ export function StepsSection() {
         </div>
         <ol className={styles.stepList}>
           {defaultSteps.map(([title, desc], index) => (
-            <li key={title} data-aos="fade-up" data-aos-delay={index * 60}><b>{String(index + 1).padStart(2, "0")}</b><div><h3>{title}</h3><p>{desc}</p></div></li>
+            <li key={title}><b>{String(index + 1).padStart(2, "0")}</b><div><h3>{title}</h3><p>{desc}</p></div></li>
           ))}
         </ol>
       </div>
