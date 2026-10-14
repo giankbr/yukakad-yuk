@@ -182,9 +182,9 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
             );
           })}
           <div className={s.rsvpRow} role="group" aria-label="Konfirmasi kehadiran">
-            <button type="button" className={s.rsvpYes} onClick={sheets.openRsvp}>Ya, hadir</button>
-            <button type="button" onClick={sheets.openRsvp}>Mungkin</button>
-            <button type="button" onClick={sheets.openRsvp}>Tidak</button>
+            <button type="button" className={s.rsvpYes} onClick={() => sheets.openRsvp("yes")}>Ya, hadir</button>
+            <button type="button" onClick={() => sheets.openRsvp("maybe")}>Mungkin</button>
+            <button type="button" onClick={() => sheets.openRsvp("no")}>Tidak</button>
           </div>
         </section>
 
@@ -268,7 +268,7 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
       </nav>
 
       <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Balas undangan kalender" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Ya, hadir", maybe: "Mungkin", no: "Tidak", submit: "Kirim Balasan" }} />
+        <RsvpForm key={sheets.attendance} initialAttendance={sheets.attendance} rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Ya, hadir", maybe: "Mungkin", no: "Tidak", submit: "Kirim Balasan" }} />
       </Sheet>
       <Sheet open={sheets.sheet === "wish"} onClose={sheets.close} title="Balas — Kirim Ucapan" tint={tint}>
         <WishForm wishes={wishes} guestName={data.guestName} demo={demo} submitLabel="Kirim" />

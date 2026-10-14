@@ -145,8 +145,8 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
                   {where && (href ? <a href={href} target="_blank" rel="noreferrer">{where}</a> : <span>{where}</span>)}
                 </div>
                 <div className={s.agendaBtns}>
-                  <button type="button" className={s.accept} onClick={sheets.openRsvp}>Terima</button>
-                  <button type="button" className={s.decline} onClick={sheets.openRsvp}>Tolak</button>
+                  <button type="button" className={s.accept} onClick={() => sheets.openRsvp("yes")}>Terima</button>
+                  <button type="button" className={s.decline} onClick={() => sheets.openRsvp("no")}>Tolak</button>
                 </div>
               </article>
             );
@@ -239,7 +239,7 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
       </nav>
 
       <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Terima Undangan Rapat" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Terima", maybe: "Mungkin", no: "Tolak", submit: "Konfirmasi Hadir" }} />
+        <RsvpForm key={sheets.attendance} initialAttendance={sheets.attendance} rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Terima", maybe: "Mungkin", no: "Tolak", submit: "Konfirmasi Hadir" }} />
       </Sheet>
       <Sheet open={sheets.sheet === "wish"} onClose={sheets.close} title="Chat ke Semua Panelis" tint={tint}>
         <WishForm wishes={wishes} guestName={data.guestName} demo={demo} submitLabel="Kirim ke Chat" />

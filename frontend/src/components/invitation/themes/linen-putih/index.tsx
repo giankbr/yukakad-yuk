@@ -2,7 +2,7 @@
 // Theme "Linen Putih" — minimalis putih, tipografi serif tipis di atas tekstur linen.
 import { useState, type FormEvent } from "react";
 import {
-  Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
@@ -75,8 +75,9 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
+    const guests = attendance === "no" ? 1 : Number(form.get("guests")) || 1;
     if (!name) return;
-    void rsvp.submit({ name, attendance, guests: 1, message });
+    void rsvp.submit({ name, attendance, guests, message });
     if (message) void wishes.send(name, message);
   };
 
@@ -249,6 +250,7 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
                     </label>
                   ))}
                 </fieldset>
+                {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
                 {(rsvp.status === "error" || wishes.status === "error") && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
                 <button type="submit" className={`${s.btn} ${s.submit}`} disabled={rsvp.status === "sending" || wishes.status === "sending"}>
                   {rsvp.status === "sending" || wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}

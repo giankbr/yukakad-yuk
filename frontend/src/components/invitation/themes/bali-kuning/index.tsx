@@ -2,18 +2,14 @@
 // Theme "Bali Kuning" — undangan adat Bali: krem, emas, kamboja (design: Undangan — Tema Bali Kuning (Dewa & Ayu)).
 import { useRef, useState, type FormEvent } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
-  toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint, type Wish,
+  GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Cormorant Garamond:ital,wght@0,400;0,600;0,700;1,400", "Cinzel:wght@400;700"];
-const tint: ThemeTint = {
-  "--t-accent": "#b8860b", "--t-accent-ink": "#ffffff", "--t-bg": "#fbf3dc", "--t-ink": "#3b2a14", "--t-muted": "#7a6240",
-  "--t-line": "rgba(184, 134, 11, .4)", "--t-field": "#fffaf0", "--t-radius": "8px", "--t-font": "'Cormorant Garamond', Georgia, serif",
-};
 const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Bli Komang", message: "Selamat! Semoga langgeng dan bahagia selamanya.", attendance: "yes" },
   { id: "w2", name: "Mbok Sri", message: "Selamat ya Ayu & Dewa, see you di Ubud!", attendance: "yes" },
@@ -114,7 +110,6 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
-  const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const hero = data.gallery[0];
@@ -136,8 +131,9 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
+    const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
     if (!name || !message) return;
-    void rsvp.submit({ name, attendance, guests: 1, message });
+    void rsvp.submit({ name, attendance, guests, message });
     void wishes.send(name, message);
   };
 
@@ -291,9 +287,9 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
                   </label>
                 ))}
               </fieldset>
+              {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
               <button type="submit" className={s.pillWide} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
-              <button type="button" className={s.link} onClick={sheets.openRsvp}>Konfirmasi jumlah tamu</button>
             </form>
           )}
           {wishes.wishes.slice(0, 8).map(wish => (
@@ -312,9 +308,6 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
         </footer>
       </main>
 
-      <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} />
-      </Sheet>
     </ThemeShell>
   );
 }

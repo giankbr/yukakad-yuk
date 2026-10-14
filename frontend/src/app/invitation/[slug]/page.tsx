@@ -11,7 +11,8 @@ import { StorySection } from "@/components/invitation/StorySection";
 import { WishesSection } from "@/components/invitation/WishesSection";
 import type { GiftMethod, InvitationData } from "@/components/invitation/types";
 import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
-import { isTheme, loadTheme } from "@/components/invitation/themes/registry";
+import { isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
+import { MusicPlayer } from "@/components/invitation/themes/kit";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -28,6 +29,8 @@ type PublicInvitation = {
 type PublicContent = {
   items?: Array<Record<string, string>>;
   theme?: string;
+  music_url?: string;
+  autoplay_music?: boolean;
 };
 
 function authHeaders(previewToken?: string): HeadersInit | undefined {
@@ -105,8 +108,9 @@ export default async function PublicInvitationPage({
       address: result.event?.address ?? invitation.address,
       events: events.length ? events : invitation.events,
       stories: storyList.length ? storyList : undefined,
+      music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,
     };
-    return <Theme data={data} slug={slug} guestToken={guestToken} />;
+    return <><Theme data={data} slug={slug} guestToken={guestToken} />{!themesWithOwnMusic.has(result.template_id) && <MusicPlayer music={data.music} />}</>;
   }
   if (isWeddingStyle(result.template_id)) return <WeddingTemplate variant={result.template_id} data={invitation} slug={slug} guestToken={guestToken} />;
   const template = settings.theme === "adat" || settings.theme === "modern" || settings.theme === "motion" ? settings.theme : "editorial";

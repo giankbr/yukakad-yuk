@@ -221,13 +221,13 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
       </main>
 
       <nav className={s.bottom} aria-label="Aksi undangan">
-        <button type="button" className={s.no} onClick={sheets.openRsvp} aria-label="Tidak bisa hadir"><Lucide icon={ic.x} size={22} color="#ff7854" /></button>
-        <button type="button" className={s.rsvpBtn} onClick={sheets.openRsvp}><Lucide icon={ic.heart} size={17} color="#fff" />Hadir — Swipe Right</button>
+        <button type="button" className={s.no} onClick={() => sheets.openRsvp("no")} aria-label="Tidak bisa hadir"><Lucide icon={ic.x} size={22} color="#ff7854" /></button>
+        <button type="button" className={s.rsvpBtn} onClick={() => sheets.openRsvp("yes")}><Lucide icon={ic.heart} size={17} color="#fff" />Hadir — Swipe Right</button>
         <button type="button" className={s.star} onClick={sheets.openWish} aria-label="Kirim ucapan"><Lucide icon={ic.star} size={20} color="#35c9f3" /></button>
       </nav>
 
       <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Swipe right (hadir)", no: "Berhalangan" }} />
+        <RsvpForm key={sheets.attendance} initialAttendance={sheets.attendance} rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ yes: "Swipe right (hadir)", no: "Berhalangan" }} />
       </Sheet>
       <Sheet open={sheets.sheet === "wish"} onClose={sheets.close} title="Kirim Super Like & Ucapan" tint={tint}>
         <WishForm wishes={wishes} guestName={data.guestName} demo={demo} />

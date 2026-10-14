@@ -2,18 +2,14 @@
 // Theme "Lavender Air" — undangan cat air lavender: ungu lembut, polaroid, galeri gelembung (design: Undangan — Tema Lavender Air (Nadia & Reza)).
 import { useState, type FormEvent } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
-  toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint, type Wish,
+  GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Great Vibes", "Nunito:ital,wght@0,400;0,600;0,700;1,400"];
-const tint: ThemeTint = {
-  "--t-accent": "#7b5ea7", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#4a3573", "--t-muted": "#8b7ab0",
-  "--t-line": "#d9ceeb", "--t-field": "#f4f0fa", "--t-radius": "8px", "--t-font": "Nunito, system-ui, sans-serif",
-};
 const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Sinta", message: "Nadia!!! Akhirnya. Selamat ya, sampai ketemu di sana!", attendance: "yes" },
   { id: "w2", name: "Om Bram", message: "Selamat Reza & Nadia, semoga bahagia selalu.", attendance: "yes" },
@@ -64,7 +60,6 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
-  const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const hero = data.gallery[0];
@@ -88,8 +83,9 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
+    const guests = attendance === "no" ? 1 : Number(form.get("guests")) || 1;
     if (!name || !message) return;
-    void rsvp.submit({ name, attendance, guests: 1, message });
+    void rsvp.submit({ name, attendance, guests, message });
     void wishes.send(name, message);
   };
 
@@ -253,9 +249,9 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
                   </label>
                 ))}
               </fieldset>
+              {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
               <button type="submit" className={s.pillWide} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
-              <button type="button" className={s.link} onClick={sheets.openRsvp}>Konfirmasi jumlah tamu</button>
             </form>
           )}
           {wishes.wishes.slice(0, 8).map(wish => (
@@ -273,10 +269,6 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
           <a href="/" target="_blank" rel="noreferrer" className={s.credit}>dibuat dengan ♥ di Rawuh</a>
         </footer>
       </main>
-
-      <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} />
-      </Sheet>
     </ThemeShell>
   );
 }

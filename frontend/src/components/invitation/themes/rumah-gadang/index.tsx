@@ -2,18 +2,14 @@
 // Theme "Rumah Gadang" — undangan adat Minang: merah marun, emas, songket (design: Undangan — Tema Rumah Gadang (Sari & Fadli)).
 import { useState, type FormEvent } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
-  toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint, type Wish,
+  GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Cormorant Garamond:ital,wght@0,400;0,600;0,700;1,400", "Cinzel:wght@400;700"];
-const tint: ThemeTint = {
-  "--t-accent": "#e3b341", "--t-accent-ink": "#5a0f1a", "--t-bg": "#4a0c16", "--t-ink": "#f8e7c4", "--t-muted": "#d9b98e",
-  "--t-line": "rgba(227, 179, 65, .35)", "--t-field": "rgba(0, 0, 0, .2)", "--t-radius": "8px", "--t-font": "'Cormorant Garamond', Georgia, serif",
-};
 const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Uda Rizal", message: "Selamat berumah tangga, Sari & Fadli! Semoga samawa.", attendance: "yes" },
   { id: "w2", name: "Etek Nurma", message: "Barakallah. Semoga lancar sampai hari H.", attendance: "yes" },
@@ -70,7 +66,6 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
-  const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const hero = data.gallery[0];
@@ -95,8 +90,9 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     const message = String(form.get("message") ?? "").trim();
+    const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
     if (!name || !message) return;
-    void rsvp.submit({ name, attendance, guests: 1, message });
+    void rsvp.submit({ name, attendance, guests, message });
     void wishes.send(name, message);
   };
 
@@ -263,9 +259,9 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
                   </label>
                 ))}
               </fieldset>
+              {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
               <button type="submit" className={s.pillWide} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
-              <button type="button" className={s.link} onClick={sheets.openRsvp}>Konfirmasi jumlah tamu</button>
             </form>
           )}
           {wishes.wishes.slice(0, 8).map(wish => (
@@ -284,9 +280,6 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
         </footer>
       </main>
 
-      <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} />
-      </Sheet>
     </ThemeShell>
   );
 }

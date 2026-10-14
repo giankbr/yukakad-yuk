@@ -7,7 +7,7 @@
  * using <ThemeShell>. Data comes from `props.data` (real invitation or the theme's demo data).
  * Interactive pieces (RSVP, wishes, countdown, copy) use the hooks below so all themes behave the same.
  */
-import { useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { GiftMethod, InvitationData } from "../types";
 import kit from "./kit.module.css";
 
@@ -20,6 +20,8 @@ export type ThemeProps = {
   /** Render straight to the main page (used for previews/screenshots: `?open=1`). */
   skipCover?: boolean;
 };
+
+export const OPEN_EVENT = "rawuh:invitation-open";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -45,6 +47,8 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
   const open = useCallback(() => {
     setOpened(true);
     window.scrollTo({ top: 0 });
+    // Opening the cover is a user gesture, so background music may start now (see <MusicPlayer>).
+    window.dispatchEvent(new Event(OPEN_EVENT));
   }, []);
   useEffect(() => {
     if (opened) return;
@@ -346,8 +350,8 @@ export function Sheet({ open, onClose, title, tint, children }: { open: boolean;
 }
 
 /** RSVP form (name, attendance, guest count, message). Use inside <Sheet> or inline. */
-export function RsvpForm({ rsvp, guestName, demo, labels }: {
-  rsvp: ReturnType<typeof useRsvp>; guestName?: string; demo?: boolean;
+export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "yes" }: {
+  rsvp: ReturnType<typeof useRsvp>; guestName?: string; demo?: boolean; initialAttendance?: Attendance;
   labels?: { submit?: string; yes?: string; maybe?: string; no?: string; success?: string };
 }) {
   const [guests, setGuests] = useState(1);
@@ -366,9 +370,9 @@ export function RsvpForm({ rsvp, guestName, demo, labels }: {
       <fieldset className={kit.field} style={{ border: 0, margin: 0, padding: 0 }}>
         <legend style={{ marginBottom: 6 }}>Kehadiran</legend>
         <div className={kit.choices}>
-          <label><input type="radio" name="attendance" value="yes" defaultChecked />{labels?.yes ?? "Hadir"}</label>
-          <label><input type="radio" name="attendance" value="maybe" />{labels?.maybe ?? "Ragu"}</label>
-          <label><input type="radio" name="attendance" value="no" />{labels?.no ?? "Berhalangan"}</label>
+          <label><input type="radio" name="attendance" value="yes" defaultChecked={initialAttendance === "yes"} />{labels?.yes ?? "Hadir"}</label>
+          <label><input type="radio" name="attendance" value="maybe" defaultChecked={initialAttendance === "maybe"} />{labels?.maybe ?? "Ragu"}</label>
+          <label><input type="radio" name="attendance" value="no" defaultChecked={initialAttendance === "no"} />{labels?.no ?? "Berhalangan"}</label>
         </div>
       </fieldset>
       <div className={kit.field}>
@@ -415,7 +419,96 @@ export function WishForm({ wishes, guestName, demo, submitLabel }: { wishes: Ret
 /** Convenience: state for the two sheets most themes need. */
 export function useSheets() {
   const [sheet, setSheet] = useState<null | "rsvp" | "wish">(null);
-  return { sheet, openRsvp: () => setSheet("rsvp"), openWish: () => setSheet("wish"), close: () => setSheet(null) };
+  const [attendance, setAttendance] = useState<Attendance>("yes");
+  return {
+    sheet,
+    /** Answer to preselect in <RsvpForm initialAttendance={sheets.attendance} key={sheets.attendance} />. */
+    attendance,
+    openRsvp: (answer?: Attendance | unknown) => {
+      setAttendance(answer === "no" || answer === "maybe" ? answer : "yes");
+      setSheet("rsvp");
+    },
+    openWish: () => setSheet("wish"),
+    close: () => setSheet(null),
+  };
+}
+
+/**
+ * Guest-count stepper for inline RSVP forms. Renders a hidden `guests` input, so
+ * `readRsvpForm(form)` picks the value up automatically. Style it via `className`/`buttonClassName`.
+ */
+export function GuestCount({ label = "Jumlah tamu", max = 10, className, buttonClassName, labelClassName, style }: {
+  label?: string; max?: number; className?: string; buttonClassName?: string; labelClassName?: string; style?: CSSProperties;
+}) {
+  const [count, setCount] = useState(1);
+  const id = useId();
+  const button: CSSProperties = { width: 36, height: 36, display: "grid", placeItems: "center", border: "1px solid currentColor", borderRadius: 999, background: "transparent", color: "inherit", font: "inherit", fontSize: 18, lineHeight: 1, cursor: "pointer", opacity: 0.85 };
+  return (
+    <div className={className} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, ...style }}>
+      <span id={id} className={labelClassName}>{label}</span>
+      <span role="group" aria-labelledby={id} style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <button type="button" className={buttonClassName} style={buttonClassName ? undefined : button} onClick={() => setCount(c => Math.max(1, c - 1))} aria-label="Kurangi jumlah tamu">−</button>
+        <output aria-live="polite" style={{ minWidth: 24, textAlign: "center", fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{count}</output>
+        <button type="button" className={buttonClassName} style={buttonClassName ? undefined : button} onClick={() => setCount(c => Math.min(max, c + 1))} aria-label="Tambah jumlah tamu">+</button>
+      </span>
+      <input type="hidden" name="guests" value={count} />
+    </div>
+  );
+}
+
+/** Background music from the dashboard (Pengaturan → musik): starts when the cover is opened if autoplay is on. */
+export function useMusic(music?: InvitationData["music"]) {
+  const audio = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const url = safeUrl(music?.url) ?? (music?.url?.startsWith("/") ? music.url : undefined);
+  useEffect(() => {
+    if (!url) return;
+    const element = new Audio(url);
+    element.loop = true;
+    element.preload = "none";
+    audio.current = element;
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    element.addEventListener("play", onPlay);
+    element.addEventListener("pause", onPause);
+    const onOpen = () => {
+      setOpened(true);
+      if (music?.autoplay) void element.play().catch(() => undefined);
+    };
+    window.addEventListener(OPEN_EVENT, onOpen);
+    // Rendered without a cover (?open=1): show the toggle straight away.
+    const timer = setTimeout(() => { if (!document.querySelector('[aria-label="Sampul undangan"]')) setOpened(true); }, 600);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener(OPEN_EVENT, onOpen);
+      element.pause();
+      element.removeEventListener("play", onPlay);
+      element.removeEventListener("pause", onPause);
+      audio.current = null;
+    };
+  }, [url, music?.autoplay]);
+  const toggle = useCallback(() => {
+    const element = audio.current;
+    if (!element) return;
+    if (element.paused) void element.play().catch(() => undefined);
+    else element.pause();
+  }, []);
+  return { available: Boolean(url), visible: Boolean(url) && opened, playing, toggle };
+}
+
+/** Generic floating music toggle, rendered by the invitation page next to themes without their own player. */
+export function MusicPlayer({ music, accent = "rgba(17,16,16,.72)" }: { music?: InvitationData["music"]; accent?: string }) {
+  const player = useMusic(music);
+  if (!player.visible) return null;
+  return (
+    <button type="button" onClick={player.toggle} aria-pressed={player.playing} aria-label={player.playing ? "Jeda musik" : "Putar musik"}
+      style={{ position: "fixed", right: "max(14px, calc(50% - 215px + 14px))", bottom: 104, zIndex: 60, width: 44, height: 44, display: "grid", placeItems: "center", border: "1px solid rgba(255,255,255,.35)", borderRadius: 999, background: accent, color: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,.25)", backdropFilter: "blur(8px)", cursor: "pointer" }}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />{!player.playing && <path d="M2 2l20 20" />}
+      </svg>
+    </button>
+  );
 }
 
 /** Render a lucide icon from its inner SVG markup (generated per theme into `icons.ts`). */

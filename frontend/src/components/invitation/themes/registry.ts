@@ -90,6 +90,9 @@ const loaders: Record<string, { component: () => Promise<ThemeModule>; demo: () 
   "rencana-perjalanan": { component: () => import("./rencana-perjalanan"), demo: () => import("./rencana-perjalanan/demo") },
 };
 
+/** Themes that render their own music button (the page then skips the generic <MusicPlayer>). */
+export const themesWithOwnMusic = new Set(["jawa"]);
+
 export function isTheme(id?: string): id is string {
   return Boolean(id && id in loaders);
 }

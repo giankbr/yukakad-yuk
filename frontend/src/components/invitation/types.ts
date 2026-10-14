@@ -48,4 +48,6 @@ export type InvitationData = {
   gallery: string[];
   gifts: GiftMethod[];
   guestName?: string;
+  /** Background music uploaded from the dashboard (settings.music_url / autoplay_music). */
+  music?: { url: string; autoplay?: boolean };
 };

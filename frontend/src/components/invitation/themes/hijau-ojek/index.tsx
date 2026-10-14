@@ -90,7 +90,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
               <Photo src={coverPhoto} alt={`Foto ${names}`} className={s.driverPhoto} />
               <div className={s.driverText}>
                 <strong>{names}</strong>
-                <small>{[plate, "Vespa Cinta Matic"].filter(Boolean).join(" · ")}</small>
+                <small>{[plate, "Skuter Cinta Matic"].filter(Boolean).join(" · ")}</small>
                 {demo
                   ? <span><b aria-hidden>★</b>5.0 · 2.700 perjalanan bersama</span>
                   : <span>{data.eventLabel ?? "Pernikahan"}</span>}

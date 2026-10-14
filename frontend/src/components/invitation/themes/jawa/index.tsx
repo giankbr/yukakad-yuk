@@ -1,19 +1,15 @@
 "use client";
 // Theme "Jawa Keraton" — adat Jawa klasik cokelat-emas dengan gunungan (design: Undangan — Tema Jawa (Laksmi & Bayu)).
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
-  toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint,
+  GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
+  toDate, useCopy, useCountdown, useMusic, useRsvp, useWishes, type Attendance, type ThemeProps,
 } from "../kit";
 import type { InvitationData } from "../../types";
 import { gunungan, ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Cinzel:wght@400;600;700", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600"];
-const tint: ThemeTint = {
-  "--t-accent": "#2b1a10", "--t-accent-ink": "#e6c77a", "--t-bg": "#f5eddc", "--t-ink": "#3a2618", "--t-muted": "#7a5e48",
-  "--t-line": "#d9c7a3", "--t-field": "#ffffff", "--t-radius": "6px", "--t-font": "'Cormorant Garamond', Georgia, serif",
-};
 const DEMO_WISHES = [
   { id: "w1", name: "Rini Handayani", attendance: "yes" as Attendance, message: "Selamat menempuh bahtera rumah tangga. Semoga selalu rukun, tenteram, dan dijauhkan dari marabahaya." },
   { id: "w2", name: "Pakdhe Darmo", attendance: "yes" as Attendance, message: "Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. Amin." },
@@ -64,54 +60,6 @@ function calendarHref(data: InvitationData) {
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
 
-/** Soft gamelan-like chimes (slendro-ish scale) generated with WebAudio — no audio file needed. */
-function useGamelan() {
-  const ctx = useRef<AudioContext | null>(null);
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
-  const [playing, setPlaying] = useState(false);
-  const stop = useCallback(() => {
-    if (timer.current) clearInterval(timer.current);
-    timer.current = null;
-    void ctx.current?.suspend();
-    setPlaying(false);
-  }, []);
-  const start = useCallback(() => {
-    const AC = window.AudioContext ?? (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AC) return;
-    ctx.current ??= new AC();
-    const audio = ctx.current;
-    void audio.resume();
-    const scale = [293.7, 336.2, 386.4, 445.1, 512.8, 587.3];
-    const melody = [0, 2, 3, 2, 4, 3, 2, 0, 1, 2, 4, 5, 4, 2, 3, 2];
-    let step = 0;
-    const ring = () => {
-      const t = audio.currentTime;
-      const freq = scale[melody[step % melody.length]];
-      for (const [mult, gain] of [[1, 0.12], [2.76, 0.03], [0.5, 0.05]] as const) {
-        const osc = audio.createOscillator();
-        const amp = audio.createGain();
-        osc.type = "sine";
-        osc.frequency.value = freq * mult;
-        amp.gain.setValueAtTime(0.0001, t);
-        amp.gain.exponentialRampToValueAtTime(gain, t + 0.01);
-        amp.gain.exponentialRampToValueAtTime(0.0001, t + 2.2);
-        osc.connect(amp).connect(audio.destination);
-        osc.start(t);
-        osc.stop(t + 2.3);
-      }
-      step += 1;
-    };
-    ring();
-    timer.current = setInterval(ring, 700);
-    setPlaying(true);
-  }, []);
-  useEffect(() => () => {
-    if (timer.current) clearInterval(timer.current);
-    void ctx.current?.close();
-  }, []);
-  return { playing, toggle: () => (playing ? stop() : start()) };
-}
-
 export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const couple = coupleLabel(data);
   const parts = dateParts(data.date);
@@ -123,9 +71,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
-  const sheets = useSheets();
   const { copy, copied } = useCopy();
-  const music = useGamelan();
+  const music = useMusic(data.music);
   const [attendance, setAttendance] = useState<Attendance>("yes");
   const stories = storyItems(data);
   const hero = data.gallery[0];
@@ -307,9 +254,10 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
               const form = new FormData(event.currentTarget);
               const name = String(form.get("name") ?? "").trim();
               const message = String(form.get("message") ?? "").trim();
+              const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
               if (!name || !message) return;
               void wishes.send(name, message);
-              if (rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests: 1 });
+              if (rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests });
             }}>
               <label className={s.field}><span>Nama</span><input name="name" required maxLength={100} defaultValue={plainName(data.guestName)} placeholder="Nama Anda" autoComplete="name" /></label>
               <label className={s.field}><span>Ucapan</span><textarea name="message" required maxLength={500} rows={3} placeholder="Tuliskan doa & ucapan…" /></label>
@@ -320,11 +268,11 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
                   </button>
                 ))}
               </div>
+              {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Coba lagi sebentar lagi.</p>}
               <button type="submit" className={s.submit} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
             </form>
           )}
-          <button type="button" className={s.textBtn} onClick={sheets.openRsvp}>Konfirmasi jumlah tamu yang hadir →</button>
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada ucapan. Jadilah yang pertama mendoakan.</p>}
           {wishes.wishes.slice(0, 10).map(wish => (
             <article key={wish.id} className={s.wish}>
@@ -343,13 +291,12 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
         </footer>
       </main>
 
-      <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan gending" : "Putar gending"}>
-        <Lucide icon={ic.music} size={18} color="#e6c77a" />
-      </button>
+      {music.visible && (
+        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan gending" : "Putar gending"}>
+          <Lucide icon={ic.music} size={18} color="#e6c77a" />
+        </button>
+      )}
 
-      <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ success: "Matur nuwun!" }} />
-      </Sheet>
     </ThemeShell>
   );
 }

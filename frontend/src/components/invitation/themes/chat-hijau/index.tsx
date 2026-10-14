@@ -236,15 +236,15 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
 
       <nav className={s.quick} aria-label="Konfirmasi kehadiran">
         <div className={s.chips}>
-          <button type="button" className={s.chipOn} onClick={sheets.openRsvp}>Hadir</button>
-          <button type="button" onClick={sheets.openRsvp}>Masih ragu</button>
-          <button type="button" onClick={sheets.openRsvp}>Berhalangan</button>
+          <button type="button" className={s.chipOn} onClick={() => sheets.openRsvp("yes")}>Hadir</button>
+          <button type="button" onClick={() => sheets.openRsvp("maybe")}>Masih ragu</button>
+          <button type="button" onClick={() => sheets.openRsvp("no")}>Berhalangan</button>
         </div>
         <button type="button" className={s.rsvp} onClick={sheets.openRsvp}><Lucide icon={ic.send} size={15} color="#fff" />Kirim Konfirmasi &amp; Ucapan</button>
       </nav>
 
       <Sheet open={sheets.sheet === "rsvp"} onClose={sheets.close} title="Konfirmasi Kehadiran" tint={tint}>
-        <RsvpForm rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ maybe: "Masih ragu" }} />
+        <RsvpForm key={sheets.attendance} initialAttendance={sheets.attendance} rsvp={rsvp} guestName={data.guestName} demo={demo} labels={{ maybe: "Masih ragu" }} />
       </Sheet>
       <Sheet open={sheets.sheet === "wish"} onClose={sheets.close} title="Kirim Ucapan" tint={tint}>
         <WishForm wishes={wishes} guestName={data.guestName} demo={demo} />
