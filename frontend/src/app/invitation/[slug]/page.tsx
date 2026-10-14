@@ -11,6 +11,7 @@ import { StorySection } from "@/components/invitation/StorySection";
 import { WishesSection } from "@/components/invitation/WishesSection";
 import type { GiftMethod, InvitationData } from "@/components/invitation/types";
 import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
+import { isTheme, loadTheme } from "@/components/invitation/themes/registry";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -18,8 +19,9 @@ type PublicInvitation = {
   slug?: string;
   title: string;
   template_id?: string;
-  couple?: { bride_name?: string; groom_name?: string };
-  event?: { title?: string; venue?: string; date?: string; maps_url?: string };
+  couple?: { bride_name?: string; groom_name?: string; bride_nickname?: string; groom_nickname?: string; bride_parents?: string; groom_parents?: string; bride_photo?: string; groom_photo?: string };
+  event?: { title?: string; type?: string; venue?: string; date?: string; address?: string; maps_url?: string };
+  events?: Array<{ title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string }>;
   sections?: string[];
 };
 
@@ -79,6 +81,33 @@ export default async function PublicInvitationPage({
     guestName: guestName ? guestName.replace(/-/g, " ") : undefined,
   };
 
+  if (isTheme(result.template_id)) {
+    const { Theme } = await loadTheme(result.template_id);
+    const couple = result.couple ?? {};
+    const time = (start?: string, end?: string) => [start, end].filter(Boolean).join(" – ") + (start ? " WIB" : "");
+    const events = (result.events ?? []).filter(event => event.title || event.date).map(event => ({
+      name: event.title ?? "Acara", date: event.date ?? invitation.date, time: time(event.start_time, event.end_time) || "Waktu menyusul",
+      venue: event.venue ?? invitation.place, address: event.address, mapsUrl: event.maps_url,
+    }));
+    const storyList = (stories.items ?? [])
+      .map(item => ({ title: item.title ?? "", body: item.content ?? "", date: item.date, image: item.image_url }))
+      .filter(item => item.title || item.body);
+    const data: InvitationData = {
+      ...invitation,
+      couple: {
+        ...invitation.couple,
+        bride: couple.bride_nickname || invitation.couple.bride,
+        groom: couple.groom_nickname || invitation.couple.groom,
+        brideFull: couple.bride_name, groomFull: couple.groom_name,
+        brideParents: couple.bride_parents, groomParents: couple.groom_parents,
+        bridePhoto: couple.bride_photo, groomPhoto: couple.groom_photo,
+      },
+      address: result.event?.address ?? invitation.address,
+      events: events.length ? events : invitation.events,
+      stories: storyList.length ? storyList : undefined,
+    };
+    return <Theme data={data} slug={slug} guestToken={guestToken} />;
+  }
   if (isWeddingStyle(result.template_id)) return <WeddingTemplate variant={result.template_id} data={invitation} slug={slug} guestToken={guestToken} />;
   const template = settings.theme === "adat" || settings.theme === "modern" || settings.theme === "motion" ? settings.theme : "editorial";
   return <main className={`invitation-page template-${template}`}>

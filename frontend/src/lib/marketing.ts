@@ -9,10 +9,16 @@ export type Testimonial = { id: string; name: string; role?: string; quote: stri
 export type Template = { id: string; name: string; slug: string; category: string; preview_image?: string; preview_url?: string; is_premium: boolean };
 export type Plan = { id: string; name: string; max_guests: number; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean; price: number; duration_days?: number | null };
 
+import { themeList } from "@/components/invitation/themes/registry";
+
 export const defaultTemplates: Template[] = [
   { id: "alyra", name: "Alyra", slug: "alyra", category: "Editorial", preview_url: "/invitation/demo?template=alyra", is_premium: false },
   { id: "weddings", name: "Weddings", slug: "weddings", category: "Modern", preview_url: "/invitation/demo?template=weddings", is_premium: false },
   { id: "veloria", name: "Veloria", slug: "veloria", category: "Editorial", preview_url: "/invitation/demo?template=veloria", is_premium: false },
+  ...themeList.map(theme => ({
+    id: theme.id, name: theme.name, slug: theme.id, category: theme.category,
+    preview_image: `/themes/previews/${theme.id}.webp`, preview_url: `/invitation/demo?template=${theme.id}`, is_premium: theme.tier === "premium",
+  })),
 ];
 
 export const defaultPlans: Plan[] = [

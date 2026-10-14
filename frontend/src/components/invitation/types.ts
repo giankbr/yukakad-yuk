@@ -12,10 +12,21 @@ export type GiftMethod = {
 
 export type InvitationData = {
   couple: {
+    /** Short/nickname used in headlines, e.g. "Rina". */
     bride: string;
     groom: string;
     note: string;
+    /** Full names with titles, e.g. "Rina Maharani, S.Ds." */
+    brideFull?: string;
+    groomFull?: string;
+    /** e.g. "Putri dari Bpk. Ahmad & Ibu Siti" */
+    brideParents?: string;
+    groomParents?: string;
+    bridePhoto?: string;
+    groomPhoto?: string;
   };
+  /** Event kind shown in headings, e.g. "Pernikahan". */
+  eventLabel?: string;
   date: string;
   place: string;
   address: string;
@@ -29,7 +40,11 @@ export type InvitationData = {
     date: string;
     time: string;
     venue: string;
+    address?: string;
+    mapsUrl?: string;
   }>;
+  /** Love story timeline (optional; themes fall back to `story`). */
+  stories?: Array<{ title: string; body: string; date?: string; image?: string }>;
   gallery: string[];
   gifts: GiftMethod[];
   guestName?: string;

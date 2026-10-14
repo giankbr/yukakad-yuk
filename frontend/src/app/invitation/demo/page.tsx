@@ -11,6 +11,7 @@ import { StorySection } from "@/components/invitation/StorySection";
 import { WishesSection } from "@/components/invitation/WishesSection";
 import type { InvitationData } from "@/components/invitation/types";
 import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
+import { isTheme, loadTheme } from "@/components/invitation/themes/registry";
 
 const defaultInvitation: InvitationData = {
   couple: { bride: "Alya", groom: "Rizky", note: "We met in a room full of people and somehow left with a life full of small, shared rituals. This next chapter feels better with you in it." },
@@ -36,14 +37,19 @@ const defaultInvitation: InvitationData = {
 const invitationSlug = "alya-rizky";
 
 // "?names=Nina & Dimas" lets marketing pages preview a theme with the visitor's own names.
-function withNames(names?: string): InvitationData {
+function withNames(names?: string, base: InvitationData = defaultInvitation): InvitationData {
   const [bride, groom] = (names ?? "").split(/\s*(?:&|dan)\s*/i).map(part => part.trim().slice(0, 40));
-  if (!bride || !groom) return defaultInvitation;
-  return { ...defaultInvitation, couple: { ...defaultInvitation.couple, bride, groom } };
+  if (!bride || !groom) return base;
+  return { ...base, couple: { ...base.couple, bride, groom, brideFull: bride, groomFull: groom } };
 }
 
-export default async function InvitationDemoPage({ searchParams }: { searchParams: Promise<{ template?: string; names?: string }> }) {
-  const { template, names } = await searchParams;
+export default async function InvitationDemoPage({ searchParams }: { searchParams: Promise<{ template?: string; names?: string; to?: string; open?: string }> }) {
+  const { template, names, to, open } = await searchParams;
+  if (isTheme(template)) {
+    const { Theme, demo } = await loadTheme(template);
+    const data = withNames(names, demo);
+    return <Theme data={{ ...data, guestName: to ? to.replace(/-/g, " ").slice(0, 80) : data.guestName }} slug={`demo-${template}`} demo skipCover={open === "1"} />;
+  }
   const invitation = withNames(names);
   if (isWeddingStyle(template)) return <WeddingTemplate variant={template} data={invitation} slug={invitationSlug} demo />;
   return <main className="invitation-page template-editorial">
