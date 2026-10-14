@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import theme from "@/components/ui/workspace-theme.module.css";
+import { IconHeart } from "@/components/brand/icons";
 
 /* ── Inline SVG icons ─────────────────────────────────────────── */
 function IGrid() {
@@ -355,10 +356,10 @@ export function DashboardShell({
 			<aside className="dashboard-rail">
 				{/* Logo */}
 				<Link href="/dashboard" className="dashboard-logo">
-					<span className="dashboard-logo-icon">
-						y
+					<span className="dashboard-logo-icon" aria-hidden="true">
+						<IconHeart size={16} strokeWidth={2.2} />
 					</span>
-					yukakad<span>.</span>
+					RAWUH
 				</Link>
 
 				{/* Search */}
@@ -373,13 +374,13 @@ export function DashboardShell({
 					<div style={{ paddingTop: "1rem" }}>
 						<Link
 							href="/dashboard/invitations"
+							className="rail-back"
 							style={{
 								display: "flex",
 								alignItems: "center",
 								gap: ".4rem",
 								padding: ".45rem .75rem",
 								fontSize: ".78rem",
-								color: "#5A8476",
 								textDecoration: "none",
 								borderRadius: ".35rem",
 							}}
@@ -413,7 +414,7 @@ export function DashboardShell({
 				<div className="rail-user">
 					<div className="rail-user-inner">
 						<div className="rail-user-avatar" aria-hidden="true">
-							{initials || "YK"}
+							{initials || "RW"}
 						</div>
 						<div style={{ minWidth: 0, flex: 1 }}>
 							<strong>{userName}</strong>
@@ -426,7 +427,6 @@ export function DashboardShell({
 								background: "none",
 								border: "none",
 								cursor: "pointer",
-								color: "#3A6058",
 								flexShrink: 0,
 								padding: ".25rem",
 								display: "flex",

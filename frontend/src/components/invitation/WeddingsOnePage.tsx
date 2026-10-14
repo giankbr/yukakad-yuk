@@ -212,7 +212,7 @@ export function WeddingsOnePage({ data, slug, guestToken, demo = false }: { data
 
     <footer className={`${styles.section} ${styles.footer}`}>
       <div className={`${styles.container} ${styles.footerGrid}`} {...aos()}>
-        <div className={styles.footerItem}><span className={styles.footerBrand}>{bride.slice(0, 1)}&amp;{groom.slice(0, 1)}</span><p className={styles.body}>{data.couple.note}</p><p className={styles.body}>Dibuat dengan cinta · <Link className={styles.link} href="/">Yukakad</Link></p></div>
+        <div className={styles.footerItem}><span className={styles.footerBrand}>{bride.slice(0, 1)}&amp;{groom.slice(0, 1)}</span><p className={styles.body}>{data.couple.note}</p><p className={styles.body}>Dibuat dengan cinta · <Link className={styles.link} href="/">Rawuh</Link></p></div>
         <div className={styles.footerMenu}><p className={styles.label}>Undangan</p><a href="#info">Info</a><a href="#timeline">Timeline</a><a href="#rsvp">RSVP</a><a href="#story">Cerita</a><a href="#faq">FAQ</a></div>
         <div className={styles.footerMenu}><p className={styles.label}>Hari bahagia</p><span>{date}</span><span>{data.place}</span><a href="#home">Kembali ke atas ↑</a></div>
       </div>

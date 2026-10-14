@@ -1,4 +1,4 @@
-# Yukakad
+# Rawuh
 
 Platform undangan digital dengan backend Go dan frontend Next.js.
 Branch `dev` berisi stack baru; aplikasi CodeIgniter tetap tersedia di branch `main`.

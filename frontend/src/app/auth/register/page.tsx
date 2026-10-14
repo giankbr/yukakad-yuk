@@ -3,13 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import theme from "@/components/ui/workspace-theme.module.css";
+import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
+import { IconEye, IconEyeOff } from "@/components/brand/icons";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -27,86 +29,65 @@ export default function RegisterPage() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Registration failed");
+        throw new Error(data.error || "Pendaftaran gagal");
       }
 
       const data = await response.json();
       localStorage.setItem("yukakad_token", data.token);
       localStorage.setItem("yukakad_role", data.user?.role ?? "user");
-      router.push("/dashboard");
+      const search = new URLSearchParams(window.location.search);
+      const planId = search.get("plan");
+      const templateId = search.get("template");
+      const eventName = search.get("event")?.trim();
+      router.push(planId
+        ? `/checkout?plan=${encodeURIComponent(planId)}`
+        : templateId
+          ? `/dashboard/invitations/create?template=${encodeURIComponent(templateId)}${eventName ? `&title=${encodeURIComponent(eventName)}` : ""}`
+          : eventName
+            ? `/dashboard/invitations/create?title=${encodeURIComponent(eventName)}`
+            : "/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className={`auth-page ${theme.auth}`}>
-      <div className="auth-aside"><Link href="/" className="auth-brand"><span>y</span> yukakad.</Link><p>Undangan yang terasa seperti kalian.</p><small>Mulai dari template. Selesai dengan cerita.</small></div>
-      <div className="auth-panel">
-        <div className="auth-heading">
-          <p className="auth-kicker">Mulai dalam beberapa menit</p>
-          <h1>Buat undangan yang ingin dibagikan.</h1>
-          <p>Akun gratis, tanpa kartu kredit.</p>
+    <AuthLayout topRight={<>Sudah punya akun? <Link href="/auth/login">Masuk</Link></>}>
+      <AuthHeading lead="Buat undangan" mono="pertamamu.">Gratis untuk mencoba — bayar hanya saat undangan siap dikirim.</AuthHeading>
+
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div>
+          <label htmlFor="register-name">Nama lengkap</label>
+          <input id="register-name" autoComplete="name" type="text" value={name}
+            onChange={(e) => setName(e.target.value)} required placeholder="Nama kamu" />
         </div>
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div>
-            <label htmlFor="register-name">Nama lengkap</label>
-            <input
-              id="register-name"
-              autoComplete="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              placeholder="Nama kamu"
-            />
+
+        <div>
+          <label htmlFor="register-email">Email</label>
+          <input id="register-email" autoComplete="email" type="email" value={email}
+            onChange={(e) => setEmail(e.target.value)} required placeholder="nama@email.com" />
+        </div>
+
+        <div>
+          <label htmlFor="register-password">Kata sandi</label>
+          <div className="auth-input">
+            <input id="register-password" autoComplete="new-password" minLength={8} type={showPassword ? "text" : "password"} value={password}
+              onChange={(e) => setPassword(e.target.value)} required placeholder="Minimal 8 karakter" />
+            <button type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"} aria-pressed={showPassword}>
+              {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
+            </button>
           </div>
+        </div>
 
-          <div>
-            <label htmlFor="register-email">Email</label>
-            <input
-              id="register-email"
-              autoComplete="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="nama@email.com"
-            />
-          </div>
+        {error && <div className="auth-error" role="alert">{error}</div>}
 
-          <div>
-            <label htmlFor="register-password">Kata sandi</label>
-            <input
-              id="register-password"
-              autoComplete="new-password"
-              minLength={8}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Minimal 8 karakter"
-            />
-          </div>
-
-          {error && <div className="auth-error" role="alert">{error}</div>}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="auth-submit"
-          >
-            {loading ? "Membuat akun..." : "Buat akun gratis →"}
-          </button>
-        </form>
-
-        <p className="auth-switch">
-          Sudah punya akun? <Link href="/auth/login">Masuk di sini</Link>
-        </p>
-      </div>
-    </main>
+        <button type="submit" disabled={loading} className="auth-submit">
+          {loading ? "Membuat akun..." : "Buat akun gratis"}
+        </button>
+        <p className="auth-note">Dengan mendaftar, kamu menyetujui Syarat &amp; Ketentuan dan Kebijakan Privasi Rawuh.</p>
+      </form>
+    </AuthLayout>
   );
 }

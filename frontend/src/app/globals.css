@@ -1,23 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+/* Rawuh design tokens (from the Rawuh design system). */
 :root {
-	--font-be-vietnam-pro: "Be Vietnam Pro", Arial, sans-serif;
-	--font-urbanist: "Be Vietnam Pro", Arial, sans-serif;
+	--rw-primary: #e65532;
+	--rw-primary-hover: #d63720;
+	--rw-primary-border: #f1a280;
+	--rw-primary-soft: #fceae6;
+	--rw-ink: #1a1817;
+	--rw-ink-2: #322f2d;
+	--rw-muted: #79716b;
+	--rw-muted-2: #948d89;
+	--rw-bg: #ffffff;
+	--rw-surface: #f0efeb;
+	--rw-surface-2: #f8f8f6;
+	--rw-black: #111010;
+	--rw-border: #eeeeee;
+	--rw-border-warm: #e7e5e4;
+	--rw-success: #007a55;
+	--rw-warning: #e17100;
+	--rw-info: #155dfc;
+	--rw-radius-sm: 4px;
+	--rw-radius-md: 8px;
+	--rw-radius-lg: 16px;
+	--rw-radius-xl: 24px;
+	--rw-font-sans: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+	--rw-font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+
+	/* Legacy aliases still used by older rules. */
+	--font-be-vietnam-pro: var(--rw-font-sans);
+	--font-urbanist: var(--rw-font-sans);
 	--font-cormorant: Georgia, serif;
-	--background: #f6f7f4;
-	--foreground: #17202a;
+	--background: var(--rw-bg);
+	--foreground: var(--rw-ink);
 	--paper: #f7f4ee;
-	--ink: #1d1d1b;
-	--accent: #a63d40;
-	--muted: #7b776f;
-	--line: #d8d3c9;
-	--radius-sm: 0.45rem;
+	--ink: var(--rw-ink);
+	--accent: var(--rw-primary);
+	--muted: var(--rw-muted);
+	--line: var(--rw-border-warm);
+	--radius-sm: var(--rw-radius-md);
 }
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
-	--font-sans: var(--font-be-vietnam-pro);
+	--font-sans: var(--rw-font-sans);
+	--font-mono: var(--rw-font-mono);
 	--font-display: var(--font-cormorant);
 }
 * {
@@ -51,6 +77,11 @@ textarea:focus-visible {
 	outline-offset: 2px;
 }
 .invitation-page {
+	/* Guest-facing invitations keep their own palette. */
+	--accent: #a63d40;
+	--muted: #7b776f;
+	--line: #d8d3c9;
+	--ink: #1d1d1b;
 	min-height: 100vh;
 	background: var(--paper);
 	color: var(--ink);
@@ -2131,7 +2162,7 @@ textarea:focus-visible {
 .landing-assurance { max-width:1170px; margin:0 auto; display:grid; grid-template-columns:.85fr 1.15fr; gap:4rem; padding:clamp(4rem,8vw,7rem) 0; border-top:1px solid var(--landing-line); }.landing-assurance h2 { font-size:clamp(2.2rem,4vw,3.7rem); }.landing-assurance > div > p:last-child { margin-top:1.2rem; }.landing-assurance-list { border-top:1px solid var(--landing-line); }.landing-assurance-list > div { display:grid; grid-template-columns:2.8rem 1fr; gap:1rem; padding:1.25rem 0; border-bottom:1px solid var(--landing-line); }.landing-assurance-list b { color:var(--landing-muted); font-size:.65rem; }.landing-assurance-list span { display:grid; gap:.3rem; }.landing-assurance-list strong { color:var(--landing-ink); font-size:.9rem; }.landing-assurance-list small { color:var(--landing-muted); font-size:.76rem; line-height:1.45; }
 @media (max-width:760px) { .landing-problem-heading,.landing-showcase-heading,.landing-pricing-heading,.landing-voices,.landing-assurance { grid-template-columns:1fr; gap:1.25rem; }.landing-problem-grid,.landing-system-grid { grid-template-columns:1fr; }.landing-problem-card { min-height:23rem; }.landing-system-card,.landing-system-card:nth-child(3) { grid-template-columns:1fr; }.landing-system-card:nth-child(3) { grid-column:auto; }.landing-steps { margin:0 1.75rem; grid-template-columns:1fr; }.landing-steps > div { min-height:auto; }.landing-steps > div + div { border-top:1px solid var(--landing-line); border-left:0; }.landing-showcase,.landing-pricing,.landing-voices { padding-inline:1.75rem; }.landing-template-grid,.landing-pricing-grid,.landing-testimonial-grid { grid-template-columns:1fr; }.landing-template-card:first-child .landing-template-preview,.landing-template-preview { height:17rem; }.landing-testimonial-card:nth-child(3n) { grid-column:auto; }.landing-assurance { margin:0 1.75rem; }.landing-problem-heading > p:last-child,.landing-showcase-heading > p:last-child,.landing-pricing-heading > p:last-child { margin-top:0.8rem; } }
 
-/* Yukakad editorial direction: tactile, warm, and unmistakably wedding-led. */
+/* Rawuh editorial direction: tactile, warm, and unmistakably wedding-led. */
 .landing-page {
 	--landing-bg:#f4efe7;
 	--landing-ink:#203b35;
@@ -2163,29 +2194,8 @@ textarea:focus-visible {
 .landing-footer { max-width:none; margin:1.35rem clamp(1rem,3.5vw,3.5rem) 1.35rem; border-radius:0; background:#203b35; box-shadow:none; }.landing-footer-watermark { font-family:var(--font-cormorant),serif; color:rgba(244,239,231,.06); }
 @media (max-width:760px) { .landing-system-grid { grid-template-columns:1fr; }.landing-system-card,.landing-system-card:nth-child(2),.landing-system-card:nth-child(3) { min-height:25rem; }.landing-steps { padding-inline:1.75rem; }.landing-steps>div+div { padding-left:0; }.landing-template-grid { grid-template-columns:1fr; }.landing-hero-card { min-height:auto; }.landing-hero-copy h1 { font-size:4rem; } }
 
-.auth-page { min-height:100dvh; display:grid; grid-template-columns: minmax(300px,.9fr) minmax(420px,1.1fr); background:#f8f7f3; color:#173c3a; }
-.auth-aside { display:flex; flex-direction:column; justify-content:space-between; padding:2.2rem clamp(1.5rem,5vw,5rem) 4rem; background:#173c3a; color:#fff; }
-.auth-brand { display:flex; align-items:center; gap:.45rem; color:#fff; text-decoration:none; font-weight:700; letter-spacing:-.04em; }
-.auth-brand span { width:1.8rem; height:1.8rem; display:grid; place-items:center; border-radius:.55rem; background:#e56b51; font:700 1rem/1 var(--font-be-vietnam-pro),sans-serif; }
-.auth-aside p { max-width:9ch; margin:auto 0 .5rem; font:600 clamp(2.5rem,5vw,4.5rem)/.92 var(--font-be-vietnam-pro),sans-serif; letter-spacing:-.05em; }
-.auth-aside small { color:#9dbbb0; font-size:.78rem; }
-.auth-panel { width:min(100%,490px); align-self:center; padding:3rem clamp(1.5rem,6vw,6rem); }
-.auth-heading { margin-bottom:2rem; }
-.auth-kicker { margin:0 0 .75rem; color:#e56b51; font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
-.auth-heading h1 { max-width:11ch; margin:0 0 .8rem; font:600 clamp(2.5rem,5vw,4rem)/.92 var(--font-be-vietnam-pro),sans-serif; letter-spacing:-.05em; }
-.auth-heading > p:last-child { margin:0; color:#73847d; font-size:.88rem; }
-.auth-form { display:grid; gap:1.1rem; }
-.auth-form > div { display:grid; gap:.45rem; }
-.auth-form label { color:#48615a; font-size:.76rem; font-weight:650; }
-.auth-form input { padding:.88rem .9rem; border-color:#d9e0d9; border-radius:.45rem; background:#fff; font-size:.84rem; }
-.auth-submit { width:100%; padding:.9rem 1rem; border:0; border-radius:.45rem; background:#173c3a; color:#fff; font-weight:700; cursor:pointer; transition:background .18s,transform .18s; }
-.auth-submit:hover { background:#e56b51; transform:translateY(-1px); }
-.auth-submit:disabled { opacity:.6; cursor:wait; }
-.auth-error { padding:.75rem .85rem; border:1px solid #f0c2b7; border-radius:.45rem; background:#fff4f1; color:#a54232; font-size:.78rem; }
-.auth-switch { margin:1.5rem 0 0; color:#7b8984; font-size:.78rem; text-align:center; }
-.auth-switch a { color:#e56b51; font-weight:700; text-decoration:none; }
 
-/* AgentLab-inspired Yukakad system: deep product navy, electric celebration gradients, crisp cards. */
+/* AgentLab-inspired Rawuh system: deep product navy, electric celebration gradients, crisp cards. */
 .landing-page {
 	--landing-bg:#f7f8fc;
 	--landing-ink:#10142b;
@@ -2288,17 +2298,17 @@ textarea:focus-visible {
 .landing-page h1,.landing-page h2,.landing-page h3,.landing-page .landing-logo,.landing-page .landing-kicker,.landing-page .landing-section-kicker,.landing-page .step-number,.landing-page .landing-cta-button,.landing-page .landing-secondary-button { font-family:var(--font-be-vietnam-pro),sans-serif; }
 .landing-page p,.landing-page span,.landing-page a,.landing-page li,.landing-page summary,.landing-page strong,.landing-page small { font-family:var(--font-urbanist),sans-serif; }
 .landing-agent-copy h1 { font-weight:700; letter-spacing:-.075em; }.landing-agent-copy p { font-weight:500; }
-@keyframes yukakad-fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-@keyframes yukakad-fade-in { from { opacity:0; } to { opacity:1; } }
-@keyframes yukakad-float { 0%,100% { transform:translateY(0) rotate(-2deg); } 50% { transform:translateY(-9px) rotate(-1deg); } }
-@keyframes yukakad-float-soft { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-6px) rotate(-2deg); } }
-@keyframes yukakad-sheen { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
-@keyframes yukakad-grid-pulse { 0%,100% { opacity:.28; } 50% { opacity:.55; } }
-.landing-agent-frame { animation:yukakad-fade-in 700ms cubic-bezier(.23,1,.32,1) both; }
-.landing-agent-copy > * { opacity:0; animation:yukakad-fade-up 650ms cubic-bezier(.23,1,.32,1) both; }
+@keyframes rawuh-fade-up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+@keyframes rawuh-fade-in { from { opacity:0; } to { opacity:1; } }
+@keyframes rawuh-float { 0%,100% { transform:translateY(0) rotate(-2deg); } 50% { transform:translateY(-9px) rotate(-1deg); } }
+@keyframes rawuh-float-soft { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-6px) rotate(-2deg); } }
+@keyframes rawuh-sheen { 0% { background-position:0% 50%; } 50% { background-position:100% 50%; } 100% { background-position:0% 50%; } }
+@keyframes rawuh-grid-pulse { 0%,100% { opacity:.28; } 50% { opacity:.55; } }
+.landing-agent-frame { animation:rawuh-fade-in 700ms cubic-bezier(.23,1,.32,1) both; }
+.landing-agent-copy > * { opacity:0; animation:rawuh-fade-up 650ms cubic-bezier(.23,1,.32,1) both; }
 .landing-agent-copy > :nth-child(1) { animation-delay:80ms; }.landing-agent-copy > :nth-child(2) { animation-delay:150ms; }.landing-agent-copy > :nth-child(3) { animation-delay:220ms; }.landing-agent-copy > :nth-child(4) { animation-delay:300ms; }
-.landing-agent-visual { animation:yukakad-fade-up 800ms 280ms cubic-bezier(.23,1,.32,1) both; }.landing-agent-visual::before { animation:yukakad-grid-pulse 4s ease-in-out infinite; }.landing-agent-visual { background-size:200% 200%; animation:yukakad-fade-up 800ms 280ms cubic-bezier(.23,1,.32,1) both, yukakad-sheen 8s ease-in-out infinite; }
-.landing-agent-demo { animation:yukakad-float 5.5s ease-in-out infinite; }.landing-agent-visual .landing-hero-rsvp { animation:yukakad-float-soft 5s .4s ease-in-out infinite; }
+.landing-agent-visual { animation:rawuh-fade-up 800ms 280ms cubic-bezier(.23,1,.32,1) both; }.landing-agent-visual::before { animation:rawuh-grid-pulse 4s ease-in-out infinite; }.landing-agent-visual { background-size:200% 200%; animation:rawuh-fade-up 800ms 280ms cubic-bezier(.23,1,.32,1) both, rawuh-sheen 8s ease-in-out infinite; }
+.landing-agent-demo { animation:rawuh-float 5.5s ease-in-out infinite; }.landing-agent-visual .landing-hero-rsvp { animation:rawuh-float-soft 5s .4s ease-in-out infinite; }
 .landing-problem-card,.landing-template-card,.landing-plan-card,.landing-testimonial-card { transition-property:transform,box-shadow,border-color; transition-duration:220ms; transition-timing-function:cubic-bezier(.2,0,0,1); }.landing-problem-card:hover,.landing-template-card:hover,.landing-plan-card:hover,.landing-testimonial-card:hover { transform:translateY(-5px); box-shadow:0 14px 30px rgba(10,10,20,.1); }.landing-showcase .landing-template-card:hover,.landing-voices .landing-testimonial-card:hover { box-shadow:0 16px 34px rgba(0,0,0,.35); }
 .landing-page .landing-cta-button,.landing-page .landing-secondary-button { transition-property:transform,background-color,border-color,color,box-shadow; transition-duration:160ms; transition-timing-function:cubic-bezier(.2,0,0,1); }.landing-page .landing-cta-button:active,.landing-page .landing-secondary-button:active { transform:scale(.96); }
 @media (prefers-reduced-motion:reduce) { .landing-agent-frame,.landing-agent-copy > *,.landing-agent-visual,.landing-agent-demo,.landing-agent-visual .landing-hero-rsvp,.landing-agent-visual::before { animation:none!important; opacity:1; } }
@@ -2309,7 +2319,7 @@ button,
 input,
 textarea,
 select {
-	font-family: "Be Vietnam Pro", Arial, sans-serif;
+	font-family: var(--rw-font-sans);
 }
 
 .landing-agent-visual {
@@ -2345,7 +2355,7 @@ select {
 /* Full-page visual system: one rail, one typeface, alternating light/dark chapters. */
 .landing-page,
 .landing-page * {
-	font-family: "Be Vietnam Pro", Arial, sans-serif;
+	font-family: var(--rw-font-sans);
 }
 
 .landing-page h1,
@@ -2363,7 +2373,7 @@ select {
 .landing-page h1,
 .landing-page h2,
 .landing-page h3 {
-	font-family: "Be Vietnam Pro", Arial, sans-serif !important;
+	font-family: var(--rw-font-sans) !important;
 	letter-spacing: -.055em;
 }
 
@@ -2383,7 +2393,7 @@ select {
 .landing-page .landing-secondary-button {
 	min-height: 3.35rem;
 	border-radius: .35rem;
-	font-family: "Be Vietnam Pro", Arial, sans-serif;
+	font-family: var(--rw-font-sans);
 	font-weight: 700;
 	letter-spacing: .01em;
 	transition-property: transform, background-color, color, border-color, box-shadow;
@@ -2484,7 +2494,6 @@ select {
 	.landing-template-card { border-bottom: 1px solid #2b2c31; }
 	.landing-template-card:last-child { border-bottom: 0; }
 }
-@media (max-width:700px) { .auth-page { grid-template-columns:1fr; } .auth-aside { min-height:210px; padding:1.5rem; } .auth-aside p { margin-top:3rem; font-size:2.6rem; } .auth-aside small { display:none; } .auth-panel { width:100%; padding:3rem 1.5rem 4rem; } }
 
 /* Reset legacy split headers so every landing section reads as one clear composition. */
 .landing-problem-heading,
@@ -2761,7 +2770,7 @@ select {
 .landing-faq summary:hover { color: #1c5cff; }
 .landing-faq details[open] summary { color: #111; }
 .landing-faq details[open] p {
-	animation: yukakad-fade-up 280ms cubic-bezier(.2, 0, 0, 1) both;
+	animation: rawuh-fade-up 280ms cubic-bezier(.2, 0, 0, 1) both;
 }
 .landing-announcement a {
 	transition: opacity 160ms cubic-bezier(.2, 0, 0, 1);

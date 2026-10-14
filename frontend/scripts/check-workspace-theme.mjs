@@ -4,7 +4,7 @@ import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import assert from 'node:assert/strict';
-const dir = await mkdtemp(join(tmpdir(), 'yukakad-workspace-'));
+const dir = await mkdtemp(join(tmpdir(), 'rawuh-workspace-'));
 const browser = spawn(process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', ['--headless=new', '--disable-gpu', '--hide-scrollbars', '--remote-debugging-port=0', `--user-data-dir=${dir}`, 'about:blank'], { stdio: 'ignore' });
 let socket;
 try {
@@ -39,13 +39,13 @@ try {
       assert(ready,`${route} did not load`);
       await evaluate(`document.fonts.ready.then(()=>new Promise(r=>setTimeout(r,500)))`);
       assert(await evaluate(`document.documentElement.scrollWidth<=innerWidth`),`${route} ${width}: overflow`);
-      assert(await evaluate(`getComputedStyle(document.querySelector('h1')).fontFamily.includes('Be Vietnam Pro')`),`${route}: wrong font`);
+      assert(await evaluate(`getComputedStyle(document.querySelector('h1')).fontFamily.includes('Geist')`),`${route}: wrong font`);
       if(route.startsWith('/auth')) {
         assert(await evaluate(`[...document.querySelectorAll('input')].every(i=>i.labels.length>0)`),'Unlabelled input');
         await evaluate(`document.querySelector('input').focus()`);
         assert(await evaluate(`getComputedStyle(document.activeElement).outlineStyle!=='none'`),'Missing focus');
       } else {
-        assert(await evaluate(`getComputedStyle(document.querySelector('.dashboard-rail')).backgroundColor==='rgb(8, 8, 10)'`),'Wrong sidebar theme');
+        assert(await evaluate(`getComputedStyle(document.querySelector('.dashboard-rail')).backgroundColor==='rgb(17, 16, 16)'`),'Wrong sidebar theme');
         assert(await evaluate(`document.querySelector('.db-nav-section').getBoundingClientRect().height>0`),'Hidden navigation');
       }
       const shot=await call('Page.captureScreenshot',{format:'png'});

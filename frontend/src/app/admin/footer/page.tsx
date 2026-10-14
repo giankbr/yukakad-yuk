@@ -63,9 +63,9 @@ export default function AdminFooterPage() {
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
-          <FormField label="Heading" value={footer.heading ?? ""} onChange={(e) => setFooter({ ...footer, heading: e.target.value })} placeholder="yukakad" />
-          <FormField label="Copyright" value={footer.copyright ?? ""} onChange={(e) => setFooter({ ...footer, copyright: e.target.value })} placeholder="© 2026 Yukakad. All rights reserved." />
-          <FormField label="Instagram handle" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@yukakad" />
+          <FormField label="Heading" value={footer.heading ?? ""} onChange={(e) => setFooter({ ...footer, heading: e.target.value })} placeholder="Rawuh" />
+          <FormField label="Copyright" value={footer.copyright ?? ""} onChange={(e) => setFooter({ ...footer, copyright: e.target.value })} placeholder="© 2026 Rawuh.id" />
+          <FormField label="Instagram handle" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@rawuh.id" />
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
               {saving ? "Saving..." : "Save changes"}

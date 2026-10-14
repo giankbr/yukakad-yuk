@@ -3,12 +3,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import theme from "@/components/ui/workspace-theme.module.css";
+import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
+import { IconEye, IconEyeOff, IconMail } from "@/components/brand/icons";
 
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,72 +28,62 @@ export default function LoginPage() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Login failed");
+        throw new Error(data.error || "Login gagal");
       }
 
       const data = await response.json();
+      // Storage keys keep the legacy prefix so existing sessions stay signed in.
       localStorage.setItem("yukakad_token", data.token);
       localStorage.setItem("yukakad_role", data.user?.role ?? "user");
-      router.push(data.user?.role === "admin" ? "/admin" : "/dashboard");
+      const planId = new URLSearchParams(window.location.search).get("plan");
+      router.push(data.user?.role === "admin" ? "/admin" : planId
+        ? `/checkout?plan=${encodeURIComponent(planId)}`
+        : "/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
     } finally {
       setLoading(false);
     }
   };
 
+  const registerLink = <Link href="/auth/register" onClick={(event) => {
+    const planId = new URLSearchParams(window.location.search).get("plan");
+    if (!planId) return;
+    event.preventDefault();
+    router.push(`/auth/register?plan=${encodeURIComponent(planId)}`);
+  }}>Daftar gratis</Link>;
+
   return (
-    <main className={`auth-page ${theme.auth}`}>
-      <div className="auth-aside"><Link href="/" className="auth-brand"><span>y</span> yukakad.</Link><p>Undangan yang terasa seperti kalian.</p><small>Bagikan cerita. Rayakan bersama.</small></div>
-      <div className="auth-panel">
-        <div className="auth-heading">
-          <p className="auth-kicker">Selamat datang kembali</p>
-          <h1>Masuk ke workspace kamu.</h1>
-          <p>Kelola undangan dan tamu dari satu tempat.</p>
+    <AuthLayout topRight={<>Belum punya akun? {registerLink}</>}>
+      <AuthHeading lead="Selamat datang" mono="kembali.">Lanjutkan undanganmu — draft tersimpan otomatis.</AuthHeading>
+
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div>
+          <label htmlFor="login-email">Email</label>
+          <div className="auth-input">
+            <input id="login-email" autoComplete="email" type="email" value={email}
+              onChange={(e) => setEmail(e.target.value)} required placeholder="nama@email.com" />
+            <IconMail size={18} />
+          </div>
         </div>
-        
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div>
-            <label htmlFor="login-email">Email</label>
-            <input
-              id="login-email"
-              autoComplete="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="nama@email.com"
-            />
+
+        <div>
+          <label htmlFor="login-password">Kata sandi</label>
+          <div className="auth-input">
+            <input id="login-password" autoComplete="current-password" type={showPassword ? "text" : "password"} value={password}
+              onChange={(e) => setPassword(e.target.value)} required placeholder="Masukkan kata sandi" />
+            <button type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"} aria-pressed={showPassword}>
+              {showPassword ? <IconEyeOff size={18} /> : <IconEye size={18} />}
+            </button>
           </div>
+        </div>
 
-          <div>
-            <label htmlFor="login-password">Kata sandi</label>
-            <input
-              id="login-password"
-              autoComplete="current-password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="Masukkan kata sandi"
-            />
-          </div>
+        {error && <div className="auth-error" role="alert">{error}</div>}
 
-          {error && <div className="auth-error" role="alert">{error}</div>}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="auth-submit"
-          >
-            {loading ? "Memproses..." : "Masuk"}
-          </button>
-        </form>
-
-        <p className="auth-switch">
-          Belum punya akun? <Link href="/auth/register">Buat akun gratis</Link>
-        </p>
-      </div>
-    </main>
+        <button type="submit" disabled={loading} className="auth-submit">
+          {loading ? "Memproses..." : "Masuk"}
+        </button>
+      </form>
+    </AuthLayout>
   );
 }

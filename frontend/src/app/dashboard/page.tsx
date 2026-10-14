@@ -369,7 +369,7 @@ export default function DashboardPage() {
 														marginTop: ".12rem",
 													}}
 												>
-													yukakad.com/{inv.slug}
+													rawuh.id/{inv.slug}
 												</small>
 											</td>
 											<td>

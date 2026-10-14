@@ -19,7 +19,8 @@ function slugify(value: string) {
 export default function CreateInvitationPage() {
   const { token, ready } = useAuthToken();
   const router = useRouter();
-  const [title, setTitle] = useState("");
+  // Prefilled from the landing page "Nama acaramu" field (forwarded through registration).
+  const [title, setTitle] = useState(() => typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("title") ?? "");
   const [slug, setSlug] = useState("");
   const [slugTouched, setSlugTouched] = useState(false);
   const [error, setError] = useState("");
@@ -83,7 +84,7 @@ export default function CreateInvitationPage() {
           }}
           placeholder="alya-rizky"
         />
-        <p className="form-hint">yukakad.com/invitation/{slug || "your-slug"}</p>
+        <p className="form-hint">rawuh.id/invitation/{slug || "your-slug"}</p>
         {templateId && <p className="form-hint">Template: <strong>{templateId}</strong></p>}
         {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
         <div className="form-actions">

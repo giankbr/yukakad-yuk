@@ -74,7 +74,7 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
         <div>
           <p className="dashboard-kicker">Invitation</p>
           <h1>{invitation?.title ?? "Loading..."}</h1>
-          <p className="dashboard-subtitle">yukakad.com/invitation/{invitation?.slug}</p>
+          <p className="dashboard-subtitle">rawuh.id/invitation/{invitation?.slug}</p>
         </div>
         {invitation && (
           <button className="dashboard-action" onClick={togglePublish} disabled={publishing}>

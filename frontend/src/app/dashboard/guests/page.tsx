@@ -66,7 +66,7 @@ export default function DashboardGuestsPage() {
                 <tr key={invitation.id}>
                   <td>
                     <strong>{invitation.title}</strong>
-                    <span>yukakad.com/{invitation.slug}</span>
+                    <span>rawuh.id/{invitation.slug}</span>
                   </td>
                   <td>
                     <span className={`status status-${invitation.published ? "published" : "draft"}`}>

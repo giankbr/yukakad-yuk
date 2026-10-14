@@ -88,6 +88,6 @@ export function WeddingTemplate({ variant, data, slug, guestToken, demo = false 
     {data.gallery.length > 0 && <section id="memories" className={styles.memories}><div className={styles.sectionHeading} {...aos()}><p className={styles.eyebrow}>03 / In good company</p><h2>Momen kecil,<br /><em>kenangan selamanya.</em></h2></div><div className={styles.gallery}>{data.gallery.map((src, index) => <figure key={`${src}-${index}`} {...aos("fade-up", (index % 3) * 90)}><Photo src={src} alt={`Kenangan ${bride} dan ${groom}, foto ${index + 1}`} /><figcaption>({String(index + 1).padStart(2, "0")}) A moment to keep</figcaption></figure>)}</div></section>}
     <div id="rsvp" className={styles.response} {...aos()}><RSVPSection slug={slug} guestToken={guestToken} demo={demo} /></div>
     <div className={styles.gifts} {...aos()}><GiftSection data={data} /></div>
-    <footer className={styles.footer} {...aos("fade-in")}><p className={styles.eyebrow}>The beginning of forever</p><h2>{bride} <em>&</em> {groom}</h2><p>Terima kasih sudah menjadi bagian dari cerita kami.</p><div><span>{date}</span><a href="#home">Kembali ke atas ↑</a><Link href="/">Made with love · Yukakad</Link></div></footer>
+    <footer className={styles.footer} {...aos("fade-in")}><p className={styles.eyebrow}>The beginning of forever</p><h2>{bride} <em>&</em> {groom}</h2><p>Terima kasih sudah menjadi bagian dari cerita kami.</p><div><span>{date}</span><a href="#home">Kembali ke atas ↑</a><Link href="/">Made with love · Rawuh</Link></div></footer>
   </main>;
 }
