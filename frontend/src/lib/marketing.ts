@@ -12,9 +12,6 @@ export type Plan = { id: string; name: string; max_guests: number; has_watermark
 import { themeList } from "@/components/invitation/themes/registry";
 
 export const defaultTemplates: Template[] = [
-  { id: "alyra", name: "Alyra", slug: "alyra", category: "Editorial", preview_url: "/invitation/demo?template=alyra", is_premium: false },
-  { id: "weddings", name: "Weddings", slug: "weddings", category: "Modern", preview_url: "/invitation/demo?template=weddings", is_premium: false },
-  { id: "veloria", name: "Veloria", slug: "veloria", category: "Editorial", preview_url: "/invitation/demo?template=veloria", is_premium: false },
   ...themeList.map(theme => ({
     id: theme.id, name: theme.name, slug: theme.id, category: theme.category,
     preview_image: `/themes/previews/${theme.id}.webp`, preview_url: `/invitation/demo?template=${theme.id}`, is_premium: theme.tier === "premium",
@@ -26,11 +23,6 @@ export const defaultPlans: Plan[] = [
   { id: "pro", name: "Rayakan", max_guests: 1000, has_watermark: false, custom_domain_allowed: true, payment_gateway_allowed: true, price: 149000, duration_days: 30 },
 ];
 
-export const templateImages: Record<string, string> = {
-  alyra: "/templates/alyra-preview.png",
-  weddings: "/templates/weddings-preview.png",
-  veloria: "/templates/veloria-preview.png",
-};
 
 export async function getJSON<T>(path: string, fallback: T): Promise<T> {
   try {
@@ -63,7 +55,7 @@ export async function getSiteContact() {
 }
 
 export function templatePreview(template: Template) {
-  return template.preview_image || templateImages[template.slug];
+  return template.preview_image || `/themes/previews/${template.slug}.webp`;
 }
 
 export function templateDemoHref(template: Template, names?: string) {

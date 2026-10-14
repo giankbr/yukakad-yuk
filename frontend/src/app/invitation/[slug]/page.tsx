@@ -1,17 +1,5 @@
-import { ClosingSection } from "@/components/invitation/ClosingSection";
-import { CountdownSection } from "@/components/invitation/CountdownSection";
-import { CoupleSection } from "@/components/invitation/CoupleSection";
-import { CoverSection } from "@/components/invitation/CoverSection";
-import { EventSection } from "@/components/invitation/EventSection";
-import { GallerySection } from "@/components/invitation/GallerySection";
-import { GiftSection } from "@/components/invitation/GiftSection";
-import { LocationSection } from "@/components/invitation/LocationSection";
-import { RSVPSection } from "@/components/invitation/RSVPSection";
-import { StorySection } from "@/components/invitation/StorySection";
-import { WishesSection } from "@/components/invitation/WishesSection";
 import type { GiftMethod, InvitationData } from "@/components/invitation/types";
-import { WeddingTemplate, isWeddingStyle } from "@/components/invitation/WeddingTemplate";
-import { isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
+import { FALLBACK_THEME, isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
 import { MusicPlayer } from "@/components/invitation/themes/kit";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
@@ -60,7 +48,7 @@ export default async function PublicInvitationPage({
   const { guest: guestToken, to: guestName, preview_token: previewToken } = await searchParams;
 
   const result = await getInvitation(slug, previewToken);
-  if (!result) return <main className="invitation-not-found"><h1>This invitation is taking a quiet moment.</h1><p>The link may be private or no longer available.</p></main>;
+  if (!result) return <main className="invitation-not-found"><h1>Undangan ini belum bisa dibuka.</h1><p>Link mungkin belum dipublikasikan atau sudah tidak aktif.</p></main>;
 
   const [gallery, giftsResult, settings, stories] = await Promise.all([
     getContent(slug, "gallery", previewToken),
@@ -84,50 +72,32 @@ export default async function PublicInvitationPage({
     guestName: guestName ? guestName.replace(/-/g, " ") : undefined,
   };
 
-  if (isTheme(result.template_id)) {
-    const { Theme } = await loadTheme(result.template_id);
-    const couple = result.couple ?? {};
-    const time = (start?: string, end?: string) => [start, end].filter(Boolean).join(" – ") + (start ? " WIB" : "");
-    const events = (result.events ?? []).filter(event => event.title || event.date).map(event => ({
-      name: event.title ?? "Acara", date: event.date ?? invitation.date, time: time(event.start_time, event.end_time) || "Waktu menyusul",
-      venue: event.venue ?? invitation.place, address: event.address, mapsUrl: event.maps_url,
-    }));
-    const storyList = (stories.items ?? [])
-      .map(item => ({ title: item.title ?? "", body: item.content ?? "", date: item.date, image: item.image_url }))
-      .filter(item => item.title || item.body);
-    const data: InvitationData = {
-      ...invitation,
-      couple: {
-        ...invitation.couple,
-        bride: couple.bride_nickname || invitation.couple.bride,
-        groom: couple.groom_nickname || invitation.couple.groom,
-        brideFull: couple.bride_name, groomFull: couple.groom_name,
-        brideParents: couple.bride_parents, groomParents: couple.groom_parents,
-        bridePhoto: couple.bride_photo, groomPhoto: couple.groom_photo,
-      },
-      address: result.event?.address ?? invitation.address,
-      events: events.length ? events : invitation.events,
-      stories: storyList.length ? storyList : undefined,
-      music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,
-    };
-    return <><Theme data={data} slug={slug} guestToken={guestToken} />{!themesWithOwnMusic.has(result.template_id) && <MusicPlayer music={data.music} />}</>;
-  }
-  if (isWeddingStyle(result.template_id)) return <WeddingTemplate variant={result.template_id} data={invitation} slug={slug} guestToken={guestToken} />;
-  const template = settings.theme === "adat" || settings.theme === "modern" || settings.theme === "motion" ? settings.theme : "editorial";
-  return <main className={`invitation-page template-${template}`}>
-    <CoverSection data={invitation} />
-    <div className="invitation-body">
-      <CountdownSection data={invitation} />
-      <CoupleSection data={invitation} />
-      <StorySection data={invitation} />
-      <EventSection data={invitation} />
-      <LocationSection data={invitation} />
-      <GallerySection data={invitation} />
-      <RSVPSection slug={slug} guestToken={guestToken} />
-      <WishesSection slug={slug} guestToken={guestToken} />
-      <GiftSection data={invitation} />
-      <ClosingSection data={invitation} />
-      <footer className="invitation-footer">With love, {invitation.couple.bride} &amp; {invitation.couple.groom}</footer>
-    </div>
-  </main>;
+  // Every invitation renders with a Rawuh theme; missing/retired templates fall back to Linen Putih.
+  const themeId = isTheme(result.template_id) ? result.template_id : FALLBACK_THEME;
+  const { Theme } = await loadTheme(themeId);
+  const couple = result.couple ?? {};
+  const time = (start?: string, end?: string) => [start, end].filter(Boolean).join(" – ") + (start ? " WIB" : "");
+  const events = (result.events ?? []).filter(event => event.title || event.date).map(event => ({
+    name: event.title ?? "Acara", date: event.date ?? invitation.date, time: time(event.start_time, event.end_time) || "Waktu menyusul",
+    venue: event.venue ?? invitation.place, address: event.address, mapsUrl: event.maps_url,
+  }));
+  const storyList = (stories.items ?? [])
+    .map(item => ({ title: item.title ?? "", body: item.content ?? "", date: item.date, image: item.image_url }))
+    .filter(item => item.title || item.body);
+  const data: InvitationData = {
+    ...invitation,
+    couple: {
+      ...invitation.couple,
+      bride: couple.bride_nickname || invitation.couple.bride,
+      groom: couple.groom_nickname || invitation.couple.groom,
+      brideFull: couple.bride_name, groomFull: couple.groom_name,
+      brideParents: couple.bride_parents, groomParents: couple.groom_parents,
+      bridePhoto: couple.bride_photo, groomPhoto: couple.groom_photo,
+    },
+    address: result.event?.address ?? invitation.address,
+    events: events.length ? events : invitation.events,
+    stories: storyList.length ? storyList : undefined,
+    music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,
+  };
+  return <><Theme data={data} slug={slug} guestToken={guestToken} />{!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}</>;
 }

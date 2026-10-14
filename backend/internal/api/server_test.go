@@ -235,7 +235,7 @@ func TestGiftTemplateAndWishModerationFlow(t *testing.T) {
 	templateReq := httptest.NewRequest(http.MethodGet, "/api/templates", nil)
 	templateRecorder := httptest.NewRecorder()
 	server.handleTemplates(templateRecorder, templateReq)
-	if templateRecorder.Code != http.StatusOK || !strings.Contains(templateRecorder.Body.String(), "classic") {
+	if templateRecorder.Code != http.StatusOK || !strings.Contains(templateRecorder.Body.String(), "linen-putih") {
 		t.Fatalf("expected seeded templates, got %d: %s", templateRecorder.Code, templateRecorder.Body.String())
 	}
 
@@ -257,11 +257,11 @@ func TestGiftTemplateAndWishModerationFlow(t *testing.T) {
 
 func TestTemplateCatalogResolvesPublicSlug(t *testing.T) {
 	server := NewServer(config.Config{Port: "8080", Environment: "test", JWTSecret: "secret"})
-	req := httptest.NewRequest(http.MethodGet, "/api/v1/templates/slug/classic", nil)
+	req := httptest.NewRequest(http.MethodGet, "/api/v1/templates/slug/linen-putih", nil)
 	recorder := httptest.NewRecorder()
 	server.handleV1(recorder, req)
-	if recorder.Code != http.StatusOK || !strings.Contains(recorder.Body.String(), `"slug":"classic"`) {
-		t.Fatalf("expected classic template by slug, got %d: %s", recorder.Code, recorder.Body.String())
+	if recorder.Code != http.StatusOK || !strings.Contains(recorder.Body.String(), `"slug":"linen-putih"`) {
+		t.Fatalf("expected linen-putih template by slug, got %d: %s", recorder.Code, recorder.Body.String())
 	}
 }
 
@@ -350,7 +350,7 @@ func TestInvitationContentManagement(t *testing.T) {
 		t.Fatalf("gallery expected 201, got %d: %s", galleryRecorder.Code, galleryRecorder.Body.String())
 	}
 
-	templateReq := httptest.NewRequest(http.MethodPut, "/api/invitations/"+invitation.ID+"/template", strings.NewReader(`{"template_id":"classic"}`))
+	templateReq := httptest.NewRequest(http.MethodPut, "/api/invitations/"+invitation.ID+"/template", strings.NewReader(`{"template_id":"linen-putih"}`))
 	templateReq.Header.Set("Authorization", "Bearer "+token)
 	templateRecorder := httptest.NewRecorder()
 	server.handleInvitationDetail(templateRecorder, templateReq)

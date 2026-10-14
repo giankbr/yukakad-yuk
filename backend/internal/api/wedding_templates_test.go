@@ -19,7 +19,7 @@ func TestWeddingTemplateSelectionReachesPublicInvitation(t *testing.T) {
 		t.Fatal(err)
 	}
 	invitation.Published = true
-	for _, id := range []string{"alyra", "weddings", "veloria"} {
+	for _, id := range []string{"linen-putih", "jawa", "chat-hijau"} {
 		t.Run(id, func(t *testing.T) {
 			if err := server.store.AssignTemplate(invitation.ID, id); err != nil {
 				t.Fatal(err)

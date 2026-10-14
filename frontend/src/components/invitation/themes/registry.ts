@@ -93,6 +93,9 @@ const loaders: Record<string, { component: () => Promise<ThemeModule>; demo: () 
 /** Themes that render their own music button (the page then skips the generic <MusicPlayer>). */
 export const themesWithOwnMusic = new Set(["jawa"]);
 
+/** Theme used for invitations whose template is missing or retired. */
+export const FALLBACK_THEME = "linen-putih";
+
 export function isTheme(id?: string): id is string {
   return Boolean(id && id in loaders);
 }
