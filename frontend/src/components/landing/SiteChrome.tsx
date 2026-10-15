@@ -94,8 +94,9 @@ export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawIns
             <span>{copyright ?? `© ${new Date().getFullYear()} Rawuh.id`}</span>
           </div>
         </div>
-        <svg className={styles.giant} viewBox="0 0 1280 240" aria-hidden="true" focusable="false">
-          <text x="0" y="232" textLength="1280" lengthAdjust="spacingAndGlyphs" fontSize="300">rawuh.</text>
+        {/* Metrics from Be Vietnam Pro Bold at 404px: ink spans exactly 1280 wide, "h" ascender at y=0, baseline at 307. */}
+        <svg className={styles.giant} viewBox="0 0 1280 312" aria-hidden="true" focusable="false">
+          <text x="-23.4" y="307" fontSize="404" letterSpacing="-16.2">rawuh.</text>
         </svg>
       </div>
     </footer>
