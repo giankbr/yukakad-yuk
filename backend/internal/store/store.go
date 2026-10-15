@@ -108,6 +108,7 @@ type Store interface {
 	DeleteGalleryItem(id string) error
 	FindGalleryItem(id string) (map[string]any, bool)
 	DeleteStoryItem(id string) error
+	UpdateStory(id, title, content, date, image string) (map[string]any, error)
 	// Admin
 	AdminListUsers() []*User
 	AdminStats() map[string]any
@@ -1678,6 +1679,20 @@ func (s *MemoryStore) FindGalleryItem(id string) (map[string]any, bool) {
 		}
 	}
 	return nil, false
+}
+
+func (s *MemoryStore) UpdateStory(id, title, content, date, image string) (map[string]any, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for _, items := range s.stories {
+		for _, item := range items {
+			if item["id"] == id {
+				item["title"], item["content"], item["date"], item["image_url"] = title, content, date, image
+				return item, nil
+			}
+		}
+	}
+	return nil, fmt.Errorf("story not found")
 }
 
 func (s *MemoryStore) DeleteStoryItem(id string) error {

@@ -540,16 +540,8 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			"title":       invitation.Title,
 			"published":   invitation.Published,
 			"template_id": invitation.TemplateID,
-			"couple": map[string]any{
-				"groom_name": invitation.Couple.GroomName,
-				"bride_name": invitation.Couple.BrideName,
-			},
-			"event": map[string]any{
-				"title":    invitation.Event.Title,
-				"venue":    invitation.Event.Venue,
-				"date":     invitation.Event.Date,
-				"maps_url": invitation.Event.MapsURL,
-			},
+			"couple":      invitation.Couple,
+			"event":       invitation.Event,
 		})
 		return
 	}
@@ -569,11 +561,16 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 
 		couple := invitation.Couple
 		if payload.Couple != nil {
-			if groom, ok := payload.Couple["groom_name"]; ok {
-				couple.GroomName = groom
+			fields := map[string]*string{
+				"groom_name": &couple.GroomName, "bride_name": &couple.BrideName,
+				"groom_nickname": &couple.GroomNickname, "bride_nickname": &couple.BrideNickname,
+				"groom_parents": &couple.GroomParents, "bride_parents": &couple.BrideParents,
+				"groom_photo": &couple.GroomPhoto, "bride_photo": &couple.BridePhoto,
 			}
-			if bride, ok := payload.Couple["bride_name"]; ok {
-				couple.BrideName = bride
+			for key, target := range fields {
+				if value, ok := payload.Couple[key]; ok {
+					*target = strings.TrimSpace(value)
+				}
 			}
 		}
 
@@ -590,6 +587,18 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			}
 			if mapsURL, ok := payload.Event["maps_url"]; ok {
 				event.MapsURL = mapsURL
+			}
+			if kind, ok := payload.Event["type"]; ok {
+				event.Type = kind
+			}
+			if address, ok := payload.Event["address"]; ok {
+				event.Address = address
+			}
+			if start, ok := payload.Event["start_time"]; ok {
+				event.StartTime = start
+			}
+			if end, ok := payload.Event["end_time"]; ok {
+				event.EndTime = end
 			}
 		}
 
@@ -619,16 +628,8 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			"slug":      updated.Slug,
 			"title":     updated.Title,
 			"published": updated.Published,
-			"couple": map[string]any{
-				"groom_name": updated.Couple.GroomName,
-				"bride_name": updated.Couple.BrideName,
-			},
-			"event": map[string]any{
-				"title":    updated.Event.Title,
-				"venue":    updated.Event.Venue,
-				"date":     updated.Event.Date,
-				"maps_url": updated.Event.MapsURL,
-			},
+			"couple":    updated.Couple,
+			"event":     updated.Event,
 		})
 		return
 	}
@@ -807,17 +808,10 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		"watermark":   watermark,
 		"template_id": invitation.TemplateID,
 		"status":      map[string]bool{"published": invitation.Published},
-		"couple": map[string]any{
-			"groom_name": invitation.Couple.GroomName,
-			"bride_name": invitation.Couple.BrideName,
-		},
-		"event": map[string]any{
-			"title":    invitation.Event.Title,
-			"venue":    invitation.Event.Venue,
-			"date":     invitation.Event.Date,
-			"maps_url": invitation.Event.MapsURL,
-		},
-		"sections": []string{"cover", "couple", "story", "event", "countdown", "location", "gallery", "rsvp", "wishes", "gift", "closing"},
+		"couple":      invitation.Couple,
+		"event":       invitation.Event,
+		"events":      s.store.ListInvitationEvents(invitation.ID),
+		"sections":    []string{"cover", "couple", "story", "event", "countdown", "location", "gallery", "rsvp", "wishes", "gift", "closing"},
 	})
 }
 

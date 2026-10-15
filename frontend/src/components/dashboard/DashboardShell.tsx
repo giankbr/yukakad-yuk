@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -74,6 +74,12 @@ function invitationNav(id: string): NavItem[] {
 			label: "Acara",
 			href: `/dashboard/invitations/${id}/events`,
 			icon: <PhCalendarBlank size={16} />,
+		},
+		{
+			key: "stories",
+			label: "Kisah cinta",
+			href: `/dashboard/invitations/${id}/stories`,
+			icon: <PhBookOpenText size={16} />,
 		},
 		{
 			key: "gallery",

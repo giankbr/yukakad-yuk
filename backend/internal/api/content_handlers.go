@@ -46,14 +46,19 @@ func (s *Server) handleInvitationContent(w http.ResponseWriter, r *http.Request,
 		}
 		if r.Method == http.MethodPost {
 			var payload struct {
-				Title   string `json:"title"`
-				Content string `json:"content"`
+				Title    string `json:"title"`
+				Content  string `json:"content"`
+				Date     string `json:"date"`
+				ImageURL string `json:"image_url"`
 			}
 			if json.NewDecoder(r.Body).Decode(&payload) != nil || strings.TrimSpace(payload.Content) == "" {
 				writeJSON(w, http.StatusBadRequest, map[string]string{"error": "content is required"})
 				return
 			}
 			story, err := s.store.CreateStory(invitationID, payload.Title, payload.Content)
+			if err == nil && (payload.Date != "" || payload.ImageURL != "") {
+				story, err = s.store.UpdateStory(story["id"].(string), payload.Title, payload.Content, payload.Date, payload.ImageURL)
+			}
 			if err != nil {
 				writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 				return
@@ -321,6 +326,37 @@ func (s *Server) handleStoryItemDetail(w http.ResponseWriter, r *http.Request, i
 	}
 	if invitation.UserID != claims.UserID {
 		writeJSON(w, http.StatusForbidden, map[string]string{"error": "forbidden"})
+		return
+	}
+	// The story must belong to this invitation.
+	owned := false
+	for _, item := range s.store.ListStories(invitationID) {
+		if item["id"] == storyID {
+			owned = true
+			break
+		}
+	}
+	if !owned {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "story not found"})
+		return
+	}
+	if r.Method == http.MethodPut || r.Method == http.MethodPatch {
+		var payload struct {
+			Title    string `json:"title"`
+			Content  string `json:"content"`
+			Date     string `json:"date"`
+			ImageURL string `json:"image_url"`
+		}
+		if json.NewDecoder(r.Body).Decode(&payload) != nil || strings.TrimSpace(payload.Content) == "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "content is required"})
+			return
+		}
+		story, err := s.store.UpdateStory(storyID, payload.Title, payload.Content, payload.Date, payload.ImageURL)
+		if err != nil {
+			writeJSON(w, http.StatusNotFound, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, story)
 		return
 	}
 	if r.Method != http.MethodDelete {

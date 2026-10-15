@@ -1,6 +1,7 @@
 import type { GiftMethod, InvitationData, InvitationExtras } from "@/components/invitation/types";
 import { FALLBACK_THEME, isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
 import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
+import { eventTypeLabel } from "@/lib/event-types";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -9,7 +10,7 @@ type PublicInvitation = {
   title: string;
   template_id?: string;
   couple?: { bride_name?: string; groom_name?: string; bride_nickname?: string; groom_nickname?: string; bride_parents?: string; groom_parents?: string; bride_photo?: string; groom_photo?: string };
-  event?: { title?: string; type?: string; venue?: string; date?: string; address?: string; maps_url?: string };
+  event?: { title?: string; type?: string; venue?: string; date?: string; start_time?: string; end_time?: string; address?: string; maps_url?: string };
   events?: Array<{ title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string }>;
   sections?: string[];
 };
@@ -21,6 +22,7 @@ type PublicContent = {
   autoplay_music?: boolean;
   /** Extra sections from the dashboard (an object; older invitations still store the legacy `[]`). */
   sections_config?: unknown;
+  opening_text?: string;
 };
 
 function authHeaders(previewToken?: string): HeadersInit | undefined {
@@ -72,14 +74,23 @@ export default async function PublicInvitationPage({
   const gifts = (giftsResult.items ?? []) as unknown as GiftMethod[];
   const firstStory = stories.items?.[0];
 
+  // "2026-12-12" + "11:00" → "2026-12-12T11:00:00+07:00" so countdowns and calendars use WIB.
+  const at = (date?: string, start?: string) => {
+    if (!date) return undefined;
+    if (date.includes("T")) return date;
+    return `${date.slice(0, 10)}T${/^\d{2}:\d{2}/.test(start ?? "") ? start!.slice(0, 5) : "00:00"}:00+07:00`;
+  };
+  const time = (start?: string, end?: string) => (start ? `${start.slice(0, 5).replace(":", ".")}${end ? ` – ${end.slice(0, 5).replace(":", ".")}` : ""} WIB` : "");
+  const mainDate = at(result.event?.date, result.event?.start_time) ?? "";
   const invitation: InvitationData = {
-    couple: { bride: result.couple?.bride_name ?? "Bride", groom: result.couple?.groom_name ?? "Groom", note: "A life made of ordinary days, shared carefully." },
-    date: result.event?.date ?? "A day to remember",
-    place: result.event?.venue ?? "Our chosen place",
-    address: result.event?.title ?? "Details to follow",
+    couple: { bride: result.couple?.bride_name || "Mempelai Wanita", groom: result.couple?.groom_name || "Mempelai Pria", note: settings.opening_text?.trim() ?? "" },
+    eventLabel: eventTypeLabel(result.event?.type),
+    date: mainDate,
+    place: result.event?.venue || "Lokasi menyusul",
+    address: result.event?.address ?? "",
     mapsUrl: result.event?.maps_url,
-    story: { title: firstStory?.title ?? "The story continues here", body: firstStory?.content ?? "Thank you for being part of this chapter." },
-    events: [{ name: result.event?.title ?? "Celebration", date: result.event?.date ?? "Soon", time: "Details to follow", venue: result.event?.venue ?? "Our chosen place" }],
+    story: { title: firstStory?.title ?? "", body: firstStory?.content ?? "" },
+    events: [{ name: result.event?.title || eventTypeLabel(result.event?.type), date: mainDate, time: time(result.event?.start_time, result.event?.end_time) || "Waktu menyusul", venue: result.event?.venue || "Lokasi menyusul", address: result.event?.address, mapsUrl: result.event?.maps_url }],
     gallery: gallery.items?.map((item) => item.image_url).filter(Boolean) ?? [],
     gifts,
     guestName: guestName ? guestName.replace(/-/g, " ") : guest?.name || undefined,
@@ -90,9 +101,8 @@ export default async function PublicInvitationPage({
   const themeId = isTheme(result.template_id) ? result.template_id : FALLBACK_THEME;
   const { Theme } = await loadTheme(themeId);
   const couple = result.couple ?? {};
-  const time = (start?: string, end?: string) => [start, end].filter(Boolean).join(" – ") + (start ? " WIB" : "");
   const events = (result.events ?? []).filter(event => event.title || event.date).map(event => ({
-    name: event.title ?? "Acara", date: event.date ?? invitation.date, time: time(event.start_time, event.end_time) || "Waktu menyusul",
+    name: event.title ?? "Acara", date: at(event.date, event.start_time) ?? invitation.date, time: time(event.start_time, event.end_time) || "Waktu menyusul",
     venue: event.venue ?? invitation.place, address: event.address, mapsUrl: event.maps_url,
   }));
   const storyList = (stories.items ?? [])
@@ -108,7 +118,6 @@ export default async function PublicInvitationPage({
       brideParents: couple.bride_parents, groomParents: couple.groom_parents,
       bridePhoto: couple.bride_photo, groomPhoto: couple.groom_photo,
     },
-    address: result.event?.address ?? invitation.address,
     events: events.length ? events : invitation.events,
     stories: storyList.length ? storyList : undefined,
     music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,

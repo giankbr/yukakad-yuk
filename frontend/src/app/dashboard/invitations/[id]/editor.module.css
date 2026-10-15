@@ -1,0 +1,59 @@
+/* Shared layout for the invitation editor pages (Mempelai, Acara, Kisah). */
+.form { display: grid; gap: 16px; max-width: 980px; }
+.twoCol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.panel { display: grid; gap: 14px; min-width: 0; padding: 20px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); background: #fff; }
+.panel > h2 { margin: 0; color: var(--rw-ink); font-size: 16px; font-weight: 600; }
+.panelHead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.panelHead h2 { margin: 0; color: var(--rw-ink); font-size: 16px; font-weight: 600; }
+.panelHead p { margin: 2px 0 0; color: var(--rw-muted); font-size: 13px; }
+.row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field > span { color: var(--rw-ink-2); font-size: 12.5px; font-weight: 600; }
+.field input, .field textarea, .field select {
+  width: 100%; min-height: 42px; padding: 9px 12px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md);
+  background: #fff; color: var(--rw-ink); font: inherit; font-size: 14px;
+}
+.field textarea { resize: vertical; line-height: 1.55; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--rw-primary); outline: 0; box-shadow: 0 0 0 3px var(--rw-primary-soft); }
+.hint { margin: 0; color: var(--rw-muted); font-size: 12.5px; line-height: 1.5; }
+
+.person { display: flex; align-items: flex-start; gap: 16px; }
+.photo {
+  display: grid; flex: none; place-items: center; width: 96px; height: 120px; overflow: hidden; border: 1.5px dashed var(--rw-border-warm);
+  border-radius: var(--rw-radius-md); background: var(--rw-surface-2); color: var(--rw-muted); font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.photo:hover { border-color: var(--rw-primary-border); color: var(--rw-primary); }
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.fields { display: grid; flex: 1; gap: 12px; min-width: 0; }
+
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.ok { color: #1d6b35; font-size: 13px; font-weight: 600; }
+.link { justify-self: start; padding: 0; border: 0; background: none; color: var(--rw-primary); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; }
+.danger { color: #b42318; }
+.ghost {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 14px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md);
+  background: #fff; color: var(--rw-ink); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.ghost:hover { border-color: var(--rw-ink); }
+
+.list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.item { display: flex; align-items: flex-start; gap: 14px; padding: 14px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md); background: var(--rw-surface-2); }
+.itemBody { display: grid; flex: 1; gap: 2px; min-width: 0; }
+.itemBody strong { color: var(--rw-ink); font-size: 14px; }
+.itemBody small { color: var(--rw-muted); font-size: 12.5px; line-height: 1.5; }
+.itemActions { display: flex; flex: none; gap: 6px; }
+.thumb { flex: none; width: 56px; height: 56px; border-radius: 10px; object-fit: cover; background: var(--rw-surface); }
+.badge { display: inline-grid; place-items: center; flex: none; min-width: 44px; height: 44px; padding: 0 8px; border-radius: 10px; background: var(--rw-primary-soft); color: var(--rw-primary); font-family: var(--rw-font-mono); font-size: 12px; font-weight: 600; }
+.editor { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--rw-primary-border); border-radius: var(--rw-radius-md); background: #fff; }
+.empty { margin: 0; padding: 20px; border: 1px dashed var(--rw-border-warm); border-radius: var(--rw-radius-md); color: var(--rw-muted); font-size: 13px; text-align: center; }
+
+@media (max-width: 860px) {
+  .twoCol, .row, .row3 { grid-template-columns: minmax(0, 1fr); }
+  .item { flex-wrap: wrap; }
+  .itemActions { width: 100%; justify-content: flex-end; }
+}
+@media (max-width: 480px) {
+  .person { flex-direction: column; }
+  .photo { width: 100%; height: 160px; }
+}

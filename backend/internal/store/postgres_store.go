@@ -664,17 +664,17 @@ func (s *PostgresStore) CreateStory(invitationID, title, content string) (map[st
 }
 
 func (s *PostgresStore) ListStories(invitationID string) []map[string]any {
-	rows, err := s.db.Query(`SELECT id, invitation_id, COALESCE(title, ''), content, sort_order FROM stories WHERE invitation_id = $1 ORDER BY sort_order`, invitationID)
+	rows, err := s.db.Query(`SELECT id, invitation_id, COALESCE(title, ''), content, sort_order, COALESCE(date, ''), COALESCE(image_url, '') FROM stories WHERE invitation_id = $1 ORDER BY sort_order`, invitationID)
 	if err != nil {
 		return []map[string]any{}
 	}
 	defer rows.Close()
 	items := []map[string]any{}
 	for rows.Next() {
-		var id, inviteID, title, content string
+		var id, inviteID, title, content, date, image string
 		var order int
-		if rows.Scan(&id, &inviteID, &title, &content, &order) == nil {
-			items = append(items, map[string]any{"id": id, "invitation_id": inviteID, "title": title, "content": content, "sort_order": order})
+		if rows.Scan(&id, &inviteID, &title, &content, &order, &date, &image) == nil {
+			items = append(items, map[string]any{"id": id, "invitation_id": inviteID, "title": title, "content": content, "sort_order": order, "date": date, "image_url": image})
 		}
 	}
 	if err := rows.Err(); err != nil {
@@ -1243,6 +1243,16 @@ func (s *PostgresStore) FindGalleryItem(id string) (map[string]any, bool) {
 	}
 	item["id"], item["invitation_id"], item["image_url"], item["caption"], item["sort_order"] = id, invitationID, imageURL, caption, order
 	return item, true
+}
+
+func (s *PostgresStore) UpdateStory(id, title, content, date, image string) (map[string]any, error) {
+	var inviteID string
+	var order int
+	err := s.db.QueryRow(`UPDATE stories SET title = $2, content = $3, date = NULLIF($4, ''), image_url = NULLIF($5, '') WHERE id = $1 RETURNING invitation_id, sort_order`, id, title, content, date, image).Scan(&inviteID, &order)
+	if err != nil {
+		return nil, fmt.Errorf("update story: %w", err)
+	}
+	return map[string]any{"id": id, "invitation_id": inviteID, "title": title, "content": content, "sort_order": order, "date": date, "image_url": image}, nil
 }
 
 func (s *PostgresStore) DeleteStoryItem(id string) error {
