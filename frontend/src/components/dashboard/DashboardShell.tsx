@@ -146,7 +146,7 @@ export function DashboardShell({
 	const [userName] = useState(() =>
 		typeof window === "undefined"
 			? "Pengguna"
-			: window.localStorage.getItem("yukakad_name") ?? "Pengguna",
+			: window.localStorage.getItem("yukakad_name") ?? (variant === "admin" ? "Admin" : "Pengguna"),
 	);
 	const [userEmail] = useState(() =>
 		typeof window === "undefined"
