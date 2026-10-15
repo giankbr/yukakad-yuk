@@ -4,6 +4,8 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import type { InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -54,6 +56,18 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
   const depart = startTime(data.events[0]) || "08.00";
   const schedule = data.events.map(event => [event.name.split(" ")[0], startTime(event)].filter(Boolean).join(" ")).join(" · ");
   const seats = demo ? DEMO_SEATS : REAL_SEATS;
+  const [seat, setSeat] = useState<string | null>(null);
+  const [gifts, setGifts] = useState<string[]>([]);
+  const pickSeat = (label: string) => {
+    const next = seat === label ? null : label;
+    setSeat(next);
+    toast(next ? `Kursi ${label} dipilih` : "Pilihan kursi dibatalkan");
+  };
+  const toggleGift = (name: string) => {
+    const on = !gifts.includes(name);
+    setGifts(list => on ? [...list, name] : list.filter(item => item !== name));
+    toast(on ? "Masuk bagasi kado" : "Dikeluarkan dari bagasi");
+  };
 
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
@@ -97,19 +111,19 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
                 <div><b>{depart}</b><small>LJG{firstYear ? ` · ${firstYear}` : ""}</small></div>
                 <div className={s.mid}>
                   <small>{years > 0 ? `${years} thn perjalanan` : "Perjalanan cinta"}</small>
-                  <Lucide icon={ic.moveRight} size={24} color="#3d5be9" style={{ width: 40, height: 14 }} />
+                  <span className={s.arrow} aria-hidden><Lucide icon={ic.moveRight} size={24} color="#3d5be9" style={{ width: 40, height: 14 }} /></span>
                   <em>Langsung, tanpa transit</em>
                 </div>
                 <div className={s.end}><b>Selamanya</b><small>SLM · {shortDate}</small></div>
               </div>
               <div className={`${s.between} ${s.resultFoot}`}>
                 <span className={s.price}>Harga: cukup doa &amp; kehadiran</span>
-                <span className={s.avail}>Tersedia</span>
+                <span className={s.avail}><i className={s.availDot} aria-hidden />Tersedia</span>
               </div>
             </div>
             <p className={s.caption}>Pilih kursimu · Gerbong CINTA 1</p>
-            <div className={s.seatmap} aria-hidden>
-              <div className={s.seatRow}>
+            <div className={s.seatmap} data-nolightbox>
+              <div className={s.seatRow} aria-hidden>
                 <span>1</span>
                 <i className={s.seatCouple}>{groom.slice(0, 1).toUpperCase()}</i>
                 <i className={s.seatCouple}>{bride.slice(0, 1).toUpperCase()}</i>
@@ -118,13 +132,14 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
               </div>
               {seats.map((row, r) => (
                 <div key={r} className={s.seatRow}>
-                  <span>{r + 2}</span>
-                  {row.map((state, c) => (
-                    <SeatCell key={c} state={state} aisle={c === 2} />
-                  ))}
+                  <span aria-hidden>{r + 2}</span>
+                  {row.map((state, c) => {
+                    const label = `${r + 2}${"ABC"[c]}`;
+                    return <SeatCell key={c} state={state} aisle={c === 2} label={label} picked={seat === label} onPick={() => pickSeat(label)} index={r * 3 + c} />;
+                  })}
                 </div>
               ))}
-              <div className={s.legend}>
+              <div className={s.legend} aria-hidden>
                 <span><i style={{ background: "#3d5be9" }} />Mempelai</span>
                 {demo ? <span><i style={{ background: "#18a45d" }} />Tamu hadir</span> : <span><i style={{ background: "#f7941e" }} />Kursimu</span>}
                 <span><i style={{ background: "#cdd4e6" }} />Masih kosong</span>
@@ -151,7 +166,7 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
         <section className={s.pass} aria-label="E-boarding pass">
           <div className={s.passHead}><span>E-Boarding Pass{passDate ? ` · ${passDate}` : ""}</span><Lucide icon={ic.trainFront} color="#fff" /></div>
           <div className={s.passBody}>
-            <span className={s.qr} aria-hidden><Lucide icon={ic.qrCode} size={60} color="#1e2a4a" /></span>
+            <span className={s.qr} aria-hidden><Lucide icon={ic.qrCode} size={60} color="#1e2a4a" /><i className={s.scan} /></span>
             <div className={s.grow}>
               <strong>{couple}{schedule ? ` — ${schedule}` : ""}</strong>
               <small>Gerbong CINTA 1 · Kursi mempelai 1A-1B</small>
@@ -234,10 +249,12 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
           <section className={s.card} aria-labelledby="kk-gift">
             <div className={s.head}><h2 id="kk-gift">Bagasi Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && DEMO_WISHLIST.map(item => (
-              <div key={item.name} className={s.item}>
+              <div key={item.name} className={`${s.item} ${gifts.includes(item.name) ? s.itemOn : ""}`}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#3d5be9" /></span>
                 <div className={s.grow}><strong>{item.name}</strong><small>{item.price}</small></div>
-                <span className={s.small} aria-hidden>Beri</span>
+                <button type="button" className={`${s.small} ${gifts.includes(item.name) ? s.done : ""}`} aria-pressed={gifts.includes(item.name)} onClick={() => toggleGift(item.name)}>
+                  {gifts.includes(item.name) ? <><Lucide icon={ic.check} size={12} color="#18a45d" strokeWidth={3} />Dipilih</> : "Beri"}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -250,7 +267,7 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
                     <small>{[gift.type === "bank" || gift.type === "ewallet" ? `${info.title} ${info.number}` : info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.small} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.small} ${copied === info.copy ? s.done : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -284,14 +301,23 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
   );
 }
 
-function SeatCell({ state, aisle }: { state: "in" | "free" | "you"; aisle: boolean }) {
+function SeatCell({ state, aisle, label, picked, onPick, index }: {
+  state: "in" | "free" | "you"; aisle: boolean; label: string; picked: boolean; onPick: () => void; index: number;
+}) {
+  const delay = { "--i": index } as CSSProperties;
   return (
     <>
       {aisle && <b />}
-      <i className={state === "in" ? s.seatIn : state === "you" ? s.seatYou : undefined}>
-        {state === "in" && <Lucide icon={ic.check} size={14} color="#18a45d" />}
-        {state === "you" && <Lucide icon={ic.armchair} size={14} color="#f7941e" />}
-      </i>
+      {state === "free" ? (
+        <button type="button" className={`${s.seatFree} ${picked ? s.seatPicked : ""}`} style={delay} aria-pressed={picked} aria-label={`Pilih kursi ${label}`} onClick={onPick}>
+          {picked ? <Lucide icon={ic.armchair} size={14} color="#fff" /> : <small>{label}</small>}
+        </button>
+      ) : (
+        <i className={state === "in" ? s.seatIn : s.seatYou} style={delay} aria-hidden>
+          {state === "in" && <Lucide icon={ic.check} size={14} color="#18a45d" />}
+          {state === "you" && <Lucide icon={ic.armchair} size={14} color="#f7941e" />}
+        </i>
+      )}
     </>
   );
 }

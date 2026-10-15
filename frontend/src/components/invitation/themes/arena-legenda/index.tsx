@@ -1,8 +1,10 @@
 "use client";
 // Theme "Arena Legenda" — undangan bergaya game MOBA (design: Undangan — Tema Arena Legenda (Aldo & Vina)).
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -51,6 +53,18 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
+  const countdown = useCountdown(data.date);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [bought, setBought] = useState<string[]>([]);
+  const pickHero = (key: string, name: string) => {
+    setPicked(current => (current === key ? null : key));
+    if (picked !== key) toast(`Hero dipilih: ${name}`);
+  };
+  const buy = (name: string) => {
+    const on = !bought.includes(name);
+    setBought(b => (on ? [...b, name] : b.filter(n => n !== name)));
+    toast(on ? `${name} ditandai` : "Batal ditandai");
+  };
   const heroes = [
     { key: "groom", short: couple.groom, name: couple.groomFull ?? couple.groom, parents: couple.groomParents, photo: couple.groomPhoto ?? data.gallery[0] },
     { key: "bride", short: couple.bride, name: couple.brideFull ?? couple.bride, parents: couple.brideParents, photo: couple.bridePhoto ?? data.gallery[1] },
@@ -116,22 +130,25 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
         <section className={s.section} aria-labelledby="al-hero">
           <Head id="al-hero">PILIH HERO</Head>
           {heroes.map((hero, index) => (
-            <article key={hero.key} className={s.hero}>
+            <article key={hero.key} className={s.hero} data-picked={picked === hero.key ? "" : undefined}>
               <Photo src={hero.photo} alt={hero.name} className={s.heroPhoto} />
               <div className={s.heroText}>
                 <strong>{hero.name}</strong>
                 {hero.parents && <small>{hero.parents}</small>}
                 {demo ? (
-                  DEMO_STATS[index]?.map(([label, value]) => (
+                  DEMO_STATS[index]?.map(([label, value], i) => (
                     <div key={label} className={s.stat}>
                       <span>{label}</span>
-                      <i><b style={{ width: `${value}%` }} /></i>
+                      <i><b style={{ width: `${value}%`, "--i": i } as CSSProperties} /></i>
                       <em>{value}</em>
                     </div>
                   ))
                 ) : (
                   <em className={s.role}>{ROLES[index]}</em>
                 )}
+                <button type="button" className={s.pick} aria-pressed={picked === hero.key} onClick={() => pickHero(hero.key, hero.short)}>
+                  <Lucide icon={ic.swords} size={12} />{picked === hero.key ? "TERPILIH" : "PILIH"}
+                </button>
               </div>
             </article>
           ))}
@@ -141,7 +158,7 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
           <section className={s.section} aria-labelledby="al-story">
             <Head id="al-story">RIWAYAT MUSIM</Head>
             {stories.map((story, index) => (
-              <article key={story.title + index} className={s.season}>
+              <article key={story.title + index} className={s.season} style={{ "--i": index } as CSSProperties}>
                 <span className={s.badge} aria-hidden><Lucide icon={ic.shield} size={16} color="#f0c96e" />{story.date && <small>{story.date}</small>}</span>
                 <div>
                   <h3>{story.title}</h3>
@@ -156,6 +173,16 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
 
         <section className={s.section} aria-labelledby="al-events">
           <Head id="al-events">JADWAL PERTANDINGAN</Head>
+          {countdown.ready && !countdown.done && (
+            <div className={s.timer} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
+              <small>MATCH DIMULAI DALAM</small>
+              <div>
+                {[[countdown.days, "H"], [countdown.hours, "J"], [countdown.minutes, "M"], [countdown.seconds, "D"]].map(([value, unit]) => (
+                  <span key={unit}><Tick className={s.tick} value={value} /><small>{unit}</small></span>
+                ))}
+              </div>
+            </div>
+          )}
           {data.events.map((event, index) => {
             const p = dateParts(event.date);
             const href = mapsHref(data, event);
@@ -196,12 +223,13 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
             <Head id="al-shop">TOKO WISHLIST</Head>
             <div className={s.shop}>
               {DEMO_SHOP.map(item => (
-                <div key={item.name} className={s.item} style={{ borderColor: `${item.color}66` }}>
+                <button key={item.name} type="button" className={s.item} aria-pressed={bought.includes(item.name)} onClick={() => buy(item.name)}
+                  style={{ borderColor: `${item.color}66`, "--rc": item.color } as CSSProperties}>
                   <em style={{ color: item.color, background: `${item.color}26` }}>{item.rarity}</em>
                   <span className={s.itemIcon} style={{ borderColor: item.color }}><Lucide icon={item.icon} size={24} color={item.color} /></span>
                   <strong>{item.name}</strong>
-                  <b><Lucide icon={ic.gem} size={11} color="#39c5f3" />{item.price}</b>
-                </div>
+                  <b>{bought.includes(item.name) ? "DITANDAI" : <><Lucide icon={ic.gem} size={11} color="#39c5f3" />{item.price}</>}</b>
+                </button>
               ))}
             </div>
             <p className={s.fine}>1 diamond = Rp1.000 · atau kirim langsung ke alamat di bawah</p>
@@ -224,7 +252,7 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
                     <small>{[[address ? "" : info.title, info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" onClick={() => copy(info.copy)}>{copied === info.copy ? "TERSALIN" : "SALIN"}</button>}
+                  {info.copy && <button type="button" data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "TERSALIN" : "SALIN"}</button>}
                 </div>
               );
             })}
@@ -235,11 +263,12 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
           <Head id="al-wishes-h">OBROLAN TIM</Head>
           {wishes.wishes.length === 0 && <p className={s.fine}>Belum ada pesan di obrolan tim. Kirim ucapan pertamamu!</p>}
           {wishes.wishes.slice(0, 10).map((wish, index) => (
-            <p key={wish.id} className={s.msg}>
+            <p key={wish.id} className={s.msg} style={{ "--i": Math.min(index, 6) } as CSSProperties}>
               <b style={{ color: NAME_COLORS[index % NAME_COLORS.length] }}>{wish.name}:</b>
               <span>{wish.message}</span>
             </p>
           ))}
+          <p className={s.typing} aria-hidden><i /><i /><i /><span>{couple.bride} sedang mengetik</span></p>
         </section>
 
         <footer className={s.note}><a href="/" target="_blank" rel="noreferrer">dibuat dengan ♥ di Rawuh</a></footer>

@@ -3,8 +3,9 @@
 import { useState } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  mapsHref, storyItems, Tick, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import type { InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -64,6 +65,12 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [shared, setShared] = useState(false);
+  const [cart, setCart] = useState<string[]>([]);
+  const toggleCart = (name: string) => {
+    const on = !cart.includes(name);
+    setCart(list => on ? [...list, name] : list.filter(item => item !== name));
+    toast(on ? "Ditambahkan ke pesanan" : "Dihapus dari pesanan");
+  };
   const stories = storyItems(data);
   const years = stories.map(story => Number(story.date?.match(/\d{4}/)?.[0] ?? NaN));
   const firstYear = years.find(year => !Number.isNaN(year));
@@ -78,7 +85,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
     const url = window.location.href;
     try {
       if (navigator.share) await navigator.share({ title: `${label} ${couple}`, url });
-      else { await navigator.clipboard.writeText(url); setShared(true); setTimeout(() => setShared(false), 2000); }
+      else { await navigator.clipboard.writeText(url); setShared(true); toast("Tautan undangan disalin"); setTimeout(() => setShared(false), 2000); }
     } catch { /* cancelled */ }
   };
 
@@ -91,7 +98,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverHead}>
-            <h1>Pesananmu Dikonfirmasi!</h1>
+            <h1><span className={s.okBadge} aria-hidden><svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12.5l4.2 4.2L19 7" /></svg></span>Pesananmu Dikonfirmasi!</h1>
             <p>Order ID: {orderId} · Paket Selamanya</p>
           </div>
           <div className={s.coverBody}>
@@ -117,9 +124,9 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
               <p>Tidak perlu cetak — tunjukkan senyummu saja.</p>
             </div>
             <div className={s.countdown} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
-              <div><b>{countdown.days}</b><span>Hari</span></div>
-              <div><b>{countdown.hours}</b><span>Jam</span></div>
-              <div><b>{countdown.minutes}</b><span>Menit</span></div>
+              <div><b><Tick value={countdown.days} /></b><span>Hari</span></div>
+              <div><b><Tick value={countdown.hours} /></b><span>Jam</span></div>
+              <div><b><Tick value={countdown.minutes} /></b><span>Menit</span></div>
             </div>
             <button type="button" className={s.openBtn} onClick={open}><Lucide icon={ic.ticketCheck} size={17} color="#ffc900" />Lihat E-Voucher — Buka Undangan</button>
           </div>
@@ -140,7 +147,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
             <h1>E-Voucher Saya</h1>
             <p>{label} {couple}</p>
           </div>
-          <button type="button" className={s.share} onClick={share} aria-label={shared ? "Tautan disalin" : "Bagikan undangan"}>
+          <button type="button" className={`${s.share} ${shared ? s.shared : ""}`} onClick={share} aria-label={shared ? "Tautan disalin" : "Bagikan undangan"}>
             <Lucide icon={shared ? ic.ticketCheck : ic.share2} size={18} color="#1e2a3b" />
           </button>
         </div>
@@ -148,9 +155,9 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
 
       <main className={s.body}>
         <section className={s.voucher} aria-label="E-voucher">
-          <div className={s.vHead}><span>E-Voucher · {events.length} Tiket Acara</span><em>Aktif</em></div>
+          <div className={s.vHead}><span>E-Voucher · {events.length} Tiket Acara</span><em><i className={s.live} aria-hidden />Aktif</em></div>
           <div className={s.vBody}>
-            <span className={s.qr} aria-hidden><Lucide icon={ic.qrCode} size={58} color="#1e2a3b" /></span>
+            <span className={s.qr} aria-hidden><Lucide icon={ic.qrCode} size={58} color="#1e2a3b" /><i className={s.scan} /></span>
             <div className={s.grow}>
               {schedule.length > 0 && <strong>{schedule.join(" · ")} WIB</strong>}
               <span className={s.vDate}>{longDate}</span>
@@ -237,13 +244,15 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
           <section className={s.card} aria-labelledby="pl-gift">
             <div className={s.head}><h2 id="pl-gift">Tambah ke Pesanan · Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && DEMO_WISHLIST.map(item => (
-              <div key={item.name} className={s.item}>
+              <div key={item.name} className={`${s.item} ${cart.includes(item.name) ? s.itemOn : ""}`}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#0064d2" /></span>
                 <div className={s.grow}>
                   <strong>{item.name}</strong>
                   <span className={s.scoreRow}><i>{item.score}</i>{item.price}</span>
                 </div>
-                <span className={s.yellow} aria-hidden>+ Pesan</span>
+                <button type="button" className={`${s.yellow} ${cart.includes(item.name) ? s.done : ""}`} aria-pressed={cart.includes(item.name)} onClick={() => toggleCart(item.name)}>
+                  {cart.includes(item.name) ? <><Lucide icon={ic.ticketCheck} size={12} color="#18a45d" strokeWidth={2.5} />Dipesan</> : "+ Pesan"}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -256,7 +265,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
                     <small>{[gift.type === "bank" || gift.type === "ewallet" ? `${info.title} ${info.number}` : info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.yellow} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.yellow} ${copied === info.copy ? s.done : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -295,7 +304,7 @@ function OrderItem({ icon, title, note, tag, bonus }: { icon: string; title: str
     <li className={s.orderItem}>
       <span className={s.itemIcon} aria-hidden><Lucide icon={icon} color="#0064d2" /></span>
       <div className={s.grow}><strong>{title}</strong>{note && <small>{note}</small>}</div>
-      <span className={bonus ? s.tagBonus : s.tag}>{tag}</span>
+      <span className={`${bonus ? s.tagBonus : s.tag} ${s.stamp}`}>{tag}</span>
     </li>
   );
 }

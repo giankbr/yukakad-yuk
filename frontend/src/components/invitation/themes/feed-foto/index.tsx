@@ -1,9 +1,11 @@
 "use client";
 // Theme "Feed Foto" — undangan bergaya feed & profil aplikasi foto (design: Undangan — Tema Feed Foto (Alika & Rio)).
+import { useEffect, useRef, useState } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  Tick, mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -47,6 +49,31 @@ function calendarHref(data: ThemeProps["data"]) {
 
 const nf = new Intl.NumberFormat("id-ID");
 
+/** Profile counter that counts up once it scrolls into view. */
+function CountUp({ value }: { value: number }) {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    const text = el?.firstChild;
+    if (!el || !text || !value || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      const start = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min(1, (now - start) / 1400);
+        text.nodeValue = nf.format(Math.round(value * (1 - Math.pow(1 - progress, 3))));
+        if (progress < 1) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }, { threshold: 0.5 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); text.nodeValue = nf.format(value); };
+  }, [value]);
+  return <b ref={ref}>{nf.format(value)}</b>;
+}
+
 export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const user = handle(data);
   const where = location(data.address, data.place);
@@ -68,6 +95,25 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
   const calendar = calendarHref(data);
   const mainMaps = mapsHref(data, data.events[data.events.length - 1]);
   const commentCount = demo ? "1.024" : nf.format(wishes.wishes.length);
+  const [liked, setLiked] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [burst, setBurst] = useState(0);
+  const [picked, setPicked] = useState<Record<string, boolean>>({});
+  const [cLiked, setCLiked] = useState<Record<string, boolean>>({});
+  const lastTap = useRef(0);
+  // Double-tap the post photo to like it, like the real app.
+  const tapPhoto = () => {
+    const now = Date.now();
+    if (now - lastTap.current < 320) { setLiked(true); setBurst(n => n + 1); lastTap.current = 0; } else lastTap.current = now;
+  };
+  const toggleSave = () => {
+    if (!saved) toast("Disimpan ke koleksi");
+    setSaved(v => !v);
+  };
+  const pick = (name: string) => {
+    if (!picked[name]) toast("Ditandai di wishlist");
+    setPicked(state => ({ ...state, [name]: !state[name] }));
+  };
 
   return (
     <ThemeShell
@@ -79,7 +125,7 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
         <section className={s.cover}>
           <div className={s.coverNav}>
             <span className={s.logo}>Undangan</span>
-            <span className={s.navIcons} aria-hidden><Lucide icon={ic.heart} size={22} /><Lucide icon={ic.messageCircle} size={22} /></span>
+            <span className={s.navIcons} aria-hidden><span className={s.badged}><Lucide icon={ic.heart} size={22} /><i /></span><Lucide icon={ic.messageCircle} size={22} /></span>
           </div>
           <div className={s.postHead}>
             <span className={s.ring}><Photo src={ringAvatar} className={s.ringImg} /></span>
@@ -89,13 +135,24 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
             </div>
             <Lucide icon={ic.ellipsis} size={18} />
           </div>
-          <Photo src={hero} alt={`Foto ${coupleLabel(data)}`} className={s.postPhoto} />
-          <div className={s.actions} aria-hidden>
-            <span><Lucide icon={ic.heart} size={24} color="#ff3040" /><Lucide icon={ic.messageCircle} size={24} /><Lucide icon={ic.send} size={24} /></span>
-            <Lucide icon={ic.bookmark} size={24} />
+          <div className={s.postWrap} onClick={tapPhoto}>
+            <Photo src={hero} alt={`Foto ${coupleLabel(data)}`} className={s.postPhoto} />
+            {burst > 0 && <span key={burst} className={s.bigHeart} aria-hidden><Lucide icon={ic.heart} size={96} color="#fff" /></span>}
+          </div>
+          <div className={s.actions}>
+            <span>
+              <button type="button" className={s.act} aria-pressed={liked} aria-label="Suka" onClick={() => setLiked(v => !v)}>
+                <span key={String(liked)} className={liked ? `${s.pop} ${s.filledRed}` : undefined}><Lucide icon={ic.heart} size={24} color={liked ? "#ff3040" : "#262626"} /></span>
+              </button>
+              <span className={s.act} aria-hidden><Lucide icon={ic.messageCircle} size={24} /></span>
+              <span className={s.act} aria-hidden><Lucide icon={ic.send} size={24} /></span>
+            </span>
+            <button type="button" className={s.act} aria-pressed={saved} aria-label="Simpan" onClick={toggleSave}>
+              <span key={String(saved)} className={saved ? `${s.pop} ${s.filledInk}` : undefined}><Lucide icon={ic.bookmark} size={24} /></span>
+            </button>
           </div>
           <div className={s.caption}>
-            <strong>{demo ? "Disukai oleh keluargabesar dan 2.700 lainnya" : "Disukai oleh keluarga besar & sahabat"}</strong>
+            <strong>{demo ? `Disukai oleh ${liked ? "kamu, " : ""}keluargabesar dan 2.700 lainnya` : `Disukai oleh ${liked ? "kamu, " : ""}keluarga besar & sahabat`}</strong>
             <p><b>{user}</b>{"  "}Kami {data.eventLabel === "Menikah" || !data.eventLabel ? "menikah" : `mengundangmu ke ${data.eventLabel.toLowerCase()} kami`}! {longDate}{where ? ` · ${where}` : ""}. Geser untuk detail acara.</p>
             <div className={s.kepada}>
               <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>
@@ -116,9 +173,9 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
         <Photo src={avatar} alt={`Foto ${coupleLabel(data)}`} className={s.avatar} />
         <div className={s.stats}>
           {demo
-            ? <div><b>2.190</b><small>Hari bersama</small></div>
+            ? <div><CountUp value={2190} /><small>Hari bersama</small></div>
             : <div><b>{nf.format(wishes.wishes.length)}</b><small>Ucapan</small></div>}
-          <div><b>{countdown.ready ? Number(countdown.days) : "–"}</b><small>Hari lagi</small></div>
+          <div><b>{countdown.ready ? <Tick value={Number(countdown.days)} /> : "–"}</b><small>Hari lagi</small></div>
           <div><b>∞</b><small>Selamanya</small></div>
         </div>
       </section>
@@ -215,7 +272,9 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
                     <span className={s.productImg}><Lucide icon={item.icon} size={24} /></span>
                     <strong>{item.name}</strong>
                     <small>{item.price}</small>
-                    <span className={s.beri}>Beri</span>
+                    <button type="button" className={`${s.beri} ${picked[item.name] ? s.beriOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>
+                      <span key={String(!!picked[item.name])} className={s.swap}>{picked[item.name] && <Lucide icon={ic.check} size={11} color="#fff" />}{picked[item.name] ? "Dipilih" : "Beri"}</span>
+                    </button>
                   </div>
                 ))}
               </div>
@@ -229,7 +288,11 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
                     <strong>{gift.type === "address" ? "Kirim Kado" : "Amplop Digital"}</strong>
                     <small>{(gift.type === "address" ? [info.number] : [`${info.title} ${info.number}`.trim(), info.holder ? `a.n. ${info.holder}` : ""]).filter(Boolean).join(" · ")}</small>
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && (
+                    <button type="button" className={s.copy} onClick={() => copy(info.copy)}>
+                      <span key={String(copied === info.copy)} className={s.swap}>{copied === info.copy && <Lucide icon={ic.check} size={11} color="#d62976" />}{copied === info.copy ? "Tersalin" : "Salin"}</span>
+                    </button>
+                  )}
                   {info.image && <a className={s.copy} href={info.image} target="_blank" rel="noreferrer">Lihat QR</a>}
                 </div>
               );
@@ -246,9 +309,12 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
               <span className={s.cAv} aria-hidden>{wish.name.slice(0, 1).toUpperCase()}</span>
               <div>
                 <p><b>{wish.name}</b>{"  "}{wish.message}</p>
-                <small>Balas · Suka</small>
+                <small>{cLiked[wish.id] ? "1 suka · " : ""}Balas</small>
               </div>
-              <Lucide icon={ic.heart} size={13} color="#8e8e8e" />
+              <button type="button" className={s.cLike} aria-pressed={!!cLiked[wish.id]} aria-label={`Suka komentar ${wish.name}`}
+                onClick={() => setCLiked(state => ({ ...state, [wish.id]: !state[wish.id] }))}>
+                <span key={String(!!cLiked[wish.id])} className={cLiked[wish.id] ? `${s.pop} ${s.filledRed}` : undefined}><Lucide icon={ic.heart} size={14} color={cLiked[wish.id] ? "#ff3040" : "#8e8e8e"} /></span>
+              </button>
             </article>
           ))}
           <button type="button" className={s.addComment} onClick={sheets.openWish}>Tambahkan komentar…</button>

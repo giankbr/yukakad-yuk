@@ -1,7 +1,9 @@
 "use client";
 // Theme "Hijau Ojek" — undangan bergaya aplikasi ojek online (design: Undangan — Tema Hijau Ojek (Sigit & Ratna)).
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -53,7 +55,18 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
     { key: "bride", name: couple.brideFull ?? couple.bride, parents: couple.brideParents, photo: couple.bridePhoto ?? data.gallery[2], note: "Selalu kasih bintang 5" },
   ];
   const daysLeft = Number(countdown.days);
-  const eta = !countdown.ready ? "Menuju hari bahagia" : countdown.done ? "Hari bahagia telah tiba!" : `Menuju hari bahagia · ${daysLeft} hari lagi`;
+  const eta = !countdown.ready ? "Menuju hari bahagia" : countdown.done ? "Hari bahagia telah tiba!" : <>Menuju hari bahagia · <Tick value={daysLeft} /> hari lagi</>;
+  const [cart, setCart] = useState<string[]>([]);
+  const [stars, setStars] = useState(0);
+  const toggleCart = (name: string) => {
+    const on = !cart.includes(name);
+    setCart(c => (on ? [...c, name] : c.filter(n => n !== name)));
+    toast(on ? "Masuk keranjang kado" : "Dihapus dari keranjang");
+  };
+  const rate = (value: number) => {
+    setStars(value);
+    toast(value === 5 ? "Terima kasih atas bintang 5!" : `Kamu memberi ${value} bintang`);
+  };
   const menu = [
     { label: "Mempelai", href: "#ho-couple", icon: ic.users, bg: "#00aa13" },
     ...data.events.slice(0, 2).map((event, index) => ({ label: event.name.split(" ")[0], href: `#ho-event-${index}`, icon: index === 0 ? ic.heartHandshake : ic.partyPopper, bg: index === 0 ? "#e8551e" : "#2d7ff9" })),
@@ -70,6 +83,9 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
         <section className={s.cover}>
           <div className={s.map} aria-hidden><Photo src="/themes/img/a94.webp" /></div>
           <div className={s.mapArea}>
+            <svg className={s.routeLine} viewBox="0 0 390 360" preserveAspectRatio="none" aria-hidden>
+              <path d="M40 40 C 90 120, 40 170, 120 200 S 250 160, 195 300" />
+            </svg>
             <span className={s.pin} aria-hidden><Lucide icon={ic.heart} size={32} color="#00aa13" /></span>
             <span className={s.eta}>{eta}</span>
           </div>
@@ -132,7 +148,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
 
         <nav className={s.menu} aria-label="Menu undangan">
           {menu.map(item => (
-            <a key={item.href} href={item.href}>
+            <a key={item.href} href={item.href} className={s.menuItem}>
               <span style={{ background: item.bg }}><Lucide icon={item.icon} size={24} color="#fff" /></span>
               {item.label}
             </a>
@@ -163,7 +179,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
               {stories.map((story, index) => {
                 const last = index === stories.length - 1 && stories.length > 1;
                 return (
-                  <li key={story.title + index} className={s.trip}>
+                  <li key={story.title + index} className={s.trip} style={{ "--d": `${index * 90}ms` } as CSSProperties}>
                     <span className={`${s.tripIcon} ${last ? s.tripNow : ""}`} aria-hidden>
                       <Lucide icon={last ? ic.navigation : ic.check} size={15} color={last ? "#fff" : "#008a0f"} />
                     </span>
@@ -226,11 +242,11 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
             <div className={s.head}><h2 id="ho-wishlist">Wishlist Kado</h2><span>Belanja</span></div>
             <div className={s.products}>
               {DEMO_PRODUCTS.map(item => (
-                <div key={item.name} className={s.product}>
+                <div key={item.name} className={s.product} data-on={cart.includes(item.name) ? "" : undefined}>
                   <span style={{ background: item.bg }}><Lucide icon={item.icon} size={26} color={item.color} /></span>
                   <strong>{item.name}</strong>
                   <b>{item.price}</b>
-                  <em>Beli</em>
+                  <button type="button" aria-pressed={cart.includes(item.name)} onClick={() => toggleCart(item.name)}>{cart.includes(item.name) ? "✓ Dipilih" : "Beli"}</button>
                 </div>
               ))}
             </div>
@@ -253,7 +269,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
                     <small>{[info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -266,8 +282,8 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
             <span>{demo ? "248" : wishes.wishes.length}</span>
           </div>
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada ucapan. Jadilah yang pertama mengirim doa!</p>}
-          {wishes.wishes.slice(0, 8).map(wish => (
-            <article key={wish.id} className={s.chat}>
+          {wishes.wishes.slice(0, 8).map((wish, index) => (
+            <article key={wish.id} className={s.chat} style={{ "--d": `${index * 80}ms` } as CSSProperties}>
               <span className={s.avatar} aria-hidden>{wish.name.slice(0, 1).toUpperCase()}</span>
               <div className={s.bubble}>
                 <div><strong>{wish.name}</strong><small>{(demo && DEMO_TAG[wish.id]) || (wish.attendance ? ATTEND[wish.attendance] : timeAgo(wish.created_at))}</small></div>
@@ -275,6 +291,18 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
               </div>
             </article>
           ))}
+        </section>
+
+        <section className={s.rateCard} aria-labelledby="ho-rate">
+          <h2 id="ho-rate">Bagaimana perjalanan cinta mereka?</h2>
+          <p>Beri bintang untuk {names}</p>
+          <div className={s.rate} role="radiogroup" aria-label="Beri bintang">
+            {[1, 2, 3, 4, 5].map(value => (
+              <button key={value} type="button" role="radio" aria-checked={stars === value} aria-label={`${value} bintang`} data-on={stars >= value ? "" : undefined}
+                style={{ transitionDelay: `${(value - 1) * 40}ms` }} onClick={() => rate(value)}>★</button>
+            ))}
+          </div>
+          {stars > 0 && <small key={stars}>{stars === 5 ? "Sempurna! Doamu ikut menemani perjalanan mereka." : "Terima kasih atas penilaianmu."}</small>}
         </section>
 
         <footer className={s.note}><a href="/" target="_blank" rel="noreferrer">dibuat dengan ♥ di Rawuh</a></footer>

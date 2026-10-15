@@ -1,10 +1,11 @@
 "use client";
 // Theme "Playlist" — undangan bergaya aplikasi streaming musik gelap (design: Tema Playlist (Kania & Dimas)).
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  Tick, mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -23,6 +24,36 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
+/** Animated equalizer bars (frozen while paused). */
+function Eq({ paused, className }: { paused?: boolean; className?: string }) {
+  return <span className={`${s.eq} ${paused ? s.eqPaused : ""} ${className ?? ""}`} aria-hidden><i /><i /><i /><i /></span>;
+}
+
+/** "Wrapped"-style number that counts up once it scrolls into view. */
+function CountUp({ value, className }: { value: string; className?: string }) {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    const text = el?.firstChild;
+    const target = Number(value.replace(/\./g, ""));
+    if (!el || !text || !/^\d[\d.]*$/.test(value) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      const start = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min(1, (now - start) / 1700);
+        text.nodeValue = Math.round(target * (1 - Math.pow(1 - progress, 3))).toLocaleString("id-ID");
+        if (progress < 1) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
+    }, { threshold: 0.4 });
+    io.observe(el);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); text.nodeValue = value; };
+  }, [value]);
+  return <strong ref={ref} className={className}>{value}</strong>;
+}
 
 export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const couple = coupleLabel(data);
@@ -37,6 +68,27 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const [following, setFollowing] = useState<Record<string, boolean>>({});
+  const [saved, setSaved] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
+  const [shuffle, setShuffle] = useState(true);
+  const [chip, setChip] = useState("#pl-top");
+  const [nowIndex, setNowIndex] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [tier, setTier] = useState("Superfan");
+  const [picked, setPicked] = useState<Record<string, boolean>>({});
+  const [loved, setLoved] = useState<Record<string, boolean>>({});
+  const follow = (name: string) => {
+    if (!following[name]) toast(`Mengikuti ${name}`);
+    setFollowing(f => ({ ...f, [name]: !f[name] }));
+  };
+  const save = () => {
+    if (!saved) toast("Disimpan ke Koleksimu");
+    setSaved(v => !v);
+  };
+  const pick = (name: string) => {
+    if (!picked[name]) toast("Ditandai di wishlist");
+    setPicked(state => ({ ...state, [name]: !state[name] }));
+  };
   const art = data.gallery[0];
   const photos = data.gallery.length > 1 ? data.gallery.slice(1) : data.gallery;
   const firstYear = stories.map(story => story.date?.match(/\d{4}/)?.[0]).find(Boolean);
@@ -44,7 +96,12 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
     { name: c.brideFull ?? c.bride, listeners: "2,1 jt pendengar hati", parents: c.brideParents, photo: c.bridePhoto ?? data.gallery[1] },
     { name: c.groomFull ?? c.groom, listeners: "1 pendengar setia", parents: c.groomParents, photo: c.groomPhoto ?? data.gallery[2] },
   ];
-  const daysLeft = countdown.ready ? (countdown.done ? "Hari ini" : `${Number(countdown.days)} hari lagi`) : "";
+  const chips = [
+    { href: "#pl-top", label: "Semua" },
+    { href: "#pl-acara", label: "Acara" },
+    ...(stories.length > 0 || photos.length > 0 ? [{ href: "#pl-kisah", label: "Kisah" }] : []),
+    ...(demo || data.gifts.length > 0 ? [{ href: "#pl-kado", label: "Kado" }] : []),
+  ];
 
   return (
     <ThemeShell
@@ -65,11 +122,19 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
                 {["Rawuh", demo ? "2.700 suka" : "", longDate, where].filter(Boolean).join(" · ")}
               </p>
               <div className={s.actions}>
-                <span className={s.actionsL} aria-hidden>
-                  <Lucide icon={ic.heart} size={20} color="#1db954" /><Lucide icon={ic.circleArrowDown} size={20} color="#b3b3b3" /><Lucide icon={ic.ellipsis} size={20} color="#b3b3b3" />
+                <span className={s.actionsL}>
+                  <button type="button" className={s.iconBtn} aria-pressed={saved} aria-label="Simpan playlist" onClick={save}>
+                    <span key={String(saved)} className={saved ? `${s.pop} ${s.filled}` : undefined}><Lucide icon={ic.heart} size={22} color={saved ? "#1db954" : "#b3b3b3"} /></span>
+                  </button>
+                  <button type="button" className={s.iconBtn} aria-pressed={downloaded} aria-label="Unduh playlist" onClick={() => setDownloaded(v => !v)}>
+                    <span key={String(downloaded)} className={downloaded ? s.pop : undefined}><Lucide icon={ic.circleArrowDown} size={22} color={downloaded ? "#1db954" : "#b3b3b3"} /></span>
+                  </button>
+                  <span aria-hidden className={s.iconBtn}><Lucide icon={ic.ellipsis} size={20} color="#b3b3b3" /></span>
                 </span>
                 <span className={s.actionsR}>
-                  <Lucide icon={ic.shuffle} size={20} color="#1db954" />
+                  <button type="button" className={`${s.iconBtn} ${shuffle ? s.dot : ""}`} aria-pressed={shuffle} aria-label="Acak" onClick={() => setShuffle(v => !v)}>
+                    <Lucide icon={ic.shuffle} size={20} color={shuffle ? "#1db954" : "#b3b3b3"} />
+                  </button>
                   <button type="button" className={s.playCircle} onClick={open} aria-label="Putar undangan"><Lucide icon={ic.play} size={22} color="#000" /></button>
                 </span>
               </div>
@@ -82,7 +147,7 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
             <button type="button" className={s.openBtn} onClick={open}><Lucide icon={ic.play} color="#000" />Putar Undangan</button>
             <ol className={s.preview} aria-label="Rangkaian acara">
               <li className={s.playing}>
-                <Lucide icon={ic.audioLines} size={14} color="#1db954" className={s.no} />
+                <Eq className={s.no} />
                 <div><strong>Intro — Dua Nama Satu Janji</strong><small>{couple}</small></div>
                 <Lucide icon={ic.ellipsis} color="#b3b3b3" />
               </li>
@@ -101,10 +166,9 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
       <header className={s.header} id="pl-top">
         <h1 className={s.hello}>Selamat datang, {guestLabel(data)}</h1>
         <nav className={s.chips} aria-label="Bagian undangan">
-          <a href="#pl-top" aria-current="page">Semua</a>
-          <a href="#pl-acara">Acara</a>
-          {(stories.length > 0 || photos.length > 0) && <a href="#pl-kisah">Kisah</a>}
-          {(demo || data.gifts.length > 0) && <a href="#pl-kado">Kado</a>}
+          {chips.map(item => (
+            <a key={item.href} href={item.href} aria-current={chip === item.href ? "page" : undefined} onClick={() => setChip(item.href)}>{item.label}</a>
+          ))}
         </nav>
       </header>
 
@@ -120,9 +184,8 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
                 <strong>{person.name}</strong>
                 {demo && <small>{person.listeners}</small>}
                 {person.parents && <small>{person.parents}</small>}
-                <button type="button" className={s.outline} aria-pressed={!!following[person.name]}
-                  onClick={() => setFollowing(f => ({ ...f, [person.name]: !f[person.name] }))}>
-                  {following[person.name] ? "Diikuti" : "Ikuti"}
+                <button type="button" className={s.outline} aria-pressed={!!following[person.name]} onClick={() => follow(person.name)}>
+                  <span key={String(!!following[person.name])} className={s.swap}>{following[person.name] && <Lucide icon={ic.check} size={12} />}{following[person.name] ? "Diikuti" : "Ikuti"}</span>
                 </button>
               </article>
             ))}
@@ -137,9 +200,12 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
               const href = mapsHref(data, event);
               const sub = [event.time, event.venue && event.venue !== data.place ? event.venue : "", event.date && formatDate(event.date) !== longDate ? formatDate(event.date) : ""].filter(Boolean).join(" · ");
               return (
-                <li key={event.name + index} className={index === 0 ? s.now : undefined}>
-                  <span className={s.qIcon} aria-hidden><Lucide icon={index === 0 ? ic.audioLines : ic.music2} size={18} color={index === 0 ? "#000" : "#b3b3b3"} /></span>
-                  <div><strong>{event.name}</strong><small>{sub}</small></div>
+                <li key={event.name + index} className={index === nowIndex ? s.now : undefined}>
+                  <button type="button" className={s.qIcon} aria-label={index === nowIndex ? (playing ? `Jeda ${event.name}` : `Putar ${event.name}`) : `Putar ${event.name}`}
+                    onClick={() => { if (index === nowIndex) setPlaying(v => !v); else { setNowIndex(index); setPlaying(true); } }}>
+                    {index === nowIndex ? <Eq paused={!playing} className={s.eqDark} /> : <Lucide icon={ic.music2} size={18} color="#b3b3b3" />}
+                  </button>
+                  <div><strong key={String(index === nowIndex)}>{event.name}</strong><small>{sub}</small></div>
                   {href && <a className={s.outline} href={href} target="_blank" rel="noreferrer" aria-label={`Peta ${event.venue || event.name}`}>Peta</a>}
                 </li>
               );
@@ -152,7 +218,7 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
         <section className={s.section} aria-label="Ringkasan">
           <div className={s.wrapped}>
             <small>KALIAN WRAPPED · {demo ? "2019–2027" : firstYear && firstYear !== parts.year ? `${firstYear}–${parts.year}` : parts.year}</small>
-            <strong>{demo ? "4.212.000" : countdown.done ? "Hari ini" : countdown.days}</strong>
+            {demo ? <CountUp value="4.212.000" /> : <strong>{countdown.done ? "Hari ini" : <Tick value={countdown.days} />}</strong>}
             <p>{demo ? "menit dihabiskan bersama — naik 100% tiap tahun" : countdown.done ? "hari bahagia telah tiba" : "hari lagi menuju hari bahagia"}</p>
             <dl>
               {(demo
@@ -204,8 +270,10 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
             {demo && (
               <>
                 <div className={s.tiers}>
-                  {[["Dengar", "Rp100rb"], ["Fans", "Rp500rb"], ["Superfan", "Rp1jt"]].map(([name, price], index) => (
-                    <div key={name} className={index === 2 ? s.tierHot : undefined}><strong>{name}</strong><small>{price}</small></div>
+                  {[["Dengar", "Rp100rb"], ["Fans", "Rp500rb"], ["Superfan", "Rp1jt"]].map(([name, price]) => (
+                    <button key={name} type="button" aria-pressed={tier === name} className={tier === name ? s.tierHot : undefined} onClick={() => setTier(name)}>
+                      <strong>{name}</strong><small>{price}</small>
+                    </button>
                   ))}
                 </div>
                 <ul className={s.merch}>
@@ -217,7 +285,9 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
                     <li key={item.name}>
                       <span className={s.merchIcon}><Lucide icon={item.icon} size={22} color="#1db954" /></span>
                       <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                      <span className={s.outline}>Beri</span>
+                      <button type="button" className={`${s.outline} ${picked[item.name] ? s.outlineOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>
+                        <span key={String(!!picked[item.name])} className={s.swap}>{picked[item.name] && <Lucide icon={ic.check} size={12} />}{picked[item.name] ? "Dipilih" : "Beri"}</span>
+                      </button>
                     </li>
                   ))}
                 </ul>
@@ -233,7 +303,11 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
                     <small>{[[info.title !== "Alamat kado" && gift.type !== "qris" ? info.title : "", info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && (
+                    <button type="button" className={s.copy} onClick={() => copy(info.copy)}>
+                      <span key={String(copied === info.copy)} className={s.swap}>{copied === info.copy && <Lucide icon={ic.check} size={12} />}{copied === info.copy ? "Tersalin" : "Salin"}</span>
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -247,6 +321,10 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
             <article key={wish.id} className={s.note}>
               <span aria-hidden>{wish.name.slice(0, 1).toUpperCase()}</span>
               <div><strong>{wish.name}</strong><p>{wish.message}</p></div>
+              <button type="button" className={s.love} aria-pressed={!!loved[wish.id]} aria-label={`Sukai catatan ${wish.name}`}
+                onClick={() => setLoved(state => ({ ...state, [wish.id]: !state[wish.id] }))}>
+                <span key={String(!!loved[wish.id])} className={loved[wish.id] ? `${s.pop} ${s.filled}` : undefined}><Lucide icon={ic.heart} size={16} color={loved[wish.id] ? "#1db954" : "#b3b3b3"} /></span>
+              </button>
             </article>
           ))}
           <button type="button" className={s.writeBtn} onClick={sheets.openWish}>Tulis Catatan</button>
@@ -255,12 +333,15 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
 
       <nav className={s.bottom} aria-label="Aksi undangan">
         <div className={s.nowPlaying}>
-          <i aria-hidden />
+          <i aria-hidden><Eq paused={!playing} /></i>
           <div>
             <strong>{parts.day ? `Menuju ${parts.day} ${parts.month} — Hitung Mundur` : "Hitung Mundur"}</strong>
-            <small>{[couple, daysLeft].filter(Boolean).join(" · ")}</small>
+            <small>{couple}{countdown.ready && (countdown.done ? " · Hari ini" : <> · <Tick value={Number(countdown.days)} /> hari lagi</>)}</small>
           </div>
-          <Lucide icon={ic.play} size={18} color="#fff" />
+          <button type="button" className={s.miniPlay} aria-label={playing ? "Jeda" : "Putar"} onClick={() => setPlaying(v => !v)}>
+            <span key={String(playing)} className={s.swap}><Lucide icon={playing ? ic.pause : ic.play} size={18} color="#fff" /></span>
+          </button>
+          <b className={s.miniBar} aria-hidden><em className={playing ? undefined : s.paused} /></b>
         </div>
         <div className={s.rsvpRow}><button type="button" className={s.rsvp} onClick={sheets.openRsvp}>Konfirmasi Hadir</button></div>
       </nav>

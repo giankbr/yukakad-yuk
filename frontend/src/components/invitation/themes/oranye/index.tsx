@@ -1,8 +1,9 @@
 "use client";
 // Theme "Oranye" — undangan bergaya aplikasi belanja oranye (design: Undangan — Tema Oranye (Dewi & Arya)).
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -64,6 +65,13 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [allWishes, setAllWishes] = useState(false);
+  const [hearts, setHearts] = useState<string[]>([]);
+  const [filter, setFilter] = useState(0);
+  const toggleHeart = (key: string, label: string) => {
+    const on = !hearts.includes(key);
+    setHearts(h => (on ? [...h, key] : h.filter(k => k !== key)));
+    if (on) toast(label);
+  };
   const stories = storyItems(data);
   const hero = data.gallery[0];
   const feed = data.gallery.length > 1 ? data.gallery.slice(1) : data.gallery;
@@ -161,9 +169,9 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
 
         <section className={s.section} aria-labelledby="or-flash">
           <div className={s.flashHead}>
-            <h2 id="or-flash" className={s.flashLogo}>F<Lucide icon={ic.zap} size={16} color="#ffd424" style={{ fill: "#ffd424" }} />LASH SALE</h2>
+            <h2 id="or-flash" className={s.flashLogo}>F<Lucide icon={ic.zap} size={16} color="#ffd424" style={{ fill: "#ffd424" }} className={s.bolt} />LASH SALE</h2>
             <span className={s.timer} aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
-              <b>{countdown.days}</b>:<b>{countdown.hours}</b>:<b>{countdown.minutes}</b>
+              <Tick className={s.tick} value={countdown.days} />:<Tick className={s.tick} value={countdown.hours} />:<Tick className={s.tick} value={countdown.minutes} />:<Tick className={s.tick} value={countdown.seconds} />
             </span>
             <span className={s.flex} />
             <small>menuju {firstEvent ?? "hari H"}</small>
@@ -202,7 +210,10 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                   <span className={s.outlineTag}>Cashback Cinta 100%</span>
                   <div className={s.cardBottom}>
                     {demo ? <span><b className={s.star}>★</b>5.0</span> : <span />}
-                    <small>1 hati terpikat</small>
+                    <button type="button" className={s.heartBtn} aria-pressed={hearts.includes(person.badge)} aria-label={`Suka ${person.name}`}
+                      onClick={() => toggleHeart(person.badge, "Kamu ikut terpikat")}>
+                      <Lucide icon={ic.heart} size={13} />{hearts.includes(person.badge) ? 2 : 1} hati
+                    </button>
                   </div>
                 </div>
               </article>
@@ -219,7 +230,7 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                   <div key={index} className={s.chatGroup}>
                     {(story.title || story.date) && <p className={s.pill}>{[story.date, story.title].filter(Boolean).join(" · ")}</p>}
                     {lines.map((line, i) => (
-                      <div key={i} className={line.fromGroom ? `${s.msg} ${s.msgMe}` : s.msg}>
+                      <div key={i} className={line.fromGroom ? `${s.msg} ${s.msgMe}` : s.msg} style={{ "--i": Math.min(i, 4) } as CSSProperties}>
                         <div className={s.bubble}><b>{line.name}</b><p>{line.text}</p></div>
                       </div>
                     ))}
@@ -227,6 +238,7 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                   </div>
                 );
               })}
+              <div className={s.typing} aria-hidden><span className={s.typingDots}><i /><i /><i /></span>{data.couple.bride} sedang mengetik</div>
             </div>
           </section>
         )}
@@ -271,10 +283,12 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                         <div className={s.productImg} style={{ height: tall ? 220 : 150 }}>
                           <Photo src={src} alt={caption} />
                           {demo && i === 0 && <span className={s.live}><Lucide icon={ic.play} size={10} color="#fff" />VIDEO</span>}
+                          <button type="button" className={s.likeBtn} aria-pressed={hearts.includes(`f${i}`)} aria-label={`Suka ${caption}`}
+                            onClick={() => toggleHeart(`f${i}`, "Disukai")}><Lucide icon={ic.heart} size={14} /></button>
                         </div>
                         <figcaption>
                           <span>{caption}</span>
-                          <div><b>Rp ∞</b>{demo && DEMO_FEED[i] && <small>{DEMO_FEED[i][1]}</small>}</div>
+                          <div><b>Rp ∞</b>{demo && DEMO_FEED[i] && <small data-on={hearts.includes(`f${i}`) ? "" : undefined}>{hearts.includes(`f${i}`) ? `Kamu & ${DEMO_FEED[i][1]}` : DEMO_FEED[i][1]}</small>}</div>
                         </figcaption>
                       </figure>
                     );
@@ -303,7 +317,7 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                     <div className={s.tags}>
                       <span className={s.outlineTag} style={{ color: "#00bfa5", borderColor: "#00bfa5" }}>Gratis Ongkir</span>
                       <span className={s.outlineTag}>COD Cinta</span>
-                      {info.copy && <button type="button" className={s.copyText} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin alamat"}</button>}
+                      {info.copy && <button type="button" className={s.copyText} data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin alamat"}</button>}
                     </div>
                   </div>
                 );
@@ -316,7 +330,7 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
                     <small>{[`${info.title !== "QRIS" ? info.title : ""} ${info.number}`.trim(), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.copy} data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -333,18 +347,22 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
           {demo ? (
             <>
               <div className={s.summary}><b>5.0</b><small>/5</small><span className={s.stars}>★★★★★</span><small>(312 ucapan)</small></div>
-              <div className={s.filters}><span className={s.filterOn}>Semua</span><span>Hadir (268)</span><span>Dengan Foto (42)</span></div>
+              <div className={s.filters} role="group" aria-label="Saring ucapan">
+                {["Semua", "Hadir (268)", "Dengan Foto (42)"].map((label, i) => (
+                  <button key={label} type="button" aria-pressed={filter === i} onClick={() => setFilter(i)}>{label}</button>
+                ))}
+              </div>
             </>
           ) : (
             <div className={s.summary}><b>{wishes.wishes.length}</b><small>ucapan &amp; doa</small></div>
           )}
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada ucapan. Jadilah yang pertama memberi penilaian!</p>}
-          {shownWishes.map(wish => (
+          {shownWishes.filter(wish => !(demo && filter === 1) || wish.attendance === "yes").map(wish => (
             <article key={wish.id} className={s.review}>
               <span className={s.avatar} aria-hidden>{wish.name.slice(0, 1).toUpperCase()}</span>
               <div>
                 <strong>{wish.name}</strong>
-                <span className={s.stars} aria-hidden>★★★★★</span>
+                <span className={s.stars} aria-hidden>{[0, 1, 2, 3, 4].map(i => <i key={i} style={{ animationDelay: `${i * 70}ms` }}>★</i>)}</span>
                 {wish.attendance && <small>Kehadiran: {ATTEND[wish.attendance]}{demo ? " · 2 orang" : ""}</small>}
                 <p>{wish.message}</p>
               </div>

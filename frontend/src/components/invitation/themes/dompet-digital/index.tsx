@@ -1,6 +1,7 @@
 "use client";
 // Theme "Dompet Digital" — undangan bergaya bukti transfer e-wallet (design: Dompet Cinta, Nisa & Fajar).
-import { useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
@@ -34,6 +35,38 @@ function city(address: string) {
 
 const initial = (name: string) => (name.trim().replace(/^(bu|ibu|pak|bapak|bpk\.?|mas|mbak|kak|om|tante)\s+/i, "").slice(0, 1) || "?").toUpperCase();
 
+const TIERS = ["Rp100rb", "Rp500rb", "Rp1jt", "Lainnya"];
+const rupiah = (value: number) => `Rp${Math.round(value).toLocaleString("id-ID")}`;
+
+/** Saldo that counts up when its row is revealed, then settles on the "tak terhingga" joke. */
+function useCountUp() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [value, setValue] = useState<number | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const run = () => {
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / 1400);
+        const eased = 1 - Math.pow(1 - t, 3);
+        setValue(t < 1 ? eased * 999_999_999 : null);
+        if (t < 1) frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    };
+    const observer = new MutationObserver(() => {
+      if (!el.hasAttribute("data-revealed")) return;
+      observer.disconnect();
+      run();
+    });
+    observer.observe(el, { attributes: true, attributeFilter: ["data-revealed"] });
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, []);
+  return [ref, value] as const;
+}
+
 const icsText = (value: string) => value.replace(/([,;\\])/g, "\\$1").replace(/\n/g, "\\n");
 
 export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
@@ -53,6 +86,10 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [hidden, setHidden] = useState(false);
+  const [tier, setTier] = useState(1);
+  const [ring, setRing] = useState(0);
+  const [given, setGiven] = useState<string[]>([]);
+  const [saldoRef, saldoValue] = useCountUp();
   const stories = storyItems(data);
   const people = [
     { name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[0] },
@@ -140,14 +177,17 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
             <h1>Dompet Cinta</h1>
             <p>{[couple, shortDate, where].filter(Boolean).join(" · ")}</p>
           </div>
-          <Lucide icon={ic.bell} size={20} />
+          <button type="button" className={s.bell} onClick={() => { setRing(count => count + 1); toast("1 undangan baru untukmu"); }} aria-label="Notifikasi">
+            <span key={ring} className={s.bellIcon}><Lucide icon={ic.bell} size={20} /></span>
+            {ring === 0 && <i className={s.badge} aria-hidden>1</i>}
+          </button>
         </div>
       </header>
 
       <main className={s.body}>
         <section className={s.saldo} aria-label="Saldo kebahagiaan">
-          <div className={s.saldoRow}>
-            <div><small>Saldo Kebahagiaan</small><strong>{hidden ? "Rp••••••" : "Rp∞ (tak terhingga)"}</strong></div>
+          <div className={s.saldoRow} ref={saldoRef}>
+            <div><small>Saldo Kebahagiaan</small><strong key={String(hidden)} className={s.saldoValue}>{hidden ? "Rp••••••" : saldoValue !== null ? rupiah(saldoValue) : "Rp∞ (tak terhingga)"}</strong></div>
             <button type="button" className={s.eye} onClick={() => setHidden(value => !value)} aria-pressed={hidden} aria-label={hidden ? "Tampilkan saldo" : "Sembunyikan saldo"}>
               <Lucide icon={ic.eye} size={15} color="#78808c" />
             </button>
@@ -242,14 +282,20 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
             <div className={s.cardHead}><h2 id="dd-gift-h">Kirim Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && (
               <>
-                <div className={s.tiers} aria-hidden>
-                  {["Rp100rb", "Rp500rb", "Rp1jt", "Lainnya"].map((tier, index) => <span key={tier} className={index === 1 ? s.tierOn : undefined}>{tier}</span>)}
+                <div className={s.tiers} role="group" aria-label="Nominal kado" style={{ "--i": tier } as CSSProperties}>
+                  <i className={s.tierPill} aria-hidden />
+                  {TIERS.map((name, index) => (
+                    <button key={name} type="button" className={index === tier ? s.tierOn : undefined} aria-pressed={index === tier} onClick={() => setTier(index)}>{name}</button>
+                  ))}
                 </div>
                 {DEMO_WISHLIST.map(item => (
                   <div key={item.name} className={s.wishItem}>
                     <span className={s.wishIcon}><Lucide icon={item.icon} size={17} color="#108ee9" /></span>
                     <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                    <button type="button" className={s.ghostBtn} onClick={sheets.openWish}>Beri</button>
+                    <button type="button" className={s.ghostBtn} aria-pressed={given.includes(item.name)}
+                      onClick={() => { setGiven(list => list.includes(item.name) ? list : [...list, item.name]); sheets.openWish(); }}>
+                      {given.includes(item.name) ? <><Lucide icon={ic.check} size={12} />Ditandai</> : "Beri"}
+                    </button>
                   </div>
                 ))}
               </>
@@ -265,7 +311,7 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
                     <small>{[number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "Tersalin" : "Salin"}</span></button>}
                 </div>
               );
             })}

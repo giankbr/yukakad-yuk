@@ -1,6 +1,7 @@
 "use client";
 // Theme "Game Retro" — undangan bergaya game 8-bit (design: The Final Level, Dina & Rama).
 import { useState } from "react";
+import { toast } from "@/lib/celebrate";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
@@ -44,6 +45,18 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [later, setLater] = useState(false);
+  const [picked, setPicked] = useState<number[]>([]);
+  const [bag, setBag] = useState<string[]>([]);
+  const pick = (index: number, name: string) => {
+    const on = !picked.includes(index);
+    setPicked(list => on ? [...list, index] : list.filter(item => item !== index));
+    if (on) toast(`${name.toUpperCase()} siap bertarung!`);
+  };
+  const buy = (name: string) => {
+    const on = !bag.includes(name);
+    setBag(list => on ? [...list, name] : list.filter(item => item !== name));
+    if (on) toast(`${name} masuk inventori`);
+  };
   const stories = storyItems(data);
   const where = city(data.address) || data.place;
   const label = (data.eventLabel ?? "Pernikahan").toUpperCase();
@@ -93,17 +106,17 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
     >
       <header className={s.nav}>
         <h1>WORLD MAP</h1>
-        <span className={s.coins} aria-hidden><i className={s.coin} />x{year}</span>
+        <span className={s.coins} aria-hidden><i className={s.coin} />x{year}{bag.length > 0 && <b key={bag.length} className={s.bagCount}>+{bag.length}</b>}</span>
       </header>
 
       <main className={s.body}>
         <Extras slot="opening" className={s.extras} />
 
         <section className={s.section} aria-labelledby="gr-chars">
-          <h2 id="gr-chars" className={s.cyan}>■ PILIH KARAKTER</h2>
+          <h2 id="gr-chars" className={s.cyan}><i className={s.blk} aria-hidden>■</i> PILIH KARAKTER</h2>
           <div className={s.chars}>
             {people.map((person, index) => (
-              <article key={index} className={s.char}>
+              <article key={index} className={s.char} data-picked={picked.includes(index) || undefined}>
                 <Photo src={person.photo} alt={person.name} className={s.charImg} />
                 <h3>{person.name.toUpperCase()}</h3>
                 {person.parents && <p>{person.parents}</p>}
@@ -114,13 +127,16 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
                     <em>{value}</em>
                   </div>
                 ))}
+                <button type="button" className={s.pickBtn} aria-pressed={picked.includes(index)} onClick={() => pick(index, person.name)}>
+                  {picked.includes(index) ? `P${index + 1} SIAP!` : "► PILIH"}
+                </button>
               </article>
             ))}
           </div>
         </section>
 
         <section className={s.section} aria-labelledby="gr-story">
-          <h2 id="gr-story" className={s.yellow}>■ WORLD 1 — KISAH</h2>
+          <h2 id="gr-story" className={s.yellow}><i className={s.blk} aria-hidden>■</i> WORLD 1 — KISAH</h2>
           <ol className={s.levels}>
             {stories.map((story, index) => (
               <li key={story.title + index} className={s.levelRow}>
@@ -145,7 +161,7 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
 
         {data.events.length > 0 && (
           <section className={s.section} aria-labelledby="gr-quest">
-            <h2 id="gr-quest" className={s.green}>■ QUEST HARI-H</h2>
+            <h2 id="gr-quest" className={s.green}><i className={s.blk} aria-hidden>■</i> QUEST HARI-H</h2>
             {data.events.map((event, index) => {
               const href = mapsHref(data, event);
               return (
@@ -166,7 +182,7 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
 
         {data.gallery.length > 0 && (
           <section className={s.section} aria-labelledby="gr-gallery">
-            <h2 id="gr-gallery" className={s.pink}>■ GALERI SPRITE</h2>
+            <h2 id="gr-gallery" className={s.pink}><i className={s.blk} aria-hidden>■</i> GALERI SPRITE</h2>
             <div className={s.gallery}>
               {data.gallery.map((src, index) => <Photo key={src + index} src={src} alt={`Foto ${index + 1}`} />)}
             </div>
@@ -178,16 +194,17 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="gr-shop">
-            <h2 id="gr-shop" className={s.yellow}>■ {demo ? "ITEM SHOP" : "KASIR KOIN"}</h2>
+            <h2 id="gr-shop" className={s.yellow}><i className={s.blk} aria-hidden>■</i> {demo ? "ITEM SHOP" : "KASIR KOIN"}</h2>
             {demo && (
               <>
                 <div className={s.shop}>
                   {DEMO_SHOP.map(item => (
-                    <div key={item.name} className={s.item}>
-                      <Lucide icon={item.icon} size={22} color="#4deeea" />
+                    <button key={item.name} type="button" className={s.item} aria-pressed={bag.includes(item.name)} onClick={() => buy(item.name)}>
+                      <Lucide icon={item.icon} size={22} color={bag.includes(item.name) ? "#1a1040" : "#4deeea"} />
                       <strong>{item.name}</strong>
                       <span><i className={s.coinSm} />{item.price}</span>
-                    </div>
+                      {bag.includes(item.name) && <em className={s.plus} aria-hidden>+1</em>}
+                    </button>
                   ))}
                 </div>
                 <p className={s.shopNote}>1 koin = Rp1.000 · beli lewat kasir di bawah</p>
@@ -204,7 +221,7 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
                     <span>{line}</span>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "TERSALIN" : "SALIN"}</button>}
+                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "TERSALIN" : "SALIN"}</span></button>}
                 </div>
               );
             })}
@@ -212,11 +229,11 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
         )}
 
         <section className={s.section} aria-labelledby="gr-wishes">
-          <h2 id="gr-wishes" className={s.cyan}>■ GUESTBOOK.SAV</h2>
+          <h2 id="gr-wishes" className={s.cyan}><i className={s.blk} aria-hidden>■</i> GUESTBOOK.SAV</h2>
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada data tersimpan. Tekan B untuk menulis ucapan pertama!</p>}
-          {wishes.wishes.slice(0, 8).map(wish => (
+          {wishes.wishes.slice(0, 8).map((wish, index) => (
             <article key={wish.id} className={s.wish}>
-              <strong>{handle(wish.name)}</strong>
+              <strong>{handle(wish.name)}{index === 0 && <i className={s.caret} aria-hidden />}</strong>
               <p>{wish.message}</p>
             </article>
           ))}

@@ -1,11 +1,12 @@
 "use client";
 // Theme "Jawa Keraton" — adat Jawa klasik cokelat-emas dengan gunungan (design: Undangan — Tema Jawa (Laksmi & Bayu)).
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useMusic, useRsvp, useWishes, type Attendance, type ThemeProps,
 } from "../kit";
 import type { InvitationData } from "../../types";
+import { celebrate } from "@/lib/celebrate";
 import { gunungan, ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -81,6 +82,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
   const calendar = calendarHref(data);
   const maps = mapsHref(data);
   const families = [father(data.couple.brideParents), father(data.couple.groomParents)].filter(Boolean).join(" & ");
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (wishes.status === "sent") celebrate(sentRef.current); }, [wishes.status]);
 
   return (
     <ThemeShell
@@ -151,7 +154,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
           <Head id="jw-count" title="Menghitung Hari" light />
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
             {[[countdown.days, "Hari"], [countdown.hours, "Jam"], [countdown.minutes, "Menit"], [countdown.seconds, "Detik"]].map(([value, unit]) => (
-              <div key={unit}><b>{value}</b><small>{unit}</small></div>
+              <div key={unit}><b><Tick value={value} /></b><small>{unit}</small></div>
             ))}
           </div>
           {calendar && <a className={s.ghostBtn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} color="#e6c77a" />Simpan ke Kalender</a>}
@@ -229,7 +232,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
               const sub = gift.type === "address" ? (cut > 0 ? address.slice(cut + 1).trim() : "") : info.holder ? `a.n. ${info.holder}` : "";
               const icon = gift.type === "bank" ? ic.landmark : gift.type === "address" ? ic.gift : gift.type === "qris" ? ic.qrCode : ic.wallet;
               return (
-                <div key={gift.id} className={s.gift}>
+                <div key={gift.id} className={info.copy && copied === info.copy ? `${s.gift} ${s.giftCopied}` : s.gift}>
                   <span className={s.giftIcon}><Lucide icon={icon} size={20} color="#e6c77a" /></span>
                   <div>
                     <h3>{title}</h3>
@@ -238,8 +241,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${title}`}>
-                      <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={14} color="#9a7224" />
+                    <button type="button" className={copied === info.copy ? `${s.copy} ${s.copyOn}` : s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${title}`}>
+                      <Lucide key={copied === info.copy ? "on" : "off"} icon={copied === info.copy ? ic.check : ic.copy} size={14} color={copied === info.copy ? "#f5eddc" : "#9a7224"} />
                     </button>
                   )}
                 </div>
@@ -251,7 +254,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
         <section className={`${s.section} ${s.wishes}`} aria-labelledby="jw-wishes">
           <Head id="jw-wishes" title="Ucapan & Doa" />
           {wishes.status === "sent" ? (
-            <div className={s.form} role="status">
+            <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
               <p className={s.sent}>Matur nuwun — ucapan &amp; doa Anda sudah terkirim.</p>
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
               <button type="button" className={s.submit} onClick={() => { wishes.reset(); rsvp.reset(); }}>Tulis Lagi</button>

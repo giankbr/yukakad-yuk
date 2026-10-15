@@ -1,5 +1,7 @@
 "use client";
 // Theme "Poin Ungu" — undangan bergaya aplikasi poin/loyalti (design: Poin Bahagia, Putra & Keisha).
+import { useEffect, useState } from "react";
+import { toast } from "@/lib/celebrate";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
@@ -25,6 +27,26 @@ const DEMO_WISHLIST = [
 
 const fmt = (n: number) => n.toLocaleString("id-ID");
 
+/** Counts 0 → target once on mount (skipped under reduced motion); null means "show the final value". */
+function useCountUp(target: number, delay = 350) {
+  const [value, setValue] = useState<number | null>(null);
+  useEffect(() => {
+    if (!target || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    const timer = window.setTimeout(() => {
+      const start = performance.now();
+      const step = (now: number) => {
+        const t = Math.min(1, (now - start) / 1300);
+        setValue(t < 1 ? Math.round((1 - Math.pow(1 - t, 3)) * target) : null);
+        if (t < 1) frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    }, delay);
+    return () => { window.clearTimeout(timer); cancelAnimationFrame(frame); };
+  }, [target, delay]);
+  return value;
+}
+
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -38,7 +60,17 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
   const mm = formatDate(data.date, { month: "2-digit" });
   const yyyy = formatDate(data.date, { year: "numeric" });
   const valid = /^\d+$/.test(dd) && /^\d+$/.test(mm);
-  const points = valid ? fmt(Number(`${dd}${mm}`)) : "100";
+  const total = valid ? Number(`${dd}${mm}`) : 100;
+  const points = fmt(total);
+  const counting = useCountUp(total);
+  const [traded, setTraded] = useState<string[]>([]);
+  const [bump, setBump] = useState(0);
+  const trade = (name: string) => {
+    if (traded.includes(name)) return;
+    setTraded(list => [...list, name]);
+    setBump(count => count + 1);
+    toast(`${name} ditandai di wishlist`);
+  };
   const code = valid ? `SAH-${dd}${mm}${yyyy}` : "SAH";
   const longDate = formatDate(data.date);
   const where = city(data.address) || data.place;
@@ -64,10 +96,13 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBody}>
-            <div className={s.badge} aria-hidden><span><Lucide icon={ic.sparkles} size={40} color="#fff" /></span></div>
+            <div className={s.badge} aria-hidden>
+              <span><Lucide icon={ic.sparkles} size={40} color="#fff" /></span>
+              <i className={s.orbit}><b /><b /><b /></i>
+            </div>
             <p className={s.congrats}>Selamat! Kamu dapat</p>
             <div className={s.pts}>
-              <h1>+{points} Poin Bahagia</h1>
+              <h1>+<span className={s.num}>{counting === null ? points : fmt(counting)}</span> Poin Bahagia</h1>
               <p>dari transaksi: {label} {couple}</p>
               <small>{longDate}{where ? ` · ${where}` : ""}</small>
             </div>
@@ -110,7 +145,7 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
             <h1>Poin Bahagia</h1>
             <p>{couple} · {longDate}</p>
           </div>
-          <span className={s.pill}><Lucide icon={ic.sparkles} size={13} color="#ffc01e" />{points}</span>
+          <span key={bump} className={`${s.pill} ${bump ? s.pillBump : ""}`}><Lucide icon={ic.sparkles} size={13} color="#ffc01e" />{points}</span>
         </div>
       </header>
 
@@ -189,7 +224,10 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
               <div key={item.name} className={s.wish}>
                 <span className={s.wIcon}><Lucide icon={item.icon} size={17} color="#4f2bd1" /></span>
                 <span className={s.grow}><strong>{item.name}</strong><small>{item.note}</small></span>
-                <span className={s.tukarBtn} aria-hidden>Tukar</span>
+                <button type="button" className={s.tukarBtn} aria-pressed={traded.includes(item.name)} onClick={() => trade(item.name)}>
+                  {traded.includes(item.name) ? "Ditandai" : "Tukar"}
+                  {traded.includes(item.name) && <em className={s.spent} aria-hidden>-{item.note.split(" ")[0]}</em>}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -202,7 +240,7 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
                     <small>{[gift.type === "bank" || gift.type === "ewallet" ? info.title : "", info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </span>
-                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "Tersalin" : "Salin"}</span></button>}
                 </div>
               );
             })}

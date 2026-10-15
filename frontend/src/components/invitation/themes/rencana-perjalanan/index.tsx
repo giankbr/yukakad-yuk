@@ -4,6 +4,8 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, safeUrl, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { useState } from "react";
+import { toast } from "@/lib/celebrate";
 import type { InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -66,6 +68,12 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
     { name: data.couple.brideFull ?? bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[2] },
   ];
   const mainMaps = mapsHref(data);
+  const [addons, setAddons] = useState<string[]>([]);
+  const toggleAddon = (name: string) => {
+    const on = !addons.includes(name);
+    setAddons(list => on ? [...list, name] : list.filter(item => item !== name));
+    toast(on ? "Add-on ditambahkan" : "Add-on dihapus");
+  };
 
   return (
     <ThemeShell
@@ -88,6 +96,7 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
               <SearchRow icon={ic.plane} kicker="Perjalanan" title="Masa Lajang → Pelaminan" note="1 rute, tanpa kembali" />
               <SearchRow icon={ic.building2} kicker="Venue" title={data.place} note={midDate} />
               <SearchRow icon={ic.users} kicker="Tamu" title="2 Dewasa + keluarga besar" note="Kursi VIP tersedia" />
+              <span className={s.searching} aria-hidden />
             </div>
             <div className={s.kepada}>
               <small>Traveler Utama</small>
@@ -200,13 +209,15 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
           <section className={s.card} aria-labelledby="rp-gift">
             <div className={s.head}><h2 id="rp-gift">Add-on Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && DEMO_WISHLIST.map(item => (
-              <div key={item.name} className={s.item}>
+              <div key={item.name} className={`${s.item} ${addons.includes(item.name) ? s.itemOn : ""}`}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#0194f3" /></span>
                 <div className={s.grow}>
                   <span className={s.itemHead}><strong>{item.name}</strong>{item.tag && <em>{item.tag}</em>}</span>
                   <small>{item.price}</small>
                 </div>
-                <span className={s.ghost} aria-hidden>Tambah</span>
+                <button type="button" className={`${s.ghost} ${addons.includes(item.name) ? s.added : ""}`} aria-pressed={addons.includes(item.name)} onClick={() => toggleAddon(item.name)}>
+                  {addons.includes(item.name) ? <><Lucide icon={ic.check} size={12} color="#fff" strokeWidth={3} />Ditambah</> : "Tambah"}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -219,7 +230,7 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
                     <small>{[gift.type === "bank" || gift.type === "ewallet" ? `${info.title} ${info.number}` : info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.salin} ${copied === info.copy ? s.added : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}

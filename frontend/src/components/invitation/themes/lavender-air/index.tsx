@@ -1,11 +1,12 @@
 "use client";
 // Theme "Lavender Air" — undangan cat air lavender: ungu lembut, polaroid, galeri gelembung (design: Undangan — Tema Lavender Air (Nadia & Reza)).
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
+import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -72,6 +73,8 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
   const maps = mapsHref(data, data.events[data.events.length - 1]);
   const [attendance, setAttendance] = useState<Attendance>("yes");
   const guestDefault = data.guestName && data.guestName !== "Tamu Undangan" ? data.guestName : "";
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (wishes.status === "sent") celebrate(sentRef.current); }, [wishes.status]);
 
   const people = [
     { short: data.couple.bride, name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[1] },
@@ -99,6 +102,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
           <div className={s.coverBorder} aria-hidden />
+          <div className={s.petals} aria-hidden><i /><i /><i /><i /><i /></div>
           <div className={s.coverContent}>
             <p className={s.kicker}>{coverLabel.toUpperCase()}</p>
             <h1 className={s.coverNames}>{couple}</h1>
@@ -149,7 +153,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
           <Head id="la-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit ${countdown.seconds} detik lagi`}>
             {([[countdown.days, "Hari"], [countdown.hours, "Jam"], [countdown.minutes, "Menit"], [countdown.seconds, "Detik"]] as const).map(([value, label]) => (
-              <div key={label} className={s.countBox} aria-hidden><b>{value}</b><span>{label}</span></div>
+              <div key={label} className={s.countBox} aria-hidden><b><Tick value={value} /></b><span>{label}</span></div>
             ))}
           </div>
           {calendar && <a className={s.pill} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -227,7 +231,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${gift.type === "address" ? "alamat" : "nomor"}`}>
+                    <button type="button" className={`${s.copy} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${gift.type === "address" ? "alamat" : "nomor"}`}>
                       <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
@@ -240,7 +244,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
         <section className={`${s.section} ${s.alt}`} aria-labelledby="la-wish">
           <Head id="la-wish">Ucapan &amp; RSVP</Head>
           {wishes.status === "sent" ? (
-            <div className={s.card} role="status">
+            <div ref={sentRef} className={`${s.card} ${s.sentCard}`} role="status">
               <p className={s.sent}>Terima kasih! {demo ? "Ini pratinjau — ucapanmu muncul di daftar." : "Ucapan dan konfirmasimu sudah kami terima."}</p>
               <button type="button" className={s.pillWide} onClick={() => { wishes.reset(); rsvp.reset(); }}>Tulis Lagi</button>
             </div>

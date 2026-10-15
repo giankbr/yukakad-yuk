@@ -1,9 +1,11 @@
 "use client";
 // Theme "Kencan" — undangan bergaya aplikasi kencan "It's a Match!" (design: Undangan — Tema Kencan (Maya & Kevin)).
+import { useState, type CSSProperties } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -28,6 +30,21 @@ const WISHLIST = [
 ];
 
 
+/** Heart on a profile card: tap to like (local, decorative) with a pop + little heart burst. */
+function LikeButton({ name }: { name: string }) {
+  const [liked, setLiked] = useState(false);
+  const onTap = () => {
+    setLiked(value => !value);
+    if (!liked) toast(`Kamu menyukai ${name.split(" ")[0]}`);
+  };
+  return (
+    <button type="button" className={`${s.like} ${liked ? s.liked : ""}`} onClick={onTap} aria-pressed={liked} aria-label={`Suka profil ${name}`}>
+      <Lucide icon={ic.heart} size={20} color={liked ? "#fff" : "#fd3a73"} />
+      {liked && <span className={s.likeBurst} aria-hidden><i /><i /><i /><i /><i /><i /></span>}
+    </button>
+  );
+}
+
 function city(address: string) {
   const parts = address.split(",").map(p => p.trim()).filter(Boolean);
   return parts[parts.length - 1] ?? "";
@@ -48,6 +65,8 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
   const cardB = data.gallery[1] ?? data.couple.groomPhoto;
   const rest = data.gallery.slice(2);
   const grid = rest.length >= 2 ? rest : data.gallery;
+  const [active, setTier] = useState<string>();
+  const [given, setGiven] = useState<string[]>([]);
   const people = [
     { key: "bride" as const, name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[0] },
     { key: "groom" as const, name: data.couple.groomFull ?? data.couple.groom, parents: data.couple.groomParents, photo: data.couple.groomPhoto ?? data.gallery[1] },
@@ -68,7 +87,8 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
           <div className={s.cards} aria-hidden>
             <div className={`${s.card} ${s.cardA}`}><Photo src={cardA} /></div>
             <div className={`${s.card} ${s.cardB}`}><Photo src={cardB} /></div>
-            <span className={s.bigHeart}><Lucide icon={ic.heart} size={28} color="#fd3a73" /></span>
+            <span className={s.bigHeart}><span className={s.beat}><Lucide icon={ic.heart} size={28} color="#fd3a73" /></span><i className={s.ring} /></span>
+            <span className={s.sparks}><i /><i /><i /><i /><i /><i /></span>
           </div>
           <div className={s.info}>
             <h2>{couple}</h2>
@@ -97,6 +117,7 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
           {people.map(person => (
             <article key={person.key} className={s.profile}>
               <Photo src={person.photo} alt={person.name} />
+              <LikeButton name={person.name} />
               <div className={s.profileText}>
                 <span className={s.profileName}><strong>{person.name}{demo ? `, ${DEMO_PROFILE[person.key].age}` : ""}</strong><Lucide icon={ic.badgeCheck} size={15} color="#35c9f3" /></span>
                 {person.parents && <small>{person.parents}</small>}
@@ -112,13 +133,14 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
           <section className={s.section} aria-labelledby="kc-chat">
             <h2 id="kc-chat">Riwayat Chat</h2>
             <p className={s.sub}>{since ? `Setelah match, ${since}` : "Dari match sampai pelaminan"}</p>
-            <div className={s.chat}>
+            <div className={s.chat} style={{ "--typing-at": `${Math.min(stories.length, 5) * 350}ms` } as CSSProperties}>
               {stories.map((story, index) => (
                 <div key={story.title + index} className={index % 2 ? s.rowOut : s.rowIn}>
                   <p className={index % 2 ? s.out : s.in}>{story.body}</p>
                 </div>
               ))}
-              <div className={s.rowOut}><p className={`${s.out} ${s.fit}`}>Deal. Selamanya. ✓✓</p></div>
+              <div className={s.typing} aria-hidden><span><i /><i /><i /></span></div>
+              <div className={`${s.rowOut} ${s.last}`}><p className={`${s.out} ${s.fit}`}>Deal. Selamanya. ✓✓</p></div>
             </div>
           </section>
         )}
@@ -171,17 +193,28 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
               <>
                 <div className={s.tiers}>
                   {TIERS.map(tier => (
-                    <div key={tier.name} className={s.tier} style={{ borderColor: tier.color }}>
-                      <Lucide icon={tier.icon} size={20} color={tier.color} />
+                    <button
+                      key={tier.name} type="button" className={`${s.tier} ${tier.name === active ? s.tierOn : ""}`} aria-pressed={tier.name === active}
+                      style={{ borderColor: tier.color, "--tier": tier.color } as CSSProperties}
+                      onClick={() => { const next = tier.name === active ? undefined : tier.name; setTier(next); if (next) toast(`${next} dipilih`); }}
+                    >
+                      <span className={s.tierIcon}><Lucide icon={tier.icon} size={20} color={tier.name === active ? "#fff" : tier.color} /></span>
                       <strong>{tier.name}</strong><small>{tier.price}</small>
-                    </div>
+                    </button>
                   ))}
                 </div>
                 {WISHLIST.map(item => (
                   <div key={item.name} className={s.wish}>
                     <span className={s.wishIcon} aria-hidden><Lucide icon={item.icon} size={18} color="#fd3a73" /></span>
                     <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                    <span className={s.beri}>Beri</span>
+                    <button
+                      type="button" className={`${s.beri} ${given.includes(item.name) ? s.beriOn : ""}`} aria-pressed={given.includes(item.name)}
+                      onClick={() => {
+                        const on = given.includes(item.name);
+                        setGiven(list => on ? list.filter(name => name !== item.name) : [...list, item.name]);
+                        if (!on) toast("Ditandai sebagai kado darimu");
+                      }}
+                    >{given.includes(item.name) ? <><Lucide icon={ic.heart} size={12} color="#fd3a73" />Dipilih</> : "Beri"}</button>
                   </div>
                 ))}
               </>
@@ -195,7 +228,7 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
                     <strong>{gift.type === "address" ? "Kirim Kado" : "Amplop Digital"}</strong>
                     <small>{(gift.type === "address" ? [info.number] : [`${info.title} ${info.number}`.trim(), info.holder ? `a.n. ${info.holder}` : ""]).filter(Boolean).join(" · ")}</small>
                   </div>
-                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.salin} ${copied === info.copy ? s.salinOn : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                   {info.image && <a className={s.salin} href={info.image} target="_blank" rel="noreferrer">Lihat QR</a>}
                 </div>
               );

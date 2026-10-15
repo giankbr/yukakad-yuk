@@ -22,7 +22,7 @@ export default async function InvitationDemoPage({ searchParams }: { searchParam
   };
   const slug = `demo-${id}`;
   return (
-    <InvitationProvider data={data} slug={slug} demo>
+    <InvitationProvider data={data} slug={slug} demo theme={id}>
       <Theme data={data} slug={slug} demo skipCover={open === "1"} />
     </InvitationProvider>
   );

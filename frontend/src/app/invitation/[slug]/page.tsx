@@ -131,7 +131,7 @@ export default async function PublicInvitationPage({
       ? settings.sections_config as InvitationExtras : undefined,
   };
   return (
-    <InvitationProvider data={data} slug={slug} guestToken={guestToken}>
+    <InvitationProvider data={data} slug={slug} guestToken={guestToken} theme={themeId}>
       {/* Guests returning from the envelope payment skip the cover so they land on the thank-you note. */}
       <Theme data={data} slug={slug} guestToken={guestToken} skipCover={amplop === "selesai"} />
       {!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}

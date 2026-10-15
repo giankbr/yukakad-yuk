@@ -12,7 +12,7 @@ import x from "./extras.module.css";
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 const TZ = "Asia/Jakarta";
 
-type Ctx = { data: InvitationData; slug: string; guestToken?: string; demo?: boolean };
+type Ctx = { data: InvitationData; slug: string; guestToken?: string; demo?: boolean; /** Theme id, drives the motion personality. */ theme?: string };
 const InvitationContext = createContext<Ctx | null>(null);
 
 export function InvitationProvider({ children, ...value }: Ctx & { children: ReactNode }) {

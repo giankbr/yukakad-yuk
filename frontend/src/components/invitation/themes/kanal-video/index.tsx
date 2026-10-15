@@ -5,6 +5,7 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import type { InvitationData } from "../../types";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -63,6 +64,9 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
   const { copy, copied } = useCopy();
   const [subscribed, setSubscribed] = useState<Record<string, boolean>>({});
   const [liked, setLiked] = useState(false);
+  const [activeChip, setActiveChip] = useState("#kv-top");
+  const [tier, setTier] = useState<string>();
+  const [cLiked, setCLiked] = useState<Record<string, boolean>>({});
   const stories = storyItems(data);
   const thumb = data.gallery[0];
   const clips = data.gallery.length > 4 ? data.gallery.slice(1) : data.gallery;
@@ -87,10 +91,21 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
       void copy(url);
     }
   };
-  const toggleSub = (key: string) => setSubscribed(state => ({ ...state, [key]: !state[key] }));
+  const toggleSub = (key: string) => {
+    if (!subscribed[key]) toast("Berhasil subscribe");
+    setSubscribed(state => ({ ...state, [key]: !state[key] }));
+  };
+  const toggleLike = () => {
+    if (!liked) toast("Ditambahkan ke video yang disukai");
+    setLiked(v => !v);
+  };
+  // Remounting the icon wrapper on every change replays the pop animation.
+  const likeIcon = (size: number, off: string) => (
+    <span key={String(liked)} className={`${s.likeIcon} ${liked ? s.popped : ""}`}><Lucide icon={ic.thumbsUp} size={size} color={liked ? "#ff0033" : off} /></span>
+  );
   const subBtn = (id: string, className: string) => (
     <button type="button" className={`${className} ${subscribed[id] ? s.subbed : ""}`} aria-pressed={!!subscribed[id]} onClick={() => toggleSub(id)}>
-      {subscribed[id] ? "Disubscribe" : "Subscribe"}
+      <span key={String(!!subscribed[id])} className={s.subLabel}>{subscribed[id] && <Lucide icon={ic.bell} size={12} />}{subscribed[id] ? "Disubscribe" : "Subscribe"}</span>
     </button>
   );
 
@@ -107,7 +122,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
             <Photo src={thumb} alt={`Foto ${names}`} />
             <button type="button" className={s.play} onClick={open} aria-label="Tonton undangan"><Lucide icon={ic.play} size={30} color="#fff" /></button>
             <span className={s.dur} aria-hidden>∞</span>
-            <i className={s.progress} aria-hidden><b /></i>
+            <i className={s.progress} aria-hidden><b><em /></b></i>
           </div>
           <div className={s.meta}>
             <h1>{names} — Menuju Selamanya (Trailer Resmi)</h1>
@@ -118,8 +133,8 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
               {subBtn("cover", s.subLight)}
             </div>
             <div className={s.actions}>
-              <button type="button" aria-pressed={liked} onClick={() => setLiked(v => !v)}>
-                <Lucide icon={ic.thumbsUp} size={14} color={liked ? "#ff0033" : "#fff"} />{demo ? "12 rb" : liked ? "Disukai" : "Suka"}
+              <button type="button" aria-pressed={liked} onClick={toggleLike}>
+                {likeIcon(14, "#fff")}{demo ? "12 rb" : liked ? "Disukai" : "Suka"}
               </button>
               <button type="button" onClick={share}><Lucide icon={copied && copied.startsWith("http") ? ic.check : ic.share2} size={14} color="#fff" />Bagikan</button>
               {mainCalendar && <a href={mainCalendar} target="_blank" rel="noreferrer"><Lucide icon={ic.bookmark} size={14} color="#fff" />Simpan</a>}
@@ -139,7 +154,9 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
           <span className={s.navIcons} aria-hidden><Lucide icon={ic.cast} size={20} /><Lucide icon={ic.bell} size={20} /><Lucide icon={ic.search} size={20} /></span>
         </div>
         <nav className={s.chips} aria-label="Bagian undangan">
-          {chips.map((chip, index) => <a key={chip.href} href={chip.href} className={index === 0 ? s.chipOn : undefined}>{chip.label}</a>)}
+          {chips.map(chip => (
+            <a key={chip.href} href={chip.href} className={activeChip === chip.href ? s.chipOn : undefined} aria-current={activeChip === chip.href ? "true" : undefined} onClick={() => setActiveChip(chip.href)}>{chip.label}</a>
+          ))}
         </nav>
       </header>
 
@@ -168,7 +185,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
               <span className={s.epThumb}>
                 <Photo src={story.image ?? clips[index]} alt="" />
                 <i className={s.epPlay} aria-hidden><Lucide icon={ic.play} size={11} color="#fff" /></i>
-                <b className={s.epBar} aria-hidden />
+                <b className={s.epBar} aria-hidden style={{ width: `${index === stories.length - 1 ? 62 : 100}%` }} />
               </span>
               <div className={s.epText}>
                 <strong>Ep. {index + 1} — {story.title}</strong>
@@ -182,7 +199,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
             <span className={`${s.epThumb} ${s.epFinal}`}><i className={s.epPlay} aria-hidden><Lucide icon={ic.play} size={11} color="#fff" /></i></span>
             <div className={s.epText}>
               <strong>Final — Menuju Selamanya</strong>
-              <small className={s.live}>{[shortDate, "LIVE"].filter(Boolean).join(" · ")}</small>
+              <small className={s.live}>{shortDate && `${shortDate} · `}<i className={s.liveDot} aria-hidden />LIVE</small>
             </div>
             <Lucide icon={ic.ellipsisVertical} size={16} color="#606060" />
           </article>
@@ -236,7 +253,13 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
             <h2 id="kv-gift-h">{demo ? "Super Thanks · Wishlist Kado" : "Super Thanks · Kirim Kado"}</h2>
             {demo && (
               <>
-                <div className={s.tiers}>{DEMO_TIERS.map(([label, color]) => <span key={label} style={{ color, borderColor: color, background: `${color}1a` }}>{label}</span>)}</div>
+                <div className={s.tiers}>
+                  {DEMO_TIERS.map(([label, color]) => (
+                    <button key={label} type="button" aria-pressed={tier === label} className={tier === label ? s.tierOn : undefined}
+                      style={{ color: tier === label ? "#fff" : color, borderColor: color, background: tier === label ? color : `${color}1a` }}
+                      onClick={() => setTier(value => value === label ? undefined : label)}>{label}</button>
+                  ))}
+                </div>
                 <div className={s.rack}>
                   {DEMO_PRODUCTS.map(item => (
                     <div key={item.name} className={s.product}>
@@ -259,7 +282,11 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
                     <small>{[[address ? "" : info.title, info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && (
+                    <button type="button" className={copied === info.copy ? s.copiedBtn : undefined} onClick={() => copy(info.copy)}>
+                      <span key={String(copied === info.copy)} className={s.subLabel}>{copied === info.copy && <Lucide icon={ic.check} size={12} />}{copied === info.copy ? "Tersalin" : "Salin"}</span>
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -278,7 +305,11 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
                 <p className={s.cHead}><b>{handle(wish.name)}</b><span>{timeAgo(wish.created_at).replace(/ lalu$/, "")}</span></p>
                 <p className={s.cBody}>{wish.message}</p>
                 <p className={s.cFoot}>
-                  {demo && DEMO_LIKES[wish.id] && <span><Lucide icon={ic.thumbsUp} size={12} color="#606060" />{DEMO_LIKES[wish.id]}</span>}
+                  <button type="button" className={`${s.cLike} ${cLiked[wish.id] ? s.cLikeOn : ""}`} aria-pressed={!!cLiked[wish.id]} aria-label={`Suka komentar ${handle(wish.name)}`}
+                    onClick={() => setCLiked(state => ({ ...state, [wish.id]: !state[wish.id] }))}>
+                    <span key={String(!!cLiked[wish.id])} className={cLiked[wish.id] ? s.popped : undefined}><Lucide icon={ic.thumbsUp} size={12} color={cLiked[wish.id] ? "#ff0033" : "#606060"} /></span>
+                    {demo && DEMO_LIKES[wish.id] ? (cLiked[wish.id] ? String(Number(DEMO_LIKES[wish.id]) + 1) : DEMO_LIKES[wish.id]) : cLiked[wish.id] ? "1" : ""}
+                  </button>
                   <button type="button" onClick={sheets.openWish}>Balas</button>
                 </p>
               </div>
@@ -290,8 +321,8 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
       </main>
 
       <nav className={s.bottom} aria-label="Aksi undangan">
-        <button type="button" className={`${s.likeBtn} ${liked ? s.likeOn : ""}`} aria-pressed={liked} aria-label="Suka undangan ini" onClick={() => setLiked(v => !v)}>
-          <Lucide icon={ic.thumbsUp} size={18} color={liked ? "#ff0033" : "#0f0f0f"} />
+        <button type="button" className={`${s.likeBtn} ${liked ? s.likeOn : ""}`} aria-pressed={liked} aria-label="Suka undangan ini" onClick={toggleLike}>
+          {likeIcon(18, "#0f0f0f")}
         </button>
         <button type="button" className={s.rsvpBtn} onClick={sheets.openRsvp}>Konfirmasi Hadir</button>
       </nav>

@@ -2880,6 +2880,94 @@ body,
 	[data-reveal][data-revealed] { animation: none; }
 }
 
+/* ── Invitation motion personalities (components/invitation/themes/motion.ts) ──
+   ThemeShell sets data-motion on the invitation root; the tokens below drive reveals, presses and celebrations.
+   Everything uses the independent `translate` / `scale` properties so it composes with a theme's own transforms,
+   and the press/hover defaults sit in :where() (specificity 0) so a theme's own rules always win. */
+[data-motion] {
+	--m-ease: cubic-bezier(.22, .61, .36, 1);
+	--m-spring: cubic-bezier(.22, .61, .36, 1);
+	--m-dur: 1050ms;
+	--m-dist: 22px;
+	--m-scale: 1;
+	--m-blur: 6px;
+	--m-press: .975;
+	--m-lift: -1px;
+}
+[data-motion="playful"] {
+	--m-ease: cubic-bezier(.34, 1.4, .64, 1);
+	--m-spring: cubic-bezier(.34, 1.56, .64, 1);
+	--m-dur: 720ms;
+	--m-dist: 34px;
+	--m-scale: .92;
+	--m-blur: 0px;
+	--m-press: .93;
+	--m-lift: -2px;
+}
+[data-motion="crisp"] {
+	--m-ease: cubic-bezier(.2, .8, .2, 1);
+	--m-spring: cubic-bezier(.2, .8, .2, 1);
+	--m-dur: 520ms;
+	--m-dist: 12px;
+	--m-scale: .99;
+	--m-blur: 0px;
+	--m-press: .97;
+	--m-lift: 0px;
+}
+[data-motion] [data-reveal][data-revealed] { animation: rw-m-rise var(--m-dur) var(--m-ease) var(--rd, 0ms) both; }
+[data-motion] [data-reveal="fade"][data-revealed] { animation-name: rw-reveal-fade; animation-timing-function: ease-out; }
+[data-motion] [data-reveal="media"][data-revealed] { animation-name: rw-m-media; animation-duration: calc(var(--m-dur) * 1.35); animation-timing-function: cubic-bezier(.16, 1, .3, 1); }
+[data-motion] [data-reveal="title"][data-revealed] { animation-name: rw-m-title; }
+@keyframes rw-m-rise {
+	from { opacity: 0; translate: 0 var(--m-dist); scale: var(--m-scale); filter: blur(var(--m-blur)); }
+	to { opacity: 1; translate: none; scale: none; filter: none; }
+}
+@keyframes rw-m-media {
+	from { opacity: 0; scale: 1.06; filter: blur(var(--m-blur)) saturate(.7); }
+	to { opacity: 1; scale: none; filter: none; }
+}
+@keyframes rw-m-title {
+	from { opacity: 0; translate: 0 calc(var(--m-dist) * .5); scale: calc(var(--m-scale) * .96 + .04); letter-spacing: .04em; filter: blur(calc(var(--m-blur) + 2px)); }
+	to { opacity: 1; translate: none; scale: none; filter: none; }
+}
+[data-motion="crisp"] [data-reveal="title"][data-revealed] { animation-name: rw-m-rise; }
+
+/* Press + hover feedback for anything tappable. */
+:where([data-motion]) :where(button, a[href], [role="button"], summary, label:has(> input[type="radio"]), label:has(> input[type="checkbox"])) {
+	transition: scale 260ms var(--m-spring), translate 260ms var(--m-spring), filter 200ms ease, box-shadow 200ms ease, background-color 200ms ease, color 200ms ease, border-color 200ms ease, opacity 200ms ease;
+	-webkit-tap-highlight-color: transparent;
+}
+:where([data-motion]) :where(button, a[href], [role="button"], summary, label:has(> input)):not(:disabled):active { scale: var(--m-press); transition-duration: 90ms; }
+@media (hover: hover) {
+	:where([data-motion]) :where(button, [role="button"]):not(:disabled):hover { translate: 0 var(--m-lift); }
+}
+:where([data-motion]) :where(button, a[href], summary, input, textarea, select):focus-visible { outline: 2px solid var(--t-accent, currentColor); outline-offset: 3px; }
+
+/* Cover: slow Ken Burns on big photos, a breathing call-to-action. */
+[data-kenburns] { animation: rw-m-kenburns 22s ease-in-out infinite alternate; transform-origin: 50% 40%; }
+@keyframes rw-m-kenburns { from { scale: 1; translate: 0 0; } to { scale: 1.1; translate: -1.5% -2%; } }
+:where([data-cta]) { animation: rw-m-breathe 2.8s ease-in-out infinite; }
+:where([data-motion="playful"] [data-cta]) { animation-name: rw-m-wiggle; animation-duration: 3.2s; }
+@keyframes rw-m-breathe {
+	0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--t-accent, #888) 0%, transparent); }
+	50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--t-accent, #888) 18%, transparent); }
+}
+@keyframes rw-m-wiggle {
+	0%, 70%, 100% { scale: 1; rotate: 0deg; }
+	76% { scale: 1.06; rotate: -2deg; }
+	82% { scale: 1.06; rotate: 2deg; }
+	88% { scale: 1.03; rotate: -1deg; }
+}
+/* Gentle parallax on the opening photo (ThemeShell sets --py while scrolling). */
+[data-parallax] { translate: 0 var(--py, 0px); scale: 1.12; will-change: translate; }
+
+@media (prefers-reduced-motion: reduce) {
+	[data-motion] [data-reveal][data-revealed] { animation: none; }
+	[data-kenburns], [data-cta] { animation: none !important; }
+	[data-parallax] { translate: none; scale: none; }
+	:where([data-motion]) :where(button, a[href], [role="button"], summary, label:has(> input)):not(:disabled):active { scale: none; }
+}
+
 /* Empty states */
 .dashboard-empty {
 	display: grid;

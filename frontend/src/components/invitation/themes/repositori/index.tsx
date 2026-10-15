@@ -1,9 +1,11 @@
 "use client";
 // Theme "Repositori" — undangan bergaya repositori kode / pull request (design: Tema Repositori (Raka & Tami)).
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -22,6 +24,12 @@ const GRAPH = [
   ["", "#006d32", "#26a641"], ["#39d353", "#0e4429", "#006d32"], ["#26a641", "#39d353", "#0e4429"],
   ["#006d32", "#26a641", ""], ["#0e4429", "#006d32", "#39d353"],
 ];
+const TABS = [
+  { id: "repo-mempelai", label: "Kode", icon: ic.code },
+  { id: "repo-acara", label: "Undangan", icon: ic.gitPullRequest },
+  { id: "repo-ucapan", label: "Ucapan", icon: ic.messageSquare },
+];
+const MERGE_LINE = "git merge";
 
 function slugify(value: string) {
   return value.toLowerCase().normalize("NFKD").replace(/[^\w\s-]/g, "").trim().replace(/[\s_]+/g, "-") || "kita";
@@ -52,6 +60,36 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
+  const [starred, setStarred] = useState(false);
+  const [tab, setTab] = useState(TABS[0].id);
+  const [selectedTier, setTier] = useState<string>();
+  const [reacted, setReacted] = useState<Record<string, boolean>>({});
+  const tabsRef = useRef<HTMLElement>(null);
+  // Scroll-spy: the tab of the last section whose heading passed under the sticky header is active.
+  useEffect(() => {
+    const onScroll = () => {
+      let current = TABS[0].id;
+      for (const { id } of TABS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top < 170) current = id;
+      }
+      setTab(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  // Slide the underline under the active tab.
+  useEffect(() => {
+    const nav = tabsRef.current;
+    const active = nav?.querySelector<HTMLElement>("a[aria-current]");
+    if (!nav || !active) return;
+    nav.style.setProperty("--ink-x", `${active.offsetLeft}px`);
+    nav.style.setProperty("--ink-w", `${active.offsetWidth}px`);
+  }, [tab]);
+  const toggleStar = () => {
+    if (!starred) toast("Repositori diberi bintang");
+    setStarred(value => !value);
+  };
   const noteLines = couple.note.split("\n").map(line => line.trim()).filter(Boolean);
   const people = [
     { name: couple.groomFull ?? couple.groom, handle: demo ? "@rakadev" : `@${groom}`, parents: couple.groomParents, photo: couple.groomPhoto ?? data.gallery[1], commits: "1.204 commit kesabaran" },
@@ -70,15 +108,16 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
       skipCover={skipCover}
       className={s.root}
       cover={open => (
-        <section className={s.cover}>
-          <div className={s.coverBody}>
+        <section className={`${s.cover} ${s.coverBody}`}>
             <div className={s.crumb}>
               <Lucide icon={ic.bookMarked} size={15} color="#8d96a0" />
               <span className={s.link}>{groom}</span><span className={s.muted}>/</span><strong className={s.link}>{repo}</strong>
               <span className={s.pill}>Public</span>
             </div>
             <div className={s.stats}>
-              {demo && <span><Lucide icon={ic.star} size={14} />2,7rb</span>}
+              <button type="button" className={`${s.star} ${starred ? s.starred : ""}`} aria-pressed={starred} onClick={toggleStar}>
+                <Lucide icon={ic.star} size={14} color={starred ? "#d29922" : "currentColor"} />{starred ? "Starred" : "Star"}{demo && <b>2,7rb</b>}
+              </button>
               <span><Lucide icon={ic.gitFork} size={14} />2 → 1</span>
               <span><Lucide icon={ic.eye} size={14} />Semua tamu</span>
             </div>
@@ -112,20 +151,19 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
             <button type="button" className={s.openBtn} onClick={open}><Lucide icon={ic.gitMerge} size={17} color="#fff" />Buka Undangan</button>
 
             <div className={s.term} aria-hidden>
-              <code className={s.green}>$ git merge {bride} --forever</code>
-              <code>Merging... 100% (∞/∞), selesai.</code>
+              <code className={`${s.green} ${s.typed}`} style={{ "--n": `${`$ ${MERGE_LINE} ${bride} --forever`.length}` } as CSSProperties}>$ {MERGE_LINE} {bride} --forever</code>
+              <code className={s.after}>Merging... <i className={s.mergeBar}><b /></i> 100% (∞/∞), selesai.</code>
             </div>
 
             <div className={s.contrib} aria-hidden>
               <code>{demo ? "2.555 hari saling kontribusi" : countdown.ready ? `${countdown.days} hari menuju merge` : "Riwayat kontribusi"}</code>
               <div className={s.graph}>
                 {GRAPH.map((row, r) => (
-                  <div key={r}>{Array.from({ length: 24 }, (_, i) => <i key={i} style={row[i % 3] ? { background: row[i % 3], borderColor: row[i % 3] } : undefined} />)}</div>
+                  <div key={r}>{Array.from({ length: 24 }, (_, i) => <i key={i} style={{ "--d": `${(i + r) * 22}ms`, ...(row[i % 3] ? { background: row[i % 3], borderColor: row[i % 3] } : {}) } as CSSProperties} />)}</div>
                 ))}
               </div>
               <code className={s.tiny}>Sedikit → Banyak cinta</code>
             </div>
-          </div>
         </section>
       )}
     >
@@ -135,10 +173,11 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
           <span>{groom}/{repo}</span>
           <Lucide icon={ic.bell} size={18} color="#8d96a0" />
         </div>
-        <nav className={s.tabs} aria-label="Bagian undangan">
-          <a href="#repo-mempelai" aria-current="page"><Lucide icon={ic.code} size={14} />Kode</a>
-          <a href="#repo-acara"><Lucide icon={ic.gitPullRequest} size={14} />Undangan</a>
-          <a href="#repo-ucapan"><Lucide icon={ic.messageSquare} size={14} />Ucapan</a>
+        <nav className={s.tabs} aria-label="Bagian undangan" ref={tabsRef}>
+          {TABS.map(item => (
+            <a key={item.id} href={`#${item.id}`} aria-current={tab === item.id ? "page" : undefined}><Lucide icon={item.icon} size={14} />{item.label}</a>
+          ))}
+          <i className={s.tabInk} aria-hidden />
         </nav>
       </header>
 
@@ -228,11 +267,13 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
                     { name: "Backer", price: "Rp500rb", icon: ic.sparkles, color: "#58a6ff" },
                     { name: "Gold", price: "Rp1jt", icon: ic.crown, color: "#d29922" },
                   ].map(tier => (
-                    <div key={tier.name} className={s.tier} style={{ borderColor: tier.color }}>
+                    <button key={tier.name} type="button" className={s.tier} aria-pressed={tier.name === selectedTier}
+                      style={{ borderColor: tier.color, "--c": tier.color } as CSSProperties} onClick={() => setTier(value => value === tier.name ? undefined : tier.name)}>
                       <Lucide icon={tier.icon} size={18} color={tier.color} />
                       <strong>{tier.name}</strong>
                       <code style={{ color: tier.color }}>{tier.price}</code>
-                    </div>
+                      {tier.name === selectedTier && <em className={s.tierCheck}><Lucide icon={ic.check} size={10} color="#fff" /></em>}
+                    </button>
                   ))}
                 </div>
                 <ul className={s.wishlist}>
@@ -256,7 +297,11 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
                     <code>{[[info.title !== "Alamat kado" && gift.type !== "qris" ? info.title : "", info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</code>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && (
+                    <button type="button" className={`${s.copy} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)}>
+                      {copied === info.copy && <Lucide icon={ic.check} size={11} color="#fff" />}{copied === info.copy ? "Tersalin" : "Salin"}
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -274,6 +319,10 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
                 <em><Lucide icon={ic.check} size={10} color="#3fb950" />approved</em>
               </div>
               <p>{wish.message}</p>
+              <button type="button" className={`${s.react} ${reacted[wish.id] ? s.reacted : ""}`} aria-pressed={!!reacted[wish.id]} aria-label={`Beri hati untuk ucapan ${wish.name}`}
+                onClick={() => setReacted(state => ({ ...state, [wish.id]: !state[wish.id] }))}>
+                <Lucide icon={ic.heart} size={12} color={reacted[wish.id] ? "#db61a2" : "#8d96a0"} />{reacted[wish.id] ? 1 : ""}
+              </button>
             </article>
           ))}
         </section>

@@ -2,9 +2,10 @@
 // Theme "Peta Rute" — undangan bergaya aplikasi peta & navigasi (design: Undangan — Tema Peta (Laras & Galih)).
 import { useState } from "react";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -59,6 +60,9 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [shared, setShared] = useState(false);
+  const [helpful, setHelpful] = useState<Record<string, boolean>>({});
+  const [given, setGiven] = useState<Record<string, boolean>>({});
+  const [saved, setSaved] = useState(false);
   const stories = storyItems(data);
   const start = year(stories[0]?.date);
   const end = formatDate(data.date, { year: "numeric" });
@@ -80,7 +84,7 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
     const url = window.location.href;
     try {
       if (navigator.share) await navigator.share({ title, url });
-      else { await navigator.clipboard.writeText(url); setShared(true); setTimeout(() => setShared(false), 2000); }
+      else { await navigator.clipboard.writeText(url); setShared(true); toast("Tautan disalin"); setTimeout(() => setShared(false), 2000); }
     } catch { /* dismissed */ }
   };
 
@@ -99,17 +103,17 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
             <Lucide icon={ic.mic} size={18} color="#1a73e8" />
           </div>
           <div className={s.pin} aria-hidden>
-            <span className={s.pinHead}><Lucide icon={ic.heart} size={28} color="#fff" /></span>
+            <span className={s.ping} /><span className={s.pinHead}><Lucide icon={ic.heart} size={28} color="#fff" /></span>
             <i />
           </div>
-          <span className={s.eta}>{countdown.ready ? (countdown.done ? "Sudah tiba di tujuan" : `${Number(countdown.days)} hari menuju tujuan`) : "Menghitung rute…"}</span>
+          <span className={s.eta}>{countdown.ready ? (countdown.done ? "Sudah tiba di tujuan" : <><Tick value={Number(countdown.days)} /> hari menuju tujuan</>) : "Menghitung rute…"}</span>
           <div className={s.sheet}>
             <span className={s.handle} aria-hidden />
             <h1>Rute: Lajang → Pelaminan</h1>
             <p className={s.green}>{[span > 0 ? `${span} tahun` : "", "jalur tercepat lewat kesabaran", "lancar"].filter(Boolean).join(" · ")}</p>
             <ol className={s.route}>
               <li>
-                <span className={s.rail} aria-hidden><Lucide icon={ic.circle} size={14} color="#1a73e8" /><i /><i /><i /></span>
+                <span className={s.rail} aria-hidden><Lucide icon={ic.circle} size={14} color="#1a73e8" /><i /><i /><i /><i /></span>
                 <div className={s.stop}><strong>Kota Lajang</strong>{start && <small>Berangkat {start}</small>}</div>
               </li>
               <li>
@@ -138,8 +142,8 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
         <p className={s.green}>Buka {longDate}{placeLine ? ` · ${placeLine}` : ""}</p>
         <div className={s.chips}>
           {mainMaps && <a className={`${s.chip} ${s.chipOn}`} href={mainMaps} target="_blank" rel="noreferrer"><Lucide icon={ic.navigation} size={14} color="#fff" />Rute</a>}
-          {calendar && <a className={s.chip} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.bookmark} size={14} color="#1a73e8" />Simpan</a>}
-          <button type="button" className={s.chip} onClick={share}><Lucide icon={ic.share2} size={14} color="#1a73e8" />{shared ? "Tautan disalin" : "Bagikan"}</button>
+          {calendar && <a className={s.chip} href={calendar} target="_blank" rel="noreferrer" data-on={saved || undefined} onClick={() => setSaved(true)}><Lucide icon={ic.bookmark} size={14} color="#1a73e8" />{saved ? "Disimpan" : "Simpan"}</a>}
+          <button type="button" className={s.chip} data-on={shared || undefined} onClick={share}><Lucide icon={ic.share2} size={14} color="#1a73e8" />{shared ? "Tautan disalin" : "Bagikan"}</button>
           <button type="button" className={s.chip} onClick={sheets.openWish}><Lucide icon={ic.phone} size={14} color="#1a73e8" />Kontak</button>
         </div>
       </section>
@@ -154,7 +158,7 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
             const day = event.date && formatDate(event.date) !== longDate ? formatDate(event.date, { weekday: "short", day: "numeric", month: "short" }) : "";
             return (
               <article key={event.name + index} className={s.event}>
-                <Lucide icon={ic.clock3} size={16} color={first ? "#188038" : "#5f6368"} />
+                <span className={first ? s.clockLive : s.clock}><Lucide icon={ic.clock3} size={16} color={first ? "#188038" : "#5f6368"} /></span>
                 <div className={s.eventText}>
                   <strong className={first ? s.bold : undefined}>{event.name}{event.time ? ` · ${event.time}` : ""}</strong>
                   <small className={first ? s.green : undefined}>{[EVENT_NOTES[Math.min(index, 1)], day, venue].filter(Boolean).join(" · ")}</small>
@@ -223,7 +227,10 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
               <div key={item.name} className={s.item}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#1a73e8" /></span>
                 <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                <span className={s.pill}>Beri</span>
+                <button type="button" className={s.pill} aria-pressed={!!given[item.name]}
+                  onClick={() => { setGiven(g => ({ ...g, [item.name]: !g[item.name] })); if (!given[item.name]) toast("Ditandai di perangkatmu"); }}>
+                  {given[item.name] ? "Dipilih" : "Beri"}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -235,7 +242,7 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
                     <strong>{gift.type === "address" ? "Kirim Kado" : "Amplop Digital"}</strong>
                     <small>{(gift.type === "address" ? [info.number] : [`${info.title} ${info.number}`.trim(), info.holder ? `a.n. ${info.holder}` : ""]).filter(Boolean).join(" · ")}</small>
                   </div>
-                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.salin} data-done={copied === info.copy || undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                   {info.image && <a className={s.salin} href={info.image} target="_blank" rel="noreferrer">Lihat QR</a>}
                 </div>
               );
@@ -254,6 +261,9 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
                 <div><strong>{wish.name}</strong><span><b aria-hidden>★★★★★</b>{timeAgo(wish.created_at)}</span></div>
               </div>
               <p>{wish.message}</p>
+              <button type="button" className={s.helpful} aria-pressed={!!helpful[wish.id]} onClick={() => setHelpful(h => ({ ...h, [wish.id]: !h[wish.id] }))}>
+                <Lucide icon={ic.thumbsUp} size={13} />{helpful[wish.id] ? "Membantu · 1" : "Membantu"}
+              </button>
             </article>
           ))}
           <button type="button" className={s.write} onClick={sheets.openWish}>Tulis ulasan &amp; doa</button>

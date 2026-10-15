@@ -1,11 +1,12 @@
 "use client";
 // Theme "Pastel Flat" — ilustrasi flat lucu, palet pink-pastel, kartu membulat.
-import { useState, type FormEvent } from "react";
+import { Fragment, useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, giftInfo, guestLabel,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
+import { celebrate, toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -17,6 +18,28 @@ const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Vina", message: "Mira!!! Selamat ya sayang, gemes banget temanya.", attendance: "yes" },
   { id: "w2", name: "Pak Budi", message: "Selamat Mira & Bagas. Bahagia selalu.", attendance: "yes" },
 ];
+
+/** The little heart between the couple cards: tap to send love (purely decorative, local state only). */
+function LoveButton() {
+  const [count, setCount] = useState(0);
+  const [bursts, setBursts] = useState<number[]>([]);
+  const onTap = () => {
+    const id = Date.now();
+    setCount(value => value + 1);
+    setBursts(list => [...list.slice(-5), id]);
+    window.setTimeout(() => setBursts(list => list.filter(item => item !== id)), 1100);
+    if (count === 0) toast("Cinta terkirim untuk kedua mempelai");
+  };
+  return (
+    <button type="button" className={`${s.heart} ${count > 0 ? s.heartOn : ""}`} onClick={onTap} aria-label="Kirim cinta untuk mempelai">
+      <span key={count} className={s.heartIcon} aria-hidden>♥</span>
+      {count > 0 && <span className={s.heartCount} aria-hidden><Tick value={count} /></span>}
+      {bursts.map(id => (
+        <span key={id} className={s.heartBurst} aria-hidden><i>♥</i><i>♥</i><i>♥</i><i>♥</i><i>♥</i></span>
+      ))}
+    </button>
+  );
+}
 
 function Head({ id, children }: { id: string; children: string }) {
   return (
@@ -69,6 +92,8 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
   const families = [familyName(data.couple.brideParents) ?? data.couple.bride, familyName(data.couple.groomParents) ?? data.couple.groom];
   const sending = rsvp.status === "sending" || wishes.status === "sending";
   const sent = rsvp.status === "sent" || wishes.status === "sent";
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (sent) celebrate(sentRef.current); }, [sent]);
   const pillTone = [undefined, s.pillBlue, s.pillYellow];
 
   const people = [
@@ -96,6 +121,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={ART} /></div>
+          <div className={s.confetti} aria-hidden><i /><i /><i /><i /><i /><i /></div>
           <div className={s.coverContent}>
             <p className={s.coverKicker}>Simpan tanggalnya</p>
             <h1 className={s.coverNames}>{couple}</h1>
@@ -127,8 +153,8 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
           <Head id="pf-couple">Mempelai</Head>
           <p className={`${s.lead} ${s.small}`}>Yeay! Kami mau nikah dan kamu diundang. Kenalan dulu sama kami:</p>
           {people.map((person, index) => (
-            <div key={person.key} style={{ display: "contents" }}>
-              {index > 0 && <span className={s.heart} aria-hidden>♥</span>}
+            <Fragment key={person.key}>
+              {index > 0 && <LoveButton />}
               <article className={`${s.person} ${index % 2 ? s.personRight : ""}`}>
                 <Photo src={person.photo} alt={person.name} className={s.personPhoto} />
                 <div className={s.personText}>
@@ -137,7 +163,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
                   {person.parents && <p>{person.parents}</p>}
                 </div>
               </article>
-            </div>
+            </Fragment>
           ))}
         </section>
 
@@ -145,7 +171,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
           <Head id="pf-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
             {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
-              <div key={unit} className={s.countBox}><b>{value}</b><small>{unit}</small></div>
+              <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
             ))}
           </div>
           {calendar && <a className={s.btn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -208,6 +234,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
                 {extra.length > 0 && (
                   <button type="button" className={s.more} aria-expanded={showAll} onClick={() => setShowAll(value => !value)}>
                     {showAll ? "Sembunyikan foto" : `Lihat ${extra.length} foto lainnya`}
+                    <Lucide icon={ic.chevronDown} size={14} className={s.moreIcon} />
                   </button>
                 )}
               </div>
@@ -243,7 +270,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
+                    <button type="button" className={`${s.copy} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
                       <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
@@ -257,7 +284,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
           <Head id="pf-wish">Ucapan &amp; RSVP</Head>
           <div className={`${s.card} ${s.formCard}`}>
             {sent ? (
-              <div className={s.sent} role="status">
+              <div ref={sentRef} className={s.sent} role="status">
                 <span className={s.iconDot}><Lucide icon={ic.check} size={18} /></span>
                 <strong>Yeay, terima kasih!</strong>
                 <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi dan ucapanmu sudah kami terima."}</p>

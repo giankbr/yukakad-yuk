@@ -1,8 +1,9 @@
 "use client";
 // Theme "Marketplace" — undangan bergaya aplikasi belanja (design: Undangan — Tema Marketplace (Rina & Bima)).
 import { useState } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -39,6 +40,19 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
   const [active, setActive] = useState(0);
   const hero = data.gallery[0];
   const where = city(data.address) || data.place;
+  const [liked, setLiked] = useState(false);
+  const [cart, setCart] = useState<string[]>([]);
+  const [helpful, setHelpful] = useState<string[]>([]);
+  const [playing, setPlaying] = useState(false);
+  const toggleLike = () => {
+    setLiked(v => !v);
+    toast(liked ? "Dihapus dari favorit" : "Ditambahkan ke favorit");
+  };
+  const addToCart = (name: string) => {
+    if (cart.includes(name)) { setCart(c => c.filter(n => n !== name)); toast("Dihapus dari keranjang"); return; }
+    setCart(c => [...c, name]);
+    toast("Masuk keranjang kado");
+  };
 
   return (
     <ThemeShell
@@ -88,8 +102,10 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
       <header className={s.top}>
         <div className={s.searchRow}>
           <div className={s.search}><Lucide icon={ic.search} color="#6d7588" />Cari momen bahagia…</div>
-          <span className={s.cart} aria-hidden><Lucide icon={ic.shoppingCart} size={24} color="#212121" /><b>1</b></span>
-          <Lucide icon={ic.heart} size={24} color="#f94d63" />
+          <span className={s.cart} aria-hidden key={cart.length} data-bump={cart.length > 0 ? "" : undefined}><Lucide icon={ic.shoppingCart} size={24} color="#212121" /><b>{cart.length + 1}</b></span>
+          <button type="button" className={s.like} aria-pressed={liked} aria-label="Simpan ke favorit" onClick={toggleLike}>
+            <Lucide icon={ic.heart} size={24} color="#f94d63" />
+          </button>
         </div>
       </header>
 
@@ -110,7 +126,7 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           <div className={s.countHead}>
             <span><Lucide icon={ic.zap} size={18} color="#fff" />Menuju Hari H</span>
             <span className={s.timer} aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
-              <b>{countdown.days}</b>:<b>{countdown.hours}</b>:<b>{countdown.minutes}</b>
+              <Tick className={s.tick} value={countdown.days} />:<Tick className={s.tick} value={countdown.hours} />:<Tick className={s.tick} value={countdown.minutes} />:<Tick className={s.tick} value={countdown.seconds} />
             </span>
           </div>
           <p>Stok kursi terbatas! Konfirmasi kehadiranmu sebelum hari H.</p>
@@ -142,7 +158,7 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           <section className={s.section} aria-labelledby="mp-story">
             <div className={s.sectionHead}><h2 id="mp-story">Lacak Perjalanan Cinta</h2><span>Detail</span></div>
             <div className={s.invoice}>
-              <Lucide icon={ic.truck} size={20} color="#00aa5b" />
+              <span className={s.truck} aria-hidden><Lucide icon={ic.truck} size={20} color="#00aa5b" /></span>
               <div><strong>Dalam pengiriman · Estimasi tiba {shortDate}</strong><small>No. Resi: {resi}-SELAMANYA</small></div>
             </div>
             <ol className={s.timeline} style={{ listStyle: "none", margin: 0, padding: 0 }}>
@@ -171,8 +187,8 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           <section className={s.section} aria-labelledby="mp-gallery">
             <div className={s.sectionHead}><h2 id="mp-gallery">Foto dari Pembeli</h2><span>Lihat {gallery.length} foto</span></div>
             <div className={s.mainPhoto}>
-              <Photo src={gallery[active]} alt={`Foto ${active + 1} dari ${gallery.length}`} />
-              <span>{active + 1}/{gallery.length}</span>
+              <Photo key={active} className={s.swap} src={gallery[active]} alt={`Foto ${active + 1} dari ${gallery.length}`} />
+              <span key={`n${active}`}>{active + 1}/{gallery.length}</span>
             </div>
             {gallery.length > 1 && (
               <div className={s.thumbs}>
@@ -186,11 +202,11 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
               </div>
             )}
             {demo && (
-              <div className={s.video}>
-                <span className={s.play}><Lucide icon={ic.play} size={14} color="#fff" /></span>
-                <div><strong>Video Prewedding</strong><small>Durasi 2:34 · Ditonton 1,2rb kali</small></div>
+              <button type="button" className={s.video} aria-pressed={playing} onClick={() => setPlaying(v => !v)}>
+                <span className={s.play} aria-hidden>{playing ? <span className={s.eq}><i /><i /><i /></span> : <Lucide icon={ic.play} size={14} color="#fff" />}</span>
+                <div><strong>Video Prewedding</strong><small>{playing ? "Sedang diputar · 0:12 / 2:34" : "Durasi 2:34 · Ditonton 1,2rb kali"}</small>{playing && <i className={s.vprog} aria-hidden />}</div>
                 <Lucide icon={ic.chevronRight} size={18} color="#6d7588" />
-              </div>
+              </button>
             )}
           </section>
         )}
@@ -231,10 +247,10 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
                   { name: "Sprei Katun Premium", price: "Rp689.000", was: "Rp899.000", icon: ic.bedDouble, bg: "#e5f7ee" },
                   { name: "Set Panci Keramik", price: "Rp1.150.000", was: "Rp1.450.000", icon: ic.cookingPot, bg: "#feecef" },
                 ].map(item => (
-                  <div key={item.name} className={s.product}>
-                    <div className={s.productImg} style={{ background: item.bg }}><Lucide icon={item.icon} size={36} color="#212121" /></div>
-                    <div className={s.productInfo}><span>{item.name}</span><strong>{item.price}</strong><div><em>-22%</em><s>{item.was}</s></div></div>
-                  </div>
+                  <button key={item.name} type="button" className={s.product} aria-pressed={cart.includes(item.name)} onClick={() => addToCart(item.name)}>
+                    <span className={s.productImg} style={{ background: item.bg }}><Lucide icon={item.icon} size={36} color="#212121" /><b className={s.addBadge} aria-hidden>{cart.includes(item.name) ? "✓" : "+"}</b></span>
+                    <span className={s.productInfo}><span>{item.name}</span><strong>{item.price}</strong><span className={s.disc}><em>-22%</em><s>{item.was}</s></span></span>
+                  </button>
                 ))}
               </div>
             )}
@@ -247,7 +263,7 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
                     <strong>{gift.type === "address" ? "Kirim Kado" : "Amplop Digital"}</strong>
                     <small>{[info.title !== "Alamat kado" ? info.title : "", info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.copy} data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -273,8 +289,12 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           {wishes.wishes.slice(0, 6).map(wish => (
             <article key={wish.id} className={s.review}>
               <div className={s.reviewHead}><span aria-hidden>{wish.name.slice(0, 1).toUpperCase()}</span><strong>{wish.name}</strong><small>{timeAgo(wish.created_at)}</small></div>
-              <div className={s.stars} aria-label="5 bintang">★★★★★</div>
+              <div className={s.stars} aria-label="5 bintang">{[0, 1, 2, 3, 4].map(i => <i key={i} style={{ animationDelay: `${i * 70}ms` }}>★</i>)}</div>
               <p>{wish.message}</p>
+              <button type="button" className={s.helpful} aria-pressed={helpful.includes(wish.id)}
+                onClick={() => setHelpful(h => (h.includes(wish.id) ? h.filter(id => id !== wish.id) : [...h, wish.id]))}>
+                <Lucide icon={ic.heart} size={13} />Membantu{helpful.includes(wish.id) ? " · 1" : ""}
+              </button>
             </article>
           ))}
         </section>

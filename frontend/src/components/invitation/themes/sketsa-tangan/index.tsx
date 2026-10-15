@@ -1,11 +1,12 @@
 "use client";
 // Theme "Sketsa Tangan" — line art di atas kertas krem, foto ala scrapbook dengan selotip.
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, formatDate, giftInfo, guestLabel,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
+import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -21,7 +22,9 @@ function Head({ id, children }: { id: string; children: string }) {
   return (
     <div className={s.head}>
       <h2 id={id}>{children}</h2>
-      <span className={s.divider} aria-hidden><i /><b /><i /></span>
+      <svg className={s.squiggle} viewBox="0 0 120 14" aria-hidden focusable="false">
+        <path d="M3 8 C 12 3, 19 12, 29 7 S 47 2, 57 7 S 76 12, 86 7 S 105 2, 117 7" pathLength={1} />
+      </svg>
     </div>
   );
 }
@@ -58,6 +61,8 @@ export default function SketsaTanganTheme({ data, slug, guestToken, demo, skipCo
   const families = [familyName(data.couple.brideParents) ?? data.couple.bride, familyName(data.couple.groomParents) ?? data.couple.groom];
   const sending = rsvp.status === "sending" || wishes.status === "sending";
   const sent = rsvp.status === "sent" || wishes.status === "sent";
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (sent) celebrate(sentRef.current); }, [sent]);
 
   const people = [
     { key: "bride", name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? gallery[1] },
@@ -84,7 +89,7 @@ export default function SketsaTanganTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={ART} /></div>
-          <div className={s.frame} aria-hidden />
+          <svg className={s.frame} aria-hidden focusable="false"><rect x="0.5" y="0.5" pathLength={1} /></svg>
           <div className={s.coverContent}>
             <p className={s.coverKicker}>kami akan menikah!</p>
             <h1 className={s.coverNames}>{data.couple.bride} &amp; {data.couple.groom}</h1>
@@ -134,7 +139,7 @@ export default function SketsaTanganTheme({ data, slug, guestToken, demo, skipCo
           <Head id="st-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
             {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
-              <div key={unit} className={s.countBox}><b>{value}</b><small>{unit}</small></div>
+              <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
             ))}
           </div>
           {calendar && <a className={s.btn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -220,7 +225,7 @@ export default function SketsaTanganTheme({ data, slug, guestToken, demo, skipCo
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
+                    <button type="button" className={`${s.copy} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
                       <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
@@ -234,7 +239,7 @@ export default function SketsaTanganTheme({ data, slug, guestToken, demo, skipCo
           <Head id="st-wish">Ucapan &amp; RSVP</Head>
           <div className={`${s.card} ${s.formCard}`}>
             {sent ? (
-              <div className={s.sent} role="status">
+              <div ref={sentRef} className={s.sent} role="status">
                 <span className={s.iconDot}><Lucide icon={ic.check} size={18} /></span>
                 <strong>Makasih ya!</strong>
                 <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi dan ucapanmu sudah kami terima."}</p>

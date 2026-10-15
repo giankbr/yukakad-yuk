@@ -1,7 +1,9 @@
 "use client";
 // Theme "Pesan-Antar" — undangan bergaya aplikasi pesan-antar makanan (design: Undangan — Tema Pesan-Antar (Rendi & Salma)).
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -53,7 +55,15 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
-  const eta = !countdown.ready ? "Segera tiba" : countdown.done ? "Pesanan telah tiba!" : `Tiba dalam ${Number(countdown.days)} hari`;
+  const eta = !countdown.ready ? "Segera tiba" : countdown.done ? "Pesanan telah tiba!" : <>Tiba dalam <Tick value={Number(countdown.days)} /> hari</>;
+  const [picked, setPicked] = useState<string[]>([]);
+  const [liked, setLiked] = useState<number[]>([]);
+  const togglePick = (name: string) => {
+    const on = !picked.includes(name);
+    setPicked(p => (on ? [...p, name] : p.filter(n => n !== name)));
+    toast(on ? "Ditambahkan ke pesanan" : "Dihapus dari pesanan");
+  };
+  const toggleLike = (index: number) => setLiked(l => (l.includes(index) ? l.filter(i => i !== index) : [...l, index]));
   const people = [
     { key: "groom", name: couple.groomFull ?? couple.groom, parents: couple.groomParents, photo: couple.groomPhoto ?? data.gallery[0] },
     { key: "bride", name: couple.brideFull ?? couple.bride, parents: couple.brideParents, photo: couple.bridePhoto ?? data.gallery[1] },
@@ -90,9 +100,9 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
             <Dash />
             <ul className={s.items}>
               {data.events.map((event, index) => (
-                <li key={event.name + index}><b>1x</b><span>{event.name}</span><strong>Gratis</strong></li>
+                <li key={event.name + index} style={{ "--i": index } as CSSProperties}><b>1x</b><span>{event.name}</span><strong>Gratis</strong></li>
               ))}
-              <li><b>1x</b><span>Cinta selamanya</span><strong>Tak ternilai</strong></li>
+              <li style={{ "--i": data.events.length } as CSSProperties}><b>1x</b><span>Cinta selamanya</span><strong>Tak ternilai</strong></li>
             </ul>
             <Dash />
             <div className={s.total}><span>Total dibayar dengan</span><strong>Doa &amp; Kehadiranmu</strong></div>
@@ -122,9 +132,28 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
 
         <section className={s.section} aria-labelledby="pa-status">
           <h2 id="pa-status">Status Pengiriman Cinta</h2>
+          <div className={s.etaCard}>
+            <div className={s.etaHead}>
+              <span className={s.etaIcon} aria-hidden><Lucide icon={ic.bike} size={20} color="#fff" /></span>
+              <div><small>{countdown.done ? "Status" : "Estimasi tiba"}</small><strong>{countdown.done ? "Pesanan telah tiba!" : shortDate}</strong></div>
+              <span className={s.liveTag}><i aria-hidden />LIVE</span>
+            </div>
+            {!countdown.done && (
+              <div className={s.etaCount} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
+                {[[countdown.days, "hari"], [countdown.hours, "jam"], [countdown.minutes, "menit"], [countdown.seconds, "detik"]].map(([value, unit]) => (
+                  <span key={unit}><Tick className={s.tick} value={value} /><small>{unit}</small></span>
+                ))}
+              </div>
+            )}
+            <div className={s.road} aria-hidden>
+              <i className={s.roadFill} style={{ width: countdown.done ? "100%" : "74%" }} />
+              <span className={s.rider} style={{ left: countdown.done ? "100%" : "74%" }}><Lucide icon={ic.bike} size={16} color="#fff" /></span>
+              <span className={s.home}><Lucide icon={ic.heart} size={14} color="#00b14f" /></span>
+            </div>
+          </div>
           <ol className={s.track}>
             {stories.map((story, index) => (
-              <li key={story.title + index} className={s.step}>
+              <li key={story.title + index} className={s.step} style={{ "--i": index } as CSSProperties}>
                 <span className={s.rail} aria-hidden><i className={s.dot}><Lucide icon={ic.check} size={13} color="#009643" /></i><i className={s.line} /></span>
                 <div className={s.stepText}>
                   <strong>{[story.date, story.title].filter(Boolean).join(" · ")}</strong>
@@ -133,7 +162,7 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
                 </div>
               </li>
             ))}
-            <li className={`${s.step} ${s.stepNow}`}>
+            <li className={`${s.step} ${s.stepNow}`} style={{ "--i": stories.length } as CSSProperties}>
               <span className={s.rail} aria-hidden><i className={s.dot}><Lucide icon={ic.package} size={13} color="#fff" /></i></span>
               <div className={s.stepText}>
                 <strong>{[shortDate, "Tiba di tujuan"].filter(Boolean).join(" · ")}</strong>
@@ -193,7 +222,12 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
                 <figure key={src + index} className={s.dish}>
                   <Photo src={src} alt={demo && DEMO_CAPTIONS[index] ? DEMO_CAPTIONS[index][0] : `Foto ${index + 1}`} />
                   {demo && DEMO_CAPTIONS[index] && (
-                    <figcaption><strong>{DEMO_CAPTIONS[index][0]}</strong><span><Lucide icon={ic.heart} size={11} color="#00b14f" />{DEMO_CAPTIONS[index][1]}</span></figcaption>
+                    <figcaption>
+                      <strong>{DEMO_CAPTIONS[index][0]}</strong>
+                      <button type="button" className={s.likeBtn} aria-pressed={liked.includes(index)} aria-label={`Suka ${DEMO_CAPTIONS[index][0]}`} onClick={() => toggleLike(index)}>
+                        <Lucide icon={ic.heart} size={12} />{liked.includes(index) ? `${DEMO_CAPTIONS[index][1]} +1` : DEMO_CAPTIONS[index][1]}
+                      </button>
+                    </figcaption>
                   )}
                 </figure>
               ))}
@@ -209,13 +243,21 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
             <p className={s.sub}>Pilih menu, kami yang bahagia</p>
             <div className={s.products}>
               {DEMO_PRODUCTS.map(item => (
-                <div key={item.name} className={s.product}>
+                <div key={item.name} className={s.product} data-on={picked.includes(item.name) ? "" : undefined}>
                   <span className={s.productIcon}><Lucide icon={item.icon} size={24} color="#009643" /></span>
                   <div><strong>{item.name}</strong><p><b>{item.price}</b>{item.tag && <em>{item.tag}</em>}</p></div>
-                  <span className={s.plus}><Lucide icon={ic.plus} size={14} color="#00b14f" /></span>
+                  <button type="button" className={s.plus} aria-pressed={picked.includes(item.name)} aria-label={`${picked.includes(item.name) ? "Batalkan" : "Pilih"} ${item.name}`} onClick={() => togglePick(item.name)}>
+                    <Lucide icon={picked.includes(item.name) ? ic.check : ic.plus} size={14} />
+                  </button>
                 </div>
               ))}
             </div>
+            {picked.length > 0 && (
+              <div className={s.basket} key={picked.length}>
+                <span><b>{picked.length}</b> menu dipilih</span>
+                <small>Terima kasih, doamu ikut diantar</small>
+              </div>
+            )}
           </section>
         )}
 
@@ -234,7 +276,7 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
                     <small>{[[info.title, info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -242,7 +284,7 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
               <div key={gift.id} className={s.address}>
                 <Lucide icon={ic.mapPin} size={18} color="#00b14f" />
                 <div><small>Alamat kirim kado</small><strong>{gift.address}</strong></div>
-                {gift.address && <button type="button" onClick={() => copy(gift.address)}>{copied === gift.address ? "Tersalin" : "Salin"}</button>}
+                {gift.address && <button type="button" data-copied={copied === gift.address ? "" : undefined} onClick={() => copy(gift.address)}>{copied === gift.address ? "Tersalin" : "Salin"}</button>}
               </div>
             ))}
           </section>
@@ -254,7 +296,7 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada ulasan. Jadilah yang pertama mengirim ucapan!</p>}
           {wishes.wishes.slice(0, 8).map(wish => (
             <article key={wish.id} className={s.review}>
-              <div><strong>{wish.name}</strong><span aria-hidden>★★★★★</span></div>
+              <div><strong>{wish.name}</strong><span aria-hidden>{[0, 1, 2, 3, 4].map(i => <i key={i} style={{ animationDelay: `${i * 70}ms` }}>★</i>)}</span></div>
               <p>{wish.message}</p>
             </article>
           ))}

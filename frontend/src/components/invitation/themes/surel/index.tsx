@@ -5,6 +5,7 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -70,6 +71,8 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const [shared, setShared] = useState(false);
+  const [starred, setStarred] = useState(true);
+  const pick = (value: "yes" | "maybe" | "no") => sheets.openRsvp(value);
   const files = data.gallery.map((src, index) => ({ src, name: demo && DEMO_FILES[index] ? DEMO_FILES[index] : `foto_${String(index + 1).padStart(2, "0")}.jpg` }));
   const attachments = files.length + (demo ? 1 : 0);
 
@@ -77,7 +80,7 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
     const url = window.location.href;
     try {
       if (navigator.share) await navigator.share({ title: subject, url });
-      else { await navigator.clipboard.writeText(url); setShared(true); setTimeout(() => setShared(false), 2000); }
+      else { await navigator.clipboard.writeText(url); setShared(true); toast("Tautan disalin"); setTimeout(() => setShared(false), 2000); }
     } catch { /* share dismissed */ }
   };
 
@@ -97,16 +100,19 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
           <p className={s.inboxLabel} aria-hidden>UTAMA</p>
           <div className={s.list}>
             {INBOX_BEFORE.map(row => <InboxRow key={row.from} {...row} />)}
-            <button type="button" className={`${s.row} ${s.rowActive}`} onClick={open}>
+            {/* role=button (not <button>) so the shared cover motion picks "Buka Email Undangan" as the breathing CTA */}
+            <div role="button" tabIndex={0} className={`${s.row} ${s.rowActive}`} onClick={open}
+              onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); open(); } }}>
               <span className={`${s.avatar} ${s.avatarRed}`} aria-hidden>{initial(data.couple.bride)}</span>
+              <i className={s.unread} aria-hidden />
               <span className={s.rowText}>
                 <span className={s.rowHead}><b>{couple}</b><small>{stamp}</small></span>
                 <span className={s.rowSubject}>{subject}</span>
                 <span className={s.rowSnippet}>Dengan hormat, kami mengundang Bapak/Ibu untuk hadir pada…</span>
                 <span className={s.tags} aria-hidden><i>Undangan</i><i className={s.tagGold}>Penting</i></span>
               </span>
-              <Lucide icon={ic.star} color="#f9ab00" />
-            </button>
+              <Lucide icon={ic.star} color="#f9ab00" className={s.coverStar} />
+            </div>
             {INBOX_AFTER.map(row => <InboxRow key={row.from} {...row} />)}
           </div>
           <div className={s.coverSpacer} />
@@ -128,7 +134,10 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
       <main className={s.body}>
         <div className={s.subject}>
           <h1>{subject}</h1>
-          <Lucide icon={ic.star} size={18} color="#f9ab00" />
+          <button type="button" className={s.star} aria-pressed={starred} aria-label={starred ? "Hapus bintang" : "Beri bintang"}
+            onClick={() => { setStarred(v => !v); toast(starred ? "Bintang dihapus" : "Ditandai berbintang"); }}>
+            <Lucide icon={ic.star} size={18} color={starred ? "#f9ab00" : "#5f6368"} />
+          </button>
         </div>
 
         <div className={s.from}>
@@ -174,10 +183,11 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
             );
           })}
           <div className={s.rsvpRow} role="group" aria-label="Konfirmasi kehadiran">
-            <button type="button" className={s.rsvpYes} onClick={() => sheets.openRsvp("yes")}>Ya, hadir</button>
-            <button type="button" onClick={() => sheets.openRsvp("maybe")}>Mungkin</button>
-            <button type="button" onClick={() => sheets.openRsvp("no")}>Tidak</button>
+            <button type="button" className={s.rsvpYes} onClick={() => pick("yes")}>Ya, hadir</button>
+            <button type="button" onClick={() => pick("maybe")}>Mungkin</button>
+            <button type="button" onClick={() => pick("no")}>Tidak</button>
           </div>
+          {rsvp.status === "sent" && <p className={s.replied}><Lucide icon={ic.check} size={14} color="#188038" />Balasan kehadiran terkirim</p>}
         </section>
 
         <Extras slot="event" className={s.extras} />
@@ -202,10 +212,10 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
             <h2 id="sr-files">{attachments} Lampiran · Galeri</h2>
             <div className={s.grid}>
               {files.map(file => (
-                <a key={file.src} className={s.file} href={file.src} target="_blank" rel="noreferrer">
+                <div key={file.src} className={`${s.file} ${s.fileLink}`}>
                   <Photo src={file.src} alt={`Foto ${couple}: ${file.name}`} className={s.fileImg} />
                   <span className={s.fileCap}><Lucide icon={ic.image} size={10} color="#5f6368" /><span>{file.name}</span></span>
-                </a>
+                </div>
               ))}
               {demo && (
                 <div className={s.file}>
@@ -237,7 +247,7 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
                     {gift.type === "address" ? <small>{info.number}</small> : info.holder && <small>a.n. {info.holder}</small>}
                     {"image" in info && info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.copy} data-done={copied === info.copy || undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}

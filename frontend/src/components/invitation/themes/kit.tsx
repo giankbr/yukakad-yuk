@@ -11,7 +11,10 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSPrope
 import type { GiftMethod, InvitationData } from "../types";
 import kit from "./kit.module.css";
 import { autoReveal, revealChildren } from "@/lib/reveal";
-import { DietaryField, ReadingAids, ThankYouBanner, useThankYou } from "./extras";
+import { celebrate, toast } from "@/lib/celebrate";
+import { DietaryField, ReadingAids, ThankYouBanner, useInvitation, useThankYou } from "./extras";
+import { Lightbox, ScrollProgress, Toaster, enhanceCover, enhanceMain, useLightbox } from "./motion-layer";
+import { motionOf } from "./motion";
 
 export type ThemeProps = {
   data: InvitationData;
@@ -49,16 +52,22 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
   const [coverMounted, setCoverMounted] = useState(!skipCover);
   const coverRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
-  // Cover: stagger its content in on first paint.
+  const motion = motionOf(useInvitation()?.theme);
+  const lightbox = useLightbox(mainRef, opened);
+  // Cover: stagger its content in on first paint, then add the Ken Burns photo + breathing open button.
   useEffect(() => {
     const root = coverRef.current?.firstElementChild;
-    if (root instanceof HTMLElement) revealChildren(root);
-  }, []);
+    if (root instanceof HTMLElement) revealChildren(root, motion === "elegant" ? { stagger: 140, delay: 200 } : motion === "crisp" ? { stagger: 50, delay: 60 } : { stagger: 80, delay: 120 });
+    return enhanceCover(coverRef.current);
+  }, [motion]);
   // Main page: scroll-reveal every section once the invitation is open.
   useEffect(() => {
     if (!opened || !mainRef.current) return;
-    return autoReveal(mainRef.current);
-  }, [opened]);
+    const main = mainRef.current;
+    const stop = autoReveal(main, motion === "elegant" ? { stagger: 110 } : motion === "crisp" ? { stagger: 40, maxStagger: 4 } : { stagger: 65 });
+    const parallax = enhanceMain(main);
+    return () => { stop(); parallax(); };
+  }, [opened, motion]);
   const open = useCallback(() => {
     setOpened(true);
     // Let the cover slide away before unmounting it.
@@ -89,7 +98,7 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
     <div style={{ minHeight: "100dvh", background, display: "flex", justifyContent: "center" }}>
       {/* Fonts are scoped to the invitation route. */}
       {fontHref && <link rel="stylesheet" href={fontHref} />}
-      <div className={className} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh", overflowX: "clip", ...style }}>
+      <div className={className} data-motion={motion} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh", overflowX: "clip", ...style }}>
         {coverMounted && (
           <div role="dialog" aria-modal="true" aria-label="Sampul undangan" className={opened ? kit.coverLeave : undefined}
             style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", justifyContent: "center", background: opened ? "transparent" : background, overflowY: "auto", pointerEvents: opened ? "none" : undefined }}>
@@ -98,6 +107,9 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
         )}
         <div ref={mainRef} data-invitation-main aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}><ThankYouBanner />{children}</div>
         {opened && <ReadingAids />}
+        {opened && <ScrollProgress width={width} />}
+        <Toaster />
+        {lightbox.state && <Lightbox {...lightbox.state} onClose={lightbox.close} onIndex={lightbox.setIndex} />}
       </div>
     </div>
   );
@@ -201,6 +213,11 @@ export function useCountdown(value?: string) {
       ready: true,
     };
   }, [target, now]);
+}
+
+/** A countdown digit that rolls in whenever its value changes: <Tick value={countdown.seconds} />. */
+export function Tick({ value, className, style }: { value: string | number; className?: string; style?: CSSProperties }) {
+  return <span className={className} style={{ display: "inline-block", overflow: "hidden", verticalAlign: "bottom", ...style }}><span key={value} className={kit.tick}>{value}</span></span>;
 }
 
 /* ── RSVP ───────────────────────────────────────────────────────── */
@@ -308,6 +325,8 @@ export function useCopy() {
     try {
       await navigator.clipboard.writeText(value);
       setCopied(value);
+      toast("Disalin");
+      navigator.vibrate?.(8);
       setTimeout(() => setCopied(current => (current === value ? null : current)), 2000);
     } catch { /* clipboard blocked: the value is still visible */ }
   }, []);
@@ -362,22 +381,64 @@ export type ThemeTint = {
 };
 
 export function Sheet({ open, onClose, title, tint, children }: { open: boolean; onClose: () => void; title: string; tint?: ThemeTint; children: ReactNode }) {
+  // Stay mounted while the closing animation plays (adjusting state during render, no effect needed).
+  const [shown, setShown] = useState(open);
+  if (open && !shown) setShown(true);
+  const leaving = shown && !open;
+  const sheet = useRef<HTMLDivElement>(null);
+  const backdrop = useRef<HTMLDivElement>(null);
+  const drag = useRef<{ y: number; dy: number; t: number } | null>(null);
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
-  if (!open) return null;
+  if (!shown) return null;
+  const release = () => {
+    const state = drag.current;
+    drag.current = null;
+    const element = sheet.current;
+    if (!state || !element) return;
+    const fast = state.dy / Math.max(1, Date.now() - state.t) > 0.6;
+    element.style.transition = "translate 260ms cubic-bezier(.2, .8, .2, 1)";
+    if (backdrop.current) backdrop.current.style.opacity = "";
+    if (state.dy > 120 || (fast && state.dy > 40)) onClose();
+    else element.style.translate = "";
+  };
   return (
-    <div className={kit.backdrop} onClick={event => { if (event.target === event.currentTarget) onClose(); }} style={tint as CSSProperties}>
-      <div className={kit.sheet} role="dialog" aria-modal="true" aria-label={title}>
+    <div ref={backdrop} className={`${kit.backdrop} ${leaving ? kit.backdropLeave : ""}`} style={tint as CSSProperties}
+      onClick={event => { if (event.target === event.currentTarget) onClose(); }}
+      onAnimationEnd={event => { if (leaving && event.target === event.currentTarget) setShown(false); }}>
+      <div ref={sheet} className={`${kit.sheet} ${leaving ? kit.sheetLeave : ""}`} role="dialog" aria-modal="true" aria-label={title}
+        onTouchStart={event => {
+          if ((sheet.current?.scrollTop ?? 0) > 0) return;
+          drag.current = { y: event.touches[0].clientY, dy: 0, t: Date.now() };
+          if (sheet.current) sheet.current.style.transition = "none";
+        }}
+        onTouchMove={event => {
+          const state = drag.current;
+          if (!state || !sheet.current) return;
+          state.dy = Math.max(0, event.touches[0].clientY - state.y);
+          if (state.dy > 0 && sheet.current.scrollTop <= 0) {
+            sheet.current.style.translate = `0 ${state.dy}px`;
+            if (backdrop.current) backdrop.current.style.opacity = String(Math.max(0.35, 1 - state.dy / 500));
+          }
+        }}
+        onTouchEnd={release} onTouchCancel={release}>
         <div className={kit.grip} aria-hidden />
         <div className={kit.head}><h2>{title}</h2><button type="button" className={kit.close} onClick={onClose} aria-label="Tutup">×</button></div>
         {children}
       </div>
     </div>
   );
+}
+
+/** Fires a theme-flavoured celebration once when `when` turns true. */
+function useCelebrate(when: boolean) {
+  const ref = useRef<HTMLSpanElement>(null);
+  useEffect(() => { if (when) celebrate(ref.current); }, [when]);
+  return ref;
 }
 
 /** RSVP form (name, attendance, guest count, message). Use inside <Sheet> or inline. */
@@ -387,6 +448,7 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
 }) {
   const [guests, setGuests] = useState(1);
   const thanks = useThankYou();
+  const party = useCelebrate(rsvp.status === "sent");
   if (thanks.active) {
     return (
       <div className={kit.state} role="status">
@@ -399,7 +461,7 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
   if (rsvp.status === "sent") {
     return (
       <div className={kit.state} role="status">
-        <span className={kit.badge}><Icon d={icons.check} size={26} strokeWidth={3} /></span>
+        <span ref={party} className={`${kit.badge} ${kit.badgePop}`}><Icon d={icons.check} size={26} strokeWidth={3} className={kit.draw} /></span>
         <strong>{labels?.success ?? "Terima kasih!"}</strong>
         <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi kehadiranmu sudah kami terima."}</p>
       </div>
@@ -434,10 +496,11 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
 
 /** Wish form (name + message). */
 export function WishForm({ wishes, guestName, demo, submitLabel }: { wishes: ReturnType<typeof useWishes>; guestName?: string; demo?: boolean; submitLabel?: string }) {
+  const party = useCelebrate(wishes.status === "sent");
   if (wishes.status === "sent") {
     return (
       <div className={kit.state} role="status">
-        <span className={kit.badge}><Icon d={icons.heart} size={24} strokeWidth={2.4} /></span>
+        <span ref={party} className={`${kit.badge} ${kit.badgePop}`}><Icon d={icons.heart} size={24} strokeWidth={2.4} /></span>
         <strong>Ucapan terkirim</strong>
         <p>{demo ? "Ucapanmu muncul di daftar (pratinjau)." : "Terima kasih atas doa dan ucapannya."}</p>
         <button type="button" className={kit.submit} style={{ minWidth: 180 }} onClick={wishes.reset}>Tulis lagi</button>

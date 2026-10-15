@@ -26,7 +26,18 @@
 .card img, .card > div { width: 100%; height: 100%; border-radius: 12px; }
 .cardA { left: 0; top: 16px; transform: rotate(7deg); animation: inA 700ms 150ms cubic-bezier(.2, .8, .2, 1) both; }
 .cardB { right: 0; top: 30px; transform: rotate(-7deg); animation: inB 700ms 150ms cubic-bezier(.2, .8, .2, 1) both; }
-.bigHeart { position: absolute; left: calc(50% - 30px); top: 120px; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 999px; background: #fff; box-shadow: 0 8px 22px rgba(0, 0, 0, .25); animation: pop 500ms 650ms cubic-bezier(.2, .9, .3, 1.4) both; }
+.bigHeart { position: absolute; z-index: 2; left: calc(50% - 30px); top: 120px; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 999px; background: #fff; box-shadow: 0 8px 22px rgba(0, 0, 0, .25); animation: pop 500ms 650ms cubic-bezier(.2, .9, .3, 1.4) both; }
+.beat { display: grid; animation: beat 1.6s 1.4s ease-in-out infinite; }
+.ring { position: absolute; inset: 0; border: 2px solid #fff; border-radius: inherit; opacity: 0; animation: ring 1.6s 1.4s ease-out infinite; }
+/* "match" sparks bursting out of the heart once the cards land */
+.sparks { position: absolute; left: 50%; top: 150px; z-index: 1; width: 0; height: 0; }
+.sparks i { position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 999px; background: #fff; opacity: 0; animation: spark 900ms 700ms cubic-bezier(.2, .8, .3, 1) both; }
+.sparks i:nth-child(1) { --sx: -86px; --sy: -70px; }
+.sparks i:nth-child(2) { --sx: 90px; --sy: -64px; width: 6px; height: 6px; }
+.sparks i:nth-child(3) { --sx: -104px; --sy: 20px; background: #ffd166; }
+.sparks i:nth-child(4) { --sx: 100px; --sy: 30px; background: #ffd166; width: 6px; height: 6px; }
+.sparks i:nth-child(5) { --sx: -30px; --sy: -110px; width: 5px; height: 5px; }
+.sparks i:nth-child(6) { --sx: 36px; --sy: 104px; }
 .info { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 330px; max-width: calc(100% - 32px); margin-top: 26px; text-align: center; }
 .info h2 { font-size: 26px; font-weight: 800; overflow-wrap: anywhere; }
 .info p { color: rgba(255, 255, 255, .9); font-size: 12px; line-height: 1.5; }
@@ -35,74 +46,130 @@
 .kepada strong { align-self: stretch; color: var(--ink); font-size: 16px; font-weight: 800; overflow-wrap: anywhere; }
 .coverBtns { display: flex; align-items: center; gap: 12px; width: 330px; max-width: calc(100% - 32px); margin-top: 32px; }
 .nope { display: grid; place-items: center; width: 54px; height: 54px; flex-shrink: 0; border: 1.5px solid #fff; border-radius: 999px; background: rgba(255, 255, 255, .2); }
-.openBtn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 54px; border: 0; border-radius: 999px; background: #fff; color: var(--pink); font-size: 15px; font-weight: 800; transition: transform 150ms; }
-.openBtn:hover { transform: scale(1.02); }
-.openBtn:active { transform: scale(.97); }
+.openBtn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 54px; border: 0; border-radius: 999px; background: #fff; color: var(--pink); font-size: 15px; font-weight: 800; box-shadow: 0 10px 24px -10px rgba(120, 0, 40, .5); }
+@media (hover: hover) { .openBtn:hover { scale: 1.03; } }
 
 /* ── Main ── */
 .nav { display: flex; justify-content: space-between; align-items: center; padding: 0 16px 10px; }
 .brand { display: flex; align-items: center; gap: 6px; min-width: 0; color: var(--pink); font-size: 16px; font-weight: 800; overflow-wrap: anywhere; }
-.body { display: flex; flex-direction: column; gap: 16px; padding: 4px 0 96px; }
+.body { display: flex; flex-direction: column; gap: 32px; padding: 8px 0 112px; }
 .section { display: flex; flex-direction: column; gap: 10px; padding: 0 16px; }
+.section > .sub { margin-top: -6px; margin-bottom: 2px; }
 .section h2 { font-size: 16px; font-weight: 800; }
 .sub { color: var(--muted); font-size: 12px; }
 /* shared extra sections, laid out like the app's own sections */
-.root .extras { gap: 24px; padding: 0 16px; color: var(--ink); font-size: 13px; }
-.profile { position: relative; height: 200px; overflow: hidden; border-radius: 16px; background: #f4dde2; color: #fff; }
+.root .extras { gap: 32px; padding: 0 16px; color: var(--ink); font-size: 13px; }
+.profile { position: relative; height: 220px; overflow: hidden; border-radius: 18px; background: #f4dde2; color: #fff; box-shadow: 0 12px 28px -18px rgba(33, 38, 46, .6); }
+.profile > img { transition: scale 900ms var(--m-ease); }
+@media (hover: hover) { .profile:hover > img { scale: 1.05; } }
 .profile > img, .profile > div:first-child { position: absolute; inset: 0; width: 100%; height: 100%; }
 .profile::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8)); }
-.profileText { position: absolute; left: 14px; right: 14px; bottom: 22px; z-index: 1; display: flex; flex-direction: column; gap: 1px; }
+.profileText { position: absolute; left: 16px; right: 70px; bottom: 18px; z-index: 1; display: flex; flex-direction: column; gap: 1px; }
 .profileName { display: flex; align-items: center; gap: 6px; }
 .profileName strong { font-size: 18px; font-weight: 800; overflow-wrap: anywhere; }
 .profileText small { color: rgba(255, 255, 255, .8); font-size: 11px; }
-.chat { display: flex; flex-direction: column; gap: 6px; }
+.chat { position: relative; display: flex; flex-direction: column; gap: 6px; }
+/* chat replay: bubbles pop in one by one, the other side types, then the last message lands */
+.chat[data-revealed] > div { animation: bubble 520ms var(--m-spring) both; }
+.chat[data-revealed] > div:nth-child(2) { animation-delay: 350ms; }
+.chat[data-revealed] > div:nth-child(3) { animation-delay: 700ms; }
+.chat[data-revealed] > div:nth-child(4) { animation-delay: 1050ms; }
+.chat[data-revealed] > div:nth-child(5) { animation-delay: 1400ms; }
+.chat[data-revealed] > div:nth-child(n+6) { animation-delay: 1750ms; }
+.typing { position: absolute; right: 0; bottom: 0; display: none; justify-content: flex-end; transform-origin: 100% 100%; }
+.typing > span { display: flex; align-items: center; gap: 4px; height: 34px; padding: 0 14px; border-radius: 14px 4px 14px 14px; background: #ffe1ea; }
+.typing i { width: 6px; height: 6px; border-radius: 999px; background: var(--pink); opacity: .5; animation: dot 900ms ease-in-out infinite; }
+.typing i:nth-child(2) { animation-delay: 150ms; }
+.typing i:nth-child(3) { animation-delay: 300ms; }
+.chat[data-revealed] .typing { display: flex; animation: typing 2s calc(var(--typing-at, 1.4s)) both !important; }
+.chat[data-revealed] .last { animation: bubble 520ms calc(var(--typing-at, 1.4s) + 2s) var(--m-spring) both !important; }
 .rowIn, .rowOut { display: flex; }
 .rowOut { justify-content: flex-end; }
-.in, .out { max-width: 254px; padding: 8px 12px; font-size: 13px; line-height: 1.4; overflow-wrap: anywhere; }
+.in, .out { max-width: 254px; padding: 9px 13px; font-size: 13px; line-height: 1.45; overflow-wrap: anywhere; }
+.rowIn { transform-origin: 0 0; }
+.rowOut { transform-origin: 100% 0; }
 .in { width: 254px; border-radius: 4px 14px 14px 14px; background: #f1f2f4; }
 .out { width: 254px; border-radius: 14px 4px 14px 14px; background: var(--grad); color: #fff; }
 .out.fit { width: 162px; }
-.event { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; }
-.pin { display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 999px; background: var(--grad); }
+.event { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 16px; transition: border-color 250ms, box-shadow 300ms var(--m-spring), translate 300ms var(--m-spring); }
+@media (hover: hover) { .event:hover { translate: 0 -2px; border-color: #ffc2d3; box-shadow: 0 12px 24px -16px rgba(253, 58, 115, .55); } .event:hover .pin { rotate: -10deg; scale: 1.08; } }
+.pin { display: grid; place-items: center; width: 42px; height: 42px; flex-shrink: 0; border-radius: 999px; background: var(--grad); transition: rotate 400ms var(--m-spring), scale 400ms var(--m-spring); }
 .eventText { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .eventText strong { font-size: 14px; font-weight: 800; }
 .eventText small { color: var(--muted); font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
-.rute { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--pink); border-radius: 999px; color: var(--pink); font-size: 11px; font-weight: 800; transition: background 150ms, color 150ms; }
+.rute { flex-shrink: 0; padding: 7px 14px; border: 1px solid var(--pink); border-radius: 999px; color: var(--pink); font-size: 11px; font-weight: 800; transition: background 200ms, color 200ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .rute:hover { background: var(--pink); color: #fff; }
 .grid { display: flex; gap: 8px; }
 .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
-.tall, .short { width: 100%; border-radius: 14px; }
+.tall, .short { width: 100%; border-radius: 14px; cursor: zoom-in; transition: scale 400ms var(--m-spring), filter 300ms; }
+@media (hover: hover) { .tall:hover, .short:hover { scale: 1.03; filter: saturate(1.15); } }
 .tall { height: 160px; }
 .short { height: 120px; }
 .tiers { display: flex; gap: 8px; }
-.tier { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; border: 1.5px solid; border-radius: 14px; }
+.tier { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; border: 1.5px solid; border-radius: 14px; background: #fff; color: var(--ink); transition: background 250ms, box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.tierIcon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; transition: background 250ms, rotate 500ms var(--m-spring); }
+@media (hover: hover) { .tier:hover .tierIcon { rotate: -14deg; } }
+.tierOn { background: color-mix(in srgb, var(--tier) 10%, #fff); box-shadow: 0 10px 22px -12px var(--tier); }
+.tierOn .tierIcon { background: var(--tier); animation: boing 550ms var(--m-spring) both; }
 .tier strong { font-size: 12px; font-weight: 800; }
 .tier small { color: var(--muted); font-size: 11px; }
-.wish { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid var(--line); border-radius: 14px; }
+.wish { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; }
 .wish > div, .amplop > div { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .wish strong { font-size: 13px; font-weight: 700; }
 .wish small { color: var(--muted); font-size: 11px; }
 .wishIcon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px; background: #fff0f4; }
-.beri { padding: 6px 12px; border-radius: 999px; background: var(--grad); color: #fff; font-size: 11px; font-weight: 800; }
-.amplop { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: var(--grad); color: #fff; }
+.beri { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 7px 14px; border: 1.5px solid transparent; border-radius: 999px; background: var(--grad); color: #fff; font-size: 11px; font-weight: 800; transition: background 250ms, color 250ms, border-color 250ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
+.beriOn { border-color: var(--pink); background: #fff; color: var(--pink); animation: boing 500ms var(--m-spring) both; }
+.amplop { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: var(--grad); color: #fff; box-shadow: 0 12px 26px -16px rgba(253, 58, 115, .8); }
 .amplop strong { font-size: 13px; font-weight: 800; }
 .amplop small { color: rgba(255, 255, 255, .9); font-size: 11px; overflow-wrap: anywhere; }
-.salin { flex-shrink: 0; padding: 6px 12px; border: 0; border-radius: 999px; background: #fff; color: var(--pink); font-size: 11px; font-weight: 800; }
-.wishCard { display: flex; gap: 10px; padding: 12px; border: 1px solid #ffe1ea; border-radius: 14px; background: #fff7f9; }
+.salin { flex-shrink: 0; padding: 7px 14px; border: 0; border-radius: 999px; background: #fff; color: var(--pink); font-size: 11px; font-weight: 800; transition: background 200ms, color 200ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
+.salinOn { background: var(--ink); color: #fff; animation: boing 500ms var(--m-spring) both; }
+.wishCard { display: flex; gap: 12px; padding: 14px; border: 1px solid #ffe1ea; border-radius: 16px; background: #fff7f9; }
 .wishCard > div { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .wishCard strong { font-size: 13px; font-weight: 800; overflow-wrap: anywhere; }
 .wishCard p { color: var(--muted); font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
 .wAv { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border-radius: 999px; background: var(--grad); color: #fff; font-size: 14px; font-weight: 800; }
 .empty { color: var(--muted); font-size: 13px; }
 .bottom { position: fixed; bottom: 0; left: 50%; z-index: 20; display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; max-width: 430px; padding: 12px 16px calc(22px + env(safe-area-inset-bottom)); transform: translateX(-50%); border-top: 1px solid var(--line); background: #fff; }
-.no, .star { display: grid; place-items: center; width: 52px; height: 52px; flex-shrink: 0; border: 1.5px solid #ffb199; border-radius: 999px; background: #fff; transition: transform 150ms; }
+.no, .star { display: grid; place-items: center; width: 52px; height: 52px; flex-shrink: 0; border: 1.5px solid #ffb199; border-radius: 999px; background: #fff; transition: background 200ms, box-shadow 300ms var(--m-spring), scale 260ms var(--m-spring), translate 260ms var(--m-spring), rotate 400ms var(--m-spring); }
+.no svg, .star svg { transition: rotate 450ms var(--m-spring); }
 .star { border-color: #9be1f7; }
-.rsvpBtn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border: 0; border-radius: 999px; background: var(--grad); color: #fff; font-size: 14px; font-weight: 800; transition: transform 150ms; }
-.no:hover, .star:hover, .rsvpBtn:hover { transform: scale(1.04); }
+.rsvpBtn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; height: 52px; border: 0; border-radius: 999px; background: var(--grad); color: #fff; font-size: 14px; font-weight: 800; box-shadow: 0 10px 22px -12px rgba(253, 58, 115, .9); transition: box-shadow 300ms var(--m-spring), scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
+.rsvpBtn svg { animation: beat 1.6s 2s ease-in-out infinite; }
+@media (hover: hover) {
+  .no:hover, .star:hover, .rsvpBtn:hover { scale: 1.05; }
+  .no:hover { background: #fff4f0; box-shadow: 0 8px 18px -10px #ff7854; }
+  .no:hover svg { rotate: 90deg; }
+  .star:hover { background: #f0fbff; box-shadow: 0 8px 18px -10px #35c9f3; }
+  .star:hover svg { rotate: 72deg; }
+}
+
+/* like button on profile cards */
+.like { position: absolute; right: 14px; bottom: 18px; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: #fff; box-shadow: 0 6px 16px rgba(0, 0, 0, .25); transition: background 250ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
+.liked { background: var(--grad); }
+.liked > svg { animation: boing 520ms var(--m-spring) both; }
+.likeBurst { position: absolute; inset: 0; pointer-events: none; }
+.likeBurst i { position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; margin: -3.5px; border-radius: 999px; background: #fd3a73; opacity: 0; animation: spark 650ms cubic-bezier(.2, .8, .3, 1) both; }
+.likeBurst i:nth-child(1) { --sx: 0px; --sy: -34px; }
+.likeBurst i:nth-child(2) { --sx: 30px; --sy: -18px; background: #ff7854; }
+.likeBurst i:nth-child(3) { --sx: 30px; --sy: 18px; background: #ffd166; }
+.likeBurst i:nth-child(4) { --sx: 0px; --sy: 34px; }
+.likeBurst i:nth-child(5) { --sx: -30px; --sy: 18px; background: #ff7854; }
+.likeBurst i:nth-child(6) { --sx: -30px; --sy: -18px; background: #ffd166; }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes inA { from { transform: translateX(-60px) rotate(-10deg); opacity: 0; } to { transform: rotate(7deg); opacity: 1; } }
 @keyframes inB { from { transform: translateX(60px) rotate(10deg); opacity: 0; } to { transform: rotate(-7deg); opacity: 1; } }
+@keyframes beat { 0%, 100% { scale: 1; } 14% { scale: 1.18; } 28% { scale: 1; } 42% { scale: 1.1; } 70% { scale: 1; } }
+@keyframes ring { 0% { opacity: .7; scale: 1; } 100% { opacity: 0; scale: 1.7; } }
+@keyframes spark { 0% { opacity: 0; translate: 0 0; scale: .4; } 25% { opacity: 1; } 100% { opacity: 0; translate: var(--sx) var(--sy); scale: 1; } }
+@keyframes boing { 0% { scale: .5; } 60% { scale: 1.2; } 100% { scale: 1; } }
+@keyframes bubble { from { opacity: 0; scale: .6; translate: 0 10px; } }
+@keyframes dot { 0%, 100% { translate: 0 0; opacity: .4; } 40% { translate: 0 -4px; opacity: 1; } }
+@keyframes typing { 0% { opacity: 0; scale: .6; } 15%, 85% { opacity: 1; scale: 1; } 100% { opacity: 0; scale: .8; } }
 @media (prefers-reduced-motion: reduce) {
-  .match h1, .cardA, .cardB, .bigHeart { animation: none; }
+  .match h1, .cardA, .cardB, .bigHeart, .beat, .ring, .sparks i, .chat[data-revealed] > div, .chat[data-revealed] .last, .chat[data-revealed] .typing, .typing i, .liked > svg, .likeBurst i,
+  .tierOn .tierIcon, .beriOn, .salinOn, .rsvpBtn svg { animation: none !important; }
+  .typing, .sparks, .likeBurst { display: none !important; }
   .root *, .cover * { transition: none !important; }
 }

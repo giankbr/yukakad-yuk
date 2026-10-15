@@ -1,11 +1,12 @@
 "use client";
 // Theme "Rumah Gadang" — undangan adat Minang: merah marun, emas, songket (design: Undangan — Tema Rumah Gadang (Sari & Fadli)).
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
+import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -78,6 +79,8 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
   const calendar = calendarHref(data);
   const maps = mapsHref(data, data.events[data.events.length - 1]);
   const [attendance, setAttendance] = useState<Attendance>("yes");
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (wishes.status === "sent") celebrate(sentRef.current); }, [wishes.status]);
   const guestDefault = data.guestName && data.guestName !== "Tamu Undangan" ? data.guestName : "";
 
   const people = [
@@ -154,7 +157,7 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
           <Head id="rg-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit ${countdown.seconds} detik lagi`}>
             {([[countdown.days, "Hari"], [countdown.hours, "Jam"], [countdown.minutes, "Menit"], [countdown.seconds, "Detik"]] as const).map(([value, label]) => (
-              <div key={label} className={s.countBox} aria-hidden><b>{value}</b><span>{label}</span></div>
+              <div key={label} className={s.countBox} aria-hidden><b><Tick value={value} /></b><span>{label}</span></div>
             ))}
           </div>
           {calendar && <a className={s.pill} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -228,7 +231,7 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
               const [line1, ...line2] = gift.type === "address" ? info.number.split(",") : [info.number];
               const sub = gift.type === "address" ? line2.join(",").trim() : info.holder ? `a.n. ${info.holder}` : "";
               return (
-                <div key={gift.id} className={s.gift}>
+                <div key={gift.id} className={info.copy && copied === info.copy ? `${s.gift} ${s.giftCopied}` : s.gift}>
                   <span className={s.iconDot}><Lucide icon={giftIcon(gift)} size={18} /></span>
                   <div className={s.giftText}>
                     <small>{gift.type === "address" ? "Kirim Kado" : info.title}</small>
@@ -237,8 +240,8 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${gift.type === "address" ? "alamat" : "nomor"}`}>
-                      <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
+                    <button type="button" className={copied === info.copy ? `${s.copy} ${s.copyOn}` : s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${gift.type === "address" ? "alamat" : "nomor"}`}>
+                      <Lucide key={copied === info.copy ? "on" : "off"} icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
                 </div>
@@ -250,7 +253,7 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
         <section className={`${s.section} ${s.alt}`} aria-labelledby="rg-wish">
           <Head id="rg-wish">Ucapan &amp; RSVP</Head>
           {wishes.status === "sent" ? (
-            <div className={s.card} role="status">
+            <div ref={sentRef} className={`${s.card} ${s.sentCard}`} role="status">
               <p className={s.sent}>Terima kasih! {demo ? "Ini pratinjau — ucapanmu muncul di daftar." : "Ucapan dan konfirmasimu sudah kami terima."}</p>
               <button type="button" className={s.pillWide} onClick={() => { wishes.reset(); rsvp.reset(); }}>Tulis Lagi</button>
             </div>

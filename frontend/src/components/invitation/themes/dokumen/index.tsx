@@ -5,6 +5,7 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -42,6 +43,8 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
   const banner = data.gallery[0];
   const gallery = data.gallery.length > 3 ? data.gallery.slice(1) : data.gallery;
   const [shared, setShared] = useState(false);
+  const [favorite, setFavorite] = useState(false);
+  const [todo, setTodo] = useState<Record<string, boolean>>(() => Object.fromEntries(DEMO_TODO));
   const people = [
     { name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[1], tag: demo ? "PM proyek rumah tangga" : "Mempelai wanita" },
     { name: data.couple.groomFull ?? data.couple.groom, parents: data.couple.groomParents, photo: data.couple.groomPhoto ?? data.gallery[2], tag: demo ? "Eksekutor ide dadakan" : "Mempelai pria" },
@@ -51,7 +54,7 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
     const url = window.location.href;
     try {
       if (navigator.share) await navigator.share({ title, url });
-      else { await navigator.clipboard.writeText(url); setShared(true); setTimeout(() => setShared(false), 2000); }
+      else { await navigator.clipboard.writeText(url); setShared(true); toast("Tautan disalin"); setTimeout(() => setShared(false), 2000); }
     } catch { /* share dismissed */ }
   };
 
@@ -67,11 +70,11 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
           <div className={s.page}>
             <span className={s.pageIcon} aria-hidden>💍</span>
             <nav className={s.crumb} aria-label="Lokasi halaman"><span>Keluarga</span>/<span>Momen Besar</span>/<b>{label}</b></nav>
-            <h1 className={s.title}>{title}</h1>
+            <h1 className={s.title}>{title}<span className={s.caret} aria-hidden /></h1>
             <dl className={s.props}>
               <div><dt><Lucide icon={ic.calendar} size={14} color="#787774" />Tanggal</dt><dd>{formatDate(data.date)}</dd></div>
               <div><dt><Lucide icon={ic.mapPin} size={14} color="#787774" />Lokasi</dt><dd>{data.place}</dd></div>
-              <div><dt><Lucide icon={ic.loader} size={14} color="#787774" />Status</dt><dd><span className={s.tagGreen}>Lajang → Selamanya</span></dd></div>
+              <div><dt><Lucide icon={ic.loader} size={14} color="#787774" className={s.spin} />Status</dt><dd><span className={s.tagGreen}>Lajang → Selamanya</span></dd></div>
               <div><dt><Lucide icon={ic.users} size={14} color="#787774" />Tamu</dt><dd>Kepada Yth. di bawah ini</dd></div>
             </dl>
             <div className={s.callout}>
@@ -110,7 +113,10 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
         <span className={s.navIcons}>
           <button type="button" onClick={share} aria-label={shared ? "Tautan disalin" : "Bagikan undangan"}><Lucide icon={shared ? ic.check : ic.share2} size={17} color="#787774" /></button>
           <button type="button" onClick={sheets.openWish} aria-label="Tulis komentar"><Lucide icon={ic.messageSquare} size={17} color="#787774" /></button>
-          <span aria-hidden><Lucide icon={ic.star} size={17} color="#787774" /></span>
+          <button type="button" className={s.fav} aria-pressed={favorite} aria-label={favorite ? "Hapus dari favorit" : "Tambahkan ke favorit"}
+            onClick={() => { setFavorite(v => !v); toast(favorite ? "Dihapus dari favorit" : "Ditambahkan ke favorit"); }}>
+            <Lucide icon={ic.star} size={17} color={favorite ? "#e9a23b" : "#787774"} />
+          </button>
           <span aria-hidden><Lucide icon={ic.ellipsis} size={17} color="#787774" /></span>
         </span>
       </header>
@@ -176,10 +182,10 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
               {gallery.map((src, index) => {
                 const name = demo && DEMO_FILES[index] ? DEMO_FILES[index] : `foto-${String(index + 1).padStart(2, "0")}.jpg`;
                 return (
-                  <a key={src + index} className={s.file} href={src} target="_blank" rel="noreferrer">
+                  <div key={src + index} className={s.file}>
                     <Photo src={src} alt={`Foto ${index + 1}`} className={s.fileImg} />
                     <span>{name}</span>
-                  </a>
+                  </div>
                 );
               })}
             </div>
@@ -194,11 +200,18 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
             <Heading emoji="🎁" id="dk-gift">{demo ? "Wishlist Kado" : "Kado"}</Heading>
             {demo && (
               <ul className={s.todo}>
-                {DEMO_TODO.map(([item, done]) => (
-                  <li key={item} className={done ? s.done : undefined}>
-                    <span className={s.checkbox} aria-hidden>{done && <Lucide icon={ic.check} size={11} color="#fff" strokeWidth={3} />}</span>{item}
-                  </li>
-                ))}
+                {DEMO_TODO.map(([item]) => {
+                  const done = !!todo[item];
+                  return (
+                    <li key={item} className={done ? s.done : undefined}>
+                      <label>
+                        <input type="checkbox" checked={done} onChange={() => setTodo(t => ({ ...t, [item]: !t[item] }))} />
+                        <span className={s.checkbox} aria-hidden><Lucide icon={ic.check} size={11} color="#fff" strokeWidth={3} /></span>
+                        <span className={s.todoText}>{item}</span>
+                      </label>
+                    </li>
+                  );
+                })}
               </ul>
             )}
             {data.gifts.map(gift => {
@@ -210,11 +223,11 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
                   <small>{file}</small>
                   {line && <code>{line}</code>}
                   {"image" in info && info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
-                  {info.copy && <i>{copied === info.copy ? "// tersalin ✓" : "// klik untuk menyalin"}</i>}
+                  {info.copy && <i className={copied === info.copy ? s.copiedNote : undefined}>{copied === info.copy ? "// tersalin ✓" : "// klik untuk menyalin"}</i>}
                 </>
               );
               return info.copy
-                ? <button key={gift.id} type="button" className={s.code} onClick={() => copy(info.copy)} aria-label={`Salin ${line}`}>{body}</button>
+                ? <button key={gift.id} type="button" className={s.code} data-done={copied === info.copy || undefined} onClick={() => copy(info.copy)} aria-label={`Salin ${line}`}>{body}</button>
                 : <div key={gift.id} className={s.code}>{body}</div>;
             })}
           </section>

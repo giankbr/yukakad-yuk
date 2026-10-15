@@ -1,9 +1,11 @@
 "use client";
 // Theme "Pemutar Musik" — undangan bergaya aplikasi pemutar musik (design: Tema Pemutar Musik (Nada & Raga)).
+import { useState } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -21,6 +23,11 @@ const DEMO_VIDEOS = [{ title: "MV — Selamanya", length: "4:12" }, { title: "Se
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
   return parts[parts.length - 1] ?? "";
+}
+
+/** Animated equalizer bars (frozen while paused). */
+function Eq({ paused, className }: { paused?: boolean; className?: string }) {
+  return <span className={`${s.eq} ${paused ? s.eqPaused : ""} ${className ?? ""}`} aria-hidden><i /><i /><i /><i /></span>;
 }
 
 /** "08.00 – 10.00 WIB" → "08.00" */
@@ -48,6 +55,26 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
     { name: c.groomFull ?? c.groom, role: "Komposer", parents: c.groomParents, photo: c.groomPhoto ?? data.gallery[2] },
   ];
   const mainMaps = mapsHref(data);
+  const [track, setTrack] = useState(liveIndex);
+  const [playing, setPlaying] = useState(true);
+  const [followed, setFollowed] = useState<Record<string, boolean>>({});
+  const [picked, setPicked] = useState<Record<string, boolean>>({});
+  const [rating, setRating] = useState(0);
+  const trackCount = Math.max(1, data.events.length);
+  const nowPlaying = data.events[track]?.name ?? couple;
+  const step = (delta: number) => { setTrack(index => (index + delta + trackCount) % trackCount); setPlaying(true); };
+  const follow = (name: string) => {
+    if (!followed[name]) toast(`Mengikuti ${name}`);
+    setFollowed(state => ({ ...state, [name]: !state[name] }));
+  };
+  const pick = (name: string) => {
+    if (!picked[name]) toast("Ditandai di wishlist");
+    setPicked(state => ({ ...state, [name]: !state[name] }));
+  };
+  const rate = (value: number) => {
+    setRating(value);
+    toast(`Kamu memberi ${value} bintang`);
+  };
 
   return (
     <ThemeShell
@@ -77,7 +104,7 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
             <button type="button" className={s.openBtn} onClick={open}><Lucide icon={ic.play} color="#fff" />Putar Undangan</button>
           </div>
           <div className={s.mini} aria-hidden>
-            <i />
+            <i><Eq /></i>
             <div><strong>Janji Suci (feat. Keluarga)</strong><small>{couple}</small></div>
             <Lucide icon={ic.play} size={18} color="#1d1d1f" />
             <Lucide icon={ic.fastForward} size={18} color="#1d1d1f" />
@@ -99,14 +126,17 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
           <h2 id="pm-acara">Daftar Lagu · Rangkaian Hari</h2>
           <ol className={s.tracks}>
             {data.events.map((event, index) => {
-              const live = index === liveIndex;
+              const live = index === track;
               const sub = [formatDate(event.date), event.venue && event.venue !== data.place ? event.venue : ""].filter(Boolean).join(" · ");
               return (
                 <li key={event.name + index} className={live ? s.live : undefined}>
-                  {live ? <Lucide icon={ic.audioLines} size={16} color="#fa2d48" className={s.trackNo} /> : <span className={s.trackNo}>{index + 1}</span>}
-                  <div><strong>{event.name}</strong><small>{sub}</small></div>
-                  <time>{startTime(event.time)}</time>
-                  <Lucide icon={ic.ellipsis} size={16} color="#86868b" />
+                  <button type="button" className={s.trackBtn} aria-current={live ? "true" : undefined} aria-label={`Putar ${event.name}`}
+                    onClick={() => { if (live) setPlaying(value => !value); else { setTrack(index); setPlaying(true); } }}>
+                    {live ? <Eq paused={!playing} className={s.trackNo} /> : <span className={s.trackNo}>{index + 1}</span>}
+                    <div><strong>{event.name}</strong><small>{sub}</small></div>
+                    <time>{startTime(event.time)}</time>
+                    <Lucide icon={ic.ellipsis} size={16} color="#86868b" />
+                  </button>
                 </li>
               );
             })}
@@ -139,6 +169,9 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
                 <strong>{person.name}</strong>
                 <em>{person.role}</em>
                 {person.parents && <small>{person.parents}</small>}
+                <button type="button" className={`${s.follow} ${followed[person.name] ? s.followed : ""}`} aria-pressed={!!followed[person.name]} onClick={() => follow(person.name)}>
+                  <span key={String(!!followed[person.name])} className={s.swap}>{followed[person.name] && <Lucide icon={ic.check} size={12} />}{followed[person.name] ? "Diikuti" : "Ikuti"}</span>
+                </button>
               </article>
             ))}
           </div>
@@ -211,7 +244,9 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
                       <b>#{index + 1}</b>
                       <span className={s.chartIcon}><Lucide icon={item.icon} size={22} color="#fa2d48" /></span>
                       <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                      <span className={s.pill}>Beri</span>
+                      <button type="button" className={`${s.pill} ${picked[item.name] ? s.pillOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>
+                        <span key={String(!!picked[item.name])} className={s.swap}>{picked[item.name] && <Lucide icon={ic.check} size={12} />}{picked[item.name] ? "Dipilih" : "Beri"}</span>
+                      </button>
                     </li>
                   ))}
                 </ol>
@@ -227,7 +262,11 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
                     <small>{[[info.title !== "Alamat kado" && gift.type !== "qris" ? info.title : "", info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copy} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && (
+                    <button type="button" className={s.copy} onClick={() => copy(info.copy)}>
+                      <span key={String(copied === info.copy)} className={s.swap}>{copied === info.copy && <Lucide icon={ic.check} size={12} />}{copied === info.copy ? "Tersalin" : "Salin"}</span>
+                    </button>
+                  )}
                 </div>
               );
             })}
@@ -244,15 +283,34 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
               <p>{wish.message}</p>
             </article>
           ))}
+          <div className={s.rate}>
+            <span>{rating ? `Rating kamu: ${rating} dari 5` : "Ketuk untuk menilai"}</span>
+            <div>
+              {[1, 2, 3, 4, 5].map(value => (
+                <button key={value} type="button" aria-label={`Beri ${value} bintang`} aria-pressed={value <= rating} className={value <= rating ? s.starOn : undefined}
+                  style={{ animationDelay: `${(value - 1) * 45}ms` }} onClick={() => rate(value)}>
+                  <Lucide icon={ic.star} size={22} color={value <= rating ? "#ff9500" : "#c7c7cc"} />
+                </button>
+              ))}
+            </div>
+          </div>
           <button type="button" className={s.writeBtn} onClick={sheets.openWish}>Tulis Ulasan</button>
         </section>
       </main>
 
       <nav className={s.bottom} aria-label="Aksi undangan">
-        <div className={s.progress} aria-hidden><i /></div>
+        <div className={s.now}>
+          <strong key={track} className={s.nowTitle}>{nowPlaying}</strong>
+          <small>{couple}</small>
+        </div>
+        <div className={s.progress} aria-hidden><i key={track} className={playing ? undefined : s.paused} /></div>
         <div className={s.controls}>
-          <span className={s.transport} aria-hidden>
-            <Lucide icon={ic.skipBack} size={20} color="#1d1d1f" /><Lucide icon={ic.play} size={20} color="#1d1d1f" /><Lucide icon={ic.skipForward} size={20} color="#1d1d1f" />
+          <span className={s.transport}>
+            <button type="button" aria-label="Lagu sebelumnya" onClick={() => step(-1)}><Lucide icon={ic.skipBack} size={20} color="#1d1d1f" /></button>
+            <button type="button" aria-label={playing ? "Jeda" : "Putar"} onClick={() => setPlaying(value => !value)}>
+              <span key={String(playing)} className={s.swap}><Lucide icon={playing ? ic.pause : ic.play} size={20} color="#1d1d1f" /></span>
+            </button>
+            <button type="button" aria-label="Lagu berikutnya" onClick={() => step(1)}><Lucide icon={ic.skipForward} size={20} color="#1d1d1f" /></button>
           </span>
           <button type="button" className={s.rsvp} onClick={sheets.openRsvp}>Konfirmasi Hadir</button>
         </div>

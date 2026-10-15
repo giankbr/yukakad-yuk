@@ -1,8 +1,10 @@
 "use client";
 // Theme "Kantong Oranye" — undangan bergaya aplikasi tabungan/kantong bersama (design: Kantong Bersama, Dion & Salsa).
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  Tick, mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -26,6 +28,7 @@ const POCKETS = [
   { bg: "#d9a3e6", ink: "#1a1a1a", icon: ic.partyPopper },
   { bg: "#5ea9cc", ink: "#ffffff", icon: ic.plane },
 ];
+const TIERS = ["Rp100rb", "Rp300rb", "Rp1jt", "Bebas"];
 const YEAR_BG = ["#fdf0d2", "#fbefcb", "#e8f7ee"];
 const NAV = [
   { label: "Beranda", icon: ic.landmark }, { label: "Kantong", icon: ic.wallet, active: true },
@@ -48,6 +51,12 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
   // Progress over the final year before the day (derived from the date, not invented).
   const pct = demo ? 86 : countdown.ready ? Math.min(100, Math.max(1, Math.round(100 - Number(countdown.days) / 3.65))) : 0;
 
+  const [tier, setTier] = useState(1);
+  const [topped, setTopped] = useState<Record<string, number>>({});
+  const topUp = (name: string) => {
+    setTopped(map => ({ ...map, [name]: (map[name] ?? 0) + 5 }));
+    toast("Kantong terisi, terima kasih!");
+  };
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
   const sheets = useSheets();
@@ -75,7 +84,7 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
         <section className={s.cover}>
           <div className={s.coverHead}>
             <div className={s.notif}>
-              <span className={s.appIcon} aria-hidden><Lucide icon={ic.piggyBank} size={30} color="#f8a91b" /></span>
+              <span className={s.appIcon} aria-hidden><i className={s.coin} /><Lucide icon={ic.piggyBank} size={30} color="#f8a91b" /></span>
               <h1>Kantong Baru Dibuat!</h1>
               <p>{couple} membuat kantong bersama</p>
             </div>
@@ -105,7 +114,7 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
               {pockets.map((pocket, index) => {
                 const look = POCKETS[index % POCKETS.length];
                 return (
-                  <div key={pocket.label + index} className={s.pocket} style={{ background: look.bg, color: look.ink }}>
+                  <div key={pocket.label + index} className={s.pocket} style={{ background: look.bg, color: look.ink, "--d": `${700 + index * 90}ms` } as CSSProperties}>
                     <span aria-hidden><Lucide icon={look.icon} color={look.ink} /></span>
                     <strong>{pocket.label}</strong>
                     <small>{pocket.value}</small>
@@ -132,11 +141,27 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
             <h1>Kantong Bersama</h1>
             <p>{couple} · {midDate}{where ? ` · ${where}` : ""}</p>
           </div>
-          <span className={s.mono} aria-hidden>{groom.slice(0, 1).toUpperCase()}♥{bride.slice(0, 1).toUpperCase()}</span>
+          <span className={`${s.mono} ${s.monoBeat}`} aria-hidden>{groom.slice(0, 1).toUpperCase()}♥{bride.slice(0, 1).toUpperCase()}</span>
         </div>
       </header>
 
       <main className={s.body}>
+        <section className={s.summary} aria-label="Kantong Rumah Tangga">
+          <div className={s.sumHead}>
+            <span className={s.houseIcon} aria-hidden><Lucide icon={ic.house} size={20} color="#1a1a1a" /></span>
+            <div className={s.grow}><strong className={s.t14}>Kantong Rumah Tangga</strong><small className={s.muted11}>Target cair {longDate}</small></div>
+            <b className={s.sumPct}>{pct}%</b>
+          </div>
+          <div className={s.sumBar} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Progres menuju hari H"><i style={{ width: `${pct}%` }} /></div>
+          {countdown.ready && !countdown.done && (
+            <div className={s.clock} aria-label="Hitung mundur">
+              {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([name, value]) => (
+                <span key={name}><Tick value={value} /><small>{name}</small></span>
+              ))}
+            </div>
+          )}
+        </section>
+
         <Extras slot="opening" className={s.extras} />
 
         <section className={s.card} aria-labelledby="ko-members">
@@ -212,19 +237,28 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
             <div className={s.head}><h2 id="ko-gift">Top Up Kantong Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && (
               <>
-                <div className={s.tiers} aria-hidden>
-                  {["Rp100rb", "Rp300rb", "Rp1jt", "Bebas"].map((tier, index) => <span key={tier} className={index === 1 ? s.tierOn : undefined}>{tier}</span>)}
+                <div className={s.tiers} role="group" aria-label="Nominal top up" style={{ "--i": tier } as CSSProperties}>
+                  <i className={s.tierPill} aria-hidden />
+                  {TIERS.map((name, index) => (
+                    <button key={name} type="button" className={index === tier ? s.tierOn : undefined} aria-pressed={index === tier} onClick={() => setTier(index)}>{name}</button>
+                  ))}
                 </div>
-                {DEMO_WISHLIST.map(item => (
-                  <div key={item.name} className={s.wish}>
-                    <div className={s.row}>
-                      <span className={s.wIcon} aria-hidden><Lucide icon={item.icon} color="#f8a91b" /></span>
-                      <div className={s.grow}><strong>{item.name}</strong><small className={s.muted11}>{item.note}</small></div>
-                      <span className={s.isi} aria-hidden>Isi</span>
+                {DEMO_WISHLIST.map(item => {
+                  const filled = Math.min(100, item.pct + (topped[item.name] ?? 0));
+                  return (
+                    <div key={item.name} className={s.wish}>
+                      <div className={s.row}>
+                        <span className={s.wIcon} aria-hidden><Lucide icon={item.icon} color="#f8a91b" /></span>
+                        <div className={s.grow}><strong>{item.name}</strong><small className={s.muted11}>{item.note.replace(`${item.pct}%`, `${filled}%`)}</small></div>
+                        <button type="button" className={s.isi} onClick={() => topUp(item.name)} disabled={filled >= 100} aria-label={`Isi ${item.name}`}>
+                          {filled >= 100 ? "Penuh" : "Isi"}
+                          {topped[item.name] ? <em key={topped[item.name]} className={s.plusFive} aria-hidden>+5%</em> : null}
+                        </button>
+                      </div>
+                      <div className={s.barSm}><i style={{ width: `${filled}%` }} /></div>
                     </div>
-                    <div className={s.barSm}><i style={{ width: `${item.pct}%` }} /></div>
-                  </div>
-                ))}
+                  );
+                })}
               </>
             )}
             {data.gifts.map(gift => {
@@ -237,7 +271,7 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
                     <small>{[gift.type === "bank" || gift.type === "ewallet" ? info.title : "", info.number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.isi} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.isi} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "Tersalin" : "Salin"}</span></button>}
                 </div>
               );
             })}

@@ -18,6 +18,20 @@ function isSkippable(element: HTMLElement) {
   return false;
 }
 
+const MEDIA = new Set(["IMG", "PICTURE", "VIDEO", "FIGURE", "IFRAME", "CANVAS"]);
+
+/** Reveal flavour: images settle in, headings blur/pop in, everything else rises (see globals.css). */
+function variantOf(item: HTMLElement): string {
+  if (getComputedStyle(item).position === "absolute") return "fade";
+  if (MEDIA.has(item.tagName)) return "media";
+  if (/^H[1-3]$/.test(item.tagName)) return "title";
+  const text = item.textContent?.trim() ?? "";
+  if (!text && item.querySelector("img, video, picture")) return "media";
+  const first = item.firstElementChild;
+  if (first && /^H[1-3]$/.test(first.tagName) && item.children.length <= 2 && text.length < 90) return "title";
+  return "";
+}
+
 function itemsOf(block: HTMLElement, depth = 0): HTMLElement[] {
   let container: HTMLElement = block;
   for (let i = 0; i < 3; i++) {
@@ -44,8 +58,7 @@ export function autoReveal(root: HTMLElement, { stagger = 70, maxStagger = 6 }: 
   for (const block of blocks) {
     itemsOf(block).forEach((item, index) => {
       if (item.hasAttribute("data-reveal") || isSkippable(item) || item.offsetHeight === 0) return;
-      const position = getComputedStyle(item).position;
-      item.setAttribute("data-reveal", position === "absolute" ? "fade" : "");
+      item.setAttribute("data-reveal", variantOf(item));
       item.style.setProperty("--rd", `${Math.min(index, maxStagger) * stagger}ms`);
       targets.push(item);
     });

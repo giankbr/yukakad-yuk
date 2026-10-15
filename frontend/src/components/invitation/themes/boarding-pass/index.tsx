@@ -2,8 +2,10 @@
 // Theme "Boarding Pass" — undangan bergaya tiket pesawat (design: Undangan — Tema Boarding Pass (Citra & Bagus)).
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  mapsHref, storyItems, Tick, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { useState } from "react";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -49,7 +51,13 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
   const sky = data.gallery[0];
   const gallery = data.gallery.length > 3 ? data.gallery.slice(1) : data.gallery;
   const firstEvent = data.events[0]?.name?.toLowerCase();
-  const statusLine = countdown.done ? "STATUS: SUDAH MENDARAT" : `STATUS: ON TIME · ${countdown.ready ? Number(countdown.days) : "–"} HARI MENUJU BOARDING`;
+  const statusLine = countdown.done ? "STATUS: SUDAH MENDARAT" : <>STATUS: ON TIME · {countdown.ready ? <Tick value={Number(countdown.days)} /> : "–"} HARI MENUJU BOARDING</>;
+  const [picked, setPicked] = useState<string[]>([]);
+  const togglePick = (name: string) => {
+    const on = !picked.includes(name);
+    setPicked(list => on ? [...list, name] : list.filter(item => item !== name));
+    toast(on ? "Masuk bagasi kado" : "Dikeluarkan dari bagasi");
+  };
   const crew = [
     { role: "KAPTEN RUMAH TANGGA", name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[1] },
     { role: "CO-PILOT SETIA", name: data.couple.groomFull ?? data.couple.groom, parents: data.couple.groomParents, photo: data.couple.groomPhoto ?? data.gallery[2] },
@@ -75,7 +83,7 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
             </div>
             <div className={s.route}>
               <div><strong>SGL</strong><span>Lajang</span>{firstYear && <small>Boarding {firstYear}</small>}</div>
-              <div className={s.routeMid}><Lucide icon={ic.plane} size={20} color="#f4a000" />{years > 0 && <small>{years} thn</small>}</div>
+              <div className={s.routeMid}><span className={s.flightPath} aria-hidden><i /><Lucide icon={ic.plane} size={20} color="#f4a000" className={s.flyer} /></span>{years > 0 && <small>{years} thn</small>}</div>
               <div className={s.routeEnd}><strong>SLM</strong><span>Selamanya</span><small>Mendarat {shortDate}</small></div>
             </div>
             <dl className={s.info}>
@@ -90,13 +98,13 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
               <strong>{guestLabel(data)}</strong>
               <span>{demo ? "Kursi VIP · Zona Keluarga" : "Kepada Yth. Bapak/Ibu/Saudara/i"}</span>
             </div>
-            <div className={s.barcode} aria-hidden>{BARCODE.map((w, i) => <i key={i} style={{ width: w }} />)}</div>
+            <div className={s.barcode} aria-hidden>{BARCODE.map((w, i) => <i key={i} style={{ width: w }} />)}<span className={s.scan} /></div>
           </article>
           <div className={s.coverSpacer} />
           <button type="button" className={s.checkIn} onClick={open}><Lucide icon={ic.scanLine} size={17} color="#fff" />Check-in — Buka Undangan</button>
           <div className={s.note}>
             <p>Gerbang ditutup saat {firstEvent ?? "acara"} dimulai. Mohon hadir 30 menit lebih awal.</p>
-            <span className={s.onTime}><i aria-hidden />{statusLine}</span>
+            <span className={s.onTime}><i aria-hidden className={s.dot} /><span>{statusLine}</span></span>
           </div>
           {demo && (
             <div className={s.facilities} aria-label="Fasilitas penerbangan">
@@ -130,7 +138,7 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
               </li>
             ))}
             <li className={s.now}>
-              <span className={s.rail} aria-hidden><i className={s.landing}><Lucide icon={ic.plane} size={12} color="#fff" /></i></span>
+              <span className={s.rail} aria-hidden><i className={s.landing}><span className={s.ping} /><Lucide icon={ic.plane} size={12} color="#fff" /></i></span>
               <div>
                 <strong>Mendarat — Pelaminan</strong>
                 <p>{longShort} · final approach</p>
@@ -180,9 +188,9 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
             <h2 id="bp-gallery">Jendela Kabin · Galeri</h2>
             <div className={s.windows}>
               {gallery.map((src, index) => (
-                <a key={src + index} className={s.window} href={src} target="_blank" rel="noreferrer">
+                <div key={src + index} className={s.window}>
                   <Photo src={src} alt={`Foto ${couple} ${index + 1}`} />
-                </a>
+                </div>
               ))}
             </div>
           </section>
@@ -195,10 +203,12 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
           <section className={s.section} aria-labelledby="bp-gift">
             <h2 id="bp-gift">Bagasi Kado</h2>
             {demo && DEMO_BAGGAGE.map(item => (
-              <div key={item.name} className={s.bag}>
+              <div key={item.name} className={`${s.bag} ${picked.includes(item.name) ? s.bagOn : ""}`}>
                 <span className={s.bagIcon}><Lucide icon={item.icon} size={17} color="#0b2545" /></span>
                 <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                <span className={s.amberBtn}>Beri</span>
+                <button type="button" className={`${s.amberBtn} ${picked.includes(item.name) ? s.picked : ""}`} aria-pressed={picked.includes(item.name)} onClick={() => togglePick(item.name)}>
+                  {picked.includes(item.name) ? <><Lucide icon={ic.check} size={12} color="#1f7a4d" strokeWidth={3} />Dipilih</> : "Beri"}
+                </button>
               </div>
             ))}
             {data.gifts.map(gift => {
@@ -212,7 +222,7 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
                     {line && <small>{line}</small>}
                     {"image" in info && info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.amberBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.amberBtn} ${copied === info.copy ? s.picked : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}

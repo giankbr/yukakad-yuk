@@ -1,11 +1,12 @@
 "use client";
 // Theme "Linen Putih" — minimalis putih, tipografi serif tipis di atas tekstur linen.
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
+import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -64,6 +65,9 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
   const families = [familyName(data.couple.brideParents) ?? data.couple.bride, familyName(data.couple.groomParents) ?? data.couple.groom];
   const pad = (n: number) => String(n).padStart(2, "0");
   const sent = rsvp.status === "sent" || wishes.status === "sent";
+  const sentRef = useRef<HTMLDivElement>(null);
+  const [swapped, setSwapped] = useState(false);
+  useEffect(() => { if (sent) celebrate(sentRef.current); }, [sent]);
 
   const people = [
     { key: "bride", name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? gallery[1] },
@@ -110,6 +114,7 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
             <p className={s.kicker}>{label}</p>
             <h1>{couple}</h1>
             <p className={s.openingDate}>{dotDate(data.date)}</p>
+            <i className={s.openingRule} aria-hidden />
           </div>
         </section>
 
@@ -136,7 +141,7 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
           <Head id="lp-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
             {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
-              <div key={unit} className={s.countBox}><b>{value}</b><small>{unit}</small></div>
+              <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
             ))}
           </div>
           {calendar && <a className={s.btn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -181,13 +186,15 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
           <section className={`${s.band} ${s.alt} ${s.gallery}`} aria-labelledby="lp-gallery">
             <div className={s.galleryHead}>
               <h2 id="lp-gallery" className={s.kicker}>Galeri</h2>
-              <span aria-live="polite">{pad(shown + 1)} / {pad(gallery.length)}</span>
+              <span aria-live="polite"><Tick value={pad(shown + 1)} /> / {pad(gallery.length)}</span>
             </div>
-            <Photo src={gallery[shown]} alt={`Foto ${shown + 1} dari ${gallery.length}`} className={s.mainPhoto} />
+            <div className={s.mainFrame}>
+              <Photo key={shown} src={gallery[shown]} alt={`Foto ${shown + 1} dari ${gallery.length}`} className={`${s.mainPhoto} ${swapped ? s.swap : ""}`} />
+            </div>
             {gallery.length > 1 && (
               <div className={s.thumbs}>
                 {gallery.map((src, index) => index === shown ? null : (
-                  <button key={src + index} type="button" className={s.thumb} onClick={() => setActive(index)} aria-label={`Lihat foto ${index + 1}`}>
+                  <button key={src + index} type="button" className={s.thumb} onClick={() => { setActive(index); setSwapped(true); }} aria-label={`Lihat foto ${index + 1}`}>
                     <Photo src={src} />
                   </button>
                 ))}
@@ -220,7 +227,7 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
+                    <button type="button" className={`${s.copy} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
                       <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
@@ -234,7 +241,7 @@ export default function LinenPutihTheme({ data, slug, guestToken, demo, skipCove
           <Head id="lp-wish">Ucapan &amp; RSVP</Head>
           <div className={`${s.card} ${s.formCard}`}>
             {sent ? (
-              <div className={s.sent} role="status">
+              <div ref={sentRef} className={s.sent} role="status">
                 <span className={s.iconDot}><Lucide icon={ic.check} size={18} /></span>
                 <strong>Terima kasih!</strong>
                 <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi dan ucapanmu sudah kami terima."}</p>

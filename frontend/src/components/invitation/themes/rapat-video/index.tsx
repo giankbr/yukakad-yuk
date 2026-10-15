@@ -1,9 +1,11 @@
 "use client";
 // Theme "Rapat Video" — undangan bergaya aplikasi rapat video (design: Undangan — Tema Rapat Video (Rani & Yudha)).
+import { useRef, useState } from "react";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -23,7 +25,13 @@ const DEMO_WISHLIST = [{ name: "Monitor Kerja 27\"", price: "Rp2.800.000", icon:
 
 
 function NameTag({ name, muted }: { name: string; muted?: boolean }) {
-  return <span className={s.nameTag}><Lucide icon={muted ? ic.micOff : ic.mic} size={11} color={muted ? "#f44336" : "#4caf50"} />{name}</span>;
+  return (
+    <span className={s.nameTag}>
+      <Lucide icon={muted ? ic.micOff : ic.mic} size={11} color={muted ? "#f44336" : "#4caf50"} />
+      {!muted && <span className={s.level} aria-hidden><i /><i /><i /></span>}
+      {name}
+    </span>
+  );
 }
 
 export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
@@ -44,6 +52,15 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const guest = guestLabel(data);
+  const [reactions, setReactions] = useState<{ id: number; emoji: string; x: number }[]>([]);
+  const [tier, setTier] = useState<string | null>(null);
+  const [given, setGiven] = useState<Record<string, boolean>>({});
+  const nextId = useRef(0);
+  const react = (emoji: string, amount: string) => {
+    setTier(amount);
+    const id = nextId.current++;
+    setReactions(list => [...list.slice(-6), { id, emoji, x: 15 + Math.round(Math.random() * 70) }]);
+  };
   const panel = [
     { role: "Host", short: data.couple.bride, name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[0] },
     { role: "Co-host", short: data.couple.groom, name: data.couple.groomFull ?? data.couple.groom, parents: data.couple.groomParents, photo: data.couple.groomPhoto ?? data.gallery[1] },
@@ -66,14 +83,14 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
             </div>
             <p className={s.waiting}><i aria-hidden />Menunggu host memulai rapat…{waiting && ` (${waiting})`}</p>
             <div className={s.tiles}>
-              {panel.map(person => (
-                <div key={person.role} className={s.tile}>
+              {panel.map((person, index) => (
+                <div key={person.role} className={`${s.tile} ${index === 0 ? s.speakA : s.speakB}`}>
                   <Photo src={person.photo} alt={person.short} className={s.tileImg} />
                   <NameTag name={`${person.short} (Mempelai)`} />
                 </div>
               ))}
               <div className={s.tile} aria-hidden>
-                <span className={s.tileAvatar}>K</span>
+                <span className={`${s.tileAvatar} ${s.tileAvatarTalk}`}>K</span>
                 <NameTag name="Keluarga Besar" />
               </div>
               <div className={s.tile} aria-hidden>
@@ -99,7 +116,7 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
       <header className={s.nav}>
         <span className={s.rec}><i aria-hidden />REC · {title}</span>
         <span className={s.timer} aria-label={countdown.ready ? `${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi` : "Hitung mundur"}>
-          {countdown.done ? "LIVE" : `${countdown.days} hari ${countdown.hours}:${countdown.minutes}`}
+          {countdown.done ? "LIVE" : <><Tick value={countdown.days} /> hari <Tick value={countdown.hours} />:<Tick value={countdown.minutes} />:<Tick value={countdown.seconds} /></>}
         </span>
       </header>
 
@@ -165,13 +182,14 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
               {data.gallery.map((src, index) => {
                 const [name, duration] = demo && DEMO_FILES[index] ? DEMO_FILES[index] : [`Foto-${String(index + 1).padStart(2, "0")}.jpg`, ""];
                 return (
-                  <a key={src + index} className={s.rec2} href={src} target="_blank" rel="noreferrer">
+                  <div key={src + index} className={s.rec2}>
                     <span className={s.thumb}>
                       <Photo src={src} alt={`Galeri ${index + 1}`} />
                       {duration && <b>{duration}</b>}
+                      <span className={s.playIcon} aria-hidden><Lucide icon={ic.play} size={14} color="#fff" /></span>
                     </span>
                     <span className={s.recName}>{name}</span>
-                  </a>
+                  </div>
                 );
               })}
             </div>
@@ -186,14 +204,26 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
             <h2 id="rv-gift">{demo ? "Reaksi & Kado" : "Kado"}</h2>
             {demo && (
               <>
-                <div className={s.tiers} aria-hidden>
-                  {DEMO_TIERS.map(([emoji, amount]) => <span key={amount}><i>{emoji}</i>{amount}</span>)}
+                <div className={s.tiers}>
+                  {DEMO_TIERS.map(([emoji, amount]) => (
+                    <button key={amount} type="button" aria-pressed={tier === amount} aria-label={`Reaksi ${amount}`} onClick={() => react(emoji, amount)}>
+                      <i aria-hidden>{emoji}</i>{amount}
+                    </button>
+                  ))}
+                  <span className={s.floats} aria-hidden>
+                    {reactions.map(item => (
+                      <i key={item.id} style={{ left: `${item.x}%` }} onAnimationEnd={() => setReactions(list => list.filter(r => r.id !== item.id))}>{item.emoji}</i>
+                    ))}
+                  </span>
                 </div>
                 {DEMO_WISHLIST.map(item => (
                   <div key={item.name} className={s.item}>
                     <span className={s.itemIcon}><Lucide icon={item.icon} color="#6db0ff" /></span>
                     <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                    <span className={s.smallBtn}>Beri</span>
+                    <button type="button" className={s.smallBtn} aria-pressed={!!given[item.name]}
+                      onClick={() => { setGiven(g => ({ ...g, [item.name]: !g[item.name] })); if (!given[item.name]) toast("Ditandai di perangkatmu"); }}>
+                      {given[item.name] ? "Dipilih" : "Beri"}
+                    </button>
                   </div>
                 ))}
               </>
@@ -209,7 +239,7 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
                     {line && <small>{line}</small>}
                     {"image" in info && info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.smallBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.smallBtn} data-done={copied === info.copy || undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}
@@ -225,6 +255,7 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
               <p>{wish.message}</p>
             </article>
           ))}
+          <p className={s.typing} aria-hidden><span><i /><i /><i /></span>{data.couple.bride} sedang mengetik…</p>
           <button type="button" className={s.chatBtn} onClick={sheets.openWish}><Lucide icon={ic.messageSquare} size={15} color="#6db0ff" />Tulis di chat…</button>
         </section>
       </main>

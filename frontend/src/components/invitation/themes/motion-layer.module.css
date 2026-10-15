@@ -1,0 +1,54 @@
+/* Shared motion layer (motion-layer.tsx). Tinted by the theme's --t-* tokens and --m-* motion tokens (globals.css). */
+
+/* Toast */
+.toastSlot { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom)); z-index: 130; translate: -50% 0; pointer-events: none; }
+.toast {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px 10px 12px; border-radius: 999px;
+  background: color-mix(in srgb, var(--t-ink, #1a1817) 92%, transparent); color: var(--t-bg, #fff);
+  font-family: var(--t-font, inherit); font-size: 13px; font-weight: 700; white-space: nowrap;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .22); backdrop-filter: blur(10px);
+  animation: toast-in 1.9s var(--m-spring, cubic-bezier(.34, 1.56, .64, 1)) both;
+}
+.toast svg { padding: 3px; border-radius: 999px; background: var(--t-accent, #2e7d32); color: var(--t-accent-ink, #fff); box-sizing: content-box; }
+@keyframes toast-in {
+  0% { opacity: 0; translate: 0 18px; scale: .9; }
+  14% { opacity: 1; translate: none; scale: none; }
+  86% { opacity: 1; translate: none; }
+  100% { opacity: 0; translate: 0 8px; }
+}
+
+/* Reading progress */
+.progress { position: fixed; top: 0; left: 50%; z-index: 70; width: 100%; height: 3px; translate: -50% 0; pointer-events: none; }
+.progressBar {
+  height: 100%; transform: scaleX(0); transform-origin: 0 50%; opacity: 0;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--t-accent, #888) 60%, transparent), var(--t-accent, #888));
+  border-radius: 0 3px 3px 0; transition: opacity 300ms ease;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 140; display: grid; place-items: center; padding: 56px 12px 64px;
+  background: rgba(8, 8, 10, .94); touch-action: none; user-select: none; animation: lb-in 260ms ease-out both;
+}
+.lightboxLeave { animation: lb-out 220ms ease-in both; }
+.lightboxImg { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); animation: lb-img 320ms cubic-bezier(.2, .8, .2, 1) both; transition: translate 200ms ease-out; }
+.lbClose, .lbNav {
+  position: absolute; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 999px;
+  background: rgba(255, 255, 255, .1); color: #fff; font: 400 26px/1 system-ui, sans-serif; cursor: pointer; backdrop-filter: blur(8px);
+}
+.lbClose { top: max(12px, env(safe-area-inset-top)); right: 12px; }
+.lbNav { top: 50%; translate: 0 -50%; }
+.lbPrev { left: 10px; }
+.lbNext { right: 10px; }
+.lbDots { position: absolute; bottom: max(22px, env(safe-area-inset-bottom)); left: 50%; display: flex; gap: 6px; translate: -50% 0; }
+.lbDots i { width: 6px; height: 6px; border-radius: 999px; background: rgba(255, 255, 255, .35); transition: width 300ms cubic-bezier(.34, 1.56, .64, 1), background 300ms; }
+.lbDots i[data-on] { width: 20px; background: #fff; }
+@keyframes lb-in { from { opacity: 0; } }
+@keyframes lb-out { to { opacity: 0; } }
+@keyframes lb-img { from { opacity: 0; scale: .96; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { animation-duration: 1.9s; animation-timing-function: linear; }
+  .lightbox, .lightboxImg { animation: none; }
+  .lightboxLeave { animation: lb-out 1ms both; }
+}

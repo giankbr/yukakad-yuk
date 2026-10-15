@@ -90,7 +90,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
                 <b>LJG</b><small>St. Lajang</small><span className={s.mono}>{depart}</span>
               </div>
               <div className={s.routeMid} aria-hidden>
-                <span className={s.track}><i /><i /></span><small>{demo ? "6 jam 12 mnt" : "tanpa transit"}</small>
+                <span className={s.track}><i /><i /><b className={s.train} /></span><small>{demo ? "6 jam 12 mnt" : "tanpa transit"}</small>
               </div>
               <div className={`${s.station} ${s.stationEnd}`}>
                 <b>SLM</b><small>St. Selamanya</small><span className={s.mono}>{shortDate}</span>
@@ -118,7 +118,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
             <div><dt>PERON</dt><dd>1</dd></div>
             <div><dt>BOARDING</dt><dd>{boarding || "—"}</dd></div>
             <div><dt>GERBANG</dt><dd>CINTA</dd></div>
-            <div><dt>STATUS</dt><dd className={s.onTime}>TEPAT WAKTU</dd></div>
+            <div><dt>STATUS</dt><dd className={s.onTime}><i className={s.blink} />TEPAT WAKTU</dd></div>
           </dl>
           <div className={s.grow} style={{ flexBasis: 66 }} />
           <button type="button" className={s.openBtn} onClick={open}>
@@ -166,7 +166,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
               </li>
             ))}
             <li className={`${s.stop} ${s.stopNow}`}>
-              <span className={s.rail} aria-hidden><i className={s.dot} /></span>
+              <span className={s.rail} aria-hidden><i className={s.dot}><span className={s.ping} /></i></span>
               <div className={s.stopText}>
                 <strong>St. Selamanya</strong>
                 <p>{shortDate} · pemberhentian terakhir</p>
@@ -251,7 +251,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
                     <small>{line}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.orangeBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={`${s.orangeBtn} ${copied === info.copy ? s.copied : ""}`} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                 </div>
               );
             })}

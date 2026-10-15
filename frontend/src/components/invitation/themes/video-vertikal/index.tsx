@@ -2,9 +2,10 @@
 // Theme "Video Vertikal" — undangan bergaya aplikasi video pendek (design: Undangan — Tema Video Vertikal (Zahra & Evan)).
 import { useState, type CSSProperties } from "react";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint, type Wish,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -23,6 +24,7 @@ const THUMBS = [
   "linear-gradient(310deg, #b06bff 0%, #4a2580 100%)",
 ];
 const DEMO_VIEWS = ["890rb ditonton", "1,1jt ditonton", "2,4jt ditonton"];
+const WATCHED = ["100%", "100%", "100%", "82%", "64%"];
 const GRID_VIEWS = ["1,2jt", "890rb", "2,4jt"];
 const TIERS = [["🌹", "Mawar", "Rp10rb"], ["🧸", "Boneka", "Rp100rb"], ["🦁", "Singa", "Rp500rb"], ["🌌", "Galaxy", "Rp1jt"]];
 const WISHLIST = [
@@ -50,6 +52,9 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [following, setFollowing] = useState<Record<string, boolean>>({});
+  const [liked, setLiked] = useState<Record<string, boolean>>({});
+  const [tier, setTier] = useState<string | null>(null);
+  const [marked, setMarked] = useState<Record<string, boolean>>({});
   const stories = storyItems(data);
   const hero = data.gallery[0];
   const railAvatar = data.gallery[1] ?? hero;
@@ -71,6 +76,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
       cover={open => (
         <section className={s.cover}>
           <div className={s.video} aria-hidden><Photo src={hero} /></div>
+          <span className={s.progress} aria-hidden><i /></span>
           <div className={s.dim} aria-hidden />
           <div className={s.feedTabs} aria-hidden><span>Mengikuti</span><b>Untukmu</b></div>
           <div className={s.spacer} />
@@ -79,7 +85,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
               <div className={s.meta}>
                 <strong>@{user}</strong>
                 <p>POV: kamu diundang ke hari paling bahagia kami {dayMonthYear}{where ? `, ${where}` : ""}. #UndanganDigital {tag}</p>
-                <span className={s.music}><Lucide icon={ic.music2} size={13} />suara asli — Janji Kita ({coupleLabel(data)})</span>
+                <span className={s.music}><Lucide icon={ic.music2} size={13} /><span className={s.marquee}><span><span>suara asli — Janji Kita ({coupleLabel(data)})</span><span aria-hidden>suara asli — Janji Kita ({coupleLabel(data)})</span></span></span></span>
               </div>
               <div className={s.kepada}>
                 <small>VIDEO INI UNTUK</small>
@@ -88,10 +94,11 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
             </div>
             <div className={s.rail} aria-hidden>
               <Photo src={railAvatar} className={s.railAv} />
-              <span><Lucide icon={ic.heart} size={30} color="#fe2c55" />{demo ? "1,2jt" : "Suka"}</span>
+              <span><Lucide icon={ic.heart} size={30} color="#fe2c55" className={s.beat} />{demo ? "1,2jt" : "Suka"}</span>
               <span><Lucide icon={ic.messageCircle} size={30} />{demo ? "8.204" : "Ucapan"}</span>
               <span><Lucide icon={ic.bookmark} size={30} />{demo ? "52rb" : "Simpan"}</span>
               <span><Lucide icon={ic.share2} size={30} />Bagikan</span>
+              <span className={s.disc}><Photo src={avatar} className={s.discImg} /></span>
             </div>
           </div>
           <button type="button" className={s.openBtn} onClick={open}><Lucide icon={ic.play} size={15} />Tonton Undangan Lengkap</button>
@@ -110,7 +117,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
           <div className={s.stats}>
             <div><b>2</b><small>Mempelai</small></div>
             {demo ? <div><b>1,2jt</b><small>Suka</small></div> : <div><b>{nf.format(wishes.wishes.length)}</b><small>Ucapan</small></div>}
-            <div><b>{countdown.ready ? Number(countdown.days) : "–"}</b><small>Hari lagi</small></div>
+            <div><b>{countdown.ready ? <Tick value={Number(countdown.days)} /> : "–"}</b><small>Hari lagi</small></div>
           </div>
           <h1>{data.couple.brideFull ?? data.couple.bride} × {data.couple.groomFull ?? data.couple.groom}<br />{formatDate(data.date)}{where ? ` · ${where}` : ""}</h1>
         </section>
@@ -128,7 +135,10 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
                 <em>{person.note}</em>
               </div>
               <button type="button" className={following[person.key] ? s.followOn : s.follow} aria-pressed={!!following[person.key]}
-                onClick={() => setFollowing(f => ({ ...f, [person.key]: !f[person.key] }))}>
+                onClick={() => {
+                  if (!following[person.key]) toast(`Kamu mengikuti ${person.name}`);
+                  setFollowing(f => ({ ...f, [person.key]: !f[person.key] }));
+                }}>
                 {following[person.key] ? "Mengikuti" : "Ikuti"}
               </button>
             </article>
@@ -142,6 +152,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
               <article key={story.title + index} className={s.part}>
                 <span className={s.thumb} style={{ background: story.image ? `linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.35)), url(${JSON.stringify(story.image)}) center/cover` : THUMBS[index % THUMBS.length] } as CSSProperties} aria-hidden>
                   <Lucide icon={ic.play} size={16} color="rgba(255,255,255,.7)" />
+                  <i className={s.watch} style={{ "--w": WATCHED[index] ?? "100%" } as CSSProperties} />
                 </span>
                 <div className={s.partText}>
                   <strong>Part {index + 1} — {story.title}</strong>
@@ -153,7 +164,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
               <span className={`${s.thumb} ${s.thumbFinal}`} aria-hidden><Lucide icon={ic.play} size={16} color="#fe2c55" /></span>
               <div className={s.partText}>
                 <strong>Final — Menuju {dayMonth}</strong>
-                <small className={s.hot}>Premiere · jangan skip</small>
+                <small className={s.hot}><i className={s.liveDot} aria-hidden />Premiere · jangan skip</small>
               </div>
             </article>
           </section>
@@ -204,7 +215,10 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
               <>
                 <div className={s.tiers}>
                   {TIERS.map(([emoji, name, price]) => (
-                    <div key={name} className={s.tier}><span aria-hidden>{emoji}</span><strong>{name}</strong><small>{price}</small></div>
+                    <button key={name} type="button" className={s.tier} aria-pressed={tier === name}
+                      onClick={() => { setTier(t => (t === name ? null : name)); if (tier !== name) toast(`Gift ${name} dipilih`); }}>
+                      <span aria-hidden>{emoji}</span><strong>{name}</strong><small>{price}</small>
+                    </button>
                   ))}
                 </div>
                 <div className={s.wishlist}>
@@ -212,7 +226,10 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
                     <div key={item.name} className={s.wish}>
                       <span className={s.wishIcon} aria-hidden><Lucide icon={item.icon} size={16} color="#25f4ee" /></span>
                       <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                      <span className={s.beri}>Beri</span>
+                      <button type="button" className={s.beri} aria-pressed={!!marked[item.name]}
+                        onClick={() => { setMarked(m => ({ ...m, [item.name]: !m[item.name] })); if (!marked[item.name]) toast("Ditandai di perangkatmu"); }}>
+                        {marked[item.name] ? "Dipilih" : "Beri"}
+                      </button>
                     </div>
                   ))}
                 </div>
@@ -227,7 +244,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
                     <strong>{gift.type === "address" ? "Kirim Kado" : "Amplop Digital"}</strong>
                     <small>{(gift.type === "address" ? [info.number] : [`${info.title} ${info.number}`.trim(), info.holder ? `a.n. ${info.holder}` : ""]).filter(Boolean).join(" · ")}</small>
                   </div>
-                  {info.copy && <button type="button" className={s.salin} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.salin} data-done={copied === info.copy || undefined} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
                   {info.image && <a className={s.salin} href={info.image} target="_blank" rel="noreferrer">Lihat QR</a>}
                 </div>
               );
@@ -248,7 +265,10 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
                   <p>{wish.message}</p>
                   <small className={s.reply}>Balas</small>
                 </div>
-                <span className={s.cLike} aria-hidden><Lucide icon={ic.heart} size={14} color="rgba(255,255,255,.7)" />{demo && likes}</span>
+                <button type="button" className={s.cLike} aria-pressed={!!liked[wish.id]} aria-label={`Suka komentar ${wish.name}`}
+                  onClick={() => setLiked(l => ({ ...l, [wish.id]: !l[wish.id] }))}>
+                  <Lucide icon={ic.heart} size={14} color="currentColor" />{demo ? likes : liked[wish.id] ? "1" : ""}
+                </button>
               </article>
             );
           })}
@@ -257,7 +277,7 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
       </main>
 
       <nav className={s.bottom} aria-label="Aksi undangan">
-        <button type="button" className={s.like} onClick={sheets.openWish} aria-label="Kirim ucapan"><Lucide icon={ic.heart} size={18} color="#fe2c55" /></button>
+        <button type="button" className={s.like} onClick={sheets.openWish} aria-label="Kirim ucapan"><Lucide icon={ic.heart} size={18} color="#fe2c55" className={s.beat} /></button>
         <button type="button" className={s.rsvpBtn} onClick={sheets.openRsvp}>Konfirmasi Hadir</button>
       </nav>
 

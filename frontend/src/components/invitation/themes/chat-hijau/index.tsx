@@ -5,6 +5,7 @@ import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
+import { toast } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -39,6 +40,11 @@ function Bubble({ out, time = "14:02", read, className, children }: { out?: bool
   );
 }
 
+/** Incoming "typing…" bubble (decorative). */
+function Typing() {
+  return <div className={s.row} aria-hidden><div className={`${s.bubble} ${s.typing}`}><i /><i /><i /></div></div>;
+}
+
 function Day({ children }: { children: ReactNode }) {
   return <div className={s.day}><span>{children}</span></div>;
 }
@@ -49,7 +55,7 @@ function ChatHeader({ title, avatar }: { title: string; avatar?: string }) {
       <div className={s.contact}>
         <Lucide icon={ic.arrowLeft} size={20} color="#fff" />
         <Photo src={avatar} alt="" className={s.avatar} />
-        <div><strong>{title}</strong><small>online</small></div>
+        <div><strong>{title}</strong><small className={s.presence}><span>online</span><span aria-hidden>mengetik…</span></small></div>
         <span className={s.headIcons} aria-hidden>
           <Lucide icon={ic.video} size={19} color="#fff" /><Lucide icon={ic.phone} size={19} color="#fff" /><Lucide icon={ic.ellipsisVertical} size={19} color="#fff" />
         </span>
@@ -67,6 +73,11 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const [showAll, setShowAll] = useState(false);
+  const [reacted, setReacted] = useState<Record<string, boolean>>({});
+  const react = (id: string) => {
+    if (!reacted[id]) toast("Reaksi terkirim");
+    setReacted(state => ({ ...state, [id]: !state[id] }));
+  };
   const avatar = data.gallery[0];
   const cardImage = data.gallery[1] ?? data.gallery[0];
   const photos = data.gallery.length > 4 ? data.gallery.slice(2) : data.gallery;
@@ -87,10 +98,10 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
           <ChatHeader title={couple} avatar={avatar} />
           <div className={s.coverChat}>
             <Day>Hari Ini</Day>
-            <Bubble>Assalamualaikum! Ada kabar bahagia nih</Bubble>
-            {c.note && <Bubble>{c.note}</Bubble>}
+            <Bubble className={s.seq}>Assalamualaikum! Ada kabar bahagia nih</Bubble>
+            {c.note && <Bubble className={s.seq}>{c.note}</Bubble>}
             <div className={s.row}>
-              <article className={`${s.bubble} ${s.invite}`}>
+              <article className={`${s.bubble} ${s.invite} ${s.seq}`}>
                 <Photo src={cardImage} alt={`Foto ${couple}`} className={s.inviteImg} />
                 <div className={s.inviteText}>
                   <small>Undangan {data.eventLabel ?? "Pernikahan"}</small>
@@ -104,8 +115,9 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
                 <button type="button" className={s.linkBtn} onClick={open}><Lucide icon={ic.externalLink} size={14} color="#53bdeb" />Buka Undangan</button>
               </article>
             </div>
-            <Bubble>Mohon maaf bila ada salah penulisan nama &amp; gelar ya</Bubble>
-            <Bubble out read className={s.short}>Wah selamat!! Pasti datang</Bubble>
+            <Bubble className={s.seq}>Mohon maaf bila ada salah penulisan nama &amp; gelar ya</Bubble>
+            <Bubble out read className={`${s.short} ${s.seq} ${s.readLate}`}>Wah selamat!! Pasti datang</Bubble>
+            <div className={s.seqTyping}><Typing /></div>
           </div>
           <div className={s.inputBar}>
             <div className={s.field} aria-hidden><Lucide icon={ic.smile} size={20} color="#667781" /><span>Ketik balasan…</span><Lucide icon={ic.paperclip} size={18} color="#667781" /></div>
@@ -116,7 +128,7 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
     >
       <ChatHeader title={couple} avatar={avatar} />
 
-      <main className={s.body}>
+      <main className={s.body} data-reveal-block>
         <Day>Mempelai</Day>
         {[
           { name: c.brideFull ?? c.bride, parents: c.brideParents, photo: c.bridePhoto ?? data.gallery[2], out: false },
@@ -174,7 +186,7 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
                   const more = !showAll && index === 3 && hidden > 0;
                   const demoMore = demo && !showAll && index === 3 && hidden <= 0;
                   return (
-                    <div key={src + index} className={s.tile}>
+                    <div key={src + index} className={`${s.tile} ${showAll && index >= 4 ? s.tileIn : ""}`} style={showAll && index >= 4 ? { animationDelay: `${(index - 4) * 60}ms` } : undefined}>
                       <Photo src={src} alt={`Foto ${index + 1}`} />
                       {more && <button type="button" className={s.more} onClick={() => setShowAll(true)} aria-label={`Lihat ${hidden} foto lainnya`}>+{hidden}</button>}
                       {demoMore && <span className={s.more} aria-hidden>+12</span>}
@@ -216,7 +228,11 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
                         <small>{[[info.title !== "Alamat kado" && gift.type !== "qris" ? info.title : "", info.number].filter(Boolean).join(" "), info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                         {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                       </div>
-                      {info.copy && <button type="button" onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                      {info.copy && (
+                        <button type="button" onClick={() => copy(info.copy)}>
+                          <span key={String(copied === info.copy)} className={s.swap}>{copied === info.copy && <Lucide icon={ic.check} size={12} color="#008069" />}{copied === info.copy ? "Tersalin" : "Salin"}</span>
+                        </button>
+                      )}
                     </div>
                   );
                 })}
@@ -227,11 +243,19 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
 
         <Day>Ucapan Tamu</Day>
         {wishes.wishes.slice(0, 10).map(wish => (
-          <Bubble key={wish.id} time={wishTime(wish.created_at)}>
-            <b className={s.sender}>{wish.name}</b>
-            <p>{wish.message}</p>
-          </Bubble>
+          <div key={wish.id} className={`${s.row} ${s.wishRow} ${reacted[wish.id] ? s.hasReaction : ""}`}>
+            <div className={s.bubble}>
+              <b className={s.sender}>{wish.name}</b>
+              <p>{wish.message}</p>
+              <span className={s.stamp}>{wishTime(wish.created_at)}</span>
+              {reacted[wish.id] && <span className={s.reaction} aria-hidden><Lucide icon={ic.heart} size={12} color="#e5484d" /></span>}
+            </div>
+            <button type="button" className={s.reactBtn} aria-pressed={!!reacted[wish.id]} aria-label={`Beri reaksi untuk ucapan ${wish.name}`} onClick={() => react(wish.id)}>
+              <Lucide icon={reacted[wish.id] ? ic.heart : ic.smile} size={16} color={reacted[wish.id] ? "#e5484d" : "#667781"} />
+            </button>
+          </div>
         ))}
+        <Typing />
         <button type="button" className={`${s.field} ${s.fieldBtn}`} onClick={sheets.openWish}>
           <Lucide icon={ic.smile} size={20} color="#667781" /><span>Tulis ucapan untuk {couple}…</span><Lucide icon={ic.send} size={18} color="#008069" />
         </button>

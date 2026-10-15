@@ -1,9 +1,10 @@
 "use client";
 // Theme "Saku Biru" — undangan bergaya dompet digital biru dengan layar PIN (design: Saku Bersama, Rizki & Amanda).
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
-  mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  Tick, mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
 import s from "./styles.module.css";
@@ -25,6 +26,7 @@ const DEMO_WISHLIST = [
 ];
 const TX_ICONS = [ic.qrCode, ic.arrowDownLeft, ic.gem];
 const BADGES = ["+1 doa", "+1 restu"];
+const TIERS = ["Rp50rb", "Rp200rb", "Rp500rb", "Bebas"];
 const BACKSPACE = <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 5h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H10l-7-7z" /><path d="m12 9 6 6" /><path d="m18 9-6 6" /></svg>;
 
 
@@ -52,12 +54,15 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [pin, setPin] = useState(code);
+  const [tier, setTier] = useState(2);
+  const [given, setGiven] = useState<string[]>([]);
+  const [scans, setScans] = useState(0);
   const stories = storyItems(data);
   const people = [
     { name: data.couple.groomFull ?? groom, parents: data.couple.groomParents, photo: data.couple.groomPhoto ?? data.gallery[0] },
     { name: data.couple.brideFull ?? bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? data.gallery[1] },
   ];
-  const daysLeft = !countdown.ready ? "–" : countdown.done ? "Hari ini" : `${Number(countdown.days)} hari`;
+  const daysLeft = !countdown.ready ? "–" : countdown.done ? "Hari ini" : <><Tick value={Number(countdown.days)} /> hari</>;
   const press = (key: string) => setPin(value => (key === "back" ? value.slice(0, -1) : key === "fill" ? code : value.length >= 6 ? value : value + key));
   const pinOk = Boolean(code) && pin === code;
 
@@ -82,7 +87,7 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
             </div>
             <div className={s.pin}>
               <p id="sb-pin">Masukkan PIN untuk membuka undangan</p>
-              <div className={s.dots} aria-hidden>
+              <div className={`${s.dots} ${pinOk ? s.dotsOk : code && pin.length >= code.length ? s.dotsBad : ""}`} aria-hidden>
                 {Array.from({ length: 6 }, (_, index) => <i key={index} className={index < pin.length ? s.dotOn : undefined} />)}
               </div>
             </div>
@@ -112,13 +117,16 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
             <h1>Saku Bersama</h1>
             <p>{[pair, shortDate].filter(Boolean).join(" · ")}</p>
           </div>
-          <span className={s.qr} aria-hidden><Lucide icon={ic.scanLine} size={18} /></span>
+          <button type="button" className={s.qr} onClick={() => { setScans(count => count + 1); toast("Undangan terverifikasi"); }} aria-label="Pindai undangan">
+            <Lucide icon={ic.scanLine} size={18} />
+            <i key={scans} className={s.qrBeam} aria-hidden />
+          </button>
         </div>
       </header>
 
       <main className={s.body}>
         <section className={s.stats} aria-label="Ringkasan">
-          <div><Lucide icon={ic.heart} color="#1c8fe0" /><strong>100%</strong><small>Cinta</small></div>
+          <div><span className={s.beat}><Lucide icon={ic.heart} color="#1c8fe0" /></span><strong>100%</strong><small>Cinta</small></div>
           <div><Lucide icon={ic.calendarCheck} color="#1c8fe0" /><strong>{daysLeft}</strong><small>Hari H</small></div>
           <div>
             <Lucide icon={ic.users} color="#1c8fe0" />
@@ -205,14 +213,20 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
             <div className={s.cardHead}><h2 id="sb-gift">Kirim Kado</h2>{demo && <span>Wishlist</span>}</div>
             {demo && (
               <>
-                <div className={s.tiers} aria-hidden>
-                  {["Rp50rb", "Rp200rb", "Rp500rb", "Bebas"].map((tier, index) => <span key={tier} className={index === 2 ? s.tierOn : undefined}>{tier}</span>)}
+                <div className={s.tiers} role="group" aria-label="Nominal kado" style={{ "--i": tier } as CSSProperties}>
+                  <i className={s.tierPill} aria-hidden />
+                  {TIERS.map((name, index) => (
+                    <button key={name} type="button" className={index === tier ? s.tierOn : undefined} aria-pressed={index === tier} onClick={() => setTier(index)}>{name}</button>
+                  ))}
                 </div>
                 {DEMO_WISHLIST.map(item => (
                   <div key={item.name} className={s.item}>
                     <span className={s.itemIcon}><Lucide icon={item.icon} size={17} color="#0a5a8a" /></span>
                     <div><strong>{item.name}</strong><small>{item.price}</small></div>
-                    <button type="button" className={s.ghostBtn} onClick={sheets.openWish}>Beri</button>
+                    <button type="button" className={s.ghostBtn} aria-pressed={given.includes(item.name)}
+                      onClick={() => { setGiven(list => list.includes(item.name) ? list : [...list, item.name]); sheets.openWish(); }}>
+                      {given.includes(item.name) ? <><Lucide icon={ic.check} size={12} />Ditandai</> : "Beri"}
+                    </button>
                   </div>
                 ))}
               </>
@@ -229,7 +243,7 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
                     <small>{[number, info.holder ? `a.n. ${info.holder}` : ""].filter(Boolean).join(" · ")}</small>
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "Tersalin" : "Salin"}</button>}
+                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "Tersalin" : "Salin"}</span></button>}
                 </div>
               );
             })}

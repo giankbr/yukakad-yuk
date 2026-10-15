@@ -1,11 +1,12 @@
 "use client";
 // Theme "Malam Rimba" — elegan gelap, dedaunan rimba, aksen emas dan bingkai lengkung.
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
-  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, giftInfo, guestLabel,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
+import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -70,6 +71,8 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
   const families = [familyName(data.couple.brideParents) ?? data.couple.bride, familyName(data.couple.groomParents) ?? data.couple.groom];
   const sending = rsvp.status === "sending" || wishes.status === "sending";
   const sent = rsvp.status === "sent" || wishes.status === "sent";
+  const sentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { if (sent) celebrate(sentRef.current); }, [sent]);
 
   const people = [
     { key: "bride", role: "Mempelai Wanita", name: data.couple.brideFull ?? data.couple.bride, parents: data.couple.brideParents, photo: data.couple.bridePhoto ?? gallery[1] },
@@ -97,6 +100,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={FOREST} /></div>
           <div className={s.arch} aria-hidden />
+          <span className={s.fireflies} aria-hidden />
           <div className={s.coverContent}>
             <p className={s.coverKicker}>{label}</p>
             <h1 className={s.coverNames}>{couple}</h1>
@@ -113,6 +117,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
       <main className={s.page}>
         <section className={s.opening} aria-label="Pembuka">
           <div className={s.openingBg} aria-hidden><Photo src={FOREST} /></div>
+          <span className={s.fireflies} aria-hidden />
           <div className={s.openingText}>
             <p className={s.openingKicker}>{label}</p>
             <h1>{couple}</h1>
@@ -145,7 +150,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
           <Head id="mr-count">Menuju Hari Bahagia</Head>
           <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
             {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
-              <div key={unit} className={s.countBox}><b>{value}</b><small>{unit}</small></div>
+              <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
             ))}
           </div>
           {calendar && <a className={s.btn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
@@ -218,7 +223,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
               const sub = gift.type === "address" ? rest.join(",").trim() : info.holder ? `a.n. ${info.holder}` : "";
               const icon = gift.type === "bank" ? ic.landmark : gift.type === "ewallet" ? ic.wallet : gift.type === "qris" ? ic.qrCode : ic.gift;
               return (
-                <div key={gift.id} className={`${s.card} ${s.gift}`}>
+                <div key={gift.id} className={`${s.card} ${s.gift} ${info.copy && copied === info.copy ? s.giftCopied : ""}`}>
                   <span className={s.iconDot}><Lucide icon={icon} size={18} /></span>
                   <div className={s.giftText}>
                     <small>{gift.type === "address" ? "Kirim Kado" : info.title}</small>
@@ -227,8 +232,8 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
-                      <Lucide icon={copied === info.copy ? ic.check : ic.copy} size={16} />
+                    <button type="button" className={copied === info.copy ? `${s.copy} ${s.copyOn}` : s.copy} onClick={() => copy(info.copy)} aria-label={copied === info.copy ? "Tersalin" : `Salin ${info.title}`}>
+                      <Lucide key={copied === info.copy ? "on" : "off"} icon={copied === info.copy ? ic.check : ic.copy} size={16} />
                     </button>
                   )}
                 </div>
@@ -241,7 +246,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
           <Head id="mr-wish">Ucapan &amp; RSVP</Head>
           <div className={`${s.card} ${s.formCard}`}>
             {sent ? (
-              <div className={s.sent} role="status">
+              <div ref={sentRef} className={s.sent} role="status">
                 <span className={s.iconDot}><Lucide icon={ic.check} size={18} /></span>
                 <strong>Terima kasih</strong>
                 <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi dan ucapanmu sudah kami terima."}</p>

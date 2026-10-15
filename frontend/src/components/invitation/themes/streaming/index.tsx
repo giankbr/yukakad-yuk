@@ -1,8 +1,9 @@
 "use client";
 // Theme "Streaming" — undangan ala serial streaming (design: Undangan — Tema Streaming (Sekar & Damar)).
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
+import { toast } from "@/lib/celebrate";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleInitials, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleInitials, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -57,6 +58,15 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const [showAll, setShowAll] = useState(false);
+  const [tab, setTab] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [likes, setLikes] = useState<string[]>([]);
+  const [nav, setNav] = useState("top");
+  const toggleLike = (id: string) => {
+    const on = !likes.includes(id);
+    setLikes(l => (on ? [...l, id] : l.filter(x => x !== id)));
+    if (on) toast("Kamu menyukai ulasan ini");
+  };
   const stories = storyItems(data);
   const hero = data.gallery[0];
   const photos = data.gallery.length > 1 ? data.gallery.slice(1) : data.gallery;
@@ -142,7 +152,7 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
             <p className={s.premiereHead}><Lucide icon={ic.bellRing} size={14} color="#e50914" />TAYANG PERDANA</p>
             <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
               {[[countdown.days, "HARI"], [countdown.hours, "JAM"], [countdown.minutes, "MENIT"], [countdown.seconds, "DETIK"]].map(([value, unit]) => (
-                <div key={unit}><b>{value}</b><small>{unit}</small></div>
+                <div key={unit}><Tick className={s.tick} value={value} /><small>{unit}</small></div>
               ))}
             </div>
             <p className={s.premiereDate}>{formatDate(data.date)}{where ? ` · ${where}` : ""}</p>
@@ -198,7 +208,7 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
                   </div>
                   <div className={s.epText}>
                     <strong>{stories.length + 1}. Episode Final: Sah!</strong>
-                    <small className={s.live}>{shortDate} · Live</small>
+                    <small className={s.live}><i className={s.liveDot} aria-hidden />{shortDate} · Live</small>
                   </div>
                 </div>
                 <p>Saksikan langsung. Kehadiranmu melengkapi cerita.</p>
@@ -213,14 +223,21 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
               <h2 id="st-gallery">Galeri Momen</h2>
               <span>{demo ? "24 foto · 3 video" : `${photos.length} foto`}</span>
             </div>
-            <div className={s.tabs} aria-hidden><span className={s.tabOn}>Foto</span><span>Trailer</span><span>Di Balik Layar</span></div>
+            <div className={s.tabs} role="tablist" aria-label="Jenis galeri" style={{ "--tab": tab } as CSSProperties}>
+              {["Foto", "Trailer", "Di Balik Layar"].map((name, i) => (
+                <button key={name} type="button" role="tab" aria-selected={tab === i} className={tab === i ? s.tabOn : undefined} onClick={() => setTab(i)}>{name}</button>
+              ))}
+              <i className={s.tabInk} aria-hidden />
+            </div>
             <div className={s.galleryBody}>
-              <figure className={s.trailer}>
+              <figure className={s.trailer} data-playing={playing ? "" : undefined}>
                 <Photo src={trailer} alt={demo ? "Senja di Parangtritis" : `Foto ${couple}`} />
                 <div className={s.trTop}><span><b>R</b>TRAILER PREWEDDING</span><i>HD</i></div>
-                <span className={s.trPlay} aria-hidden><Lucide icon={ic.play} size={22} color="#fff" /></span>
+                <button type="button" className={s.trPlay} aria-pressed={playing} aria-label={playing ? "Jeda trailer" : "Putar trailer"} onClick={() => setPlaying(v => !v)}>
+                  {playing ? <span className={s.pause} aria-hidden><i /><i /></span> : <Lucide icon={ic.play} size={22} color="#fff" />}
+                </button>
                 <figcaption className={s.trBottom}>
-                  <span><strong>{demo ? "Senja di Parangtritis" : couple}</strong>{demo && <small>0:48 / 2:34</small>}</span>
+                  <span><strong>{demo ? "Senja di Parangtritis" : couple}</strong>{demo && <small>{playing ? "Sedang diputar" : "0:48 / 2:34"}</small>}</span>
                   {demo && <span className={s.trBar} aria-hidden><i /><b /></span>}
                 </figcaption>
               </figure>
@@ -297,7 +314,7 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
                   {info.copy && (
-                    <button type="button" className={s.copy} onClick={() => copy(info.copy)}>
+                    <button type="button" className={s.copy} data-copied={copied === info.copy ? "" : undefined} onClick={() => copy(info.copy)}>
                       <Lucide icon={ic.copy} size={12} color="#000" />{copied === info.copy ? "Tersalin" : "Salin"}
                     </button>
                   )}
@@ -325,6 +342,9 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
                   {wish.attendance && <span className={wish.attendance === "yes" ? s.tagYes : s.tag}>{ATTEND[wish.attendance]}</span>}
                 </p>
                 <p>{wish.message}</p>
+                <button type="button" className={s.likeBtn} aria-pressed={likes.includes(wish.id)} onClick={() => toggleLike(wish.id)}>
+                  <Lucide icon={ic.thumbsUp} size={13} />{likes.includes(wish.id) ? "Disukai" : "Suka"}
+                </button>
               </div>
             </article>
           ))}
@@ -340,11 +360,11 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
       <nav className={s.bottom} aria-label="Aksi undangan">
         <button type="button" className={s.rsvp} onClick={sheets.openRsvp}><Lucide icon={ic.ticket} size={18} color="#fff" />Konfirmasi Kehadiran</button>
         <div className={s.tabBar}>
-          <a href="#st-top" className={s.tabActive}><Lucide icon={ic.house} size={20} />Beranda</a>
-          {stories.length > 0 && <a href="#st-kisah"><Lucide icon={ic.clapperboard} size={20} />Kisah</a>}
-          {photos.length > 0 && <a href="#st-galeri"><Lucide icon={ic.images} size={20} />Galeri</a>}
+          <a href="#st-top" className={nav === "top" ? s.tabActive : undefined} onClick={() => setNav("top")}><Lucide icon={ic.house} size={20} />Beranda</a>
+          {stories.length > 0 && <a href="#st-kisah" className={nav === "kisah" ? s.tabActive : undefined} onClick={() => setNav("kisah")}><Lucide icon={ic.clapperboard} size={20} />Kisah</a>}
+          {photos.length > 0 && <a href="#st-galeri" className={nav === "galeri" ? s.tabActive : undefined} onClick={() => setNav("galeri")}><Lucide icon={ic.images} size={20} />Galeri</a>}
           {data.gifts.length > 0
-            ? <a href="#st-kado"><Lucide icon={ic.gift} size={20} />Kado</a>
+            ? <a href="#st-kado" className={nav === "kado" ? s.tabActive : undefined} onClick={() => setNav("kado")}><Lucide icon={ic.gift} size={20} />Kado</a>
             : <button type="button" onClick={sheets.openWish}><Lucide icon={ic.messageSquare} size={20} />Ucapan</button>}
         </div>
       </nav>

@@ -106,6 +106,16 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
         <header className={s.pageHead}>
           <strong>WARTA BAHAGIA</strong>
           <span>HLM. 2 · RUBRIK {label.toUpperCase()}</span>
+          <div className={s.ticker} aria-hidden>
+            <b>TERKINI</b>
+            <div className={s.tickerTrack}>
+              {[0, 1].map(copyIndex => (
+                <span key={copyIndex}>
+                  {groom} &amp; {bride} resmi menikah{longDate ? ` · ${longDate}` : ""}{where ? ` · ${where}` : ""} · Pembaca diundang hadir · Edisi khusus terbit hari ini ·&nbsp;
+                </span>
+              ))}
+            </div>
+          </div>
         </header>
 
         <Extras slot="opening" className={s.extras} />
@@ -208,7 +218,7 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
                     {gift.type === "address" ? <small>{info.number}</small> : info.holder && <small>a.n. {info.holder}</small>}
                     {info.image && <Photo src={info.image} alt="Kode QRIS" className={s.qris} />}
                   </div>
-                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}>{copied === info.copy ? "TERSALIN" : "SALIN"}</button>}
+                  {info.copy && <button type="button" className={s.copyBtn} onClick={() => copy(info.copy)}><span key={String(copied === info.copy)} className={s.copyLabel}>{copied === info.copy ? "✓ TERSALIN" : "SALIN"}</span></button>}
                 </div>
               );
             })}
