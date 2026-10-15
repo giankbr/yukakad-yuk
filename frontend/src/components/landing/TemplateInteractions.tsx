@@ -41,7 +41,13 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
   const search = useRef<HTMLInputElement>(null);
-  const categories = Array.from(new Set(templates.map(template => template.category).filter(Boolean)));
+  const counts = templates.reduce<Record<string, number>>((acc, template) => {
+    if (template.category) acc[template.category] = (acc[template.category] ?? 0) + 1;
+    return acc;
+  }, {});
+  const categories = Object.keys(counts);
+  const tagRow = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: false, end: false });
   const needle = query.trim().toLowerCase();
   const visible = templates.filter(template => (!category || template.category === category)
     && (!needle || `${template.name} ${template.category}`.toLowerCase().includes(needle)));
@@ -59,6 +65,22 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Category row scrolls horizontally; track which edges still have hidden chips.
+  useEffect(() => {
+    const row = tagRow.current;
+    if (!row) return;
+    const update = () => setEdges({ start: row.scrollLeft > 4, end: row.scrollLeft + row.clientWidth < row.scrollWidth - 4 });
+    update();
+    row.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => { row.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+  }, []);
+
+  function scrollTags(direction: 1 | -1) {
+    const row = tagRow.current;
+    if (row) row.scrollBy({ left: direction * row.clientWidth * 0.7, behavior: "smooth" });
+  }
+
   return (
     <div className={styles.themes}>
       <div className={styles.sectionHeader}>
@@ -74,12 +96,21 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
           <kbd aria-hidden="true">⌘K</kbd>
         </label>
       </div>
-      <div className={styles.tags} role="group" aria-label="Filter kategori tema">
-        {["", ...categories].map(value => (
-          <button type="button" key={value || "all"} aria-pressed={category === value} onClick={() => setCategory(value)}>
-            {value || "🔥 Populer"}
-          </button>
-        ))}
+      <div className={styles.tagBar} data-start={edges.start || undefined} data-end={edges.end || undefined}>
+        <button type="button" className={styles.tagNav} data-dir="prev" onClick={() => scrollTags(-1)} aria-label="Kategori sebelumnya" tabIndex={-1} hidden={!edges.start}>
+          <IconArrowRight size={16} />
+        </button>
+        <div ref={tagRow} className={styles.tags} role="group" aria-label="Filter kategori tema">
+          {["", ...categories].map(value => (
+            <button type="button" key={value || "all"} aria-pressed={category === value} onClick={() => setCategory(value)}>
+              <span>{value || "Semua tema"}</span>
+              <small>{value ? counts[value] : templates.length}</small>
+            </button>
+          ))}
+        </div>
+        <button type="button" className={styles.tagNav} data-dir="next" onClick={() => scrollTags(1)} aria-label="Kategori berikutnya" tabIndex={-1} hidden={!edges.end}>
+          <IconArrowRight size={16} />
+        </button>
       </div>
       {visible.length === 0 ? (
         <p className={styles.empty} role="status">Belum ada tema yang cocok. Coba kata kunci lain.</p>
