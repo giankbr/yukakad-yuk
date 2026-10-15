@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
+import { safeNext } from "@/lib/next-path";
 import { IconEye, IconEyeOff } from "@/components/brand/icons";
 
 export default function RegisterPage() {
@@ -39,13 +40,14 @@ export default function RegisterPage() {
       const planId = search.get("plan");
       const templateId = search.get("template");
       const eventName = search.get("event")?.trim();
-      router.push(planId
+      const next = safeNext(search.get("next"));
+      router.push(next ?? (planId
         ? `/checkout?plan=${encodeURIComponent(planId)}`
         : templateId
           ? `/dashboard/invitations/create?template=${encodeURIComponent(templateId)}${eventName ? `&title=${encodeURIComponent(eventName)}` : ""}`
           : eventName
             ? `/dashboard/invitations/create?title=${encodeURIComponent(eventName)}`
-            : "/dashboard");
+            : "/dashboard"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan");
     } finally {
@@ -54,7 +56,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <AuthLayout topRight={<>Sudah punya akun? <Link href="/auth/login">Masuk</Link></>}>
+    <AuthLayout topRight={<>Sudah punya akun? <Link href="/auth/login" onClick={(event) => {
+      const next = safeNext(new URLSearchParams(window.location.search).get("next"));
+      if (!next) return;
+      event.preventDefault();
+      router.push(`/auth/login?next=${encodeURIComponent(next)}`);
+    }}>Masuk</Link></>}>
       <AuthHeading lead="Buat undangan" mono="pertamamu.">Gratis untuk mencoba — bayar hanya saat undangan siap dikirim.</AuthHeading>
 
       <form onSubmit={handleSubmit} className="auth-form">

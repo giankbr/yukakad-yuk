@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { can, landingPath, ROLE_LABELS, useInvitationAccess } from "@/lib/invitation-access";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, CreditCard as PhCreditCard, Receipt as PhReceipt, Notebook as PhNotebook, Monitor as PhMonitor, Confetti as PhConfetti, Camera as PhCamera, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, UsersThree as PhUsersThree, LockSimple as PhLockSimple, CreditCard as PhCreditCard, Receipt as PhReceipt, Notebook as PhNotebook, Monitor as PhMonitor, Confetti as PhConfetti, Camera as PhCamera, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -85,6 +86,7 @@ function invitationNav(id: string): { label: string; items: NavItem[] }[] {
 				{ key: "settings", label: "Tema & Musik", href: `${base}/settings`, icon: <PhMusicNotes size={16} /> },
 				{ key: "sections", label: "Section Tambahan", href: `${base}/sections`, icon: <PhStack size={16} /> },
 				{ key: "preview", label: "Pratinjau", href: `${base}/preview`, icon: <PhEye size={16} /> },
+				{ key: "team", label: "Tim & akses", href: `${base}/tim`, icon: <PhUsersThree size={16} /> },
 			],
 		},
 		{
@@ -144,6 +146,7 @@ export function DashboardShell({
 	});
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const pathname = usePathname();
+	const access = useInvitationAccess(variant === "user" ? invitationId : undefined);
 
 	const toggleCollapsed = useCallback(() => {
 		setCollapsed((value) => {
@@ -186,6 +189,8 @@ export function DashboardShell({
 			? [{ label: "Konten landing", items: adminNav }, { label: "Halaman", items: pagesNav }, { label: "Bisnis", items: businessNav }]
 			: invitationId
 				? invitationNav(invitationId)
+						.map((group) => ({ ...group, items: group.items.filter((item) => can(access, item.key)) }))
+						.filter((group) => group.items.length > 0)
 				: [
 						{ label: "Menu Utama", items: mainNav },
 						{ label: "Kelola", items: manageNav },
@@ -286,7 +291,17 @@ export function DashboardShell({
 			</aside>
 
 			{/* ── Content area ───────────────────────────────────────── */}
-			<section className={`dashboard-content ${shell.content}`}>{children}</section>
+			<section className={`dashboard-content ${shell.content}`}>
+				{access && access.role !== "owner" && (
+					<p className="dashboard-role-note"><PhUsersThree size={14} /> Kamu membantu undangan ini sebagai <b>{ROLE_LABELS[access.role]}</b>.</p>
+				)}
+				{invitationId && variant === "user" && !can(access, active) ? (
+					<div className="dashboard-state" role="alert" style={{ display: "grid", gap: 8, justifyItems: "start" }}>
+						<strong><PhLockSimple size={14} /> Halaman ini tidak tersedia untuk peranmu.</strong>
+						{access && <a className="table-action" href={landingPath(invitationId, access.role)}>Ke halaman yang bisa kamu buka</a>}
+					</div>
+				) : children}
+			</section>
 		</main>
 	);
 }

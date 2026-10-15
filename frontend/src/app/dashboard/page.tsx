@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight as PhArrowRight, CreditCard as PhCreditCard, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Globe as PhGlobe, Palette as PhPalette, Plus as PhPlus, Users as PhUsers } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
+import { landingPath, ROLE_LABELS, type AccessRole } from "@/lib/invitation-access";
 import { useAuthToken } from "@/lib/useAuthToken";
 
 /* ── Types ──────────────────────────────────────────────────────── */
@@ -16,6 +17,7 @@ type Invitation = {
 	created_at: string;
 	couple?: { groom_name: string; bride_name: string };
 };
+type Shared = { id: string; title: string; role: Exclude<AccessRole, "owner"> };
 
 /* ── Components ─────────────────────────────────────────────────── */
 function StatCard({
@@ -63,6 +65,7 @@ function StatCard({
 export default function DashboardPage() {
 	const { token, ready } = useAuthToken();
 	const [invitations, setInvitations] = useState<Invitation[]>([]);
+	const [shared, setShared] = useState<Shared[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState("");
 	const [userName] = useState(() =>
@@ -75,9 +78,10 @@ export default function DashboardPage() {
 		if (!ready || !token) return;
 		apiFetch("/api/invitations", token)
 			.then((r) => (r.ok ? r.json() : Promise.reject("Gagal memuat data.")))
-			.then((body: { items?: Invitation[] }) =>
-				setInvitations(body.items ?? []),
-			)
+			.then((body: { items?: Invitation[]; shared?: Shared[] }) => {
+				setInvitations(body.items ?? []);
+				setShared(body.shared ?? []);
+			})
 			.catch((e: unknown) => setError(String(e)))
 			.finally(() => setLoading(false));
 	}, [ready, token]);
@@ -118,6 +122,22 @@ export default function DashboardPage() {
 
 			{/* ── Inner content ───────────────────────────────────────── */}
 			<div className="db-inner">
+				{shared.length > 0 && (
+					<div className="db-card" style={{ marginBottom: 16 }}>
+						<div className="db-card-header">
+							<h2 className="db-card-title">Dibagikan ke kamu</h2>
+							<Link href="/dashboard/invitations" className="db-card-action">Lihat semua →</Link>
+						</div>
+						<ul style={{ display: "grid", gap: 8, margin: 0, padding: "0 20px 16px", listStyle: "none" }}>
+							{shared.slice(0, 4).map((item) => (
+								<li key={item.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+									<span><strong>{item.title}</strong> <small style={{ color: "var(--rw-muted)" }}>· {ROLE_LABELS[item.role]}</small></span>
+									<a className="table-action" href={landingPath(item.id, item.role)}>Buka →</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
 				{/* Stats row */}
 				<div className="db-stat-grid">
 					<StatCard

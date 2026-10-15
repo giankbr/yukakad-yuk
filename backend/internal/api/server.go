@@ -146,6 +146,7 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/webhooks/mayar", s.handleMayarWebhook)
 	mux.HandleFunc("/api/billing/verify", s.handleBillingVerify)
 	mux.HandleFunc("/api/invitations/", s.handleInvitationDetail)
+	mux.HandleFunc("/api/team-invites/", s.handleTeamInvite)
 	mux.HandleFunc("/api/public/site-content/", s.handlePublicSiteContent)
 	mux.HandleFunc("/api/public/features", s.handlePublicFeatures)
 	mux.HandleFunc("/api/public/testimonials", s.handlePublicTestimonials)
@@ -437,7 +438,7 @@ func (s *Server) handleInvitations(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, http.StatusOK, map[string]any{"items": items[start:end], "pagination": meta})
 			return
 		}
-		writeJSON(w, http.StatusOK, map[string]any{"items": items})
+		writeJSON(w, http.StatusOK, map[string]any{"items": items, "shared": s.sharedInvitations(claims.UserID)})
 		return
 	}
 	if r.Method == http.MethodPost {
@@ -469,6 +470,14 @@ func (s *Server) handleInvitations(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) {
+	if id, rest, found := strings.Cut(strings.TrimPrefix(r.URL.Path, "/api/invitations/"), "/"); found && (rest == "team" || strings.HasPrefix(rest, "team/")) {
+		s.handleTeam(w, r, id, strings.Trim(strings.TrimPrefix(rest, "team"), "/"))
+		return
+	}
+	r, allowed := s.gateInvitation(w, r)
+	if !allowed {
+		return
+	}
 	path := strings.TrimPrefix(r.URL.Path, "/api/invitations/")
 	if strings.HasSuffix(path, "/rsvps/summary") {
 		invitationID := strings.Split(path, "/")[0]
@@ -619,6 +628,7 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			"template_id": invitation.TemplateID,
 			"couple":      invitation.Couple,
 			"event":       invitation.Event,
+			"access":      s.accessView(r, invitation, claims.UserID),
 		})
 		return
 	}
@@ -736,6 +746,10 @@ func (s *Server) requireAuth(w http.ResponseWriter, r *http.Request) (auth.Token
 	if !ok {
 		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "invalid token"})
 		return auth.TokenClaims{}, false
+	}
+	// A team member already authorised by gateInvitation acts as the owner for this request.
+	if a, ok := actingFrom(r); ok && a.tokenUserID == claims.UserID {
+		claims.UserID = a.ownerID
 	}
 	return claims, true
 }

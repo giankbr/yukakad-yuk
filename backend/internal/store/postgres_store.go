@@ -502,6 +502,91 @@ func (s *PostgresStore) UpdateGiftTransactionStatus(id, status, reference string
 	return tx, nil
 }
 
+const memberColumns = `id, invitation_id, COALESCE(user_id,''), COALESCE(email,''), role, status, COALESCE(token_hash,''), COALESCE(invited_by,''), expires_at, created_at, accepted_at`
+
+func scanMember(row interface{ Scan(...any) error }) (*Member, error) {
+	m := &Member{}
+	var expires, accepted sql.NullTime
+	if err := row.Scan(&m.ID, &m.InvitationID, &m.UserID, &m.Email, &m.Role, &m.Status, &m.TokenHash, &m.InvitedBy, &expires, &m.CreatedAt, &accepted); err != nil {
+		return nil, err
+	}
+	if expires.Valid {
+		t := expires.Time
+		m.ExpiresAt = &t
+	}
+	if accepted.Valid {
+		t := accepted.Time
+		m.AcceptedAt = &t
+	}
+	return m, nil
+}
+
+func (s *PostgresStore) queryMembers(query string, args ...any) []*Member {
+	rows, err := s.db.Query(query, args...)
+	if err != nil {
+		return []*Member{}
+	}
+	defer rows.Close()
+	items := make([]*Member, 0)
+	for rows.Next() {
+		if m, err := scanMember(rows); err == nil {
+			items = append(items, m)
+		}
+	}
+	return items
+}
+
+func (s *PostgresStore) CreateMember(m Member) (*Member, error) {
+	return scanMember(s.db.QueryRow(`INSERT INTO invitation_members (invitation_id, user_id, email, role, status, token_hash, invited_by, expires_at, accepted_at)
+		VALUES ($1, NULLIF($2,''), NULLIF($3,''), $4, $5, NULLIF($6,''), NULLIF($7,''), $8, $9) RETURNING `+memberColumns,
+		m.InvitationID, m.UserID, m.Email, m.Role, m.Status, m.TokenHash, m.InvitedBy, m.ExpiresAt, m.AcceptedAt))
+}
+
+func (s *PostgresStore) ListMembers(invitationID string) []*Member {
+	return s.queryMembers(`SELECT `+memberColumns+` FROM invitation_members WHERE invitation_id = $1 ORDER BY created_at`, invitationID)
+}
+
+func (s *PostgresStore) FindMember(id string) (*Member, bool) {
+	m, err := scanMember(s.db.QueryRow(`SELECT `+memberColumns+` FROM invitation_members WHERE id = $1`, id))
+	return m, err == nil
+}
+
+func (s *PostgresStore) FindMemberByTokenHash(hash string) (*Member, bool) {
+	if hash == "" {
+		return nil, false
+	}
+	m, err := scanMember(s.db.QueryRow(`SELECT `+memberColumns+` FROM invitation_members WHERE token_hash = $1`, hash))
+	return m, err == nil
+}
+
+func (s *PostgresStore) FindMembership(invitationID, userID string) (*Member, bool) {
+	if userID == "" {
+		return nil, false
+	}
+	m, err := scanMember(s.db.QueryRow(`SELECT `+memberColumns+` FROM invitation_members WHERE invitation_id = $1 AND user_id = $2 AND status = 'active'`, invitationID, userID))
+	return m, err == nil
+}
+
+func (s *PostgresStore) ListMembershipsByUser(userID string) []*Member {
+	return s.queryMembers(`SELECT `+memberColumns+` FROM invitation_members WHERE user_id = $1 AND status = 'active' ORDER BY created_at`, userID)
+}
+
+func (s *PostgresStore) UpdateMember(m Member) (*Member, error) {
+	return scanMember(s.db.QueryRow(`UPDATE invitation_members SET user_id=NULLIF($1,''), email=NULLIF($2,''), role=$3, status=$4, token_hash=NULLIF($5,''), expires_at=$6, accepted_at=$7 WHERE id=$8 RETURNING `+memberColumns,
+		m.UserID, m.Email, m.Role, m.Status, m.TokenHash, m.ExpiresAt, m.AcceptedAt, m.ID))
+}
+
+func (s *PostgresStore) DeleteMember(id string) error {
+	res, err := s.db.Exec(`DELETE FROM invitation_members WHERE id=$1`, id)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return fmt.Errorf("member not found")
+	}
+	return nil
+}
+
 const ledgerColumns = `id, invitation_id, COALESCE(guest_id,''), name, kind, amount, COALESCE(item,''), COALESCE(note,''), COALESCE(recorded_by,''), created_at`
 
 func scanLedger(row interface{ Scan(...any) error }) (*LedgerEntry, error) {

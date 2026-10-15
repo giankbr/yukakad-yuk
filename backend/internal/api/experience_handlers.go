@@ -111,7 +111,7 @@ func (s *Server) handleLedger(w http.ResponseWriter, r *http.Request, invitation
 		var err error
 		status := http.StatusCreated
 		if entryID == "" {
-			entry.RecordedBy = userID
+			entry.RecordedBy = actorID(r, userID)
 			saved, err = s.store.CreateLedgerEntry(entry)
 		} else {
 			entry.ID = entryID

@@ -56,6 +56,14 @@ type Store interface {
 	UpdateGuestPhotoStatus(invitationID, id, status string) (*GuestPhoto, error)
 	GetPrivateData(invitationID, key string) map[string]any
 	SetPrivateData(invitationID, key string, data map[string]any) error
+	CreateMember(Member) (*Member, error)
+	ListMembers(invitationID string) []*Member
+	FindMember(id string) (*Member, bool)
+	FindMemberByTokenHash(hash string) (*Member, bool)
+	FindMembership(invitationID, userID string) (*Member, bool)
+	ListMembershipsByUser(userID string) []*Member
+	UpdateMember(Member) (*Member, error)
+	DeleteMember(id string) error
 	CreateGiftPayout(GiftPayout) (*GiftPayout, error)
 	ListGiftPayouts(invitationID string) []*GiftPayout
 	ListAllGiftPayouts(status string) []*GiftPayout
@@ -246,6 +254,21 @@ type GiftTransaction struct {
 	CreatedAt        time.Time `json:"created_at"`
 }
 
+// Member is someone the owner invited to help with one invitation, with a limited role.
+type Member struct {
+	ID           string     `json:"id"`
+	InvitationID string     `json:"invitation_id"`
+	UserID       string     `json:"user_id,omitempty"`
+	Email        string     `json:"email,omitempty"`
+	Role         string     `json:"role"`   // editor, organizer, receptionist
+	Status       string     `json:"status"` // pending, active
+	TokenHash    string     `json:"-"`
+	InvitedBy    string     `json:"invited_by,omitempty"`
+	ExpiresAt    *time.Time `json:"expires_at,omitempty"`
+	CreatedAt    time.Time  `json:"created_at"`
+	AcceptedAt   *time.Time `json:"accepted_at,omitempty"`
+}
+
 // LedgerEntry is one line of the "buku buwuh": who gave what, so the family can reciprocate later.
 type LedgerEntry struct {
 	ID           string    `json:"id"`
@@ -403,6 +426,7 @@ type MemoryStore struct {
 	giftTransactions map[string]*GiftTransaction
 	giftPayouts      map[string]*GiftPayout
 	ledger           map[string]*LedgerEntry
+	members          map[string]*Member
 	guestPhotos      map[string]*GuestPhoto
 	private          map[string]map[string]any
 	seq              int
@@ -442,6 +466,7 @@ func NewMemoryStore() *MemoryStore {
 		giftTransactions: make(map[string]*GiftTransaction),
 		giftPayouts:      make(map[string]*GiftPayout),
 		ledger:           make(map[string]*LedgerEntry),
+		members:          make(map[string]*Member),
 		guestPhotos:      make(map[string]*GuestPhoto),
 		private:          make(map[string]map[string]any),
 		subscriptions:    make(map[string]*Subscription),
@@ -949,6 +974,100 @@ func (s *MemoryStore) ListGiftTransactions(invitationID string) []*GiftTransacti
 func (s *MemoryStore) nextID(prefix string) string {
 	s.seq++
 	return fmt.Sprintf("%s-%d", prefix, s.seq)
+}
+
+func (s *MemoryStore) CreateMember(m Member) (*Member, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.invitations[m.InvitationID]; !ok {
+		return nil, fmt.Errorf("invitation not found")
+	}
+	for _, existing := range s.members {
+		if m.UserID != "" && existing.InvitationID == m.InvitationID && existing.UserID == m.UserID {
+			return nil, fmt.Errorf("already a member")
+		}
+	}
+	m.ID = s.nextID("member")
+	m.CreatedAt = time.Now().UTC()
+	s.members[m.ID] = &m
+	out := m
+	return &out, nil
+}
+
+func (s *MemoryStore) findMembers(keep func(*Member) bool) []*Member {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	items := make([]*Member, 0)
+	for _, m := range s.members {
+		if keep(m) {
+			out := *m
+			items = append(items, &out)
+		}
+	}
+	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.Before(items[j].CreatedAt) })
+	return items
+}
+
+func (s *MemoryStore) ListMembers(invitationID string) []*Member {
+	return s.findMembers(func(m *Member) bool { return m.InvitationID == invitationID })
+}
+
+func (s *MemoryStore) FindMember(id string) (*Member, bool) {
+	items := s.findMembers(func(m *Member) bool { return m.ID == id })
+	if len(items) == 0 {
+		return nil, false
+	}
+	return items[0], true
+}
+
+func (s *MemoryStore) FindMemberByTokenHash(hash string) (*Member, bool) {
+	items := s.findMembers(func(m *Member) bool { return hash != "" && m.TokenHash == hash })
+	if len(items) == 0 {
+		return nil, false
+	}
+	return items[0], true
+}
+
+func (s *MemoryStore) FindMembership(invitationID, userID string) (*Member, bool) {
+	items := s.findMembers(func(m *Member) bool {
+		return m.InvitationID == invitationID && userID != "" && m.UserID == userID && m.Status == "active"
+	})
+	if len(items) == 0 {
+		return nil, false
+	}
+	return items[0], true
+}
+
+func (s *MemoryStore) ListMembershipsByUser(userID string) []*Member {
+	return s.findMembers(func(m *Member) bool { return userID != "" && m.UserID == userID && m.Status == "active" })
+}
+
+func (s *MemoryStore) UpdateMember(m Member) (*Member, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	current, ok := s.members[m.ID]
+	if !ok {
+		return nil, fmt.Errorf("member not found")
+	}
+	for _, existing := range s.members {
+		if m.UserID != "" && existing.ID != m.ID && existing.InvitationID == current.InvitationID && existing.UserID == m.UserID {
+			return nil, fmt.Errorf("already a member")
+		}
+	}
+	current.UserID, current.Email, current.Role, current.Status = m.UserID, m.Email, m.Role, m.Status
+	current.TokenHash, current.ExpiresAt, current.AcceptedAt = m.TokenHash, m.ExpiresAt, m.AcceptedAt
+	out := *current
+	return &out, nil
+}
+
+func (s *MemoryStore) DeleteMember(id string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.members[id]; !ok {
+		return fmt.Errorf("member not found")
+	}
+	delete(s.members, id)
+	return nil
 }
 
 func (s *MemoryStore) CreateLedgerEntry(e LedgerEntry) (*LedgerEntry, error) {

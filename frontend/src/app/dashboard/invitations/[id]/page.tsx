@@ -10,6 +10,7 @@ type Invitation = {
   slug: string;
   title: string;
   published: boolean;
+  access?: { role: string };
 };
 
 type RSVPSummary = { yes: number; no: number; maybe: number; attendees: number };
@@ -76,7 +77,7 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
           <h1>{invitation?.title ?? "Memuat..."}</h1>
           <p className="dashboard-subtitle">rawuh.id/invitation/{invitation?.slug}</p>
         </div>
-        {invitation && (
+        {invitation && (!invitation.access || invitation.access.role === "owner") && (
           <button className="dashboard-action" onClick={togglePublish} disabled={publishing}>
             {invitation.published ? "Batalkan terbit" : "Terbitkan"}
           </button>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
 import { IconEye, IconEyeOff, IconMail } from "@/components/brand/icons";
+import { safeNext } from "@/lib/next-path";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -35,10 +36,12 @@ export default function LoginPage() {
       // Storage keys keep the legacy prefix so existing sessions stay signed in.
       localStorage.setItem("yukakad_token", data.token);
       localStorage.setItem("yukakad_role", data.user?.role ?? "user");
-      const planId = new URLSearchParams(window.location.search).get("plan");
-      router.push(data.user?.role === "admin" ? "/admin" : planId
+      const search = new URLSearchParams(window.location.search);
+      const planId = search.get("plan");
+      const next = safeNext(search.get("next"));
+      router.push(next ?? (data.user?.role === "admin" ? "/admin" : planId
         ? `/checkout?plan=${encodeURIComponent(planId)}`
-        : "/dashboard");
+        : "/dashboard"));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Terjadi kesalahan");
     } finally {
@@ -47,10 +50,12 @@ export default function LoginPage() {
   };
 
   const registerLink = <Link href="/auth/register" onClick={(event) => {
-    const planId = new URLSearchParams(window.location.search).get("plan");
-    if (!planId) return;
+    const search = new URLSearchParams(window.location.search);
+    const planId = search.get("plan");
+    const next = safeNext(search.get("next"));
+    if (!planId && !next) return;
     event.preventDefault();
-    router.push(`/auth/register?plan=${encodeURIComponent(planId)}`);
+    router.push(next ? `/auth/register?next=${encodeURIComponent(next)}` : `/auth/register?plan=${encodeURIComponent(planId!)}`);
   }}>Daftar gratis</Link>;
 
   return (
