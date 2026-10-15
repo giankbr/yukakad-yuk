@@ -67,7 +67,7 @@ export default function AdminKontakPage() {
           <FormTextarea label="Subjudul" rows={2} value={kontak.subheading ?? ""} onChange={(e) => setKontak({ ...kontak, subheading: e.target.value })} placeholder="Tim kami siap bantu kapan saja." />
           <FormField label="Nomor WhatsApp" value={kontak.whatsapp ?? ""} onChange={(e) => setKontak({ ...kontak, whatsapp: e.target.value })} placeholder="628123456789" />
           <div className="form-actions">
-            <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
             {saved && <span className="form-hint">Tersimpan.</span>}

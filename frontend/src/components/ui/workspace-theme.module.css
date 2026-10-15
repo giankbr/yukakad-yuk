@@ -123,7 +123,17 @@
 .workspace :global(.dashboard-form) { max-width: 760px; padding-top: 0; }
 .workspace :global(.dashboard-form) button[type=submit] { background: var(--rw-primary); color: #fff; border-radius: var(--rw-radius-md); min-height: 44px; }
 .workspace :global(.dashboard-form) button[type=submit]:hover { background: var(--rw-primary-hover); }
-.workspace :global(.table-action), .workspace :global(.secondary-action) { border-radius: var(--rw-radius-md) !important; color: var(--ink) !important; border-color: var(--line) !important; min-height: 40px; }
+.workspace :global(.secondary-action) { border-radius: var(--rw-radius-md) !important; color: var(--ink) !important; border-color: var(--line) !important; min-height: 40px; }
+/* Row actions: small outlined pills so every action reads as a button. */
+.workspace :global(.table-action) {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px; min-height: 32px; padding: 0 12px !important;
+  border: 1px solid var(--line) !important; border-radius: 999px !important; background: #fff; color: var(--ink) !important;
+  font-size: 13px; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
+}
+.workspace :global(.table-action):hover { border-color: var(--rw-primary-border) !important; background: var(--rw-primary-soft); color: var(--rw-primary) !important; }
+.workspace :global(.table-action):disabled { cursor: default; opacity: .5; }
+.workspace :global(.table-action-danger) { color: #b42318 !important; }
+.workspace :global(.table-action-danger):hover { border-color: #f3b4ae !important; background: #fff5f4; color: #b42318 !important; }
 .workspace :global(.badge-premium) { background: var(--rw-primary-soft) !important; color: var(--rw-primary-hover) !important; }
 .workspace :global(.dashboard-note) { background: var(--rw-primary-soft) !important; border-color: var(--rw-primary-border) !important; border-radius: var(--rw-radius-lg) !important; }
 .workspace :global(.dashboard-note) h2 { color: var(--ink); font-size: 24px; }

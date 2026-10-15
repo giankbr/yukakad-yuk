@@ -138,7 +138,7 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
       )}
 
       <form className="dashboard-form" onSubmit={handleSubmit}>
-        <h2 style={{ margin: "1rem 0 0", color: "#173c3a" }}>Tambah metode</h2>
+        <h2 style={{ margin: "1rem 0 0", color: "var(--rw-ink)" }}>Tambah metode</h2>
         <FormSelect label="Jenis" value={form.type} onChange={(e) => setForm({ ...emptyForm, type: e.target.value })}>
           <option value="bank">Transfer bank</option>
           <option value="ewallet">E-wallet</option>
@@ -180,7 +180,7 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
         )}
 
         <div className="form-actions">
-          <Button type="submit" disabled={submitting} className="bg-[#173c3a] text-white">
+          <Button type="submit" disabled={submitting}>
             {submitting ? "Menambahkan..." : "Tambah metode"}
           </Button>
         </div>

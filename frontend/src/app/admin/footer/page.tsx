@@ -69,7 +69,7 @@ export default function AdminFooterPage() {
           <FormField label="Akun Instagram" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@rawuh.id" />
           <FormField label="Akun TikTok" value={footer.tiktok ?? ""} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} placeholder="@rawuh.id" />
           <div className="form-actions">
-            <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
             {saved && <span className="form-hint">Tersimpan.</span>}

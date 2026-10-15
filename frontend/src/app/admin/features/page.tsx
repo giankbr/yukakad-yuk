@@ -75,7 +75,7 @@ export default function AdminFeaturesPage() {
         </div>
         <FormTextarea label="Deskripsi" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Pantau kehadiran tamu langsung dari dashboard." required />
         <div className="form-actions">
-          <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+          <Button type="submit" disabled={saving}>
             {saving ? "Menambahkan..." : "Tambah fitur"}
           </Button>
         </div>
@@ -87,8 +87,8 @@ export default function AdminFeaturesPage() {
           {items.map((item) => (
             <div className="dashboard-card" key={item.id}>
               <h3>{item.icon ? `${item.icon} ` : ""}{item.title}</h3>
-              <p style={{ margin: 0, color: "#6e786f", fontSize: ".85rem" }}>{item.description}</p>
-              <button type="button" className="table-action" onClick={() => handleDelete(item.id)}>
+              <p style={{ margin: 0, color: "var(--rw-muted)", fontSize: ".85rem" }}>{item.description}</p>
+              <button type="button" className="table-action table-action-danger" style={{ justifySelf: "start" }} onClick={() => handleDelete(item.id)}>
                 Hapus
               </button>
             </div>

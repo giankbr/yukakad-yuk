@@ -94,7 +94,7 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
           </div>
           <FormField label="Link Google Maps" value={mapsUrl} onChange={(e) => setMapsUrl(e.target.value)} placeholder="https://maps.google.com/..." />
           <div className="form-actions">
-            <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
             {saved && <span className="form-hint">Tersimpan.</span>}

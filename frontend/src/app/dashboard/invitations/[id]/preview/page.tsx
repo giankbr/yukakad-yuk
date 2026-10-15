@@ -59,7 +59,7 @@ export default function PreviewPage({ params }: { params: Promise<{ id: string }
             style={{
               width: viewport === "mobile" ? "390px" : "100%",
               height: "80vh",
-              border: "1px solid #d9e1d8",
+              border: "1px solid var(--rw-border-warm)",
               borderRadius: ".5rem",
               background: "#fff",
             }}

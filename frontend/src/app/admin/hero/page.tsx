@@ -71,7 +71,7 @@ export default function AdminHeroPage() {
             <FormField label="Link tombol CTA" value={hero.cta_href ?? ""} onChange={(e) => setHero({ ...hero, cta_href: e.target.value })} placeholder="/auth/register" />
           </div>
           <div className="form-actions">
-            <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
             {saved && <span className="form-hint">Tersimpan.</span>}

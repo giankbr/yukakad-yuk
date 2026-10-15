@@ -186,7 +186,7 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
           <FormField label="Kategori" value={category} onChange={(e) => setCategory(e.target.value)} />
           <FormField label="Meja" value={table} onChange={(e) => setTable(e.target.value)} placeholder="12 / VIP A" maxLength={20} />
           <div className="form-actions">
-            <Button type="submit" disabled={submitting} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={submitting}>
               {submitting ? "Menambahkan..." : "Tambah"}
             </Button>
           </div>
@@ -255,7 +255,7 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
                     {!guest.checked_in_at && (
                       <button className="table-action" onClick={() => handleCheckIn(guest.id)}>Check-in</button>
                     )}
-                    <button className="table-action" onClick={() => handleDelete(guest.id)}>Hapus</button>
+                    <button className="table-action table-action-danger" onClick={() => handleDelete(guest.id)}>Hapus</button>
                   </td>
                 </tr>
               ))}

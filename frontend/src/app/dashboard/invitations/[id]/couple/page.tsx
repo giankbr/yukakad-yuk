@@ -88,7 +88,7 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
             <FormField label="Nama mempelai wanita" value={brideName} onChange={(e) => setBrideName(e.target.value)} required />
           </div>
           <div className="form-actions">
-            <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+            <Button type="submit" disabled={saving}>
               {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
             {saved && <span className="form-hint">Tersimpan.</span>}

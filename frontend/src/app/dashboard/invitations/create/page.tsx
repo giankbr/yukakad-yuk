@@ -88,7 +88,7 @@ export default function CreateInvitationPage() {
         {templateId && <p className="form-hint">Template: <strong>{templateId}</strong></p>}
         {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
         <div className="form-actions">
-          <Button type="submit" disabled={submitting || !title || !slug} className="bg-[#173c3a] text-white">
+          <Button type="submit" disabled={submitting || !title || !slug}>
             {submitting ? "Membuat..." : "Buat undangan"}
           </Button>
         </div>

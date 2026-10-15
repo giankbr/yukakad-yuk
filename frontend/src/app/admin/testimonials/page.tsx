@@ -76,7 +76,7 @@ export default function AdminTestimonialsPage() {
         <FormTextarea label="Kutipan" rows={2} value={form.quote} onChange={(e) => setForm({ ...form, quote: e.target.value })} placeholder="Prosesnya cepat banget, tamu-tamu juga suka tampilannya." required />
         <FormField label="URL foto profil (opsional)" value={form.avatar_url} onChange={(e) => setForm({ ...form, avatar_url: e.target.value })} placeholder="https://..." />
         <div className="form-actions">
-          <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
+          <Button type="submit" disabled={saving}>
             {saving ? "Menambahkan..." : "Tambah testimoni"}
           </Button>
         </div>
@@ -89,8 +89,8 @@ export default function AdminTestimonialsPage() {
             <div className="dashboard-card" key={item.id}>
               <h3>{item.name}</h3>
               {item.role && <span className="dashboard-card-meta">{item.role}</span>}
-              <p style={{ margin: 0, color: "#6e786f", fontSize: ".85rem" }}>&ldquo;{item.quote}&rdquo;</p>
-              <button type="button" className="table-action" onClick={() => handleDelete(item.id)}>
+              <p style={{ margin: 0, color: "var(--rw-muted)", fontSize: ".85rem" }}>&ldquo;{item.quote}&rdquo;</p>
+              <button type="button" className="table-action table-action-danger" style={{ justifySelf: "start" }} onClick={() => handleDelete(item.id)}>
                 Hapus
               </button>
             </div>

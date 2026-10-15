@@ -49,7 +49,17 @@ export default function InvitationsListPage() {
       {loading && <p className="dashboard-state">Memuat undangan...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
       {!loading && !error && invitations.length === 0 && (
-        <p className="dashboard-state">Belum ada undangan. Buat undangan pertama kamu untuk mulai.</p>
+        <div className="dashboard-empty">
+          <span className="dashboard-empty-icon" aria-hidden>
+            <svg width="26" height="26" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z" /></svg>
+          </span>
+          <h2>Belum ada undangan</h2>
+          <p>Pilih tema, isi nama dan tanggal acara, lalu bagikan link-nya ke tamu. Cuma butuh sekitar 10 menit.</p>
+          <div className="dashboard-empty-actions">
+            <Link className="dashboard-action" href="/dashboard/invitations/create">+ Buat undangan pertama</Link>
+            <Link className="secondary-action" href="/dashboard/templates">Lihat tema</Link>
+          </div>
+        </div>
       )}
       {!loading && !error && invitations.length > 0 && (
         <div className="dashboard-table-wrap">
