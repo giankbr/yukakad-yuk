@@ -60,21 +60,33 @@ export function SiteHeader({ current }: { current?: NavKey }) {
   );
 }
 
-type FooterProps = { products?: { slug: string; name: string }[]; tagline?: string; copyright?: string; instagram?: string; tiktok?: string; whatsappHref?: string };
+export type FooterColumn = { title: string; links: { label: string; href: string }[] };
+
+/** Footer link columns after "Produk"; "contact" as href opens the admin WhatsApp. Admins edit them in /admin/footer. */
+export const defaultFooterColumns: FooterColumn[] = [
+  { title: "Acara", links: [{ label: "Pernikahan", href: "/templates" }, { label: "Khitan", href: "/templates" }, { label: "Aqiqah", href: "/templates" }, { label: "Ulang Tahun", href: "/templates" }, { label: "Syukuran", href: "/templates" }] },
+  { title: "Perusahaan", links: [{ label: "Tentang kami", href: "/tentang" }, { label: "Program Reseller", href: "/tentang#kontak" }, { label: "Tim", href: "/tentang#tim" }, { label: "Fitur", href: "/fitur" }] },
+  { title: "Bantuan", links: [{ label: "Pusat bantuan", href: "/harga#faq" }, { label: "Panduan membuat", href: "/fitur#cara-kerja" }, { label: "Hubungi kami", href: "contact" }] },
+];
+export const defaultPaymentMethods = ["QRIS", "Virtual Account", "GoPay", "OVO", "Kartu Kredit"];
+
+type FooterProps = { columns?: FooterColumn[]; paymentMethods?: string[]; products?: { slug: string; name: string }[]; tagline?: string; copyright?: string; instagram?: string; tiktok?: string; whatsappHref?: string };
 
 // Content saved before the rebrand may still say "Yukakad"; fall back to Rawuh defaults instead of showing it.
 const legacyBrand = (value?: string) => value && !/yukakad/i.test(value) ? value : undefined;
 
-export function SiteFooter({ products = defaultProducts, tagline: rawTagline, copyright: rawCopyright, instagram: rawInstagram, tiktok, whatsappHref }: FooterProps) {
+export function SiteFooter({ columns: rawColumns, paymentMethods: rawPayments, products = defaultProducts, tagline: rawTagline, copyright: rawCopyright, instagram: rawInstagram, tiktok, whatsappHref }: FooterProps) {
   const copyright = legacyBrand(rawCopyright);
   const tagline = legacyBrand(rawTagline?.trim());
   const instagram = legacyBrand(rawInstagram);
   const columns = [
     { title: "Produk", links: products.map(product => [product.name, `/produk/${product.slug}`]) },
-    { title: "Acara", links: [["Pernikahan", "/templates"], ["Khitan", "/templates"], ["Aqiqah", "/templates"], ["Ulang Tahun", "/templates"], ["Syukuran", "/templates"]] },
-    { title: "Perusahaan", links: [["Tentang kami", "/tentang"], ["Program Reseller", "/tentang#kontak"], ["Tim", "/tentang#tim"], ["Fitur", "/fitur"]] },
-    { title: "Bantuan", links: [["Pusat bantuan", "/harga#faq"], ["Panduan membuat", "/fitur#cara-kerja"], ["Hubungi kami", whatsappHref ?? "/tentang#kontak"]] },
+    ...(rawColumns?.length ? rawColumns : defaultFooterColumns).map(column => ({
+      title: column.title,
+      links: column.links.filter(link => link.label?.trim() && link.href?.trim()).map(link => [link.label, link.href === "contact" ? whatsappHref ?? "/tentang#kontak" : link.href]),
+    })),
   ];
+  const paymentMethods = rawPayments?.filter(method => method.trim()).length ? rawPayments.filter(method => method.trim()) : defaultPaymentMethods;
   const instagramHref = instagram ? `https://instagram.com/${instagram.replace(/^@/, "")}` : undefined;
   const tiktokHref = tiktok ? `https://www.tiktok.com/@${tiktok.replace(/^@/, "")}` : undefined;
   return (
@@ -98,7 +110,7 @@ export function SiteFooter({ products = defaultProducts, tagline: rawTagline, co
           ))}
         </div>
         <div className={styles.footerBottom}>
-          <div className={styles.payments}>Bayar via {["QRIS", "Virtual Account", "GoPay", "OVO", "Kartu Kredit"].map(method => <span key={method}>{method}</span>)}</div>
+          <div className={styles.payments}>Bayar via {paymentMethods.map(method => <span key={method}>{method}</span>)}</div>
           <div className={styles.legal}>
             <Link href="/syarat-ketentuan">Syarat &amp; Ketentuan</Link>
             <Link href="/kebijakan-privasi">Kebijakan Privasi</Link>

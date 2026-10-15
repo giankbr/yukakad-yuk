@@ -232,7 +232,7 @@ export default async function Home() {
         <FinalCta heading={kontak.heading} subheading={kontak.subheading} />
       </div>
 
-      <SiteFooter products={products} tagline={footer.tagline} copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
+      <SiteFooter columns={footer.columns} paymentMethods={footer.payment_methods} products={products} tagline={footer.tagline} copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
     </main>
   );
 }
