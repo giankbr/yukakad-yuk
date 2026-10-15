@@ -42,7 +42,7 @@ func (s *Service) Create(invitationID, guestID, gateway, sender, message string,
 	if gateway != "dummy" || s.gateway == nil {
 		return nil, fmt.Errorf("%w: unsupported gateway", ErrInvalid)
 	}
-	payment, err := s.gateway.Create(context.Background(), amount)
+	payment, err := s.gateway.Create(context.Background(), payments.Request{Amount: amount, Name: "Amplop digital", Description: "Amplop digital dari " + strings.TrimSpace(sender)})
 	if err != nil {
 		return nil, fmt.Errorf("create payment: %w", err)
 	}

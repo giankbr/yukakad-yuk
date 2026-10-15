@@ -27,6 +27,9 @@ type Config struct {
 	SMTPPassword         string
 	SMTPFrom             string
 	PaymentWebhookSecret string
+	MayarAPIKey          string
+	MayarEnvironment     string
+	MayarBaseURL         string // optional override, e.g. a local fake in tests
 
 	AdminEmail    string
 	AdminPassword string
@@ -53,6 +56,9 @@ func Load() Config {
 		SMTPPassword:         getEnv("SMTP_PASSWORD", ""),
 		SMTPFrom:             getEnv("SMTP_FROM", ""),
 		PaymentWebhookSecret: getEnv("PAYMENT_WEBHOOK_SECRET", ""),
+		MayarAPIKey:          getEnv("MAYAR_API_KEY", ""),
+		MayarEnvironment:     getEnv("MAYAR_ENV", "sandbox"),
+		MayarBaseURL:         getEnv("MAYAR_BASE_URL", ""),
 
 		AdminEmail:    getEnv("ADMIN_EMAIL", ""),
 		AdminPassword: getEnv("ADMIN_PASSWORD", ""),

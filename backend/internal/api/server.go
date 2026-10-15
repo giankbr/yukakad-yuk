@@ -55,7 +55,24 @@ func NewServer(cfg config.Config) *Server {
 	return NewServerWithStore(cfg, memoryStore)
 }
 
+// billingGateway picks the payment provider for plan purchases: Mayar when an API key is set,
+// the simulated gateway outside production, and none in production without a key.
+func billingGateway(cfg config.Config) payments.Gateway {
+	if strings.TrimSpace(cfg.MayarAPIKey) != "" {
+		mayar := payments.NewMayar(cfg.MayarAPIKey, cfg.MayarEnvironment)
+		if cfg.MayarBaseURL != "" {
+			mayar.BaseURL = cfg.MayarBaseURL
+		}
+		return mayar
+	}
+	if cfg.Environment == "production" {
+		return nil
+	}
+	return payments.Dummy{BaseURL: cfg.FrontendOrigin}
+}
+
 func NewServerWithStore(cfg config.Config, dataStore store.Store) *Server {
+	gateway := billingGateway(cfg)
 	return &Server{
 		config:      &cfg,
 		store:       dataStore,
@@ -68,8 +85,8 @@ func NewServerWithStore(cfg config.Config, dataStore store.Store) *Server {
 		wishes:      wishservice.NewService(dataStore),
 		templates:   templateservice.NewService(dataStore),
 		gifts:       giftservice.NewService(dataStore, payments.Dummy{BaseURL: cfg.FrontendOrigin}),
-		billing:     billingservice.NewService(dataStore, payments.Dummy{BaseURL: cfg.FrontendOrigin}),
-		domains:     domainservice.NewService(dataStore, billingservice.NewService(dataStore, payments.Dummy{BaseURL: cfg.FrontendOrigin})),
+		billing:     billingservice.NewService(dataStore, gateway),
+		domains:     domainservice.NewService(dataStore, billingservice.NewService(dataStore, gateway)),
 	}
 }
 
@@ -115,6 +132,8 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/billing/entitlements", s.handleBillingEntitlements)
 	mux.HandleFunc("/api/billing/dummy/", s.handleBillingDummyConfirm)
 	mux.HandleFunc("/api/webhooks/payment", s.handlePaymentWebhook)
+	mux.HandleFunc("/api/webhooks/mayar", s.handleMayarWebhook)
+	mux.HandleFunc("/api/billing/verify", s.handleBillingVerify)
 	mux.HandleFunc("/api/invitations/", s.handleInvitationDetail)
 	mux.HandleFunc("/api/public/site-content/", s.handlePublicSiteContent)
 	mux.HandleFunc("/api/public/features", s.handlePublicFeatures)
@@ -191,6 +210,10 @@ func (s *Server) handleV1(w http.ResponseWriter, r *http.Request) {
 		s.handleDummyPayment(w, r2)
 	case path == "/webhooks/payment":
 		s.handlePaymentWebhook(w, r2)
+	case path == "/webhooks/mayar":
+		s.handleMayarWebhook(w, r2)
+	case path == "/billing/verify":
+		s.handleBillingVerify(w, r2)
 	case strings.HasPrefix(path, "/public/invitations/"):
 		r2.URL.Path = "/api/public/invitation/" + strings.TrimPrefix(path, "/public/invitations/")
 		s.handlePublicInvitation(w, r2)

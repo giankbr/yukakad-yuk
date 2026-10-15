@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 	billingservice "yukakad/internal/billing"
+	"yukakad/internal/store"
 )
 
 func (s *Server) handleBillingPlan(w http.ResponseWriter, r *http.Request) {
@@ -34,7 +35,7 @@ func (s *Server) handleBillingPlan(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if payload.PlanID != "free" {
-		sub, paymentURL, err := s.billing.Checkout(claims.UserID, payload.PlanID)
+		sub, paymentURL, err := s.billing.Checkout(claims.UserID, payload.PlanID, s.checkoutOptions())
 		if err != nil {
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 			return
@@ -71,7 +72,7 @@ func (s *Server) handleBillingCheckout(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "plan_id is required"})
 		return
 	}
-	sub, url, err := s.billing.Checkout(claims.UserID, payload.PlanID)
+	sub, url, err := s.billing.Checkout(claims.UserID, payload.PlanID, s.checkoutOptions())
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
@@ -135,6 +136,11 @@ func (s *Server) handleBillingEntitlements(w http.ResponseWriter, r *http.Reques
 }
 
 func (s *Server) handleBillingDummyConfirm(w http.ResponseWriter, r *http.Request) {
+	// Simulated payments only exist while the dummy gateway is active (never with Mayar or in production).
+	if s.billing.Provider() != "dummy" {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": "not found"})
+		return
+	}
 	if r.Method != http.MethodPost {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
@@ -150,4 +156,45 @@ func (s *Server) handleBillingDummyConfirm(w http.ResponseWriter, r *http.Reques
 		return
 	}
 	writeJSON(w, http.StatusOK, sub)
+}
+
+func (s *Server) checkoutOptions() billingservice.CheckoutOptions {
+	return billingservice.CheckoutOptions{RedirectURL: strings.TrimRight(s.config.FrontendOrigin, "/") + "/payments/selesai"}
+}
+
+// POST /api/billing/verify — called by the return page: asks the gateway about the user's pending payments.
+func (s *Server) handleBillingVerify(w http.ResponseWriter, r *http.Request) {
+	claims, ok := s.requireAuth(w, r)
+	if !ok {
+		return
+	}
+	if r.Method != http.MethodPost {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
+		return
+	}
+	activated, err := s.billing.VerifyPending(r.Context(), claims.UserID)
+	if err != nil && !errors.Is(err, billingservice.ErrGatewayDisabled) {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": err.Error()})
+		return
+	}
+	plan, err := s.billing.Current(claims.UserID)
+	if err != nil {
+		writeJSON(w, http.StatusNotFound, map[string]string{"error": err.Error()})
+		return
+	}
+	pending := 0
+	var latest *store.Subscription
+	for _, sub := range s.store.ListSubscriptions(claims.UserID) {
+		if sub.Status == "pending" {
+			pending++
+		}
+		if latest == nil || sub.StartedAt.After(latest.StartedAt) {
+			latest = sub
+		}
+	}
+	latestStatus := ""
+	if latest != nil {
+		latestStatus = latest.Status
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"plan": plan, "activated": activated, "pending": pending, "latest_status": latestStatus})
 }
