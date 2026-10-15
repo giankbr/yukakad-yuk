@@ -52,6 +52,7 @@ func (s *Service) Provider() string {
 func online(tx *store.GiftTransaction) bool { return tx.Gateway == "mayar" || tx.Gateway == "dummy" }
 
 type CreateOptions struct {
+	Purpose     string // e.g. "wishlist:<item id>" when chipping in for a wishlist item
 	RedirectURL string
 	Email       string
 	Title       string
@@ -88,12 +89,12 @@ func (s *Service) Create(invitationID, guestID, sender, message string, amount f
 		Email:       options.Email,
 		RedirectURL: options.RedirectURL,
 		ExpiresAt:   time.Now().UTC().Add(24 * time.Hour),
-		Extra:       map[string]string{"invitation_id": invitationID, "kind": "gift"},
+		Extra:       map[string]string{"invitation_id": invitationID, "kind": "gift", "purpose": options.Purpose},
 	})
 	if err != nil {
 		return nil, fmt.Errorf("create payment: %w", err)
 	}
-	tx, err := s.store.CreateGiftTransaction(store.GiftTransaction{InvitationID: invitationID, GuestID: guestID, Gateway: s.gateway.Name(), GatewayReference: payment.Reference, Amount: amount, Status: "pending", SenderName: sender, Message: strings.TrimSpace(message)})
+	tx, err := s.store.CreateGiftTransaction(store.GiftTransaction{InvitationID: invitationID, GuestID: guestID, Gateway: s.gateway.Name(), GatewayReference: payment.Reference, Amount: amount, Status: "pending", SenderName: sender, Message: strings.TrimSpace(message), Purpose: options.Purpose})
 	if err != nil {
 		return nil, err
 	}

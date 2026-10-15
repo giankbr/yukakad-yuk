@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "@/components/dashboard/editor.module.css";
+import { GREETINGS } from "@/lib/greetings";
 
 type Couple = {
   groom_name: string; bride_name: string;
@@ -140,6 +141,12 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
           </div>
           <section className={styles.panel} aria-label="Kata pengantar">
             <h2>Kata pengantar</h2>
+            <label className={styles.field}><span>Pakai kalimat siap pakai (termasuk bahasa daerah)</span>
+              <select value="" onChange={(e) => { const greeting = GREETINGS.find((g) => g.id === e.target.value); if (greeting && (!note.trim() || window.confirm("Ganti kata pengantar yang sudah ada?"))) { setNote(greeting.text); setNotice(""); } }}>
+                <option value="">Pilih bahasa…</option>
+                {GREETINGS.map((g) => <option key={g.id} value={g.id}>{g.label}</option>)}
+              </select>
+            </label>
             <label className={styles.field}><span>Kutipan singkat di bawah nama kalian (opsional)</span>
               <textarea rows={3} maxLength={240} value={note} onChange={(e) => { setNote(e.target.value); setNotice(""); }} placeholder="Dua cerita yang akhirnya menemukan rumah yang sama." />
             </label>

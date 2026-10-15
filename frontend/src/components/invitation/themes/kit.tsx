@@ -11,7 +11,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSPrope
 import type { GiftMethod, InvitationData } from "../types";
 import kit from "./kit.module.css";
 import { autoReveal, revealChildren } from "@/lib/reveal";
-import { DietaryField, ThankYouBanner, useThankYou } from "./extras";
+import { DietaryField, ReadingAids, ThankYouBanner, useThankYou } from "./extras";
 
 export type ThemeProps = {
   data: InvitationData;
@@ -68,6 +68,16 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
     // Opening the cover is a user gesture, so background music may start now (see <MusicPlayer>).
     window.dispatchEvent(new Event(OPEN_EVENT));
   }, []);
+  // Deep links from table QR cards (e.g. #extra-foto-tamu) open the invitation straight to that section.
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!/^#extra-[\w-]+$/.test(hash)) return;
+    const timer = setTimeout(() => {
+      open();
+      setTimeout(() => document.querySelector(hash)?.scrollIntoView({ block: "start" }), 700);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [open]);
   useEffect(() => {
     if (opened) return;
     const previous = document.body.style.overflow;
@@ -86,7 +96,8 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
             <div ref={coverRef} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh" }}>{cover(open)}</div>
           </div>
         )}
-        <div ref={mainRef} aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}><ThankYouBanner />{children}</div>
+        <div ref={mainRef} data-invitation-main aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}><ThankYouBanner />{children}</div>
+        {opened && <ReadingAids />}
       </div>
     </div>
   );

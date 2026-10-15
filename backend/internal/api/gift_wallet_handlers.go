@@ -99,6 +99,7 @@ func (s *Server) handlePublicGiftTransaction(w http.ResponseWriter, r *http.Requ
 		Email      string  `json:"email"`
 		Amount     float64 `json:"amount"`
 		ReturnURL  string  `json:"return_url"`
+		WishlistID string  `json:"wishlist_item_id"`
 	}
 	if json.NewDecoder(http.MaxBytesReader(w, r.Body, 8192)).Decode(&payload) != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid payload"})
@@ -118,7 +119,17 @@ func (s *Server) handlePublicGiftTransaction(w http.ResponseWriter, r *http.Requ
 	if !strings.Contains(email, "@") || len(email) > 120 {
 		email = ""
 	}
-	tx, err := s.gifts.Create(invitation.ID, payload.GuestID, payload.SenderName, payload.Message, payload.Amount, giftservice.CreateOptions{RedirectURL: returnURL, Email: email, Title: title})
+	options := giftservice.CreateOptions{RedirectURL: returnURL, Email: email, Title: title}
+	if payload.WishlistID != "" {
+		itemName, ok := fundableWishlistItem(s.store.GetSettings(invitation.ID), payload.WishlistID)
+		if !ok {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "kado ini tidak menerima patungan"})
+			return
+		}
+		options.Purpose = "wishlist:" + payload.WishlistID
+		options.Title = itemName + " untuk " + title
+	}
+	tx, err := s.gifts.Create(invitation.ID, payload.GuestID, payload.SenderName, payload.Message, payload.Amount, options)
 	if err != nil {
 		status := http.StatusBadRequest
 		switch {

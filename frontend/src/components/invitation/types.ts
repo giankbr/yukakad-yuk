@@ -56,6 +56,8 @@ export type InvitationData = {
   extras?: InvitationExtras;
   /** Online envelope paid through Rawuh (Mayar); present only when active for this invitation. */
   onlineGift?: OnlineGift;
+  /** Confirmed contributions per crowdfunded wishlist item id. */
+  wishlistFunds?: Record<string, number>;
 };
 
 export type OnlineGift = { note?: string; minAmount: number; maxAmount: number };
@@ -64,6 +66,10 @@ export type OnlineGift = { note?: string; minAmount: number; maxAmount: number }
 export type InvitationExtras = {
   /** Set on the Amplop page; the public payload decides whether it is actually available. */
   onlineGift?: { enabled?: boolean; note?: string };
+  /** Guests upload photos from the invitation (managed on the "Foto dari tamu" page). */
+  guestPhotos?: { enabled?: boolean; moderate?: boolean };
+  /** Large-text toggle and read-aloud button for older guests; on unless switched off. */
+  easyRead?: { enabled?: boolean };
   /** Opening verse/quote, e.g. QS Ar-Rum 21. */
   quote?: { enabled?: boolean; text: string; source?: string };
   /** Child profile for aqiqah / khitan / birthday invitations. */
@@ -88,4 +94,8 @@ export type InvitationExtras = {
   thankYou?: { mode?: "auto" | "on" | "off"; message?: string };
 };
 
-export type WishlistItem = { id: string; name: string; url?: string; image?: string; price?: string; claimed_by?: string };
+export type WishlistItem = {
+  id: string; name: string; url?: string; image?: string; price?: string; claimed_by?: string;
+  /** Patungan: guests chip in through an online envelope until `target` (Rupiah) is reached. */
+  fund?: boolean; target?: number;
+};

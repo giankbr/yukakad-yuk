@@ -113,3 +113,43 @@ a.card:hover { border-color: var(--t-accent, currentColor); }
 .field input:focus, .field textarea:focus { border-color: var(--t-accent, currentColor); outline: 0; }
 .giftForm .button { width: 100%; }
 .giftForm .button:disabled { cursor: wait; opacity: .7; }
+
+/* Guest photos */
+.photoGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.photoGrid img { display: block; width: 100%; aspect-ratio: 1; border-radius: calc(var(--t-radius, 12px) * .5); object-fit: cover; }
+label.button { cursor: pointer; }
+
+/* Patungan (crowdfunded wishlist item) */
+.fundCard { display: grid; align-items: stretch; gap: 10px; }
+.fundTop { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.progress { height: 8px; overflow: hidden; border-radius: 999px; background: color-mix(in srgb, currentColor 12%, transparent); }
+.progress i { display: block; height: 100%; border-radius: inherit; background: var(--t-accent, currentColor); transition: width .6s ease; }
+.fundCard .giftForm { max-width: none; }
+
+/* Reading aids: bigger text + read aloud (fixed, bottom-left; the music button sits bottom-right) */
+.aids { position: fixed; left: max(14px, calc(50% - 215px + 14px)); bottom: 104px; z-index: 60; display: grid; gap: 8px; font-family: var(--rw-font-sans, system-ui, sans-serif); }
+.aids button {
+  display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid rgb(255 255 255 / .35); border-radius: 999px;
+  background: rgb(20 20 24 / .62); color: #fff; font: inherit; box-shadow: 0 8px 24px rgb(0 0 0 / .22); backdrop-filter: blur(8px); cursor: pointer;
+}
+.aids button[aria-pressed="true"] { background: #2e43b0; }
+.aidsText { font-size: 18px; font-weight: 700; line-height: 1; letter-spacing: -.02em; }
+.aidsText small { font-size: 12px; }
+@media print { .aids { display: none; } }
+
+/* Kenangan: recap chips + fullscreen player */
+.recap { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 4px 0 6px; padding: 0; list-style: none; }
+.recap li { padding: 6px 12px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: 999px; font-size: 12px; font-weight: 600; }
+.player { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; background: #0b0b0e; color: #f5f5f7; cursor: pointer; }
+.playerPhoto { display: grid; justify-items: center; gap: 12px; margin: 0; animation: extras-kenburns 5s ease-out both; }
+.playerPhoto img { max-width: min(92vw, 900px); max-height: 76vh; border-radius: 12px; object-fit: contain; box-shadow: 0 30px 80px rgb(0 0 0 / .5); }
+.playerPhoto figcaption { font-size: 13px; opacity: .75; }
+.playerWish { display: grid; gap: 16px; max-width: 680px; margin: 0; text-align: center; animation: extras-fade .8s ease both; }
+.playerWish p { margin: 0; font-family: var(--t-heading-font, Georgia, serif); font-size: clamp(22px, 5vw, 36px); line-height: 1.4; }
+.playerWish cite { font-size: 14px; font-style: normal; opacity: .75; }
+.playerBar { position: absolute; left: 16px; right: 16px; bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; opacity: .85; cursor: default; }
+.playerProgress { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: rgb(255 255 255 / .12); }
+.playerProgress i { display: block; height: 100%; background: var(--t-accent, #fff); transition: width .4s ease; }
+@keyframes extras-kenburns { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+@keyframes extras-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .playerPhoto, .playerWish { animation: none; } }

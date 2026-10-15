@@ -4,6 +4,7 @@
 // <InvitationProvider> and style themselves from the surrounding colour (currentColor) plus the theme's
 // --t-* tokens, so they look native on light and dark themes alike.
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import QRCode from "qrcode";
 import type { InvitationData, InvitationExtras, OnlineGift, WishlistItem } from "../types";
 import x from "./extras.module.css";
@@ -130,6 +131,9 @@ const ICONS = {
   pin: "M20 10c0 5-8 12-8 12s-8-7-8-12a8 8 0 0 1 16 0ZM12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z",
   check: "M20 6 9 17l-5-5",
   link: "M7 17 17 7M8 7h9v9",
+  text: "M4 7V4h16v3M9 20h6M12 4v16",
+  speaker: "M11 5 6 9H2v6h4l5 4V5ZM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14",
+  stop: "M6 6h12v12H6z",
   heart: "M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z",
 };
 
@@ -341,10 +345,14 @@ function TravelBlock({ travel }: { travel: NonNullable<InvitationExtras["travel"
   );
 }
 
-function WishlistBlock({ wishlist, slug, demo, guestName }: { wishlist: NonNullable<InvitationExtras["wishlist"]>; slug: string; demo?: boolean; guestName?: string }) {
+function WishlistBlock({ wishlist, slug, demo, guestName, online, funds }: { wishlist: NonNullable<InvitationExtras["wishlist"]>; slug: string; demo?: boolean; guestName?: string; online?: OnlineGift; funds?: Record<string, number> }) {
   const [items, setItems] = useState<WishlistItem[]>(() => wishlist.items?.filter(item => item.name?.trim()) ?? []);
   const [claiming, setClaiming] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [chipIn, setChipIn] = useState<string | null>(null);
+  const [chipAmount, setChipAmount] = useState(100000);
+  const [chipName, setChipName] = useState(guestName && guestName !== "Tamu Undangan" ? guestName : "");
+  const [paying, setPaying] = useState(false);
   if (!items.length) return null;
 
   async function claim(item: WishlistItem) {
@@ -373,6 +381,17 @@ function WishlistBlock({ wishlist, slug, demo, guestName }: { wishlist: NonNulla
     }
   }
 
+  async function contribute(event: React.FormEvent, item: WishlistItem) {
+    event.preventDefault();
+    if (!chipName.trim()) { setError("Isi nama kamu dulu."); return; }
+    if (online && (chipAmount < online.minAmount || chipAmount > online.maxAmount)) { setError(`Nominal minimal ${rupiah(online.minAmount)}.`); return; }
+    setError("");
+    if (demo) { setChipIn(null); return; }
+    setPaying(true);
+    const failure = await startOnlinePayment(slug, { sender_name: chipName.trim().slice(0, 80), amount: chipAmount, wishlist_item_id: item.id, message: `Patungan ${item.name}` });
+    if (failure) { setError(failure); setPaying(false); }
+  }
+
   return (
     <Block id="extra-wishlist" title="Wishlist kado" eyebrow="Kalau ingin memberi">
       <p className={x.body}>{wishlist.note || "Tandai kado yang akan kamu berikan supaya tidak ada yang dobel."}</p>
@@ -380,6 +399,36 @@ function WishlistBlock({ wishlist, slug, demo, guestName }: { wishlist: NonNulla
         {items.map(item => {
           const href = /^https?:\/\//i.test(item.url ?? "") ? item.url : undefined;
           const image = /^https?:\/\//i.test(item.image ?? "") || item.image?.startsWith("/") ? item.image : undefined;
+          const fundable = Boolean(item.fund && item.target && online);
+          if (fundable) {
+            const collected = funds?.[item.id] ?? 0;
+            const percent = Math.min(100, Math.round((collected / item.target!) * 100));
+            return (
+              <li key={item.id} className={`${x.card} ${x.fundCard}`}>
+                <div className={x.fundTop}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  {image ? <img className={x.thumb} src={image} alt="" loading="lazy" /> : <span className={x.icon}><Glyph d={ICONS.gift} /></span>}
+                  <div className={x.cardText}>
+                    <strong>{href ? <a href={href} target="_blank" rel="noreferrer">{item.name}</a> : item.name}</strong>
+                    <small>Patungan · {rupiah(collected)} dari {rupiah(item.target!)}</small>
+                  </div>
+                  {percent >= 100
+                    ? <span className={x.done}><Glyph d={ICONS.check} size={14} /> Terkumpul</span>
+                    : <button type="button" className={x.chip} onClick={() => setChipIn(chipIn === item.id ? null : item.id)}>Ikut patungan</button>}
+                </div>
+                <div className={x.progress} role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={percent} aria-label={`${percent}% terkumpul`}><i style={{ width: `${percent}%` }} /></div>
+                {chipIn === item.id && (
+                  <form className={x.giftForm} onSubmit={e => contribute(e, item)}>
+                    <div className={x.presets} role="group" aria-label="Nominal patungan">
+                      {[50000, 100000, 250000, 500000].map(value => <button key={value} type="button" className={x.chip} aria-pressed={chipAmount === value} onClick={() => setChipAmount(value)}>{rupiah(value)}</button>)}
+                    </div>
+                    <label className={x.field}><span>Nama kamu</span><input value={chipName} maxLength={80} onChange={e => setChipName(e.target.value)} /></label>
+                    <button type="submit" className={x.button} disabled={paying}>{paying ? "Membuka pembayaran…" : `Patungan ${rupiah(chipAmount)}`}</button>
+                  </form>
+                )}
+              </li>
+            );
+          }
           return (
             <li key={item.id} className={x.card} data-claimed={item.claimed_by ? "" : undefined}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -400,6 +449,160 @@ function WishlistBlock({ wishlist, slug, demo, guestName }: { wishlist: NonNulla
   );
 }
 
+/* ── Reading aids (mode orang tua) ─────────────────────────────────── */
+
+const EASY_KEY = "rawuh_easy_read";
+
+function speechText(data: InvitationData) {
+  const parts = [`${data.eventLabel || "Undangan"} ${data.couple.bride} dan ${data.couple.groom}.`];
+  if (data.guestName && data.guestName !== "Tamu Undangan") parts.push(`Kepada yang terhormat, ${data.guestName}.`);
+  if (data.couple.note) parts.push(data.couple.note);
+  for (const event of data.events) {
+    const when = fmt(event.date, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+    parts.push(`${event.name}: ${when || ""}${event.time ? `, pukul ${event.time.replace(/\./g, " lewat ").replace("WIB", "Waktu Indonesia Barat")}` : ""}. Bertempat di ${event.venue}${event.address ? `, ${event.address}` : ""}.`);
+  }
+  parts.push("Merupakan suatu kehormatan apabila Bapak, Ibu, dan Saudara berkenan hadir. Terima kasih.");
+  return parts.join(" ");
+}
+
+/** Floating "Aa" (bigger text) and "Dengarkan" (read the key details aloud) for older guests. */
+export function ReadingAids() {
+  const ctx = useInvitation();
+  const [big, setBig] = useState(false);
+  const [speaking, setSpeaking] = useState(false);
+  const [canSpeak, setCanSpeak] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCanSpeak(typeof window !== "undefined" && "speechSynthesis" in window);
+      try { setBig(localStorage.getItem(EASY_KEY) === "1"); } catch { /* storage unavailable */ }
+    }, 0);
+    return () => { clearTimeout(timer); window.speechSynthesis?.cancel(); };
+  }, []);
+  useEffect(() => {
+    if (big) document.documentElement.dataset.easyRead = "1";
+    else delete document.documentElement.dataset.easyRead;
+    try { localStorage.setItem(EASY_KEY, big ? "1" : "0"); } catch { /* storage unavailable */ }
+  }, [big]);
+
+  if (!ctx || ctx.data.extras?.easyRead?.enabled === false) return null;
+
+  function toggleSpeech() {
+    const synth = window.speechSynthesis;
+    if (speaking) { synth.cancel(); setSpeaking(false); return; }
+    const utterance = new SpeechSynthesisUtterance(speechText(ctx!.data));
+    utterance.lang = "id-ID";
+    utterance.rate = 0.9;
+    const voice = synth.getVoices().find(v => v.lang?.toLowerCase().startsWith("id"));
+    if (voice) utterance.voice = voice;
+    utterance.onend = () => setSpeaking(false);
+    utterance.onerror = () => setSpeaking(false);
+    synth.cancel();
+    synth.speak(utterance);
+    setSpeaking(true);
+  }
+
+  return (
+    <div className={x.aids} role="group" aria-label="Bantuan membaca">
+      <button type="button" aria-pressed={big} onClick={() => setBig(!big)} aria-label={big ? "Tulisan normal" : "Perbesar tulisan"} title={big ? "Tulisan normal" : "Perbesar tulisan"}><span aria-hidden className={x.aidsText}>A<small>A</small></span></button>
+      {canSpeak && <button type="button" aria-pressed={speaking} onClick={toggleSpeech} aria-label={speaking ? "Berhenti membacakan" : "Bacakan undangan"} title={speaking ? "Berhenti membacakan" : "Bacakan undangan"}><Glyph d={speaking ? ICONS.stop : ICONS.speaker} size={18} /></button>}
+    </div>
+  );
+}
+
+/* ── Guest photos ("Foto dari tamu") ───────────────────────────────── */
+
+type GuestPhoto = { id: string; url: string; uploader_name?: string };
+
+/** Downscale big phone photos before upload so they go through quickly on venue Wi-Fi. */
+async function shrinkImage(file: File, max = 2000): Promise<Blob> {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height));
+    if (scale === 1 && file.size < 2_500_000) return file;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas.getContext("2d")?.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    return await new Promise<Blob>((resolve) => canvas.toBlob((blob) => resolve(blob ?? file), "image/jpeg", 0.85));
+  } catch {
+    return file;
+  }
+}
+
+function GuestPhotosBlock({ slug, demo, guestToken, guestName }: { slug: string; demo?: boolean; guestToken?: string; guestName?: string }) {
+  const [photos, setPhotos] = useState<GuestPhoto[]>([]);
+  const [name, setName] = useState(guestName && guestName !== "Tamu Undangan" ? guestName : "");
+  const [sending, setSending] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (demo) return;
+    let cancelled = false;
+    fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/photos`)
+      .then(r => r.json())
+      .then((body: { items?: GuestPhoto[] }) => { if (!cancelled) setPhotos(body.items ?? []); })
+      .catch(() => undefined);
+    return () => { cancelled = true; };
+  }, [slug, demo]);
+
+  async function upload(files: FileList | null) {
+    if (!files?.length) return;
+    setError("");
+    setMessage("");
+    if (demo) { setMessage("Demo: foto tidak benar-benar diunggah."); return; }
+    setSending(true);
+    let sent = 0;
+    let pending = 0;
+    try {
+      for (const file of Array.from(files).slice(0, 5)) {
+        const form = new FormData();
+        form.append("file", await shrinkImage(file), "foto.jpg");
+        form.append("name", name.trim().slice(0, 60));
+        if (guestToken) form.append("guest", guestToken);
+        const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/photos`, { method: "POST", body: form });
+        const body = await response.json() as { id?: string; url?: string; status?: string; error?: string };
+        if (!response.ok) throw new Error(body.error);
+        sent++;
+        if (body.status === "approved" && body.id && body.url) setPhotos(current => [{ id: body.id!, url: body.url!, uploader_name: name.trim() }, ...current]);
+        else pending++;
+      }
+      setMessage(pending ? `${sent} foto terkirim. Tampil setelah disetujui mempelai.` : `${sent} foto terkirim. Terima kasih!`);
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Foto belum terkirim. Coba lagi.");
+      if (sent) setMessage(`${sent} foto terkirim.`);
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <Block id="extra-foto-tamu" title="Foto dari tamu" eyebrow="Bagikan momen">
+      <p className={x.body}>Punya foto seru hari ini? Kirim di sini — langsung tampil di undangan dan layar acara.</p>
+      <div className={x.giftForm}>
+        <label className={x.field}><span>Nama kamu (opsional)</span><input value={name} maxLength={60} onChange={e => setName(e.target.value)} placeholder="Nama kamu" /></label>
+        <label className={x.button} style={{ opacity: sending ? 0.7 : 1 }}>
+          {sending ? "Mengirim…" : "Kirim foto"}
+          <input type="file" accept="image/*" multiple hidden disabled={sending} onChange={e => { void upload(e.target.files); e.target.value = ""; }} />
+        </label>
+        {message && <p className={x.muted} role="status">{message}</p>}
+        {error && <p className={x.error} role="alert">{error}</p>}
+      </div>
+      {photos.length > 0 && (
+        <ul className={x.photoGrid}>
+          {photos.slice(0, 30).map(photo => (
+            <li key={photo.id}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <a href={photo.url} target="_blank" rel="noreferrer"><img src={photo.url} alt={`Foto dari ${photo.uploader_name || "tamu"}`} loading="lazy" /></a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Block>
+  );
+}
+
 /* ── Online envelope (paid through Rawuh / Mayar) ──────────────────── */
 
 const rupiah = (value: number) => `Rp${Math.round(value).toLocaleString("id-ID")}`;
@@ -415,6 +618,28 @@ function readRef(slug: string): string | null {
     const saved = JSON.parse(sessionStorage.getItem(GIFT_REF_KEY) ?? "null") as { slug?: string; ref?: string } | null;
     return saved?.slug === slug && saved.ref ? saved.ref : null;
   } catch { return null; }
+}
+
+/** Create an online envelope and send the guest to Mayar; returns an error message on failure. */
+async function startOnlinePayment(slug: string, payload: { sender_name: string; message?: string; amount: number; wishlist_item_id?: string }): Promise<string | null> {
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set("amplop", "selesai");
+    url.hash = "";
+    const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/gift-transactions`, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...payload, return_url: url.href }),
+    });
+    const body = await response.json() as { reference?: string; payment_url?: string; error?: string };
+    if (!response.ok || !body.payment_url || !body.reference) return body.error || "Pembayaran belum bisa dibuka. Coba lagi sebentar lagi.";
+    const target = new URL(body.payment_url, window.location.origin);
+    const trusted = target.origin === window.location.origin || (target.protocol === "https:" && PAYMENT_HOSTS.some(p => p.test(target.hostname)));
+    if (!trusted) return "Alamat pembayaran tidak valid.";
+    storeRef(slug, body.reference);
+    window.location.assign(target.href);
+    return null;
+  } catch {
+    return "Pembayaran belum bisa dibuka. Coba lagi sebentar lagi.";
+  }
 }
 
 function OnlineGiftBlock({ gift, slug, demo, guestName }: { gift: OnlineGift; slug: string; demo?: boolean; guestName?: string }) {
@@ -462,25 +687,8 @@ function OnlineGiftBlock({ gift, slug, demo, guestName }: { gift: OnlineGift; sl
     setError("");
     if (demo) { setResult({ state: "confirmed", amount }); return; }
     setSending(true);
-    try {
-      const url = new URL(window.location.href);
-      url.searchParams.set("amplop", "selesai");
-      url.hash = "";
-      const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/gift-transactions`, {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sender_name: name.trim().slice(0, 80), message: message.trim().slice(0, 500), amount, return_url: url.href }),
-      });
-      const body = await response.json() as { reference?: string; payment_url?: string; error?: string };
-      if (!response.ok || !body.payment_url || !body.reference) throw new Error(body.error);
-      const target = new URL(body.payment_url, window.location.origin);
-      const trusted = target.origin === window.location.origin || (target.protocol === "https:" && PAYMENT_HOSTS.some(p => p.test(target.hostname)));
-      if (!trusted) throw new Error();
-      storeRef(slug, body.reference);
-      window.location.assign(target.href);
-    } catch {
-      setError("Pembayaran belum bisa dibuka. Coba lagi sebentar lagi.");
-      setSending(false);
-    }
+    const failure = await startOnlinePayment(slug, { sender_name: name.trim().slice(0, 80), message: message.trim().slice(0, 500), amount });
+    if (failure) { setError(failure); setSending(false); }
   }
 
   if (result && result.state !== "checking") {
@@ -583,8 +791,9 @@ export function Extras({ slot, className, without = [] }: {
       case "end":
         return <>
           {travel && <TravelBlock travel={travel} />}
+          {e?.guestPhotos?.enabled && <GuestPhotosBlock slug={slug} demo={demo} guestToken={guestToken} guestName={data.guestName} />}
           {data.onlineGift && <OnlineGiftBlock gift={data.onlineGift} slug={slug} demo={demo} guestName={data.guestName} />}
-          {wishlist && <WishlistBlock wishlist={wishlist} slug={slug} demo={demo} guestName={data.guestName} />}
+          {wishlist && <WishlistBlock wishlist={wishlist} slug={slug} demo={demo} guestName={data.guestName} online={data.onlineGift} funds={data.wishlistFunds} />}
           {faq && <FaqBlock faq={faq} />}
         </>;
     }
@@ -594,18 +803,123 @@ export function Extras({ slot, className, without = [] }: {
 }
 
 /** Banner shown at the top of the page in thank-you mode (rendered by ThemeShell). */
+/** Years since the main event when today is its anniversary (Jakarta time), else 0. */
+function anniversaryYears(date?: string) {
+  const event = toDate(date);
+  if (!event) return 0;
+  const parts = (d: Date) => new Intl.DateTimeFormat("en-CA", { timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit" }).format(d).split("-").map(Number);
+  const [ey, em, ed] = parts(event);
+  const [ty, tm, td] = parts(new Date());
+  return tm === em && td === ed && ty > ey ? ty - ey : 0;
+}
+
+type Recap = { checked_in: number; attending: number; wishes: number; photos: number };
+
 export function ThankYouBanner() {
   const thanks = useThankYou();
   const ctx = useInvitation();
+  const [recap, setRecap] = useState<Recap | null>(null);
+  const [years, setYears] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const active = thanks.active && Boolean(ctx);
+  const slug = ctx?.slug;
+  const demo = ctx?.demo;
+  const date = ctx?.data.date;
+  useEffect(() => {
+    if (!active) return;
+    const timer = setTimeout(() => setYears(anniversaryYears(date)), 0);
+    if (!slug || demo) return () => clearTimeout(timer);
+    let cancelled = false;
+    fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/recap`).then(r => r.json()).then((body: Recap) => { if (!cancelled) setRecap(body); }).catch(() => undefined);
+    return () => { cancelled = true; clearTimeout(timer); };
+  }, [active, slug, demo, date]);
   if (!thanks.active || !ctx) return null;
+  const guests = Math.max(recap?.checked_in ?? 0, recap?.attending ?? 0);
+  const stats = [
+    guests ? `${guests.toLocaleString("id-ID")} tamu hadir` : "",
+    recap?.wishes ? `${recap.wishes.toLocaleString("id-ID")} ucapan & doa` : "",
+    recap?.photos ? `${recap.photos.toLocaleString("id-ID")} foto dari tamu` : "",
+  ].filter(Boolean);
   return (
-    <section className={x.thanks} aria-label="Ucapan terima kasih">
+    <section className={x.thanks} aria-label={years ? "Hari jadi pernikahan" : "Ucapan terima kasih"}>
       <span className={x.thanksIcon} aria-hidden><Glyph d={ICONS.heart} size={18} /></span>
-      <p className={x.eyebrow}>Acara telah berlangsung</p>
-      <h2 className={x.title}>Terima kasih</h2>
-      <p className={x.body}>{thanks.message}</p>
+      <p className={x.eyebrow}>{years ? `Hari jadi ke-${years}` : "Acara telah berlangsung"}</p>
+      <h2 className={x.title}>{years ? `${years} tahun bersama` : "Terima kasih"}</h2>
+      <p className={x.body}>{years ? "Hari ini, tepat di tanggal yang sama, kalian hadir merayakan awal cerita kami. Terima kasih masih menjadi bagian darinya." : thanks.message}</p>
       <p className={x.muted}>— {ctx.data.couple.bride} &amp; {ctx.data.couple.groom}</p>
+      {stats.length > 0 && <ul className={x.recap}>{stats.map(item => <li key={item}>{item}</li>)}</ul>}
+      <button type="button" className={x.button} onClick={() => setPlaying(true)}><Glyph d={ICONS.play} size={14} /> Putar kenangan</button>
+      {playing && createPortal(<MemoriesPlayer onClose={() => setPlaying(false)} />, document.body)}
     </section>
+  );
+}
+
+type Slide = { kind: "photo"; url: string; caption?: string } | { kind: "wish"; text: string; name: string };
+
+/** Fullscreen slideshow of the gallery, guest photos and wishes — a keepsake to replay after the event. */
+function MemoriesPlayer({ onClose }: { onClose: () => void }) {
+  const ctx = useInvitation()!;
+  const [slides, setSlides] = useState<Slide[] | null>(null);
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const base = `${API}/api/public/invitation/${encodeURIComponent(ctx.slug)}`;
+    const get = (path: string) => (ctx.demo ? Promise.resolve({ items: [] }) : fetch(base + path).then(r => r.json()).catch(() => ({ items: [] })));
+    Promise.all([get("/photos"), get("/wishes")]).then(([photos, wishes]: [{ items?: { url: string; uploader_name?: string }[] }, { items?: { name: string; message: string }[] }]) => {
+      if (cancelled) return;
+      const pics: Slide[] = [
+        ...ctx.data.gallery.map(url => ({ kind: "photo" as const, url })),
+        ...(photos.items ?? []).map(p => ({ kind: "photo" as const, url: p.url, caption: p.uploader_name ? `Foto dari ${p.uploader_name}` : undefined })),
+      ];
+      const words: Slide[] = (wishes.items ?? []).filter(w => w.message?.trim()).map(w => ({ kind: "wish" as const, text: w.message, name: w.name }));
+      // Interleave photos and wishes so it plays like a short film.
+      const mixed: Slide[] = [];
+      for (let i = 0; i < Math.max(pics.length, words.length); i++) {
+        if (pics[i]) mixed.push(pics[i]);
+        if (words[i]) mixed.push(words[i]);
+      }
+      setSlides(mixed.length ? mixed : [{ kind: "wish", text: "Terima kasih atas doa dan kehadiranmu.", name: `${ctx.data.couple.bride} & ${ctx.data.couple.groom}` }]);
+    });
+    return () => { cancelled = true; };
+  }, [ctx]);
+  useEffect(() => {
+    if (!slides || paused) return;
+    const timer = setTimeout(() => setIndex(i => (i + 1) % slides.length), slides[index]?.kind === "wish" ? 6500 : 4500);
+    return () => clearTimeout(timer);
+  }, [slides, index, paused]);
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+      if (event.key === "ArrowRight" && slides) setIndex(i => (i + 1) % slides.length);
+      if (event.key === "ArrowLeft" && slides) setIndex(i => (i - 1 + slides.length) % slides.length);
+      if (event.key === " ") { event.preventDefault(); setPaused(p => !p); }
+    };
+    window.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { window.removeEventListener("keydown", onKey); document.body.style.overflow = previous; };
+  }, [onClose, slides]);
+  const slide = slides?.[index];
+  return (
+    <div className={x.player} role="dialog" aria-modal="true" aria-label="Putar kenangan" onClick={() => setPaused(p => !p)}>
+      {slide?.kind === "photo" && (
+        <figure key={index} className={x.playerPhoto}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={slide.url} alt="" />
+          {slide.caption && <figcaption>{slide.caption}</figcaption>}
+        </figure>
+      )}
+      {slide?.kind === "wish" && (
+        <blockquote key={index} className={x.playerWish}><p>{slide.text}</p><cite>— {slide.name}</cite></blockquote>
+      )}
+      {!slides && <p className={x.muted}>Menyiapkan kenangan…</p>}
+      <div className={x.playerBar} onClick={event => event.stopPropagation()}>
+        <span>{ctx.data.couple.bride} &amp; {ctx.data.couple.groom}{slides ? ` · ${index + 1}/${slides.length}` : ""}{paused ? " · dijeda" : ""}</span>
+        <button type="button" className={x.chip} onClick={onClose}>Tutup</button>
+      </div>
+      {slides && <div className={x.playerProgress} aria-hidden><i style={{ width: `${((index + 1) / slides.length) * 100}%` }} /></div>}
+    </div>
   );
 }
 

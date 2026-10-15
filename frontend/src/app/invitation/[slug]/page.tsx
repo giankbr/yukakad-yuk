@@ -14,6 +14,7 @@ type PublicInvitation = {
   events?: Array<{ title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string }>;
   sections?: string[];
   online_gift?: { active?: boolean; note?: string; min_amount?: number; max_amount?: number };
+  wishlist_funds?: Record<string, number>;
 };
 
 type PublicContent = {
@@ -99,6 +100,7 @@ export default async function PublicInvitationPage({
     onlineGift: result.online_gift?.active
       ? { note: result.online_gift.note, minAmount: result.online_gift.min_amount ?? 10000, maxAmount: result.online_gift.max_amount ?? 100000000 }
       : undefined,
+    wishlistFunds: result.wishlist_funds ?? {},
   };
 
   // Every invitation renders with a Rawuh theme; missing/retired templates fall back to Linen Putih.

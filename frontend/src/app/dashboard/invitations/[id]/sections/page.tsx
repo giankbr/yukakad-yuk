@@ -13,7 +13,7 @@ import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "./sections.module.css";
 
-type Key = Exclude<keyof InvitationExtras, "thankYou" | "onlineGift">;
+type Key = Exclude<keyof InvitationExtras, "thankYou" | "onlineGift" | "guestPhotos" | "easyRead">;
 
 const QUOTES = [
   { label: "QS. Ar-Rum: 21", text: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang." },
@@ -119,8 +119,14 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
       const base: InvitationExtras = extras.wishlist
         ? { ...extras, wishlist: { ...extras.wishlist, items: extras.wishlist.items.map(item => item.claimed_by === "" ? item : { ...item, claimed_by: item.claimed_by ?? claims.get(item.id) }) } }
         : extras;
-      // The online-envelope switch lives on the Amplop page; keep whatever was saved there.
-      const merged: InvitationExtras = { ...base, onlineGift: latest?.sections_config?.onlineGift ?? extras.onlineGift };
+      // These switches live on their own pages (Amplop, Foto dari tamu, Tema); keep whatever was saved there.
+      const latestConfig = (latest?.sections_config ?? {}) as InvitationExtras;
+      const merged: InvitationExtras = {
+        ...base,
+        onlineGift: latestConfig.onlineGift ?? extras.onlineGift,
+        guestPhotos: latestConfig.guestPhotos ?? extras.guestPhotos,
+        easyRead: latestConfig.easyRead ?? extras.easyRead,
+      };
       const response = await apiFetch(`/api/invitations/${invitationId}/settings`, token, { method: "PATCH", body: JSON.stringify({ sections_config: merged }) });
       if (!response.ok) throw new Error();
       setExtras(merged);
@@ -275,12 +281,20 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
         const wishlist = extras.wishlist ?? DEFAULTS.wishlist;
         return <>
           <Field label="Catatan" value={wishlist.note ?? ""} onChange={note => patch("wishlist", { note })} placeholder="Tandai kado yang akan kamu berikan supaya tidak dobel." />
+          <p className={styles.hint}>Kado “patungan” bisa dibayar bareng-bareng lewat amplop online. Aktifkan dulu amplop online di menu Amplop digital.</p>
           <Repeater
             items={wishlist.items} onChange={items => patch("wishlist", { items })} empty={{ id: newId(), name: "" } as WishlistItem} addLabel="Tambah kado"
             render={(item, change) => <>
               <Field label="Nama kado" value={item.name} onChange={name => change({ ...item, name })} placeholder="Rice cooker digital" />
               <Field label="Harga" value={item.price ?? ""} onChange={price => change({ ...item, price })} placeholder="± Rp850.000" className={styles.narrow} />
               <Field label="Link toko" type="url" value={item.url ?? ""} onChange={url => change({ ...item, url })} placeholder="https://…" />
+              <label className={styles.field}><span>Patungan</span>
+                <select value={item.fund ? "fund" : "claim"} onChange={event => change({ ...item, fund: event.target.value === "fund", target: event.target.value === "fund" ? item.target || Number((item.price ?? "").replace(/\D/g, "")) || undefined : item.target })}>
+                  <option value="claim">Satu tamu membelikan</option>
+                  <option value="fund">Patungan lewat amplop online</option>
+                </select>
+              </label>
+              {item.fund && <Field label="Target (Rp)" inputMode="numeric" value={item.target ? String(item.target) : ""} onChange={value => change({ ...item, target: Number(value.replace(/\D/g, "")) || undefined })} placeholder="4000000" className={styles.narrow} />}
               {item.claimed_by && (
                 <p className={styles.claimed}>Dipilih oleh <b>{item.claimed_by}</b> · <button type="button" className={styles.link} onClick={() => change({ ...item, claimed_by: "" })}>Buka lagi</button></p>
               )}

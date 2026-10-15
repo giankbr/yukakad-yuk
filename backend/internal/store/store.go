@@ -1,6 +1,7 @@
 package store
 
 import (
+	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
@@ -46,6 +47,15 @@ type Store interface {
 	ListGiftTransactions(invitationID string) []*GiftTransaction
 	FindGiftTransactionByReference(reference string) (*GiftTransaction, bool)
 	UpdateGiftTransactionStatus(id, status, reference string) (*GiftTransaction, error)
+	CreateLedgerEntry(LedgerEntry) (*LedgerEntry, error)
+	ListLedger(invitationID string) []*LedgerEntry
+	UpdateLedgerEntry(LedgerEntry) (*LedgerEntry, error)
+	DeleteLedgerEntry(invitationID, id string) error
+	CreateGuestPhoto(GuestPhoto) (*GuestPhoto, error)
+	ListGuestPhotos(invitationID, status string) []*GuestPhoto
+	UpdateGuestPhotoStatus(invitationID, id, status string) (*GuestPhoto, error)
+	GetPrivateData(invitationID, key string) map[string]any
+	SetPrivateData(invitationID, key string, data map[string]any) error
 	CreateGiftPayout(GiftPayout) (*GiftPayout, error)
 	ListGiftPayouts(invitationID string) []*GiftPayout
 	ListAllGiftPayouts(status string) []*GiftPayout
@@ -230,7 +240,33 @@ type GiftTransaction struct {
 	SenderName       string    `json:"sender_name,omitempty"`
 	Message          string    `json:"message,omitempty"`
 	PaymentURL       string    `json:"payment_url,omitempty"`
+	Purpose          string    `json:"purpose,omitempty"` // e.g. "wishlist:<item id>" for a crowdfunded gift
 	CreatedAt        time.Time `json:"created_at"`
+}
+
+// LedgerEntry is one line of the "buku buwuh": who gave what, so the family can reciprocate later.
+type LedgerEntry struct {
+	ID           string    `json:"id"`
+	InvitationID string    `json:"invitation_id"`
+	GuestID      string    `json:"guest_id,omitempty"`
+	Name         string    `json:"name"`
+	Kind         string    `json:"kind"` // cash, transfer, kado, online
+	Amount       float64   `json:"amount"`
+	Item         string    `json:"item,omitempty"`
+	Note         string    `json:"note,omitempty"`
+	RecordedBy   string    `json:"recorded_by,omitempty"`
+	CreatedAt    time.Time `json:"created_at"`
+}
+
+// GuestPhoto is a photo uploaded by a guest from the invitation (scan QR on the table).
+type GuestPhoto struct {
+	ID           string    `json:"id"`
+	InvitationID string    `json:"invitation_id"`
+	GuestID      string    `json:"guest_id,omitempty"`
+	UploaderName string    `json:"uploader_name,omitempty"`
+	URL          string    `json:"url"`
+	Status       string    `json:"status"` // approved, pending, hidden
+	CreatedAt    time.Time `json:"created_at"`
 }
 
 // GiftPayout is a couple's request to withdraw online envelopes held by Rawuh.
@@ -364,6 +400,10 @@ type MemoryStore struct {
 	passwordResets   map[string]passwordReset
 	giftTransactions map[string]*GiftTransaction
 	giftPayouts      map[string]*GiftPayout
+	ledger           map[string]*LedgerEntry
+	guestPhotos      map[string]*GuestPhoto
+	private          map[string]map[string]any
+	seq              int
 	subscriptions    map[string]*Subscription
 	customDomains    map[string]*CustomDomain
 	entitlements     map[string]Entitlement
@@ -399,6 +439,9 @@ func NewMemoryStore() *MemoryStore {
 		passwordResets:   make(map[string]passwordReset),
 		giftTransactions: make(map[string]*GiftTransaction),
 		giftPayouts:      make(map[string]*GiftPayout),
+		ledger:           make(map[string]*LedgerEntry),
+		guestPhotos:      make(map[string]*GuestPhoto),
+		private:          make(map[string]map[string]any),
 		subscriptions:    make(map[string]*Subscription),
 		customDomains:    make(map[string]*CustomDomain),
 		entitlements:     make(map[string]Entitlement),
@@ -899,6 +942,122 @@ func (s *MemoryStore) ListGiftTransactions(invitationID string) []*GiftTransacti
 	}
 	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.After(items[j].CreatedAt) })
 	return items
+}
+
+func (s *MemoryStore) nextID(prefix string) string {
+	s.seq++
+	return fmt.Sprintf("%s-%d", prefix, s.seq)
+}
+
+func (s *MemoryStore) CreateLedgerEntry(e LedgerEntry) (*LedgerEntry, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.invitations[e.InvitationID]; !ok {
+		return nil, fmt.Errorf("invitation not found")
+	}
+	e.ID = s.nextID("ledger")
+	e.CreatedAt = time.Now().UTC()
+	s.ledger[e.ID] = &e
+	out := e
+	return &out, nil
+}
+
+func (s *MemoryStore) ListLedger(invitationID string) []*LedgerEntry {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	items := make([]*LedgerEntry, 0)
+	for _, e := range s.ledger {
+		if e.InvitationID == invitationID {
+			out := *e
+			items = append(items, &out)
+		}
+	}
+	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.After(items[j].CreatedAt) })
+	return items
+}
+
+func (s *MemoryStore) UpdateLedgerEntry(e LedgerEntry) (*LedgerEntry, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	current, ok := s.ledger[e.ID]
+	if !ok || current.InvitationID != e.InvitationID {
+		return nil, fmt.Errorf("ledger entry not found")
+	}
+	current.Name, current.Kind, current.Amount, current.Item, current.Note = e.Name, e.Kind, e.Amount, e.Item, e.Note
+	out := *current
+	return &out, nil
+}
+
+func (s *MemoryStore) DeleteLedgerEntry(invitationID, id string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	current, ok := s.ledger[id]
+	if !ok || current.InvitationID != invitationID {
+		return fmt.Errorf("ledger entry not found")
+	}
+	delete(s.ledger, id)
+	return nil
+}
+
+func (s *MemoryStore) CreateGuestPhoto(p GuestPhoto) (*GuestPhoto, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.invitations[p.InvitationID]; !ok {
+		return nil, fmt.Errorf("invitation not found")
+	}
+	p.ID = s.nextID("photo")
+	p.CreatedAt = time.Now().UTC()
+	s.guestPhotos[p.ID] = &p
+	out := p
+	return &out, nil
+}
+
+func (s *MemoryStore) ListGuestPhotos(invitationID, status string) []*GuestPhoto {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	items := make([]*GuestPhoto, 0)
+	for _, p := range s.guestPhotos {
+		if p.InvitationID == invitationID && (status == "" || p.Status == status) {
+			out := *p
+			items = append(items, &out)
+		}
+	}
+	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.After(items[j].CreatedAt) })
+	return items
+}
+
+func (s *MemoryStore) UpdateGuestPhotoStatus(invitationID, id, status string) (*GuestPhoto, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	p, ok := s.guestPhotos[id]
+	if !ok || p.InvitationID != invitationID {
+		return nil, fmt.Errorf("photo not found")
+	}
+	p.Status = status
+	out := *p
+	return &out, nil
+}
+
+func (s *MemoryStore) GetPrivateData(invitationID, key string) map[string]any {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	raw, _ := json.Marshal(s.private[invitationID+"/"+key])
+	out := map[string]any{}
+	_ = json.Unmarshal(raw, &out)
+	return out
+}
+
+func (s *MemoryStore) SetPrivateData(invitationID, key string, data map[string]any) error {
+	raw, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	stored := map[string]any{}
+	_ = json.Unmarshal(raw, &stored)
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.private[invitationID+"/"+key] = stored
+	return nil
 }
 
 func (s *MemoryStore) CreateGiftPayout(p GiftPayout) (*GiftPayout, error) {

@@ -6,6 +6,7 @@ import { MusicNotes as PhMusicNotes } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { TemplatePicker } from "@/components/dashboard/TemplatePicker";
 import { apiFetch } from "@/lib/api";
+import { getSectionsConfig, patchSectionsConfig } from "@/lib/sections-config";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "./settings.module.css";
 
@@ -38,6 +39,7 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
   const [busy, setBusy] = useState<"" | "upload" | "save">("");
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [easyRead, setEasyRead] = useState(true);
   const fileInput = useRef<HTMLInputElement>(null);
 
   const invitationId = routeParams?.id;
@@ -54,6 +56,7 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
       })
       .catch(() => setError("Pengaturan gagal dimuat. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
+    getSectionsConfig(invitationId, token).then((config) => setEasyRead(config.easyRead?.enabled !== false)).catch(() => undefined);
   }, [ready, token, invitationId]);
 
   async function saveSettings(patch: Partial<Settings>, message: string) {
@@ -170,6 +173,29 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
               <span>
                 <strong>Putar otomatis saat undangan dibuka</strong>
                 <small>Musik mulai setelah tamu menekan tombol buka undangan.</small>
+              </span>
+            </label>
+          </section>
+
+          <section className={styles.panel} aria-labelledby="easy-heading">
+            <label className={styles.toggle}>
+              <input
+                type="checkbox"
+                role="switch"
+                checked={easyRead}
+                onChange={async (e) => {
+                  const enabled = e.target.checked;
+                  setEasyRead(enabled);
+                  try {
+                    await patchSectionsConfig(invitationId, token!, "easyRead", { enabled });
+                    setNotice(enabled ? "Tombol perbesar tulisan & dengarkan tampil di undangan." : "Tombol bantuan membaca disembunyikan.");
+                  } catch { setEasyRead(!enabled); setError("Belum tersimpan."); }
+                }}
+              />
+              <span className={styles.switch} aria-hidden="true" />
+              <span>
+                <strong id="easy-heading">Mode mudah dibaca untuk orang tua</strong>
+                <small>Tombol “Besar” memperbesar tulisan, “Dengarkan” membacakan nama, tanggal, dan lokasi acara.</small>
               </span>
             </label>
           </section>

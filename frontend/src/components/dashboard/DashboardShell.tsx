@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, Notebook as PhNotebook, Monitor as PhMonitor, Confetti as PhConfetti, Camera as PhCamera, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -69,85 +69,40 @@ const businessNav: NavItem[] = [
 	{ key: "payouts", label: "Pencairan amplop", href: "/admin/payouts", icon: <PhHandCoins size={16} /> },
 ];
 
-function invitationNav(id: string): NavItem[] {
+function invitationNav(id: string): { label: string; items: NavItem[] }[] {
+	const base = `/dashboard/invitations/${id}`;
 	return [
 		{
-			key: "summary",
-			label: "Ringkasan",
-			href: `/dashboard/invitations/${id}`,
-			icon: <PhSquaresFour size={16} />,
+			label: "Undangan ini",
+			items: [
+				{ key: "summary", label: "Ringkasan", href: base, icon: <PhSquaresFour size={16} /> },
+				{ key: "couple", label: "Mempelai", href: `${base}/couple`, icon: <PhHeart size={16} /> },
+				{ key: "events", label: "Acara", href: `${base}/events`, icon: <PhCalendarBlank size={16} /> },
+				{ key: "stories", label: "Kisah cinta", href: `${base}/stories`, icon: <PhBookOpenText size={16} /> },
+				{ key: "gallery", label: "Galeri", href: `${base}/gallery`, icon: <PhImages size={16} /> },
+				{ key: "settings", label: "Tema & Musik", href: `${base}/settings`, icon: <PhMusicNotes size={16} /> },
+				{ key: "sections", label: "Section Tambahan", href: `${base}/sections`, icon: <PhStack size={16} /> },
+				{ key: "preview", label: "Pratinjau", href: `${base}/preview`, icon: <PhEye size={16} /> },
+			],
 		},
 		{
-			key: "couple",
-			label: "Mempelai",
-			href: `/dashboard/invitations/${id}/couple`,
-			icon: <PhHeart size={16} />,
+			label: "Tamu & amplop",
+			items: [
+				{ key: "guests", label: "Tamu", href: `${base}/guests`, icon: <PhUsers size={16} /> },
+				{ key: "rsvp", label: "RSVP", href: `${base}/rsvp`, icon: <PhCheckSquare size={16} /> },
+				{ key: "wishes", label: "Ucapan", href: `${base}/wishes`, icon: <PhChatCircleText size={16} /> },
+				{ key: "gift", label: "Amplop digital", href: `${base}/gift`, icon: <PhGift size={16} /> },
+				{ key: "ledger", label: "Buku buwuh", href: `${base}/buwuh`, icon: <PhNotebook size={16} /> },
+			],
 		},
 		{
-			key: "events",
-			label: "Acara",
-			href: `/dashboard/invitations/${id}/events`,
-			icon: <PhCalendarBlank size={16} />,
-		},
-		{
-			key: "stories",
-			label: "Kisah cinta",
-			href: `/dashboard/invitations/${id}/stories`,
-			icon: <PhBookOpenText size={16} />,
-		},
-		{
-			key: "gallery",
-			label: "Galeri",
-			href: `/dashboard/invitations/${id}/gallery`,
-			icon: <PhImages size={16} />,
-		},
-		{
-			key: "guests",
-			label: "Tamu",
-			href: `/dashboard/invitations/${id}/guests`,
-			icon: <PhUsers size={16} />,
-		},
-		{
-			key: "rsvp",
-			label: "RSVP",
-			href: `/dashboard/invitations/${id}/rsvp`,
-			icon: <PhCheckSquare size={16} />,
-		},
-		{
-			key: "wishes",
-			label: "Ucapan",
-			href: `/dashboard/invitations/${id}/wishes`,
-			icon: <PhChatCircleText size={16} />,
-		},
-		{
-			key: "gift",
-			label: "Hadiah",
-			href: `/dashboard/invitations/${id}/gift`,
-			icon: <PhGift size={16} />,
-		},
-		{
-			key: "checkin",
-			label: "Check-in",
-			href: `/dashboard/invitations/${id}/checkin`,
-			icon: <PhQrCode size={16} />,
-		},
-		{
-			key: "settings",
-			label: "Tema & Musik",
-			href: `/dashboard/invitations/${id}/settings`,
-			icon: <PhMusicNotes size={16} />,
-		},
-		{
-			key: "sections",
-			label: "Section Tambahan",
-			href: `/dashboard/invitations/${id}/sections`,
-			icon: <PhStack size={16} />,
-		},
-		{
-			key: "preview",
-			label: "Pratinjau",
-			href: `/dashboard/invitations/${id}/preview`,
-			icon: <PhEye size={16} />,
+			label: "Hari-H",
+			items: [
+				{ key: "checkin", label: "Check-in", href: `${base}/checkin`, icon: <PhQrCode size={16} /> },
+				{ key: "screen", label: "Layar sapa", href: `${base}/layar`, icon: <PhMonitor size={16} /> },
+				{ key: "doorprize", label: "Undian doorprize", href: `${base}/doorprize`, icon: <PhConfetti size={16} /> },
+				{ key: "photos", label: "Foto dari tamu", href: `${base}/foto-tamu`, icon: <PhCamera size={16} /> },
+			],
 		},
 	];
 }
@@ -228,7 +183,7 @@ export function DashboardShell({
 		variant === "admin"
 			? [{ label: "Konten landing", items: adminNav }, { label: "Halaman", items: pagesNav }, { label: "Bisnis", items: businessNav }]
 			: invitationId
-				? [{ label: "Undangan ini", items: invitationNav(invitationId) }]
+				? invitationNav(invitationId)
 				: [
 						{ label: "Menu Utama", items: mainNav },
 						{ label: "Kelola", items: manageNav },

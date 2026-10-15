@@ -463,8 +463,8 @@ func (s *PostgresStore) SetGiftActive(id string, active bool) (*Gift, error) {
 }
 
 func (s *PostgresStore) CreateGiftTransaction(tx GiftTransaction) (*GiftTransaction, error) {
-	created := &GiftTransaction{InvitationID: tx.InvitationID, GuestID: tx.GuestID, Gateway: tx.Gateway, GatewayReference: tx.GatewayReference, Amount: tx.Amount, Status: tx.Status, SenderName: tx.SenderName, Message: tx.Message}
-	err := s.db.QueryRow(`INSERT INTO gift_transactions (invitation_id, guest_id, gateway, gateway_reference_id, amount, status, sender_name, message) VALUES ($1, NULLIF($2,''), $3, NULLIF($4,''), $5, $6, $7, $8) RETURNING id, created_at`, tx.InvitationID, tx.GuestID, tx.Gateway, tx.GatewayReference, tx.Amount, tx.Status, tx.SenderName, tx.Message).Scan(&created.ID, &created.CreatedAt)
+	created := &GiftTransaction{InvitationID: tx.InvitationID, GuestID: tx.GuestID, Gateway: tx.Gateway, GatewayReference: tx.GatewayReference, Amount: tx.Amount, Status: tx.Status, SenderName: tx.SenderName, Message: tx.Message, Purpose: tx.Purpose}
+	err := s.db.QueryRow(`INSERT INTO gift_transactions (invitation_id, guest_id, gateway, gateway_reference_id, amount, status, sender_name, message, purpose) VALUES ($1, NULLIF($2,''), $3, NULLIF($4,''), $5, $6, $7, $8, NULLIF($9,'')) RETURNING id, created_at`, tx.InvitationID, tx.GuestID, tx.Gateway, tx.GatewayReference, tx.Amount, tx.Status, tx.SenderName, tx.Message, tx.Purpose).Scan(&created.ID, &created.CreatedAt)
 	if err != nil {
 		return nil, err
 	}
@@ -472,7 +472,7 @@ func (s *PostgresStore) CreateGiftTransaction(tx GiftTransaction) (*GiftTransact
 }
 
 func (s *PostgresStore) ListGiftTransactions(invitationID string) []*GiftTransaction {
-	rows, err := s.db.Query(`SELECT id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at FROM gift_transactions WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
+	rows, err := s.db.Query(`SELECT id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at, COALESCE(purpose,'') FROM gift_transactions WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
 	if err != nil {
 		return []*GiftTransaction{}
 	}
@@ -480,7 +480,7 @@ func (s *PostgresStore) ListGiftTransactions(invitationID string) []*GiftTransac
 	items := make([]*GiftTransaction, 0)
 	for rows.Next() {
 		tx := &GiftTransaction{}
-		if rows.Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt) == nil {
+		if rows.Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt, &tx.Purpose) == nil {
 			items = append(items, tx)
 		}
 	}
@@ -489,17 +489,116 @@ func (s *PostgresStore) ListGiftTransactions(invitationID string) []*GiftTransac
 
 func (s *PostgresStore) FindGiftTransactionByReference(reference string) (*GiftTransaction, bool) {
 	tx := &GiftTransaction{}
-	err := s.db.QueryRow(`SELECT id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at FROM gift_transactions WHERE gateway_reference_id = $1`, reference).Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt)
+	err := s.db.QueryRow(`SELECT id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at, COALESCE(purpose,'') FROM gift_transactions WHERE gateway_reference_id = $1`, reference).Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt, &tx.Purpose)
 	return tx, err == nil
 }
 
 func (s *PostgresStore) UpdateGiftTransactionStatus(id, status, reference string) (*GiftTransaction, error) {
 	tx := &GiftTransaction{}
-	err := s.db.QueryRow(`UPDATE gift_transactions SET status=$1, gateway_reference_id=NULLIF($2,'') WHERE id=$3 RETURNING id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at`, status, reference, id).Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt)
+	err := s.db.QueryRow(`UPDATE gift_transactions SET status=$1, gateway_reference_id=NULLIF($2,'') WHERE id=$3 RETURNING id, invitation_id, COALESCE(guest_id,''), gateway, COALESCE(gateway_reference_id,''), amount, status, COALESCE(sender_name,''), COALESCE(message,''), created_at, COALESCE(purpose,'')`, status, reference, id).Scan(&tx.ID, &tx.InvitationID, &tx.GuestID, &tx.Gateway, &tx.GatewayReference, &tx.Amount, &tx.Status, &tx.SenderName, &tx.Message, &tx.CreatedAt, &tx.Purpose)
 	if err != nil {
 		return nil, err
 	}
 	return tx, nil
+}
+
+const ledgerColumns = `id, invitation_id, COALESCE(guest_id,''), name, kind, amount, COALESCE(item,''), COALESCE(note,''), COALESCE(recorded_by,''), created_at`
+
+func scanLedger(row interface{ Scan(...any) error }) (*LedgerEntry, error) {
+	e := &LedgerEntry{}
+	if err := row.Scan(&e.ID, &e.InvitationID, &e.GuestID, &e.Name, &e.Kind, &e.Amount, &e.Item, &e.Note, &e.RecordedBy, &e.CreatedAt); err != nil {
+		return nil, err
+	}
+	return e, nil
+}
+
+func (s *PostgresStore) CreateLedgerEntry(e LedgerEntry) (*LedgerEntry, error) {
+	return scanLedger(s.db.QueryRow(`INSERT INTO gift_ledger (invitation_id, guest_id, name, kind, amount, item, note, recorded_by) VALUES ($1, NULLIF($2,''), $3, $4, $5, NULLIF($6,''), NULLIF($7,''), NULLIF($8,'')) RETURNING `+ledgerColumns,
+		e.InvitationID, e.GuestID, e.Name, e.Kind, e.Amount, e.Item, e.Note, e.RecordedBy))
+}
+
+func (s *PostgresStore) ListLedger(invitationID string) []*LedgerEntry {
+	rows, err := s.db.Query(`SELECT `+ledgerColumns+` FROM gift_ledger WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
+	if err != nil {
+		return []*LedgerEntry{}
+	}
+	defer rows.Close()
+	items := make([]*LedgerEntry, 0)
+	for rows.Next() {
+		if e, err := scanLedger(rows); err == nil {
+			items = append(items, e)
+		}
+	}
+	return items
+}
+
+func (s *PostgresStore) UpdateLedgerEntry(e LedgerEntry) (*LedgerEntry, error) {
+	return scanLedger(s.db.QueryRow(`UPDATE gift_ledger SET name=$1, kind=$2, amount=$3, item=NULLIF($4,''), note=NULLIF($5,'') WHERE id=$6 AND invitation_id=$7 RETURNING `+ledgerColumns,
+		e.Name, e.Kind, e.Amount, e.Item, e.Note, e.ID, e.InvitationID))
+}
+
+func (s *PostgresStore) DeleteLedgerEntry(invitationID, id string) error {
+	res, err := s.db.Exec(`DELETE FROM gift_ledger WHERE id=$1 AND invitation_id=$2`, id, invitationID)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return fmt.Errorf("ledger entry not found")
+	}
+	return nil
+}
+
+const guestPhotoColumns = `id, invitation_id, COALESCE(guest_id,''), COALESCE(uploader_name,''), url, status, created_at`
+
+func scanGuestPhoto(row interface{ Scan(...any) error }) (*GuestPhoto, error) {
+	p := &GuestPhoto{}
+	if err := row.Scan(&p.ID, &p.InvitationID, &p.GuestID, &p.UploaderName, &p.URL, &p.Status, &p.CreatedAt); err != nil {
+		return nil, err
+	}
+	return p, nil
+}
+
+func (s *PostgresStore) CreateGuestPhoto(p GuestPhoto) (*GuestPhoto, error) {
+	return scanGuestPhoto(s.db.QueryRow(`INSERT INTO guest_photos (invitation_id, guest_id, uploader_name, url, status) VALUES ($1, NULLIF($2,''), NULLIF($3,''), $4, $5) RETURNING `+guestPhotoColumns,
+		p.InvitationID, p.GuestID, p.UploaderName, p.URL, p.Status))
+}
+
+func (s *PostgresStore) ListGuestPhotos(invitationID, status string) []*GuestPhoto {
+	rows, err := s.db.Query(`SELECT `+guestPhotoColumns+` FROM guest_photos WHERE invitation_id = $1 AND ($2 = '' OR status = $2) ORDER BY created_at DESC LIMIT 1000`, invitationID, status)
+	if err != nil {
+		return []*GuestPhoto{}
+	}
+	defer rows.Close()
+	items := make([]*GuestPhoto, 0)
+	for rows.Next() {
+		if p, err := scanGuestPhoto(rows); err == nil {
+			items = append(items, p)
+		}
+	}
+	return items
+}
+
+func (s *PostgresStore) UpdateGuestPhotoStatus(invitationID, id, status string) (*GuestPhoto, error) {
+	return scanGuestPhoto(s.db.QueryRow(`UPDATE guest_photos SET status=$1 WHERE id=$2 AND invitation_id=$3 RETURNING `+guestPhotoColumns, status, id, invitationID))
+}
+
+func (s *PostgresStore) GetPrivateData(invitationID, key string) map[string]any {
+	var raw []byte
+	out := map[string]any{}
+	if err := s.db.QueryRow(`SELECT data FROM invitation_private WHERE invitation_id=$1 AND key=$2`, invitationID, key).Scan(&raw); err == nil {
+		_ = json.Unmarshal(raw, &out)
+	}
+	return out
+}
+
+func (s *PostgresStore) SetPrivateData(invitationID, key string, data map[string]any) error {
+	raw, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	_, err = s.db.Exec(`INSERT INTO invitation_private (invitation_id, key, data, updated_at) VALUES ($1,$2,$3,NOW())
+		ON CONFLICT (invitation_id, key) DO UPDATE SET data=EXCLUDED.data, updated_at=NOW()`, invitationID, key, raw)
+	return err
 }
 
 const giftPayoutColumns = `id, invitation_id, user_id, amount, bank_name, account_number, account_name, status, COALESCE(note,''), created_at, processed_at`

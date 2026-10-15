@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 	"yukakad/internal/auth"
 	billingservice "yukakad/internal/billing"
@@ -46,6 +47,8 @@ type Server struct {
 	domains     *domainservice.Service
 	templates   *templateservice.Service
 	resetMailer mailer.Sender
+	photoStore  objectUploader // guest photo uploads; nil until object storage is configured
+	doorprizeMu sync.Mutex
 }
 
 func NewServer(cfg config.Config) *Server {
@@ -103,6 +106,9 @@ func (s *Server) SetLimiter(l ratelimit.Limiter) { s.limiter = l }
 func (s *Server) SetStorage(c *storage.Client) {
 	s.storage = c
 	s.media = mediaservice.NewService(s.store, c)
+	if c != nil {
+		s.photoStore = c
+	}
 }
 
 func (s *Server) SetSessions(manager session.Manager) { s.sessions = manager }
@@ -465,6 +471,27 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 		s.handleInvitationManagement(w, r, invitationID, "rsvp-summary")
 		return
 	}
+	parts := strings.Split(path, "/")
+	if len(parts) >= 2 {
+		sub := ""
+		if len(parts) >= 3 {
+			sub = parts[2]
+		}
+		switch parts[1] {
+		case "ledger":
+			s.handleLedger(w, r, parts[0], sub)
+			return
+		case "live":
+			s.handleLiveFeed(w, r, parts[0])
+			return
+		case "doorprize":
+			s.handleDoorprize(w, r, parts[0], sub)
+			return
+		case "guest-photos":
+			s.handleGuestPhotosAdmin(w, r, parts[0], sub)
+			return
+		}
+	}
 	switch {
 	case strings.HasSuffix(path, "/gift-wallet"):
 		s.handleGiftWallet(w, r, strings.Split(path, "/")[0], "wallet")
@@ -792,6 +819,14 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		s.handlePublicGiftTransaction(w, r, strings.TrimSuffix(parts, "/gift-transactions"))
 		return
 	}
+	if strings.HasSuffix(parts, "/photos") {
+		s.handlePublicGuestPhotos(w, r, strings.TrimSuffix(parts, "/photos"))
+		return
+	}
+	if strings.HasSuffix(parts, "/recap") {
+		s.handlePublicRecap(w, r, strings.TrimSuffix(parts, "/recap"))
+		return
+	}
 	for _, resource := range []string{"gallery", "stories", "settings"} {
 		if strings.HasSuffix(parts, "/"+resource) {
 			s.handlePublicContent(w, r, strings.TrimSuffix(parts, "/"+resource), resource)
@@ -819,17 +854,18 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		watermark = plan.HasWatermark
 	}
 	writeJSON(w, http.StatusOK, map[string]any{
-		"id":          invitation.ID,
-		"slug":        invitation.Slug,
-		"title":       invitation.Title,
-		"watermark":   watermark,
-		"template_id": invitation.TemplateID,
-		"status":      map[string]bool{"published": invitation.Published},
-		"couple":      invitation.Couple,
-		"event":       invitation.Event,
-		"events":      s.store.ListInvitationEvents(invitation.ID),
-		"online_gift": publicOnlineGift(s.onlineGift(invitation), s.giftSettings()),
-		"sections":    []string{"cover", "couple", "story", "event", "countdown", "location", "gallery", "rsvp", "wishes", "gift", "closing"},
+		"id":             invitation.ID,
+		"slug":           invitation.Slug,
+		"title":          invitation.Title,
+		"watermark":      watermark,
+		"template_id":    invitation.TemplateID,
+		"status":         map[string]bool{"published": invitation.Published},
+		"couple":         invitation.Couple,
+		"event":          invitation.Event,
+		"events":         s.store.ListInvitationEvents(invitation.ID),
+		"online_gift":    publicOnlineGift(s.onlineGift(invitation), s.giftSettings()),
+		"wishlist_funds": s.wishlistFunds(invitation.ID),
+		"sections":       []string{"cover", "couple", "story", "event", "countdown", "location", "gallery", "rsvp", "wishes", "gift", "closing"},
 	})
 }
 
