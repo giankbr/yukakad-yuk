@@ -124,6 +124,8 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/auth/logout", s.handleLogout)
 	mux.HandleFunc("/api/auth/forgot-password", s.handleForgotPassword)
 	mux.HandleFunc("/api/auth/reset-password", s.handleResetPassword)
+	mux.HandleFunc("/api/auth/change-password", s.handleChangePassword)
+	mux.HandleFunc("/api/admin/payments", s.handleAdminPayments)
 	mux.HandleFunc("/api/profile", s.handleProfile)
 	mux.HandleFunc("/api/invitations", s.handleInvitations)
 	mux.HandleFunc("/api/templates", s.handleTemplates)
@@ -299,6 +301,8 @@ func (s *Server) handleAdminV1(w http.ResponseWriter, r *http.Request) {
 		}
 	case r.URL.Path == "/api/admin/stats":
 		s.handleAdminStats(w, r)
+	case r.URL.Path == "/api/admin/payments":
+		s.handleAdminPayments(w, r)
 	case r.URL.Path == "/api/admin/uploads":
 		s.handleAdminUploads(w, r)
 	case r.URL.Path == "/api/admin/gift-payouts" || strings.HasPrefix(r.URL.Path, "/api/admin/gift-payouts/"):

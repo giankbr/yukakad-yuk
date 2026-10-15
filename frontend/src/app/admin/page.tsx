@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight as PhArrowRight, ArrowSquareOut as PhArrowSquareOut, Article as PhArticle, Browser as PhBrowser,
-  ChatCircleText as PhChatCircleText, Info as PhInfo, HandCoins as PhHandCoins, Megaphone as PhMegaphone, Package as PhPackage, Scales as PhScales, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
+  ChatCircleText as PhChatCircleText, Info as PhInfo, Receipt as PhReceipt, HandCoins as PhHandCoins, Megaphone as PhMegaphone, Package as PhPackage, Scales as PhScales, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
 } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
@@ -32,6 +32,7 @@ const pages: Section[] = [
 const business: Section[] = [
   { key: "plans", href: "/admin/plans", label: "Paket & harga", description: "Harga, kuota tamu, masa aktif, dan fitur tiap paket.", icon: <PhTag size={20} /> },
   { key: "templates", href: "/admin/templates", label: "Tema", description: "Aktif/nonaktif, kategori, dan akses Premium tiap tema.", icon: <PhPalette size={20} /> },
+  { key: "payments", href: "/admin/payments", label: "Pembayaran", description: "Pendapatan paket, transaksi Mayar, dan status pembayaran.", icon: <PhReceipt size={20} /> },
   { key: "payouts", href: "/admin/payouts", label: "Pencairan amplop", description: "Transfer amplop online ke rekening pengantin & atur biaya layanan.", icon: <PhHandCoins size={20} /> },
   { key: "users", href: "/admin/users", label: "Pengguna", description: "Ubah paket atau peran akun secara manual.", icon: <PhUsers size={20} /> },
 ];

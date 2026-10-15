@@ -18,6 +18,9 @@ export default function DashboardSettingsPage() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [pw, setPw] = useState({ current: "", next: "", confirm: "" });
+  const [pwSaving, setPwSaving] = useState(false);
+  const [pwStatus, setPwStatus] = useState<{ ok: boolean; text: string } | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
@@ -67,6 +70,25 @@ export default function DashboardSettingsPage() {
     }
   }
 
+  async function changePassword(event: React.FormEvent) {
+    event.preventDefault();
+    if (!token) return;
+    setPwStatus(null);
+    if (pw.next !== pw.confirm) { setPwStatus({ ok: false, text: "Konfirmasi password tidak sama." }); return; }
+    setPwSaving(true);
+    try {
+      const response = await apiFetch("/api/auth/change-password", token, { method: "POST", body: JSON.stringify({ current_password: pw.current, new_password: pw.next }) });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error);
+      setPw({ current: "", next: "", confirm: "" });
+      setPwStatus({ ok: true, text: "Password berhasil diganti." });
+    } catch (err) {
+      setPwStatus({ ok: false, text: err instanceof Error && err.message ? err.message : "Password belum diganti." });
+    } finally {
+      setPwSaving(false);
+    }
+  }
+
   if (!ready) return null;
 
   return (
@@ -75,7 +97,7 @@ export default function DashboardSettingsPage() {
         <div>
           <p className="dashboard-kicker">Akun</p>
           <h1>Pengaturan</h1>
-          <p className="dashboard-subtitle">Kelola profil akun yang dipakai di workspace kamu.</p>
+          <p className="dashboard-subtitle">Kelola profil dan keamanan akunmu.</p>
         </div>
       </header>
 
@@ -108,6 +130,27 @@ export default function DashboardSettingsPage() {
           <button type="submit" disabled={saving || !name.trim()}>
             {saving ? "Menyimpan..." : "Simpan perubahan"}
           </button>
+        </form>
+      )}
+
+      {!loading && profile && (
+        <form className="dashboard-form" onSubmit={changePassword} style={{ marginTop: 24 }} aria-labelledby="pw-heading">
+          <h2 id="pw-heading" style={{ margin: 0, color: "var(--rw-ink)", fontSize: 18 }}>Ganti password</h2>
+          <div className="form-field">
+            <label htmlFor="pw-current">Password saat ini</label>
+            <input id="pw-current" type="password" autoComplete="current-password" value={pw.current} onChange={(e) => setPw({ ...pw, current: e.target.value })} required />
+          </div>
+          <div className="form-field">
+            <label htmlFor="pw-new">Password baru</label>
+            <input id="pw-new" type="password" autoComplete="new-password" minLength={8} value={pw.next} onChange={(e) => setPw({ ...pw, next: e.target.value })} required />
+            <p className="form-hint">Minimal 8 karakter.</p>
+          </div>
+          <div className="form-field">
+            <label htmlFor="pw-confirm">Ulangi password baru</label>
+            <input id="pw-confirm" type="password" autoComplete="new-password" minLength={8} value={pw.confirm} onChange={(e) => setPw({ ...pw, confirm: e.target.value })} required />
+          </div>
+          {pwStatus && <p className={`dashboard-state ${pwStatus.ok ? "" : "dashboard-state-error"}`} role={pwStatus.ok ? "status" : "alert"}>{pwStatus.text}</p>}
+          <button type="submit" disabled={pwSaving}>{pwSaving ? "Menyimpan..." : "Ganti password"}</button>
         </form>
       )}
     </DashboardShell>

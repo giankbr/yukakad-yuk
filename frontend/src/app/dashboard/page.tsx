@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight as PhArrowRight, Bell as PhBell, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Globe as PhGlobe, Palette as PhPalette, Plus as PhPlus, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { ArrowRight as PhArrowRight, CreditCard as PhCreditCard, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Globe as PhGlobe, Palette as PhPalette, Plus as PhPlus, Users as PhUsers } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken } from "@/lib/useAuthToken";
@@ -107,9 +107,9 @@ export default function DashboardPage() {
 					</p>
 				</div>
 				<div className="db-topbar-actions">
-					<button className="db-icon-btn" aria-label="Notifikasi">
-						<PhBell size={17} />
-					</button>
+					<Link href="/dashboard/paket" className="db-icon-btn" aria-label="Paket & tagihan" title="Paket & tagihan">
+						<PhCreditCard size={17} />
+					</Link>
 					<Link href="/dashboard/invitations/create" className="db-primary-btn">
 						<PhPlus size={14} /> Buat Undangan
 					</Link>
