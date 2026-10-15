@@ -202,7 +202,11 @@ function initials(name: string) {
 
 export function VoiceWall({ voices, photos }: { voices: Voice[]; photos: VoicePhoto[] }) {
   const [tab, setTab] = useState("");
-  const categoryOf = (voice: Voice) => voice.role?.split("·")[0]?.trim() ?? "";
+  // Roles look like "Pernikahan · Bandung" or "Menikah, Jakarta": keep the event type only, so filters stay few.
+  const categoryOf = (voice: Voice) => {
+    const kind = voice.role?.split(/[·,|-]/)[0]?.trim() ?? "";
+    return /^(menikah|pernikahan|nikah|wedding|resepsi|akad)/i.test(kind) ? "Pernikahan" : kind;
+  };
   const tabs = Array.from(new Set(voices.map(categoryOf).filter(Boolean)));
   const visible = voices.filter(voice => !tab || categoryOf(voice) === tab);
   const items: ({ kind: "voice"; voice: Voice } | { kind: "photo"; photo: VoicePhoto })[] = [];

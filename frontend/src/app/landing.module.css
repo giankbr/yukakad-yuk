@@ -286,11 +286,17 @@
 .assurance > a:hover { color: var(--rw-primary); }
 
 /* ── Testimonials ────────────────────────── */
-.voices { display: grid; justify-items: center; gap: 40px; padding-bottom: 0; }
+.voices { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 40px; padding-bottom: 0; }
 .voices > .titleGroup { justify-items: center; text-align: center; }
-.voiceTabs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 4px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md); background: #fff; }
-.voiceTabs button { padding: 8px 16px; border: 0; border-radius: 6px; background: transparent; color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
+.voiceTabs { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 4px; max-width: 100%; padding: 4px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md); background: #fff; }
+.voiceTabs button { flex: none; padding: 8px 16px; white-space: nowrap; border: 0; border-radius: 6px; background: transparent; color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
 .voiceTabs button[aria-pressed="true"] { background: var(--rw-surface); color: var(--rw-ink); }
+@media (max-width: 640px) {
+  /* One swipeable row instead of a tall wrapped block. */
+  .voiceTabs { display: flex; flex-wrap: nowrap; justify-content: flex-start; width: 100%; overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .voiceTabs::-webkit-scrollbar { display: none; }
+  .voiceTabs button { padding: 8px 14px; }
+}
 .wall { position: relative; width: 100%; columns: 3 260px; column-gap: 20px; max-height: 760px; overflow: hidden; }
 .wall::after { content: ""; position: absolute; inset: auto 0 0; height: 200px; background: linear-gradient(rgba(255, 255, 255, 0), #fff 85%); pointer-events: none; }
 .chat { display: grid; gap: 12px; break-inside: avoid; margin-bottom: 20px; padding: 16px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); background: #fff; }
