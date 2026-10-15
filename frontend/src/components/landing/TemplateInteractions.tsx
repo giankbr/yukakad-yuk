@@ -3,29 +3,69 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { createPortal } from "react-dom";
 import styles from "@/app/landing.module.css";
-import { IconArrowRight, IconMessage, IconSearch } from "@/components/brand/icons";
+import { IconArrowRight, IconClose, IconHeart, IconMenu, IconMessage, IconSearch } from "@/components/brand/icons";
 
+const MOBILE_LINKS: [string, string][] = [
+  ["Tema", "/templates"], ["Fitur", "/fitur"], ["Harga", "/harga"], ["Produk", "/produk/undangan-website"], ["Tentang kami", "/tentang"],
+];
+
+/** Hamburger button that opens a full-screen menu (mobile only; hidden on desktop by CSS). */
 export function MobileMenu() {
-  const menu = useRef<HTMLDetailsElement>(null);
-  return <details ref={menu} className={styles.mobileMenu} onKeyDown={event => {
-    if (event.key === "Escape" && menu.current?.open) {
-      menu.current.open = false;
-      menu.current.querySelector("summary")?.focus();
-    }
-  }}>
-    <summary><span className={styles.menuClosed}>Menu</span><span className={styles.menuOpened}>Tutup</span></summary>
-    <div onClick={event => {
-      if ((event.target as HTMLElement).closest("a") && menu.current) menu.current.open = false;
-    }}>
-      <Link href="/templates">Tema</Link>
-      <Link href="/fitur">Fitur</Link>
-      <Link href="/harga">Harga</Link>
-      <Link href="/produk/undangan-website">Produk</Link>
-      <Link href="/tentang">Tentang kami</Link>
-      <Link href="/auth/login">Masuk</Link>
-    </div>
-  </details>;
+  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const button = useRef<HTMLButtonElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
+  useEffect(() => {
+    if (!open) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    panel.current?.querySelector<HTMLElement>("a, button")?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") { setOpen(false); button.current?.focus(); }
+    };
+    const onResize = () => { if (window.innerWidth > 900) setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", onKey); window.removeEventListener("resize", onResize); };
+  }, [open]);
+
+  const close = () => setOpen(false);
+  const path = typeof window !== "undefined" ? window.location.pathname : "";
+
+  return <>
+    <button ref={button} type="button" className={styles.menuButton} aria-label="Buka menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(true)}>
+      <IconMenu size={22} />
+    </button>
+    {mounted && open && createPortal(
+      <div ref={panel} id="mobile-menu" className={styles.mobilePanel} role="dialog" aria-modal="true" aria-label="Menu">
+        <div className={styles.mobilePanelTop}>
+          <Link href="/" className={styles.logo} onClick={close} aria-label="Rawuh, ke beranda"><IconHeart size={20} strokeWidth={2.2} />RAWUH</Link>
+          <button type="button" className={styles.menuButton} aria-label="Tutup menu" onClick={() => { close(); button.current?.focus(); }}>
+            <IconClose size={22} />
+          </button>
+        </div>
+        <nav className={styles.mobileLinks} aria-label="Menu utama">
+          {MOBILE_LINKS.map(([label, href]) => (
+            <Link key={href} href={href} onClick={close} aria-current={path.startsWith(href.split("/").slice(0, 2).join("/")) && href !== "/" ? "page" : undefined}>
+              {label}<IconArrowRight size={18} />
+            </Link>
+          ))}
+        </nav>
+        <div className={styles.mobileCtas}>
+          <Link href="/auth/login" className={styles.btnOutline} onClick={close}>Masuk</Link>
+          <Link href="/auth/register" className={styles.btnPrimary} onClick={close}>Buat undangan gratis</Link>
+        </div>
+      </div>,
+      document.body,
+    )}
+  </>;
 }
 
 export type GalleryTemplate = {

@@ -50,14 +50,21 @@
 .navLinks a:hover, .navLinks a[aria-current="page"] { color: var(--rw-ink); }
 .navActions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
 
-.mobileMenu { display: none; position: relative; }
-.mobileMenu summary { display: grid; place-items: center; min-width: 44px; min-height: 40px; padding: 0 12px; list-style: none; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md); font-size: 14px; font-weight: 500; cursor: pointer; }
-.mobileMenu summary::-webkit-details-marker { display: none; }
-.menuOpened, .mobileMenu[open] .menuClosed { display: none; }
-.mobileMenu[open] .menuOpened { display: inline; }
-.mobileMenu > div { position: absolute; right: 0; top: calc(100% + 8px); display: grid; min-width: 220px; padding: 8px; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); background: #fff; box-shadow: 0 18px 48px rgba(17, 16, 16, .1); }
-.mobileMenu > div a { padding: 12px; border-radius: var(--rw-radius-md); font-size: 15px; }
-.mobileMenu > div a:hover { background: var(--rw-surface-2); }
+/* Mobile navigation: hamburger + full-screen panel (rendered in a portal on <body>) */
+.menuButton { display: none; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-md); background: #fff; color: var(--rw-ink); cursor: pointer; }
+.menuButton:hover { border-color: var(--rw-ink); }
+.mobilePanel { position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-rows: auto 1fr auto; background: #fff; color: var(--rw-ink); font-family: var(--rw-font-sans); animation: mobile-panel-in .22s ease-out both; overscroll-behavior: contain; }
+.mobilePanelTop { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 20px; border-bottom: 1px solid var(--rw-border-warm); }
+.mobilePanelTop .menuButton { display: grid; }
+.mobileLinks { display: grid; align-content: start; padding: 12px 20px; overflow-y: auto; }
+.mobileLinks a { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid var(--rw-border-warm); color: var(--rw-ink); font-size: 22px; font-weight: 600; letter-spacing: -.01em; text-decoration: none; }
+.mobileLinks a svg { color: var(--rw-muted); transition: transform .15s ease; }
+.mobileLinks a:hover svg, .mobileLinks a[aria-current="page"] svg { color: var(--rw-primary); transform: translateX(3px); }
+.mobileLinks a[aria-current="page"] { color: var(--rw-primary); }
+.mobileCtas { display: grid; gap: 10px; padding: 16px 20px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--rw-border-warm); }
+.mobileCtas a { justify-content: center; min-height: 48px; font-size: 16px; }
+@keyframes mobile-panel-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .mobilePanel { animation: none; } }
 
 /* ── Rail ────────────────────────────────── */
 .rail { width: min(100%, 1280px); margin: 0 auto; border-inline: 1px solid var(--rw-border-warm); }
@@ -383,7 +390,7 @@ details[open] .faqToggle { background: var(--rw-primary); color: #fff; }
 }
 @media (max-width: 900px) {
   .navLinks, .navActions .btnOutline { display: none; }
-  .mobileMenu { display: block; }
+  .menuButton { display: grid; }
   .nav { gap: 16px; height: 64px; }
   .section { padding-block: 72px; }
   .sectionHeader { flex-direction: column; align-items: start; gap: 20px; }
