@@ -97,7 +97,7 @@ export default function FiturPage() {
               </div>
               <div className={styles.card}>
                 <div className={styles.cardRow}><b>Respons tamu</b><span>207 / 248</span></div>
-                <div className={styles.split}><i style={{ width: "50%", background: "var(--rw-primary)" }} /><i style={{ width: "17%", background: "#f1a280" }} /></div>
+                <div className={styles.split}><i style={{ width: "50%", background: "var(--rw-primary)" }} /><i style={{ width: "17%", background: "#aab5e6" }} /></div>
               </div>
               <div className={styles.card}>
                 <div className={styles.wish}><span className={styles.av}>S</span><div><strong>Sari W.<span>2m</span></strong><p>Selamat ya Nina &amp; Dimas! Semoga sakinah mawaddah warahmah 🤍</p></div></div>

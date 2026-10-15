@@ -74,7 +74,7 @@ export default async function Home() {
           {heroCta ? <a href={hero.cta_href} className={styles.btnPrimary}>{hero.cta_label}</a> : <EventSignup />}
           <div className={styles.proof}>
             <div className={styles.avatars} aria-hidden>
-              {[["D", "#E65532"], ["R", "#9CAF88"], ["N", "#C9A66B"], ["F", "#322F2D"]].map(([letter, color]) => <span key={letter} style={{ background: color }}>{letter}</span>)}
+              {[["D", "#2E43B0"], ["R", "#9CAF88"], ["N", "#C9A66B"], ["F", "#322F2D"]].map(([letter, color]) => <span key={letter} style={{ background: color }}>{letter}</span>)}
             </div>
             Dipakai 120.000+ pasangan &amp; keluarga
           </div>
