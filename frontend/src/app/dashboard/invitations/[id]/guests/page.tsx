@@ -31,6 +31,8 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
   const [category, setCategory] = useState("family");
   const [submitting, setSubmitting] = useState(false);
   const [importing, setImporting] = useState(false);
+  const [slug, setSlug] = useState("");
+  const [copied, setCopied] = useState<string | null>(null);
 
   const invitationId = routeParams?.id;
 
@@ -47,6 +49,36 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
     if (!ready) return;
     load();
   }, [ready, load]);
+
+  useEffect(() => {
+    if (!ready || !token || !invitationId) return;
+    apiFetch(`/api/invitations/${invitationId}`, token)
+      .then((response) => response.json())
+      .then((body: { slug?: string }) => setSlug(body.slug ?? ""))
+      .catch(() => undefined);
+  }, [ready, token, invitationId]);
+
+  /** Personal link: greets the guest by name, records RSVP against them and shows their check-in QR. */
+  function personalLink(guest: Guest) {
+    const params = new URLSearchParams({ to: guest.name, guest: guest.token });
+    return `${window.location.origin}/invitation/${slug}?${params}`;
+  }
+
+  async function copyLink(guest: Guest) {
+    try {
+      await navigator.clipboard.writeText(personalLink(guest));
+      setCopied(guest.id);
+      setTimeout(() => setCopied(current => (current === guest.id ? null : current)), 1800);
+    } catch {
+      window.prompt("Salin link undangan:", personalLink(guest));
+    }
+  }
+
+  function whatsappHref(guest: Guest) {
+    const digits = (guest.phone ?? "").replace(/[^0-9]/g, "").replace(/^0/, "62");
+    const text = `Halo ${guest.name}, dengan penuh sukacita kami mengundang Anda. Buka undangan di sini: ${personalLink(guest)}`;
+    return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
+  }
 
   async function handleAddGuest(event: React.FormEvent) {
     event.preventDefault();
@@ -173,7 +205,13 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
                       <button className="table-action" onClick={() => setQrGuestId(guest.id)}>Tampilkan QR</button>
                     )}
                   </td>
-                  <td style={{ display: "flex", gap: ".5rem" }}>
+                  <td style={{ display: "flex", flexWrap: "wrap", gap: ".5rem" }}>
+                    {slug && guest.token && (
+                      <>
+                        <button className="table-action" onClick={() => copyLink(guest)}>{copied === guest.id ? "Tersalin ✓" : "Salin link"}</button>
+                        {guest.phone && <a className="table-action" href={whatsappHref(guest)} target="_blank" rel="noreferrer">Kirim WA</a>}
+                      </>
+                    )}
                     {!guest.checked_in_at && (
                       <button className="table-action" onClick={() => handleCheckIn(guest.id)}>Check-in</button>
                     )}

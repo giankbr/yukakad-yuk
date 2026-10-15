@@ -50,4 +50,34 @@ export type InvitationData = {
   guestName?: string;
   /** Background music uploaded from the dashboard (settings.music_url / autoplay_music). */
   music?: { url: string; autoplay?: boolean };
+  /** Optional extra sections managed from the dashboard (stored in settings.sections_config). */
+  extras?: InvitationExtras;
 };
+
+/** Every block is optional; a section renders only when its data is filled (and `enabled !== false`). */
+export type InvitationExtras = {
+  /** Opening verse/quote, e.g. QS Ar-Rum 21. */
+  quote?: { enabled?: boolean; text: string; source?: string };
+  /** Child profile for aqiqah / khitan / birthday invitations. */
+  child?: { enabled?: boolean; name: string; nickname?: string; birthDate?: string; photo?: string; meaning?: string; parents?: string };
+  /** "Simpan ke kalender" buttons under the events (on by default). */
+  calendar?: { enabled?: boolean };
+  livestream?: { enabled?: boolean; url: string; platform?: string; startsAt?: string; note?: string };
+  dressCode?: { enabled?: boolean; note: string; colors?: string[] };
+  /** Prewedding / teaser video (YouTube, Vimeo or a direct .mp4 link). */
+  video?: { enabled?: boolean; url: string; title?: string };
+  /** "Turut mengundang" family list. */
+  family?: { enabled?: boolean; title?: string; names: string[] };
+  /** Show the guest's personal check-in QR when the link carries ?guest=<token>. */
+  guestPass?: { enabled?: boolean; note?: string };
+  rundown?: { enabled?: boolean; items: Array<{ time: string; title: string; note?: string }> };
+  travel?: { enabled?: boolean; note?: string; items: Array<{ name: string; detail?: string; url?: string }> };
+  wishlist?: { enabled?: boolean; note?: string; items: WishlistItem[] };
+  faq?: { enabled?: boolean; items: Array<{ q: string; a: string }> };
+  /** Extra RSVP question about allergies / dietary needs. */
+  rsvpDietary?: { enabled?: boolean; label?: string };
+  /** After the event: "auto" switches once the last event date has passed. */
+  thankYou?: { mode?: "auto" | "on" | "off"; message?: string };
+};
+
+export type WishlistItem = { id: string; name: string; url?: string; image?: string; price?: string; claimed_by?: string };

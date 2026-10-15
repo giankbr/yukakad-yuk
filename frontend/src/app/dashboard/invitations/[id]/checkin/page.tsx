@@ -25,11 +25,21 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
       if (cancelled) return;
       const scanner = new Html5QrcodeScanner("qr-reader", { fps: 10, qrbox: 240 }, false);
       scanner.render(
-        async (decodedGuestId) => {
+        async (decoded) => {
           if (busyRef.current) return;
           busyRef.current = true;
           try {
-            const response = await apiFetch(`/api/invitations/${invitationId}/guests/${decodedGuestId}/check-in`, token, { method: "POST" });
+            // Dashboard QR codes carry the guest ID; the guest's own invitation shows "rawuh:<invitation token>".
+            let guestId = decoded.trim();
+            if (guestId.startsWith("rawuh:")) {
+              const guestToken = guestId.slice("rawuh:".length);
+              const list = await apiFetch(`/api/invitations/${invitationId}/guests`, token).then(r => r.json()) as { items?: Array<{ id: string; token?: string }> } | Array<{ id: string; token?: string }>;
+              const guests = Array.isArray(list) ? list : list.items ?? [];
+              const match = guests.find(guest => guest.token === guestToken);
+              if (!match) throw new Error("QR tidak dikenali untuk undangan ini.");
+              guestId = match.id;
+            }
+            const response = await apiFetch(`/api/invitations/${invitationId}/guests/${encodeURIComponent(guestId)}/check-in`, token, { method: "POST" });
             const body = await response.json();
             if (!response.ok) throw new Error(body.error ?? "Check-in gagal");
             setResult({ kind: "success", message: `${body.name} berhasil check-in.` });

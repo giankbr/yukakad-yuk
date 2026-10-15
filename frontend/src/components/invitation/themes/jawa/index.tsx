@@ -2,7 +2,7 @@
 // Theme "Jawa Keraton" — adat Jawa klasik cokelat-emas dengan gunungan (design: Undangan — Tema Jawa (Laksmi & Bayu)).
 import { useState } from "react";
 import {
-  GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useMusic, useRsvp, useWishes, type Attendance, type ThemeProps,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -127,6 +127,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
           <cite>— QS. Ar-Rum: 21</cite>
         </section>
 
+        <Extras slot="opening" without={["quote"]} />
+
         <section className={`${s.section} ${s.couple}`} aria-labelledby="jw-couple">
           <Head id="jw-couple" title="Mempelai" />
           <p className={s.intro}>Dengan memohon rahmat dan ridha Tuhan Yang Maha Kuasa, kami bermaksud menyelenggarakan {label.toLowerCase()} putra-putri kami:</p>
@@ -170,6 +172,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
           {maps && <a className={s.darkBtn} href={maps} target="_blank" rel="noreferrer"><Lucide icon={ic.mapPin} size={15} color="#e6c77a" />Lihat Peta Lokasi</a>}
         </section>
 
+        <Extras slot="event" without={["calendar"]} />
+
         {stories.length > 0 && (
           <section className={`${s.section} ${s.story}`} aria-labelledby="jw-story">
             <Head id="jw-story" title="Perjalanan Cinta" />
@@ -207,6 +211,10 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
             <p className={s.caption}>“Cinta bukan sekadar saling memandang, tapi menyatu dalam tujuan.”</p>
           </section>
         )}
+
+        <Extras slot="story" />
+
+        <Extras slot="end" />
 
         {data.gifts.length > 0 && (
           <section className={`${s.section} ${s.gifts}`} aria-labelledby="jw-gift">
@@ -257,7 +265,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
               const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
               if (!name || !message) return;
               void wishes.send(name, message);
-              if (rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests });
+              if (rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests, diet: String(form.get("diet") ?? "").trim() || undefined });
             }}>
               <label className={s.field}><span>Nama</span><input name="name" required maxLength={100} defaultValue={plainName(data.guestName)} placeholder="Nama Anda" autoComplete="name" /></label>
               <label className={s.field}><span>Ucapan</span><textarea name="message" required maxLength={500} rows={3} placeholder="Tuliskan doa & ucapan…" /></label>
@@ -269,6 +277,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
                 ))}
               </div>
               {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+              {attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Coba lagi sebentar lagi.</p>}
               <button type="submit" className={s.submit} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
             </form>

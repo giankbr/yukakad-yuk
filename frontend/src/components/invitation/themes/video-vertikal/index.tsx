@@ -2,7 +2,7 @@
 // Theme "Video Vertikal" — undangan bergaya aplikasi video pendek (design: Undangan — Tema Video Vertikal (Zahra & Evan)).
 import { useState, type CSSProperties } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint, type Wish,
 } from "../kit";
 import { ic } from "./icons";
@@ -125,6 +125,8 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
           <h1>{data.couple.brideFull ?? data.couple.bride} × {data.couple.groomFull ?? data.couple.groom}<br />{formatDate(data.date)}{where ? ` · ${where}` : ""}</h1>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="vv-mempelai">
           <h2 id="vv-mempelai">Mempelai</h2>
           {people.map(person => (
@@ -185,6 +187,8 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {grid.length > 0 && (
           <section className={s.section} aria-labelledby="vv-galeri">
             <h2 id="vv-galeri">Galeri</h2>
@@ -198,6 +202,9 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="vv-kado">

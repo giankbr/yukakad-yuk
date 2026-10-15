@@ -1,0 +1,99 @@
+/* Extra sections shared by all themes. Colours derive from the surrounding text colour (currentColor), so the
+   blocks fit light and dark sections; accents and type come from the theme's --t-* tokens when present:
+   --t-accent, --t-accent-ink, --t-radius, --t-font, --t-heading-font. */
+.slot { display: grid; gap: 44px; padding: 44px 24px; color: inherit; font-family: var(--t-font, inherit); text-align: left; }
+.slot:empty { display: none; }
+
+.block { display: grid; gap: 14px; min-width: 0; }
+.center { justify-items: center; text-align: center; }
+.eyebrow { margin: 0; text-align: var(--t-heading-align, inherit); color: var(--t-accent, currentColor); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; opacity: .9; }
+.title { margin: 0; font-family: var(--t-heading-font, inherit); font-size: var(--t-heading-size, 26px); font-weight: var(--t-heading-weight, 600); text-align: var(--t-heading-align, inherit); font-style: var(--t-heading-style, normal); line-height: 1.2; letter-spacing: -.01em; }
+.lead { margin: 0; font-size: 17px; font-style: italic; }
+.body { margin: 0; font-size: 15px; line-height: 1.7; opacity: .85; white-space: pre-line; }
+.muted { margin: 0; font-size: 13px; line-height: 1.6; opacity: .65; }
+.error { margin: 0; color: #d93025; font-size: 13px; }
+
+.quote { position: relative; justify-items: center; padding: 8px 4px; text-align: center; }
+.quoteMark { display: block; height: 40px; color: var(--t-accent, currentColor); font-family: Georgia, serif; font-size: 72px; line-height: 1; opacity: .5; }
+.quote blockquote { margin: 0; display: grid; gap: 12px; }
+.quote blockquote p { margin: 0; font-family: var(--t-heading-font, inherit); font-size: 16px; font-style: italic; line-height: 1.75; }
+.quote cite { font-size: 12px; font-style: normal; font-weight: 600; letter-spacing: .08em; opacity: .7; }
+
+.childPhoto { width: 132px; height: 132px; border: 4px solid color-mix(in srgb, currentColor 10%, transparent); border-radius: 999px; object-fit: cover; }
+
+.list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.card {
+  display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px 14px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  border-radius: var(--t-radius, 14px); background: color-mix(in srgb, currentColor 5%, transparent); color: inherit; text-decoration: none;
+}
+a.card:hover { border-color: var(--t-accent, currentColor); }
+.card[data-claimed] { opacity: .6; }
+.icon { display: grid; flex: none; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: color-mix(in srgb, var(--t-accent, currentColor) 16%, transparent); color: var(--t-accent, currentColor); }
+.thumb { flex: none; width: 44px; height: 44px; border-radius: calc(var(--t-radius, 14px) * .6); object-fit: cover; }
+.cardText { display: grid; flex: 1; gap: 2px; min-width: 0; }
+.cardText strong { overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; }
+.cardText strong a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.cardText small { font-size: 12px; opacity: .7; }
+.arrow { flex: none; opacity: .6; }
+.calCard { flex-wrap: wrap; }
+.calCard .actions { flex-basis: 100%; justify-content: flex-start; padding-left: 48px; }
+.actions { display: flex; flex: none; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 12px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
+}
+.chip:hover { border-color: var(--t-accent, currentColor); color: var(--t-accent, currentColor); }
+.chip:disabled { cursor: wait; opacity: .6; }
+.done { display: inline-flex; flex: none; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; opacity: .8; }
+.button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 22px; border: 0; border-radius: var(--t-radius, 999px);
+  background: var(--t-accent, currentColor); color: var(--t-accent-ink, #fff); font: inherit; font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer;
+  transition: filter 150ms, transform 150ms;
+}
+.button:hover { filter: brightness(1.06); }
+.button:active { transform: scale(.98); }
+
+.timeline { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.timeline li { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 16px; padding: 0 0 18px; }
+.timeline li::before { content: ""; position: absolute; top: 6px; bottom: -6px; left: 75px; width: 1px; background: color-mix(in srgb, currentColor 18%, transparent); }
+.timeline li:last-child::before { display: none; }
+.timeline li::after { content: ""; position: absolute; top: 4px; left: 71px; width: 9px; height: 9px; border-radius: 999px; background: var(--t-accent, currentColor); box-shadow: 0 0 0 3px color-mix(in srgb, var(--t-accent, currentColor) 20%, transparent); }
+.timeline time { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.timeline li > div { display: grid; gap: 2px; padding-left: 14px; }
+.timeline strong { font-size: 15px; font-weight: 600; }
+.timeline small { font-size: 13px; opacity: .7; }
+
+.swatches { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.swatches span { width: 44px; height: 44px; border: 3px solid color-mix(in srgb, currentColor 10%, transparent); border-radius: 999px; box-shadow: 0 4px 12px rgba(0, 0, 0, .12); }
+
+.liveCard { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 340px; padding: 14px 16px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: var(--t-radius, 14px); text-align: left; }
+.liveDot { display: grid; flex: none; place-items: center; width: 40px; height: 40px; border-radius: 999px; background: #e53935; color: #fff; animation: extras-pulse 2s ease-in-out infinite; }
+@keyframes extras-pulse { 50% { box-shadow: 0 0 0 8px rgba(229, 57, 53, .18); } }
+
+.pass { display: grid; justify-items: center; gap: 8px; width: 100%; max-width: 280px; padding: 22px 20px; border: 1px dashed color-mix(in srgb, currentColor 30%, transparent); border-radius: var(--t-radius, 16px); }
+.pass img { width: 180px; height: 180px; padding: 10px; border-radius: 12px; background: #fff; }
+.qrPlaceholder { width: 180px; height: 180px; border-radius: 12px; background: color-mix(in srgb, currentColor 8%, transparent); }
+.pass strong { font-size: 15px; }
+.pass small { font-size: 12px; line-height: 1.5; opacity: .7; }
+
+.video { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--t-radius, 14px); background: #000; }
+.video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.family { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.5; }
+.family li { opacity: .85; }
+
+.faq { display: grid; gap: 8px; }
+.faq details { border: 1px solid color-mix(in srgb, currentColor 14%, transparent); border-radius: var(--t-radius, 14px); background: color-mix(in srgb, currentColor 4%, transparent); }
+.faq summary { display: flex; justify-content: space-between; gap: 12px; padding: 14px 16px; font-size: 14px; font-weight: 600; list-style: none; cursor: pointer; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; color: var(--t-accent, currentColor); font-size: 18px; line-height: 1; transition: rotate 200ms; }
+.faq details[open] summary::after { rotate: 45deg; }
+.faq details p { margin: 0; padding: 0 16px 14px; font-size: 14px; line-height: 1.65; opacity: .8; }
+
+.thanks { display: grid; justify-items: center; gap: 10px; margin: 0; padding: 40px 24px; border-bottom: 1px solid color-mix(in srgb, currentColor 12%, transparent); text-align: center; }
+.thanksIcon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: var(--t-accent, currentColor); color: var(--t-accent-ink, #fff); }
+
+.dietary { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+.dietary input { width: 100%; min-height: 46px; padding: 12px 14px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: var(--t-radius, 12px); background: transparent; color: inherit; font: inherit; font-size: 16px; font-weight: 400; }
+
+@media (prefers-reduced-motion: reduce) { .liveDot { animation: none; } .faq summary::after { transition: none; } }

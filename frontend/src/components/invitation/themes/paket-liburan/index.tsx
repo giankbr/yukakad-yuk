@@ -2,7 +2,7 @@
 // Theme "Paket Liburan" — undangan bergaya aplikasi pesan paket wisata / e-voucher (design: Fikri & Monica).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -11,7 +11,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Poppins:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#0064d2", "--t-bg": "#ffffff", "--t-ink": "#1e2a3b", "--t-muted": "#6e7a8f", "--t-line": "#e3eaf5",
+  "--t-accent": "#0064d2", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1e2a3b", "--t-muted": "#6e7a8f", "--t-line": "#e3eaf5",
   "--t-field": "#f0f4fb", "--t-radius": "12px", "--t-font": "'Poppins', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -187,6 +187,8 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
           )}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         <section className={s.card} aria-labelledby="pl-guide">
           <div className={s.head}><h2 id="pl-guide">Tour Guide Kamu</h2></div>
           {people.map(person => (
@@ -200,6 +202,8 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
             </article>
           ))}
         </section>
+
+        <Extras slot="opening" className={s.extras} />
 
         {stories.length > 0 && (
           <section className={s.card} aria-labelledby="pl-story">
@@ -236,6 +240,9 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="pl-gift">

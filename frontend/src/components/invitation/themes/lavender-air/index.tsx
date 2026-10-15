@@ -2,7 +2,7 @@
 // Theme "Lavender Air" — undangan cat air lavender: ungu lembut, polaroid, galeri gelembung (design: Undangan — Tema Lavender Air (Nadia & Reza)).
 import { useState, type FormEvent } from "react";
 import {
-  GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
@@ -85,7 +85,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
     const message = String(form.get("message") ?? "").trim();
     const guests = attendance === "no" ? 1 : Number(form.get("guests")) || 1;
     if (!name || !message) return;
-    void rsvp.submit({ name, attendance, guests, message });
+    void rsvp.submit({ name, attendance, guests, message, diet: String(form.get("diet") ?? "").trim() || undefined });
     void wishes.send(name, message);
   };
 
@@ -123,6 +123,8 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
         </section>
 
         {data.couple.note && <blockquote className={s.quote}>“{data.couple.note}”</blockquote>}
+
+        <Extras slot="opening" />
 
         <section className={`${s.section} ${s.alt}`} aria-labelledby="la-couple">
           <Head id="la-couple">Mempelai</Head>
@@ -168,6 +170,8 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
           {maps && <a className={s.pill} href={maps} target="_blank" rel="noreferrer"><Lucide icon={ic.mapPin} size={15} />Lihat Lokasi di Maps</a>}
         </section>
 
+        <Extras slot="event" without={["calendar"]} />
+
         {stories.length > 0 && (
           <section className={s.section} aria-labelledby="la-story">
             <Head id="la-story">Kisah Kami</Head>
@@ -200,6 +204,10 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
             )}
           </section>
         )}
+
+        <Extras slot="story" />
+
+        <Extras slot="end" />
 
         {data.gifts.length > 0 && (
           <section className={s.section} aria-labelledby="la-gift">
@@ -250,6 +258,7 @@ export default function LavenderAirTheme({ data, slug, guestToken, demo, skipCov
                 ))}
               </fieldset>
               {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+              {attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
               <button type="submit" className={s.pillWide} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
             </form>

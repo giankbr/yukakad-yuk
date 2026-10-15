@@ -2,7 +2,7 @@
 // Theme "Chat Hijau" — undangan bergaya ruang obrolan aplikasi pesan (design: Tema Chat Hijau (Fitri & Andra)).
 import { useState, type ReactNode } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -134,6 +134,8 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
           </div>
         ))}
 
+        <Extras slot="opening" className={s.extras} />
+
         {stories.length > 0 && (
           <>
             <Day>Kisah Kami</Day>
@@ -165,6 +167,8 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
           );
         })}
 
+        <Extras slot="event" className={s.extras} />
+
         {photos.length > 0 && (
           <>
             <Day>Galeri</Day>
@@ -185,6 +189,9 @@ export default function ChatHijauTheme({ data, slug, guestToken, demo, skipCover
             </div>
           </>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <>

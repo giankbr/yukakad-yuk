@@ -3,6 +3,10 @@
   --serif: "Noto Serif", Georgia, serif; --display: "Playfair Display", Georgia, serif;
   font-family: var(--serif); color: var(--ink); line-height: normal; background: var(--paper);
 }
+.root {
+  --t-accent: #1d1a14; --t-accent-ink: #f5f0e4; --t-bg: #f5f0e4; --t-ink: #1d1a14; --t-muted: #6b6456; --t-line: #c9c0ac; --t-field: #fbf8f0;
+  --t-radius: 0px; --t-font: var(--serif); --t-heading-font: var(--display); --t-heading-weight: 800; --t-heading-size: 22px; --t-heading-align: left;
+}
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, ol, blockquote, figure) { margin: 0; }
 :where(.root, .cover) :where(ol) { padding: 0; list-style: none; }
@@ -38,6 +42,8 @@
 .pageHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; padding: 4px 0 8px; border-bottom: 2px solid var(--ink); }
 .pageHead strong { font-family: var(--display); font-size: 14px; font-weight: 800; }
 .pageHead span { color: var(--muted); font-size: 9px; letter-spacing: 1px; text-align: right; }
+/* Extra sections: printed as a column boxed by newspaper rules. */
+.root .extras { gap: 28px; padding: 16px 0; border-top: 3px double var(--ink); border-bottom: 1px solid var(--rule); color: var(--ink); }
 .section { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
 .sectionHead { display: flex; align-items: center; gap: 8px; }
 .sectionHead h2 { font-family: var(--display); font-size: 16px; font-weight: 800; }

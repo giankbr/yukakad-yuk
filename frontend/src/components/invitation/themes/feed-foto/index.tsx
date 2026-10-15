@@ -1,7 +1,7 @@
 "use client";
 // Theme "Feed Foto" — undangan bergaya feed & profil aplikasi foto (design: Undangan — Tema Feed Foto (Alika & Rio)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -162,6 +162,8 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
       </nav>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         {stories.length > 0 && (
           <section id="ff-kisah" className={s.section} aria-labelledby="ff-kisah-h">
             <h2 id="ff-kisah-h">Kisah Kami</h2>
@@ -195,6 +197,8 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
           })}
         </section>
 
+        <Extras slot="event" without={["calendar"]} className={s.extras} />
+
         {grid.length > 0 && (
           <section className={s.gallery} aria-label="Galeri foto">
             <div className={s.tabs} aria-hidden>
@@ -207,6 +211,9 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section id="ff-kado" className={s.section} aria-labelledby="ff-kado-h">

@@ -2,7 +2,7 @@
 // Theme "Oranye" — undangan bergaya aplikasi belanja oranye (design: Undangan — Tema Oranye (Dewi & Arya)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -193,6 +193,8 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
           )}
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section id="or-mempelai" className={s.section} aria-labelledby="or-couple">
           <div className={s.head}><h2 id="or-couple">Mempelai Pilihan</h2><span aria-hidden>Lihat Profil<Lucide icon={ic.chevronRight} size={14} color="#757575" /></span></div>
           <div className={s.coupleRow}>
@@ -264,6 +266,8 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {feed.length > 0 && (
           <section id="or-galeri" className={s.section} aria-labelledby="or-gallery">
             <div className={s.head}><h2 id="or-gallery">Rekomendasi Untukmu · Galeri</h2><span>{demo ? "24" : feed.length} foto<Lucide icon={ic.chevronRight} size={14} color="#757575" /></span></div>
@@ -291,6 +295,10 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {data.gifts.length > 0 && (
           <section id="or-kado" className={s.section} aria-labelledby="or-gift">

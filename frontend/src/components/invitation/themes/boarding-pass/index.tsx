@@ -1,7 +1,7 @@
 "use client";
 // Theme "Boarding Pass" — undangan bergaya tiket pesawat (design: Undangan — Tema Boarding Pass (Citra & Bagus)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -126,6 +126,8 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="bp-status">
           <h2 id="bp-status">Status Penerbangan</h2>
           <ol className={s.timeline}>
@@ -182,6 +184,8 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {gallery.length > 0 && (
           <section className={s.section} aria-labelledby="bp-gallery">
             <h2 id="bp-gallery">Jendela Kabin · Galeri</h2>
@@ -194,6 +198,9 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="bp-gift">

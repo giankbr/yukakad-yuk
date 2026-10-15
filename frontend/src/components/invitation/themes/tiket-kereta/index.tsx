@@ -1,7 +1,7 @@
 "use client";
 // Theme "Tiket Kereta" — undangan bergaya e-tiket kereta (design: KA Argo Asmara, Wulan & Seno).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -10,7 +10,7 @@ import s from "./styles.module.css";
 const FONTS = ["Archivo:wght@400;700;800", "JetBrains Mono:wght@700;800"];
 const COVER_ART = "/themes/img/r39.webp";
 const tint: ThemeTint = {
-  "--t-accent": "#f26a21", "--t-bg": "#f7f3ec", "--t-ink": "#2b2b33", "--t-muted": "#6e6e78", "--t-line": "#e3dacb",
+  "--t-accent": "#f26a21", "--t-accent-ink": "#ffffff", "--t-bg": "#f7f3ec", "--t-ink": "#2b2b33", "--t-muted": "#6e6e78", "--t-line": "#e3dacb",
   "--t-field": "#ffffff", "--t-radius": "10px", "--t-font": "'Archivo', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -160,6 +160,8 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="tk-route">
           <h2 id="tk-route">Rute Perjalanan Cinta</h2>
           <ol className={s.timeline}>
@@ -218,6 +220,8 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
           </section>
         )}
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.section} aria-labelledby="tk-gallery">
             <h2 id="tk-gallery">Pemandangan dari Jendela</h2>
@@ -232,6 +236,9 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
             )}
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="tk-gift">

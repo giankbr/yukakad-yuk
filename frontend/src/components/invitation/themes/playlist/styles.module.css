@@ -1,6 +1,9 @@
 .root, .cover {
   --bg: #121212; --card: #1e1e1e; --chip: #2a2a2a; --ink: #ffffff; --muted: #b3b3b3; --green: #1db954; --line: #ffffff1a; --outline: #ffffff4d;
   font-family: "DM Sans", system-ui, sans-serif; line-height: 1.3; color: var(--ink); background: var(--bg);
+  --t-accent: #1db954; --t-accent-ink: #000000; --t-bg: #1e1e1e; --t-ink: #ffffff; --t-muted: #b3b3b3; --t-line: #ffffff26;
+  --t-field: #2a2a2a; --t-radius: 10px; --t-font: "DM Sans", system-ui, sans-serif;
+  --t-heading-font: "DM Sans", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 22px; --t-heading-align: left;
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, figure, ol, ul, dl, dd) { margin: 0; padding: 0; }
@@ -134,3 +137,6 @@ button.outline[aria-pressed="true"] { border-color: var(--green); color: var(--g
 @media (prefers-reduced-motion: reduce) {
   .root *, .cover * { transition: none !important; animation: none !important; }
 }
+
+/* Shared extra sections, hosted in a dark player card */
+.root .extras { gap: 28px; margin: 0 16px; padding: 18px 16px; border-radius: 10px; background: var(--card); color: var(--ink); }

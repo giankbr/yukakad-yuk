@@ -2,7 +2,7 @@
 // Theme "Marketplace" — undangan bergaya aplikasi belanja (design: Undangan — Tema Marketplace (Rina & Bima)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -127,6 +127,8 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           <p>Stok kursi terbatas! Konfirmasi kehadiranmu sebelum hari H.</p>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="mp-couple">
           <div className={s.sectionHead}><h2 id="mp-couple">Mempelai Pilihan</h2><span>Official ✓</span></div>
           <div className={s.couple}>
@@ -204,6 +206,8 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
           </section>
         )}
 
+        <Extras slot="story" className={s.extras} />
+
         <section className={s.section} aria-labelledby="mp-events">
           <div className={s.sectionHead}><h2 id="mp-events">Detail Pengiriman Doa</h2></div>
           {data.events.map((event, index) => (
@@ -223,6 +227,10 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
             </a>
           )}
         </section>
+
+        <Extras slot="event" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="mp-gift">

@@ -3,6 +3,9 @@
   --ink: #eaf0ff; --muted: #8a96b8;
   --gold-grad: linear-gradient(270deg, #c9a24b 0%, #f0c96e 50%, #c9a24b 100%);
   font-family: "Exo 2", system-ui, sans-serif; line-height: normal; color: var(--ink); background: var(--night);
+  --t-accent: #f0c96e; --t-accent-ink: #0a1128; --t-bg: #13204a; --t-ink: #eaf0ff; --t-muted: #8a96b8; --t-line: rgba(240, 201, 110, .25);
+  --t-field: #0a1128; --t-radius: 8px; --t-font: "Exo 2", system-ui, sans-serif;
+  --t-heading-font: Cinzel, serif; --t-heading-weight: 700; --t-heading-size: 22px; --t-heading-align: left;
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, figure) { margin: 0; }
@@ -121,3 +124,6 @@
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 @keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @media (prefers-reduced-motion: reduce) { .vsMid span, .stat i b { animation: none; } }
+
+/* Shared extra sections, hosted in a game panel like the hero/match cards */
+.root .extras { gap: 28px; padding: 18px 14px; border: 1px solid rgba(240, 201, 110, .25); border-radius: 10px; background: var(--panel); color: var(--ink); }

@@ -1,7 +1,7 @@
 "use client";
 // Theme "Pemutar Musik" — undangan bergaya aplikasi pemutar musik (design: Tema Pemutar Musik (Nada & Raga)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -9,7 +9,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Inter:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#fa2d48", "--t-ink": "#1d1d1f", "--t-muted": "#86868b", "--t-line": "#e8e8ed", "--t-field": "#f2f2f7",
+  "--t-accent": "#fa2d48", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1d1d1f", "--t-muted": "#86868b", "--t-line": "#e8e8ed", "--t-field": "#f2f2f7",
   "--t-radius": "12px", "--t-font": "Inter, system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -103,6 +103,8 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="pm-acara">
           <h2 id="pm-acara">Daftar Lagu · Rangkaian Hari</h2>
           <ol className={s.tracks}>
@@ -135,6 +137,8 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
             );
           })}
         </section>
+
+        <Extras slot="event" className={s.extras} />
 
         <section className={s.section} aria-labelledby="pm-mempelai">
           <h2 id="pm-mempelai">Artis Utama</h2>
@@ -196,6 +200,10 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
             )}
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="pm-kado">

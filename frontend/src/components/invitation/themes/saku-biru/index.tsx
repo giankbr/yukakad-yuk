@@ -2,7 +2,7 @@
 // Theme "Saku Biru" — undangan bergaya dompet digital biru dengan layar PIN (design: Saku Bersama, Rizki & Amanda).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -10,7 +10,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Plus Jakarta Sans:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#1c8fe0", "--t-bg": "#ffffff", "--t-ink": "#1c1c1c", "--t-muted": "#6b7280", "--t-line": "#e3e6ea",
+  "--t-accent": "#1c8fe0", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1c1c1c", "--t-muted": "#6b7280", "--t-line": "#e3e6ea",
   "--t-field": "#f3f7f9", "--t-radius": "12px", "--t-font": "'Plus Jakarta Sans', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -138,6 +138,8 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
           </div>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.card} aria-labelledby="sb-couple">
           <div className={s.cardHead}><h2 id="sb-couple">Pemilik Saku</h2></div>
           {people.map((person, index) => (
@@ -190,6 +192,8 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
           </section>
         )}
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.card} aria-labelledby="sb-gallery">
             <div className={s.cardHead}><h2 id="sb-gallery">Galeri</h2><span>{data.gallery.length} foto</span></div>
@@ -203,6 +207,9 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="sb-gift">

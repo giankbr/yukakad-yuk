@@ -1,7 +1,7 @@
 "use client";
 // Theme "Kantong Oranye" — undangan bergaya aplikasi tabungan/kantong bersama (design: Kantong Bersama, Dion & Salsa).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -9,7 +9,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["DM Sans:wght@400;500;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#1a1a1a", "--t-bg": "#fbf8f1", "--t-ink": "#1a1a1a", "--t-muted": "#6f6a62", "--t-line": "#ede6d6",
+  "--t-accent": "#1a1a1a", "--t-accent-ink": "#ffffff", "--t-bg": "#fbf8f1", "--t-ink": "#1a1a1a", "--t-muted": "#6f6a62", "--t-line": "#ede6d6",
   "--t-field": "#ffffff", "--t-radius": "14px", "--t-font": "'DM Sans', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -150,6 +150,8 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.card} aria-labelledby="ko-members">
           <div className={s.head}><h2 id="ko-members">Anggota Kantong</h2></div>
           {people.map(person => (
@@ -199,6 +201,8 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {gallery.length > 0 && (
           <section className={s.card} aria-labelledby="ko-gallery">
             <div className={s.head}><h2 id="ko-gallery">Galeri Tabungan Momen</h2><span>{gallery.length}</span></div>
@@ -212,6 +216,9 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="ko-gift">

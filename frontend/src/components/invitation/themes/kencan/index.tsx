@@ -1,7 +1,7 @@
 "use client";
 // Theme "Kencan" — undangan bergaya aplikasi kencan "It's a Match!" (design: Undangan — Tema Kencan (Maya & Kevin)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -117,6 +117,8 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
           ))}
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         {stories.length > 0 && (
           <section className={s.section} aria-labelledby="kc-chat">
             <h2 id="kc-chat">Riwayat Chat</h2>
@@ -151,6 +153,8 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {grid.length > 0 && (
           <section className={s.section} aria-labelledby="kc-galeri">
             <h2 id="kc-galeri">Galeri</h2>
@@ -166,6 +170,9 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="kc-kado">

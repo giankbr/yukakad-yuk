@@ -2,7 +2,7 @@
 // Theme "Playlist" — undangan bergaya aplikasi streaming musik gelap (design: Tema Playlist (Kania & Dimas)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -119,6 +119,8 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="pl-mempelai">
           <h2 id="pl-mempelai">Artis Bulan Ini</h2>
           <div className={s.artists}>
@@ -154,6 +156,8 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
             })}
           </ol>
         </section>
+
+        <Extras slot="event" className={s.extras} />
 
         <section className={s.section} aria-label="Ringkasan">
           <div className={s.wrapped}>
@@ -199,6 +203,10 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
             )}
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="pl-kado">

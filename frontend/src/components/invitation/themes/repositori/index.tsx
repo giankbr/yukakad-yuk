@@ -1,7 +1,7 @@
 "use client";
 // Theme "Repositori" — undangan bergaya repositori kode / pull request (design: Tema Repositori (Raka & Tami)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -153,6 +153,8 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="repo-mempelai">
           <h2 className={s.head} id="repo-mempelai"><Lucide icon={ic.users} size={16} color="#8d96a0" />contributors (2)</h2>
           {people.map(person => (
@@ -205,6 +207,8 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.section} aria-labelledby="repo-galeri">
             <h2 className={s.head} id="repo-galeri"><Lucide icon={ic.image} size={16} color="#8d96a0" />assets/prewedding/</h2>
@@ -218,6 +222,10 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="repo-kado">

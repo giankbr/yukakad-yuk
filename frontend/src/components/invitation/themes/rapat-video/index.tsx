@@ -1,7 +1,7 @@
 "use client";
 // Theme "Rapat Video" — undangan bergaya aplikasi rapat video (design: Undangan — Tema Rapat Video (Rani & Yudha)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -131,6 +131,8 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
           </div>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="rv-agenda">
           <h2 id="rv-agenda">Agenda Rapat</h2>
           {data.events.map((event, index) => {
@@ -152,6 +154,8 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
             );
           })}
         </section>
+
+        <Extras slot="event" className={s.extras} />
 
         {stories.length > 0 && (
           <section className={s.section} aria-labelledby="rv-story">
@@ -184,6 +188,9 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="rv-gift">

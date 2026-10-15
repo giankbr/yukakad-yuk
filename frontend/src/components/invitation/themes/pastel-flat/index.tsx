@@ -2,7 +2,7 @@
 // Theme "Pastel Flat" — ilustrasi flat lucu, palet pink-pastel, kartu membulat.
 import { useState, type FormEvent } from "react";
 import {
-  GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, giftInfo, guestLabel,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, coupleLabel, dateParts, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
@@ -83,7 +83,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
     const message = String(form.get("message") ?? "").trim();
     const guests = attendance === "no" ? 1 : Number(form.get("guests")) || 1;
     if (!name) return;
-    void rsvp.submit({ name, attendance, guests, message });
+    void rsvp.submit({ name, attendance, guests, message, diet: String(form.get("diet") ?? "").trim() || undefined });
     if (message) void wishes.send(name, message);
   };
 
@@ -120,6 +120,8 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
         </section>
 
         {data.couple.note && <p className={s.quote}>“{data.couple.note.replace(/^[“"]|[”"]$/g, "")}”</p>}
+
+        <Extras slot="opening" />
 
         <section className={`${s.band} ${s.alt}`} aria-labelledby="pf-couple">
           <Head id="pf-couple">Mempelai</Head>
@@ -163,6 +165,8 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
           ))}
           {maps && <a className={s.btn} href={maps} target="_blank" rel="noreferrer"><Lucide icon={ic.mapPin} size={15} />Lihat Lokasi di Maps</a>}
         </section>
+
+        <Extras slot="event" without={["calendar"]} />
 
         {stories.length > 0 && (
           <section className={s.band} aria-labelledby="pf-story">
@@ -215,6 +219,10 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
             )}
           </section>
         )}
+
+        <Extras slot="story" />
+
+        <Extras slot="end" />
 
         {data.gifts.length > 0 && (
           <section className={s.band} aria-labelledby="pf-gift">
@@ -274,6 +282,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
                   ))}
                 </fieldset>
                 {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+                {attendance !== "no" && <DietaryField className={s.field} />}
                 {(rsvp.status === "error" || wishes.status === "error") && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
                 <button type="submit" className={`${s.btn} ${s.submit}`} disabled={sending}>{sending ? "Mengirim…" : "Kirim Ucapan"}</button>
               </form>

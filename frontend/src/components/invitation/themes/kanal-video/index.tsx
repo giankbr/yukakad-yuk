@@ -2,7 +2,7 @@
 // Theme "Kanal Video" — undangan bergaya platform video (design: Undangan — Tema Video (Dika & Putri)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -11,7 +11,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Roboto:wght@400;500;600;700"];
 const tint: ThemeTint = {
-  "--t-accent": "#ff0033", "--t-bg": "#ffffff", "--t-ink": "#0f0f0f", "--t-muted": "#606060", "--t-line": "#e5e5e5",
+  "--t-accent": "#ff0033", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#0f0f0f", "--t-muted": "#606060", "--t-line": "#e5e5e5",
   "--t-field": "#f2f2f2", "--t-radius": "12px", "--t-font": "Roboto, system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -155,6 +155,8 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} id="kv-couple" aria-labelledby="kv-couple-h">
           <h2 id="kv-couple-h">Channel Mempelai</h2>
           {people.map((person, index) => (
@@ -217,6 +219,8 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
           })}
         </section>
 
+        <Extras slot="event" without={["calendar"]} className={s.extras} />
+
         {clips.length > 0 && (
           <section className={s.section} id="kv-gallery" aria-labelledby="kv-gallery-h">
             <h2 id="kv-gallery-h">Video &amp; Momen</h2>
@@ -233,6 +237,10 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} id="kv-gift" aria-labelledby="kv-gift-h">

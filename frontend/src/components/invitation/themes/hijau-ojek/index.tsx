@@ -1,7 +1,7 @@
 "use client";
 // Theme "Hijau Ojek" — undangan bergaya aplikasi ojek online (design: Undangan — Tema Hijau Ojek (Sigit & Ratna)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -10,7 +10,7 @@ import s from "./styles.module.css";
 const FONTS = ["Plus Jakarta Sans:wght@400;600;700;800"];
 const FONT = "'Plus Jakarta Sans', system-ui, sans-serif";
 const tint: ThemeTint = {
-  "--t-accent": "#00aa13", "--t-bg": "#ffffff", "--t-ink": "#1a1a1a", "--t-muted": "#697077", "--t-line": "#e0e3e7",
+  "--t-accent": "#00aa13", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1a1a1a", "--t-muted": "#697077", "--t-line": "#e0e3e7",
   "--t-field": "#f6f7f8", "--t-radius": "14px", "--t-font": FONT,
 };
 const DEMO_WISHES = [
@@ -150,6 +150,8 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
           ))}
         </nav>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} id="ho-couple" aria-labelledby="ho-couple-h">
           <div className={s.head}><h2 id="ho-couple-h">Profil Pengemudi Cinta</h2><span>Lengkap</span></div>
           {people.map(person => (
@@ -206,6 +208,8 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {gallery.length > 0 && (
           <section className={s.section} aria-labelledby="ho-gallery">
             <div className={s.head}><h2 id="ho-gallery">Galeri Perjalanan</h2><span>{demo ? "24 foto" : `${gallery.length} foto`}</span></div>
@@ -226,6 +230,8 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
           </section>
         )}
 
+        <Extras slot="story" className={s.extras} />
+
         {demo && (
           <section className={s.section} aria-labelledby="ho-wishlist">
             <div className={s.head}><h2 id="ho-wishlist">Wishlist Kado</h2><span>Belanja</span></div>
@@ -241,6 +247,8 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
             </div>
           </section>
         )}
+
+        <Extras slot="end" className={s.extras} />
 
         {data.gifts.length > 0 && (
           <section className={s.section} id="ho-gift" aria-labelledby="ho-gift-h">

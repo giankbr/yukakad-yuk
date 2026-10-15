@@ -2,7 +2,7 @@
 // Theme "Bali Kuning" — undangan adat Bali: krem, emas, kamboja (design: Undangan — Tema Bali Kuning (Dewa & Ayu)).
 import { useRef, useState, type FormEvent } from "react";
 import {
-  GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
+  DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, dateParts, giftInfo, guestLabel, mapsHref, storyItems,
   toDate, useCopy, useCountdown, useRsvp, useWishes, type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import type { GiftMethod, InvitationData } from "../../types";
@@ -133,7 +133,7 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
     const message = String(form.get("message") ?? "").trim();
     const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
     if (!name || !message) return;
-    void rsvp.submit({ name, attendance, guests, message });
+    void rsvp.submit({ name, attendance, guests, message, diet: String(form.get("diet") ?? "").trim() || undefined });
     void wishes.send(name, message);
   };
 
@@ -171,6 +171,8 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
         </section>
 
         {data.couple.note && <blockquote className={s.quote}>“{data.couple.note}”</blockquote>}
+
+        <Extras slot="opening" />
 
         <section className={`${s.section} ${s.alt}`} aria-labelledby="bk-couple">
           <Head id="bk-couple">Mempelai</Head>
@@ -214,6 +216,8 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
           {maps && <a className={s.pill} href={maps} target="_blank" rel="noreferrer"><Lucide icon={ic.mapPin} size={15} />Lihat Lokasi di Maps</a>}
         </section>
 
+        <Extras slot="event" without={["calendar"]} />
+
         {stories.length > 0 && (
           <section className={s.section} aria-labelledby="bk-story">
             <Head id="bk-story">Kisah Kami</Head>
@@ -238,6 +242,10 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
             <Filmstrip images={gallery} />
           </section>
         )}
+
+        <Extras slot="story" />
+
+        <Extras slot="end" />
 
         {data.gifts.length > 0 && (
           <section className={s.section} aria-labelledby="bk-gift">
@@ -288,6 +296,7 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
                 ))}
               </fieldset>
               {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+              {attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
               <button type="submit" className={s.pillWide} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
             </form>

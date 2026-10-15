@@ -1,6 +1,9 @@
 .root, .cover {
   --bg: #fafafc; --ink: #1d1d1f; --muted: #86868b; --body: #3a3a3c; --line: #e8e8ed; --chip: #f2f2f7; --red: #fa2d48; --blush: #f0e2e6;
   font-family: Inter, system-ui, sans-serif; line-height: 1.21; color: var(--ink); background: var(--bg);
+  --t-accent: #fa2d48; --t-accent-ink: #ffffff; --t-bg: #ffffff; --t-ink: #1d1d1f; --t-muted: #86868b; --t-line: #e8e8ed;
+  --t-field: #f2f2f7; --t-radius: 12px; --t-font: Inter, system-ui, sans-serif;
+  --t-heading-font: Inter, system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 22px; --t-heading-align: left;
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, figure, ol, ul) { margin: 0; padding: 0; }
@@ -121,3 +124,6 @@ a.pill:hover { background: #e9e9f0; }
 @media (prefers-reduced-motion: reduce) {
   .root *, .cover * { transition: none !important; animation: none !important; }
 }
+
+/* Shared extra sections, hosted in a white library card */
+.root .extras { gap: 28px; margin: 0 16px; padding: 18px 16px; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); }

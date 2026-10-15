@@ -1,7 +1,7 @@
 "use client";
 // Theme "Poin Ungu" — undangan bergaya aplikasi poin/loyalti (design: Poin Bahagia, Putra & Keisha).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -9,7 +9,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Poppins:wght@400;600;700;800", "JetBrains Mono:wght@700"];
 const tint: ThemeTint = {
-  "--t-accent": "#4f2bd1", "--t-bg": "#ffffff", "--t-ink": "#2b1f5c", "--t-muted": "#6e6a8a", "--t-line": "#ece7fa",
+  "--t-accent": "#4f2bd1", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#2b1f5c", "--t-muted": "#6e6a8a", "--t-line": "#ece7fa",
   "--t-field": "#f5f3fb", "--t-radius": "14px", "--t-font": "'Poppins', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -132,6 +132,8 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
           <button type="button" onClick={sheets.openRsvp}><Lucide icon={ic.utensils} size={18} color="#4f2bd1" /><strong>Makan enak</strong><small>0 poin</small></button>
         </nav>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.card} aria-labelledby="pu-member">
           <div className={s.head}><h2 id="pu-member">Member Prioritas</h2></div>
           {people.map(person => (
@@ -172,6 +174,8 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
           </button>
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {gallery.length > 0 && (
           <section className={s.card} id="pu-gallery" aria-labelledby="pu-gallery-h">
             <div className={s.head}><h2 id="pu-gallery-h">Galeri Momen</h2><span>{gallery.length}</span></div>
@@ -185,6 +189,9 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="pu-gift">

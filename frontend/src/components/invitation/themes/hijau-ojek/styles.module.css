@@ -2,6 +2,9 @@
   --green: #00aa13; --green-dark: #008a0f; --green-soft: #e6f6e6; --ink: #1a1a1a; --muted: #697077; --line: #e0e3e7;
   --line-soft: #edeff2; --bg: #f6f7f8; --star: #f5a623; --blue: #005bac;
   font-family: "Plus Jakarta Sans", system-ui, sans-serif; line-height: normal; color: var(--ink); background: var(--bg);
+  --t-accent: #00aa13; --t-accent-ink: #ffffff; --t-bg: #ffffff; --t-ink: #1a1a1a; --t-muted: #697077; --t-line: #e0e3e7;
+  --t-field: #f6f7f8; --t-radius: 14px; --t-font: "Plus Jakarta Sans", system-ui, sans-serif;
+  --t-heading-font: "Plus Jakarta Sans", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 22px; --t-heading-align: left;
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, figure, ol) { margin: 0; }
@@ -133,3 +136,6 @@
 .root :is(button, a):focus-visible, .cover :is(button, a):focus-visible { outline: 2px solid var(--green-dark); outline-offset: 2px; }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 @media (prefers-reduced-motion: reduce) { .pin { animation: none; } }
+
+/* Shared extra sections, hosted as a white app panel like the other sections */
+.root .extras { gap: 28px; padding: 16px; background: #fff; color: var(--ink); }

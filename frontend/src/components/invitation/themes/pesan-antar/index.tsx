@@ -1,7 +1,7 @@
 "use client";
 // Theme "Pesan-Antar" — undangan bergaya aplikasi pesan-antar makanan (design: Undangan — Tema Pesan-Antar (Rendi & Salma)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -9,7 +9,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Figtree:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#00b14f", "--t-bg": "#ffffff", "--t-ink": "#1c1c1c", "--t-muted": "#707579", "--t-line": "#edeff1",
+  "--t-accent": "#00b14f", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1c1c1c", "--t-muted": "#707579", "--t-line": "#edeff1",
   "--t-field": "#f7f7f7", "--t-radius": "12px", "--t-font": "Figtree, system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -129,6 +129,8 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="pa-status">
           <h2 id="pa-status">Status Pengiriman Cinta</h2>
           <ol className={s.track}>
@@ -191,6 +193,8 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.section} aria-labelledby="pa-gallery">
             <h2 id="pa-gallery">Menu Favorit Kami</h2>
@@ -208,6 +212,8 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
           </section>
         )}
 
+        <Extras slot="story" className={s.extras} />
+
         {demo && (
           <section className={s.section} aria-labelledby="pa-wishlist">
             <h2 id="pa-wishlist">Menu Wishlist Kado</h2>
@@ -223,6 +229,8 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
             </div>
           </section>
         )}
+
+        <Extras slot="end" className={s.extras} />
 
         {data.gifts.length > 0 && (
           <section className={s.section} aria-labelledby="pa-gift">

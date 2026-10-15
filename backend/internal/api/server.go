@@ -719,6 +719,10 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		s.handlePublicWishes(w, r, strings.TrimSuffix(parts, "/wishes"))
 		return
 	}
+	if strings.HasSuffix(parts, "/wishlist/claim") {
+		s.handlePublicWishlistClaim(w, r, strings.TrimSuffix(parts, "/wishlist/claim"))
+		return
+	}
 	if strings.HasSuffix(parts, "/gifts") {
 		invitationSlug := strings.TrimSuffix(parts, "/gifts")
 		invitation, exists := s.store.FindInvitationBySlug(invitationSlug)

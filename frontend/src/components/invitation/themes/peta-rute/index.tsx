@@ -2,7 +2,7 @@
 // Theme "Peta Rute" — undangan bergaya aplikasi peta & navigasi (design: Undangan — Tema Peta (Laras & Galih)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -175,6 +175,8 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
           })}
         </section>
 
+        <Extras slot="event" without={["calendar"]} className={s.extras} />
+
         <section className={s.section} aria-labelledby="pr-pemilik">
           <h2 id="pr-pemilik">Tentang Pemilik Tempat</h2>
           <p className={s.sub}>{start ? `Dikelola dua hati sejak ${start}` : "Dikelola dua hati"}</p>
@@ -186,6 +188,8 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
             </article>
           ))}
         </section>
+
+        <Extras slot="opening" className={s.extras} />
 
         {stories.length > 0 && (
           <section className={s.section} aria-labelledby="pr-riwayat">
@@ -217,6 +221,9 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="pr-hadiah">

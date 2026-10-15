@@ -2,7 +2,7 @@
 // Theme "Surel" — undangan bergaya kotak masuk email (design: Undangan — Tema Surel (Sinta & Haris)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -161,6 +161,8 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
           </p>
         </div>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.invite} aria-label="Undangan kalender">
           {data.events.map((event, index) => {
             const parts = dateParts(event.date || data.date);
@@ -187,6 +189,8 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
             <button type="button" onClick={() => sheets.openRsvp("no")}>Tidak</button>
           </div>
         </section>
+
+        <Extras slot="event" className={s.extras} />
 
         {stories.length > 0 && (
           <section className={s.thread} aria-labelledby="sr-story">
@@ -222,6 +226,9 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.kado} aria-labelledby="sr-gift">

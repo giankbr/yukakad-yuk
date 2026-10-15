@@ -1,6 +1,6 @@
-import type { GiftMethod, InvitationData } from "@/components/invitation/types";
+import type { GiftMethod, InvitationData, InvitationExtras } from "@/components/invitation/types";
 import { FALLBACK_THEME, isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
-import { MusicPlayer } from "@/components/invitation/themes/kit";
+import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
 
 const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -19,6 +19,8 @@ type PublicContent = {
   theme?: string;
   music_url?: string;
   autoplay_music?: boolean;
+  /** Extra sections from the dashboard (an object; older invitations still store the legacy `[]`). */
+  sections_config?: unknown;
 };
 
 function authHeaders(previewToken?: string): HeadersInit | undefined {
@@ -98,6 +100,13 @@ export default async function PublicInvitationPage({
     events: events.length ? events : invitation.events,
     stories: storyList.length ? storyList : undefined,
     music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,
+    extras: settings.sections_config && typeof settings.sections_config === "object" && !Array.isArray(settings.sections_config)
+      ? settings.sections_config as InvitationExtras : undefined,
   };
-  return <><Theme data={data} slug={slug} guestToken={guestToken} />{!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}</>;
+  return (
+    <InvitationProvider data={data} slug={slug} guestToken={guestToken}>
+      <Theme data={data} slug={slug} guestToken={guestToken} />
+      {!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}
+    </InvitationProvider>
+  );
 }

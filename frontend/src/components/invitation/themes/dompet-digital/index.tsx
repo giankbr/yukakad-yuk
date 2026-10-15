@@ -2,7 +2,7 @@
 // Theme "Dompet Digital" — undangan bergaya bukti transfer e-wallet (design: Dompet Cinta, Nisa & Fajar).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -10,7 +10,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Inter:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#108ee9", "--t-bg": "#ffffff", "--t-ink": "#20232a", "--t-muted": "#78808c", "--t-line": "#dde5ee",
+  "--t-accent": "#108ee9", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#20232a", "--t-muted": "#78808c", "--t-line": "#dde5ee",
   "--t-field": "#f2f5f9", "--t-radius": "12px", "--t-font": "'Inter', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -170,6 +170,8 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
           </nav>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.card} id="dd-couple" aria-labelledby="dd-couple-h">
           <div className={s.cardHead}><h2 id="dd-couple-h">Pemilik Rekening Bersama</h2></div>
           {people.map((person, index) => (
@@ -226,6 +228,8 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
           </section>
         )}
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.card} id="dd-gallery" aria-labelledby="dd-gallery-h">
             <div className={s.cardHead}><h2 id="dd-gallery-h">Voucher Kenangan</h2><span>{data.gallery.length} foto</span></div>
@@ -239,6 +243,9 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} id="dd-gift" aria-labelledby="dd-gift-h">

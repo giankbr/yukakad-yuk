@@ -1,7 +1,7 @@
 "use client";
 // Theme "Arena Legenda" — undangan bergaya game MOBA (design: Undangan — Tema Arena Legenda (Aldo & Vina)).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -121,6 +121,8 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
       </header>
 
       <main className={s.body}>
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="al-hero">
           <Head id="al-hero">PILIH HERO</Head>
           {heroes.map((hero, index) => (
@@ -181,6 +183,8 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
           })}
         </section>
 
+        <Extras slot="event" className={s.extras} />
+
         {data.gallery.length > 0 && (
           <section className={s.section} aria-labelledby="al-gallery">
             <Head id="al-gallery">KOLEKSI SKIN</Head>
@@ -194,6 +198,8 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
             </div>
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
 
         {demo && (
           <section className={s.section} aria-labelledby="al-shop">
@@ -211,6 +217,8 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
             <p className={s.fine}>1 diamond = Rp1.000 · atau kirim langsung ke alamat di bawah</p>
           </section>
         )}
+
+        <Extras slot="end" className={s.extras} />
 
         {data.gifts.length > 0 && (
           <section className={s.section} aria-labelledby="al-gift">

@@ -1,7 +1,7 @@
 "use client";
 // Theme "Koran" — undangan bergaya surat kabar (design: Warta Bahagia, Ayu & Teguh).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -118,6 +118,8 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
           <span>HLM. 2 · RUBRIK {label.toUpperCase()}</span>
         </header>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="ko-couple">
           <div className={s.sectionHead}><h2 id="ko-couple">PROFIL MEMPELAI</h2></div>
           <div className={s.couple}>
@@ -168,6 +170,8 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
           </section>
         )}
 
+        <Extras slot="event" className={s.extras} />
+
         {mainPhoto && (
           <section className={s.section} aria-labelledby="ko-gallery">
             <div className={s.sectionHead}><h2 id="ko-gallery">GALERI FOTO</h2></div>
@@ -189,6 +193,9 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
             )}
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="ko-gift">

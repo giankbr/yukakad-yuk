@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -115,6 +115,12 @@ function invitationNav(id: string): NavItem[] {
 			label: "Tema & Musik",
 			href: `/dashboard/invitations/${id}/settings`,
 			icon: <PhMusicNotes size={16} />,
+		},
+		{
+			key: "sections",
+			label: "Section Tambahan",
+			href: `/dashboard/invitations/${id}/sections`,
+			icon: <PhStack size={16} />,
 		},
 		{
 			key: "preview",

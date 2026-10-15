@@ -2,7 +2,7 @@
 // Theme "Streaming" — undangan ala serial streaming (design: Undangan — Tema Streaming (Sekar & Damar)).
 import { useState } from "react";
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleInitials, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleInitials, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useSheets, useWishes, type Attendance, type ThemeProps, type ThemeTint,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -163,6 +163,8 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
           </div>
         </section>
 
+        <Extras slot="opening" className={s.extras} />
+
         <section className={s.section} aria-labelledby="st-cast">
           <h2 id="st-cast">Pemeran Utama</h2>
           <div className={s.castRow}>
@@ -269,6 +271,8 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
           </section>
         )}
 
+        <Extras slot="story" className={s.extras} />
+
         <section id="st-acara" className={s.section} aria-labelledby="st-events">
           <h2 id="st-events">Jadwal Tayang</h2>
           {data.events.map((event, index) => {
@@ -288,6 +292,10 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
             );
           })}
         </section>
+
+        <Extras slot="event" without={["calendar"]} className={s.extras} />
+
+        <Extras slot="end" className={s.extras} />
 
         {data.gifts.length > 0 && (
           <section id="st-kado" className={s.section} aria-labelledby="st-gift">

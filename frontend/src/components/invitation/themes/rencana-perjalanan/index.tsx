@@ -1,7 +1,7 @@
 "use client";
 // Theme "Rencana Perjalanan" — undangan bergaya aplikasi travel/itinerary (design: Arga & Bella, Bali).
 import {
-  Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, safeUrl, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import type { InvitationData } from "../../types";
@@ -10,7 +10,7 @@ import s from "./styles.module.css";
 
 const FONTS = ["Mulish:wght@400;600;700;800"];
 const tint: ThemeTint = {
-  "--t-accent": "#ff5e1f", "--t-bg": "#ffffff", "--t-ink": "#1f2a37", "--t-muted": "#687176", "--t-line": "#e4eef7",
+  "--t-accent": "#ff5e1f", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1f2a37", "--t-muted": "#687176", "--t-line": "#e4eef7",
   "--t-field": "#f3f8fc", "--t-radius": "12px", "--t-font": "'Mulish', system-ui, sans-serif",
 };
 const DEMO_WISHES = [
@@ -151,6 +151,8 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
           </section>
         )}
 
+        <Extras slot="event" className={s.extras} />
+
         <section className={s.card} aria-labelledby="rp-host">
           <div className={s.head}><h2 id="rp-host">Host Perjalananmu</h2></div>
           <div className={s.hosts}>
@@ -165,6 +167,8 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
             ))}
           </div>
         </section>
+
+        <Extras slot="opening" className={s.extras} />
 
         {stories.length > 0 && (
           <section className={s.card} aria-labelledby="rp-story">
@@ -198,6 +202,9 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
             )}
           </section>
         )}
+
+        <Extras slot="story" className={s.extras} />
+        <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="rp-gift">

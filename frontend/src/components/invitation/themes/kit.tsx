@@ -11,6 +11,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState, type CSSPrope
 import type { GiftMethod, InvitationData } from "../types";
 import kit from "./kit.module.css";
 import { autoReveal, revealChildren } from "@/lib/reveal";
+import { DietaryField, ThankYouBanner, useThankYou } from "./extras";
 
 export type ThemeProps = {
   data: InvitationData;
@@ -85,7 +86,7 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
             <div ref={coverRef} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh" }}>{cover(open)}</div>
           </div>
         )}
-        <div ref={mainRef} aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}>{children}</div>
+        <div ref={mainRef} aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}><ThankYouBanner />{children}</div>
       </div>
     </div>
   );
@@ -194,7 +195,7 @@ export function useCountdown(value?: string) {
 /* ── RSVP ───────────────────────────────────────────────────────── */
 
 export type Attendance = "yes" | "no" | "maybe";
-export type RsvpInput = { name: string; attendance: Attendance; guests?: number; message?: string };
+export type RsvpInput = { name: string; attendance: Attendance; guests?: number; message?: string; diet?: string };
 
 export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "guestToken" | "demo">) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -210,7 +211,7 @@ export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "g
           guest_token: guestToken,
           attendance: input.attendance,
           attendees_count: Math.min(10, Math.max(1, input.guests ?? 1)),
-          message: `${input.name}: ${input.message ?? ""}`.trim(),
+          message: `${input.name}: ${input.message ?? ""}${input.diet ? ` [Catatan makanan: ${input.diet}]` : ""}`.trim(),
         }),
       });
       setStatus(response.ok ? "sent" : "error");
@@ -230,6 +231,7 @@ export function readRsvpForm(form: HTMLFormElement): RsvpInput {
     attendance: attendance === "no" || attendance === "maybe" ? attendance : "yes",
     guests: Number(data.get("guests") ?? 1) || 1,
     message: String(data.get("message") ?? "").trim(),
+    diet: String(data.get("diet") ?? "").trim() || undefined,
   };
 }
 
@@ -373,6 +375,16 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
   labels?: { submit?: string; yes?: string; maybe?: string; no?: string; success?: string };
 }) {
   const [guests, setGuests] = useState(1);
+  const thanks = useThankYou();
+  if (thanks.active) {
+    return (
+      <div className={kit.state} role="status">
+        <span className={kit.badge}><Icon d={icons.heart} size={24} strokeWidth={2.4} /></span>
+        <strong>Konfirmasi kehadiran sudah ditutup</strong>
+        <p>Acara telah berlangsung. Terima kasih atas doa dan perhatiannya.</p>
+      </div>
+    );
+  }
   if (rsvp.status === "sent") {
     return (
       <div className={kit.state} role="status">
@@ -401,6 +413,7 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
           <button type="button" onClick={() => setGuests(g => Math.min(10, g + 1))} aria-label="Tambah">+</button>
         </div>
       </div>
+      <DietaryField className={kit.field} />
       <label className={kit.field}>Pesan (opsional)<textarea name="message" maxLength={500} rows={3} placeholder="Tulis doa atau pesan…" /></label>
       {rsvp.status === "error" && <p className={kit.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
       <button type="submit" className={kit.submit} disabled={rsvp.status === "sending"}>{rsvp.status === "sending" ? "Mengirim…" : labels?.submit ?? "Kirim Konfirmasi"}</button>
@@ -539,3 +552,5 @@ export function Lucide({ icon, size = 16, color = "currentColor", strokeWidth = 
       dangerouslySetInnerHTML={{ __html: icon }} />
   );
 }
+
+export { Extras, DietaryField, InvitationProvider, useInvitation, useThankYou } from "./extras";
