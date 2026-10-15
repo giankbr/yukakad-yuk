@@ -1,7 +1,7 @@
 /* Page-specific layouts for Rawuh marketing pages (Harga, Fitur, Tentang, Produk, Tema). */
 
 /* ── Page heads ──────────────────────────── */
-.head { display: grid; gap: 24px; padding: 64px var(--gutter) 56px; border-bottom: 1px solid var(--rw-border-warm); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 64px var(--gutter) 56px; border-bottom: 1px solid var(--rw-border-warm); }
 .headCenter { justify-items: center; text-align: center; }
 .headCenter .lead { max-width: 620px; }
 .headRow { display: flex; justify-content: space-between; align-items: end; gap: 40px; flex-wrap: wrap; }
@@ -342,15 +342,27 @@
 .browserNames span { white-space: nowrap; }
 .browserNames input { flex: 1; min-width: 60px; border: 0; outline: none; background: transparent; color: var(--rw-ink); font: inherit; font-weight: 600; padding: 0; }
 .browserNames:focus-within { border-color: var(--rw-primary); }
-.browserFilter { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin: 32px calc(-1 * var(--gutter)) 0; padding: 14px var(--gutter); border-block: 1px solid var(--rw-border-warm); background: var(--rw-surface-2); }
-.browserTabs { display: flex; flex-wrap: wrap; gap: 4px; }
-.browserTabs button, .browserToggle { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--rw-ink-2); font-size: 14px; font-weight: 500; cursor: pointer; }
-.browserTabs button small { color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 10px; }
-.browserTabs button:hover, .browserToggle:hover { background: #fff; }
-.browserTabs button[aria-pressed="true"] { background: var(--rw-ink); color: #fff; }
-.browserTabs button[aria-pressed="true"] small { color: var(--rw-muted-2); }
-.browserToggle { border-color: var(--rw-border-warm); background: #fff; }
-.browserToggle[aria-pressed="true"] { border-color: var(--rw-primary-border); background: var(--rw-primary-soft); color: var(--rw-primary-hover); }
+.browserFilter { min-width: 0; display: flex; align-items: center; gap: 12px; margin: 32px calc(-1 * var(--gutter)) 0; padding: 14px var(--gutter); border-block: 1px solid var(--rw-border-warm); background: var(--rw-surface-2); }
+.browserTabs { flex: 1; min-width: 0; margin-top: 0 !important; }
+.browserTabs > div[role="group"] { background: #fff; }
+.browserToggle {
+  display: inline-flex; flex: none; align-items: center; gap: 8px; height: 48px; padding: 0 10px 0 16px; border: 1px solid var(--rw-border-warm); border-radius: 999px;
+  background: #fff; color: var(--rw-ink-2); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: border-color 160ms, background 160ms, color 160ms;
+}
+.browserToggle svg { color: var(--rw-muted-2); transition: color 160ms; }
+.browserToggle i { position: relative; width: 34px; height: 20px; border-radius: 999px; background: #d6d3d1; transition: background 160ms; }
+.browserToggle i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); transition: translate 160ms; }
+.browserToggle:hover { border-color: var(--rw-primary-border); }
+.browserToggle:focus-visible { outline: 2px solid var(--rw-primary); outline-offset: 2px; }
+.browserToggle[aria-checked="true"] { border-color: var(--rw-primary-border); background: var(--rw-primary-soft); color: var(--rw-primary-hover); }
+.browserToggle[aria-checked="true"] svg { color: var(--rw-primary); }
+.browserToggle[aria-checked="true"] i { background: var(--rw-primary); }
+.browserToggle[aria-checked="true"] i::after { translate: 14px 0; }
+@media (max-width: 640px) {
+  .browserFilter { flex-direction: column; align-items: stretch; }
+  .browserToggle { justify-content: space-between; }
+  .browserToggle span { flex: 1; text-align: left; }
+}
 .browserResults { display: grid; gap: 24px; padding-top: 32px; }
 .browserSummary { color: var(--rw-muted); font-size: 14px; }
 .browserMore { display: flex; justify-content: center; padding-top: 16px; }

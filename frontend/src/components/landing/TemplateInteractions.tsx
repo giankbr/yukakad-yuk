@@ -46,8 +46,6 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
     return acc;
   }, {});
   const categories = Object.keys(counts);
-  const tagRow = useRef<HTMLDivElement>(null);
-  const [edges, setEdges] = useState({ start: false, end: false });
   const needle = query.trim().toLowerCase();
   const visible = templates.filter(template => (!category || template.category === category)
     && (!needle || `${template.name} ${template.category}`.toLowerCase().includes(needle)));
@@ -65,22 +63,6 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // Category row scrolls horizontally; track which edges still have hidden chips.
-  useEffect(() => {
-    const row = tagRow.current;
-    if (!row) return;
-    const update = () => setEdges({ start: row.scrollLeft > 4, end: row.scrollLeft + row.clientWidth < row.scrollWidth - 4 });
-    update();
-    row.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => { row.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
-  }, []);
-
-  function scrollTags(direction: 1 | -1) {
-    const row = tagRow.current;
-    if (row) row.scrollBy({ left: direction * row.clientWidth * 0.7, behavior: "smooth" });
-  }
-
   return (
     <div className={styles.themes}>
       <div className={styles.sectionHeader}>
@@ -96,22 +78,7 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
           <kbd aria-hidden="true">⌘K</kbd>
         </label>
       </div>
-      <div className={styles.tagBar} data-start={edges.start || undefined} data-end={edges.end || undefined}>
-        <button type="button" className={styles.tagNav} data-dir="prev" onClick={() => scrollTags(-1)} aria-label="Kategori sebelumnya" tabIndex={-1} hidden={!edges.start}>
-          <IconArrowRight size={16} />
-        </button>
-        <div ref={tagRow} className={styles.tags} role="group" aria-label="Filter kategori tema">
-          {["", ...categories].map(value => (
-            <button type="button" key={value || "all"} aria-pressed={category === value} onClick={() => setCategory(value)}>
-              <span>{value || "Semua tema"}</span>
-              <small>{value ? counts[value] : templates.length}</small>
-            </button>
-          ))}
-        </div>
-        <button type="button" className={styles.tagNav} data-dir="next" onClick={() => scrollTags(1)} aria-label="Kategori berikutnya" tabIndex={-1} hidden={!edges.end}>
-          <IconArrowRight size={16} />
-        </button>
-      </div>
+      <CategoryBar categories={categories} counts={counts} total={templates.length} value={category} onChange={setCategory} />
       {visible.length === 0 ? (
         <p className={styles.empty} role="status">Belum ada tema yang cocok. Coba kata kunci lain.</p>
       ) : (
@@ -152,6 +119,48 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
           : clip && <Link href="/templates" className={styles.btnPrimary}>Lihat semua tema <IconArrowRight size={14} /></Link>}
         <p role="status">{visible.length} tema{category ? ` ${category}` : ""}</p>
       </div>}
+    </div>
+  );
+}
+
+/** Horizontally scrollable category pills with counts, edge fades and prev/next buttons. */
+export function CategoryBar({ categories, counts, total, value, onChange, allLabel = "Semua tema", className }: {
+  categories: string[]; counts: Record<string, number>; total: number; value: string; onChange: (value: string) => void;
+  allLabel?: string; className?: string;
+}) {
+  const row = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ start: false, end: false });
+
+  useEffect(() => {
+    const element = row.current;
+    if (!element) return;
+    const update = () => setEdges({ start: element.scrollLeft > 4, end: element.scrollLeft + element.clientWidth < element.scrollWidth - 4 });
+    update();
+    element.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => { element.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+  }, []);
+
+  function scroll(direction: 1 | -1) {
+    row.current?.scrollBy({ left: direction * row.current.clientWidth * 0.7, behavior: "smooth" });
+  }
+
+  return (
+    <div className={`${styles.tagBar} ${className ?? ""}`} data-start={edges.start || undefined} data-end={edges.end || undefined}>
+      <button type="button" className={styles.tagNav} data-dir="prev" onClick={() => scroll(-1)} aria-label="Kategori sebelumnya" tabIndex={-1} hidden={!edges.start}>
+        <IconArrowRight size={16} />
+      </button>
+      <div ref={row} className={styles.tags} role="group" aria-label="Filter kategori tema">
+        {["", ...categories].map(item => (
+          <button type="button" key={item || "all"} aria-pressed={value === item} onClick={() => onChange(item)}>
+            <span>{item || allLabel}</span>
+            <small>{item ? counts[item] : total}</small>
+          </button>
+        ))}
+      </div>
+      <button type="button" className={styles.tagNav} data-dir="next" onClick={() => scroll(1)} aria-label="Kategori berikutnya" tabIndex={-1} hidden={!edges.end}>
+        <IconArrowRight size={16} />
+      </button>
     </div>
   );
 }

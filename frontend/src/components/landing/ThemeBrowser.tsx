@@ -6,6 +6,7 @@ import Link from "next/link";
 import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { IconPencil, IconSearch, IconSparkle } from "@/components/brand/icons";
+import { CategoryBar } from "@/components/landing/TemplateInteractions";
 
 export type BrowserTemplate = {
   id: string; slug: string; name: string; category: string; preview?: string; demoHref: string; isPremium: boolean; price: string;
@@ -75,14 +76,13 @@ export function ThemeBrowser({ templates }: { templates: BrowserTemplate[] }) {
       </label>
     </div>
     <div className={browser.filterBar}>
-      <div className={browser.tabs} role="group" aria-label="Kategori tema">
-        {["", ...Object.keys(counts)].map(value => (
-          <button key={value || "all"} type="button" aria-pressed={category === value} onClick={() => { setCategory(value); setLimit(PAGE); }}>
-            {value || "Semua"}<small>{value ? counts[value] : templates.length}</small>
-          </button>
-        ))}
-      </div>
-      <button type="button" className={browser.toggle} aria-pressed={premiumOnly} onClick={() => { setPremiumOnly(v => !v); setLimit(PAGE); }}>Hanya Premium</button>
+      <CategoryBar className={browser.tabs} categories={Object.keys(counts)} counts={counts} total={templates.length} value={category}
+        onChange={value => { setCategory(value); setLimit(PAGE); }} />
+      <button type="button" role="switch" className={browser.toggle} aria-checked={premiumOnly} onClick={() => { setPremiumOnly(v => !v); setLimit(PAGE); }}>
+        <IconSparkle size={15} weight="fill" />
+        <span>Hanya Premium</span>
+        <i aria-hidden />
+      </button>
     </div>
     <div className={browser.results}>
       <p className={browser.summary} role="status">Menampilkan {Math.min(limit, visible.length)} dari {visible.length} tema{category ? ` ${category}` : ""}</p>
