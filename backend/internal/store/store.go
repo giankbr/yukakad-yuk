@@ -77,6 +77,8 @@ type Store interface {
 	FindSubscriptionByReference(reference string) (*Subscription, bool)
 	GetActiveSubscription(userID string) (*Subscription, error)
 	UpdateSubscriptionStatus(id, status string) (*Subscription, error)
+	// ActivateSubscription marks it active from now until endsAt (nil = no expiry).
+	ActivateSubscription(id string, endsAt *time.Time) (*Subscription, error)
 	CancelActiveSubscriptions(userID string) error
 	ListSubscriptions(userID string) []*Subscription
 	CreateInvoice(Invoice) (*Invoice, error)
@@ -1552,6 +1554,17 @@ func (s *MemoryStore) UpdateSubscriptionStatus(id, status string) (*Subscription
 		return nil, fmt.Errorf("subscription not found")
 	}
 	sub.Status = status
+	return sub, nil
+}
+
+func (s *MemoryStore) ActivateSubscription(id string, endsAt *time.Time) (*Subscription, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	sub, ok := s.subscriptions[id]
+	if !ok {
+		return nil, fmt.Errorf("subscription not found")
+	}
+	sub.Status, sub.StartedAt, sub.EndsAt = "active", time.Now().UTC(), endsAt
 	return sub, nil
 }
 

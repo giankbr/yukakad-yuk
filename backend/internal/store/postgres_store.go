@@ -1197,6 +1197,10 @@ func (s *PostgresStore) UpdateSubscriptionStatus(id, status string) (*Subscripti
 	return scanSubscription(s.db.QueryRow(`UPDATE subscriptions SET status=$1 WHERE id=$2 RETURNING id,user_id,plan_id,status,COALESCE(provider,''),COALESCE(provider_reference,''),started_at,ends_at`, status, id))
 }
 
+func (s *PostgresStore) ActivateSubscription(id string, endsAt *time.Time) (*Subscription, error) {
+	return scanSubscription(s.db.QueryRow(`UPDATE subscriptions SET status='active', started_at=NOW(), ends_at=$1 WHERE id=$2 RETURNING id,user_id,plan_id,status,COALESCE(provider,''),COALESCE(provider_reference,''),started_at,ends_at`, endsAt, id))
+}
+
 func (s *PostgresStore) CancelActiveSubscriptions(userID string) error {
 	_, err := s.db.Exec(`UPDATE subscriptions SET status='cancelled' WHERE user_id=$1 AND status='active'`, userID)
 	return err

@@ -164,7 +164,8 @@ func (s *Service) Confirm(reference string) (*store.Subscription, error) {
 	if err := s.store.CancelActiveSubscriptions(sub.UserID); err != nil {
 		return nil, err
 	}
-	updated, err := s.store.UpdateSubscriptionStatus(sub.ID, "active")
+	// The paid period starts when the payment is confirmed, not when checkout was opened.
+	updated, err := s.store.ActivateSubscription(sub.ID, s.periodEnd(sub.PlanID))
 	if err != nil {
 		return nil, err
 	}
@@ -241,4 +242,47 @@ func (s *Service) VerifyPending(ctx context.Context, userID string) ([]*store.Su
 		}
 	}
 	return activated, nil
+}
+
+func (s *Service) periodEnd(planID string) *time.Time {
+	for _, plan := range s.store.ListPlans() {
+		if plan.ID == planID && plan.DurationDays != nil && *plan.DurationDays > 0 {
+			end := time.Now().UTC().AddDate(0, 0, *plan.DurationDays)
+			return &end
+		}
+	}
+	return nil
+}
+
+// GrantPlan is an admin's manual activation (e.g. after a bank transfer). It is recorded as an active
+// "manual" subscription so the expiry job keeps the plan for its normal duration instead of resetting it.
+func (s *Service) GrantPlan(userID, planID string) (*store.Subscription, error) {
+	if _, ok := s.store.FindUserByID(userID); !ok {
+		return nil, ErrUserNotFound
+	}
+	found := false
+	for _, plan := range s.store.ListPlans() {
+		if plan.ID == planID {
+			found = true
+		}
+	}
+	if !found {
+		return nil, ErrPlanNotFound
+	}
+	s.confirm.Lock()
+	defer s.confirm.Unlock()
+	if err := s.store.CancelActiveSubscriptions(userID); err != nil {
+		return nil, err
+	}
+	if err := s.store.SetUserPlan(userID, planID); err != nil {
+		return nil, err
+	}
+	if planID == "free" {
+		return nil, nil
+	}
+	sub, err := s.store.CreateSubscription(store.Subscription{UserID: userID, PlanID: planID, Status: "pending", Provider: "manual"})
+	if err != nil {
+		return nil, err
+	}
+	return s.store.ActivateSubscription(sub.ID, s.periodEnd(planID))
 }

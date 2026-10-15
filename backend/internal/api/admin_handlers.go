@@ -93,11 +93,16 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "plan_id is required"})
 			return
 		}
-		if err := s.store.SetUserPlan(userID, payload.PlanID); err != nil {
+		sub, err := s.billing.GrantPlan(userID, payload.PlanID)
+		if err != nil {
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 			return
 		}
-		writeJSON(w, http.StatusOK, map[string]string{"id": userID, "plan_id": payload.PlanID})
+		response := map[string]any{"id": userID, "plan_id": payload.PlanID}
+		if sub != nil && sub.EndsAt != nil {
+			response["ends_at"] = sub.EndsAt
+		}
+		writeJSON(w, http.StatusOK, response)
 		return
 	}
 
