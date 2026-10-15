@@ -5,7 +5,7 @@
 // --t-* tokens, so they look native on light and dark themes alike.
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import QRCode from "qrcode";
-import type { InvitationData, InvitationExtras, WishlistItem } from "../types";
+import type { InvitationData, InvitationExtras, OnlineGift, WishlistItem } from "../types";
 import x from "./extras.module.css";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
@@ -400,6 +400,131 @@ function WishlistBlock({ wishlist, slug, demo, guestName }: { wishlist: NonNulla
   );
 }
 
+/* ── Online envelope (paid through Rawuh / Mayar) ──────────────────── */
+
+const rupiah = (value: number) => `Rp${Math.round(value).toLocaleString("id-ID")}`;
+const PRESETS = [50000, 100000, 200000, 500000];
+const GIFT_REF_KEY = "rawuh_gift_ref";
+const PAYMENT_HOSTS = [/\.myr\.id$/, /(^|\.)mayar\.id$/, /(^|\.)mayar\.io$/];
+
+function storeRef(slug: string, ref: string) {
+  try { sessionStorage.setItem(GIFT_REF_KEY, JSON.stringify({ slug, ref })); } catch { /* storage unavailable */ }
+}
+function readRef(slug: string): string | null {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(GIFT_REF_KEY) ?? "null") as { slug?: string; ref?: string } | null;
+    return saved?.slug === slug && saved.ref ? saved.ref : null;
+  } catch { return null; }
+}
+
+function OnlineGiftBlock({ gift, slug, demo, guestName }: { gift: OnlineGift; slug: string; demo?: boolean; guestName?: string }) {
+  const [preset, setPreset] = useState<number | null>(PRESETS[1]);
+  const [custom, setCustom] = useState("");
+  const [name, setName] = useState(guestName && guestName !== "Tamu Undangan" ? guestName : "");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+  const [result, setResult] = useState<{ state: "checking" | "confirmed" | "pending" | "failed"; amount?: number } | null>(null);
+
+  // Back from Mayar (?amplop=selesai): confirm the payment we started in this tab.
+  useEffect(() => {
+    if (demo || new URLSearchParams(window.location.search).get("amplop") !== "selesai") return;
+    const ref = readRef(slug);
+    if (!ref) return;
+    let cancelled = false;
+    const run = async () => {
+      setResult({ state: "checking" });
+      for (let attempt = 0; attempt < 6 && !cancelled; attempt++) {
+        if (attempt) await new Promise(resolve => setTimeout(resolve, 2500));
+        try {
+          const response = await fetch(`${API}/api/public/gift-transactions/${encodeURIComponent(ref)}/verify`, { method: "POST" });
+          const body = await response.json() as { status?: string; amount?: number };
+          if (body.status === "confirmed") { if (!cancelled) setResult({ state: "confirmed", amount: body.amount }); return; }
+          if (body.status === "failed") { if (!cancelled) setResult({ state: "failed" }); return; }
+        } catch { /* retry */ }
+      }
+      if (!cancelled) setResult({ state: "pending" });
+    };
+    void run();
+    document.getElementById("extra-amplop")?.scrollIntoView({ block: "center" });
+    return () => { cancelled = true; };
+  }, [slug, demo]);
+
+  const amount = preset ?? Number(custom.replace(/\D/g, ""));
+  const valid = amount >= gift.minAmount && amount <= gift.maxAmount && name.trim().length > 0;
+
+  async function send(event: React.FormEvent) {
+    event.preventDefault();
+    if (!valid) {
+      setError(name.trim() ? `Nominal antara ${rupiah(gift.minAmount)} dan ${rupiah(gift.maxAmount)}.` : "Isi nama kamu dulu.");
+      return;
+    }
+    setError("");
+    if (demo) { setResult({ state: "confirmed", amount }); return; }
+    setSending(true);
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("amplop", "selesai");
+      url.hash = "";
+      const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/gift-transactions`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender_name: name.trim().slice(0, 80), message: message.trim().slice(0, 500), amount, return_url: url.href }),
+      });
+      const body = await response.json() as { reference?: string; payment_url?: string; error?: string };
+      if (!response.ok || !body.payment_url || !body.reference) throw new Error(body.error);
+      const target = new URL(body.payment_url, window.location.origin);
+      const trusted = target.origin === window.location.origin || (target.protocol === "https:" && PAYMENT_HOSTS.some(p => p.test(target.hostname)));
+      if (!trusted) throw new Error();
+      storeRef(slug, body.reference);
+      window.location.assign(target.href);
+    } catch {
+      setError("Pembayaran belum bisa dibuka. Coba lagi sebentar lagi.");
+      setSending(false);
+    }
+  }
+
+  if (result && result.state !== "checking") {
+    return (
+      <Block id="extra-amplop" title={result.state === "confirmed" ? "Terima kasih 🤍" : result.state === "failed" ? "Pembayaran dibatalkan" : "Menunggu pembayaran"} eyebrow="Amplop online" className={x.center}>
+        <p className={x.body}>
+          {result.state === "confirmed"
+            ? `Amplop${result.amount ? ` ${rupiah(result.amount)}` : ""} sudah kami terima dan akan diteruskan ke kedua mempelai.${demo ? " (Demo — tidak ada pembayaran.)" : ""}`
+            : result.state === "failed"
+              ? "Pembayaran kedaluwarsa atau dibatalkan. Kamu bisa mencoba lagi."
+              : "Kalau kamu sudah membayar, konfirmasinya biasanya masuk dalam beberapa menit. Tidak perlu membayar ulang."}
+        </p>
+        {result.state !== "confirmed" && <button type="button" className={x.chip} onClick={() => setResult(null)}>Kirim amplop lagi</button>}
+      </Block>
+    );
+  }
+
+  return (
+    <Block id="extra-amplop" title="Kirim amplop online" eyebrow="Tanda kasih">
+      <p className={x.body}>{gift.note?.trim() || "Bayar lewat QRIS, transfer bank, atau e-wallet. Amplop diteruskan Rawuh ke kedua mempelai."}</p>
+      {result?.state === "checking" ? <p className={x.muted} role="status">Memeriksa pembayaranmu…</p> : (
+        <form className={x.giftForm} onSubmit={send}>
+          <div className={x.presets} role="group" aria-label="Nominal">
+            {PRESETS.filter(value => value >= gift.minAmount && value <= gift.maxAmount).map(value => (
+              <button key={value} type="button" className={x.chip} aria-pressed={preset === value} onClick={() => { setPreset(value); setCustom(""); }}>{rupiah(value)}</button>
+            ))}
+            <button type="button" className={x.chip} aria-pressed={preset === null} onClick={() => setPreset(null)}>Lainnya</button>
+          </div>
+          {preset === null && (
+            <label className={x.field}><span>Nominal (Rp)</span>
+              <input inputMode="numeric" autoFocus value={custom} placeholder={String(gift.minAmount)} onChange={e => setCustom(e.target.value.replace(/[^\d.]/g, ""))} />
+            </label>
+          )}
+          <label className={x.field}><span>Nama pengirim</span><input value={name} maxLength={80} onChange={e => setName(e.target.value)} placeholder="Nama kamu" /></label>
+          <label className={x.field}><span>Ucapan (opsional)</span><textarea rows={2} maxLength={500} value={message} onChange={e => setMessage(e.target.value)} /></label>
+          {error && <p className={x.error} role="alert">{error}</p>}
+          <button type="submit" className={x.button} disabled={sending}>{sending ? "Membuka pembayaran…" : `Kirim ${amount >= gift.minAmount ? rupiah(amount) : "amplop"}`}</button>
+          <p className={x.muted}>Pembayaran diproses aman oleh Mayar.</p>
+        </form>
+      )}
+    </Block>
+  );
+}
+
 function FaqBlock({ faq }: { faq: NonNullable<InvitationExtras["faq"]> }) {
   const items = faq.items?.filter(item => item.q?.trim() && item.a?.trim()) ?? [];
   if (!items.length) return null;
@@ -458,6 +583,7 @@ export function Extras({ slot, className, without = [] }: {
       case "end":
         return <>
           {travel && <TravelBlock travel={travel} />}
+          {data.onlineGift && <OnlineGiftBlock gift={data.onlineGift} slug={slug} demo={demo} guestName={data.guestName} />}
           {wishlist && <WishlistBlock wishlist={wishlist} slug={slug} demo={demo} guestName={data.guestName} />}
           {faq && <FaqBlock faq={faq} />}
         </>;

@@ -89,8 +89,14 @@ export const terms: LegalDoc = {
       id: "amplop-digital",
       title: "Amplop digital",
       body: [
-        "Fitur amplop digital menampilkan informasi rekening, e-wallet, atau QRIS yang kamu masukkan sendiri. Transfer dari tamu masuk langsung ke rekening atau dompet tersebut, bukan melalui Rawuh.",
-        "Rawuh tidak bertanggung jawab atas kesalahan nomor rekening yang kamu masukkan atau atas transaksi antara kamu dan tamu.",
+        "Amplop digital bisa diterima dengan dua cara, dan kamu boleh memakai keduanya sekaligus:",
+        [
+          "Langsung ke rekening: undangan menampilkan rekening, e-wallet, atau QRIS yang kamu masukkan sendiri. Transfer dari tamu masuk langsung ke rekening atau dompet tersebut, bukan melalui Rawuh.",
+          "Amplop online lewat Rawuh: tamu membayar di undangan melalui mitra pembayaran kami, Mayar. Dana ditampung sementara oleh Rawuh dan dicairkan ke rekening yang kamu ajukan dari dashboard, biasanya dalam 1–2 hari kerja.",
+        ],
+        "Biaya layanan amplop online dan minimal pencairan ditampilkan di dashboard sebelum fitur diaktifkan, dan biaya dipotong dari saldo sebelum dicairkan. Pastikan rekening pencairan atas nama kamu atau keluargamu.",
+        "Kami dapat menunda atau menolak pencairan bila ada indikasi penipuan, pencucian uang, atau penyalahgunaan, dan dapat meminta verifikasi identitas sebelum mentransfer.",
+        "Rawuh tidak bertanggung jawab atas kesalahan nomor rekening yang kamu masukkan atau atas transaksi langsung antara kamu dan tamu.",
       ],
     },
     {
@@ -140,13 +146,14 @@ export const privacy: LegalDoc = {
         [
           "nama, email, nomor WhatsApp, dan kata sandi (disimpan dalam bentuk terenkripsi);",
           "isi undangan: nama mempelai, orang tua, tanggal dan lokasi acara, cerita, foto, dan musik;",
-          "informasi amplop digital yang kamu masukkan, seperti nama bank dan nomor rekening;",
+          "informasi amplop digital yang kamu masukkan, seperti nama bank dan nomor rekening, termasuk rekening tujuan pencairan amplop online;",
           "riwayat transaksi paket (tanpa data kartu atau PIN).",
         ],
         "Dari tamu undangan:",
         [
           "nama dan nomor telepon yang kamu masukkan ke daftar tamu;",
-          "jawaban RSVP, jumlah tamu, ucapan, dan waktu check-in.",
+          "jawaban RSVP, jumlah tamu, ucapan, dan waktu check-in;",
+          "nama pengirim, ucapan, dan nominal amplop online. Pembayarannya diproses oleh Mayar; Rawuh tidak menerima atau menyimpan data kartu, PIN, atau rekening tamu.",
         ],
         "Secara otomatis: alamat IP, jenis perangkat dan browser, serta halaman yang dibuka, untuk keamanan dan statistik kunjungan undangan.",
       ],

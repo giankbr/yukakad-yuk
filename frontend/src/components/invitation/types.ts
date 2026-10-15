@@ -54,10 +54,16 @@ export type InvitationData = {
   music?: { url: string; autoplay?: boolean };
   /** Optional extra sections managed from the dashboard (stored in settings.sections_config). */
   extras?: InvitationExtras;
+  /** Online envelope paid through Rawuh (Mayar); present only when active for this invitation. */
+  onlineGift?: OnlineGift;
 };
+
+export type OnlineGift = { note?: string; minAmount: number; maxAmount: number };
 
 /** Every block is optional; a section renders only when its data is filled (and `enabled !== false`). */
 export type InvitationExtras = {
+  /** Set on the Amplop page; the public payload decides whether it is actually available. */
+  onlineGift?: { enabled?: boolean; note?: string };
   /** Opening verse/quote, e.g. QS Ar-Rum 21. */
   quote?: { enabled?: boolean; text: string; source?: string };
   /** Child profile for aqiqah / khitan / birthday invitations. */

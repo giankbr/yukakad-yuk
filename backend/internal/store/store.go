@@ -46,6 +46,11 @@ type Store interface {
 	ListGiftTransactions(invitationID string) []*GiftTransaction
 	FindGiftTransactionByReference(reference string) (*GiftTransaction, bool)
 	UpdateGiftTransactionStatus(id, status, reference string) (*GiftTransaction, error)
+	CreateGiftPayout(GiftPayout) (*GiftPayout, error)
+	ListGiftPayouts(invitationID string) []*GiftPayout
+	ListAllGiftPayouts(status string) []*GiftPayout
+	FindGiftPayout(id string) (*GiftPayout, bool)
+	UpdateGiftPayout(id, status, note string) (*GiftPayout, error)
 	ListTemplates() []*Template
 	ListTemplatesAdmin() []*Template
 	FindTemplate(id string) (*Template, bool)
@@ -228,6 +233,21 @@ type GiftTransaction struct {
 	CreatedAt        time.Time `json:"created_at"`
 }
 
+// GiftPayout is a couple's request to withdraw online envelopes held by Rawuh.
+type GiftPayout struct {
+	ID            string     `json:"id"`
+	InvitationID  string     `json:"invitation_id"`
+	UserID        string     `json:"user_id"`
+	Amount        float64    `json:"amount"`
+	BankName      string     `json:"bank_name"`
+	AccountNumber string     `json:"account_number"`
+	AccountName   string     `json:"account_name"`
+	Status        string     `json:"status"` // requested, paid, rejected
+	Note          string     `json:"note,omitempty"`
+	CreatedAt     time.Time  `json:"created_at"`
+	ProcessedAt   *time.Time `json:"processed_at,omitempty"`
+}
+
 type Plan struct {
 	ID                      string  `json:"id"`
 	Name                    string  `json:"name"`
@@ -343,6 +363,7 @@ type MemoryStore struct {
 	invitationEvents map[string][]*InvitationEvent
 	passwordResets   map[string]passwordReset
 	giftTransactions map[string]*GiftTransaction
+	giftPayouts      map[string]*GiftPayout
 	subscriptions    map[string]*Subscription
 	customDomains    map[string]*CustomDomain
 	entitlements     map[string]Entitlement
@@ -377,6 +398,7 @@ func NewMemoryStore() *MemoryStore {
 		invitationEvents: make(map[string][]*InvitationEvent),
 		passwordResets:   make(map[string]passwordReset),
 		giftTransactions: make(map[string]*GiftTransaction),
+		giftPayouts:      make(map[string]*GiftPayout),
 		subscriptions:    make(map[string]*Subscription),
 		customDomains:    make(map[string]*CustomDomain),
 		entitlements:     make(map[string]Entitlement),
@@ -875,7 +897,70 @@ func (s *MemoryStore) ListGiftTransactions(invitationID string) []*GiftTransacti
 			items = append(items, tx)
 		}
 	}
+	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.After(items[j].CreatedAt) })
 	return items
+}
+
+func (s *MemoryStore) CreateGiftPayout(p GiftPayout) (*GiftPayout, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	if _, ok := s.invitations[p.InvitationID]; !ok {
+		return nil, fmt.Errorf("invitation not found")
+	}
+	p.ID = fmt.Sprintf("payout-%d", len(s.giftPayouts)+1)
+	p.CreatedAt = time.Now().UTC()
+	if p.Status == "" {
+		p.Status = "requested"
+	}
+	s.giftPayouts[p.ID] = &p
+	out := p
+	return &out, nil
+}
+
+func (s *MemoryStore) listPayouts(keep func(*GiftPayout) bool) []*GiftPayout {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	items := make([]*GiftPayout, 0)
+	for _, p := range s.giftPayouts {
+		if keep(p) {
+			out := *p
+			items = append(items, &out)
+		}
+	}
+	sort.Slice(items, func(i, j int) bool { return items[i].CreatedAt.After(items[j].CreatedAt) })
+	return items
+}
+
+func (s *MemoryStore) ListGiftPayouts(invitationID string) []*GiftPayout {
+	return s.listPayouts(func(p *GiftPayout) bool { return p.InvitationID == invitationID })
+}
+
+func (s *MemoryStore) ListAllGiftPayouts(status string) []*GiftPayout {
+	return s.listPayouts(func(p *GiftPayout) bool { return status == "" || p.Status == status })
+}
+
+func (s *MemoryStore) FindGiftPayout(id string) (*GiftPayout, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	p, ok := s.giftPayouts[id]
+	if !ok {
+		return nil, false
+	}
+	out := *p
+	return &out, true
+}
+
+func (s *MemoryStore) UpdateGiftPayout(id, status, note string) (*GiftPayout, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	p, ok := s.giftPayouts[id]
+	if !ok {
+		return nil, fmt.Errorf("payout not found")
+	}
+	now := time.Now().UTC()
+	p.Status, p.Note, p.ProcessedAt = status, note, &now
+	out := *p
+	return &out, nil
 }
 
 func (s *MemoryStore) FindGiftTransactionByReference(reference string) (*GiftTransaction, bool) {

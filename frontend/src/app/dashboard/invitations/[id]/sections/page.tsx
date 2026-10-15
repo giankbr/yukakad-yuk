@@ -13,7 +13,7 @@ import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "./sections.module.css";
 
-type Key = Exclude<keyof InvitationExtras, "thankYou">;
+type Key = Exclude<keyof InvitationExtras, "thankYou" | "onlineGift">;
 
 const QUOTES = [
   { label: "QS. Ar-Rum: 21", text: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang." },
@@ -116,9 +116,11 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
       const latest = await apiFetch(`/api/invitations/${invitationId}/settings`, token).then(r => r.json()).catch(() => ({}));
       const claims = new Map<string, string>(((latest?.sections_config?.wishlist?.items ?? []) as WishlistItem[])
         .filter(item => item.claimed_by).map(item => [item.id, item.claimed_by as string]));
-      const merged: InvitationExtras = extras.wishlist
+      const base: InvitationExtras = extras.wishlist
         ? { ...extras, wishlist: { ...extras.wishlist, items: extras.wishlist.items.map(item => item.claimed_by === "" ? item : { ...item, claimed_by: item.claimed_by ?? claims.get(item.id) }) } }
         : extras;
+      // The online-envelope switch lives on the Amplop page; keep whatever was saved there.
+      const merged: InvitationExtras = { ...base, onlineGift: latest?.sections_config?.onlineGift ?? extras.onlineGift };
       const response = await apiFetch(`/api/invitations/${invitationId}/settings`, token, { method: "PATCH", body: JSON.stringify({ sections_config: merged }) });
       if (!response.ok) throw new Error();
       setExtras(merged);

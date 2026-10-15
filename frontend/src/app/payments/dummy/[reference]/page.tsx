@@ -17,9 +17,21 @@ export default function DummyPaymentPage({ params }: PageProps<"/payments/dummy/
     setError("");
     try {
       const response = await fetch(`${API_URL}/api/billing/dummy/${encodeURIComponent(reference)}`, { method: "POST" });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Konfirmasi pembayaran gagal.");
-      router.replace("/dashboard");
+      if (response.ok) {
+        router.replace("/dashboard");
+        return;
+      }
+      // Not a plan purchase: try an online envelope, then return the guest to the invitation.
+      const gift = await fetch(`${API_URL}/api/payments/dummy/${encodeURIComponent(reference)}`, { method: "POST" });
+      const body = await gift.json();
+      if (!gift.ok) throw new Error(body.error ?? "Konfirmasi pembayaran gagal.");
+      if (document.referrer.includes("/invitation/")) {
+        const back = new URL(document.referrer);
+        back.searchParams.set("amplop", "selesai");
+        window.location.assign(back.href);
+      } else {
+        router.back();
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Konfirmasi pembayaran gagal.");
       setLoading(false);

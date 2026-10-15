@@ -98,3 +98,18 @@ a.card:hover { border-color: var(--t-accent, currentColor); }
 .dietary input { width: 100%; min-height: 46px; padding: 12px 14px; border: 1px solid color-mix(in srgb, currentColor 18%, transparent); border-radius: var(--t-radius, 12px); background: transparent; color: inherit; font: inherit; font-size: 16px; font-weight: 400; }
 
 @media (prefers-reduced-motion: reduce) { .liveDot { animation: none; } .faq summary::after { transition: none; } }
+
+/* Online envelope form */
+.giftForm { display: grid; gap: 12px; width: 100%; max-width: 420px; }
+.presets { display: flex; flex-wrap: wrap; gap: 8px; }
+.presets .chip[aria-pressed="true"] { border-color: var(--t-accent, currentColor); background: var(--t-accent, currentColor); color: var(--t-accent-ink, #fff); }
+.field { display: grid; gap: 6px; font-size: 12px; font-weight: 600; }
+.field span { opacity: .75; }
+.field input, .field textarea {
+  width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid color-mix(in srgb, currentColor 20%, transparent); border-radius: calc(var(--t-radius, 12px) * .7);
+  background: color-mix(in srgb, currentColor 4%, transparent); color: inherit; font: inherit; font-size: 15px; font-weight: 400;
+}
+.field textarea { resize: vertical; }
+.field input:focus, .field textarea:focus { border-color: var(--t-accent, currentColor); outline: 0; }
+.giftForm .button { width: 100%; }
+.giftForm .button:disabled { cursor: wait; opacity: .7; }

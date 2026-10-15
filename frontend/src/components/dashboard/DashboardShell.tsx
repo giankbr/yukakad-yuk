@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -66,6 +66,7 @@ const businessNav: NavItem[] = [
 	{ key: "plans", label: "Paket & harga", href: "/admin/plans", icon: <PhTag size={16} /> },
 	{ key: "templates", label: "Tema", href: "/admin/templates", icon: <PhPalette size={16} /> },
 	{ key: "users", label: "Pengguna", href: "/admin/users", icon: <PhUsers size={16} /> },
+	{ key: "payouts", label: "Pencairan amplop", href: "/admin/payouts", icon: <PhHandCoins size={16} /> },
 ];
 
 function invitationNav(id: string): NavItem[] {

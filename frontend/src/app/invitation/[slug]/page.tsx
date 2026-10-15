@@ -13,6 +13,7 @@ type PublicInvitation = {
   event?: { title?: string; type?: string; venue?: string; date?: string; start_time?: string; end_time?: string; address?: string; maps_url?: string };
   events?: Array<{ title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string }>;
   sections?: string[];
+  online_gift?: { active?: boolean; note?: string; min_amount?: number; max_amount?: number };
 };
 
 type PublicContent = {
@@ -56,10 +57,10 @@ export default async function PublicInvitationPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ guest?: string; to?: string; preview_token?: string }>;
+  searchParams: Promise<{ guest?: string; to?: string; preview_token?: string; amplop?: string }>;
 }) {
   const { slug } = await params;
-  const { guest: guestToken, to: guestName, preview_token: previewToken } = await searchParams;
+  const { guest: guestToken, to: guestName, preview_token: previewToken, amplop } = await searchParams;
 
   const result = await getInvitation(slug, previewToken);
   if (!result) return <main className="invitation-not-found"><h1>Undangan ini belum bisa dibuka.</h1><p>Link mungkin belum dipublikasikan atau sudah tidak aktif.</p></main>;
@@ -95,6 +96,9 @@ export default async function PublicInvitationPage({
     gifts,
     guestName: guestName ? guestName.replace(/-/g, " ") : guest?.name || undefined,
     guestTable: guest?.table || undefined,
+    onlineGift: result.online_gift?.active
+      ? { note: result.online_gift.note, minAmount: result.online_gift.min_amount ?? 10000, maxAmount: result.online_gift.max_amount ?? 100000000 }
+      : undefined,
   };
 
   // Every invitation renders with a Rawuh theme; missing/retired templates fall back to Linen Putih.
@@ -126,7 +130,8 @@ export default async function PublicInvitationPage({
   };
   return (
     <InvitationProvider data={data} slug={slug} guestToken={guestToken}>
-      <Theme data={data} slug={slug} guestToken={guestToken} />
+      {/* Guests returning from the envelope payment skip the cover so they land on the thank-you note. */}
+      <Theme data={data} slug={slug} guestToken={guestToken} skipCover={amplop === "selesai"} />
       {!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}
     </InvitationProvider>
   );

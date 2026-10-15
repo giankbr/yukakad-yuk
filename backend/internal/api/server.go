@@ -84,7 +84,7 @@ func NewServerWithStore(cfg config.Config, dataStore store.Store) *Server {
 		rsvps:       rsvpservice.NewService(dataStore),
 		wishes:      wishservice.NewService(dataStore),
 		templates:   templateservice.NewService(dataStore),
-		gifts:       giftservice.NewService(dataStore, payments.Dummy{BaseURL: cfg.FrontendOrigin}),
+		gifts:       giftservice.NewService(dataStore, gateway),
 		billing:     billingservice.NewService(dataStore, gateway),
 		domains:     domainservice.NewService(dataStore, billingservice.NewService(dataStore, gateway)),
 	}
@@ -124,6 +124,9 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/templates/", s.handleTemplates)
 	mux.HandleFunc("/api/public/invitation/", s.handlePublicInvitation)
 	mux.HandleFunc("/api/public/current", s.handlePublicCurrent)
+	mux.HandleFunc("/api/public/gift-transactions/", s.handlePublicGiftVerify)
+	mux.HandleFunc("/api/admin/gift-payouts", s.handleAdminGiftPayouts)
+	mux.HandleFunc("/api/admin/gift-payouts/", s.handleAdminGiftPayouts)
 	mux.HandleFunc("/api/payments/dummy/", s.handleDummyPayment)
 	mux.HandleFunc("/api/billing/plan", s.handleBillingPlan)
 	mux.HandleFunc("/api/billing/checkout", s.handleBillingCheckout)
@@ -292,6 +295,8 @@ func (s *Server) handleAdminV1(w http.ResponseWriter, r *http.Request) {
 		s.handleAdminStats(w, r)
 	case r.URL.Path == "/api/admin/uploads":
 		s.handleAdminUploads(w, r)
+	case r.URL.Path == "/api/admin/gift-payouts" || strings.HasPrefix(r.URL.Path, "/api/admin/gift-payouts/"):
+		s.handleAdminGiftPayouts(w, r)
 	case r.URL.Path == "/api/admin/plans" || strings.HasPrefix(r.URL.Path, "/api/admin/plans/"):
 		s.handleAdminPlans(w, r)
 	case r.URL.Path == "/api/admin/users" || strings.HasPrefix(r.URL.Path, "/api/admin/users/"):
@@ -458,6 +463,17 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 	if strings.HasSuffix(path, "/rsvps/summary") {
 		invitationID := strings.Split(path, "/")[0]
 		s.handleInvitationManagement(w, r, invitationID, "rsvp-summary")
+		return
+	}
+	switch {
+	case strings.HasSuffix(path, "/gift-wallet"):
+		s.handleGiftWallet(w, r, strings.Split(path, "/")[0], "wallet")
+		return
+	case strings.HasSuffix(path, "/gift-wallet/verify"):
+		s.handleGiftWallet(w, r, strings.Split(path, "/")[0], "verify")
+		return
+	case strings.HasSuffix(path, "/gift-payouts"):
+		s.handleGiftWallet(w, r, strings.Split(path, "/")[0], "payout")
 		return
 	}
 	for _, resource := range []string{"rsvps", "wishes", "gifts"} {
@@ -773,36 +789,7 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		return
 	}
 	if strings.HasSuffix(parts, "/gift-transactions") {
-		invitationSlug := strings.TrimSuffix(parts, "/gift-transactions")
-		invitation, exists := s.store.FindInvitationBySlug(invitationSlug)
-		if !exists || !invitation.Published {
-			writeJSON(w, http.StatusNotFound, map[string]string{"error": "invitation not found"})
-			return
-		}
-		if r.Method != http.MethodPost {
-			writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
-			return
-		}
-		var payload struct {
-			GuestID    string  `json:"guest_id"`
-			SenderName string  `json:"sender_name"`
-			Message    string  `json:"message"`
-			Amount     float64 `json:"amount"`
-		}
-		if json.NewDecoder(r.Body).Decode(&payload) != nil {
-			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid payload"})
-			return
-		}
-		tx, err := s.gifts.Create(invitation.ID, payload.GuestID, "dummy", payload.SenderName, payload.Message, payload.Amount)
-		if err != nil {
-			status := http.StatusBadRequest
-			if errors.Is(err, giftservice.ErrNotFound) {
-				status = http.StatusNotFound
-			}
-			writeJSON(w, status, map[string]string{"error": err.Error()})
-			return
-		}
-		writeJSON(w, http.StatusCreated, tx)
+		s.handlePublicGiftTransaction(w, r, strings.TrimSuffix(parts, "/gift-transactions"))
 		return
 	}
 	for _, resource := range []string{"gallery", "stories", "settings"} {
@@ -841,6 +828,7 @@ func (s *Server) handlePublicInvitation(w http.ResponseWriter, r *http.Request) 
 		"couple":      invitation.Couple,
 		"event":       invitation.Event,
 		"events":      s.store.ListInvitationEvents(invitation.ID),
+		"online_gift": publicOnlineGift(s.onlineGift(invitation), s.giftSettings()),
 		"sections":    []string{"cover", "couple", "story", "event", "countdown", "location", "gallery", "rsvp", "wishes", "gift", "closing"},
 	})
 }

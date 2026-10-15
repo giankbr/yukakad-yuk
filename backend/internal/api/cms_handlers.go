@@ -7,7 +7,7 @@ import (
 )
 
 // Landing page blocks editable from the admin CMS (stored as free-form JSON per section).
-var siteContentSections = map[string]bool{"hero": true, "kontak": true, "footer": true, "stats": true, "faq": true, "announcement": true, "about": true, "terms": true, "privacy": true, "products": true}
+var siteContentSections = map[string]bool{"hero": true, "kontak": true, "footer": true, "stats": true, "faq": true, "announcement": true, "about": true, "terms": true, "privacy": true, "products": true, "gift_settings": true}
 
 func (s *Server) handlePublicSiteContent(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {

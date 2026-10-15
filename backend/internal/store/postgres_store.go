@@ -501,6 +501,65 @@ func (s *PostgresStore) UpdateGiftTransactionStatus(id, status, reference string
 	}
 	return tx, nil
 }
+
+const giftPayoutColumns = `id, invitation_id, user_id, amount, bank_name, account_number, account_name, status, COALESCE(note,''), created_at, processed_at`
+
+func scanGiftPayout(row interface{ Scan(...any) error }) (*GiftPayout, error) {
+	p := &GiftPayout{}
+	var processed sql.NullTime
+	if err := row.Scan(&p.ID, &p.InvitationID, &p.UserID, &p.Amount, &p.BankName, &p.AccountNumber, &p.AccountName, &p.Status, &p.Note, &p.CreatedAt, &processed); err != nil {
+		return nil, err
+	}
+	if processed.Valid {
+		t := processed.Time
+		p.ProcessedAt = &t
+	}
+	return p, nil
+}
+
+func (s *PostgresStore) CreateGiftPayout(p GiftPayout) (*GiftPayout, error) {
+	if p.Status == "" {
+		p.Status = "requested"
+	}
+	return scanGiftPayout(s.db.QueryRow(`INSERT INTO gift_payouts (invitation_id, user_id, amount, bank_name, account_number, account_name, status, note) VALUES ($1,$2,$3,$4,$5,$6,$7,NULLIF($8,'')) RETURNING `+giftPayoutColumns,
+		p.InvitationID, p.UserID, p.Amount, p.BankName, p.AccountNumber, p.AccountName, p.Status, p.Note))
+}
+
+func (s *PostgresStore) queryGiftPayouts(query string, args ...any) []*GiftPayout {
+	rows, err := s.db.Query(query, args...)
+	if err != nil {
+		return []*GiftPayout{}
+	}
+	defer rows.Close()
+	items := make([]*GiftPayout, 0)
+	for rows.Next() {
+		if p, err := scanGiftPayout(rows); err == nil {
+			items = append(items, p)
+		}
+	}
+	return items
+}
+
+func (s *PostgresStore) ListGiftPayouts(invitationID string) []*GiftPayout {
+	return s.queryGiftPayouts(`SELECT `+giftPayoutColumns+` FROM gift_payouts WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
+}
+
+func (s *PostgresStore) ListAllGiftPayouts(status string) []*GiftPayout {
+	if status == "" {
+		return s.queryGiftPayouts(`SELECT ` + giftPayoutColumns + ` FROM gift_payouts ORDER BY created_at DESC LIMIT 500`)
+	}
+	return s.queryGiftPayouts(`SELECT `+giftPayoutColumns+` FROM gift_payouts WHERE status = $1 ORDER BY created_at DESC LIMIT 500`, status)
+}
+
+func (s *PostgresStore) FindGiftPayout(id string) (*GiftPayout, bool) {
+	p, err := scanGiftPayout(s.db.QueryRow(`SELECT `+giftPayoutColumns+` FROM gift_payouts WHERE id = $1`, id))
+	return p, err == nil
+}
+
+func (s *PostgresStore) UpdateGiftPayout(id, status, note string) (*GiftPayout, error) {
+	return scanGiftPayout(s.db.QueryRow(`UPDATE gift_payouts SET status=$1, note=NULLIF($2,''), processed_at=NOW() WHERE id=$3 RETURNING `+giftPayoutColumns, status, note, id))
+}
+
 func (s *PostgresStore) ListTemplates() []*Template {
 	rows, err := s.db.Query(`SELECT ` + templateColumns + ` FROM templates WHERE status = 'active' ORDER BY sort_order,name`)
 	if err != nil {

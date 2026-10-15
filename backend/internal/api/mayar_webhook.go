@@ -19,7 +19,7 @@ func (s *Server) handleMayarWebhook(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-	if s.billing.Provider() != "mayar" {
+	if s.billing.Provider() != "mayar" && s.gifts.Provider() != "mayar" {
 		writeJSON(w, http.StatusServiceUnavailable, map[string]string{"error": "mayar is not configured"})
 		return
 	}
@@ -70,6 +70,14 @@ func (s *Server) handleMayarWebhook(w http.ResponseWriter, r *http.Request) {
 	}
 	confirmed := 0
 	for _, reference := range candidates {
+		if _, ok := s.store.FindGiftTransactionByReference(reference); ok {
+			if _, err := s.gifts.ConfirmPaid(r.Context(), reference); err == nil {
+				confirmed++
+			} else {
+				log.Printf("mayar webhook gift: %s: %v", reference, err)
+			}
+			continue
+		}
 		if _, ok := s.store.FindSubscriptionByReference(reference); !ok {
 			continue
 		}
