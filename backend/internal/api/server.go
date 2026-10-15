@@ -131,6 +131,7 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/admin/plans", s.handleAdminPlans)
 	mux.HandleFunc("/api/admin/plans/", s.handleAdminPlans)
 	mux.HandleFunc("/api/admin/users", s.handleAdminUsers)
+	mux.HandleFunc("/api/admin/uploads", s.handleAdminUploads)
 	mux.HandleFunc("/api/admin/users/", s.handleAdminUsers)
 	// v1 is the canonical API namespace. The adapter normalizes the prefix
 	// before invoking the existing domain handlers while the handler modules
@@ -266,6 +267,8 @@ func (s *Server) handleAdminV1(w http.ResponseWriter, r *http.Request) {
 		}
 	case r.URL.Path == "/api/admin/stats":
 		s.handleAdminStats(w, r)
+	case r.URL.Path == "/api/admin/uploads":
+		s.handleAdminUploads(w, r)
 	case r.URL.Path == "/api/admin/plans" || strings.HasPrefix(r.URL.Path, "/api/admin/plans/"):
 		s.handleAdminPlans(w, r)
 	case r.URL.Path == "/api/admin/users" || strings.HasPrefix(r.URL.Path, "/api/admin/users/"):

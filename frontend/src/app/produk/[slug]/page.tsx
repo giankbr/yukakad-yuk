@@ -10,7 +10,8 @@ import {
   IconArrowRight, IconCalendar, IconDownload, IconFile, IconGift, IconGlobe, IconImages, IconLink, IconMail, IconMusic,
   IconPin, IconPrinter, IconQr, IconRefresh, IconSparkle, IconTruck, IconUser, IconUsers, IconVideo, IconWifiOff,
 } from "@/components/brand/icons";
-import { getSiteContact, products } from "@/lib/marketing";
+import { getProducts, getSiteContact, products } from "@/lib/marketing";
+import { isRemoteImage } from "@/lib/site-content";
 
 const icons: Record<string, (size: number) => ReactNode> = {
   globe: s => <IconGlobe size={s} />, video: s => <IconVideo size={s} />, qr: s => <IconQr width={s} height={s} />, printer: s => <IconPrinter size={s} />,
@@ -27,18 +28,18 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps<"/produk/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const product = products.find(item => item.slug === slug);
+  const product = (await getProducts()).find(item => item.slug === slug);
   if (!product) return {};
   return { title: `${product.name} | Rawuh`, description: product.lead };
 }
 
 export default async function ProductPage({ params }: PageProps<"/produk/[slug]">) {
   const { slug } = await params;
-  const product = products.find(item => item.slug === slug);
+  const [all, { waLink }] = await Promise.all([getProducts(), getSiteContact()]);
+  const product = all.find(item => item.slug === slug);
   if (!product) notFound();
-  const { waLink } = await getSiteContact();
   const resolve = (href: string) => href === "contact" ? (waLink ?? "/tentang#kontak") : href;
-  const others = products.filter(item => item.slug !== product.slug);
+  const others = all.filter(item => item.slug !== product.slug);
 
   return (
     <MarketingPage current="produk">
@@ -55,7 +56,7 @@ export default async function ProductPage({ params }: PageProps<"/produk/[slug]"
           <p className={styles.priceTag}>{product.price}</p>
         </div>
         <div className={styles.productVisual}>
-          <Image src={product.image} alt={product.name} fill sizes="(max-width: 900px) 100vw, 560px" preload />
+          <Image src={product.image} alt={product.name} unoptimized={isRemoteImage(product.image)} fill sizes="(max-width: 900px) 100vw, 560px" preload />
           <span className={styles.productBadge}><span>{icon(product.icon, 14)}</span>{product.name}</span>
         </div>
       </section>
@@ -95,7 +96,7 @@ export default async function ProductPage({ params }: PageProps<"/produk/[slug]"
         <div className={styles.related}>
           {others.map(other => (
             <Link key={other.slug} href={`/produk/${other.slug}`}>
-              <div><Image src={other.image} alt="" fill sizes="(max-width: 900px) 100vw, 33vw" /></div>
+              <div><Image src={other.image} alt="" unoptimized={isRemoteImage(other.image)} fill sizes="(max-width: 900px) 100vw, 33vw" /></div>
               <strong>{icon(other.icon)}{other.name}</strong>
               <small>{other.price}</small>
             </Link>

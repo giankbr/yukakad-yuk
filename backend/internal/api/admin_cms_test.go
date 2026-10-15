@@ -60,4 +60,21 @@ func TestAdminPlansUsersAndContent(t *testing.T) {
 	if !strings.Contains(public.Body.String(), "Gratis?") {
 		t.Fatalf("public faq missing: %s", public.Body.String())
 	}
+
+	for _, section := range []string{"about", "terms", "privacy", "products"} {
+		if code := call(server.handleAdminSiteContent, adminToken, http.MethodPut, "/api/admin/site-content/"+section, `{"intro":"Halo `+section+`"}`).Code; code != http.StatusOK {
+			t.Fatalf("save %s expected 200, got %d", section, code)
+		}
+		rec := httptest.NewRecorder()
+		server.handlePublicSiteContent(rec, httptest.NewRequest(http.MethodGet, "/api/public/site-content/"+section, nil))
+		if !strings.Contains(rec.Body.String(), "Halo "+section) {
+			t.Fatalf("public %s missing: %s", section, rec.Body.String())
+		}
+	}
+	if code := call(server.handleAdminUploads, memberToken, http.MethodPost, "/api/admin/uploads", "").Code; code != http.StatusForbidden {
+		t.Fatalf("non-admin upload expected 403, got %d", code)
+	}
+	if code := call(server.handleAdminUploads, adminToken, http.MethodPost, "/api/admin/uploads", "").Code; code != http.StatusServiceUnavailable {
+		t.Fatalf("upload without storage expected 503, got %d", code)
+	}
 }

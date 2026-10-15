@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight as PhArrowRight, ArrowSquareOut as PhArrowSquareOut, Article as PhArticle, Browser as PhBrowser,
-  ChatCircleText as PhChatCircleText, Megaphone as PhMegaphone, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
+  ChatCircleText as PhChatCircleText, Info as PhInfo, Megaphone as PhMegaphone, Package as PhPackage, Scales as PhScales, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
 } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
@@ -21,6 +21,12 @@ const sections: Section[] = [
   { key: "kontak", href: "/admin/kontak", label: "Kontak", description: "Nomor WhatsApp untuk tombol chat admin.", icon: <PhPhone size={20} /> },
   { key: "footer", href: "/admin/footer", label: "Footer", description: "Hak cipta serta akun Instagram & TikTok.", icon: <PhArticle size={20} /> },
   { key: "landing", href: "/admin/landing", label: "Statistik, FAQ & pengumuman", description: "Angka di bawah hero, daftar FAQ, dan bar pengumuman.", icon: <PhMegaphone size={20} /> },
+];
+
+const pages: Section[] = [
+  { key: "about", href: "/admin/about", label: "Tentang kami", description: "Cerita, angka, prinsip, perjalanan, tim, dan alamat kantor.", icon: <PhInfo size={20} /> },
+  { key: "products", href: "/admin/products", label: "Produk", description: "Isi halaman Undangan Website, Video 3D, QR Check-in, dan Cetak.", icon: <PhPackage size={20} /> },
+  { key: "legal", href: "/admin/legal", label: "Legal", description: "Syarat & Ketentuan dan Kebijakan Privasi.", icon: <PhScales size={20} /> },
 ];
 
 const business: Section[] = [
@@ -133,19 +139,23 @@ export default function AdminOverviewPage() {
         })}
       </div>
 
-      <h2 className={styles.heading}>Bisnis</h2>
-      <div className={styles.grid}>
-        {business.map(section => (
-          <Link key={section.href} href={section.href} className={styles.card}>
-            <span className={styles.icon}>{section.icon}</span>
-            <div className={styles.cardText}>
-              <div className={styles.cardTop}><h3>{section.label}</h3></div>
-              <p>{section.description}</p>
-            </div>
-            <PhArrowRight className={styles.arrow} size={16} />
-          </Link>
-        ))}
-      </div>
+      {([["Halaman", pages], ["Bisnis", business]] as const).map(([title, list]) => (
+        <section key={title} aria-label={title}>
+          <h2 className={styles.heading}>{title}</h2>
+          <div className={styles.grid}>
+            {list.map(section => (
+              <Link key={section.href} href={section.href} className={styles.card}>
+                <span className={styles.icon}>{section.icon}</span>
+                <div className={styles.cardText}>
+                  <div className={styles.cardTop}><h3>{section.label}</h3></div>
+                  <p>{section.description}</p>
+                </div>
+                <PhArrowRight className={styles.arrow} size={16} />
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
     </DashboardShell>
   );
 }
