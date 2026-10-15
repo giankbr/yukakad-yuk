@@ -86,7 +86,7 @@ export default function RegisterPage() {
         <button type="submit" disabled={loading} className="auth-submit">
           {loading ? "Membuat akun..." : "Buat akun gratis"}
         </button>
-        <p className="auth-note">Dengan mendaftar, kamu menyetujui Syarat &amp; Ketentuan dan Kebijakan Privasi Rawuh.</p>
+        <p className="auth-note">Dengan mendaftar, kamu menyetujui <Link href="/syarat-ketentuan">Syarat &amp; Ketentuan</Link> dan <Link href="/kebijakan-privasi">Kebijakan Privasi</Link> Rawuh.</p>
       </form>
     </AuthLayout>
   );

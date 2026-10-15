@@ -89,8 +89,8 @@ export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawIns
         <div className={styles.footerBottom}>
           <div className={styles.payments}>Bayar via {["QRIS", "Virtual Account", "GoPay", "OVO", "Kartu Kredit"].map(method => <span key={method}>{method}</span>)}</div>
           <div className={styles.legal}>
-            <Link href="/">Syarat &amp; Ketentuan</Link>
-            <Link href="/">Kebijakan Privasi</Link>
+            <Link href="/syarat-ketentuan">Syarat &amp; Ketentuan</Link>
+            <Link href="/kebijakan-privasi">Kebijakan Privasi</Link>
             <span>{copyright ?? `© ${new Date().getFullYear()} Rawuh.id`}</span>
           </div>
         </div>

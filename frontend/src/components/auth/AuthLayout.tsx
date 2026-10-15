@@ -17,7 +17,7 @@ export function AuthLayout({ children, topRight }: { children: ReactNode; topRig
         <div className="auth-panel">{children}</div>
         <footer className="auth-foot">
           <span>© {new Date().getFullYear()} Rawuh.id</span>
-          <nav aria-label="Tautan bantuan"><Link href="/">Syarat &amp; Ketentuan</Link><span aria-hidden>·</span><Link href="/">Privasi</Link><span aria-hidden>·</span><Link href="/#faq">Bantuan</Link></nav>
+          <nav aria-label="Tautan bantuan"><Link href="/syarat-ketentuan">Syarat &amp; Ketentuan</Link><span aria-hidden>·</span><Link href="/kebijakan-privasi">Privasi</Link><span aria-hidden>·</span><Link href="/#faq">Bantuan</Link></nav>
         </footer>
       </section>
       <aside className="auth-aside" aria-label="Cerita pengguna Rawuh">
