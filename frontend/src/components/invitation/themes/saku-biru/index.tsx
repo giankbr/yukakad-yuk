@@ -27,14 +27,6 @@ const TX_ICONS = [ic.qrCode, ic.arrowDownLeft, ic.gem];
 const BADGES = ["+1 doa", "+1 restu"];
 const BACKSPACE = <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M10 5h10a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H10l-7-7z" /><path d="m12 9 6 6" /><path d="m18 9-6 6" /></svg>;
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -50,7 +42,6 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
   const date = toDate(data.date);
   const mm = date ? new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Jakarta", month: "2-digit" }).format(date) : "";
   const dd = parts.day.padStart(2, "0");
-  const clock = parts.day ? `${dd}:${mm}` : "17:04";
   const code = parts.day ? `${dd}${mm}` : "";
   const where = city(data.address) || data.place;
   const label = data.eventLabel ?? "Pernikahan";
@@ -78,7 +69,6 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.coverBody}>
             <div className={s.merchant}>
               <Photo src={data.gallery[0] ?? data.couple.groomPhoto} alt={`Foto ${pair}`} className={s.merchantAv} />
@@ -117,7 +107,6 @@ export default function SakuBiruTheme({ data, slug, guestToken, demo, skipCover 
       )}
     >
       <header className={s.head}>
-        <Status time={clock} />
         <div className={s.hi}>
           <div>
             <h1>Saku Bersama</h1>

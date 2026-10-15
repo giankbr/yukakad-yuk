@@ -32,14 +32,6 @@ const NAV = [
   { label: "Transaksi", icon: ic.arrowLeftRight }, { label: "Kartu", icon: ic.creditCard }, { label: "Lainnya", icon: ic.ellipsis },
 ];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -49,9 +41,6 @@ function city(address: string) {
 export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const { bride, groom } = data.couple;
   const couple = `${groom} & ${bride}`;
-  const dd = formatDate(data.date, { day: "2-digit" });
-  const mm = formatDate(data.date, { month: "2-digit" });
-  const clock = /^\d+$/.test(dd) && /^\d+$/.test(mm) ? `${dd}:${mm}` : "09:41";
   const longDate = formatDate(data.date);
   const midDate = formatDate(data.date, { weekday: "long", day: "numeric", month: "short", year: "numeric" });
   const where = city(data.address) || data.place;
@@ -85,7 +74,6 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverHead}>
-            <Status time={clock} />
             <div className={s.notif}>
               <span className={s.appIcon} aria-hidden><Lucide icon={ic.piggyBank} size={30} color="#f8a91b" /></span>
               <h1>Kantong Baru Dibuat!</h1>
@@ -139,7 +127,6 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
       )}
     >
       <header className={s.top}>
-        <Status time={clock} />
         <div className={s.nav}>
           <div className={s.grow}>
             <h1>Kantong Bersama</h1>

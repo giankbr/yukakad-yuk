@@ -26,14 +26,6 @@ const WISHLIST = [
 const STORY_ICONS = [ic.flag, ic.navigation, ic.mapPin];
 const EVENT_NOTES = ["Sekarang dinanti", "Ramai lancar"];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>08:08</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(p => p.trim()).filter(Boolean);
@@ -101,7 +93,6 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
       cover={open => (
         <section className={s.cover}>
           <div className={s.map} aria-hidden><Photo src={MAP} /></div>
-          <Status />
           <div className={s.search}>
             <Lucide icon={ic.search} size={18} color="#5f6368" />
             <span>{title}</span>
@@ -138,7 +129,6 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
         </section>
       )}
     >
-      <Status />
       <Photo src={hero} alt={`Foto ${couple}`} className={s.hero} />
       <section className={s.place}>
         <h1>{title}</h1>

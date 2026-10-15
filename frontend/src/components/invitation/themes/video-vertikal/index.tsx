@@ -30,14 +30,6 @@ const WISHLIST = [
   { name: "Microwave", price: "Rp1.300.000", icon: ic.microwave },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>20:11</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 const nf = new Intl.NumberFormat("id-ID");
 const clean = (v: string) => v.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
@@ -80,7 +72,6 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
         <section className={s.cover}>
           <div className={s.video} aria-hidden><Photo src={hero} /></div>
           <div className={s.dim} aria-hidden />
-          <Status />
           <div className={s.feedTabs} aria-hidden><span>Mengikuti</span><b>Untukmu</b></div>
           <div className={s.spacer} />
           <div className={s.coverBottom}>
@@ -107,7 +98,6 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
         </section>
       )}
     >
-      <Status />
       <header className={s.nav}>
         <span aria-hidden><Lucide icon={ic.arrowLeft} size={20} /></span>
         <strong>{user}</strong>

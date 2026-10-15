@@ -39,20 +39,11 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const { bride, groom } = data.couple;
   const couple = `${groom} & ${bride}`;
   const parts = dateParts(data.date);
-  const clock = "06:07";
   const longDate = formatDate(data.date);
   const shortDate = formatDate(data.date, { day: "numeric", month: "short", year: "numeric" });
   const passDate = parts.day ? `${parts.weekdayShort}, ${parts.day} ${parts.monthShort} ${parts.year}` : "";
@@ -83,7 +74,6 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverHead}>
-            <Status time={clock} />
             <h1>Pesan Tiket {data.eventLabel ?? "Pernikahan"}</h1>
             <div className={s.form}>
               <div className={s.formRow}>
@@ -151,7 +141,6 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
       )}
     >
       <header className={s.top}>
-        <Status time={clock} />
         <div className={s.nav}>
           <h1>E-Boarding Pass {data.eventLabel ?? "Pernikahan"}</h1>
           <p>KA Cinta Abadi · {couple}{where ? ` · ${where}` : ""}</p>

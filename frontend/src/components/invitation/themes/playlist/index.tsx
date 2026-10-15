@@ -23,14 +23,6 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      24:07
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const couple = coupleLabel(data);
@@ -63,7 +55,6 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
       cover={open => (
         <section className={s.cover}>
           <div className={s.glow} aria-hidden />
-          <Status />
           <div className={s.coverContent}>
             <Photo src={art} alt={`Sampul playlist ${couple}`} className={s.art} />
             <div className={s.coverTitle}>
@@ -108,7 +99,6 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
       )}
     >
       <header className={s.header} id="pl-top">
-        <Status />
         <h1 className={s.hello}>Selamat datang, {guestLabel(data)}</h1>
         <nav className={s.chips} aria-label="Bagian undangan">
           <a href="#pl-top" aria-current="page">Semua</a>

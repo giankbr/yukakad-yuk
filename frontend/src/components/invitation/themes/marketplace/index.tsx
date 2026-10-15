@@ -16,14 +16,6 @@ const DEMO_WISHES = [
   { id: "w2", name: "Om Hendra", message: "Produk original, seller ramah, pengiriman cinta super cepat. Recommended!", created_at: new Date(Date.now() - 5 * 3600e3).toISOString() },
 ];
 
-function Status({ time, color }: { time: string; color: string }) {
-  return (
-    <div className={s.status} style={{ color }} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} color={color} /><Lucide icon={ic.wifi} color={color} /><Lucide icon={ic.batteryFull} color={color} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -34,7 +26,6 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
   const couple = coupleLabel(data);
   const parts = dateParts(data.date);
   const promo = parts.day && parts.monthShort ? `SPESIAL ${parts.day}.${String(new Date(data.date).getMonth() + 1).padStart(2, "0")}` : "SPESIAL";
-  const clock = parts.day ? `${parts.day.padStart(2, "0")}:${String(new Date(data.date).getMonth() + 1).padStart(2, "0")}` : "12:12";
   const resi = parts.day ? `RB-${parts.day.padStart(2, "0")}${String(new Date(data.date).getMonth() + 1).padStart(2, "0")}${parts.year.slice(-2)}` : "RB-000000";
   const longDate = formatDate(data.date);
   const shortDate = formatDate(data.date, { day: "numeric", month: "short", year: "numeric" });
@@ -58,7 +49,6 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
-          <Status time={clock} color="#fff" />
           <div className={s.notifWrap}>
             <div className={s.notif}>
               <span className={s.appIcon}><Lucide icon={ic.package} size={18} color="#fff" /></span>
@@ -96,7 +86,6 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
       )}
     >
       <header className={s.top}>
-        <Status time={clock} color="#212121" />
         <div className={s.searchRow}>
           <div className={s.search}><Lucide icon={ic.search} color="#6d7588" />Cari momen bahagia…</div>
           <span className={s.cart} aria-hidden><Lucide icon={ic.shoppingCart} size={24} color="#212121" /><b>1</b></span>

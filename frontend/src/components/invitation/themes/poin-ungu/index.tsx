@@ -25,14 +25,6 @@ const DEMO_WISHLIST = [
 
 const fmt = (n: number) => n.toLocaleString("id-ID");
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -46,7 +38,6 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
   const mm = formatDate(data.date, { month: "2-digit" });
   const yyyy = formatDate(data.date, { year: "numeric" });
   const valid = /^\d+$/.test(dd) && /^\d+$/.test(mm);
-  const clock = valid ? `${dd}:${mm}` : "09:41";
   const points = valid ? fmt(Number(`${dd}${mm}`)) : "100";
   const code = valid ? `SAH-${dd}${mm}${yyyy}` : "SAH";
   const longDate = formatDate(data.date);
@@ -72,7 +63,6 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.coverBody}>
             <div className={s.badge} aria-hidden><span><Lucide icon={ic.sparkles} size={40} color="#fff" /></span></div>
             <p className={s.congrats}>Selamat! Kamu dapat</p>
@@ -115,7 +105,6 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
       )}
     >
       <header className={s.header}>
-        <Status time={clock} />
         <div className={s.hi}>
           <div>
             <h1>Poin Bahagia</h1>

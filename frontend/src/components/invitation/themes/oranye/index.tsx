@@ -26,14 +26,6 @@ const DEMO_FEED = [["Pagi di Lembang", "2,1rb suka"], ["Jalan-jalan Braga", "1,3
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const pad = (n: number) => String(n).padStart(2, "0");
 
-function StatusBar({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} color="#fff" /><Lucide icon={ic.wifi} color="#fff" /><Lucide icon={ic.batteryFull} color="#fff" /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -64,7 +56,6 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
   const valid = !Number.isNaN(date.getTime()) && !!parts.day;
   const month = valid ? pad(Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Jakarta", month: "numeric" }).format(date))) : "";
   const code = valid ? `${pad(Number(parts.day))}.${month}` : "";
-  const clock = valid ? `${pad(Number(parts.day))}:${month}` : "11:11";
   const longDate = formatDate(data.date);
   const where = city(data.address);
   const countdown = useCountdown(data.date);
@@ -98,7 +89,6 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
-          <StatusBar time={clock} />
           <div className={s.coverTop}>
             <span className={s.saleBadge}><Lucide icon={ic.zap} size={14} color="#ee4d2d" />{code ? `${code} ` : ""}{sale}</span>
           </div>
@@ -128,7 +118,6 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
       )}
     >
       <header className={s.header}>
-        <StatusBar time={clock} />
         <div className={s.searchRow}>
           <div className={s.search}>
             <Lucide icon={ic.search} color="#757575" />

@@ -25,15 +25,6 @@ const DEMO_BAGGAGE = [
   { name: "Sprei Hotel 5★", price: "Rp860.000", icon: ic.bedDouble },
 ];
 
-function Status({ className }: { className?: string }) {
-  return (
-    <div className={`${s.status} ${className ?? ""}`} aria-hidden>
-      06:10
-      <span><Lucide icon={ic.signal} color="#fff" /><Lucide icon={ic.wifi} color="#fff" /><Lucide icon={ic.batteryFull} color="#fff" /></span>
-    </div>
-  );
-}
-
 function lastPart(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
   return parts[parts.length - 1] ?? "";
@@ -73,7 +64,6 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.sky} aria-hidden><Photo src={sky} /></div>
-          <Status />
           <header className={s.coverHead}>
             <span>RAWUH AIR</span>
             <h1>Boarding Pass {data.eventLabel ?? "Pernikahan"}</h1>
@@ -118,7 +108,6 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
       )}
     >
       <header className={s.top}>
-        <Status className={s.statusInline} />
         <div className={s.topText}>
           <h1>Penerbangan {flight}</h1>
           <p>Lajang (SGL) → Selamanya (SLM){city ? ` · ${city}` : ""}</p>

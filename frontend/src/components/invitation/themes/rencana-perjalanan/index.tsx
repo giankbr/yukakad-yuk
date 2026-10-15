@@ -42,14 +42,6 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      09:11
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const { bride, groom } = data.couple;
@@ -86,7 +78,6 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
           <div className={s.hero}>
             <Photo src={hero} alt={`Foto ${couple}`} className={s.heroImg} />
             <span className={s.dim} aria-hidden />
-            <Status />
             <div className={s.heroText}>
               <small>Perjalanan Seumur Hidup</small>
               <h1>{couple}{where || shortDate ? " — " : ""}{[where, shortDate].filter(Boolean).join(", ")}</h1>
@@ -114,7 +105,6 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
       )}
     >
       <header className={s.top}>
-        <Status />
         <div className={s.nav}>
           <h1>Itinerary Perjalananmu</h1>
           <p>{label} {couple} · {midDate}{where ? ` · ${where}` : ""}</p>

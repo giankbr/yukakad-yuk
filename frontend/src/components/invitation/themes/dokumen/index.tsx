@@ -2,7 +2,7 @@
 // Theme "Dokumen" — undangan bergaya halaman catatan/wiki (design: Undangan — Tema Dokumen (Tasya & Bram)).
 import { useState } from "react";
 import {
-  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
+  Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, coupleLabel, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, timeAgo, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { ic } from "./icons";
@@ -20,14 +20,6 @@ const DEMO_WISHES = [
 const DEMO_FILES = ["kisah-01.jpg", "lamaran.jpg", "prewed.jpg"];
 const DEMO_TODO: Array<[string, boolean]> = [["Robot vacuum — Rp3.200.000", false], ["Set gelas kristal — Rp780.000", true], ["Coffee maker — Rp1.450.000", false]];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} color="#37352f" /><Lucide icon={ic.wifi} color="#37352f" /><Lucide icon={ic.batteryFull} color="#37352f" /></span>
-    </div>
-  );
-}
 
 function Heading({ emoji, id, children }: { emoji: string; id: string; children: string }) {
   return <h2 className={s.h2} id={id}><span aria-hidden>{emoji}</span>{children}</h2>;
@@ -42,9 +34,6 @@ function storyLine(story: { title: string; body: string; date?: string }) {
 export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const label = data.eventLabel ?? "Pernikahan";
   const title = `${label} ${coupleLabel(data)}`;
-  const parts = dateParts(data.date);
-  const month = formatDate(data.date, { month: "2-digit" });
-  const clock = parts.day && /^\d+$/.test(month) ? `${parts.day.padStart(2, "0")}:${month}` : "08:08";
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
   const sheets = useSheets();
@@ -74,7 +63,6 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.banner} aria-hidden><Photo src={banner} /></div>
           <div className={s.page}>
             <span className={s.pageIcon} aria-hidden>💍</span>
@@ -117,7 +105,6 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
         </section>
       )}
     >
-      <Status time={clock} />
       <header className={s.nav}>
         <span className={s.navTitle}><span aria-hidden>💍</span>{title}</span>
         <span className={s.navIcons}>

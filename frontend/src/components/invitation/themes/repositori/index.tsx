@@ -39,14 +39,6 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      22:10
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function RepositoriTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const { couple } = data;
@@ -79,7 +71,6 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status />
           <div className={s.coverBody}>
             <div className={s.crumb}>
               <Lucide icon={ic.bookMarked} size={15} color="#8d96a0" />
@@ -139,7 +130,6 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
       )}
     >
       <header className={s.header}>
-        <Status />
         <div className={s.nav}>
           <Lucide icon={ic.gitBranch} size={18} color="#e6edf3" />
           <span>{groom}/{repo}</span>

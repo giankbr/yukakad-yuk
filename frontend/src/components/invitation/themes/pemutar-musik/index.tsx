@@ -28,14 +28,6 @@ function startTime(time: string) {
   return time.split(/\s*[–-]\s*/)[0].replace(/\s*(WIB|WITA|WIT)$/i, "").trim();
 }
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      21:05
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const couple = coupleLabel(data);
@@ -66,7 +58,6 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.backdrop} aria-hidden />
-          <Status />
           <div className={s.coverContent}>
             <Photo src={art} alt={`Sampul album ${couple}`} className={s.albumArt} />
             <div className={s.coverTitle}>
@@ -95,7 +86,6 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
       )}
     >
       <header className={s.header}>
-        <Status />
         <div className={s.nav}>
           <h1>Sedang Diputar</h1>
           <span aria-label={couple}>{initials}</span>

@@ -22,14 +22,6 @@ const WISHLIST = [
   { name: "Kursi Rotan", price: "Rp1.150.000", icon: ic.armchair },
 ];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function handle(data: ThemeProps["data"]) {
   const slug = `${data.couple.bride}${data.couple.groom}`.toLowerCase().normalize("NFD").replace(/[^a-z0-9]/g, "");
@@ -59,7 +51,6 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
   const user = handle(data);
   const where = location(data.address, data.place);
   const longDate = formatDate(data.date);
-  const clock = toDate(data.date) ? `${formatDate(data.date, { day: "2-digit" })}:${formatDate(data.date, { month: "2-digit" })}` : "07:03";
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
@@ -86,7 +77,6 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.coverNav}>
             <span className={s.logo}>Undangan</span>
             <span className={s.navIcons} aria-hidden><Lucide icon={ic.heart} size={22} /><Lucide icon={ic.messageCircle} size={22} /></span>
@@ -117,7 +107,6 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
         </section>
       )}
     >
-      <Status time={clock} />
       <header className={s.nav}>
         <span className={s.userRow}><strong className={s.navUser}>{user}</strong><Lucide icon={ic.badgeCheck} size={15} color="#0095f6" /></span>
         <span className={s.navIcons} aria-hidden><Lucide icon={ic.squarePlus} size={22} /><Lucide icon={ic.menu} size={22} /></span>

@@ -26,14 +26,6 @@ const INBOX_AFTER = [
   { from: "Newsletter", time: "Kemarin", subject: "5 resep minggu ini", snippet: "Tumis kangkung ala restoran…" },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      10:10
-      <span><Lucide icon={ic.signal} color="#202124" /><Lucide icon={ic.wifi} color="#202124" /><Lucide icon={ic.batteryFull} color="#202124" /></span>
-    </div>
-  );
-}
 
 function initial(name: string) {
   return name.trim().slice(0, 1).toUpperCase() || "?";
@@ -97,7 +89,6 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status />
           <div className={s.search} aria-hidden>
             <Lucide icon={ic.menu} size={18} color="#5f6368" />
             <span>Telusuri di email</span>
@@ -129,7 +120,6 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
         </section>
       )}
     >
-      <Status />
       <div className={s.nav} aria-hidden>
         <Lucide icon={ic.arrowLeft} size={20} color="#5f6368" />
         <span><Lucide icon={ic.archive} size={19} color="#5f6368" /><Lucide icon={ic.trash2} size={19} color="#5f6368" /><Lucide icon={ic.ellipsisVertical} size={19} color="#5f6368" /></span>

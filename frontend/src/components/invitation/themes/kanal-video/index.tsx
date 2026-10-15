@@ -29,15 +29,6 @@ const DEMO_PRODUCTS = [
   { name: "Kamera Pocket", price: "Rp3.200.000", icon: ic.camera },
 ];
 
-function Status({ dark }: { dark?: boolean }) {
-  const color = dark ? "#fff" : "#0f0f0f";
-  return (
-    <div className={s.status} style={{ color }} aria-hidden>
-      19.30
-      <span><Lucide icon={ic.signal} color={color} /><Lucide icon={ic.wifi} color={color} /><Lucide icon={ic.batteryFull} color={color} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -111,7 +102,6 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status dark />
           <div className={s.premiere}><span><Lucide icon={ic.radio} size={13} color="#fff" />PREMIERE</span></div>
           <div className={s.player}>
             <Photo src={thumb} alt={`Foto ${names}`} />
@@ -144,7 +134,6 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
       )}
     >
       <header className={s.header} id="kv-top">
-        <Status />
         <div className={s.nav}>
           <span className={s.logo}><i aria-hidden><Lucide icon={ic.play} size={11} color="#fff" /></i>{brand}</span>
           <span className={s.navIcons} aria-hidden><Lucide icon={ic.cast} size={20} /><Lucide icon={ic.bell} size={20} /><Lucide icon={ic.search} size={20} /></span>

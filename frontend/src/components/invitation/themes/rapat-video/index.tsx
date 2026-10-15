@@ -21,14 +21,6 @@ const DEMO_FILES = [["Prewedding.mp4", "24:10"], ["Lamaran.mp4", "08:52"], ["BTS
 const DEMO_TIERS = [["👏", "Rp100rb"], ["❤", "Rp500rb"], ["🎉", "Rp1jt"]];
 const DEMO_WISHLIST = [{ name: "Monitor Kerja 27\"", price: "Rp2.800.000", icon: ic.monitor }, { name: "Ring Light Pro", price: "Rp650.000", icon: ic.lamp }];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} color="#fff" /><Lucide icon={ic.wifi} color="#fff" /><Lucide icon={ic.batteryFull} color="#fff" /></span>
-    </div>
-  );
-}
 
 function NameTag({ name, muted }: { name: string; muted?: boolean }) {
   return <span className={s.nameTag}><Lucide icon={muted ? ic.micOff : ic.mic} size={11} color={muted ? "#f44336" : "#4caf50"} />{name}</span>;
@@ -42,7 +34,6 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
   const dd = valid ? num({ day: "2-digit" }) : "00";
   const mm = valid ? num({ month: "2-digit" }) : "00";
   const yyyy = valid ? num({ year: "numeric" }) : "0000";
-  const clock = valid ? `${mm}:${dd}` : "09:12";
   const meetingId = `${dd}${mm} ${yyyy}`;
   const startTime = valid ? num({ hour: "2-digit", minute: "2-digit", hour12: false }).replace(":", ".") : "";
   const waiting = [formatDate(data.date, { day: "numeric", month: "short", year: "numeric" }), startTime && `${startTime} WIB`].filter(Boolean).join(", ");
@@ -66,7 +57,6 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.coverBody}>
             <p className={s.kicker}>Rapat Sakral</p>
             <h1 className={s.coverTitle}>{title}</h1>
@@ -106,7 +96,6 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
         </section>
       )}
     >
-      <Status time={clock} />
       <header className={s.nav}>
         <span className={s.rec}><i aria-hidden />REC · {title}</span>
         <span className={s.timer} aria-label={countdown.ready ? `${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi` : "Hitung mundur"}>

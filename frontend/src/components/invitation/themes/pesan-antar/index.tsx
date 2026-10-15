@@ -23,15 +23,6 @@ const DEMO_PRODUCTS = [
   { name: "Lampu Meja Estetik", price: "Rp450.000", tag: "Hemat", icon: ic.lamp },
 ];
 
-function Status({ light }: { light?: boolean }) {
-  const color = light ? "#fff" : "#1c1c1c";
-  return (
-    <div className={s.status} style={{ color }} aria-hidden>
-      12:21
-      <span><Lucide icon={ic.signal} color={color} /><Lucide icon={ic.wifi} color={color} /><Lucide icon={ic.batteryFull} color={color} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -88,7 +79,6 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
       cover={open => (
         <section className={s.cover}>
           <div className={s.illus} aria-hidden><Photo src="/themes/img/a98.webp" /></div>
-          <Status light />
           <span className={s.eta}>{eta}</span>
           <div className={s.coverSpacer} />
           <div className={s.receipt}>
@@ -118,7 +108,6 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
       )}
     >
       <header className={s.header}>
-        <Status />
         <div className={s.nav}>
           <Lucide icon={ic.arrowLeft} size={20} color="#1c1c1c" />
           <div><h1>Lacak Pesanan</h1><small>No. {orderNo}</small></div>

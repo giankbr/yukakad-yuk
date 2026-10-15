@@ -27,14 +27,6 @@ const WISHLIST = [
   { name: "Tenda Camping 4P", price: "Rp1.600.000", icon: ic.tent },
 ];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(p => p.trim()).filter(Boolean);
@@ -45,7 +37,6 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
   const couple = coupleLabel(data);
   const handle = `${data.couple.bride}&${data.couple.groom}`.toLowerCase().replace(/\s+/g, "");
   const longDate = formatDate(data.date);
-  const clock = toDate(data.date) ? `${formatDate(data.date, { day: "2-digit" })}:${formatDate(data.date, { month: "2-digit" })}` : "09:05";
   const where = city(data.address) || data.place;
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
@@ -70,7 +61,6 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status time={clock} />
           <div className={s.match}>
             <h1>It&apos;s a Match!</h1>
             <p>Dan kali ini... selamanya.</p>
@@ -95,7 +85,6 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
         </section>
       )}
     >
-      <Status time={clock} />
       <header className={s.nav}>
         <span aria-hidden><Lucide icon={ic.arrowLeft} size={20} color="#7c8591" /></span>
         <span className={s.brand}><Lucide icon={ic.flame} size={20} color="#fd3a73" />{handle}</span>

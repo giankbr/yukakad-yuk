@@ -41,14 +41,6 @@ function city(address: string) {
   return parts[parts.length - 1] ?? "";
 }
 
-function Status({ time, dark }: { time: string; dark?: boolean }) {
-  return (
-    <div className={s.status} style={{ color: dark ? "#1e2a3b" : "#fff" }} aria-hidden>
-      {time}
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCover }: ThemeProps) {
   const { bride, groom } = data.couple;
@@ -58,7 +50,6 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
   const mm = formatDate(data.date, { month: "2-digit" });
   const yyyy = formatDate(data.date, { year: "numeric" });
   const valid = /^\d+$/.test(dd) && /^\d+$/.test(mm);
-  const clock = valid ? `${dd}:${mm}` : "09:41";
   const orderId = valid ? `FM-${dd}${mm}${yyyy}` : "FM-000000";
   const longDate = formatDate(data.date);
   const where = city(data.address);
@@ -100,7 +91,6 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverHead}>
-            <Status time={clock} />
             <h1>Pesananmu Dikonfirmasi!</h1>
             <p>Order ID: {orderId} · Paket Selamanya</p>
           </div>
@@ -144,7 +134,6 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
       )}
     >
       <header className={s.top}>
-        <Status time={clock} dark />
         <div className={s.nav}>
           <span aria-hidden><Lucide icon={ic.arrowLeft} size={20} color="#1e2a3b" /></span>
           <div className={s.navTitle}>

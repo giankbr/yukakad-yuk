@@ -23,14 +23,6 @@ const DEMO_WISHLIST = [
   { name: "Koper Liburan", price: "Rp1.400.000", icon: ic.luggage },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>05:45</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 /** "08.00" from an ISO date (Asia/Jakarta). */
 function clock(value?: string, shiftMinutes = 0) {
@@ -83,7 +75,6 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={COVER_ART} /></div>
-          <Status />
           <div className={s.coverHead}>
             <span>E-TIKET {(data.eventLabel ?? "Pernikahan").toUpperCase()}</span>
             <strong>KA ARGO ASMARA</strong>
@@ -152,7 +143,6 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
       )}
     >
       <header className={s.top}>
-        <Status />
         <div className={s.nav}>
           <h1>KA Argo Asmara · Info Perjalanan</h1>
           <p>St. Lajang → St. Selamanya{where ? ` · ${where}` : ""}</p>

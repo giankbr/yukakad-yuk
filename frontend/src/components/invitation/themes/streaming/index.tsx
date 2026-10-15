@@ -22,16 +22,7 @@ const DEMO_WISHES = [
 const DEMO_RUNTIME = ["45m", "52m", "48m"];
 const AVATARS = ["#0071eb", "#e87c03", "#46d369"];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
-const pad = (n: number) => String(n).padStart(2, "0");
 
-function StatusBar({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} color="#fff" /><Lucide icon={ic.wifi} color="#fff" /><Lucide icon={ic.batteryFull} color="#fff" /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -58,9 +49,6 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
   const couple = coupleLabel(data);
   const brand = coupleInitials(data);
   const parts = dateParts(data.date);
-  const date = toDate(data.date);
-  const month = date ? pad(Number(new Intl.DateTimeFormat("en", { timeZone: "Asia/Jakarta", month: "numeric" }).format(date))) : "";
-  const clock = parts.day ? `${pad(Number(parts.day))}:${month}` : "20:06";
   const where = city(data.address);
   const label = data.eventLabel ?? "Pernikahan";
   const countdown = useCountdown(data.date);
@@ -88,7 +76,6 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <StatusBar time={clock} />
           <div className={s.coverNav}>
             <span aria-hidden style={{ width: 22 }} />
             <span className={s.logo}>{brand}</span>
@@ -117,7 +104,6 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
       <header id="st-top" className={s.billboard}>
         <Photo src={hero} alt={`Foto ${couple}`} className={s.billboardImg} />
         <div className={s.billTop}>
-          <StatusBar time={clock} />
           <div className={s.nav}>
             <span className={s.logo}>{brand}</span>
             <span className={s.navIcons} aria-hidden>

@@ -30,14 +30,6 @@ const DEMO_SHOP = [
   { name: "Smart TV 50\"", rarity: "LEGEND", price: "4.100", icon: ic.tv, color: "#f0c96e" },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      20:27
-      <span><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -73,7 +65,6 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.bg} aria-hidden><Photo src="/themes/img/a103.webp" /></div>
-          <Status />
           <div className={s.match}>
             <h1>Pasangan Ditemukan!</h1>
             <p>DUO RANKED · SELAMANYA</p>
@@ -105,7 +96,6 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
       )}
     >
       <header className={s.header}>
-        <Status />
         <div className={s.top}>
           <div className={s.player}>
             <span className={s.av} aria-hidden>{initials}</span>

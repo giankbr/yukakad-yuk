@@ -28,14 +28,6 @@ const DEMO_SHOP = [
   { name: "SOFA +5 DEF", price: "2700", icon: ic.sofa },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>20:05</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -71,7 +63,6 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverBg} aria-hidden><Photo src={COVER_ART} /></div>
-          <Status />
           <div className={s.hud} aria-hidden>
             <span className={s.yellow}>SCORE {year}</span>
             <span className={s.hearts}>♥♥♥</span>
@@ -100,7 +91,6 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
         </section>
       )}
     >
-      <Status />
       <header className={s.nav}>
         <h1>WORLD MAP</h1>
         <span className={s.coins} aria-hidden><i className={s.coin} />x{year}</span>

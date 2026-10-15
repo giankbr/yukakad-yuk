@@ -46,10 +46,6 @@ function Day({ children }: { children: ReactNode }) {
 function ChatHeader({ title, avatar }: { title: string; avatar?: string }) {
   return (
     <header className={s.header}>
-      <div className={s.status} aria-hidden>
-        14:02
-        <span><Lucide icon={ic.signal} color="#fff" /><Lucide icon={ic.wifi} color="#fff" /><Lucide icon={ic.batteryFull} color="#fff" /></span>
-      </div>
       <div className={s.contact}>
         <Lucide icon={ic.arrowLeft} size={20} color="#fff" />
         <Photo src={avatar} alt="" className={s.avatar} />

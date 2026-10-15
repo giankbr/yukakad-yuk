@@ -26,14 +26,6 @@ const DEMO_WISHLIST = [
 const BADGES = ["+1 doa tulus", "+1 restu"];
 const TAGS = ["WAJIB HADIR", "JANGAN TELAT"];
 
-function Status({ time }: { time: string }) {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>{time}</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -104,7 +96,6 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverHead}>
-            <Status time={clock} />
             <div className={s.check}>
               <span className={s.checkCircle} aria-hidden><Lucide icon={ic.check} size={36} color="#2bb673" /></span>
               <h1>Transfer Berhasil!</h1>
@@ -144,7 +135,6 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
       )}
     >
       <header className={s.head}>
-        <Status time={clock} />
         <div className={s.hi}>
           <div>
             <h1>Dompet Cinta</h1>

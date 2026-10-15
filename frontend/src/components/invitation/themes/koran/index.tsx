@@ -17,14 +17,6 @@ const DEMO_WISHES = [
   { id: "w2", name: "Ibu Sri Rejeki", message: "Semoga rumah tangganya selangsung koran ini terbit: setiap hari." },
 ];
 
-function Status() {
-  return (
-    <div className={s.status} aria-hidden>
-      <span>06:00</span>
-      <span className={s.statusIcons}><Lucide icon={ic.signal} /><Lucide icon={ic.wifi} /><Lucide icon={ic.batteryFull} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -77,7 +69,6 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Status />
           <div className={s.page}>
             <header className={s.masthead}>
               <strong>WARTA BAHAGIA</strong>
@@ -111,7 +102,6 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
         </section>
       )}
     >
-      <Status />
       <main className={s.body}>
         <header className={s.pageHead}>
           <strong>WARTA BAHAGIA</strong>

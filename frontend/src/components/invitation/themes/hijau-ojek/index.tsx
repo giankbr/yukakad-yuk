@@ -25,15 +25,6 @@ const DEMO_PRODUCTS = [
   { name: "Mesin Kopi", price: "Rp899.000", icon: ic.coffee, bg: "#e6f6e6", color: "#008a0f" },
 ];
 
-function Status({ light }: { light?: boolean }) {
-  const color = light ? "#fff" : "#1a1a1a";
-  return (
-    <div className={s.status} style={{ color }} aria-hidden>
-      07:00
-      <span><Lucide icon={ic.signal} color={color} /><Lucide icon={ic.wifi} color={color} /><Lucide icon={ic.batteryFull} color={color} /></span>
-    </div>
-  );
-}
 
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
@@ -78,7 +69,6 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
       cover={open => (
         <section className={s.cover}>
           <div className={s.map} aria-hidden><Photo src="/themes/img/a94.webp" /></div>
-          <Status />
           <div className={s.mapArea}>
             <span className={s.pin} aria-hidden><Lucide icon={ic.heart} size={32} color="#00aa13" /></span>
             <span className={s.eta}>{eta}</span>
@@ -118,7 +108,6 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
       )}
     >
       <header className={s.header}>
-        <Status light />
         <h1>Selamat datang, Tamu Istimewa!</h1>
         <div className={s.search}><Lucide icon={ic.search} color="#00aa13" /><span>Cari momen bahagia {names}…</span></div>
       </header>
