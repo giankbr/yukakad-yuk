@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CountUp, MotionInit } from "@/components/landing/Motion";
 import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/landing/SiteChrome";
 import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@/components/landing/Sections";
-import { getJSON, getLandingContent, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
+import { getJSON, getLandingContent, getPlans, getProducts, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
 import { ThemeGallery, VoiceWall, type Voice } from "@/components/landing/TemplateInteractions";
 import {
   IconArrowRight, IconCalendar, IconGift, IconGlobe, IconImages, IconLink, IconLock, IconMusic, IconPause, IconPin, IconQrArt, IconSend, IconSparkle, IconUsers,
@@ -65,7 +65,7 @@ const sampleVoices: Voice[] = [
 ];
 
 export default async function Home() {
-  const [hero, kontak, footer, featuresResult, testimonialsResult, templates, plans, landing] = await Promise.all([
+  const [hero, kontak, footer, featuresResult, testimonialsResult, templates, plans, landing, products] = await Promise.all([
     getJSON<Hero>("/api/public/site-content/hero", {}),
     getJSON<Kontak>("/api/public/site-content/kontak", {}),
     getJSON<FooterContent>("/api/public/site-content/footer", {}),
@@ -74,6 +74,7 @@ export default async function Home() {
     getTemplates(),
     getPlans(),
     getLandingContent(),
+    getProducts(),
   ]);
 
   // Admin-managed features render under the bento; skip ones the fixed cards above already cover.
@@ -231,7 +232,7 @@ export default async function Home() {
         <FinalCta heading={kontak.heading} subheading={kontak.subheading} />
       </div>
 
-      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
+      <SiteFooter products={products} tagline={footer.tagline} copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
     </main>
   );
 }

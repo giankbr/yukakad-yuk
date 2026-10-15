@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { defaultAnnouncement, type Announcement } from "@/lib/marketing";
+import { defaultProducts } from "@/lib/products";
 import styles from "@/app/landing.module.css";
 import { IconArrowRight, IconChevronDown, IconHeart, IconInstagram, IconTiktok, IconWhatsapp } from "@/components/brand/icons";
 import { MobileMenu } from "./TemplateInteractions";
@@ -59,16 +60,17 @@ export function SiteHeader({ current }: { current?: NavKey }) {
   );
 }
 
-type FooterProps = { tagline?: string; copyright?: string; instagram?: string; tiktok?: string; whatsappHref?: string };
+type FooterProps = { products?: { slug: string; name: string }[]; tagline?: string; copyright?: string; instagram?: string; tiktok?: string; whatsappHref?: string };
 
 // Content saved before the rebrand may still say "Yukakad"; fall back to Rawuh defaults instead of showing it.
 const legacyBrand = (value?: string) => value && !/yukakad/i.test(value) ? value : undefined;
 
-export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawInstagram, tiktok, whatsappHref }: FooterProps) {
+export function SiteFooter({ products = defaultProducts, tagline: rawTagline, copyright: rawCopyright, instagram: rawInstagram, tiktok, whatsappHref }: FooterProps) {
   const copyright = legacyBrand(rawCopyright);
+  const tagline = legacyBrand(rawTagline?.trim());
   const instagram = legacyBrand(rawInstagram);
   const columns = [
-    { title: "Produk", links: [["Undangan Website", "/produk/undangan-website"], ["Video Ucapan 3D", "/produk/video-ucapan-3d"], ["QR Check-in", "/produk/qr-checkin"], ["Undangan Cetak", "/produk/undangan-cetak"]] },
+    { title: "Produk", links: products.map(product => [product.name, `/produk/${product.slug}`]) },
     { title: "Acara", links: [["Pernikahan", "/templates"], ["Khitan", "/templates"], ["Aqiqah", "/templates"], ["Ulang Tahun", "/templates"], ["Syukuran", "/templates"]] },
     { title: "Perusahaan", links: [["Tentang kami", "/tentang"], ["Program Reseller", "/tentang#kontak"], ["Tim", "/tentang#tim"], ["Fitur", "/fitur"]] },
     { title: "Bantuan", links: [["Pusat bantuan", "/harga#faq"], ["Panduan membuat", "/fitur#cara-kerja"], ["Hubungi kami", whatsappHref ?? "/tentang#kontak"]] },

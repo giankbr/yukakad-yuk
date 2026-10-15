@@ -7,11 +7,11 @@ import { MotionInit } from "@/components/landing/Motion";
 import {
   IconArrowRight, IconCheck, IconChevronRight, IconHeadset, IconInfinity, IconMinus, IconPlus, IconSend, IconShield, IconTimer,
 } from "@/components/brand/icons";
-import { defaultFaq, getLandingContent, getSiteContact, planHref, planPerks, shortPrice, type FaqItem, type Plan } from "@/lib/marketing";
+import { defaultFaq, getLandingContent, getProducts, getSiteContact, planHref, planPerks, shortPrice, type FaqItem, type Plan } from "@/lib/marketing";
 
 /** Page frame shared by every marketing page: announcement, nav, bordered content rail and footer. */
 export async function MarketingPage({ current, children }: { current?: NavKey; children: ReactNode }) {
-  const [{ footer, waLink }, { announcement }] = await Promise.all([getSiteContact(), getLandingContent()]);
+  const [{ footer, waLink }, { announcement }, products] = await Promise.all([getSiteContact(), getLandingContent(), getProducts()]);
   return (
     <main className={styles.page}>
       <MotionInit />
@@ -19,7 +19,7 @@ export async function MarketingPage({ current, children }: { current?: NavKey; c
       <AnnouncementBar announcement={announcement} />
       <SiteHeader current={current} />
       <div className={styles.rail} id="konten">{children}</div>
-      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
+      <SiteFooter products={products} tagline={footer.tagline} copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
     </main>
   );
 }
