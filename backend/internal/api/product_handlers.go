@@ -54,15 +54,19 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 		}
 		if r.Method == http.MethodPut || r.Method == http.MethodPatch {
 			var payload struct {
-				Name     string `json:"name"`
-				Phone    string `json:"phone"`
-				Category string `json:"category"`
+				Name     string  `json:"name"`
+				Phone    string  `json:"phone"`
+				Category string  `json:"category"`
+				Table    *string `json:"table"`
 			}
 			if err := json.NewDecoder(r.Body).Decode(&payload); err != nil || strings.TrimSpace(payload.Name) == "" {
 				writeJSON(w, http.StatusBadRequest, map[string]string{"error": "name is required"})
 				return
 			}
 			guest, err := s.guests.Update(claims.UserID, invitationID, guestID, payload.Name, payload.Phone, payload.Category)
+			if err == nil && payload.Table != nil {
+				guest, err = s.guests.SetTable(claims.UserID, invitationID, guestID, *payload.Table)
+			}
 			if err != nil {
 				status := http.StatusNotFound
 				if errors.Is(err, guestservice.ErrInvalid) {
@@ -116,6 +120,9 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 					category = strings.TrimSpace(record[2])
 				}
 				guest, err := s.guests.Create(claims.UserID, invitationID, record[0], phone, category)
+				if err == nil && len(record) > 3 && strings.TrimSpace(record[3]) != "" {
+					guest, err = s.guests.SetTable(claims.UserID, invitationID, guest.ID, record[3])
+				}
 				if err != nil {
 					status := http.StatusBadRequest
 					if errors.Is(err, guestservice.ErrNotFound) {
@@ -139,6 +146,7 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 			Name     string `json:"name"`
 			Phone    string `json:"phone"`
 			Category string `json:"category"`
+			Table    string `json:"table"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil || strings.TrimSpace(payload.Name) == "" {
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "name is required"})
@@ -148,6 +156,9 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 			payload.Category = "family"
 		}
 		guest, err := s.guests.Create(claims.UserID, invitationID, payload.Name, payload.Phone, payload.Category)
+		if err == nil && strings.TrimSpace(payload.Table) != "" {
+			guest, err = s.guests.SetTable(claims.UserID, invitationID, guest.ID, payload.Table)
+		}
 		if err != nil {
 			status := http.StatusBadRequest
 			if errors.Is(err, guestservice.ErrNotFound) {

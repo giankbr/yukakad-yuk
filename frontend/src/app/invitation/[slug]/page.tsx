@@ -39,6 +39,16 @@ async function getContent(slug: string, resource: string, previewToken?: string)
   return response.json();
 }
 
+/** Personal link details (name + table) for `?guest=<token>`; null when the token is unknown. */
+async function getGuest(slug: string, token: string, previewToken?: string): Promise<{ name?: string; table?: string } | null> {
+  try {
+    const response = await fetch(`${API_BASE}/api/public/invitation/${slug}/guest?token=${encodeURIComponent(token)}`, { cache: "no-store", headers: authHeaders(previewToken) });
+    return response.ok ? response.json() : null;
+  } catch {
+    return null;
+  }
+}
+
 export default async function PublicInvitationPage({
   params,
   searchParams,
@@ -52,11 +62,12 @@ export default async function PublicInvitationPage({
   const result = await getInvitation(slug, previewToken);
   if (!result) return <main className="invitation-not-found"><h1>Undangan ini belum bisa dibuka.</h1><p>Link mungkin belum dipublikasikan atau sudah tidak aktif.</p></main>;
 
-  const [gallery, giftsResult, settings, stories] = await Promise.all([
+  const [gallery, giftsResult, settings, stories, guest] = await Promise.all([
     getContent(slug, "gallery", previewToken),
     getContent(slug, "gifts", previewToken),
     getContent(slug, "settings", previewToken),
     getContent(slug, "stories", previewToken),
+    guestToken ? getGuest(slug, guestToken, previewToken) : Promise.resolve(null),
   ]);
   const gifts = (giftsResult.items ?? []) as unknown as GiftMethod[];
   const firstStory = stories.items?.[0];
@@ -71,7 +82,8 @@ export default async function PublicInvitationPage({
     events: [{ name: result.event?.title ?? "Celebration", date: result.event?.date ?? "Soon", time: "Details to follow", venue: result.event?.venue ?? "Our chosen place" }],
     gallery: gallery.items?.map((item) => item.image_url).filter(Boolean) ?? [],
     gifts,
-    guestName: guestName ? guestName.replace(/-/g, " ") : undefined,
+    guestName: guestName ? guestName.replace(/-/g, " ") : guest?.name || undefined,
+    guestTable: guest?.table || undefined,
   };
 
   // Every invitation renders with a Rawuh theme; missing/retired templates fall back to Linen Putih.

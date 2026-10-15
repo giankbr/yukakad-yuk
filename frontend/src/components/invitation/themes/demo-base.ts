@@ -17,6 +17,7 @@ const base: InvitationData = {
   gallery: [],
   gifts: [{ id: "demo-bank", type: "bank", bank_name: "BCA", account_number: "1234567890", account_name: "Rina Maharani" }],
   guestName: "Bapak Budi Santoso & Keluarga",
+  guestTable: "12",
   // Sample extra sections so every demo shows what can be switched on from the dashboard.
   extras: {
     quote: { text: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.", source: "QS. Ar-Rum: 21" },

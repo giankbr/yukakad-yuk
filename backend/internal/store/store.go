@@ -27,6 +27,7 @@ type Store interface {
 	UpdateGuest(string, string, string, string) (*Guest, error)
 	DeleteGuest(string) error
 	CheckInGuest(id, actorUserID string) (*Guest, error)
+	SetGuestTable(id, table string) (*Guest, error)
 	FindGuestByToken(invitationID, token string) (*Guest, bool)
 	FindGuestByID(id string) (*Guest, bool)
 	CreateRSVP(string, string, string, int, string) (*RSVP, error)
@@ -170,6 +171,7 @@ type Guest struct {
 	Phone        string     `json:"phone,omitempty"`
 	Category     string     `json:"category"`
 	Token        string     `json:"token"`
+	Table        string     `json:"table"`
 	CheckedInAt  *time.Time `json:"checked_in_at,omitempty"`
 	CheckedInBy  *string    `json:"checked_in_by,omitempty"`
 	CreatedAt    time.Time  `json:"created_at"`
@@ -658,6 +660,17 @@ func (s *MemoryStore) FindGuestByID(id string) (*Guest, bool) {
 	defer s.mu.RUnlock()
 	guest, ok := s.guests[id]
 	return guest, ok
+}
+
+func (s *MemoryStore) SetGuestTable(id, table string) (*Guest, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	guest, ok := s.guests[id]
+	if !ok {
+		return nil, fmt.Errorf("guest not found")
+	}
+	guest.Table = table
+	return guest, nil
 }
 
 func (s *MemoryStore) FindGuestByToken(invitationID, token string) (*Guest, bool) {

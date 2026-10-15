@@ -42,7 +42,7 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
             const response = await apiFetch(`/api/invitations/${invitationId}/guests/${encodeURIComponent(guestId)}/check-in`, token, { method: "POST" });
             const body = await response.json();
             if (!response.ok) throw new Error(body.error ?? "Check-in gagal");
-            setResult({ kind: "success", message: `${body.name} berhasil check-in.` });
+            setResult({ kind: "success", message: `${body.name} berhasil check-in.${body.table ? ` Arahkan ke ${/^\d/.test(body.table) ? `meja ${body.table}` : body.table}.` : ""}` });
           } catch (err) {
             setResult({ kind: "error", message: err instanceof Error ? err.message : "Check-in gagal" });
           } finally {

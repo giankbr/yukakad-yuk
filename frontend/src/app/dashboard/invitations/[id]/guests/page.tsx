@@ -14,6 +14,7 @@ type Guest = {
   phone?: string;
   category: string;
   token: string;
+  table?: string;
   checked_in_at?: string;
 };
 
@@ -28,6 +29,8 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
   const [name, setName] = useState("");
   const [qrGuestId, setQrGuestId] = useState<string | null>(null);
   const [phone, setPhone] = useState("");
+  const [table, setTable] = useState("");
+  const [savingTable, setSavingTable] = useState<string | null>(null);
   const [category, setCategory] = useState("family");
   const [submitting, setSubmitting] = useState(false);
   const [importing, setImporting] = useState(false);
@@ -88,12 +91,13 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
     try {
       const response = await apiFetch(`/api/invitations/${invitationId}/guests`, token, {
         method: "POST",
-        body: JSON.stringify({ name, phone, category }),
+        body: JSON.stringify({ name, phone, category, table }),
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error ?? "Gagal menambahkan tamu");
       setName("");
       setPhone("");
+      setTable("");
       load();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Gagal menambahkan tamu");
@@ -122,6 +126,27 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
     } finally {
       setImporting(false);
       event.target.value = "";
+    }
+  }
+
+  /** Saves a table/seat label; called when the inline input loses focus or Enter is pressed. */
+  async function saveTable(guest: Guest, value: string) {
+    const next = value.trim().slice(0, 20);
+    if (!token || !invitationId || next === (guest.table ?? "")) return;
+    setSavingTable(guest.id);
+    setError("");
+    try {
+      const response = await apiFetch(`/api/invitations/${invitationId}/guests/${guest.id}`, token, {
+        method: "PATCH",
+        body: JSON.stringify({ name: guest.name, phone: guest.phone ?? "", category: guest.category, table: next }),
+      });
+      const body = await response.json();
+      if (!response.ok) throw new Error(body.error ?? "Nomor meja belum tersimpan");
+      setGuests(current => current.map(item => (item.id === guest.id ? { ...item, table: body.table ?? next } : item)));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Nomor meja belum tersimpan");
+    } finally {
+      setSavingTable(null);
     }
   }
 
@@ -155,10 +180,11 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
 
       <form className="dashboard-form" onSubmit={handleAddGuest} style={{ maxWidth: "none" }}>
-        <div className="form-row" style={{ gridTemplateColumns: "2fr 1fr 1fr auto" }}>
+        <div className="form-row" style={{ gridTemplateColumns: "2fr 1fr 1fr 0.7fr auto" }}>
           <FormField label="Nama" value={name} onChange={(e) => setName(e.target.value)} required />
           <FormField label="No. HP" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="0812..." />
           <FormField label="Kategori" value={category} onChange={(e) => setCategory(e.target.value)} />
+          <FormField label="Meja" value={table} onChange={(e) => setTable(e.target.value)} placeholder="12 / VIP A" maxLength={20} />
           <div className="form-actions">
             <Button type="submit" disabled={submitting} className="bg-[#173c3a] text-white">
               {submitting ? "Menambahkan..." : "Tambah"}
@@ -168,7 +194,7 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
       </form>
 
       <label className="upload-drop" style={{ marginTop: "1rem" }}>
-        <span>{importing ? "Mengimpor..." : "Klik untuk impor tamu dari CSV (name, phone, category)"}</span>
+        <span>{importing ? "Mengimpor..." : "Klik untuk impor tamu dari CSV (name, phone, category, table)"}</span>
         <input type="file" accept=".csv,text/csv" onChange={handleImportCSV} disabled={importing} hidden />
       </label>
 
@@ -182,6 +208,7 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
                 <th>Nama</th>
                 <th>Kategori</th>
                 <th>No. HP</th>
+                <th>Meja</th>
                 <th>Check-in</th>
                 <th>QR</th>
                 <th><span className="sr-only">Aksi</span></th>
@@ -193,6 +220,19 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
                   <td><strong>{guest.name}</strong></td>
                   <td>{categoryLabels[guest.category] ?? guest.category}</td>
                   <td>{guest.phone || "—"}</td>
+                  <td>
+                    <input
+                      className="table-input"
+                      defaultValue={guest.table ?? ""}
+                      key={guest.table ?? ""}
+                      placeholder="—"
+                      maxLength={20}
+                      aria-label={`Nomor meja ${guest.name}`}
+                      disabled={savingTable === guest.id}
+                      onBlur={(event) => void saveTable(guest, event.target.value)}
+                      onKeyDown={(event) => { if (event.key === "Enter") event.currentTarget.blur(); }}
+                    />
+                  </td>
                   <td>
                     {guest.checked_in_at ? (
                       <span className="status status-published">Sudah check-in</span>

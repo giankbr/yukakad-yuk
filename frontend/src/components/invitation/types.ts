@@ -48,6 +48,8 @@ export type InvitationData = {
   gallery: string[];
   gifts: GiftMethod[];
   guestName?: string;
+  /** Table/seat label of the guest who opened their personal link (e.g. "12", "VIP A"). */
+  guestTable?: string;
   /** Background music uploaded from the dashboard (settings.music_url / autoplay_music). */
   music?: { url: string; autoplay?: boolean };
   /** Optional extra sections managed from the dashboard (stored in settings.sections_config). */

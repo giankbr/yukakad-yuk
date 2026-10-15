@@ -187,7 +187,7 @@ func (s *PostgresStore) CreateGuest(invitationID, name, phone, category string) 
 }
 
 func (s *PostgresStore) ListGuests(invitationID string) []*Guest {
-	rows, err := s.db.Query(`SELECT id, invitation_id, name, phone, category, invitation_token, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
+	rows, err := s.db.Query(`SELECT id, invitation_id, name, phone, category, invitation_token, table_number, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1 ORDER BY created_at DESC`, invitationID)
 	if err != nil {
 		return []*Guest{}
 	}
@@ -196,7 +196,7 @@ func (s *PostgresStore) ListGuests(invitationID string) []*Guest {
 	for rows.Next() {
 		item := &Guest{}
 		var checkedInBy sql.NullString
-		if rows.Scan(&item.ID, &item.InvitationID, &item.Name, &item.Phone, &item.Category, &item.Token, &item.CheckedInAt, &checkedInBy, &item.CreatedAt) == nil {
+		if rows.Scan(&item.ID, &item.InvitationID, &item.Name, &item.Phone, &item.Category, &item.Token, &item.Table, &item.CheckedInAt, &checkedInBy, &item.CreatedAt) == nil {
 			if checkedInBy.Valid {
 				item.CheckedInBy = &checkedInBy.String
 			}
@@ -212,8 +212,8 @@ func (s *PostgresStore) ListGuests(invitationID string) []*Guest {
 func (s *PostgresStore) FindGuestByID(id string) (*Guest, bool) {
 	guest := &Guest{}
 	var checkedInBy sql.NullString
-	err := s.db.QueryRow(`SELECT id, invitation_id, name, phone, category, invitation_token, checked_in_at, checked_in_by, created_at FROM guests WHERE id = $1`, id).
-		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.CheckedInAt, &checkedInBy, &guest.CreatedAt)
+	err := s.db.QueryRow(`SELECT id, invitation_id, name, phone, category, invitation_token, table_number, checked_in_at, checked_in_by, created_at FROM guests WHERE id = $1`, id).
+		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.Table, &guest.CheckedInAt, &checkedInBy, &guest.CreatedAt)
 	if err != nil {
 		return nil, false
 	}
@@ -226,8 +226,8 @@ func (s *PostgresStore) FindGuestByID(id string) (*Guest, bool) {
 func (s *PostgresStore) FindGuestByToken(invitationID, token string) (*Guest, bool) {
 	guest := &Guest{}
 	var checkedInBy sql.NullString
-	err := s.db.QueryRow(`SELECT id, invitation_id, name, phone, category, invitation_token, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1 AND invitation_token = $2`, invitationID, token).
-		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.CheckedInAt, &checkedInBy, &guest.CreatedAt)
+	err := s.db.QueryRow(`SELECT id, invitation_id, name, phone, category, invitation_token, table_number, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1 AND invitation_token = $2`, invitationID, token).
+		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.Table, &guest.CheckedInAt, &checkedInBy, &guest.CreatedAt)
 	if err != nil {
 		return nil, false
 	}
@@ -239,9 +239,24 @@ func (s *PostgresStore) FindGuestByToken(invitationID, token string) (*Guest, bo
 
 func (s *PostgresStore) UpdateGuest(id, name, phone, category string) (*Guest, error) {
 	guest := &Guest{}
-	err := s.db.QueryRow(`UPDATE guests SET name = $1, phone = $2, category = $3, updated_at = NOW() WHERE id = $4 RETURNING id, invitation_id, name, phone, category, invitation_token, created_at`, name, phone, category, id).Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.CreatedAt)
+	err := s.db.QueryRow(`UPDATE guests SET name = $1, phone = $2, category = $3, updated_at = NOW() WHERE id = $4 RETURNING id, invitation_id, name, phone, category, invitation_token, table_number, created_at`, name, phone, category, id).Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.Table, &guest.CreatedAt)
 	if err != nil {
 		return nil, fmt.Errorf("update guest: %w", err)
+	}
+	return guest, nil
+}
+
+func (s *PostgresStore) SetGuestTable(id, table string) (*Guest, error) {
+	result, err := s.db.Exec(`UPDATE guests SET table_number = $2, updated_at = NOW() WHERE id = $1`, id, table)
+	if err != nil {
+		return nil, fmt.Errorf("set guest table: %w", err)
+	}
+	if count, _ := result.RowsAffected(); count == 0 {
+		return nil, fmt.Errorf("guest not found")
+	}
+	guest, ok := s.FindGuestByID(id)
+	if !ok {
+		return nil, fmt.Errorf("guest not found")
 	}
 	return guest, nil
 }
@@ -261,8 +276,8 @@ func (s *PostgresStore) DeleteGuest(id string) error {
 func (s *PostgresStore) CheckInGuest(id, actorUserID string) (*Guest, error) {
 	guest := &Guest{}
 	var checkedInBy sql.NullString
-	err := s.db.QueryRow(`UPDATE guests SET checked_in_at = NOW(), checked_in_by = $2, updated_at = NOW() WHERE id = $1 RETURNING id, invitation_id, name, phone, category, invitation_token, created_at, checked_in_at, checked_in_by`, id, actorUserID).
-		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.CreatedAt, &guest.CheckedInAt, &checkedInBy)
+	err := s.db.QueryRow(`UPDATE guests SET checked_in_at = NOW(), checked_in_by = $2, updated_at = NOW() WHERE id = $1 RETURNING id, invitation_id, name, phone, category, invitation_token, table_number, created_at, checked_in_at, checked_in_by`, id, actorUserID).
+		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.Table, &guest.CreatedAt, &guest.CheckedInAt, &checkedInBy)
 	if err != nil {
 		return nil, fmt.Errorf("check in guest: %w", err)
 	}
@@ -1364,7 +1379,7 @@ func (s *PostgresStore) BulkDeleteGuests(invitationID string, guestIDs []string)
 }
 
 func (s *PostgresStore) ListGuestsFiltered(invitationID, search, category string) []*Guest {
-	base := `SELECT id, invitation_id, name, phone, category, invitation_token, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1`
+	base := `SELECT id, invitation_id, name, phone, category, invitation_token, table_number, checked_in_at, checked_in_by, created_at FROM guests WHERE invitation_id = $1`
 	args := []any{invitationID}
 	if category != "" {
 		args = append(args, category)
@@ -1384,7 +1399,7 @@ func (s *PostgresStore) ListGuestsFiltered(invitationID, search, category string
 	for rows.Next() {
 		item := &Guest{}
 		var checkedInBy sql.NullString
-		if rows.Scan(&item.ID, &item.InvitationID, &item.Name, &item.Phone, &item.Category, &item.Token, &item.CheckedInAt, &checkedInBy, &item.CreatedAt) == nil {
+		if rows.Scan(&item.ID, &item.InvitationID, &item.Name, &item.Phone, &item.Category, &item.Token, &item.Table, &item.CheckedInAt, &checkedInBy, &item.CreatedAt) == nil {
 			if checkedInBy.Valid {
 				item.CheckedInBy = &checkedInBy.String
 			}

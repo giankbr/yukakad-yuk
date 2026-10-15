@@ -108,6 +108,22 @@ func (s *Service) CheckIn(ownerID, invitationID, guestID string) (*store.Guest, 
 	return s.store.CheckInGuest(guestID, ownerID)
 }
 
+// SetTable assigns a table/seat label (e.g. "12" or "VIP A") to a guest; an empty string clears it.
+func (s *Service) SetTable(ownerID, invitationID, guestID, table string) (*store.Guest, error) {
+	if err := s.ensureOwner(ownerID, invitationID); err != nil {
+		return nil, err
+	}
+	guest, ok := s.store.FindGuestByID(guestID)
+	if !ok || guest.InvitationID != invitationID {
+		return nil, ErrNotFound
+	}
+	table = strings.TrimSpace(table)
+	if len([]rune(table)) > 20 {
+		return nil, fmt.Errorf("%w: table label is too long", ErrInvalid)
+	}
+	return s.store.SetGuestTable(guestID, table)
+}
+
 func (s *Service) BulkDelete(ownerID, invitationID string, ids []string) error {
 	if err := s.ensureOwner(ownerID, invitationID); err != nil {
 		return err

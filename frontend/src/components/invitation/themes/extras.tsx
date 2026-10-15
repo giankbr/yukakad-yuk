@@ -257,7 +257,14 @@ function LivestreamBlock({ live }: { live: NonNullable<InvitationExtras["livestr
   );
 }
 
-function GuestPassBlock({ pass, guestToken, guestName, demo }: { pass: NonNullable<InvitationExtras["guestPass"]>; guestToken?: string; guestName?: string; demo?: boolean }) {
+/** "12" → "Meja 12"; free-form labels ("VIP A", "Meja Keluarga") are shown as written. */
+export function tableLabel(table?: string) {
+  const value = table?.trim();
+  if (!value) return "";
+  return /^\d/.test(value) ? `Meja ${value}` : value;
+}
+
+function GuestPassBlock({ pass, guestToken, guestName, guestTable, demo }: { pass: NonNullable<InvitationExtras["guestPass"]>; guestToken?: string; guestName?: string; guestTable?: string; demo?: boolean }) {
   const token = guestToken || (demo ? "demo-tamu" : undefined);
   const [src, setSrc] = useState("");
   useEffect(() => {
@@ -271,6 +278,7 @@ function GuestPassBlock({ pass, guestToken, guestName, demo }: { pass: NonNullab
         {/* eslint-disable-next-line @next/next/no-img-element */}
         {src ? <img src={src} alt="Kode QR check-in" width={180} height={180} /> : <span className={x.qrPlaceholder} aria-hidden />}
         {guestName && <strong>{guestName}</strong>}
+        {guestTable && <span className={x.table}>{tableLabel(guestTable)}</span>}
         <small>{pass.note || "Tunjukkan kode ini ke penerima tamu saat tiba di lokasi."}</small>
       </div>
     </Block>
@@ -443,7 +451,7 @@ export function Extras({ slot, className, without = [] }: {
           {rundown && <RundownBlock rundown={rundown} />}
           {dress && <DressCodeBlock dress={dress} />}
           {live && <LivestreamBlock live={live} />}
-          {pass && <GuestPassBlock pass={pass} guestToken={guestToken} guestName={data.guestName} demo={demo} />}
+          {pass && <GuestPassBlock pass={pass} guestToken={guestToken} guestName={data.guestName} guestTable={data.guestTable} demo={demo} />}
         </>;
       case "story":
         return <>{video && <VideoBlock video={video} />}{family && <FamilyBlock family={family} />}</>;
