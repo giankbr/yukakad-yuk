@@ -69,7 +69,7 @@
 .auth :global(.auth-quote) figcaption small { display: block; color: var(--rw-muted); font-size: 14px; }
 
 /* ── Workspace (dashboard + admin) ──────────────────── */
-.workspace { grid-template-columns: 248px minmax(0, 1fr) !important; background: var(--rw-surface-2) !important; }
+.workspace { background: var(--rw-surface-2) !important; }
 .workspace :global(.dashboard-rail) { background: var(--rw-black) !important; border-right: 1px solid #262322 !important; }
 .workspace :global(.dashboard-logo) { display: inline-flex !important; align-items: center; gap: 10px; color: #fff !important; font-size: 17px !important; font-weight: 600 !important; letter-spacing: .04em !important; margin-bottom: 24px !important; text-decoration: none; }
 .workspace :global(.dashboard-logo) span { color: #fff !important; }
@@ -87,7 +87,7 @@
 .workspace :global(.rail-user) button { color: var(--rw-muted-2) !important; min-width: 40px; min-height: 40px; justify-content: center; }
 .workspace :global(.rail-back) { color: var(--rw-muted-2) !important; }
 .workspace :global(.rail-back):hover { color: #fff !important; }
-.workspace :global(.dashboard-content) { min-width: 0; padding: 28px clamp(20px, 3vw, 44px) !important; }
+.workspace :global(.dashboard-content) { min-width: 0; padding: 28px clamp(16px, 3vw, 44px) !important; }
 .workspace :global(.dashboard-content):has(> :global(.db-topbar)) { padding: 0 !important; }
 .workspace :global(.db-topbar) { padding: 24px 32px; border-color: var(--line) !important; background: #fff !important; }
 .workspace :global(.db-topbar-left) h1, .workspace :global(.dashboard-header) h1 { color: var(--ink); font-size: clamp(24px, 2.5vw, 30px); line-height: 1.2; letter-spacing: -.03em; font-weight: 500; }
@@ -139,15 +139,6 @@
 .workspace :global(.dashboard-note) h2 { color: var(--ink); font-size: 24px; }
 .workspace button, .workspace a { transition-property: background-color, color, border-color; transition-duration: 150ms; }
 @media (max-width: 960px) {
-	.workspace { grid-template-columns: minmax(0, 1fr) !important; }
-	.workspace :global(.dashboard-rail) { align-items: center; gap: 12px !important; padding: 16px 20px !important; }
-	.workspace :global(.db-nav-section) { display: block !important; width: 100%; padding-top: 0; }
-	.workspace :global(.db-nav-label) { display: none; }
-	.workspace :global(.dashboard-rail) nav { flex-wrap: nowrap !important; overflow-x: auto; }
-	.workspace :global(.dashboard-rail) nav a { flex-shrink: 0; }
-	.workspace :global(.rail-user) { display: block !important; margin: 0 0 0 auto !important; padding: 0 !important; border: 0 !important; }
-	.workspace :global(.rail-user-inner) > div { display: none; }
-	.workspace :global(.dashboard-logo) { margin-bottom: 0 !important; }
 	.workspace :global(.db-content-grid) { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 860px) {

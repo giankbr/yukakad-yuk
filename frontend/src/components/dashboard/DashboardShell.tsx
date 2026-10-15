@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { useState } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
+import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -132,6 +133,8 @@ function invitationNav(id: string): NavItem[] {
 }
 
 /* ── Component ────────────────────────────────────────────────── */
+const COLLAPSE_KEY = "rawuh_sidebar_collapsed";
+
 export function DashboardShell({
 	active,
 	invitationId,
@@ -153,6 +156,53 @@ export function DashboardShell({
 			? ""
 			: window.localStorage.getItem("yukakad_email") ?? "",
 	);
+	// Desktop: icon-only rail, remembered per browser. Mobile: off-canvas drawer.
+	const [collapsed, setCollapsed] = useState(() => {
+		if (typeof window === "undefined") return false;
+		try {
+			return window.localStorage.getItem(COLLAPSE_KEY) === "1";
+		} catch {
+			return false;
+		}
+	});
+	const [drawerOpen, setDrawerOpen] = useState(false);
+	const pathname = usePathname();
+
+	const toggleCollapsed = useCallback(() => {
+		setCollapsed((value) => {
+			try {
+				window.localStorage.setItem(COLLAPSE_KEY, value ? "0" : "1");
+			} catch {
+				/* storage unavailable: keep in-memory state */
+			}
+			return !value;
+		});
+	}, []);
+
+	// Close the drawer on navigation and with Escape; lock page scroll while it is open.
+	useEffect(() => {
+		const timer = setTimeout(() => setDrawerOpen(false), 0);
+		return () => clearTimeout(timer);
+	}, [pathname]);
+	useEffect(() => {
+		if (!drawerOpen) return;
+		const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") setDrawerOpen(false); };
+		const previous = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+		window.addEventListener("keydown", onKey);
+		return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", onKey); };
+	}, [drawerOpen]);
+	// Keyboard shortcut: Ctrl/Cmd + B toggles the rail on desktop.
+	useEffect(() => {
+		const onKey = (event: KeyboardEvent) => {
+			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "b") {
+				event.preventDefault();
+				toggleCollapsed();
+			}
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [toggleCollapsed]);
 
 	const navGroups =
 		variant === "admin"
@@ -176,97 +226,90 @@ export function DashboardShell({
 		window.location.href = "/auth/login";
 	}
 
-	return (
-		<main className={`dashboard-shell ${theme.workspace}`}>
-			{/* ── Dark sidebar ───────────────────────────────────────── */}
-			<aside className="dashboard-rail">
-				{/* Logo */}
-				<Link href="/dashboard" className="dashboard-logo">
-					<span className="dashboard-logo-icon" aria-hidden="true">
-						<IconHeart size={16} strokeWidth={2.2} />
-					</span>
-					RAWUH
-				</Link>
+	const home = variant === "admin" ? "/admin" : "/dashboard";
 
-				{/* Search */}
-				<div className="db-search" role="search" aria-label="Cari">
-					<PhMagnifyingGlass size={15} />
-					<span style={{ flex: 1 }}>Cari...</span>
-					<kbd>⌘F</kbd>
+	return (
+		<main className={`${shell.shell} ${theme.workspace}`} data-collapsed={collapsed || undefined}>
+			{/* ── Mobile top bar ─────────────────────────────────────── */}
+			<header className={shell.topbar}>
+				<button type="button" className={shell.iconButton} onClick={() => setDrawerOpen(true)} aria-label="Buka menu" aria-expanded={drawerOpen} aria-controls="dashboard-rail">
+					<PhList size={20} />
+				</button>
+				<Link href={home} className={shell.logo}>
+					<span className={shell.logoIcon} aria-hidden="true"><IconHeart size={16} strokeWidth={2.2} /></span>
+					<span>RAWUH</span>
+				</Link>
+				<span className={shell.avatar} aria-hidden="true">{initials || "RW"}</span>
+			</header>
+
+			{drawerOpen && <button type="button" className={shell.scrim} aria-label="Tutup menu" onClick={() => setDrawerOpen(false)} />}
+
+			{/* ── Sidebar ────────────────────────────────────────────── */}
+			<aside id="dashboard-rail" className={shell.rail} data-open={drawerOpen || undefined} aria-label="Navigasi dashboard">
+				<div className={shell.railHead}>
+					<Link href={home} className={shell.logo} title="Rawuh">
+						<span className={shell.logoIcon} aria-hidden="true"><IconHeart size={16} strokeWidth={2.2} /></span>
+						<span className={shell.label}>RAWUH</span>
+					</Link>
+					<button type="button" className={`${shell.iconButton} ${shell.collapseButton}`} onClick={toggleCollapsed}
+						aria-label={collapsed ? "Lebarkan sidebar" : "Ciutkan sidebar"} aria-pressed={collapsed} title={`${collapsed ? "Lebarkan" : "Ciutkan"} sidebar (Ctrl/⌘ B)`}>
+						<PhSidebarSimple size={18} />
+					</button>
+					<button type="button" className={`${shell.iconButton} ${shell.closeButton}`} onClick={() => setDrawerOpen(false)} aria-label="Tutup menu">
+						<PhX size={18} />
+					</button>
 				</div>
 
-				{/* Back link when inside an invitation */}
+				<div className={shell.search} role="search" aria-label="Cari" data-tip="Cari">
+					<PhMagnifyingGlass size={15} />
+					<span className={shell.label}>Cari...</span>
+					<kbd className={shell.label}>⌘F</kbd>
+				</div>
+
 				{invitationId && (
-					<div style={{ paddingTop: "1rem" }}>
-						<Link
-							href="/dashboard/invitations"
-							className="rail-back"
-							style={{
-								display: "flex",
-								alignItems: "center",
-								gap: ".4rem",
-								padding: ".45rem .75rem",
-								fontSize: ".78rem",
-								textDecoration: "none",
-								borderRadius: ".35rem",
-							}}
-						>
-							← Semua Undangan
-						</Link>
-					</div>
+					<Link href="/dashboard/invitations" className={shell.back} data-tip="Semua undangan">
+						<PhArrowLeft size={15} />
+						<span className={shell.label}>Semua Undangan</span>
+					</Link>
 				)}
 
-				{/* Nav groups */}
-				{navGroups.map((group) => (
-					<div key={group.label} className="db-nav-section">
-						<p className="db-nav-label">{group.label}</p>
-						<nav aria-label={group.label}>
-							{group.items.map((item) => (
-								<Link
-									key={item.key}
-									href={item.href}
-									aria-current={active === item.key ? "page" : undefined}
-									className={active === item.key ? "active" : undefined}
-								>
-									{item.icon}
-									{item.label}
-								</Link>
-							))}
-						</nav>
-					</div>
-				))}
+				<div className={shell.navScroll}>
+					{navGroups.map((group) => (
+						<div key={group.label} className={shell.group}>
+							<p className={shell.groupLabel}>{group.label}</p>
+							<nav aria-label={group.label} className={shell.nav}>
+								{group.items.map((item) => (
+									<Link
+										key={item.key}
+										href={item.href}
+										aria-current={active === item.key ? "page" : undefined}
+										className={shell.link}
+										data-tip={item.label}
+										onClick={() => setDrawerOpen(false)}
+									>
+										<span className={shell.linkIcon}>{item.icon}</span>
+										<span className={shell.label}>{item.label}</span>
+									</Link>
+								))}
+							</nav>
+						</div>
+					))}
+				</div>
 
-				{/* User section */}
-				<div className="rail-user">
-					<div className="rail-user-inner">
-						<div className="rail-user-avatar" aria-hidden="true">
-							{initials || "RW"}
-						</div>
-						<div style={{ minWidth: 0, flex: 1 }}>
-							<strong>{userName}</strong>
-							<span>{userEmail}</span>
-						</div>
-						<button
-							onClick={handleLogout}
-							aria-label="Keluar"
-							style={{
-								background: "none",
-								border: "none",
-								cursor: "pointer",
-								flexShrink: 0,
-								padding: ".25rem",
-								display: "flex",
-								alignItems: "center",
-							}}
-						>
-							<PhSignOut size={16} />
-						</button>
+				<div className={shell.user}>
+					<span className={shell.avatar} aria-hidden="true">{initials || "RW"}</span>
+					<div className={`${shell.userText} ${shell.label}`}>
+						<strong>{userName}</strong>
+						{userEmail && <small>{userEmail}</small>}
 					</div>
+					<button type="button" onClick={handleLogout} aria-label="Keluar" className={shell.iconButton} data-tip="Keluar">
+						<PhSignOut size={16} />
+					</button>
 				</div>
 			</aside>
 
 			{/* ── Content area ───────────────────────────────────────── */}
-			<section className="dashboard-content">{children}</section>
+			<section className={`dashboard-content ${shell.content}`}>{children}</section>
 		</main>
 	);
 }

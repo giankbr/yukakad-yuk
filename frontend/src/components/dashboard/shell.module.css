@@ -1,0 +1,98 @@
+/* Dashboard / admin frame: dark rail that collapses to icons on desktop and becomes a drawer on mobile. */
+.shell {
+  --rail-w: 248px;
+  display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); min-height: 100dvh;
+  background: var(--rw-surface-2); color: var(--rw-ink);
+  transition: grid-template-columns 220ms cubic-bezier(.2, 0, 0, 1);
+}
+.shell[data-collapsed] { --rail-w: 76px; }
+
+.rail {
+  position: sticky; top: 0; z-index: 30; display: flex; flex-direction: column; gap: 14px; height: 100dvh; min-width: 0;
+  padding: 20px 14px 14px; overflow: hidden; border-right: 1px solid #262322; background: var(--rw-black); color: #c9c3bf;
+}
+.railHead { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 36px; padding: 0 4px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: #fff; font-size: 17px; font-weight: 600; letter-spacing: .04em; text-decoration: none; white-space: nowrap; }
+.logoIcon { display: grid; flex: none; place-items: center; width: 30px; height: 30px; border-radius: var(--rw-radius-md); background: var(--rw-primary); color: #fff; }
+
+.iconButton {
+  display: grid; flex: none; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: var(--rw-radius-md);
+  background: transparent; color: var(--rw-muted-2); cursor: pointer; transition: background-color 150ms, color 150ms;
+}
+.iconButton:hover { background: #1f1c1b; color: #fff; }
+.iconButton:focus-visible, .link:focus-visible, .back:focus-visible, .logo:focus-visible { outline: 2px solid var(--rw-primary-border); outline-offset: 2px; }
+.closeButton { display: none; }
+
+.search {
+  display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 12px; border: 1px solid #2c2928; border-radius: var(--rw-radius-md);
+  background: #1a1817; color: var(--rw-muted-2); font-size: 13px; white-space: nowrap; overflow: hidden;
+}
+.search > span { flex: 1; }
+.search kbd { padding: 1px 6px; border: 1px solid #3a3634; border-radius: 4px; font-family: var(--rw-font-mono); font-size: 10px; }
+
+.back { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 10px; border-radius: var(--rw-radius-md); color: var(--rw-muted-2); font-size: 12.5px; text-decoration: none; white-space: nowrap; }
+.back:hover { background: #1f1c1b; color: #fff; }
+
+.navScroll { flex: 1; min-height: 0; margin: 0 -6px; padding: 0 6px; overflow-y: auto; overflow-x: hidden; scrollbar-width: thin; scrollbar-color: #3a3634 transparent; }
+.group + .group { margin-top: 18px; }
+.groupLabel { margin: 4px 10px 8px; color: var(--rw-muted); font-family: var(--rw-font-mono) !important; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
+.nav { display: grid; gap: 2px; }
+.link {
+  position: relative; display: flex; align-items: center; gap: 12px; min-height: 40px; padding: 0 10px; border-radius: var(--rw-radius-md);
+  color: #c9c3bf; font-size: 13.5px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 150ms, color 150ms;
+}
+.link:hover { background: #1f1c1b; color: #fff; }
+.link[aria-current="page"] { background: var(--rw-primary); color: #fff; }
+.linkIcon { display: grid; flex: none; place-items: center; width: 20px; }
+
+.user { display: flex; align-items: center; gap: 10px; padding: 12px 4px 0; border-top: 1px solid #262322; }
+.avatar { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: #22253f; color: var(--rw-primary-border); font-size: 12px; font-weight: 700; }
+.userText { display: grid; flex: 1; min-width: 0; }
+.userText strong { overflow: hidden; color: #fff; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.userText small { overflow: hidden; color: var(--rw-muted-2); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+
+.content { min-width: 0; }
+.topbar, .scrim { display: none; }
+
+/* ── Collapsed rail (desktop) ─────────────────────────────── */
+@media (min-width: 961px) {
+  .shell[data-collapsed] .rail { padding-inline: 12px; }
+  .shell[data-collapsed] .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .shell[data-collapsed] .railHead { flex-direction: column; gap: 12px; padding: 0; }
+  .shell[data-collapsed] .groupLabel { height: 1px; margin: 10px 8px; overflow: hidden; background: #2c2928; color: transparent; }
+  .shell[data-collapsed] :is(.link, .back, .search) { justify-content: center; padding: 0; }
+  .shell[data-collapsed] .search { border-color: transparent; background: transparent; }
+  .shell[data-collapsed] .user { flex-direction: column; padding-inline: 0; }
+  /* Tooltips for icon-only items. */
+  .shell[data-collapsed] [data-tip] { position: relative; }
+  .shell[data-collapsed] [data-tip]:hover::after, .shell[data-collapsed] [data-tip]:focus-visible::after {
+    content: attr(data-tip); position: absolute; top: 50%; left: calc(100% + 12px); z-index: 50; translate: 0 -50%;
+    padding: 6px 10px; border-radius: 6px; background: #fff; color: var(--rw-ink); box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    font-size: 12px; font-weight: 600; white-space: nowrap; pointer-events: none;
+  }
+  .shell[data-collapsed] .rail { overflow: visible; }
+  .shell[data-collapsed] .navScroll { overflow: visible; }
+}
+
+/* ── Mobile: top bar + drawer ─────────────────────────────── */
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+  .topbar {
+    position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px; height: 60px; padding: 0 12px;
+    border-bottom: 1px solid #262322; background: var(--rw-black);
+  }
+  .topbar .logo { flex: 1; }
+  .rail {
+    position: fixed; inset: 0 auto 0 0; z-index: 60; width: min(300px, 86vw); height: 100dvh; translate: -100% 0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0); transition: translate 240ms cubic-bezier(.2, 0, 0, 1), box-shadow 240ms;
+  }
+  .rail[data-open] { translate: 0 0; box-shadow: 24px 0 60px rgba(0, 0, 0, .35); }
+  .collapseButton { display: none; }
+  .closeButton { display: grid; }
+  .scrim { position: fixed; inset: 0; z-index: 55; display: block; padding: 0; border: 0; background: rgba(10, 10, 12, .5); animation: shell-fade 200ms ease-out both; }
+}
+@keyframes shell-fade { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .shell, .rail, .scrim { transition: none; animation: none; }
+}
