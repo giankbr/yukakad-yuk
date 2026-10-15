@@ -11,17 +11,47 @@ import {
 } from "@/components/brand/icons";
 
 /** Admin features store an emoji; pick a matching line icon so cards match the design system. */
-function FeatureIcon({ title }: { title: string }) {
+function FeatureIcon({ title, size = 20 }: { title: string; size?: number }) {
   const t = title.toLowerCase();
-  if (/amplop|hadiah|gift|kado/.test(t)) return <IconGift size={20} />;
-  if (/whatsapp|bagikan|kirim|share/.test(t)) return <IconSend size={20} />;
-  if (/galeri|foto|video/.test(t)) return <IconImages size={20} />;
-  if (/musik|lagu/.test(t)) return <IconMusic size={20} />;
-  if (/peta|lokasi|maps/.test(t)) return <IconPin size={20} />;
-  if (/tamu|guest/.test(t)) return <IconUsers size={20} />;
-  if (/acara|jadwal|hitung|tanggal/.test(t)) return <IconCalendar size={20} />;
-  if (/domain|link|website/.test(t)) return <IconGlobe size={20} />;
-  return <IconSparkle size={20} />;
+  if (/amplop|hadiah|gift|kado/.test(t)) return <IconGift size={size} />;
+  if (/whatsapp|bagikan|kirim|share/.test(t)) return <IconSend size={size} />;
+  if (/galeri|foto|video/.test(t)) return <IconImages size={size} />;
+  if (/musik|lagu/.test(t)) return <IconMusic size={size} />;
+  if (/peta|lokasi|maps/.test(t)) return <IconPin size={size} />;
+  if (/tamu|guest/.test(t)) return <IconUsers size={size} />;
+  if (/acara|jadwal|hitung|tanggal/.test(t)) return <IconCalendar size={size} />;
+  if (/domain|link|website/.test(t)) return <IconGlobe size={size} />;
+  return <IconSparkle size={size} />;
+}
+
+/** Illustration for an admin-managed feature card, matching the fixed bento cards. */
+function FeatureVisual({ title }: { title: string }) {
+  const t = title.toLowerCase();
+  if (/amplop|hadiah|gift|kado/.test(t)) {
+    return (
+      <div className={styles.giftList}>
+        {[["BCA", "Transfer bank", "Rp500.000"], ["GoPay", "E-wallet", "Rp250.000"], ["QRIS", "Scan QR", "Rp1.000.000"]].map(([label, kind, amount]) => (
+          <div key={label} className={styles.giftRow}>
+            <span className={styles.giftBadge}>{label}</span>
+            <span>{kind}</span>
+            <b>{amount}</b>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (/whatsapp|bagikan|kirim|share/.test(t)) {
+    return (
+      <div className={styles.waChat}>
+        <div className={styles.waBubble}>
+          <p>Halo <b>Pak Budi</b>, dengan hormat kami mengundang Bapak sekeluarga 🙏</p>
+          <div className={styles.waLink}><IconLink size={14} /><span>rawuh.id/rina-bima?to=Pak+Budi</span></div>
+          <time>09.41 ✓✓</time>
+        </div>
+      </div>
+    );
+  }
+  return <div className={styles.featureIconLg}><FeatureIcon title={title} size={28} /></div>;
 }
 import styles from "./landing.module.css";
 
@@ -154,8 +184,8 @@ export default async function Home() {
                 <div className={styles.cardCopy}><h3>Domain pribadi</h3><p>Alamat undangan atas nama kalian sendiri.</p></div>
               </article>
               {extraFeatures.map((feature) => (
-                <article key={feature.id} className={`${styles.card} ${styles.cardMini}`} style={{ "--span": extraSpan } as CSSProperties}>
-                  <span className={styles.featureIcon} aria-hidden><FeatureIcon title={feature.title} /></span>
+                <article key={feature.id} className={`${styles.card} ${styles.cardExtra}`} style={{ "--span": extraSpan } as CSSProperties}>
+                  <div className={styles.cardVisual} aria-hidden><FeatureVisual title={feature.title} /></div>
                   <div className={styles.cardCopy}><h3>{feature.title}</h3><p>{feature.description}</p></div>
                 </article>
               ))}
