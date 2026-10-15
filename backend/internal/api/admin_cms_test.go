@@ -1,6 +1,8 @@
 package api
 
 import (
+	"bytes"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -76,5 +78,37 @@ func TestAdminPlansUsersAndContent(t *testing.T) {
 	}
 	if code := call(server.handleAdminUploads, adminToken, http.MethodPost, "/api/admin/uploads", "").Code; code != http.StatusServiceUnavailable {
 		t.Fatalf("upload without storage expected 503, got %d", code)
+	}
+
+	// Uploads land under site/ without a doubled prefix.
+	uploader := &fakeUploader{}
+	server.photoStore = uploader
+	upload := func(folder string) int {
+		var buf bytes.Buffer
+		mw := multipart.NewWriter(&buf)
+		part, _ := mw.CreateFormFile("file", "a.png")
+		_, _ = part.Write(tinyPNG)
+		if folder != "" {
+			_ = mw.WriteField("folder", folder)
+		}
+		_ = mw.Close()
+		req := httptest.NewRequest(http.MethodPost, "/api/admin/uploads", &buf)
+		req.Header.Set("Content-Type", mw.FormDataContentType())
+		req.Header.Set("Authorization", "Bearer "+adminToken)
+		rec := httptest.NewRecorder()
+		server.handleAdminUploads(rec, req)
+		return rec.Code
+	}
+	if code := upload(""); code != http.StatusOK {
+		t.Fatalf("upload without folder: %d", code)
+	}
+	if code := upload("team"); code != http.StatusOK {
+		t.Fatalf("upload with folder: %d", code)
+	}
+	if code := upload("../etc"); code != http.StatusBadRequest {
+		t.Fatalf("bad folder should be 400, got %d", code)
+	}
+	if len(uploader.keys) != 2 || strings.HasPrefix(uploader.keys[0], "site/site/") || !strings.HasPrefix(uploader.keys[0], "site/") || !strings.HasPrefix(uploader.keys[1], "site/team/") {
+		t.Fatalf("unexpected keys %v", uploader.keys)
 	}
 }

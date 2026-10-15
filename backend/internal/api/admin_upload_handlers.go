@@ -21,7 +21,7 @@ func (s *Server) handleAdminUploads(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-	if s.storage == nil {
+	if s.photoStore == nil {
 		writeJSON(w, http.StatusServiceUnavailable, map[string]string{"error": "object storage is not configured"})
 		return
 	}
@@ -31,10 +31,7 @@ func (s *Server) handleAdminUploads(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	folder := r.FormValue("folder")
-	if folder == "" {
-		folder = "site"
-	}
-	if !uploadFolderPattern.MatchString(folder) {
+	if folder != "" && !uploadFolderPattern.MatchString(folder) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid folder"})
 		return
 	}
@@ -54,10 +51,18 @@ func (s *Server) handleAdminUploads(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "image must be jpeg, png, or webp"})
 		return
 	}
-	url, err := s.storage.Upload(r.Context(), "site/"+folder+"/"+randomID(), bytes.NewReader(data), int64(len(data)), contentType)
+	url, err := s.photoStore.Upload(r.Context(), adminUploadKey(folder, randomID()), bytes.NewReader(data), int64(len(data)), contentType)
 	if err != nil {
 		writeJSON(w, http.StatusBadGateway, map[string]string{"error": err.Error()})
 		return
 	}
 	writeJSON(w, http.StatusOK, map[string]string{"url": url})
+}
+
+// adminUploadKey keeps admin uploads under site/ ("site/<id>", or "site/<folder>/<id>" when a folder is given).
+func adminUploadKey(folder, id string) string {
+	if folder == "" || folder == "site" {
+		return "site/" + id
+	}
+	return "site/" + folder + "/" + id
 }

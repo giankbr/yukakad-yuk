@@ -47,7 +47,7 @@ type Server struct {
 	domains     *domainservice.Service
 	templates   *templateservice.Service
 	resetMailer mailer.Sender
-	photoStore  objectUploader // guest photo uploads; nil until object storage is configured
+	photoStore  objectUploader // guest photo and admin uploads; nil until object storage is configured
 	doorprizeMu sync.Mutex
 }
 

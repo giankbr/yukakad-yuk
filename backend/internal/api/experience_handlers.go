@@ -19,7 +19,7 @@ import (
 // Hari-H & after-event features: buku buwuh, venue screen feed, doorprize, guest photos,
 // wishlist crowdfunding and the public recap.
 
-// objectUploader is the part of object storage the guest photo upload needs (fakeable in tests).
+// objectUploader is the part of object storage that guest photo and admin uploads need (fakeable in tests).
 type objectUploader interface {
 	Upload(ctx context.Context, key string, r io.Reader, size int64, contentType string) (string, error)
 }
