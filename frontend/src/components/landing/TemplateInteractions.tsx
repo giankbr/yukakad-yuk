@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/app/landing.module.css";
@@ -134,15 +134,51 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
               </div>
             </article>
           ))}
+          {visible.length < 4 && (
+            <FewThemesCard
+              span={4 - visible.length}
+              label={category || (needle ? `"${query.trim()}"` : "")}
+              count={visible.length}
+              total={templates.length}
+              suggestions={templates.filter(template => !visible.includes(template)).slice(0, 3)}
+              onReset={() => { setCategory(""); setQuery(""); }}
+            />
+          )}
         </div>
       )}
-      <div className={styles.galleryFooter}>
+      {(visible.length === 0 || visible.length >= 4) && <div className={styles.galleryFooter}>
         {clipped
           ? <button type="button" className={styles.btnPrimary} onClick={() => setExpanded(true)}>Muat {visible.length - 8} tema lainnya <IconArrowRight size={14} /></button>
           : clip && <Link href="/templates" className={styles.btnPrimary}>Lihat semua tema <IconArrowRight size={14} /></Link>}
         <p role="status">{visible.length} tema{category ? ` ${category}` : ""}</p>
-      </div>
+      </div>}
     </div>
+  );
+}
+
+/** Fills the empty columns when a filter leaves only 1–3 themes, so the row never looks broken. */
+function FewThemesCard({ span, label, count, total, suggestions, onReset }: {
+  span: number; label: string; count: number; total: number; suggestions: GalleryTemplate[]; onReset: () => void;
+}) {
+  return (
+    <aside className={styles.fewCard} style={{ "--span": span } as CSSProperties} data-span={span}>
+      <div className={styles.fewCopy}>
+        <p className={styles.eyebrow}>Baru {count} tema{label ? ` ${label}` : ""}</p>
+        <h3>Belum nemu yang pas?</h3>
+        <p>Tema baru rutin ditambah. Sementara itu, intip {total - count} tema lain yang sama-sama siap dipakai.</p>
+        <button type="button" className={styles.btnPrimary} onClick={onReset}>Lihat semua {total} tema <IconArrowRight size={14} /></button>
+      </div>
+      {suggestions.length > 0 && (
+        <div className={styles.fewStack} aria-label="Tema lainnya">
+          {suggestions.map(template => (
+            <Link key={template.id} href={template.href ?? template.demoHref} className={styles.fewThumb} title={template.name}>
+              {template.preview && <Image src={template.preview} alt={template.name} fill sizes="160px" unoptimized={!template.preview.startsWith("/")} />}
+              <span>{template.name}</span>
+            </Link>
+          ))}
+        </div>
+      )}
+    </aside>
   );
 }
 

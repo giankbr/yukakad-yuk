@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "@/app/landing.module.css";
-import { IconArrowRight, IconChevronDown, IconFacebook, IconHeart, IconInstagram, IconMessage, IconYoutube } from "@/components/brand/icons";
+import { IconArrowRight, IconChevronDown, IconHeart, IconInstagram, IconTiktok, IconWhatsapp } from "@/components/brand/icons";
 import { MobileMenu } from "./TemplateInteractions";
 
 export function RawuhLogo({ label = "RAWUH", href = "/" }: { label?: string; href?: string }) {
@@ -50,12 +50,12 @@ export function SiteHeader({ current }: { current?: NavKey }) {
   );
 }
 
-type FooterProps = { tagline?: string; copyright?: string; instagram?: string; whatsappHref?: string };
+type FooterProps = { tagline?: string; copyright?: string; instagram?: string; tiktok?: string; whatsappHref?: string };
 
 // Content saved before the rebrand may still say "Yukakad"; fall back to Rawuh defaults instead of showing it.
 const legacyBrand = (value?: string) => value && !/yukakad/i.test(value) ? value : undefined;
 
-export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawInstagram, whatsappHref }: FooterProps) {
+export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawInstagram, tiktok, whatsappHref }: FooterProps) {
   const copyright = legacyBrand(rawCopyright);
   const instagram = legacyBrand(rawInstagram);
   const columns = [
@@ -65,6 +65,7 @@ export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawIns
     { title: "Bantuan", links: [["Pusat bantuan", "/harga#faq"], ["Panduan membuat", "/fitur#cara-kerja"], ["Hubungi kami", whatsappHref ?? "/tentang#kontak"]] },
   ];
   const instagramHref = instagram ? `https://instagram.com/${instagram.replace(/^@/, "")}` : undefined;
+  const tiktokHref = tiktok ? `https://www.tiktok.com/@${tiktok.replace(/^@/, "")}` : undefined;
   return (
     <footer className={styles.footer}>
       <div className={styles.footerInner}>
@@ -73,10 +74,9 @@ export function SiteFooter({ tagline, copyright: rawCopyright, instagram: rawIns
             <RawuhLogo />
             <p>{tagline ?? "Undangan digital untuk setiap momen berharga. Dibuat dengan sepenuh hati di Yogyakarta."}</p>
             <div className={styles.socials}>
-              {instagramHref && <a href={instagramHref} target="_blank" rel="noreferrer" aria-label="Instagram Rawuh"><IconInstagram /></a>}
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="YouTube Rawuh"><IconYoutube /></a>
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook Rawuh"><IconFacebook /></a>
-              {whatsappHref && <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="WhatsApp Rawuh"><IconMessage /></a>}
+              {instagramHref && <a href={instagramHref} target="_blank" rel="noreferrer" aria-label="Instagram Rawuh"><IconInstagram size={18} /></a>}
+              {tiktokHref && <a href={tiktokHref} target="_blank" rel="noreferrer" aria-label="TikTok Rawuh"><IconTiktok size={18} /></a>}
+              {whatsappHref && <a href={whatsappHref} target="_blank" rel="noreferrer" aria-label="WhatsApp Rawuh"><IconWhatsapp size={18} /></a>}
             </div>
           </div>
           {columns.map(column => (

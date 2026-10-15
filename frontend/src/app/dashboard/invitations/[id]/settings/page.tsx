@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { MusicNotes as PhMusicNotes } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { TemplatePicker } from "@/components/dashboard/TemplatePicker";
 import { apiFetch } from "@/lib/api";
@@ -137,7 +138,7 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
             {music ? (
               <div className={styles.track}>
                 <span className={styles.trackIcon} aria-hidden="true">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg>
+                  <PhMusicNotes size={20} weight="fill" />
                 </span>
                 <div className={styles.trackMain}>
                   <strong title={trackName(music)}>{trackName(music)}</strong>

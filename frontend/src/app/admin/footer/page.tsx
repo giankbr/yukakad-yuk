@@ -11,6 +11,7 @@ type Footer = {
   heading?: string;
   copyright?: string;
   instagram?: string;
+  tiktok?: string;
 };
 
 export default function AdminFooterPage() {
@@ -66,6 +67,7 @@ export default function AdminFooterPage() {
           <FormField label="Judul" value={footer.heading ?? ""} onChange={(e) => setFooter({ ...footer, heading: e.target.value })} placeholder="Rawuh" />
           <FormField label="Hak cipta" value={footer.copyright ?? ""} onChange={(e) => setFooter({ ...footer, copyright: e.target.value })} placeholder="© 2026 Rawuh.id" />
           <FormField label="Akun Instagram" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@rawuh.id" />
+          <FormField label="Akun TikTok" value={footer.tiktok ?? ""} onChange={(e) => setFooter({ ...footer, tiktok: e.target.value })} placeholder="@rawuh.id" />
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
               {saving ? "Menyimpan..." : "Simpan perubahan"}

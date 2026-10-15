@@ -5,204 +5,24 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
+import { Article as PhArticle, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers } from "@phosphor-icons/react/ssr";
 
-/* ── Inline SVG icons ─────────────────────────────────────────── */
-function IGrid() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<rect x="3" y="3" width="7" height="7" rx="1.2" />
-			<rect x="14" y="3" width="7" height="7" rx="1.2" />
-			<rect x="3" y="14" width="7" height="7" rx="1.2" />
-			<rect x="14" y="14" width="7" height="7" rx="1.2" />
-		</svg>
-	);
-}
-function IScroll() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-			<polyline points="14 2 14 8 20 8" />
-		</svg>
-	);
-}
-function IUsers() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-			<circle cx="9" cy="7" r="4" />
-			<path d="M23 21v-2a4 4 0 00-3-3.87" />
-			<path d="M16 3.13a4 4 0 010 7.75" />
-		</svg>
-	);
-}
-function ILayout() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<rect x="3" y="3" width="18" height="18" rx="2" />
-			<line x1="3" y1="9" x2="21" y2="9" />
-			<line x1="9" y1="21" x2="9" y2="9" />
-		</svg>
-	);
-}
-function IGear() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<circle cx="12" cy="12" r="3" />
-			<path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-		</svg>
-	);
-}
-function ICheck() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<polyline points="9 11 12 14 22 4" />
-			<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-		</svg>
-	);
-}
-function IStar() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-		</svg>
-	);
-}
-function IMsg() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-		</svg>
-	);
-}
-function IPhone() {
-	return (
-		<svg
-			width="15"
-			height="15"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-		</svg>
-	);
-}
-function ILogout() {
-	return (
-		<svg
-			width="14"
-			height="14"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2"
-			aria-hidden="true"
-		>
-			<path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
-			<polyline points="16 17 21 12 16 7" />
-			<line x1="21" y1="12" x2="9" y2="12" />
-		</svg>
-	);
-}
-function ISearch() {
-	return (
-		<svg
-			width="13"
-			height="13"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth="2.5"
-			aria-hidden="true"
-		>
-			<circle cx="11" cy="11" r="8" />
-			<path d="m21 21-4.35-4.35" />
-		</svg>
-	);
-}
-/* ── Navigation config ────────────────────────────────────────── */
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
 const mainNav: NavItem[] = [
-	{ key: "overview", label: "Dashboard", href: "/dashboard", icon: <IGrid /> },
+	{ key: "overview", label: "Dashboard", href: "/dashboard", icon: <PhSquaresFour size={16} /> },
 	{
 		key: "invitations",
 		label: "Undangan",
 		href: "/dashboard/invitations",
-		icon: <IScroll />,
+		icon: <PhEnvelopeSimple size={16} />,
 	},
-	{ key: "guests", label: "Tamu", href: "/dashboard/guests", icon: <IUsers /> },
+	{ key: "guests", label: "Tamu", href: "/dashboard/guests", icon: <PhUsers size={16} /> },
 	{
 		key: "templates",
 		label: "Tema",
 		href: "/dashboard/templates",
-		icon: <ILayout />,
+		icon: <PhPalette size={16} />,
 	},
 ];
 
@@ -211,27 +31,27 @@ const manageNav: NavItem[] = [
 		key: "settings",
 		label: "Pengaturan",
 		href: "/dashboard/settings",
-		icon: <IGear />,
+		icon: <PhGear size={16} />,
 	},
 ];
 
 const adminNav: NavItem[] = [
-	{ key: "overview", label: "Dashboard", href: "/admin", icon: <IGrid /> },
-	{ key: "hero", label: "Hero", href: "/admin/hero", icon: <IStar /> },
+	{ key: "overview", label: "Dashboard", href: "/admin", icon: <PhSquaresFour size={16} /> },
+	{ key: "hero", label: "Hero", href: "/admin/hero", icon: <PhBrowser size={16} /> },
 	{
 		key: "features",
 		label: "Fitur",
 		href: "/admin/features",
-		icon: <ILayout />,
+		icon: <PhStar size={16} />,
 	},
 	{
 		key: "testimonials",
 		label: "Testimoni",
 		href: "/admin/testimonials",
-		icon: <IMsg />,
+		icon: <PhChatCircleText size={16} />,
 	},
-	{ key: "kontak", label: "Kontak", href: "/admin/kontak", icon: <IPhone /> },
-	{ key: "footer", label: "Footer", href: "/admin/footer", icon: <IGear /> },
+	{ key: "kontak", label: "Kontak", href: "/admin/kontak", icon: <PhPhone size={16} /> },
+	{ key: "footer", label: "Footer", href: "/admin/footer", icon: <PhArticle size={16} /> },
 ];
 
 function invitationNav(id: string): NavItem[] {
@@ -240,67 +60,67 @@ function invitationNav(id: string): NavItem[] {
 			key: "summary",
 			label: "Ringkasan",
 			href: `/dashboard/invitations/${id}`,
-			icon: <IGrid />,
+			icon: <PhSquaresFour size={16} />,
 		},
 		{
 			key: "couple",
 			label: "Mempelai",
 			href: `/dashboard/invitations/${id}/couple`,
-			icon: <IUsers />,
+			icon: <PhHeart size={16} />,
 		},
 		{
 			key: "events",
 			label: "Acara",
 			href: `/dashboard/invitations/${id}/events`,
-			icon: <ICheck />,
+			icon: <PhCalendarBlank size={16} />,
 		},
 		{
 			key: "gallery",
 			label: "Galeri",
 			href: `/dashboard/invitations/${id}/gallery`,
-			icon: <ILayout />,
+			icon: <PhImages size={16} />,
 		},
 		{
 			key: "guests",
 			label: "Tamu",
 			href: `/dashboard/invitations/${id}/guests`,
-			icon: <IUsers />,
+			icon: <PhUsers size={16} />,
 		},
 		{
 			key: "rsvp",
 			label: "RSVP",
 			href: `/dashboard/invitations/${id}/rsvp`,
-			icon: <IStar />,
+			icon: <PhCheckSquare size={16} />,
 		},
 		{
 			key: "wishes",
 			label: "Ucapan",
 			href: `/dashboard/invitations/${id}/wishes`,
-			icon: <IMsg />,
+			icon: <PhChatCircleText size={16} />,
 		},
 		{
 			key: "gift",
 			label: "Hadiah",
 			href: `/dashboard/invitations/${id}/gift`,
-			icon: <IStar />,
+			icon: <PhGift size={16} />,
 		},
 		{
 			key: "checkin",
 			label: "Check-in",
 			href: `/dashboard/invitations/${id}/checkin`,
-			icon: <ICheck />,
+			icon: <PhQrCode size={16} />,
 		},
 		{
 			key: "settings",
 			label: "Tema & Musik",
 			href: `/dashboard/invitations/${id}/settings`,
-			icon: <IGear />,
+			icon: <PhMusicNotes size={16} />,
 		},
 		{
 			key: "preview",
 			label: "Pratinjau",
 			href: `/dashboard/invitations/${id}/preview`,
-			icon: <ILayout />,
+			icon: <PhEye size={16} />,
 		},
 	];
 }
@@ -364,7 +184,7 @@ export function DashboardShell({
 
 				{/* Search */}
 				<div className="db-search" role="search" aria-label="Cari">
-					<ISearch />
+					<PhMagnifyingGlass size={15} />
 					<span style={{ flex: 1 }}>Cari...</span>
 					<kbd>⌘F</kbd>
 				</div>
@@ -433,7 +253,7 @@ export function DashboardShell({
 								alignItems: "center",
 							}}
 						>
-							<ILogout />
+							<PhSignOut size={16} />
 						</button>
 					</div>
 				</div>

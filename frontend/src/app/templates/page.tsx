@@ -5,7 +5,7 @@ import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, MarketingPage, SplitTitle } from "@/components/landing/Sections";
 import { ThemeBrowser, type BrowserTemplate } from "@/components/landing/ThemeBrowser";
-import { IconAward, IconGift, IconImages, IconMessage, IconMusic, IconPin } from "@/components/brand/icons";
+import { IconAward, IconGift, IconImages, IconMusic, IconPin, IconWhatsapp } from "@/components/brand/icons";
 import { getPlans, getSiteContact, getTemplates, planForTemplate, priceLabel, templateDemoHref, templatePreview } from "@/lib/marketing";
 
 export const metadata: Metadata = {
@@ -83,7 +83,7 @@ export default async function TemplatesPage() {
           </div>
           <div>
             <a href={waLink ?? "/tentang#kontak"} className={base.btnPrimary} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Request desain</a>
-            {waLink && <a href={waLink} className={styles.btnDarkOutline} target="_blank" rel="noreferrer"><IconMessage size={14} /> Chat admin</a>}
+            {waLink && <a href={waLink} className={styles.btnDarkOutline} target="_blank" rel="noreferrer"><IconWhatsapp size={14} /> Chat admin</a>}
           </div>
         </div>
       </section>

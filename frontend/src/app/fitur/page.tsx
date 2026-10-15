@@ -5,7 +5,7 @@ import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FinalCta, MarketingPage, SplitTitle, StepsSection } from "@/components/landing/Sections";
 import {
   IconBank, IconCalendar, IconChart, IconCheck, IconClock, IconCopy, IconGift, IconImages, IconLanguages, IconLock,
-  IconMusic, IconPin, IconQr, IconRadio, IconSend, IconUsers,
+  IconMusic, IconPin, IconQr, IconQrArt, IconRadio, IconSend, IconUsers,
 } from "@/components/brand/icons";
 
 export const metadata: Metadata = {
@@ -120,7 +120,7 @@ export default function FiturPage() {
             <div className={styles.giftLayout}>
               <div className={styles.giftCard}>
                 Kirim hadiah untuk<br />Nina &amp; Dimas
-                <div className={styles.giftQr}><IconQr /></div>
+                <div className={styles.giftQr}><IconQrArt /></div>
                 <small>QRIS · semua e-wallet</small>
                 <div className={styles.bank}><IconBank size={14} /><span>BCA · 1234 5678 90<small>a.n. Nina Larasati</small></span><IconCopy size={13} /></div>
               </div>

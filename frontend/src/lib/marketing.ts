@@ -3,7 +3,7 @@ export const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?
 
 export type Hero = { heading?: string; subheading?: string; cta_label?: string; cta_href?: string };
 export type Kontak = { heading?: string; subheading?: string; whatsapp?: string };
-export type FooterContent = { heading?: string; copyright?: string; instagram?: string };
+export type FooterContent = { heading?: string; copyright?: string; instagram?: string; tiktok?: string };
 export type Feature = { id: string; title: string; description: string; icon?: string };
 export type Testimonial = { id: string; name: string; role?: string; quote: string; avatar_url?: string; is_sample?: boolean };
 export type Template = { id: string; name: string; slug: string; category: string; preview_image?: string; preview_url?: string; is_premium: boolean };

@@ -7,7 +7,7 @@ import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@
 import { getJSON, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
 import { ThemeGallery, VoiceWall, type Voice } from "@/components/landing/TemplateInteractions";
 import {
-  IconArrowRight, IconCalendar, IconGift, IconGlobe, IconImages, IconLink, IconLock, IconMusic, IconPause, IconPin, IconQr, IconSend, IconSparkle, IconUsers,
+  IconArrowRight, IconCalendar, IconGift, IconGlobe, IconImages, IconLink, IconLock, IconMusic, IconPause, IconPin, IconQrArt, IconSend, IconSparkle, IconUsers,
 } from "@/components/brand/icons";
 
 /** Admin features store an emoji; pick a matching line icon so cards match the design system. */
@@ -167,7 +167,7 @@ export default async function Home() {
                 <div className={styles.cardCopy}><h3>RSVP real-time</h3><p>Pantau siapa yang hadir, jumlah tamu, dan pesan menu.</p></div>
               </article>
               <article className={styles.card}>
-                <div className={styles.cardVisual} aria-hidden><div className={styles.qrBox}><IconQr /></div></div>
+                <div className={styles.cardVisual} aria-hidden><div className={styles.qrBox}><IconQrArt /></div></div>
                 <div className={styles.cardCopy}><h3>QR Check-in</h3><p>Scan di pintu masuk, daftar hadir terisi otomatis.</p></div>
               </article>
               <article className={styles.card}>
@@ -235,7 +235,7 @@ export default async function Home() {
         <FinalCta heading={kontak.heading} subheading={kontak.subheading} />
       </div>
 
-      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} whatsappHref={waLink} />
+      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
     </main>
   );
 }

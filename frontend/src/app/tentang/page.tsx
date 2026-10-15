@@ -3,7 +3,7 @@ import Image from "next/image";
 import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FinalCta, MarketingPage, SplitTitle } from "@/components/landing/Sections";
-import { IconHandshake, IconMail, IconMessage, IconPin } from "@/components/brand/icons";
+import { IconHandshake, IconMail, IconPin, IconWhatsapp } from "@/components/brand/icons";
 import { getSiteContact } from "@/lib/marketing";
 
 export const metadata: Metadata = {
@@ -116,7 +116,7 @@ export default async function TentangPage() {
       <div className={styles.contacts} id="kontak">
         <div><IconPin size={16} /><small>Kantor</small><p>Jl. Prawirotaman No. 12, Yogyakarta</p></div>
         <div><IconMail size={16} /><small>Email</small><a href="mailto:halo@rawuh.id">halo@rawuh.id</a></div>
-        <div><IconMessage size={16} /><small>WhatsApp</small>{waLink ? <a href={waLink} target="_blank" rel="noreferrer">{whatsappLabel}</a> : <p>{whatsappLabel}</p>}</div>
+        <div><IconWhatsapp size={16} /><small>WhatsApp</small>{waLink ? <a href={waLink} target="_blank" rel="noreferrer">{whatsappLabel}</a> : <p>{whatsappLabel}</p>}</div>
         <div><IconHandshake size={16} /><small>Kemitraan</small>{waLink ? <a href={waLink} target="_blank" rel="noreferrer">Reseller &amp; Wedding Organizer</a> : <p>Reseller &amp; Wedding Organizer</p>}</div>
       </div>
 

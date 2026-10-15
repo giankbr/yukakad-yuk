@@ -19,7 +19,7 @@ export async function MarketingPage({ current, children }: { current?: NavKey; c
       <AnnouncementBar />
       <SiteHeader current={current} />
       <div className={styles.rail} id="konten">{children}</div>
-      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} whatsappHref={waLink} />
+      <SiteFooter copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
     </main>
   );
 }

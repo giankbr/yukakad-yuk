@@ -200,10 +200,33 @@
 @media (hover: none) { .tagNav { display: none; } }
 .masonry { position: relative; columns: 4 220px; column-gap: 16px; }
 .masonry[data-clipped] { max-height: 860px; overflow: hidden; }
-/* Few themes: lay them out as an even row instead of leaving empty masonry columns. */
-.masonry[data-few] { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); column-gap: 16px; columns: auto; }
+/* Few themes: keep the normal 4-column card size and fill the leftover columns with a suggestion card. */
+.masonry[data-few] { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; columns: auto; align-items: stretch; padding-bottom: 40px; }
+.masonry[data-few] .themeCard { margin-bottom: 0; }
+.masonry[data-few] .themePreview { height: auto !important; aspect-ratio: 3 / 4; }
 .masonry[data-few] .themePreview img { object-position: top; }
-.masonry[data-few] .themePreview { height: 380px !important; }
+.fewCard {
+  grid-column: span var(--span, 1); container-type: inline-size; display: flex; align-items: stretch; gap: 24px; overflow: hidden;
+  padding: 28px; border: 1px dashed #c6cdee; border-radius: var(--rw-radius-lg);
+  background: linear-gradient(160deg, var(--rw-primary-soft), #fff 70%);
+}
+.fewCopy { display: flex; flex: 1 1 260px; flex-direction: column; justify-content: center; gap: 12px; min-width: 0; }
+.fewCopy h3 { color: var(--rw-ink); font-size: 24px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; }
+.fewCopy > p:not(.eyebrow) { color: var(--rw-muted); font-size: 15px; line-height: 1.6; }
+.fewCopy .btnPrimary { align-self: flex-start; margin-top: 8px; }
+.fewStack { position: relative; flex: 0 0 min(46%, 300px); min-height: 260px; }
+.fewThumb { position: absolute; top: 50%; width: 58%; aspect-ratio: 3 / 4; overflow: hidden; border: 4px solid #fff; border-radius: var(--rw-radius-lg); background: var(--rw-surface); box-shadow: 0 18px 40px -18px rgba(17, 16, 16, .35); transition: translate 260ms cubic-bezier(.2, 0, 0, 1), rotate 260ms cubic-bezier(.2, 0, 0, 1); }
+.fewThumb img { object-fit: cover; object-position: top; }
+.fewThumb span { position: absolute; inset: auto 6px 6px; padding: 3px 8px; border-radius: 999px; background: rgba(255, 255, 255, .92); color: var(--rw-ink); font-size: 11px; font-weight: 600; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transition: opacity 200ms; }
+.fewThumb:hover span, .fewThumb:focus-visible span { opacity: 1; }
+.fewThumb:nth-child(1) { left: 0; translate: 0 -50%; rotate: -8deg; z-index: 1; }
+.fewThumb:nth-child(2) { left: 21%; translate: 0 -54%; rotate: 0deg; z-index: 3; }
+.fewThumb:nth-child(3) { left: 42%; translate: 0 -50%; rotate: 8deg; z-index: 2; }
+.fewThumb:hover { z-index: 4; translate: 0 -58%; }
+.fewCard[data-span="1"] { flex-direction: column; padding: 22px; }
+.fewCard[data-span="1"] .fewStack { display: none; }
+.fewCard[data-span="1"] h3 { font-size: 20px; }
+@container (max-width: 440px) { .fewStack { display: none; } }
 .masonry[data-clipped]::after { content: ""; position: absolute; inset: auto 0 0; height: 220px; background: linear-gradient(rgba(255, 255, 255, 0), #fff 85%); pointer-events: none; }
 .themeCard { display: grid; gap: 10px; break-inside: avoid; margin-bottom: 20px; }
 .themePreview { position: relative; display: block; border: 1px solid var(--rw-border-warm); border-radius: var(--rw-radius-lg); overflow: hidden; background: var(--rw-surface); }
@@ -394,6 +417,9 @@ details[open] .faqToggle { background: var(--rw-primary); color: #fff; }
   .stepList li { grid-template-columns: 56px minmax(0, 1fr); }
   .stepList b { font-size: 36px; }
   .masonry { columns: 2 140px; column-gap: 12px; }
+  .masonry[data-few] { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .fewCard { grid-column: 1 / -1; padding: 22px; }
+  .fewCard[data-span] .fewStack { display: none; }
   .faqList details p { padding-right: 12px; }
   .footerTop { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .footerBottom { flex-direction: column; align-items: start; }
