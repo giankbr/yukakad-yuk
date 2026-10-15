@@ -26,7 +26,7 @@ export default function AdminFooterPage() {
     apiFetch("/api/admin/site-content/footer", token)
       .then((r) => r.json())
       .then(setFooter)
-      .catch(() => setError("Could not load footer content"))
+      .catch(() => setError("Gagal memuat konten footer"))
       .finally(() => setLoading(false));
   }, [ready, token]);
 
@@ -41,7 +41,7 @@ export default function AdminFooterPage() {
       if (!response.ok) throw new Error();
       setSaved(true);
     } catch {
-      setError("Could not save footer content");
+      setError("Gagal menyimpan konten footer");
     } finally {
       setSaving(false);
     }
@@ -55,7 +55,7 @@ export default function AdminFooterPage() {
         <div>
           <p className="dashboard-kicker">Landing page</p>
           <h1>Footer</h1>
-          <p className="dashboard-subtitle">Shown at the very bottom of the home page.</p>
+          <p className="dashboard-subtitle">Tampil di bagian paling bawah home page.</p>
         </div>
       </header>
 
@@ -63,14 +63,14 @@ export default function AdminFooterPage() {
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
-          <FormField label="Heading" value={footer.heading ?? ""} onChange={(e) => setFooter({ ...footer, heading: e.target.value })} placeholder="Rawuh" />
-          <FormField label="Copyright" value={footer.copyright ?? ""} onChange={(e) => setFooter({ ...footer, copyright: e.target.value })} placeholder="© 2026 Rawuh.id" />
-          <FormField label="Instagram handle" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@rawuh.id" />
+          <FormField label="Judul" value={footer.heading ?? ""} onChange={(e) => setFooter({ ...footer, heading: e.target.value })} placeholder="Rawuh" />
+          <FormField label="Hak cipta" value={footer.copyright ?? ""} onChange={(e) => setFooter({ ...footer, copyright: e.target.value })} placeholder="© 2026 Rawuh.id" />
+          <FormField label="Akun Instagram" value={footer.instagram ?? ""} onChange={(e) => setFooter({ ...footer, instagram: e.target.value })} placeholder="@rawuh.id" />
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
-            {saved && <span className="form-hint">Saved.</span>}
+            {saved && <span className="form-hint">Tersimpan.</span>}
           </div>
         </form>
       )}

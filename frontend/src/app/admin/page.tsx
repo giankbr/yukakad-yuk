@@ -9,7 +9,7 @@ import { useAdminAuth } from "@/lib/useAuthToken";
 const sections = [
   { href: "/admin/hero", label: "Hero", description: "Judul dan CTA utama di home page" },
   { href: "/admin/features", label: "Fitur", description: "Daftar fitur yang ditampilkan" },
-  { href: "/admin/testimonials", label: "Testimonials", description: "Ulasan dari pengguna" },
+  { href: "/admin/testimonials", label: "Testimoni", description: "Ulasan dari pengguna" },
   { href: "/admin/kontak", label: "Kontak", description: "Banner kontak/WhatsApp" },
   { href: "/admin/footer", label: "Footer", description: "Bagian paling bawah home page" },
 ];
@@ -35,7 +35,7 @@ export default function AdminOverviewPage() {
       <header className="dashboard-header">
         <div>
           <p className="dashboard-kicker">Admin</p>
-          <h1>Landing page content</h1>
+          <h1>Konten landing page</h1>
           <p className="dashboard-subtitle">Kelola konten yang tampil di home page publik.</p>
         </div>
       </header>
@@ -47,7 +47,7 @@ export default function AdminOverviewPage() {
             <strong>{counts.features}</strong>
           </div>
           <div className="dashboard-stat">
-            <span>Testimonials</span>
+            <span>Testimoni</span>
             <strong>{counts.testimonials}</strong>
           </div>
         </div>

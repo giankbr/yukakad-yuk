@@ -7,6 +7,8 @@ import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 
 type Wish = { id: string; name: string; message: string; status: string; created_at: string };
 
+const wishStatusLabels: Record<string, string> = { published: "Tampil", rejected: "Disembunyikan", pending: "Menunggu" };
+
 export default function WishesPage({ params }: { params: Promise<{ id: string }> }) {
   const routeParams = useRouteParams(params);
   const { token, ready } = useAuthToken();
@@ -21,7 +23,7 @@ export default function WishesPage({ params }: { params: Promise<{ id: string }>
     apiFetch(`/api/invitations/${invitationId}/wishes`, token)
       .then((response) => response.json())
       .then((body: { items?: Wish[] }) => setWishes(body.items ?? []))
-      .catch(() => setError("Could not load wishes"))
+      .catch(() => setError("Gagal memuat ucapan"))
       .finally(() => setLoading(false));
   }, [token, invitationId]);
 
@@ -45,24 +47,24 @@ export default function WishesPage({ params }: { params: Promise<{ id: string }>
     <DashboardShell active="wishes" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Wishes</h1>
-          <p className="dashboard-subtitle">Moderate messages before they appear on the public page.</p>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Ucapan</h1>
+          <p className="dashboard-subtitle">Moderasi ucapan sebelum tampil di halaman publik.</p>
         </div>
       </header>
 
-      {loading && <p className="dashboard-state">Loading wishes...</p>}
+      {loading && <p className="dashboard-state">Memuat ucapan...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
-      {!loading && !error && wishes.length === 0 && <p className="dashboard-state">No wishes yet.</p>}
+      {!loading && !error && wishes.length === 0 && <p className="dashboard-state">Belum ada ucapan.</p>}
       {!loading && wishes.length > 0 && (
         <div className="dashboard-table-wrap">
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Guest</th>
-                <th>Message</th>
+                <th>Tamu</th>
+                <th>Ucapan</th>
                 <th>Status</th>
-                <th><span className="sr-only">Actions</span></th>
+                <th><span className="sr-only">Aksi</span></th>
               </tr>
             </thead>
             <tbody>
@@ -70,13 +72,13 @@ export default function WishesPage({ params }: { params: Promise<{ id: string }>
                 <tr key={wish.id}>
                   <td><strong>{wish.name}</strong></td>
                   <td>{wish.message}</td>
-                  <td><span className={`status ${wish.status === "published" ? "status-published" : "status-draft"}`}>{wish.status}</span></td>
+                  <td><span className={`status ${wish.status === "published" ? "status-published" : "status-draft"}`}>{wishStatusLabels[wish.status] ?? wish.status}</span></td>
                   <td style={{ display: "flex", gap: ".5rem" }}>
                     {wish.status !== "published" && (
-                      <button className="table-action" onClick={() => setStatus(wish.id, "published")}>Publish</button>
+                      <button className="table-action" onClick={() => setStatus(wish.id, "published")}>Tampilkan</button>
                     )}
                     {wish.status !== "rejected" && (
-                      <button className="table-action" onClick={() => setStatus(wish.id, "rejected")}>Hide</button>
+                      <button className="table-action" onClick={() => setStatus(wish.id, "rejected")}>Sembunyikan</button>
                     )}
                   </td>
                 </tr>

@@ -200,7 +200,7 @@ const mainNav: NavItem[] = [
 	{ key: "guests", label: "Tamu", href: "/dashboard/guests", icon: <IUsers /> },
 	{
 		key: "templates",
-		label: "Template",
+		label: "Tema",
 		href: "/dashboard/templates",
 		icon: <ILayout />,
 	},
@@ -238,13 +238,13 @@ function invitationNav(id: string): NavItem[] {
 	return [
 		{
 			key: "summary",
-			label: "Overview",
+			label: "Ringkasan",
 			href: `/dashboard/invitations/${id}`,
 			icon: <IGrid />,
 		},
 		{
 			key: "couple",
-			label: "Pasangan",
+			label: "Mempelai",
 			href: `/dashboard/invitations/${id}/couple`,
 			icon: <IUsers />,
 		},
@@ -292,13 +292,13 @@ function invitationNav(id: string): NavItem[] {
 		},
 		{
 			key: "settings",
-			label: "Pengaturan",
+			label: "Tema & Musik",
 			href: `/dashboard/invitations/${id}/settings`,
 			icon: <IGear />,
 		},
 		{
 			key: "preview",
-			label: "Preview",
+			label: "Pratinjau",
 			href: `/dashboard/invitations/${id}/preview`,
 			icon: <ILayout />,
 		},

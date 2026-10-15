@@ -26,7 +26,7 @@ export default function AdminKontakPage() {
     apiFetch("/api/admin/site-content/kontak", token)
       .then((r) => r.json())
       .then(setKontak)
-      .catch(() => setError("Could not load contact content"))
+      .catch(() => setError("Gagal memuat konten kontak"))
       .finally(() => setLoading(false));
   }, [ready, token]);
 
@@ -41,7 +41,7 @@ export default function AdminKontakPage() {
       if (!response.ok) throw new Error();
       setSaved(true);
     } catch {
-      setError("Could not save contact content");
+      setError("Gagal menyimpan konten kontak");
     } finally {
       setSaving(false);
     }
@@ -55,7 +55,7 @@ export default function AdminKontakPage() {
         <div>
           <p className="dashboard-kicker">Landing page</p>
           <h1>Kontak</h1>
-          <p className="dashboard-subtitle">Contact banner shown near the bottom of the home page.</p>
+          <p className="dashboard-subtitle">Banner kontak yang tampil di dekat bagian bawah home page.</p>
         </div>
       </header>
 
@@ -63,14 +63,14 @@ export default function AdminKontakPage() {
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
-          <FormField label="Heading" value={kontak.heading ?? ""} onChange={(e) => setKontak({ ...kontak, heading: e.target.value })} placeholder="Siap bikin undangan digitalmu?" />
-          <FormTextarea label="Subheading" rows={2} value={kontak.subheading ?? ""} onChange={(e) => setKontak({ ...kontak, subheading: e.target.value })} placeholder="Tim kami siap bantu kapan saja." />
-          <FormField label="WhatsApp number" value={kontak.whatsapp ?? ""} onChange={(e) => setKontak({ ...kontak, whatsapp: e.target.value })} placeholder="628123456789" />
+          <FormField label="Judul" value={kontak.heading ?? ""} onChange={(e) => setKontak({ ...kontak, heading: e.target.value })} placeholder="Siap bikin undangan digitalmu?" />
+          <FormTextarea label="Subjudul" rows={2} value={kontak.subheading ?? ""} onChange={(e) => setKontak({ ...kontak, subheading: e.target.value })} placeholder="Tim kami siap bantu kapan saja." />
+          <FormField label="Nomor WhatsApp" value={kontak.whatsapp ?? ""} onChange={(e) => setKontak({ ...kontak, whatsapp: e.target.value })} placeholder="628123456789" />
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
-            {saved && <span className="form-hint">Saved.</span>}
+            {saved && <span className="form-hint">Tersimpan.</span>}
           </div>
         </form>
       )}

@@ -22,7 +22,7 @@ export default function AdminTestimonialsPage() {
     apiFetch("/api/admin/testimonials", token)
       .then((r) => r.json())
       .then((body: { items?: Testimonial[] }) => setItems(body.items ?? []))
-      .catch(() => setError("Could not load testimonials"))
+      .catch(() => setError("Gagal memuat testimoni"))
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -42,7 +42,7 @@ export default function AdminTestimonialsPage() {
       setForm({ name: "", role: "", quote: "", avatar_url: "" });
       load();
     } catch {
-      setError("Could not add testimonial");
+      setError("Gagal menambahkan testimoni");
     } finally {
       setSaving(false);
     }
@@ -61,7 +61,7 @@ export default function AdminTestimonialsPage() {
       <header className="dashboard-header">
         <div>
           <p className="dashboard-kicker">Landing page</p>
-          <h1>Testimonials</h1>
+          <h1>Testimoni</h1>
           <p className="dashboard-subtitle">{items.length} testimoni ditampilkan di home page</p>
         </div>
       </header>
@@ -70,19 +70,19 @@ export default function AdminTestimonialsPage() {
 
       <form className="dashboard-form" onSubmit={handleSubmit}>
         <div className="form-row">
-          <FormField label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Dinda & Raka" required />
-          <FormField label="Role (optional)" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Pengantin, Jakarta" />
+          <FormField label="Nama" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Dinda & Raka" required />
+          <FormField label="Keterangan (opsional)" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Pengantin, Jakarta" />
         </div>
-        <FormTextarea label="Quote" rows={2} value={form.quote} onChange={(e) => setForm({ ...form, quote: e.target.value })} placeholder="Prosesnya cepat banget, tamu-tamu juga suka tampilannya." required />
-        <FormField label="Avatar URL (optional)" value={form.avatar_url} onChange={(e) => setForm({ ...form, avatar_url: e.target.value })} placeholder="https://..." />
+        <FormTextarea label="Kutipan" rows={2} value={form.quote} onChange={(e) => setForm({ ...form, quote: e.target.value })} placeholder="Prosesnya cepat banget, tamu-tamu juga suka tampilannya." required />
+        <FormField label="URL foto profil (opsional)" value={form.avatar_url} onChange={(e) => setForm({ ...form, avatar_url: e.target.value })} placeholder="https://..." />
         <div className="form-actions">
           <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-            {saving ? "Adding..." : "Add testimonial"}
+            {saving ? "Menambahkan..." : "Tambah testimoni"}
           </Button>
         </div>
       </form>
 
-      {loading && <p className="dashboard-state">Loading...</p>}
+      {loading && <p className="dashboard-state">Memuat...</p>}
       {!loading && items.length > 0 && (
         <div className="card-grid">
           {items.map((item) => (
@@ -91,7 +91,7 @@ export default function AdminTestimonialsPage() {
               {item.role && <span className="dashboard-card-meta">{item.role}</span>}
               <p style={{ margin: 0, color: "#6e786f", fontSize: ".85rem" }}>&ldquo;{item.quote}&rdquo;</p>
               <button type="button" className="table-action" onClick={() => handleDelete(item.id)}>
-                Delete
+                Hapus
               </button>
             </div>
           ))}

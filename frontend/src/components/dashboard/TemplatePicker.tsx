@@ -1,108 +1,78 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { API_URL, apiFetch } from "@/lib/api";
-
-type Template = {
-  id: string;
-  name: string;
-  slug: string;
-  category: string;
-  preview_image?: string;
-  preview_url?: string;
-  is_premium: boolean;
-};
-
-const categories = ["all", "modern", "editorial", "adat", "motion"];
+import { ThemeButton, ThemeGrid, type DashboardTemplate } from "./ThemeGrid";
 
 export function TemplatePicker({
   invitationId,
   token,
   selectedTemplateId,
+  onChange,
 }: {
   invitationId: string;
   token: string;
   selectedTemplateId?: string;
+  onChange?: (templateId: string) => void;
 }) {
-  const [templates, setTemplates] = useState<Template[]>([]);
-  const [category, setCategory] = useState("all");
+  const [templates, setTemplates] = useState<DashboardTemplate[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(selectedTemplateId ?? "");
   const [saving, setSaving] = useState<string | null>(null);
   const [error, setError] = useState("");
+  const [premiumBlocked, setPremiumBlocked] = useState("");
 
   useEffect(() => {
     fetch(`${API_URL}/api/templates`)
       .then((response) => response.json())
-      .then((body: { items?: Template[] }) => setTemplates(body.items ?? []))
-      .catch(() => setError("Template gagal dimuat. Coba muat ulang halaman."));
+      .then((body: { items?: DashboardTemplate[] }) => setTemplates(body.items ?? []))
+      .catch(() => setError("Tema gagal dimuat. Coba muat ulang halaman."))
+      .finally(() => setLoading(false));
   }, []);
 
-  async function selectTemplate(templateId: string) {
-    setSaving(templateId);
+  async function selectTemplate(template: DashboardTemplate) {
+    setSaving(template.id);
     setError("");
+    setPremiumBlocked("");
     try {
       const response = await apiFetch(`/api/invitations/${invitationId}/template`, token, {
         method: "PUT",
-        body: JSON.stringify({ template_id: templateId }),
+        body: JSON.stringify({ template_id: template.id }),
       });
-      if (!response.ok) throw new Error("Template belum tersimpan. Coba lagi.");
-      setSelected(templateId);
+      if (response.status === 403) {
+        setPremiumBlocked(template.name);
+        return;
+      }
+      if (!response.ok) throw new Error();
+      setSelected(template.id);
+      onChange?.(template.id);
     } catch {
-      setError("Template belum tersimpan. Periksa koneksi lalu coba lagi.");
+      setError("Tema belum tersimpan. Periksa koneksi lalu coba lagi.");
     } finally {
       setSaving(null);
     }
   }
 
-  const visible = category === "all" ? templates : templates.filter((t) => t.category === category);
+  if (loading) return <p className="dashboard-state">Memuat tema...</p>;
 
   return (
     <div>
       {error && <p role="alert" className="dashboard-state dashboard-state-error">{error}</p>}
-      <div className="form-row" style={{ gridTemplateColumns: "repeat(5, auto)", gap: ".4rem" }}>
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            className="table-action"
-            style={{ textTransform: "capitalize", fontWeight: category === cat ? 700 : 500 }}
-            onClick={() => setCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-      <div className="card-grid">
-        {visible.map((template) => (
-          <div className="dashboard-card" key={template.id}>
-            {template.preview_image && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={template.preview_image} alt={template.name} />
-            )}
-            <div className="dashboard-card-meta">
-              <h3>{template.name}</h3>
-              {template.is_premium && <span className="badge badge-premium">Premium</span>}
-            </div>
-            <span className="badge" style={{ width: "fit-content", textTransform: "capitalize" }}>{template.category}</span>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: ".4rem" }}>
-              {template.preview_url && (
-                <a className="table-action" href={template.preview_url} target="_blank" rel="noreferrer">
-                  Demo ↗
-                </a>
-              )}
-              <button
-                type="button"
-                className="table-action"
-                disabled={saving !== null}
-                onClick={() => selectTemplate(template.id)}
-              >
-                {selected === template.id ? "Selected ✓" : saving === template.id ? "Saving..." : "Pakai template"}
-              </button>
-            </div>
-          </div>
-        ))}
-        {visible.length === 0 && <p className="dashboard-state">No templates in this category yet.</p>}
-      </div>
+      {premiumBlocked && (
+        <p role="alert" className="dashboard-state dashboard-state-error">
+          {premiumBlocked} adalah tema Premium. <Link href="/harga">Upgrade paket</Link> untuk memakainya.
+        </p>
+      )}
+      <ThemeGrid
+        templates={templates}
+        selectedId={selected}
+        action={(template, isSelected) => (
+          <ThemeButton disabled={saving !== null || isSelected} onClick={() => selectTemplate(template)}>
+            {isSelected ? "Sedang dipakai" : saving === template.id ? "Menyimpan..." : "Pakai tema"}
+          </ThemeButton>
+        )}
+      />
     </div>
   );
 }

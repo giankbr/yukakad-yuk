@@ -31,10 +31,10 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
           try {
             const response = await apiFetch(`/api/invitations/${invitationId}/guests/${decodedGuestId}/check-in`, token, { method: "POST" });
             const body = await response.json();
-            if (!response.ok) throw new Error(body.error ?? "Check-in failed");
-            setResult({ kind: "success", message: `${body.name} checked in.` });
+            if (!response.ok) throw new Error(body.error ?? "Check-in gagal");
+            setResult({ kind: "success", message: `${body.name} berhasil check-in.` });
           } catch (err) {
-            setResult({ kind: "error", message: err instanceof Error ? err.message : "Check-in failed" });
+            setResult({ kind: "error", message: err instanceof Error ? err.message : "Check-in gagal" });
           } finally {
             setTimeout(() => { busyRef.current = false; }, 1500);
           }
@@ -57,15 +57,15 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
     <DashboardShell active="checkin" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Check-in scan</h1>
-          <p className="dashboard-subtitle">Point the camera at a guest&apos;s QR code to check them in.</p>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Scan check-in</h1>
+          <p className="dashboard-subtitle">Arahkan kamera ke kode QR tamu untuk check-in.</p>
         </div>
       </header>
 
       <div className="checkin-scan">
         <div id="qr-reader" />
-        {!scanning && <p className="dashboard-state">Starting camera...</p>}
+        {!scanning && <p className="dashboard-state">Menyalakan kamera...</p>}
         {result && (
           <p className={`checkin-result ${result.kind === "error" ? "error" : ""}`}>{result.message}</p>
         )}

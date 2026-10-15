@@ -73,7 +73,7 @@ export default function DashboardSettingsPage() {
     <DashboardShell active="settings">
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Workspace</p>
+          <p className="dashboard-kicker">Akun</p>
           <h1>Pengaturan</h1>
           <p className="dashboard-subtitle">Kelola profil akun yang dipakai di workspace kamu.</p>
         </div>

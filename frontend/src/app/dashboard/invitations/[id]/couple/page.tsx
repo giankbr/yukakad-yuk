@@ -37,7 +37,7 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
         setGroomName(body.couple?.groom_name ?? "");
         setBrideName(body.couple?.bride_name ?? "");
       })
-      .catch(() => setError("Could not load couple details"))
+      .catch(() => setError("Gagal memuat data mempelai"))
       .finally(() => setLoading(false));
   }, [ready, token, invitationId]);
 
@@ -60,7 +60,7 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
       if (!response.ok) throw new Error();
       setSaved(true);
     } catch {
-      setError("Could not save changes");
+      setError("Gagal menyimpan perubahan");
     } finally {
       setSaving(false);
     }
@@ -72,26 +72,26 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
     <DashboardShell active="couple" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Couple</h1>
-          <p className="dashboard-subtitle">Names shown across the invitation.</p>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Mempelai</h1>
+          <p className="dashboard-subtitle">Nama yang tampil di seluruh undangan.</p>
         </div>
       </header>
 
-      {loading && <p className="dashboard-state">Loading...</p>}
+      {loading && <p className="dashboard-state">Memuat...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
           <div className="form-row">
-            <FormField label="Groom's name" value={groomName} onChange={(e) => setGroomName(e.target.value)} required />
-            <FormField label="Bride's name" value={brideName} onChange={(e) => setBrideName(e.target.value)} required />
+            <FormField label="Nama mempelai pria" value={groomName} onChange={(e) => setGroomName(e.target.value)} required />
+            <FormField label="Nama mempelai wanita" value={brideName} onChange={(e) => setBrideName(e.target.value)} required />
           </div>
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
-            {saved && <span className="form-hint">Saved.</span>}
+            {saved && <span className="form-hint">Tersimpan.</span>}
           </div>
         </form>
       )}

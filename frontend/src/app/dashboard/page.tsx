@@ -293,7 +293,7 @@ export default function DashboardPage() {
 						value={draft.length}
 						icon={<IUsers />}
 						badge={
-							draft.length > 0 ? { text: "Draft", positive: false } : undefined
+							draft.length > 0 ? { text: "Draf", positive: false } : undefined
 						}
 						delta="Belum dipublikasikan"
 					/>
@@ -349,7 +349,7 @@ export default function DashboardPage() {
 									<tr>
 										<th>Undangan</th>
 										<th>Status</th>
-										<th>Pasangan</th>
+										<th>Mempelai</th>
 										<th>
 											<span className="sr-only">Aksi</span>
 										</th>
@@ -378,7 +378,7 @@ export default function DashboardPage() {
 														inv.published ? "db-status-pub" : "db-status-draft"
 													}
 												>
-													{inv.published ? "● Publik" : "○ Draft"}
+													{inv.published ? "● Publik" : "○ Draf"}
 												</span>
 											</td>
 											<td style={{ color: "#8CAEA8", fontSize: ".81rem" }}>
@@ -410,10 +410,10 @@ export default function DashboardPage() {
 							<span className="db-upgrade-tag">✦ Pro</span>
 							<h3>Tingkatkan ke Pro</h3>
 							<p>
-								Hapus watermark, custom domain, tamu tak terbatas, dan template
-								eksklusif adat Nusantara.
+								Hapus watermark, custom domain, hingga 1.000 tamu, dan tema
+								Premium seperti Jawa Keraton & Marketplace.
 							</p>
-							<button className="db-upgrade-btn">Upgrade Sekarang →</button>
+							<Link className="db-upgrade-btn" href="/harga">Upgrade Sekarang →</Link>
 						</div>
 
 						{/* Quick links */}
@@ -441,7 +441,7 @@ export default function DashboardPage() {
 								</div>
 								<div className="db-quick-link-text">
 									<span>Kelola Undangan</span>
-									<small>Edit, publish, atau hapus</small>
+									<small>Ubah, terbitkan, atau hapus</small>
 								</div>
 							</Link>
 

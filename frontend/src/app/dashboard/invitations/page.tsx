@@ -23,7 +23,7 @@ export default function InvitationsListPage() {
     if (!ready || !token) return;
     apiFetch("/api/invitations", token)
       .then(async (response) => {
-        if (!response.ok) throw new Error("Could not load invitations");
+        if (!response.ok) throw new Error("Gagal memuat daftar undangan");
         return response.json();
       })
       .then((body: { items?: Invitation[] }) => setInvitations(body.items ?? []))
@@ -37,28 +37,28 @@ export default function InvitationsListPage() {
     <DashboardShell active="invitations">
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Workspace</p>
-          <h1>Invitations</h1>
-          <p className="dashboard-subtitle">Every invitation you have started or published.</p>
+          <p className="dashboard-kicker">Akun</p>
+          <h1>Undangan</h1>
+          <p className="dashboard-subtitle">Semua undangan yang sudah kamu buat atau terbitkan.</p>
         </div>
         <Link className="dashboard-action" href="/dashboard/invitations/create">
-          + Create invitation
+          + Buat undangan
         </Link>
       </header>
 
-      {loading && <p className="dashboard-state">Loading invitations...</p>}
+      {loading && <p className="dashboard-state">Memuat undangan...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
       {!loading && !error && invitations.length === 0 && (
-        <p className="dashboard-state">Nothing here yet. Create your first invitation to begin.</p>
+        <p className="dashboard-state">Belum ada undangan. Buat undangan pertama kamu untuk mulai.</p>
       )}
       {!loading && !error && invitations.length > 0 && (
         <div className="dashboard-table-wrap">
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Invitation</th>
+                <th>Undangan</th>
                 <th>Status</th>
-                <th><span className="sr-only">Actions</span></th>
+                <th><span className="sr-only">Aksi</span></th>
               </tr>
             </thead>
             <tbody>
@@ -70,12 +70,12 @@ export default function InvitationsListPage() {
                   </td>
                   <td>
                     <span className={`status status-${invitation.published ? "published" : "draft"}`}>
-                      {invitation.published ? "Published" : "Draft"}
+                      {invitation.published ? "Terbit" : "Draf"}
                     </span>
                   </td>
                   <td>
                     <a className="table-action" href={`/dashboard/invitations/${invitation.id}`}>
-                      Open →
+                      Buka →
                     </a>
                   </td>
                 </tr>

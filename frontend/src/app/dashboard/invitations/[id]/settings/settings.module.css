@@ -1,0 +1,40 @@
+.panel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; margin-top: 20px; padding: 20px; border: 1px solid var(--rw-border-warm, #e7e5e4); border-radius: var(--rw-radius-lg, 16px); background: #fff; }
+.panelHead h2 { margin: 0; color: var(--rw-ink, #1a1817); font-size: 17px; font-weight: 600; letter-spacing: -.015em; }
+.panelHead p { margin: 4px 0 0; color: var(--rw-muted, #79716b); font-size: 13px; line-height: 1.5; }
+.notice { margin: 16px 0 0; padding: 10px 14px; border-radius: var(--rw-radius-sm, 8px); background: #ecf8ef; color: #1d6b35; font-size: 13px; }
+.hint { margin: 0; color: var(--rw-muted, #79716b); font-size: 12px; }
+
+.drop {
+  display: grid; gap: 4px; justify-items: center; padding: 28px 16px; border: 1.5px dashed var(--rw-border-warm, #e7e5e4); border-radius: var(--rw-radius-md, 12px);
+  background: var(--rw-surface-2, #f8f8f6); color: var(--rw-ink, #1a1817); font: inherit; cursor: pointer; transition: border-color 150ms, background 150ms;
+}
+.drop:hover { border-color: var(--rw-primary-border, #f1a280); background: var(--rw-primary-soft, #fceae6); }
+.drop strong { font-size: 14px; }
+.drop span { color: var(--rw-muted, #79716b); font-size: 12px; }
+.drop:disabled { cursor: wait; opacity: .7; }
+
+.track { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px; border-radius: var(--rw-radius-md, 12px); background: var(--rw-surface-2, #f8f8f6); }
+.trackIcon { display: grid; flex: none; place-items: center; width: 40px; height: 40px; border-radius: 999px; background: var(--rw-primary, #e65532); color: #fff; }
+.trackMain { display: grid; flex: 1 1 220px; gap: 6px; min-width: 0; }
+.trackMain strong { overflow: hidden; color: var(--rw-ink, #1a1817); font-size: 13px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.trackMain audio { width: 100%; height: 36px; }
+.trackActions { display: flex; gap: 8px; }
+.ghost, .danger {
+  min-height: 36px; padding: 0 14px; border: 1px solid var(--rw-border-warm, #e7e5e4); border-radius: var(--rw-radius-sm, 8px);
+  background: #fff; color: var(--rw-ink, #1a1817); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.danger { color: #b42318; }
+.ghost:hover { border-color: var(--rw-ink, #1a1817); }
+.danger:hover { border-color: #f3b4ae; background: #fff5f4; }
+.ghost:disabled, .danger:disabled { cursor: wait; opacity: .6; }
+
+.toggle { position: relative; display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+.toggle[data-disabled] { cursor: not-allowed; opacity: .55; }
+.toggle input { position: absolute; top: 0; left: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+.switch { position: relative; flex: none; width: 40px; height: 24px; margin-top: 1px; border-radius: 999px; background: #d6d3d1; transition: background 160ms; }
+.switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); transition: translate 160ms; }
+.toggle input:checked + .switch { background: var(--rw-primary, #e65532); }
+.toggle input:checked + .switch::after { translate: 16px 0; }
+.toggle input:focus-visible + .switch { outline: 2px solid var(--rw-primary, #e65532); outline-offset: 2px; }
+.toggle strong { display: block; color: var(--rw-ink, #1a1817); font-size: 14px; font-weight: 600; }
+.toggle small { display: block; margin-top: 2px; color: var(--rw-muted, #79716b); font-size: 12px; }

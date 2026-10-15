@@ -17,6 +17,8 @@ type Guest = {
   checked_in_at?: string;
 };
 
+const categoryLabels: Record<string, string> = { family: "Keluarga", friend: "Teman", friends: "Teman", colleague: "Rekan kerja", vip: "VIP" };
+
 export default function GuestsDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const routeParams = useRouteParams(params);
   const { token, ready } = useAuthToken();
@@ -37,7 +39,7 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
     apiFetch(`/api/invitations/${invitationId}/guests`, token)
       .then((response) => response.json())
       .then((body: { items?: Guest[] }) => setGuests(body.items ?? []))
-      .catch(() => setError("Could not load guests"))
+      .catch(() => setError("Gagal memuat daftar tamu"))
       .finally(() => setLoading(false));
   }, [token, invitationId]);
 
@@ -57,12 +59,12 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
         body: JSON.stringify({ name, phone, category }),
       });
       const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Could not add guest");
+      if (!response.ok) throw new Error(body.error ?? "Gagal menambahkan tamu");
       setName("");
       setPhone("");
       load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not add guest");
+      setError(err instanceof Error ? err.message : "Gagal menambahkan tamu");
     } finally {
       setSubmitting(false);
     }
@@ -81,10 +83,10 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
         body: text,
       });
       const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Import failed");
+      if (!response.ok) throw new Error(body.error ?? "Gagal mengimpor");
       load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Import failed");
+      setError(err instanceof Error ? err.message : "Gagal mengimpor");
     } finally {
       setImporting(false);
       event.target.value = "";
@@ -109,12 +111,12 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
     <DashboardShell active="guests" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation guests</p>
-          <h1>Guest list</h1>
-          <p className="dashboard-subtitle">{guests.length} guests invited</p>
+          <p className="dashboard-kicker">Tamu undangan</p>
+          <h1>Daftar tamu</h1>
+          <p className="dashboard-subtitle">{guests.length} tamu diundang</p>
         </div>
         <a className="secondary-action" href={`/dashboard/invitations/${invitationId}/checkin`}>
-          Scan for check-in →
+          Scan untuk check-in →
         </a>
       </header>
 
@@ -122,60 +124,60 @@ export default function GuestsDetailPage({ params }: { params: Promise<{ id: str
 
       <form className="dashboard-form" onSubmit={handleAddGuest} style={{ maxWidth: "none" }}>
         <div className="form-row" style={{ gridTemplateColumns: "2fr 1fr 1fr auto" }}>
-          <FormField label="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-          <FormField label="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="0812..." />
-          <FormField label="Category" value={category} onChange={(e) => setCategory(e.target.value)} />
+          <FormField label="Nama" value={name} onChange={(e) => setName(e.target.value)} required />
+          <FormField label="No. HP" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="0812..." />
+          <FormField label="Kategori" value={category} onChange={(e) => setCategory(e.target.value)} />
           <div className="form-actions">
             <Button type="submit" disabled={submitting} className="bg-[#173c3a] text-white">
-              {submitting ? "Adding..." : "Add"}
+              {submitting ? "Menambahkan..." : "Tambah"}
             </Button>
           </div>
         </div>
       </form>
 
       <label className="upload-drop" style={{ marginTop: "1rem" }}>
-        <span>{importing ? "Importing..." : "Click to import guests from CSV (name, phone, category)"}</span>
+        <span>{importing ? "Mengimpor..." : "Klik untuk impor tamu dari CSV (name, phone, category)"}</span>
         <input type="file" accept=".csv,text/csv" onChange={handleImportCSV} disabled={importing} hidden />
       </label>
 
-      {loading && <p className="dashboard-state">Loading guest list...</p>}
-      {!loading && !error && guests.length === 0 && <p className="dashboard-state">No guests yet. Add your first guest to begin.</p>}
+      {loading && <p className="dashboard-state">Memuat daftar tamu...</p>}
+      {!loading && !error && guests.length === 0 && <p className="dashboard-state">Belum ada tamu. Tambahkan tamu pertama kamu untuk mulai.</p>}
       {!loading && guests.length > 0 && (
         <div className="dashboard-table-wrap" style={{ marginTop: "1.5rem" }}>
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Phone</th>
+                <th>Nama</th>
+                <th>Kategori</th>
+                <th>No. HP</th>
                 <th>Check-in</th>
                 <th>QR</th>
-                <th><span className="sr-only">Actions</span></th>
+                <th><span className="sr-only">Aksi</span></th>
               </tr>
             </thead>
             <tbody>
               {guests.map((guest) => (
                 <tr key={guest.id}>
                   <td><strong>{guest.name}</strong></td>
-                  <td>{guest.category}</td>
+                  <td>{categoryLabels[guest.category] ?? guest.category}</td>
                   <td>{guest.phone || "—"}</td>
                   <td>
                     {guest.checked_in_at ? (
-                      <span className="status status-published">Checked in</span>
+                      <span className="status status-published">Sudah check-in</span>
                     ) : (
-                      <span className="status status-draft">Not yet</span>
+                      <span className="status status-draft">Belum</span>
                     )}
                   </td>
                   <td>
                     {qrGuestId === guest.id ? <GuestQRCode guestId={guest.id} /> : (
-                      <button className="table-action" onClick={() => setQrGuestId(guest.id)}>Show QR</button>
+                      <button className="table-action" onClick={() => setQrGuestId(guest.id)}>Tampilkan QR</button>
                     )}
                   </td>
                   <td style={{ display: "flex", gap: ".5rem" }}>
                     {!guest.checked_in_at && (
-                      <button className="table-action" onClick={() => handleCheckIn(guest.id)}>Check in</button>
+                      <button className="table-action" onClick={() => handleCheckIn(guest.id)}>Check-in</button>
                     )}
-                    <button className="table-action" onClick={() => handleDelete(guest.id)}>Remove</button>
+                    <button className="table-action" onClick={() => handleDelete(guest.id)}>Hapus</button>
                   </td>
                 </tr>
               ))}

@@ -22,7 +22,7 @@ export default function AdminFeaturesPage() {
     apiFetch("/api/admin/features", token)
       .then((r) => r.json())
       .then((body: { items?: Feature[] }) => setItems(body.items ?? []))
-      .catch(() => setError("Could not load features"))
+      .catch(() => setError("Gagal memuat fitur"))
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -42,7 +42,7 @@ export default function AdminFeaturesPage() {
       setForm({ title: "", description: "", icon: "" });
       load();
     } catch {
-      setError("Could not add feature");
+      setError("Gagal menambahkan fitur");
     } finally {
       setSaving(false);
     }
@@ -70,18 +70,18 @@ export default function AdminFeaturesPage() {
 
       <form className="dashboard-form" onSubmit={handleSubmit}>
         <div className="form-row">
-          <FormField label="Title" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="RSVP real-time" required />
-          <FormField label="Icon (emoji, optional)" value={form.icon} onChange={(e) => setForm({ ...form, icon: e.target.value })} placeholder="✅" />
+          <FormField label="Judul" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="RSVP real-time" required />
+          <FormField label="Ikon (emoji, opsional)" value={form.icon} onChange={(e) => setForm({ ...form, icon: e.target.value })} placeholder="✅" />
         </div>
-        <FormTextarea label="Description" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Pantau kehadiran tamu langsung dari dashboard." required />
+        <FormTextarea label="Deskripsi" rows={2} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Pantau kehadiran tamu langsung dari dashboard." required />
         <div className="form-actions">
           <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-            {saving ? "Adding..." : "Add feature"}
+            {saving ? "Menambahkan..." : "Tambah fitur"}
           </Button>
         </div>
       </form>
 
-      {loading && <p className="dashboard-state">Loading...</p>}
+      {loading && <p className="dashboard-state">Memuat...</p>}
       {!loading && items.length > 0 && (
         <div className="card-grid">
           {items.map((item) => (
@@ -89,7 +89,7 @@ export default function AdminFeaturesPage() {
               <h3>{item.icon ? `${item.icon} ` : ""}{item.title}</h3>
               <p style={{ margin: 0, color: "#6e786f", fontSize: ".85rem" }}>{item.description}</p>
               <button type="button" className="table-action" onClick={() => handleDelete(item.id)}>
-                Delete
+                Hapus
               </button>
             </div>
           ))}

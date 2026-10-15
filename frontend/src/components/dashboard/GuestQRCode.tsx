@@ -18,5 +18,5 @@ export function GuestQRCode({ guestId }: { guestId: string }) {
   if (!dataUrl) return null;
 
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={dataUrl} alt="Guest check-in QR code" width={80} height={80} />;
+  return <img src={dataUrl} alt="Kode QR check-in tamu" width={80} height={80} />;
 }

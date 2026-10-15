@@ -14,6 +14,8 @@ type RSVP = {
   submitted_at: string;
 };
 
+const attendanceLabels: Record<string, string> = { yes: "Hadir", no: "Tidak hadir", maybe: "Mungkin" };
+
 type Summary = { yes: number; no: number; maybe: number; attendees: number };
 
 export default function RSVPPage({ params }: { params: Promise<{ id: string }> }) {
@@ -36,7 +38,7 @@ export default function RSVPPage({ params }: { params: Promise<{ id: string }> }
         setRsvps(rsvpBody.items ?? []);
         setSummary(summaryBody);
       })
-      .catch(() => setError("Could not load RSVPs"))
+      .catch(() => setError("Gagal memuat RSVP"))
       .finally(() => setLoading(false));
   }, [ready, token, invitationId]);
 
@@ -46,42 +48,42 @@ export default function RSVPPage({ params }: { params: Promise<{ id: string }> }
     <DashboardShell active="rsvp" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
+          <p className="dashboard-kicker">Undangan</p>
           <h1>RSVP</h1>
-          <p className="dashboard-subtitle">Responses from your guests.</p>
+          <p className="dashboard-subtitle">Konfirmasi kehadiran dari tamu kamu.</p>
         </div>
       </header>
 
       {summary && (
         <section className="dashboard-summary">
-          <div className="dashboard-stat"><span>Attending</span><strong>{summary.yes}</strong></div>
-          <div className="dashboard-stat"><span>Not attending</span><strong>{summary.no}</strong></div>
-          <div className="dashboard-stat"><span>Maybe</span><strong>{summary.maybe}</strong></div>
-          <div className="dashboard-stat"><span>Total attendees</span><strong>{summary.attendees}</strong></div>
+          <div className="dashboard-stat"><span>Hadir</span><strong>{summary.yes}</strong></div>
+          <div className="dashboard-stat"><span>Tidak hadir</span><strong>{summary.no}</strong></div>
+          <div className="dashboard-stat"><span>Mungkin</span><strong>{summary.maybe}</strong></div>
+          <div className="dashboard-stat"><span>Total hadir</span><strong>{summary.attendees}</strong></div>
         </section>
       )}
 
-      {loading && <p className="dashboard-state">Loading RSVPs...</p>}
+      {loading && <p className="dashboard-state">Memuat RSVP...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
-      {!loading && !error && rsvps.length === 0 && <p className="dashboard-state">No RSVPs yet.</p>}
+      {!loading && !error && rsvps.length === 0 && <p className="dashboard-state">Belum ada RSVP.</p>}
       {!loading && rsvps.length > 0 && (
         <div className="dashboard-table-wrap">
           <table className="dashboard-table">
             <thead>
               <tr>
-                <th>Attendance</th>
-                <th>Guests</th>
-                <th>Message</th>
-                <th>Submitted</th>
+                <th>Kehadiran</th>
+                <th>Jumlah tamu</th>
+                <th>Pesan</th>
+                <th>Dikirim</th>
               </tr>
             </thead>
             <tbody>
               {rsvps.map((rsvp) => (
                 <tr key={rsvp.id}>
-                  <td><span className={`status ${rsvp.attendance === "yes" ? "status-published" : "status-draft"}`}>{rsvp.attendance}</span></td>
+                  <td><span className={`status ${rsvp.attendance === "yes" ? "status-published" : "status-draft"}`}>{attendanceLabels[rsvp.attendance] ?? rsvp.attendance}</span></td>
                   <td>{rsvp.attendees_count}</td>
                   <td>{rsvp.message || "—"}</td>
-                  <td>{new Date(rsvp.submitted_at).toLocaleString()}</td>
+                  <td>{new Date(rsvp.submitted_at).toLocaleString("id-ID")}</td>
                 </tr>
               ))}
             </tbody>

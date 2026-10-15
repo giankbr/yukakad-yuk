@@ -41,7 +41,7 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
         setDate(body.event?.date ?? "");
         setMapsUrl(body.event?.maps_url ?? "");
       })
-      .catch(() => setError("Could not load event details"))
+      .catch(() => setError("Gagal memuat detail acara"))
       .finally(() => setLoading(false));
   }, [ready, token, invitationId]);
 
@@ -64,7 +64,7 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
       if (!response.ok) throw new Error();
       setSaved(true);
     } catch {
-      setError("Could not save changes");
+      setError("Gagal menyimpan perubahan");
     } finally {
       setSaving(false);
     }
@@ -76,28 +76,28 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
     <DashboardShell active="events" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Event</h1>
-          <p className="dashboard-subtitle">When and where guests should show up.</p>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Acara</h1>
+          <p className="dashboard-subtitle">Kapan dan di mana tamu perlu hadir.</p>
         </div>
       </header>
 
-      {loading && <p className="dashboard-state">Loading...</p>}
+      {loading && <p className="dashboard-state">Memuat...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
-          <FormField label="Event title" value={eventTitle} onChange={(e) => setEventTitle(e.target.value)} placeholder="Akad Nikah" required />
+          <FormField label="Nama acara" value={eventTitle} onChange={(e) => setEventTitle(e.target.value)} placeholder="Akad Nikah" required />
           <div className="form-row">
-            <FormField label="Venue" value={venue} onChange={(e) => setVenue(e.target.value)} placeholder="Gedung Serbaguna" required />
-            <FormField label="Date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <FormField label="Tempat" value={venue} onChange={(e) => setVenue(e.target.value)} placeholder="Gedung Serbaguna" required />
+            <FormField label="Tanggal" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
           </div>
-          <FormField label="Google Maps URL" value={mapsUrl} onChange={(e) => setMapsUrl(e.target.value)} placeholder="https://maps.google.com/..." />
+          <FormField label="Link Google Maps" value={mapsUrl} onChange={(e) => setMapsUrl(e.target.value)} placeholder="https://maps.google.com/..." />
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
-            {saved && <span className="form-hint">Saved.</span>}
+            {saved && <span className="form-hint">Tersimpan.</span>}
           </div>
         </form>
       )}

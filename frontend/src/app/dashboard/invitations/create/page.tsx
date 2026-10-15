@@ -41,14 +41,14 @@ export default function CreateInvitationPage() {
         body: JSON.stringify({ title, slug: slug || slugify(title) }),
       });
       const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Could not create invitation");
+      if (!response.ok) throw new Error(body.error ?? "Gagal membuat undangan");
       if (templateId) {
         // Non-blocking: the template can still be picked later from the invitation settings.
         await apiFetch(`/api/invitations/${body.id}/template`, token, { method: "PUT", body: JSON.stringify({ template_id: templateId }) }).catch(() => undefined);
       }
       router.push(`/dashboard/invitations/${body.id}`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong");
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
       setSubmitting(false);
     }
   }
@@ -57,15 +57,15 @@ export default function CreateInvitationPage() {
     <DashboardShell active="invitations">
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Workspace</p>
-          <h1>Create an invitation</h1>
-          <p className="dashboard-subtitle">Give it a title. Everything else can be filled in later.</p>
+          <p className="dashboard-kicker">Akun</p>
+          <h1>Buat undangan</h1>
+          <p className="dashboard-subtitle">Kasih judul dulu. Detail lainnya bisa dilengkapi nanti.</p>
         </div>
       </header>
 
       <form className="dashboard-form" onSubmit={handleSubmit}>
         <FormField
-          label="Event title"
+          label="Nama acara"
           required
           value={title}
           onChange={(event) => {
@@ -75,7 +75,7 @@ export default function CreateInvitationPage() {
           placeholder="Alya & Rizky"
         />
         <FormField
-          label="URL slug"
+          label="Alamat URL (slug)"
           required
           value={slug}
           onChange={(event) => {
@@ -84,12 +84,12 @@ export default function CreateInvitationPage() {
           }}
           placeholder="alya-rizky"
         />
-        <p className="form-hint">rawuh.id/invitation/{slug || "your-slug"}</p>
+        <p className="form-hint">rawuh.id/invitation/{slug || "nama-undangan"}</p>
         {templateId && <p className="form-hint">Template: <strong>{templateId}</strong></p>}
         {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
         <div className="form-actions">
           <Button type="submit" disabled={submitting || !title || !slug} className="bg-[#173c3a] text-white">
-            {submitting ? "Creating..." : "Create invitation"}
+            {submitting ? "Membuat..." : "Buat undangan"}
           </Button>
         </div>
       </form>

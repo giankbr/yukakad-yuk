@@ -29,14 +29,14 @@ export default function PreviewPage({ params }: { params: Promise<{ id: string }
     <DashboardShell active="preview" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Preview</h1>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Pratinjau</h1>
           <p className="dashboard-subtitle">
-            {invitation?.published ? "This is the live public page." : "Draft preview — not visible to guests yet."}
+            {invitation?.published ? "Ini halaman publik yang sudah terbit." : "Pratinjau draf — belum bisa dilihat tamu."}
           </p>
         </div>
         <div className="form-actions">
-          <button className="table-action" onClick={() => setViewport("mobile")} style={{ fontWeight: viewport === "mobile" ? 700 : 500 }}>Mobile</button>
+          <button className="table-action" onClick={() => setViewport("mobile")} style={{ fontWeight: viewport === "mobile" ? 700 : 500 }}>Ponsel</button>
           <button className="table-action" onClick={() => setViewport("desktop")} style={{ fontWeight: viewport === "desktop" ? 700 : 500 }}>Desktop</button>
           {invitation && (
             <a
@@ -45,7 +45,7 @@ export default function PreviewPage({ params }: { params: Promise<{ id: string }
               target="_blank"
               rel="noreferrer"
             >
-              Open in new tab ↗
+              Buka di tab baru ↗
             </a>
           )}
         </div>
@@ -55,7 +55,7 @@ export default function PreviewPage({ params }: { params: Promise<{ id: string }
         <div style={{ paddingTop: "2rem", display: "flex", justifyContent: "center" }}>
           <iframe
             src={`/invitation/${invitation.slug}${invitation.published ? "" : `?preview_token=${token}`}`}
-            title="Invitation preview"
+            title="Pratinjau undangan"
             style={{
               width: viewport === "mobile" ? "390px" : "100%",
               height: "80vh",

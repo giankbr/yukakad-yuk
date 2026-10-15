@@ -40,7 +40,7 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
         setGuestCount((guestsBody.items ?? []).length);
         setWishCount((wishesBody.items ?? []).length);
       })
-      .catch(() => setError("Could not load this invitation"));
+      .catch(() => setError("Gagal memuat undangan ini"));
   }, [token, invitationId]);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
       const body = await response.json();
       setInvitation(body);
     } catch {
-      setError("Could not update publish status");
+      setError("Gagal mengubah status terbit");
     } finally {
       setPublishing(false);
     }
@@ -72,13 +72,13 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
     <DashboardShell active="summary" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>{invitation?.title ?? "Loading..."}</h1>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>{invitation?.title ?? "Memuat..."}</h1>
           <p className="dashboard-subtitle">rawuh.id/invitation/{invitation?.slug}</p>
         </div>
         {invitation && (
           <button className="dashboard-action" onClick={togglePublish} disabled={publishing}>
-            {invitation.published ? "Unpublish" : "Publish"}
+            {invitation.published ? "Batalkan terbit" : "Terbitkan"}
           </button>
         )}
       </header>
@@ -88,35 +88,35 @@ export default function InvitationSummaryPage({ params }: { params: Promise<{ id
       <section className="dashboard-summary">
         <div className="dashboard-stat">
           <span>Status</span>
-          <strong>{invitation?.published ? "Live" : "Draft"}</strong>
-          <small>{invitation?.published ? "Visible to guests" : "Not published yet"}</small>
+          <strong>{invitation?.published ? "Terbit" : "Draf"}</strong>
+          <small>{invitation?.published ? "Sudah bisa dilihat tamu" : "Belum diterbitkan"}</small>
         </div>
         <div className="dashboard-stat">
-          <span>Guests</span>
+          <span>Tamu</span>
           <strong>{guestCount ?? "—"}</strong>
-          <small>Invited so far</small>
+          <small>Sudah diundang</small>
         </div>
         <div className="dashboard-stat">
-          <span>Attending</span>
+          <span>Total hadir</span>
           <strong>{rsvp?.attendees ?? "—"}</strong>
-          <small>{rsvp ? `${rsvp.yes} yes · ${rsvp.no} no · ${rsvp.maybe} maybe` : "No RSVPs yet"}</small>
+          <small>{rsvp ? `${rsvp.yes} hadir · ${rsvp.no} tidak · ${rsvp.maybe} mungkin` : "Belum ada RSVP"}</small>
         </div>
         <div className="dashboard-stat">
-          <span>Wishes</span>
+          <span>Ucapan</span>
           <strong>{wishCount ?? "—"}</strong>
-          <small>Total messages received</small>
+          <small>Total ucapan diterima</small>
         </div>
       </section>
 
       <section className="dashboard-note">
         <div>
-          <p className="dashboard-kicker">Next step</p>
-          <h2>Fill in couple, event, and gallery details.</h2>
+          <p className="dashboard-kicker">Langkah berikutnya</p>
+          <h2>Lengkapi data mempelai, acara, dan galeri.</h2>
         </div>
-        <p>Preview the public page any time to see how guests will experience it.</p>
+        <p>Lihat pratinjau halaman publik kapan saja untuk melihat tampilannya di mata tamu.</p>
         {invitation && (
           <a className="secondary-action" href={`/dashboard/invitations/${invitation.id}/preview`}>
-            Preview →
+            Pratinjau →
           </a>
         )}
       </section>

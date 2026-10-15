@@ -22,7 +22,7 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
     apiFetch(`/api/invitations/${invitationId}/gallery`, token)
       .then((response) => response.json())
       .then((body: { items?: GalleryItem[] }) => setItems(body.items ?? []))
-      .catch(() => setError("Could not load gallery"))
+      .catch(() => setError("Gagal memuat galeri"))
       .finally(() => setLoading(false));
   }, [token, invitationId]);
 
@@ -45,16 +45,16 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
         body: formData,
       });
       const uploaded = await uploadResponse.json();
-      if (!uploadResponse.ok) throw new Error(uploaded.error ?? "Upload failed");
+      if (!uploadResponse.ok) throw new Error(uploaded.error ?? "Gagal mengunggah");
 
       const galleryResponse = await apiFetch(`/api/invitations/${invitationId}/gallery`, token, {
         method: "POST",
         body: JSON.stringify({ image_url: uploaded.path }),
       });
-      if (!galleryResponse.ok) throw new Error("Could not add photo to gallery");
+      if (!galleryResponse.ok) throw new Error("Gagal menambahkan foto ke galeri");
       load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upload failed");
+      setError(err instanceof Error ? err.message : "Gagal mengunggah");
     } finally {
       setUploading(false);
       event.target.value = "";
@@ -67,26 +67,26 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
     <DashboardShell active="gallery" invitationId={invitationId}>
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Invitation</p>
-          <h1>Gallery</h1>
-          <p className="dashboard-subtitle">{items.length} photos uploaded</p>
+          <p className="dashboard-kicker">Undangan</p>
+          <h1>Galeri</h1>
+          <p className="dashboard-subtitle">{items.length} foto terunggah</p>
         </div>
       </header>
 
       <label className="upload-drop">
-        <span>{uploading ? "Uploading..." : "Click to upload a photo (JPEG, PNG, or WebP, max 10MB)"}</span>
+        <span>{uploading ? "Mengunggah..." : "Klik untuk mengunggah foto (JPEG, PNG, atau WebP, maks. 10 MB)"}</span>
         <input type="file" accept="image/jpeg,image/png,image/webp" onChange={handleUpload} disabled={uploading} hidden />
       </label>
 
-      {loading && <p className="dashboard-state">Loading gallery...</p>}
+      {loading && <p className="dashboard-state">Memuat galeri...</p>}
       {error && <p className="dashboard-state dashboard-state-error">{error}</p>}
-      {!loading && !error && items.length === 0 && <p className="dashboard-state">No photos yet.</p>}
+      {!loading && !error && items.length === 0 && <p className="dashboard-state">Belum ada foto.</p>}
       {!loading && items.length > 0 && (
         <div className="card-grid">
           {items.map((item) => (
             <div className="dashboard-card" key={item.id}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item.image_url} alt={item.caption ?? "Gallery photo"} />
+              <img src={item.image_url} alt={item.caption ?? "Foto galeri"} />
             </div>
           ))}
         </div>

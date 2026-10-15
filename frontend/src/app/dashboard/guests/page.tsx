@@ -37,7 +37,7 @@ export default function DashboardGuestsPage() {
     <DashboardShell active="guests">
       <header className="dashboard-header">
         <div>
-          <p className="dashboard-kicker">Workspace</p>
+          <p className="dashboard-kicker">Akun</p>
           <h1>Tamu</h1>
           <p className="dashboard-subtitle">Kelola tamu per undangan. Pilih undangan untuk membuka daftar tamu.</p>
         </div>
@@ -70,7 +70,7 @@ export default function DashboardGuestsPage() {
                   </td>
                   <td>
                     <span className={`status status-${invitation.published ? "published" : "draft"}`}>
-                      {invitation.published ? "Published" : "Draft"}
+                      {invitation.published ? "Terbit" : "Draf"}
                     </span>
                   </td>
                   <td>

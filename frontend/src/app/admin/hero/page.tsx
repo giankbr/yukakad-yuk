@@ -27,7 +27,7 @@ export default function AdminHeroPage() {
     apiFetch("/api/admin/site-content/hero", token)
       .then((r) => r.json())
       .then(setHero)
-      .catch(() => setError("Could not load hero content"))
+      .catch(() => setError("Gagal memuat konten hero"))
       .finally(() => setLoading(false));
   }, [ready, token]);
 
@@ -42,7 +42,7 @@ export default function AdminHeroPage() {
       if (!response.ok) throw new Error();
       setSaved(true);
     } catch {
-      setError("Could not save hero content");
+      setError("Gagal menyimpan konten hero");
     } finally {
       setSaving(false);
     }
@@ -56,7 +56,7 @@ export default function AdminHeroPage() {
         <div>
           <p className="dashboard-kicker">Landing page</p>
           <h1>Hero</h1>
-          <p className="dashboard-subtitle">The first thing visitors see on the home page.</p>
+          <p className="dashboard-subtitle">Bagian pertama yang dilihat pengunjung di home page.</p>
         </div>
       </header>
 
@@ -64,17 +64,17 @@ export default function AdminHeroPage() {
 
       {!loading && (
         <form className="dashboard-form" onSubmit={handleSubmit}>
-          <FormField label="Heading" value={hero.heading ?? ""} onChange={(e) => setHero({ ...hero, heading: e.target.value })} placeholder="Bikin undangan digital dalam hitungan menit" />
-          <FormTextarea label="Subheading" rows={3} value={hero.subheading ?? ""} onChange={(e) => setHero({ ...hero, subheading: e.target.value })} placeholder="Platform undangan digital modern untuk pernikahan dan acara spesialmu." />
+          <FormField label="Judul" value={hero.heading ?? ""} onChange={(e) => setHero({ ...hero, heading: e.target.value })} placeholder="Bikin undangan digital dalam hitungan menit" />
+          <FormTextarea label="Subjudul" rows={3} value={hero.subheading ?? ""} onChange={(e) => setHero({ ...hero, subheading: e.target.value })} placeholder="Platform undangan digital modern untuk pernikahan dan acara spesialmu." />
           <div className="form-row">
-            <FormField label="CTA label" value={hero.cta_label ?? ""} onChange={(e) => setHero({ ...hero, cta_label: e.target.value })} placeholder="Buat undangan gratis" />
-            <FormField label="CTA link" value={hero.cta_href ?? ""} onChange={(e) => setHero({ ...hero, cta_href: e.target.value })} placeholder="/auth/register" />
+            <FormField label="Teks tombol CTA" value={hero.cta_label ?? ""} onChange={(e) => setHero({ ...hero, cta_label: e.target.value })} placeholder="Buat undangan gratis" />
+            <FormField label="Link tombol CTA" value={hero.cta_href ?? ""} onChange={(e) => setHero({ ...hero, cta_href: e.target.value })} placeholder="/auth/register" />
           </div>
           <div className="form-actions">
             <Button type="submit" disabled={saving} className="bg-[#173c3a] text-white">
-              {saving ? "Saving..." : "Save changes"}
+              {saving ? "Menyimpan..." : "Simpan perubahan"}
             </Button>
-            {saved && <span className="form-hint">Saved.</span>}
+            {saved && <span className="form-hint">Tersimpan.</span>}
           </div>
         </form>
       )}
