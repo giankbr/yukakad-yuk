@@ -83,6 +83,24 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// PATCH /api/admin/users/{id}/plan
+	if strings.HasSuffix(path, "/plan") && (r.Method == http.MethodPatch || r.Method == http.MethodPut) {
+		userID := strings.TrimSuffix(path, "/plan")
+		var payload struct {
+			PlanID string `json:"plan_id"`
+		}
+		if json.NewDecoder(r.Body).Decode(&payload) != nil || payload.PlanID == "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "plan_id is required"})
+			return
+		}
+		if err := s.store.SetUserPlan(userID, payload.PlanID); err != nil {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, map[string]string{"id": userID, "plan_id": payload.PlanID})
+		return
+	}
+
 	// GET /api/admin/users
 	if r.Method != http.MethodGet {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
@@ -91,13 +109,18 @@ func (s *Server) handleAdminUsers(w http.ResponseWriter, r *http.Request) {
 	users := s.store.AdminListUsers()
 	items := make([]map[string]any, 0, len(users))
 	for _, u := range users {
-		items = append(items, map[string]any{
+		item := map[string]any{
 			"id":         u.ID,
 			"name":       u.Name,
 			"email":      u.Email,
 			"role":       u.Role,
 			"created_at": u.CreatedAt,
-		})
+		}
+		if plan, err := s.store.GetUserPlan(u.ID); err == nil && plan != nil {
+			item["plan_id"], item["plan_name"] = plan.ID, plan.Name
+		}
+		item["invitations"] = len(s.store.ListInvitationsByUser(u.ID))
+		items = append(items, item)
 	}
 	writeJSON(w, http.StatusOK, map[string]any{"items": items})
 }

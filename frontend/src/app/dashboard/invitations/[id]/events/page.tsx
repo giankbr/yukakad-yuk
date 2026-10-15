@@ -5,7 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import { EVENT_TYPES } from "@/lib/event-types";
-import styles from "../editor.module.css";
+import styles from "@/components/dashboard/editor.module.css";
 
 type MainEvent = { title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string };
 type Invitation = { id: string; slug: string; title: string; published: boolean; event?: MainEvent };

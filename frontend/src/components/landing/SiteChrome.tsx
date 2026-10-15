@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { defaultAnnouncement, type Announcement } from "@/lib/marketing";
 import styles from "@/app/landing.module.css";
 import { IconArrowRight, IconChevronDown, IconHeart, IconInstagram, IconTiktok, IconWhatsapp } from "@/components/brand/icons";
 import { MobileMenu } from "./TemplateInteractions";
@@ -12,11 +13,19 @@ export function RawuhLogo({ label = "RAWUH", href = "/" }: { label?: string; hre
   );
 }
 
-export function AnnouncementBar() {
+export function AnnouncementBar({ announcement }: { announcement?: Announcement }) {
+  const item = announcement ?? defaultAnnouncement;
+  if (item.enabled === false || !item.text?.trim()) return null;
+  const href = item.href?.trim();
+  const external = href ? /^https?:\/\//.test(href) : false;
   return (
     <div className={styles.announcement}>
-      <span>Baru: Undangan Video 3D &amp; QR Check-in untuk semua paket Premium</span>
-      <Link href="/produk/video-ucapan-3d">Lihat sekarang <IconArrowRight size={14} /></Link>
+      <span>{item.text}</span>
+      {href && item.label?.trim() && (
+        external
+          ? <a href={href} target="_blank" rel="noreferrer">{item.label} <IconArrowRight size={14} /></a>
+          : <Link href={href}>{item.label} <IconArrowRight size={14} /></Link>
+      )}
     </div>
   );
 }

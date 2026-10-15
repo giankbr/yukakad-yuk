@@ -44,6 +44,50 @@ export async function getPlans() {
   return (result.items?.length ? result.items : defaultPlans).slice().sort((a, b) => a.price - b.price);
 }
 
+export type LandingStat = { value: string; label: string };
+export type FaqItem = { q: string; a: string };
+export type Announcement = { enabled?: boolean; text?: string; label?: string; href?: string };
+
+export const defaultStats: LandingStat[] = [
+  { value: "120rb+", label: "undangan dibuat oleh pasangan dan keluarga di seluruh Indonesia." },
+  { value: "500+", label: "tema siap pakai untuk pernikahan, khitan, aqiqah, hingga ulang tahun." },
+  { value: "10 mnt", label: "rata-rata waktu dari pilih tema sampai undangan siap dikirim." },
+  { value: "4.9/5", label: "rating dari 18.000+ ulasan pengguna di Google Play." },
+];
+
+export const defaultFaq: FaqItem[] = [
+  { q: "Apakah bisa mencoba gratis?", a: "Bisa. Kamu dapat membuat dan melihat pratinjau undangan tanpa biaya. Pembayaran hanya diperlukan saat undangan siap dibagikan ke tamu." },
+  { q: "Apakah ada batas jumlah tamu?", a: "Setiap paket punya kapasitas tamu yang berbeda. Lihat detailnya di halaman harga sebelum memilih paket." },
+  { q: "Berapa lama proses pembuatannya?", a: "Rata-rata sekitar 10 menit: pilih tema, isi data acara, lalu bagikan link ke tamu." },
+  { q: "Apa maksud masa aktif undangan?", a: "Masa aktif adalah lama link undanganmu bisa dibuka tamu. Setelah lewat, kamu tetap bisa memperpanjang dari dashboard." },
+  { q: "Apakah tema bisa di-custom?", a: "Bisa. Ubah foto, teks, musik, dan section tambahan, lalu lihat pratinjaunya seketika." },
+  { q: "Apakah tersedia program reseller?", a: "Ya. Vendor WO dan EO bisa menghubungi tim kami lewat WhatsApp untuk informasi program reseller." },
+];
+
+export const defaultAnnouncement: Announcement = {
+  enabled: true,
+  text: "Baru: Undangan Video 3D & QR Check-in untuk semua paket Premium",
+  label: "Lihat sekarang",
+  href: "/produk/video-ucapan-3d",
+};
+
+/** Landing blocks managed from Admin → Konten lainnya; each falls back to the defaults above when empty. */
+export async function getLandingContent() {
+  const [stats, faq, announcement] = await Promise.all([
+    getJSON<{ items?: LandingStat[] }>("/api/public/site-content/stats", {}),
+    getJSON<{ items?: FaqItem[] }>("/api/public/site-content/faq", {}),
+    getJSON<Announcement>("/api/public/site-content/announcement", {}),
+  ]);
+  const statItems = (stats.items ?? []).filter((item) => item?.value?.trim() && item?.label?.trim());
+  const faqItems = (faq.items ?? []).filter((item) => item?.q?.trim() && item?.a?.trim());
+  const hasAnnouncement = typeof announcement.enabled === "boolean" || Boolean(announcement.text?.trim());
+  return {
+    stats: statItems.length ? statItems : defaultStats,
+    faq: faqItems.length ? faqItems : defaultFaq,
+    announcement: hasAnnouncement ? { ...defaultAnnouncement, ...announcement } : defaultAnnouncement,
+  };
+}
+
 /** Contact + footer content shared by every marketing page. */
 export async function getSiteContact() {
   const [kontak, footer] = await Promise.all([

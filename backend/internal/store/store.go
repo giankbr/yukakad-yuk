@@ -89,6 +89,7 @@ type Store interface {
 	DeleteMedia(string) error
 	UpdateUserRole(id, role string) (*User, error)
 	ListPlans() []*Plan
+	SavePlan(plan Plan) (*Plan, error)
 	GetSiteContent(section string) map[string]any
 	UpdateSiteContent(section string, data map[string]any) map[string]any
 	ListFeatures() []map[string]any
@@ -1465,7 +1466,17 @@ func (s *MemoryStore) ListPlans() []*Plan {
 	for _, plan := range s.plans {
 		items = append(items, plan)
 	}
+	sort.Slice(items, func(i, j int) bool { return items[i].Price < items[j].Price })
 	return items
+}
+
+// SavePlan creates or replaces a plan by ID.
+func (s *MemoryStore) SavePlan(plan Plan) (*Plan, error) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	saved := plan
+	s.plans[plan.ID] = &saved
+	return &saved, nil
 }
 
 func (s *MemoryStore) GetSiteContent(section string) map[string]any {

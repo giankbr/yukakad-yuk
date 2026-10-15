@@ -7,16 +7,16 @@ import { MotionInit } from "@/components/landing/Motion";
 import {
   IconArrowRight, IconCheck, IconChevronRight, IconHeadset, IconInfinity, IconMinus, IconPlus, IconSend, IconShield, IconTimer,
 } from "@/components/brand/icons";
-import { getSiteContact, planHref, planPerks, shortPrice, type Plan } from "@/lib/marketing";
+import { defaultFaq, getLandingContent, getSiteContact, planHref, planPerks, shortPrice, type FaqItem, type Plan } from "@/lib/marketing";
 
 /** Page frame shared by every marketing page: announcement, nav, bordered content rail and footer. */
 export async function MarketingPage({ current, children }: { current?: NavKey; children: ReactNode }) {
-  const { footer, waLink } = await getSiteContact();
+  const [{ footer, waLink }, { announcement }] = await Promise.all([getSiteContact(), getLandingContent()]);
   return (
     <main className={styles.page}>
       <MotionInit />
       <a className={styles.skip} href="#konten">Lewati navigasi</a>
-      <AnnouncementBar />
+      <AnnouncementBar announcement={announcement} />
       <SiteHeader current={current} />
       <div className={styles.rail} id="konten">{children}</div>
       <SiteFooter copyright={footer.copyright} instagram={footer.instagram} tiktok={footer.tiktok} whatsappHref={waLink} />
@@ -116,16 +116,8 @@ export function PricingPlans({ plans, waLink }: { plans: Plan[]; waLink?: string
   </>;
 }
 
-export const faqs: [string, string][] = [
-  ["Apakah bisa mencoba gratis?", "Bisa. Kamu dapat membuat dan melihat pratinjau undangan tanpa biaya. Pembayaran hanya diperlukan saat undangan siap dibagikan ke tamu."],
-  ["Apakah ada batas jumlah tamu?", "Setiap paket punya kapasitas tamu yang berbeda. Lihat detailnya di halaman harga sebelum memilih paket."],
-  ["Berapa lama proses pembuatannya?", "Rata-rata sekitar 10 menit: pilih tema, isi data acara, lalu bagikan link ke tamu."],
-  ["Apa maksud masa aktif undangan?", "Masa aktif adalah lama link undanganmu bisa dibuka tamu. Setelah lewat, kamu tetap bisa memperpanjang dari dashboard."],
-  ["Apakah tema bisa di-custom?", "Bisa. Ubah foto, warna, teks, musik, dan urutan bagian undangan, lalu lihat pratinjaunya seketika."],
-  ["Apakah tersedia program reseller?", "Ya. Vendor WO dan EO bisa menghubungi tim kami lewat WhatsApp untuk informasi program reseller."],
-];
 
-export function FaqSection({ waLink, items = faqs }: { waLink?: string; items?: [string, string][] }) {
+export function FaqSection({ waLink, items = defaultFaq }: { waLink?: string; items?: FaqItem[] }) {
   return (
     <section className={styles.section} id="faq" aria-labelledby="faq-title">
       <div className={styles.faq}>
@@ -136,7 +128,7 @@ export function FaqSection({ waLink, items = faqs }: { waLink?: string; items?: 
           <a href={waLink ?? "/tentang#kontak"} className={styles.btnOutline} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Chat tim support <IconArrowRight size={14} /></a>
         </div>
         <div className={styles.faqList}>
-          {items.map(([question, answer], index) => (
+          {items.map(({ q: question, a: answer }, index) => (
             <details key={question} open={index === 0}>
               <summary>{question}<span className={styles.faqToggle} aria-hidden><IconPlus className={styles.plus} size={16} /><IconMinus className={styles.minus} size={16} /></span></summary>
               <p>{answer}</p>

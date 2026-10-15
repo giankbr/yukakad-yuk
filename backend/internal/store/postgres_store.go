@@ -958,6 +958,24 @@ func (s *PostgresStore) DeleteTestimonial(id string) error {
 	return nil
 }
 
+// SavePlan creates or replaces a plan by ID.
+func (s *PostgresStore) SavePlan(plan Plan) (*Plan, error) {
+	var duration any
+	if plan.DurationDays != nil && *plan.DurationDays > 0 {
+		duration = *plan.DurationDays
+	}
+	_, err := s.db.Exec(`INSERT INTO plans (id, name, max_guests, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days)
+		VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+		ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, max_guests=EXCLUDED.max_guests, has_watermark=EXCLUDED.has_watermark,
+			custom_domain_allowed=EXCLUDED.custom_domain_allowed, payment_gateway_allowed=EXCLUDED.payment_gateway_allowed,
+			premium_templates_allowed=EXCLUDED.premium_templates_allowed, price=EXCLUDED.price, duration_days=EXCLUDED.duration_days`,
+		plan.ID, plan.Name, plan.MaxGuests, plan.HasWatermark, plan.CustomDomainAllowed, plan.PaymentGatewayAllowed, plan.PremiumTemplatesAllowed, plan.Price, duration)
+	if err != nil {
+		return nil, fmt.Errorf("save plan: %w", err)
+	}
+	return &plan, nil
+}
+
 func (s *PostgresStore) SetUserPlan(userID, planID string) error {
 	result, err := s.db.Exec(`UPDATE users SET plan_id = $1 WHERE id = $2`, planID, userID)
 	if err != nil {

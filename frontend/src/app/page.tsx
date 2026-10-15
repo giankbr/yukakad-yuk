@@ -4,7 +4,7 @@ import Link from "next/link";
 import { CountUp, MotionInit } from "@/components/landing/Motion";
 import { AnnouncementBar, SiteFooter, SiteHeader } from "@/components/landing/SiteChrome";
 import { EventSignup, FaqSection, FinalCta, PricingPlans, StepsSection } from "@/components/landing/Sections";
-import { getJSON, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
+import { getJSON, getLandingContent, getPlans, getTemplates, templateDemoHref, templatePreview, type Feature, type Hero, type Kontak, type FooterContent, type Testimonial } from "@/lib/marketing";
 import { ThemeGallery, VoiceWall, type Voice } from "@/components/landing/TemplateInteractions";
 import {
   IconArrowRight, IconCalendar, IconGift, IconGlobe, IconImages, IconLink, IconLock, IconMusic, IconPause, IconPin, IconQrArt, IconSend, IconSparkle, IconUsers,
@@ -65,7 +65,7 @@ const sampleVoices: Voice[] = [
 ];
 
 export default async function Home() {
-  const [hero, kontak, footer, featuresResult, testimonialsResult, templates, plans] = await Promise.all([
+  const [hero, kontak, footer, featuresResult, testimonialsResult, templates, plans, landing] = await Promise.all([
     getJSON<Hero>("/api/public/site-content/hero", {}),
     getJSON<Kontak>("/api/public/site-content/kontak", {}),
     getJSON<FooterContent>("/api/public/site-content/footer", {}),
@@ -73,6 +73,7 @@ export default async function Home() {
     getJSON<{ items?: Testimonial[] }>("/api/public/testimonials", {}),
     getTemplates(),
     getPlans(),
+    getLandingContent(),
   ]);
 
   // Admin-managed features render under the bento; skip ones the fixed cards above already cover.
@@ -90,7 +91,7 @@ export default async function Home() {
     <main className={styles.page}>
       <MotionInit />
       <a className={styles.skip} href="#konten">Lewati navigasi</a>
-      <AnnouncementBar />
+      <AnnouncementBar announcement={landing.announcement} />
       <SiteHeader />
 
       <div className={styles.rail} id="konten">
@@ -119,12 +120,7 @@ export default async function Home() {
 
         {/* Stats */}
         <section className={styles.stats} aria-label="Rawuh dalam angka">
-          {[
-            ["120rb+", "undangan dibuat oleh pasangan dan keluarga di seluruh Indonesia."],
-            ["500+", "tema siap pakai untuk pernikahan, khitan, aqiqah, hingga ulang tahun."],
-            ["10 mnt", "rata-rata waktu dari pilih tema sampai undangan siap dikirim."],
-            ["4.9/5", "rating dari 18.000+ ulasan pengguna di Google Play."],
-          ].map(([value, label]) => (
+          {landing.stats.map(({ value, label }) => (
             <div key={value} className={styles.stat}><strong><CountUp value={value} /></strong><p>{label}</p></div>
           ))}
         </section>
@@ -231,7 +227,7 @@ export default async function Home() {
           <a href={waLink ?? "/tentang#kontak"} className={`${styles.btnOutline} ${styles.voicesMore}`} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Ceritakan pengalamanmu</a>
         </section>
 
-        <FaqSection waLink={waLink} />
+        <FaqSection waLink={waLink} items={landing.faq} />
         <FinalCta heading={kontak.heading} subheading={kontak.subheading} />
       </div>
 

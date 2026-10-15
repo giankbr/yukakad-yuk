@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
-import styles from "../editor.module.css";
+import styles from "@/components/dashboard/editor.module.css";
 
 type Couple = {
   groom_name: string; bride_name: string;

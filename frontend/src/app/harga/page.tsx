@@ -4,7 +4,7 @@ import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FaqSection, FinalCta, MarketingPage, PricingPlans, SplitTitle } from "@/components/landing/Sections";
 import { IconCheck, IconGlobe, IconMinus, IconPrinter, IconReceipt, IconShield, IconUsers, IconVideo, IconWallet } from "@/components/brand/icons";
-import { getPlans, getSiteContact, priceLabel, planHref, type Plan } from "@/lib/marketing";
+import { getPlans, getLandingContent, getSiteContact, priceLabel, planHref, type Plan } from "@/lib/marketing";
 
 export const metadata: Metadata = {
   title: "Harga | Rawuh",
@@ -57,7 +57,7 @@ function Value({ cell }: { cell: Cell }) {
 }
 
 export default async function HargaPage() {
-  const [plans, { waLink }] = await Promise.all([getPlans(), getSiteContact()]);
+  const [plans, { waLink }, landing] = await Promise.all([getPlans(), getSiteContact(), getLandingContent()]);
   const featuredIndex = plans.length >= 3 ? 1 : plans.length - 1;
   return (
     <MarketingPage current="harga">
@@ -133,7 +133,7 @@ export default async function HargaPage() {
         </div>
       </section>
 
-      <FaqSection waLink={waLink} />
+      <FaqSection waLink={waLink} items={landing.faq} />
       <FinalCta />
     </MarketingPage>
   );
