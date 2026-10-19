@@ -25,8 +25,13 @@ func (s *Server) securityHeadersMiddleware(next http.Handler) http.Handler {
 
 func (s *Server) corsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if allowed := allowedCORSOrigin(s.config.FrontendOrigin, r.Header.Get("Origin")); allowed != "" {
+		origin := r.Header.Get("Origin")
+		if allowed := allowedCORSOrigin(s.config.FrontendOrigin, origin); allowed != "" {
 			w.Header().Set("Access-Control-Allow-Origin", allowed)
+			w.Header().Set("Vary", "Origin")
+		} else if origin != "" && strings.HasPrefix(r.URL.Path, "/api/public/") && s.verifiedDomainOrigin(origin) {
+			// Guests on a couple's own domain call the public endpoints (RSVP, wishes, envelopes) from there.
+			w.Header().Set("Access-Control-Allow-Origin", origin)
 			w.Header().Set("Vary", "Origin")
 		}
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS")

@@ -154,3 +154,26 @@ func TestInvitationUpdateKeepsPublishedAndValidatesSchedule(t *testing.T) {
 		t.Fatalf("invalid date should be 400, got %d", rec.Code)
 	}
 }
+
+func TestPublicDomainLookup(t *testing.T) {
+	server, user, _, inv := auditServer(t)
+	_, _ = server.store.UpdateInvitation(inv.ID, "rina-bima", "Rina & Bima", true, store.Couple{BrideName: "Rina", GroomName: "Bima"}, store.Event{})
+	domain, _ := server.store.CreateCustomDomain(store.CustomDomain{UserID: user.ID, InvitationID: inv.ID, Domain: "rinabima.com", VerificationToken: "tok"})
+	if code := doReq(server.handlePublicDomain, http.MethodGet, "/api/public/domain/rinabima.com", "", "", nil).Code; code != http.StatusNotFound {
+		t.Fatalf("pending domain must not resolve, got %d", code)
+	}
+	_, _ = server.store.VerifyCustomDomain(domain.ID, user.ID, "tok")
+	rec := doReq(server.handlePublicDomain, http.MethodGet, "/api/public/domain/RinaBima.com", "", "", nil)
+	if rec.Code != http.StatusOK || !strings.Contains(rec.Body.String(), `"slug":"rina-bima"`) {
+		t.Fatalf("verified domain lookup: %d %s", rec.Code, rec.Body.String())
+	}
+	if code := doReq(server.handleDomainCheck, http.MethodGet, "/api/public/domain-check?domain=rinabima.com", "", "", nil).Code; code != http.StatusOK {
+		t.Fatalf("domain-check should allow verified domain, got %d", code)
+	}
+	if code := doReq(server.handleDomainCheck, http.MethodGet, "/api/public/domain-check?domain=evil.com", "", "", nil).Code; code != http.StatusNotFound {
+		t.Fatalf("domain-check should refuse unknown domain, got %d", code)
+	}
+	if !server.verifiedDomainOrigin("https://rinabima.com") || server.verifiedDomainOrigin("https://evil.com") {
+		t.Fatal("CORS origin check wrong")
+	}
+}

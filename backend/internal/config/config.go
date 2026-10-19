@@ -32,9 +32,11 @@ type Config struct {
 	PaymentWebhookSecret string
 	// InternalAPISecret identifies server-to-server calls from the Next.js server (skips the global per-IP limit).
 	InternalAPISecret string
-	MayarAPIKey       string
-	MayarEnvironment  string
-	MayarBaseURL      string // optional override, e.g. a local fake in tests
+	// CustomDomainTarget is the hostname couples point their own domain at (CNAME), e.g. domains.rawuh.id.
+	CustomDomainTarget string
+	MayarAPIKey        string
+	MayarEnvironment   string
+	MayarBaseURL       string // optional override, e.g. a local fake in tests
 
 	AdminEmail    string
 	AdminPassword string
@@ -62,6 +64,7 @@ func Load() Config {
 		SMTPFrom:             getEnv("SMTP_FROM", ""),
 		PaymentWebhookSecret: getEnv("PAYMENT_WEBHOOK_SECRET", ""),
 		InternalAPISecret:    getEnv("INTERNAL_API_SECRET", ""),
+		CustomDomainTarget:   getEnv("CUSTOM_DOMAIN_TARGET", "domains.rawuh.id"),
 		MayarAPIKey:          getEnv("MAYAR_API_KEY", ""),
 		MayarEnvironment:     getEnv("MAYAR_ENV", "sandbox"),
 		MayarBaseURL:         getEnv("MAYAR_BASE_URL", ""),

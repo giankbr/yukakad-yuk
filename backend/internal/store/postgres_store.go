@@ -1398,6 +1398,17 @@ func (s *PostgresStore) VerifyCustomDomain(id, userID, token string) (*CustomDom
 	return item, err
 }
 
+func (s *PostgresStore) DeleteCustomDomain(id, userID string) error {
+	result, err := s.db.Exec(`DELETE FROM custom_domains WHERE id=$1 AND user_id=$2`, id, userID)
+	if err != nil {
+		return err
+	}
+	if count, _ := result.RowsAffected(); count == 0 {
+		return fmt.Errorf("domain not found")
+	}
+	return nil
+}
+
 func (s *PostgresStore) CreateAuditLog(userID, invitationID, action string, metadata map[string]any) error {
 	metadataJSON, err := json.Marshal(metadata)
 	if err != nil {

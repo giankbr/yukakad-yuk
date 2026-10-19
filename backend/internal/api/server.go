@@ -6,6 +6,7 @@ import (
 	"errors"
 	"net"
 	"net/http"
+	"net/url"
 	"strings"
 	"sync"
 	"time"
@@ -76,7 +77,7 @@ func billingGateway(cfg config.Config) payments.Gateway {
 
 func NewServerWithStore(cfg config.Config, dataStore store.Store) *Server {
 	gateway := billingGateway(cfg)
-	return &Server{
+	server := &Server{
 		config:      &cfg,
 		store:       dataStore,
 		revoker:     tokenstore.NewMemoryRevoker(),
@@ -91,6 +92,16 @@ func NewServerWithStore(cfg config.Config, dataStore store.Store) *Server {
 		billing:     billingservice.NewService(dataStore, gateway),
 		domains:     domainservice.NewService(dataStore, billingservice.NewService(dataStore, gateway)),
 	}
+	if cfg.CustomDomainTarget != "" {
+		server.domains.Target = cfg.CustomDomainTarget
+	}
+	// Rawuh's own hosts can't be claimed as someone's custom domain.
+	for _, origin := range strings.Split(cfg.FrontendOrigin, ",") {
+		if parsed, err := url.Parse(strings.TrimSpace(origin)); err == nil && parsed.Hostname() != "" {
+			server.domains.Reserved = append(server.domains.Reserved, parsed.Hostname())
+		}
+	}
+	return server
 }
 
 // SetRevoker overrides the default in-memory token revocation store, e.g.
@@ -132,6 +143,8 @@ func (s *Server) ListenAndServe() error {
 	mux.HandleFunc("/api/templates/", s.handleTemplates)
 	mux.HandleFunc("/api/public/invitation/", s.handlePublicInvitation)
 	mux.HandleFunc("/api/public/current", s.handlePublicCurrent)
+	mux.HandleFunc("/api/public/domain/", s.handlePublicDomain)
+	mux.HandleFunc("/api/public/domain-check", s.handleDomainCheck)
 	mux.HandleFunc("/api/public/gift-transactions/", s.handlePublicGiftVerify)
 	mux.HandleFunc("/api/admin/gift-payouts", s.handleAdminGiftPayouts)
 	mux.HandleFunc("/api/admin/gift-payouts/", s.handleAdminGiftPayouts)

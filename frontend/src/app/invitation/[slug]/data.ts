@@ -153,3 +153,10 @@ export function longDateWIB(iso?: string) {
   if (Number.isNaN(date.getTime())) return undefined;
   return new Intl.DateTimeFormat("id-ID", { timeZone: "Asia/Jakarta", weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(date);
 }
+
+/** Slug of the published invitation a verified custom domain points to; unknown → notFound(). */
+export const getDomainSlug = cache(async (host: string): Promise<string> => {
+  const result = await getJSON<{ slug?: string }>(`/api/public/domain/${enc(host)}`);
+  if (!result.ok || !result.data.slug) notFound();
+  return result.data.slug;
+});

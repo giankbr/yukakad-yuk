@@ -99,6 +99,7 @@ type Store interface {
 	ListCustomDomains(invitationID string) []*CustomDomain
 	FindInvitationByCustomDomain(domain string) (*Invitation, bool)
 	VerifyCustomDomain(id, userID, token string) (*CustomDomain, error)
+	DeleteCustomDomain(id, userID string) error
 	CreateAuditLog(userID, invitationID, action string, metadata map[string]any) error
 	GetSettings(string) map[string]any
 	UpdateSettings(string, map[string]any) map[string]any
@@ -1784,7 +1785,7 @@ func (s *MemoryStore) CreateCustomDomain(domain CustomDomain) (*CustomDomain, er
 			return nil, fmt.Errorf("domain already exists")
 		}
 	}
-	domain.ID = fmt.Sprintf("domain-%d", len(s.customDomains)+1)
+	domain.ID = fmt.Sprintf("domain-%d", time.Now().UnixNano())
 	domain.CreatedAt = time.Now().UTC()
 	domain.Status = "pending"
 	s.customDomains[domain.ID] = &domain
@@ -1828,6 +1829,17 @@ func (s *MemoryStore) VerifyCustomDomain(id, userID, token string) (*CustomDomai
 	now := time.Now().UTC()
 	item.Status, item.VerifiedAt = "verified", &now
 	return item, nil
+}
+
+func (s *MemoryStore) DeleteCustomDomain(id, userID string) error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	item, ok := s.customDomains[id]
+	if !ok || item.UserID != userID {
+		return fmt.Errorf("domain not found")
+	}
+	delete(s.customDomains, id)
+	return nil
 }
 
 func (s *MemoryStore) CreateAuditLog(userID, invitationID, action string, metadata map[string]any) error {

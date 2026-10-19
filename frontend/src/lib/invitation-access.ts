@@ -24,7 +24,7 @@ export const PAGE_PERMISSION: Record<string, string> = {
   summary: "guests", preview: "view", // the summary shows RSVP and wishes counts
   couple: "content", events: "content", stories: "content", gallery: "content", settings: "content", sections: "content",
   guests: "guests", rsvp: "guests", wishes: "guests",
-  gift: "owner", team: "owner",
+  gift: "owner", team: "owner", domain: "owner",
   ledger: "ledger_read",
   checkin: "checkin", screen: "live", doorprize: "hari_h", photos: "hari_h",
 };

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 
@@ -116,6 +117,11 @@ func (s *Server) handlePublicGiftTransaction(w http.ResponseWriter, r *http.Requ
 	returnURL := base + "?amplop=selesai"
 	if strings.HasPrefix(payload.ReturnURL, base+"?") || payload.ReturnURL == base {
 		returnURL = payload.ReturnURL
+	} else if parsed, err := url.Parse(payload.ReturnURL); err == nil && parsed.Scheme == "https" && (parsed.Path == "" || parsed.Path == "/") {
+		// Guests on the couple's own domain go back there, but only to a domain verified for this invitation.
+		if found, ok := s.store.FindInvitationByCustomDomain(strings.ToLower(parsed.Hostname())); ok && found.ID == invitation.ID {
+			returnURL = payload.ReturnURL
+		}
 	}
 	title := invitation.Title
 	if invitation.Couple.BrideName != "" && invitation.Couple.GroomName != "" {
