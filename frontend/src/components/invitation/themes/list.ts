@@ -1,6 +1,6 @@
 // Theme catalogue (ids, names, tiers). Plain data with no component imports, so it is safe to import
 // anywhere (sitemap, marketing pages, client components). Theme ids are stored as invitations.template_id.
-export type ThemeMeta = { id: string; name: string; group: "utama" | "koleksi" | "brand" | "web"; category: string; tier: "free" | "premium"; description: string };
+export type ThemeMeta = { id: string; name: string; group: "utama" | "koleksi" | "brand" | "web" | "klasik" | "islami" | "adat" | "acara"; category: string; tier: "free" | "premium"; description: string };
 
 export const themeList: ThemeMeta[] = [
   { id: "marketplace", name: "Marketplace", group: "utama", category: "Belanja", tier: "premium", description: "Undangan bergaya aplikasi belanja: paket cinta, lacak perjalanan, dan ulasan tamu." },
@@ -41,4 +41,36 @@ export const themeList: ThemeMeta[] = [
   { id: "kursi-kereta", name: "Kursi Kereta", group: "web", category: "Perjalanan", tier: "free", description: "Ala pemesanan kursi kereta: denah gerbong dan tiket tamu." },
   { id: "paket-liburan", name: "Paket Liburan", group: "web", category: "Perjalanan", tier: "free", description: "Ala paket liburan: rencana perjalanan, pesanan, dan voucher." },
   { id: "rencana-perjalanan", name: "Rencana Perjalanan", group: "web", category: "Perjalanan", tier: "free", description: "Ala aplikasi perjalanan: itinerary harian, penginapan, dan peta." },
+  { id: "mawar-blush", name: "Mawar Blush", group: "klasik", category: "Floral", tier: "premium", description: "Bunga mawar cat air merah muda lembut dengan bingkai lengkung dan tulisan tangan." },
+  { id: "emas-hitam", name: "Emas Hitam", group: "klasik", category: "Luxury", tier: "premium", description: "Mewah hitam-emas bergaya art deco dengan garis geometris berkilau." },
+  { id: "rustic-kayu", name: "Rustic Kayu", group: "klasik", category: "Rustic", tier: "free", description: "Kertas kraft, kayu hangat, dan rangkaian baby's breath bergaya pedesaan." },
+  { id: "taman-eukaliptus", name: "Taman Eukaliptus", group: "klasik", category: "Garden", tier: "premium", description: "Hijau sage dengan daun eukaliptus untuk pesta taman yang segar." },
+  { id: "surat-vintage", name: "Surat Vintage", group: "klasik", category: "Vintage", tier: "free", description: "Surat lama bernuansa sepia lengkap dengan segel lilin dan perangko." },
+  { id: "marmer-rosegold", name: "Marmer Rose Gold", group: "klasik", category: "Luxury", tier: "premium", description: "Marmer putih modern dengan aksen rose gold yang bersih dan mewah." },
+  { id: "langit-navy", name: "Langit Navy", group: "klasik", category: "Elegan", tier: "premium", description: "Navy dan emas berhias bintang dan bulan untuk pesta malam." },
+  { id: "boho-terakota", name: "Boho Terakota", group: "klasik", category: "Boho", tier: "free", description: "Terakota hangat, rumput pampas, dan lengkungan bergaya bohemian." },
+  { id: "pantai-senja", name: "Pantai Senja", group: "klasik", category: "Pantai", tier: "premium", description: "Gradasi senja di tepi pantai dengan ombak dan nyiur melambai." },
+  { id: "editorial-monokrom", name: "Editorial Monokrom", group: "klasik", category: "Minimalis", tier: "free", description: "Tata letak majalah hitam-putih dengan tipografi besar yang tegas." },
+  { id: "kaligrafi-emas", name: "Kaligrafi Emas", group: "islami", category: "Islami", tier: "premium", description: "Krem dan emas dengan lengkung mihrab dan ornamen geometris Islami." },
+  { id: "masjid-biru", name: "Masjid Biru", group: "islami", category: "Islami", tier: "premium", description: "Biru tua berhias kubah, lentera, dan pola bintang delapan." },
+  { id: "sakinah-putih", name: "Sakinah Putih", group: "islami", category: "Syari", tier: "free", description: "Syari putih-hijau lembut tanpa foto, penuh doa dan ayat." },
+  { id: "arabesque-marun", name: "Arabesque Marun", group: "islami", category: "Islami", tier: "premium", description: "Marun dan emas dengan sulur arabesque yang anggun." },
+  { id: "lentera-malam", name: "Lentera Malam", group: "islami", category: "Islami", tier: "free", description: "Langit malam dengan lentera bergantungan dan bulan sabit." },
+  { id: "mihrab-pastel", name: "Mihrab Pastel", group: "islami", category: "Syari", tier: "free", description: "Lengkung mihrab pastel tanpa foto, lembut dan bersahaja." },
+  { id: "sunda-siger", name: "Sunda Siger", group: "adat", category: "Adat Sunda", tier: "premium", description: "Adat Sunda hijau-emas dengan siger, melati, dan motif batik Mega Mendung." },
+  { id: "batak-ulos", name: "Batak Ulos", group: "adat", category: "Adat Batak", tier: "premium", description: "Adat Batak Toba merah-hitam-putih dengan motif gorga dan kain ulos." },
+  { id: "bugis-bosara", name: "Bugis Bosara", group: "adat", category: "Adat Bugis", tier: "premium", description: "Adat Bugis-Makassar warna cerah dengan bosara dan sarung sutra." },
+  { id: "betawi-ondel", name: "Betawi Ondel", group: "adat", category: "Adat Betawi", tier: "free", description: "Adat Betawi meriah dengan ondel-ondel, gigi balang, dan kembang kelapa." },
+  { id: "melayu-songket", name: "Melayu Songket", group: "adat", category: "Adat Melayu", tier: "premium", description: "Adat Melayu kuning-hijau dengan songket dan motif pucuk rebung." },
+  { id: "toraja-tongkonan", name: "Toraja Tongkonan", group: "adat", category: "Adat Toraja", tier: "premium", description: "Adat Toraja merah-hitam dengan atap tongkonan dan ukiran pa'ssura." },
+  { id: "dayak-borneo", name: "Dayak Borneo", group: "adat", category: "Adat Dayak", tier: "premium", description: "Adat Dayak dengan motif sulur khas Kalimantan dan burung enggang." },
+  { id: "palembang-aesan", name: "Palembang Aesan", group: "adat", category: "Adat Palembang", tier: "premium", description: "Adat Palembang merah-emas dengan aesan gede dan songket limar." },
+  { id: "khitan-ceria", name: "Khitan Ceria", group: "acara", category: "Khitanan", tier: "free", description: "Khitanan anak yang ceria dengan ilustrasi lucu dan warna segar." },
+  { id: "aqiqah-bintang", name: "Aqiqah Bintang", group: "acara", category: "Aqiqah", tier: "free", description: "Aqiqah bayi bernuansa pastel dengan bintang, awan, dan bulan." },
+  { id: "ultah-balon", name: "Ultah Balon", group: "acara", category: "Ulang Tahun", tier: "free", description: "Ulang tahun anak penuh balon, confetti, dan kue warna-warni." },
+  { id: "ultah-gemerlap", name: "Ultah Gemerlap", group: "acara", category: "Ulang Tahun", tier: "premium", description: "Pesta ulang tahun dewasa yang gemerlap dengan nuansa malam dan emas." },
+  { id: "syukuran-rumah", name: "Syukuran Rumah", group: "acara", category: "Syukuran", tier: "free", description: "Tasyakuran rumah baru yang hangat dengan ilustrasi rumah dan tanaman." },
+  { id: "lamaran-cincin", name: "Lamaran Cincin", group: "acara", category: "Tunangan", tier: "premium", description: "Lamaran dan tunangan dengan cincin, bunga, dan nuansa champagne." },
+  { id: "wisuda-toga", name: "Wisuda Toga", group: "acara", category: "Wisuda", tier: "free", description: "Syukuran wisuda dengan toga, ijazah, dan warna akademik." },
+  { id: "tujuh-bulanan", name: "Tujuh Bulanan", group: "acara", category: "Syukuran", tier: "free", description: "Syukuran tujuh bulanan (mitoni) dengan kembang setaman dan janur." },
 ];

@@ -797,7 +797,7 @@ export type ExtrasSlot = "opening" | "event" | "story" | "end";
 export function Extras({ slot, className, without = [] }: {
   slot: ExtrasSlot; className?: string;
   /** Blocks the theme already renders itself, e.g. ["calendar"] when it has its own save-the-date button. */
-  without?: Array<"calendar" | "quote">;
+  without?: Array<"calendar" | "quote" | "child">;
 }) {
   const ctx = useInvitation();
   const content = useMemo(() => {
@@ -810,7 +810,7 @@ export function Extras({ slot, className, without = [] }: {
     const calendar = e?.calendar?.enabled !== false && !without.includes("calendar");
     switch (slot) {
       case "opening":
-        return <>{quote && !without.includes("quote") && <QuoteBlock quote={quote} />}{child && <ChildBlock child={child} label={data.eventLabel} />}</>;
+        return <>{quote && !without.includes("quote") && <QuoteBlock quote={quote} />}{child && !without.includes("child") && <ChildBlock child={child} label={data.eventLabel} />}</>;
       case "event":
         return <>
           {calendar && <CalendarBlock data={data} />}
