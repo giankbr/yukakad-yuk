@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, getJson, usePageGate } from "../_lib";
 
 type Entry = { id: string; guest_id?: string; name: string; kind: string; amount: number; item?: string; note?: string; created_at: string; source: "manual" | "online" };
 type Ledger = { items: Entry[]; totals: { cash: number; transfer: number; online: number; total: number }; kado_count: number };
@@ -36,22 +37,32 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
+  const [forbidden, setForbidden] = useState(false);
+
+  const gate = usePageGate(invitationId, token, "ledger");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
 
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
     const [l, g] = await Promise.all([
-      apiFetch(`/api/invitations/${invitationId}/ledger`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/guests`, token).then((r) => r.json()).catch(() => ({})),
+      getJson<Ledger>(`/api/invitations/${invitationId}/ledger`, token),
+      getJson<{ items?: Guest[] } | Guest[]>(`/api/invitations/${invitationId}/guests`, token),
     ]);
-    setLedger(l);
-    setGuests(Array.isArray(g) ? g : g.items ?? []);
-  }, [token, invitationId]);
+    if (l.status === 404) { lose(); return; }
+    if (l.status === 403) { setForbidden(true); return; }
+    if (!l.ok || !l.data) { setError(l.error || "Gagal memuat buku buwuh."); return; }
+    setLedger({ ...l.data, items: Array.isArray(l.data.items) ? l.data.items : [] });
+    // The guest list only feeds name suggestions; a role without guest access just gets none.
+    const list = g.ok ? g.data : null;
+    setGuests(Array.isArray(list) ? list : list?.items ?? []);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
-    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat buku buwuh")).finally(() => setLoading(false)); }, 0);
+    if (!ready || !allowed) return;
+    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat buku buwuh.")).finally(() => setLoading(false)); }, 0);
     return () => clearTimeout(timer);
-  }, [ready, token, invitationId, load]);
+  }, [ready, allowed, load]);
 
   const pickName = (name: string) => {
     const guest = guests.find((g) => g.name.toLowerCase() === name.trim().toLowerCase());
@@ -67,8 +78,8 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
     try {
       const payload = { guest_id: form.guest_id, name: form.name, kind: form.kind, amount: Number(form.amount.replace(/\D/g, "")) || 0, item: form.item, note: form.note };
       const response = await apiFetch(`/api/invitations/${invitationId}/ledger${form.id ? `/${form.id}` : ""}`, token, { method: form.id ? "PATCH" : "POST", body: JSON.stringify(payload) });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error);
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(friendly(body.error, "Belum tersimpan."));
       setNotice(form.id ? "Catatan diperbarui." : `${form.name} tercatat.`);
       setForm(empty);
       await load();
@@ -81,7 +92,8 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
 
   async function remove(entry: Entry) {
     if (!token || !invitationId || !window.confirm(`Hapus catatan dari ${entry.name}?`)) return;
-    await apiFetch(`/api/invitations/${invitationId}/ledger/${entry.id}`, token, { method: "DELETE" });
+    const response = await apiFetch(`/api/invitations/${invitationId}/ledger/${entry.id}`, token, { method: "DELETE" }).catch(() => null);
+    if (!response?.ok) setError("Catatan belum terhapus. Coba lagi.");
     await load();
   }
 
@@ -100,6 +112,13 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
   }
 
   if (!ready || !invitationId) return null;
+  if (!allowed || forbidden) {
+    return (
+      <DashboardShell active="ledger" invitationId={invitationId}>
+        <GateNotice gate={forbidden ? { status: "denied", access: gate.access } : gate} invitationId={invitationId} deniedText="Peranmu tidak bisa melihat buku buwuh" />
+      </DashboardShell>
+    );
+  }
   const t = ledger?.totals;
 
   return (
@@ -110,7 +129,7 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
           <h1>Buku buwuh</h1>
           <p className="dashboard-subtitle">Catatan siapa memberi apa, supaya keluarga bisa membalas saat mereka punya hajat. Amplop online masuk otomatis; amplop tunai dan kado dicatat di sini atau saat check-in.</p>
         </div>
-        <button type="button" className="secondary-action" onClick={exportCsv} disabled={!ledger?.items.length}>Unduh Excel (CSV)</button>
+        <button type="button" className="secondary-action" onClick={exportCsv} disabled={!ledger?.items?.length}>Unduh Excel (CSV)</button>
       </header>
 
       {error && <p role="alert" className="dashboard-state dashboard-state-error">{error}</p>}
@@ -154,7 +173,7 @@ export default function BuwuhPage({ params }: { params: Promise<{ id: string }> 
 
           <section className={styles.panel} aria-label="Daftar pemberian">
             <div className={styles.panelHead}>
-              <div><h2>Daftar pemberian</h2><p>{ledger?.items.length ?? 0} catatan</p></div>
+              <div><h2>Daftar pemberian</h2><p>{ledger?.items?.length ?? 0} catatan</p></div>
               <label className={styles.field} style={{ width: 260 }}><span className="sr-only">Cari</span><input type="search" placeholder="Cari nama atau barang…" value={query} onChange={(e) => setQuery(e.target.value)} /></label>
             </div>
             {visible.length === 0 ? <p className={styles.empty}>Belum ada catatan.</p> : (

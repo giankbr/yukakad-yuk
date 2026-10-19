@@ -4,8 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, getJson, usePageGate } from "../_lib";
 
-type Result = { kind: "success" | "error"; message: string } | null;
+type Result = { kind: "success" | "warning" | "error"; message: string } | null;
+type CheckInBody = { id: string; name: string; table?: string; checked_in_at?: string; already?: boolean };
+
+const clock = (value?: string) => {
+  const date = value ? new Date(value) : null;
+  if (!date || Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("id-ID", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Asia/Jakarta" }).format(date).replace(":", ".");
+};
+const seat = (table?: string) => (table ? ` Arahkan ke ${/^\d/.test(table) ? `meja ${table}` : table}.` : "");
+const RESULT_STYLE: Record<"warning", React.CSSProperties> = {
+  warning: { background: "#fdf0d5", color: "#8a5a00", border: "1px solid #f0c36d" },
+};
 type Checked = { id: string; name: string };
 
 export default function CheckInPage({ params }: { params: Promise<{ id: string }> }) {
@@ -21,9 +33,11 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
   const busyRef = useRef(false);
 
   const invitationId = routeParams?.id;
+  const gate = usePageGate(invitationId, token, "checkin");
+  const allowed = gate.status === "ok";
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     let cancelled = false;
 
     import("html5-qrcode").then(({ Html5QrcodeScanner }) => {
@@ -38,21 +52,32 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
             let guestId = decoded.trim();
             if (guestId.startsWith("rawuh:")) {
               const guestToken = guestId.slice("rawuh:".length);
-              const list = await apiFetch(`/api/invitations/${invitationId}/guests`, token).then(r => r.json()) as { items?: Array<{ id: string; token?: string }> } | Array<{ id: string; token?: string }>;
-              const guests = Array.isArray(list) ? list : list.items ?? [];
+              const list = await getJson<{ items?: Array<{ id: string; token?: string }> } | Array<{ id: string; token?: string }>>(`/api/invitations/${invitationId}/guests`, token);
+              if (!list.ok) throw new Error(list.status === 403 ? "Peranmu belum bisa membaca QR dari undangan tamu. Minta tamu menunjukkan QR dari panitia." : list.error);
+              const guests = Array.isArray(list.data) ? list.data : list.data?.items ?? [];
               const match = guests.find(guest => guest.token === guestToken);
               if (!match) throw new Error("QR tidak dikenali untuk undangan ini.");
               guestId = match.id;
             }
-            const response = await apiFetch(`/api/invitations/${invitationId}/guests/${encodeURIComponent(guestId)}/check-in`, token, { method: "POST" });
-            const body = await response.json();
-            if (!response.ok) throw new Error(body.error ?? "Check-in gagal");
-            setChecked({ id: body.id, name: body.name });
+            const response = await getJson<CheckInBody>(`/api/invitations/${invitationId}/guests/${encodeURIComponent(guestId)}/check-in`, token, { method: "POST" });
+            if (!response.ok || !response.data) throw new Error(response.status === 404 ? "QR tidak dikenali untuk undangan ini." : response.error || "Check-in gagal.");
+            const body = response.data;
             setGift({ kind: "cash", amount: "", item: "" });
             setSaved("");
-            setResult({ kind: "success", message: `${body.name} berhasil check-in.${body.table ? ` Arahkan ke ${/^\d/.test(body.table) ? `meja ${body.table}` : body.table}.` : ""}` });
+            if (body.already) {
+              // A repeat scan: warn, and leave the envelope form closed so the gift isn't recorded twice.
+              setChecked(null);
+              const at = clock(body.checked_in_at);
+              setResult({ kind: "warning", message: `${body.name} sudah check-in sebelumnya${at ? ` pukul ${at}` : ""}.${seat(body.table)}` });
+            } else {
+              setChecked({ id: body.id, name: body.name });
+              setResult({ kind: "success", message: `${body.name} berhasil check-in.${seat(body.table)}` });
+            }
           } catch (err) {
-            setResult({ kind: "error", message: err instanceof Error ? err.message : "Check-in gagal" });
+            // Never leave the previous guest's envelope form open after a failed scan.
+            setChecked(null);
+            setSaved("");
+            setResult({ kind: "error", message: friendly(err, "Check-in gagal.") });
           } finally {
             setTimeout(() => { busyRef.current = false; }, 1500);
           }
@@ -67,7 +92,7 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
       cancelled = true;
       scannerRef.current?.clear().catch(() => {});
     };
-  }, [ready, token, invitationId]);
+  }, [ready, token, invitationId, allowed]);
 
   async function recordGift(event: React.FormEvent) {
     event.preventDefault();
@@ -78,18 +103,26 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
         method: "POST",
         body: JSON.stringify({ guest_id: checked.id, name: checked.name, kind: gift.kind, amount: Number(gift.amount) || 0, item: gift.item, note: gift.kind === "cash" && !gift.amount ? "Amplop belum dibuka — isi nominal nanti" : "Dicatat saat check-in" }),
       });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       setSaved(`Tercatat di buku buwuh: ${checked.name}.`);
       setChecked(null);
     } catch (err) {
-      setSaved(err instanceof Error && err.message ? err.message : "Belum tercatat.");
+      setSaved(friendly(err, "Belum tercatat. Coba lagi."));
     } finally {
       setSaving(false);
     }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="checkin" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   return (
     <DashboardShell active="checkin" invitationId={invitationId}>
@@ -105,7 +138,7 @@ export default function CheckInPage({ params }: { params: Promise<{ id: string }
         <div id="qr-reader" />
         {!scanning && <p className="dashboard-state">Menyalakan kamera...</p>}
         {result && (
-          <p className={`checkin-result ${result.kind === "error" ? "error" : ""}`}>{result.message}</p>
+          <p role={result.kind === "success" ? "status" : "alert"} className={`checkin-result ${result.kind === "error" ? "error" : ""}`} style={result.kind === "warning" ? RESULT_STYLE.warning : undefined}>{result.message}</p>
         )}
         {checked && (
           <form className="checkin-gift" onSubmit={recordGift} aria-label="Catat amplop atau kado">

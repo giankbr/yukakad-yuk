@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
 import { safeNext } from "@/lib/next-path";
+import { API_URL, saveSession } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { IconEye, IconEyeOff } from "@/components/brand/icons";
 
 export default function RegisterPage() {
@@ -22,20 +24,16 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"}/api/auth/register`, {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Pendaftaran gagal");
-      }
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.token) throw new Error(friendlyError(data.error, "Pendaftaran gagal. Coba lagi."));
 
-      const data = await response.json();
-      localStorage.setItem("yukakad_token", data.token);
-      localStorage.setItem("yukakad_role", data.user?.role ?? "user");
+      saveSession(data.token, data.user);
       const search = new URLSearchParams(window.location.search);
       const planId = search.get("plan");
       const templateId = search.get("template");
@@ -49,7 +47,7 @@ export default function RegisterPage() {
             ? `/dashboard/invitations/create?title=${encodeURIComponent(eventName)}`
             : "/dashboard"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
+      setError(friendlyError(err instanceof Error ? err.message : ""));
     } finally {
       setLoading(false);
     }

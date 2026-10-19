@@ -35,7 +35,8 @@ func (s *Server) handlePaymentWebhook(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "unsupported webhook status"})
 		return
 	}
-	sub, err := s.billing.Confirm(payload.Reference)
+	// The signed body is only a hint: activation always re-checks the payment with the gateway.
+	sub, err := s.billing.ConfirmPaid(r.Context(), payload.Reference)
 	if err != nil {
 		writeJSON(w, http.StatusNotFound, map[string]string{"error": err.Error()})
 		return

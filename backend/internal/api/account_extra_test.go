@@ -1,10 +1,12 @@
 package api
 
 import (
+	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
+	"time"
 
 	"yukakad/internal/auth"
 	"yukakad/internal/config"
@@ -27,15 +29,31 @@ func TestChangePasswordAndAdminPayments(t *testing.T) {
 		h(rec, req)
 		return rec
 	}
-	if code := call(server.handleChangePassword, token, http.MethodPost, `{"current_password":"salah","new_password":"baru-12345"}`).Code; code != http.StatusUnauthorized {
-		t.Fatalf("wrong current password should be 401, got %d", code)
+	if code := call(server.handleChangePassword, token, http.MethodPost, `{"current_password":"salah","new_password":"baru-12345"}`).Code; code != http.StatusBadRequest {
+		t.Fatalf("wrong current password should be 400, got %d", code)
 	}
 	if code := call(server.handleChangePassword, token, http.MethodPost, `{"current_password":"lama-12345","new_password":"pendek"}`).Code; code != http.StatusBadRequest {
 		t.Fatalf("short password should be 400, got %d", code)
 	}
-	if code := call(server.handleChangePassword, token, http.MethodPost, `{"current_password":"lama-12345","new_password":"baru-12345"}`).Code; code != http.StatusOK {
-		t.Fatalf("change password: %d", code)
+	time.Sleep(1100 * time.Millisecond) // the old token must come from an earlier second than the change
+	changed := call(server.handleChangePassword, token, http.MethodPost, `{"current_password":"lama-12345","new_password":"baru-12345"}`)
+	if changed.Code != http.StatusOK {
+		t.Fatalf("change password: %d", changed.Code)
 	}
+	var fresh struct {
+		Token string `json:"token"`
+	}
+	_ = json.Unmarshal(changed.Body.Bytes(), &fresh)
+	if fresh.Token == "" {
+		t.Fatal("change password should return a fresh token")
+	}
+	if code := call(server.handleProfile, token, http.MethodGet, "").Code; code != http.StatusUnauthorized {
+		t.Fatalf("old token should be revoked after password change, got %d", code)
+	}
+	if code := call(server.handleProfile, fresh.Token, http.MethodGet, "").Code; code != http.StatusOK {
+		t.Fatalf("fresh token should work, got %d", code)
+	}
+	token = fresh.Token
 	updated, _ := server.store.FindUserByID(user.ID)
 	if !auth.VerifyPassword("baru-12345", updated.Password) {
 		t.Fatal("new password not stored")

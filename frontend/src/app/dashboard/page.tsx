@@ -82,7 +82,7 @@ export default function DashboardPage() {
 				setInvitations(body.items ?? []);
 				setShared(body.shared ?? []);
 			})
-			.catch((e: unknown) => setError(String(e)))
+			.catch((e: unknown) => setError(typeof e === "string" ? e : "Tidak bisa terhubung ke server. Periksa koneksi internetmu."))
 			.finally(() => setLoading(false));
 	}, [ready, token]);
 

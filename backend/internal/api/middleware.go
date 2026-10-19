@@ -1,6 +1,7 @@
 package api
 
 import (
+	"crypto/subtle"
 	"net"
 	"net/http"
 	"strings"
@@ -54,6 +55,11 @@ func allowedCORSOrigin(configured, request string) string {
 
 func (s *Server) rateLimitMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Server-side renders from the Next.js server all share one IP; they are trusted and cached there.
+		if s.internalRequest(r) {
+			next.ServeHTTP(w, r)
+			return
+		}
 		if !s.allowRate(w, "global:"+clientIP(r), 120, time.Minute) {
 			return
 		}
@@ -85,4 +91,11 @@ func clientIP(r *http.Request) string {
 		return r.RemoteAddr
 	}
 	return host
+}
+
+// internalRequest reports whether the request carries the shared INTERNAL_API_SECRET.
+func (s *Server) internalRequest(r *http.Request) bool {
+	secret := s.config.InternalAPISecret
+	got := r.Header.Get("X-Rawuh-Internal")
+	return len(secret) >= 16 && got != "" && subtle.ConstantTimeCompare([]byte(got), []byte(secret)) == 1
 }

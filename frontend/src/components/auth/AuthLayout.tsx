@@ -23,7 +23,7 @@ export function AuthLayout({ children, topRight }: { children: ReactNode; topRig
       <aside className="auth-aside" aria-label="Cerita pengguna Rawuh">
         <Image src="/rawuh/login-photo.webp" alt="" fill sizes="50vw" preload />
         <figure className="auth-quote">
-          <div className="auth-stars" aria-label="5 dari 5 bintang">{Array.from({ length: 5 }, (_, i) => <IconStar key={i} size={16} />)}</div>
+          <div className="auth-stars" aria-label="5 dari 5 bintang">{Array.from({ length: 5 }, (_, i) => <IconStar key={i} size={16} weight="fill" />)}</div>
           <blockquote>“Undangan jadi dalam semalam, 400 tamu terkirim besok paginya. Ibu sampai tanya ini bikin di mana.”</blockquote>
           <figcaption>
             <Image src="/rawuh/avatar-laras-adit.webp" alt="" width={40} height={40} />

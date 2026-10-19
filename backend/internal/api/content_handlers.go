@@ -178,8 +178,12 @@ func (s *Server) handleInvitationEventsCollection(w http.ResponseWriter, r *http
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid payload"})
 			return
 		}
+		if msg := validateSchedule(payload.Date, payload.StartTime, payload.EndTime); msg != "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": msg})
+			return
+		}
 		if strings.TrimSpace(payload.Title) == "" || strings.TrimSpace(payload.Venue) == "" {
-			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "title and venue are required"})
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Nama acara dan tempat wajib diisi"})
 			return
 		}
 		if payload.Type == "" {
@@ -244,8 +248,12 @@ func (s *Server) handleInvitationEventDetail(w http.ResponseWriter, r *http.Requ
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid payload"})
 			return
 		}
+		if msg := validateSchedule(payload.Date, payload.StartTime, payload.EndTime); msg != "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": msg})
+			return
+		}
 		if strings.TrimSpace(payload.Title) == "" || strings.TrimSpace(payload.Venue) == "" {
-			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "title and venue are required"})
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Nama acara dan tempat wajib diisi"})
 			return
 		}
 		updated, err := s.store.UpdateInvitationEvent(eventID, store.InvitationEvent{

@@ -29,6 +29,8 @@ export default function VenueScreen({ params }: { params: Promise<{ id: string }
   const { id } = use(params);
   const [feed, setFeed] = useState<Feed | null>(null);
   const [error, setError] = useState("");
+  // Conditions polling can't fix by itself: show a full-screen state and stop polling.
+  const [blocked, setBlocked] = useState<"login" | "forbidden" | null>(null);
   const [queue, setQueue] = useState<Checkin[]>([]);
   const [current, setCurrent] = useState<Checkin | null>(null);
   const [wishIndex, setWishIndex] = useState(0);
@@ -43,10 +45,12 @@ export default function VenueScreen({ params }: { params: Promise<{ id: string }
     let timer: ReturnType<typeof setTimeout>;
     const tick = async () => {
       const token = getToken();
-      if (!token) { setError("Masuk ke dashboard dulu di perangkat ini, lalu buka layar lagi."); return; }
+      if (!token) { setBlocked("login"); return; }
       try {
         const response = await apiFetch(`/api/invitations/${id}/live`, token);
-        if (!response.ok) throw new Error(response.status === 404 ? "Undangan tidak ditemukan untuk akun ini." : "Koneksi terputus, mencoba lagi…");
+        if (response.status === 401) { if (!cancelled) setBlocked("login"); return; }
+        if (response.status === 403 || response.status === 404) { if (!cancelled) setBlocked("forbidden"); return; }
+        if (!response.ok) throw new Error("Koneksi terputus, mencoba lagi…");
         const body: Feed = await response.json();
         if (cancelled) return;
         if (!seen.current) {
@@ -61,8 +65,8 @@ export default function VenueScreen({ params }: { params: Promise<{ id: string }
         }
         setFeed(body);
         setError("");
-      } catch (err) {
-        if (!cancelled) setError(err instanceof Error ? err.message : "Koneksi terputus, mencoba lagi…");
+      } catch {
+        if (!cancelled) setError("Koneksi terputus, mencoba lagi…");
       }
       if (!cancelled) timer = setTimeout(tick, POLL);
     };
@@ -112,6 +116,33 @@ export default function VenueScreen({ params }: { params: Promise<{ id: string }
 
   const wish = wishes.length ? wishes[wishIndex % wishes.length] : null;
   const recent = (feed?.checkins ?? []).slice(0, 8);
+
+  if (blocked) {
+    const next = `/layar/${id}`;
+    return (
+      <main className={s.screen}>
+        <section className={s.blocked} role="alert">
+          <p className={s.eyebrow}>Layar sapa</p>
+          {blocked === "login" ? (
+            <>
+              <h1>Layar ini perlu login dulu</h1>
+              <p>Masuk dengan akun pemilik undangan atau anggota tim yang punya akses hari-H di perangkat ini. Layar akan langsung tampil setelah masuk.</p>
+              <a className={s.blockedAction} href={`/auth/login?next=${encodeURIComponent(next)}`}>Masuk untuk membuka layar</a>
+            </>
+          ) : (
+            <>
+              <h1>Akunmu tidak punya akses ke layar ini</h1>
+              <p>Undangan ini mungkin milik akun lain, sudah dihapus, atau peranmu di tim tidak termasuk layar sapa. Minta pemilik undangan menambahkan aksesmu, atau masuk dengan akun lain.</p>
+              <div className={s.blockedRow}>
+                <a className={s.blockedAction} href="/dashboard">Ke dashboard</a>
+                <a className={s.blockedGhost} href={`/auth/login?next=${encodeURIComponent(next)}`}>Masuk dengan akun lain</a>
+              </div>
+            </>
+          )}
+        </section>
+      </main>
+    );
+  }
 
   return (
     <main className={s.screen} aria-live="polite">

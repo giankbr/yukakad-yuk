@@ -33,7 +33,8 @@ func (s *Server) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 	}
 	user, exists := s.store.FindUserByID(claims.UserID)
 	if !exists || !auth.VerifyPassword(payload.Current, user.Password) {
-		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "password saat ini salah"})
+		// 400, not 401: the session itself is fine, and clients log out on 401.
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "Password saat ini salah"})
 		return
 	}
 	hashed, err := auth.HashPassword(payload.New)
@@ -46,7 +47,13 @@ func (s *Server) handleChangePassword(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	_ = s.store.CreateAuditLog(user.ID, "", "auth.password.change", nil)
-	writeJSON(w, http.StatusOK, map[string]bool{"changed": true})
+	// Every earlier token is now invalid (see authenticateToken); hand this device a fresh one.
+	token, err := s.issueToken(user)
+	if err != nil {
+		writeJSON(w, http.StatusOK, map[string]any{"changed": true})
+		return
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"changed": true, "token": token})
 }
 
 // GET /api/admin/payments — plan purchases and online-envelope money across all users.

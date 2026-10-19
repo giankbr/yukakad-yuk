@@ -6,6 +6,8 @@ import Link from "next/link";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
 import { IconEye, IconEyeOff, IconMail } from "@/components/brand/icons";
 import { safeNext } from "@/lib/next-path";
+import { API_URL, saveSession } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -21,21 +23,16 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"}/api/auth/login`, {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || "Login gagal");
-      }
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.token) throw new Error(friendlyError(data.error, "Login gagal. Coba lagi."));
 
-      const data = await response.json();
-      // Storage keys keep the legacy prefix so existing sessions stay signed in.
-      localStorage.setItem("yukakad_token", data.token);
-      localStorage.setItem("yukakad_role", data.user?.role ?? "user");
+      saveSession(data.token, data.user);
       const search = new URLSearchParams(window.location.search);
       const planId = search.get("plan");
       const next = safeNext(search.get("next"));
@@ -43,7 +40,7 @@ export default function LoginPage() {
         ? `/checkout?plan=${encodeURIComponent(planId)}`
         : "/dashboard"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Terjadi kesalahan");
+      setError(friendlyError(err instanceof Error ? err.message : ""));
     } finally {
       setLoading(false);
     }
@@ -73,7 +70,10 @@ export default function LoginPage() {
         </div>
 
         <div>
-          <label htmlFor="login-password">Kata sandi</label>
+          <span style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+            <label htmlFor="login-password">Kata sandi</label>
+            <Link href="/auth/forgot-password" className="auth-note" style={{ textDecoration: "underline", textUnderlineOffset: 2 }}>Lupa kata sandi?</Link>
+          </span>
           <div className="auth-input">
             <input id="login-password" autoComplete="current-password" type={showPassword ? "text" : "password"} value={password}
               onChange={(e) => setPassword(e.target.value)} required placeholder="Masukkan kata sandi" />

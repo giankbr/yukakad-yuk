@@ -20,7 +20,7 @@ export default function AdminFeaturesPage() {
   const load = useCallback(() => {
     if (!token) return;
     apiFetch("/api/admin/features", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: { items?: Feature[] }) => setItems(body.items ?? []))
       .catch(() => setError("Gagal memuat fitur"))
       .finally(() => setLoading(false));

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, formatDate, giftInfo, guestLabel, mapsHref, storyItems,
-  toDate, useCopy, useCountdown, useMusic, useRsvp, useWishes, type Attendance, type ThemeProps,
+  toDate, useCopy, useCountdown, useMusic, DATE_TBA, useRsvp, useThankYou, useWishes, type Attendance, type ThemeProps,
 } from "../kit";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
@@ -72,6 +72,9 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
+  const thanks = useThankYou();
+  // Thank-you mode (or the server already closed RSVPs): only wishes can still be sent.
+  const rsvpClosed = thanks.active || rsvp.status === "closed";
   const { copy, copied } = useCopy();
   const music = useMusic(data.music);
   const [attendance, setAttendance] = useState<Attendance>("yes");
@@ -152,11 +155,13 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
 
         <section className={`${s.section} ${s.dark}`} aria-labelledby="jw-count">
           <Head id="jw-count" title="Menghitung Hari" light />
-          <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
-            {[[countdown.days, "Hari"], [countdown.hours, "Jam"], [countdown.minutes, "Menit"], [countdown.seconds, "Detik"]].map(([value, unit]) => (
-              <div key={unit}><b><Tick value={value} /></b><small>{unit}</small></div>
-            ))}
-          </div>
+          {countdown.valid ? (
+            <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
+              {[[countdown.days, "Hari"], [countdown.hours, "Jam"], [countdown.minutes, "Menit"], [countdown.seconds, "Detik"]].map(([value, unit]) => (
+                <div key={unit}><b><Tick value={value} /></b><small>{unit}</small></div>
+              ))}
+            </div>
+          ) : <p className={s.countTba}>{DATE_TBA}</p>}
           {calendar && <a className={s.ghostBtn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} color="#e6c77a" />Simpan ke Kalender</a>}
         </section>
 
@@ -256,6 +261,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
           {wishes.status === "sent" ? (
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
               <p className={s.sent}>Matur nuwun — ucapan &amp; doa Anda sudah terkirim.</p>
+              {!demo && wishes.pending && <p className={s.sentNote}>Ucapan Anda akan tampil setelah disetujui oleh mempelai.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
               <button type="button" className={s.submit} onClick={() => { wishes.reset(); rsvp.reset(); }}>Tulis Lagi</button>
             </div>
@@ -268,19 +274,21 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
               const guests = attendance === "no" ? 1 : Number(form.get("guests") ?? 1) || 1;
               if (!name || !message) return;
               void wishes.send(name, message);
-              if (rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests, diet: String(form.get("diet") ?? "").trim() || undefined });
+              if (!rsvpClosed && rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests, diet: String(form.get("diet") ?? "").trim() || undefined });
             }}>
               <label className={s.field}><span>Nama</span><input name="name" required maxLength={100} defaultValue={plainName(data.guestName)} placeholder="Nama Anda" autoComplete="name" /></label>
               <label className={s.field}><span>Ucapan</span><textarea name="message" required maxLength={500} rows={3} placeholder="Tuliskan doa & ucapan…" /></label>
-              <div className={s.choices} role="radiogroup" aria-label="Kehadiran">
-                {(["yes", "maybe", "no"] as Attendance[]).map(value => (
-                  <button key={value} type="button" role="radio" aria-checked={attendance === value} className={attendance === value ? s.choiceOn : undefined} onClick={() => setAttendance(value)}>
-                    {ATTEND[value]}
-                  </button>
-                ))}
-              </div>
-              {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
-              {attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
+              {rsvpClosed ? <div className={s.closed} role="status"><strong>Konfirmasi kehadiran sudah ditutup</strong><p>Terima kasih atas doa dan perhatiannya. Ucapan &amp; doa masih bisa dikirim lewat form ini.</p></div> : (
+                <div className={s.choices} role="radiogroup" aria-label="Kehadiran">
+                  {(["yes", "maybe", "no"] as Attendance[]).map(value => (
+                    <button key={value} type="button" role="radio" aria-checked={attendance === value} className={attendance === value ? s.choiceOn : undefined} onClick={() => setAttendance(value)}>
+                      {ATTEND[value]}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {!rsvpClosed && attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+              {!rsvpClosed && attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Coba lagi sebentar lagi.</p>}
               <button type="submit" className={s.submit} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
             </form>
@@ -303,7 +311,7 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
         </footer>
       </main>
 
-      {music.visible && (
+      {music.visible && !music.failed && (
         <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan gending" : "Putar gending"}>
           <Lucide icon={ic.music} size={18} color="#e6c77a" />
         </button>

@@ -1,10 +1,9 @@
 package api
 
 import (
-	"encoding/csv"
 	"encoding/json"
 	"errors"
-	"io"
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -31,16 +30,29 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 				writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 				return
 			}
-			if !s.allowRate(w, "checkin:"+invitationID+":"+clientIP(r), 20, time.Minute) {
+			// A busy reception desk scans a guest every few seconds.
+			if !s.allowRate(w, "checkin:"+invitationID+":"+clientIP(r), 60, time.Minute) {
 				return
+			}
+			already := false
+			if existing, ok := s.store.FindGuestByID(guestID); ok && existing.InvitationID == invitationID && existing.CheckedInAt != nil {
+				already = true
 			}
 			guest, err := s.guests.CheckIn(claims.UserID, invitationID, guestID)
 			if err != nil {
-				writeJSON(w, http.StatusNotFound, map[string]string{"error": err.Error()})
+				writeJSON(w, http.StatusNotFound, map[string]string{"error": "Tamu tidak ditemukan"})
 				return
 			}
-			_ = s.store.CreateAuditLog(claims.UserID, invitationID, "guest.check_in", map[string]any{"guest_id": guestID})
-			writeJSON(w, http.StatusOK, guest)
+			if !already {
+				_ = s.store.CreateAuditLog(claims.UserID, invitationID, "guest.check_in", map[string]any{"guest_id": guestID})
+			}
+			// Same guest fields as before, plus "already" so a reused/forwarded QR is flagged at the desk.
+			body := map[string]any{}
+			if raw, err := json.Marshal(guest); err == nil {
+				_ = json.Unmarshal(raw, &body)
+			}
+			body["already"] = already
+			writeJSON(w, http.StatusOK, body)
 			return
 		}
 		guestID := pathID
@@ -98,30 +110,30 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 	}
 	if r.Method == http.MethodPost {
 		if r.Header.Get("Content-Type") == "text/csv" {
-			reader := csv.NewReader(r.Body)
-			created := make([]*store.Guest, 0)
-			for {
-				record, err := reader.Read()
-				if err == io.EOF {
-					break
+			rows, err := parseGuestCSV(http.MaxBytesReader(w, r.Body, 2<<20))
+			if err != nil {
+				writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
+				return
+			}
+			// Check the whole file against the plan first, so an import never stops halfway.
+			if plan, err := s.store.GetUserPlan(claims.UserID); err == nil && plan.MaxGuests > 0 {
+				remaining := plan.MaxGuests - len(s.store.ListGuests(invitationID))
+				if remaining < 0 {
+					remaining = 0
 				}
-				if err != nil || len(record) < 1 {
-					writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid CSV"})
+				if len(rows) > remaining {
+					writeJSON(w, http.StatusConflict, map[string]any{
+						"error": fmt.Sprintf("Kuota tamu paketmu tinggal %d dari %d, file ini berisi %d tamu.", remaining, plan.MaxGuests, len(rows)),
+						"code":  "guest_limit", "limit": plan.MaxGuests, "remaining": remaining,
+					})
 					return
 				}
-				if strings.EqualFold(strings.TrimSpace(record[0]), "name") {
-					continue
-				}
-				phone, category := "", "family"
-				if len(record) > 1 {
-					phone = strings.TrimSpace(record[1])
-				}
-				if len(record) > 2 && strings.TrimSpace(record[2]) != "" {
-					category = strings.TrimSpace(record[2])
-				}
-				guest, err := s.guests.Create(claims.UserID, invitationID, record[0], phone, category)
-				if err == nil && len(record) > 3 && strings.TrimSpace(record[3]) != "" {
-					guest, err = s.guests.SetTable(claims.UserID, invitationID, guest.ID, record[3])
+			}
+			created := make([]*store.Guest, 0, len(rows))
+			for _, row := range rows {
+				guest, err := s.guests.Create(claims.UserID, invitationID, row.name, row.phone, row.category)
+				if err == nil && row.table != "" {
+					guest, err = s.guests.SetTable(claims.UserID, invitationID, guest.ID, row.table)
 				}
 				if err != nil {
 					status := http.StatusBadRequest
@@ -134,7 +146,7 @@ func (s *Server) handleInvitationGuests(w http.ResponseWriter, r *http.Request, 
 					if errors.Is(err, guestservice.ErrPlanUnavailable) {
 						status = http.StatusServiceUnavailable
 					}
-					writeJSON(w, status, map[string]string{"error": err.Error()})
+					writeJSON(w, status, map[string]any{"error": err.Error(), "imported": len(created)})
 					return
 				}
 				created = append(created, guest)
@@ -200,13 +212,20 @@ func (s *Server) handlePublicRSVP(w http.ResponseWriter, r *http.Request, slug s
 		AttendeesCount int    `json:"attendees_count"`
 		Message        string `json:"message"`
 	}
-	if err := json.NewDecoder(r.Body).Decode(&payload); err != nil || (payload.Attendance != "yes" && payload.Attendance != "no" && payload.Attendance != "maybe") {
+	if s.thankYouActive(invitation) {
+		writeJSON(w, http.StatusConflict, map[string]string{"error": "Konfirmasi kehadiran sudah ditutup", "code": "rsvp_closed"})
+		return
+	}
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 8<<10)).Decode(&payload); err != nil || (payload.Attendance != "yes" && payload.Attendance != "no" && payload.Attendance != "maybe") {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "attendance must be yes, no, or maybe"})
 		return
 	}
 	if payload.AttendeesCount < 0 {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "attendees_count cannot be negative"})
 		return
+	}
+	if payload.GuestToken == "" {
+		payload.GuestID = "" // a guest is only identified by their secret link token, never by a bare id
 	}
 	rsvp, err := s.rsvps.Submit(invitation.ID, payload.GuestID, payload.GuestToken, payload.Attendance, payload.AttendeesCount, payload.Message)
 	if err != nil {
@@ -241,9 +260,12 @@ func (s *Server) handlePublicWishes(w http.ResponseWriter, r *http.Request, slug
 			Name       string `json:"name"`
 			Message    string `json:"message"`
 		}
-		if err := json.NewDecoder(r.Body).Decode(&payload); err != nil || strings.TrimSpace(payload.Name) == "" || strings.TrimSpace(payload.Message) == "" {
+		if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 8<<10)).Decode(&payload); err != nil || strings.TrimSpace(payload.Name) == "" || strings.TrimSpace(payload.Message) == "" {
 			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "name and message are required"})
 			return
+		}
+		if payload.GuestToken == "" {
+			payload.GuestID = ""
 		}
 		wish, err := s.wishes.Create(invitation.ID, payload.GuestID, payload.GuestToken, payload.Name, payload.Message)
 		if err != nil {

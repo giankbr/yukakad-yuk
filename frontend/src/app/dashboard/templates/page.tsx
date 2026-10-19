@@ -6,6 +6,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { ThemeGrid, ThemeLink, type DashboardTemplate } from "@/components/dashboard/ThemeGrid";
 import { API_URL } from "@/lib/api";
 import { useAuthToken } from "@/lib/useAuthToken";
+import { friendlyError } from "@/lib/errors";
 
 export default function DashboardTemplatesPage() {
   const { ready } = useAuthToken();
@@ -21,7 +22,7 @@ export default function DashboardTemplatesPage() {
         return response.json();
       })
       .then((body: { items?: DashboardTemplate[] }) => setTemplates(body.items ?? []))
-      .catch((err: Error) => setError(err.message))
+      .catch((err: Error) => setError(friendlyError(err.message, "Gagal memuat. Coba muat ulang halaman.")))
       .finally(() => setLoading(false));
   }, [ready]);
 

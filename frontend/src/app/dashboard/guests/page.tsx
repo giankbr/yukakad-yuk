@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken } from "@/lib/useAuthToken";
+import { friendlyError } from "@/lib/errors";
 
 type Invitation = {
   id: string;
@@ -27,7 +28,7 @@ export default function DashboardGuestsPage() {
         return response.json();
       })
       .then((body: { items?: Invitation[] }) => setInvitations(body.items ?? []))
-      .catch((err: Error) => setError(err.message))
+      .catch((err: Error) => setError(friendlyError(err.message, "Gagal memuat. Coba muat ulang halaman.")))
       .finally(() => setLoading(false));
   }, [ready, token]);
 

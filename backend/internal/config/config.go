@@ -1,7 +1,10 @@
 package config
 
 import (
+	"crypto/rand"
+	"encoding/hex"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
@@ -27,9 +30,11 @@ type Config struct {
 	SMTPPassword         string
 	SMTPFrom             string
 	PaymentWebhookSecret string
-	MayarAPIKey          string
-	MayarEnvironment     string
-	MayarBaseURL         string // optional override, e.g. a local fake in tests
+	// InternalAPISecret identifies server-to-server calls from the Next.js server (skips the global per-IP limit).
+	InternalAPISecret string
+	MayarAPIKey       string
+	MayarEnvironment  string
+	MayarBaseURL      string // optional override, e.g. a local fake in tests
 
 	AdminEmail    string
 	AdminPassword string
@@ -39,7 +44,7 @@ func Load() Config {
 	cfg := Config{
 		Port:           getEnv("PORT", "8080"),
 		Environment:    getEnv("ENVIRONMENT", "development"),
-		JWTSecret:      getEnv("JWT_SECRET", "yukakad-dev-secret-change-me"),
+		JWTSecret:      jwtSecretFromEnv(),
 		DatabaseURL:    getEnv("DATABASE_URL", "postgres://postgres:postgres@localhost:5432/yukakad?sslmode=disable"),
 		RedisURL:       getEnv("REDIS_URL", ""),
 		FrontendOrigin: getEnv("FRONTEND_ORIGIN", "http://localhost:3000"),
@@ -56,6 +61,7 @@ func Load() Config {
 		SMTPPassword:         getEnv("SMTP_PASSWORD", ""),
 		SMTPFrom:             getEnv("SMTP_FROM", ""),
 		PaymentWebhookSecret: getEnv("PAYMENT_WEBHOOK_SECRET", ""),
+		InternalAPISecret:    getEnv("INTERNAL_API_SECRET", ""),
 		MayarAPIKey:          getEnv("MAYAR_API_KEY", ""),
 		MayarEnvironment:     getEnv("MAYAR_ENV", "sandbox"),
 		MayarBaseURL:         getEnv("MAYAR_BASE_URL", ""),
@@ -84,8 +90,9 @@ func (c Config) Validate() error {
 			missing = append(missing, key)
 		}
 	}
-	if c.Environment == "production" && c.JWTSecret == "yukakad-dev-secret-change-me" {
-		return fmt.Errorf("JWT_SECRET must be changed in production")
+	// Tokens are HMAC-signed with this secret; a known or short value lets anyone mint admin tokens.
+	if weakSecrets[c.JWTSecret] || len(c.JWTSecret) < 16 {
+		return fmt.Errorf("JWT_SECRET is missing, a known default or shorter than 16 characters")
 	}
 	if len(missing) > 0 {
 		return fmt.Errorf("missing required configuration: %s", strings.Join(missing, ", "))
@@ -97,6 +104,23 @@ func (c Config) Validate() error {
 		return fmt.Errorf("PAYMENT_WEBHOOK_SECRET is required in production")
 	}
 	return nil
+}
+
+// weakSecrets are values that appeared in docs/examples; never accept them.
+var weakSecrets = map[string]bool{"yukakad-dev-secret-change-me": true, "change-me": true, "secret": true, "changeme": true}
+
+// jwtSecretFromEnv returns JWT_SECRET, or a random per-process secret when it is unset, so a missing variable
+// can never fall back to a public default (sessions then last until the next restart).
+func jwtSecretFromEnv() string {
+	if value := strings.TrimSpace(os.Getenv("JWT_SECRET")); value != "" {
+		return value
+	}
+	buf := make([]byte, 32)
+	if _, err := rand.Read(buf); err != nil {
+		panic("config: cannot generate JWT secret: " + err.Error())
+	}
+	log.Println("config: JWT_SECRET is not set; using a random secret for this process (logins reset on restart)")
+	return hex.EncodeToString(buf)
 }
 
 func getEnv(key, fallback string) string {

@@ -15,6 +15,8 @@ type Store interface {
 	FindUserByID(string) (*User, bool)
 	UpdateUser(string, string) (*User, error)
 	UpdatePassword(string, string) error
+	// PasswordChangedAt is when the password was last changed/reset (tokens issued earlier are invalid).
+	PasswordChangedAt(userID string) (time.Time, bool)
 	CreatePasswordResetToken(userID, tokenHash string, expiresAt time.Time) error
 	ConsumePasswordResetToken(tokenHash string) (string, error)
 	CreateInvitation(string, string, string) (*Invitation, error)
@@ -405,6 +407,7 @@ type InvitationEvent struct {
 type MemoryStore struct {
 	mu               sync.RWMutex
 	users            map[string]*User
+	passwordChanged  map[string]time.Time
 	invitations      map[string]*Invitation
 	guests           map[string]*Guest
 	rsvps            map[string]*RSVP
@@ -538,7 +541,18 @@ func (s *MemoryStore) UpdatePassword(id, password string) error {
 		return fmt.Errorf("user not found")
 	}
 	user.Password = password
+	if s.passwordChanged == nil {
+		s.passwordChanged = map[string]time.Time{}
+	}
+	s.passwordChanged[id] = time.Now()
 	return nil
+}
+
+func (s *MemoryStore) PasswordChangedAt(userID string) (time.Time, bool) {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	at, ok := s.passwordChanged[userID]
+	return at, ok
 }
 
 func (s *MemoryStore) CreatePasswordResetToken(userID, tokenHash string, expiresAt time.Time) error {
@@ -744,9 +758,11 @@ func (s *MemoryStore) CheckInGuest(id, actorUserID string) (*Guest, error) {
 	if !ok {
 		return nil, fmt.Errorf("guest not found")
 	}
-	now := time.Now().UTC()
-	guest.CheckedInAt = &now
-	guest.CheckedInBy = &actorUserID
+	if guest.CheckedInAt == nil { // keep the first check-in time
+		now := time.Now().UTC()
+		guest.CheckedInAt = &now
+		guest.CheckedInBy = &actorUserID
+	}
 	return guest, nil
 }
 

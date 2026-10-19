@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Wish = { id: string; name: string; message: string; status: string; created_at: string };
 
@@ -18,30 +19,46 @@ export default function WishesPage({ params }: { params: Promise<{ id: string }>
 
   const invitationId = routeParams?.id;
 
+  const gate = usePageGate(invitationId, token, "wishes");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(() => {
     if (!token || !invitationId) return;
-    apiFetch(`/api/invitations/${invitationId}/wishes`, token)
-      .then((response) => response.json())
-      .then((body: { items?: Wish[] }) => setWishes(body.items ?? []))
-      .catch(() => setError("Gagal memuat ucapan"))
+    getJson<{ items?: Wish[] }>(`/api/invitations/${invitationId}/wishes`, token)
+      .then((result) => {
+        if (lostAccess(result.status)) { lose(); return; }
+        if (!result.ok) { setError(result.error || "Gagal memuat ucapan."); return; }
+        setError("");
+        setWishes(result.data?.items ?? []);
+      })
       .finally(() => setLoading(false));
-  }, [token, invitationId]);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !allowed) return;
     load();
-  }, [ready, load]);
+  }, [ready, allowed, load]);
 
   async function setStatus(wishId: string, status: string) {
     if (!token || !invitationId) return;
-    await apiFetch(`/api/invitations/${invitationId}/wishes/${wishId}`, token, {
+    const response = await apiFetch(`/api/invitations/${invitationId}/wishes/${wishId}`, token, {
       method: "PATCH",
       body: JSON.stringify({ status }),
-    });
+    }).catch(() => null);
+    if (!response?.ok) { setError("Status ucapan belum tersimpan. Coba lagi."); return; }
     load();
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="wishes" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   return (
     <DashboardShell active="wishes" invitationId={invitationId}>

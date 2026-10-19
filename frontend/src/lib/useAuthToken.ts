@@ -2,7 +2,39 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getRole, getToken } from "./api";
+import { AUTH_EVENT, clearSession, getRole, getToken, isTokenExpired } from "./api";
+
+/** The stored token, or null when there is none or it has visibly expired (the stale one is dropped). */
+function usableToken(): string | null {
+  const stored = getToken();
+  if (stored && isTokenExpired(stored)) {
+    clearSession();
+    return null;
+  }
+  return stored;
+}
+
+/** Picks up a replacement token (e.g. after a password change, or a re-login in another tab). */
+function useTokenUpdates(ready: boolean, setToken: (token: string) => void) {
+  useEffect(() => {
+    if (!ready) return;
+    const sync = () => {
+      const next = getToken();
+      if (next) setToken(next);
+    };
+    window.addEventListener(AUTH_EVENT, sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener(AUTH_EVENT, sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, [ready, setToken]);
+}
+
+function loginPath() {
+  const here = `${window.location.pathname}${window.location.search}`;
+  return `/auth/login?next=${encodeURIComponent(here)}`;
+}
 
 // Redirects to login if no token is present; otherwise returns the token
 // once available. `ready` is false during the one-tick localStorage read so
@@ -13,9 +45,9 @@ export function useAuthToken() {
   const router = useRouter();
 
   useEffect(() => {
-    const stored = getToken();
+    const stored = usableToken();
     if (!stored) {
-      router.push("/auth/login");
+      router.push(loginPath());
       return;
     }
     // localStorage isn't available during SSR, so this can only run client-side.
@@ -23,6 +55,7 @@ export function useAuthToken() {
     setToken(stored);
     setReady(true);
   }, [router]);
+  useTokenUpdates(ready, setToken);
 
   return { token, ready };
 }
@@ -36,9 +69,9 @@ export function useAdminAuth() {
   const router = useRouter();
 
   useEffect(() => {
-    const stored = getToken();
+    const stored = usableToken();
     if (!stored) {
-      router.push("/auth/login");
+      router.push(loginPath());
       return;
     }
     if (getRole() !== "admin") {
@@ -49,6 +82,7 @@ export function useAdminAuth() {
     setToken(stored);
     setReady(true);
   }, [router]);
+  useTokenUpdates(ready, setToken);
 
   return { token, ready };
 }

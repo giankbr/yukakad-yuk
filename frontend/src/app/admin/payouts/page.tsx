@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { useAdminAuth } from "@/lib/useAuthToken";
 
 type Payout = { id: string; amount: number; status: string; bank_name: string; account_number: string; account_name: string; note?: string; created_at: string; processed_at?: string };
@@ -35,7 +36,7 @@ export default function AdminPayoutsPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch(`/api/admin/gift-payouts${filter ? `?status=${filter}` : ""}`, token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: { items?: Row[]; settings?: Settings }) => { setRows(body.items ?? []); if (body.settings) setSettings(body.settings); })
       .catch(() => setError("Gagal memuat pencairan"))
       .finally(() => setLoading(false));
@@ -51,12 +52,12 @@ export default function AdminPayoutsPage() {
     setNotice("");
     try {
       const response = await apiFetch(`/api/admin/gift-payouts/${row.payout.id}`, token, { method: "PATCH", body: JSON.stringify({ status, note }) });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error);
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(friendlyError(body.error, ""));
       setNotice(status === "paid" ? "Ditandai sudah ditransfer." : "Pencairan ditolak; saldo kembali ke pengguna.");
       setReload((n) => n + 1);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum tersimpan.");
+      setError(friendlyError(err instanceof Error ? err.message : "", "Belum tersimpan."));
     } finally {
       setBusy(null);
     }
@@ -122,16 +123,16 @@ export default function AdminPayoutsPage() {
           <p className={styles.empty}>{filter === "requested" ? "Tidak ada pencairan yang menunggu." : "Belum ada data."}</p>
         ) : (
           <div className="dashboard-table-wrap">
-            <table className="dashboard-table" style={{ minWidth: 860 }}>
+            <table className="dashboard-table dashboard-table-stack" style={{ minWidth: 860 }}>
               <thead><tr><th>Diajukan</th><th>Pengguna</th><th>Nominal</th><th>Rekening tujuan</th><th>Status</th><th><span className="sr-only">Aksi</span></th></tr></thead>
               <tbody>
                 {rows.map((row) => (
                   <tr key={row.payout.id}>
-                    <td>{date(row.payout.created_at)}</td>
-                    <td><strong>{row.user?.name ?? "—"}</strong><span>{row.user?.email}</span>{row.invitation && <span><a href={`/invitation/${row.invitation.slug}`} target="_blank" rel="noreferrer">{row.invitation.title} ↗</a></span>}</td>
-                    <td><strong>{rupiah(row.payout.amount)}</strong>{row.wallet && <span>Saldo diterima {rupiah(row.wallet.received - row.wallet.fee)}</span>}</td>
-                    <td><strong>{row.payout.bank_name} · {row.payout.account_number}</strong><span>a.n. {row.payout.account_name}</span></td>
-                    <td><span className={`status ${row.payout.status === "paid" ? "status-published" : "status-draft"}`}>{STATUS[row.payout.status] ?? row.payout.status}</span>{row.payout.note && <span>{row.payout.note}</span>}{row.payout.processed_at && <span>{date(row.payout.processed_at)}</span>}</td>
+                    <td data-label="Diajukan">{date(row.payout.created_at)}</td>
+                    <td data-label="Pengguna"><strong>{row.user?.name ?? "—"}</strong><span>{row.user?.email}</span>{row.invitation && <span><a href={`/invitation/${row.invitation.slug}`} target="_blank" rel="noreferrer">{row.invitation.title} ↗</a></span>}</td>
+                    <td data-label="Nominal"><strong>{rupiah(row.payout.amount)}</strong>{row.wallet && <span>Saldo diterima {rupiah(row.wallet.received - row.wallet.fee)}</span>}</td>
+                    <td data-label="Rekening"><strong>{row.payout.bank_name} · {row.payout.account_number}</strong><span>a.n. {row.payout.account_name}</span></td>
+                    <td data-label="Status"><span className={`status ${row.payout.status === "paid" ? "status-published" : "status-draft"}`}>{STATUS[row.payout.status] ?? row.payout.status}</span>{row.payout.note && <span>{row.payout.note}</span>}{row.payout.processed_at && <span>{date(row.payout.processed_at)}</span>}</td>
                     <td>
                       {row.payout.status === "requested" && (
                         <div style={{ display: "flex", gap: 6 }}>

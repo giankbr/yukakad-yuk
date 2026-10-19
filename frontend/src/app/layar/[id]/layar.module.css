@@ -45,6 +45,15 @@
 .controls button, .controls a { min-height: 36px; padding: 0 14px; border: 1px solid rgb(255 255 255 / .2); border-radius: 999px; background: rgb(0 0 0 / .4); color: #fff; font: inherit; font-size: 13px; text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; }
 .error { position: fixed; left: 50%; bottom: 16px; z-index: 6; transform: translateX(-50%); padding: 8px 14px; border-radius: 999px; background: #b42318; font-size: 13px; }
 
+.blocked { position: relative; z-index: 1; display: grid; justify-items: center; align-content: center; gap: 2.2vh; max-width: 760px; margin: 0 auto; padding: 6vh 24px; text-align: center; grid-row: 1 / -1; }
+.blocked h1 { margin: 0; font-size: clamp(28px, 4.4vw, 64px); font-weight: 700; letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.blocked p:not(.eyebrow) { margin: 0; color: #b8c0e8; font-size: clamp(15px, 1.6vw, 22px); line-height: 1.5; }
+.blockedRow { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.blockedAction, .blockedGhost { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; font-size: clamp(15px, 1.4vw, 19px); font-weight: 650; text-decoration: none; }
+.blockedAction { background: #fff; color: #0d1024; }
+.blockedGhost { border: 1px solid rgb(255 255 255 / .3); color: #fff; }
+.blockedAction:focus-visible, .blockedGhost:focus-visible { outline: 3px solid #9fb0ff; outline-offset: 3px; }
+
 @keyframes rise { from { opacity: 0; transform: translateY(4vh) scale(.98); } to { opacity: 1; transform: none; } }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 @keyframes drop { to { transform: translateY(110vh) rotate(720deg); } }

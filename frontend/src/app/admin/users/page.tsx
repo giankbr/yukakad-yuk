@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { useAdminAuth } from "@/lib/useAuthToken";
+import { friendlyError } from "@/lib/errors";
 
 type User = { id: string; name: string; email: string; role: string; created_at: string; plan_id?: string; plan_name?: string; invitations?: number };
 type Plan = { id: string; name: string };
@@ -22,11 +23,11 @@ export default function AdminUsersPage() {
   useEffect(() => {
     if (!ready || !token) return;
     Promise.all([
-      apiFetch("/api/admin/users", token).then((r) => r.json()),
-      apiFetch("/api/admin/plans", token).then((r) => r.json()),
+      apiFetch("/api/admin/users", token).then((r) => (r.ok ? r.json() : Promise.reject(new Error()))),
+      apiFetch("/api/admin/plans", token).then((r) => (r.ok ? r.json() : { items: [] })),
     ])
       .then(([u, p]: [{ items?: User[] }, { items?: Plan[] }]) => { setUsers(u.items ?? []); setPlans(p.items ?? []); })
-      .catch(() => setError("Gagal memuat pengguna"))
+      .catch(() => setError("Gagal memuat pengguna. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
   }, [ready, token]);
 
@@ -41,14 +42,14 @@ export default function AdminUsersPage() {
         method: "PATCH",
         body: JSON.stringify(kind === "plan" ? { plan_id: value } : { role: value }),
       });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       setUsers((current) => current.map((item) => (item.id === user.id
         ? { ...item, ...(kind === "plan" ? { plan_id: value, plan_name: plans.find((p) => p.id === value)?.name } : { role: value }) }
         : item)));
       setNotice(`${user.name} diperbarui.`);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum tersimpan.");
+      setError(friendlyError(err instanceof Error ? err.message : "", "Belum tersimpan."));
     } finally {
       setBusy(null);
     }
@@ -81,22 +82,22 @@ export default function AdminUsersPage() {
 
       {loading ? <p className="dashboard-state">Memuat pengguna…</p> : (
         <div className="dashboard-table-wrap">
-          <table className="dashboard-table" style={{ minWidth: 720 }}>
+          <table className="dashboard-table dashboard-table-stack" style={{ minWidth: 720 }}>
             <thead><tr><th>Pengguna</th><th>Bergabung</th><th>Undangan</th><th>Paket</th><th>Peran</th></tr></thead>
             <tbody>
               {visible.map((user) => (
                 <tr key={user.id}>
                   <td><strong>{user.name}</strong><span>{user.email}</span></td>
-                  <td>{new Date(user.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}</td>
-                  <td>{user.invitations ?? 0}</td>
-                  <td>
+                  <td data-label="Bergabung">{new Date(user.created_at).toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" })}</td>
+                  <td data-label="Undangan">{user.invitations ?? 0}</td>
+                  <td data-label="Paket">
                     <select className="table-input" style={{ width: 150 }} value={user.plan_id ?? ""} disabled={busy === user.id} aria-label={`Paket ${user.name}`}
                       onChange={(e) => change(user, "plan", e.target.value)}>
                       {!user.plan_id && <option value="">—</option>}
                       {plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.name}</option>)}
                     </select>
                   </td>
-                  <td>
+                  <td data-label="Peran">
                     <select className="table-input" style={{ width: 110 }} value={user.role} disabled={busy === user.id} aria-label={`Peran ${user.name}`}
                       onChange={(e) => change(user, "role", e.target.value)}>
                       <option value="user">Pengguna</option>

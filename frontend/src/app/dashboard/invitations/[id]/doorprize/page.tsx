@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Prize = { id: string; name: string; qty: number };
 type Winner = { guest_id: string; name: string; table?: string; prize_id: string; prize: string; at: string };
@@ -26,23 +27,30 @@ export default function DoorprizePage({ params }: { params: Promise<{ id: string
   const [notice, setNotice] = useState("");
   const spin = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const gate = usePageGate(invitationId, token, "doorprize");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
     const [d, live] = await Promise.all([
-      apiFetch(`/api/invitations/${invitationId}/doorprize`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/live`, token).then((r) => r.json()).catch(() => ({ checkins: [] })),
+      getJson<State>(`/api/invitations/${invitationId}/doorprize`, token),
+      getJson<{ checkins?: { name: string }[]; stats?: { checked_in?: number } }>(`/api/invitations/${invitationId}/live`, token),
     ]);
-    setState(d);
-    setDraft(d.prizes.length ? d.prizes : [{ id: "", name: "", qty: 1 }]);
-    setPresent((live.checkins ?? []).map((c: { name: string }) => c.name));
-    setPresentCount(live.stats?.checked_in ?? 0);
-  }, [token, invitationId]);
+    if (lostAccess(d.status)) { lose(); return; }
+    if (!d.ok || !d.data) { setError(d.error || "Gagal memuat doorprize."); return; }
+    const prizes = d.data.prizes ?? [];
+    setState({ prizes, winners: d.data.winners ?? [] });
+    setDraft(prizes.length ? prizes : [{ id: "", name: "", qty: 1 }]);
+    setPresent((live.data?.checkins ?? []).map((c) => c.name));
+    setPresentCount(live.data?.stats?.checked_in ?? 0);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat doorprize")).finally(() => setLoading(false)); }, 0);
     return () => { clearTimeout(timer); if (spin.current) clearInterval(spin.current); };
-  }, [ready, token, invitationId, load]);
+  }, [ready, token, invitationId, allowed, load]);
 
   async function savePrizes(reset = false) {
     if (!token || !invitationId) return;
@@ -51,13 +59,13 @@ export default function DoorprizePage({ params }: { params: Promise<{ id: string
     setNotice("");
     try {
       const response = await apiFetch(`/api/invitations/${invitationId}/doorprize`, token, { method: "PUT", body: JSON.stringify({ prizes: draft, reset_winners: reset }) });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
-      setState(body);
-      setDraft(body.prizes.length ? body.prizes : [{ id: "", name: "", qty: 1 }]);
+      setState({ prizes: body.prizes ?? [], winners: body.winners ?? [] });
+      setDraft(body.prizes?.length ? body.prizes : [{ id: "", name: "", qty: 1 }]);
       setNotice(reset ? "Daftar pemenang dikosongkan." : "Hadiah tersimpan.");
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum tersimpan.");
+      setError(friendly(err, "Belum tersimpan."));
     } finally {
       setBusy(null);
     }
@@ -78,12 +86,12 @@ export default function DoorprizePage({ params }: { params: Promise<{ id: string
         apiFetch(`/api/invitations/${invitationId}/doorprize/draw`, token, { method: "POST", body: JSON.stringify({ prize_id: prize.id }) }),
         new Promise((resolve) => setTimeout(resolve, 2600)),
       ]);
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
-      setState(body.state);
+      if (body.state) setState({ prizes: body.state.prizes ?? [], winners: body.state.winners ?? [] });
       setReveal(body.winner);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Undian gagal.");
+      setError(friendly(err, "Undian gagal."));
     } finally {
       if (spin.current) clearInterval(spin.current);
       setRolling("");
@@ -92,6 +100,14 @@ export default function DoorprizePage({ params }: { params: Promise<{ id: string
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="doorprize" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
   const given = (id: string) => state.winners.filter((w) => w.prize_id === id).length;
   const dirty = JSON.stringify(draft.filter((p) => p.name.trim())) !== JSON.stringify(state.prizes);
 

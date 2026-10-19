@@ -59,12 +59,28 @@ func roleAllows(role, perm string) bool {
 	return false
 }
 
+// routedResources are the sub-resource names the invitation router dispatches on.
+var routedResources = map[string]bool{
+	"settings": true, "stories": true, "gallery": true, "template": true, "events": true, "media": true, "guests": true,
+	"rsvps": true, "wishes": true, "broadcast": true, "ledger": true, "live": true, "doorprize": true, "guest-photos": true,
+	"gift-wallet": true, "gift-payouts": true, "gift-transactions": true, "gifts": true, "domains": true, "team": true,
+	"publish": true, "duplicate": true, "preview-token": true,
+}
+
 // requiredPermission maps /api/invitations/{id}/<sub> + method to the permission a member needs.
 // Anything not listed is owner-only, so new endpoints are private until they are added here.
 func requiredPermission(sub, method string) string {
 	read := method == http.MethodGet || method == http.MethodHead
 	parts := strings.Split(strings.Trim(sub, "/"), "/")
 	head := parts[0]
+	// The router also matches some resources by suffix/substring (gift-wallet, rsvps, domains, …). A path that
+	// names a second resource after the first one is ambiguous, so only the owner may use it — otherwise a
+	// member could prefix an allowed resource ("settings/x/gift-wallet") to reach an owner-only handler.
+	for _, part := range parts[1:] {
+		if routedResources[part] {
+			return ownerOnly
+		}
+	}
 	switch head {
 	case "":
 		if read {
@@ -108,6 +124,8 @@ func requiredPermission(sub, method string) string {
 		return permHariH
 	case "guest-photos":
 		return permHariH
+	case "preview-token":
+		return permView
 	}
 	return ownerOnly
 }

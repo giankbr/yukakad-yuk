@@ -353,20 +353,34 @@ function WishlistBlock({ wishlist, slug, demo, guestName, online, funds }: { wis
   const [chipAmount, setChipAmount] = useState(100000);
   const [chipName, setChipName] = useState(guestName && guestName !== "Tamu Undangan" ? guestName : "");
   const [paying, setPaying] = useState(false);
+  const knownName = guestName && guestName !== "Tamu Undangan" ? guestName : "";
+  const [claimOpen, setClaimOpen] = useState<string | null>(null);
+  const [claimName, setClaimName] = useState(knownName);
+  const [claimError, setClaimError] = useState("");
   if (!items.length) return null;
 
-  async function claim(item: WishlistItem) {
-    const fallback = guestName && guestName !== "Tamu Undangan" ? guestName : "";
-    const name = window.prompt("Nama kamu (agar kado tidak dobel):", fallback)?.trim();
-    if (!name) return;
+
+  function openClaim(item: WishlistItem) {
+    setClaimOpen(item.id);
+    setClaimName(current => current || knownName);
+    setClaimError("");
+    setError("");
+  }
+
+  async function claim(event: React.FormEvent, item: WishlistItem) {
+    event.preventDefault();
+    const name = claimName.trim().slice(0, 60);
+    if (!name) { setClaimError("Isi nama kamu dulu."); return; }
+    setClaimError("");
     setError("");
     setClaiming(item.id);
     try {
       if (!demo) {
         const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/wishlist/claim`, {
-          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ item_id: item.id, name: name.slice(0, 60) }),
+          method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ item_id: item.id, name }),
         });
         if (response.status === 409) {
+          setClaimOpen(null);
           setError(`${item.name} sudah dipilih tamu lain.`);
           setItems(current => current.map(entry => entry.id === item.id ? { ...entry, claimed_by: entry.claimed_by || "tamu lain" } : entry));
           return;
@@ -374,8 +388,9 @@ function WishlistBlock({ wishlist, slug, demo, guestName, online, funds }: { wis
         if (!response.ok) throw new Error();
       }
       setItems(current => current.map(entry => entry.id === item.id ? { ...entry, claimed_by: name } : entry));
+      setClaimOpen(null);
     } catch {
-      setError("Belum tersimpan. Coba lagi sebentar lagi.");
+      setClaimError("Belum tersimpan. Periksa koneksi lalu coba lagi.");
     } finally {
       setClaiming(null);
     }
@@ -429,17 +444,35 @@ function WishlistBlock({ wishlist, slug, demo, guestName, online, funds }: { wis
               </li>
             );
           }
+          const open = claimOpen === item.id && !item.claimed_by;
+          const busy = claiming === item.id;
           return (
-            <li key={item.id} className={x.card} data-claimed={item.claimed_by ? "" : undefined}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              {image ? <img className={x.thumb} src={image} alt="" loading="lazy" /> : <span className={x.icon}><Glyph d={ICONS.gift} /></span>}
-              <div className={x.cardText}>
-                <strong>{href ? <a href={href} target="_blank" rel="noreferrer">{item.name}</a> : item.name}</strong>
-                <small>{item.claimed_by ? `Dipilih oleh ${item.claimed_by}` : item.price || "Belum ada yang memilih"}</small>
+            <li key={item.id} className={`${x.card} ${x.fundCard}`} data-claimed={item.claimed_by ? "" : undefined}>
+              <div className={x.fundTop}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                {image ? <img className={x.thumb} src={image} alt="" loading="lazy" /> : <span className={x.icon}><Glyph d={ICONS.gift} /></span>}
+                <div className={x.cardText}>
+                  <strong>{href ? <a href={href} target="_blank" rel="noreferrer">{item.name}</a> : item.name}</strong>
+                  <small>{item.claimed_by ? `Dipilih oleh ${item.claimed_by}` : item.price || "Belum ada yang memilih"}</small>
+                </div>
+                {item.claimed_by
+                  ? <span className={x.done}><Glyph d={ICONS.check} size={14} /> Dipilih</span>
+                  : !open && <button type="button" className={x.chip} disabled={claiming !== null} onClick={() => openClaim(item)}>Saya belikan</button>}
               </div>
-              {item.claimed_by
-                ? <span className={x.done}><Glyph d={ICONS.check} size={14} /> Dipilih</span>
-                : <button type="button" className={x.chip} disabled={claiming !== null} onClick={() => claim(item)}>{claiming === item.id ? "Menyimpan…" : "Saya belikan"}</button>}
+              {open && (
+                <form className={x.giftForm} onSubmit={e => claim(e, item)} aria-label={`Pilih ${item.name}`}>
+                  <label className={x.field}><span>Nama kamu</span>
+                    <input value={claimName} maxLength={60} required autoComplete="name" autoFocus placeholder="Nama kamu" disabled={busy}
+                      onChange={e => setClaimName(e.target.value)} />
+                  </label>
+                  <p className={x.muted}>Namamu akan terlihat oleh tamu lain supaya kado tidak dobel.</p>
+                  {claimError && <p className={x.error} role="alert">{claimError}</p>}
+                  <div className={x.claimActions}>
+                    <button type="button" className={x.chip} disabled={busy} onClick={() => { setClaimOpen(null); setClaimError(""); }}>Batal</button>
+                    <button type="submit" className={x.button} disabled={busy}>{busy ? "Menyimpan…" : "Simpan"}</button>
+                  </div>
+                </form>
+              )}
             </li>
           );
         })}

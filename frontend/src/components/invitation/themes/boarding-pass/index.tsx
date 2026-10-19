@@ -41,7 +41,7 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
   const years = firstYear && parts.year ? Number(parts.year) - Number(firstYear) : 0;
   const shortDate = formatDate(data.date, { day: "numeric", month: "short", year: "numeric" });
   const longShort = formatDate(data.date, { weekday: "long", day: "numeric", month: "short", year: "numeric" });
-  const ticketDate = parts.day ? `${parts.day} ${parts.monthShort} ${parts.year}` : data.date;
+  const ticketDate = parts.day ? `${parts.day} ${parts.monthShort} ${parts.year}` : "Menyusul";
   const city = lastPart(data.address) || data.place;
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });

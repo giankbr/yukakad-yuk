@@ -6,13 +6,36 @@ import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import { EVENT_TYPES } from "@/lib/event-types";
 import styles from "@/components/dashboard/editor.module.css";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type MainEvent = { title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string };
-type Invitation = { id: string; slug: string; title: string; published: boolean; event?: MainEvent };
+type Invitation = { id: string; slug: string; title: string; event?: MainEvent };
 type EventItem = { id: string; title: string; type?: string; date: string; start_time?: string; end_time?: string; venue: string; address?: string; maps_url?: string; sort_order?: number };
 type Draft = Omit<EventItem, "id"> & { id?: string };
 
 const EMPTY_DRAFT: Draft = { title: "", date: "", start_time: "", end_time: "", venue: "", address: "", maps_url: "" };
+
+const DATE_RE = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+/** Mirrors the backend rules (YYYY-MM-DD, HH:MM); returns an Indonesian message or "". */
+function validateSchedule(value: { date?: string; start_time?: string; end_time?: string }, dateRequired: boolean) {
+  const date = value.date?.slice(0, 10) ?? "";
+  if (!date) return dateRequired ? "Tanggal acara wajib diisi." : "";
+  if (!DATE_RE.test(date) || Number.isNaN(new Date(`${date}T00:00:00Z`).getTime()) || new Date(`${date}T00:00:00Z`).toISOString().slice(0, 10) !== date) {
+    return "Tanggal belum benar. Pilih tanggal dari kalender (format TTTT-BB-HH).";
+  }
+  for (const [label, time] of [["Jam mulai", value.start_time], ["Jam selesai", value.end_time]] as const) {
+    if (time && !TIME_RE.test(time.slice(0, 5))) return `${label} belum benar. Gunakan format JJ:MM, misalnya 09:30.`;
+  }
+  if (value.start_time && value.end_time && value.end_time.slice(0, 5) < value.start_time.slice(0, 5)) return "Jam selesai tidak boleh lebih awal dari jam mulai.";
+  return "";
+}
+
+/** Normalises date/time to exactly what the backend accepts. */
+function cleanSchedule<T extends { date?: string; start_time?: string; end_time?: string }>(value: T): T {
+  return { ...value, date: value.date?.slice(0, 10) ?? "", start_time: value.start_time?.slice(0, 5) ?? "", end_time: value.end_time?.slice(0, 5) ?? "" };
+}
 
 function dateLabel(value?: string) {
   if (!value) return "Tanggal belum diisi";
@@ -33,44 +56,57 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
+  const gate = usePageGate(invitationId, token, "events");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const loadItems = useCallback(async () => {
     if (!token || !invitationId) return;
-    const body = await apiFetch(`/api/invitations/${invitationId}/events`, token).then((r) => r.json());
-    setItems(((body.items ?? []) as EventItem[]).slice().sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)));
-  }, [token, invitationId]);
+    const list = await getJson<{ items?: EventItem[] }>(`/api/invitations/${invitationId}/events`, token);
+    if (lostAccess(list.status)) { lose(); return; }
+    if (!list.ok) { setError("Rangkaian acara gagal dimuat. Coba muat ulang halaman."); return; }
+    setItems((list.data?.items ?? []).slice().sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)));
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     Promise.all([
-      apiFetch(`/api/invitations/${invitationId}`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/events`, token).then((r) => r.json()),
+      getJson<Invitation>(`/api/invitations/${invitationId}`, token),
+      getJson<{ items?: EventItem[] }>(`/api/invitations/${invitationId}/events`, token),
     ])
-      .then(([body, list]: [Invitation, { items?: EventItem[] }]) => {
-        setInvitation(body);
-        setMain(body.event ?? {});
-        setItems((list.items ?? []).slice().sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)));
+      .then(([body, list]) => {
+        if (lostAccess(body.status) || lostAccess(list.status)) { lose(); return; }
+        if (!body.ok || !body.data || !list.ok) { setError("Gagal memuat detail acara. Coba muat ulang halaman."); return; }
+        setInvitation(body.data);
+        setMain(body.data.event ?? {});
+        setItems((list.data?.items ?? []).slice().sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)));
       })
-      .catch(() => setError("Gagal memuat detail acara"))
       .finally(() => setLoading(false));
-  }, [ready, token, invitationId]);
+  }, [ready, token, invitationId, allowed, lose]);
 
   const setMainField = (key: keyof MainEvent, value: string) => { setMain((m) => ({ ...m, [key]: value })); setNotice(""); };
 
   async function saveMain(event: React.FormEvent) {
     event.preventDefault();
     if (!token || !invitation) return;
-    setSaving("main");
     setError("");
     setNotice("");
+    const invalid = validateSchedule(main, false);
+    if (invalid) { setError(invalid); return; }
+    setSaving("main");
     try {
       const response = await apiFetch(`/api/invitations/${invitation.id}`, token, {
         method: "PUT",
-        body: JSON.stringify({ slug: invitation.slug, title: invitation.title, published: invitation.published, event: main }),
+        // `published` is left out on purpose: the backend keeps the current publish state.
+        body: JSON.stringify({ slug: invitation.slug, title: invitation.title, event: cleanSchedule(main) }),
       });
-      if (!response.ok) throw new Error();
+      if (lostAccess(response.status)) { lose(); return; }
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(body.error ?? "");
       setNotice("Info utama tersimpan.");
-    } catch {
-      setError("Info utama belum tersimpan.");
+    } catch (err) {
+      const message = friendly(err, "");
+      setError(message ? `Info utama belum tersimpan: ${message}` : "Info utama belum tersimpan.");
     } finally {
       setSaving("");
     }
@@ -79,10 +115,12 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
   async function saveItem(event: React.FormEvent) {
     event.preventDefault();
     if (!token || !invitationId || !draft) return;
-    setSaving("item");
     setError("");
+    const invalid = validateSchedule(draft, true);
+    if (invalid) { setError(invalid); return; }
+    setSaving("item");
     try {
-      const payload = { ...draft, type: draft.type || main.type || "pernikahan", sort_order: draft.sort_order ?? items.length };
+      const payload = { ...cleanSchedule(draft), type: draft.type || main.type || "pernikahan", sort_order: draft.sort_order ?? items.length };
       const response = draft.id
         ? await apiFetch(`/api/invitations/${invitationId}/events/${draft.id}`, token, { method: "PUT", body: JSON.stringify(payload) })
         : await apiFetch(`/api/invitations/${invitationId}/events`, token, { method: "POST", body: JSON.stringify(payload) });
@@ -92,7 +130,8 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
       await loadItems();
       setNotice("Rangkaian acara tersimpan.");
     } catch (err) {
-      setError(err instanceof Error && err.message ? `Acara belum tersimpan: ${err.message}` : "Acara belum tersimpan.");
+      const message = friendly(err, "");
+      setError(message ? `Acara belum tersimpan: ${message}` : "Acara belum tersimpan.");
     } finally {
       setSaving("");
     }
@@ -112,10 +151,19 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
     if (target < 0 || target >= next.length) return;
     [next[index], next[target]] = [next[target], next[index]];
     setItems(next);
-    await Promise.all(next.map((item, order) => apiFetch(`/api/invitations/${invitationId}/events/${item.id}`, token, { method: "PUT", body: JSON.stringify({ ...item, sort_order: order }) })));
+    const results = await Promise.all(next.map((item, order) => apiFetch(`/api/invitations/${invitationId}/events/${item.id}`, token, { method: "PUT", body: JSON.stringify({ ...cleanSchedule(item), sort_order: order }) }).catch(() => null)));
+    if (results.some((r) => !r?.ok)) { setError("Urutan acara belum tersimpan semua."); await loadItems(); }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="events" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   const fields = (value: Draft | MainEvent, change: (key: keyof Draft & keyof MainEvent, v: string) => void, withTitle: boolean) => (
     <>
@@ -125,9 +173,9 @@ export default function EventsPage({ params }: { params: Promise<{ id: string }>
         </label>
       )}
       <div className={styles.row3}>
-        <label className={styles.field}><span>Tanggal</span><input type="date" value={value.date?.slice(0, 10) ?? ""} onChange={(e) => change("date", e.target.value)} required={withTitle} /></label>
-        <label className={styles.field}><span>Jam mulai</span><input type="time" value={value.start_time ?? ""} onChange={(e) => change("start_time", e.target.value)} /></label>
-        <label className={styles.field}><span>Jam selesai</span><input type="time" value={value.end_time ?? ""} onChange={(e) => change("end_time", e.target.value)} /></label>
+        <label className={styles.field}><span>Tanggal</span><input type="date" min="1900-01-01" max="2100-12-31" value={value.date?.slice(0, 10) ?? ""} onChange={(e) => change("date", e.target.value)} required={withTitle} /></label>
+        <label className={styles.field}><span>Jam mulai</span><input type="time" step={60} pattern="[0-2][0-9]:[0-5][0-9]" value={value.start_time?.slice(0, 5) ?? ""} onChange={(e) => change("start_time", e.target.value)} /></label>
+        <label className={styles.field}><span>Jam selesai</span><input type="time" step={60} pattern="[0-2][0-9]:[0-5][0-9]" value={value.end_time?.slice(0, 5) ?? ""} onChange={(e) => change("end_time", e.target.value)} /></label>
       </div>
       <div className={styles.row}>
         <label className={styles.field}><span>Tempat</span><input value={value.venue ?? ""} onChange={(e) => change("venue", e.target.value)} required={withTitle} placeholder="Gedung Graha Sarana" /></label>

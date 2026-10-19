@@ -30,7 +30,7 @@ export default function AdminFooterPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch("/api/admin/site-content/footer", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: Footer) => setFooter({ ...body, columns: body.columns?.length ? body.columns : defaultFooterColumns, payment_methods: body.payment_methods?.length ? body.payment_methods : defaultPaymentMethods }))
       .catch(() => setError("Gagal memuat konten footer"))
       .finally(() => setLoading(false));

@@ -25,7 +25,7 @@ export function TemplatePicker({
 
   useEffect(() => {
     fetch(`${API_URL}/api/templates`)
-      .then((response) => response.json())
+      .then((response) => { if (!response.ok) throw new Error(); return response.json(); })
       .then((body: { items?: DashboardTemplate[] }) => setTemplates(body.items ?? []))
       .catch(() => setError("Tema gagal dimuat. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
@@ -60,8 +60,9 @@ export function TemplatePicker({
     <div>
       {error && <p role="alert" className="dashboard-state dashboard-state-error">{error}</p>}
       {premiumBlocked && (
-        <p role="alert" className="dashboard-state dashboard-state-error">
-          {premiumBlocked} adalah tema Premium. <Link href="/harga">Upgrade paket</Link> untuk memakainya.
+        // Sticky so the message is visible right where the guest clicked, even far down the grid.
+        <p role="alert" className="dashboard-state dashboard-state-error" style={{ position: "sticky", top: 12, zIndex: 5, boxShadow: "0 8px 24px rgba(0,0,0,.08)" }}>
+          {premiumBlocked} adalah tema Premium. <Link href="/dashboard/paket">Upgrade paket</Link> untuk memakainya.
         </p>
       )}
       <ThemeGrid

@@ -24,7 +24,7 @@ export default function AdminPaymentsPage() {
 
   useEffect(() => {
     if (!ready || !token) return;
-    apiFetch("/api/admin/payments", token).then((r) => r.json()).then(setData).catch(() => setError("Gagal memuat pembayaran"));
+    apiFetch("/api/admin/payments", token).then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status))))).then(setData).catch(() => setError("Gagal memuat pembayaran"));
   }, [ready, token]);
 
   const rows = useMemo(() => {
@@ -71,16 +71,16 @@ export default function AdminPaymentsPage() {
             </div>
             {rows.length === 0 ? <p className={styles.empty}>Belum ada transaksi.</p> : (
               <div className="dashboard-table-wrap">
-                <table className="dashboard-table" style={{ minWidth: 760 }}>
+                <table className="dashboard-table dashboard-table-stack" style={{ minWidth: 760 }}>
                   <thead><tr><th>Waktu</th><th>Pengguna</th><th>Paket</th><th>Status</th><th>Referensi</th></tr></thead>
                   <tbody>
                     {rows.map((row) => (
                       <tr key={row.subscription.id}>
-                        <td>{when(row.subscription.started_at)}</td>
-                        <td><strong>{row.user.name}</strong><span>{row.user.email}</span></td>
-                        <td><strong>{row.plan_name}</strong><span>{rupiah(row.amount)}</span></td>
-                        <td><span className={`status ${row.subscription.status === "active" ? "status-published" : "status-draft"}`}>{STATUS[row.subscription.status] ?? row.subscription.status}</span></td>
-                        <td><span style={{ fontFamily: "var(--rw-font-mono)" }}>{row.subscription.provider} · {(row.subscription.provider_reference ?? "").slice(0, 18)}</span></td>
+                        <td data-label="Waktu">{when(row.subscription.started_at)}</td>
+                        <td data-label="Pengguna"><strong>{row.user.name}</strong><span>{row.user.email}</span></td>
+                        <td data-label="Paket"><strong>{row.plan_name}</strong><span>{rupiah(row.amount)}</span></td>
+                        <td data-label="Status"><span className={`status ${row.subscription.status === "active" ? "status-published" : "status-draft"}`}>{STATUS[row.subscription.status] ?? row.subscription.status}</span></td>
+                        <td data-label="Referensi"><span style={{ fontFamily: "var(--rw-font-mono)" }}>{row.subscription.provider} · {(row.subscription.provider_reference ?? "").slice(0, 18)}</span></td>
                       </tr>
                     ))}
                   </tbody>

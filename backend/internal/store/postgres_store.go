@@ -57,7 +57,7 @@ func (s *PostgresStore) UpdateUserRole(id, role string) (*User, error) {
 }
 
 func (s *PostgresStore) UpdatePassword(id, password string) error {
-	result, err := s.db.Exec(`UPDATE users SET password_hash = $1, updated_at = NOW() WHERE id = $2`, password, id)
+	result, err := s.db.Exec(`UPDATE users SET password_hash = $1, updated_at = NOW(), password_changed_at = NOW() WHERE id = $2`, password, id)
 	if err != nil {
 		return err
 	}
@@ -276,7 +276,7 @@ func (s *PostgresStore) DeleteGuest(id string) error {
 func (s *PostgresStore) CheckInGuest(id, actorUserID string) (*Guest, error) {
 	guest := &Guest{}
 	var checkedInBy sql.NullString
-	err := s.db.QueryRow(`UPDATE guests SET checked_in_at = NOW(), checked_in_by = $2, updated_at = NOW() WHERE id = $1 RETURNING id, invitation_id, name, phone, category, invitation_token, table_number, created_at, checked_in_at, checked_in_by`, id, actorUserID).
+	err := s.db.QueryRow(`UPDATE guests SET checked_in_at = COALESCE(checked_in_at, NOW()), checked_in_by = COALESCE(checked_in_by, $2), updated_at = NOW() WHERE id = $1 RETURNING id, invitation_id, name, phone, category, invitation_token, table_number, created_at, checked_in_at, checked_in_by`, id, actorUserID).
 		Scan(&guest.ID, &guest.InvitationID, &guest.Name, &guest.Phone, &guest.Category, &guest.Token, &guest.Table, &guest.CreatedAt, &guest.CheckedInAt, &checkedInBy)
 	if err != nil {
 		return nil, fmt.Errorf("check in guest: %w", err)
@@ -1697,3 +1697,11 @@ func (s *PostgresStore) UpdateUserAvatar(userID, avatarURL string) (*User, error
 }
 
 var _ Store = (*PostgresStore)(nil)
+
+func (s *PostgresStore) PasswordChangedAt(userID string) (time.Time, bool) {
+	var at sql.NullTime
+	if err := s.db.QueryRow(`SELECT password_changed_at FROM users WHERE id = $1`, userID).Scan(&at); err != nil || !at.Valid {
+		return time.Time{}, false
+	}
+	return at.Time, true
+}

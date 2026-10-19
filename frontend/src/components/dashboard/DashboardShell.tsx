@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import { can, landingPath, ROLE_LABELS, useInvitationAccess } from "@/lib/invitation-access";
+import { useCallback, useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { apiFetch, AUTH_EVENT, clearSession, getToken } from "@/lib/api";
+import { can, clearAccessCache, landingPath, PAGE_PERMISSION, ROLE_LABELS, useInvitationAccess } from "@/lib/invitation-access";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
 import { IconHeart } from "@/components/brand/icons";
@@ -114,6 +115,24 @@ function invitationNav(id: string): { label: string; items: NavItem[] }[] {
 /* ── Component ────────────────────────────────────────────────── */
 const COLLAPSE_KEY = "rawuh_sidebar_collapsed";
 
+// Name/email cached at login (and refreshed by the settings page); re-read on same-tab auth events and cross-tab storage events.
+function subscribeProfile(onChange: () => void) {
+	window.addEventListener(AUTH_EVENT, onChange);
+	window.addEventListener("storage", onChange);
+	return () => {
+		window.removeEventListener(AUTH_EVENT, onChange);
+		window.removeEventListener("storage", onChange);
+	};
+}
+function storedValue(key: string) {
+	try {
+		return window.localStorage.getItem(key);
+	} catch {
+		return null;
+	}
+}
+const serverValue = () => null;
+
 export function DashboardShell({
 	active,
 	invitationId,
@@ -125,16 +144,10 @@ export function DashboardShell({
 	variant?: "user" | "admin";
 	children: ReactNode;
 }) {
-	const [userName] = useState(() =>
-		typeof window === "undefined"
-			? "Pengguna"
-			: window.localStorage.getItem("yukakad_name") ?? (variant === "admin" ? "Admin" : "Pengguna"),
-	);
-	const [userEmail] = useState(() =>
-		typeof window === "undefined"
-			? ""
-			: window.localStorage.getItem("yukakad_email") ?? "",
-	);
+	const storedName = useSyncExternalStore(subscribeProfile, () => storedValue("yukakad_name"), serverValue);
+	const storedEmail = useSyncExternalStore(subscribeProfile, () => storedValue("yukakad_email"), serverValue);
+	const userName = storedName?.trim() || (variant === "admin" ? "Admin" : "Pengguna");
+	const userEmail = storedEmail ?? "";
 	// Desktop: icon-only rail, remembered per browser. Mobile: off-canvas drawer.
 	const [collapsed, setCollapsed] = useState(() => {
 		if (typeof window === "undefined") return false;
@@ -189,7 +202,7 @@ export function DashboardShell({
 			? [{ label: "Konten landing", items: adminNav }, { label: "Halaman", items: pagesNav }, { label: "Bisnis", items: businessNav }]
 			: invitationId
 				? invitationNav(invitationId)
-						.map((group) => ({ ...group, items: group.items.filter((item) => can(access, item.key)) }))
+						.map((group) => ({ ...group, items: group.items.filter((item) => (access ? can(access, item.key) : PAGE_PERMISSION[item.key] !== "owner")) }))
 						.filter((group) => group.items.length > 0)
 				: [
 						{ label: "Menu Utama", items: mainNav },
@@ -202,12 +215,17 @@ export function DashboardShell({
 		.map((n) => n[0]?.toUpperCase() ?? "")
 		.join("");
 
-	const router = useRouter();
-	function handleLogout() {
-		if (typeof window === "undefined") return;
-		window.localStorage.clear();
-		router.replace("/auth/login");
-		router.refresh();
+	const [loggingOut, setLoggingOut] = useState(false);
+	async function handleLogout() {
+		if (loggingOut) return;
+		setLoggingOut(true);
+		const token = getToken();
+		// Revoke the session server-side first; a failure (offline, already expired) must not block logging out locally.
+		if (token) await apiFetch("/api/auth/logout", token, { method: "POST" }).catch(() => undefined);
+		clearSession();
+		clearAccessCache();
+		// Hard navigation drops all in-memory page state of the previous account.
+		window.location.replace(new URL("/auth/login", window.location.origin).toString());
 	}
 
 	const home = variant === "admin" ? "/admin" : "/dashboard";
@@ -286,7 +304,7 @@ export function DashboardShell({
 						<strong>{userName}</strong>
 						{userEmail && <small>{userEmail}</small>}
 					</div>
-					<button type="button" onClick={handleLogout} aria-label="Keluar" className={shell.iconButton} data-tip="Keluar">
+					<button type="button" onClick={handleLogout} disabled={loggingOut} aria-label="Keluar" className={shell.iconButton} data-tip="Keluar">
 						<PhSignOut size={16} />
 					</button>
 				</div>

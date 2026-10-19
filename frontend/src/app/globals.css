@@ -545,6 +545,98 @@ body {
 .dashboard-table tbody tr:hover {
 	background: #fbfcfa;
 }
+/* Scroll shadows: an edge shade appears only on the side that has more columns
+   to scroll to. The two white "covers" scroll with the content (attachment local)
+   and hide the shades (attachment scroll) when an edge is reached. Longhands with
+   !important + a heavier selector so the workspace theme's plain white fill can't
+   flatten them. */
+:root .dashboard-table-wrap.dashboard-table-wrap {
+	-webkit-overflow-scrolling: touch;
+	background-color: #fff !important;
+	background-image:
+		linear-gradient(to right, #fff 35%, rgb(255 255 255 / 0)),
+		linear-gradient(to left, #fff 35%, rgb(255 255 255 / 0)),
+		radial-gradient(farthest-side at 0 50%, rgb(26 24 23 / 0.2), rgb(26 24 23 / 0)),
+		radial-gradient(farthest-side at 100% 50%, rgb(26 24 23 / 0.2), rgb(26 24 23 / 0)) !important;
+	background-position: left center, right center, left center, right center !important;
+	background-size: 48px 100%, 48px 100%, 16px 100%, 16px 100% !important;
+	background-repeat: no-repeat !important;
+	background-attachment: local, local, scroll, scroll !important;
+}
+/* Cells must stay see-through for the shades to show; the header keeps its tint. */
+.dashboard-table-wrap .dashboard-table tbody tr:hover {
+	background: rgb(251 252 250 / 0.6);
+}
+@media (max-width: 760px) {
+	.dashboard-table {
+		min-width: 600px;
+	}
+	.dashboard-table th,
+	.dashboard-table td {
+		padding: 0.7rem 0.75rem;
+	}
+}
+
+/* Opt-in stacked layout for narrow screens: each row becomes a card and each
+   cell shows its column name from data-label. Use on tables whose last columns
+   hold the important controls (e.g. admin users: Paket, Peran). */
+@media (max-width: 640px) {
+	:root .dashboard-table.dashboard-table-stack {
+		min-width: 0 !important;
+	}
+	.dashboard-table-stack thead {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+	.dashboard-table-stack,
+	.dashboard-table-stack tbody,
+	.dashboard-table-stack tr,
+	.dashboard-table-stack td {
+		display: block;
+		width: 100%;
+	}
+	.dashboard-table-stack tr {
+		padding: 0.85rem 1rem;
+		border-top: 1px solid var(--rw-border-warm);
+	}
+	.dashboard-table-stack tbody tr:first-child {
+		border-top: 0;
+	}
+	.dashboard-table-stack td,
+	.dashboard-table-stack td:first-child {
+		padding: 0.3rem 0;
+		border-top: 0 !important;
+	}
+	.dashboard-table-stack td[data-label] {
+		display: grid;
+		grid-template-columns: minmax(5.5rem, 34%) minmax(0, 1fr);
+		align-items: center;
+		gap: 0.75rem;
+	}
+	.dashboard-table-stack td[data-label]::before {
+		content: attr(data-label);
+		color: var(--rw-muted);
+		font-size: 0.68rem;
+		font-weight: 650;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+	.dashboard-table-stack td[data-label] > * {
+		min-width: 0;
+		max-width: 100%;
+	}
+	.dashboard-table-stack td[data-label] > * + * {
+		grid-column: 2;
+		margin-top: 0;
+	}
+	.dashboard-table-stack .table-input {
+		width: 100% !important;
+	}
+}
 .status {
 	display: inline-flex;
 	padding: 0.3rem 0.5rem;

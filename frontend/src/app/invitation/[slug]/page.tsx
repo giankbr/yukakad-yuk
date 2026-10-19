@@ -1,70 +1,61 @@
+import type { Metadata } from "next";
 import type { GiftMethod, InvitationData, InvitationExtras } from "@/components/invitation/types";
 import { FALLBACK_THEME, isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
 import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
 import { eventTypeLabel } from "@/lib/event-types";
+import { at, first, getContent, getGuest, getInvitation, guestNameFrom, longDateWIB, previewTokenFrom, timeRange } from "./data";
 
-const API_BASE = process.env.API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://rawuh.id";
+const DATE_PENDING = "Tanggal menyusul";
 
-type PublicInvitation = {
-  slug?: string;
-  title: string;
-  template_id?: string;
-  couple?: { bride_name?: string; groom_name?: string; bride_nickname?: string; groom_nickname?: string; bride_parents?: string; groom_parents?: string; bride_photo?: string; groom_photo?: string };
-  event?: { title?: string; type?: string; venue?: string; date?: string; start_time?: string; end_time?: string; address?: string; maps_url?: string };
-  events?: Array<{ title?: string; type?: string; date?: string; start_time?: string; end_time?: string; venue?: string; address?: string; maps_url?: string }>;
-  sections?: string[];
-  online_gift?: { active?: boolean; note?: string; min_amount?: number; max_amount?: number };
-  wishlist_funds?: Record<string, number>;
-};
+type SearchParams = { guest?: string | string[]; to?: string | string[]; preview?: string | string[]; preview_token?: string | string[]; amplop?: string | string[] };
+type Props = { params: Promise<{ slug: string }>; searchParams: Promise<SearchParams> };
 
-type PublicContent = {
-  items?: Array<Record<string, string>>;
-  theme?: string;
-  music_url?: string;
-  autoplay_music?: boolean;
-  /** Extra sections from the dashboard (an object; older invitations still store the legacy `[]`). */
-  sections_config?: unknown;
-  opening_text?: string;
-};
-
-function authHeaders(previewToken?: string): HeadersInit | undefined {
-  return previewToken ? { Authorization: `Bearer ${previewToken}` } : undefined;
-}
-
-async function getInvitation(slug: string, previewToken?: string): Promise<PublicInvitation | null> {
-  const response = await fetch(`${API_BASE}/api/public/invitation/${slug}`, { cache: "no-store", headers: authHeaders(previewToken) });
-  if (!response.ok) return null;
-  return response.json();
-}
-
-async function getContent(slug: string, resource: string, previewToken?: string): Promise<PublicContent> {
-  const response = await fetch(`${API_BASE}/api/public/invitation/${slug}/${resource}`, { cache: "no-store", headers: authHeaders(previewToken) });
-  if (!response.ok) return {};
-  return response.json();
-}
-
-/** Personal link details (name + table) for `?guest=<token>`; null when the token is unknown. */
-async function getGuest(slug: string, token: string, previewToken?: string): Promise<{ name?: string; table?: string } | null> {
+function absoluteUrl(value?: string) {
+  if (!value) return undefined;
   try {
-    const response = await fetch(`${API_BASE}/api/public/invitation/${slug}/guest?token=${encodeURIComponent(token)}`, { cache: "no-store", headers: authHeaders(previewToken) });
-    return response.ok ? response.json() : null;
+    return new URL(value, SITE_URL).toString();
   } catch {
-    return null;
+    return undefined;
   }
 }
 
-export default async function PublicInvitationPage({
-  params,
-  searchParams,
-}: {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ guest?: string; to?: string; preview_token?: string; amplop?: string }>;
-}) {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const { guest: guestToken, to: guestName, preview_token: previewToken, amplop } = await searchParams;
+  const previewToken = previewTokenFrom(await searchParams);
+  // Same cached calls as the page (React cache + fetch cache): no extra API hits.
+  const [result, gallery] = await Promise.all([getInvitation(slug, previewToken), getContent(slug, "gallery", previewToken)]);
+  const couple = result.couple ?? {};
+  const bride = couple.bride_nickname || couple.bride_name;
+  const groom = couple.groom_nickname || couple.groom_name;
+  const names = bride && groom ? `${bride} & ${groom}` : bride || groom || result.title || "Undangan";
+  const title = `${names} — Undangan ${eventTypeLabel(result.event?.type)}`;
+  const when = longDateWIB(at(result.event?.date, result.event?.start_time));
+  const description = [when, result.event?.venue].filter(Boolean).join(" · ") || "Undangan digital dari Rawuh.";
+  const image = absoluteUrl(gallery.items?.map(item => item.image_url).find(Boolean) || couple.bride_photo || couple.groom_photo);
+  // No photo yet: fall back to the Rawuh card so WhatsApp still shows a large preview.
+  const shareImage = image ?? "/rawuh/phone-kirana.webp";
+  const images = [{ url: shareImage, alt: image ? names : "Undangan digital Rawuh" }];
+  return {
+    title,
+    description,
+    robots: { index: false, follow: false },
+    alternates: { canonical: `/invitation/${encodeURIComponent(slug)}` },
+    openGraph: { type: "website", title, description, url: `/invitation/${encodeURIComponent(slug)}`, siteName: "Rawuh", locale: "id_ID", images },
+    twitter: { card: "summary_large_image", title, description, images: [shareImage] },
+  };
+}
 
+export default async function PublicInvitationPage({ params, searchParams }: Props) {
+  const { slug } = await params;
+  const query = await searchParams;
+  const previewToken = previewTokenFrom(query);
+  const guestToken = first(query.guest)?.trim() || undefined;
+  const guestName = guestNameFrom(query.to);
+  const amplop = first(query.amplop);
+
+  // Unknown/unpublished → notFound() (branded 404); API busy/down → throws → error.tsx.
   const result = await getInvitation(slug, previewToken);
-  if (!result) return <main className="invitation-not-found"><h1>Undangan ini belum bisa dibuka.</h1><p>Link mungkin belum dipublikasikan atau sudah tidak aktif.</p></main>;
 
   const [gallery, giftsResult, settings, stories, guest] = await Promise.all([
     getContent(slug, "gallery", previewToken),
@@ -76,14 +67,9 @@ export default async function PublicInvitationPage({
   const gifts = (giftsResult.items ?? []) as unknown as GiftMethod[];
   const firstStory = stories.items?.[0];
 
-  // "2026-12-12" + "11:00" → "2026-12-12T11:00:00+07:00" so countdowns and calendars use WIB.
-  const at = (date?: string, start?: string) => {
-    if (!date) return undefined;
-    if (date.includes("T")) return date;
-    return `${date.slice(0, 10)}T${/^\d{2}:\d{2}/.test(start ?? "") ? start!.slice(0, 5) : "00:00"}:00+07:00`;
-  };
-  const time = (start?: string, end?: string) => (start ? `${start.slice(0, 5).replace(":", ".")}${end ? ` – ${end.slice(0, 5).replace(":", ".")}` : ""} WIB` : "");
-  const mainDate = at(result.event?.date, result.event?.start_time) ?? "";
+  const time = timeRange;
+  // Invalid/missing dates render as "Tanggal menyusul" (kit's formatDate shows unparseable values as-is).
+  const mainDate = at(result.event?.date, result.event?.start_time) ?? DATE_PENDING;
   const invitation: InvitationData = {
     couple: { bride: result.couple?.bride_name || "Mempelai Wanita", groom: result.couple?.groom_name || "Mempelai Pria", note: settings.opening_text?.trim() ?? "" },
     eventLabel: eventTypeLabel(result.event?.type),
@@ -95,7 +81,7 @@ export default async function PublicInvitationPage({
     events: [{ name: result.event?.title || eventTypeLabel(result.event?.type), date: mainDate, time: time(result.event?.start_time, result.event?.end_time) || "Waktu menyusul", venue: result.event?.venue || "Lokasi menyusul", address: result.event?.address, mapsUrl: result.event?.maps_url }],
     gallery: gallery.items?.map((item) => item.image_url).filter(Boolean) ?? [],
     gifts,
-    guestName: guestName ? guestName.replace(/-/g, " ") : guest?.name || undefined,
+    guestName: guestName ?? (guest?.name || undefined),
     guestTable: guest?.table || undefined,
     onlineGift: result.online_gift?.active
       ? { note: result.online_gift.note, minAmount: result.online_gift.min_amount ?? 10000, maxAmount: result.online_gift.max_amount ?? 100000000 }

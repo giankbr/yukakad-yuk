@@ -16,9 +16,25 @@ const beVietnamPro = localFont({
 });
 const geistMono = localFont({ src: "./fonts/GeistMono-Variable.woff2", variable: "--font-geist-mono", weight: "100 900", display: "swap" });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://rawuh.id";
+const DEFAULT_TITLE = "Rawuh — Undangan digital yang terasa personal";
+const DEFAULT_DESCRIPTION = "Buat undangan website dalam 10 menit dari HP. Kirim ke ratusan tamu, masing-masing dengan namanya.";
+
 export const metadata: Metadata = {
-  title: "Rawuh — Undangan digital yang terasa personal",
-  description: "Buat undangan website dalam 10 menit dari HP. Kirim ke ratusan tamu, masing-masing dengan namanya.",
+  // Resolves relative og:image/canonical URLs (pages may override any of the defaults below).
+  metadataBase: new URL(SITE_URL),
+  title: DEFAULT_TITLE,
+  description: DEFAULT_DESCRIPTION,
+  applicationName: "Rawuh",
+  openGraph: {
+    type: "website",
+    siteName: "Rawuh",
+    locale: "id_ID",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [{ url: "/rawuh/phone-kirana.webp", width: 1200, height: 655, alt: "Contoh undangan digital Rawuh" }],
+  },
+  twitter: { card: "summary_large_image", title: DEFAULT_TITLE, description: DEFAULT_DESCRIPTION, images: ["/rawuh/phone-kirana.webp"] },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
 import { API_URL, apiFetch, getToken } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { landingPath, ROLE_DESCRIPTIONS, ROLE_LABELS, type AccessRole } from "@/lib/invitation-access";
 
 type Preview = {
@@ -25,8 +26,8 @@ export default function JoinTeamPage({ params }: { params: Promise<{ token: stri
   useEffect(() => {
     const timer = setTimeout(() => setLoggedIn(Boolean(getToken())), 0);
     fetch(`${API_URL}/api/team-invites/${encodeURIComponent(token)}`)
-      .then(async (r) => { const body = await r.json(); if (!r.ok) throw new Error(body.error); setPreview(body); })
-      .catch((err) => setError(err instanceof Error && err.message ? err.message : "Link tidak bisa dibuka."));
+      .then(async (r) => { const body = await r.json().catch(() => ({})); if (!r.ok) throw new Error(body.error); setPreview(body); })
+      .catch((err) => setError(friendlyError(err instanceof Error ? err.message : "", "Link tidak bisa dibuka.")));
     return () => clearTimeout(timer);
   }, [token]);
 
@@ -37,11 +38,12 @@ export default function JoinTeamPage({ params }: { params: Promise<{ token: stri
     setError("");
     try {
       const response = await apiFetch(`/api/team-invites/${encodeURIComponent(token)}/accept`, auth, { method: "POST" });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
+      if (response.status === 401) { setLoggedIn(false); throw new Error("Sesi kamu sudah berakhir. Masuk lagi untuk bergabung."); }
       if (!response.ok) throw new Error(body.error);
       router.replace(landingPath(body.invitation_id, body.role));
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum bisa bergabung.");
+      setError(friendlyError(err instanceof Error ? err.message : "", "Belum bisa bergabung."));
       setJoining(false);
     }
   }

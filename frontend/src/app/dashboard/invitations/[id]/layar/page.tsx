@@ -4,12 +4,22 @@ import Link from "next/link";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { GateNotice, usePageGate } from "../_lib";
 
 export default function ScreenSetupPage({ params }: { params: Promise<{ id: string }> }) {
   const routeParams = useRouteParams(params);
-  const { ready } = useAuthToken();
+  const { token, ready } = useAuthToken();
   const invitationId = routeParams?.id;
+  const gate = usePageGate(invitationId, token, "screen");
   if (!ready || !invitationId) return null;
+
+  if (gate.status !== "ok") {
+    return (
+      <DashboardShell active="screen" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   return (
     <DashboardShell active="screen" invitationId={invitationId}>

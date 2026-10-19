@@ -405,7 +405,7 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 
 	user, exists := s.store.FindUserByEmail(payload.Email)
 	if !exists || !auth.VerifyPassword(payload.Password, user.Password) {
-		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "invalid credentials"})
+		writeJSON(w, http.StatusUnauthorized, map[string]string{"error": "Email atau kata sandi salah"})
 		return
 	}
 
@@ -456,11 +456,8 @@ func (s *Server) handleInvitations(w http.ResponseWriter, r *http.Request) {
 		}
 		invitation, err := s.invitations.Create(claims.UserID, payload.Slug, payload.Title)
 		if err != nil {
-			status := http.StatusConflict
-			if errors.Is(err, invitations.ErrInvalid) {
-				status = http.StatusBadRequest
-			}
-			writeJSON(w, status, map[string]string{"error": err.Error()})
+			status, body := invitationSaveError(err)
+			writeJSON(w, status, body)
 			return
 		}
 		writeJSON(w, http.StatusCreated, invitation)
@@ -491,6 +488,9 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			sub = parts[2]
 		}
 		switch parts[1] {
+		case "preview-token":
+			s.handlePreviewToken(w, r, parts[0])
+			return
 		case "ledger":
 			s.handleLedger(w, r, parts[0], sub)
 			return
@@ -637,7 +637,7 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 		var payload struct {
 			Slug      string            `json:"slug"`
 			Title     string            `json:"title"`
-			Published bool              `json:"published"`
+			Published *bool             `json:"published"` // omitted = keep current state
 			Couple    map[string]string `json:"couple"`
 			Event     map[string]string `json:"event"`
 		}
@@ -689,6 +689,14 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 			}
 		}
 
+		if msg := validateSchedule(event.Date, event.StartTime, event.EndTime); payload.Event != nil && msg != "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": msg})
+			return
+		}
+		published := invitation.Published
+		if payload.Published != nil {
+			published = *payload.Published
+		}
 		if payload.Slug == "" {
 			payload.Slug = invitation.Slug
 		}
@@ -697,13 +705,10 @@ func (s *Server) handleInvitationDetail(w http.ResponseWriter, r *http.Request) 
 		}
 
 		wasPublished := invitation.Published
-		updated, err := s.invitations.Update(claims.UserID, invitation.ID, payload.Slug, payload.Title, payload.Published, couple, event)
+		updated, err := s.invitations.Update(claims.UserID, invitation.ID, payload.Slug, payload.Title, published, couple, event)
 		if err != nil {
-			status := http.StatusConflict
-			if errors.Is(err, invitations.ErrInvalid) {
-				status = http.StatusBadRequest
-			}
-			writeJSON(w, status, map[string]string{"error": err.Error()})
+			status, body := invitationSaveError(err)
+			writeJSON(w, status, body)
 			return
 		}
 		if !wasPublished && updated.Published {
@@ -756,13 +761,27 @@ func (s *Server) requireAuth(w http.ResponseWriter, r *http.Request) (auth.Token
 
 func (s *Server) issueToken(user *store.User) (string, error) {
 	if s.sessions != nil {
-		token, _, err := s.sessions.Create(user.ID, user.Email, user.Role, 24*time.Hour)
+		token, _, err := s.sessions.Create(user.ID, user.Email, user.Role, tokenLifetime)
 		return token, err
 	}
 	return auth.GenerateToken(user.ID, user.Email, user.Role, s.config.JWTSecret), nil
 }
 
 func (s *Server) authenticateToken(token string) (auth.TokenClaims, bool) {
+	claims, ok := s.authenticateTokenRaw(token)
+	if !ok {
+		return claims, false
+	}
+	// Tokens live 24h, so exp-24h is when it was issued; reject tokens from before a password change.
+	if changed, has := s.store.PasswordChangedAt(claims.UserID); has && claims.Exp-int64(tokenLifetime/time.Second) < changed.Unix() {
+		return auth.TokenClaims{}, false
+	}
+	return claims, true
+}
+
+const tokenLifetime = 24 * time.Hour
+
+func (s *Server) authenticateTokenRaw(token string) (auth.TokenClaims, bool) {
 	if s.sessions != nil {
 		claims, ok, err := s.sessions.Get(token)
 		if err != nil || !ok {
@@ -792,6 +811,9 @@ func (s *Server) requireAdmin(w http.ResponseWriter, r *http.Request) (auth.Toke
 // public read endpoints before it's published, so the dashboard preview
 // page can reuse the same public rendering path for drafts.
 func (s *Server) canPreviewUnpublished(r *http.Request, invitation *store.Invitation) bool {
+	if preview := r.Header.Get("X-Preview-Token"); preview != "" {
+		return s.validPreviewToken(preview, invitation.ID, time.Now())
+	}
 	authorization := r.Header.Get("Authorization")
 	if authorization == "" {
 		return false
@@ -918,4 +940,18 @@ func writeJSON(w http.ResponseWriter, status int, payload any) {
 		return
 	}
 	_ = json.NewEncoder(w).Encode(payload)
+}
+
+// invitationSaveError turns create/update failures into a status and an Indonesian message.
+func invitationSaveError(err error) (int, map[string]string) {
+	text := strings.ToLower(err.Error())
+	switch {
+	case errors.Is(err, invitations.ErrInvalid):
+		return http.StatusBadRequest, map[string]string{"error": "Judul atau alamat URL belum valid. Alamat URL hanya boleh huruf kecil, angka, dan tanda strip.", "code": "slug_invalid"}
+	case strings.Contains(text, "duplicate") || strings.Contains(text, "already") || strings.Contains(text, "unique"):
+		return http.StatusConflict, map[string]string{"error": "Alamat URL ini sudah dipakai undangan lain. Coba alamat lain.", "code": "slug_taken"}
+	case errors.Is(err, invitations.ErrNotFound):
+		return http.StatusNotFound, map[string]string{"error": "Undangan tidak ditemukan"}
+	}
+	return http.StatusConflict, map[string]string{"error": "Undangan belum tersimpan. Coba lagi."}
 }

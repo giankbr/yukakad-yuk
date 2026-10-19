@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { apiFetch, getToken } from "@/lib/api";
+import { apiFetch, AUTH_EVENT, getToken } from "@/lib/api";
 
 export type AccessRole = "owner" | "editor" | "organizer" | "receptionist";
 export type Access = { role: AccessRole; permissions: string[] };
@@ -42,6 +42,14 @@ export function landingPath(id: string, role: AccessRole) {
 }
 
 const cache = new Map<string, Access>();
+
+/** Forgets every cached role, e.g. on logout so the next account doesn't inherit the previous one's access. */
+export function clearAccessCache() {
+  cache.clear();
+}
+
+// Any login/logout/token swap in this tab invalidates the cached roles.
+if (typeof window !== "undefined") window.addEventListener(AUTH_EVENT, clearAccessCache);
 
 export function useInvitationAccess(invitationId?: string) {
   const [access, setAccess] = useState<Access | null>(() => (invitationId ? cache.get(invitationId) ?? null : null));

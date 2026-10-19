@@ -7,6 +7,7 @@ import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { ROLE_DESCRIPTIONS, ROLE_LABELS, type AccessRole } from "@/lib/invitation-access";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, lostAccess, usePageGate } from "../_lib";
 
 type MemberRole = Exclude<AccessRole, "owner">;
 type Member = { id: string; name?: string; email?: string; role: MemberRole; status: "pending" | "active"; expires_at?: string; accepted_at?: string; created_at: string };
@@ -27,20 +28,25 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
+  const gate = usePageGate(invitationId, token, "team");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
     const response = await apiFetch(`/api/invitations/${invitationId}/team`, token);
-    const body = await response.json();
+    if (lostAccess(response.status)) { lose(); return; }
+    const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error);
     setMembers(body.items ?? []);
     setLimit(typeof body.limit === "number" ? body.limit : null);
-  }, [token, invitationId]);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
-    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat tim")).finally(() => setLoading(false)); }, 0);
+    if (!ready || !token || !invitationId || !allowed) return;
+    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat tim. Coba muat ulang halaman.")).finally(() => setLoading(false)); }, 0);
     return () => clearTimeout(timer);
-  }, [ready, token, invitationId, load]);
+  }, [ready, token, invitationId, allowed, load]);
 
   async function run(key: string, action: () => Promise<void>) {
     setBusy(key);
@@ -49,7 +55,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     try {
       await action();
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum tersimpan.");
+      setError(friendly(err, "Belum tersimpan."));
     } finally {
       setBusy(null);
     }
@@ -59,7 +65,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     event.preventDefault();
     void run("invite", async () => {
       const response = await apiFetch(`/api/invitations/${invitationId}/team`, token!, { method: "POST", body: JSON.stringify({ role, email: email.trim() }) });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       setLink({ url: body.invite_url, label: `${ROLE_LABELS[role]}${email.trim() ? ` · ${email.trim()}` : ""}` });
       setCopied(false);
@@ -70,7 +76,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
 
   const newLink = (member: Member) => run(member.id, async () => {
     const response = await apiFetch(`/api/invitations/${invitationId}/team/${member.id}/link`, token!, { method: "POST" });
-    const body = await response.json();
+    const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error);
     setLink({ url: body.invite_url, label: `${ROLE_LABELS[member.role]}${member.email ? ` · ${member.email}` : ""}` });
     setCopied(false);
@@ -78,7 +84,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
 
   const changeRole = (member: Member, next: MemberRole) => run(member.id, async () => {
     const response = await apiFetch(`/api/invitations/${invitationId}/team/${member.id}`, token!, { method: "PATCH", body: JSON.stringify({ role: next }) });
-    const body = await response.json();
+    const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error);
     setMembers((current) => current.map((m) => (m.id === member.id ? { ...m, role: next } : m)));
     setNotice(`${member.name || member.email || "Anggota"} sekarang ${ROLE_LABELS[next]}.`);
@@ -88,7 +94,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     if (!window.confirm(`Cabut akses ${member.name || member.email || "anggota ini"}?`)) return;
     void run(member.id, async () => {
       const response = await apiFetch(`/api/invitations/${invitationId}/team/${member.id}`, token!, { method: "DELETE" });
-      if (!response.ok) throw new Error((await response.json()).error);
+      if (!response.ok) throw new Error((await response.json().catch(() => ({}))).error);
       setMembers((current) => current.filter((m) => m.id !== member.id));
       setNotice("Akses dicabut.");
     });
@@ -100,6 +106,14 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="team" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} deniedText="Hanya pemilik undangan yang bisa mengatur tim" />
+      </DashboardShell>
+    );
+  }
   const waText = link ? encodeURIComponent(`Halo! Aku mengajakmu membantu undangan kami di Rawuh sebagai ${link.label.split(" · ")[0]}. Buka link ini untuk bergabung (berlaku 7 hari):\n${link.url}`) : "";
 
   return (

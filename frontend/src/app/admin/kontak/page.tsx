@@ -24,7 +24,7 @@ export default function AdminKontakPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch("/api/admin/site-content/kontak", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then(setKontak)
       .catch(() => setError("Gagal memuat konten kontak"))
       .finally(() => setLoading(false));

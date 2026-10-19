@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type GalleryItem = { id: string; image_url: string; caption?: string };
 
@@ -17,19 +18,25 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
 
   const invitationId = routeParams?.id;
 
+  const gate = usePageGate(invitationId, token, "gallery");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(() => {
     if (!token || !invitationId) return;
-    apiFetch(`/api/invitations/${invitationId}/gallery`, token)
-      .then((response) => response.json())
-      .then((body: { items?: GalleryItem[] }) => setItems(body.items ?? []))
-      .catch(() => setError("Gagal memuat galeri"))
+    getJson<{ items?: GalleryItem[] }>(`/api/invitations/${invitationId}/gallery`, token)
+      .then((result) => {
+        if (lostAccess(result.status)) { lose(); return; }
+        if (!result.ok) { setError(result.error || "Gagal memuat galeri."); return; }
+        setItems(result.data?.items ?? []);
+      })
       .finally(() => setLoading(false));
-  }, [token, invitationId]);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || !allowed) return;
     load();
-  }, [ready, load]);
+  }, [ready, allowed, load]);
 
   async function handleUpload(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -44,17 +51,17 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
         method: "POST",
         body: formData,
       });
-      const uploaded = await uploadResponse.json();
+      const uploaded = await uploadResponse.json().catch(() => ({}));
       if (!uploadResponse.ok) throw new Error(uploaded.error ?? "Gagal mengunggah");
 
       const galleryResponse = await apiFetch(`/api/invitations/${invitationId}/gallery`, token, {
         method: "POST",
         body: JSON.stringify({ image_url: uploaded.path }),
       });
-      if (!galleryResponse.ok) throw new Error("Gagal menambahkan foto ke galeri");
+      if (!galleryResponse.ok) throw new Error("Gagal menambahkan foto ke galeri.");
       load();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gagal mengunggah");
+      setError(friendly(err, "Gagal mengunggah."));
     } finally {
       setUploading(false);
       event.target.value = "";
@@ -62,6 +69,14 @@ export default function GalleryPage({ params }: { params: Promise<{ id: string }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="gallery" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   return (
     <DashboardShell active="gallery" invitationId={invitationId}>

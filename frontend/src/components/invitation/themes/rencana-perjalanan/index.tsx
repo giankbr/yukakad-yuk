@@ -2,9 +2,10 @@
 // Theme "Rencana Perjalanan" — undangan bergaya aplikasi travel/itinerary (design: Arga & Bella, Bali).
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, WishForm, dateParts, formatDate, giftInfo, guestLabel,
-  mapsHref, safeUrl, storyItems, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
+  mapsHref, safeUrl, storyItems, toDate, useCopy, useRsvp, useSheets, useWishes, type ThemeProps, type ThemeTint,
 } from "../kit";
 import { useState } from "react";
+import { tableLabel } from "../extras";
 import { toast } from "@/lib/celebrate";
 import type { InvitationData } from "../../types";
 import { ic } from "./icons";
@@ -28,7 +29,7 @@ const DEMO_WISHLIST = [
 type Event = InvitationData["events"][number];
 
 function startTime(event: Event) {
-  return event.time?.match(/\d{1,2}[.:]\d{2}/)?.[0]?.replace(":", ".") ?? formatDate(event.date, { hour: "2-digit", minute: "2-digit" }).replace(":", ".");
+  return event.time?.match(/\d{1,2}[.:]\d{2}/)?.[0]?.replace(":", ".") ?? (toDate(event.date) ? formatDate(event.date, { hour: "2-digit", minute: "2-digit" }).replace(":", ".") : "");
 }
 
 function eventIcon(name: string) {
@@ -95,7 +96,7 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
             <div className={s.search}>
               <SearchRow icon={ic.plane} kicker="Perjalanan" title="Masa Lajang → Pelaminan" note="1 rute, tanpa kembali" />
               <SearchRow icon={ic.building2} kicker="Venue" title={data.place} note={midDate} />
-              <SearchRow icon={ic.users} kicker="Tamu" title="2 Dewasa + keluarga besar" note="Kursi VIP tersedia" />
+              <SearchRow icon={ic.users} kicker="Tamu" title={guestLabel(data, "Tamu undangan")} note={tableLabel(data.guestTable)} />
               <span className={s.searching} aria-hidden />
             </div>
             <div className={s.kepada}>

@@ -9,6 +9,7 @@ import { apiFetch } from "@/lib/api";
 import { getSectionsConfig, patchSectionsConfig } from "@/lib/sections-config";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "./settings.module.css";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Settings = {
   theme?: string;
@@ -44,20 +45,25 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
 
   const invitationId = routeParams?.id;
 
+  const gate = usePageGate(invitationId, token, "settings");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     Promise.all([
-      apiFetch(`/api/invitations/${invitationId}`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/settings`, token).then((r) => r.json()),
+      getJson<{ template_id?: string }>(`/api/invitations/${invitationId}`, token),
+      getJson<Settings>(`/api/invitations/${invitationId}/settings`, token),
     ])
       .then(([invitationBody, settingsBody]) => {
-        setTemplateId(invitationBody.template_id ?? "");
-        setSettings(settingsBody ?? {});
+        if (lostAccess(invitationBody.status) || lostAccess(settingsBody.status)) { lose(); return; }
+        if (!invitationBody.ok || !settingsBody.ok) { setError("Pengaturan gagal dimuat. Coba muat ulang halaman."); return; }
+        setTemplateId(invitationBody.data?.template_id ?? "");
+        setSettings(settingsBody.data ?? {});
       })
-      .catch(() => setError("Pengaturan gagal dimuat. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
     getSectionsConfig(invitationId, token).then((config) => setEasyRead(config.easyRead?.enabled !== false)).catch(() => undefined);
-  }, [ready, token, invitationId]);
+  }, [ready, token, invitationId, allowed, lose]);
 
   async function saveSettings(patch: Partial<Settings>, message: string) {
     if (!token || !invitationId) return false;
@@ -96,17 +102,26 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
       formData.append("file", file);
       formData.append("type", "music");
       const response = await apiFetch(`/api/invitations/${invitationId}/media`, token, { method: "POST", body: formData });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error ?? "Upload gagal");
       setBusy("");
       await saveSettings({ music_url: body.path }, "Musik tersimpan dan akan diputar di undangan.");
     } catch (err) {
-      setError(err instanceof Error && err.message ? `Upload musik gagal: ${err.message}` : "Upload musik gagal.");
+      const message = friendly(err, "");
+      setError(message ? `Upload musik gagal: ${message}` : "Upload musik gagal.");
       setBusy("");
     }
   }
 
   if (!ready || !invitationId || !token) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="settings" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   const music = settings.music_url;
 

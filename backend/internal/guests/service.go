@@ -11,7 +11,7 @@ import (
 var (
 	ErrNotFound        = errors.New("guest not found")
 	ErrInvalid         = errors.New("invalid guest")
-	ErrQuotaExceeded   = errors.New("guest limit reached for your plan")
+	ErrQuotaExceeded   = errors.New("Kuota tamu paketmu sudah penuh")
 	ErrPlanUnavailable = errors.New("plan unavailable")
 )
 

@@ -6,6 +6,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Gift = {
   id: string;
@@ -39,7 +40,7 @@ const payoutStatus: Record<string, string> = { requested: "Diproses", paid: "Sud
 
 async function json(response: Response) {
   const body = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(body.error);
+  if (!response.ok) throw new Error(friendly(body.error, "Belum tersimpan. Coba lagi."));
   return body;
 }
 
@@ -58,24 +59,31 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState<string | null>(null);
 
+  const gate = usePageGate(invitationId, token, "gift");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
-    const [g, w]: [{ items?: Gift[] }, WalletResponse | null] = await Promise.all([
-      apiFetch(`/api/invitations/${invitationId}/gifts`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/gift-wallet`, token).then((r) => (r.ok ? r.json() : null)),
+    const [g, w] = await Promise.all([
+      getJson<{ items?: Gift[] }>(`/api/invitations/${invitationId}/gifts`, token),
+      getJson<WalletResponse>(`/api/invitations/${invitationId}/gift-wallet`, token),
     ]);
-    setGifts(g.items ?? []);
-    setWallet(w);
-    if (w) setNote(w.online.note ?? "");
-  }, [token, invitationId]);
+    if (lostAccess(g.status)) { lose(); return; }
+    if (!g.ok) throw new Error(g.error);
+    setGifts(g.data?.items ?? []);
+    const walletData = w.ok && w.data?.online && w.data.wallet ? w.data : null;
+    setWallet(walletData);
+    if (walletData) setNote(walletData.online.note ?? "");
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     const timer = setTimeout(() => {
-      load().catch(() => setError("Gagal memuat data amplop")).finally(() => setLoading(false));
+      load().catch(() => setError("Gagal memuat data amplop. Coba muat ulang halaman.")).finally(() => setLoading(false));
     }, 0);
     return () => clearTimeout(timer);
-  }, [ready, token, invitationId, load]);
+  }, [ready, token, invitationId, allowed, load]);
 
   async function run(key: string, action: () => Promise<void>, success?: string) {
     setBusy(key);
@@ -85,7 +93,7 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
       await action();
       if (success) setNotice(success);
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Belum tersimpan. Coba lagi.");
+      setError(friendly(err, "Belum tersimpan. Coba lagi."));
     } finally {
       setBusy(null);
     }
@@ -96,7 +104,10 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
     if (!token || !invitationId) return;
     setWallet((current) => (current ? { ...current, online: { ...current.online, enabled } } : current));
     try {
-      const current = await apiFetch(`/api/invitations/${invitationId}/settings`, token).then((r) => r.json());
+      // A failed read must stop the save: an empty base would wipe every other section.
+      const latest = await getJson<{ sections_config?: unknown }>(`/api/invitations/${invitationId}/settings`, token);
+      if (!latest.ok || !latest.data) throw new Error(latest.error || "Pengaturan belum terbaca. Coba lagi.");
+      const current = latest.data;
       const config = current.sections_config && typeof current.sections_config === "object" && !Array.isArray(current.sections_config) ? current.sections_config : {};
       await json(await apiFetch(`/api/invitations/${invitationId}/settings`, token, {
         method: "PATCH", body: JSON.stringify({ sections_config: { ...config, onlineGift: { enabled, note: text.trim() } } }),
@@ -155,6 +166,14 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
   };
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="gift" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} deniedText="Amplop dan saldo hanya bisa dibuka pemilik undangan" />
+      </DashboardShell>
+    );
+  }
 
   const online = wallet?.online;
   const w = wallet?.wallet;

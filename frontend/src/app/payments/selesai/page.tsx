@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { apiFetch, getToken } from "@/lib/api";
 import { AuthHeading, AuthLayout } from "@/components/auth/AuthLayout";
+import { friendlyError } from "@/lib/errors";
 
 type VerifyResult = { plan?: { id: string; name: string; price: number }; activated?: unknown[]; pending?: number; latest_status?: string };
 type State = "checking" | "paid" | "pending" | "error";
@@ -26,15 +27,16 @@ export default function PaymentDonePage() {
     (async () => {
       const token = getToken();
       if (!token) {
-        router.replace("/auth/login");
+        router.replace(`/auth/login?next=${encodeURIComponent("/payments/selesai")}`);
         return;
       }
       try {
         for (let attempt = 0; attempt < ATTEMPTS && !cancelled; attempt++) {
           if (attempt > 0) await sleep(INTERVAL);
           const response = await apiFetch("/api/billing/verify", token, { method: "POST" });
-          const body: VerifyResult & { error?: string } = await response.json();
-          if (!response.ok) throw new Error(body.error ?? "Gagal memeriksa pembayaran.");
+          const body: VerifyResult & { error?: string } = await response.json().catch(() => ({}));
+          if (response.status === 401) { router.replace(`/auth/login?next=${encodeURIComponent("/payments/selesai")}`); return; }
+          if (!response.ok) throw new Error(friendlyError(body.error, "Gagal memeriksa pembayaran."));
           if ((body.activated?.length ?? 0) > 0 || body.latest_status === "active") {
             if (!cancelled) { setPlanName(body.plan?.name ?? ""); setState("paid"); }
             return;
@@ -42,7 +44,7 @@ export default function PaymentDonePage() {
         }
         if (!cancelled) setState("pending");
       } catch (err) {
-        if (!cancelled) { setError(err instanceof Error ? err.message : "Gagal memeriksa pembayaran."); setState("error"); }
+        if (!cancelled) { setError(friendlyError(err instanceof Error ? err.message : "", "Gagal memeriksa pembayaran.")); setState("error"); }
       }
     })();
     return () => { cancelled = true; };
@@ -55,7 +57,8 @@ export default function PaymentDonePage() {
       {state === "paid" ? (
         <>
           <AuthHeading lead="Pembayaran" mono="berhasil.">{planName ? `Paket ${planName} sudah aktif di akunmu.` : "Paketmu sudah aktif."} Terima kasih sudah memakai Rawuh.</AuthHeading>
-          <Link className="auth-submit" href="/dashboard" style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>Ke dashboard</Link>
+          <Link className="auth-submit" href="/dashboard/paket?bayar=selesai" style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>Lihat paketku</Link>
+          <p className="auth-switch"><Link href="/dashboard">Ke dashboard</Link></p>
         </>
       ) : state === "pending" ? (
         <>

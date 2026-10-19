@@ -5,6 +5,7 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "@/components/dashboard/editor.module.css";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Story = { id: string; title?: string; content: string; date?: string; image_url?: string };
 type Draft = Omit<Story, "id"> & { id?: string };
@@ -22,20 +23,23 @@ export default function StoriesPage({ params }: { params: Promise<{ id: string }
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState("");
 
+  const gate = usePageGate(invitationId, token, "stories");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
-    const body = await apiFetch(`/api/invitations/${invitationId}/stories`, token).then((r) => r.json());
-    setItems(body.items ?? []);
-  }, [token, invitationId]);
+    const result = await getJson<{ items?: Story[] }>(`/api/invitations/${invitationId}/stories`, token);
+    if (lostAccess(result.status)) { lose(); return; }
+    if (!result.ok) { setError(result.error || "Gagal memuat kisah."); return; }
+    setItems(result.data?.items ?? []);
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
-    apiFetch(`/api/invitations/${invitationId}/stories`, token)
-      .then((r) => r.json())
-      .then((body: { items?: Story[] }) => setItems(body.items ?? []))
-      .catch(() => setError("Gagal memuat kisah"))
-      .finally(() => setLoading(false));
-  }, [ready, token, invitationId]);
+    if (!ready || !allowed) return;
+    const timer = setTimeout(() => { load().finally(() => setLoading(false)); }, 0);
+    return () => clearTimeout(timer);
+  }, [ready, allowed, load]);
 
   async function upload(file: File) {
     if (!token || !invitationId) return;
@@ -46,7 +50,7 @@ export default function StoriesPage({ params }: { params: Promise<{ id: string }
       form.append("file", file);
       form.append("type", "gallery");
       const response = await apiFetch(`/api/invitations/${invitationId}/media`, token, { method: "POST", body: form });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       setDraft((d) => (d ? { ...d, image_url: body.path } : d));
     } catch {
@@ -66,11 +70,12 @@ export default function StoriesPage({ params }: { params: Promise<{ id: string }
       const response = draft.id
         ? await apiFetch(`/api/invitations/${invitationId}/stories/${draft.id}`, token, { method: "PUT", body: JSON.stringify(payload) })
         : await apiFetch(`/api/invitations/${invitationId}/stories`, token, { method: "POST", body: JSON.stringify(payload) });
-      if (!response.ok) throw new Error();
+      if (!response.ok) throw new Error(((await response.json().catch(() => ({}))) as { error?: string }).error ?? "");
       setDraft(null);
       await load();
-    } catch {
-      setError("Kisah belum tersimpan.");
+    } catch (err) {
+      const message = friendly(err, "");
+      setError(message ? `Kisah belum tersimpan: ${message}` : "Kisah belum tersimpan.");
     } finally {
       setSaving(false);
     }
@@ -84,6 +89,14 @@ export default function StoriesPage({ params }: { params: Promise<{ id: string }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="stories" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   return (
     <DashboardShell active="stories" invitationId={invitationId}>

@@ -6,8 +6,9 @@ import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { API_URL, apiFetch } from "@/lib/api";
 import { useAuthToken } from "@/lib/useAuthToken";
+import { friendlyError } from "@/lib/errors";
 
-type Plan = { id: string; name: string; price: number; max_guests: number; duration_days?: number | null; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean };
+type Plan = { id: string; name: string; price: number; max_guests: number; max_team_members?: number; duration_days?: number | null; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean };
 type Subscription = { id: string; plan_id: string; status: string; provider: string; started_at: string; ends_at?: string };
 type Invoice = { id: string; invoice_number: string; amount: number; status: string; issued_at?: string; paid_at?: string };
 
@@ -18,6 +19,9 @@ const SUB_STATUS: Record<string, string> = { active: "Aktif", pending: "Menunggu
 function perks(plan: Plan) {
   return [
     `Hingga ${plan.max_guests.toLocaleString("id-ID")} tamu`,
+    typeof plan.max_team_members === "number"
+      ? plan.max_team_members === 0 ? "Tim tanpa batas" : `Tim hingga ${plan.max_team_members.toLocaleString("id-ID")} anggota`
+      : "",
     plan.duration_days ? `Aktif ${plan.duration_days} hari` : "Aktif selamanya",
     plan.premium_templates_allowed ? "Semua tema Premium" : "Tema gratis",
     plan.payment_gateway_allowed ? "Amplop online lewat Rawuh" : "",
@@ -37,23 +41,41 @@ export default function BillingPage() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
-  const load = useCallback(async () => {
-    if (!token) return;
+  const load = useCallback(async (): Promise<Plan | null> => {
+    if (!token) return null;
+    const ok = (r: Response) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status))));
     const [plan, list, s, i] = await Promise.all([
-      apiFetch("/api/billing/plan", token).then((r) => r.json()),
-      fetch(`${API_URL}/api/public/plans`).then((r) => r.json()).catch(() => ({ items: [] })),
-      apiFetch("/api/billing/subscriptions", token).then((r) => r.json()),
-      apiFetch("/api/billing/invoices", token).then((r) => r.json()),
+      apiFetch("/api/billing/plan", token).then(ok),
+      fetch(`${API_URL}/api/public/plans`).then(ok).catch(() => ({ items: [] })),
+      apiFetch("/api/billing/subscriptions", token).then(ok).catch(() => ({ items: [] })),
+      apiFetch("/api/billing/invoices", token).then(ok).catch(() => ({ items: [] })),
     ]);
-    setCurrent(plan);
+    const currentPlan: Plan | null = plan && typeof plan === "object" && "id" in plan ? plan : null;
+    setCurrent(currentPlan);
     setPlans((list.items ?? []).slice().sort((a: Plan, b: Plan) => a.price - b.price));
     setSubs(s.items ?? []);
     setInvoices(i.items ?? []);
+    return currentPlan;
   }, [token]);
 
   useEffect(() => {
     if (!ready || !token) return;
-    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat paket")).finally(() => setLoading(false)); }, 0);
+    // Back from checkout (/payments/dummy or /payments/selesai): confirm, re-fetch, and say which plan is now active.
+    const returned = typeof window !== "undefined" && new URLSearchParams(window.location.search).get("bayar") === "selesai";
+    const timer = setTimeout(() => {
+      const confirm = returned ? apiFetch("/api/billing/verify", token, { method: "POST" }).catch(() => null) : Promise.resolve(null);
+      confirm
+        .then(() => load())
+        .then((plan) => {
+          if (!returned) return;
+          window.history.replaceState(null, "", window.location.pathname);
+          setNotice(plan && plan.price > 0
+            ? `Paket ${plan.name} sudah aktif. Terima kasih sudah memakai Rawuh.`
+            : "Pembayaranmu belum terkonfirmasi. Kalau sudah membayar, tunggu beberapa menit lalu tekan Cek pembayaran.");
+        })
+        .catch(() => setError("Gagal memuat paket. Coba muat ulang halaman."))
+        .finally(() => setLoading(false));
+    }, 0);
     return () => clearTimeout(timer);
   }, [ready, token, load]);
 
@@ -64,12 +86,12 @@ export default function BillingPage() {
     setError("");
     try {
       const response = await apiFetch("/api/billing/verify", token, { method: "POST" });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       await load();
       setNotice(body.activated?.length ? `Pembayaran diterima. Paket ${body.plan?.name ?? ""} aktif.` : "Belum ada pembayaran baru yang masuk. Kalau baru saja membayar, tunggu beberapa menit.");
     } catch (err) {
-      setError(err instanceof Error && err.message ? err.message : "Gagal memeriksa pembayaran.");
+      setError(friendlyError(err instanceof Error ? err.message : "", "Gagal memeriksa pembayaran. Coba lagi sebentar lagi."));
     } finally {
       setChecking(false);
     }

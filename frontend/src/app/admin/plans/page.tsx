@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { useAdminAuth } from "@/lib/useAuthToken";
 
 type Plan = {
@@ -34,7 +35,7 @@ export default function AdminPlansPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch("/api/admin/plans", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: { items?: Plan[] }) => setPlans(body.items ?? []))
       .catch(() => setError("Gagal memuat paket"))
       .finally(() => setLoading(false));
@@ -50,8 +51,8 @@ export default function AdminPlansPage() {
       const { isNew, ...plan } = draft;
       const payload = { ...plan, duration_days: plan.duration_days ? Number(plan.duration_days) : null };
       const response = await apiFetch(isNew ? "/api/admin/plans" : `/api/admin/plans/${plan.id}`, token, { method: isNew ? "POST" : "PUT", body: JSON.stringify(payload) });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error);
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(/plan id already exists/i.test(String(body.error)) ? "ID paket itu sudah dipakai. Pilih ID lain." : friendlyError(body.error, ""));
       setPlans((current) => (isNew ? [...current, body] : current.map((item) => (item.id === body.id ? body : item))).sort((a, b) => a.price - b.price));
       setDraft(null);
       setNotice(`Paket ${body.name} tersimpan. Halaman harga ikut berubah.`);

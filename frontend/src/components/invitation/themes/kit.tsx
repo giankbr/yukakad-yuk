@@ -125,10 +125,13 @@ export function toDate(value?: string) {
   return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
-/** Format a date in Indonesian; returns the raw value when it isn't a valid date. */
+/** Placeholder shown wherever a date is missing or can't be parsed. */
+export const DATE_TBA = "Tanggal menyusul";
+
+/** Format a date in Indonesian; returns "Tanggal menyusul" when it isn't a valid date. */
 export function formatDate(value: string | undefined, options: Intl.DateTimeFormatOptions = { weekday: "long", day: "numeric", month: "long", year: "numeric" }) {
   const date = toDate(value);
-  if (!date) return value ?? "";
+  if (!date) return DATE_TBA;
   return new Intl.DateTimeFormat("id-ID", { timeZone: TZ, ...options }).format(date);
 }
 
@@ -201,7 +204,9 @@ export function useCountdown(value?: string) {
     return () => clearInterval(id);
   }, [target]);
   return useMemo(() => {
-    if (!target || now === null) return { days: "--", hours: "--", minutes: "--", seconds: "--", done: false, ready: false };
+    // No (valid) date yet: render nothing in the digits; themes may hide the block via `valid`.
+    if (!target) return { days: "", hours: "", minutes: "", seconds: "", done: false, ready: false, valid: false };
+    if (now === null) return { days: "--", hours: "--", minutes: "--", seconds: "--", done: false, ready: false, valid: true };
     const diff = Math.max(0, target - now);
     const pad = (n: number) => String(n).padStart(2, "0");
     return {
@@ -211,6 +216,7 @@ export function useCountdown(value?: string) {
       seconds: pad(Math.floor(diff / 1000) % 60),
       done: diff === 0,
       ready: true,
+      valid: true,
     };
   }, [target, now]);
 }
@@ -226,7 +232,8 @@ export type Attendance = "yes" | "no" | "maybe";
 export type RsvpInput = { name: string; attendance: Attendance; guests?: number; message?: string; diet?: string };
 
 export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "guestToken" | "demo">) {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  /** `closed`: the couple switched on thank-you mode, the backend no longer accepts RSVPs (409 rsvp_closed). */
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error" | "closed">("idle");
   const submit = useCallback(async (input: RsvpInput) => {
     if (status === "sending") return;
     if (demo) { setStatus("sent"); return; }
@@ -242,7 +249,12 @@ export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "g
           message: `${input.name}: ${input.message ?? ""}${input.diet ? ` [Catatan makanan: ${input.diet}]` : ""}`.trim(),
         }),
       });
-      setStatus(response.ok ? "sent" : "error");
+      if (response.ok) { setStatus("sent"); return; }
+      if (response.status === 409) {
+        const body = await response.json().catch(() => null) as { code?: string } | null;
+        if (body?.code === "rsvp_closed") { setStatus("closed"); return; }
+      }
+      setStatus("error");
     } catch {
       setStatus("error");
     }
@@ -271,6 +283,8 @@ export type Wish = { id: string; name: string; message: string; created_at?: str
 export function useWishes({ slug, guestToken, demo, seed = [] }: Pick<ThemeProps, "slug" | "guestToken" | "demo"> & { seed?: Wish[] }) {
   const [wishes, setWishes] = useState<Wish[]>(demo ? seed : []);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  /** The last sent wish waits for the couple's approval before it's shown (moderation on). */
+  const [pending, setPending] = useState(false);
   useEffect(() => {
     if (demo) return;
     let alive = true;
@@ -284,6 +298,7 @@ export function useWishes({ slug, guestToken, demo, seed = [] }: Pick<ThemeProps
     if (!name.trim() || !message.trim()) return;
     if (demo) {
       setWishes(list => [{ id: `local-${Date.now()}`, name, message, created_at: new Date().toISOString() }, ...list]);
+      setPending(false);
       setStatus("sent");
       return;
     }
@@ -293,13 +308,32 @@ export function useWishes({ slug, guestToken, demo, seed = [] }: Pick<ThemeProps
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ guest_token: guestToken, name, message }),
       });
-      // New wishes may need moderation before they're published, so don't add them to the list.
-      setStatus(response.ok ? "sent" : "error");
+      if (!response.ok) { setStatus("error"); return; }
+      // The backend answers with the stored wish; status "pending" means it's held for moderation.
+      const wish = await response.json().catch(() => null) as (Wish & { status?: string }) | null;
+      const published = wish?.status === "published";
+      setPending(!published);
+      if (published && wish?.id) setWishes(list => [{ id: wish.id, name: wish.name ?? name, message: wish.message ?? message, created_at: wish.created_at }, ...list.filter(item => item.id !== wish.id)]);
+      setStatus("sent");
     } catch {
       setStatus("error");
     }
   }, [demo, guestToken, slug]);
-  return { wishes, send, status, reset: () => setStatus("idle") };
+  return {
+    wishes, send, status, pending,
+    /** Confirmation line after sending (live mode). */
+    sentNote: pending ? "Ucapanmu akan tampil setelah disetujui oleh mempelai." : "Terima kasih atas doa dan ucapannya.",
+    reset: () => setStatus("idle"),
+  };
+}
+
+/** Confirmation line for themes with a combined RSVP + wish form (live mode). */
+export function sentSummary(rsvp: ReturnType<typeof useRsvp>, wishes: ReturnType<typeof useWishes>) {
+  const rsvpSent = rsvp.status === "sent";
+  const wishSent = wishes.status === "sent";
+  if (rsvpSent && wishSent) return wishes.pending ? "Konfirmasi kehadiranmu sudah kami terima. Ucapanmu akan tampil setelah disetujui oleh mempelai." : "Konfirmasi dan ucapanmu sudah kami terima.";
+  if (rsvpSent) return "Konfirmasi kehadiranmu sudah kami terima.";
+  return wishes.sentNote;
 }
 
 /** "2 jam lalu" style relative time. */
@@ -449,7 +483,7 @@ export function RsvpForm({ rsvp, guestName, demo, labels, initialAttendance = "y
   const [guests, setGuests] = useState(1);
   const thanks = useThankYou();
   const party = useCelebrate(rsvp.status === "sent");
-  if (thanks.active) {
+  if (thanks.active || rsvp.status === "closed") {
     return (
       <div className={kit.state} role="status">
         <span className={kit.badge}><Icon d={icons.heart} size={24} strokeWidth={2.4} /></span>
@@ -502,7 +536,7 @@ export function WishForm({ wishes, guestName, demo, submitLabel }: { wishes: Ret
       <div className={kit.state} role="status">
         <span ref={party} className={`${kit.badge} ${kit.badgePop}`}><Icon d={icons.heart} size={24} strokeWidth={2.4} /></span>
         <strong>Ucapan terkirim</strong>
-        <p>{demo ? "Ucapanmu muncul di daftar (pratinjau)." : "Terima kasih atas doa dan ucapannya."}</p>
+        <p>{demo ? "Ucapanmu muncul di daftar (pratinjau)." : wishes.sentNote}</p>
         <button type="button" className={kit.submit} style={{ minWidth: 180 }} onClick={wishes.reset}>Tulis lagi</button>
       </div>
     );
@@ -566,6 +600,8 @@ export function useMusic(music?: InvitationData["music"]) {
   const audio = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
   const [opened, setOpened] = useState(false);
+  /** The track couldn't be loaded or played (broken link, unsupported format). */
+  const [failed, setFailed] = useState(false);
   const url = safeUrl(music?.url) ?? (music?.url?.startsWith("/") ? music.url : undefined);
   useEffect(() => {
     if (!url) return;
@@ -575,11 +611,13 @@ export function useMusic(music?: InvitationData["music"]) {
     audio.current = element;
     const onPlay = () => setPlaying(true);
     const onPause = () => setPlaying(false);
+    const onError = () => { setFailed(true); setPlaying(false); };
     element.addEventListener("play", onPlay);
     element.addEventListener("pause", onPause);
+    element.addEventListener("error", onError);
     const onOpen = () => {
       setOpened(true);
-      if (music?.autoplay) void element.play().catch(() => undefined);
+      if (music?.autoplay) void element.play().catch(playFailed(onError));
     };
     window.addEventListener(OPEN_EVENT, onOpen);
     // Rendered without a cover (?open=1): show the toggle straight away.
@@ -590,22 +628,33 @@ export function useMusic(music?: InvitationData["music"]) {
       element.pause();
       element.removeEventListener("play", onPlay);
       element.removeEventListener("pause", onPause);
+      element.removeEventListener("error", onError);
       audio.current = null;
+      setFailed(false);
     };
   }, [url, music?.autoplay]);
   const toggle = useCallback(() => {
     const element = audio.current;
     if (!element) return;
-    if (element.paused) void element.play().catch(() => undefined);
+    if (element.paused) void element.play().catch(playFailed(() => { setFailed(true); setPlaying(false); }));
     else element.pause();
   }, []);
-  return { available: Boolean(url), visible: Boolean(url) && opened, playing, toggle };
+  return { available: Boolean(url), visible: Boolean(url) && opened, playing: playing && !failed, failed, toggle };
+}
+
+/** `play()` rejection handler: autoplay blocks (NotAllowedError) and interrupted loads (AbortError) aren't failures. */
+function playFailed(onFail: () => void) {
+  return (error: unknown) => {
+    const name = error instanceof DOMException ? error.name : "";
+    if (name !== "NotAllowedError" && name !== "AbortError") onFail();
+  };
 }
 
 /** Generic floating music toggle, rendered by the invitation page next to themes without their own player. */
 export function MusicPlayer({ music, accent = "rgba(17,16,16,.72)" }: { music?: InvitationData["music"]; accent?: string }) {
   const player = useMusic(music);
-  if (!player.visible) return null;
+  // A broken track: drop the toggle instead of offering a button that does nothing.
+  if (!player.visible || player.failed) return null;
   return (
     <button type="button" onClick={player.toggle} aria-pressed={player.playing} aria-label={player.playing ? "Jeda musik" : "Putar musik"}
       style={{ position: "fixed", right: "max(14px, calc(50% - 215px + 14px))", bottom: 104, zIndex: 60, width: 44, height: 44, display: "grid", placeItems: "center", border: "1px solid rgba(255,255,255,.35)", borderRadius: 999, background: accent, color: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,.25)", backdropFilter: "blur(8px)", cursor: "pointer" }}>

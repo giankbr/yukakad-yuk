@@ -6,6 +6,7 @@ import { apiFetch } from "@/lib/api";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "@/components/dashboard/editor.module.css";
 import { GREETINGS } from "@/lib/greetings";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Couple = {
   groom_name: string; bride_name: string;
@@ -13,7 +14,7 @@ type Couple = {
   groom_parents?: string; bride_parents?: string;
   groom_photo?: string; bride_photo?: string;
 };
-type Invitation = { id: string; slug: string; title: string; published: boolean; couple?: Couple };
+type Invitation = { id: string; slug: string; title: string; couple?: Couple };
 type Side = "bride" | "groom";
 
 const EMPTY: Couple = { groom_name: "", bride_name: "" };
@@ -32,20 +33,25 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
 
   const invitationId = routeParams?.id;
 
+  const gate = usePageGate(invitationId, token, "couple");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
+    if (!ready || !token || !invitationId || !allowed) return;
     Promise.all([
-      apiFetch(`/api/invitations/${invitationId}`, token).then((r) => r.json()),
-      apiFetch(`/api/invitations/${invitationId}/settings`, token).then((r) => r.json()).catch(() => ({})),
+      getJson<Invitation>(`/api/invitations/${invitationId}`, token),
+      getJson<{ opening_text?: string }>(`/api/invitations/${invitationId}/settings`, token),
     ])
-      .then(([body, settings]: [Invitation, { opening_text?: string }]) => {
-        setInvitation(body);
-        setCouple({ ...EMPTY, ...body.couple });
-        setNote(settings.opening_text ?? "");
+      .then(([body, settings]) => {
+        if (lostAccess(body.status)) { lose(); return; }
+        if (!body.ok || !body.data) { setError("Gagal memuat data mempelai. Coba muat ulang halaman."); return; }
+        setInvitation(body.data);
+        setCouple({ ...EMPTY, ...body.data.couple });
+        setNote(settings.data?.opening_text ?? "");
       })
-      .catch(() => setError("Gagal memuat data mempelai"))
       .finally(() => setLoading(false));
-  }, [ready, token, invitationId]);
+  }, [ready, token, invitationId, allowed, lose]);
 
   const set = (key: keyof Couple, value: string) => { setCouple((c) => ({ ...c, [key]: value })); setNotice(""); };
 
@@ -61,8 +67,9 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
       const body = await response.json();
       if (!response.ok) throw new Error(body.error);
       set(side === "bride" ? "bride_photo" : "groom_photo", body.path);
-    } catch {
-      setError("Foto belum terunggah. Gunakan JPG, PNG, atau WebP maksimal 10 MB.");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "";
+      setError(message && !/^unexpected|json/i.test(message) ? `Foto belum terunggah: ${friendly(message)}` : "Foto belum terunggah. Gunakan JPG, PNG, atau WebP maksimal 10 MB.");
     } finally {
       setUploading(null);
     }
@@ -78,20 +85,31 @@ export default function CouplePage({ params }: { params: Promise<{ id: string }>
       const [response, settings] = await Promise.all([
         apiFetch(`/api/invitations/${invitation.id}`, token, {
           method: "PUT",
-          body: JSON.stringify({ slug: invitation.slug, title: invitation.title, published: invitation.published, couple }),
+          // `published` is left out on purpose: the backend keeps the current publish state.
+          body: JSON.stringify({ slug: invitation.slug, title: invitation.title, couple }),
         }),
         apiFetch(`/api/invitations/${invitation.id}/settings`, token, { method: "PATCH", body: JSON.stringify({ opening_text: note.trim() }) }),
       ]);
-      if (!response.ok || !settings.ok) throw new Error();
+      if (lostAccess(response.status)) { lose(); return; }
+      const failed = !response.ok ? response : !settings.ok ? settings : null;
+      if (failed) throw new Error(((await failed.json().catch(() => ({}))) as { error?: string }).error ?? "");
       setNotice("Tersimpan.");
-    } catch {
-      setError("Gagal menyimpan perubahan");
+    } catch (err) {
+      setError(friendly(err, "Gagal menyimpan perubahan. Coba lagi."));
     } finally {
       setSaving(false);
     }
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="couple" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   function person(side: Side, title: string, parentsHint: string) {
     const photo = side === "bride" ? couple.bride_photo : couple.groom_photo;

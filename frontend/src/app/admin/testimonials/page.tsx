@@ -20,7 +20,7 @@ export default function AdminTestimonialsPage() {
   const load = useCallback(() => {
     if (!token) return;
     apiFetch("/api/admin/testimonials", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: { items?: Testimonial[] }) => setItems(body.items ?? []))
       .catch(() => setError("Gagal memuat testimoni"))
       .finally(() => setLoading(false));

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { useAdminAuth } from "@/lib/useAuthToken";
 
 type Template = { id: string; name: string; slug: string; category: string; is_premium: boolean; tier: string; status: string; preview_image?: string; sort_order: number };
@@ -19,7 +20,7 @@ export default function AdminTemplatesPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch("/api/admin/templates", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then((body: { items?: Template[] }) => setItems((body.items ?? []).slice().sort((a, b) => a.sort_order - b.sort_order)))
       .catch(() => setError("Gagal memuat tema"))
       .finally(() => setLoading(false));
@@ -33,8 +34,8 @@ export default function AdminTemplatesPage() {
       const response = path
         ? await apiFetch(`/api/admin/templates/${item.id}/${path}`, token, { method: "POST" })
         : await apiFetch(`/api/admin/templates/${item.id}`, token, { method: "PATCH", body: JSON.stringify(patch) });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error);
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(friendlyError(body.error, ""));
       setItems((current) => current.map((entry) => (entry.id === item.id ? { ...entry, ...body } : entry)));
     } catch (err) {
       setError(err instanceof Error && err.message ? `${item.name}: ${err.message}` : `${item.name} belum tersimpan.`);

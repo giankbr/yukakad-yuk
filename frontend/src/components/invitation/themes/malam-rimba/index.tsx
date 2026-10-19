@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, coupleLabel, dateParts, giftInfo, guestLabel,
-  mapsHref, storyItems, toDate, useCopy, useCountdown, useRsvp, useWishes,
+  mapsHref, storyItems, toDate, useCopy, useCountdown, DATE_TBA, sentSummary, useRsvp, useThankYou, useWishes,
   type Attendance, type ThemeProps, type Wish,
 } from "../kit";
 import { celebrate } from "@/lib/celebrate";
@@ -31,7 +31,7 @@ function Head({ id, children }: { id: string; children: string }) {
 /** "Sabtu · 12 Desember 2026" */
 function dotDate(value?: string) {
   const p = dateParts(value);
-  return p.day ? `${p.weekday} · ${p.day} ${p.month} ${p.year}` : (value ?? "");
+  return p.day ? `${p.weekday} · ${p.day} ${p.month} ${p.year}` : DATE_TBA;
 }
 
 /** Father's family name from "Putri dari Bapak Hendra Gunawan & Ibu Sinta" → "Gunawan". */
@@ -62,6 +62,9 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
   const countdown = useCountdown(data.date);
   const rsvp = useRsvp({ slug, guestToken, demo });
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
+  const thanks = useThankYou();
+  // Thank-you mode (or the server already closed RSVPs): only wishes can still be sent.
+  const rsvpClosed = thanks.active || rsvp.status === "closed";
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
   const gallery = data.gallery;
@@ -86,7 +89,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
     const message = String(form.get("message") ?? "").trim();
     const guests = attendance === "no" ? 1 : Number(form.get("guests")) || 1;
     if (!name) return;
-    void rsvp.submit({ name, attendance, guests, message, diet: String(form.get("diet") ?? "").trim() || undefined });
+    if (!rsvpClosed) void rsvp.submit({ name, attendance, guests, message, diet: String(form.get("diet") ?? "").trim() || undefined });
     if (message) void wishes.send(name, message);
   };
 
@@ -148,11 +151,13 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
 
         <section className={s.band} aria-labelledby="mr-count">
           <Head id="mr-count">Menuju Hari Bahagia</Head>
-          <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
-            {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
-              <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
-            ))}
-          </div>
+          {countdown.valid ? (
+            <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
+              {([["Hari", countdown.days], ["Jam", countdown.hours], ["Menit", countdown.minutes], ["Detik", countdown.seconds]] as const).map(([unit, value]) => (
+                <div key={unit} className={s.countBox}><b><Tick value={value} /></b><small>{unit}</small></div>
+              ))}
+            </div>
+          ) : <p className={s.countTba}>{DATE_TBA}</p>}
           {calendar && <a className={s.btn} href={calendar} target="_blank" rel="noreferrer"><Lucide icon={ic.calendarPlus} size={15} />Simpan ke Kalender</a>}
         </section>
 
@@ -249,7 +254,7 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
               <div ref={sentRef} className={s.sent} role="status">
                 <span className={s.iconDot}><Lucide icon={ic.check} size={18} /></span>
                 <strong>Terima kasih</strong>
-                <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : "Konfirmasi dan ucapanmu sudah kami terima."}</p>
+                <p>{demo ? "Ini pratinjau — jawaban contoh tidak dikirim." : sentSummary(rsvp, wishes)}</p>
                 <button type="button" className={s.btn} onClick={() => { rsvp.reset(); wishes.reset(); }}>Tulis lagi</button>
               </div>
             ) : (
@@ -259,19 +264,21 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
                     defaultValue={data.guestName && data.guestName !== "Tamu Undangan" ? data.guestName : ""} />
                 </label>
                 <label className={s.field}>Ucapan
-                  <textarea name="message" maxLength={500} rows={3} placeholder="Tulis doa & ucapan…" />
+                  <textarea name="message" required={rsvpClosed} maxLength={500} rows={3} placeholder="Tulis doa & ucapan…" />
                 </label>
-                <fieldset className={s.choices}>
-                  <legend className={s.srOnly}>Kehadiran</legend>
-                  {(Object.keys(ATTEND) as Attendance[]).map(key => (
-                    <label key={key} className={attendance === key ? s.chosen : undefined}>
-                      <input type="radio" name="attendance" value={key} checked={attendance === key} onChange={() => setAttendance(key)} />
-                      {ATTEND[key]}
-                    </label>
-                  ))}
-                </fieldset>
-                {attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
-                {attendance !== "no" && <DietaryField className={s.field} />}
+                {rsvpClosed ? <div className={s.closed} role="status"><strong>Konfirmasi kehadiran sudah ditutup</strong><p>Terima kasih atas doa dan perhatiannya. Ucapan &amp; doa masih bisa dikirim lewat form ini.</p></div> : (
+                  <fieldset className={s.choices}>
+                    <legend className={s.srOnly}>Kehadiran</legend>
+                    {(Object.keys(ATTEND) as Attendance[]).map(key => (
+                      <label key={key} className={attendance === key ? s.chosen : undefined}>
+                        <input type="radio" name="attendance" value={key} checked={attendance === key} onChange={() => setAttendance(key)} />
+                        {ATTEND[key]}
+                      </label>
+                    ))}
+                  </fieldset>
+                )}
+                {!rsvpClosed && attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+                {!rsvpClosed && attendance !== "no" && <DietaryField className={s.field} />}
                 {(rsvp.status === "error" || wishes.status === "error") && <p className={s.error} role="alert">Belum terkirim. Periksa koneksi lalu coba lagi.</p>}
                 <button type="submit" className={`${s.btn} ${s.submit}`} disabled={sending}>{sending ? "Mengirim…" : "Kirim Ucapan"}</button>
               </form>

@@ -10,6 +10,7 @@ import {
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import type { InvitationExtras, WishlistItem } from "@/components/invitation/types";
 import { apiFetch } from "@/lib/api";
+import { friendly, GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
 import styles from "./sections.module.css";
 
@@ -79,17 +80,23 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
   const [open, setOpen] = useState<Key | "thankYou" | null>(null);
   const [uploading, setUploading] = useState(false);
 
+  const [loadFailed, setLoadFailed] = useState(false);
+  const gate = usePageGate(invitationId, token, "sections");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
-    apiFetch(`/api/invitations/${invitationId}/settings`, token)
-      .then(response => response.json())
-      .then((body: { sections_config?: unknown }) => {
-        const config = body.sections_config;
+    if (!ready || !token || !invitationId || !allowed) return;
+    getJson<{ sections_config?: unknown }>(`/api/invitations/${invitationId}/settings`, token)
+      .then((result) => {
+        if (lostAccess(result.status)) { lose(); return; }
+        // Never show the editor on a failed load: saving an empty config would wipe every section.
+        if (!result.ok) { setLoadFailed(true); setError("Section gagal dimuat. Coba muat ulang halaman."); return; }
+        const config = result.data?.sections_config;
         setExtras(config && typeof config === "object" && !Array.isArray(config) ? config as InvitationExtras : {});
       })
-      .catch(() => setError("Section gagal dimuat. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
-  }, [ready, token, invitationId]);
+  }, [ready, token, invitationId, allowed, lose]);
 
   function update<K extends keyof InvitationExtras>(key: K, value: InvitationExtras[K]) {
     setExtras(current => ({ ...current, [key]: value }));
@@ -113,7 +120,10 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
     setError("");
     try {
       // Re-read wishlist claims made by guests since this page was opened so they aren't overwritten.
-      const latest = await apiFetch(`/api/invitations/${invitationId}/settings`, token).then(r => r.json()).catch(() => ({}));
+      const latestResult = await getJson<{ sections_config?: InvitationExtras }>(`/api/invitations/${invitationId}/settings`, token);
+      if (lostAccess(latestResult.status)) { lose(); return; }
+      if (!latestResult.ok) throw new Error(latestResult.error);
+      const latest = latestResult.data;
       const claims = new Map<string, string>(((latest?.sections_config?.wishlist?.items ?? []) as WishlistItem[])
         .filter(item => item.claimed_by).map(item => [item.id, item.claimed_by as string]));
       const base: InvitationExtras = extras.wishlist
@@ -128,12 +138,13 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
         easyRead: latestConfig.easyRead ?? extras.easyRead,
       };
       const response = await apiFetch(`/api/invitations/${invitationId}/settings`, token, { method: "PATCH", body: JSON.stringify({ sections_config: merged }) });
-      if (!response.ok) throw new Error();
+      if (!response.ok) throw new Error(((await response.json().catch(() => ({}))) as { error?: string }).error ?? "");
       setExtras(merged);
       setDirty(false);
       setNotice("Tersimpan. Section langsung tampil di semua tema undangan.");
-    } catch {
-      setError("Belum tersimpan. Periksa koneksi lalu coba lagi.");
+    } catch (err) {
+      const message = friendly(err, "");
+      setError(message ? `Belum tersimpan: ${message}` : "Belum tersimpan. Periksa koneksi lalu coba lagi.");
     } finally {
       setSaving(false);
     }
@@ -147,7 +158,7 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
       form.append("file", file);
       form.append("type", "cover");
       const response = await apiFetch(`/api/invitations/${invitationId}/media`, token, { method: "POST", body: form });
-      const body = await response.json();
+      const body = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(body.error);
       patch("child", { photo: body.path });
     } catch {
@@ -158,6 +169,14 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
   }
 
   if (!ready || !invitationId || !token) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="sections" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
 
   const groups = Array.from(new Set(META.map(item => item.group)));
   const thankMode = extras.thankYou?.mode ?? "auto";
@@ -336,7 +355,7 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
 
       {error && <p role="alert" className="dashboard-state dashboard-state-error">{error}</p>}
 
-      {loading ? <p className="dashboard-state">Memuat section…</p> : (
+      {loading ? <p className="dashboard-state">Memuat section…</p> : loadFailed ? null : (
         <div className={styles.wrap}>
           {groups.map(group => (
             <section key={group} className={styles.group} aria-label={group}>
@@ -389,7 +408,7 @@ export default function SectionsPage({ params }: { params: Promise<{ id: string 
 
       <div className={styles.saveBar} data-dirty={dirty || undefined}>
         <span role="status">{notice || (dirty ? "Ada perubahan yang belum disimpan." : "Semua perubahan tersimpan.")}</span>
-        <button type="button" className={styles.save} disabled={saving || !dirty} onClick={save}>{saving ? "Menyimpan…" : "Simpan perubahan"}</button>
+        <button type="button" className={styles.save} disabled={saving || !dirty || loadFailed} onClick={save}>{saving ? "Menyimpan…" : "Simpan perubahan"}</button>
       </div>
     </DashboardShell>
   );

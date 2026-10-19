@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
-import { apiFetch } from "@/lib/api";
+import { apiFetch, saveProfile, saveToken } from "@/lib/api";
+import { friendlyError } from "@/lib/errors";
 import { useAuthToken } from "@/lib/useAuthToken";
 
 type Profile = {
@@ -35,10 +36,7 @@ export default function DashboardSettingsPage() {
       .then((body: Profile) => {
         setProfile(body);
         setName(body.name ?? "");
-        if (typeof window !== "undefined") {
-          window.localStorage.setItem("yukakad_name", body.name ?? "");
-          window.localStorage.setItem("yukakad_email", body.email ?? "");
-        }
+        saveProfile({ name: body.name ?? "", email: body.email ?? "" });
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
@@ -56,12 +54,10 @@ export default function DashboardSettingsPage() {
         body: JSON.stringify({ name: name.trim() }),
       });
       const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Profil gagal disimpan");
+      if (!response.ok) throw new Error(friendlyError(body.error, "Profil gagal disimpan"));
       setProfile(body);
       setName(body.name ?? "");
-      if (typeof window !== "undefined") {
-        window.localStorage.setItem("yukakad_name", body.name ?? "");
-      }
+      saveProfile({ name: body.name ?? "" });
       setSaved(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Profil gagal disimpan");
@@ -78,10 +74,12 @@ export default function DashboardSettingsPage() {
     setPwSaving(true);
     try {
       const response = await apiFetch("/api/auth/change-password", token, { method: "POST", body: JSON.stringify({ current_password: pw.current, new_password: pw.next }) });
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error);
+      const body = (await response.json().catch(() => ({}))) as { error?: string; token?: string };
+      if (!response.ok) throw new Error(friendlyError(body.error, "Password belum diganti."));
+      // Changing the password revokes every earlier session, including this one: keep the fresh token.
+      if (body.token) saveToken(body.token);
       setPw({ current: "", next: "", confirm: "" });
-      setPwStatus({ ok: true, text: "Password berhasil diganti." });
+      setPwStatus({ ok: true, text: "Password berhasil diganti. Sesi di perangkat lain otomatis keluar." });
     } catch (err) {
       setPwStatus({ ok: false, text: err instanceof Error && err.message ? err.message : "Password belum diganti." });
     } finally {

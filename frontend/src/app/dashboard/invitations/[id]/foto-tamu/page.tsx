@@ -7,6 +7,7 @@ import styles from "@/components/dashboard/editor.module.css";
 import { apiFetch } from "@/lib/api";
 import { getSectionsConfig, patchSectionsConfig } from "@/lib/sections-config";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
+import { GateNotice, getJson, lostAccess, usePageGate } from "../_lib";
 
 type Photo = { id: string; url: string; uploader_name?: string; status: "approved" | "pending" | "hidden"; created_at: string };
 type Filter = "" | "pending" | "approved" | "hidden";
@@ -27,24 +28,30 @@ export default function GuestPhotosPage({ params }: { params: Promise<{ id: stri
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
+  const gate = usePageGate(invitationId, token, "photos");
+  const { lose } = gate;
+  const allowed = gate.status === "ok";
+
   const load = useCallback(async () => {
     if (!token || !invitationId) return;
     const [list, sections, invitation] = await Promise.all([
-      apiFetch(`/api/invitations/${invitationId}/guest-photos`, token).then((r) => r.json()),
-      getSectionsConfig(invitationId, token),
-      apiFetch(`/api/invitations/${invitationId}`, token).then((r) => r.json()),
+      getJson<{ items?: Photo[]; storage_ready?: boolean }>(`/api/invitations/${invitationId}/guest-photos`, token),
+      getSectionsConfig(invitationId, token).catch(() => ({} as Awaited<ReturnType<typeof getSectionsConfig>>)),
+      getJson<{ slug?: string }>(`/api/invitations/${invitationId}`, token),
     ]);
-    setPhotos(list.items ?? []);
-    setStorageReady(list.storage_ready !== false);
+    if (lostAccess(list.status) || lostAccess(invitation.status)) { lose(); return; }
+    if (!list.ok) { setError(list.error || "Gagal memuat foto."); return; }
+    setPhotos(list.data?.items ?? []);
+    setStorageReady(list.data?.storage_ready !== false);
     setConfig(sections.guestPhotos ?? {});
-    setSlug(invitation.slug ?? "");
-  }, [token, invitationId]);
+    setSlug(invitation.data?.slug ?? "");
+  }, [token, invitationId, lose]);
 
   useEffect(() => {
-    if (!ready || !token || !invitationId) return;
-    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat foto")).finally(() => setLoading(false)); }, 0);
+    if (!ready || !token || !invitationId || !allowed) return;
+    const timer = setTimeout(() => { load().catch(() => setError("Gagal memuat foto.")).finally(() => setLoading(false)); }, 0);
     return () => clearTimeout(timer);
-  }, [ready, token, invitationId, load]);
+  }, [ready, token, invitationId, allowed, load]);
 
   const link = slug && typeof window !== "undefined" ? `${window.location.origin}/invitation/${slug}#extra-foto-tamu` : "";
   useEffect(() => {
@@ -71,19 +78,29 @@ export default function GuestPhotosPage({ params }: { params: Promise<{ id: stri
   async function setStatus(photo: Photo, status: Photo["status"]) {
     if (!token || !invitationId) return;
     setBusy(photo.id);
-    const response = await apiFetch(`/api/invitations/${invitationId}/guest-photos/${photo.id}`, token, { method: "PATCH", body: JSON.stringify({ status }) });
-    if (response.ok) setPhotos((current) => current.map((p) => (p.id === photo.id ? { ...p, status } : p)));
+    setError("");
+    const response = await apiFetch(`/api/invitations/${invitationId}/guest-photos/${photo.id}`, token, { method: "PATCH", body: JSON.stringify({ status }) }).catch(() => null);
+    if (response?.ok) setPhotos((current) => current.map((p) => (p.id === photo.id ? { ...p, status } : p)));
+    else setError("Status foto belum tersimpan. Coba lagi.");
     setBusy(null);
   }
 
   function printCard() {
     const win = window.open("", "_blank", "width=600,height=800");
     if (!win || !qr) return;
-    win.document.write(`<!doctype html><title>QR foto tamu</title><style>body{margin:0;font-family:system-ui,sans-serif}.card{width:10cm;margin:1cm auto;padding:1cm;border:1px dashed #999;text-align:center}img{width:6cm;height:6cm}h1{margin:.2cm 0;font-size:20pt}p{margin:.2cm 0;color:#444;font-size:11pt}</style><div class="card"><p>Bagikan momen hari ini</p><h1>Kirim fotomu 📸</h1><img src="${qr}"><p>Scan, lalu ketuk <b>Kirim foto</b>.<br>Fotomu tampil di layar &amp; undangan.</p></div><script>onload=()=>print()</script>`);
+    win.document.write(`<!doctype html><title>QR foto tamu</title><style>body{margin:0;font-family:system-ui,sans-serif}.card{width:10cm;margin:1cm auto;padding:1cm;border:1px dashed #999;text-align:center}img{width:6cm;height:6cm}h1{margin:.2cm 0;font-size:20pt}p{margin:.2cm 0;color:#444;font-size:11pt}</style><div class="card"><p>Bagikan momen hari ini</p><h1>Kirim fotomu</h1><img src="${qr}"><p>Scan, lalu ketuk <b>Kirim foto</b>.<br>Fotomu tampil di layar &amp; undangan.</p></div><script>onload=()=>print()</script>`);
     win.document.close();
   }
 
   if (!ready || !invitationId) return null;
+
+  if (!allowed) {
+    return (
+      <DashboardShell active="photos" invitationId={invitationId}>
+        <GateNotice gate={gate} invitationId={invitationId} />
+      </DashboardShell>
+    );
+  }
   const visible = photos.filter((p) => !filter || p.status === filter);
   const pending = photos.filter((p) => p.status === "pending").length;
 

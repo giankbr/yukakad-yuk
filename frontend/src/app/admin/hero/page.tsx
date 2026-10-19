@@ -25,7 +25,7 @@ export default function AdminHeroPage() {
   useEffect(() => {
     if (!ready || !token) return;
     apiFetch("/api/admin/site-content/hero", token)
-      .then((r) => r.json())
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(String(r.status)))))
       .then(setHero)
       .catch(() => setError("Gagal memuat konten hero"))
       .finally(() => setLoading(false));
