@@ -13,7 +13,7 @@ type Row = {
   user?: { name: string; email: string };
   wallet?: { received: number; fee: number; paid_out: number; requested: number; available: number };
 };
-type Settings = { fee_percent: number; min_payout: number };
+type Settings = { online_enabled?: boolean; fee_percent: number; min_payout: number };
 type Filter = "requested" | "paid" | "rejected" | "";
 
 const rupiah = (value: number) => `Rp${Math.round(value).toLocaleString("id-ID")}`;
@@ -96,7 +96,11 @@ export default function AdminPayoutsPage() {
 
       <div className={styles.form} style={{ maxWidth: "none" }}>
         <form className={styles.panel} onSubmit={saveSettings} aria-label="Pengaturan">
-          <div className={styles.panelHead}><div><h2>Pengaturan</h2><p>Berlaku untuk semua undangan. Biaya dipotong dari saldo sebelum dicairkan.</p></div></div>
+          <div className={styles.panelHead}>
+            <div><h2>Pengaturan</h2><p>Berlaku untuk semua undangan. Biaya dipotong dari saldo sebelum dicairkan.</p></div>
+            <label className={styles.check}><input type="checkbox" checked={Boolean(settings.online_enabled)} onChange={(e) => setSettings({ ...settings, online_enabled: e.target.checked })} /> {settings.online_enabled ? "Amplop online dibuka" : "Amplop online ditutup"}</label>
+          </div>
+          <p className={styles.hint} style={{ margin: 0 }}>Selama ditutup, pengantin tidak bisa mengaktifkan amplop online dan tamu hanya melihat transfer langsung ke rekening pengantin. Buka setelah tinjauan legal &amp; izin penampungan dana selesai.</p>
           <div className={styles.row3} style={{ alignItems: "end" }}>
             <label className={styles.field}><span>Biaya layanan (%)</span>
               <input type="number" min={0} max={50} step={0.1} value={settings.fee_percent} onChange={(e) => setSettings({ ...settings, fee_percent: Number(e.target.value) })} />

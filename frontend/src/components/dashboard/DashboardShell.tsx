@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { can, landingPath, ROLE_LABELS, useInvitationAccess } from "@/lib/invitation-access";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
@@ -202,10 +202,12 @@ export function DashboardShell({
 		.map((n) => n[0]?.toUpperCase() ?? "")
 		.join("");
 
+	const router = useRouter();
 	function handleLogout() {
 		if (typeof window === "undefined") return;
 		window.localStorage.clear();
-		window.location.href = "/auth/login";
+		router.replace("/auth/login");
+		router.refresh();
 	}
 
 	const home = variant === "admin" ? "/admin" : "/dashboard";

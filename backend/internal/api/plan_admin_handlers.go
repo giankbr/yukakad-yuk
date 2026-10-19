@@ -58,7 +58,7 @@ func (s *Server) handleAdminPlans(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	plan.Name = strings.TrimSpace(plan.Name)
-	if plan.Name == "" || plan.Price < 0 || plan.MaxGuests < 0 || (plan.DurationDays != nil && *plan.DurationDays < 0) {
+	if plan.Name == "" || plan.Price < 0 || plan.MaxGuests < 0 || plan.MaxTeamMembers < 0 || (plan.DurationDays != nil && *plan.DurationDays < 0) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "name is required and numbers cannot be negative"})
 		return
 	}

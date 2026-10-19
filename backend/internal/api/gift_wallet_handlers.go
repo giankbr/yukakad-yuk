@@ -16,14 +16,18 @@ import (
 // couple withdraws the balance with a payout request that an admin transfers manually.
 
 type giftSettings struct {
-	FeePercent float64 `json:"fee_percent"`
-	MinPayout  float64 `json:"min_payout"`
+	// OnlineEnabled is the platform-wide switch for holding guests' money (amplop online lewat Rawuh).
+	// Off by default until the legal / BI review is done; direct transfers to the couple are unaffected.
+	OnlineEnabled bool    `json:"online_enabled"`
+	FeePercent    float64 `json:"fee_percent"`
+	MinPayout     float64 `json:"min_payout"`
 }
 
-// Admin-editable (site-content "gift_settings"); defaults: no fee, Rp50.000 minimum payout.
+// Admin-editable (site-content "gift_settings"); defaults: switched off, no fee, Rp50.000 minimum payout.
 func (s *Server) giftSettings() giftSettings {
 	settings := giftSettings{FeePercent: 0, MinPayout: 50000}
 	content := s.store.GetSiteContent("gift_settings")
+	settings.OnlineEnabled, _ = content["online_enabled"].(bool)
 	if v, ok := number(content["fee_percent"]); ok && v >= 0 && v <= 50 {
 		settings.FeePercent = v
 	}
@@ -66,6 +70,7 @@ type onlineGiftState struct {
 	Enabled      bool   `json:"enabled"`       // switched on by the couple
 	Allowed      bool   `json:"allowed"`       // the couple's plan includes it
 	GatewayReady bool   `json:"gateway_ready"` // a payment gateway is configured
+	PlatformOpen bool   `json:"platform_open"` // Rawuh has switched online envelopes on (admin)
 	Active       bool   `json:"active"`        // all of the above
 	Note         string `json:"note,omitempty"`
 }
@@ -74,7 +79,8 @@ func (s *Server) onlineGift(invitation *store.Invitation) onlineGiftState {
 	enabled, note := onlineGiftConfig(s.store.GetSettings(invitation.ID))
 	allowed, _ := s.billing.Allows(invitation.UserID, billingservice.FeaturePaymentGateway)
 	ready := s.gifts.Provider() != ""
-	return onlineGiftState{Enabled: enabled, Allowed: allowed, GatewayReady: ready, Active: enabled && allowed && ready, Note: note}
+	open := s.giftSettings().OnlineEnabled
+	return onlineGiftState{Enabled: enabled, Allowed: allowed, GatewayReady: ready, PlatformOpen: open, Active: enabled && allowed && ready && open, Note: note}
 }
 
 // POST /api/public/invitation/{slug}/gift-transactions

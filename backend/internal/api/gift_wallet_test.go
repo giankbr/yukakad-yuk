@@ -78,6 +78,11 @@ func TestOnlineGiftFlow(t *testing.T) {
 		t.Fatalf("plan without payment gateway should be 403, got %d", code)
 	}
 	_ = server.store.SetUserPlan(owner.ID, "premium")
+	// Plan + couple OK, but Rawuh hasn't opened online envelopes platform-wide yet.
+	if code := public(http.MethodPost, "/api/public/invitation/rina-bima/gift-transactions", give).Code; code != http.StatusForbidden {
+		t.Fatalf("platform switch off should be 403, got %d", code)
+	}
+	server.store.UpdateSiteContent("gift_settings", map[string]any{"online_enabled": true})
 	if body := public(http.MethodGet, "/api/public/invitation/rina-bima", "").Body.String(); !strings.Contains(body, `"online_gift":{"active":true`) {
 		t.Fatalf("public payload should expose active online gift: %s", body)
 	}
@@ -128,7 +133,7 @@ func TestOnlineGiftFlow(t *testing.T) {
 	}
 
 	// Wallet with a 5% fee: 350.000 received → 17.500 fee → 332.500 available.
-	server.store.UpdateSiteContent("gift_settings", map[string]any{"fee_percent": 5, "min_payout": 50000})
+	server.store.UpdateSiteContent("gift_settings", map[string]any{"online_enabled": true, "fee_percent": 5, "min_payout": 50000})
 	wallet := func(token string) *httptest.ResponseRecorder {
 		return call(func(w http.ResponseWriter, r *http.Request) { server.handleGiftWallet(w, r, inv.ID, "wallet") }, token, http.MethodGet, "/", "")
 	}

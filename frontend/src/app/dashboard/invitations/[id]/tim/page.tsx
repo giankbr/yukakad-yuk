@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import styles from "@/components/dashboard/editor.module.css";
@@ -16,6 +17,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
   const { token, ready } = useAuthToken();
   const invitationId = routeParams?.id;
   const [members, setMembers] = useState<Member[]>([]);
+  const [limit, setLimit] = useState<number | null>(null);
   const [role, setRole] = useState<MemberRole>("receptionist");
   const [email, setEmail] = useState("");
   const [link, setLink] = useState<{ url: string; label: string } | null>(null);
@@ -31,6 +33,7 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
     const body = await response.json();
     if (!response.ok) throw new Error(body.error);
     setMembers(body.items ?? []);
+    setLimit(typeof body.limit === "number" ? body.limit : null);
   }, [token, invitationId]);
 
   useEffect(() => {
@@ -115,6 +118,12 @@ export default function TeamPage({ params }: { params: Promise<{ id: string }> }
       <div className={styles.form}>
         <form className={styles.panel} onSubmit={invite} aria-label="Undang anggota">
           <h2>Undang anggota</h2>
+          {limit !== null && limit > 0 && (
+            <p className={styles.hint} style={{ margin: 0 }}>
+              {members.length} dari {limit} anggota terpakai di paketmu.
+              {members.length >= limit && <> Tim sudah penuh. <Link className={styles.link} href="/dashboard/paket">Upgrade paket →</Link></>}
+            </p>
+          )}
           <div role="radiogroup" aria-label="Peran" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 10 }}>
             {ROLES.map((r) => (
               <label key={r} className={styles.item} style={{ display: "grid", gap: 4, cursor: "pointer", ...(role === r ? { borderColor: "var(--rw-primary)", background: "var(--rw-primary-soft)" } : {}) }}>

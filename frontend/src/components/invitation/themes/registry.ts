@@ -2,6 +2,7 @@
 import type { ComponentType } from "react";
 import type { InvitationData } from "../types";
 import type { ThemeProps } from "./kit";
+import { freshDemo } from "./demo-base";
 
 export type ThemeMeta = { id: string; name: string; group: "utama" | "koleksi" | "brand" | "web"; category: string; tier: "free" | "premium"; description: string };
 
@@ -10,40 +11,40 @@ export const themeList: ThemeMeta[] = [
   { id: "oranye", name: "Oranye", group: "utama", category: "Belanja", tier: "premium", description: "Nuansa promo oranye yang meriah dengan voucher kehadiran." },
   { id: "streaming", name: "Streaming", group: "utama", category: "Hiburan", tier: "premium", description: "Undangan ala serial streaming: episode kisah, jadwal tayang, dan ulasan penonton." },
   { id: "jawa", name: "Jawa Keraton", group: "utama", category: "Adat Jawa", tier: "premium", description: "Adat Jawa klasik cokelat-emas dengan gunungan dan aksara." },
-  { id: "rumah-gadang", name: "Rumah Gadang", group: "koleksi", category: "Adat Minang", tier: "premium", description: "Adat Minang · Merah · Songket" },
-  { id: "bali-kuning", name: "Bali Kuning", group: "koleksi", category: "Adat Bali", tier: "premium", description: "Adat Bali · Kuning · Kamboja" },
-  { id: "syari-zamrud", name: "Syari Zamrud", group: "koleksi", category: "Syari", tier: "free", description: "Syari · Tanpa Foto · Hijau" },
-  { id: "lavender-air", name: "Lavender Air", group: "koleksi", category: "Watercolor", tier: "premium", description: "Watercolor · Ungu · Ilustrasi" },
-  { id: "linen-putih", name: "Linen Putih", group: "koleksi", category: "Minimalis", tier: "free", description: "Minimalist · Putih · Tipografi" },
-  { id: "sketsa-tangan", name: "Sketsa Tangan", group: "koleksi", category: "Hand Drawn", tier: "free", description: "Hand Drawn · Cream · Line Art" },
-  { id: "malam-rimba", name: "Malam Rimba", group: "koleksi", category: "Elegan", tier: "premium", description: "Elegant · Hitam · Botanical" },
-  { id: "pastel-flat", name: "Pastel Flat", group: "koleksi", category: "Ilustrasi", tier: "free", description: "Flat · Pink · Ilustrasi Lucu" },
-  { id: "hijau-ojek", name: "Hijau Ojek", group: "brand", category: "Aplikasi", tier: "premium", description: "Undangan bergaya Hijau Ojek yang unik dan personal." },
-  { id: "pesan-antar", name: "Pesan-Antar", group: "brand", category: "Aplikasi", tier: "premium", description: "Undangan bergaya Pesan-Antar yang unik dan personal." },
-  { id: "arena-legenda", name: "Arena Legenda", group: "brand", category: "Unik", tier: "premium", description: "Undangan bergaya Arena Legenda yang unik dan personal." },
-  { id: "kanal-video", name: "Video", group: "brand", category: "Hiburan", tier: "premium", description: "Undangan bergaya Video yang unik dan personal." },
-  { id: "repositori", name: "Repositori", group: "brand", category: "Unik", tier: "premium", description: "Undangan bergaya Repositori yang unik dan personal." },
-  { id: "pemutar-musik", name: "Musik", group: "brand", category: "Hiburan", tier: "premium", description: "Undangan bergaya Musik yang unik dan personal." },
-  { id: "playlist", name: "Playlist", group: "brand", category: "Hiburan", tier: "premium", description: "Undangan bergaya Playlist yang unik dan personal." },
-  { id: "chat-hijau", name: "Chat Hijau", group: "web", category: "Sosial Media", tier: "free", description: "Undangan bergaya Chat Hijau yang unik dan personal." },
-  { id: "feed-foto", name: "Feed Foto", group: "web", category: "Sosial Media", tier: "free", description: "Undangan bergaya Feed Foto yang unik dan personal." },
-  { id: "video-vertikal", name: "Video Vertikal", group: "web", category: "Sosial Media", tier: "free", description: "Undangan bergaya Video Vertikal yang unik dan personal." },
-  { id: "kencan", name: "Kencan", group: "web", category: "Sosial Media", tier: "free", description: "Undangan bergaya Kencan yang unik dan personal." },
-  { id: "peta-rute", name: "Peta", group: "web", category: "Aplikasi", tier: "free", description: "Undangan bergaya Peta yang unik dan personal." },
-  { id: "surel", name: "Surel", group: "web", category: "Aplikasi", tier: "free", description: "Undangan bergaya Surel yang unik dan personal." },
-  { id: "dokumen", name: "Dokumen", group: "web", category: "Aplikasi", tier: "free", description: "Undangan bergaya Dokumen yang unik dan personal." },
-  { id: "rapat-video", name: "Rapat Video", group: "web", category: "Aplikasi", tier: "free", description: "Undangan bergaya Rapat Video yang unik dan personal." },
-  { id: "boarding-pass", name: "Boarding Pass", group: "web", category: "Perjalanan", tier: "free", description: "Undangan bergaya Boarding Pass yang unik dan personal." },
-  { id: "tiket-kereta", name: "Tiket Kereta", group: "web", category: "Perjalanan", tier: "free", description: "Undangan bergaya Tiket Kereta yang unik dan personal." },
-  { id: "game-retro", name: "Game Retro", group: "web", category: "Unik", tier: "free", description: "Undangan bergaya Game Retro yang unik dan personal." },
-  { id: "koran", name: "Koran", group: "web", category: "Unik", tier: "free", description: "Undangan bergaya Koran yang unik dan personal." },
-  { id: "dompet-digital", name: "Dompet Digital", group: "web", category: "Fintech", tier: "free", description: "Undangan bergaya Dompet Digital yang unik dan personal." },
-  { id: "saku-biru", name: "Saku Biru", group: "web", category: "Fintech", tier: "free", description: "Undangan bergaya Saku Biru yang unik dan personal." },
-  { id: "poin-ungu", name: "Poin Ungu", group: "web", category: "Fintech", tier: "free", description: "Undangan bergaya Poin Ungu yang unik dan personal." },
-  { id: "kantong-oranye", name: "Kantong Oranye", group: "web", category: "Fintech", tier: "free", description: "Undangan bergaya Kantong Oranye yang unik dan personal." },
-  { id: "kursi-kereta", name: "Kursi Kereta", group: "web", category: "Perjalanan", tier: "free", description: "Undangan bergaya Kursi Kereta yang unik dan personal." },
-  { id: "paket-liburan", name: "Paket Liburan", group: "web", category: "Perjalanan", tier: "free", description: "Undangan bergaya Paket Liburan yang unik dan personal." },
-  { id: "rencana-perjalanan", name: "Rencana Perjalanan", group: "web", category: "Perjalanan", tier: "free", description: "Undangan bergaya Rencana Perjalanan yang unik dan personal." },
+  { id: "rumah-gadang", name: "Rumah Gadang", group: "koleksi", category: "Adat Minang", tier: "premium", description: "Adat Minang merah-emas dengan motif songket dan siluet rumah gadang." },
+  { id: "bali-kuning", name: "Bali Kuning", group: "koleksi", category: "Adat Bali", tier: "premium", description: "Adat Bali kuning keemasan dengan bunga kamboja dan gapura candi bentar." },
+  { id: "syari-zamrud", name: "Syari Zamrud", group: "koleksi", category: "Syari", tier: "free", description: "Syari hijau zamrud tanpa foto, berisi doa dan ornamen geometris." },
+  { id: "lavender-air", name: "Lavender Air", group: "koleksi", category: "Cat Air", tier: "premium", description: "Cat air ungu lembut dengan ilustrasi bunga dan polaroid." },
+  { id: "linen-putih", name: "Linen Putih", group: "koleksi", category: "Minimalis", tier: "free", description: "Minimalis putih bersih yang mengandalkan tipografi." },
+  { id: "sketsa-tangan", name: "Sketsa Tangan", group: "koleksi", category: "Gambar Tangan", tier: "free", description: "Gambar tangan di kertas krem, gaya buku tempel dengan coretan tinta." },
+  { id: "malam-rimba", name: "Malam Rimba", group: "koleksi", category: "Elegan", tier: "premium", description: "Elegan hitam-emas dengan dedaunan dan kunang-kunang." },
+  { id: "pastel-flat", name: "Pastel Flat", group: "koleksi", category: "Ilustrasi", tier: "free", description: "Ilustrasi datar pastel merah muda yang lucu dan ceria." },
+  { id: "hijau-ojek", name: "Hijau Ojek", group: "brand", category: "Aplikasi", tier: "premium", description: "Ala aplikasi ojek online: rute cinta, perjalanan, dan bintang untuk pengantin." },
+  { id: "pesan-antar", name: "Pesan-Antar", group: "brand", category: "Aplikasi", tier: "premium", description: "Ala aplikasi pesan-antar: menu acara, status pengiriman, dan voucher." },
+  { id: "arena-legenda", name: "Arena Legenda", group: "brand", category: "Unik", tier: "premium", description: "Ala gim arena: pilih hero, rank pasangan, dan toko item hadiah." },
+  { id: "kanal-video", name: "Video", group: "brand", category: "Hiburan", tier: "premium", description: "Ala kanal video: episode kisah, tayangan premiere, dan kolom komentar." },
+  { id: "repositori", name: "Repositori", group: "brand", category: "Unik", tier: "premium", description: "Ala repositori kode: riwayat commit, kontribusi, dan diskusi." },
+  { id: "pemutar-musik", name: "Musik", group: "brand", category: "Hiburan", tier: "premium", description: "Ala pemutar musik: daftar lagu acara, artis, dan pemutar mini." },
+  { id: "playlist", name: "Playlist", group: "brand", category: "Hiburan", tier: "premium", description: "Ala playlist: antrean acara, kilas balik tahunan, dan pemutar mini." },
+  { id: "chat-hijau", name: "Chat Hijau", group: "web", category: "Sosial Media", tier: "free", description: "Ala aplikasi chat: obrolan berdua, grup keluarga, dan ucapan tamu." },
+  { id: "feed-foto", name: "Feed Foto", group: "web", category: "Sosial Media", tier: "free", description: "Ala feed foto: sorotan cerita, unggahan galeri, dan suka dari tamu." },
+  { id: "video-vertikal", name: "Video Vertikal", group: "web", category: "Sosial Media", tier: "free", description: "Ala video vertikal: siaran premiere, hadiah, dan komentar tamu." },
+  { id: "kencan", name: "Kencan", group: "web", category: "Sosial Media", tier: "free", description: "Ala aplikasi kencan: profil berdua, match, dan riwayat obrolan." },
+  { id: "peta-rute", name: "Peta", group: "web", category: "Aplikasi", tier: "free", description: "Ala aplikasi peta: titik lokasi, rute perjalanan, dan ulasan tamu." },
+  { id: "surel", name: "Surel", group: "web", category: "Aplikasi", tier: "free", description: "Ala kotak masuk surel: undangan sebagai email lengkap dengan lampiran." },
+  { id: "dokumen", name: "Dokumen", group: "web", category: "Aplikasi", tier: "free", description: "Ala halaman dokumen: properti acara, daftar periksa, dan komentar." },
+  { id: "rapat-video", name: "Rapat Video", group: "web", category: "Aplikasi", tier: "free", description: "Ala rapat video: ubin peserta, agenda, dan obrolan rapat." },
+  { id: "boarding-pass", name: "Boarding Pass", group: "web", category: "Perjalanan", tier: "free", description: "Ala boarding pass: penerbangan cinta, gerbang, dan barcode tamu." },
+  { id: "tiket-kereta", name: "Tiket Kereta", group: "web", category: "Perjalanan", tier: "free", description: "Ala tiket kereta: rute perjalanan, stasiun, dan jadwal keberangkatan." },
+  { id: "game-retro", name: "Game Retro", group: "web", category: "Unik", tier: "free", description: "Ala gim retro piksel: karakter, level, dan toko item." },
+  { id: "koran", name: "Koran", group: "web", category: "Unik", tier: "free", description: "Ala koran klasik: berita utama, kolom acara, dan iklan baris." },
+  { id: "dompet-digital", name: "Dompet Digital", group: "web", category: "Keuangan", tier: "free", description: "Ala dompet digital: saldo cinta, riwayat transaksi, dan struk." },
+  { id: "saku-biru", name: "Saku Biru", group: "web", category: "Keuangan", tier: "free", description: "Ala aplikasi bank: PIN masuk, transfer kasih, dan mutasi." },
+  { id: "poin-ungu", name: "Poin Ungu", group: "web", category: "Keuangan", tier: "free", description: "Ala aplikasi poin: misi, tukar poin, dan tingkat keanggotaan." },
+  { id: "kantong-oranye", name: "Kantong Oranye", group: "web", category: "Keuangan", tier: "free", description: "Ala kantong tabungan: target bersama, isi kantong, dan anggota." },
+  { id: "kursi-kereta", name: "Kursi Kereta", group: "web", category: "Perjalanan", tier: "free", description: "Ala pemesanan kursi kereta: denah gerbong dan tiket tamu." },
+  { id: "paket-liburan", name: "Paket Liburan", group: "web", category: "Perjalanan", tier: "free", description: "Ala paket liburan: rencana perjalanan, pesanan, dan voucher." },
+  { id: "rencana-perjalanan", name: "Rencana Perjalanan", group: "web", category: "Perjalanan", tier: "free", description: "Ala aplikasi perjalanan: itinerary harian, penginapan, dan peta." },
 ];
 
 type ThemeModule = { default: ComponentType<ThemeProps> };
@@ -103,5 +104,5 @@ export function isTheme(id?: string): id is string {
 export async function loadTheme(id: string) {
   const entry = loaders[id];
   const [mod, demo] = await Promise.all([entry.component(), entry.demo()]);
-  return { Theme: mod.default, demo: demo.demo };
+  return { Theme: mod.default, demo: freshDemo(demo.demo) };
 }

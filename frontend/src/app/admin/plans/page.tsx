@@ -7,7 +7,7 @@ import { apiFetch } from "@/lib/api";
 import { useAdminAuth } from "@/lib/useAuthToken";
 
 type Plan = {
-  id: string; name: string; price: number; max_guests: number; duration_days?: number | null;
+  id: string; name: string; price: number; max_guests: number; max_team_members?: number; duration_days?: number | null;
   has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed: boolean;
 };
 type Draft = Plan & { isNew?: boolean };
@@ -75,7 +75,7 @@ export default function AdminPlansPage() {
           <p className="dashboard-subtitle">Harga, kuota tamu, dan fitur tiap paket. Tampil di halaman Harga dan dipakai untuk membatasi akun.</p>
         </div>
         {!draft && (
-          <button type="button" className="dashboard-action" onClick={() => setDraft({ id: "", name: "", price: 0, max_guests: 100, duration_days: 30, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, isNew: true })}>
+          <button type="button" className="dashboard-action" onClick={() => setDraft({ id: "", name: "", price: 0, max_guests: 100, max_team_members: 5, duration_days: 30, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, isNew: true })}>
             + Paket baru
           </button>
         )}
@@ -97,6 +97,9 @@ export default function AdminPlansPage() {
               </div>
               <div className={styles.row}>
                 <label className={styles.field}><span>Maksimal tamu</span><input type="number" min={0} value={draft.max_guests} onChange={(e) => set("max_guests", Number(e.target.value))} /></label>
+                <label className={styles.field}><span>Maksimal anggota tim per undangan (0 = tanpa batas)</span><input type="number" min={0} max={100} value={draft.max_team_members ?? 15} onChange={(e) => set("max_team_members", Number(e.target.value))} /></label>
+              </div>
+              <div className={styles.row}>
                 <label className={styles.field}><span>Masa aktif (hari, kosongkan = selamanya)</span><input type="number" min={0} value={draft.duration_days ?? ""} onChange={(e) => set("duration_days", e.target.value ? Number(e.target.value) : null)} /></label>
               </div>
               <div className={styles.row}>
@@ -116,13 +119,14 @@ export default function AdminPlansPage() {
 
           <div className="dashboard-table-wrap">
             <table className="dashboard-table" style={{ minWidth: 640 }}>
-              <thead><tr><th>Paket</th><th>Harga</th><th>Tamu</th><th>Masa aktif</th><th>Fitur</th><th><span className="sr-only">Aksi</span></th></tr></thead>
+              <thead><tr><th>Paket</th><th>Harga</th><th>Tamu</th><th>Tim</th><th>Masa aktif</th><th>Fitur</th><th><span className="sr-only">Aksi</span></th></tr></thead>
               <tbody>
                 {plans.map((plan) => (
                   <tr key={plan.id}>
                     <td><strong>{plan.name}</strong><span>{plan.id}</span></td>
                     <td>{rupiah(plan.price)}</td>
                     <td>{plan.max_guests.toLocaleString("id-ID")}</td>
+                    <td>{plan.max_team_members === 0 ? "Bebas" : `${plan.max_team_members ?? 15} orang`}</td>
                     <td>{plan.duration_days ? `${plan.duration_days} hari` : "Selamanya"}</td>
                     <td>{FLAGS.filter(([key]) => (key === "has_watermark" ? !plan[key] : plan[key])).map(([key, label]) => (key === "has_watermark" ? "Tanpa watermark" : label.replace(" (payment gateway)", ""))).join(" · ") || "—"}</td>
                     <td><button type="button" className="table-action" onClick={() => setDraft({ ...plan })}>Ubah</button></td>

@@ -313,6 +313,7 @@ type Plan struct {
 	ID                      string  `json:"id"`
 	Name                    string  `json:"name"`
 	MaxGuests               int     `json:"max_guests"`
+	MaxTeamMembers          int     `json:"max_team_members"` // 0 = unlimited
 	HasWatermark            bool    `json:"has_watermark"`
 	CustomDomainAllowed     bool    `json:"custom_domain_allowed"`
 	PaymentGatewayAllowed   bool    `json:"payment_gateway_allowed"`
@@ -1364,9 +1365,9 @@ func (s *MemoryStore) SeedTemplates() {
 		{ID: "rumah-gadang", Name: "Rumah Gadang", Slug: "rumah-gadang", Category: "Adat Minang", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/rumah-gadang.webp", PreviewURL: "/invitation/demo?template=rumah-gadang", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 104},
 		{ID: "bali-kuning", Name: "Bali Kuning", Slug: "bali-kuning", Category: "Adat Bali", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/bali-kuning.webp", PreviewURL: "/invitation/demo?template=bali-kuning", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 105},
 		{ID: "syari-zamrud", Name: "Syari Zamrud", Slug: "syari-zamrud", Category: "Syari", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/syari-zamrud.webp", PreviewURL: "/invitation/demo?template=syari-zamrud", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 106},
-		{ID: "lavender-air", Name: "Lavender Air", Slug: "lavender-air", Category: "Watercolor", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/lavender-air.webp", PreviewURL: "/invitation/demo?template=lavender-air", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 107},
+		{ID: "lavender-air", Name: "Lavender Air", Slug: "lavender-air", Category: "Cat Air", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/lavender-air.webp", PreviewURL: "/invitation/demo?template=lavender-air", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 107},
 		{ID: "linen-putih", Name: "Linen Putih", Slug: "linen-putih", Category: "Minimalis", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/linen-putih.webp", PreviewURL: "/invitation/demo?template=linen-putih", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 108},
-		{ID: "sketsa-tangan", Name: "Sketsa Tangan", Slug: "sketsa-tangan", Category: "Hand Drawn", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/sketsa-tangan.webp", PreviewURL: "/invitation/demo?template=sketsa-tangan", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 109},
+		{ID: "sketsa-tangan", Name: "Sketsa Tangan", Slug: "sketsa-tangan", Category: "Gambar Tangan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/sketsa-tangan.webp", PreviewURL: "/invitation/demo?template=sketsa-tangan", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 109},
 		{ID: "malam-rimba", Name: "Malam Rimba", Slug: "malam-rimba", Category: "Elegan", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/malam-rimba.webp", PreviewURL: "/invitation/demo?template=malam-rimba", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 110},
 		{ID: "pastel-flat", Name: "Pastel Flat", Slug: "pastel-flat", Category: "Ilustrasi", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/pastel-flat.webp", PreviewURL: "/invitation/demo?template=pastel-flat", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 111},
 		{ID: "hijau-ojek", Name: "Hijau Ojek", Slug: "hijau-ojek", Category: "Aplikasi", EventType: "wedding", Tier: "premium", Premium: true, PreviewImage: "/themes/previews/hijau-ojek.webp", PreviewURL: "/invitation/demo?template=hijau-ojek", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 112},
@@ -1388,10 +1389,10 @@ func (s *MemoryStore) SeedTemplates() {
 		{ID: "tiket-kereta", Name: "Tiket Kereta", Slug: "tiket-kereta", Category: "Perjalanan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/tiket-kereta.webp", PreviewURL: "/invitation/demo?template=tiket-kereta", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 128},
 		{ID: "game-retro", Name: "Game Retro", Slug: "game-retro", Category: "Unik", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/game-retro.webp", PreviewURL: "/invitation/demo?template=game-retro", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 129},
 		{ID: "koran", Name: "Koran", Slug: "koran", Category: "Unik", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/koran.webp", PreviewURL: "/invitation/demo?template=koran", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 130},
-		{ID: "dompet-digital", Name: "Dompet Digital", Slug: "dompet-digital", Category: "Fintech", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/dompet-digital.webp", PreviewURL: "/invitation/demo?template=dompet-digital", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 131},
-		{ID: "saku-biru", Name: "Saku Biru", Slug: "saku-biru", Category: "Fintech", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/saku-biru.webp", PreviewURL: "/invitation/demo?template=saku-biru", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 132},
-		{ID: "poin-ungu", Name: "Poin Ungu", Slug: "poin-ungu", Category: "Fintech", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/poin-ungu.webp", PreviewURL: "/invitation/demo?template=poin-ungu", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 133},
-		{ID: "kantong-oranye", Name: "Kantong Oranye", Slug: "kantong-oranye", Category: "Fintech", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/kantong-oranye.webp", PreviewURL: "/invitation/demo?template=kantong-oranye", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 134},
+		{ID: "dompet-digital", Name: "Dompet Digital", Slug: "dompet-digital", Category: "Keuangan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/dompet-digital.webp", PreviewURL: "/invitation/demo?template=dompet-digital", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 131},
+		{ID: "saku-biru", Name: "Saku Biru", Slug: "saku-biru", Category: "Keuangan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/saku-biru.webp", PreviewURL: "/invitation/demo?template=saku-biru", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 132},
+		{ID: "poin-ungu", Name: "Poin Ungu", Slug: "poin-ungu", Category: "Keuangan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/poin-ungu.webp", PreviewURL: "/invitation/demo?template=poin-ungu", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 133},
+		{ID: "kantong-oranye", Name: "Kantong Oranye", Slug: "kantong-oranye", Category: "Keuangan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/kantong-oranye.webp", PreviewURL: "/invitation/demo?template=kantong-oranye", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 134},
 		{ID: "kursi-kereta", Name: "Kursi Kereta", Slug: "kursi-kereta", Category: "Perjalanan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/kursi-kereta.webp", PreviewURL: "/invitation/demo?template=kursi-kereta", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 135},
 		{ID: "paket-liburan", Name: "Paket Liburan", Slug: "paket-liburan", Category: "Perjalanan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/paket-liburan.webp", PreviewURL: "/invitation/demo?template=paket-liburan", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 136},
 		{ID: "rencana-perjalanan", Name: "Rencana Perjalanan", Slug: "rencana-perjalanan", Category: "Perjalanan", EventType: "wedding", Tier: "free", Premium: false, PreviewImage: "/themes/previews/rencana-perjalanan.webp", PreviewURL: "/invitation/demo?template=rencana-perjalanan", SupportsPhoto: true, SupportsRSVP: true, SupportsGift: true, Status: "active", SortOrder: 137},
@@ -1573,15 +1574,17 @@ func (s *MemoryStore) SeedPlans() {
 	}
 	durationDays := 30
 	s.plans["free"] = &Plan{
-		ID:           "free",
-		Name:         "Free",
-		MaxGuests:    50,
-		HasWatermark: true,
+		ID:             "free",
+		Name:           "Free",
+		MaxGuests:      50,
+		MaxTeamMembers: 2,
+		HasWatermark:   true,
 	}
 	s.plans["pro"] = &Plan{
 		ID:                      "pro",
 		Name:                    "Pro",
 		MaxGuests:               500,
+		MaxTeamMembers:          5,
 		HasWatermark:            false,
 		CustomDomainAllowed:     false,
 		PremiumTemplatesAllowed: true,
@@ -1592,6 +1595,7 @@ func (s *MemoryStore) SeedPlans() {
 		ID:                      "premium",
 		Name:                    "Premium",
 		MaxGuests:               2000,
+		MaxTeamMembers:          15,
 		HasWatermark:            false,
 		CustomDomainAllowed:     true,
 		PaymentGatewayAllowed:   true,

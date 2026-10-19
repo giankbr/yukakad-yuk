@@ -6,6 +6,7 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/mail"
@@ -33,7 +34,7 @@ const (
 	permHariH         = "hari_h"       // doorprize setup/draw, guest-photo moderation
 	permLive          = "live"         // venue screen feed
 	ownerOnly         = ""             // money, team, domains, deleting, duplicating
-	maxMembers        = 15
+	defaultTeamLimit  = 15             // used when the owner's plan can't be read
 	inviteValidity    = 7 * 24 * time.Hour
 	roleEditor        = "editor"
 	roleOrganizer     = "organizer"
@@ -259,7 +260,7 @@ func (s *Server) handleTeam(w http.ResponseWriter, r *http.Request, invitationID
 	memberID, action, _ := strings.Cut(rest, "/")
 	switch {
 	case memberID == "" && r.Method == http.MethodGet:
-		writeJSON(w, http.StatusOK, map[string]any{"items": s.memberViews(invitation.ID), "roles": rolePermissions})
+		writeJSON(w, http.StatusOK, map[string]any{"items": s.memberViews(invitation.ID), "roles": rolePermissions, "limit": s.teamLimit(invitation.UserID)})
 	case memberID == "" && r.Method == http.MethodPost:
 		var payload struct {
 			Email string `json:"email"`
@@ -281,8 +282,8 @@ func (s *Server) handleTeam(w http.ResponseWriter, r *http.Request, invitationID
 			}
 		}
 		members := s.store.ListMembers(invitation.ID)
-		if len(members) >= maxMembers {
-			writeJSON(w, http.StatusConflict, map[string]string{"error": "tim sudah penuh (maksimal 15 orang)"})
+		if limit := s.teamLimit(invitation.UserID); limit > 0 && len(members) >= limit {
+			writeJSON(w, http.StatusConflict, map[string]string{"error": fmt.Sprintf("tim sudah penuh (paketmu maksimal %d orang)", limit), "code": "team_limit"})
 			return
 		}
 		for _, m := range members {
@@ -439,4 +440,13 @@ func (s *Server) accessView(r *http.Request, invitation *store.Invitation, userI
 	}
 	role, perms := s.accessFor(invitation, userID)
 	return map[string]any{"role": role, "permissions": perms}
+}
+
+// teamLimit is how many members the owner's plan allows per invitation (0 = unlimited).
+func (s *Server) teamLimit(ownerID string) int {
+	plan, err := s.store.GetUserPlan(ownerID)
+	if err != nil || plan == nil {
+		return defaultTeamLimit
+	}
+	return plan.MaxTeamMembers
 }

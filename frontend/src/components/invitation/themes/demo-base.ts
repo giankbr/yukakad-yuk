@@ -58,3 +58,34 @@ export function makeDemo(overrides: DeepPartial<InvitationData> = {}): Invitatio
     story: { ...base.story, ...(overrides.story ?? {}) },
   } as InvitationData;
 }
+
+const ISO = /^(\d{4})(-\d{2}-\d{2}T.*)$/;
+const DAY = 24 * 60 * 60 * 1000;
+
+/**
+ * Demo invitations must always look upcoming (countdown running, RSVP open, no thank-you banner).
+ * When a demo's main date is less than three weeks away (or already past), every event-related ISO
+ * timestamp near that date is moved forward by whole years, so day + month (and copy like "12.12") stay
+ * true. Story dates and wish timestamps far from the event are left alone.
+ */
+export function freshDemo(data: InvitationData, now = Date.now()): InvitationData {
+  const main = new Date(data.date).getTime();
+  if (Number.isNaN(main) || main >= now + 21 * DAY) return data;
+  let years = 0;
+  const shiftOf = (value: number, add: number) => { const d = new Date(value); d.setFullYear(d.getFullYear() + add); return d.getTime(); };
+  while (shiftOf(main, years) < now + 21 * DAY && years < 20) years += 1;
+  const near = (value: string) => {
+    const time = new Date(value).getTime();
+    return !Number.isNaN(time) && Math.abs(time - main) <= 7 * DAY;
+  };
+  const walk = (value: unknown): unknown => {
+    if (typeof value === "string") {
+      const match = ISO.exec(value);
+      return match && near(value) ? `${Number(match[1]) + years}${match[2]}` : value;
+    }
+    if (Array.isArray(value)) return value.map(walk);
+    if (value && typeof value === "object") return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, walk(item)]));
+    return value;
+  };
+  return walk(data) as InvitationData;
+}

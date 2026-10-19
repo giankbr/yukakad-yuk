@@ -23,7 +23,7 @@ type Envelope = { id: string; amount: number; status: string; sender_name?: stri
 type Payout = { id: string; amount: number; status: string; bank_name: string; account_number: string; account_name: string; note?: string; created_at: string; processed_at?: string };
 type Wallet = { fee_percent: number; count: number; received: number; fee: number; net: number; paid_out: number; requested: number; available: number };
 type WalletResponse = {
-  online: { enabled: boolean; allowed: boolean; gateway_ready: boolean; active: boolean; note?: string };
+  online: { enabled: boolean; allowed: boolean; gateway_ready: boolean; platform_open?: boolean; active: boolean; note?: string };
   settings: { fee_percent: number; min_payout: number };
   wallet: Wallet;
   transactions: Envelope[];
@@ -193,7 +193,7 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
             <section className={styles.panel} aria-label="Amplop online lewat Rawuh">
               <div className={styles.panelHead}>
                 <div><h2>Amplop online lewat Rawuh</h2><p>Tamu bayar langsung di undangan pakai QRIS, VA, atau e-wallet.</p></div>
-                {online?.allowed && online.gateway_ready && (
+                {online?.allowed && online.gateway_ready && online.platform_open && (
                   <label className={styles.check}>
                     <input type="checkbox" checked={online.enabled} disabled={busy === "online"} onChange={(e) => saveOnline(e.target.checked)} /> {online.enabled ? "Tampil" : "Nonaktif"}
                   </label>
@@ -204,7 +204,9 @@ export default function GiftPage({ params }: { params: Promise<{ id: string }> }
                 <li>Dana ditampung Rawuh, lalu kalian cairkan ke rekening kapan saja.</li>
                 <li>Biaya layanan {wallet?.settings.fee_percent ? `${wallet.settings.fee_percent}% per amplop` : "gratis"} · minimal pencairan {rupiah(minPayout || 50000)}.</li>
               </ul>
-              {!online?.allowed ? (
+              {online && online.platform_open === false ? (
+                <p className={styles.hint}><strong>Segera hadir.</strong> Amplop online lewat Rawuh sedang kami siapkan. Sementara ini tamu bisa kirim lewat transfer langsung ke rekening kalian.</p>
+              ) : !online?.allowed ? (
                 <p className={styles.hint}><strong>Tersedia di paket dengan fitur amplop digital.</strong> <Link className={styles.link} href="/harga">Lihat paket →</Link></p>
               ) : !online.gateway_ready ? (
                 <p className={styles.hint}>Pembayaran online belum dikonfigurasi. Hubungi admin Rawuh.</p>

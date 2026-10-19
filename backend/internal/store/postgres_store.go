@@ -1069,7 +1069,7 @@ func (s *PostgresStore) SeedPlans() {
 }
 
 func (s *PostgresStore) ListPlans() []*Plan {
-	rows, err := s.db.Query(`SELECT id, name, max_guests, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days FROM plans ORDER BY price ASC`)
+	rows, err := s.db.Query(`SELECT id, name, max_guests, max_team_members, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days FROM plans ORDER BY price ASC`)
 	if err != nil {
 		return []*Plan{}
 	}
@@ -1078,7 +1078,7 @@ func (s *PostgresStore) ListPlans() []*Plan {
 	for rows.Next() {
 		item := &Plan{}
 		var durationDays sql.NullInt64
-		if rows.Scan(&item.ID, &item.Name, &item.MaxGuests, &item.HasWatermark, &item.CustomDomainAllowed, &item.PaymentGatewayAllowed, &item.PremiumTemplatesAllowed, &item.Price, &durationDays) == nil {
+		if rows.Scan(&item.ID, &item.Name, &item.MaxGuests, &item.MaxTeamMembers, &item.HasWatermark, &item.CustomDomainAllowed, &item.PaymentGatewayAllowed, &item.PremiumTemplatesAllowed, &item.Price, &durationDays) == nil {
 			if durationDays.Valid {
 				days := int(durationDays.Int64)
 				item.DurationDays = &days
@@ -1207,12 +1207,12 @@ func (s *PostgresStore) SavePlan(plan Plan) (*Plan, error) {
 	if plan.DurationDays != nil && *plan.DurationDays > 0 {
 		duration = *plan.DurationDays
 	}
-	_, err := s.db.Exec(`INSERT INTO plans (id, name, max_guests, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days)
-		VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+	_, err := s.db.Exec(`INSERT INTO plans (id, name, max_guests, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days, max_team_members)
+		VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
 		ON CONFLICT (id) DO UPDATE SET name=EXCLUDED.name, max_guests=EXCLUDED.max_guests, has_watermark=EXCLUDED.has_watermark,
 			custom_domain_allowed=EXCLUDED.custom_domain_allowed, payment_gateway_allowed=EXCLUDED.payment_gateway_allowed,
-			premium_templates_allowed=EXCLUDED.premium_templates_allowed, price=EXCLUDED.price, duration_days=EXCLUDED.duration_days`,
-		plan.ID, plan.Name, plan.MaxGuests, plan.HasWatermark, plan.CustomDomainAllowed, plan.PaymentGatewayAllowed, plan.PremiumTemplatesAllowed, plan.Price, duration)
+			premium_templates_allowed=EXCLUDED.premium_templates_allowed, price=EXCLUDED.price, duration_days=EXCLUDED.duration_days, max_team_members=EXCLUDED.max_team_members`,
+		plan.ID, plan.Name, plan.MaxGuests, plan.HasWatermark, plan.CustomDomainAllowed, plan.PaymentGatewayAllowed, plan.PremiumTemplatesAllowed, plan.Price, duration, plan.MaxTeamMembers)
 	if err != nil {
 		return nil, fmt.Errorf("save plan: %w", err)
 	}
@@ -1242,8 +1242,8 @@ func (s *PostgresStore) GetUserPlan(userID string) (*Plan, error) {
 	}
 	plan := &Plan{}
 	var durationDays sql.NullInt64
-	err := s.db.QueryRow(`SELECT id, name, max_guests, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days FROM plans WHERE id = $1`, id).
-		Scan(&plan.ID, &plan.Name, &plan.MaxGuests, &plan.HasWatermark, &plan.CustomDomainAllowed, &plan.PaymentGatewayAllowed, &plan.PremiumTemplatesAllowed, &plan.Price, &durationDays)
+	err := s.db.QueryRow(`SELECT id, name, max_guests, max_team_members, has_watermark, custom_domain_allowed, payment_gateway_allowed, premium_templates_allowed, price, duration_days FROM plans WHERE id = $1`, id).
+		Scan(&plan.ID, &plan.Name, &plan.MaxGuests, &plan.MaxTeamMembers, &plan.HasWatermark, &plan.CustomDomainAllowed, &plan.PaymentGatewayAllowed, &plan.PremiumTemplatesAllowed, &plan.Price, &durationDays)
 	if err != nil {
 		return nil, fmt.Errorf("plan not found: %w", err)
 	}

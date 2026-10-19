@@ -29,6 +29,7 @@ func TestTeamRolesAndPermissions(t *testing.T) {
 	_, _ = server.store.UpdateInvitation(inv.ID, "rina-bima", "Rina & Bima", true, store.Couple{BrideName: "Rina", GroomName: "Bima"}, store.Event{})
 	guest, _ := server.store.CreateGuest(inv.ID, "Pak Budi", "0812", "family")
 	base := "/api/invitations/" + inv.ID
+	_ = server.store.SetUserPlan(ownerID, "premium") // free plans only allow 2 members
 
 	call := func(tok, method, path, body string) *httptest.ResponseRecorder {
 		req := httptest.NewRequest(method, path, strings.NewReader(body))
@@ -171,5 +172,33 @@ func TestEveryMemberRouteIsMapped(t *testing.T) {
 	}
 	if requiredPermission("", http.MethodDelete) != ownerOnly {
 		t.Fatal("deleting an invitation must be owner-only")
+	}
+}
+
+func TestTeamLimitFollowsPlan(t *testing.T) {
+	cfg := config.Config{Port: "8080", Environment: "test", JWTSecret: "secret", FrontendOrigin: "https://rawuh.test"}
+	server := NewServer(cfg)
+	server.store.SeedPlans()
+	u, _ := server.store.CreateUser("Rina", "rina@example.com", "hash")
+	token := auth.GenerateToken(u.ID, u.Email, "user", cfg.JWTSecret)
+	inv, _ := server.store.CreateInvitation(u.ID, "rina-bima", "Rina & Bima")
+	invite := func() int {
+		req := httptest.NewRequest(http.MethodPost, "/api/invitations/"+inv.ID+"/team", strings.NewReader(`{"role":"receptionist"}`))
+		req.Header.Set("Authorization", "Bearer "+token)
+		rec := httptest.NewRecorder()
+		server.handleInvitationDetail(rec, req)
+		return rec.Code
+	}
+	for i := 0; i < 2; i++ {
+		if code := invite(); code != http.StatusCreated {
+			t.Fatalf("free invite %d: %d", i, code)
+		}
+	}
+	if code := invite(); code != http.StatusConflict {
+		t.Fatalf("free plan third member should be 409, got %d", code)
+	}
+	_ = server.store.SetUserPlan(u.ID, "pro")
+	if code := invite(); code != http.StatusCreated {
+		t.Fatalf("pro plan should allow more members, got %d", code)
 	}
 }

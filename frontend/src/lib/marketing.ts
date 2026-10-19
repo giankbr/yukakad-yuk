@@ -69,7 +69,7 @@ export const defaultFaq: FaqItem[] = [
 
 export const defaultAnnouncement: Announcement = {
   enabled: true,
-  text: "Baru: Undangan Video 3D & QR Check-in untuk semua paket Premium",
+  text: "Baru: Video ucapan 3D untuk story & status WA, plus QR Check-in tamu",
   label: "Lihat sekarang",
   href: "/produk/video-ucapan-3d",
 };
