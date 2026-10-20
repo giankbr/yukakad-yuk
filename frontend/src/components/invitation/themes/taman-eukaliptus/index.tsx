@@ -91,8 +91,8 @@ export default function TamanEukaliptusTheme({ data, slug, guestToken, demo, ski
       cover={open => (
         <section className={s.cover}>
           <div className={s.garland} aria-hidden>
-            <Branch className={`${s.branch} ${s.b1}`} /><Branch className={`${s.branch} ${s.b2}`} />
-            <Branch className={`${s.branch} ${s.b3}`} /><Branch className={`${s.branch} ${s.b4}`} />
+            <Branch className={`${s.branch} ${s.b1}`} eager /><Branch className={`${s.branch} ${s.b2}`} variant="b" eager />
+            <Branch className={`${s.branch} ${s.b3}`} variant="b" eager /><Branch className={`${s.branch} ${s.b4}`} eager />
           </div>
           <div className={s.oval}>
             <span className={s.ovalRing} aria-hidden />
@@ -286,7 +286,7 @@ export default function TamanEukaliptusTheme({ data, slug, guestToken, demo, ski
         <Extras slot="end" />
 
         <footer className={s.closing}>
-          <div className={s.closeGarland} aria-hidden><Branch className={s.cb1} /><Branch className={s.cb2} /></div>
+          <div className={s.closeGarland} aria-hidden><Branch className={s.cb1} /><Branch className={s.cb2} variant="b" /></div>
           <p className={s.thanks}>Terima Kasih</p>
           <p className={s.closingText}>Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
           <p className={s.salamTitle}>Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh</p>

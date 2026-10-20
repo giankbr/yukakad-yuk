@@ -26,27 +26,23 @@
 .body { max-width: 320px; color: var(--muted); font-size: 15px; line-height: 1.7; text-wrap: pretty; }
 
 /* Ring strokes draw themselves; the solitaire twinkles. */
-.draw { stroke-dasharray: 1; stroke-dashoffset: 0; animation: drawRing 2.4s var(--m-ease) both; }
-.drawLate { animation-delay: .5s; }
-.gem { transform-box: fill-box; transform-origin: center; animation: gemIn 1.4s var(--m-ease) 1.2s both; }
-.spark { transform-box: fill-box; transform-origin: center; animation: sparkle 3.6s ease-in-out 2s infinite; opacity: 0; }
+@property --sweep { syntax: "<angle>"; inherits: false; initial-value: 400deg; }
+.rings { display: block; height: auto; --sweep: 400deg; mask-image: conic-gradient(from 200deg, #000 var(--sweep), transparent calc(var(--sweep) + 40deg)); animation: ringSweep 2.6s var(--m-ease) .2s both; }
 
-.sprig { position: absolute; pointer-events: none; color: var(--gold); }
-.sprig .blooms { fill: #fffdf9; stroke: var(--gold-light); stroke-width: .6; }
-.sprig .bloomEye { fill: var(--gold-light); stroke: none; }
-.sprig .leaves { fill: var(--gold); }
+.sprig { position: absolute; height: auto; pointer-events: none; mix-blend-mode: multiply; }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; min-height: 100dvh; padding: 64px 28px 48px; overflow: hidden; background: radial-gradient(120% 70% at 50% 30%, var(--ivory) 0%, var(--champagne-2) 55%, var(--champagne) 100%); text-align: center; isolation: isolate; }
 .cover::before { content: ""; position: absolute; inset: 14px; z-index: -1; border: 1px solid rgba(184, 149, 90, .45); border-radius: 200px 200px 18px 18px; pointer-events: none; }
 .glowA, .glowB { position: absolute; z-index: -2; border-radius: 50%; filter: blur(30px); pointer-events: none; }
-.glowA { top: -80px; left: -60px; width: 260px; height: 260px; background: rgba(234, 210, 202, .8); }
-.glowB { right: -80px; bottom: 40px; width: 280px; height: 280px; background: rgba(220, 193, 150, .45); }
-.sprigTL { top: 30px; left: 18px; width: 120px; rotate: 160deg; }
-.sprigBR { right: 14px; bottom: 26px; width: 130px; }
+.glowA, .glowB { filter: none; border-radius: 0; background: url("/themes/art/lamaran-cincin/wash.webp") center / contain no-repeat; }
+.glowA { top: -90px; left: -90px; width: 320px; height: 300px; }
+.glowB { right: -100px; bottom: 20px; width: 330px; height: 310px; opacity: .7; rotate: 160deg; }
+.sprigTL { top: 6px; left: -4px; width: 220px; transform-origin: 0 0; }
+.sprigBR { right: -6px; bottom: 6px; width: 200px; transform-origin: 100% 100%; }
 .sprigTL, .sprigBR, .heroSprig, .closingSprig { animation: sprigSway 9s ease-in-out infinite alternate; }
 .coverInner { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.coverRings { width: 130px; color: var(--gold); margin-bottom: 8px; }
+.coverRings { width: 124px; margin-bottom: 8px; }
 .coverNames { display: flex; flex-direction: column; align-items: center; font-family: var(--serif); font-weight: 500; font-style: italic; line-height: .95; }
 .coverNames span { max-width: 320px; font-size: 64px; overflow-wrap: anywhere; }
 .coverNames em { margin: 4px 0; color: var(--gold); font-size: 34px; }
@@ -62,7 +58,7 @@
 /* ── Main ── */
 .main { display: flex; flex-direction: column; background: var(--cream); }
 .hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 56px 24px 52px; overflow: hidden; background: linear-gradient(180deg, var(--ivory), var(--champagne-2)); text-align: center; }
-.heroSprig { top: 18px; right: -6px; width: 120px; }
+.heroSprig { top: 10px; right: -10px; width: 110px; }
 .oval { width: 250px; height: 340px; padding: 6px; border-radius: 50%; background: var(--gold-grad); box-shadow: 0 20px 48px rgba(142, 109, 58, .25); }
 .oval > img, .oval > div { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; cursor: zoom-in; }
 .heroNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 10px; margin-top: 8px; font-family: var(--serif); font-size: 50px; font-weight: 500; font-style: italic; line-height: 1; overflow-wrap: anywhere; }
@@ -89,12 +85,12 @@
 .person h3 { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.15; overflow-wrap: anywhere; }
 .person p { color: var(--muted); font-size: 12.5px; line-height: 1.5; white-space: pre-line; }
 .pairRings { position: absolute; left: 50%; top: 82px; width: 56px; translate: -50% 0; padding: 6px; border-radius: 50%; background: var(--ivory); color: var(--gold); box-shadow: 0 6px 18px rgba(142, 109, 58, .18); }
-.pairRings svg { display: block; width: 100%; }
+.pairRings .rings { width: 100%; }
 
 .exchange { gap: 12px; margin: 0 16px; padding: 48px 24px; border-radius: 28px; background: radial-gradient(90% 80% at 50% 0%, #5b463c 0%, #3d2f29 100%); color: var(--ivory); }
 .exchange .kicker { color: var(--gold-light); }
 .exchange .body { color: rgba(251, 247, 241, .78); }
-.exchangeRings { width: 110px; color: var(--gold-light); }
+.exchangeRings { width: 116px; }
 .exchangeTitle { font-family: var(--serif); font-size: 42px; font-weight: 500; font-style: italic; line-height: 1; }
 .exchangeWhen { margin-top: 6px; padding: 8px 16px; border: 1px solid rgba(220, 193, 150, .5); border-radius: 999px; color: var(--gold-light); font-size: 13px; font-weight: 600; }
 
@@ -156,7 +152,7 @@
 .submit:hover { background-position: 100% 0; }
 .submit:disabled { opacity: .6; cursor: progress; }
 .sentBox { align-items: center; gap: 10px; padding: 28px 22px; text-align: center; }
-.sentRings { width: 84px; color: var(--gold); }
+.sentRings { width: 92px; }
 .sentBox strong { font-family: var(--serif); font-size: 26px; font-style: italic; }
 .sentBox p { color: var(--muted); font-size: 14px; }
 .sentBox .submit { width: 100%; max-width: 220px; }
@@ -184,24 +180,21 @@
 .copyOn, .copyOn:hover { background: var(--gold); color: #fff; }
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 104px 28px 40px; overflow: hidden; background: linear-gradient(180deg, var(--cream), var(--champagne)); text-align: center; }
-.closingSprig { top: -6px; left: -18px; width: 96px; rotate: 170deg; opacity: .8; }
+.closingSprig { top: -16px; left: -16px; width: 136px; opacity: .9; }
 .thanks { font-family: var(--serif); font-size: 54px; font-weight: 500; font-style: italic; line-height: 1; }
 .family { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 30px; font-family: var(--serif); font-size: 23px; font-style: italic; font-weight: 600; overflow-wrap: anywhere; }
 .family small { color: var(--gold-deep); font-family: var(--sans); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
 .made { color: var(--muted); font-size: 12px; transition: color 400ms var(--m-ease), scale 400ms var(--m-ease), translate 400ms var(--m-ease); }
 .made:hover { color: var(--gold-deep); }
 
-@keyframes drawRing { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-@keyframes gemIn { from { opacity: 0; scale: .6; } to { opacity: 1; scale: 1; } }
-@keyframes sparkle { 0%, 70%, 100% { opacity: 0; scale: .5; } 82% { opacity: 1; scale: 1; } }
-@keyframes sprigSway { from { translate: 0 0; } to { translate: 2px -4px; } }
+@keyframes ringSweep { from { --sweep: -40deg; } to { --sweep: 400deg; } }
+@keyframes sprigSway { from { rotate: 0deg; } to { rotate: 1.4deg; } }
 
 @supports (animation-timeline: view()) {
-  .exchangeRings .draw, .pairRings .draw { animation: drawRing linear both; animation-timeline: view(); animation-range: entry 30% cover 40%; }
-  .exchangeRings .drawLate, .pairRings .drawLate { animation-range: entry 50% cover 50%; }
+  .exchangeRings, .pairRings .rings { animation: ringSweep linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .exchangeRings .draw, .pairRings .draw, .draw, .gem, .spark, .sprigTL, .sprigBR, .heroSprig, .closingSprig { animation: none; }
-  .spark { opacity: .8; }
+  .rings, .exchangeRings, .pairRings .rings, .sprigTL, .sprigBR, .heroSprig, .closingSprig { animation: none; }
+  .rings { mask-image: none; }
 }

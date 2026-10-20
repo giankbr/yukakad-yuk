@@ -29,12 +29,21 @@
 @media (hover: hover) { .btnLine:not(:disabled):hover { background: var(--navy); color: #fff; } }
 
 /* ── Ornaments ── */
-.cap { display: block; width: 100%; height: auto; overflow: visible; }
+.cap { position: relative; display: block; width: 100%; aspect-ratio: 300 / 230; }
+.cap img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; -webkit-user-drag: none; user-select: none; }
+.emblem { position: relative; display: grid; place-items: center; }
+.laurel { display: block; width: 100%; height: auto; pointer-events: none; }
+.emblemCenter { position: absolute; left: 50%; top: 45%; translate: -50% -50%; display: grid; place-items: center; }
+.coverEmblem { width: 214px; margin-bottom: -4px; }
+.closeEmblem { width: 200px; }
+.closeEmblem .emblemCenter { top: 50%; }
+.diploma { position: absolute; right: -14px; top: -30px; width: 124px; height: auto; rotate: -9deg; filter: drop-shadow(0 6px 6px rgba(20, 33, 58, .12)); pointer-events: none; }
 .capBtn { display: block; padding: 0; border: 0; background: none; -webkit-tap-highlight-color: transparent; transition: scale 160ms var(--m-ease), translate 160ms var(--m-ease); }
 .capBtn .capArt { display: block; transform-origin: 50% 60%; }
 .tossing .capArt { animation: toss 900ms cubic-bezier(.3, 0, .3, 1); }
-.tassel { transform-box: fill-box; transform-origin: 50% 0; animation: tassel 4s ease-in-out infinite; }
-.seal { display: block; width: 100%; height: auto; }
+.cap .tassel { transform-origin: 82% 48%; animation: tassel 4s ease-in-out infinite; }
+.seal { position: relative; display: block; width: 100%; aspect-ratio: 1; }
+.seal img, .seal svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .sealText { font-family: var(--sans); font-size: 9.4px; font-weight: 700; letter-spacing: 2.6px; fill: var(--navy2); }
 .sealSpin { transform-origin: 60px 60px; animation: spin 40s linear infinite; }
 .rule { display: flex; align-items: center; gap: 10px; width: 100%; color: var(--gold); }
@@ -43,7 +52,7 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 22px; background: var(--navy); color: #fff; overflow: hidden; }
-.cover::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 2px, transparent 2px 12px); pointer-events: none; }
+.cover::before { content: ""; position: absolute; inset: 0; background: var(--navy) url(/themes/art/wisuda-toga/grain.webp) 0 0 / 256px repeat; background-blend-mode: soft-light; pointer-events: none; }
 .certificate { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 34px 22px 30px; border: 1px solid rgba(200, 162, 74, .7); outline: 1px solid rgba(200, 162, 74, .35); outline-offset: -8px; text-align: center; }
 .corner { position: absolute; width: 22px; height: 22px; border: 1px solid var(--gold); }
 .corner:nth-child(1) { left: -1px; top: -1px; border-width: 3px 0 0 3px; }
@@ -64,7 +73,7 @@
 /* ── Main ── */
 .page { display: flex; flex-direction: column; background: var(--paper); }
 .section { display: flex; flex-direction: column; gap: 22px; padding: 60px 24px; }
-.navyBand { background: var(--navy); color: #fff; }
+.navyBand { background: var(--navy) url(/themes/art/wisuda-toga/grain.webp) 0 0 / 256px repeat; background-blend-mode: soft-light; color: #fff; }
 .head { display: flex; flex-direction: column; gap: 6px; }
 .num { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--gold); }
 .head h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.1; overflow-wrap: anywhere; }
@@ -72,7 +81,7 @@
 .lead { color: var(--muted); font-size: 14.5px; }
 .navyBand .lead { color: rgba(255, 255, 255, .72); }
 
-.hero { position: relative; display: grid; grid-template-columns: 1fr; gap: 18px; padding: 40px 24px 50px; background: var(--navy); color: #fff; overflow: hidden; }
+.hero { position: relative; display: grid; grid-template-columns: 1fr; gap: 18px; padding: 40px 24px 50px; background: var(--navy) url(/themes/art/wisuda-toga/grain.webp) 0 0 / 256px repeat; background-blend-mode: soft-light; color: #fff; overflow: hidden; }
 .hero::after { content: ""; position: absolute; right: -70px; top: -70px; width: 220px; height: 220px; border: 1px solid rgba(200, 162, 74, .25); border-radius: 50%; box-shadow: 0 0 0 18px rgba(200, 162, 74, .05), 0 0 0 40px rgba(200, 162, 74, .04); }
 .heroTop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .heroTop .coverKicker { text-align: left; }
@@ -85,7 +94,7 @@
 .heroMeta dt { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255, 255, 255, .55); }
 .heroMeta dd { margin-top: 2px; font-family: var(--mono); font-size: 13px; overflow-wrap: anywhere; }
 
-.quote { position: relative; padding: 22px 22px 22px 26px; border-left: 3px solid var(--gold); background: var(--card); font-family: var(--serif); font-size: 21px; line-height: 1.35; }
+.quote { position: relative; padding: 30px 22px 22px 26px; border-left: 3px solid var(--gold); background: var(--card); font-family: var(--serif); font-size: 21px; line-height: 1.35; }
 .quote cite { display: block; margin-top: 10px; font-family: var(--sans); font-size: 12px; font-style: normal; letter-spacing: 1px; color: var(--muted); }
 
 .grad { display: grid; grid-template-columns: 120px 1fr; gap: 18px; align-items: start; padding: 18px; border: 1px solid var(--line); background: var(--card); }
@@ -175,8 +184,8 @@
 @media (hover: hover) { .copy:hover { border-color: var(--gold); } }
 .copyOn { background: var(--gold); border-color: var(--gold); color: var(--navy2); }
 
-.closing { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 56px 24px 40px; text-align: center; background: var(--navy2); color: #fff; }
-.closing .sealWrap { width: 110px; }
+.closing { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 56px 24px 40px; text-align: center; background: var(--navy2) url(/themes/art/wisuda-toga/grain.webp) 0 0 / 256px repeat; background-blend-mode: soft-light; color: #fff; }
+.closing .sealWrap { width: 100px; }
 .closing h2 { font-family: var(--serif); font-weight: 400; font-size: 34px; }
 .closing p { max-width: 310px; font-size: 14px; color: rgba(255, 255, 255, .72); }
 .closing strong { font-size: 16px; overflow-wrap: anywhere; }

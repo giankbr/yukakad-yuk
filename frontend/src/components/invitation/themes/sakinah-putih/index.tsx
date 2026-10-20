@@ -8,7 +8,7 @@ import {
 import { tableLabel } from "../extras";
 import type { GiftMethod, InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
-import { Bloom, Vine } from "./ornaments";
+import { Bloom, Spray, Vine } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["Lora:ital,wght@0,500;0,600;1,500", "Nunito Sans:wght@400;600;700", "Amiri:wght@400;700"];
@@ -118,7 +118,9 @@ export default function SakinahPutihTheme({ data, slug, guestToken, demo, skipCo
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Bloom className={s.coverBloom} />
+          <Spray className={s.spray} eager />
+          <Spray className={`${s.spray} ${s.sprayB}`} eager />
+          <Bloom className={s.coverBloom} eager />
           <p className={s.arabic} lang="ar" dir="rtl">{BISMILLAH}</p>
           <p className={s.kicker}>{wedding ? "Undangan Walimatul 'Ursy" : `Undangan ${label}`}</p>
           <h1 className={s.coverNames}>

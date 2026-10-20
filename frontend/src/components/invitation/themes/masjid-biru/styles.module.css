@@ -14,7 +14,7 @@
 .root :where(a) { color: inherit; text-decoration: none; }
 .root :where(ol, ul) { list-style: none; }
 
-.kicker { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.kicker { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; text-wrap: balance; }
 .arabic { color: var(--gold-soft); font-family: var(--arab); font-size: 25px; line-height: 1.9; text-align: center; text-wrap: balance; }
 .arabicSm { color: var(--gold); font-family: var(--arab); font-size: 19px; line-height: 1.7; text-align: center; }
 .lead { max-width: 330px; color: var(--muted); font-size: 15px; line-height: 1.7; text-align: center; text-wrap: pretty; }
@@ -40,23 +40,28 @@
   radial-gradient(1px 1px at 74% 66%, #fff 50%, transparent 51%), radial-gradient(1px 1px at 36% 70%, #fff 50%, transparent 51%);
   opacity: .7; animation: twinkle 6s ease-in-out infinite alternate; }
 .starsB { background-position: 37px 53px; opacity: .45; animation-delay: -3s; animation-duration: 8s; }
-.lanterns { position: absolute; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 22px; pointer-events: none; color: var(--gold); }
-.lantern { display: block; transform-origin: 50% 0; animation: sway 7s ease-in-out infinite; filter: drop-shadow(0 6px 14px rgba(255, 200, 100, .45)); }
-.lantern svg { display: block; }
-.lantern path[fill^="var(--glow"] { animation: flicker 3.4s ease-in-out infinite; }
-.lanternB { animation-duration: 8.5s; animation-delay: -2s; }
+.lanterns { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: flex-start; justify-content: space-between; padding: 0 22px; pointer-events: none; color: var(--gold); }
+/* painted lanterns: CSS string + painted brass body; a soft light pool flickers behind the glass */
+.lantern, .storyLantern { position: relative; display: flex; flex-direction: column; align-items: center; transform-origin: 50% 0; }
+.lantern { width: 64px; animation: sway 7s ease-in-out infinite; }
+.lantern [data-string], .storyLantern [data-string] { display: block; width: 1px; height: var(--drop); background: linear-gradient(rgba(230, 185, 92, .15), rgba(230, 185, 92, .75)); }
+.lantern img, .storyLantern img { position: relative; display: block; width: 64px; height: auto; margin-top: -13px; }
+.lantern::after { content: ""; position: absolute; left: 50%; bottom: 48px; width: 84px; height: 84px; translate: -50% 50%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 196, 102, .32), rgba(255, 196, 102, 0)); mix-blend-mode: screen; pointer-events: none; animation: flicker 3.4s ease-in-out infinite; }
+.lanternB { width: 76px; animation-duration: 8.5s; animation-delay: -2s; }
+.lanternB img { width: 76px; margin-top: -15px; }
+.lanternB::after { bottom: 57px; width: 100px; height: 100px; animation-delay: -1.3s; }
 .lanternC { animation-duration: 6.2s; animation-delay: -4s; }
-.lanternB svg { width: 46px; height: auto; }
-.skyline { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; display: block; }
+.lanternC::after { animation-delay: -2.1s; }
+.skyline { position: absolute; left: 0; right: 0; bottom: 0; display: block; width: 100%; height: auto; pointer-events: none; }
 
 /* ── Cover ── */
 .cover {
   position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh;
   padding: 120px 30px 180px; overflow: hidden; text-align: center;
-  background: radial-gradient(90% 55% at 50% 100%, #24407e 0%, transparent 70%), linear-gradient(180deg, #060d22 0%, var(--night) 55%, #142a5e 100%);
+  background: url("/themes/art/masjid-biru/sky.webp") center / 100% 100% no-repeat, #0c1838;
 }
-.cover::before { content: ""; position: absolute; inset: 0; background-image: var(--tile); background-size: 60px; opacity: .07; }
-.moon { position: absolute; top: 74px; right: 84px; width: 46px; height: 46px; color: var(--gold-soft); filter: drop-shadow(0 0 18px rgba(243, 215, 152, .55)); rotate: -20deg; }
+.cover::before { content: ""; position: absolute; inset: 0; background-image: var(--tile); background-size: 180px; opacity: .07; }
+.moon { position: absolute; top: 54px; right: 62px; width: 88px; height: 88px; rotate: -20deg; pointer-events: none; }
 .coverInner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 320px; }
 .coverNames { width: 100%; color: var(--ink); font-family: var(--head); font-size: 46px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 0 30px rgba(127, 208, 200, .25); }
 .coverDate { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
@@ -67,7 +72,7 @@
 
 /* ── Main ── */
 .page { display: flex; flex-direction: column; background: var(--night); }
-.hero { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 560px; padding: 120px 28px 170px; overflow: hidden; text-align: center; background: linear-gradient(180deg, #060d22, var(--night) 60%, #17305f); }
+.hero { position: relative; display: flex; flex-direction: column; justify-content: center; min-height: 560px; padding: 120px 28px 170px; overflow: hidden; text-align: center; background: url("/themes/art/masjid-biru/sky.webp") center / 100% 100% no-repeat, #0c1838; }
 .heroText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .heroNames { max-width: 100%; color: var(--ink); font-family: var(--head); font-size: 44px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
 .heroDate { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
@@ -79,19 +84,19 @@
 .verse figcaption { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
 
 .section { position: relative; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 64px 22px; background: var(--night); }
-.section::before { content: ""; position: absolute; inset: 0; background-image: var(--tile); background-size: 60px; opacity: .05; pointer-events: none; }
+.section::before { content: ""; position: absolute; inset: 0; background-image: var(--tile); background-size: 180px; opacity: .05; pointer-events: none; }
 .section > * { position: relative; }
 .deep { background: var(--tilebg); }
 .deep::before { opacity: .09; }
 .head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
-.headStar { width: 22px; height: 22px; color: var(--gold); filter: drop-shadow(0 0 8px rgba(230, 185, 92, .5)); }
+.headStar { width: 44px; height: 44px; margin: -11px 0 -11px; }
 .head h2 { color: var(--ink); font-family: var(--head); font-size: 31px; font-weight: 400; line-height: 1.15; text-wrap: balance; }
 
 /* people: photo or initial inside an eight-point star medallion */
 .people { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; }
 .person { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 320px; text-align: center; }
-.medal { width: 196px; height: 196px; margin-bottom: 12px; padding: 2px; background: linear-gradient(135deg, var(--gold-soft), var(--gold) 50%, #9b7428); clip-path: var(--octa); transition: rotate 1.4s var(--m-ease), scale 900ms var(--m-ease); }
-.medalInner { display: grid; place-items: center; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 40%, #1f3b78, var(--deep)); clip-path: var(--octa); }
+.medal { width: 196px; height: 196px; margin-bottom: 12px; padding: 3px; background: url("/themes/art/masjid-biru/gold.webp") center / 220px; clip-path: var(--octa); transition: rotate 1.4s var(--m-ease), scale 900ms var(--m-ease); }
+.medalInner { display: grid; place-items: center; width: 100%; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 40%, rgba(58, 90, 160, .55), rgba(8, 17, 39, 0) 70%), url("/themes/art/masjid-biru/sky.webp") center 30% / 100% 300%, var(--deep); clip-path: var(--octa); }
 .medalInner img { width: 100%; height: 100%; }
 .medalInner b { color: var(--gold); font-family: var(--head); font-size: 72px; font-weight: 400; line-height: 1; text-shadow: 0 0 24px rgba(230, 185, 92, .4); }
 .person:hover .medal { rotate: 22.5deg; }
@@ -128,8 +133,8 @@
 .stories { position: relative; display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 340px; }
 .stories::before { content: ""; position: absolute; top: 0; bottom: 20px; left: 19.5px; width: 1px; background: linear-gradient(var(--gold), rgba(230, 185, 92, .1)); }
 .story { display: flex; gap: 14px; }
-.storyLantern { flex-shrink: 0; width: 40px; color: var(--gold); transform-origin: 50% 0; filter: drop-shadow(0 4px 10px rgba(255, 200, 100, .4)); }
-.storyLantern svg { width: 40px; height: auto; }
+.storyLantern { flex-shrink: 0; width: 40px; }
+.storyLantern img { width: 54px; margin-top: -11px; }
 .story > div { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 4px; padding-top: 10px; }
 .story small { color: var(--teal); font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .story h3 { color: var(--ink); font-family: var(--head); font-size: 21px; font-weight: 400; }
@@ -173,7 +178,7 @@
 .wishes { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 6px; }
 .wish { display: flex; gap: 12px; padding: 14px; border: 1px solid rgba(255, 255, 255, .07); border-radius: 16px; background: var(--card); transition: border-color 500ms var(--m-ease); }
 .wish:hover { border-color: var(--line); }
-.wishAvatar { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; background: linear-gradient(135deg, var(--gold), #a07a2c); clip-path: var(--octa); color: var(--night); font-family: var(--head); font-size: 16px; }
+.wishAvatar { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; background: url("/themes/art/masjid-biru/gold.webp") center / 120px; clip-path: var(--octa); color: var(--night); font-family: var(--head); font-size: 16px; }
 .wish > div { display: flex; flex: 1; min-width: 0; flex-direction: column; gap: 3px; }
 .wishHead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .wishHead strong { color: var(--ink); font-size: 14px; overflow-wrap: anywhere; }
@@ -182,14 +187,14 @@
 .wish small { color: rgba(169, 181, 214, .7); font-size: 11px; }
 
 /* closing */
-.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 72px 30px 190px; overflow: hidden; text-align: center; background: linear-gradient(180deg, var(--night), #17305f); }
-.closingMoon { width: 40px; height: 40px; color: var(--gold-soft); rotate: -20deg; filter: drop-shadow(0 0 16px rgba(243, 215, 152, .5)); }
+.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 72px 30px 190px; overflow: hidden; text-align: center; background: linear-gradient(180deg, var(--night), rgba(12, 24, 56, 0) 40%), url("/themes/art/masjid-biru/sky.webp") center / 100% 100% no-repeat, #0c1838; }
+.closingMoon { width: 80px; height: 80px; margin: -20px 0; rotate: -20deg; }
 .closing h2 { max-width: 300px; color: var(--ink); font-family: var(--head); font-size: 25px; font-weight: 400; line-height: 1.3; text-wrap: balance; }
 .families { color: var(--muted); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
 .families b { color: var(--gold); font-family: var(--head); font-size: 24px; font-weight: 400; }
 .credit { position: relative; z-index: 1; margin-top: 10px; color: var(--muted); font-size: 12px; transition: color 400ms var(--m-ease); }
 .credit:hover { color: var(--gold); }
-.closingSkyline { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 130px; }
+.closingSkyline { position: absolute; left: 0; right: 0; bottom: 0; display: block; width: 100%; height: auto; pointer-events: none; }
 
 .root :is(button, a, input, textarea):focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 2px; }
 
@@ -203,6 +208,6 @@
 @keyframes softPop { from { opacity: 0; scale: .6; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .stars, .lantern, .lantern path[fill^="var(--glow"], [data-revealed] .headStar, .copyOn svg { animation: none; }
+  .stars, .lantern, .lantern::after, [data-revealed] .headStar, .copyOn svg { animation: none; }
   .btn, .btnLine, .medal, .medalInner > *, .event, .window > *, .gift, .copy, .wish { transition: none; }
 }

@@ -57,43 +57,31 @@ function timeOf(value?: string) {
 
 /* ── Ornaments ─────────────────────────────────────────────── */
 
-/** Line-art house with lit windows and potted plants (240×170). */
-function House({ animate, className }: { animate?: boolean; className?: string }) {
+const ART = "/themes/art/syukuran-rumah";
+
+/** Painted (gouache) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
   return (
-    <svg className={`${s.house} ${animate ? s.animate : ""} ${className ?? ""}`} viewBox="0 0 240 170" aria-hidden="true" focusable="false">
-      <rect className={s.glow} x="67" y="103" width="26" height="24" rx="1" />
-      <rect className={s.glow} x="147" y="103" width="26" height="24" rx="1" />
-      <circle className={s.glow} cx="120" cy="70" r="7" />
-      <g className={s.sway}>
-        <path className={s.leaf} d="M30 146c-6-12-12-16-14-26 8 3 13 11 14 26z" />
-        <path className={s.leafDark} d="M31 146c2-14 7-22 15-26-1 10-7 17-15 26z" />
-        <path className={s.leaf} d="M31 146c-1-16 1-26 6-34 3 10 1 22-6 34z" />
-      </g>
-      <path className={s.pot} d="M21 145h21l-3 15H24z" />
-      <g className={s.sway}>
-        <circle className={s.leaf} cx="214" cy="112" r="16" />
-        <circle className={s.leafDark} cx="204" cy="124" r="10" />
-        <circle className={s.leaf} cx="224" cy="126" r="10" />
-      </g>
-      <path className={s.draw} pathLength={1} d="M214 160v-36" />
-      <path className={s.draw} pathLength={1} d="M6 160h228" />
-      <path className={s.draw} pathLength={1} d="M50 160V88h140v72" />
-      <path className={s.draw} pathLength={1} d="M36 92 120 36l84 56" />
-      <path className={`${s.draw} ${s.soft}`} pathLength={1} d="M60 87 120 47l60 40" />
-      <path className={s.draw} pathLength={1} d="M158 60V40h14v30" />
-      <path className={s.draw} pathLength={1} d="M106 160v-38a14 14 0 0 1 28 0v38" />
-      <path className={s.draw} pathLength={1} d="M66 102h28v26H66z" />
-      <path className={s.draw} pathLength={1} d="M146 102h28v26h-28z" />
-      <path className={`${s.draw} ${s.soft}`} pathLength={1} d="M80 102v26M66 115h28M160 102v26M146 115h28" />
-      <path className={s.draw} pathLength={1} d="M128 70a8 8 0 1 1-16 0 8 8 0 1 1 16 0" />
-      <path className={`${s.draw} ${s.soft}`} pathLength={1} d="M98 160h44M62 132h36M142 132h36" />
-      <circle cx="128" cy="142" r="1.8" fill="currentColor" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
+
+/** Gouache house in stacked layers (same 480×340 canvas): tree and plant sway, windows light up. */
+function House({ animate, className, eager }: { animate?: boolean; className?: string; eager?: boolean }) {
+  return (
+    <div className={`${s.house} ${animate ? s.animate : ""} ${className ?? ""}`} aria-hidden data-nolightbox>
+      <span className={s.tree} />
+      <Art name="house" w={480} h={340} eager={eager} />
+      <span className={s.plant} />
+      <Art name="lights" w={480} h={340} className={s.lights} eager={eager} />
+    </div>
   );
 }
 
 function Roof() {
-  return <svg className={s.roof} viewBox="0 0 46 18" aria-hidden="true"><path d="M2 16 23 3l21 13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /><circle cx="23" cy="11" r="2" fill="currentColor" /></svg>;
+  return <Art name="roof" w={104} h={30} className={s.roof} />;
 }
 
 function Head({ id, eyebrow, children }: { id: string; eyebrow?: string; children: string }) {
@@ -153,7 +141,7 @@ export default function SyukuranRumahTheme({ data, slug, guestToken, demo, skipC
       cover={open => (
         <section className={s.cover}>
           <div className={s.door}>
-            <House animate />
+            <House animate eager />
             <p className={s.coverKicker}>Undangan</p>
             <h1 className={s.coverTitle}>{label}</h1>
             <p className={s.coverFamily}>{hosts.family}</p>
@@ -260,6 +248,10 @@ export default function SyukuranRumahTheme({ data, slug, guestToken, demo, skipC
               );
             })}
           </div>
+          <figure className={s.tumpeng}>
+            <Art name="tumpeng" w={548} h={309} />
+            <figcaption>Tumpeng syukur, tanda terima kasih atas rezeki rumah ini.</figcaption>
+          </figure>
         </section>
 
         <Extras slot="event" without={["calendar"]} />

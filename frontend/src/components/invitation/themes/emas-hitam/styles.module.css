@@ -20,29 +20,30 @@
 
 .gold { background: var(--gold-grad); background-size: 220% 100%; background-position: 0 0; -webkit-background-clip: text; background-clip: text; color: transparent; }
 .kicker { color: var(--gold); font-family: var(--deco); font-size: 11px; letter-spacing: .42em; text-transform: uppercase; }
-.rule { width: 200px; max-width: 70%; height: 16px; }
+.rule { width: 200px; max-width: 70%; height: auto; }
+.ruleArt { display: block; }
 .chamfer, .panel, .openBtn, .guest, .tile, .portrait, .submit, .heroFrame {
   clip-path: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut));
 }
 
 /* ── Cover ── */
-.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 100dvh; padding: 60px 40px 54px; overflow: hidden; background: radial-gradient(90% 60% at 50% 40%, #1b1a17 0%, var(--onyx) 70%); text-align: center; }
-.pattern { position: absolute; inset: 0; opacity: .07; background:
-  repeating-linear-gradient(45deg, var(--gold) 0 1px, transparent 1px 22px),
-  repeating-linear-gradient(-45deg, var(--gold) 0 1px, transparent 1px 22px); }
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; min-height: 100dvh; padding: 60px 40px 54px; overflow: hidden; background: radial-gradient(90% 60% at 50% 40%, rgba(44, 40, 31, .7) 0%, transparent 70%), url("/themes/art/emas-hitam/card.webp") 0 0 / 256px 256px, var(--onyx); text-align: center; }
+.pattern { position: absolute; inset: 0; background:
+  repeating-linear-gradient(45deg, rgba(210, 174, 104, .075) 0 1px, transparent 1px 22px),
+  repeating-linear-gradient(-45deg, rgba(210, 174, 104, .075) 0 1px, transparent 1px 22px); }
 .frame { position: absolute; inset: 18px; border: 1px solid var(--line); pointer-events: none; }
 .frame::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(210, 174, 104, .18); }
-.corner { position: absolute; width: 58px; height: 58px; }
+.corner { position: absolute; width: 62px; height: 62px; }
 .c1 { top: -1px; left: -1px; }
 .c2 { top: -1px; right: -1px; rotate: 90deg; }
 .c3 { right: -1px; bottom: -1px; rotate: 180deg; }
 .c4 { bottom: -1px; left: -1px; rotate: 270deg; }
 .cover > :not(.pattern, .frame) { position: relative; }
-.coverFan { width: 220px; height: auto; margin-bottom: 4px; }
+.coverFan { width: 250px; height: auto; margin-bottom: 4px; }
 .coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; font-family: var(--display); font-weight: 400; line-height: 1; }
 .coverNames span { font-size: 60px; letter-spacing: .04em; overflow-wrap: anywhere; padding: 0 4px; }
 .coverNames em { margin: 6px 0; color: var(--gold); font-family: var(--deco); font-size: 22px; font-style: normal; }
-.coverRule { width: 180px; height: 16px; }
+.coverRule { width: 180px; height: auto; }
 .coverDate { color: var(--ivory); font-family: var(--deco); font-size: 15px; letter-spacing: .32em; }
 .guest { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 290px; max-width: 100%; margin-top: 14px; padding: 16px 20px; background: linear-gradient(var(--coal), var(--coal)) padding-box, var(--gold-grad) border-box; border: 1px solid transparent; --cut: 10px; }
 .guest small { color: var(--muted); font-size: 12px; letter-spacing: .06em; }
@@ -194,32 +195,33 @@
 .closed strong { font-family: var(--deco); font-size: 14px; font-weight: 400; letter-spacing: .1em; }
 .closed p { color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-/* ── Signature motion: sunburst rays draw in, gold sheen sweeps the names, deco lines extend ── */
-.coverFan :global(.ray), .coverFan :global(.arc) { stroke-dasharray: 1; animation: draw 1.8s var(--m-ease) both; }
-.coverFan :global(.ray) { animation-delay: .6s; }
-[data-revealed] .heroFan :global(.ray), [data-revealed] .closeFan :global(.ray), [data-revealed] .heroFan :global(.arc), [data-revealed] .closeFan :global(.arc) { stroke-dasharray: 1; animation: draw 1.8s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
+/* ── Signature motion: foil fan unfolds from its base, a glint sweeps the foil + names, dividers extend from the diamond ── */
+.fan { position: relative; display: block; }
+.fan img { display: block; width: 100%; height: auto; }
+.fan::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 40%, rgba(255, 238, 196, .55) 50%, transparent 60%) 0 0 / 300% 100% no-repeat; background-position: 100% 0;
+  -webkit-mask: url("/themes/art/emas-hitam/fan.webp") center / 100% 100% no-repeat; mask: url("/themes/art/emas-hitam/fan.webp") center / 100% 100% no-repeat; mix-blend-mode: screen; opacity: 0; }
+.coverFan img { animation: unfold 2s var(--m-ease) .2s both; }
+.coverFan::after { animation: foilGlint 8s var(--m-ease) 2s infinite; }
+[data-revealed] .heroFan img, [data-revealed] .closeFan img { animation: unfold 2s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
+[data-revealed] .heroFan::after, [data-revealed] .closeFan::after { animation: foilGlint 8s var(--m-ease) calc(var(--rd, 0ms) + 2.2s) infinite; }
 .coverNames .gold, .heroNames .gold, .thanks .gold { animation: sheen 7s var(--m-ease) 1.2s infinite; }
-[data-revealed] .rule :global(.line) { animation: extend 1.4s var(--m-ease) calc(var(--rd, 0ms) + 250ms) both; }
-[data-revealed] .rule :global(.line):first-child { transform-origin: 100% 50%; }
-[data-revealed] .rule :global(.line) + :global(.line) { transform-origin: 0 50%; }
-.coverRule :global(.line) { transform-box: fill-box; animation: extend 1.4s var(--m-ease) 1s both; }
-.rule :global(.line) { transform-box: fill-box; }
-.coverRule :global(.line):first-child { transform-origin: 100% 50%; }
+[data-revealed] .rule { animation: extend 1.4s var(--m-ease) calc(var(--rd, 0ms) + 250ms) both; }
+.coverRule { animation: extend 1.4s var(--m-ease) 1s both; }
 [data-revealed] .tile::after { animation: glint 8s var(--m-ease) calc(var(--rd, 0ms) + 1.2s) infinite; }
 [data-revealed] .timeline::before { animation: drawDown 1.8s var(--m-ease) calc(var(--rd, 0ms) + 300ms) both; }
 
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes unfold { from { clip-path: circle(0% at 50% 100%); opacity: .4; } to { clip-path: circle(120% at 50% 100%); opacity: 1; } }
+@keyframes foilGlint { 0%, 70% { background-position: 100% 0; opacity: 0; } 74% { opacity: 1; } 96% { opacity: 1; } 100% { background-position: 0 0; opacity: 0; } }
 @keyframes sheen { 0%, 55% { background-position: 0 0; } 100% { background-position: 100% 0; } }
-@keyframes extend { from { transform: scaleX(0); opacity: 0; } }
+@keyframes extend { from { clip-path: inset(0 50% 0 50%); opacity: .3; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 @keyframes glint { 0%, 72% { translate: -120% 0; } 100% { translate: 120% 0; } }
 @keyframes drawDown { from { transform: scaleY(0); } }
 @keyframes softPop { from { opacity: 0; scale: .5; } }
 @keyframes pulse { 50% { opacity: .55; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .coverFan :global(.ray), .coverFan :global(.arc), [data-revealed] .heroFan :global(.ray), [data-revealed] .closeFan :global(.ray),
-  [data-revealed] .heroFan :global(.arc), [data-revealed] .closeFan :global(.arc), .coverNames .gold, .heroNames .gold, .thanks .gold,
-  [data-revealed] .rule :global(.line), .coverRule :global(.line), [data-revealed] .tile::after, [data-revealed] .timeline::before, .copyOn svg, .musicOn svg { animation: none; }
+  .coverFan img, .coverFan::after, [data-revealed] .heroFan img, [data-revealed] .closeFan img, [data-revealed] .heroFan::after, [data-revealed] .closeFan::after,
+  .coverNames .gold, .heroNames .gold, .thanks .gold, [data-revealed] .rule, .coverRule, [data-revealed] .tile::after, [data-revealed] .timeline::before, .copyOn svg, .musicOn svg { animation: none; }
   .tile::after { display: none; }
   .openBtn, .portrait, .panelIn, .lineBtn, .mosaic > img, .field input, .field textarea, .choices button, .step, .submit, .wish, .card, .copy, .music { transition: none; }
 }

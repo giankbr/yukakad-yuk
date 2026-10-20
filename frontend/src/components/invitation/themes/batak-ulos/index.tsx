@@ -9,7 +9,6 @@ import { tableLabel } from "../extras";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
-import { lozenge, rumahBolon, spiral } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["DM Serif Display", "Josefin Sans:wght@400;600;700", "Lora:ital,wght@0,400;0,500;0,600;1,400"];
@@ -19,8 +18,12 @@ const DEMO_WISHES = [
 ];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Belum pasti", no: "Berhalangan" };
 
-const Svg = ({ html, box, className }: { html: string; box: string; className?: string }) => (
-  <svg className={className} viewBox={box} aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: html }} />
+// Linocut-printed ornaments (rendered by /tmp/pen/art/themes/batak-ulos.py); woven ulos/gorga tiles live in the CSS.
+const ART = { "spiral-red": [88, 67], "lozenge": [410, 411], "spiral-bone": [88, 69], "rumah-bolon": [440, 298] } as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative printed ornament, static asset
+  <img src={`/themes/art/batak-ulos/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
 );
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -28,7 +31,7 @@ function Head({ id, kicker, title }: { id: string; kicker?: string; title: strin
     <div className={s.head}>
       {kicker && <p className={s.eyebrow}>{kicker}</p>}
       <h2 id={id}>{title}</h2>
-      <span className={s.headRule} aria-hidden><Svg html={spiral} box="0 0 40 40" /></span>
+      <span className={s.headRule} aria-hidden><Art name="spiral-red" /></span>
     </div>
   );
 }
@@ -90,7 +93,7 @@ export default function BatakUlosTheme({ data, slug, guestToken, demo, skipCover
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <Svg html={rumahBolon} box="0 0 220 160" className={s.house} />
+          <Art name="rumah-bolon" eager className={s.house} />
           <p className={s.horas}>Horas!</p>
           <p className={s.kicker}>Undangan {label} Adat Batak</p>
           <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>dohot</em><span>{data.couple.groom}</span></h1>
@@ -132,7 +135,7 @@ export default function BatakUlosTheme({ data, slug, guestToken, demo, skipCover
               {index === 1 && <p className={s.amp} aria-hidden>&amp;</p>}
               <article className={s.person}>
                 <div className={s.diamond}>
-                  <Svg html={lozenge} box="0 0 200 200" />
+                  <Art name="lozenge" />
                   {person.photo
                     ? <div className={s.diamondPhoto}><Photo src={person.photo} alt={person.name} /></div>
                     : <span className={s.initial} aria-hidden>{person.nick.slice(0, 1)}</span>}
@@ -191,7 +194,7 @@ export default function BatakUlosTheme({ data, slug, guestToken, demo, skipCover
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.rail} aria-hidden><span><Svg html={spiral} box="0 0 40 40" /></span><i /></span>
+                  <span className={s.rail} aria-hidden><span><Art name="spiral-bone" /></span><i /></span>
                   <div className={s.storyBody}>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>
@@ -219,7 +222,7 @@ export default function BatakUlosTheme({ data, slug, guestToken, demo, skipCover
           <Head id="bt-wishes" kicker="Pasu-pasu" title="Doa & Konfirmasi" />
           {wishes.status === "sent" ? (
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
-              <span className={s.sentMark} aria-hidden><Svg html={spiral} box="0 0 40 40" /></span>
+              <span className={s.sentMark} aria-hidden><Art name="spiral-bone" /></span>
               <p className={s.sent}>Mauliate godang — doa dan ucapan Anda sudah terkirim.</p>
               {!demo && wishes.pending && <p className={s.sentNote}>Ucapan akan tampil setelah disetujui oleh mempelai.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
@@ -293,7 +296,7 @@ export default function BatakUlosTheme({ data, slug, guestToken, demo, skipCover
 
         <footer className={s.closing}>
           <span className={`${s.gorga} ${s.gorgaWeave}`} aria-hidden />
-          <Svg html={rumahBolon} box="0 0 220 160" className={s.closingHouse} />
+          <Art name="rumah-bolon" className={s.closingHouse} />
           <p className={s.thanks}>Mauliate Godang</p>
           <p className={s.closingText}>Atas kehadiran, doa, dan pasu-pasu Bapak/Ibu/Saudara/i, kami mengucapkan terima kasih yang sebesar-besarnya.</p>
           <p className={s.closingHoras}>Horas! Horas! Horas!</p>

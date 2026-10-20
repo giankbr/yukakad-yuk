@@ -20,7 +20,9 @@ const STAR = "M12 2.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 8.8l6.1-
 const WALLET = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const BANK = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 
-/** Triangle bunting along a sagging string; each flag flutters from its top edge. */
+const ART = "/themes/art/khitan-ceria";
+
+/** Triangle bunting along a sagging string; each gouache-painted flag flutters from its top edge. */
 function Bunting({ flags = 9, className }: { flags?: number; className?: string }) {
   const points = Array.from({ length: flags }, (_, i) => {
     const t = (i + 0.5) / flags;
@@ -28,61 +30,36 @@ function Bunting({ flags = 9, className }: { flags?: number; className?: string 
   });
   return (
     <svg className={`${s.bunting} ${className ?? ""}`} viewBox="0 0 390 70" preserveAspectRatio="xMidYMin slice" aria-hidden="true" focusable="false">
-      <path d="M-4 6Q195 86 394 6" fill="none" stroke="#17324d" strokeWidth="2" />
+      <path d="M-4 6Q195 86 394 6" fill="none" stroke="#17324d" strokeWidth="1.6" strokeLinecap="round" opacity=".85" />
       {points.map((p, i) => (
         <g key={i} className={s.flag} style={{ transformOrigin: `${p.x}px ${p.y}px`, animationDelay: `${-i * 0.37}s` }}>
-          <path d={`M${p.x - 15} ${p.y}L${p.x + 15} ${p.y}L${p.x} ${p.y + 32}z`} fill={COLORS[i % COLORS.length]} stroke="#17324d" strokeWidth="2" strokeLinejoin="round" />
+          <image href={`${ART}/flag-${i % COLORS.length}.webp`} x={p.x - 17.5} y={p.y - 3} width="35" height="37.5" />
         </g>
       ))}
     </svg>
   );
 }
 
-/** Original flat illustration: a smiling boy in peci and baju koko, waving. */
-function Boy({ className }: { className?: string }) {
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, w, h, className, eager = false }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element -- static decorative theme art
+  return <img className={className} src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} data-nolightbox />;
+}
+
+/** Gouache illustration: a smiling boy in peci and baju koko, waving (arm and chest star are separate layers). */
+function Boy({ className, eager = false }: { className?: string; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 220 220" aria-hidden="true" focusable="false">
-      <circle cx="110" cy="118" r="96" fill="#dff7ee" />
-      <g stroke="#17324d" strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round">
-        <path d="M58 220c0-50 20-74 52-74s52 24 52 74z" fill="#fff" />
-        <path d="M110 148v72" fill="none" />
-        <path d="M96 148l14 16 14-16" fill="#12a594" />
-        <circle cx="110" cy="180" r="2.6" fill="#17324d" />
-        <circle cx="110" cy="198" r="2.6" fill="#17324d" />
-        <path d="M70 176c-6 14-8 28-8 44" fill="none" />
-        <g className={s.wave}>
-          <path d="M152 170c14-10 26-30 30-54" fill="none" stroke="#17324d" strokeWidth="22" />
-          <path d="M152 170c14-10 26-30 30-54" fill="none" stroke="#fff" strokeWidth="15" />
-          <circle cx="183" cy="106" r="12" fill="#f5c9a0" />
-        </g>
-        <circle cx="72" cy="104" r="9" fill="#f5c9a0" />
-        <circle cx="148" cy="104" r="9" fill="#f5c9a0" />
-        <circle cx="110" cy="100" r="40" fill="#f5c9a0" />
-        <path d="M70 84c-2-30 14-40 40-40s42 10 40 40z" fill="#17324d" />
-      </g>
-      <path d="M74 72h72" stroke="#ffc93c" strokeWidth="3" />
-      <circle cx="95" cy="104" r="4.4" fill="#17324d" />
-      <circle cx="125" cy="104" r="4.4" fill="#17324d" />
-      <circle cx="96.5" cy="102.5" r="1.4" fill="#fff" />
-      <circle cx="126.5" cy="102.5" r="1.4" fill="#fff" />
-      <path d="M97 118q13 12 26 0" fill="none" stroke="#17324d" strokeWidth="3.5" strokeLinecap="round" />
-      <circle cx="84" cy="116" r="6" fill="#ff7a59" opacity=".35" />
-      <circle cx="136" cy="116" r="6" fill="#ff7a59" opacity=".35" />
-      <path className={s.chestStar} d="M84 168l3 6.4 7 .8-5.2 4.8 1.4 6.9-6.2-3.5-6.2 3.5 1.4-6.9-5.2-4.8 7-.8z" fill="#ffc93c" stroke="#17324d" strokeWidth="2" strokeLinejoin="round" />
-    </svg>
+    <span className={`${s.boy} ${className ?? ""}`} aria-hidden>
+      <Art src="boy" w={440} h={440} eager={eager} />
+      <span className={s.wave}><Art src="boy-arm" w={440} h={440} eager={eager} /></span>
+      <Art src="chest-star" w={48} h={46} className={s.chestStar} eager={eager} />
+    </span>
   );
 }
 
-function Confetti({ count = 12, seed = 1 }: { count?: number; seed?: number }) {
-  return (
-    <div className={s.confetti} aria-hidden>
-      {Array.from({ length: count }, (_, i) => {
-        const n = (i + 3) * 29 * seed;
-        const kind = n % 3;
-        return <i key={i} data-kind={kind} style={{ left: `${(n * 13) % 96}%`, top: `${(n * 17) % 92}%`, background: kind === 2 ? "none" : COLORS[n % COLORS.length], color: COLORS[n % COLORS.length], rotate: `${(n * 23) % 180}deg`, animationDelay: `${(n % 7) * 0.5}s` }} />;
-      })}
-    </div>
-  );
+/** Painted paper confetti: one hand-painted tile that bobs gently. */
+function Confetti({ seed = 1 }: { count?: number; seed?: number }) {
+  return <div className={s.confetti} style={{ ["--sx" as string]: `${(seed * 131) % 360}px`, ["--sy" as string]: `${(seed * 89) % 360}px` }} aria-hidden />;
 }
 
 function Head({ id, tag, title, color = 0 }: { id: string; tag?: string; title: string; color?: number }) {
@@ -184,7 +161,7 @@ export default function KhitanCeriaTheme({ data, slug, guestToken, demo, skipCov
           <Bunting />
           <div className={s.coverStack}>
             <p className={s.tag} style={{ background: "#ff7a59" }}>Undangan {label}</p>
-            <Boy className={s.coverBoy} />
+            <Boy className={s.coverBoy} eager />
             <h1 className={s.coverName}>{nick}</h1>
             {child && child.name !== nick && <p className={s.coverFull}>{child.name}</p>}
             <p className={s.coverDate}><Icon d={icons.calendar} size={15} strokeWidth={2.6} />{formatDate(data.date)}</p>

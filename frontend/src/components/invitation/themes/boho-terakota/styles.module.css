@@ -7,7 +7,7 @@
 .root {
   --t-accent: #c0643f; --t-accent-ink: #fff6ec; --t-bg: #f6ebdd; --t-ink: #4a2c20; --t-muted: #8a6a58; --t-line: rgba(156, 74, 44, .25); --t-field: #fffaf3;
   --t-radius: 16px; --t-font: "Josefin Sans", system-ui, sans-serif; --t-heading-font: "DM Serif Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
-  background: radial-gradient(60% 30% at 100% 10%, rgba(232, 180, 160, .35), transparent 70%), radial-gradient(60% 30% at 0% 55%, rgba(211, 154, 74, .16), transparent 70%), var(--sand);
+  background: url("/themes/art/boho-terakota/grain.webp") 0 0 / 256px 256px, radial-gradient(60% 30% at 100% 10%, rgba(232, 180, 160, .35), transparent 70%), radial-gradient(60% 30% at 0% 55%, rgba(211, 154, 74, .16), transparent 70%), var(--sand);
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, ol, blockquote, cite) { margin: 0; }
@@ -21,29 +21,26 @@
 .script { font-family: var(--script); font-size: 34px; line-height: 1; color: var(--terra); }
 
 /* Pampas, rainbow, sun */
-.sprig { rotate: var(--r0, 0deg); transform-origin: 22px 150px; animation: sway 7s ease-in-out infinite alternate; }
+.pampas { display: block; pointer-events: none; user-select: none; }
+.sprig { position: absolute; bottom: 0; width: auto; max-width: none; height: 100%; rotate: var(--r0, 0deg); transform-origin: 50% 98%; animation: sway 7s ease-in-out infinite alternate; }
 @keyframes sway { from { rotate: calc(var(--r0, 0deg) - 3deg); } to { rotate: calc(var(--r0, 0deg) + 6deg); } }
-.stem { fill: none; stroke: #b0906a; stroke-width: 1.6; stroke-linecap: round; }
-.fronds { fill: none; stroke: #d2b48c; stroke-width: 1.8; stroke-linecap: round; opacity: .95; }
-.band { fill: none; stroke-width: 13; stroke-linecap: round; stroke-dasharray: 1; }
-[data-revealed] .band, [data-revealed].heroRainbow .band { animation: drawIn 1800ms var(--m-ease) both; }
-@keyframes drawIn { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-.rays path { stroke: var(--mustard); stroke-width: 3.2; stroke-linecap: round; }
-.rays { transform-origin: 50px 50px; animation: spin 60s linear infinite; }
+.rainbow { display: block; height: auto; object-fit: contain; user-select: none; pointer-events: none; }
+[data-revealed] .rainbow, [data-revealed].rainbow { animation: drawIn 1800ms var(--m-ease) both; }
+@keyframes drawIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.sun { display: block; user-select: none; pointer-events: none; animation: spin 90s linear infinite; }
 @keyframes spin { to { rotate: 360deg; } }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 100dvh; padding: 36px 24px 40px; overflow: hidden; text-align: center;
-  background: radial-gradient(70% 40% at 50% 100%, rgba(192, 100, 63, .22), transparent 70%), radial-gradient(50% 30% at 10% 10%, rgba(232, 180, 160, .45), transparent 70%), var(--sand); }
+  background: url("/themes/art/boho-terakota/grain.webp") 0 0 / 256px 256px, radial-gradient(70% 40% at 50% 100%, rgba(192, 100, 63, .22), transparent 70%), radial-gradient(50% 30% at 10% 10%, rgba(232, 180, 160, .45), transparent 70%), var(--sand); }
 .coverArch { position: relative; width: 250px; height: 330px; margin: 18px 0 10px; }
 .coverSun { position: absolute; z-index: 0; top: -34px; left: 50%; width: 120px; height: 120px; margin-left: -60px; }
-.coverSun circle { fill: var(--mustard); opacity: .9; }
 .archWindow { position: relative; z-index: 1; width: 100%; height: 100%; overflow: hidden; border-radius: 999px 999px 18px 18px; border: 6px solid var(--cream); box-shadow: 0 0 0 1.5px var(--terra), 0 22px 40px rgba(74, 44, 32, .22); background: var(--clay); }
 .archWindow > img, .archWindow > div { width: 100%; height: 100%; object-fit: cover; }
 .archRainbow { width: 100%; height: 100%; padding: 60px 20px; }
-.pampasL, .pampasR { position: absolute; z-index: 2; bottom: -26px; width: 140px; height: 186px; }
-.pampasL { left: -92px; }
-.pampasR { right: -92px; }
+.pampasL, .pampasR { position: absolute; z-index: 0; bottom: -26px; width: 140px; height: 186px; }
+.pampasL { left: -104px; }
+.pampasR { right: -104px; }
 .coverNames { display: flex; flex-direction: column; align-items: center; font-family: var(--display); font-weight: 400; font-size: 50px; line-height: 1.02; color: var(--terra-deep); overflow-wrap: anywhere; max-width: 340px; }
 .coverNames em, .heroNames em { font-family: var(--script); font-style: normal; font-size: 46px; line-height: .9; color: var(--mustard); }
 .coverDate { font-size: 13px; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--brown); }
@@ -66,8 +63,6 @@
 
 .opening { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 56px 30px 8px; background: var(--terra); color: var(--cream); text-align: center; padding-bottom: 56px; }
 .openSun { width: 64px; height: 64px; }
-.openSun circle { fill: var(--blush); }
-.openSun .rays path { stroke: var(--blush); }
 .salam { font-family: var(--display); font-size: 21px; line-height: 1.35; max-width: 320px; }
 .quote { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 330px; font-size: 16px; line-height: 1.75; color: rgba(255, 246, 236, .92); text-wrap: pretty; }
 .quote cite { font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--clay); }
@@ -184,7 +179,6 @@
 .submit:disabled { opacity: .6; }
 .sentBox { align-items: center; text-align: center; }
 .sentSun { width: 72px; height: 72px; animation: rise 1000ms var(--m-ease) both; }
-.sentSun circle { fill: var(--mustard); }
 @keyframes rise { from { opacity: 0; translate: 0 20px; scale: .7; } to { opacity: 1; translate: 0 0; scale: 1; } }
 .sent { font-family: var(--display); font-size: 20px; line-height: 1.4; }
 .sentNote { color: var(--muted); font-size: 14px; }
@@ -230,6 +224,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sprig, .rays, [data-revealed] .band, [data-revealed].heroRainbow .band, .giftOn .copyBtn svg, .sentSun, .musicOn svg { animation: none; }
+  .sprig, .sun, [data-revealed] .rainbow, [data-revealed].rainbow, .giftOn .copyBtn svg, .sentSun, .musicOn svg { animation: none; }
   .openBtn, .portrait, .event, .btn, .tile > img, .gift, .copyBtn, .choices button, .step, .submit, .field input, .field textarea, .made, .music { transition: none; }
 }

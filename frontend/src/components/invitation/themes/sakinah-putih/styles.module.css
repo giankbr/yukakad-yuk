@@ -19,7 +19,7 @@
 .arabic { color: var(--green); font-family: var(--arab); font-size: 26px; line-height: 2; text-align: center; text-wrap: balance; }
 .arabicLg { color: var(--green); font-family: var(--arab); font-size: 34px; line-height: 1.7; text-align: center; }
 .lead { max-width: 330px; color: var(--muted); font-size: 15px; line-height: 1.75; text-align: center; text-wrap: pretty; }
-.vine { width: 150px; height: 16px; color: var(--sage); overflow: visible; }
+.vine { display: block; width: 168px; height: auto; }
 
 .btn, .btnWide, .btnSoft {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 26px;
@@ -37,12 +37,15 @@
 .cover {
   position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 100dvh;
   padding: 64px 32px; overflow: hidden; text-align: center;
-  background: radial-gradient(80% 50% at 50% 0%, var(--mint) 0%, transparent 70%), radial-gradient(80% 40% at 50% 100%, var(--mint) 0%, transparent 70%), var(--bg);
+  background: radial-gradient(80% 50% at 50% 0%, var(--mint) 0%, transparent 70%), radial-gradient(80% 40% at 50% 100%, var(--mint) 0%, transparent 70%), url("/themes/art/sakinah-putih/paper.webp") 0 0 / 512px, var(--bg); background-blend-mode: normal, normal, multiply;
 }
+.spray { position: absolute; top: -4px; left: -6px; width: 224px; height: auto; pointer-events: none; transform-origin: 0 0; }
+.sprayB { top: auto; left: auto; right: -6px; bottom: -4px; rotate: 180deg; transform-origin: 50% 50%; }
+.cover > :not(.spray) { position: relative; }
 .cover::before, .cover::after { content: ""; position: absolute; left: 18px; right: 18px; height: 1px; background: var(--line); }
 .cover::before { top: 18px; }
 .cover::after { bottom: 18px; }
-.coverBloom { width: 120px; height: 120px; color: var(--sage); }
+.coverBloom { width: 124px; height: 124px; }
 .coverNames { display: flex; flex-direction: column; align-items: center; width: 100%; color: var(--green); font-family: var(--head); font-size: 46px; font-style: italic; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; }
 .coverNames small { margin: 4px 0; color: var(--sage); font-family: var(--arab); font-size: 22px; font-style: normal; }
 .coverDate { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
@@ -52,9 +55,9 @@
 .kepada span { margin-top: 4px; padding: 2px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: .06em; }
 
 /* ── Main ── */
-.page { display: flex; flex-direction: column; background: var(--bg); }
+.page { display: flex; flex-direction: column; background: url("/themes/art/sakinah-putih/paper.webp") 0 0 / 512px, var(--bg); background-blend-mode: multiply; }
 .opening { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 76px 28px 56px; text-align: center; background: linear-gradient(180deg, var(--mint), var(--bg)); }
-.openingBloom { width: 96px; height: 96px; color: var(--sage); }
+.openingBloom { width: 100px; height: 100px; }
 .openingNames { color: var(--green); font-family: var(--head); font-size: 40px; font-style: italic; font-weight: 500; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
 .salam { color: var(--ink); font-family: var(--head); font-size: 20px; font-style: italic; line-height: 1.4; text-wrap: balance; }
 
@@ -72,7 +75,7 @@
 .couple { display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; }
 .monogram { position: relative; display: grid; place-items: center; width: 150px; height: 150px; }
 .monogram > * { grid-area: 1 / 1; }
-.monogram svg { width: 150px; height: 150px; color: var(--line); }
+.monogram img { width: 150px; height: 150px; opacity: .45; }
 .monogram b { display: flex; align-items: baseline; gap: 6px; color: var(--green); font-family: var(--head); font-size: 40px; font-style: italic; font-weight: 500; line-height: 1; }
 .monogram b i { color: var(--sage); font-size: 22px; }
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; max-width: 330px; padding: 26px 20px; border-radius: 24px; background: var(--card); border: 1px solid var(--line); text-align: center; transition: border-color 600ms var(--m-ease), box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease); }
@@ -117,7 +120,7 @@
 /* story */
 .stories { display: flex; flex-direction: column; gap: 14px; width: 100%; }
 .story { position: relative; padding: 20px 20px 20px 54px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
-.storyDot { position: absolute; top: 22px; left: 18px; width: 22px; height: 22px; color: var(--sage); }
+.storyDot { position: absolute; top: 19px; left: 16px; width: 26px; height: 26px; }
 .story small { color: var(--sage); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .story h3 { margin-top: 2px; color: var(--green); font-family: var(--head); font-size: 20px; font-style: italic; font-weight: 500; }
 .story p { margin-top: 4px; color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -160,7 +163,7 @@
 .closed strong { color: var(--ink); font-size: 15px; }
 .closed p { color: var(--muted); font-size: 13px; line-height: 1.5; }
 .sentCard { align-items: center; padding: 30px 20px; text-align: center; }
-.sentBloom { width: 60px; height: 60px; color: var(--sage); }
+.sentBloom { width: 64px; height: 64px; }
 .sent { color: var(--ink); font-size: 15px; line-height: 1.6; }
 .wishes { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 .wish { padding: 16px 18px; border-radius: 20px; background: var(--card); border: 1px solid rgba(95, 143, 116, .16); transition: border-color 500ms var(--m-ease); }
@@ -171,8 +174,8 @@
 .wish p { margin-top: 6px; color: var(--muted); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
 
 /* closing */
-.closing { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 72px 30px 60px; text-align: center; background: linear-gradient(180deg, var(--bg), var(--mint)); }
-.closingBloom { width: 72px; height: 72px; color: var(--sage); }
+.closing { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 72px 30px 60px; text-align: center; background: linear-gradient(180deg, rgba(253, 253, 251, 0), var(--mint)); }
+.closingBloom { width: 76px; height: 76px; }
 .closing h2 { max-width: 300px; color: var(--green); font-family: var(--head); font-size: 24px; font-style: italic; font-weight: 500; line-height: 1.3; text-wrap: balance; }
 .families { color: var(--muted); font-size: 14px; line-height: 1.7; overflow-wrap: anywhere; }
 .families b { color: var(--green); font-family: var(--head); font-size: 24px; font-style: italic; font-weight: 500; }
@@ -182,20 +185,21 @@
 .root :is(button, a, input, textarea):focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
 
 /* ── Signature motion: petals bloom one by one, vines draw themselves, tab pill glides ── */
-.coverBloom [data-petals] circle, [data-revealed] .openingBloom [data-petals] circle, [data-revealed] .monogram [data-petals] circle, [data-revealed] .closingBloom [data-petals] circle {
-  transform-box: fill-box; transform-origin: 50% 100%; animation: petal 1.4s var(--m-ease) calc(var(--i) * 120ms + 200ms) both;
-}
-.coverBloom, .openingBloom, .closingBloom { animation: turn 140s linear infinite; }
-.cover .vine path[pathLength], [data-revealed] .vine path[pathLength] { stroke-dasharray: 1; animation: draw 2.2s var(--m-ease) .3s both; }
+/* watercolour bloom: the rosette soaks in (soft focus → sharp) then turns very slowly; vines unroll from the bud */
+.coverBloom, [data-revealed] .openingBloom, [data-revealed] .monogram img, [data-revealed] .closingBloom { animation: soak 1.8s var(--m-ease) .2s both, turn 160s linear 2s infinite; }
+[data-revealed] .monogram img { animation: soak 1.8s var(--m-ease) .2s both; }
+.cover .vine, [data-revealed] .vine { animation: unroll 2.2s var(--m-ease) .4s both; }
+.spray { animation: sprayIn 2.4s var(--m-ease) both; }
+.sprayB { animation-delay: .3s; }
 
-@keyframes petal { from { opacity: 0; scale: .2; } }
+@keyframes soak { from { opacity: 0; scale: .82; filter: blur(6px); } }
+@keyframes unroll { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes sprayIn { from { opacity: 0; filter: blur(4px); } }
 @keyframes turn { to { rotate: 360deg; } }
-@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 @keyframes panelIn { from { opacity: 0; translate: 0 8px; } }
 @keyframes softPop { from { opacity: 0; scale: .6; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .coverBloom [data-petals] circle, [data-revealed] .openingBloom [data-petals] circle, [data-revealed] .monogram [data-petals] circle, [data-revealed] .closingBloom [data-petals] circle,
-  .coverBloom, .openingBloom, .closingBloom, .cover .vine path[pathLength], [data-revealed] .vine path[pathLength], .panel > *, .copyOn svg { animation: none; }
+  .coverBloom, [data-revealed] .openingBloom, [data-revealed] .monogram img, [data-revealed] .closingBloom, .cover .vine, [data-revealed] .vine, .spray, .panel > *, .copyOn svg { animation: none; }
   .btn, .btnWide, .btnSoft, .person, .event, .tabs button, .tabPill, .gift, .copy, .choices label, .step, .wish, .field input, .field textarea { transition: none; }
 }

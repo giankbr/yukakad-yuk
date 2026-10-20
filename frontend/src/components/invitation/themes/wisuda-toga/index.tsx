@@ -1,6 +1,6 @@
 "use client";
 // Theme "Wisuda Toga" — syukuran wisuda: navy & emas akademik, bingkai ijazah, toga yang bisa dilempar, transkrip perjalanan, segel emas.
-import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import {
   DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, dateParts, formatDate, giftInfo, guestLabel, mapsHref,
   storyItems, toDate, useCopy, useCountdown, DATE_TBA, sentSummary, useRsvp, useThankYou, useWishes, type Attendance, type ThemeProps, type Wish,
@@ -48,24 +48,29 @@ function clock(value?: string) {
 
 /* ── Ornaments ─────────────────────────────────────────────── */
 
-function CapArt() {
+const ART = "/themes/art/wisuda-toga";
+
+/** Painted (gouache / stamped foil) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
   return (
-    <svg className={s.cap} viewBox="0 0 120 92" aria-hidden="true" focusable="false">
-      <path d="M28 40v20c0 9 14 15 32 15s32-6 32-15V40L60 53z" fill="#0d1d36" stroke="#c8a24a" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M60 8 116 30 60 53 4 30z" fill="#1c3866" stroke="#c8a24a" strokeWidth="1.6" strokeLinejoin="round" />
-      <path d="M60 15 99 30 60 46 21 30z" fill="none" stroke="#c8a24a" strokeOpacity=".35" strokeWidth="1" />
-      <g className={s.tassel}>
-        <path d="M60 30 98 38v26" fill="none" stroke="#c8a24a" strokeWidth="1.8" strokeLinecap="round" />
-        <path d="M94 62h8l2 16h-12z" fill="#c8a24a" />
-        <path d="M95 66v11M98 66v12M101 66v11" stroke="#8a6d27" strokeWidth=".8" />
-      </g>
-      <circle cx="60" cy="30" r="3.2" fill="#c8a24a" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
+
+/** Gouache mortarboard; the foil tassel is its own layer so it can swing. */
+function CapArt({ eager }: { eager?: boolean }) {
+  return (
+    <span className={s.cap} aria-hidden>
+      <Art name="cap" w={300} h={230} eager={eager} />
+      <Art name="tassel" w={300} h={230} className={s.tassel} eager={eager} />
+    </span>
   );
 }
 
 /** Tap the mortarboard to toss it (decorative). */
-function Cap({ className }: { className?: string }) {
+function Cap({ className, eager }: { className?: string; eager?: boolean }) {
   const [tossing, setTossing] = useState(false);
   const [tosses, setTosses] = useState(0);
   return (
@@ -78,22 +83,32 @@ function Cap({ className }: { className?: string }) {
         const element = event.currentTarget;
         window.setTimeout(() => { setTossing(false); celebrate(element); }, 900);
       }}>
-      <span className={s.capArt}><CapArt /></span>
+      <span className={s.capArt}><CapArt eager={eager} /></span>
     </button>
   );
 }
 
+/** Stamped-foil seal medallion with the event name running round it (typeset, slowly turning). */
 function Seal({ text }: { text: string }) {
   const id = useId().replace(/:/g, "");
   return (
-    <svg className={s.seal} viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-      <defs><path id={`seal-${id}`} d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" /></defs>
-      <path d="M60 2l7 6 9-2 4 8 9 1 1 9 8 4-2 9 6 7-6 7 2 9-8 4-1 9-9 1-4 8-9-2-7 6-7-6-9 2-4-8-9-1-1-9-8-4 2-9-6-7 6-7-2-9 8-4 1-9 9-1 4-8 9 2z" fill="#c8a24a" />
-      <circle cx="60" cy="60" r="51" fill="none" stroke="#0d1d36" strokeOpacity=".35" strokeWidth="1" />
-      <circle cx="60" cy="60" r="34" fill="#13294b" />
-      <g className={s.sealSpin}><text className={s.sealText}><textPath href={`#seal-${id}`} textLength="272" lengthAdjust="spacing">{text}</textPath></text></g>
-      <path d="M60 44l4.7 9.6 10.6 1.5-7.6 7.5 1.8 10.5L60 68l-9.5 5.1 1.8-10.5-7.6-7.5 10.6-1.5z" fill="#c8a24a" />
-    </svg>
+    <span className={s.seal} aria-hidden data-nolightbox>
+      <Art name="seal" w={238} h={238} />
+      <svg viewBox="0 0 120 120" focusable="false">
+        <defs><path id={`seal-${id}`} d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0" /></defs>
+        <g className={s.sealSpin}><text className={s.sealText}><textPath href={`#seal-${id}`} textLength="272" lengthAdjust="spacing">{text}</textPath></text></g>
+      </svg>
+    </span>
+  );
+}
+
+/** Seal framed by a stamped-foil laurel wreath. */
+function Emblem({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <div className={`${s.emblem} ${className ?? ""}`}>
+      <Art name="laurel" w={420} h={266} className={s.laurel} />
+      <div className={s.emblemCenter}>{children}</div>
+    </div>
   );
 }
 
@@ -159,7 +174,7 @@ export default function WisudaTogaTheme({ data, slug, guestToken, demo, skipCove
         <section className={s.cover}>
           <div className={s.certificate}>
             <i className={s.corner} aria-hidden /><i className={s.corner} aria-hidden /><i className={s.corner} aria-hidden /><i className={s.corner} aria-hidden />
-            <Cap className={s.coverCap} />
+            <Emblem className={s.coverEmblem}><Cap className={s.coverCap} eager /></Emblem>
             <p className={s.coverKicker}>Undangan {label}</p>
             <h1 className={s.coverName}>{names}</h1>
             {degree && <p className={s.coverDegree}>{degree}</p>}
@@ -191,7 +206,7 @@ export default function WisudaTogaTheme({ data, slug, guestToken, demo, skipCove
 
         <section className={s.section} aria-label="Pembuka">
           <p className={s.lead}>Puji syukur ke hadirat Tuhan Yang Maha Esa atas segala rahmat-Nya. {data.couple.note?.trim() || `Dengan bahagia kami mengundang Bapak/Ibu/Saudara/i untuk merayakan kelulusan ${names}.`}</p>
-          <blockquote className={s.quote}>“Pendidikan adalah senjata paling ampuh yang bisa kamu gunakan untuk mengubah dunia.”<cite>— Nelson Mandela</cite></blockquote>
+          <blockquote className={s.quote}><Art name="diploma" w={296} h={108} className={s.diploma} />“Pendidikan adalah senjata paling ampuh yang bisa kamu gunakan untuk mengubah dunia.”<cite>— Nelson Mandela</cite></blockquote>
         </section>
 
         <Extras slot="opening" />
@@ -357,7 +372,7 @@ export default function WisudaTogaTheme({ data, slug, guestToken, demo, skipCove
         )}
 
         <footer className={s.closing}>
-          <span className={s.sealWrap}><Seal text={sealText} /></span>
+          <Emblem className={s.closeEmblem}><span className={s.sealWrap}><Seal text={sealText} /></span></Emblem>
           <h2>Terima Kasih</h2>
           <p>Kehadiran dan doa Anda melengkapi kebahagiaan kami. Semoga ilmu yang diperoleh bermanfaat bagi sesama.</p>
           <strong>Keluarga besar {names}</strong>

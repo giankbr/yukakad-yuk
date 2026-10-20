@@ -27,7 +27,7 @@ function Head({ id, kicker, title, light }: { id: string; kicker?: string; title
     <div className={light ? `${s.head} ${s.headLight}` : s.head}>
       {kicker && <p className={s.kicker}>{kicker}</p>}
       <h2 id={id}>{title}</h2>
-      <Sulur className={s.sulur} />
+      <Sulur className={s.sulur} tone={light ? "kuning" : "tosca"} />
     </div>
   );
 }
@@ -93,12 +93,12 @@ export default function DayakBorneoTheme({ data, slug, guestToken, demo, skipCov
           <div className={`${s.beads} ${s.beadsRight}`} aria-hidden />
           <div className={s.glow} aria-hidden />
           <p className={s.kicker}>Undangan Pernikahan</p>
-          <Enggang className={s.coverBird} />
+          <Enggang className={s.coverBird} eager />
           <h1 className={s.coverNames}>
             <span>{data.couple.bride}</span>
             {data.couple.groom && <><em>&amp;</em><span>{data.couple.groom}</span></>}
           </h1>
-          <Sulur className={s.coverSulur} />
+          <Sulur className={s.coverSulur} tone="kuning" />
           <p className={s.coverDate}>{formatDate(data.date)}</p>
           <div className={s.guest}>
             <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>

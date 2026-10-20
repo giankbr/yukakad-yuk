@@ -30,9 +30,8 @@
 .btnGhost { background: var(--sun); color: var(--ink); }
 
 /* ── Ornaments ── */
-.bunting { display: block; width: 100%; height: 46px; }
-.bunting path:not(:first-child) { transform-box: fill-box; transform-origin: 50% 0; animation: flap 3.2s ease-in-out infinite; }
-.bunting path:nth-child(odd) { animation-delay: -1.6s; }
+.bunting { position: relative; display: block; width: calc(100% + 8px); margin: -4px -4px 0; pointer-events: none; }
+.bunting img { display: block; width: 100%; height: auto; transform-origin: 50% 0; animation: flap 5.5s ease-in-out infinite; }
 .confetti { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .confetti i {
   position: absolute; top: -20px; left: calc(var(--i) * 7.3% + 2%); width: 9px; height: 14px; border-radius: 3px; opacity: .8;
@@ -48,11 +47,11 @@
 }
 .balloon:nth-child(2) { z-index: 1; margin-bottom: 26px; } .balloon:nth-child(4) { margin-bottom: 18px; } .balloon:nth-child(3) { margin-bottom: 44px; }
 .balloon .bob { display: block; animation: bob calc(3.4s + var(--i) * .4s) ease-in-out infinite; animation-delay: calc(var(--i) * -.7s); transform-origin: 50% 100%; }
-.balloon svg { display: block; width: 100%; height: auto; transition: scale 200ms var(--m-spring), opacity 160ms; }
-@media (hover: hover) { .balloon:hover svg { scale: 1.07; } }
-.balloon:active svg { scale: 1.15; }
-.balloon.popped svg { scale: 0; opacity: 0; transition: scale 90ms ease-in, opacity 90ms; }
-.balloon:not(.popped) svg { animation: regrow 600ms var(--m-spring); }
+.balloonImg { display: block; width: 100%; height: auto; transform-origin: 50% 30%; transition: scale 200ms var(--m-spring), opacity 160ms; -webkit-user-drag: none; user-select: none; }
+@media (hover: hover) { .balloon:hover .balloonImg { scale: 1.07; } }
+.balloon:active .balloonImg { scale: 1.15; }
+.balloon.popped .balloonImg { scale: 0; opacity: 0; transition: scale 90ms ease-in, opacity 90ms; }
+.balloon:not(.popped) .balloonImg { animation: regrow 600ms var(--m-spring); }
 .burst { position: absolute; left: 50%; top: 30%; pointer-events: none; }
 .burst i { position: absolute; left: -3px; top: -7px; width: 6px; height: 14px; border-radius: 3px; background: var(--ink); opacity: 0; }
 .popped .burst i { animation: shard 480ms ease-out forwards; }
@@ -64,7 +63,8 @@
 /* ── Cover ── */
 .cover {
   position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden;
-  background: radial-gradient(120% 60% at 50% 0%, #fff 0%, var(--bg) 55%, var(--tint) 100%);
+  background: url(/themes/art/ultah-balon/paper.webp) 0 0 / 256px repeat, radial-gradient(120% 60% at 50% 0%, #fff 0%, var(--bg) 55%, var(--tint) 100%);
+  background-blend-mode: multiply, normal;
 }
 .coverBalloons { position: relative; margin: 6px auto 0; width: 300px; }
 .coverBalloons .balloon { width: 70px; }
@@ -86,12 +86,12 @@
 .hint { font-family: var(--hand); font-size: 18px; color: var(--muted); rotate: -2deg; }
 
 /* ── Main ── */
-.page { display: flex; flex-direction: column; background: var(--bg); padding-bottom: 8px; }
+.page { display: flex; flex-direction: column; background: var(--bg) url(/themes/art/ultah-balon/paper.webp) repeat; background-size: 256px; background-blend-mode: multiply; padding-bottom: 8px; }
 .band { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 52px 22px; text-align: center; }
-.tint { background: var(--tint); }
+.tint { background: var(--tint) url(/themes/art/ultah-balon/paper.webp) repeat; background-size: 256px; background-blend-mode: multiply; }
 .head { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .kicker { font-family: var(--hand); font-size: 22px; font-weight: 700; color: var(--grape); line-height: 1; }
-.head h2 { font-size: 28px; font-weight: 900; line-height: 1.1; letter-spacing: -.3px; overflow-wrap: anywhere; }
+.head h2 { text-wrap: balance; font-size: 28px; font-weight: 900; line-height: 1.1; letter-spacing: -.3px; overflow-wrap: anywhere; }
 .lead { max-width: 320px; color: var(--muted); font-size: 14px; }
 
 .hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 22px 44px; text-align: center; background: linear-gradient(180deg, #fff 0%, var(--bg) 100%); overflow: hidden; }
@@ -99,15 +99,19 @@
 .heroBalloons { position: absolute; left: 50%; top: -6px; translate: -50% 0; width: 230px; justify-content: space-between; }
 .heroBalloons .balloon { width: 58px; }
 .heroBalloons .balloon:nth-child(2) { margin-top: -30px; align-self: flex-start; }
-.cake { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: 180px; height: auto; }
-.flame { transform-box: fill-box; transform-origin: 50% 100%; animation: flicker 1.1s ease-in-out infinite; }
+.cake { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: 190px; }
+.cakeImg { display: block; width: 100%; height: auto; }
+.candles { position: absolute; left: 22%; right: 22%; bottom: calc(100% - 3px); display: flex; justify-content: space-evenly; align-items: flex-end; }
+.candle { display: flex; flex-direction: column; align-items: center; width: 9px; }
+.candle img { display: block; width: 9px; height: auto; }
+.candle img.flame { width: 22px; max-width: none; margin-bottom: -3px; transform-origin: 50% 88%; animation: flicker 1.1s ease-in-out infinite; animation-delay: calc(var(--i) * -.23s); }
 .script { font-family: var(--hand); font-size: 28px; font-weight: 700; color: var(--grape); rotate: -3deg; }
 .heroName { max-width: 100%; font-size: clamp(44px, 14vw, 60px); font-weight: 900; line-height: 1; overflow-wrap: anywhere; color: var(--mint); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; text-shadow: 4px 4px 0 var(--ink); }
 .heroLine { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
 .note { position: relative; max-width: 340px; padding: 24px 22px; border: var(--stroke); border-radius: 22px; background: #fff; box-shadow: var(--pop); font-size: 15px; rotate: -1deg; }
 .note::before { content: ""; position: absolute; top: -12px; left: 50%; width: 70px; height: 22px; translate: -50% 0; rotate: 3deg; background: rgba(255, 201, 60, .75); border-radius: 3px; }
-.hello { margin-bottom: 8px !important; font-size: 18px; font-weight: 900; color: var(--coral); }
+.hello { text-wrap: balance; margin-bottom: 8px !important; font-size: 18px; font-weight: 900; color: var(--coral); }
 
 .star { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; max-width: 340px; padding: 28px 22px 26px; border: var(--stroke); border-radius: 28px; background: #fff; box-shadow: var(--pop); }
 .avatar { position: relative; display: grid; place-items: center; width: 132px; height: 132px; margin-bottom: 10px; border: var(--stroke); border-radius: 50%; background: conic-gradient(var(--coral) 0 25%, var(--sun) 0 50%, var(--mint) 0 75%, var(--grape) 0); padding: 8px; }
@@ -159,9 +163,10 @@
 .polaroid:nth-child(even) { rotate: 2deg; }
 .gallery > :first-child:nth-last-child(odd) { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
 
-.wishBand { padding-top: 8px; padding-bottom: 8px; }
+.wishBand { padding-top: 12px; padding-bottom: 20px; gap: 14px; }
+.gifts { display: block; width: min(100%, 300px); height: auto; margin-bottom: -6px; }
 .hope { display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 320px; color: var(--grape); }
-.hope p { font-family: var(--hand); font-size: 24px; line-height: 1.25; color: var(--ink); }
+.hope p { text-wrap: pretty; font-family: var(--hand); font-size: 24px; line-height: 1.25; color: var(--ink); }
 
 .card { width: 100%; max-width: 350px; padding: 22px 18px; border: var(--stroke); border-radius: 24px; background: #fff; box-shadow: var(--pop); text-align: left; }
 .form { display: flex; flex-direction: column; gap: 14px; }
@@ -228,7 +233,7 @@
 
 /* ── Motion ── */
 @keyframes bob { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 0 -10px; rotate: 3deg; } }
-@keyframes flap { 0%, 100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+@keyframes flap { 0%, 100% { rotate: -.6deg; translate: 0 0; } 50% { rotate: .6deg; translate: 0 2px; } }
 @keyframes fall { 0% { translate: 0 0; rotate: 0deg; } 100% { translate: 30px 105dvh; rotate: 540deg; } }
 @keyframes flicker { 0%, 100% { scale: 1 1; opacity: 1; } 40% { scale: .86 1.12; } 70% { scale: 1.08 .92; opacity: .85; } }
 @keyframes shard { 0% { opacity: 1; transform: rotate(var(--a, 0deg)) translateY(-8px); } 100% { opacity: 0; transform: rotate(var(--a, 0deg)) translateY(-40px); } }
@@ -236,6 +241,6 @@
 @keyframes popIn { 0% { scale: .3; } 100% { scale: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .bunting path, .confetti i, .balloon .bob, .balloon svg, .flame, .burst i, .sentBadge, .copyOn svg { animation: none !important; }
+  .bunting img, .confetti i, .balloon .bob, .balloonImg, .candle img.flame, .burst i, .sentBadge, .copyOn svg { animation: none !important; }
   .confetti { display: none; }
 }

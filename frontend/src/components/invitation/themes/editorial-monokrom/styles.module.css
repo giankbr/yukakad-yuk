@@ -1,7 +1,8 @@
 .root, .cover {
   --paper: #f5f5f2; --white: #ffffff; --ink: #0f0f0f; --muted: #5f5f5c; --soft: #8f8f8b; --line: #d6d6d1;
   --display: "Bebas Neue", Impact, "Arial Narrow", sans-serif; --serif: "Playfair Display", Georgia, serif; --sans: Inter, "Helvetica Neue", Arial, sans-serif;
-  font-family: var(--sans); color: var(--ink); background: var(--paper); line-height: 1.5;
+  font-family: var(--sans); color: var(--ink); background: var(--paper) var(--grain); line-height: 1.5;
+  --grain: url("/themes/art/editorial-monokrom/paper.webp") 0 0 / 256px 256px repeat;
 }
 .root {
   --t-accent: #0f0f0f; --t-accent-ink: #ffffff; --t-bg: #f5f5f2; --t-ink: #0f0f0f; --t-muted: #5f5f5c; --t-line: #d6d6d1; --t-field: #ffffff;
@@ -20,13 +21,13 @@
 .mast { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 10px; border-bottom: 3px solid var(--ink); font-size: 11px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; }
 
 /* ── Cover ── */
-.cover { display: flex; flex-direction: column; gap: 14px; min-height: 100dvh; padding: 22px 20px 26px; background: var(--paper); }
+.cover { display: flex; flex-direction: column; gap: 14px; min-height: 100dvh; padding: 22px 20px 26px; background: var(--paper) var(--grain); }
 .coverBrand { font-family: var(--serif); font-size: 46px; font-style: italic; font-weight: 400; line-height: 1; letter-spacing: -1px; }
 .coverFrame { position: relative; flex: 1; min-height: 300px; overflow: hidden; background: #222; }
 .coverImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.coverStamp { position: absolute; top: 12px; right: 12px; padding: 6px 10px; background: var(--paper); font-family: var(--display); font-size: 20px; letter-spacing: 1px; line-height: 1; }
+.coverStamp { position: absolute; top: 12px; right: 12px; padding: 6px 10px; background: var(--paper) var(--grain); font-family: var(--display); font-size: 20px; letter-spacing: 1px; line-height: 1; }
 .coverNames { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; margin-top: -54px; position: relative; font-family: var(--display); font-size: 84px; font-weight: 400; line-height: .86; text-transform: uppercase; overflow-wrap: anywhere; }
-.coverNames span { padding: 0 6px; background: var(--paper); }
+.coverNames span { padding: 0 6px; background: var(--paper) var(--grain); }
 .coverNames em { font-family: var(--serif); font-size: 44px; font-style: italic; text-transform: none; }
 .coverFoot { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; padding-top: 12px; border-top: 1px solid var(--ink); }
 .to { display: flex; flex-direction: column; min-width: 0; }
@@ -38,7 +39,7 @@
 .openBtn:hover { box-shadow: 4px 4px 0 0 #9a9a96; translate: -2px -2px; }
 
 /* ── Main ── */
-.main { display: flex; flex-direction: column; background: var(--paper); }
+.main { display: flex; flex-direction: column; background: var(--paper) var(--grain); }
 .masthead { display: flex; flex-direction: column; gap: 16px; padding: 22px 20px 30px; }
 .bigNames { display: flex; flex-direction: column; font-family: var(--display); font-size: 104px; font-weight: 400; line-height: .84; text-transform: uppercase; overflow-wrap: anywhere; }
 .and { align-self: flex-start; margin: 6px 0 4px; font-family: var(--serif); font-size: 30px; font-style: italic; text-transform: none; line-height: 1; }
@@ -76,7 +77,7 @@
 .profilePic > img, .profilePic > div { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: scale 240ms var(--m-ease); }
 .profilePic:hover > img { scale: 1.03; }
 .mono { display: grid; place-items: center; width: 100%; height: 100%; background: var(--ink); color: var(--paper); font-family: var(--display); font-size: 220px; line-height: 1; }
-.profileNo { position: absolute; left: 0; bottom: 0; padding: 8px 12px 4px; background: var(--paper); font-family: var(--display); font-size: 40px; line-height: 1; }
+.profileNo { position: absolute; left: 0; bottom: 0; padding: 8px 12px 4px; background: var(--paper) var(--grain); font-family: var(--display); font-size: 40px; line-height: 1; }
 .profile:nth-of-type(2) .profileNo { left: auto; right: 0; }
 .profile:nth-of-type(2) .profileText { text-align: right; }
 .profileText { display: flex; flex-direction: column; gap: 4px; }
@@ -174,7 +175,12 @@
 .copy:hover { background: var(--ink); color: var(--white); }
 .copyOn, .copyOn:hover { background: var(--white); color: var(--ink); }
 
-.colophon { display: flex; flex-direction: column; gap: 18px; padding: 64px 20px 32px; background: var(--paper); }
+.colophon { position: relative; display: flex; flex-direction: column; gap: 18px; padding: 64px 20px 32px; background: var(--paper) var(--grain); }
+.lily { position: absolute; top: 40px; right: 18px; width: 118px; height: auto; rotate: 4deg; mix-blend-mode: multiply; pointer-events: none; }
+.root .lily, .root .twig { filter: none; }
+.fin, .finText { position: relative; }
+.finText { max-width: 300px; }
+.twig { align-self: flex-end; width: 143px; height: auto; margin-top: -6px; opacity: .9; mix-blend-mode: multiply; }
 .fin { font-family: var(--display); font-size: 96px; line-height: .85; text-transform: uppercase; overflow-wrap: anywhere; }
 .finText { font-family: var(--serif); font-size: 19px; font-style: italic; line-height: 1.4; }
 .credits { display: flex; flex-direction: column; border-top: 3px solid var(--ink); }

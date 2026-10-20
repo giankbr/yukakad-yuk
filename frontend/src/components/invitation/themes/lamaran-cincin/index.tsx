@@ -18,39 +18,21 @@ const DEMO_WISHES: Wish[] = [
 const wallet = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const bank = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 
-const round = (n: number) => Math.round(n * 100) / 100;
 
-/** Two interlocking rings with a solitaire; strokes draw themselves in. */
-function Rings({ className }: { className?: string }) {
+const ART = "/themes/art/lamaran-cincin";
+
+/** Painted art (decorative): never opens the photo lightbox. */
+function Art({ src, className, width, height, eager }: { src: string; className?: string; width: number; height: number; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 120 92" aria-hidden="true" focusable="false" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <circle className={s.draw} cx="46" cy="56" r="28" stroke="currentColor" strokeWidth="3.2" pathLength={1} />
-      <circle className={`${s.draw} ${s.drawLate}`} cx="74" cy="56" r="28" stroke="currentColor" strokeWidth="3.2" pathLength={1} />
-      <path className={s.gem} d="M38 22 L46 12 L54 22 L46 31 Z M38 22 H54 M42 22 L46 31 L50 22 M42 22 L46 12 L50 22" stroke="currentColor" strokeWidth="1.4" fill="rgba(255,255,255,.55)" />
-      <g className={s.spark} stroke="currentColor" strokeWidth="1.2"><path d="M64 8 v8 M60 12 h8" /><path d="M24 18 v6 M21 21 h6" /></g>
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static decorative painting
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden className={className} width={width} height={height} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
 }
 
-/** Baby's breath / small blossom sprig. */
-function Sprig({ className }: { className?: string }) {
-  const bloom = (x: number, y: number, r = 3.2) => (
-    <g key={`${x}-${y}`} transform={`translate(${x} ${y})`}>
-      {[0, 72, 144, 216, 288].map(a => <circle key={a} cx={round(Math.cos((a * Math.PI) / 180) * r)} cy={round(Math.sin((a * Math.PI) / 180) * r)} r={r * 0.75} />)}
-      <circle r={r * 0.5} className={s.bloomEye} />
-    </g>
-  );
-  return (
-    <svg className={className} viewBox="0 0 120 140" aria-hidden="true" focusable="false">
-      <g fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity=".75">
-        <path d="M10 136 C 32 104 48 72 86 22" /><path d="M40 92 C 30 76 22 66 12 58" /><path d="M56 70 C 70 64 84 62 104 64" /><path d="M70 50 C 64 38 62 26 64 12" />
-      </g>
-      <g className={s.leaves} opacity=".55">
-        <ellipse cx="28" cy="110" rx="9" ry="3.4" transform="rotate(-50 28 110)" /><ellipse cx="52" cy="80" rx="9" ry="3.4" transform="rotate(30 52 80)" /><ellipse cx="80" cy="34" rx="8" ry="3" transform="rotate(-40 80 34)" />
-      </g>
-      <g className={s.blooms}>{[bloom(86, 22, 4), bloom(12, 58), bloom(104, 64, 3.6), bloom(64, 12), bloom(96, 46, 2.6), bloom(20, 76, 2.6), bloom(74, 66, 2.4)]}</g>
-    </svg>
-  );
+/** Interlocking gold-foil rings with a painted solitaire; a sweeping mask "draws" them in. */
+function Rings({ className, eager }: { className?: string; eager?: boolean }) {
+  return <Art src="rings" className={`${s.rings} ${className ?? ""}`} width={225} height={158} eager={eager} />;
 }
 
 function Diamond() {
@@ -113,10 +95,10 @@ export default function LamaranCincinTheme({ data, slug, guestToken, demo, skipC
         <section className={s.cover}>
           <span className={s.glowA} aria-hidden />
           <span className={s.glowB} aria-hidden />
-          <Sprig className={`${s.sprig} ${s.sprigTL}`} />
-          <Sprig className={`${s.sprig} ${s.sprigBR}`} />
+          <Art src="corner-top" className={`${s.sprig} ${s.sprigTL}`} width={220} height={182} eager />
+          <Art src="corner-bottom" className={`${s.sprig} ${s.sprigBR}`} width={200} height={175} eager />
           <div className={s.coverInner}>
-            <Rings className={s.coverRings} />
+            <Rings className={s.coverRings} eager />
             <p className={s.kicker}>Undangan {label}</p>
             <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>&amp;</em><span>{data.couple.groom}</span></h1>
             <p className={s.coverDate}>{dateLine}</p>
@@ -132,7 +114,7 @@ export default function LamaranCincinTheme({ data, slug, guestToken, demo, skipC
     >
       <main className={s.main}>
         <header className={s.hero}>
-          <Sprig className={`${s.sprig} ${s.heroSprig}`} />
+          <Art src="sprig" className={`${s.sprig} ${s.heroSprig}`} width={110} height={156} />
           <p className={s.kicker}>{label} · {parts.year || "segera"}</p>
           <div className={s.oval}><Photo src={hero} alt={`Foto ${couple}`} /></div>
           <h1 className={s.heroNames}>{data.couple.bride}<em>&amp;</em>{data.couple.groom}</h1>
@@ -316,7 +298,7 @@ export default function LamaranCincinTheme({ data, slug, guestToken, demo, skipC
         <Extras slot="end" />
 
         <footer className={s.closing}>
-          <Sprig className={`${s.sprig} ${s.closingSprig}`} />
+          <Art src="corner-top" className={`${s.sprig} ${s.closingSprig}`} width={136} height={112} />
           <p className={s.kicker}>Wassalamu&apos;alaikum warahmatullahi wabarakatuh</p>
           <p className={s.thanks}>Terima Kasih</p>
           <p className={s.body}>{thanks.active ? thanks.message : "Atas kehadiran dan doa restunya, kami ucapkan terima kasih. Semoga Allah memudahkan langkah kami hingga hari akad."}</p>

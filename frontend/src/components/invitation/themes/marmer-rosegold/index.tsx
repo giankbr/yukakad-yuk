@@ -21,19 +21,14 @@ const tint: ThemeTint = {
   "--t-line": "#e7dcd6", "--t-field": "#ffffff", "--t-radius": "2px", "--t-font": "Jost, system-ui, sans-serif",
 };
 
-/** Small four-point glint used as a sparkle. */
-function Glint({ className }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 0c.6 5.4 4.6 9.4 10 10-5.4.6-9.4 4.6-10 10-.6-5.4-4.6-9.4-10-10C5.4 9.4 9.4 5.4 10 0z" /></svg>;
-}
+const ART = "/themes/art/marmer-rosegold";
 
-/** Tall rectangle crossed by a circle: the theme's geometric frame (strokes draw themselves in). */
-function Frame({ className }: { className?: string }) {
+/** Decorative painted/foil image (never opens the photo lightbox). */
+function Art({ src, className, w, h, eager }: { src: string; className?: string; w: number; h: number; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 300 470" aria-hidden="true" focusable="false">
-      <rect className={s.draw} x="16" y="56" width="268" height="398" pathLength="1" />
-      <rect className={s.draw} x="26" y="66" width="248" height="378" pathLength="1" style={{ animationDelay: "300ms" }} />
-      <circle className={s.draw} cx="150" cy="150" r="128" pathLength="1" style={{ animationDelay: "500ms" }} />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
 }
 
@@ -42,7 +37,7 @@ function Head({ id, kicker, title, light }: { id: string; kicker: string; title:
     <div className={`${s.head} ${light ? s.headLight : ""}`}>
       <p className={s.kicker}>{kicker}</p>
       <h2 id={id}>{title}</h2>
-      <span className={s.rule} aria-hidden><i /><Glint className={s.ruleGlint} /><i /></span>
+      <Art src="rule" className={s.rule} w={210} h={16} />
     </div>
   );
 }
@@ -98,7 +93,7 @@ export default function MarmerRoseGoldTheme({ data, slug, guestToken, demo, skip
       cover={open => (
         <section className={s.cover}>
           <div className={s.stage}>
-          <Frame className={s.coverFrame} />
+          <Art src="frame" className={s.coverFrame} w={600} h={940} eager />
           <div className={s.coverInner}>
             <p className={s.kicker}>The Wedding of</p>
             <h1 className={s.coverNames}><span className={s.foil}>{data.couple.bride}</span>{data.couple.groom && <><em className={s.foil}>&amp;</em><span className={s.foil}>{data.couple.groom}</span></>}</h1>
@@ -295,7 +290,7 @@ export default function MarmerRoseGoldTheme({ data, slug, guestToken, demo, skip
 
         <footer className={s.closing}>
           <div className={s.mono} aria-hidden>
-            <Glint className={s.g1} /><Glint className={s.g2} /><Glint className={s.g3} />
+            <Art src="ring" className={s.monoRing} w={296} h={296} />
             <span className={s.foil}>{mono}</span>
           </div>
           <p className={s.kicker}>Thank You</p>

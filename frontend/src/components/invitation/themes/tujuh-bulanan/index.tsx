@@ -1,6 +1,6 @@
 "use client";
 // Theme "Tujuh Bulanan" — syukuran mitoni: gading-merah muda, janur yang bergoyang, bokor kembang setaman, kelopak yang berguguran.
-import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FormEvent } from "react";
 import {
   DietaryField, Extras, GuestCount, Lucide, Photo, ThemeShell, Tick, dateParts, formatDate, giftInfo, guestLabel, mapsHref,
   storyItems, toDate, useCopy, useCountdown, DATE_TBA, sentSummary, useRsvp, useThankYou, useWishes, type Attendance, type ThemeProps, type Wish,
@@ -13,7 +13,6 @@ import s from "./styles.module.css";
 
 const FONTS = ["Marcellus", "EB Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500", "Amiri:wght@400;700"];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
-const PETALS = ["#c8707a", "#ffffff", "#e6d46a", "#e9a3a8", "#f7f3e6"];
 const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Bude Narti", attendance: "yes", message: "Semoga Sekar sehat selalu, lancar sampai persalinan, dan dedek lahir sempurna menjadi anak yang sholeh-sholehah." },
   { id: "w2", name: "Rina & Yoga", attendance: "maybe", message: "Barakallah! Ikut bahagia menanti si kecil. Sehat-sehat ya ibu dan bayi." },
@@ -55,60 +54,46 @@ function plainName(guest?: string) {
 
 /* ── Ornaments ─────────────────────────────────────────────── */
 
-function Janur() {
-  const strips = [[22, 70], [52, 96], [82, 58], [308, 58], [338, 96], [368, 70]];
+const ART = "/themes/art/tujuh-bulanan";
+const PETAL_KINDS = ["rose", "white", "yellow"];
+
+/** Painted (watercolour) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
+
+/** Woven janur band with hanging strips (each strip sways on its own). */
+function Janur({ eager }: { eager?: boolean }) {
+  const strips: [number, number][] = [[22, 1], [52, 2], [82, 0], [308, 0], [338, 2], [368, 1]];
   return (
     <div className={s.janur} aria-hidden>
-      <svg viewBox="0 0 390 120" preserveAspectRatio="xMidYMin meet" focusable="false">
-        {strips.map(([x, len], i) => (
-          <g key={x} className={s.strip}>
-            <path d={`M${x - 5} 14q-2 ${len / 2} 5 ${len}q7-${len / 2} 5-${len}z`} fill={i % 2 ? "#b8c26a" : "#cfd58a"} />
-            <path d={`M${x} 16v${len - 6}`} stroke="#7c8a3a" strokeOpacity=".5" strokeWidth=".8" />
-          </g>
-        ))}
-        <rect x="0" y="0" width="390" height="16" fill="#b8c26a" />
-        <path d={Array.from({ length: 33 }, (_, i) => `M${i * 12} 0l12 16`).join("")} stroke="#7c8a3a" strokeOpacity=".45" strokeWidth="1" />
-        <path d={Array.from({ length: 33 }, (_, i) => `M${i * 12 + 12} 0l-12 16`).join("")} stroke="#fff" strokeOpacity=".35" strokeWidth="1" />
-        <path d={`M0 16${"l6 6l6-6".repeat(33)}`} fill="#b8c26a" />
-      </svg>
+      {strips.map(([x, kind]) => <span key={x} className={`${s.strip} ${s[`strip${kind}`]}`} style={{ left: `${(x / 390) * 100}%` }} />)}
+      <Art name="janur" w={780} h={47} className={s.janurBand} eager={eager} />
     </div>
   );
 }
 
 function Petals() {
-  return <div className={s.petals} aria-hidden>{Array.from({ length: 11 }, (_, i) => <i key={i} style={{ "--i": i, "--c": PETALS[i % PETALS.length] } as CSSProperties} />)}</div>;
+  return <div className={s.petals} aria-hidden>{Array.from({ length: 11 }, (_, i) => <i key={i} style={{ "--i": i, backgroundImage: `url(${ART}/petal-${PETAL_KINDS[i % PETAL_KINDS.length]}.webp)` } as CSSProperties} />)}</div>;
 }
 
 function Bloom() {
-  return (
-    <svg className={s.bloom} viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-      {Array.from({ length: 7 }, (_, i) => <ellipse key={i} cx="20" cy="10" rx="4.2" ry="8" fill="currentColor" opacity={i % 2 ? .55 : .85} transform={`rotate(${(360 / 7) * i} 20 20)`} />)}
-      <circle cx="20" cy="20" r="4" fill="#c99a3f" />
-    </svg>
-  );
+  return <Art name="bloom" w={80} h={79} className={s.bloom} />;
 }
 
 /** Bokor (brass bowl) of kembang setaman: rose, melati, kenanga and kantil floating on rippling water. */
-function Bokor({ className }: { className?: string }) {
-  const id = useId().replace(/:/g, "");
+function Bokor({ className, eager }: { className?: string; eager?: boolean }) {
   return (
-    <svg className={`${s.bokor} ${className ?? ""}`} viewBox="0 0 200 132" aria-hidden="true" focusable="false">
-      <defs>
-        <linearGradient id={`b-${id}`} x1="0" x2="1"><stop offset="0" stopColor="#a9782b" /><stop offset=".45" stopColor="#e2bd6a" /><stop offset="1" stopColor="#9a6c25" /></linearGradient>
-      </defs>
-      <path d="M76 106h48l9 16H67z" fill={`url(#b-${id})`} />
-      <path d="M20 52q8 54 80 56 72-2 80-56z" fill={`url(#b-${id})`} />
-      <path d="M30 70q70 22 140 0" fill="none" stroke="#fff" strokeOpacity=".35" strokeWidth="1.4" />
-      <path d="M38 84q62 18 124 0" fill="none" stroke="#7a5420" strokeOpacity=".35" strokeWidth="1" />
-      <ellipse cx="100" cy="52" rx="80" ry="17" fill="#d8ebe6" stroke="#c99a3f" strokeWidth="3" />
-      <ellipse className={s.ripple} cx="100" cy="53" rx="44" ry="9" />
-      <ellipse className={s.ripple} cx="100" cy="53" rx="44" ry="9" />
-      <g className={s.floaty}>{Array.from({ length: 6 }, (_, i) => <ellipse key={i} cx="66" cy="42" rx="5" ry="7" fill="#c8707a" transform={`rotate(${i * 60} 66 49)`} />)}<circle cx="66" cy="49" r="4" fill="#9c4a57" /></g>
-      <g className={s.floaty}>{Array.from({ length: 5 }, (_, i) => <ellipse key={i} cx="122" cy="41" rx="3" ry="5" fill="#fff" transform={`rotate(${i * 72} 122 46)`} />)}<circle cx="122" cy="46" r="2" fill="#e6d46a" /></g>
-      <g className={s.floaty}>{Array.from({ length: 6 }, (_, i) => <ellipse key={i} cx="96" cy="50" rx="1.6" ry="7" fill="#d9cf5c" transform={`rotate(${i * 60} 96 57)`} />)}</g>
-      <g className={s.floaty}><ellipse cx="146" cy="55" rx="3.4" ry="9" fill="#fffdf2" transform="rotate(60 146 55)" /><ellipse cx="141" cy="52" rx="3" ry="8" fill="#f4efdc" transform="rotate(20 141 52)" /></g>
-      <g className={s.floaty}>{Array.from({ length: 5 }, (_, i) => <ellipse key={i} cx="40" cy="51" rx="2.6" ry="4" fill="#fff" transform={`rotate(${i * 72} 40 55)`} />)}</g>
-    </svg>
+    <div className={`${s.bokor} ${className ?? ""}`} aria-hidden data-nolightbox>
+      <Art name="bokor" w={420} h={290} eager={eager} />
+      <span className={s.ripple} />
+      <span className={s.ripple} />
+      <span className={s.floaty} />
+    </div>
   );
 }
 
@@ -166,8 +151,8 @@ export default function TujuhBulananTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <Petals />
-          <Janur />
-          <Bokor className={s.coverBokor} />
+          <Janur eager />
+          <Bokor className={s.coverBokor} eager />
           <p className={s.coverKicker}>Tingkeban · Mitoni</p>
           <h1 className={s.coverTitle}>{label}</h1>
           <p className={s.coverNames}>{names}</p>
@@ -265,6 +250,7 @@ export default function TujuhBulananTheme({ data, slug, guestToken, demo, skipCo
 
         <section className={s.section} aria-labelledby="tb-rites">
           <Head id="tb-rites" eyebrow="Adat Jawa">Makna Tingkeban</Head>
+          <Art name="siraman" w={606} h={256} className={s.siraman} />
           <p className={s.lead}>Tingkeban digelar pada bulan ketujuh kehamilan anak pertama, dihiasi janur dan kembang setaman: mawar, melati, kenanga, dan kantil.</p>
           <ol className={s.rites}>
             {RITES.map((rite, index) => (

@@ -98,9 +98,9 @@ export default function PalembangAesanTheme({ data, slug, guestToken, demo, skip
           <div className={s.coverPattern} aria-hidden />
           <div className={s.coverFrame} aria-hidden><Corner className={s.cTL} /><Corner className={s.cTR} /><Corner className={s.cBL} /><Corner className={s.cBR} /></div>
           {coverPhoto ? <>
-            <Crown className={s.coverCrown} />
+            <Crown className={s.coverCrown} eager />
             <div className={s.coverPhoto}><Photo src={coverPhoto} alt="" /></div>
-          </> : <Crown className={s.coverCrownSolo} />}
+          </> : <Crown className={s.coverCrownSolo} eager />}
           <p className={s.kicker}>Walimatul &lsquo;Ursy</p>
           <h1 className={s.coverNames}>
             <span>{data.couple.bride}</span>
@@ -203,7 +203,7 @@ export default function PalembangAesanTheme({ data, slug, guestToken, demo, skip
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.node} aria-hidden><Limar className={s.nodeIcon} /></span>
+                  <span className={s.node} aria-hidden><Limar className={s.nodeIcon} tone="red" /></span>
                   <div className={s.storyText}>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>
@@ -265,7 +265,7 @@ export default function PalembangAesanTheme({ data, slug, guestToken, demo, skip
           <Head id="pl-wishes" kicker={rsvpClosed ? "Doa Restu" : "Konfirmasi & Doa"} title="Ucapan & Kehadiran" />
           {wishes.status === "sent" ? (
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
-              <Limar className={s.sentIcon} />
+              <Limar className={s.sentIcon} tone="red" />
               <p className={s.sent}>Terimo kasih, ucapan &amp; doa Anda sudah terkirim.</p>
               {!demo && wishes.pending && <p className={s.sentNote}>Ucapan Anda akan tampil setelah disetujui oleh mempelai.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}

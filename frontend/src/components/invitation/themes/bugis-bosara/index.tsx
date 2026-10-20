@@ -9,7 +9,6 @@ import { tableLabel } from "../extras";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
-import { bosaraBase, bosaraDefs, bosaraLid, divider, jewel } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["Playfair Display:ital,wght@0,400;0,600;1,400;1,600", "Jost:wght@400;500;600"];
@@ -19,17 +18,23 @@ const DEMO_WISHES = [
 ];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Insyaallah", no: "Berhalangan" };
 
-const Svg = ({ html, box, className }: { html: string; box: string; className?: string }) => (
-  <svg className={className} viewBox={box} aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: html }} />
+// Gouache + gold-foil ornaments (rendered by /tmp/pen/art/themes/bugis-bosara.py); sabbe/walasuji tiles live in the CSS.
+const ART = {
+  "bosara-base": [300, 322], "bosara-lid": [300, 322], divider: [320, 53], "jewel-gold": [56, 56], "jewel-magenta": [56, 56], "jewel-emerald": [56, 56],
+} as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/bugis-bosara/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
 );
 
-function Bosara({ className }: { className?: string }) {
+/** Bosara: bowl + separately painted lid (the lid floats). */
+function Bosara({ className, eager }: { className?: string; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 160 170" aria-hidden="true" focusable="false">
-      <defs dangerouslySetInnerHTML={{ __html: bosaraDefs }} />
-      <g dangerouslySetInnerHTML={{ __html: bosaraBase }} />
-      <g className={s.lid} dangerouslySetInnerHTML={{ __html: bosaraLid }} />
-    </svg>
+    <span className={`${s.bosaraArt} ${className ?? ""}`} aria-hidden>
+      <Art name="bosara-base" eager={eager} />
+      <Art name="bosara-lid" eager={eager} className={s.lid} />
+    </span>
   );
 }
 
@@ -38,7 +43,7 @@ function Head({ id, kicker, title }: { id: string; kicker?: string; title: strin
     <div className={s.head}>
       {kicker && <p className={s.eyebrow}>{kicker}</p>}
       <h2 id={id}>{title}</h2>
-      <Svg html={divider} box="0 0 160 24" className={s.divider} />
+      <Art name="divider" className={s.divider} />
     </div>
   );
 }
@@ -101,11 +106,11 @@ export default function BugisBosaraTheme({ data, slug, guestToken, demo, skipCov
           <div className={s.sheen} aria-hidden />
           <div className={s.panel}>
             <div className={s.panelInner}>
-              <Bosara className={s.bosara} />
+              <Bosara className={s.bosara} eager />
               <p className={s.salam}>Tabe&apos;</p>
               <p className={s.kicker}>Undangan {label}</p>
               <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>&amp;</em><span>{data.couple.groom}</span></h1>
-              <Svg html={divider} box="0 0 160 24" className={s.divider} />
+              <Art name="divider" className={s.divider} />
               <p className={s.coverDate}>{formatDate(data.date)}</p>
               <div className={s.guest}>
                 <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>
@@ -172,7 +177,7 @@ export default function BugisBosaraTheme({ data, slug, guestToken, demo, skipCov
             const maps = mapsHref(data, event);
             return (
               <article key={event.name + index} className={s.event}>
-                <div className={s.eventBand}><h3>{event.name}</h3><Svg html={jewel} box="0 0 24 24" /></div>
+                <div className={s.eventBand}><h3>{event.name}</h3><Art name="jewel-gold" /></div>
                 <p className={s.meta}><Lucide icon={ic.calendarPlus} size={15} color="#c2185b" /><span>{formatDate(event.date || data.date)}</span></p>
                 {event.time && <p className={s.meta}><Lucide icon={ic.clock} size={15} color="#c2185b" /><span>{event.time}</span></p>}
                 {(event.venue || event.address) && (
@@ -195,7 +200,7 @@ export default function BugisBosaraTheme({ data, slug, guestToken, demo, skipCov
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <Svg html={jewel} box="0 0 24 24" className={s.node} />
+                  <Art name={index % 2 ? "jewel-emerald" : "jewel-magenta"} className={s.node} />
                   {story.date && <small>{story.date}</small>}
                   <h3>{story.title}</h3>
                   {story.body && <p>{story.body}</p>}

@@ -1,6 +1,6 @@
 "use client";
 // Theme "Aqiqah Bintang" — aqiqah bayi bernuansa pastel: bulan sabit tidur, awan, dan mainan gantung bintang yang berayun.
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DietaryField, Extras, GuestCount, Icon, Photo, ThemeShell, Tick, dateParts, formatDate, giftInfo, guestLabel, icons,
   mapsHref, storyItems, useCopy, useCountdown, DATE_TBA, useRsvp, useThankYou, useWishes, type Attendance, type ThemeProps, type Wish,
@@ -19,66 +19,47 @@ const HOPES = ["Anak salehah yang taat kepada Allah", "Sehat dan tumbuh dengan c
 const WALLET = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const BANK = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 const STAR = "M12 2.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 8.8l6.1-.7z";
-const CLOUD = "M18 46a14 14 0 0 1 2-28 20 20 0 0 1 37-6 15 15 0 0 1 25 11 12 12 0 0 1-1 23z";
 
-/** Sleeping crescent moon cradling a swaddled baby (original illustration). */
-function MoonBaby({ className }: { className?: string }) {
-  const id = useId().replace(/:/g, "");
+const ART = "/themes/art/aqiqah-bintang";
+
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, w, h, className, eager = false }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element -- static decorative theme art
+  return <img className={className} src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} data-nolightbox />;
+}
+
+/** Sleeping crescent moon cradling a swaddled baby — watercolour, split in two layers so only the moon rocks
+ *  (moving pieces are CSS backgrounds so they never count as photos). */
+function MoonBaby({ className, eager = false }: { className?: string; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 220 190" aria-hidden="true" focusable="false">
-      <defs>
-        <mask id={`m${id}`}><rect width="220" height="190" fill="#fff" /><circle cx="138" cy="70" r="66" fill="#000" /></mask>
-      </defs>
-      <g className={s.moonBody}>
-        <circle cx="104" cy="98" r="84" fill="#ffe08f" mask={`url(#m${id})`} />
-        <path d="M38 96q8 7 16 0" fill="none" stroke="#7a5c2e" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="40" cy="112" r="7" fill="#f7a7b4" opacity=".7" />
-        <path d="M44 126q8 6 16 1" fill="none" stroke="#7a5c2e" strokeWidth="2.6" strokeLinecap="round" />
-      </g>
-      <g className={s.baby}>
-        <path d="M78 150c-4-18 16-32 46-34 22-1 40 4 46 14 4 9-6 20-30 24-26 5-58 6-62-4z" fill="#f9c9d4" />
-        <path d="M96 130c18-6 40-6 58 0" fill="none" stroke="#f1aebd" strokeWidth="3" strokeLinecap="round" />
-        <path d="M92 142c22-5 46-5 64 1" fill="none" stroke="#f1aebd" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="172" cy="118" r="20" fill="#ffe2cc" />
-        <path d="M156 110c2-14 22-20 34-8-8-2-14 0-18 4-4-3-10-2-16 4z" fill="#cfdcff" />
-        <circle cx="191" cy="99" r="4" fill="#ffd37a" />
-        <path d="M163 121q4 3 8 0" fill="none" stroke="#5b4636" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="164" cy="128" r="3.5" fill="#f7a7b4" opacity=".75" />
-        <path d="M176 131q3 2 6 0" fill="none" stroke="#c98a7a" strokeWidth="1.8" strokeLinecap="round" />
-      </g>
-      <g className={s.zz} fill="#8f9ad1" fontFamily="Nunito, sans-serif" fontWeight="800">
-        <text x="186" y="74" fontSize="14">z</text><text x="198" y="58" fontSize="11">z</text>
-      </g>
-    </svg>
+    <span className={`${s.moonBaby} ${className ?? ""}`} aria-hidden>
+      <span className={s.moonBody} />
+      <Art src="baby" w={480} h={414} className={s.babyArt} eager={eager} />
+      <span className={s.zz}><i>z</i><i>z</i></span>
+    </span>
   );
 }
 
-function Cloud({ className }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 96 50" aria-hidden="true" focusable="false"><path d={CLOUD} fill="currentColor" /></svg>;
+function Cloud({ className, bank = false }: { className?: string; bank?: boolean }) {
+  return <span className={`${bank ? s.cloudBank : s.cloudArt} ${className ?? ""}`} aria-hidden />;
 }
 
-/** Crib mobile: an arched bar with a star, moon and cloud each swinging on its own string. */
+/** Crib mobile: a painted arched bar with a star, cloud, moon and star each swinging on its own string. */
 function Mobile() {
   return (
     <div className={s.mobile} aria-hidden>
-      <svg className={s.mobileBar} viewBox="0 0 260 40" focusable="false"><path d="M10 34Q130-6 250 34" fill="none" stroke="#b7c2ec" strokeWidth="3" strokeLinecap="round" /><circle cx="130" cy="14" r="5" fill="#ffd37a" /></svg>
-      <span className={s.hang} style={{ ["--len" as string]: "46px", left: "14%" }}><svg viewBox="0 0 24 24"><path d={STAR} fill="#ffd37a" /></svg></span>
+      <Art src="mobile-bar" w={520} h={92} className={s.mobileBar} eager />
+      <span className={s.hang} style={{ ["--len" as string]: "46px", left: "14%" }}><Art src="m-star" w={64} h={63} eager /></span>
       <span className={s.hang} style={{ ["--len" as string]: "70px", left: "38%", animationDelay: "-1.2s" }}><Cloud className={s.hangCloud} /></span>
-      <span className={s.hang} style={{ ["--len" as string]: "58px", left: "62%", animationDelay: "-2.1s" }}><svg viewBox="0 0 24 24"><path d="M15 3a9 9 0 1 0 6 13A7 7 0 0 1 15 3z" fill="#f9c9d4" /></svg></span>
-      <span className={s.hang} style={{ ["--len" as string]: "40px", left: "84%", animationDelay: "-.6s" }}><svg viewBox="0 0 24 24"><path d={STAR} fill="#cdeee0" /></svg></span>
+      <span className={s.hang} style={{ ["--len" as string]: "58px", left: "62%", animationDelay: "-2.1s" }}><Art src="m-moon" w={64} h={68} eager /></span>
+      <span className={s.hang} style={{ ["--len" as string]: "40px", left: "84%", animationDelay: "-.6s" }}><Art src="m-star-mint" w={64} h={63} eager /></span>
     </div>
   );
 }
 
-function Sparkles({ count = 8, seed = 1 }: { count?: number; seed?: number }) {
-  return (
-    <div className={s.sparkles} aria-hidden>
-      {Array.from({ length: count }, (_, i) => {
-        const n = (i + 2) * 41 * seed;
-        return <svg key={i} viewBox="0 0 24 24" style={{ left: `${(n * 11) % 94}%`, top: `${(n * 7) % 90}%`, width: 8 + (n % 4) * 3, animationDelay: `${(n % 6) * 0.6}s` }}><path d={STAR} fill="currentColor" /></svg>;
-      })}
-    </div>
-  );
+/** Painted star confetti: one hand-painted tile, two out-of-phase layers that glimmer. */
+function Sparkles({ seed = 1 }: { count?: number; seed?: number }) {
+  return <div className={s.sparkles} style={{ ["--sx" as string]: `${(seed * 97) % 420}px`, ["--sy" as string]: `${(seed * 173) % 420}px` }} aria-hidden />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -163,7 +144,7 @@ export default function AqiqahBintangTheme({ data, slug, guestToken, demo, skipC
           <Cloud className={`${s.cloud} ${s.cloudA}`} />
           <Cloud className={`${s.cloud} ${s.cloudB}`} />
           <Mobile />
-          <MoonBaby className={s.coverArt} />
+          <MoonBaby className={s.coverArt} eager />
           <div className={s.coverText}>
             <p className={s.pill}>Tasyakuran {label}</p>
             <h1 className={s.coverName}>{nick}</h1>
@@ -176,7 +157,7 @@ export default function AqiqahBintangTheme({ data, slug, guestToken, demo, skipC
             {table && <span className={s.table}>{table}</span>}
           </div>
           <button type="button" className={s.btn} onClick={open}><Icon d={icons.mailOpen} size={17} strokeWidth={2.4} />Buka Undangan</button>
-          <Cloud className={`${s.cloud} ${s.cloudBottom}`} />
+          <Cloud className={`${s.cloud} ${s.cloudBottom}`} bank />
         </section>
       )}
     >
@@ -406,7 +387,7 @@ export default function AqiqahBintangTheme({ data, slug, guestToken, demo, skipC
           <p className={s.script}>Kami yang berbahagia</p>
           <p className={s.closingNames}>{parents || `Keluarga ${nick}`}</p>
           <a href="/" target="_blank" rel="noreferrer" className={s.made}>dibuat dengan ♥ di Rawuh</a>
-          <Cloud className={`${s.cloud} ${s.cloudBottom}`} />
+          <Cloud className={`${s.cloud} ${s.cloudBottom}`} bank />
         </footer>
       </main>
     </ThemeShell>

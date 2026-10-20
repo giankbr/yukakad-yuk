@@ -36,6 +36,16 @@ function familyName(parents?: string) {
   return match?.[1].trim().split(/\s+/).pop();
 }
 
+const ART = "/themes/art/editorial-monokrom";
+
+/** Linocut accent (decorative): never opens the photo lightbox. */
+function Print({ src, className, width, height }: { src: string; className?: string; width: number; height: number }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static decorative print
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden className={className} width={width} height={height} data-nolightbox loading="lazy" decoding="async" draggable={false} />
+  );
+}
+
 function Head({ id, no, kicker, title }: { id: string; no: string; kicker: string; title: string }) {
   return (
     <div className={s.head}>
@@ -128,6 +138,7 @@ export default function EditorialMonokromTheme({ data, slug, guestToken, demo, s
           <p className={s.dropcap}>Dengan memohon rahmat dan ridha Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam {label.toLowerCase()} kami. Halaman-halaman berikut memuat seluruh keterangan acara — semoga berkenan membacanya sampai habis.</p>
           {data.couple.note && <blockquote className={s.pull}>“{data.couple.note}”</blockquote>}
           <p className={s.sign}>— {couple}</p>
+          <Print src="linocut-twig" className={s.twig} width={143} height={26} />
         </section>
 
         <Extras slot="opening" />
@@ -304,6 +315,7 @@ export default function EditorialMonokromTheme({ data, slug, guestToken, demo, s
         <Extras slot="end" />
 
         <footer className={s.colophon}>
+          <Print src="linocut-lily" className={s.lily} width={118} height={180} />
           <p className={s.fin}>Terima kasih.</p>
           <p className={s.finText}>{thanks.active ? thanks.message : "Kehadiran dan doa restu Anda melengkapi cerita kami. Sampai bertemu di hari bahagia."}</p>
           <dl className={s.credits}>

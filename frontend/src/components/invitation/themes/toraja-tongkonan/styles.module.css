@@ -3,7 +3,7 @@
   --black: #16110f; --black-2: #241b17; --red: #a3201b; --red-d: #7a1612; --yellow: #e5a823; --yellow-l: #f2c75b; --white: #f3ece0;
   --bone: #ede3d1; --paper: #f7f1e6; --ink: #1c1512; --muted: #6a5a50; --line: #d5c6ad;
   --sans: "Josefin Sans", "Futura", sans-serif; --serif: Lora, Georgia, serif;
-  --passura: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='18'%3E%3Crect width='32' height='18' fill='%2316110f'/%3E%3Cpath d='M0 18L8 5L16 18Z' fill='%23a3201b'/%3E%3Cpath d='M16 0L24 13L32 0Z' fill='%23a3201b'/%3E%3Cpath d='M0 10L8 3L16 10L24 16L32 10' fill='none' stroke='%23e5a823' stroke-width='1.6'/%3E%3Ccircle cx='8' cy='13' r='1.6' fill='%23f3ece0'/%3E%3Ccircle cx='24' cy='5' r='1.6' fill='%23f3ece0'/%3E%3C/svg%3E");
+  --passura: url("/themes/art/toraja-tongkonan/band.webp");
   font-family: var(--serif); color: var(--ink); background: var(--paper); line-height: normal;
 }
 .root {
@@ -19,16 +19,23 @@
 .root :focus-visible, .cover :focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
 
 .kicker { color: var(--red); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
-.band { position: absolute; left: 0; right: 0; height: 18px; background: var(--passura) 0 0 / 32px 18px repeat-x; box-shadow: 0 2px 0 var(--yellow), 0 -2px 0 var(--yellow); pointer-events: none; }
+.band { position: absolute; left: 0; right: 0; height: 18px; background: var(--passura) 0 0 / 256px 18px repeat-x; box-shadow: 0 2px 0 var(--yellow), 0 -2px 0 var(--yellow); pointer-events: none; }
 .bandTop { top: 2px; }
 .bandBottom { bottom: 2px; }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 100dvh; padding: 60px 28px 56px; overflow: hidden; background: radial-gradient(90% 60% at 50% 32%, #3a1410 0%, #16110f 70%); color: var(--white); text-align: center; }
-.cover > :not(.band, .coverSun) { position: relative; }
-.coverSun { position: absolute; top: 46px; left: 50%; width: 330px; height: 330px; translate: -50% 0; opacity: .16; pointer-events: none; }
-.coverSunSvg { width: 100%; height: 100%; }
-.coverHouse { width: 250px; height: 208px; margin-top: 8px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); }
+.cover > :not(.band) { position: relative; }
+/* Painted barre allo sun sits only behind the house roof; the names below get a clean dark ground. */
+.coverArt { position: relative; display: grid; place-items: end center; width: 280px; max-width: 100%; height: 236px; margin: 24px 0 10px; }
+.coverArt .coverSun { position: absolute; top: -30px; left: 50%; width: 200px; height: 200px; translate: -50% 0; opacity: .36; }
+.coverHouse { position: relative; display: block; width: 260px; max-width: 100%; height: auto; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .5)); }
+.sun { position: relative; display: block; flex-shrink: 0; }
+.sun img { position: absolute; display: block; }
+.rays { inset: 0; width: 100%; height: 100%; }
+.sunDisc { inset: 14%; width: 72%; height: 72%; }
+.sunFull { inset: 0; width: 100%; height: 100%; }
+.sunText { position: absolute; inset: 0; display: grid; place-items: center; color: var(--white); font-family: var(--sans); font-size: 34px; font-weight: 600; line-height: 1; padding-top: 4%; }
 .cover .kicker { color: var(--yellow); }
 .coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; font-family: var(--sans); font-weight: 700; line-height: 1; text-transform: uppercase; }
 .coverNames span { color: var(--white); font-size: 42px; letter-spacing: .08em; overflow-wrap: anywhere; }
@@ -67,7 +74,7 @@
 .rule { display: flex; align-items: center; gap: 10px; color: var(--red); }
 .rule i { width: 48px; height: 3px; background: repeating-linear-gradient(90deg, currentColor 0 6px, transparent 6px 9px); }
 .headLight .rule { color: var(--yellow); }
-.ruleIcon { width: 28px; height: 22px; }
+.ruleIcon { width: 30px; height: 23px; }
 .intro { max-width: 330px; color: var(--muted); font-size: 16px; line-height: 1.6; text-align: center; text-wrap: pretty; }
 .dark { padding-top: 72px; background: var(--black); color: var(--white); overflow: hidden; }
 
@@ -75,7 +82,7 @@
 .person { display: flex; align-items: center; gap: 16px; width: 100%; }
 .personAlt { flex-direction: row-reverse; text-align: right; }
 .alang { display: flex; flex-direction: column; align-items: center; width: 132px; flex-shrink: 0; transition: translate 700ms var(--m-ease), scale 700ms var(--m-ease); }
-.alangRoof { display: block; width: 132px; height: 30px; margin-bottom: -2px; color: var(--black); }
+.alangRoof { display: block; width: 132px; height: 30px; margin-bottom: -4px; }
 .alangBody { display: grid; place-items: center; width: 104px; height: 128px; overflow: hidden; border: 3px solid var(--black); border-top: 0; background: var(--red); box-shadow: inset 0 0 0 3px var(--yellow); }
 .alangBody img { width: 100%; height: 100%; object-fit: cover; }
 .mono { width: 86px; height: 86px; }
@@ -99,7 +106,7 @@
 .events { background: var(--bone); }
 .event { display: flex; flex-direction: column; align-items: center; width: 100%; transition: translate 650ms var(--m-ease), scale 650ms var(--m-ease); }
 .event:hover { translate: 0 -3px; }
-.eventRoof { display: block; width: 100%; height: 44px; margin-bottom: -2px; color: var(--red); }
+.eventRoof { display: block; width: 100%; height: 44px; margin-bottom: -6px; }
 .eventBody { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; width: calc(100% - 36px); padding: 22px 18px 24px; border: 2px solid var(--black); border-top: 0; background: var(--paper); text-align: center; }
 .eventNo { color: var(--red); font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .3em; }
 .eventBody h3 { font-family: var(--sans); font-size: 21px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; overflow-wrap: anywhere; }
@@ -116,7 +123,7 @@
 .mark { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
 .mark::after { content: ""; flex: 1; width: 3px; margin-top: 6px; background: repeating-linear-gradient(180deg, var(--red) 0 8px, var(--black) 8px 11px, var(--yellow) 11px 14px, var(--black) 14px 17px); transform-origin: 50% 0; }
 .timeline li:last-child .mark::after { display: none; }
-.markIcon { width: 40px; height: 32px; color: var(--black); }
+.markIcon { width: 40px; height: 31px; }
 .storyText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 4px 0 30px; }
 .timeline li:last-child .storyText { padding-bottom: 0; }
 .storyText small { color: var(--red); font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .2em; }
@@ -148,7 +155,7 @@
 .wishes { background: var(--bone); }
 .form { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 22px 18px; border: 2px solid var(--black); background: var(--paper); }
 .fieldRow { display: flex; flex-direction: column; gap: 5px; }
-.fieldRow > span, .fieldLabel, .diet { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.fieldRow > span, .fieldLabel, .diet { font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .16em; line-height: 1.45; text-transform: uppercase; }
 .diet input { font-family: var(--serif); font-weight: 400; letter-spacing: normal; text-transform: none; }
 .fieldRow input, .fieldRow textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 0; background: #fff; color: var(--ink); font-size: 16px; line-height: 1.35; transition: border-color 400ms var(--m-ease), box-shadow 400ms var(--m-ease); }
 .fieldRow input { height: 44px; }
@@ -156,7 +163,7 @@
 .fieldRow input::placeholder, .fieldRow textarea::placeholder { color: #a3958a; }
 .fieldRow input:focus, .fieldRow textarea:focus { outline: none; border-color: var(--black); box-shadow: 3px 3px 0 var(--yellow); }
 .choices { display: flex; gap: 6px; }
-.choices button { flex: 1; height: 42px; padding-top: 2px; border: 1.5px solid var(--black); background: #fff; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; transition: background 400ms var(--m-ease), color 400ms var(--m-ease), scale 400ms var(--m-ease), translate 400ms var(--m-ease); }
+.choices button { flex: 1 1 0; min-width: 0; height: 42px; padding: 2px 4px 0; border: 1.5px solid var(--black); background: #fff; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; transition: background 400ms var(--m-ease), color 400ms var(--m-ease), scale 400ms var(--m-ease), translate 400ms var(--m-ease); }
 .choices button:hover { background: var(--bone); }
 .choices .choiceOn, .choices .choiceOn:hover { background: var(--black); color: var(--yellow); }
 .guests { padding: 2px 0; font-size: 18px; }
@@ -167,7 +174,7 @@
 .submit:disabled { opacity: .6; cursor: default; }
 .error { color: var(--red); font-size: 15px; }
 .sentBox { align-items: center; padding: 28px 20px; text-align: center; }
-.sentIcon { width: 48px; height: 38px; color: var(--red); }
+.sentIcon { width: 48px; height: 37px; }
 .sent { font-family: var(--sans); font-size: 18px; font-weight: 600; line-height: 1.4; }
 .sentNote { color: var(--muted); font-size: 15px; }
 .closed { display: grid; gap: 4px; padding: 12px 14px; border: 2px dashed var(--red); text-align: center; }
@@ -185,7 +192,7 @@
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 76px 26px 60px; overflow: hidden; background: var(--black); color: var(--white); text-align: center; }
 .closing > :not(.band) { position: relative; }
-.closingHouse { width: 170px; height: 142px; }
+.closingHouse { width: 190px; height: auto; }
 .thanks { font-family: var(--sans); font-size: 34px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .thanksSub { margin-top: -6px; color: var(--yellow); font-size: 16px; font-style: italic; }
 .closingText { max-width: 320px; color: rgba(243, 236, 224, .82); font-size: 16px; line-height: 1.6; }
@@ -197,7 +204,7 @@
 .musicOn svg { animation: spin 6s linear infinite; }
 
 /* ── Signature motion: barre allo rays turn slowly, pa'ssura' band weaves, timeline posts rise ── */
-.rays { transform-box: view-box; transform-origin: 50% 50%; animation: turn 90s linear infinite; }
+.rays { animation: turn 90s linear infinite; }
 .band { animation: weave 30s linear infinite; }
 .bandBottom { animation-direction: reverse; }
 [data-revealed] .mark::after { animation: drawDown 1.6s var(--m-ease) calc(var(--rd, 0ms) + 300ms) both; }

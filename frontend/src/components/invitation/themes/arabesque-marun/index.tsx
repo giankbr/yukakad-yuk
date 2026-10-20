@@ -55,8 +55,8 @@ function verseOf(data: InvitationData): { ar?: string; text: string; source?: st
   return AR_RUM_21;
 }
 
-function Corners() {
-  return <div className={s.corners} aria-hidden><Corner className={s.corner} /><Corner className={s.corner} /><Corner className={s.corner} /><Corner className={s.corner} /></div>;
+function Corners({ eager }: { eager?: boolean }) {
+  return <div className={s.corners} aria-hidden>{[0, 1, 2, 3].map(i => <Corner key={i} className={s.corner} eager={eager} />)}</div>;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -112,8 +112,8 @@ export default function ArabesqueMarunTheme({ data, slug, guestToken, demo, skip
       style={damask}
       cover={open => (
         <section className={s.cover}>
-          <Corners />
-          <Medallion className={s.medal} />
+          <Corners eager />
+          <Medallion className={s.medal} eager />
           <p className={s.arabic} lang="ar" dir="rtl">{BISMILLAH}</p>
           <p className={s.kicker}>{wedding ? "The Wedding of" : label}</p>
           <h1 className={s.coverNames}>

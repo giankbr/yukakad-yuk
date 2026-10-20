@@ -31,7 +31,7 @@ function Head({ id, kicker, title, light }: { id: string; kicker?: string; title
     <div className={light ? `${s.head} ${s.headLight}` : s.head}>
       {kicker && <p className={s.kicker}>{kicker}</p>}
       <h2 id={id}>{title}</h2>
-      <span className={s.rule} aria-hidden><i /><Tedong className={s.ruleIcon} /><i /></span>
+      <span className={s.rule} aria-hidden><i /><Tedong className={s.ruleIcon} tone={light ? "yellow" : "red"} /><i /></span>
     </div>
   );
 }
@@ -95,8 +95,10 @@ export default function TorajaTongkonanTheme({ data, slug, guestToken, demo, ski
         <section className={s.cover}>
           <Band className={s.bandTop} />
           <Band className={s.bandBottom} />
-          <div className={s.coverSun} aria-hidden><BarreAllo className={s.coverSunSvg} /></div>
-          <Tongkonan className={s.coverHouse} />
+          <div className={s.coverArt} aria-hidden>
+            <BarreAllo className={s.coverSun} rays eager />
+            <Tongkonan className={s.coverHouse} eager />
+          </div>
           <p className={s.kicker}>Undangan Pernikahan</p>
           <h1 className={s.coverNames}>
             <span>{data.couple.bride}</span>
@@ -141,7 +143,7 @@ export default function TorajaTongkonanTheme({ data, slug, guestToken, demo, ski
           {people.map((person, index) => (
             <article key={person.role} className={index % 2 ? `${s.person} ${s.personAlt}` : s.person}>
               <div className={s.alang}>
-                <Roof className={s.alangRoof} />
+                <Roof className={s.alangRoof} tone="black" />
                 <div className={s.alangBody}>
                   {person.photo ? <Photo src={person.photo} alt={person.name} /> : <BarreAllo className={s.mono} initial={person.short.slice(0, 1).toUpperCase()} />}
                 </div>
@@ -197,7 +199,7 @@ export default function TorajaTongkonanTheme({ data, slug, guestToken, demo, ski
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.mark} aria-hidden><Tedong className={s.markIcon} /></span>
+                  <span className={s.mark} aria-hidden><Tedong className={s.markIcon} tone="black" /></span>
                   <div className={s.storyText}>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>

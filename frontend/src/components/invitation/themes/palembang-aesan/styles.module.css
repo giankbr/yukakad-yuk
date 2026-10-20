@@ -4,7 +4,7 @@
   --cream: #fbf3e2; --sand: #f4e6c8; --ink: #3b0a0e; --muted: #7b4a3a; --line: #e3c88f;
   --serif: "Cormorant Garamond", Georgia, serif; --display: "Playfair Display", Georgia, serif;
   --gold-grad: linear-gradient(100deg, #9c6d22 0%, #f2d58b 45%, #d6a548 60%, #9c6d22 100%);
-  --limar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cg fill='%23d6a548'%3E%3Ccircle cx='18' cy='5' r='1.3'/%3E%3Ccircle cx='24.5' cy='11.5' r='1.3'/%3E%3Ccircle cx='31' cy='18' r='1.3'/%3E%3Ccircle cx='24.5' cy='24.5' r='1.3'/%3E%3Ccircle cx='18' cy='31' r='1.3'/%3E%3Ccircle cx='11.5' cy='24.5' r='1.3'/%3E%3Ccircle cx='5' cy='18' r='1.3'/%3E%3Ccircle cx='11.5' cy='11.5' r='1.3'/%3E%3Cpath d='M18 14l4 4-4 4-4-4z'/%3E%3Ccircle cx='0' cy='0' r='1.6'/%3E%3Ccircle cx='36' cy='0' r='1.6'/%3E%3Ccircle cx='0' cy='36' r='1.6'/%3E%3Ccircle cx='36' cy='36' r='1.6'/%3E%3C/g%3E%3C/svg%3E");
+  --limar: url("/themes/art/palembang-aesan/limar.webp");
   --k: 12px;
   font-family: var(--serif); color: var(--ink); background: var(--cream); line-height: normal;
 }
@@ -25,6 +25,10 @@
 .divider i { width: 54px; height: 1px; background: linear-gradient(90deg, transparent, currentColor); }
 .divider i:last-child { background: linear-gradient(270deg, transparent, currentColor); }
 .limar { width: 22px; height: 20px; }
+.crown { position: relative; display: block; flex-shrink: 0; aspect-ratio: 3 / 2; }
+.crownBase, .pinArm { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.pinArm img { position: absolute; left: 45%; top: 3.75%; display: block; width: 10%; height: 31.25%; }
+.pinArm { transform-origin: 50% 82.5%; }
 .dividerLight { color: var(--gold-l); }
 
 /* Stepped (kekijing) frame: an outer gold layer and an inner panel with the same tiered corners. */
@@ -37,7 +41,7 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: 100dvh; padding: 54px 30px 44px; overflow: hidden; background: radial-gradient(120% 80% at 50% 30%, #7a0f17 0%, #4f080e 60%, #2a0508 100%); color: var(--cream); text-align: center; }
-.coverPattern, .darkPattern { position: absolute; inset: 0; background: var(--limar); background-size: 36px 36px; opacity: .13; pointer-events: none; }
+.coverPattern, .darkPattern { position: absolute; inset: 0; background: var(--limar); background-size: 144px 144px; opacity: .2; pointer-events: none; }
 .coverPattern { -webkit-mask-image: radial-gradient(90% 70% at 50% 40%, transparent 30%, #000 90%); mask-image: radial-gradient(90% 70% at 50% 40%, transparent 30%, #000 90%); opacity: .3; animation: shimmer 14s ease-in-out infinite alternate; }
 .coverFrame { position: absolute; inset: 14px; border: 1px solid rgba(214, 165, 72, .55); pointer-events: none; }
 .coverFrame::after { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(214, 165, 72, .25); }
@@ -47,8 +51,8 @@
 .cTL { left: -1px; top: -1px; scale: 1 -1; }
 .cTR { right: -1px; top: -1px; scale: -1 -1; }
 .cover > :not(.coverPattern, .coverFrame) { position: relative; }
-.coverCrownSolo { width: 230px; height: 154px; margin: 40px 0 10px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
-.coverCrown { width: 190px; height: 127px; margin-bottom: -50px; z-index: 1; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
+.coverCrownSolo { width: 230px; height: auto; margin: 40px 0 10px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
+.coverCrown { width: 190px; height: auto; margin-bottom: -50px; z-index: 1; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
 .coverPhoto { width: 168px; height: 210px; padding: 4px; border: 1.5px solid var(--gold); border-radius: 84px 84px 6px 6px; background: rgba(0, 0, 0, .2); }
 .coverPhoto img, .coverPhoto > div { width: 100%; height: 100%; border-radius: 80px 80px 3px 3px; object-fit: cover; }
 .cover .kicker { margin-top: 10px; color: var(--gold-l); }
@@ -70,7 +74,7 @@
 .openingPlain .openingText { padding-top: 90px; background: none; }
 .openingImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .openingText { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 140px 24px 40px; background: linear-gradient(180deg, rgba(79, 8, 14, 0) 0%, rgba(79, 8, 14, .88) 45%, #4f080e 100%); color: var(--cream); text-align: center; }
-.openingCrown { width: 120px; height: 80px; }
+.openingCrown { width: 120px; height: auto; }
 .openingText .kicker { color: var(--gold-l); }
 .openingText h1 { max-width: 100%; font-family: var(--display); font-size: 42px; font-weight: 500; font-style: italic; line-height: 1.1; overflow-wrap: anywhere; }
 .openingDate { color: rgba(251, 243, 226, .85); font-size: 17px; }
@@ -95,7 +99,7 @@
 .dark > :not(.darkPattern) { position: relative; }
 
 .couple { gap: 22px; background: var(--sand); }
-.couple::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--limar); background-size: 36px 36px; opacity: .12; }
+.couple::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--limar); background-size: 144px 144px; opacity: .14; }
 .personWrap { display: contents; }
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 100%; text-align: center; }
 .kijing { --k: 10px; width: 216px; height: 276px; padding: 2px; background: var(--gold-grad); transition: scale 700ms var(--m-ease), translate 700ms var(--m-ease); }
@@ -137,7 +141,7 @@
 .timeline::before { content: ""; position: absolute; top: 14px; bottom: 14px; left: 18px; width: 1px; background: linear-gradient(180deg, var(--gold), var(--gold-d)); transform-origin: 50% 0; }
 .timeline li { position: relative; display: flex; gap: 16px; }
 .node { position: relative; display: grid; place-items: center; width: 30px; height: 30px; flex-shrink: 0; border: 1px solid var(--gold); background: var(--cream); rotate: 45deg; }
-.nodeIcon { width: 16px; height: 15px; color: var(--red); rotate: -45deg; }
+.nodeIcon { width: 16px; height: 15px; rotate: -45deg; }
 .storyText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .storyText small { color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .2em; }
 .storyText h3 { color: var(--red); font-family: var(--display); font-size: 20px; font-weight: 500; font-style: italic; }
@@ -188,7 +192,7 @@
 .submit:disabled { opacity: .6; cursor: default; }
 .error { color: #a3341c; font-size: 15px; }
 .sentBox { align-items: center; padding: 28px 20px; text-align: center; }
-.sentIcon { width: 34px; height: 32px; color: var(--red); }
+.sentIcon { width: 34px; height: 31px; }
 .sent { font-family: var(--display); font-size: 20px; font-style: italic; line-height: 1.4; }
 .sentNote { color: var(--muted); font-size: 15px; }
 .closed { display: grid; gap: 4px; padding: 12px 14px; border: 1px dashed var(--gold); border-radius: 4px; text-align: center; }
@@ -205,7 +209,7 @@
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 60px 28px 64px; overflow: hidden; background: radial-gradient(120% 90% at 50% 0%, #7a0f17, #3d060b 70%); color: var(--cream); text-align: center; }
 .closing > :not(.darkPattern) { position: relative; }
-.closingCrown { width: 150px; height: 100px; }
+.closingCrown { width: 150px; height: auto; }
 .thanks { font-family: var(--display); font-size: 42px; font-style: italic; background: var(--gold-grad); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; }
 .closingText { max-width: 320px; color: rgba(251, 243, 226, .85); font-size: 17px; line-height: 1.55; }
 .wassalam { color: var(--gold-l); font-size: 17px; font-style: italic; }
@@ -217,7 +221,7 @@
 .musicOn svg { animation: spin 6s linear infinite; }
 
 /* ── Signature motion: kembang goyang trembles, gold foil sheen, limar timeline draws ── */
-.goyang { transform-box: view-box; transform-origin: 0 -78px; animation: goyang 3.6s ease-in-out infinite alternate; }
+.goyang { transform-origin: 50% 96%; animation: goyang 3.6s ease-in-out infinite alternate; }
 [data-revealed] .divider i { animation: unfurl 1.3s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
 [data-revealed] .divider i:first-child { transform-origin: 100% 50%; }
 [data-revealed] .divider i:last-child { transform-origin: 0 50%; }

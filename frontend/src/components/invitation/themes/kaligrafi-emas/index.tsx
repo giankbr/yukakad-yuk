@@ -8,7 +8,7 @@ import {
 import { tableLabel } from "../extras";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
-import { ArchCrest, LATTICE, Mihrab, Rosette, Star } from "./ornaments";
+import { ArchCrest, LATTICE, Rosette, Star } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["Cinzel:wght@400;600", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600", "Amiri:wght@400;700"];
@@ -114,9 +114,9 @@ export default function KaligrafiEmasTheme({ data, slug, guestToken, demo, skipC
       style={lattice}
       cover={open => (
         <section className={s.cover} style={lattice}>
-          <div className={s.coverArch} aria-hidden><Mihrab className={s.mihrab} /></div>
+          <div className={s.coverArch} aria-hidden />
           <div className={s.coverInner}>
-            <Rosette className={s.coverRosette} />
+            <Rosette className={s.coverRosette} eager />
             <p className={s.arabicSm} lang="ar" dir="rtl">{BISMILLAH}</p>
             <p className={s.kicker}>{wedding ? "Walimatul 'Ursy" : label}</p>
             <h1 className={s.coverNames}>
@@ -135,10 +135,10 @@ export default function KaligrafiEmasTheme({ data, slug, guestToken, demo, skipC
     >
       <main className={s.page}>
         <section className={s.hero} aria-label="Pembuka">
-          <div className={s.heroArch} aria-hidden><Mihrab className={s.mihrab} /></div>
+          <div className={s.heroArch} aria-hidden />
           <Rosette className={s.heroRosette} />
           <p className={s.arabic} lang="ar" dir="rtl">{BISMILLAH}</p>
-          <p className={s.kicker}>{wedding ? `${label} · Walimatul 'Ursy` : label}</p>
+          <p className={s.kicker}>{wedding ? "Walimatul 'Ursy" : label}</p>
           <h1 className={s.heroNames}>{names}</h1>
           <p className={s.heroDate}>{formatDate(data.date)}</p>
         </section>
@@ -329,7 +329,7 @@ export default function KaligrafiEmasTheme({ data, slug, guestToken, demo, skipC
         </section>
 
         <footer className={s.closing}>
-          <div className={s.closingArch} aria-hidden><Mihrab className={s.mihrab} /></div>
+          <div className={s.closingArch} aria-hidden />
           <Rosette className={s.closingRosette} />
           <p className={s.closingText}>
             Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.

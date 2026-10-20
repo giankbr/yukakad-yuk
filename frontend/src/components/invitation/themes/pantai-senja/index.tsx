@@ -18,50 +18,34 @@ const DEMO_WISHES: Wish[] = [
 const wallet = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const bank = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 
-/** Two-period wave band; the SVG is twice the column width so it can drift seamlessly. */
-function Waves({ className, tone = "a" }: { className?: string; tone?: "a" | "b" | "c" }) {
-  const d = tone === "b" ? "M0 22 Q 97.5 6 195 22 T 390 22 T 585 22 T 780 22 V 60 H 0 Z" : tone === "c" ? "M0 16 Q 97.5 32 195 16 T 390 16 T 585 16 T 780 16 V 60 H 0 Z" : "M0 20 Q 97.5 0 195 20 T 390 20 T 585 20 T 780 20 V 60 H 0 Z";
+const ART = "/themes/art/pantai-senja";
+
+/** Painted art (decorative): never opens the photo lightbox. */
+function Art({ src, className, width, height, eager }: { src: string; className?: string; width: number; height: number; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static decorative painting
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden className={className} width={width} height={height} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
+
+/** Painted wave band; a seamless 390px tile repeated on a 200%-wide strip so it can drift. */
+function Waves({ className }: { className?: string }) {
+  return <span className={className} aria-hidden />;
+}
+
+/** Hand-painted palm silhouette: trunk + crown are separate paintings so the fronds can rustle on their own. */
+function Palm({ className, eager }: { className?: string; eager?: boolean }) {
   return (
     <span className={className} aria-hidden>
-      <svg viewBox="0 0 780 60" preserveAspectRatio="none" focusable="false"><path d={d} /></svg>
+      <Art src="palm-trunk" width={180} height={280} eager={eager} />
+      <Art src="palm-crown" className={s.fronds} width={180} height={280} eager={eager} />
     </span>
   );
 }
 
-function Palm({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 140 260" aria-hidden="true" focusable="false">
-      <path d="M36 262 C 44 200 58 132 88 74" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
-      <path d="M36 262 C 44 200 58 132 88 74" fill="none" stroke="rgba(255,255,255,.12)" strokeWidth="8" strokeDasharray="2 9" />
-      <g className={s.fronds}>
-        <path d="M88 72 C 60 52 30 56 4 82 C 34 66 60 66 88 76 Z" />
-        <path d="M88 72 C 70 40 44 26 16 28 C 46 38 66 52 86 76 Z" />
-        <path d="M88 72 C 96 38 116 22 138 22 C 118 34 102 50 92 76 Z" />
-        <path d="M88 72 C 116 58 136 70 140 100 C 126 80 110 74 90 78 Z" />
-        <path d="M88 72 C 84 46 90 20 104 4 C 98 26 96 48 92 74 Z" />
-        <path d="M88 74 C 70 82 56 102 54 128 C 64 106 76 92 90 80 Z" />
-        <path d="M90 74 C 108 84 118 104 116 128 C 110 106 100 92 88 80 Z" />
-        <circle cx="85" cy="80" r="4.5" /><circle cx="93" cy="81" r="4.5" /><circle cx="89" cy="86" r="4" />
-      </g>
-    </svg>
-  );
-}
-
-function Birds({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 80 30" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
-      <path d="M2 12 Q 7 6 12 12 Q 17 6 22 12" /><path d="M34 6 Q 38 2 42 6 Q 46 2 50 6" /><path d="M58 20 Q 62 15 66 20 Q 70 15 74 20" />
-    </svg>
-  );
-}
-
-function Shell() {
-  return (
-    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round">
-      <path d="M12 20 C 5 20 3 13 4 9 C 6 5 9 4 12 4 C 15 4 18 5 20 9 C 21 13 19 20 12 20 Z" />
-      <path d="M12 20 V5 M12 20 L7 6.5 M12 20 L17 6.5 M12 20 L4.6 10 M12 20 L19.4 10" />
-    </svg>
-  );
+function Shell({ size = 22 }: { size?: number }) {
+  return <Art src="shell" className={s.shellArt} width={size} height={Math.round(size * 92 / 109)} />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -118,16 +102,15 @@ export default function PantaiSenjaTheme({ data, slug, guestToken, demo, skipCov
       cover={open => (
         <section className={s.cover}>
           <div className={s.sky} aria-hidden />
-          <Birds className={s.birds} />
+          <Art src="birds" className={s.birds} width={64} height={25} eager />
           <span className={s.sun} aria-hidden><i /></span>
           <div className={s.sea} aria-hidden>
-            <span className={s.glitter} />
-            <Waves className={`${s.wave} ${s.waveBack}`} tone="b" />
-            <Waves className={`${s.wave} ${s.waveMid}`} tone="c" />
+            <Waves className={`${s.wave} ${s.waveBack}`} />
+            <Waves className={`${s.wave} ${s.waveMid}`} />
             <Waves className={`${s.wave} ${s.waveFront}`} />
           </div>
-          <Palm className={`${s.palm} ${s.palmLeft}`} />
-          <Palm className={`${s.palm} ${s.palmRight}`} />
+          <Palm className={`${s.palm} ${s.palmLeft}`} eager />
+          <Palm className={`${s.palm} ${s.palmRight}`} eager />
           <div className={s.coverTop}>
             <p className={s.coverKicker}>The Wedding of</p>
             <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>&amp;</em><span>{data.couple.groom}</span></h1>
@@ -157,8 +140,8 @@ export default function PantaiSenjaTheme({ data, slug, guestToken, demo, skipCov
         </header>
 
         <section className={`${s.section} ${s.opening}`} aria-label="Salam pembuka">
-          <Shell />
-          <p className={s.salam}>Om Swastiastu · Assalamu&apos;alaikum · Salam sejahtera</p>
+          <Shell size={44} />
+          <p className={s.salam}><span>Om Swastiastu</span><span>Assalamu&apos;alaikum</span><span>Salam sejahtera</span></p>
           <p className={s.lead}>{data.couple.note || "Dengan penuh syukur, kami mengundang Anda untuk menyaksikan hari bahagia kami."}</p>
           <p className={s.body}>Dengan memohon rahmat Tuhan Yang Maha Esa, kami bermaksud melangsungkan {label.toLowerCase()} di tepi pantai, tepat saat langit berubah jingga.</p>
         </section>
@@ -193,7 +176,7 @@ export default function PantaiSenjaTheme({ data, slug, guestToken, demo, skipCov
             </div>
           ) : <p className={s.tba}>{DATE_TBA}</p>}
           <p className={s.duskNote}>{formatDate(data.date)}</p>
-          <Waves className={`${s.edge} ${s.edgeFoam}`} tone="b" />
+          <Waves className={`${s.edge} ${s.edgeFoam}`} />
         </section>
 
         <section className={`${s.section} ${s.events}`} aria-labelledby="ps-events">
@@ -224,7 +207,7 @@ export default function PantaiSenjaTheme({ data, slug, guestToken, demo, skipCov
             <ol className={s.shore}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.shell} aria-hidden><Shell /></span>
+                  <span className={s.shell} aria-hidden><Shell size={26} /></span>
                   <div>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>
@@ -331,13 +314,13 @@ export default function PantaiSenjaTheme({ data, slug, guestToken, demo, skipCov
         <Extras slot="end" />
 
         <footer className={s.closing}>
-          <span className={s.moon} aria-hidden />
+          <Art src="moon" className={s.moon} width={90} height={90} />
           <span className={s.stars} aria-hidden />
           <p className={s.kickerLight}>Sampai jumpa di tepi pantai</p>
           <p className={s.thanks}>Terima kasih</p>
           <p className={s.closingText}>{thanks.active ? thanks.message : "Merupakan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu."}</p>
           <p className={s.family}><small>Kami yang berbahagia</small>{couple}{families.length > 0 && <span>Keluarga {families.join(" & ")}</span>}</p>
-          <Waves className={`${s.wave} ${s.closingWave}`} tone="c" />
+          <Waves className={`${s.wave} ${s.closingWave}`} />
           <a href="/" target="_blank" rel="noreferrer" className={s.made}>dibuat dengan ♥ di Rawuh</a>
         </footer>
       </main>

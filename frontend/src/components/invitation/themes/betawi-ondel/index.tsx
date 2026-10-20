@@ -9,7 +9,6 @@ import { tableLabel } from "../extras";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
-import { burst, kembangPot, ondelFemale, ondelMale, rosette } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["Bebas Neue", "Plus Jakarta Sans:ital,wght@0,400;0,600;0,700;0,800;1,400", "Great Vibes"];
@@ -19,8 +18,22 @@ const DEMO_WISHES = [
 ];
 const ATTEND: Record<Attendance, string> = { yes: "Dateng", maybe: "Insyaallah", no: "Kagak bisa" };
 
-const Svg = ({ html, box, className }: { html: string; box: string; className?: string }) => (
-  <svg className={className} viewBox={box} aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: html }} />
+// Gouache folk-paint ornaments (rendered by /tmp/pen/art/themes/betawi-ondel.py); the gigi balang tile lives in the CSS.
+const ART = {
+  "ondel-male": [240, 504], "ondel-female": [240, 504], "kembang-male": [240, 504], "kembang-female": [240, 504],
+  pot: [230, 284], burst: [400, 401], rosette: [96, 96],
+} as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/betawi-ondel/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+);
+/** Ondel-ondel figure with its kembang kelapa crown as a separate layer (the crown shimmers, the figure parades). */
+const Ondel = ({ male, eager }: { male?: boolean; eager?: boolean }) => (
+  <span className={s.ondel} aria-hidden>
+    <Art name={male ? "kembang-male" : "kembang-female"} eager={eager} className={s.kembang} />
+    <Art name={male ? "ondel-male" : "ondel-female"} eager={eager} />
+  </span>
 );
 const Balang = ({ up }: { up?: boolean }) => <span className={up ? `${s.balang} ${s.balangUp}` : s.balang} aria-hidden />;
 
@@ -98,9 +111,9 @@ export default function BetawiOndelTheme({ data, slug, guestToken, demo, skipCov
             <p className={s.coverDate}>{formatDate(data.date)}</p>
           </div>
           <div className={s.stage} aria-hidden>
-            <Svg html={ondelMale} box="0 0 120 250" className={s.ondel} />
-            <Svg html={kembangPot} box="0 0 120 130" className={s.pot} />
-            <Svg html={ondelFemale} box="0 0 120 250" className={s.ondel} />
+            <Ondel male eager />
+            <Art name="pot" eager className={s.pot} />
+            <Ondel eager />
           </div>
           <div className={s.guest}>
             <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>
@@ -141,7 +154,7 @@ export default function BetawiOndelTheme({ data, slug, guestToken, demo, skipCov
               {index === 1 && <p className={s.amp} aria-hidden>&amp;</p>}
               <article className={s.person}>
                 <div className={s.medal}>
-                  <Svg html={burst} box="0 0 120 120" />
+                  <Art name="burst" className={s.burst} />
                   <div className={s.medalFace}>{person.photo ? <Photo src={person.photo} alt={person.name} /> : <span aria-hidden>{person.nick.slice(0, 1)}</span>}</div>
                 </div>
                 <p className={s.role}>{person.role}</p>
@@ -196,7 +209,7 @@ export default function BetawiOndelTheme({ data, slug, guestToken, demo, skipCov
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.rail} aria-hidden><Svg html={rosette} box="0 0 24 24" /><i /></span>
+                  <span className={s.rail} aria-hidden><Art name="rosette" /><i /></span>
                   <div className={s.storyBody}>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>
@@ -224,7 +237,7 @@ export default function BetawiOndelTheme({ data, slug, guestToken, demo, skipCov
           <Head id="bw-wishes" kicker="Doa & Kehadiran" title="Kirim Ucapan" />
           {wishes.status === "sent" ? (
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
-              <Svg html={kembangPot} box="0 0 120 130" className={`${s.pot} ${s.sentIcon}`} />
+              <Art name="pot" className={`${s.pot} ${s.sentIcon}`} />
               <p className={s.sent}>Makasih banyak ye! Ucapan ente udah terkirim.</p>
               {!demo && wishes.pending && <p className={s.sentNote}>Ucapan akan tampil setelah disetujui oleh mempelai.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
@@ -299,9 +312,9 @@ export default function BetawiOndelTheme({ data, slug, guestToken, demo, skipCov
         <footer className={s.closing}>
           <Balang />
           <div className={s.closingStage} aria-hidden>
-            <Svg html={ondelMale} box="0 0 120 250" className={s.ondel} />
-            <Svg html={kembangPot} box="0 0 120 130" className={s.pot} />
-            <Svg html={ondelFemale} box="0 0 120 250" className={s.ondel} />
+            <Ondel male />
+            <Art name="pot" className={s.pot} />
+            <Ondel />
           </div>
           <p className={s.thanks}>Makasih Banyak Ye!</p>
           <p className={s.closingText}>Atas kehadiran dan doa restu Bapak/Ibu/Saudara/i, kami sekeluarga mengucapkan terima kasih.</p>

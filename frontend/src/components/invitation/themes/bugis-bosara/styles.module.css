@@ -3,10 +3,9 @@
   --magenta: #c2185b; --plum: #7d0f3d; --emerald: #0f7a5c; --deep: #0b4f3d; --orange: #ef7d22; --gold: #d4a532; --gold-light: #f7dc8c; --gold-deep: #9b7414;
   --ivory: #fff8ef; --blush: #fbe9ee; --ink: #3a1626; --muted: #7b5a66; --line: #ecd6dc; --bamboo: #d8b46a;
   --display: "Playfair Display", Georgia, serif; --sans: Jost, "Futura", sans-serif;
-  /* Lipa' sabbe: woven silk checks, drawn with two crossing stripe layers. */
-  --sabbe: repeating-linear-gradient(90deg, rgba(255, 255, 255, .16) 0 4px, transparent 4px 18px, rgba(0, 0, 0, .14) 18px 22px, transparent 22px 30px, rgba(247, 220, 140, .35) 30px 31px, transparent 31px 40px),
-    repeating-linear-gradient(0deg, rgba(255, 255, 255, .16) 0 4px, transparent 4px 18px, rgba(0, 0, 0, .14) 18px 22px, transparent 22px 30px, rgba(247, 220, 140, .35) 30px 31px, transparent 31px 40px);
-  --walasuji: repeating-linear-gradient(45deg, var(--bamboo) 0 1.5px, transparent 1.5px 12px), repeating-linear-gradient(-45deg, var(--bamboo) 0 1.5px, transparent 1.5px 12px);
+  /* Lipa' sabbe silk checks + walasuji bamboo lattice: hand-rendered seamless tiles (see /tmp/pen/art/themes/bugis-bosara.py). */
+  --sabbe: url("/themes/art/bugis-bosara/sabbe.webp") 0 0 / 120px 120px;
+  --walasuji: url("/themes/art/bugis-bosara/walasuji.webp") 0 0 / 96px 96px;
   font-family: var(--sans); color: var(--ink); background: var(--ivory); line-height: normal;
 }
 .root {
@@ -21,7 +20,7 @@
 :where(.root, .cover) :where(a) { color: inherit; text-decoration: none; }
 .root :focus-visible, .cover :focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
 
-.divider { display: block; width: 150px; height: 23px; }
+.divider { display: block; width: 150px; height: auto; }
 .eyebrow { color: var(--emerald); font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
 .sheen { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .sheen::after { content: ""; position: absolute; inset: -20% -60%; background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .22) 50%, transparent 60%); translate: -60% 0; animation: sheen 9s var(--m-ease) infinite; }
@@ -31,9 +30,11 @@
 .cover > :not(.sheen) { position: relative; }
 .panel { display: flex; flex-direction: column; align-items: center; width: 100%; flex: 1; padding: 10px; border-radius: 180px 180px 22px 22px; background: var(--walasuji), var(--ivory); box-shadow: 0 24px 50px rgba(60, 6, 28, .35); }
 .panelInner { display: flex; flex-direction: column; align-items: center; width: 100%; flex: 1; padding: 30px 22px 26px; border: 1.5px solid var(--gold); border-radius: 172px 172px 16px 16px; background: var(--ivory); }
-.bosara { width: 132px; height: 140px; flex-shrink: 0; overflow: visible; }
+.bosara { width: 160px; height: 172px; flex-shrink: 0; margin-top: 6px; }
+.bosaraArt { position: relative; display: block; }
+.bosaraArt > img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .lid { animation: lidFloat 5s ease-in-out infinite; }
-.salam { margin-top: 12px; color: var(--magenta); font-family: var(--display); font-size: 26px; font-style: italic; font-weight: 600; }
+.salam { margin-top: 18px; color: var(--magenta); font-family: var(--display); font-size: 26px; font-style: italic; font-weight: 600; }
 .kicker { margin-top: 4px; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
 .coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin: 12px 0 10px; font-family: var(--display); font-weight: 600; }
 .coverNames span { max-width: 100%; color: var(--plum); font-size: 48px; font-style: italic; line-height: 1.08; overflow-wrap: anywhere; }
@@ -83,7 +84,7 @@
 .role { color: var(--magenta); font-size: 11px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
 .personWrap:last-child .role { color: var(--emerald); }
 .person h3 { max-width: 100%; color: var(--plum); font-family: var(--display); font-size: 28px; font-style: italic; font-weight: 600; line-height: 1.15; overflow-wrap: anywhere; }
-.parents { max-width: 290px; color: var(--muted); font-size: 15px; line-height: 1.55; white-space: pre-line; }
+.parents { max-width: 290px; color: var(--muted); font-size: 15px; line-height: 1.55; white-space: pre-line; text-wrap: balance; }
 .amp { color: var(--gold-deep); font-family: var(--display); font-size: 46px; font-style: italic; line-height: 1; }
 
 .countBand { gap: 24px; overflow: hidden; background: var(--sabbe), linear-gradient(160deg, var(--magenta) 0%, var(--plum) 100%); color: var(--ivory); }
@@ -103,7 +104,7 @@
 .event:hover { translate: 0 -2px; box-shadow: 0 16px 34px rgba(58, 22, 38, .14); }
 .eventBand { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; padding: 14px 20px; background: var(--sabbe), var(--c, var(--magenta)); color: var(--ivory); }
 .eventBand h3 { min-width: 0; font-family: var(--display); font-size: 22px; font-style: italic; font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; }
-.eventBand svg { flex-shrink: 0; width: 22px; height: 22px; color: var(--gold-light); }
+.eventBand img { flex-shrink: 0; width: 22px; height: 22px; color: var(--gold-light); }
 .event:nth-child(4n + 2) { --c: var(--magenta); }
 .event:nth-child(4n + 3) { --c: var(--emerald); }
 .event:nth-child(4n + 4) { --c: var(--orange); }
@@ -155,7 +156,7 @@
 .submit:disabled { opacity: .6; cursor: default; }
 .error { color: var(--plum); font-size: 15px; }
 .sentBox { align-items: center; gap: 12px; padding: 28px 20px; text-align: center; }
-.sentIcon { width: 76px; height: 82px; overflow: visible; }
+.sentIcon { width: 76px; height: 82px; }
 .sent { color: var(--plum); font-family: var(--display); font-size: 21px; font-style: italic; line-height: 1.35; }
 .sentNote { color: var(--muted); font-size: 14px; }
 .sentBox .submit { padding: 0 28px; }
@@ -190,7 +191,7 @@
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 60px 28px 56px; overflow: hidden; background: var(--sabbe), linear-gradient(170deg, var(--emerald) 0%, var(--deep) 100%); color: var(--ivory); text-align: center; }
 .closing > :not(.sheen) { position: relative; }
-.closingBosara { width: 96px; height: 102px; overflow: visible; }
+.closingBosara { width: 96px; height: 103px; }
 .thanks { font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 600; line-height: 1.1; }
 .thanksSub { color: var(--gold-light); font-size: 13px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
 .closingText { max-width: 310px; color: rgba(255, 248, 239, .85); font-size: 16px; line-height: 1.65; }

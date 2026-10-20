@@ -2,7 +2,7 @@
   --paper: #f2e7cd; --paper-2: #e7d7b4; --paper-3: #dcc79e; --desk: #3a2a1c; --ink: #3b2a1a; --muted: #77604a; --line: #cdb88f;
   --wax: #8e2a22; --wax-light: #b8473a; --blue: #2c3e63; --olive: #5d6a43; --mustard: #b8862f; --cream: #fbf6ea;
   --fell: "IM Fell English", Georgia, "Times New Roman", serif; --type: "Special Elite", "Courier New", monospace; --script: "Pinyon Script", "Brush Script MT", cursive;
-  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .1 0 0 0 .16 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --noise: url("/themes/art/surat-vintage/paper.webp");
   --airmail: repeating-linear-gradient(-45deg, var(--wax) 0 11px, transparent 11px 17px, var(--blue) 17px 28px, transparent 28px 34px);
   --sepia: sepia(.62) saturate(.78) contrast(.94) brightness(1.02);
   font-family: var(--fell); color: var(--ink); line-height: 1.5;
@@ -21,15 +21,20 @@
 .root :focus-visible, .cover :focus-visible { outline: 2px dashed var(--wax); outline-offset: 3px; }
 
 .label { color: var(--muted); font-family: var(--type); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
-.flourish { width: 150px; height: 18px; color: var(--wax); opacity: .8; }
+.flourish { display: block; width: 160px; height: auto; opacity: .85; user-select: none; }
 .script { font-family: var(--script); font-size: 40px; line-height: 1.1; color: var(--wax); }
 
 /* ── Stamp + seal + postmark ── */
 .stamp { display: inline-grid; padding: 5px; background: radial-gradient(circle at center, transparent 2.4px, var(--cream) 2.9px) -4.5px -4.5px / 9px 9px round; filter: drop-shadow(0 1.5px 1.5px rgba(40, 25, 10, .32)); }
 .stampFace { display: grid; place-items: center; align-content: center; gap: 2px; padding: 6px 8px; border: 1px solid rgba(59, 42, 26, .35); background: #e4d3ae; color: var(--ink); text-align: center; }
 .stampFace b { font-family: var(--type); font-weight: 400; font-size: 9px; letter-spacing: .12em; }
-.rose { width: 30px; height: 36px; }
-.sealText { fill: #f3c7b5; font-family: var(--script); font-size: 30px; }
+.rose { display: block; width: auto; height: 40px; margin-top: -2px; }
+/* Painted wax seal; the initials are live text pressed into the recessed field. */
+:where(.wax) { position: relative; }
+.wax { display: inline-grid; place-items: center; container-type: inline-size; user-select: none; }
+.wax img { grid-area: 1 / 1; display: block; width: 100%; height: 100%; }
+.sealText { grid-area: 1 / 1; position: relative; translate: 0 2%; font-family: var(--script); font-weight: 400; font-size: 31cqw; line-height: 1; color: #c9604c; white-space: nowrap;
+  text-shadow: -1px -1px 0 rgba(40, 6, 3, .55), 1px 1px 0 rgba(240, 160, 140, .45); }
 .pmRing { fill: currentColor; font-family: var(--type); font-size: 9.5px; letter-spacing: 1.6px; }
 .pmDate { fill: currentColor; font-family: var(--type); font-size: 11px; letter-spacing: .5px; }
 .pmSmall { fill: currentColor; font-family: var(--type); font-size: 7.5px; letter-spacing: 2px; }
@@ -42,8 +47,9 @@
 .coverNames span { font-size: 60px; color: #fbf1da; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(0, 0, 0, .35); }
 .coverNames em { font-family: var(--fell); font-size: 20px; font-style: italic; color: #e5cfa4; margin: 2px 0; }
 .coverDate { font-family: var(--fell); font-style: italic; font-size: 17px; color: #ecdcbc; }
-.envelope { position: relative; width: 330px; max-width: 100%; height: 250px; margin: 18px 0 8px; perspective: 900px; }
-.envBody { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px 18px 18px; border-radius: 4px; color: var(--ink);
+.envelope { position: relative; width: 330px; max-width: 100%; min-height: 250px; margin: 18px 0 8px; perspective: 900px; }
+/* The body grows with long guest names; flap + seal stay pinned to the top so the seal never covers the address. */
+.envBody { position: relative; z-index: 3; display: flex; flex-direction: column; justify-content: flex-end; min-height: 250px; padding: 136px 18px 18px; border-radius: 4px; color: var(--ink);
   background: var(--noise), linear-gradient(160deg, #f1e3c3, #e1cca2); box-shadow: 0 18px 40px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .3); }
 .envBody::before { content: ""; position: absolute; inset: 0; border-radius: 4px; pointer-events: none;
   background: linear-gradient(to top right, transparent 49.6%, rgba(90, 60, 30, .18) 50%, transparent 50.4%) left bottom / 50% 52% no-repeat, linear-gradient(to top left, transparent 49.6%, rgba(90, 60, 30, .18) 50%, transparent 50.4%) right bottom / 50% 52% no-repeat; opacity: .6; }
@@ -55,10 +61,10 @@
 .address small { font-family: var(--type); font-size: 11px; letter-spacing: .1em; color: var(--muted); }
 .address strong { max-width: 290px; font-family: var(--fell); font-style: italic; font-weight: 400; font-size: 21px; line-height: 1.25; overflow-wrap: anywhere; border-bottom: 1px dashed rgba(59, 42, 26, .35); padding: 0 6px 2px; }
 .table { margin-top: 2px; padding: 1px 8px; border: 1px solid var(--wax); color: var(--wax); font-family: var(--type); font-size: 11px; letter-spacing: .08em; rotate: -2deg; }
-.flap { position: absolute; left: 0; right: 0; top: 0; z-index: 4; height: 42%; transform-origin: 50% 0; clip-path: polygon(0 0, 100% 0, 50% 100%);
+.flap { position: absolute; left: 0; right: 0; top: 0; z-index: 4; height: 105px; transform-origin: 50% 0; clip-path: polygon(0 0, 100% 0, 50% 100%);
   background: var(--noise), linear-gradient(180deg, #e9d8b3, #d8c093); filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .2));
   transition: transform 700ms var(--m-ease), z-index 0s 350ms; }
-.seal { position: absolute; left: 50%; top: 42%; z-index: 5; width: 62px; height: 62px; margin: -34px 0 0 -31px; filter: drop-shadow(0 3px 4px rgba(40, 10, 5, .45)); transition: opacity 400ms var(--m-ease), scale 400ms var(--m-ease), rotate 400ms var(--m-ease); }
+.seal { position: absolute; left: 50%; top: 105px; z-index: 5; width: 74px; height: 74px; margin: -40px 0 0 -37px; filter: drop-shadow(0 3px 3px rgba(40, 10, 5, .4)); transition: opacity 400ms var(--m-ease), scale 400ms var(--m-ease), rotate 400ms var(--m-ease); }
 .letterPeek { position: absolute; left: 20px; right: 20px; top: 14px; height: 70%; z-index: 2; display: flex; flex-direction: column; gap: 12px; padding: 22px 20px; background: var(--cream); box-shadow: 0 -4px 12px rgba(0, 0, 0, .12); transition: translate 700ms var(--m-ease) 250ms; }
 .letterPeek i { height: 1px; background: rgba(59, 42, 26, .25); }
 .letterPeek i:last-child { width: 60%; }
@@ -108,7 +114,7 @@
 .printImg { width: 100%; aspect-ratio: 4 / 5; height: auto; filter: var(--sepia); transition: filter 900ms var(--m-ease); cursor: zoom-in; }
 .person:hover .printImg { filter: sepia(.25) saturate(.9); }
 .monogram { display: grid; place-items: center; aspect-ratio: 4 / 5; background: var(--noise), var(--paper-2); }
-.monoSeal { width: 96px; height: 96px; }
+.monoSeal { width: 108px; height: 108px; filter: drop-shadow(0 3px 4px rgba(40, 10, 5, .3)); }
 .personText { display: flex; flex-direction: column; align-items: center; gap: 4px; max-width: 320px; }
 .personText h3 { font-family: var(--fell); font-weight: 400; font-size: 22px; line-height: 1.25; overflow-wrap: anywhere; }
 .parents { white-space: pre-line; color: var(--muted); font-size: 15.5px; line-height: 1.5; }
@@ -217,7 +223,7 @@
 .submit:hover { background: var(--wax-light); }
 .submit:disabled { opacity: .6; }
 .sentBox { align-items: center; text-align: center; }
-.sentSeal { width: 82px; height: 82px; animation: sealPress 900ms var(--m-ease) both; }
+.sentSeal { width: 92px; height: 92px; filter: drop-shadow(0 3px 4px rgba(40, 10, 5, .3)); animation: sealPress 900ms var(--m-ease) both; }
 @keyframes sealPress { 0% { opacity: 0; scale: 1.6; rotate: -20deg; } 60% { opacity: 1; scale: .95; } 100% { scale: 1; rotate: 0deg; } }
 .sent { font-style: italic; font-size: 18px; line-height: 1.5; text-wrap: pretty; }
 .sentNote { color: var(--muted); font-size: 14.5px; }
@@ -238,7 +244,13 @@
 .closing > .airmail { align-self: stretch; margin: 0 -24px 18px; }
 .closingNames { font-family: var(--script); font-size: 46px; line-height: 1.1; color: var(--wax); overflow-wrap: anywhere; }
 .family { color: var(--muted); font-style: italic; font-size: 16px; line-height: 1.5; }
-.footSeal { width: 78px; height: 78px; margin: 6px 0 4px; filter: drop-shadow(0 3px 4px rgba(40, 10, 5, .35)); }
+.footSeal { position: relative; z-index: 1; width: 88px; height: 88px; filter: drop-shadow(0 3px 4px rgba(40, 10, 5, .35)); }
+/* Pressed bouquet tied under the closing seal */
+.footArt { position: relative; display: grid; place-items: center; width: 100%; height: 132px; margin: 4px 0 0; }
+.footSprig { position: absolute; left: calc(50% - 26px); top: -40px; width: 200px; height: auto; rotate: -10deg; transform-origin: 12% 80%; opacity: .95; pointer-events: none; }
+/* Pressed flowers tucked into the envelope flap, top-left corner */
+.coverSprig { position: absolute; z-index: 5; left: -10px; top: -22px; width: 172px; height: auto; scale: -1 1; rotate: 4deg; filter: drop-shadow(0 2px 2px rgba(40, 25, 10, .25)); pointer-events: none; transition: translate 700ms var(--m-ease) 200ms, opacity 500ms var(--m-ease) 200ms; }
+.unsealing .coverSprig { translate: -14px -10px; }
 .made { font-family: var(--type); font-size: 11px; letter-spacing: .1em; color: var(--muted); transition: color 300ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
 .made:hover { color: var(--wax); }
 
@@ -256,5 +268,5 @@
 
 @media (prefers-reduced-motion: reduce) {
   [data-revealed] .bigPostmark, [data-revealed] .rail i, .weselOn .copyBtn svg, .choiceOn i::after, .sentSeal, .musicOn svg { animation: none; }
-  .flap, .seal, .letterPeek, .print, .printImg, .albumPrint, .albumPrint img, .openBtn, .inkBtn, .copyBtn, .choices button, .submit, .step, .music, .wesel, .made { transition: none; }
+  .flap, .seal, .coverSprig, .letterPeek, .print, .printImg, .albumPrint, .albumPrint img, .openBtn, .inkBtn, .copyBtn, .choices button, .submit, .step, .music, .wesel, .made { transition: none; }
 }

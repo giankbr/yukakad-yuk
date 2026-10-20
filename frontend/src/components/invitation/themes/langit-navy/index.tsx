@@ -1,6 +1,6 @@
 "use client";
 // Theme "Langit Navy" — pesta malam navy & emas: bulan sabit, bintang berkelip, rasi yang tergambar sendiri.
-import { useId, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import {
   Extras, Lucide, Photo, RsvpForm, Sheet, ThemeShell, Tick, WishForm, coupleLabel, dateParts, formatDate, giftInfo, guestLabel,
   mapsHref, storyItems, useCopy, useCountdown, useMusic, DATE_TBA, useRsvp, useSheets, useThankYou, useWishes,
@@ -22,33 +22,30 @@ const tint: ThemeTint = {
   "--t-line": "rgba(214, 180, 106, .35)", "--t-field": "#0f1f40", "--t-radius": "12px", "--t-font": "\"EB Garamond\", Georgia, serif",
 };
 
-function Star({ className, style }: { className?: string; style?: CSSProperties }) {
-  return <svg className={className} style={style} viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 0c.7 5 4.3 8.6 10 10-5.7 1.4-9.3 5-10 10-.7-5-4.3-8.6-10-10C5.7 8.6 9.3 5 10 0z" /></svg>;
-}
+const ART = "/themes/art/langit-navy";
 
-function Moon({ className }: { className?: string }) {
-  const id = useId().replace(/:/g, "");
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, className, style, w, h, eager }: { src: string; className?: string; style?: CSSProperties; w: number; h: number; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-      <defs>
-        <radialGradient id={`lm${id}`} cx="40%" cy="38%" r="70%"><stop offset="0" stopColor="#fbefc8" /><stop offset=".7" stopColor="#e3c47f" /><stop offset="1" stopColor="#c59f55" /></radialGradient>
-        <mask id={`lc${id}`}><rect width="120" height="120" fill="#fff" /><circle cx="78" cy="46" r="42" fill="#000" /></mask>
-      </defs>
-      <circle cx="60" cy="60" r="46" fill={`url(#lm${id})`} mask={`url(#lc${id})`} />
-      <g fill="#c59f55" opacity=".35" mask={`url(#lc${id})`}><circle cx="34" cy="70" r="5" /><circle cx="46" cy="88" r="3" /><circle cx="28" cy="52" r="2.5" /></g>
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} style={style} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
 }
 
-/** A small constellation whose lines draw themselves in. */
-function Constellation({ className }: { className?: string }) {
-  const points: Array<[number, number]> = [[8, 48], [46, 22], [92, 34], [128, 10], [170, 30], [206, 18]];
-  return (
-    <svg className={className} viewBox="0 0 214 60" aria-hidden="true" focusable="false">
-      <polyline className={s.cLine} points={points.map(p => p.join(",")).join(" ")} pathLength="1" />
-      {points.map(([x, y], index) => <circle key={index} cx={x} cy={y} r={index % 2 ? 2.2 : 3} className={s.cDot} style={{ animationDelay: `${index * 0.7}s` }} />)}
-    </svg>
-  );
+/** Gold-gouache four-point star. */
+function Star({ className, style, eager }: { className?: string; style?: CSSProperties; eager?: boolean }) {
+  return <Art src="star" className={className} style={style} w={48} h={48} eager={eager} />;
+}
+
+/** Painted crescent moon (its soft halo is part of the painting). */
+function Moon({ className, eager }: { className?: string; eager?: boolean }) {
+  return <Art src="moon" className={className} w={240} h={240} eager={eager} />;
+}
+
+/** A small constellation in gold ink; it is unveiled left to right when revealed. */
+function Constellation({ className, eager }: { className?: string; eager?: boolean }) {
+  return <Art src="constellation" className={`${s.constellation} ${className ?? ""}`} w={428} h={120} eager={eager} />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker: string; title: string }) {
@@ -103,13 +100,13 @@ export default function LangitNavyTheme({ data, slug, guestToken, demo, skipCove
         <section className={s.cover}>
           <div className={s.sky} aria-hidden>
             {[[8, 14, 12], [84, 10, 9], [72, 30, 6], [16, 44, 7], [90, 58, 11], [6, 74, 8], [60, 86, 6], [30, 92, 10]].map(([x, y, size], index) => (
-              <Star key={index} className={s.twinkle} style={{ left: `${x}%`, top: `${y}%`, width: size, animationDelay: `${index * 0.6}s` }} />
+              <Star key={index} className={s.twinkle} style={{ left: `${x}%`, top: `${y}%`, width: size + 4, animationDelay: `${index * 0.6}s` }} eager />
             ))}
           </div>
-          <div className={s.moonWrap}><Moon className={s.moon} /></div>
+          <div className={s.moonWrap}><Moon className={s.moon} eager /></div>
           <p className={s.kicker}>The Wedding of</p>
           <h1 className={s.coverNames}><span>{data.couple.bride}</span>{data.couple.groom && <><em>&amp;</em><span>{data.couple.groom}</span></>}</h1>
-          <Constellation className={s.coverConst} />
+          <Constellation className={s.coverConst} eager />
           <p className={s.coverDate}>{parts.day ? `${parts.weekday}, ${parts.day} ${parts.month} ${parts.year}` : DATE_TBA}</p>
           <div className={s.guest}>
             <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>

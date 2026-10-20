@@ -3,8 +3,8 @@
   --green: #0d4a35; --green-d: #073123; --green-m: #2f7a55; --kuning: #e9b526; --kuning-l: #f6d670; --kuning-d: #a77c12;
   --cream: #fbf6e4; --paper: #f4ecd0; --ink: #1d2b22; --muted: #56675b; --line: #dccb8e; --merah: #a8322a;
   --serif: "EB Garamond", Georgia, serif; --display: Marcellus, "Times New Roman", serif;
-  --songket: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%23e9b526'%3E%3Crect x='16' y='16' width='8' height='8'/%3E%3Crect x='16' y='16' width='8' height='8' transform='rotate(45 20 20)'/%3E%3Ccircle cx='0' cy='0' r='1.6'/%3E%3Ccircle cx='40' cy='0' r='1.6'/%3E%3Ccircle cx='0' cy='40' r='1.6'/%3E%3Ccircle cx='40' cy='40' r='1.6'/%3E%3Ccircle cx='20' cy='6' r='1'/%3E%3Ccircle cx='20' cy='34' r='1'/%3E%3Ccircle cx='6' cy='20' r='1'/%3E%3Ccircle cx='34' cy='20' r='1'/%3E%3C/g%3E%3Ccircle cx='20' cy='20' r='1.6' fill='%23a8322a'/%3E%3C/svg%3E");
-  --rebung: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='36'%3E%3Cpath d='M14 1L28 36H0Z' fill='%23e9b526'/%3E%3Cpath d='M14 13L22.5 36H5.5Z' fill='%230d4a35'/%3E%3Cpath d='M14 22L18.5 36H9.5Z' fill='%23e9b526'/%3E%3Ccircle cx='14' cy='8' r='1.5' fill='%23a8322a'/%3E%3C/svg%3E");
+  --songket: url("/themes/art/melayu-songket/songket.webp");
+  --rebung: url("/themes/art/melayu-songket/band.webp");
   font-family: var(--serif); color: var(--ink); background: var(--cream); line-height: normal;
 }
 .root {
@@ -20,8 +20,8 @@
 .root :focus-visible, .cover :focus-visible { outline: 2px solid var(--kuning); outline-offset: 2px; }
 
 .kicker { color: var(--kuning-d); font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; }
-.field { position: absolute; inset: 0; background: var(--songket); background-size: 40px 40px; opacity: .14; pointer-events: none; }
-.band { position: absolute; left: 0; right: 0; height: 36px; background: var(--rebung) 0 0 / 28px 36px repeat-x; pointer-events: none; }
+.field { position: absolute; inset: 0; background: var(--songket); background-size: 160px 160px; opacity: .2; pointer-events: none; }
+.band { position: absolute; left: 0; right: 0; height: 36px; background: var(--rebung) 0 0 / 224px 36px repeat-x; pointer-events: none; }
 .bandTop { top: 0; scale: 1 -1; }
 .bandBottom { bottom: 0; }
 .band::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 3px; background: var(--kuning); }
@@ -30,10 +30,17 @@
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 100dvh; padding: 72px 30px 74px; overflow: hidden; background: radial-gradient(110% 70% at 50% 35%, #146a4b 0%, #0d4a35 55%, #062a1e 100%); color: var(--cream); text-align: center; }
 .cover > :not(.field, .band) { position: relative; }
+/* keep the songket field quiet behind the names so they read cleanly */
+.cover .field { -webkit-mask-image: radial-gradient(75% 30% at 50% 50%, transparent 35%, #000 85%); mask-image: radial-gradient(75% 30% at 50% 50%, transparent 35%, #000 85%); }
 .cover .kicker { color: var(--kuning-l); }
-.coverMedal { width: 200px; height: 200px; margin: 10px 0; filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .35)); }
+.medal { position: relative; display: block; flex-shrink: 0; }
+.medal img { position: absolute; display: block; }
+.ring { inset: 0; width: 100%; height: 100%; }
+.medalCore { inset: 13%; width: 74%; height: 74%; }
+.medalText { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 2%; color: var(--kuning-l); font-family: var(--display); font-size: 2.7em; letter-spacing: .08em; line-height: 1; text-shadow: 0 2px 8px rgba(0, 0, 0, .4); }
+.coverMedal { width: 188px; height: 188px; margin: 8px 0 18px; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .38)); }
 .coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; font-family: var(--display); font-weight: 400; line-height: 1.05; }
-.coverNames span { color: var(--kuning-l); font-size: 48px; letter-spacing: .03em; overflow-wrap: anywhere; }
+.coverNames span { color: var(--kuning-l); font-size: 48px; letter-spacing: .03em; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(4, 28, 20, .65); }
 .coverNames em { margin: 4px 0; color: var(--cream); font-family: var(--serif); font-size: 20px; font-style: italic; letter-spacing: .1em; }
 .coverDate { color: rgba(251, 246, 228, .85); font-size: 18px; }
 .guest { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 300px; max-width: 100%; margin-top: auto; padding: 14px 20px; border: 1px solid rgba(233, 181, 38, .6); outline: 1px solid rgba(233, 181, 38, .25); outline-offset: 4px; background: rgba(7, 49, 35, .55); }
@@ -48,7 +55,7 @@
 .opening { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 64px 24px 84px; overflow: hidden; background: radial-gradient(100% 80% at 50% 20%, #146a4b, #0d4a35 60%, #073123); color: var(--cream); text-align: center; }
 .opening > :not(.field, .band) { position: relative; }
 .opening .kicker { color: var(--kuning-l); }
-.openMedal { width: 150px; height: 150px; }
+.openMedal { width: 150px; height: 150px; font-size: 15px; margin-bottom: 6px; }
 .opening h1 { max-width: 100%; color: var(--kuning-l); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
 .openDate { color: rgba(251, 246, 228, .85); font-size: 18px; }
 
@@ -67,13 +74,13 @@
 .head h2 { color: var(--green); font-family: var(--display); font-size: 28px; font-weight: 400; letter-spacing: .04em; line-height: 1.2; text-wrap: balance; }
 .headLight .kicker { color: var(--kuning-l); }
 .headLight h2 { color: var(--cream); }
-.awan { width: 132px; height: 26px; color: var(--kuning); overflow: visible; }
+.awan { width: 140px; height: auto; }
 .intro { max-width: 330px; color: var(--muted); font-size: 18px; line-height: 1.5; text-align: center; text-wrap: pretty; }
 .dark { padding-block: 76px 60px; overflow: hidden; background: linear-gradient(180deg, #0d4a35, #073123); color: var(--cream); }
 .dark > :not(.field, .band) { position: relative; }
 
 .couple { background: var(--paper); }
-.couple::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--songket); background-size: 40px 40px; opacity: .1; }
+.couple::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--songket); background-size: 160px 160px; opacity: .16; }
 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; }
 .single { grid-template-columns: minmax(0, 220px); justify-content: center; }
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0; text-align: center; }
@@ -101,7 +108,7 @@
 .event { width: 100%; overflow: hidden; border: 1px solid var(--line); background: #fffdf4; transition: translate 650ms var(--m-ease), box-shadow 650ms var(--m-ease), scale 650ms var(--m-ease); }
 .event:hover { translate: 0 -2px; box-shadow: 0 12px 26px rgba(13, 74, 53, .14); }
 .kepala { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 12px 22px; background: var(--green); color: var(--kuning-l); }
-.kepala::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: var(--rebung) 0 0 / 10px 12px repeat-x; }
+.kepala::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: var(--rebung) 0 0 / 80px 12px repeat-x; }
 .kepala h3 { font-family: var(--display); font-size: 20px; font-weight: 400; letter-spacing: .06em; text-align: center; overflow-wrap: anywhere; }
 .kepalaIcon { width: 12px; height: 15px; flex-shrink: 0; color: var(--kuning); }
 .eventBody { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 20px 20px 24px; text-align: center; }
@@ -190,6 +197,7 @@
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 80px 26px 64px; overflow: hidden; background: radial-gradient(110% 80% at 50% 0%, #146a4b, #073123 70%); color: var(--cream); text-align: center; }
 .closing > :not(.field, .band) { position: relative; }
 .closeMedal { width: 110px; height: 110px; }
+@media (max-height: 720px) { .coverMedal { width: 148px; height: 148px; margin-bottom: 10px; } .coverNames span { font-size: 42px; } }
 .thanks { color: var(--kuning-l); font-family: var(--display); font-size: 38px; letter-spacing: .04em; }
 .pantunLight { border-color: var(--kuning); background: rgba(7, 49, 35, .6); color: var(--cream); }
 .wassalam { color: var(--kuning-l); font-size: 17px; font-style: italic; }
@@ -202,15 +210,14 @@
 .musicOn { box-shadow: 0 0 0 4px rgba(233, 181, 38, .25), 0 6px 16px rgba(0, 0, 0, .25); }
 
 /* ── Signature motion: medallion ring turns, awan larat draws itself, pucuk rebung bands rise ── */
-.ring { transform-box: view-box; transform-origin: 50% 50%; animation: turn 80s linear infinite; }
-.draw { stroke-dasharray: 160; stroke-dashoffset: 0; }
+.ring { animation: turn 80s linear infinite; }
 [data-revealed] .draw { animation: drawIn 1.8s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
 [data-revealed].band, .band[data-revealed] { animation: rise 1.4s var(--m-ease) calc(var(--rd, 0ms) + 100ms) both; }
 .bandTop[data-revealed] { animation-name: riseTop; }
 .event:hover .kepalaIcon { animation: bob 1.6s ease-in-out infinite alternate; }
 
 @keyframes turn { to { rotate: 360deg; } }
-@keyframes drawIn { from { stroke-dashoffset: 160; } }
+@keyframes drawIn { from { clip-path: inset(0 50% 0 50%); opacity: .3; } to { clip-path: inset(0 0 0 0); opacity: 1; } }
 @keyframes rise { from { background-position: 0 36px; opacity: 0; } }
 @keyframes riseTop { from { background-position: 0 36px; opacity: 0; } }
 @keyframes bob { to { translate: 0 -3px; } }

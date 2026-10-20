@@ -91,9 +91,9 @@ export default function RusticKayuTheme({ data, slug, guestToken, demo, skipCove
           <div className={s.planks} aria-hidden />
           <div className={s.kraftCard}>
             <div className={s.spray} aria-hidden>
-              <BabysBreath className={s.sprayL} />
-              <BabysBreath className={s.sprayR} />
-              <Bow className={s.bow} />
+              <BabysBreath className={s.sprayL} eager />
+              <BabysBreath className={s.sprayR} eager />
+              <Bow className={s.bow} eager />
             </div>
             <p className={s.hand}>undangan {label.toLowerCase()}</p>
             <h1 className={s.coverNames}>

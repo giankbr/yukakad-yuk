@@ -9,7 +9,6 @@ import { tableLabel } from "../extras";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
 import { ic } from "./icons";
-import { cloudDark, cloudLight, divider, melati, ronce, siger } from "./ornaments";
 import s from "./styles.module.css";
 
 const FONTS = ["Marcellus", "EB Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500", "Pinyon Script"];
@@ -19,10 +18,16 @@ const DEMO_WISHES = [
 ];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Insyaallah", no: "Berhalangan" };
 
-const Svg = ({ html, box, className }: { html: string; box: string; className?: string }) => (
-  <svg className={className} viewBox={box} aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: html }} />
+// Hand-painted raster ornaments (rendered by /tmp/pen/art/themes/sunda-siger.py): foil siger, gouache Mega Mendung, melati.
+const ART = {
+  siger: [400, 291], "cloud-dark": [542, 232], "cloud-light": [541, 229], ronce: [44, 531], melati: [96, 97], divider: [320, 44],
+} as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/sunda-siger/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
 );
-const Divider = () => <Svg html={divider} box="0 0 160 24" className={s.divider} />;
+const Divider = () => <Art name="divider" className={s.divider} />;
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
   return (
@@ -91,16 +96,16 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverClouds} aria-hidden>
-            <Svg html={cloudDark} box="-12 20 224 96" className={`${s.cloud} ${s.cloudA}`} />
-            <Svg html={cloudDark} box="-12 20 224 96" className={`${s.cloud} ${s.cloudB}`} />
-            <Svg html={cloudDark} box="-12 20 224 96" className={`${s.cloud} ${s.cloudC}`} />
+            <Art name="cloud-dark" eager className={`${s.cloud} ${s.cloudA}`} />
+            <Art name="cloud-dark" className={`${s.cloud} ${s.cloudB}`} />
+            <Art name="cloud-dark" className={`${s.cloud} ${s.cloudC}`} />
           </div>
           <div className={s.strands} aria-hidden>
-            <Svg html={ronce} box="0 0 24 222" className={s.strand} />
-            <Svg html={ronce} box="0 0 24 222" className={s.strand} />
+            <Art name="ronce" eager className={s.strand} />
+            <Art name="ronce" eager className={s.strand} />
           </div>
           <div className={s.coverFrame} aria-hidden />
-          <Svg html={siger} box="0 0 200 120" className={s.coverSiger} />
+          <Art name="siger" eager className={s.coverSiger} />
           <div className={s.coverText}>
             <p className={s.salam}>Sampurasun</p>
             <p className={s.kicker}>Undangan {label}</p>
@@ -119,9 +124,9 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
     >
       <main className={s.main}>
         <header className={s.hero}>
-          <Svg html={cloudLight} box="-12 20 224 96" className={s.heroCloud} />
+          <Art name="cloud-light" className={s.heroCloud} />
           <div className={s.heroArch}>
-            <Svg html={siger} box="0 0 200 120" className={s.heroSiger} />
+            <Art name="siger" className={s.heroSiger} />
             <div className={s.heroPhoto}><Photo src={hero} alt={`Foto ${couple}`} /></div>
           </div>
           <p className={s.kickerDark}>The Wedding of</p>
@@ -142,10 +147,10 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
           <Head id="sg-couple" kicker="Duaan Jadi Hiji" title="Mempelai" />
           {people.map((person, index) => (
             <div key={person.role} className={s.personWrap}>
-              {index === 1 && <div className={s.amp} aria-hidden><Svg html={melati} box="-12 -12 24 24" className={s.ampBloom} /><span>&amp;</span><Svg html={melati} box="-12 -12 24 24" className={s.ampBloom} /></div>}
+              {index === 1 && <div className={s.amp} aria-hidden><Art name="melati" className={s.ampBloom} /><span>&amp;</span><Art name="melati" className={s.ampBloom} /></div>}
               <article className={s.person}>
                 <div className={s.portrait}>
-                  <Svg html={ronce} box="0 0 24 222" className={s.portraitStrand} />
+                  <Art name="ronce" className={s.portraitStrand} />
                   <div className={s.portraitFrame}>
                     {person.photo ? <Photo src={person.photo} alt={person.name} /> : <span className={s.monogram} aria-hidden>{person.nick.slice(0, 1)}</span>}
                   </div>
@@ -160,8 +165,8 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
         </section>
 
         <section className={`${s.section} ${s.countBand}`} aria-labelledby="sg-count">
-          <Svg html={cloudDark} box="-12 20 224 96" className={s.bandCloudL} />
-          <Svg html={cloudDark} box="-12 20 224 96" className={s.bandCloudR} />
+          <Art name="cloud-dark" className={s.bandCloudL} />
+          <Art name="cloud-dark" className={s.bandCloudR} />
           <div className={s.headLight}><p className={s.eyebrow}>Ngitung Poé</p><h2 id="sg-count">Menuju Hari Bahagia</h2></div>
           {countdown.valid ? (
             <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
@@ -200,7 +205,7 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
             <ol className={s.timeline}>
               {stories.map((story, index) => (
                 <li key={index}>
-                  <span className={s.node} aria-hidden><Svg html={melati} box="-12 -12 24 24" /></span>
+                  <span className={s.node} aria-hidden><Art name="melati" /></span>
                   <div className={s.storyBody}>
                     {story.date && <small>{story.date}</small>}
                     <h3>{story.title}</h3>
@@ -228,7 +233,7 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
           <Head id="sg-wishes" kicker="Du'a & Kahadiran" title="Ucapan & Konfirmasi" />
           {wishes.status === "sent" ? (
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
-              <Svg html={melati} box="-12 -12 24 24" className={s.sentBloom} />
+              <Art name="melati" className={s.sentBloom} />
               <p className={s.sent}>Hatur nuhun — doa dan ucapan Anda sudah terkirim.</p>
               {!demo && wishes.pending && <p className={s.sentNote}>Ucapan akan tampil setelah disetujui oleh mempelai.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
@@ -304,8 +309,8 @@ export default function SundaSigerTheme({ data, slug, guestToken, demo, skipCove
         <Extras slot="end" />
 
         <footer className={s.closing}>
-          <Svg html={cloudDark} box="-12 20 224 96" className={s.closingCloud} />
-          <Svg html={siger} box="0 0 200 120" className={s.closingSiger} />
+          <Art name="cloud-dark" className={s.closingCloud} />
+          <Art name="siger" className={s.closingSiger} />
           <p className={s.thanks}>Hatur Nuhun</p>
           <p className={s.closingText}>Kehadiran dan doa restu Bapak/Ibu/Saudara/i merupakan kebahagiaan yang tak ternilai bagi kami sekeluarga.</p>
           <p className={s.closingSalam}>Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh</p>

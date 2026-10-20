@@ -2,16 +2,13 @@
   --night: #0b1630; --navy: #13254a; --navy-2: #1c3461; --gold: #d6b46a; --gold-light: #f1dca4; --gold-deep: #b08d45; --ink: #f2eee3; --muted: #a9b3c9; --line: rgba(214, 180, 106, .32);
   --gold-grad: linear-gradient(100deg, #b08d45, #f1dca4 45%, #d6b46a 70%, #b08d45);
   --display: Marcellus, "Trajan Pro", Georgia, serif; --serif: "EB Garamond", Garamond, Georgia, serif; --script: Parisienne, "Snell Roundhand", cursive;
-  --stars: radial-gradient(circle at 24px 36px, rgba(255, 255, 255, .75) 0 .8px, transparent 1.4px), radial-gradient(circle at 140px 92px, rgba(255, 255, 255, .55) 0 .7px, transparent 1.3px),
-    radial-gradient(circle at 228px 160px, rgba(241, 220, 164, .8) 0 1px, transparent 1.7px), radial-gradient(circle at 318px 44px, rgba(255, 255, 255, .6) 0 .7px, transparent 1.3px),
-    radial-gradient(circle at 70px 214px, rgba(255, 255, 255, .5) 0 .6px, transparent 1.2px), radial-gradient(circle at 352px 236px, rgba(255, 255, 255, .7) 0 .8px, transparent 1.4px),
-    radial-gradient(circle at 190px 20px, rgba(241, 220, 164, .55) 0 .7px, transparent 1.3px);
+  --stars: url("/themes/art/langit-navy/stars.webp");
   font-family: var(--serif); color: var(--ink); line-height: 1.55;
 }
 .root {
   --t-accent: #d6b46a; --t-accent-ink: #0b1630; --t-bg: #13254a; --t-ink: #f2eee3; --t-muted: #a9b3c9; --t-line: rgba(214, 180, 106, .35); --t-field: #0f1f40;
   --t-radius: 12px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: Marcellus, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
-  background: var(--stars) 0 0 / 380px 260px, linear-gradient(180deg, #0b1630 0%, #13254a 30%, #0f1f40 60%, #0b1630 100%);
+  background: var(--stars) 0 0 / 260px 260px, linear-gradient(180deg, #0b1630 0%, #13254a 30%, #0f1f40 60%, #0b1630 100%);
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, ol, blockquote, cite) { margin: 0; }
@@ -22,28 +19,27 @@
 .root :focus-visible, .cover :focus-visible { outline: 1.5px solid var(--gold-light); outline-offset: 3px; }
 
 .kicker { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: var(--gold); font-family: var(--display); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
-.kStar { width: 9px; height: 9px; fill: var(--gold); opacity: .8; }
+.kStar { width: 11px; height: 11px; opacity: .9; }
 .script { font-family: var(--script); font-size: 34px; line-height: 1.1; color: var(--gold-light); }
-.twinkle { position: absolute; fill: var(--gold-light); animation: twinkle 4.8s ease-in-out infinite; filter: drop-shadow(0 0 4px rgba(241, 220, 164, .7)); }
+.twinkle { position: absolute; height: auto; animation: twinkle 4.8s ease-in-out infinite; }
 @keyframes twinkle { 0%, 100% { opacity: .25; scale: .6; } 50% { opacity: 1; scale: 1; } }
 
 /* Constellation */
-.cLine { fill: none; stroke: rgba(241, 220, 164, .55); stroke-width: 1; stroke-dasharray: 1; vector-effect: non-scaling-stroke; }
-.cDot { fill: var(--gold-light); animation: twinkle 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-[data-revealed] .cLine { animation: drawIn 3200ms var(--m-ease) 300ms both; }
-@keyframes drawIn { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+.constellation { display: block; height: auto; user-select: none; pointer-events: none; }
+.coverConst, [data-revealed] .rsvpConst { animation: drawIn 3200ms var(--m-ease) 300ms both; }
+@keyframes drawIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 100dvh; padding: 48px 24px 44px; overflow: hidden; text-align: center;
-  background: var(--stars) 0 0 / 380px 260px, radial-gradient(70% 45% at 50% 18%, #24407a 0%, transparent 70%), linear-gradient(180deg, #13254a, #0b1630 70%, #070f22); }
+  background: url("/themes/art/langit-navy/sky.webp") 50% 100% / cover, linear-gradient(180deg, #13254a, #0b1630 70%, #070f22); }
 .sky { position: absolute; inset: 0; pointer-events: none; }
-.moonWrap { position: relative; display: grid; place-items: center; width: 150px; height: 150px; margin-bottom: 4px; background: radial-gradient(circle, rgba(241, 220, 164, .28), transparent 65%); }
-.moon { width: 112px; height: 112px; animation: float 9s ease-in-out infinite; filter: drop-shadow(0 0 18px rgba(241, 220, 164, .45)); }
+.moonWrap { position: relative; display: grid; place-items: center; width: 150px; height: 150px; margin-bottom: 4px; }
+.moon { width: 190px; max-width: none; height: 190px; animation: float 9s ease-in-out infinite; }
 @keyframes float { 0%, 100% { translate: 0 0; rotate: -4deg; } 50% { translate: 0 -8px; rotate: 2deg; } }
 .coverNames { display: flex; flex-direction: column; align-items: center; font-family: var(--script); font-weight: 400; line-height: 1.05; }
 .coverNames span { font-size: 62px; color: var(--gold-light); text-shadow: 0 0 22px rgba(241, 220, 164, .35); overflow-wrap: anywhere; max-width: 340px; }
 .coverNames em { font-family: var(--display); font-style: normal; font-size: 22px; color: var(--gold); margin: 2px 0; }
-.coverConst { width: 214px; height: 60px; margin-top: -4px; }
+.coverConst { width: 214px; margin-top: -4px; }
 .coverDate { font-family: var(--display); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); }
 .guest { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 300px; max-width: 100%; margin-top: 14px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 14px; background: rgba(11, 22, 48, .55); backdrop-filter: blur(4px); }
 .guest small { color: var(--muted); font-size: 14px; font-style: italic; }
@@ -62,12 +58,12 @@
 @keyframes orbit { to { rotate: 360deg; } }
 .heroCircle { width: 100%; height: 100%; padding: 6px; border-radius: 50%; border: 1.5px solid var(--gold); overflow: hidden; }
 .heroCircle > img, .heroCircle > div { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.heroMoon { width: 100%; height: 100%; padding: 30px; }
+.heroMoon { width: 100%; height: 100%; padding: 6px; }
 .heroNames { font-family: var(--script); font-weight: 400; font-size: 52px; line-height: 1.1; color: var(--gold-light); overflow-wrap: anywhere; text-shadow: 0 0 22px rgba(241, 220, 164, .25); }
 .heroDate { font-family: var(--display); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
 
 .opening { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 48px 30px 10px; text-align: center; }
-.smallMoon { width: 46px; height: 46px; filter: drop-shadow(0 0 10px rgba(241, 220, 164, .4)); }
+.smallMoon { width: 76px; height: 76px; margin: -10px 0 -12px; }
 .salam { font-family: var(--display); font-size: 19px; line-height: 1.4; color: var(--gold-light); max-width: 320px; }
 .quote { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 330px; font-style: italic; font-size: 18px; line-height: 1.65; color: var(--ink); text-wrap: pretty; }
 .quote cite { font-family: var(--display); font-style: normal; font-size: 12px; letter-spacing: .2em; color: var(--gold); }
@@ -110,7 +106,7 @@
 .event { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 34px 22px 26px; border: 1px solid var(--line); border-radius: 160px 160px 18px 18px; background: linear-gradient(180deg, rgba(36, 64, 122, .45), rgba(11, 22, 48, .4)); text-align: center;
   transition: border-color 600ms var(--m-ease), box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease); }
 .event:hover { border-color: rgba(241, 220, 164, .6); box-shadow: 0 0 34px rgba(241, 220, 164, .12); translate: 0 -2px; }
-.eventStar { width: 22px; height: 22px; margin-bottom: 6px; fill: var(--gold-light); filter: drop-shadow(0 0 6px rgba(241, 220, 164, .6)); }
+.eventStar { width: 26px; height: 26px; margin-bottom: 4px; }
 .event h3 { font-family: var(--display); font-weight: 400; font-size: 24px; line-height: 1.2; color: var(--gold-light); overflow-wrap: anywhere; }
 .when { font-size: 18px; }
 .time { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 16px; }
@@ -125,7 +121,7 @@
 .story { display: flex; flex-direction: column; width: 100%; max-width: 340px; }
 .story li { display: grid; grid-template-columns: 26px 1fr; gap: 16px; }
 .node { position: relative; display: flex; justify-content: center; }
-.nodeStar { position: relative; z-index: 1; width: 20px; height: 20px; margin-top: 3px; fill: var(--gold-light); filter: drop-shadow(0 0 6px rgba(241, 220, 164, .7)); }
+.nodeStar { position: relative; z-index: 1; width: 22px; height: 22px; margin-top: 2px; }
 .node i { position: absolute; top: 28px; bottom: 2px; left: 50%; width: 1px; background: linear-gradient(180deg, rgba(241, 220, 164, .7), rgba(241, 220, 164, .2)); transform-origin: 50% 0; }
 .story li:last-child .node i { display: none; }
 [data-revealed] .node i { animation: drawDown 1800ms var(--m-ease) both; }
@@ -165,7 +161,7 @@
 
 /* RSVP + wishes */
 .rsvp { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; padding: 22px 20px 26px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, rgba(36, 64, 122, .5), rgba(11, 22, 48, .4)); text-align: center; }
-.rsvpConst { width: 200px; height: 56px; }
+.rsvpConst { width: 200px; }
 .quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
 .quick button { height: 44px; border-radius: 12px; border: 1px solid var(--line); background: rgba(11, 22, 48, .5); color: var(--ink); font-family: var(--display); font-size: 13px; letter-spacing: .06em;
   transition: background 300ms var(--m-ease), color 300ms var(--m-ease), border-color 300ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
@@ -178,7 +174,7 @@
 .wishes { display: flex; flex-direction: column; gap: 12px; width: 100%; }
 .empty { color: var(--muted); font-style: italic; text-align: center; }
 .wish { display: grid; grid-template-columns: 14px 1fr; gap: 12px; padding: 16px 16px 16px 14px; border-radius: 16px; background: rgba(28, 52, 97, .35); border: 1px solid rgba(214, 180, 106, .14); }
-.wishStar { width: 12px; height: 12px; margin-top: 6px; fill: var(--gold); }
+.wishStar { width: 14px; height: 14px; margin-top: 5px; }
 .wishHead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
 .wishHead strong { font-family: var(--display); font-weight: 400; font-size: 17px; color: var(--gold-light); overflow-wrap: anywhere; }
 .wishHead small { flex-shrink: 0; color: var(--muted); font-size: 13px; font-style: italic; }
@@ -186,8 +182,8 @@
 
 /* Closing */
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 64px; padding: 40px 28px 36px; text-align: center; background: radial-gradient(70% 50% at 50% 20%, rgba(36, 64, 122, .7), transparent 75%); }
-.closingSky { position: relative; width: 200px; height: 120px; }
-.closingMoon { position: absolute; left: 50%; top: 0; width: 110px; height: 110px; margin-left: -55px; filter: drop-shadow(0 0 20px rgba(241, 220, 164, .45)); }
+.closingSky { position: relative; width: 220px; height: 150px; }
+.closingMoon { position: absolute; left: 50%; top: -14px; width: 176px; max-width: none; height: 176px; margin-left: -88px; }
 .closingText { max-width: 310px; color: var(--muted); font-size: 17px; line-height: 1.6; }
 .salamEnd { font-family: var(--display); font-size: 17px; color: var(--gold-light); }
 .closingNames { font-family: var(--script); font-size: 48px; line-height: 1.15; color: var(--gold-light); overflow-wrap: anywhere; }
@@ -208,6 +204,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .twinkle, .cDot, [data-revealed] .cLine, .moon, .orbitRing, [data-revealed] .node i, [data-revealed] .nodeStar, .giftOn .copyBtn svg, .musicOn svg { animation: none; }
+  .twinkle, .coverConst, [data-revealed] .rsvpConst, .moon, .orbitRing, [data-revealed] .node i, [data-revealed] .nodeStar, .giftOn .copyBtn svg, .musicOn svg { animation: none; }
   .openBtn, .portrait, .event, .goldBtn, .tile > img, .gift, .copyBtn, .quick button, .made, .music, .phase { transition: none; }
 }

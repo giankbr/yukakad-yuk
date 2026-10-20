@@ -19,45 +19,34 @@ const POINTED = "M0 100V72C0 36 118 28 150 3c32 25 150 33 150 69v28";
 const WALLET = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const BANK = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 
-/** Eight-point star (two overlapping squares) used as the rosette at every arch apex. */
-function Star8({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-      <g fill="none" stroke="currentColor" strokeWidth="1.3">
-        <rect x="9" y="9" width="22" height="22" />
-        <rect x="9" y="9" width="22" height="22" transform="rotate(45 20 20)" />
-        <circle cx="20" cy="20" r="5" />
-      </g>
-    </svg>
-  );
+const ART = "/themes/art/mihrab-pastel";
+
+/** Eight-point rosette, painted in watercolour (two overlapping squares + ring). */
+function Star8({ className, eager = false }: { className?: string; eager?: boolean }) {
+  // eslint-disable-next-line @next/next/no-img-element -- static decorative theme art
+  return <img className={className} src={`${ART}/star.webp`} alt="" aria-hidden width={88} height={88} loading={eager ? "eager" : "lazy"} data-nolightbox />;
 }
 
-/** A card shaped like a mihrab niche: pointed SVG cap on top of a bordered body. */
+/** A card shaped like a mihrab niche: a painted-wash pointed cap (masked) on top of a washed body. */
 function Mihrab({ children, tone = "cream", className }: { children: ReactNode; tone?: "cream" | "sage" | "rose" | "lilac"; className?: string }) {
   return (
     <div className={`${s.mihrab} ${s[tone]} ${className ?? ""}`}>
-      <svg className={s.cap} viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-        <path d={POINTED} className={s.capFill} />
-        <path d={POINTED} className={s.capLine} pathLength={1} />
-      </svg>
+      <div className={s.cap} aria-hidden>
+        <span className={s.capWash} />
+        <svg viewBox="0 0 300 100" preserveAspectRatio="none" focusable="false">
+          <path d={POINTED} className={s.capLine} pathLength={1} />
+        </svg>
+      </div>
       <Star8 className={s.apex} />
       <div className={s.body}>{children}</div>
     </div>
   );
 }
 
-/** Three nested arches for the cover, each outline drawing itself in turn. */
+/** Cover illustration: three nested mihrab arches painted in sage, blush and cream watercolour. */
 function Arches() {
-  return (
-    <svg className={s.arches} viewBox="0 0 300 420" aria-hidden="true" focusable="false">
-      <path className={s.archA} d="M10 420V160C10 92 108 70 150 10c42 60 140 82 140 150v260z" />
-      <path className={s.archB} d="M34 420V170C34 112 118 92 150 44c32 48 116 68 116 126v250z" />
-      <path className={s.archC} d="M58 420V180C58 130 128 112 150 78c22 34 92 52 92 102v240z" />
-      <path className={s.archLine} pathLength={1} d="M10 420V160C10 92 108 70 150 10c42 60 140 82 140 150v260" />
-      <path className={s.archLine} pathLength={1} style={{ animationDelay: ".5s" }} d="M34 420V170C34 112 118 92 150 44c32 48 116 68 116 126v250" />
-      <path className={s.archLine} pathLength={1} style={{ animationDelay: "1s" }} d="M58 420V180C58 130 128 112 150 78c22 34 92 52 92 102v240" />
-    </svg>
-  );
+  // eslint-disable-next-line @next/next/no-img-element -- static decorative theme art
+  return <img className={s.arches} src={`${ART}/arches.webp`} alt="" aria-hidden width={640} height={884} loading="eager" fetchPriority="high" data-nolightbox />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -113,7 +102,6 @@ export default function MihrabPastelTheme({ data, slug, guestToken, demo, skipCo
           <div className={s.coverArch}>
             <Arches />
             <div className={s.coverContent}>
-              <Star8 className={s.coverStar} />
               <p className={s.bismillah} lang="ar" dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
               <p className={s.kicker}>Undangan {label}</p>
               <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>&amp;</em><span>{data.couple.groom}</span></h1>

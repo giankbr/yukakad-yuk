@@ -18,16 +18,16 @@ const DEMO_WISHES: Wish[] = [
   { id: "w2", name: "Dimas & Nadia", attendance: "maybe", message: "Semoga rumah tangga kalian hangat seperti tulisan tangan di surat pertama. Barakallah." },
 ];
 
-/** Wobbly wax-drip outline for the seal (deterministic, so server and client render the same path). */
-const SEAL_EDGE = (() => {
-  const points: string[] = [];
-  for (let i = 0; i < 40; i++) {
-    const angle = (i / 40) * Math.PI * 2;
-    const radius = 45 + (i % 3 === 0 ? 3.2 : 0) + Math.sin(i * 1.9) * 1.6;
-    points.push(`${(50 + Math.cos(angle) * radius).toFixed(1)} ${(50 + Math.sin(angle) * radius).toFixed(1)}`);
-  }
-  return `M${points.join("L")}Z`;
-})();
+const ART = "/themes/art/surat-vintage";
+
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, className, w, h, eager }: { src: string; className?: string; w: number; h: number; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 
 function initials(data: InvitationData) {
   const a = data.couple.bride?.trim().charAt(0) ?? "";
@@ -35,22 +35,12 @@ function initials(data: InvitationData) {
   return b ? `${a}${b}`.toUpperCase() : a.toUpperCase();
 }
 
-function WaxSeal({ letters, className }: { letters: string; className?: string }) {
-  const id = useId().replace(/:/g, "");
+function WaxSeal({ letters, className, eager }: { letters: string; className?: string; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-      <defs>
-        <radialGradient id={`wax${id}`} cx="38%" cy="32%" r="75%">
-          <stop offset="0" stopColor="#c0473a" /><stop offset=".55" stopColor="#8e2a22" /><stop offset="1" stopColor="#5e1812" />
-        </radialGradient>
-      </defs>
-      <path d={SEAL_EDGE} fill={`url(#wax${id})`} />
-      <circle cx="50" cy="50" r="33" fill="none" stroke="#5e1812" strokeWidth="2.4" opacity=".75" />
-      <circle cx="50" cy="50" r="30" fill="none" stroke="#e08a76" strokeWidth=".8" opacity=".55" />
-      <path d="M30 66c6-4 12-5 20-5s14 1 20 5" fill="none" stroke="#e08a76" strokeWidth="1" opacity=".5" />
-      <text x="50" y="58" textAnchor="middle" className={s.sealText}>{letters}</text>
-      <ellipse cx="36" cy="30" rx="9" ry="4" fill="#fff" opacity=".18" transform="rotate(-30 36 30)" />
-    </svg>
+    <span className={`${s.wax} ${className ?? ""}`} aria-hidden="true">
+      <Art src="seal" w={220} h={220} eager={eager} />
+      <b className={s.sealText}>{letters}</b>
+    </span>
   );
 }
 
@@ -77,23 +67,11 @@ function Stamp({ children, className, style }: { children: ReactNode; className?
 }
 
 function Rose() {
-  return (
-    <svg viewBox="0 0 40 48" className={s.rose} aria-hidden="true" focusable="false">
-      <path d="M20 46V24" stroke="#4f5b3a" strokeWidth="1.6" fill="none" />
-      <path d="M20 36c-6-1-9-5-9-9 5 0 8 3 9 9zM20 32c5-1 8-4 8-8-5 0-7 3-8 8z" fill="#6b7a4c" />
-      <path d="M20 8c-6 0-10 4-10 9 0 6 5 9 10 9s10-3 10-9c0-5-4-9-10-9z" fill="#a8463a" />
-      <path d="M20 12c-3 0-5 2-5 5s2 4 5 4 5-2 5-4-2-5-5-5zM14 16c2 3 4 4 6 4M26 16c-2 3-4 4-6 4" fill="none" stroke="#6f2219" strokeWidth="1.1" />
-    </svg>
-  );
+  return <Art src="rose" className={s.rose} w={120} h={226} eager />;
 }
 
 function Flourish() {
-  return (
-    <svg className={s.flourish} viewBox="0 0 160 18" aria-hidden="true" focusable="false">
-      <path d="M2 9h56c6 0 9-6 15-6s7 5 3 7-7-3-2-6M158 9h-56c-6 0-9-6-15-6s-7 5-3 7 7-3 2-6" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
-      <path d="M80 4l4 5-4 5-4-5z" fill="currentColor" />
-    </svg>
-  );
+  return <Art src="flourish" className={s.flourish} w={320} h={21} />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker: string; title: string }) {
@@ -177,6 +155,7 @@ export default function SuratVintageTheme({ data, slug, guestToken, demo, skipCo
           <h1 className={s.coverNames}><span>{data.couple.bride}</span>{data.couple.groom && <><em>dan</em><span>{data.couple.groom}</span></>}</h1>
           <p className={s.coverDate}>{formatDate(data.date)}</p>
           <div className={s.envelope}>
+            <Art src="sprig" className={s.coverSprig} w={460} h={312} eager />
             <div className={s.letterPeek} aria-hidden><i /><i /><i /></div>
             <div className={s.envBody}>
               <div className={s.envStamp} aria-hidden>
@@ -191,7 +170,7 @@ export default function SuratVintageTheme({ data, slug, guestToken, demo, skipCo
               </div>
             </div>
             <div className={s.flap} aria-hidden />
-            <WaxSeal className={s.seal} letters={letters} />
+            <WaxSeal className={s.seal} letters={letters} eager />
           </div>
           <button type="button" className={s.openBtn} onClick={() => unseal(open)}><Lucide icon={ic.mailOpen} size={16} color="#f4ead2" />Buka Surat</button>
         </section>
@@ -420,7 +399,10 @@ export default function SuratVintageTheme({ data, slug, guestToken, demo, skipCo
           <p className={s.label}>Hormat kami,</p>
           <p className={s.closingNames}>{couple}</p>
           <p className={s.family}>beserta Keluarga Besar{families ? <><br />Bapak {families}</> : ""}</p>
-          <WaxSeal className={s.footSeal} letters={letters} />
+          <div className={s.footArt}>
+            <Art src="sprig" className={s.footSprig} w={460} h={312} />
+            <WaxSeal className={s.footSeal} letters={letters} />
+          </div>
           <a href="/" target="_blank" rel="noreferrer" className={s.made}>dibuat dengan ♥ di Rawuh</a>
         </footer>
       </main>

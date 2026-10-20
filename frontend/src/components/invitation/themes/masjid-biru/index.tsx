@@ -96,11 +96,11 @@ export default function MasjidBiruTheme({ data, slug, guestToken, demo, skipCove
         <section className={s.cover}>
           <div className={s.sky} aria-hidden><i className={s.stars} /><i className={`${s.stars} ${s.starsB}`} /></div>
           <div className={s.lanterns} aria-hidden>
-            <Lantern className={s.lantern} drop={40} />
-            <Lantern className={`${s.lantern} ${s.lanternB}`} drop={96} />
-            <Lantern className={`${s.lantern} ${s.lanternC}`} drop={20} />
+            <Lantern className={s.lantern} drop={40} eager />
+            <Lantern className={`${s.lantern} ${s.lanternB}`} drop={96} eager />
+            <Lantern className={`${s.lantern} ${s.lanternC}`} drop={20} eager />
           </div>
-          <Crescent className={s.moon} />
+          <Crescent className={s.moon} eager />
           <div className={s.coverInner}>
             <p className={s.arabic} lang="ar" dir="rtl">{BISMILLAH}</p>
             <p className={s.kicker}>{wedding ? "Undangan Walimatul 'Ursy" : `Undangan ${label}`}</p>
@@ -113,7 +113,7 @@ export default function MasjidBiruTheme({ data, slug, guestToken, demo, skipCove
             </div>
             <button type="button" className={s.btn} onClick={open}><Icon d={icons.mailOpen} size={16} />Buka Undangan</button>
           </div>
-          <Skyline className={s.skyline} />
+          <Skyline className={s.skyline} eager />
         </section>
       )}
     >

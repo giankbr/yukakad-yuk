@@ -69,20 +69,24 @@ function plainName(guest?: string) {
 
 /* ── Ornaments ─────────────────────────────────────────────── */
 
-function BalloonArt({ color, className }: { color: string; className?: string }) {
+const ART = "/themes/art/ultah-balon";
+const BALLOON_ART = ["coral", "sun", "mint", "grape", "orange"];
+
+/** Painted (gouache) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 60 104" aria-hidden="true" focusable="false">
-      <path d="M30 70c-6 8 6 14 0 22s5 10 1 12" fill="none" stroke="#2d2a4a" strokeOpacity=".45" strokeWidth="1.4" strokeLinecap="round" />
-      <path d="M30 3c15 0 25 12 25 28 0 18-13 35-25 37C18 66 5 49 5 31 5 15 15 3 30 3z" fill={color} />
-      <path d="M30 3c15 0 25 12 25 28 0 18-13 35-25 37" fill="none" stroke="#000" strokeOpacity=".08" strokeWidth="6" />
-      <ellipse cx="19" cy="20" rx="4.5" ry="9" fill="#fff" fillOpacity=".45" transform="rotate(-22 19 20)" />
-      <path d="M25.5 67.5 30 73l4.5-5.5z" fill={color} />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
 }
 
+function BalloonArt({ index, eager }: { index: number; eager?: boolean }) {
+  return <Art name={`balloon-${BALLOON_ART[index % BALLOON_ART.length]}`} w={111} h={247} className={s.balloonImg} eager={eager} />;
+}
+
 /** Tap a balloon to pop it (purely decorative; it grows back after a moment). */
-function Balloons({ count = 5, className }: { count?: number; className?: string }) {
+function Balloons({ count = 5, className, eager }: { count?: number; className?: string; eager?: boolean }) {
   const [popped, setPopped] = useState<number[]>([]);
   const [total, setTotal] = useState(0);
   const pop = (index: number, element: HTMLElement) => {
@@ -99,7 +103,7 @@ function Balloons({ count = 5, className }: { count?: number; className?: string
       {Array.from({ length: count }, (_, index) => (
         <button key={index} type="button" className={`${s.balloon} ${popped.includes(index) ? s.popped : ""}`} style={{ "--i": index } as CSSProperties}
           onClick={event => pop(index, event.currentTarget)} aria-label="Letuskan balon">
-          <span className={s.bob}><BalloonArt color={COLORS[index % COLORS.length]} /></span>
+          <span className={s.bob}><BalloonArt index={index} eager={eager} /></span>
           <span className={s.burst} aria-hidden><i /><i /><i /><i /><i /><i /></span>
         </button>
       ))}
@@ -107,42 +111,24 @@ function Balloons({ count = 5, className }: { count?: number; className?: string
   );
 }
 
-function Bunting({ flags = 11 }: { flags?: number }) {
-  const w = 360 / flags;
-  return (
-    <svg className={s.bunting} viewBox="0 0 360 46" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path d="M0 6 Q180 30 360 6" fill="none" stroke="#2d2a4a" strokeWidth="1.6" />
-      {Array.from({ length: flags }, (_, i) => {
-        const x = i * w + 3;
-        const sag = (t: number) => 6 + 24 * 4 * (t / 360) * (1 - t / 360) * 0.98;
-        const y1 = sag(x), y2 = sag(x + w - 6);
-        return <path key={i} d={`M${x} ${y1} L${x + w - 6} ${y2} L${x + (w - 6) / 2} ${(y1 + y2) / 2 + 18} Z`} fill={COLORS[i % COLORS.length]} stroke="#2d2a4a" strokeWidth="1.2" strokeLinejoin="round" />;
-      })}
-    </svg>
-  );
+function Bunting({ eager }: { eager?: boolean }) {
+  return <div className={s.bunting} aria-hidden data-nolightbox><Art name="bunting" w={800} h={89} eager={eager} /></div>;
 }
 
 function Cake({ candles }: { candles: number }) {
   const n = Math.max(1, Math.min(candles || 1, 9));
-  const gap = 96 / (n + 1);
   return (
-    <svg className={s.cake} viewBox="0 0 160 150" aria-hidden="true" focusable="false">
-      <ellipse cx="80" cy="140" rx="70" ry="7" fill="#2d2a4a" opacity=".12" />
-      <rect x="18" y="86" width="124" height="50" rx="10" fill="#ff8fa3" stroke="#2d2a4a" strokeWidth="2.4" />
-      <path d="M18 100c10 10 20 10 31 0s20-10 31 0 20 10 31 0 20-10 31 0" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
-      <rect x="32" y="54" width="96" height="36" rx="9" fill="#ffe08a" stroke="#2d2a4a" strokeWidth="2.4" />
-      <path d="M32 66c8 8 16 8 24 0s16-8 24 0 16 8 24 0 16-8 24 0" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-      {[40, 62, 84, 106, 124].map((x, i) => <circle key={x} cx={x} cy={i % 2 ? 124 : 118} r="3" fill={COLORS[(i + 2) % COLORS.length]} />)}
-      {Array.from({ length: n }, (_, i) => {
-        const x = 32 + gap * (i + 1);
-        return (
-          <g key={i}>
-            <rect x={x - 3} y="30" width="6" height="25" rx="2" fill={COLORS[i % COLORS.length]} stroke="#2d2a4a" strokeWidth="1.6" />
-            <path className={s.flame} style={{ animationDelay: `${-i * 0.23}s` }} d={`M${x} 14c4 5 5 8 5 10a5 5 0 0 1-10 0c0-2 1-5 5-10z`} fill="#ffb627" stroke="#2d2a4a" strokeWidth="1.2" />
-          </g>
-        );
-      })}
-    </svg>
+    <div className={s.cake} aria-hidden data-nolightbox>
+      <div className={s.candles}>
+        {Array.from({ length: n }, (_, i) => (
+          <span key={i} className={s.candle} style={{ "--i": i } as CSSProperties}>
+            <Art name="flame" w={55} h={60} className={s.flame} />
+            <Art name="candle" w={18} h={73} />
+          </span>
+        ))}
+      </div>
+      <Art name="cake" w={348} h={224} className={s.cakeImg} />
+    </div>
   );
 }
 
@@ -204,8 +190,8 @@ export default function UltahBalonTheme({ data, slug, guestToken, demo, skipCove
       cover={open => (
         <section className={s.cover}>
           <Confetti />
-          <Bunting />
-          <Balloons className={s.coverBalloons} />
+          <Bunting eager />
+          <Balloons className={s.coverBalloons} eager />
           <div className={s.coverBody}>
             <p className={s.coverKicker}>Undangan {label}</p>
             <h1 className={s.coverName}>{who.short}</h1>
@@ -323,8 +309,8 @@ export default function UltahBalonTheme({ data, slug, guestToken, demo, skipCove
         <Extras slot="story" />
 
         <section className={`${s.band} ${s.wishBand}`} aria-label="Harapan">
+          <Art name="gifts" w={587} h={360} className={s.gifts} />
           <div className={s.hope}>
-            <Lucide icon={ic.sparkles} size={22} />
             <p>Semoga {who.short} tumbuh sehat, ceria, berbakti kepada orang tua, dan selalu dikelilingi kasih sayang.</p>
           </div>
         </section>

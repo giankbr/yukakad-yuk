@@ -32,18 +32,22 @@ function Glitter({ className }: { className?: string }) {
   );
 }
 
-function Burst({ className }: { className?: string }) {
+const ART = "/themes/art/ultah-gemerlap";
+
+/** Painted art (decorative): never opens the photo lightbox. */
+function Art({ src, className, width, height, eager, style }: { src: string; className?: string; width: number; height: number; eager?: boolean; style?: CSSProperties }) {
   return (
-    <svg className={className} viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeLinecap="round">
-      {Array.from({ length: 12 }, (_, i) => {
-        const a = (i * 30 * Math.PI) / 180;
-        const r1 = i % 2 ? 22 : 16;
-        const r2 = i % 2 ? 40 : 46;
-        return <path key={i} d={`M${(50 + Math.cos(a) * r1).toFixed(2)} ${(50 + Math.sin(a) * r1).toFixed(2)} L${(50 + Math.cos(a) * r2).toFixed(2)} ${(50 + Math.sin(a) * r2).toFixed(2)}`} strokeWidth={i % 2 ? 1.2 : 2} />;
-      })}
-      <circle cx="50" cy="50" r="3" fill="currentColor" stroke="none" />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static decorative painting
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden className={className} width={width} height={height} style={style} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
+}
+
+/** Pressed-foil firework burst. */
+function Burst({ className, tone = "gold", eager }: { className?: string; tone?: "gold" | "blush"; eager?: boolean }) {
+  return tone === "gold"
+    ? <Art src="burst-gold" className={className} width={109} height={110} eager={eager} />
+    : <Art src="burst-blush" className={className} width={90} height={88} eager={eager} />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -73,23 +77,18 @@ function ageOf(data: InvitationData) {
   return /(\d{1,3})/.exec(data.eventLabel ?? "")?.[1] ?? "";
 }
 
+/** Gouache two-tier cake; the painted flames sit on top so they can flicker and be blown out. */
 function Cake({ lit }: { lit: boolean }) {
   return (
-    <svg className={lit ? s.cake : `${s.cake} ${s.cakeOut}`} viewBox="0 0 160 150" aria-hidden="true" focusable="false">
-      <ellipse cx="80" cy="140" rx="70" ry="7" fill="rgba(0,0,0,.35)" />
-      <rect x="22" y="92" width="116" height="46" rx="8" fill="#2a2350" stroke="#d9b45a" strokeWidth="1.5" />
-      <path d="M22 104 q 9.7 10 19.3 0 t 19.3 0 t 19.3 0 t 19.3 0 t 19.3 0 t 19.3 0" fill="none" stroke="#f3dc9b" strokeWidth="2" />
-      <rect x="38" y="60" width="84" height="34" rx="7" fill="#3b3170" stroke="#d9b45a" strokeWidth="1.5" />
-      <path d="M38 70 q 7 8 14 0 t 14 0 t 14 0 t 14 0 t 14 0 t 14 0" fill="none" stroke="#f3dc9b" strokeWidth="2" />
-      {[124, 92, 60].map((y, i) => <circle key={y} cx={46 + i * 34} cy={y + 30} r="2.4" fill="#f3dc9b" />)}
+    <div className={lit ? s.cake : `${s.cake} ${s.cakeOut}`} aria-hidden>
+      <Art src="cake" className={s.cakeBody} width={200} height={188} />
       {[58, 80, 102].map((x, i) => (
-        <g key={x}>
-          <rect x={x - 3} y="36" width="6" height="24" rx="2" fill={i === 1 ? "#f3dc9b" : "#e8b4a0"} />
-          <path className={s.flame} d={`M${x} 22 C ${x + 5} 28 ${x + 4} 34 ${x} 35 C ${x - 4} 34 ${x - 5} 28 ${x} 22 Z`} fill="#ffcf6b" style={{ animationDelay: `${i * 0.3}s` }} />
-          <path className={s.smoke} d={`M${x} 34 c -4 -5 4 -8 0 -14 c -3 -4 3 -7 1 -11`} fill="none" stroke="rgba(243,220,155,.6)" strokeWidth="1.4" strokeLinecap="round" />
-        </g>
+        <span key={x} className={s.candle} style={{ left: `${(x / 160) * 100}%` }}>
+          <Art src="flame" className={s.flame} width={16} height={24} style={{ animationDelay: `${i * 0.3}s` }} />
+          <Art src="smoke" className={s.smoke} width={12} height={24} />
+        </span>
       ))}
-    </svg>
+    </div>
   );
 }
 
@@ -133,11 +132,11 @@ export default function UltahGemerlapTheme({ data, slug, guestToken, demo, skipC
         <section className={s.cover}>
           <span className={s.spot} aria-hidden />
           <Glitter />
-          <Burst className={`${s.burst} ${s.burstA}`} />
-          <Burst className={`${s.burst} ${s.burstB}`} />
+          <Burst className={`${s.burst} ${s.burstA}`} eager />
+          <Burst className={`${s.burst} ${s.burstB}`} tone="blush" eager />
           <div className={s.coverTop}>
             <p className={s.kicker}>Undangan Pesta Ulang Tahun</p>
-            {age ? <p className={s.foil} aria-label={`ke-${age}`}>{age}</p> : <Burst className={s.foilBurst} />}
+            {age ? <p className={s.foil} aria-label={`ke-${age}`}>{age}</p> : <Burst className={s.foilBurst} eager />}
             <h1 className={s.coverName}>{nick}</h1>
             <p className={s.coverDate}>{dateLine}</p>
             <p className={s.coverTag}><i />Malam penuh kilau<i /></p>

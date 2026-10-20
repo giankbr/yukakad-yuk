@@ -18,58 +18,42 @@ const DEMO_WISHES: Wish[] = [
 const WALLET = ["M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1", "M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"];
 const BANK = ["M3 22h18", "M6 18v-7", "M10 18v-7", "M14 18v-7", "M18 18v-7", "M12 2l8 5H4z"];
 
-/** One hanging lantern (fanous): a string, a domed cap, glowing arched windows and a tassel. */
-function Lantern({ className, string = 40 }: { className?: string; string?: number }) {
+const ART = "/themes/art/lentera-malam";
+
+/** One hanging lantern (fanous), hand-painted brass + glowing glass; the string is a CSS hairline so it can sway. */
+function Lantern({ className, string = 40, alt = false, eager = false }: { className?: string; string?: number; alt?: boolean; eager?: boolean }) {
   return (
     <span className={`${s.lantern} ${className ?? ""}`} style={{ ["--string" as string]: `${string}px` }} aria-hidden>
-      <svg viewBox="0 0 40 92" width="40" height="92" focusable="false">
-        <circle cx="20" cy="4" r="3" fill="none" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M20 7v4" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M11 22c1-7 5-11 9-11s8 4 9 11z" fill="currentColor" />
-        <rect x="9" y="21" width="22" height="4" rx="1.5" fill="currentColor" />
-        <path className={s.glass} d="M10.5 25 8 52c4 5 8 7 12 7s8-2 12-7l-2.5-27z" />
-        <path d="M10.5 25 8 52c4 5 8 7 12 7s8-2 12-7l-2.5-27z" fill="none" stroke="currentColor" strokeWidth="1.4" />
-        <path className={s.window} d="M14.5 48V33c0-3 2.5-5.5 5.5-7.5 3 2 5.5 4.5 5.5 7.5v15z" />
-        <path d="M20 26v22M14.5 38h11" stroke="currentColor" strokeWidth=".9" opacity=".7" />
-        <path d="M13 56l7 9 7-9" fill="currentColor" />
-        <path d="M20 65v14" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="20" cy="82" r="2.4" fill="currentColor" />
-      </svg>
+      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+      <img src={`${ART}/${alt ? "lantern-b" : "lantern"}.webp`} alt="" width={120} height={alt ? 259 : 252} loading={eager ? "eager" : "lazy"} data-nolightbox />
     </span>
   );
 }
 
 function Lanterns({ variant = "row" }: { variant?: "row" | "cover" | "pair" }) {
-  if (variant === "pair") return <div className={s.lanternPair} aria-hidden><Lantern className={s.lanternSmall} string={8} /><Lantern string={20} /><Lantern className={s.lanternSmall} string={8} /></div>;
+  if (variant === "pair") return <div className={s.lanternPair} aria-hidden><Lantern className={s.lanternSmall} string={8} alt /><Lantern string={20} /><Lantern className={s.lanternSmall} string={8} alt /></div>;
   if (variant === "cover") {
     return (
       <div className={s.coverLanterns} aria-hidden>
-        <Lantern string={70} /><Lantern className={s.lanternSmall} string={130} /><Lantern string={34} /><Lantern className={s.lanternSmall} string={96} />
+        <Lantern string={70} eager /><Lantern className={s.lanternSmall} string={130} alt eager /><Lantern string={34} alt eager /><Lantern className={s.lanternSmall} string={96} eager />
       </div>
     );
   }
-  return <div className={s.lanternRow} aria-hidden><Lantern className={s.lanternSmall} string={10} /><Lantern string={26} /><Lantern className={s.lanternSmall} string={10} /></div>;
+  return <div className={s.lanternRow} aria-hidden><Lantern className={s.lanternSmall} string={10} alt /><Lantern string={26} /><Lantern className={s.lanternSmall} string={10} alt /></div>;
 }
 
-function Moon({ className }: { className?: string }) {
-  return <span className={`${s.moon} ${className ?? ""}`} aria-hidden><i /></span>;
-}
-
-/** Four-point twinkling stars, positioned by CSS custom properties. */
-function Stars({ count = 9, seed = 1 }: { count?: number; seed?: number }) {
-  const list = Array.from({ length: count }, (_, i) => {
-    const n = (i + 1) * 37 * seed;
-    return { x: (n * 13) % 100, y: (n * 7) % 92, size: 6 + (n % 3) * 3, delay: (n % 5) * 0.9 };
-  });
+function Moon({ className, eager = false }: { className?: string; eager?: boolean }) {
   return (
-    <div className={s.stars} aria-hidden>
-      {list.map((star, index) => (
-        <svg key={index} viewBox="0 0 10 10" style={{ left: `${star.x}%`, top: `${star.y}%`, width: star.size, height: star.size, animationDelay: `${star.delay}s` }}>
-          <path d="M5 0c.4 3 1.6 4.6 5 5-3.4.4-4.6 2-5 5-.4-3-1.6-4.6-5-5 3.4-.4 4.6-2 5-5z" fill="currentColor" />
-        </svg>
-      ))}
-    </div>
+    <span className={`${s.moon} ${className ?? ""}`} aria-hidden>
+      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+      <img src={`${ART}/moon.webp`} alt="" width={200} height={199} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} data-nolightbox />
+    </span>
   );
+}
+
+/** Painted star dust: two offset layers of the same hand-dabbed tile that breathe out of phase. */
+function Stars({ seed = 1 }: { count?: number; seed?: number }) {
+  return <div className={s.stars} style={{ ["--sx" as string]: `${(seed * 137) % 600}px`, ["--sy" as string]: `${(seed * 251) % 600}px` }} aria-hidden />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker?: string; title: string }) {
@@ -131,7 +115,7 @@ export default function LenteraMalamTheme({ data, slug, guestToken, demo, skipCo
         <section className={s.cover}>
           <div className={s.sky} aria-hidden><Stars count={14} seed={3} /></div>
           <Lanterns variant="cover" />
-          <Moon className={s.coverMoon} />
+          <Moon className={s.coverMoon} eager />
           <div className={s.coverContent}>
             <p className={s.bismillah} lang="ar" dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
             <p className={s.kicker}>Walimatul &lsquo;Urs</p>

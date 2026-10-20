@@ -29,19 +29,25 @@
 
 /* ── Ornaments ── */
 .janur { position: absolute; top: 0; left: 0; right: 0; height: 120px; pointer-events: none; }
-.janur svg { display: block; width: 100%; height: 100%; }
-.strip { transform-box: fill-box; transform-origin: 50% 0; }
+.janurBand { position: absolute; left: 0; top: 0; display: block; width: 100%; height: auto; }
+.strip { position: absolute; top: 12px; width: 11px; translate: -50% 0; background: center top / 100% 100% no-repeat; transform-origin: 50% 0; }
+.strip0 { height: 61px; background-image: url(/themes/art/tujuh-bulanan/strip-0.webp); }
+.strip1 { height: 72px; background-image: url(/themes/art/tujuh-bulanan/strip-1.webp); }
+.strip2 { height: 99px; background-image: url(/themes/art/tujuh-bulanan/strip-2.webp); }
 .petals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.petals i { position: absolute; top: -24px; left: calc(var(--i) * 8.7% + 3%); width: 12px; height: 12px; border-radius: 70% 0 70% 0; background: var(--c); opacity: .75; rotate: calc(var(--i) * 41deg); }
-.petals i:nth-child(3n) { width: 9px; height: 9px; border-radius: 50%; }
-.bloom { display: block; width: 34px; height: 34px; color: var(--rose); }
-.bokor { display: block; width: 100%; height: auto; overflow: visible; }
-.ripple { transform-box: fill-box; transform-origin: 50% 50%; fill: none; stroke: #fff; stroke-width: 1.2; opacity: 0; }
-.floaty { transform-box: fill-box; transform-origin: 50% 50%; }
+.petals i { position: absolute; top: -24px; left: calc(var(--i) * 8.7% + 3%); width: 16px; height: 14px; background: center / contain no-repeat; opacity: .85; rotate: calc(var(--i) * 41deg); }
+.petals i:nth-child(3n) { width: 12px; height: 11px; }
+.bloom { display: block; width: 36px; height: auto; }
+.bokor { position: relative; display: block; width: 100%; aspect-ratio: 420 / 290; }
+.bokor img, .bokor span { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.bokor span { background: center / 100% 100% no-repeat; pointer-events: none; }
+.bokor .ripple { background-image: url(/themes/art/tujuh-bulanan/bokor-ripple.webp); transform-origin: 50% 39.3%; opacity: 0; }
+.bokor .floaty { background-image: url(/themes/art/tujuh-bulanan/bokor-flowers.webp); }
+.siraman { display: block; width: min(100%, 330px); height: auto; margin: -4px 0 -6px; }
 
 /* ── Cover ── */
-.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 100dvh; padding: 120px 26px 40px; overflow: hidden; text-align: center; background: radial-gradient(90% 55% at 50% 45%, #fff 0%, var(--ivory) 55%, var(--blush) 100%); }
-.coverBokor { width: 210px; margin-bottom: 4px; }
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 100dvh; padding: 120px 26px 40px; overflow: hidden; text-align: center; background: url(/themes/art/tujuh-bulanan/paper.webp) 0 0 / 256px repeat, radial-gradient(90% 55% at 50% 45%, #fff 0%, var(--ivory) 55%, var(--blush) 100%); background-blend-mode: multiply, normal; }
+.coverBokor { width: 250px; margin-bottom: 6px; }
 .coverKicker { font-family: var(--head); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--janur-deep); }
 .coverTitle { font-family: var(--head); font-weight: 400; font-size: 32px; line-height: 1.15; }
 .coverNames { max-width: 100%; font-family: var(--serif); font-style: italic; font-size: 30px; line-height: 1.2; color: var(--rose-deep); overflow-wrap: anywhere; }
@@ -52,20 +58,20 @@
 .table { align-self: center; margin-top: 4px; padding: 1px 12px; border-radius: 999px; background: var(--blush); color: var(--rose-deep); font-size: 13px; }
 
 /* ── Main ── */
-.page { display: flex; flex-direction: column; background: var(--ivory); }
+.page { display: flex; flex-direction: column; background: var(--ivory) url(/themes/art/tujuh-bulanan/paper.webp) 0 0 / 256px repeat; background-blend-mode: multiply; }
 .section { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 62px 24px; text-align: center; }
-.blush { background: var(--blush); }
+.blush { background: var(--blush) url(/themes/art/tujuh-bulanan/paper.webp) 0 0 / 256px repeat; background-blend-mode: multiply; }
 .head { display: flex; flex-direction: column; align-items: center; gap: 8px; }
 .eyebrow { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--janur-deep); }
 .head h2 { font-family: var(--head); font-weight: 400; font-size: 28px; line-height: 1.2; letter-spacing: .5px; overflow-wrap: anywhere; }
 .lead { max-width: 330px; color: var(--muted); font-size: 17px; }
 
-.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 132px 24px 56px; text-align: center; overflow: hidden; background: linear-gradient(180deg, var(--blush), var(--ivory) 70%); }
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 132px 24px 56px; text-align: center; overflow: hidden; background: url(/themes/art/tujuh-bulanan/paper.webp) 0 0 / 256px repeat, linear-gradient(180deg, var(--blush), var(--ivory) 70%); background-blend-mode: multiply, normal; }
 .heroKicker { font-family: var(--head); font-size: 12px; letter-spacing: 4px; color: var(--janur-deep); text-transform: uppercase; }
 .heroTitle { font-family: var(--head); font-weight: 400; font-size: 34px; line-height: 1.15; }
 .heroNames { max-width: 100%; font-style: italic; font-size: 30px; color: var(--rose-deep); overflow-wrap: anywhere; }
 .heroDate { font-family: var(--head); font-size: 13px; letter-spacing: 2px; color: var(--muted); }
-.heroBokor { width: 180px; margin-top: 10px; }
+.heroBokor { width: 210px; margin-top: 10px; }
 
 .salam { font-style: italic; font-size: 21px; color: var(--rose-deep); }
 .doa { width: 100%; max-width: 340px; padding: 26px 20px 22px; border-radius: 26px; background: var(--card); border: 1px solid var(--line); }
@@ -174,7 +180,7 @@
 @media (hover: hover) { .copy:hover { border-color: var(--rose); } }
 .copyOn { background: var(--janur); border-color: var(--janur); color: #fff; }
 
-.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 130px 24px 40px; overflow: hidden; text-align: center; background: linear-gradient(180deg, var(--ivory), var(--blush)); }
+.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 130px 24px 40px; overflow: hidden; text-align: center; background: url(/themes/art/tujuh-bulanan/paper.webp) 0 0 / 256px repeat, linear-gradient(180deg, var(--ivory), var(--blush)); background-blend-mode: multiply, normal; }
 .closing h2 { font-family: var(--head); font-weight: 400; font-size: 32px; }
 .closing p { max-width: 310px; color: var(--muted); }
 .closing strong { font-style: italic; font-size: 22px; font-weight: 500; color: var(--rose-deep); overflow-wrap: anywhere; }
@@ -184,18 +190,18 @@
 /* ── Signature motion: drifting kembang setaman, swaying janur, rippling water ── */
 .petals i { animation: drift calc(11s + var(--i) * .6s) linear infinite; animation-delay: calc(var(--i) * -1.7s); }
 .strip { animation: swayJanur 7s ease-in-out infinite; }
-.strip:nth-of-type(2n) { animation-delay: -3.5s; animation-duration: 8s; }
+.strip:nth-child(2n) { animation-delay: -3.5s; animation-duration: 8s; }
+.strip:nth-child(3n) { animation-delay: -1.8s; }
 .ripple { animation: ripple 5s var(--m-ease) infinite; }
-.ripple:nth-of-type(2) { animation-delay: -2.5s; }
+.bokor .ripple + .ripple { animation-delay: -2.5s; }
 .floaty { animation: floaty 6s ease-in-out infinite; }
-.floaty:nth-of-type(2n) { animation-delay: -3s; }
 @keyframes drift { 0% { translate: 0 0; rotate: 0deg; opacity: 0; } 10% { opacity: .75; } 50% { translate: 26px 50dvh; } 90% { opacity: .6; } 100% { translate: -10px 100dvh; rotate: 320deg; opacity: 0; } }
 @keyframes swayJanur { 0%, 100% { rotate: -2deg; } 50% { rotate: 2deg; } }
-@keyframes ripple { 0% { scale: .4; opacity: .7; } 100% { scale: 1.3; opacity: 0; } }
-@keyframes floaty { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2px; } }
+@keyframes ripple { 0% { scale: .45; opacity: .9; } 100% { scale: 1.25; opacity: 0; } }
+@keyframes floaty { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 1px -2px; rotate: .4deg; } }
 @keyframes soft { from { opacity: 0; scale: .9; } to { opacity: 1; scale: 1; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .petals i, .strip, .ripple, .floaty, .sentIcon { animation: none !important; }
+  .petals i, .strip, .bokor .ripple, .bokor .floaty, .sentIcon { animation: none !important; }
   .petals { display: none; }
 }

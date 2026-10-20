@@ -16,7 +16,7 @@
 .srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ── type helpers ── */
-.kicker { color: var(--gold); font-family: var(--caps); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; }
+.kicker { color: var(--gold); font-family: var(--caps); font-size: 11px; letter-spacing: .28em; text-transform: uppercase; text-wrap: balance; }
 .arabic { color: var(--gold-deep); font-family: var(--arab); font-size: 26px; line-height: 1.9; text-align: center; text-wrap: balance; }
 .arabicSm { color: var(--gold); font-family: var(--arab); font-size: 20px; line-height: 1.6; text-align: center; }
 .lead { max-width: 330px; color: var(--muted); font-size: 17px; line-height: 1.6; text-align: center; text-wrap: pretty; }
@@ -45,13 +45,14 @@
 /* ── Cover ── */
 .cover {
   position: relative; display: grid; place-items: center; min-height: 100dvh; padding: 56px 40px 48px; overflow: hidden;
-  background: radial-gradient(120% 70% at 50% 30%, #fffaf0 0%, var(--bg) 55%, #ecdfc3 100%);
+  background: url("/themes/art/kaligrafi-emas/paper.webp") 0 0 / 512px, radial-gradient(120% 70% at 50% 30%, #fffaf0 0%, var(--bg) 55%, #ecdfc3 100%); background-blend-mode: multiply;
 }
-.cover::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 44px; opacity: .22; mask-image: radial-gradient(80% 60% at 50% 45%, transparent 30%, #000 85%); }
-.coverArch { position: absolute; inset: 22px 22px 22px; color: var(--gold); }
-.mihrab { width: 100%; height: 100%; overflow: visible; }
+.cover::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 176px; opacity: .22; mask-image: radial-gradient(80% 60% at 50% 45%, transparent 30%, #000 85%); }
+/* painted foil mihrab: crown slice + stretched pillars via border-image */
+.coverArch, .heroArch, .closingArch { border-style: solid; border-color: transparent; border-width: 250px 30px 10px; border-image: url("/themes/art/kaligrafi-emas/arch.webp") 500 60 20 / 250px 30px 10px stretch; pointer-events: none; }
+.coverArch { position: absolute; inset: 22px 22px 22px; }
 .coverInner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 300px; padding-top: 40px; text-align: center; }
-.coverRosette { width: 74px; height: 74px; color: var(--gold); animation: turn 90s linear infinite; }
+.coverRosette { width: 84px; height: 84px; animation: turn 90s linear infinite; }
 .coverNames { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; font-size: 54px; font-style: italic; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
 .coverNames span { padding: 0 4px 6px; animation: sheen 9s var(--m-ease) 1.2s infinite; }
 .coverNames em { color: var(--gold); font-family: var(--serif); font-size: 30px; font-weight: 400; }
@@ -62,11 +63,11 @@
 .table { margin-top: 4px; padding: 3px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--gold-deep); font-family: var(--caps); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; }
 
 /* ── Main ── */
-.page { display: flex; flex-direction: column; background: var(--bg); }
-.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 92px 44px 72px; text-align: center; overflow: hidden; }
-.hero::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 44px; opacity: .16; mask-image: linear-gradient(180deg, #000, transparent 75%); }
-.heroArch { position: absolute; inset: 26px 26px 0; color: var(--gold); opacity: .9; }
-.heroRosette { position: relative; width: 58px; height: 58px; color: var(--gold); animation: turn 120s linear infinite; }
+.page { display: flex; flex-direction: column; background: url("/themes/art/kaligrafi-emas/paper.webp") 0 0 / 512px, var(--bg); background-blend-mode: multiply; }
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 92px 64px 72px; text-align: center; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 176px; opacity: .16; mask-image: linear-gradient(180deg, #000, transparent 75%); }
+.heroArch { position: absolute; inset: 26px 26px 0; border-bottom-width: 0; }
+.heroRosette { position: relative; width: 64px; height: 64px; animation: turn 120s linear infinite; }
 .hero > p, .hero > h1 { position: relative; }
 .heroNames { max-width: 100%; padding-bottom: 6px; font-size: 50px; font-style: italic; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
 .heroDate { color: var(--muted); font-family: var(--caps); font-size: 12px; letter-spacing: .14em; }
@@ -77,13 +78,13 @@
 
 .verse { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 0 22px 12px; padding: 40px 24px 30px; border: 1px solid var(--line); border-radius: 160px 160px 18px 18px; background: var(--card); text-align: center; box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--line); }
 .verseStar { position: absolute; top: -13px; left: 50%; display: grid; width: 26px; height: 26px; margin-left: -13px; padding: 3px; border-radius: 50%; background: var(--bg); color: var(--gold); }
-.verseStar svg { width: 100%; height: 100%; --bg: var(--bg); }
+.verseStar img, .storyMark img { display: block; width: 100%; height: 100%; }
 .verseText { max-width: 320px; color: var(--ink); font-size: 18px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
 .verseSrc { color: var(--gold); font-family: var(--caps); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
 
 .section { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 64px 24px; }
-.panel { position: relative; background: var(--panel); }
-.panel::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 44px; opacity: .12; pointer-events: none; }
+.panel { position: relative; background: url("/themes/art/kaligrafi-emas/paper.webp") 0 0 / 512px, var(--panel); background-blend-mode: multiply; }
+.panel::before { content: ""; position: absolute; inset: 0; background-image: var(--lattice); background-size: 176px; opacity: .12; pointer-events: none; }
 .panel > * { position: relative; }
 .head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 .head h2 { color: var(--ink); font-size: 36px; font-style: italic; font-weight: 600; line-height: 1.1; text-wrap: balance; }
@@ -91,14 +92,13 @@
 .divider i { width: 44px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
 .divider i:last-child { background: linear-gradient(270deg, transparent, var(--gold)); }
 .dividerStar { width: 16px; height: 16px; }
-.panel .dividerStar { --bg: var(--panel); }
 
 /* people */
 .people { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; max-width: 320px; text-align: center; }
 .amp { margin: 6px 0 14px; color: var(--gold); font-size: 48px; font-style: italic; line-height: 1; }
 .portrait { position: relative; width: 200px; height: 270px; margin-bottom: 14px; }
-.crest { position: absolute; left: -14px; right: -14px; top: -16px; width: calc(100% + 28px); color: var(--gold); }
+.crest { position: absolute; z-index: 1; left: -14px; right: -14px; top: -20px; width: calc(100% + 28px); height: auto; pointer-events: none; }
 .portraitImg { position: absolute; inset: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 100px 100px 10px 10px; padding: 6px; background: var(--card); box-shadow: 0 22px 40px -26px rgba(58, 44, 23, .55); transition: box-shadow 700ms var(--m-ease), translate 700ms var(--m-ease); }
 .portraitImg > * { width: 100%; height: 100%; border-radius: 94px 94px 6px 6px; }
 .portraitImg img { transition: scale 1.2s var(--m-ease); }
@@ -106,7 +106,7 @@
 .person:hover .portraitImg img { scale: 1.04; }
 .monogram { display: grid; place-items: center; background: linear-gradient(180deg, var(--card), var(--panel)); }
 .portraitImg.monogram > * { grid-area: 1 / 1; width: auto; height: auto; border-radius: 0; }
-.portraitImg.monogram > .monoRosette { width: 150px; height: 150px; color: var(--line); }
+.portraitImg.monogram > .monoRosette { width: 150px; height: 150px; opacity: .3; }
 .monogram b { color: var(--gold); font-size: 76px; font-style: italic; font-weight: 600; line-height: 1; }
 .person small { color: var(--gold); font-family: var(--caps); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; }
 .person h3 { color: var(--ink); font-size: 28px; font-style: italic; font-weight: 600; line-height: 1.15; overflow-wrap: anywhere; text-wrap: balance; }
@@ -196,7 +196,7 @@
 .closed strong { color: var(--ink); font-size: 17px; }
 .closed p { color: var(--muted); font-size: 15px; line-height: 1.5; }
 .sentCard { align-items: center; padding: 30px 20px; text-align: center; }
-.sentStar { width: 40px; height: 40px; color: var(--gold); --bg: var(--card); animation: softPop 900ms var(--m-ease) both; }
+.sentStar { width: 40px; height: 40px; animation: softPop 900ms var(--m-ease) both; }
 .sent { color: var(--ink); font-size: 18px; line-height: 1.5; }
 .wishes { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 .wish { padding: 14px 16px; border-left: 2px solid var(--gold); border-radius: 0 12px 12px 0; background: rgba(251, 247, 238, .75); transition: background 500ms var(--m-ease); }
@@ -207,9 +207,9 @@
 .wish p { margin-top: 2px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.5; overflow-wrap: anywhere; }
 
 /* closing */
-.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 96px 48px 72px; overflow: hidden; text-align: center; background: radial-gradient(90% 60% at 50% 40%, #fffaf0, var(--bg) 70%); }
-.closingArch { position: absolute; inset: 26px 26px 26px; color: var(--gold); opacity: .85; }
-.closingRosette { position: relative; width: 54px; height: 54px; color: var(--gold); animation: turn 120s linear infinite reverse; }
+.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 96px 48px 72px; overflow: hidden; text-align: center; background: url("/themes/art/kaligrafi-emas/paper.webp") 0 0 / 512px, radial-gradient(90% 60% at 50% 40%, #fffaf0, var(--bg) 70%); background-blend-mode: multiply; }
+.closingArch { position: absolute; inset: 26px 26px 26px; }
+.closingRosette { position: relative; width: 60px; height: 60px; animation: turn 120s linear infinite reverse; }
 .closing > p, .closing > h2, .closing > a { position: relative; }
 .closingText { max-width: 290px; color: var(--muted); font-size: 17px; line-height: 1.6; }
 .closing h2 { max-width: 280px; color: var(--ink); font-size: 26px; font-style: italic; font-weight: 600; line-height: 1.25; text-wrap: balance; }

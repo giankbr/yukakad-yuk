@@ -2,8 +2,8 @@
 .root, .cover {
   --black: #15100e; --coal: #221a17; --red: #b3261e; --maroon: #7a1616; --bone: #f4efe6; --paper: #fbf8f2; --ink: #1d1513; --muted: #6f5f59; --line: #e2d6c8;
   --display: "DM Serif Display", Georgia, serif; --caps: "Josefin Sans", "Futura", sans-serif; --serif: Lora, Georgia, serif;
-  --gorga: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='36'%3E%3Crect width='48' height='36' fill='%2315100e'/%3E%3Cpolygon points='0,0 6,6 12,0 18,6 24,0 30,6 36,0 42,6 48,0' fill='%23b3261e'/%3E%3Cpolygon points='0,36 6,30 12,36 18,30 24,36 30,30 36,36 42,30 48,36' fill='%23b3261e'/%3E%3Cg fill='none' stroke='%23f4efe6' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M0 18c12 0 12-9 22-9 8 0 8 8 2 8-4 0-4-4-1-4'/%3E%3Cpath d='M48 18c-12 0-12 9-22 9-8 0-8-8-2-8 4 0 4 4 1 4'/%3E%3C/g%3E%3Ccircle cx='9' cy='24' r='1.6' fill='%23b3261e'/%3E%3Ccircle cx='39' cy='12' r='1.6' fill='%23b3261e'/%3E%3C/svg%3E");
-  --diamonds: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12'%3E%3Cpath d='M8 1 15 6 8 11 1 6Z' fill='none' stroke='%23f4efe6' stroke-width='1.1'/%3E%3Ccircle cx='8' cy='6' r='1.3' fill='%23f4efe6'/%3E%3C/svg%3E");
+  --gorga: url("/themes/art/batak-ulos/gorga-band.webp");
+  --ulos: url("/themes/art/batak-ulos/ulos.webp"); --rambu: url("/themes/art/batak-ulos/rambu.webp"); --ulos-side: url("/themes/art/batak-ulos/ulos-side.webp");
   font-family: var(--serif); color: var(--ink); background: var(--paper); line-height: normal;
 }
 .root {
@@ -19,21 +19,18 @@
 .root :focus-visible, .cover :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
 /* Ulos cloth: maroon body with woven stripes, a diamond (ragi) row, and a fringe (rambu). */
-.ulos { position: relative; display: block; height: 58px; background:
-  var(--diamonds) 0 50% / 16px 12px repeat-x,
-  linear-gradient(180deg, transparent 0 21px, var(--black) 21px 23px, transparent 23px 35px, var(--black) 35px 37px, transparent 37px),
-  repeating-linear-gradient(180deg, var(--maroon) 0 4px, var(--red) 4px 6px, var(--maroon) 6px 9px, var(--bone) 9px 10px, var(--maroon) 10px 14px);
+.ulos { position: relative; display: block; height: 58px; background: var(--maroon) var(--ulos) 0 0 / 384px 58px repeat-x;
   box-shadow: 0 6px 14px rgba(0, 0, 0, .25); transform-origin: 0 50%; }
-.ulos::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 16px; background: repeating-linear-gradient(90deg, var(--bone) 0 2px, transparent 2px 6px); -webkit-mask: linear-gradient(#000 40%, transparent); mask: linear-gradient(#000 40%, transparent); transform-origin: 50% 0; animation: fringe 5s ease-in-out infinite alternate; }
-.gorga { display: block; height: 36px; background: var(--gorga) 0 0 / 48px 36px repeat-x; }
+.ulos::after { content: ""; position: absolute; top: 100%; left: 0; right: 0; height: 18px; background: var(--rambu) 0 0 / 384px 18px repeat-x; -webkit-mask: linear-gradient(#000 55%, transparent); mask: linear-gradient(#000 55%, transparent); transform-origin: 50% 0; animation: fringe 5s ease-in-out infinite alternate; }
+.gorga { display: block; height: 36px; background: var(--black) var(--gorga) 0 0 / 384px 36px repeat-x; }
 
 .eyebrow { color: var(--red); font-family: var(--caps); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 44px 28px 40px; overflow: hidden; background: radial-gradient(90% 60% at 50% 25%, #2b201c 0%, var(--black) 70%); color: var(--bone); text-align: center; }
-.cover::before { content: ""; position: absolute; inset: 0 0 auto; height: 36px; background: var(--gorga) 0 0 / 48px 36px repeat-x; }
+.cover::before { content: ""; position: absolute; inset: 0 0 auto; height: 36px; background: var(--black) var(--gorga) 0 0 / 384px 36px repeat-x; }
 .cover > * { position: relative; }
-.house { width: 210px; height: 152px; margin-top: 30px; flex-shrink: 0; }
+.house { width: 220px; height: auto; margin-top: 30px; flex-shrink: 0; }
 .horas { margin-top: 18px; color: var(--red); font-family: var(--caps); font-size: 30px; font-weight: 700; letter-spacing: .32em; text-indent: .32em; }
 .kicker { margin-top: 8px; color: rgba(244, 239, 230, .7); font-family: var(--caps); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
 .coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 16px; font-family: var(--display); font-weight: 400; }
@@ -75,7 +72,7 @@
 .head h2 { font-family: var(--display); font-size: 32px; font-weight: 400; line-height: 1.15; text-wrap: balance; }
 .headRule { display: flex; align-items: center; gap: 8px; color: var(--red); }
 .headRule::before, .headRule::after { content: ""; width: 44px; height: 1.5px; background: currentColor; }
-.headRule svg { width: 26px; height: 26px; }
+.headRule img { width: 30px; height: auto; }
 .dark { background: var(--black); color: var(--bone); }
 .dark .head h2 { color: var(--bone); }
 
@@ -83,14 +80,14 @@
 .personWrap { display: contents; }
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; text-align: center; }
 .diamond { position: relative; display: grid; place-items: center; width: 210px; height: 210px; margin-bottom: 10px; }
-.diamond > svg { position: absolute; inset: 0; width: 100%; height: 100%; transition: rotate 1.4s var(--m-ease); }
-.person:hover .diamond > svg { rotate: 45deg; }
+.diamond > img { position: absolute; inset: 0; width: 100%; height: 100%; transition: rotate 1.4s var(--m-ease); }
+.person:hover .diamond > img { rotate: 45deg; }
 .diamondPhoto { position: relative; width: 116px; height: 116px; overflow: hidden; rotate: 45deg; border: 2px solid var(--bone); }
 .diamondPhoto > img { width: 142%; height: 142%; margin: -21%; max-width: none; rotate: -45deg; cursor: zoom-in; }
 .initial { position: relative; color: var(--bone); font-family: var(--display); font-size: 70px; line-height: 1; }
 .role { color: var(--red); font-family: var(--caps); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
 .person h3 { max-width: 100%; font-family: var(--display); font-size: 30px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
-.parents { max-width: 300px; color: var(--muted); font-size: 15px; line-height: 1.55; white-space: pre-line; }
+.parents { max-width: 300px; color: var(--muted); font-size: 15px; line-height: 1.55; white-space: pre-line; text-wrap: balance; }
 .amp { display: flex; align-items: center; gap: 14px; color: var(--red); font-family: var(--display); font-size: 44px; line-height: 1; }
 .amp::before, .amp::after { content: ""; width: 54px; height: 1px; background: var(--line); }
 
@@ -109,7 +106,7 @@
 .events { gap: 20px; }
 .event { position: relative; display: grid; grid-template-columns: 18px 1fr; width: 100%; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: 0 1px 0 var(--line); transition: box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease); }
 .event:hover { box-shadow: 0 16px 30px rgba(21, 16, 14, .12); translate: 0 -2px; }
-.eventUlos { background: var(--diamonds) 50% 0 / 12px 9px repeat-y, linear-gradient(90deg, var(--maroon) 0 3px, var(--bone) 3px 4px, var(--red) 4px 14px, var(--bone) 14px 15px, var(--maroon) 15px); }
+.eventUlos { background: var(--maroon) var(--ulos-side) 0 0 / 18px 192px repeat-y; }
 .eventBody { display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 22px 20px 22px 18px; }
 .eventNo { color: var(--red); font-family: var(--caps); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
 .event h3 { font-family: var(--display); font-size: 26px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
@@ -127,7 +124,7 @@
 .timeline li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
 .rail { display: flex; flex-direction: column; align-items: center; }
 .rail span { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; background: var(--black); color: var(--bone); }
-.rail span svg { width: 30px; height: 30px; }
+.rail span img { width: 32px; height: auto; }
 .rail i { flex: 1; width: 2px; min-height: 20px; background: repeating-linear-gradient(180deg, var(--red) 0 6px, transparent 6px 10px); transform-origin: 50% 0; }
 .timeline li:last-child .rail i { display: none; }
 .storyBody { min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 4px 0 28px; }
@@ -152,7 +149,7 @@
 .diet input { font-family: var(--serif); letter-spacing: normal; text-transform: none; }
 .field input:focus, .field textarea:focus { outline: none; border-color: var(--black); box-shadow: 3px 3px 0 var(--red); }
 .choices { display: flex; gap: 6px; }
-.choices button { flex: 1; min-width: 0; height: 42px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); font-family: var(--caps); font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; transition: background 350ms var(--m-ease), color 350ms var(--m-ease), border-color 350ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.choices button { flex: 1; min-width: 0; height: 42px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); font-family: var(--caps); font-size: 11px; font-weight: 700; letter-spacing: .02em; padding: 0 4px; text-transform: uppercase; transition: background 350ms var(--m-ease), color 350ms var(--m-ease), border-color 350ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
 .choices button:hover { border-color: var(--black); }
 .choices .choiceOn, .choices .choiceOn:hover { border-color: var(--black); background: var(--black); color: var(--bone); box-shadow: inset 0 -3px 0 var(--red); }
 .guests { font-size: 18px; }
@@ -165,7 +162,7 @@
 .error { color: var(--red); font-size: 15px; }
 .sentBox { align-items: center; gap: 12px; padding: 28px 20px; text-align: center; }
 .sentMark { display: grid; place-items: center; width: 54px; height: 54px; background: var(--black); color: var(--bone); animation: stamp 900ms var(--m-ease) both; }
-.sentMark svg { width: 34px; height: 34px; }
+.sentMark img { width: 38px; height: auto; }
 .sent { font-family: var(--display); font-size: 22px; line-height: 1.3; }
 .sentNote { color: var(--muted); font-size: 14px; }
 .sentBox .submit { padding: 0 28px; }
@@ -197,9 +194,9 @@
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 28px 56px; background: var(--black); color: var(--bone); text-align: center; }
 .closing > .gorga { align-self: stretch; margin: 0 -28px 36px; }
-.closingHouse { width: 150px; height: 110px; }
+.closingHouse { width: 160px; height: auto; }
 .thanks { font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.1; }
-.closingText { max-width: 310px; color: rgba(244, 239, 230, .8); font-size: 16px; line-height: 1.65; }
+.closingText { max-width: 310px; color: rgba(244, 239, 230, .8); font-size: 16px; line-height: 1.65; text-wrap: pretty; }
 .closingHoras { color: var(--red); font-family: var(--caps); font-size: 15px; font-weight: 700; letter-spacing: .36em; text-indent: .36em; }
 .family { margin-top: 6px; font-family: var(--caps); font-size: 12px; font-weight: 600; letter-spacing: .18em; line-height: 1.8; text-transform: uppercase; }
 .made { margin-top: 14px; color: rgba(244, 239, 230, .45); font-size: 13px; font-style: italic; transition: color 300ms var(--m-ease); }
@@ -216,12 +213,12 @@
 
 @keyframes unroll { from { transform: scaleX(0); } }
 @keyframes fringe { from { transform: skewX(-6deg); } to { transform: skewX(6deg); } }
-@keyframes weave { to { background-position: 480px 0; } }
+@keyframes weave { to { background-position: 384px 0; } }
 @keyframes drawDown { from { transform: scaleY(0); } }
 @keyframes stamp { 0% { opacity: 0; scale: 1.6; } 60% { opacity: 1; scale: .96; } 100% { scale: 1; } }
 @keyframes spin { to { rotate: 360deg; } }
 @media (prefers-reduced-motion: reduce) {
   .ulos::after, .coverUlos, [data-revealed] .ulos, .ulos[data-revealed], .gorgaWeave, [data-revealed] .rail i, .sentMark, .copyOn svg, .musicOn svg { animation: none; }
-  .openBtn, .ghostBtn, .mapBtn, .event, .diamond > svg, .shot, .choices button, .submit, .step, .copy, .wish, .gift, .music { transition: none; }
+  .openBtn, .ghostBtn, .mapBtn, .event, .diamond > img, .shot, .choices button, .submit, .step, .copy, .wish, .gift, .music { transition: none; }
 }
 .introLight { color: rgba(244, 239, 230, .75); }

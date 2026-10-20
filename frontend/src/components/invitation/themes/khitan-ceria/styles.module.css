@@ -26,19 +26,19 @@
 .bunting { position: absolute; top: 0; left: 0; width: 100%; height: 70px; overflow: visible; pointer-events: none; }
 .flag { transform-box: view-box; animation: flutter 2.6s ease-in-out infinite alternate; }
 .buntingBottom { position: relative; margin-top: 20px; rotate: 180deg; }
-.confetti { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.confetti { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; mask-image: linear-gradient(90deg, #000, transparent 26%, transparent 74%, #000); }
+.confetti::before { content: ""; position: absolute; inset: -12px 0; background: url("/themes/art/khitan-ceria/confetti.webp") var(--sx, 0) var(--sy, 0) / 360px 360px repeat; opacity: .9; animation: bob 3.2s var(--m-spring) infinite alternate; }
 .cover, .hero, .section, .closing { isolation: isolate; }
-.confetti i { position: absolute; width: 10px; height: 10px; border-radius: 3px; opacity: .8; animation: bob 3.2s var(--m-spring) infinite alternate; }
-.confetti i[data-kind="1"] { width: 7px; height: 14px; border-radius: 4px; }
-.confetti i[data-kind="2"] { width: 12px; height: 12px; border: 3px solid currentColor; border-radius: 50%; }
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; min-height: 100dvh; padding: 96px 24px 64px; overflow: hidden; text-align: center;
   background: radial-gradient(circle at 50% 38%, #fff 0, #fff 30%, transparent 31%), linear-gradient(180deg, var(--mintbg), #eaf7ff); }
 .coverStack { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
-.coverBoy { width: 220px; height: 220px; margin: 4px 0 -4px; overflow: visible; }
-.wave { transform-box: view-box; transform-origin: 152px 170px; animation: wave 1.8s var(--m-spring) infinite alternate; }
-.chestStar { transform-box: fill-box; transform-origin: center; animation: twirl 4s ease-in-out infinite; }
+.coverBoy { width: 220px; height: 220px; margin: 4px 0 -4px; }
+.boy { position: relative; display: block; }
+.boy img, .boy .wave { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.boy .wave { transform-origin: 69% 77%; animation: wave 1.8s var(--m-spring) infinite alternate; }
+.boy .chestStar { inset: auto; left: 38.2%; top: 80.6%; width: 8%; height: auto; translate: -50% -50%; animation: twirl 4s ease-in-out infinite; }
 .coverName { color: var(--navy); font-family: var(--head); font-size: 62px; font-weight: 800; line-height: 1; letter-spacing: -.02em; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--sun); }
 .coverFull { color: var(--navy); font-size: 16px; font-weight: 700; overflow-wrap: anywhere; }
 .coverDate { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; font-weight: 700; }
@@ -75,7 +75,7 @@
 
 .kid { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; padding: 24px 20px; border: 2.5px solid var(--navy); border-radius: 26px; background: #fff; box-shadow: 6px 6px 0 var(--navy); text-align: center; }
 .kidArt { position: relative; width: 170px; height: 170px; margin-top: -4px; }
-.kidBoy { width: 100%; height: 100%; overflow: visible; }
+.kidBoy { width: 100%; height: 100%; }
 .kidPhoto { width: 100%; height: 100%; border: 2.5px solid var(--navy); border-radius: 50%; }
 .ageBadge { position: absolute; right: -10px; bottom: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 64px; height: 64px; border: 2.5px solid var(--navy); border-radius: 50%; background: var(--sun); box-shadow: 3px 3px 0 var(--navy); color: var(--navy); font-size: 10px; font-weight: 800; line-height: 1; rotate: 10deg; }
 .ageBadge b { font-family: var(--head); font-size: 26px; }
@@ -213,5 +213,5 @@
 @keyframes burst { 0% { opacity: 1; transform: rotate(var(--a, 0deg)) translateX(0) scale(1); } 100% { opacity: 0; transform: rotate(var(--a, 0deg)) translateX(34px) scale(.4); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .flag, .confetti i, .wave, .chestStar, .cheerOn .cheerStar, .burst i, .copyOn svg, .sentStar { animation: none !important; }
+  .flag, .confetti::before, .wave, .chestStar, .cheerOn .cheerStar, .burst i, .copyOn svg, .sentStar { animation: none !important; }
 }

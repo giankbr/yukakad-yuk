@@ -8,7 +8,7 @@ import {
 import { tableLabel } from "../extras";
 import type { GiftMethod } from "../../types";
 import { celebrate } from "@/lib/celebrate";
-import { ArchLine, Bouquet, PETAL_SVG, Sprig } from "./ornaments";
+import { ArchLine, Bouquet, Petal, Sprig } from "./ornaments";
 import { ic } from "./icons";
 import s from "./styles.module.css";
 
@@ -91,10 +91,10 @@ export default function MawarBlushTheme({ data, slug, guestToken, demo, skipCove
       cover={open => (
         <section className={s.cover}>
           <div className={s.wash} aria-hidden />
-          <Bouquet className={`${s.coverBouquet} ${s.tl}`} />
-          <Bouquet className={`${s.coverBouquet} ${s.br}`} />
+          <Bouquet className={`${s.coverBouquet} ${s.tl}`} eager />
+          <Bouquet className={`${s.coverBouquet} ${s.br}`} eager />
           <div className={s.petals} aria-hidden>
-            {[0, 1, 2, 3, 4, 5].map(i => <svg key={i} viewBox="0 0 20 20"><path d={PETAL_SVG} /></svg>)}
+            {[0, 1, 2, 3, 4, 5].map(i => <Petal key={i} />)}
           </div>
           <div className={s.coverArch}>
             <ArchLine className={s.archLine} />

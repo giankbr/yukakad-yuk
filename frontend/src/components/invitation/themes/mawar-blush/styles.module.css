@@ -24,9 +24,9 @@
   radial-gradient(42% 30% at 18% 14%, rgba(240, 178, 186, .55), transparent 70%),
   radial-gradient(45% 32% at 86% 88%, rgba(246, 196, 178, .6), transparent 70%),
   radial-gradient(60% 40% at 50% 50%, rgba(255, 255, 255, .7), transparent 75%); }
-.coverBouquet { position: absolute; width: 230px; height: auto; pointer-events: none; }
-.tl { top: -26px; left: -46px; rotate: 160deg; scale: 1 -1; }
-.br { right: -46px; bottom: -22px; rotate: -12deg; }
+.coverBouquet { position: absolute; width: 250px; height: auto; pointer-events: none; }
+.tl { top: -40px; left: -70px; rotate: 172deg; scale: -1 1; }
+.br { right: -78px; bottom: -40px; rotate: -8deg; }
 .cover > :not(.wash, .coverBouquet, .petals) { position: relative; }
 .coverArch { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 280px; max-width: 100%; min-height: 360px; padding: 70px 22px 40px; }
 .archLine { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--rose); }
@@ -42,24 +42,24 @@
 .openBtn { display: inline-flex; align-items: center; gap: 8px; height: 46px; padding: 0 26px; border-radius: 999px; background: var(--rose-deep); color: #fff8f6; font-size: 14px; font-weight: 600; letter-spacing: .04em; box-shadow: 0 10px 24px rgba(169, 86, 106, .3); transition: background 500ms var(--m-ease), box-shadow 500ms var(--m-ease), scale 500ms var(--m-ease), translate 500ms var(--m-ease); }
 .openBtn:hover { background: #95475b; box-shadow: 0 14px 30px rgba(169, 86, 106, .38); translate: 0 -1px; }
 .petals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.petals svg { position: absolute; top: -24px; width: 14px; height: 14px; fill: #eba9b2; opacity: 0; animation: fall 14s linear infinite; }
-.petals svg:nth-child(1) { left: 12%; animation-delay: 0s; }
-.petals svg:nth-child(2) { left: 34%; width: 10px; animation-delay: 3.5s; animation-duration: 17s; }
-.petals svg:nth-child(3) { left: 58%; animation-delay: 7s; fill: #f4c4b4; }
-.petals svg:nth-child(4) { left: 78%; width: 11px; animation-delay: 1.8s; animation-duration: 16s; }
-.petals svg:nth-child(5) { left: 90%; animation-delay: 9.5s; }
-.petals svg:nth-child(6) { left: 22%; width: 9px; animation-delay: 11s; fill: #f4c4b4; animation-duration: 19s; }
+.petals img { position: absolute; top: -24px; width: 14px; height: auto; opacity: 0; animation: fall 14s linear infinite; }
+.petals img:nth-child(1) { left: 12%; animation-delay: 0s; }
+.petals img:nth-child(2) { left: 34%; width: 10px; animation-delay: 3.5s; animation-duration: 17s; }
+.petals img:nth-child(3) { left: 58%; animation-delay: 7s; filter: hue-rotate(14deg) saturate(.9); }
+.petals img:nth-child(4) { left: 78%; width: 11px; animation-delay: 1.8s; animation-duration: 16s; }
+.petals img:nth-child(5) { left: 90%; animation-delay: 9.5s; }
+.petals img:nth-child(6) { left: 22%; width: 9px; animation-delay: 11s; filter: hue-rotate(14deg) saturate(.9); animation-duration: 19s; }
 
 /* ── Opening ── */
 .main { display: flex; flex-direction: column; }
 .opening { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 36px 24px 44px; background: linear-gradient(180deg, var(--blush), var(--petal)); text-align: center; }
-.heroArch { width: 270px; max-width: 100%; height: 370px; margin-bottom: 18px; padding: 8px; border: 1px solid var(--rose); border-radius: 999px 999px 18px 18px; background: rgba(255, 255, 255, .5); }
+.heroArch { position: relative; z-index: 1; width: 270px; max-width: 100%; height: 370px; margin-bottom: 18px; padding: 8px; border: 1px solid var(--rose); border-radius: 999px 999px 18px 18px; background: rgba(255, 255, 255, .5); }
 .heroImg { width: 100%; height: 100%; border-radius: 999px 999px 12px 12px; object-fit: cover; }
-.heroBouquet { position: absolute; top: 300px; left: calc(50% - 200px); width: 150px; pointer-events: none; rotate: 180deg; scale: 1 -1; }
+.heroBouquet { position: absolute; z-index: 0; top: 318px; left: calc(50% - 232px); width: 190px; height: auto; pointer-events: none; rotate: 180deg; scale: 1 -1; }
 .heroNames { max-width: 100%; color: var(--ink); font-family: var(--script); font-size: 54px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
 .heroDate { color: var(--muted); font-size: 14px; font-style: italic; }
 
-.salam { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 8px 32px 48px; text-align: center; }
+.salam { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 8px 32px 48px; text-align: center; }
 .salam p { max-width: 330px; color: var(--muted); font-size: 15px; line-height: 1.7; text-wrap: pretty; }
 .salamTitle { color: var(--rose-deep) !important; font-size: 16px !important; font-style: italic; font-weight: 500; line-height: 1.5 !important; }
 .note { color: var(--ink) !important; font-family: var(--script); font-size: 26px !important; line-height: 1.35 !important; }
@@ -67,7 +67,7 @@
 /* ── Sections ── */
 .section { position: relative; display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 56px 22px; }
 .head { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-bottom: 6px; text-align: center; }
-.headSprig { width: 64px; height: 48px; margin-bottom: 2px; }
+.headSprig { width: 78px; height: auto; margin-bottom: 2px; }
 .head h2 { color: var(--ink); font-family: var(--script); font-size: 46px; font-weight: 400; line-height: 1.15; text-wrap: balance; }
 .lead { max-width: 320px; color: var(--muted); font-size: 15px; line-height: 1.65; text-align: center; text-wrap: pretty; }
 
@@ -76,9 +76,9 @@
 .person { display: flex; flex-direction: column; align-items: center; gap: 6px; max-width: 100%; text-align: center; }
 .personArch { position: relative; width: 220px; height: 290px; margin-bottom: 12px; padding: 7px; border: 1px solid var(--rose); border-radius: 999px 999px 16px 16px; background: var(--petal); box-shadow: 0 14px 32px rgba(169, 86, 106, .12); transition: box-shadow 700ms var(--m-ease), translate 700ms var(--m-ease), scale 700ms var(--m-ease); }
 .person:hover .personArch { translate: 0 -3px; box-shadow: 0 20px 40px rgba(169, 86, 106, .18); }
-.personArch > img, .personArch > div { width: 100%; height: 100%; border-radius: 999px 999px 10px 10px; object-fit: cover; }
+.personArch > img:not(.personSprig), .personArch > div { width: 100%; height: 100%; border-radius: 999px 999px 10px 10px; object-fit: cover; }
 .monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px 999px 10px 10px; background: radial-gradient(circle at 50% 40%, #fff, var(--blush)); color: var(--rose-deep); font-family: var(--script); font-size: 110px; }
-.personSprig { position: absolute; bottom: -18px; left: -26px; width: 92px; height: 70px; rotate: -16deg; }
+.personSprig { position: absolute; bottom: -18px; left: -26px; width: 100px; height: auto; rotate: -16deg; }
 .personArchAlt .personSprig { right: -26px; left: auto; rotate: 16deg; }
 .personShort { color: var(--rose-deep); font-family: var(--script); font-size: 40px; line-height: 1.1; overflow-wrap: anywhere; }
 .person h3 { max-width: 320px; font-size: 18px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
@@ -95,7 +95,7 @@
 .events { gap: 18px; background: linear-gradient(180deg, var(--petal), var(--blush)); }
 .event { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 50px 22px 26px; border: 1px solid var(--line); border-radius: 160px 160px 22px 22px; background: rgba(255, 255, 255, .78); text-align: center; box-shadow: 0 12px 30px rgba(169, 86, 106, .08); transition: box-shadow 700ms var(--m-ease), translate 700ms var(--m-ease); }
 .event:hover { translate: 0 -2px; box-shadow: 0 18px 38px rgba(169, 86, 106, .14); }
-.eventSprig { position: absolute; top: -22px; left: calc(50% - 36px); width: 72px; height: 54px; }
+.eventSprig { position: absolute; top: -26px; left: calc(50% - 40px); width: 80px; height: auto; }
 .event h3 { color: var(--ink); font-family: var(--script); font-size: 38px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
 .eventDate { font-size: 15px; font-weight: 600; }
 .eventTime { display: inline-flex; align-items: center; gap: 6px; color: var(--rose-deep); font-size: 14px; }
@@ -110,7 +110,7 @@
 .timeline::before { content: ""; position: absolute; top: 20px; bottom: 20px; left: 25px; width: 1px; background: linear-gradient(180deg, var(--rose), rgba(216, 138, 149, .2)); transform-origin: 50% 0; }
 .timeline li { position: relative; display: flex; gap: 16px; }
 .node { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 50%; background: var(--petal); box-shadow: 0 0 0 1px var(--line); }
-.node svg { width: 40px; height: 30px; }
+.node img { width: 38px; height: auto; }
 .storyText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 4px 18px 18px 18px; background: #fff; box-shadow: 0 6px 18px rgba(169, 86, 106, .07); }
 .storyText small { color: var(--rose-deep); font-size: 12px; font-weight: 600; letter-spacing: .2em; }
 .storyText h3 { font-size: 17px; font-weight: 600; overflow-wrap: anywhere; }
@@ -175,7 +175,7 @@
 .copyOn svg { animation: softPop 600ms var(--m-ease) both; }
 
 .closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 156px 28px 56px; overflow: hidden; background: linear-gradient(180deg, var(--petal), var(--blush)); text-align: center; }
-.closeBouquet { position: absolute; top: -10px; left: calc(50% - 100px); width: 200px; rotate: 180deg; scale: -1 1; pointer-events: none; }
+.closeBouquet { position: absolute; top: -30px; left: calc(50% - 100px); width: 200px; height: auto; rotate: 180deg; scale: -1 1; pointer-events: none; }
 .thanks { color: var(--ink); font-family: var(--script); font-size: 58px; line-height: 1.1; }
 .closingText { max-width: 300px; color: var(--muted); font-size: 15px; line-height: 1.65; }
 .family { color: var(--muted); font-size: 14px; line-height: 1.7; }
@@ -194,7 +194,7 @@
 /* ── Signature motion: arch draws itself, roses bloom, petals drift ── */
 .archLine path { animation: draw 2.6s var(--m-ease) .3s both; }
 .archLine path + path { animation-delay: .7s; }
-[data-revealed] .headSprig, [data-revealed] .personSprig, [data-revealed] .eventSprig, [data-revealed] .node svg { animation: bloom 1.6s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
+[data-revealed] .headSprig, [data-revealed] .personSprig, [data-revealed] .eventSprig, [data-revealed] .node img { animation: bloom 1.6s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
 [data-revealed] .heroBouquet, [data-revealed] .closeBouquet, .heroBouquet { animation: bloomWide 2s var(--m-ease) .2s both; }
 .coverBouquet { animation: bloomWide 2.2s var(--m-ease) both; }
 [data-revealed] .timeline::before { animation: drawDown 1.8s var(--m-ease) calc(var(--rd, 0ms) + 300ms) both; }
@@ -219,8 +219,8 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
-  .archLine path, .petals svg, .coverBouquet, .heroBouquet, .musicOn svg, .copyOn svg,
-  [data-revealed] .headSprig, [data-revealed] .personSprig, [data-revealed] .eventSprig, [data-revealed] .node svg,
+  .archLine path, .petals img, .coverBouquet, .heroBouquet, .musicOn svg, .copyOn svg,
+  [data-revealed] .headSprig, [data-revealed] .personSprig, [data-revealed] .eventSprig, [data-revealed] .node img,
   [data-revealed] .heroBouquet, [data-revealed] .closeBouquet, [data-revealed] .timeline::before, [data-revealed] .bloom { animation: none; }
   .petals { display: none; }
   .openBtn, .ghostBtn, .personArch, .event, .grid > img, .choices button, .step, .submit, .wish, .gift, .copy, .music, .field input, .field textarea { transition: none; }
@@ -228,3 +228,10 @@
 
 /* Extras quote: keep long verses legible (the script heading font is for titles only). */
 .root [data-extras] blockquote p { font-family: var(--serif); font-size: 15px; color: var(--muted); }
+
+/* Painted-paper grain over every surface (multiply, below content). */
+.cover, .opening, .salam, .section, .closing { isolation: isolate; }
+.cover::before, .opening::before, .salam::before, .section::before, .closing::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("/themes/art/mawar-blush/paper.webp") 0 0 / 256px 256px; mix-blend-mode: multiply;
+}

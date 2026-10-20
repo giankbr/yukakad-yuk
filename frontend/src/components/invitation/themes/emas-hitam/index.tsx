@@ -100,12 +100,12 @@ export default function EmasHitamTheme({ data, slug, guestToken, demo, skipCover
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.pattern} aria-hidden />
+          <div className={s.pattern} aria-hidden data-noreveal />
           <div className={s.frame} aria-hidden>
             <Corner className={`${s.corner} ${s.c1}`} /><Corner className={`${s.corner} ${s.c2}`} />
             <Corner className={`${s.corner} ${s.c3}`} /><Corner className={`${s.corner} ${s.c4}`} />
           </div>
-          <Fan className={s.coverFan} />
+          <Fan className={s.coverFan} eager />
           <p className={s.kicker}>The Wedding of</p>
           <h1 className={s.coverNames}>
             <span className={s.gold}>{bride}</span>

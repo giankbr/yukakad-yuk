@@ -18,52 +18,36 @@ const DEMO_WISHES: Wish[] = [
   { id: "w2", name: "Mas Yoga", attendance: "yes", message: "Barakallahu lakuma wa baraka 'alaikuma. Ditunggu di garden party-nya!" },
 ];
 
-/** Feathery pampas plume generated along a curved stem (deterministic). */
-const PAMPAS = (() => {
-  const p0 = [22, 150], p1 = [24, 78], p2 = [36, 6];
-  const at = (t: number) => [0, 1].map(k => (1 - t) ** 2 * p0[k] + 2 * (1 - t) * t * p1[k] + t * t * p2[k]);
-  let fronds = "";
-  for (let t = 0.32; t <= 1.001; t += 0.028) {
-    const [x, y] = at(t);
-    const spread = 4 + (1 - t) * 11 + Math.sin(t * 40) * 1.5;
-    fronds += `M${x.toFixed(1)} ${y.toFixed(1)}q${(-spread * 0.6).toFixed(1)} -2 ${(-spread).toFixed(1)} ${(4 + spread * 0.25).toFixed(1)}`;
-    fronds += `M${x.toFixed(1)} ${y.toFixed(1)}q${(spread * 0.6).toFixed(1)} -3 ${(spread * 0.95).toFixed(1)} ${(2 + spread * 0.25).toFixed(1)}`;
-  }
-  return { stem: "M22 150Q24 78 36 6", fronds };
-})();
+const ART = "/themes/art/boho-terakota";
 
-function Pampas({ className, flip }: { className?: string; flip?: boolean }) {
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, className, style, w, h, eager }: { src: string; className?: string; style?: CSSProperties; w: number; h: number; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 120 160" aria-hidden="true" focusable="false" style={flip ? { scale: "-1 1" } : undefined}>
-      {[{ x: 10, r: -14, o: 1 }, { x: 40, r: 4, o: .85 }, { x: 64, r: 18, o: .7 }].map((sprig, index) => (
-        <g key={index} className={s.sprig} style={{ translate: `${sprig.x}px 4px`, "--r0": `${sprig.r}deg`, opacity: sprig.o, animationDelay: `${index * -1.7}s` } as CSSProperties}>
-          <path d={PAMPAS.stem} className={s.stem} />
-          <path d={PAMPAS.fronds} className={s.fronds} />
-        </g>
-      ))}
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} style={style} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
   );
 }
 
-/** Concentric boho rainbow; the bands draw themselves in. */
-function Rainbow({ className }: { className?: string }) {
-  const bands = [["#c0643f", 88], ["#d39a4a", 70], ["#e8b4a0", 52], ["#8f9a76", 34]] as const;
+/** Three gouache pampas plumes, each swaying on its own from the base. */
+function Pampas({ className, flip, eager }: { className?: string; flip?: boolean; eager?: boolean }) {
   return (
-    <svg className={className} viewBox="0 0 200 104" aria-hidden="true" focusable="false">
-      {bands.map(([color, r], index) => (
-        <path key={r} className={s.band} d={`M${100 - r} 100A${r} ${r} 0 0 1 ${100 + r} 100`} stroke={color} pathLength="1" style={{ animationDelay: `${index * 220}ms` }} />
+    <span className={`${s.pampas} ${className ?? ""}`} aria-hidden="true" style={flip ? { scale: "-1 1" } : undefined}>
+      {[{ x: 0, r: -16, o: 1, src: "pampas-a" }, { x: 22, r: -4, o: .9, src: "pampas-b" }, { x: 40, r: 8, o: .8, src: "pampas-a" }].map((sprig, index) => (
+        <Art key={index} src={sprig.src} className={s.sprig} w={150} h={300} eager={eager}
+          style={{ left: `${sprig.x}%`, opacity: sprig.o, "--r0": `${sprig.r}deg`, animationDelay: `${index * -1.7}s` } as CSSProperties} />
       ))}
-    </svg>
+    </span>
   );
 }
 
-function Sun({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-      <g className={s.rays}>{Array.from({ length: 12 }, (_, i) => <path key={i} d="M50 6v12" transform={`rotate(${i * 30} 50 50)`} />)}</g>
-      <circle cx="50" cy="50" r="22" />
-    </svg>
-  );
+/** Gouache boho rainbow; unveiled when revealed. */
+function Rainbow({ className, eager }: { className?: string; eager?: boolean }) {
+  return <Art src="rainbow" className={`${s.rainbow} ${className ?? ""}`} w={400} h={200} eager={eager} />;
+}
+
+function Sun({ className, blush, eager }: { className?: string; blush?: boolean; eager?: boolean }) {
+  return <Art src={blush ? "sun-blush" : "sun"} className={`${s.sun} ${className ?? ""}`} w={180} h={180} eager={eager} />;
 }
 
 function Head({ id, kicker, title }: { id: string; kicker: string; title: string }) {
@@ -126,10 +110,10 @@ export default function BohoTerakotaTheme({ data, slug, guestToken, demo, skipCo
       cover={open => (
         <section className={s.cover}>
           <div className={s.coverArch}>
-            <Sun className={s.coverSun} />
-            <div className={s.archWindow}>{coverPhoto ? <Photo src={coverPhoto} alt={`Foto ${couple}`} /> : <Rainbow className={s.archRainbow} />}</div>
-            <Pampas className={s.pampasL} />
-            <Pampas className={s.pampasR} flip />
+            <Sun className={s.coverSun} eager />
+            <div className={s.archWindow}>{coverPhoto ? <Photo src={coverPhoto} alt={`Foto ${couple}`} /> : <Rainbow className={s.archRainbow} eager />}</div>
+            <Pampas className={s.pampasL} eager />
+            <Pampas className={s.pampasR} flip eager />
           </div>
           <p className={s.label}>The Wedding of</p>
           <h1 className={s.coverNames}>{data.couple.bride}{data.couple.groom && <><em>&amp;</em>{data.couple.groom}</>}</h1>
@@ -153,7 +137,7 @@ export default function BohoTerakotaTheme({ data, slug, guestToken, demo, skipCo
         </header>
 
         <section className={s.opening} aria-label="Pembuka">
-          <Sun className={s.openSun} />
+          <Sun className={s.openSun} blush />
           <p className={s.salam}>{muslim ? "Assalamu'alaikum Warahmatullahi Wabarakatuh" : "Salam hangat untuk Anda"}</p>
           {quote ? (
             <blockquote className={s.quote}><p>“{quote.text}”</p>{quote.source && <cite>{quote.source}</cite>}</blockquote>

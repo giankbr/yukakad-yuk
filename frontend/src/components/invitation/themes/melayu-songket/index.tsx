@@ -96,7 +96,7 @@ export default function MelayuSongketTheme({ data, slug, guestToken, demo, skipC
           <div className={`${s.band} ${s.bandTop}`} aria-hidden />
           <div className={`${s.band} ${s.bandBottom}`} aria-hidden />
           <p className={s.kicker}>Undangan Pernikahan</p>
-          <Medallion className={s.coverMedal} />
+          <Medallion className={s.coverMedal} eager />
           <h1 className={s.coverNames}>
             <span>{data.couple.bride}</span>
             {data.couple.groom && <><em>dengan</em><span>{data.couple.groom}</span></>}
