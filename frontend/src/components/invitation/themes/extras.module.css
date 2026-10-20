@@ -23,25 +23,28 @@
 
 .list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .card {
-  display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px 14px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  display: flex; align-items: center; gap: 10px; min-width: 0; padding: 12px; border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   border-radius: var(--t-radius, 14px); background: color-mix(in srgb, currentColor 5%, transparent); color: inherit; text-decoration: none;
 }
 a.card:hover { border-color: var(--t-accent, currentColor); }
 .card[data-claimed] { opacity: .6; }
-.icon { display: grid; flex: none; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: color-mix(in srgb, var(--t-accent, currentColor) 16%, transparent); color: var(--t-accent, currentColor); }
+.icon { display: grid; flex: none; place-items: center; width: 32px; height: 32px; border-radius: 999px; background: color-mix(in srgb, var(--t-accent, currentColor) 16%, transparent); color: var(--t-accent, currentColor); }
 .thumb { flex: none; width: 44px; height: 44px; border-radius: calc(var(--t-radius, 14px) * .6); object-fit: cover; }
 .cardText { display: grid; flex: 1; gap: 2px; min-width: 0; }
-.cardText strong { overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; }
+.cardText strong { overflow: hidden; font-size: 14px; font-weight: 600; text-overflow: ellipsis; text-wrap: pretty; }
 .cardText strong a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .cardText small { font-size: 12px; opacity: .7; }
 .arrow { flex: none; opacity: .6; }
 .calCard { flex-wrap: wrap; }
-.calCard .actions { flex-basis: 100%; justify-content: flex-start; padding-left: 48px; }
+.calCard .actions { flex-basis: 100%; justify-content: flex-start; padding-left: 42px; }
 .actions { display: flex; flex: none; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
 .chip {
-  display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 12px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+  display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 11px; border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
   border-radius: 999px; background: transparent; color: inherit; font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap; text-decoration: none; cursor: pointer;
 }
+/* Many themes reset `.root button { font: inherit }` (same specificity, loaded later): keep the extras' own type scale. */
+.block .chip { font-size: 12px; font-weight: 600; line-height: 1.2; }
+.block .button { font-size: 14px; font-weight: 700; line-height: 1.2; }
 .chip:hover { border-color: var(--t-accent, currentColor); color: var(--t-accent, currentColor); }
 .chip:disabled { cursor: wait; opacity: .6; }
 .done { display: inline-flex; flex: none; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; opacity: .8; }
@@ -121,7 +124,7 @@ label.button { cursor: pointer; }
 
 /* Patungan (crowdfunded wishlist item) */
 .fundCard { display: grid; align-items: stretch; gap: 10px; }
-.fundTop { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.fundTop { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .progress { height: 8px; overflow: hidden; border-radius: 999px; background: color-mix(in srgb, currentColor 12%, transparent); }
 .progress i { display: block; height: 100%; border-radius: inherit; background: var(--t-accent, currentColor); transition: width .6s ease; }
 .fundCard .giftForm { max-width: none; }

@@ -157,6 +157,15 @@ function Block({ id, title, eyebrow, children, className }: { id: string; title:
 
 /* ── Blocks ─────────────────────────────────────────────────────── */
 
+/** True when the couple's own opening note already carries this quote (same source or same opening words), so it isn't shown twice. */
+function repeatsNote(quote: NonNullable<InvitationExtras["quote"]>, note?: string) {
+  const norm = (value?: string) => (value ?? "").toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  const text = norm(note);
+  if (!text) return false;
+  const source = norm(quote.source), start = norm(quote.text).split(" ").slice(0, 8).join(" ");
+  return (source.length > 3 && text.includes(source)) || (start.length > 20 && text.includes(start));
+}
+
 function QuoteBlock({ quote }: { quote: NonNullable<InvitationExtras["quote"]> }) {
   if (!quote.text?.trim()) return null;
   return (
@@ -810,7 +819,7 @@ export function Extras({ slot, className, without = [] }: {
     const calendar = e?.calendar?.enabled !== false && !without.includes("calendar");
     switch (slot) {
       case "opening":
-        return <>{quote && !without.includes("quote") && <QuoteBlock quote={quote} />}{child && !without.includes("child") && <ChildBlock child={child} label={data.eventLabel} />}</>;
+        return <>{quote && !without.includes("quote") && !repeatsNote(quote, data.couple.note) && <QuoteBlock quote={quote} />}{child && !without.includes("child") && <ChildBlock child={child} label={data.eventLabel} />}</>;
       case "event":
         return <>
           {calendar && <CalendarBlock data={data} />}
