@@ -17,10 +17,10 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; }
-.backdrop { position: absolute; inset: -100px; background: radial-gradient(circle at 30% 20%, #f9c6cf, transparent 55%), radial-gradient(circle at 75% 60%, #f6d5da, transparent 60%), #f6dfe3; opacity: .6; animation: drift 14s ease-in-out infinite alternate; }
+.backdrop { position: absolute; inset: -100px; background: url("/themes/art/pemutar-musik/backdrop.webp") center / cover no-repeat, #f6dfe3; opacity: .6; animation: drift 14s ease-in-out infinite alternate; }
 .cover > :not(.backdrop) { position: relative; }
 .cover > .status { padding: 14px 16px; }
-.coverContent { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 25px 24px 24px; }
+.coverContent { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: auto; padding: 25px 24px 24px; }
 .albumArt { width: 230px; height: 230px; flex-shrink: 0; border-radius: 16px; box-shadow: 0 24px 60px #00000033; animation: rise 700ms cubic-bezier(.2, 0, 0, 1) both, breathe 4.8s 900ms ease-in-out infinite; }
 .coverTitle { display: grid; justify-items: center; gap: 4px; max-width: 320px; text-align: center; }
 .coverTitle h1 { font-size: 19px; font-weight: 800; letter-spacing: -.3px; line-height: 1.21; }
@@ -112,7 +112,8 @@ button.pillOn, button.pillOn:hover { background: var(--red); color: #fff; }
 .chart { display: grid; }
 .chart li { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .chart b { width: 22px; flex-shrink: 0; color: var(--muted); font-size: 13px; font-weight: 800; }
-.chartIcon { display: grid; place-items: center; width: 48px; height: 48px; flex-shrink: 0; border-radius: 10px; background: var(--chip); }
+.chartIcon { display: grid; place-items: center; width: 48px; height: 48px; flex-shrink: 0; overflow: hidden; border-radius: 10px; background: var(--chip); }
+.chartIcon > img { width: auto; height: auto; max-width: 42px; max-height: 42px; object-fit: contain; }
 .chart li > div { flex: 1; min-width: 0; display: grid; }
 .chart strong { font-size: 14px; font-weight: 700; }
 .chart small { color: var(--muted); font-size: 12px; }

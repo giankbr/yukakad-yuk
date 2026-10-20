@@ -11,13 +11,20 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Playfair Display:ital,wght@0,400;1,400", "Cinzel:wght@400;700", "Cormorant Garamond:ital,wght@0,400;0,600;0,700;1,400"];
-const FOREST = "/themes/img/a51.webp";
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const DEMO_CAPTIONS = ["Rumah Kaca, Dago", "Cincin", "Malam di Rimba"];
 const DEMO_WISHES: Wish[] = [
   { id: "w1", name: "Raka", message: "Selamat Kirana & Arsen! Undangannya gelap-gelap elegan.", attendance: "yes" },
   { id: "w2", name: "Tante Yuni", message: "Semoga rumah tangganya rindang seperti rimba.", attendance: "yes" },
 ];
+
+// Hand-painted raster art (rendered by /tmp/pen/art/themes/malam-rimba.py): dark gouache monstera/palm/fern with gold-leaf edges.
+const ART = { canopy: [780, 640], undergrowth: [780, 460], frond: [241, 249] } as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/malam-rimba/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox data-noreveal draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+);
 
 function Head({ id, children }: { id: string; children: string }) {
   return (
@@ -101,9 +108,12 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={FOREST} /></div>
+          <div className={s.coverBg} aria-hidden>
+            <span className={s.fireflies} />
+            <Art name="canopy" className={s.canopy} eager />
+            <Art name="undergrowth" className={s.under} eager />
+          </div>
           <div className={s.arch} aria-hidden />
-          <span className={s.fireflies} aria-hidden />
           <div className={s.coverContent}>
             <p className={s.coverKicker}>{label}</p>
             <h1 className={s.coverNames}>{couple}</h1>
@@ -119,8 +129,10 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
     >
       <main className={s.page}>
         <section className={s.opening} aria-label="Pembuka">
-          <div className={s.openingBg} aria-hidden><Photo src={FOREST} /></div>
-          <span className={s.fireflies} aria-hidden />
+          <div className={s.openingBg} aria-hidden>
+            <span className={s.fireflies} />
+            <Art name="canopy" className={`${s.canopy} ${s.canopyFlip}`} />
+          </div>
           <div className={s.openingText}>
             <p className={s.openingKicker}>{label}</p>
             <h1>{couple}</h1>
@@ -149,7 +161,8 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
           ))}
         </section>
 
-        <section className={s.band} aria-labelledby="mr-count">
+        <section className={`${s.band} ${s.leafy}`} aria-labelledby="mr-count">
+          <Art name="frond" className={`${s.frond} ${s.frondBL}`} />
           <Head id="mr-count">Menuju Hari Bahagia</Head>
           {countdown.valid ? (
             <div className={s.count} role="timer" aria-label={`${countdown.days} hari ${countdown.hours} jam ${countdown.minutes} menit lagi`}>
@@ -294,6 +307,8 @@ export default function MalamRimbaTheme({ data, slug, guestToken, demo, skipCove
         </section>
 
         <footer className={s.closing}>
+          <Art name="frond" className={`${s.frond} ${s.frondTL}`} />
+          <Art name="frond" className={`${s.frond} ${s.frondBR}`} />
           <h2>Terima Kasih</h2>
           <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
           <strong>Keluarga Besar<br />{families[0]} &amp; {families[1]}</strong>

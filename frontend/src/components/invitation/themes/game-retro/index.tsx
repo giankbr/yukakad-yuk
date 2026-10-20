@@ -10,7 +10,7 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Press Start 2P", "VT323"];
-const COVER_ART = "/themes/img/r45.webp";
+const ART = "/themes/art/game-retro";
 const tint: ThemeTint = {
   "--t-accent": "#ffd93d", "--t-accent-ink": "#1a1040", "--t-bg": "#1a1040", "--t-ink": "#ffffff", "--t-muted": "#b9a8f0",
   "--t-line": "#5a4a99", "--t-field": "#241656", "--t-radius": "0px", "--t-font": "'VT323', ui-monospace, monospace",
@@ -24,9 +24,9 @@ const DEMO_STATS = [
   [["SETIA", 99, "fillPink"], ["MASAK", 42, "fillGreen"]],
 ] as const;
 const DEMO_SHOP = [
-  { name: "RICE COOKER", price: "800", icon: ic.utensils },
-  { name: "VACUUM BOT", price: "3200", icon: ic.bot },
-  { name: "SOFA +5 DEF", price: "2700", icon: ic.sofa },
+  { name: "RICE COOKER", price: "800", sprite: "rice-cooker" },
+  { name: "VACUUM BOT", price: "3200", sprite: "vacuum-bot" },
+  { name: "SOFA +5 DEF", price: "2700", sprite: "sofa" },
 ];
 
 
@@ -75,10 +75,13 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={COVER_ART} /></div>
+          <div className={s.coverBg} aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element -- painted pixel art, static asset */}
+            <img src={`${ART}/castle.webp`} alt="" width={640} height={688} loading="eager" fetchPriority="high" data-nolightbox />
+          </div>
           <div className={s.hud} aria-hidden>
             <span className={s.yellow}>SCORE {year}</span>
-            <span className={s.hearts}>♥♥♥</span>
+            <span className={s.hearts}><i /><i /><i /></span>
             <span className={s.cyan}>LV.99</span>
           </div>
           <div className={s.coverSpace} />
@@ -200,7 +203,8 @@ export default function GameRetroTheme({ data, slug, guestToken, demo, skipCover
                 <div className={s.shop}>
                   {DEMO_SHOP.map(item => (
                     <button key={item.name} type="button" className={s.item} aria-pressed={bag.includes(item.name)} onClick={() => buy(item.name)}>
-                      <Lucide icon={item.icon} size={22} color={bag.includes(item.name) ? "#1a1040" : "#4deeea"} />
+                      {/* eslint-disable-next-line @next/next/no-img-element -- painted pixel sprite, static asset */}
+                      <img className={s.sprite} src={`${ART}/${item.sprite}.webp`} alt="" aria-hidden width={48} height={48} loading="lazy" data-nolightbox />
                       <strong>{item.name}</strong>
                       <span><i className={s.coinSm} />{item.price}</span>
                       {bag.includes(item.name) && <em className={s.plus} aria-hidden>+1</em>}

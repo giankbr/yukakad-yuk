@@ -89,11 +89,11 @@ export default function RapatVideoTheme({ data, slug, guestToken, demo, skipCove
                   <NameTag name={`${person.short} (Mempelai)`} />
                 </div>
               ))}
-              <div className={s.tile} aria-hidden>
+              <div className={`${s.tile} ${s.tileRoom}`} aria-hidden>
                 <span className={`${s.tileAvatar} ${s.tileAvatarTalk}`}>K</span>
                 <NameTag name="Keluarga Besar" />
               </div>
-              <div className={s.tile} aria-hidden>
+              <div className={`${s.tile} ${s.tileGarden}`} aria-hidden>
                 <span className={`${s.tileAvatar} ${s.tileAvatarGrey}`}>K</span>
                 <NameTag name="Kamu (Tamu)" muted />
               </div>

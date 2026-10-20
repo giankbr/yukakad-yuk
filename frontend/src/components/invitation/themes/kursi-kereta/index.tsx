@@ -11,6 +11,16 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Poppins:wght@400;600;700;800"];
+const ART = "/themes/art/kursi-kereta";
+
+/** Painted ornament (decorative: hidden from AT and the photo lightbox). */
+function Art({ src, w, h, className, eager }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+  );
+}
 const tint: ThemeTint = {
   "--t-accent": "#f7941e", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1e2a4a", "--t-muted": "#6b7390", "--t-line": "#e4e8f5",
   "--t-field": "#f4f6fb", "--t-radius": "12px", "--t-font": "'Poppins', system-ui, sans-serif",
@@ -99,6 +109,7 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
                 <div className={s.grow}><small>Ke</small><strong>Pelaminan Selamanya (SLM)</strong></div>
               </div>
             </div>
+            <span className={s.heroTrain} aria-hidden />
           </div>
           <div className={s.coverBody}>
             <p className={s.caption}>Hasil pencarian · {longDate}</p>
@@ -146,6 +157,7 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
               </div>
             </div>
             <div className={s.kepada}>
+              <Art src="stamp" w={260} h={260} className={s.stamp} eager />
               <small>Penumpang Terdaftar</small>
               <strong>{guestLabel(data)}</strong>
               <p>Kursi 2A–2D sudah dipesankan untukmu</p>
@@ -248,6 +260,7 @@ export default function KursiKeretaTheme({ data, slug, guestToken, demo, skipCov
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="kk-gift">
             <div className={s.head}><h2 id="kk-gift">Bagasi Kado</h2>{demo && <span>Wishlist</span>}</div>
+            <Art src="luggage" w={220} h={182} className={s.luggage} />
             {demo && DEMO_WISHLIST.map(item => (
               <div key={item.name} className={`${s.item} ${gifts.includes(item.name) ? s.itemOn : ""}`}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#3d5be9" /></span>

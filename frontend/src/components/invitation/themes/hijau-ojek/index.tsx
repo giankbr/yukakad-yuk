@@ -22,10 +22,20 @@ const DEMO_WISHES = [
 const DEMO_TAG: Record<string, string> = { w1: "Hadir · 2 orang", w2: "Hadir · 1 orang" };
 const ATTEND: Record<string, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const DEMO_PRODUCTS = [
-  { name: "Microwave", price: "Rp1.250.000", icon: ic.microwave, bg: "#fff3e0", color: "#e8551e" },
-  { name: "Sofa Mini", price: "Rp2.400.000", icon: ic.armchair, bg: "#e8f1ff", color: "#2d7ff9" },
-  { name: "Mesin Kopi", price: "Rp899.000", icon: ic.coffee, bg: "#e6f6e6", color: "#008a0f" },
+  { name: "Microwave", price: "Rp1.250.000", art: "p-microwave", bg: "#fff3e0" },
+  { name: "Sofa Mini", price: "Rp2.400.000", art: "p-sofa", bg: "#e8f1ff" },
+  { name: "Mesin Kopi", price: "Rp899.000", art: "p-coffee", bg: "#e6f6e6" },
 ];
+const ART = "/themes/art/hijau-ojek";
+
+/** Painted (gouache + ink) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted illustration
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 
 
 function city(address: string) {
@@ -81,11 +91,12 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.map} aria-hidden><Photo src="/themes/img/a94.webp" /></div>
+          <div className={s.map} aria-hidden><Art name="map" w={640} h={1180} eager /></div>
           <div className={s.mapArea}>
             <svg className={s.routeLine} viewBox="0 0 390 360" preserveAspectRatio="none" aria-hidden>
               <path d="M40 40 C 90 120, 40 170, 120 200 S 250 160, 195 300" />
             </svg>
+            <span className={s.riderStart} aria-hidden><Art name="rider" w={440} h={318} eager /></span>
             <span className={s.pin} aria-hidden><Lucide icon={ic.heart} size={32} color="#00aa13" /></span>
             <span className={s.eta}>{eta}</span>
           </div>
@@ -243,7 +254,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
             <div className={s.products}>
               {DEMO_PRODUCTS.map(item => (
                 <div key={item.name} className={s.product} data-on={cart.includes(item.name) ? "" : undefined}>
-                  <span style={{ background: item.bg }}><Lucide icon={item.icon} size={26} color={item.color} /></span>
+                  <span style={{ background: item.bg }}><Art name={item.art} w={150} h={150} /></span>
                   <strong>{item.name}</strong>
                   <b>{item.price}</b>
                   <button type="button" aria-pressed={cart.includes(item.name)} onClick={() => toggleCart(item.name)}>{cart.includes(item.name) ? "✓ Dipilih" : "Beli"}</button>
@@ -294,6 +305,7 @@ export default function HijauOjekTheme({ data, slug, guestToken, demo, skipCover
         </section>
 
         <section className={s.rateCard} aria-labelledby="ho-rate">
+          <span className={s.rateArt} aria-hidden><Art name="rider" w={440} h={318} /></span>
           <h2 id="ho-rate">Bagaimana perjalanan cinta mereka?</h2>
           <p>Beri bintang untuk {names}</p>
           <div className={s.rate} role="radiogroup" aria-label="Beri bintang">

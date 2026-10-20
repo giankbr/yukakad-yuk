@@ -22,14 +22,19 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding-bottom: 92px; }
-.coverHead { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 54px; background: linear-gradient(290deg, #0064d2, #1e90ff 50%, #4db3ff); color: #fff; }
+.coverHead { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 92px; overflow: hidden; background: url("/themes/art/paket-liburan/hero.webp") center bottom / cover no-repeat, linear-gradient(290deg, #0064d2, #1e90ff 50%, #4db3ff); color: #fff; }
+.coverHead > h1, .coverHead > p { position: relative; z-index: 1; text-shadow: 0 1px 8px rgba(0, 50, 130, .45); }
+.coverHead > p { color: #e3efff; }
+/* painted airliner floating over the painted beach */
+.heroPlane { position: absolute; right: 22px; top: 72px; width: 92px; height: 54px; background: url("/themes/art/paket-liburan/plane.webp") no-repeat center / contain; filter: drop-shadow(0 6px 6px rgba(0, 50, 130, .25)); animation: fly 7s ease-in-out infinite; }
 .coverHead h1 { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 800; line-height: 30px; }
 .okBadge { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px rgba(255, 255, 255, .22); animation: ok-pop 620ms var(--m-spring) 250ms both; }
 .okBadge svg { fill: none; stroke: var(--green); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 22; stroke-dashoffset: 22; animation: draw 420ms ease-out 650ms forwards; }
 .coverHead p { color: var(--sky); font-size: 12px; line-height: 18px; }
 .coverBody { display: flex; flex-direction: column; gap: 18px; padding: 0 16px 24px; }
-.order { margin-top: -38px; overflow: hidden; border-radius: 16px; background: #fff; box-shadow: 0 10px 28px rgba(0, 100, 210, .15); animation: rise 500ms cubic-bezier(.2, 0, 0, 1) both; }
-.orderHead { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--cream); }
+.order { position: relative; z-index: 1; margin-top: -38px; overflow: hidden; border-radius: 16px; background: #fff; box-shadow: 0 10px 28px rgba(0, 100, 210, .15); animation: rise 500ms cubic-bezier(.2, 0, 0, 1) both; }
+.orderHead { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 64px 12px 14px; background: var(--cream); }
+.postmark { position: absolute; right: -4px; top: 50%; width: 70px; height: auto; margin-top: -35px; rotate: -14deg; opacity: .8; mix-blend-mode: multiply; pointer-events: none; animation: stamp 520ms var(--m-spring) 900ms both; }
 .orderHead strong { font-size: 15px; font-weight: 800; line-height: 22px; }
 .orderHead small { color: var(--muted); font-size: 11px; line-height: 16px; overflow-wrap: anywhere; }
 .items { display: flex; flex-direction: column; padding: 6px 14px 10px; }
@@ -75,7 +80,7 @@
 .share { display: grid; place-items: center; width: 32px; height: 32px; margin: -6px; padding: 0; border: 0; border-radius: 8px; background: none; transition: background 150ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .share.shared { background: var(--green-soft); animation: pop 420ms var(--m-spring); }
 .share:hover { background: var(--bg); }
-.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; }
+.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; background: url("/themes/art/paket-liburan/paper.webp") repeat; background-size: 256px; }
 .voucher { overflow: hidden; border-radius: 16px; background: #fff; box-shadow: 0 8px 22px rgba(0, 100, 210, .1); }
 .vHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; background: var(--blue); }
 .vHead span { color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; line-height: 15px; text-transform: uppercase; }
@@ -97,7 +102,8 @@
 .venues small { color: var(--muted); font-size: 11px; line-height: 16px; overflow-wrap: anywhere; }
 /* Extra sections: hosted in a white app card like the theme's own sections. */
 .root .extras { gap: 28px; padding: 20px 16px; border-radius: 16px; background: #fff; color: var(--ink); }
-.card { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(0, 69, 160, .05); }
+.card { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(0, 69, 160, .05); }
+.luggage { position: absolute; top: -32px; right: -4px; width: 56px; height: auto; rotate: -8deg; filter: drop-shadow(0 4px 5px rgba(0, 69, 160, .18)); pointer-events: none; }
 .head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .head h2 { font-size: 18px; font-weight: 800; line-height: 1.3; letter-spacing: -.01em; }
 .head > span { flex-shrink: 0; color: var(--blue); font-size: 12px; font-weight: 800; }
@@ -160,13 +166,14 @@
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes item-in { from { translate: 18px 0; opacity: 0; } to { translate: 0 0; opacity: 1; } }
 @keyframes stamp { 0% { scale: 1.8; rotate: -12deg; opacity: 0; } 60% { scale: .92; rotate: 2deg; opacity: 1; } 100% { scale: 1; rotate: 0deg; opacity: 1; } }
+@keyframes fly { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: -10px -6px; rotate: -3deg; } }
 @keyframes blink { 50% { opacity: .35; } }
 @keyframes scan { 0%, 100% { top: 6px; } 50% { top: calc(100% - 8px); } }
 @keyframes pop { 0% { scale: .8; } 60% { scale: 1.12; } 100% { scale: 1; } }
 @keyframes hop { 0%, 100% { translate: 0 0; rotate: 0deg; } 35% { translate: 0 -4px; rotate: -8deg; } 70% { translate: 0 1px; rotate: 4deg; } }
 @keyframes wave { 0%, 100% { rotate: 0deg; } 30% { rotate: -14deg; } 60% { rotate: 8deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .order, .okBadge, .orderItem, .stamp, .live, .scan, .share.shared, .yellow.done, .itemOn .itemIcon, .itinerary li:hover .flag svg, .mapLink:hover svg { animation: none; }
+  .order, .okBadge, .orderItem, .stamp, .live, .scan, .share.shared, .yellow.done, .itemOn .itemIcon, .itinerary li:hover .flag svg, .mapLink:hover svg, .postmark, .heroPlane { animation: none; }
   .okBadge svg { animation: none; stroke-dashoffset: 0; }
   .scan { display: none; }
   .openBtn, .rsvp, .grid img, .grid figure > div { transition: none; }

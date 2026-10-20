@@ -19,14 +19,15 @@ const DEMO_WISHES = [
   { id: "w2", name: "Bang Reza", message: "Match terbaik sepanjang masa. Samawa Maya & Kevin!", created_at: new Date(Date.now() - 5 * 3600e3).toISOString() },
 ];
 const DEMO_PROFILE = { bride: { age: "27", likes: "kopi susu, hujan, kamu" }, groom: { age: "29", likes: "naik gunung, dia, dia, dia" } };
+/* Tier stickers & wishlist vignettes: gouache art in /public/themes/art/kencan (rendered 2-3x). */
 const TIERS = [
-  { name: "Super Like", price: "Rp200rb", icon: ic.star, color: "#35c9f3" },
-  { name: "Boost", price: "Rp500rb", icon: ic.zap, color: "#b06bff" },
-  { name: "Flame", price: "Rp1jt", icon: ic.flame, color: "#fd3a73" },
+  { name: "Super Like", price: "Rp200rb", art: "superlike", color: "#35c9f3" },
+  { name: "Boost", price: "Rp500rb", art: "boost", color: "#b06bff" },
+  { name: "Flame", price: "Rp1jt", art: "flame", color: "#fd3a73" },
 ];
 const WISHLIST = [
-  { name: "Mesin Espresso", price: "Rp2.350.000", icon: ic.coffee },
-  { name: "Tenda Camping 4P", price: "Rp1.600.000", icon: ic.tent },
+  { name: "Mesin Espresso", price: "Rp2.350.000", art: "espresso" },
+  { name: "Tenda Camping 4P", price: "Rp1.600.000", art: "tenda" },
 ];
 
 
@@ -198,14 +199,20 @@ export default function KencanTheme({ data, slug, guestToken, demo, skipCover }:
                       style={{ borderColor: tier.color, "--tier": tier.color } as CSSProperties}
                       onClick={() => { const next = tier.name === active ? undefined : tier.name; setTier(next); if (next) toast(`${next} dipilih`); }}
                     >
-                      <span className={s.tierIcon}><Lucide icon={tier.icon} size={20} color={tier.name === active ? "#fff" : tier.color} /></span>
+                      <span className={s.tierIcon}>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                        <img src={`/themes/art/kencan/tier-${tier.art}.webp`} alt="" aria-hidden width={34} height={34} loading="lazy" decoding="async" data-nolightbox />
+                      </span>
                       <strong>{tier.name}</strong><small>{tier.price}</small>
                     </button>
                   ))}
                 </div>
                 {WISHLIST.map(item => (
                   <div key={item.name} className={s.wish}>
-                    <span className={s.wishIcon} aria-hidden><Lucide icon={item.icon} size={18} color="#fd3a73" /></span>
+                    <span className={s.wishIcon} aria-hidden>
+                      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                      <img src={`/themes/art/kencan/wish-${item.art}.webp`} alt="" width={40} height={40} loading="lazy" decoding="async" data-nolightbox />
+                    </span>
                     <div><strong>{item.name}</strong><small>{item.price}</small></div>
                     <button
                       type="button" className={`${s.beri} ${given.includes(item.name) ? s.beriOn : ""}`} aria-pressed={given.includes(item.name)}

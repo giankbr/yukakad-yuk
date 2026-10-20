@@ -5,6 +5,7 @@
   --t-radius: 10px; --t-font: Barlow, system-ui, sans-serif; --t-heading-font: Barlow, system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 17px; --t-heading-align: left;
   font-family: Barlow, system-ui, sans-serif; color: var(--ink); background: var(--page); line-height: normal;
 }
+.root { background: var(--page) url("/themes/art/boarding-pass/paper.webp") repeat; background-size: 256px; }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, dl, dd, ol) { margin: 0; padding: 0; font: inherit; }
 :where(.root, .cover) :where(ol) { list-style: none; }
@@ -19,13 +20,17 @@
 .cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 58px; overflow: hidden; background: var(--navy); color: #fff; }
 .cover > * { position: relative; }
 .cover > .status { align-self: stretch; }
-.sky { position: absolute; left: 0; top: 0; width: 100%; height: 380px; }
-.sky > * { width: 100%; height: 100%; }
-.sky::after { content: ""; position: absolute; left: 0; right: 0; top: 180px; height: 200px; background: linear-gradient(180deg, rgba(11, 37, 69, 0), var(--navy)); }
+.sky { position: absolute; left: 0; top: 0; width: 100%; height: 600px; }
+.sky > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.sky::after { content: ""; position: absolute; left: 0; right: 0; top: 480px; height: 120px; background: linear-gradient(180deg, rgba(11, 37, 69, 0), var(--navy)); }
+/* painted airliner crossing the dusk sky (CSS background so the lightbox never sees it) */
+.plane { position: absolute; top: 66px; right: 12px; width: 168px; height: 90px; background: url("/themes/art/boarding-pass/plane.webp") no-repeat center / contain; filter: drop-shadow(0 6px 10px rgba(5, 20, 40, .35)); animation: cruise 7s var(--m-ease) infinite; }
+.clouds { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: url("/themes/art/boarding-pass/clouds.webp") no-repeat center bottom / 100% auto; opacity: .55; pointer-events: none; }
+.stamp { position: absolute; right: -6px; bottom: -8px; width: 92px; height: auto; rotate: -14deg; opacity: .82; mix-blend-mode: multiply; pointer-events: none; }
 .coverHead { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 16px; padding: 0 20px; text-align: center; text-shadow: 0 1px 8px rgba(11, 37, 69, .35); }
 .coverHead span { font-size: 13px; font-weight: 700; letter-spacing: 4px; }
 .coverHead h1 { font-size: 21px; font-weight: 800; }
-.ticket { width: calc(100% - 40px); max-width: 350px; margin-top: 45px; overflow: hidden; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 16px 40px rgba(0, 0, 0, .35); animation: rise 600ms 150ms cubic-bezier(.2, 0, 0, 1) both; }
+.ticket { position: relative; width: calc(100% - 40px); max-width: 350px; margin-top: 98px; overflow: hidden; border-radius: 16px; background: #fff url("/themes/art/boarding-pass/paper.webp") repeat; background-size: 256px; color: var(--ink); box-shadow: 0 16px 40px rgba(0, 0, 0, .35); animation: rise 600ms 150ms cubic-bezier(.2, 0, 0, 1) both; }
 .ticketHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 12px 16px; background: var(--pale); }
 .ticketHead > span { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; }
 .ticketHead > b { padding: 2px 8px; border-radius: 4px; background: var(--amber); color: #fff; font-size: 9px; font-weight: 800; white-space: nowrap; }
@@ -66,6 +71,10 @@
 .topText p { color: var(--sky); font-size: 12px; }
 .body { display: flex; flex-direction: column; gap: 30px; padding: 20px 16px 112px; }
 .section { display: flex; flex-direction: column; gap: 12px; }
+.divider { display: block; width: 300px; max-width: 100%; height: auto; margin: -8px auto; opacity: .85; }
+.giftSection { position: relative; }
+.luggage { position: absolute; top: -24px; right: 2px; width: 76px; height: auto; rotate: 6deg; filter: drop-shadow(0 6px 8px rgba(11, 37, 69, .18)); pointer-events: none; }
+.giftSection > h2 { padding-right: 84px; }
 .section > h2 { display: flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
 .section > h2::before { content: ""; width: 14px; height: 4px; flex-shrink: 0; border-radius: 2px; background: var(--amber); }
 /* shared extra sections, hosted on a white ticket-style card */
@@ -152,6 +161,11 @@ button.amberBtn:hover { filter: brightness(1.08); }
 .ping { position: absolute; inset: 0; border-radius: inherit; background: var(--amber); animation: ping 2.4s ease-out infinite; }
 .landing > svg { position: relative; }
 
+@keyframes cruise {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  30% { translate: -6px -5px; rotate: -2deg; }
+  65% { translate: 4px 3px; rotate: 1.5deg; }
+}
 @keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
 @keyframes blink { 50% { opacity: .35; } }
 @keyframes fly {
@@ -166,7 +180,7 @@ button.amberBtn:hover { filter: brightness(1.08); }
 @keyframes pop { 0% { scale: .8; } 60% { scale: 1.12; } 100% { scale: 1; } }
 @keyframes bag-hop { 0% { translate: 0 0; rotate: 0deg; } 35% { translate: 0 -6px; rotate: -8deg; } 70% { translate: 0 1px; rotate: 4deg; } 100% { translate: 0 0; rotate: 0deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .ticket, .onTime .dot, .flyer, .scan, .ping, .amberBtn.picked, .bag.bagOn .bagIcon { animation: none; }
+  .ticket, .onTime .dot, .flyer, .scan, .ping, .amberBtn.picked, .bag.bagOn .bagIcon, .plane { animation: none; }
   .scan, .ping { display: none; }
   .window, .window::after, .crewCard, .flight { transition: none; }
 }

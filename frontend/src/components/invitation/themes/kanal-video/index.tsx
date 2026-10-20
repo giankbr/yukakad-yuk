@@ -24,11 +24,20 @@ const DEMO_DURATIONS = ["4:05", "3:28", "5:12"];
 const DEMO_CLIPS = [["Prewedding di Kebun Teh", "12:04"], ["Di Balik Layar", "8:51"], ["Trailer Teaser", "0:58"], ["Q&A Bareng Kami", "15:22"]];
 const DEMO_AGES = ["28 th", "26 th"];
 const DEMO_TIERS = [["Rp50rb", "#2196f3"], ["Rp100rb", "#00bfa5"], ["Rp500rb", "#ffb300"], ["Rp1jt", "#ff0033"]];
+const ART = "/themes/art/kanal-video";
 const DEMO_PRODUCTS = [
-  { name: "Air Purifier", price: "Rp1.450.000", icon: ic.airVent },
-  { name: "Speaker Bluetooth", price: "Rp750.000", icon: ic.speaker },
-  { name: "Kamera Pocket", price: "Rp3.200.000", icon: ic.camera },
+  { name: "Air Purifier", price: "Rp1.450.000", art: "gift-purifier", w: 45, h: 50 },
+  { name: "Speaker Bluetooth", price: "Rp750.000", art: "gift-speaker", w: 90, h: 50 },
+  { name: "Kamera Pocket", price: "Rp3.200.000", art: "gift-camera", w: 71, h: 50 },
 ];
+
+/** Painted (gouache + ink) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className }: { name: string; w: number; h: number; className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted illustration
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox loading="lazy" decoding="async" draggable={false} />
+  );
+}
 
 
 function city(address: string) {
@@ -196,7 +205,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
             </article>
           ))}
           <article className={s.episode}>
-            <span className={`${s.epThumb} ${s.epFinal}`}><i className={s.epPlay} aria-hidden><Lucide icon={ic.play} size={11} color="#fff" /></i></span>
+            <span className={`${s.epThumb} ${s.epFinal}`}><Art name="final-thumb" w={120} h={68} /><i className={s.epPlay} aria-hidden><Lucide icon={ic.play} size={11} color="#fff" /></i></span>
             <div className={s.epText}>
               <strong>Final — Menuju Selamanya</strong>
               <small className={s.live}>{shortDate && `${shortDate} · `}<i className={s.liveDot} aria-hidden />LIVE</small>
@@ -250,7 +259,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} id="kv-gift" aria-labelledby="kv-gift-h">
-            <h2 id="kv-gift-h">{demo ? "Super Thanks · Wishlist Kado" : "Super Thanks · Kirim Kado"}</h2>
+            <h2 id="kv-gift-h">{demo ? "Super Thanks · Hadiah Pilihan" : "Super Thanks · Kirim Kado"}</h2>
             {demo && (
               <>
                 <div className={s.tiers}>
@@ -263,7 +272,7 @@ export default function KanalVideoTheme({ data, slug, guestToken, demo, skipCove
                 <div className={s.rack}>
                   {DEMO_PRODUCTS.map(item => (
                     <div key={item.name} className={s.product}>
-                      <span><Lucide icon={item.icon} size={24} color="#0f0f0f" /></span>
+                      <span><Art name={item.art} w={item.w} h={item.h} /></span>
                       <strong>{item.name}</strong>
                       <b>{item.price}</b>
                     </div>

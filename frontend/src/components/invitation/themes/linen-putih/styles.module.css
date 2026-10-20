@@ -28,9 +28,11 @@
 .btn:disabled { opacity: .6; cursor: default; }
 
 /* ── Cover ── */
-.cover { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100dvh; overflow: hidden; }
+.cover { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100dvh; overflow: hidden; background: url("/themes/art/linen-putih/linen.webp") 0 0 / 256px 256px, var(--bg); }
 .coverBg { position: absolute; inset: 0; }
-.coverBg img, .coverBg > div { width: 100%; height: 100%; }
+.coverBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(246, 243, 238, 0) 45%, rgba(246, 243, 238, .55) 70%, rgba(246, 243, 238, .85) 100%); }
+/* one ink-and-pencil olive branch, drawn on the linen */
+.coverBranch { position: absolute; right: -46px; top: -44px; width: 230px; height: auto; rotate: -166deg; opacity: .82; mix-blend-mode: multiply; pointer-events: none; user-select: none; mask-image: linear-gradient(to top, #000 40%, transparent 96%); animation: settleIn 1400ms 200ms var(--m-ease) both; }
 .coverContent { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 30px 92px; text-align: center; animation: rise 900ms cubic-bezier(.2, 0, 0, 1) both; }
 .coverNames { width: 100%; font-family: var(--serif); font-size: 62px; font-weight: 300; line-height: 1.05; overflow-wrap: anywhere; }
 .coverDate { color: var(--muted); font-size: 13px; letter-spacing: 3px; }
@@ -42,9 +44,9 @@
 /* ── Main ── */
 .page { display: flex; flex-direction: column; background: var(--bg); }
 .opening { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 520px; overflow: hidden; }
-.openingBg { position: absolute; inset: 0; }
-.openingBg img, .openingBg > div { width: 100%; height: 100%; }
+.openingBg { position: absolute; inset: 0; background: url("/themes/art/linen-putih/linen.webp") 0 0 / 256px 256px, var(--bg); }
 .openingBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(246, 243, 238, 0) 30%, var(--bg) 95%); }
+.openingBranch { position: absolute; left: -44px; top: -30px; width: 210px; height: auto; rotate: -168deg; opacity: .7; mix-blend-mode: multiply; pointer-events: none; user-select: none; }
 .openingText { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 24px 32px; text-align: center; }
 .openingText h1 { font-family: var(--serif); font-size: 52px; font-weight: 300; line-height: 1.05; overflow-wrap: anywhere; }
 .openingDate { color: var(--muted); font-size: 12px; letter-spacing: 2px; }
@@ -190,9 +192,10 @@
 @keyframes bloom { from { scale: 0; opacity: 0; } }
 @keyframes settle { from { opacity: 0; translate: 0 10px; filter: blur(4px); } }
 @keyframes swap { from { opacity: 0; scale: 1.04; filter: blur(6px) grayscale(.6); } }
+@keyframes settleIn { from { opacity: 0; translate: 8px 6px; } to { opacity: .82; } }
 @media (prefers-reduced-motion: reduce) {
   .coverContent, .openingText[data-revealed] .openingRule, .head[data-revealed] .divider i, .head[data-revealed] .divider b,
-  .person[data-revealed]::before, .swap, .copied svg, .sent, .sent .iconDot { animation: none; }
+  .person[data-revealed]::before, .swap, .copied svg, .sent, .sent .iconDot, .coverBranch { animation: none; }
   .btn, .thumb img { transition: none; }
 }
 
@@ -208,3 +211,10 @@
 .closed strong { font-size: 15px; font-weight: 700; }
 .closed p { margin: 0; color: var(--t-muted); font-size: 13px; line-height: 1.5; }
 .countTba { margin: 0; color: var(--t-muted); font-size: 14px; letter-spacing: .04em; text-align: center; }
+
+/* Paper grain over the bands (multiply, below content). */
+.band, .closing, .quote { isolation: isolate; position: relative; }
+.band::before, .closing::before, .quote::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("/themes/art/linen-putih/paper.webp") 0 0 / 256px 256px; mix-blend-mode: multiply; opacity: .8;
+}

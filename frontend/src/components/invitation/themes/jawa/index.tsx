@@ -7,7 +7,7 @@ import {
 } from "../kit";
 import type { InvitationData } from "../../types";
 import { celebrate } from "@/lib/celebrate";
-import { gunungan, ic } from "./icons";
+import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Cinzel:wght@400;600;700", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600"];
@@ -18,8 +18,16 @@ const DEMO_WISHES = [
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const pad = (n: number) => String(n).padStart(2, "0");
 
+// Hand-painted raster art (rendered by /tmp/pen/art/themes/jawa.py): tooled-leather gunungan, foil lung-lungan, foil divider.
+const ART = { gunungan: [288, 429], lung: [300, 300], divider: [340, 52] } as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/jawa/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+);
+
 function Divider({ light }: { light?: boolean }) {
-  return <span className={light ? `${s.divider} ${s.dividerLight}` : s.divider} aria-hidden><i /><b /><i /></span>;
+  return <Art name="divider" className={light ? `${s.divider} ${s.dividerLight}` : s.divider} />;
 }
 
 function Head({ id, title, light }: { id: string; title: string; light?: boolean }) {
@@ -100,7 +108,9 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
           <div className={s.vignette} aria-hidden />
           <div className={s.frame} aria-hidden />
           <div className={s.frameInner} aria-hidden />
-          <svg className={s.gunungan} viewBox="0 0 160 220" aria-hidden="true" focusable="false" dangerouslySetInnerHTML={{ __html: gunungan }} />
+          <Art name="lung" className={`${s.lung} ${s.lungL}`} eager />
+          <Art name="lung" className={`${s.lung} ${s.lungR}`} eager />
+          <Art name="gunungan" className={s.gunungan} eager />
           <div className={s.coverContent}>
             <p className={s.kicker}>UNDANGAN {label.toUpperCase()}</p>
             <h1 className={s.coverNames}><span>{data.couple.bride}</span><em>&amp;</em><span>{data.couple.groom}</span></h1>
@@ -303,6 +313,8 @@ export default function JawaTheme({ data, slug, guestToken, demo, skipCover }: T
         </section>
 
         <footer className={s.closing}>
+          <Art name="lung" className={`${s.lung} ${s.lungBL}`} />
+          <Art name="lung" className={`${s.lung} ${s.lungBR}`} />
           <p className={s.thanks}>Terima Kasih</p>
           <Divider />
           <p className={s.closingText}>Kehadiran dan doa restu Anda adalah kebahagiaan tak terhingga bagi kami sekeluarga.</p>

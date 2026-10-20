@@ -25,6 +25,7 @@ const DEMO_WISHLIST = [
   { name: "Kulkas Mini Duo", price: "Rp1.750.000", icon: ic.refrigerator },
 ];
 const BADGES = ["+1 doa tulus", "+1 restu"];
+const ART = "/themes/art/dompet-digital";
 const TAGS = ["WAJIB HADIR", "JANGAN TELAT"];
 
 
@@ -279,7 +280,12 @@ export default function DompetDigitalTheme({ data, slug, guestToken, demo, skipC
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} id="dd-gift" aria-labelledby="dd-gift-h">
-            <div className={s.cardHead}><h2 id="dd-gift-h">Kirim Kado</h2>{demo && <span>Wishlist</span>}</div>
+            <div className={`${s.cardHead} ${s.giftHead}`}>
+              <h2 id="dd-gift-h">Kirim Kado</h2>
+              {/* eslint-disable-next-line @next/next/no-img-element -- static painted gift illustration */}
+              <img src={`${ART}/gift.webp`} alt="" aria-hidden width={212} height={156} className={s.giftArt} loading="lazy" decoding="async" draggable={false} data-nolightbox />
+              {demo && <span>Wishlist</span>}
+            </div>
             {demo && (
               <>
                 <div className={s.tiers} role="group" aria-label="Nominal kado" style={{ "--i": tier } as CSSProperties}>

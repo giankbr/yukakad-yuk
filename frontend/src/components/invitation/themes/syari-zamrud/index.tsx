@@ -71,9 +71,8 @@ export default function SyariZamrudTheme({ data, slug, guestToken, demo, skipCov
   const rsvpClosed = thanks.active || rsvp.status === "closed";
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
-  const hero = data.gallery[0];
-  // The design shows no portraits; extra photos (beyond the opening image) get a simple gallery.
-  const gallery = data.gallery.slice(1);
+  // No-photo theme: the opening is painted art too; any uploaded photos only appear in the simple gallery.
+  const gallery = data.gallery;
   const lastEvent = data.events[data.events.length - 1];
   const coverLine = [lastEvent?.name ?? data.eventLabel ?? "Pernikahan", formatDate(data.date)].filter(Boolean).join(" · ");
   const families = [fatherName(data.couple.brideParents) ?? data.couple.bride, fatherName(data.couple.groomParents) ?? data.couple.groom];
@@ -110,7 +109,11 @@ export default function SyariZamrudTheme({ data, slug, guestToken, demo, skipCov
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
+          {/* painted cover (rendered by /tmp/pen/art/themes/syari-zamrud.py): emerald washes + gold-foil khatam geometry, no photo */}
+          <div className={s.coverBg} aria-hidden>
+            <span className={`${s.lantern} ${s.lanternL}`} />
+            <span className={`${s.lantern} ${s.lanternR}`} />
+          </div>
           <div className={s.coverBorder} aria-hidden />
           <div className={s.coverContent}>
             <p className={s.kicker}>BISMILLAHIRRAHMANIRRAHIM</p>
@@ -127,7 +130,7 @@ export default function SyariZamrudTheme({ data, slug, guestToken, demo, skipCov
     >
       <main className={s.page}>
         <section className={s.opening} aria-label="Pembuka">
-          <Photo src={hero} alt={`Foto ${couple}`} className={s.openingImg} />
+          <div className={s.openingImg} aria-hidden />
           <div className={s.openingText}>
             <p className={s.kickerSm}>{(data.eventLabel ?? "Pernikahan").toUpperCase()}</p>
             <h1>{couple}</h1>

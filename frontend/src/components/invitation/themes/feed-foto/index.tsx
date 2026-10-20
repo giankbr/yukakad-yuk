@@ -18,10 +18,11 @@ const DEMO_WISHES = [
   { id: "w1", name: "sahabat.alika", message: "Akhirnya hard launch terakhir!! See you di Bali", created_at: new Date(Date.now() - 2 * 3600e3).toISOString() },
   { id: "w2", name: "om_wayan", message: "Rahajeng! Pasti hadir sekeluarga.", created_at: new Date(Date.now() - 5 * 3600e3).toISOString() },
 ];
+/* Wishlist product pictures: gouache vignettes in /public/themes/art/feed-foto (rendered 2x of the 114x60 box). */
 const WISHLIST = [
-  { name: "Lampu Vintage", price: "Rp520.000", icon: ic.lampDesk },
-  { name: "Vas Keramik", price: "Rp340.000", icon: ic.flower2 },
-  { name: "Kursi Rotan", price: "Rp1.150.000", icon: ic.armchair },
+  { name: "Lampu Vintage", price: "Rp520.000", art: "lampu" },
+  { name: "Vas Keramik", price: "Rp340.000", art: "vas" },
+  { name: "Kursi Rotan", price: "Rp1.150.000", art: "kursi" },
 ];
 
 
@@ -269,7 +270,10 @@ export default function FeedFotoTheme({ data, slug, guestToken, demo, skipCover 
               <div className={s.wishlist}>
                 {WISHLIST.map(item => (
                   <div key={item.name} className={s.product}>
-                    <span className={s.productImg}><Lucide icon={item.icon} size={24} /></span>
+                    <span className={s.productImg}>
+                      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                      <img src={`/themes/art/feed-foto/${item.art}.webp`} alt="" aria-hidden width={114} height={60} loading="lazy" decoding="async" data-nolightbox />
+                    </span>
                     <strong>{item.name}</strong>
                     <small>{item.price}</small>
                     <button type="button" className={`${s.beri} ${picked[item.name] ? s.beriOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>

@@ -19,6 +19,13 @@ const DEMO_WISHES = [
   { id: "w2", name: "Om Hendra", message: "Dari lagu pertama sudah tahu kalian bakal duet selamanya. Selamat!", created_at: new Date(Date.now() - 6 * 3600e3).toISOString() },
 ];
 
+const ART = "/themes/art/playlist";
+const DEMO_MERCH = [
+  { name: "Vinyl Player", price: "Rp2.500.000", art: "merch-vinyl", w: 50, h: 34 },
+  { name: "Smart Speaker", price: "Rp1.350.000", art: "merch-speaker", w: 38, h: 42 },
+  { name: "Gitar Akustik", price: "Rp2.900.000", art: "merch-guitar", w: 27, h: 42 },
+];
+
 function city(address: string) {
   const parts = address.split(",").map(part => part.trim()).filter(Boolean);
   return parts[parts.length - 1] ?? "";
@@ -266,7 +273,7 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="pl-kado">
-            <h2 id="pl-kado">{demo ? "Merch & Wishlist Kado" : "Kirim Kado"}</h2>
+            <h2 id="pl-kado">{demo ? "Merch Resmi" : "Kirim Kado"}</h2>
             {demo && (
               <>
                 <div className={s.tiers}>
@@ -277,13 +284,12 @@ export default function PlaylistTheme({ data, slug, guestToken, demo, skipCover 
                   ))}
                 </div>
                 <ul className={s.merch}>
-                  {[
-                    { name: "Vinyl Player", price: "Rp2.500.000", icon: ic.disc3 },
-                    { name: "Smart Speaker", price: "Rp1.350.000", icon: ic.speaker },
-                    { name: "Gitar Akustik", price: "Rp2.900.000", icon: ic.guitar },
-                  ].map(item => (
+                  {DEMO_MERCH.map(item => (
                     <li key={item.name}>
-                      <span className={s.merchIcon}><Lucide icon={item.icon} size={22} color="#1db954" /></span>
+                      <span className={s.merchIcon}>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- static painted merch illustration */}
+                        <img src={`${ART}/${item.art}.webp`} alt="" aria-hidden width={item.w} height={item.h} data-nolightbox loading="lazy" decoding="async" draggable={false} />
+                      </span>
                       <div><strong>{item.name}</strong><small>{item.price}</small></div>
                       <button type="button" className={`${s.outline} ${picked[item.name] ? s.outlineOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>
                         <span key={String(!!picked[item.name])} className={s.swap}>{picked[item.name] && <Lucide icon={ic.check} size={12} />}{picked[item.name] ? "Dipilih" : "Beri"}</span>

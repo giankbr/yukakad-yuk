@@ -8,7 +8,16 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Archivo:wght@400;700;800", "JetBrains Mono:wght@700;800"];
-const COVER_ART = "/themes/img/r39.webp";
+const ART = "/themes/art/tiket-kereta";
+
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, className, w, h, eager }: { src: string; className?: string; w: number; h: number; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 const tint: ThemeTint = {
   "--t-accent": "#f26a21", "--t-accent-ink": "#ffffff", "--t-bg": "#f7f3ec", "--t-ink": "#2b2b33", "--t-muted": "#6e6e78", "--t-line": "#e3dacb",
   "--t-field": "#ffffff", "--t-radius": "10px", "--t-font": "'Archivo', system-ui, sans-serif",
@@ -74,7 +83,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={COVER_ART} /></div>
+          <div className={s.coverBg} aria-hidden><Art src="hero" w={780} h={820} eager /><span className={s.heroTrain} /></div>
           <div className={s.coverHead}>
             <span>E-TIKET {(data.eventLabel ?? "Pernikahan").toUpperCase()}</span>
             <strong>KA ARGO ASMARA</strong>
@@ -112,6 +121,7 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
               <p className={s.mono}>Kode Pesanan<br />{code}</p>
               <span className={s.qr} aria-hidden><Lucide icon={ic.qrCode} size={44} color="#2b2b33" /></span>
             </div>
+            <Art src="stamp" className={s.stamp} w={260} h={261} eager />
           </article>
 
           <dl className={s.peron}>
@@ -190,6 +200,8 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
           </div>
         </section>
 
+        <Art src="divider" className={s.divider} w={360} h={33} />
+
         {data.events.length > 0 && (
           <section className={s.section} aria-labelledby="tk-events">
             <h2 id="tk-events">Jadwal Pemberhentian</h2>
@@ -257,6 +269,8 @@ export default function TiketKeretaTheme({ data, slug, guestToken, demo, skipCov
             })}
           </section>
         )}
+
+        <Art src="divider" className={s.divider} w={360} h={33} />
 
         <section className={s.section} aria-labelledby="tk-wishes">
           <h2 id="tk-wishes">Buku Tamu Peron</h2>

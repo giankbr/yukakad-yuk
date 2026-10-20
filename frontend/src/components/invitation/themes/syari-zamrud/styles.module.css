@@ -29,9 +29,12 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100dvh; padding: 0 30px 139px; overflow: hidden; background: var(--bg); }
-.coverBg { position: absolute; inset: 0; }
-.coverBg img, .coverBg > div { width: 100%; height: 100%; object-fit: cover; }
-.coverBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 61, 46, 0) 30%, rgba(10, 42, 32, .9) 60%, #0a2a20 100%); }
+.coverBg { position: absolute; inset: 0; overflow: hidden; background: #0a2a20 url("/themes/art/syari-zamrud/cover.webp") center top / cover no-repeat; }
+.coverBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10, 42, 32, 0) 45%, rgba(10, 42, 32, .55) 70%, #0a2a20 100%); }
+/* two painted fanous lanterns hang inside the arch and sway on their chains */
+.lantern { position: absolute; top: -8px; width: 46px; height: 152px; background: url("/themes/art/syari-zamrud/lantern.webp") center top / contain no-repeat; transform-origin: 50% 0; animation: sway 7s ease-in-out infinite alternate; }
+.lanternL { left: 15%; }
+.lanternR { right: 15%; top: -40px; animation-delay: -3.5s; }
 .coverBorder { position: absolute; inset: 28px; border: 1px solid var(--accent); border-radius: 167px 167px 8px 8px; pointer-events: none; animation: frameIn 1.8s var(--m-ease) both; }
 .coverContent { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 .kicker { color: var(--accent); font-size: 12px; letter-spacing: 2px; }
@@ -45,7 +48,7 @@
 /* ── Main ── */
 .page { display: flex; flex-direction: column; background: var(--bg); }
 .opening { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 520px; overflow: hidden; }
-.openingImg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.openingImg { position: absolute; inset: 0; width: 100%; height: 100%; background: #0f3d2e url("/themes/art/syari-zamrud/cover.webp") center 12% / cover no-repeat; }
 .opening::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, var(--bg) 95%); }
 .openingText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 24px 32px; text-align: center; }
 .kickerSm { color: var(--muted); font-family: var(--caps); font-size: 11px; letter-spacing: 3px; }
@@ -54,20 +57,18 @@
 .quote { max-width: 360px; margin: 0 auto; padding: 48px 32px; text-wrap: pretty; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.5; text-align: center; }
 
 .section { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 52px 24px; background: var(--bg); }
-.alt { background: var(--alt); }
+.alt { background: linear-gradient(rgba(10, 46, 34, .9), rgba(10, 46, 34, .9)), url("/themes/art/syari-zamrud/pattern.webp") center top / 120px 120px repeat, var(--alt); }
 .head { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 2px; text-align: center; }
 .head h2 { color: var(--ink); font-size: 30px; font-weight: 700; line-height: 1.15; text-wrap: balance; }
 .divider { display: flex; align-items: center; gap: 8px; }
 .divider i { width: 32px; height: 1px; background: var(--accent); }
-.divider b { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.divider b { width: 22px; height: 22px; background: url("/themes/art/syari-zamrud/divider.webp") center / 150px 18px no-repeat; }
 .lead { max-width: 320px; color: var(--muted); font-size: 15px; line-height: 1.6; text-align: center; text-wrap: pretty; }
 
 .monogram { position: relative; display: flex; align-items: center; justify-content: center; gap: 4px; width: 150px; height: 150px; margin: 6px 0; border: 1.5px solid var(--accent); border-radius: 50%; box-shadow: 0 0 0 6px rgba(212, 175, 55, .06); }
 .monogram > b, .monogram > span { position: relative; }
 /* rub el hizb: two outlined squares forming an eight-point star, turning very slowly */
-.star, .star::after { position: absolute; inset: 26px; border: 1px solid rgba(212, 175, 55, .3); }
-.star { animation: turn 120s linear infinite; }
-.star::after { content: ""; inset: -1px; rotate: 45deg; }
+.star { position: absolute; inset: 12px; background: url("/themes/art/syari-zamrud/star.webp") center / contain no-repeat; opacity: .55; animation: turn 120s linear infinite; }
 .monogram b { color: var(--accent); font-size: 56px; font-weight: 700; line-height: 1; }
 .monogram span { color: var(--muted); font-size: 24px; line-height: 1; }
 .columns { display: flex; width: 100%; }
@@ -191,10 +192,11 @@
 @keyframes softPop { from { opacity: 0; scale: .5; } }
 @keyframes glint { 0%, 70% { translate: -120% 0; } 100% { translate: 120% 0; } }
 @keyframes turn { to { rotate: 360deg; } }
+@keyframes sway { from { rotate: -2.2deg; } to { rotate: 2.2deg; } }
 @keyframes halo { 0% { opacity: .9; scale: 1; } 60%, 100% { opacity: 0; scale: 1.45; } }
 @keyframes frameIn { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0); } }
 @media (prefers-reduced-motion: reduce) {
-  .coverBorder, .star, .countBox::after, .copyOn svg, .stories[data-revealed]::before, [data-revealed] .no::after, .prayer[data-revealed] .no::after,
+  .coverBorder, .star, .lantern, .countBox::after, .copyOn svg, .stories[data-revealed]::before, [data-revealed] .no::after, .prayer[data-revealed] .no::after,
   [data-revealed] .divider i, [data-revealed] .divider b { animation: none; }
   .countBox::after { display: none; }
   .pill, .pillWide, .event, .prayer, .gift, .copy, .wish, .frame, .frame img, .choices label, .step, .field input, .field textarea { transition: none; }

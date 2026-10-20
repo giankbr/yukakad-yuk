@@ -19,6 +19,7 @@ const DEMO_WISHES = [
   { id: "w2", name: "Pak Anto", message: "Approved tanpa revisi. Samawa Sinta & Haris!", created_at: new Date(Date.now() - 6 * 3600e3).toISOString() },
 ];
 const DEMO_FILES = ["prewed_01.jpg", "prewed_02.jpg", "akad_sneak.jpg"];
+const ART = "/themes/art/surel";
 const DEMO_WISHLIST = [["Stand mixer", "Rp2.150.000"], ["Rak buku kayu", "Rp980.000"], ["Smart TV 43\"", "Rp3.400.000"]];
 // Decorative inbox rows around the invitation email (flavour only, not invitation data).
 const INBOX_BEFORE = [{ from: "Kantor", time: "08.12", subject: "Re: Laporan bulanan", snippet: "Baik, akan saya kirim hari ini…" }];
@@ -150,6 +151,11 @@ export default function SurelTheme({ data, slug, guestToken, demo, skipCover }: 
         </div>
 
         <div className={s.letter}>
+          <div className={s.banner} aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static painted e-mail header */}
+            <img src={`${ART}/banner.webp`} alt="" width={860} height={300} loading="lazy" decoding="async" draggable={false} data-nolightbox />
+            <span><small>Undangan {label}</small><b>{couple}</b></span>
+          </div>
           <p>Dengan hormat,<br /><br />Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada {label.toLowerCase()} kami:</p>
           <p className={s.names}>
             {data.couple.brideFull ?? data.couple.bride}

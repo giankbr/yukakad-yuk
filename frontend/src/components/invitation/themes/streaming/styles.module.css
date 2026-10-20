@@ -31,7 +31,10 @@
 .picker h1 { font-size: 24px; font-weight: 600; text-align: center; }
 .guest { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .guestAvatar { display: grid; place-items: center; width: 132px; height: 132px; border: 3px solid #fff; border-radius: 8px; background: linear-gradient(225deg, #e50914 0%, #831010 100%); transition: transform 350ms var(--m-spring), border-color 200ms, box-shadow 300ms; animation: rise 700ms 250ms var(--m-spring, ease) both; }
-.guestAvatar > svg { animation: blink 4.5s 1.5s ease-in-out infinite; transform-origin: 50% 40%; }
+.guestAvatar > img { width: 96px; height: auto; animation: blink 4.5s 1.5s ease-in-out infinite; transform-origin: 50% 60%; }
+.others i > img { width: 44px; height: auto; }
+.navIcons i > img { width: 18px; height: auto; }
+.avatar > img { width: 22px; height: auto; }
 .guest:hover .guestAvatar { transform: scale(1.06); box-shadow: 0 0 0 4px rgba(255, 255, 255, .12), 0 16px 40px rgba(229, 9, 20, .35); }
 .guestName { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 300px; max-width: 100%; text-align: center; }
 .guestName small { color: var(--muted); font-size: 12px; }
@@ -261,7 +264,7 @@
 @keyframes thumb { 0% { scale: 1; rotate: 0deg; } 40% { scale: 1.4; rotate: -18deg; } 100% { scale: 1; rotate: 0deg; } }
 @keyframes tilt { 0%, 84%, 100% { rotate: 0deg; } 88% { rotate: -10deg; } 94% { rotate: 8deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .coverNav .logo, .guestAvatar > svg, .others > span, .top10 > span, .playBtn:hover > svg, .premiereHead > svg, [data-revealed] .thumbBar i, .liveDot::after,
+  .coverNav .logo, .guestAvatar > img, .others > span, .top10 > span, .playBtn:hover > svg, .premiereHead > svg, [data-revealed] .thumbBar i, .liveDot::after,
   .trPlay:not([aria-pressed="true"])::after, .trailer[data-playing] > img, .trailer[data-playing] .trBar i, .trailer[data-playing] .trBar b, .allGrid > *,
   .gift:not(.giftPlain)::after, .copy[data-copied], .input span::after, .likeBtn[aria-pressed="true"] svg, .rsvp > svg, .tabBar > .tabActive::after { animation: none !important; }
   .guestAvatar { animation: none; transition: none; }

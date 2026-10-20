@@ -18,7 +18,8 @@ const DEMO_WISHES = [
   { id: "w1", name: "Yoga P.", message: "Halaman paling rapi yang pernah kubuka. Hadir!", created_at: new Date(Date.now() - 2 * 3600e3).toISOString() },
   { id: "w2", name: "Bu Rukmini", message: "Terharu lihat dokumentasinya. Sampai jumpa di BSD!", created_at: new Date(Date.now() - 5 * 3600e3).toISOString() },
 ];
-const DEMO_FILES = ["kisah-01.jpg", "lamaran.jpg", "prewed.jpg"];
+const DEMO_FILES = ["kisah-01.jpg", "lamaran.jpg", "prewed.jpg", "pagi-bsd.jpg"];
+const ART = "/themes/art/dokumen";
 const DEMO_TODO: Array<[string, boolean]> = [["Robot vacuum — Rp3.200.000", false], ["Set gelas kristal — Rp780.000", true], ["Coffee maker — Rp1.450.000", false]];
 
 
@@ -40,8 +41,7 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
   const sheets = useSheets();
   const { copy, copied } = useCopy();
   const stories = storyItems(data);
-  const banner = data.gallery[0];
-  const gallery = data.gallery.length > 3 ? data.gallery.slice(1) : data.gallery;
+  const gallery = data.gallery;
   const [shared, setShared] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const [todo, setTodo] = useState<Record<string, boolean>>(() => Object.fromEntries(DEMO_TODO));
@@ -66,9 +66,13 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.banner} aria-hidden><Photo src={banner} /></div>
+          <div className={s.banner} aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static painted page cover */}
+            <img src={`${ART}/cover.webp`} alt="" width={900} height={330} loading="eager" fetchPriority="high" decoding="async" draggable={false} data-nolightbox />
+          </div>
           <div className={s.page}>
-            <span className={s.pageIcon} aria-hidden>💍</span>
+            {/* eslint-disable-next-line @next/next/no-img-element -- painted page icon, static asset */}
+            <img className={s.pageIcon} src={`${ART}/ring.webp`} alt="" aria-hidden width={94} height={117} loading="eager" draggable={false} data-nolightbox />
             <nav className={s.crumb} aria-label="Lokasi halaman"><span>Keluarga</span>/<span>Momen Besar</span>/<b>{label}</b></nav>
             <h1 className={s.title}>{title}<span className={s.caret} aria-hidden /></h1>
             <dl className={s.props}>
@@ -109,7 +113,10 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
       )}
     >
       <header className={s.nav}>
-        <span className={s.navTitle}><span aria-hidden>💍</span>{title}</span>
+        <span className={s.navTitle}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- painted page icon, static asset */}
+          <img src={`${ART}/ring.webp`} alt="" aria-hidden width={94} height={117} loading="lazy" draggable={false} data-nolightbox />{title}
+        </span>
         <span className={s.navIcons}>
           <button type="button" onClick={share} aria-label={shared ? "Tautan disalin" : "Bagikan undangan"}><Lucide icon={shared ? ic.check : ic.share2} size={17} color="#787774" /></button>
           <button type="button" onClick={sheets.openWish} aria-label="Tulis komentar"><Lucide icon={ic.messageSquare} size={17} color="#787774" /></button>
@@ -178,7 +185,7 @@ export default function DokumenTheme({ data, slug, guestToken, demo, skipCover }
         {gallery.length > 0 && (
           <section className={s.section} aria-labelledby="dk-gallery">
             <Heading emoji="🖼" id="dk-gallery">Galeri</Heading>
-            <div className={s.gallery}>
+            <div className={s.gallery} data-even={gallery.length % 3 !== 0 && gallery.length % 2 === 0 ? "" : undefined}>
               {gallery.map((src, index) => {
                 const name = demo && DEMO_FILES[index] ? DEMO_FILES[index] : `foto-${String(index + 1).padStart(2, "0")}.jpg`;
                 return (

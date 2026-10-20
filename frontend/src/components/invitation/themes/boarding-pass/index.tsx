@@ -14,6 +14,17 @@ const tint: ThemeTint = {
   "--t-accent": "#f4a000", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#13293d", "--t-muted": "#5e748a",
   "--t-line": "#dae3ee", "--t-field": "#f4f7fb", "--t-radius": "10px", "--t-font": "Barlow, system-ui, sans-serif",
 };
+const ART = "/themes/art/boarding-pass";
+
+/** Decorative painted image (never opens the photo lightbox). */
+function Art({ src, className, w, h, eager }: { src: string; className?: string; w: number; h: number; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
+
 const BARCODE = [2, 1, 3, 1, 1, 2, 3, 1, 2, 1, 1, 3, 2, 1, 2, 2, 1, 3, 1, 1, 2, 1, 3, 2, 1, 1, 2, 3, 1, 2, 1, 2, 1, 1, 3, 2, 1, 2, 1, 3];
 const DEMO_WISHES = [
   { id: "w1", name: "Pak Surya", message: "Penerbangan paling dinanti tahun ini. Kru-nya serasi. ★★★★★", created_at: new Date(Date.now() - 3 * 3600e3).toISOString() },
@@ -48,7 +59,6 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
   const wishes = useWishes({ slug, guestToken, demo, seed: DEMO_WISHES });
   const sheets = useSheets();
   const { copy, copied } = useCopy();
-  const sky = data.gallery[0];
   const gallery = data.gallery.length > 3 ? data.gallery.slice(1) : data.gallery;
   const firstEvent = data.events[0]?.name?.toLowerCase();
   const statusLine = countdown.done ? "STATUS: SUDAH MENDARAT" : <>STATUS: ON TIME · {countdown.ready ? <Tick value={Number(countdown.days)} /> : "–"} HARI MENUJU BOARDING</>;
@@ -71,7 +81,8 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.sky} aria-hidden><Photo src={sky} /></div>
+          <div className={s.sky} aria-hidden><Art src="sky" w={780} h={1200} eager /><span className={s.plane} /></div>
+          <span className={s.clouds} aria-hidden />
           <header className={s.coverHead}>
             <span>RAWUH AIR</span>
             <h1>Boarding Pass {data.eventLabel ?? "Pernikahan"}</h1>
@@ -99,6 +110,7 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
               <span>{demo ? "Kursi VIP · Zona Keluarga" : "Kepada Yth. Bapak/Ibu/Saudara/i"}</span>
             </div>
             <div className={s.barcode} aria-hidden>{BARCODE.map((w, i) => <i key={i} style={{ width: w }} />)}<span className={s.scan} /></div>
+            <Art src="stamp" className={s.stamp} w={260} h={259} eager />
           </article>
           <div className={s.coverSpacer} />
           <button type="button" className={s.checkIn} onClick={open}><Lucide icon={ic.scanLine} size={17} color="#fff" />Check-in — Buka Undangan</button>
@@ -163,6 +175,8 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
           </div>
         </section>
 
+        <Art src="divider" className={s.divider} w={360} h={30} />
+
         <section className={s.section} aria-labelledby="bp-events">
           <h2 id="bp-events">Jadwal Keberangkatan</h2>
           {data.events.map((event, index) => {
@@ -200,8 +214,9 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
         <Extras slot="end" className={s.extras} />
 
         {(demo || data.gifts.length > 0) && (
-          <section className={s.section} aria-labelledby="bp-gift">
+          <section className={`${s.section} ${s.giftSection}`} aria-labelledby="bp-gift">
             <h2 id="bp-gift">Bagasi Kado</h2>
+            <Art src="luggage" className={s.luggage} w={220} h={185} />
             {demo && DEMO_BAGGAGE.map(item => (
               <div key={item.name} className={`${s.bag} ${picked.includes(item.name) ? s.bagOn : ""}`}>
                 <span className={s.bagIcon}><Lucide icon={item.icon} size={17} color="#0b2545" /></span>
@@ -228,6 +243,8 @@ export default function BoardingPassTheme({ data, slug, guestToken, demo, skipCo
             })}
           </section>
         )}
+
+        <Art src="divider" className={s.divider} w={360} h={30} />
 
         <section className={s.section} aria-labelledby="bp-wishes">
           <h2 id="bp-wishes">Ulasan Penumpang</h2>

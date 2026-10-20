@@ -87,7 +87,7 @@
 @keyframes vv-watch { from { width: 0; } }
 .liveDot { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 999px; background: var(--pink); vertical-align: 1px; animation: vv-live 1.6s ease-in-out infinite; }
 @keyframes vv-live { 50% { opacity: .25; scale: .7; } }
-.thumbFinal { border-color: var(--pink); background: linear-gradient(310deg, #fe2c55 0%, #25060f 100%); box-shadow: 0 0 0 0 rgba(254, 44, 85, .5); }
+.thumbFinal { border-color: var(--pink); background: url(/themes/art/video-vertikal/thumb-final.webp) center / cover, #25060f; box-shadow: 0 0 0 0 rgba(254, 44, 85, .5); }
 .partText { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .partText strong { font-size: 13px; font-weight: 700; overflow-wrap: anywhere; }
 .partText small { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 3; -webkit-box-orient: vertical; color: var(--muted); font-size: 11px; line-height: 1.35; }
@@ -109,10 +109,10 @@
 .tiers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
 .tier { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 12px 0 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: #fff; transition: border-color 200ms, background-color 200ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .tier:hover { border-color: #3a3a3a; }
-.tier > span { font-size: 22px; transition: scale 300ms var(--m-spring), rotate 300ms var(--m-spring); }
-.tier:hover > span { scale: 1.15; rotate: -8deg; }
+.tier > img { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .45)); transition: scale 300ms var(--m-spring), rotate 300ms var(--m-spring); }
+.tier:hover > img { scale: 1.15; rotate: -8deg; }
 .tier[aria-pressed="true"] { border-color: var(--pink); background: rgba(254, 44, 85, .14); }
-.tier[aria-pressed="true"] > span { animation: vv-gift 620ms var(--m-spring); }
+.tier[aria-pressed="true"] > img { animation: vv-gift 620ms var(--m-spring); }
 @keyframes vv-gift { 0% { scale: 1; } 30% { scale: 1.5; translate: 0 -8px; rotate: -12deg; } 60% { scale: .9; translate: 0 0; rotate: 6deg; } 100% { scale: 1; rotate: 0deg; } }
 .tier strong { font-size: 11px; font-weight: 800; }
 .tier small { color: var(--muted); font-size: 10px; }
@@ -149,5 +149,5 @@
 .rsvpBtn:hover { filter: brightness(1.08); }
 @media (prefers-reduced-motion: reduce) {
   .root *, .cover * { transition: none !important; }
-  .marquee > span, .progress i, .beat, .disc, .followOn, .watch, .part[data-revealed] .watch, .liveDot, .tier[aria-pressed="true"] > span, .beri[aria-pressed="true"], .salin[data-done], .cLike[aria-pressed="true"] svg { animation: none !important; }
+  .marquee > span, .progress i, .beat, .disc, .followOn, .watch, .part[data-revealed] .watch, .liveDot, .tier[aria-pressed="true"] > img, .beri[aria-pressed="true"], .salin[data-done], .cLike[aria-pressed="true"] svg { animation: none !important; }
 }

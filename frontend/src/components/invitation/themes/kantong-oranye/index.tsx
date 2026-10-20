@@ -30,6 +30,7 @@ const POCKETS = [
 ];
 const TIERS = ["Rp100rb", "Rp300rb", "Rp1jt", "Bebas"];
 const YEAR_BG = ["#fdf0d2", "#fbefcb", "#e8f7ee"];
+const ART = "/themes/art/kantong-oranye";
 const NAV = [
   { label: "Beranda", icon: ic.landmark }, { label: "Kantong", icon: ic.wallet, active: true },
   { label: "Transaksi", icon: ic.arrowLeftRight }, { label: "Kartu", icon: ic.creditCard }, { label: "Lainnya", icon: ic.ellipsis },
@@ -84,7 +85,11 @@ export default function KantongOranyeTheme({ data, slug, guestToken, demo, skipC
         <section className={s.cover}>
           <div className={s.coverHead}>
             <div className={s.notif}>
-              <span className={s.appIcon} aria-hidden><i className={s.coin} /><Lucide icon={ic.piggyBank} size={30} color="#f8a91b" /></span>
+              <span className={s.appIcon} aria-hidden>
+                <i className={s.coin} />
+                {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                <img src={`${ART}/piggy.webp`} alt="" width={50} height={38} loading="eager" fetchPriority="high" data-nolightbox />
+              </span>
               <h1>Kantong Baru Dibuat!</h1>
               <p>{couple} membuat kantong bersama</p>
             </div>

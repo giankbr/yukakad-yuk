@@ -19,13 +19,13 @@
 .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 
 /* ── Cover ── */
-.cover { display: flex; flex-direction: column; min-height: 100dvh; background: linear-gradient(180deg, #3b1ba8, #2b1480); color: #fff; }
+.cover { display: flex; flex-direction: column; min-height: 100dvh; background: #33179a url("/themes/art/poin-ungu/cover-bg.webp") center top / cover no-repeat; color: #fff; }
 .cover .status { padding: 14px 16px; }
 .coverBody { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 14px 24px; text-align: center; }
 .badge { position: relative; display: grid; place-items: center; width: 120px; height: 120px; border-radius: 999px; background: rgba(255, 255, 255, .08); animation: pop 700ms cubic-bezier(.2, 1.4, .4, 1) both; }
-.badge > span { position: relative; display: grid; place-items: center; width: 92px; height: 92px; overflow: hidden; border-radius: 999px; background: linear-gradient(315deg, #1fb24b, #ffc01e); box-shadow: 0 10px 30px rgba(255, 192, 30, .25); }
+.badge > span { position: relative; display: grid; place-items: center; width: 104px; height: 104px; overflow: hidden; border-radius: 999px; filter: drop-shadow(0 10px 18px rgba(255, 192, 30, .28)); }
 .badge > span::after { content: ""; position: absolute; inset: -20%; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .55) 50%, transparent 60%); translate: -100% 0; animation: shine 3.6s 1s ease-in-out infinite; }
-.badge svg { position: relative; animation: twinkle 2.4s 800ms var(--m-spring) infinite; }
+.badge img { position: relative; display: block; animation: medal 2.4s 800ms var(--m-spring) infinite; }
 .orbit { position: absolute; inset: 0; animation: spin 14s linear infinite; pointer-events: none; }
 .orbit b { position: absolute; width: 7px; height: 7px; border-radius: 999px; background: var(--gold); box-shadow: 0 0 10px var(--gold); }
 .orbit b:nth-child(1) { top: 2px; left: 50%; }
@@ -69,7 +69,7 @@
 .coverNote { color: var(--lilac-2); font-size: 11px; line-height: 16px; }
 
 /* ── Main ── */
-.header { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 44px; background: linear-gradient(280deg, #2e158f, #4f2bd1); color: #fff; }
+.header { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 44px; background: #3b1ba8 url("/themes/art/poin-ungu/header-bg.webp") center / cover no-repeat; color: #fff; }
 .hi { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .hi h1 { font-size: 18px; font-weight: 800; line-height: 27px; }
 .hi p { color: var(--lilac); font-size: 11px; line-height: 16px; }
@@ -141,13 +141,13 @@
 @keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (max-width: 370px) { .rsvp { font-size: 13px; } }
 @keyframes shine { 0% { translate: -100% 0; } 35%, 100% { translate: 100% 0; } }
-@keyframes twinkle { 0%, 70%, 100% { scale: 1; rotate: 0deg; } 80% { scale: 1.18; rotate: 12deg; } }
+@keyframes medal { 0%, 70%, 100% { scale: 1; rotate: 0deg; } 80% { scale: 1.08; rotate: -4deg; } }
 @keyframes spin { to { rotate: 360deg; } }
 @keyframes chip { from { opacity: 0; scale: .5; } }
 @keyframes bump { 0% { scale: 1; } 40% { scale: 1.18; } 100% { scale: 1; } }
 @keyframes float-up { 0% { opacity: 0; translate: 0 4px; } 25% { opacity: 1; } 100% { opacity: 0; translate: 0 -16px; } }
 @media (prefers-reduced-motion: reduce) {
-  .badge, .badge > span::after, .badge svg, .orbit, .histRow b, .openBtn::after, .pillBump, [data-revealed] > .tier::after, [data-revealed].mission .plus, [data-revealed] > .mission .plus,
+  .badge, .badge > span::after, .badge img, .orbit, .histRow b, .openBtn::after, .pillBump, [data-revealed] > .tier::after, [data-revealed].mission .plus, [data-revealed] > .mission .plus,
   .tukarBtn[aria-pressed="true"], .spent, .copyLabel { animation: none; }
   .openBtn, .tukar > *, .mission, .rsvp, .use { transition: none; }
 }

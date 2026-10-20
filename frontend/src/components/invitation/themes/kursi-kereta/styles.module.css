@@ -23,9 +23,13 @@
 
 /* ── Cover ── */
 .cover { display: flex; flex-direction: column; min-height: 100dvh; }
-.coverHead { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 16px; background: var(--grad); color: #fff; }
+.coverHead { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 46px; overflow: hidden; background: url("/themes/art/kursi-kereta/hero.webp") center bottom / cover no-repeat, var(--grad); color: #fff; }
+.coverHead > * { position: relative; }
+.coverHead h1 { text-shadow: 0 1px 8px rgba(26, 24, 92, .45); }
+/* painted KA train gliding along the rail painted into the hero */
+.coverHead > .heroTrain { position: absolute; left: 50%; bottom: 7px; width: 196px; height: 49px; margin-left: -98px; background: url("/themes/art/kursi-kereta/train.webp") no-repeat center / contain; filter: drop-shadow(0 3px 4px rgba(20, 16, 70, .35)); animation: glide-x 16s var(--m-ease) infinite alternate; }
 .coverHead h1 { font-size: 18px; font-weight: 800; line-height: 27px; }
-.form { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 14px; background: rgba(255, 255, 255, .08); }
+.form { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-radius: 14px; background: rgba(30, 30, 110, .32); backdrop-filter: blur(3px); }
 .formRow { display: flex; align-items: center; gap: 10px; }
 .formRow2 { padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, .15); }
 .formRow small { color: var(--mist); font-size: 8px; letter-spacing: 1.5px; line-height: 12px; text-transform: uppercase; }
@@ -49,7 +53,7 @@
 .seatRow { display: flex; align-items: center; gap: 8px; }
 .seatRow > span { width: 12px; flex-shrink: 0; color: var(--muted); font-size: 10px; }
 .seatRow > b { flex: 1; height: 1px; }
-.seatRow > i, .seatRow > button { flex: 1; min-width: 0; display: grid; place-items: center; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-style: normal; animation: seat-in 480ms var(--m-spring) both; animation-delay: calc(300ms + var(--i, 0) * 45ms); }
+.seatRow > i, .seatRow > button { flex: 1; min-width: 0; display: grid; place-items: center; height: 36px; padding: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-style: normal; animation: seat-in 480ms var(--m-spring) both; animation-delay: calc(300ms + var(--i, 0) * 45ms); }
 .seatRow > .seatFree { color: var(--mist); transition: background 200ms, border-color 200ms, color 200ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .seatRow > .seatFree small { font-size: 9px; font-weight: 700; opacity: 0; transition: opacity 200ms; }
 .seatRow > .seatFree:hover { border-color: var(--orange); background: var(--tan-soft); }
@@ -62,7 +66,8 @@
 .legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 .legend span { display: flex; align-items: center; gap: 5px; color: var(--muted); font-size: 10px; line-height: 15px; }
 .legend i { width: 10px; height: 10px; border-radius: 3px; }
-.kepada { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.kepada { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 12px 66px 12px 14px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.stamp { position: absolute; right: -8px; top: 50%; width: 76px; height: auto; margin-top: -38px; rotate: -12deg; opacity: .78; mix-blend-mode: multiply; pointer-events: none; }
 .kepada small { color: var(--blue); font-size: 9px; font-weight: 800; letter-spacing: 2px; line-height: 14px; text-transform: uppercase; }
 .kepada strong { font-size: 16px; font-weight: 800; line-height: 24px; overflow-wrap: anywhere; }
 .kepada p { color: var(--muted); font-size: 11px; line-height: 16px; }
@@ -71,12 +76,13 @@
 .bottom .orange { box-shadow: none; }
 
 /* ── Main ── */
-.top { background: var(--grad); color: #fff; }
+.top { background: linear-gradient(rgba(36, 44, 160, .38), rgba(36, 44, 160, .38)), url("/themes/art/kursi-kereta/hero.webp") center 8% / cover no-repeat, var(--grad); color: #fff; }
+.top h1 { text-shadow: 0 1px 8px rgba(26, 24, 92, .45); }
 .top .status { padding: 14px 16px; }
 .nav { display: flex; flex-direction: column; gap: 2px; padding: 4px 16px 14px; }
 .nav h1 { font-size: 18px; font-weight: 800; line-height: 27px; }
 .nav p { color: var(--mist); font-size: 12px; line-height: 18px; }
-.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; }
+.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; background: url("/themes/art/kursi-kereta/paper.webp") repeat; background-size: 256px; }
 .pass { overflow: hidden; border-radius: 16px; background: #fff; box-shadow: 0 8px 22px rgba(25, 34, 79, .1); }
 .passHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; background: linear-gradient(270deg, #3d5be9, #7b4de6); color: #fff; }
 .passHead span { font-size: 10px; font-weight: 800; letter-spacing: 1px; line-height: 15px; text-transform: uppercase; }
@@ -95,7 +101,8 @@
 .mapBtn:hover svg { animation: hop 520ms var(--m-spring); }
 /* Extra sections: hosted in a white app card like the theme's own sections. */
 .root .extras { gap: 28px; padding: 20px 16px; border-radius: 16px; background: #fff; color: var(--ink); }
-.card { display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(25, 34, 79, .04); }
+.card { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 18px 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(25, 34, 79, .04); }
+.luggage { position: absolute; top: -20px; right: 92px; width: 62px; height: auto; rotate: 8deg; filter: drop-shadow(0 4px 5px rgba(25, 34, 79, .18)); pointer-events: none; }
 .head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .head h2 { font-size: 18px; font-weight: 800; line-height: 1.3; letter-spacing: -.01em; }
 .head > span { padding: 2px 8px; border-radius: 999px; background: var(--line-2); }
@@ -158,13 +165,14 @@
 .scan { position: absolute; left: 6px; right: 6px; top: 6px; height: 2px; border-radius: 2px; background: var(--orange); box-shadow: 0 0 8px 2px rgba(247, 148, 30, .5); animation: scan 3.2s ease-in-out infinite; }
 @keyframes seat-in { from { scale: .6; opacity: 0; } to { scale: 1; opacity: 1; } }
 @keyframes seat-pick { 0% { scale: .85; } 55% { scale: 1.12; } 100% { scale: 1; } }
+@keyframes glide-x { from { translate: -70px 0; } to { translate: 70px 0; } }
 @keyframes glide { 0%, 100% { translate: -4px 0; } 50% { translate: 4px 0; } }
 @keyframes blink { 50% { opacity: .35; } }
 @keyframes scan { 0%, 100% { top: 6px; } 50% { top: calc(100% - 8px); } }
 @keyframes pop { 0% { scale: .8; } 60% { scale: 1.12; } 100% { scale: 1; } }
 @keyframes hop { 0%, 100% { translate: 0 0; rotate: 0deg; } 35% { translate: 0 -5px; rotate: -8deg; } 70% { translate: 0 1px; rotate: 4deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .result, .seatmap, .seatRow > i, .seatRow > button, .seatRow > .seatPicked, .arrow, .availDot, .scan, .small.done, .itemOn .itemIcon, .mapBtn:hover svg { animation: none; }
+  .result, .seatmap, .seatRow > i, .seatRow > button, .seatRow > .seatPicked, .arrow, .availDot, .scan, .small.done, .itemOn .itemIcon, .mapBtn:hover svg, .coverHead > .heroTrain { animation: none; }
   .scan { display: none; }
   .orange, .mapBtn, .grid img, .grid figure > div { transition: none; }
 }

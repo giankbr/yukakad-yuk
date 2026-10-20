@@ -12,6 +12,16 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Mulish:wght@400;600;700;800"];
+const ART = "/themes/art/rencana-perjalanan";
+
+/** Painted ornament (decorative: hidden from AT and the photo lightbox). */
+function Art({ src, w, h, className, eager }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+  );
+}
 const tint: ThemeTint = {
   "--t-accent": "#ff5e1f", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1f2a37", "--t-muted": "#687176", "--t-line": "#e4eef7",
   "--t-field": "#f3f8fc", "--t-radius": "12px", "--t-font": "'Mulish', system-ui, sans-serif",
@@ -85,7 +95,8 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
       cover={open => (
         <section className={s.cover}>
           <div className={s.hero}>
-            <Photo src={hero} alt={`Foto ${couple}`} className={s.heroImg} />
+            {/* painted coast scene shows through when there is no cover photo */}
+            {hero && <Photo src={hero} alt={`Foto ${couple}`} className={s.heroImg} />}
             <span className={s.dim} aria-hidden />
             <div className={s.heroText}>
               <small>Perjalanan Seumur Hidup</small>
@@ -100,6 +111,7 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
               <span className={s.searching} aria-hidden />
             </div>
             <div className={s.kepada}>
+              <Art src="stamps" w={240} h={146} className={s.stamps} eager />
               <small>Traveler Utama</small>
               <strong>{guestLabel(data)}</strong>
               <p>Semua biaya ditanggung kebahagiaan kami.</p>
@@ -119,12 +131,14 @@ export default function RencanaPerjalananTheme({ data, slug, guestToken, demo, s
           <h1>Itinerary Perjalananmu</h1>
           <p>{label} {couple} · {midDate}{where ? ` · ${where}` : ""}</p>
         </div>
+        <span className={s.topPlane} aria-hidden />
       </header>
 
       <main className={s.body}>
         {data.events.length > 0 && (
           <section className={s.card} aria-labelledby="rp-day">
             <div className={s.head}><h2 id="rp-day">Itinerary Hari H</h2>{dayTag && <span>{dayTag}</span>}</div>
+            <Art src="map" w={720} h={265} className={s.map} />
             <ol className={s.day}>
               {data.events.map((event, index) => {
                 const own = safeUrl(event.mapsUrl) || event.address ? mapsHref(data, event) : undefined;

@@ -11,7 +11,16 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Poppins:ital,wght@0,400;0,600;0,700;0,800;1,400"];
-const ART = "/themes/img/a57.webp";
+const ART = "/themes/art/pastel-flat";
+
+/** Painted gouache ornament (decorative: hidden from AT and the photo lightbox). */
+function Art({ src, w, h, className, eager }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted illustration
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+  );
+}
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const DEMO_LABELS = ["Piknik", "Kue", "Sepeda"];
 const DEMO_WISHES: Wish[] = [
@@ -45,7 +54,7 @@ function Head({ id, children }: { id: string; children: string }) {
   return (
     <div className={s.head}>
       <h2 id={id}>{children}</h2>
-      <span className={s.divider} aria-hidden><i /><b /><i /></span>
+      <span className={s.divider} aria-hidden><i /><Art src="cluster" w={160} h={63} className={s.spray} /><i /></span>
     </div>
   );
 }
@@ -123,7 +132,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={ART} /></div>
+          <div className={s.coverBg} aria-hidden><Art src="hero" w={780} h={1240} eager /></div>
           <div className={s.confetti} aria-hidden><i /><i /><i /><i /><i /><i /></div>
           <div className={s.coverContent}>
             <p className={s.coverKicker}>Simpan tanggalnya</p>
@@ -140,7 +149,7 @@ export default function PastelFlatTheme({ data, slug, guestToken, demo, skipCove
     >
       <main className={s.page}>
         <section className={s.opening} aria-label="Pembuka">
-          <div className={s.openingBg} aria-hidden><Photo src={ART} /></div>
+          <div className={s.openingBg} aria-hidden><Art src="hero" w={780} h={1240} /></div>
           <div className={s.openingText}>
             <p className={s.openingKicker}>{label}</p>
             <h1>{couple}</h1>

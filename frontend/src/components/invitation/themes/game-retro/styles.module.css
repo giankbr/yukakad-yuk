@@ -29,7 +29,8 @@
 .cover > :not(.coverBg) { position: relative; }
 .cover > .status { position: absolute; top: 0; left: 0; right: 0; }
 .hud { display: flex; justify-content: space-between; align-items: flex-start; margin: 48px 16px 0; font-family: var(--pixel); font-size: 8px; line-height: 1.7; }
-.hearts { color: var(--pink); font-size: 10px; animation: pulse 1.2s steps(2) infinite; }
+.hearts { display: flex; gap: 3px; animation: pulse 1.2s steps(2) infinite; }
+.hearts i { width: 14px; height: 12px; background: url("/themes/art/game-retro/heart.webp") center / contain no-repeat; image-rendering: pixelated; }
 .coverSpace { flex: 1 1 235px; min-height: 140px; }
 .title { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 12px; text-align: center; }
 .title h1 { color: var(--yellow); font-family: var(--pixel); font-size: 26px; font-weight: 400; line-height: 1.7; text-shadow: 3px 3px 0 #000; overflow-wrap: anywhere; }
@@ -56,7 +57,7 @@
 .nav { display: flex; justify-content: space-between; align-items: center; padding: 0 16px 12px; }
 .nav h1 { color: var(--yellow); font-family: var(--pixel); font-size: 11px; font-weight: 400; line-height: 1.7; }
 .coins { display: flex; align-items: center; gap: 6px; font-family: var(--pixel); font-size: 8px; line-height: 1.7; }
-.coin { width: 14px; height: 14px; border: 2px solid #b8860b; border-radius: 50%; background: var(--yellow); animation: coin-spin 1.6s steps(4) infinite; }
+.coin { width: 16px; height: 16px; background: url("/themes/art/game-retro/coin.webp") center / contain no-repeat; image-rendering: pixelated; animation: coin-spin 1.6s steps(4) infinite; }
 .coins { position: relative; }
 .bagCount { position: absolute; right: -6px; top: -14px; padding: 1px 4px; background: var(--pink); color: #fff; font-family: var(--pixel); font-size: 6px; font-weight: 400; line-height: 1.7; animation: pop-up 420ms var(--m-spring) both; }
 .body { display: flex; flex-direction: column; gap: 30px; padding: 8px 16px 112px; }
@@ -119,12 +120,13 @@
 .item { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; border: 2px solid var(--yellow); background: var(--panel); color: #fff; transition: background 160ms, color 160ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .item[aria-pressed="true"] { background: var(--yellow); color: var(--bg); }
 .item[aria-pressed="true"] span { color: var(--bg); }
-.item[aria-pressed="true"] .coinSm { background: var(--bg); }
-.item[aria-pressed="true"] svg { animation: hop 480ms var(--m-spring); }
+.item[aria-pressed="true"] .sprite { animation: hop 480ms var(--m-spring); }
 .plus { position: absolute; top: -4px; right: 6px; color: var(--pink); font-family: var(--pixel); font-size: 8px; font-style: normal; text-shadow: 1px 1px 0 #000; animation: float-up 900ms var(--m-ease) both; pointer-events: none; }
 .item strong { width: 100%; font-family: var(--pixel); font-size: 6.5px; font-weight: 400; line-height: 1.7; text-align: center; }
 .item span { display: flex; align-items: center; gap: 4px; color: var(--yellow); font-family: var(--pixel); font-size: 7px; line-height: 1.7; }
-.coinSm { width: 10px; height: 10px; border-radius: 50%; background: var(--yellow); }
+.coinSm { width: 11px; height: 11px; background: url("/themes/art/game-retro/coin.webp") center / contain no-repeat; image-rendering: pixelated; }
+.sprite { width: 44px; height: 44px; image-rendering: pixelated; filter: drop-shadow(2px 2px 0 var(--deep)); }
+.item[aria-pressed="true"] .sprite { filter: drop-shadow(2px 2px 0 rgba(26, 16, 64, .35)); }
 .shopNote { color: var(--muted); font-size: 14px; }
 .cash { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid var(--green); background: #0e3b2e; }
 .cashText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
@@ -160,7 +162,7 @@
 @keyframes twinkle { 0%, 80% { opacity: 1; } 90% { opacity: .35; } }
 @keyframes boss { 50% { border-color: var(--yellow); } }
 @media (prefers-reduced-motion: reduce) {
-  .press, .hearts, .coin, .bagCount, .blk, .caret, .plus, .copyLabel, .pickBtn[aria-pressed="true"], .char[data-picked] .charImg, .item[aria-pressed="true"] svg,
+  .press, .hearts, .coin, .bagCount, .blk, .caret, .plus, .copyLabel, .pickBtn[aria-pressed="true"], .char[data-picked] .charImg, .item[aria-pressed="true"] .sprite,
   [data-revealed] .bar b, [data-revealed] .star, [data-revealed] .finalRow, .laterBtn:hover::before { animation: none; }
   .startBtn, .startBtn:hover, .char[data-picked] { translate: none; }
 }

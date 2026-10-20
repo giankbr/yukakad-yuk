@@ -95,8 +95,16 @@ function Filmstrip({ images }: { images: string[] }) {
   );
 }
 
+// Hand-painted raster art (rendered by /tmp/pen/art/themes/bali-kuning.py): gouache candi bentar, watercolour kamboja.
+const ART = { cover: [680, 634], spray: [241, 282], flower: [88, 91], divider: [340, 60] } as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/bali-kuning/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+);
+
 function Divider() {
-  return <span className={s.divider} aria-hidden><i /><b /><i /></span>;
+  return <Art name="divider" className={s.divider} />;
 }
 
 function Head({ id, children }: { id: string; children: string }) {
@@ -151,7 +159,8 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
+          <div className={s.coverBg} aria-hidden><Art name="cover" className={s.coverArt} eager /></div>
+          <span className={s.polengBand} aria-hidden />
           <div className={s.coverBorder} aria-hidden />
           <div className={s.coverContent}>
             <p className={s.kicker}>{coverLabel.toUpperCase()}</p>
@@ -181,6 +190,8 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
         <Extras slot="opening" />
 
         <section className={`${s.section} ${s.alt}`} aria-labelledby="bk-couple">
+          <Art name="spray" className={`${s.spray} ${s.sprayL}`} />
+          <Art name="spray" className={`${s.spray} ${s.sprayR}`} />
           <Head id="bk-couple">Mempelai</Head>
           <p className={s.lead}>Atas asung kertha wara nugraha Ida Sang Hyang Widhi Wasa, kami mengundang Anda pada upacara Pawiwahan putra-putri kami:</p>
           <div className={s.overlap}>
@@ -320,6 +331,9 @@ export default function BaliKuningTheme({ data, slug, guestToken, demo, skipCove
         </section>
 
         <footer className={s.closing}>
+          <span className={`${s.polengBand} ${s.polengTop}`} aria-hidden />
+          <Art name="spray" className={`${s.spray} ${s.sprayBL}`} />
+          <Art name="spray" className={`${s.spray} ${s.sprayBR}`} />
           <h2>Terima Kasih</h2>
           <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
           <p className={s.families}>KELUARGA BESAR<br />{families.join(" & ").toUpperCase()}</p>

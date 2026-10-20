@@ -18,15 +18,12 @@ const DEMO_WISHES: (Wish & { likes?: string })[] = [
   { id: "w1", name: "bestie.zahra", message: "INI YANG DITUNGGU-TUNGGU!! hadir dong", created_at: new Date(Date.now() - 2 * 3600e3).toISOString(), likes: "4.2rb" },
   { id: "w2", name: "bang.dul", message: "dari part 1 gue udah bilang bakal nikah. telat tapi selamat!", created_at: new Date(Date.now() - 5 * 3600e3).toISOString(), likes: "980" },
 ];
-const THUMBS = [
-  "linear-gradient(310deg, #fe2c55 0%, #8a1538 100%)",
-  "linear-gradient(310deg, #25f4ee 0%, #0e6e8c 100%)",
-  "linear-gradient(310deg, #b06bff 0%, #4a2580 100%)",
-];
+/* Painted series thumbnails + gift stickers live in /public/themes/art/video-vertikal (gouache, 2x). */
+const THUMBS = [0, 1, 2].map(i => `url(/themes/art/video-vertikal/thumb-${i}.webp) center / cover`);
 const DEMO_VIEWS = ["890rb ditonton", "1,1jt ditonton", "2,4jt ditonton"];
 const WATCHED = ["100%", "100%", "100%", "82%", "64%"];
 const GRID_VIEWS = ["1,2jt", "890rb", "2,4jt"];
-const TIERS = [["🌹", "Mawar", "Rp10rb"], ["🧸", "Boneka", "Rp100rb"], ["🦁", "Singa", "Rp500rb"], ["🌌", "Galaxy", "Rp1jt"]];
+const TIERS = [["mawar", "Mawar", "Rp10rb"], ["boneka", "Boneka", "Rp100rb"], ["singa", "Singa", "Rp500rb"], ["galaxy", "Galaxy", "Rp1jt"]];
 const WISHLIST = [
   { name: "Kasur & Sprei Set", price: "Rp2.100.000", icon: ic.bedDouble },
   { name: "Microwave", price: "Rp1.300.000", icon: ic.microwave },
@@ -214,10 +211,12 @@ export default function VideoVertikalTheme({ data, slug, guestToken, demo, skipC
             {demo && (
               <>
                 <div className={s.tiers}>
-                  {TIERS.map(([emoji, name, price]) => (
+                  {TIERS.map(([art, name, price]) => (
                     <button key={name} type="button" className={s.tier} aria-pressed={tier === name}
                       onClick={() => { setTier(t => (t === name ? null : name)); if (tier !== name) toast(`Gift ${name} dipilih`); }}>
-                      <span aria-hidden>{emoji}</span><strong>{name}</strong><small>{price}</small>
+                      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                      <img src={`/themes/art/video-vertikal/gift-${art}.webp`} alt="" aria-hidden width={36} height={36} loading="lazy" decoding="async" data-nolightbox />
+                      <strong>{name}</strong><small>{price}</small>
                     </button>
                   ))}
                 </div>

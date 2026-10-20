@@ -25,6 +25,7 @@ const DEMO_WISHLIST = [
   { name: "Kursi Santai", note: "36.000 poin ≈ Rp1.800.000", icon: ic.armchair },
 ];
 
+const ART = "/themes/art/poin-ungu";
 const fmt = (n: number) => n.toLocaleString("id-ID");
 
 /** Counts 0 → target once on mount (skipped under reduced motion); null means "show the final value". */
@@ -97,7 +98,10 @@ export default function PoinUnguTheme({ data, slug, guestToken, demo, skipCover 
         <section className={s.cover}>
           <div className={s.coverBody}>
             <div className={s.badge} aria-hidden>
-              <span><Lucide icon={ic.sparkles} size={40} color="#fff" /></span>
+              <span>
+                {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                <img src={`${ART}/medal.webp`} alt="" width={104} height={104} loading="eager" fetchPriority="high" data-nolightbox />
+              </span>
               <i className={s.orbit}><b /><b /><b /></i>
             </div>
             <p className={s.congrats}>Selamat! Kamu dapat</p>

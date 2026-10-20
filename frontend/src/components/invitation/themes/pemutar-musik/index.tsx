@@ -18,6 +18,12 @@ const DEMO_WISHES = [
   { id: "w1", name: "Bude Retno", message: "Album terbaik tahun ini! Track 2 bikin merinding. Pasti hadir!", created_at: new Date(Date.now() - 3 * 3600e3).toISOString() },
   { id: "w2", name: "Yoga", message: "Sudah pre-save dari 2019. Akhirnya rilis juga. Selamat!", created_at: new Date(Date.now() - 7 * 3600e3).toISOString() },
 ];
+const ART = "/themes/art/pemutar-musik";
+const DEMO_GIFTS = [
+  { name: "Turntable Vinyl", price: "Rp2.750.000", art: "gift-turntable", w: 56, h: 40 },
+  { name: "Headphone Studio", price: "Rp1.900.000", art: "gift-headphones", w: 44, h: 42 },
+  { name: "Keyboard 61 Tuts", price: "Rp3.400.000", art: "gift-keyboard", w: 60, h: 29 },
+];
 const DEMO_VIDEOS = [{ title: "MV — Selamanya", length: "4:12" }, { title: "Sesi Akustik", length: "2:48" }, { title: "Di Balik Lagu", length: "6:30" }];
 
 function city(address: string) {
@@ -230,19 +236,18 @@ export default function PemutarMusikTheme({ data, slug, guestToken, demo, skipCo
 
         {(demo || data.gifts.length > 0) && (
           <section className={s.section} aria-labelledby="pm-kado">
-            <h2 id="pm-kado">{demo ? "Wishlist Kado" : "Kirim Kado"}</h2>
+            <h2 id="pm-kado">{demo ? "Tangga Lagu Kado" : "Kirim Kado"}</h2>
             {demo && (
               <>
                 <p className={s.lead}>Hadiah yang masuk tangga lagu kami</p>
                 <ol className={s.chart}>
-                  {[
-                    { name: "Turntable Vinyl", price: "Rp2.750.000", icon: ic.disc3 },
-                    { name: "Headphone Studio", price: "Rp1.900.000", icon: ic.headphones },
-                    { name: "Keyboard 61 Tuts", price: "Rp3.400.000", icon: ic.piano },
-                  ].map((item, index) => (
+                  {DEMO_GIFTS.map((item, index) => (
                     <li key={item.name}>
                       <b>#{index + 1}</b>
-                      <span className={s.chartIcon}><Lucide icon={item.icon} size={22} color="#fa2d48" /></span>
+                      <span className={s.chartIcon}>
+                        {/* eslint-disable-next-line @next/next/no-img-element -- static painted product illustration */}
+                        <img src={`${ART}/${item.art}.webp`} alt="" aria-hidden width={item.w} height={item.h} data-nolightbox loading="lazy" decoding="async" draggable={false} />
+                      </span>
                       <div><strong>{item.name}</strong><small>{item.price}</small></div>
                       <button type="button" className={`${s.pill} ${picked[item.name] ? s.pillOn : ""}`} aria-pressed={!!picked[item.name]} onClick={() => pick(item.name)}>
                         <span key={String(!!picked[item.name])} className={s.swap}>{picked[item.name] && <Lucide icon={ic.check} size={12} />}{picked[item.name] ? "Dipilih" : "Beri"}</span>

@@ -243,12 +243,13 @@ export default function MarketplaceTheme({ data, slug, guestToken, demo, skipCov
             {demo && (
               <div className={s.wishlist}>
                 {[
-                  { name: "Mesin Kopi Espresso", price: "Rp2.499.000", was: "Rp3.200.000", icon: ic.coffee, bg: "#fff3e8" },
-                  { name: "Sprei Katun Premium", price: "Rp689.000", was: "Rp899.000", icon: ic.bedDouble, bg: "#e5f7ee" },
-                  { name: "Set Panci Keramik", price: "Rp1.150.000", was: "Rp1.450.000", icon: ic.cookingPot, bg: "#feecef" },
+                  { name: "Mesin Kopi Espresso", price: "Rp2.499.000", was: "Rp3.200.000", art: "espresso", bg: "#fff3e8" },
+                  { name: "Sprei Katun Premium", price: "Rp689.000", was: "Rp899.000", art: "sprei", bg: "#e5f7ee" },
+                  { name: "Set Panci Keramik", price: "Rp1.150.000", was: "Rp1.450.000", art: "panci", bg: "#feecef" },
                 ].map(item => (
                   <button key={item.name} type="button" className={s.product} aria-pressed={cart.includes(item.name)} onClick={() => addToCart(item.name)}>
-                    <span className={s.productImg} style={{ background: item.bg }}><Lucide icon={item.icon} size={36} color="#212121" /><b className={s.addBadge} aria-hidden>{cart.includes(item.name) ? "✓" : "+"}</b></span>
+                    <span className={s.productImg} style={{ background: item.bg }}>{/* eslint-disable-next-line @next/next/no-img-element -- painted product art, static asset */}
+                      <img src={`/themes/art/marketplace/p-${item.art}.webp`} alt="" aria-hidden width={100} height={100} loading="lazy" data-nolightbox /><b className={s.addBadge} aria-hidden>{cart.includes(item.name) ? "✓" : "+"}</b></span>
                     <span className={s.productInfo}><span>{item.name}</span><strong>{item.price}</strong><span className={s.disc}><em>-22%</em><s>{item.was}</s></span></span>
                   </button>
                 ))}

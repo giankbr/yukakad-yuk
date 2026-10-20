@@ -16,7 +16,8 @@
 .statusIcons { display: flex; gap: 6px; }
 
 /* ── Cover ── */
-.cover { display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 54px; overflow: hidden; background: var(--grad); color: #fff; }
+/* painted backdrop (gouache wash + hand-cut hearts) over the brand gradient */
+.cover { display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 54px; overflow: hidden; background: url(/themes/art/kencan/cover-bg.webp) center top / cover no-repeat, var(--grad); color: #fff; }
 .cover > .status { align-self: stretch; }
 .match { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 45px; text-align: center; }
 .match h1 { font-family: Caveat, cursive; font-size: 58px; font-weight: 700; line-height: 1.25; animation: pop 600ms cubic-bezier(.2, .9, .3, 1.3) both; }
@@ -40,8 +41,8 @@
 .sparks i:nth-child(6) { --sx: 36px; --sy: 104px; }
 .info { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 330px; max-width: calc(100% - 32px); margin-top: 26px; text-align: center; }
 .info h2 { font-size: 26px; font-weight: 800; overflow-wrap: anywhere; }
-.info p { color: rgba(255, 255, 255, .9); font-size: 12px; line-height: 1.5; }
-.kepada { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 330px; max-width: calc(100% - 32px); margin-top: 4px; padding: 12px 14px; border-radius: 14px; background: #fff; text-align: center; }
+.info p { color: rgba(255, 255, 255, .9); font-size: 12px; line-height: 1.5; text-wrap: balance; }
+.kepada { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 330px; max-width: calc(100% - 32px); margin-top: 14px; padding: 12px 14px; border-radius: 14px; background: #fff; text-align: center; }
 .kepada small { color: var(--pink); font-size: 9px; font-weight: 700; letter-spacing: 2px; }
 .kepada strong { align-self: stretch; color: var(--ink); font-size: 16px; font-weight: 800; overflow-wrap: anywhere; }
 .coverBtns { display: flex; align-items: center; gap: 12px; width: 330px; max-width: calc(100% - 32px); margin-top: 32px; }
@@ -107,17 +108,19 @@
 .short { height: 120px; }
 .tiers { display: flex; gap: 8px; }
 .tier { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 0; border: 1.5px solid; border-radius: 14px; background: #fff; color: var(--ink); transition: background 250ms, box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
-.tierIcon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; transition: background 250ms, rotate 500ms var(--m-spring); }
+.tierIcon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 999px; transition: background 250ms, box-shadow 250ms, rotate 500ms var(--m-spring); }
+.tierIcon img { width: 34px; height: 34px; object-fit: contain; filter: drop-shadow(0 2px 3px rgba(33, 38, 46, .18)); }
 @media (hover: hover) { .tier:hover .tierIcon { rotate: -14deg; } }
 .tierOn { background: color-mix(in srgb, var(--tier) 10%, #fff); box-shadow: 0 10px 22px -12px var(--tier); }
-.tierOn .tierIcon { background: var(--tier); animation: boing 550ms var(--m-spring) both; }
+.tierOn .tierIcon { background: color-mix(in srgb, var(--tier) 16%, #fff); box-shadow: 0 0 0 2px var(--tier); animation: boing 550ms var(--m-spring) both; }
 .tier strong { font-size: 12px; font-weight: 800; }
 .tier small { color: var(--muted); font-size: 11px; }
 .wish { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; }
 .wish > div, .amplop > div { flex: 1; display: flex; flex-direction: column; min-width: 0; }
 .wish strong { font-size: 13px; font-weight: 700; }
 .wish small { color: var(--muted); font-size: 11px; }
-.wishIcon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px; background: #fff0f4; }
+.wishIcon { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; background: #fff0f4; }
+.wishIcon img { width: 40px; height: 40px; object-fit: contain; }
 .beri { display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0; padding: 7px 14px; border: 1.5px solid transparent; border-radius: 999px; background: var(--grad); color: #fff; font-size: 11px; font-weight: 800; transition: background 250ms, color 250ms, border-color 250ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .beriOn { border-color: var(--pink); background: #fff; color: var(--pink); animation: boing 500ms var(--m-spring) both; }
 .amplop { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: var(--grad); color: #fff; box-shadow: 0 12px 26px -16px rgba(253, 58, 115, .8); }

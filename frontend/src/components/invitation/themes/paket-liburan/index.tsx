@@ -11,6 +11,16 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Poppins:wght@400;600;700;800"];
+const ART = "/themes/art/paket-liburan";
+
+/** Painted ornament (decorative: hidden from AT and the photo lightbox). */
+function Art({ src, w, h, className, eager }: { src: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+  );
+}
 const tint: ThemeTint = {
   "--t-accent": "#0064d2", "--t-accent-ink": "#ffffff", "--t-bg": "#ffffff", "--t-ink": "#1e2a3b", "--t-muted": "#6e7a8f", "--t-line": "#e3eaf5",
   "--t-field": "#f0f4fb", "--t-radius": "12px", "--t-font": "'Poppins', system-ui, sans-serif",
@@ -100,6 +110,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
           <div className={s.coverHead}>
             <h1><span className={s.okBadge} aria-hidden><svg viewBox="0 0 24 24" width="16" height="16"><path d="M5 12.5l4.2 4.2L19 7" /></svg></span>Pesananmu Dikonfirmasi!</h1>
             <p>Order ID: {orderId} · Paket Selamanya</p>
+            <span className={s.heroPlane} aria-hidden />
           </div>
           <div className={s.coverBody}>
             <div className={s.order}>
@@ -109,6 +120,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
                   <strong>Paket Liburan Selamanya</strong>
                   <small>{couple} · {longDate}{where ? ` · ${where}` : ""}</small>
                 </div>
+                <Art src="stamp" w={200} h={199} className={s.postmark} eager />
               </div>
               <ul className={s.items}>
                 <OrderItem icon={ic.plane} title="1x Perjalanan Cinta" note="Lajang → Menikah · nonstop" tag="GRATIS" />
@@ -243,6 +255,7 @@ export default function PaketLiburanTheme({ data, slug, guestToken, demo, skipCo
         {(demo || data.gifts.length > 0) && (
           <section className={s.card} aria-labelledby="pl-gift">
             <div className={s.head}><h2 id="pl-gift">Tambah ke Pesanan · Kado</h2>{demo && <span>Wishlist</span>}</div>
+            <Art src="luggage" w={200} h={167} className={s.luggage} />
             {demo && DEMO_WISHLIST.map(item => (
               <div key={item.name} className={`${s.item} ${cart.includes(item.name) ? s.itemOn : ""}`}>
                 <span className={s.itemIcon} aria-hidden><Lucide icon={item.icon} size={17} color="#0064d2" /></span>

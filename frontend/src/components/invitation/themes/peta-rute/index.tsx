@@ -10,7 +10,7 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Roboto:wght@400;500;600;700"];
-const MAP = "/themes/img/r60.webp";
+const ART = "/themes/art/peta-rute";
 const tint: ThemeTint = {
   "--t-accent": "#1a73e8", "--t-bg": "#ffffff", "--t-ink": "#202124", "--t-muted": "#5f6368", "--t-line": "#dadce0",
   "--t-field": "#f1f3f4", "--t-radius": "10px", "--t-font": "Roboto, system-ui, sans-serif",
@@ -96,7 +96,10 @@ export default function PetaRuteTheme({ data, slug, guestToken, demo, skipCover 
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.map} aria-hidden><Photo src={MAP} /></div>
+          <div className={s.map} aria-hidden>
+            {/* eslint-disable-next-line @next/next/no-img-element -- static painted map */}
+            <img src={`${ART}/map.webp`} alt="" width={780} height={1690} loading="eager" fetchPriority="high" decoding="async" draggable={false} data-nolightbox />
+          </div>
           <div className={s.search}>
             <Lucide icon={ic.search} size={18} color="#5f6368" />
             <span>{title}</span>

@@ -39,6 +39,11 @@
 .tileAvatarTalk { box-shadow: 0 0 0 0 rgba(14, 114, 237, .5); animation: rv-ring 2.4s ease-out infinite; }
 @keyframes rv-ring { 0% { box-shadow: 0 0 0 0 rgba(14, 114, 237, .5); } 70%, 100% { box-shadow: 0 0 0 12px rgba(14, 114, 237, 0); } }
 .tileImg { position: absolute; inset: 0; width: 100%; height: 100%; }
+/* painted "virtual backgrounds" behind the avatar-only participants */
+.tileRoom, .tileGarden { background-position: center; background-size: cover; background-repeat: no-repeat; }
+.tileRoom { background-image: url("/themes/art/rapat-video/bg-room.webp"); }
+.tileGarden { background-image: url("/themes/art/rapat-video/bg-garden.webp"); }
+.tileRoom .tileAvatar, .tileGarden .tileAvatar { box-shadow: 0 4px 14px rgba(0, 0, 0, .45); }
 .tileAvatar { position: absolute; left: 50%; top: 35px; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 999px; background: var(--blue); font-size: 24px; font-weight: 800; transform: translateX(-50%); }
 .tileAvatarGrey { background: #6b7280; }
 .nameTag { position: absolute; left: 8px; bottom: 12px; display: flex; align-items: center; gap: 6px; max-width: calc(100% - 16px); padding: 3px 8px; border-radius: 6px; background: rgba(0, 0, 0, .7); font-size: 10px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

@@ -26,10 +26,20 @@ const DEMO_STATS = [
   [["Kesetiaan", 98], ["Strategi", 90], ["Nyanyi", 64]],
 ] as const;
 const ROLES = ["FIGHTER · SABAR", "SUPPORT · SETIA"];
+const ART = "/themes/art/arena-legenda";
+
+/** Painted (gouache / foil) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted ornament
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 const DEMO_SHOP = [
-  { name: "Kulkas 2 Pintu", rarity: "EPIC", price: "3.450", icon: ic.refrigerator, color: "#b06bff" },
-  { name: "Mesin Cuci", rarity: "ELITE", price: "2.890", icon: ic.washingMachine, color: "#39c5f3" },
-  { name: "Smart TV 50\"", rarity: "LEGEND", price: "4.100", icon: ic.tv, color: "#f0c96e" },
+  { name: "Kulkas 2 Pintu", rarity: "EPIC", price: "3.450", art: "item-fridge", w: 99, h: 140, color: "#b06bff" },
+  { name: "Mesin Cuci", rarity: "ELITE", price: "2.890", art: "item-washer", w: 104, h: 112, color: "#39c5f3" },
+  { name: "Smart TV 50\"", rarity: "LEGEND", price: "4.100", art: "item-tv", w: 104, h: 83, color: "#f0c96e" },
 ];
 
 
@@ -78,12 +88,13 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.bg} aria-hidden><Photo src="/themes/img/a103.webp" /></div>
+          <div className={s.bg} aria-hidden><Art name="cover" w={640} h={1400} eager /></div>
           <div className={s.match}>
             <h1>Pasangan Ditemukan!</h1>
             <p>DUO RANKED · SELAMANYA</p>
           </div>
           <div className={s.vs}>
+            <span className={s.rune} aria-hidden><Art name="rune" w={440} h={440} eager /></span>
             {heroes.map((hero, index) => (
               <div key={hero.key} className={s.vsHero} style={{ order: index === 0 ? 0 : 2 }}>
                 <span className={s.ring}><Photo src={hero.photo} alt={hero.name} /></span>
@@ -94,6 +105,7 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
             <div className={s.vsMid} aria-hidden><span>❤</span><b>&amp;</b></div>
           </div>
           <div className={s.rank}>
+            <Art name="crest" w={231} h={219} className={s.crest} eager />
             <small>NAIK PERINGKAT</small>
             <strong>MYTHIC PELAMINAN</strong>
             <span>{[longDate, where].filter(Boolean).join(" · ")}</span>
@@ -159,7 +171,7 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
             <Head id="al-story">RIWAYAT MUSIM</Head>
             {stories.map((story, index) => (
               <article key={story.title + index} className={s.season} style={{ "--i": index } as CSSProperties}>
-                <span className={s.badge} aria-hidden><Lucide icon={ic.shield} size={16} color="#f0c96e" />{story.date && <small>{story.date}</small>}</span>
+                <span className={s.badge} aria-hidden><Art name="shield" w={80} h={90} />{story.date && <small>{story.date}</small>}</span>
                 <div>
                   <h3>{story.title}</h3>
                   {story.date && <span className={s.srOnly}>{story.date}</span>}
@@ -226,7 +238,7 @@ export default function ArenaLegendaTheme({ data, slug, guestToken, demo, skipCo
                 <button key={item.name} type="button" className={s.item} aria-pressed={bought.includes(item.name)} onClick={() => buy(item.name)}
                   style={{ borderColor: `${item.color}66`, "--rc": item.color } as CSSProperties}>
                   <em style={{ color: item.color, background: `${item.color}26` }}>{item.rarity}</em>
-                  <span className={s.itemIcon} style={{ borderColor: item.color }}><Lucide icon={item.icon} size={24} color={item.color} /></span>
+                  <span className={s.itemIcon} style={{ borderColor: item.color }}><Art name={item.art} w={item.w} h={item.h} /></span>
                   <strong>{item.name}</strong>
                   <b>{bought.includes(item.name) ? "DITANDAI" : <><Lucide icon={ic.gem} size={11} color="#39c5f3" />{item.price}</>}</b>
                 </button>

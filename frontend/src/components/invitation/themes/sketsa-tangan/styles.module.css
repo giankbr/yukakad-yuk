@@ -24,9 +24,20 @@
 .btn:disabled { opacity: .6; cursor: default; }
 
 /* ── Cover ── */
-.cover { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100dvh; overflow: hidden; }
+.cover { position: relative; display: flex; flex-direction: column; justify-content: flex-end; min-height: 100dvh; overflow: hidden; background: url("/themes/art/sketsa-tangan/paper.webp") 0 0 / 256px 256px, var(--bg); }
 .coverBg { position: absolute; inset: 0; }
-.coverBg img, .coverBg > div { width: 100%; height: 100%; }
+/* inked botanical corners (two drawings, mirrored) */
+.corner { position: absolute; width: 46%; max-width: 200px; height: auto; pointer-events: none; user-select: none; mix-blend-mode: multiply; }
+.cornerTL { left: 4px; top: 6px; }
+.cornerTR { right: 4px; top: 6px; scale: -1 1; }
+.cornerBL { left: 4px; bottom: 6px; scale: 1 -1; }
+.cornerBR { right: 4px; bottom: 6px; scale: -1 -1; }
+.cover .cornerBL, .cover .cornerBR { opacity: .55; }
+/* two cups of coffee, heart in the steam */
+.cups { position: absolute; left: 50%; top: 16vh; width: 82%; max-width: 340px; height: auto; translate: -50% 0; mix-blend-mode: multiply; pointer-events: none; animation: sketch 1600ms 300ms cubic-bezier(.45, .05, .35, 1) both; }
+.stain { position: absolute; width: 150px; height: auto; mix-blend-mode: multiply; pointer-events: none; opacity: .75; }
+.stainCover { right: -44px; top: 40vh; rotate: 20deg; }
+.coverBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(243, 238, 228, 0) 50%, rgba(243, 238, 228, .9) 78%, var(--bg) 100%); }
 .frame { position: absolute; inset: 20px; width: calc(100% - 40px); height: calc(100% - 40px); overflow: visible; pointer-events: none; }
 .frame rect { width: calc(100% - 1px); height: calc(100% - 1px); fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 1; animation: ink 3.2s 200ms cubic-bezier(.45, .05, .35, 1) both; }
 .coverContent { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 30px 36px; text-align: center; animation: rise 900ms cubic-bezier(.2, 0, 0, 1) both; }
@@ -41,8 +52,9 @@
 /* ── Main ── */
 .page { display: flex; flex-direction: column; background: var(--bg); }
 .opening { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 520px; overflow: hidden; }
-.openingBg { position: absolute; inset: 0; }
-.openingBg img, .openingBg > div { width: 100%; height: 100%; }
+.openingBg { position: absolute; inset: 0; background: url("/themes/art/sketsa-tangan/paper.webp") 0 0 / 256px 256px, var(--bg); }
+.cupsOpening { top: 60px; width: 60%; max-width: 250px; animation: none; }
+.stainOpening { left: -40px; top: 190px; width: 130px; rotate: -12deg; opacity: .6; }
 .openingBg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(243, 238, 228, 0) 30%, var(--bg) 95%); }
 .openingText { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 24px 32px; text-align: center; }
 .openingKicker { color: var(--muted); font-family: var(--hand); font-size: 20px; letter-spacing: .5px; }
@@ -72,7 +84,7 @@
 .scrap[data-revealed] .tape { animation: tape 700ms 900ms var(--m-ease) both; }
 .scrap[data-revealed] .tape:nth-of-type(even) { animation-delay: 1100ms; }
 .scrap[data-revealed] .scribble, .scrap[data-revealed] .amp { animation: write 1400ms 1400ms cubic-bezier(.45, .05, .35, 1) both; }
-.tape { position: absolute; z-index: 3; width: 64px; height: 18px; border: 1px solid var(--tape-line); background: var(--tape); transform-origin: top left; pointer-events: none; }
+.tape { position: absolute; z-index: 3; width: 66px; height: 16px; background: url("/themes/art/sketsa-tangan/tape.webp") center / 100% 100% no-repeat; transform-origin: top left; pointer-events: none; filter: drop-shadow(0 1px 1px rgba(42, 38, 34, .12)); }
 .scribble { position: absolute; z-index: 3; color: var(--muted); font-family: var(--hand); font-size: 20px; white-space: nowrap; transform-origin: top left; pointer-events: none; }
 
 .couple { height: 476px; }
@@ -186,7 +198,9 @@
 .wish small { font-family: var(--hand); font-size: 17px; font-weight: 700; line-height: 1; white-space: nowrap; }
 .wish p { color: var(--muted); font-size: 14px; font-style: italic; line-height: 1.45; overflow-wrap: anywhere; }
 
-.closing { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 28px 56px; background: var(--bg); text-align: center; }
+.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 28px 56px; background: var(--bg); text-align: center; overflow: hidden; }
+.stainEnd { left: -80px; bottom: -70px; width: 170px; rotate: 8deg; opacity: .5; z-index: 0; }
+.closing > :not(.stain) { position: relative; z-index: 1; }
 .closing h2 { font-family: var(--hand); font-size: 40px; font-weight: 700; }
 .closing p { color: var(--muted); font-size: 14px; line-height: 1.5; }
 .closing strong { font-family: var(--hand); font-size: 22px; font-weight: 700; line-height: 1.3; }
@@ -201,9 +215,10 @@
 @keyframes tape { from { opacity: 0; scale: 1.25; } }
 @keyframes bloom { from { scale: 0; opacity: 0; } }
 @keyframes settle { from { opacity: 0; translate: 0 10px; } }
+@keyframes sketch { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 -2% 0 0); } }
 @media (prefers-reduced-motion: reduce) {
   .coverContent, .frame rect, .head[data-revealed] .squiggle path, .scrap[data-revealed] .polaroid, .scrap[data-revealed] .tape,
-  .scrap[data-revealed] .scribble, .scrap[data-revealed] .amp, .copied svg, .sent, .sent .iconDot { animation: none; }
+  .scrap[data-revealed] .scribble, .scrap[data-revealed] .amp, .copied svg, .sent, .sent .iconDot, .cups { animation: none; }
   .btn, .polaroid { transition: none; }
 }
 
@@ -219,3 +234,10 @@
 .closed strong { font-size: 15px; font-weight: 700; }
 .closed p { margin: 0; color: var(--t-muted); font-size: 13px; line-height: 1.5; }
 .countTba { margin: 0; color: var(--t-muted); font-size: 14px; letter-spacing: .04em; text-align: center; }
+
+/* Sketchbook paper grain over the bands (multiply, below content). */
+.band, .closing, .quote { isolation: isolate; position: relative; }
+.band::before, .closing::before, .quote::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: url("/themes/art/sketsa-tangan/paper.webp") 0 0 / 256px 256px; mix-blend-mode: multiply; opacity: .85;
+}

@@ -8,6 +8,15 @@ import { ic } from "./icons";
 import s from "./styles.module.css";
 
 const FONTS = ["Playfair Display:wght@800", "Noto Serif:ital,wght@0,400;0,700;1,400"];
+const ART = "/themes/art/koran";
+
+/** Woodcut ornament (decorative: hidden from AT and the photo lightbox). */
+function Art({ src, w, h, className }: { src: string; w: number; h: number; className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static woodcut ornament
+    <img src={`${ART}/${src}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox loading="lazy" decoding="async" />
+  );
+}
 const tint: ThemeTint = {
   "--t-accent": "#1d1a14", "--t-accent-ink": "#f5f0e4", "--t-bg": "#f5f0e4", "--t-ink": "#1d1a14", "--t-muted": "#6b6456",
   "--t-line": "#c9c0ac", "--t-field": "#fbf8f0", "--t-radius": "0px", "--t-font": "'Noto Serif', Georgia, serif",
@@ -78,9 +87,9 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
                 <span>Gratis</span>
               </div>
             </header>
-            <h2 className={s.headline}>{groom.toUpperCase()} RESMI MELAMAR {bride.toUpperCase()},<br />SELURUH KOTA IKUT BAHAGIA</h2>
+            <h2 className={s.headline}><span>{groom.toUpperCase()} RESMI MELAMAR {bride.toUpperCase()},</span> <span>SELURUH KOTA IKUT BAHAGIA</span></h2>
             <p className={s.deck}>{deck}</p>
-            {hero && <Photo src={hero} alt={`Foto ${bride} & ${groom}`} className={s.hero} />}
+            {hero && <div className={s.heroWrap}><Photo src={hero} alt={`Foto ${bride} & ${groom}`} className={s.hero} /></div>}
             {hero && (
               <p className={s.caption}>
                 {demo ? "Foto: Ayu & Teguh sesaat setelah lamaran diterima, Simpang Lima. (dok. keluarga)" : `Foto: ${bride} & ${groom}. (dok. keluarga)`}
@@ -117,6 +126,8 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
             </div>
           </div>
         </header>
+
+        <Art src="emblem" w={300} h={178} className={s.emblem} />
 
         <Extras slot="opening" className={s.extras} />
 
@@ -235,6 +246,8 @@ export default function KoranTheme({ data, slug, guestToken, demo, skipCover }: 
             </blockquote>
           ))}
         </section>
+
+        <Art src="city" w={720} h={255} className={s.city} />
       </main>
 
       <nav className={s.bottom} aria-label="Aksi undangan">

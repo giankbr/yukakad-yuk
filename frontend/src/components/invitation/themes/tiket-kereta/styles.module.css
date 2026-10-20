@@ -6,7 +6,7 @@
 .root {
   --t-accent: #f26a21; --t-accent-ink: #ffffff; --t-bg: #f7f3ec; --t-ink: #2b2b33; --t-muted: #6e6e78; --t-line: #e3dacb; --t-field: #ffffff;
   --t-radius: 10px; --t-font: "Archivo", system-ui, sans-serif; --t-heading-font: "Archivo", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 20px; --t-heading-align: left;
-  background: var(--cream);
+  background: var(--cream) url("/themes/art/tiket-kereta/paper.webp") repeat; background-size: 256px;
 }
 .root *, .cover * { box-sizing: border-box; }
 :where(.root, .cover) :where(h1, h2, h3, p, dl, dd, ol) { margin: 0; }
@@ -21,15 +21,18 @@
 
 /* ── Cover ── */
 .cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--navy); color: #fff; }
-.coverBg { position: absolute; left: 0; top: 0; width: 100%; height: 400px; }
-.coverBg img { width: 100%; height: 100%; object-fit: cover; }
-.coverBg::after { content: ""; position: absolute; left: 0; right: 0; top: 220px; height: 180px; background: linear-gradient(180deg, rgba(32, 48, 107, 0), var(--navy)); }
+.coverBg { position: absolute; left: 0; top: 0; width: 100%; height: 410px; }
+.coverBg img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.coverBg::after { content: ""; position: absolute; left: 0; right: 0; top: 250px; height: 160px; background: linear-gradient(180deg, rgba(32, 48, 107, 0), var(--navy)); }
+/* painted KA Argo Asmara gliding onto the viaduct (CSS background: never a lightbox target) */
+.heroTrain { position: absolute; left: 50%; top: 106px; width: 340px; height: 58px; margin-left: -170px; background: url("/themes/art/tiket-kereta/train.webp") no-repeat center / contain; filter: drop-shadow(0 4px 6px rgba(24, 36, 79, .4)); animation: glide 14s var(--m-ease) infinite alternate; }
+.stamp { position: absolute; right: 80px; bottom: -6px; width: 100px; height: auto; rotate: -10deg; opacity: .8; mix-blend-mode: multiply; pointer-events: none; }
 .cover > :not(.coverBg) { position: relative; }
 .cover > .status { position: absolute; top: 0; left: 0; right: 0; z-index: 1; }
 .coverHead { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 56px; text-align: center; }
 .coverHead span { color: var(--sand); font-size: 11px; font-weight: 700; letter-spacing: 3px; }
 .coverHead strong { font-size: 24px; font-weight: 800; letter-spacing: 1px; }
-.ticket { margin: 74px 20px 0; overflow: hidden; border-radius: 14px; background: var(--cream); color: var(--ink); box-shadow: 0 16px 40px rgba(0, 0, 0, .35); animation: rise 600ms 150ms cubic-bezier(.2, 0, 0, 1) both; }
+.ticket { position: relative; margin: 136px 20px 0; overflow: hidden; border-radius: 14px; background: var(--cream) url("/themes/art/tiket-kereta/paper.webp") repeat; background-size: 256px; color: var(--ink); box-shadow: 0 16px 40px rgba(0, 0, 0, .35); animation: rise 600ms 150ms cubic-bezier(.2, 0, 0, 1) both; }
 .ticketHead { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; background: var(--orange); color: #fff; font-size: 11px; font-weight: 800; }
 .route { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 14px 16px; }
 .station { display: flex; flex-direction: column; min-width: 0; }
@@ -61,7 +64,7 @@
 .peron dd { font-size: 12px; font-weight: 800; }
 .peron .onTime { display: flex; align-items: center; gap: 5px; color: var(--green); }
 .blink { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: blink 1.6s ease-in-out infinite; }
-.grow { flex: 1 1 66px; min-height: 20px; }
+.grow { flex: 1 1 40px; min-height: 14px; }
 .openBtn { font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; margin: 0 20px; border: 0; border-radius: 10px; background: var(--orange); color: #fff; font-size: 15px; font-weight: 800; box-shadow: 0 10px 24px rgba(242, 106, 33, .3); transition: filter 150ms, box-shadow 200ms, scale 260ms var(--m-spring), translate 260ms var(--m-spring); }
 .openBtn:hover { filter: brightness(1.06); box-shadow: 0 14px 30px rgba(242, 106, 33, .4); }
 .coverNote { margin: 16px 20px 0; color: var(--periwinkle); font-size: 11px; text-align: center; }
@@ -84,6 +87,7 @@
 .section h2 { display: flex; align-items: center; gap: 10px; color: var(--navy); font-size: 20px; font-weight: 800; letter-spacing: -.01em; line-height: 1.2; }
 .section h2::before { content: ""; width: 6px; height: 18px; flex-shrink: 0; border-radius: 3px; background: linear-gradient(var(--orange) 0 50%, var(--navy) 50%); }
 .card { border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.divider { display: block; width: 320px; max-width: 100%; height: auto; margin: -8px auto; opacity: .85; }
 
 .timeline { display: flex; flex-direction: column; gap: 10px; }
 .stop { display: flex; gap: 10px; }
@@ -163,17 +167,18 @@
 @keyframes slide { to { transform: translateX(-50%); } }
 
 /* Signature: a train running along the ticket route, perforation notches, pulsing destination. */
-.train { position: absolute; top: 50%; left: 0; width: 14px; height: 6px; margin-top: -3px; border-radius: 3px 5px 5px 3px; background: var(--navy); box-shadow: 0 0 0 2px var(--cream); animation: train 4.8s var(--m-ease) 1s infinite; }
+.train { position: absolute; top: 50%; left: 0; width: 22px; height: 11px; margin-top: -7px; background: url("/themes/art/tiket-kereta/loco.webp") no-repeat center / contain; animation: train 4.8s var(--m-ease) 1s infinite; }
 .perforation::before, .perforation::after { content: ""; position: absolute; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--navy); }
 .perforation::before { left: -21px; }
 .perforation::after { right: -21px; }
 .ping { position: absolute; inset: -3px; border-radius: 50%; background: var(--orange); animation: ping 2.4s ease-out infinite; }
 @keyframes blink { 50% { opacity: .3; } }
-@keyframes train { 0% { left: -4px; opacity: 0; } 12% { opacity: 1; } 78% { left: calc(100% - 10px); opacity: 1; } 90%, 100% { left: calc(100% - 10px); opacity: 0; } }
+@keyframes train { 0% { left: -6px; opacity: 0; } 12% { opacity: 1; } 78% { left: calc(100% - 16px); opacity: 1; } 90%, 100% { left: calc(100% - 16px); opacity: 0; } }
+@keyframes glide { from { translate: -14px 0; } to { translate: 14px 0; } }
 @keyframes ping { 0% { scale: 1; opacity: .45; } 80%, 100% { scale: 2.2; opacity: 0; } }
 @keyframes pop { 0% { scale: .8; } 60% { scale: 1.12; } 100% { scale: 1; } }
 @keyframes hop { 0%, 100% { translate: 0 0; rotate: 0deg; } 35% { translate: 0 -5px; rotate: -8deg; } 70% { translate: 0 1px; rotate: 4deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .ticket, .marqueeTrack, .train, .ping, .blink, .orangeBtn.copied, .gift:hover .giftIcon { animation: none; }
+  .ticket, .marqueeTrack, .train, .ping, .blink, .orangeBtn.copied, .gift:hover .giftIcon, .heroTrain { animation: none; }
   .train, .ping { display: none; }
 }

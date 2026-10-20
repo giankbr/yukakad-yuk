@@ -24,7 +24,7 @@
 
 /* ── Cover ── */
 .cover { display: flex; flex-direction: column; min-height: 100dvh; }
-.hero { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; height: 330px; color: #fff; }
+.hero { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; height: 330px; background: #f2a77a url("/themes/art/rencana-perjalanan/scene.webp") center 40% / cover no-repeat; color: #fff; }
 .heroImg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .dim { position: absolute; left: 0; right: 0; bottom: 0; height: 200px; background: linear-gradient(180deg, rgba(11, 85, 165, 0), rgba(11, 85, 165, .85)); }
 .hero > .status, .heroText { position: relative; }
@@ -39,7 +39,7 @@
 .searchRow small { color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: 1.5px; line-height: 10px; text-transform: uppercase; }
 .searchRow strong { font-size: 14px; font-weight: 800; line-height: 18px; overflow-wrap: anywhere; }
 .searchRow span { color: var(--muted); font-size: 11px; line-height: 14px; }
-.kepada { display: flex; flex-direction: column; gap: 3px; margin-top: 24px; padding: 12px 14px; border: 1px solid var(--stroke); border-radius: 14px; background: #fff; }
+.kepada { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 3px; margin-top: 24px; padding: 12px 92px 12px 14px; border: 1px solid var(--stroke); border-radius: 14px; background: #fff; }
 .kepada small { color: var(--sky); font-size: 9px; font-weight: 800; letter-spacing: 2px; line-height: 11px; text-transform: uppercase; }
 .kepada strong { font-size: 17px; font-weight: 800; line-height: 22px; overflow-wrap: anywhere; }
 .kepada p { color: var(--muted); font-size: 11px; line-height: 14px; }
@@ -48,11 +48,16 @@
 .perks span { display: flex; align-items: center; gap: 5px; padding: 6px 10px; border: 1px solid var(--stroke); border-radius: 999px; background: #fff; color: var(--navy); font-size: 9px; font-weight: 800; line-height: 11px; }
 
 /* ── Main ── */
-.top { background: linear-gradient(290deg, #0194f3, #2ba6f8 50%, #43b5ff); color: #fff; }
+.top { position: relative; overflow: hidden; background: linear-gradient(290deg, #0194f3, #2ba6f8 50%, #43b5ff); color: #fff; }
+.top .nav { position: relative; z-index: 1; padding-right: 96px; }
+/* painted airliner cruising in the header */
+.topPlane { position: absolute; right: 12px; bottom: 6px; width: 84px; height: 50px; background: url("/themes/art/rencana-perjalanan/plane.webp") no-repeat center / contain; filter: drop-shadow(0 4px 5px rgba(11, 57, 84, .25)); animation: cruise 6s ease-in-out infinite; }
+.stamps { position: absolute; right: -10px; top: 50%; width: 104px; height: auto; margin-top: -32px; rotate: -6deg; opacity: .8; mix-blend-mode: multiply; pointer-events: none; }
+.map { display: block; width: calc(100% + 16px); max-width: none; height: auto; margin: -6px -8px -4px; pointer-events: none; }
 .nav { display: flex; flex-direction: column; gap: 2px; padding: 4px 16px 14px; }
 .nav h1 { font-size: 18px; font-weight: 800; line-height: 23px; }
 .nav p { color: #ddf1ff; font-size: 12px; line-height: 15px; }
-.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; }
+.body { display: flex; flex-direction: column; gap: 18px; padding: 18px 16px 112px; background: url("/themes/art/rencana-perjalanan/paper.webp") repeat; background-size: 256px; }
 /* Extra sections: hosted in a white app card like the theme's own sections. */
 .root .extras { gap: 28px; padding: 20px 16px; border-radius: 16px; background: #fff; color: var(--ink); }
 .card { display: flex; flex-direction: column; gap: 14px; padding: 18px 16px; border-radius: 16px; background: #fff; box-shadow: 0 1px 2px rgba(11, 57, 84, .05); }
@@ -135,6 +140,7 @@
 .chat { display: grid; place-items: center; width: 48px; height: 46px; flex-shrink: 0; border: 1px solid var(--line); border-radius: 12px; background: #fff; transition: background 160ms, scale 160ms var(--m-ease), translate 160ms var(--m-ease); }
 .chat:hover { background: var(--ice); }
 :is(.root, .cover) :is(button, a):focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+@keyframes cruise { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: -8px -4px; rotate: -3deg; } }
 @keyframes rise { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (max-width: 370px) { .bottom .orange { font-size: 13px; } }
 
@@ -152,7 +158,7 @@
 @keyframes sweep { from { translate: -100% 0; } to { translate: 300% 0; } }
 @keyframes fill-rail { to { scale: 1 1; } }
 @media (prefers-reduced-motion: reduce) {
-  .search, .searching::after, .rail em::after { animation: none; }
+  .search, .searching::after, .rail em::after, .topPlane { animation: none; }
   .searching { display: none; }
   .rail em::after { scale: 1 1; }
   .orange { transition: none; }

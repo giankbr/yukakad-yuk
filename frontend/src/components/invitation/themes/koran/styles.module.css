@@ -1,7 +1,7 @@
 .root, .cover {
   --paper: #f5f0e4; --ink: #1d1a14; --muted: #6b6456; --rule: #c9c0ac; --ad: #efe8d5;
   --serif: "Noto Serif", Georgia, serif; --display: "Playfair Display", Georgia, serif;
-  font-family: var(--serif); color: var(--ink); line-height: normal; background: var(--paper);
+  font-family: var(--serif); color: var(--ink); line-height: normal; background: var(--paper) url("/themes/art/koran/paper.webp") repeat; background-size: 512px;
 }
 .root {
   --t-accent: #1d1a14; --t-accent-ink: #f5f0e4; --t-bg: #f5f0e4; --t-ink: #1d1a14; --t-muted: #6b6456; --t-line: #c9c0ac; --t-field: #fbf8f0;
@@ -20,15 +20,19 @@
 .cover { min-height: 100dvh; }
 .page { display: flex; flex-direction: column; gap: 10px; padding: 4px 18px 24px; }
 .masthead { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 0 10px; border-bottom: 3px solid var(--ink); }
-.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 3px; background: var(--ink); transform-origin: 0 50%; animation: rule 600ms 150ms cubic-bezier(.2, .8, .2, 1) both; }
+.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 8px; background: url("/themes/art/koran/rule.webp") 0 0 / auto 8px repeat-x; transform-origin: 0 50%; animation: rule 600ms 150ms cubic-bezier(.2, .8, .2, 1) both; }
 .masthead { border-bottom-color: transparent; }
 .masthead > strong { font-family: var(--display); font-size: 34px; font-weight: 800; letter-spacing: 1px; text-align: center; }
 .meta { display: flex; justify-content: space-between; gap: 8px; width: 100%; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; }
 .meta span:first-child, .meta span:last-child { letter-spacing: 2px; white-space: nowrap; }
 .meta span:nth-child(2) { text-align: center; }
-.headline { font-family: var(--display); font-size: 28px; font-weight: 800; line-height: 1.15; text-align: center; overflow-wrap: anywhere; animation: ink 900ms 100ms ease-out both; }
+.headline { margin-top: 6px; font-family: var(--display); font-size: 26px; font-weight: 800; line-height: 1.15; text-align: center; text-wrap: balance; overflow-wrap: anywhere; animation: ink 900ms 100ms ease-out both; }
 .deck { color: var(--muted); font-size: 12px; font-style: italic; text-align: center; }
-.hero { width: 100%; height: 200px; border: 1px solid var(--ink); filter: grayscale(1) contrast(1.05); animation: develop 1.4s 250ms ease-out both; }
+.headline > span { display: block; text-wrap: balance; }
+/* newsprint halftone screen over the cover photo */
+.heroWrap { position: relative; }
+.heroWrap::after { content: ""; position: absolute; inset: 0; background: url("/themes/art/koran/halftone.webp") 0 0 / 36px repeat; opacity: .2; mix-blend-mode: multiply; pointer-events: none; }
+.hero { display: block; width: 100%; height: 200px; border: 1px solid var(--ink); filter: grayscale(1) contrast(1.05); animation: develop 1.4s 250ms ease-out both; }
 .caption { overflow: hidden; color: var(--muted); font-size: 10px; font-style: italic; white-space: nowrap; text-overflow: ellipsis; }
 .cols { display: flex; gap: 12px; }
 .cols p { flex: 1; min-width: 0; font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
@@ -48,12 +52,14 @@
 .tickerTrack > span { flex-shrink: 0; }
 .pageHead strong { font-family: var(--display); font-size: 14px; font-weight: 800; }
 .pageHead span { color: var(--muted); font-size: 9px; letter-spacing: 1px; text-align: right; }
+.emblem { display: block; width: 150px; height: auto; margin: -6px auto -10px; mix-blend-mode: multiply; }
+.city { display: block; width: 100%; height: auto; margin-top: -4px; padding-top: 14px; border-top: 1px solid var(--rule); mix-blend-mode: multiply; }
 /* Extra sections: printed as a column boxed by newspaper rules. */
 .root .extras { gap: 28px; padding: 16px 0; border-top: 3px double var(--ink); border-bottom: 1px solid var(--rule); color: var(--ink); }
 .section { display: flex; flex-direction: column; gap: 12px; }
 .sectionHead { display: flex; align-items: center; gap: 8px; }
 .sectionHead h2 { font-family: var(--display); font-size: 16px; font-weight: 800; }
-.sectionHead::after { content: ""; flex: 1; min-width: 24px; height: 2px; background: var(--ink); transform-origin: 0 50%; }
+.sectionHead::after { content: ""; flex: 1; min-width: 24px; height: 6px; background: url("/themes/art/koran/rule.webp") 0 0 / auto 6px repeat-x; transform-origin: 0 50%; }
 .sectionHead[data-revealed]::after { animation: rule 520ms 180ms cubic-bezier(.2, .8, .2, 1) both; }
 
 .couple { display: flex; gap: 12px; }

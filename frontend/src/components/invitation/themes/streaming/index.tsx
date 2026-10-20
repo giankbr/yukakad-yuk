@@ -22,6 +22,17 @@ const DEMO_WISHES = [
 ];
 const DEMO_RUNTIME = ["45m", "52m", "48m"];
 const AVATARS = ["#0071eb", "#e87c03", "#46d369"];
+const ART = "/themes/art/streaming";
+const OTHERS = [["Keluarga", "#0071eb", "keluarga"], ["Sahabat", "#e87c03", "sahabat"], ["Rekan", "#46d369", "rekan"]] as const;
+
+/** Painted (gouache + ink) profile face — decorative, never opens the lightbox. */
+function Face({ name, size, className, eager }: { name: string; size: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted avatar
+    <img src={`${ART}/avatar-${name}.webp`} alt="" aria-hidden width={size} height={Math.round(size * 1.06)} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 
 
@@ -94,12 +105,12 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
           <div className={s.picker}>
             <h1>Siapa yang menonton?</h1>
             <button type="button" className={s.guest} onClick={open} aria-label={`Buka undangan untuk ${guestLabel(data)}`}>
-              <span className={s.guestAvatar}><Lucide icon={ic.smile} size={72} color="#fff" strokeWidth={1.8} /></span>
+              <span className={s.guestAvatar}><Face name="guest" size={96} eager /></span>
               <span className={s.guestName}><small>Kepada Yth.</small><strong>{guestLabel(data)}</strong></span>
             </button>
             <div className={s.others} aria-hidden>
-              {[["Keluarga", "#0071eb"], ["Sahabat", "#e87c03"], ["Rekan", "#46d369"]].map(([name, bg]) => (
-                <span key={name}><i style={{ background: bg }}><Lucide icon={ic.smile} size={34} color="#fff" /></i>{name}</span>
+              {OTHERS.map(([name, bg, art]) => (
+                <span key={name}><i style={{ background: bg }}><Face name={art} size={44} eager /></i>{name}</span>
               ))}
             </div>
           </div>
@@ -118,7 +129,7 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
             <span className={s.logo}>{brand}</span>
             <span className={s.navIcons} aria-hidden>
               <Lucide icon={ic.cast} size={22} color="#fff" /><Lucide icon={ic.search} size={22} color="#fff" />
-              <i><Lucide icon={ic.smile} size={16} color="#fff" /></i>
+              <i><Face name="guest" size={18} /></i>
             </span>
           </div>
           <nav className={s.chips} aria-label="Bagian undangan">
@@ -335,7 +346,7 @@ export default function StreamingTheme({ data, slug, guestToken, demo, skipCover
           {wishes.wishes.length === 0 && <p className={s.empty}>Belum ada ulasan. Jadilah penonton pertama yang memberi ucapan!</p>}
           {wishes.wishes.slice(0, 8).map((wish, index) => (
             <article key={wish.id} className={s.review}>
-              <span className={s.avatar} style={{ background: AVATARS[index % AVATARS.length] }} aria-hidden><Lucide icon={ic.smile} size={18} color="#fff" /></span>
+              <span className={s.avatar} style={{ background: AVATARS[index % AVATARS.length] }} aria-hidden><Face name={OTHERS[index % OTHERS.length][2]} size={22} /></span>
               <div>
                 <p className={s.reviewHead}>
                   <strong>{wish.name}</strong>

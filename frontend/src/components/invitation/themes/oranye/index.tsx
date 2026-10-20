@@ -18,11 +18,13 @@ const DEMO_WISHES = [
   { id: "w1", name: "Rizky", attendance: "yes" as Attendance, message: "Selamat Dewi & Arya! Seller-nya ramah, pengiriman doa tepat waktu. Semoga samawa sampai kakek-nenek!", created_at: new Date(Date.now() - 2 * 3600e3).toISOString() },
   { id: "w2", name: "Tante Mira", attendance: "yes" as Attendance, message: "Barang sesuai deskripsi: pasangan serasi 100%. Bintang lima tanpa ragu.", created_at: new Date(Date.now() - 6 * 3600e3).toISOString() },
 ];
+const ART = "/themes/art/oranye";
 const DEMO_SEATS = [
-  { name: "Kursi Akad", sub: "50 kursi", icon: ic.armchair, pct: 81, label: "SEGERA HABIS" },
-  { name: "Kursi Resepsi", sub: "400 kursi", icon: ic.armchair, pct: 59, label: "TERSISA 152" },
-  { name: "Meja VIP", sub: "12 meja", icon: ic.crown, pct: 38, label: "TERSISA 7" },
+  { name: "Kursi Akad", sub: "50 kursi", art: "seat-akad", pct: 81, label: "SEGERA HABIS" },
+  { name: "Kursi Resepsi", sub: "400 kursi", art: "seat-resepsi", pct: 59, label: "TERSISA 152" },
+  { name: "Meja VIP", sub: "12 meja", art: "seat-vip", pct: 38, label: "TERSISA 7" },
 ];
+const SEAT_ART = ["seat-akad", "seat-resepsi", "seat-vip"];
 const DEMO_FEED = [["Pagi di Lembang", "2,1rb suka"], ["Jalan-jalan Braga", "1,3rb suka"], ["Kencan Pertama", "845 suka"], ["Senja Ciwidey", "3rb suka"]];
 const ATTEND: Record<Attendance, string> = { yes: "Hadir", maybe: "Ragu", no: "Berhalangan" };
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -80,7 +82,7 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
   const sale = `${/^pernikahan$/i.test(label) ? "WEDDING" : label.toUpperCase()} DAY SALE`;
   const firstEvent = data.events[0]?.name.split(" ")[0]?.toLowerCase();
   const seats = demo ? DEMO_SEATS : data.events.slice(0, 3).map((event, index) => ({
-    name: event.name, sub: event.time, icon: index === 0 ? ic.armchair : ic.crown, pct: 100, label: "AMANKAN KURSI",
+    name: event.name, sub: event.time, art: SEAT_ART[Math.min(index, SEAT_ART.length - 1)], pct: 100, label: "AMANKAN KURSI",
   }));
   const shownWishes = allWishes ? wishes.wishes : wishes.wishes.slice(0, 3);
   const chatGroups = stories.reduce<{ turn: number; groups: Array<{ story: (typeof stories)[number]; lines: ReturnType<typeof chatLines> }> }>((acc, story) => {
@@ -180,7 +182,10 @@ export default function OranyeTheme({ data, slug, guestToken, demo, skipCover }:
             <div className={s.seats}>
               {seats.map(seat => (
                 <button type="button" key={seat.name} className={s.seat} onClick={sheets.openRsvp} aria-label={`${seat.name} — konfirmasi kehadiran`}>
-                  <span className={s.seatImg}><Lucide icon={seat.icon} size={26} color="#ee4d2d" /></span>
+                  <span className={s.seatImg}>
+                    {/* eslint-disable-next-line @next/next/no-img-element -- static painted product illustration */}
+                    <img src={`${ART}/${seat.art}.webp`} alt="" aria-hidden width={88} height={48} data-nolightbox loading="lazy" decoding="async" draggable={false} />
+                  </span>
                   <strong>{seat.name}</strong>
                   <small>{seat.sub}</small>
                   <span className={s.bar}><i style={{ width: `${seat.pct}%` }} /><b>{seat.label}</b></span>

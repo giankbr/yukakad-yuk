@@ -263,13 +263,15 @@ export default function RepositoriTheme({ data, slug, guestToken, demo, skipCove
               <>
                 <div className={s.tiers}>
                   {[
-                    { name: "Supporter", price: "Rp100rb", icon: ic.heart, color: "#db61a2" },
-                    { name: "Backer", price: "Rp500rb", icon: ic.sparkles, color: "#58a6ff" },
-                    { name: "Gold", price: "Rp1jt", icon: ic.crown, color: "#d29922" },
+                    /* sponsor badges: painted enamel pins / gold foil in /public/themes/art/repositori */
+                    { name: "Supporter", price: "Rp100rb", art: "supporter", color: "#db61a2" },
+                    { name: "Backer", price: "Rp500rb", art: "backer", color: "#58a6ff" },
+                    { name: "Gold", price: "Rp1jt", art: "gold", color: "#d29922" },
                   ].map(tier => (
                     <button key={tier.name} type="button" className={s.tier} aria-pressed={tier.name === selectedTier}
                       style={{ borderColor: tier.color, "--c": tier.color } as CSSProperties} onClick={() => setTier(value => value === tier.name ? undefined : tier.name)}>
-                      <Lucide icon={tier.icon} size={18} color={tier.color} />
+                      {/* eslint-disable-next-line @next/next/no-img-element -- static decorative theme art */}
+                      <img src={`/themes/art/repositori/tier-${tier.art}.webp`} alt="" aria-hidden width={32} height={32} loading="lazy" decoding="async" data-nolightbox />
                       <strong>{tier.name}</strong>
                       <code style={{ color: tier.color }}>{tier.price}</code>
                       {tier.name === selectedTier && <em className={s.tierCheck}><Lucide icon={ic.check} size={10} color="#fff" /></em>}

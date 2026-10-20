@@ -20,10 +20,20 @@ const DEMO_WISHES = [
 ];
 const DEMO_CAPTIONS = [["Ngopi bareng", "2,1rb"], ["Jalan sore", "1,4rb"], ["Nonton konser", "960"], ["Piknik taman", "960"]];
 const DEMO_PRODUCTS = [
-  { name: "Sprei & Bedcover Set", price: "Rp750.000", tag: "Paling laris", icon: ic.bedDouble },
-  { name: "Set Panci Premium", price: "Rp1.100.000", tag: "", icon: ic.cookingPot },
-  { name: "Lampu Meja Estetik", price: "Rp450.000", tag: "Hemat", icon: ic.lamp },
+  { name: "Sprei & Bedcover Set", price: "Rp750.000", tag: "Paling laris", art: "p-bed" },
+  { name: "Set Panci Premium", price: "Rp1.100.000", tag: "", art: "p-pot" },
+  { name: "Lampu Meja Estetik", price: "Rp450.000", tag: "Hemat", art: "p-lamp" },
 ];
+const ART = "/themes/art/pesan-antar";
+
+/** Painted (gouache + ink) decorative image — never opens the photo lightbox. */
+function Art({ name, w, h, className, eager }: { name: string; w: number; h: number; className?: string; eager?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- static painted illustration
+    <img src={`${ART}/${name}.webp`} alt="" aria-hidden width={w} height={h} className={className} data-nolightbox
+      loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" draggable={false} />
+  );
+}
 
 
 function city(address: string) {
@@ -88,7 +98,10 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.illus} aria-hidden><Photo src="/themes/img/a98.webp" /></div>
+          <div className={s.illus} aria-hidden>
+            <Art name="scene" w={640} h={780} eager />
+            <span className={s.courier}><Art name="courier" w={480} h={324} eager /></span>
+          </div>
           <span className={s.eta}>{eta}</span>
           <div className={s.coverSpacer} />
           <div className={s.receipt}>
@@ -244,7 +257,7 @@ export default function PesanAntarTheme({ data, slug, guestToken, demo, skipCove
             <div className={s.products}>
               {DEMO_PRODUCTS.map(item => (
                 <div key={item.name} className={s.product} data-on={picked.includes(item.name) ? "" : undefined}>
-                  <span className={s.productIcon}><Lucide icon={item.icon} size={24} color="#009643" /></span>
+                  <span className={s.productIcon}><Art name={item.art} w={150} h={150} /></span>
                   <div><strong>{item.name}</strong><p><b>{item.price}</b>{item.tag && <em>{item.tag}</em>}</p></div>
                   <button type="button" className={s.plus} aria-pressed={picked.includes(item.name)} aria-label={`${picked.includes(item.name) ? "Batalkan" : "Pilih"} ${item.name}`} onClick={() => togglePick(item.name)}>
                     <Lucide icon={picked.includes(item.name) ? ic.check : ic.plus} size={14} />

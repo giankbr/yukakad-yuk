@@ -52,8 +52,16 @@ function giftIcon(gift: GiftMethod) {
   return gift.type === "bank" ? ic.landmark : gift.type === "ewallet" ? ic.wallet : gift.type === "qris" ? ic.qrCode : ic.gift;
 }
 
+// Hand-painted raster art (rendered by /tmp/pen/art/themes/rumah-gadang.py): gouache rumah gadang, foil kaluak paku, songket.
+const ART = { cover: [780, 940], divider: [340, 56], kaluak: [258, 260], house: [406, 217] } as const;
+const Art = ({ name, className, eager }: { name: keyof typeof ART; className?: string; eager?: boolean }) => (
+  // eslint-disable-next-line @next/next/no-img-element -- decorative painted ornament, static asset
+  <img src={`/themes/art/rumah-gadang/${name}.webp`} alt="" aria-hidden width={ART[name][0]} height={ART[name][1]} className={className} data-nolightbox draggable={false}
+    loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : undefined} decoding="async" />
+);
+
 function Divider() {
-  return <span className={s.divider} aria-hidden><i /><b /><i /></span>;
+  return <Art name="divider" className={s.divider} />;
 }
 
 function Head({ id, children }: { id: string; children: string }) {
@@ -110,8 +118,12 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
       className={s.root}
       cover={open => (
         <section className={s.cover}>
-          <div className={s.coverBg} aria-hidden><Photo src={hero} /></div>
+          <div className={s.coverBg} aria-hidden><Art name="cover" className={s.coverArt} eager /></div>
+          <span className={s.songketField} aria-hidden />
           <div className={s.coverBorder} aria-hidden />
+          <Art name="kaluak" className={`${s.kaluak} ${s.kaluakL}`} eager />
+          <Art name="kaluak" className={`${s.kaluak} ${s.kaluakR}`} eager />
+          <span className={`${s.band} ${s.bandCover}`} aria-hidden />
           <div className={s.coverContent}>
             <p className={s.kicker}>{coverLabel.toUpperCase()}</p>
             <h1 className={s.coverNames}>{couple}</h1>
@@ -169,6 +181,7 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
         </section>
 
         <section className={`${s.section} ${s.alt}`} aria-labelledby="rg-events">
+          <Art name="house" className={s.house} />
           <Head id="rg-events">Rangkaian Acara</Head>
           {data.events.map((event, index) => (
             <article key={event.name + index} className={s.event}>
@@ -292,6 +305,9 @@ export default function RumahGadangTheme({ data, slug, guestToken, demo, skipCov
         </section>
 
         <footer className={s.closing}>
+          <span className={`${s.band} ${s.bandTop}`} aria-hidden />
+          <Art name="kaluak" className={`${s.kaluak} ${s.kaluakBL}`} />
+          <Art name="kaluak" className={`${s.kaluak} ${s.kaluakBR}`} />
           <h2>Terima Kasih</h2>
           <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
           <p className={s.families}>KELUARGA BESAR<br />{families.join(" & ").toUpperCase()}</p>
