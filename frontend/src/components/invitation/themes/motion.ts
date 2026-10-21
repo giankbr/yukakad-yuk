@@ -7,7 +7,7 @@ export type MotionStyle = "elegant" | "playful" | "crisp";
 
 const ELEGANT = new Set([
   "mawar-blush", "emas-hitam", "rustic-kayu", "taman-eukaliptus", "surat-vintage", "marmer-rosegold", "langit-navy", "boho-terakota", "pantai-senja", "kaligrafi-emas", "masjid-biru", "sakinah-putih", "arabesque-marun", "lentera-malam", "mihrab-pastel", "sunda-siger", "batak-ulos", "bugis-bosara", "betawi-ondel", "melayu-songket", "toraja-tongkonan", "dayak-borneo", "palembang-aesan", "syukuran-rumah", "lamaran-cincin", "tujuh-bulanan",
-  "jawa", "rumah-gadang", "bali-kuning", "syari-zamrud", "lavender-air", "linen-putih", "sketsa-tangan", "malam-rimba",
+  "joglo-marun", "kawung-biru", "gebyok-sogan", "busana-jawi", "wayang-mega", "kereta-kencana", "jawa", "rumah-gadang", "bali-kuning", "syari-zamrud", "lavender-air", "linen-putih", "sketsa-tangan", "malam-rimba",
 ]);
 const CRISP = new Set(["editorial-monokrom", "wisuda-toga", "dokumen", "surel", "koran", "repositori", "rapat-video", "peta-rute", "rencana-perjalanan"]);
 
