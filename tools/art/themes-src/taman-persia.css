@@ -1,0 +1,129 @@
+/* Taman Persia — halaman manuskrip bergaya miniatur Persia: chahar bagh dengan kanal air, cemara, delima, biru lapis berpadu emas. */
+.root, .cover {
+  --bg: #f2e7cf; --paper: #ece0c4; --ivory: #faf4e6; --field: #fffcf4; --ink: #22223a; --muted: #5a5468; --line: #dccaa0;
+  --accent: #1f3a8a; --accent2: #1f4a35; --gold: #c9a24a; --gold-l: #ecd48e; --gold-d: #8c6a22;
+  --band-bg: #1a3278; --band-ink: #faf4e6;
+  --display: "Gilda Display", Georgia, serif; --serif: "Cormorant Garamond", Georgia, serif; --script: "Gilda Display", Georgia, serif;
+  --h2: 27px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f3a8a; --t-accent-ink: #faf4e6; --t-bg: #f2e7cf; --t-ink: #22223a; --t-muted: #5a5468; --t-line: #dccaa0; --t-field: #fffcf4;
+  --t-radius: 2px; --t-font: "Cormorant Garamond", Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 24px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+/* manuscript page: ruled gold + lapis margins run down the whole page */
+.main { position: relative; background: #f2e7cf url(/themes/art/taman-persia/paper.webp); box-shadow: inset 12px 0 0 #f2e7cf, inset 14px 0 0 #c9a24a, inset 18px 0 0 #f2e7cf, inset 19px 0 0 #1f3a8a, inset -12px 0 0 #f2e7cf, inset -14px 0 0 #c9a24a, inset -18px 0 0 #f2e7cf, inset -19px 0 0 #1f3a8a; }
+.main > section, .main > footer, .main > header { margin: 0 19px; }
+.main > :not(section, footer, header) { margin-left: 19px; margin-right: 19px; }
+.head h2, .headLight h2 { letter-spacing: .02em; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12.5px; font-weight: 600; letter-spacing: .28em; }
+.eyebrow { color: var(--gold-d); }
+.intro { font-size: 18px; line-height: 1.6; }
+.divider { width: 220px; }
+
+.salamBlock { padding: 56px 24px 50px; }
+.salamBlock::before { content: ""; width: 88px; height: 88px; background: url(/themes/art/taman-persia/shamsa.webp) center / contain no-repeat; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { max-width: 280px; color: var(--gold-d); line-height: 1.7; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+
+/* couple: monogram niches (ogee arch) flanked by cypresses */
+.couple { background: transparent; }
+.portrait { display: flex; justify-content: center; align-items: flex-end; width: 260px; margin-bottom: 14px; }
+.portrait > img { position: absolute; bottom: 0; width: 30px; height: auto; transform-origin: 50% 100%; animation: sway 8s ease-in-out infinite alternate; }
+.portrait > img:first-child { left: 10px; }
+.portrait > img:nth-child(2) { right: 10px; animation-delay: -4s; }
+.portraitFrame { width: 150px; height: 200px; padding: 0; border: 0; border-radius: 0; background: linear-gradient(#c9a24a, #8c6a22); clip-path: polygon(0 100%, 0 42%, 6% 30%, 20% 20%, 38% 11%, 47% 4%, 50% 0, 53% 4%, 62% 11%, 80% 20%, 94% 30%, 100% 42%, 100% 100%); }
+.portraitFrame::after { content: ""; position: absolute; inset: 5px; background: #1f3a8a radial-gradient(circle at 50% 60%, #2c4ea6, #142a6b 70%); clip-path: polygon(0 100%, 0 42%, 6% 30%, 20% 20%, 38% 11%, 47% 4%, 50% 0, 53% 4%, 62% 11%, 80% 20%, 94% 30%, 100% 42%, 100% 100%); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 5px; z-index: 1; width: auto; height: auto; border-radius: 0; clip-path: polygon(0 100%, 0 42%, 6% 30%, 20% 20%, 38% 11%, 47% 4%, 50% 0, 53% 4%, 62% 11%, 80% 20%, 94% 30%, 100% 42%, 100% 100%); }
+.monogram { position: relative; z-index: 1; margin-top: 30px; color: var(--gold-l); font-family: var(--display); font-size: 80px; text-shadow: 0 0 18px rgba(236, 212, 142, .35); }
+.role { color: var(--accent2); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { font-size: 19px; font-weight: 600; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 40px; }
+
+/* countdown: lapis night sky with gold stars */
+.countBand { padding: 64px 24px; background: radial-gradient(circle at 20% 30%, rgba(236, 212, 142, .7) 0 .8px, transparent 1.2px) 0 0 / 74px 74px, radial-gradient(circle at 70% 60%, rgba(236, 212, 142, .5) 0 .8px, transparent 1.2px) 0 0 / 96px 96px, linear-gradient(#132560, #1f3a8a); box-shadow: inset 0 0 0 4px #1a3278, inset 0 0 0 6px #c9a24a; }
+.count > div { height: 84px; border: 1px solid #c9a24a; border-radius: 2px; background: rgba(250, 244, 230, .06); }
+.count b { color: var(--gold-l); font-family: var(--display); }
+.count small { font-style: italic; }
+
+/* events: illuminated panels with double rules and a lapis heading cartouche */
+.events { background: transparent; }
+.event { padding: 22px 20px 26px; border: 3px double #c9a24a; border-radius: 2px; background: #faf4e6; box-shadow: 0 0 0 5px #faf4e6, 0 0 0 6px #1f3a8a, 0 10px 24px rgba(34, 34, 58, .1); }
+.event::before { display: none; }
+.eventNo { position: static; translate: none; width: auto; height: auto; margin-bottom: 4px; background: none; color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .3em; }
+.event h3 { width: 100%; padding: 8px 12px; border-radius: 999px; background: #1f3a8a; box-shadow: 0 0 0 2px #c9a24a; color: var(--gold-l); font-family: var(--display); font-size: 20px; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-weight: 600; }
+.rule { width: 80px; height: 8px; background: radial-gradient(circle, #b8302a 0 3px, transparent 3.5px) center / 16px 8px repeat-x; }
+.mapBtn { border-radius: 2px; background: var(--accent2); font-family: var(--serif); font-weight: 600; font-size: 14px; }
+.mapBtn:hover { background: var(--accent); }
+
+.story { background: transparent; }
+.timeline::before { left: 21px; width: 2px; background: #c9a24a; }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody small { color: var(--gold-d); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); }
+.storyBody p { font-size: 17px; }
+
+.wishes { background: rgba(31, 58, 138, .04); }
+.form { border: 0; border-radius: 2px; box-shadow: 0 0 0 1px #c9a24a, 0 0 0 4px #faf4e6, 0 0 0 5px #1f3a8a; }
+.field input, .field textarea, .choices button, .submit { border-radius: 2px; }
+.submit { font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+.wish { border-radius: 2px; border-color: #dccaa0; }
+.wish strong { font-family: var(--display); }
+
+.gifts { background: transparent; }
+.gift { border-radius: 2px; background: #1f3a8a; box-shadow: inset 0 0 0 3px #1f3a8a, inset 0 0 0 4px #c9a24a; }
+.gift::after { right: -18px; bottom: -18px; width: 110px; height: 110px; border: 0; box-shadow: none; background: url(/themes/art/taman-persia/shamsa.webp) center / contain no-repeat; opacity: .3; }
+.copy { border-radius: 2px; }
+
+.closing { padding: 64px 28px 56px; background: linear-gradient(#132560, #1f3a8a); box-shadow: inset 0 0 0 4px #1a3278, inset 0 0 0 6px #c9a24a; }
+.closingPom { position: absolute; z-index: -1; top: 10px; right: 8px; width: 150px; height: auto; opacity: .85; }
+.closingShamsa { width: 120px; height: auto; margin-bottom: 6px; animation: turn 90s linear infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 36px; }
+.closingSalam { color: var(--gold-l); font-size: 15px; font-style: italic; }
+.closingNames { font-family: var(--display); font-size: 30px; }
+.music { border-radius: 2px; }
+
+/* ── Cover: a manuscript page — text panel above a painted garden miniature ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 22px 28px; overflow: hidden; background: #f2e7cf url(/themes/art/taman-persia/paper.webp); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 10px; border: 2px solid #c9a24a; box-shadow: inset 0 0 0 3px #f2e7cf, inset 0 0 0 4px #1f3a8a; pointer-events: none; }
+.coverRule { width: 220px; height: auto; }
+.kicker { margin-top: 8px; color: var(--gold-d); font-family: var(--serif); font-size: 12.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.namesRow { display: flex; align-items: flex-end; justify-content: center; gap: 12px; width: 100%; margin-top: 4px; }
+.namesRow > img { flex-shrink: 0; width: 18px; height: auto; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite alternate; }
+.namesRow > img:last-child { animation-delay: -3.5s; }
+.coverNames { min-width: 0; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.05; overflow-wrap: break-word; text-wrap: balance; }
+.coverNames em { display: block; color: var(--gold-d); font-size: 24px; font-style: normal; }
+.coverDate { margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; }
+.garden { width: auto; max-width: 100%; height: auto; max-height: 44dvh; margin-top: 12px; filter: drop-shadow(0 8px 16px rgba(34, 34, 58, .2)); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: inset 0 0 0 2px #1f3a8a, inset 0 0 0 3px #c9a24a, 0 10px 20px rgba(31, 58, 138, .3); }
+.openBtn:hover { background: var(--accent2); box-shadow: inset 0 0 0 2px #1f4a35, inset 0 0 0 3px #c9a24a, 0 10px 20px rgba(31, 74, 53, .3); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 22px 40px; text-align: center; }
+.hero { overflow: hidden; isolation: isolate; padding-top: 70px; }
+.heroShamsa { width: 150px; height: auto; animation: turn 120s linear infinite; }
+.heroPomL, .heroPomR { position: absolute; z-index: -1; top: 8px; width: 150px; height: auto; opacity: .9; }
+.heroPomL { left: -20px; scale: -1 1; }
+.heroPomR { right: -20px; }
+.heroRule { width: 200px; height: auto; margin-top: 22px; }
+.kickerDark { margin-top: 20px; color: var(--gold-d); font-size: 12.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: break-word; text-wrap: balance; }
+.heroNames em { padding: 0 8px; color: var(--gold-d); font-style: normal; }
+.heroDate { margin-top: 4px; color: var(--muted); font-size: 17px; font-style: italic; }
+.heroNote { max-width: 300px; margin-top: 14px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: balance; }
+.sentBox img { width: 80px; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .portrait > img, .namesRow > img, .closingShamsa, .heroShamsa { animation: none; }
+}

@@ -3,7 +3,7 @@
 // berlapis emas, ornamen kembang goyang, dan latar kain sogan bermotif truntum.
 import { Lucide, Photo, ThemeShell, formatDate, guestLabel, type ThemeProps } from "../kit";
 import { tableLabel } from "../extras";
-import { DEFAULT_COPY, JawiBody, ic, makeArt } from "../_jawi/body";
+import { DEFAULT_COPY, JAWA_WISHES, JawiBody, ic, makeArt } from "../_jawi/body";
 import s from "./styles.module.css";
 
 const FONTS = ["Cinzel:wght@400;500", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500", "Pinyon Script"];
@@ -48,6 +48,7 @@ export default function BusanaJawiTheme(props: ThemeProps) {
     >
       <JawiBody
         {...props}
+        demoWishes={JAWA_WISHES}
         s={s}
         light="#ead19a"
         dark="#24180f"

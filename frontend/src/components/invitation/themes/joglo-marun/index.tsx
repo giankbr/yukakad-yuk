@@ -3,7 +3,7 @@
 // dan rangkaian mawar merah, roncean melati, serta anggrek putih yang dilukis tangan.
 import { Lucide, Photo, ThemeShell, formatDate, guestLabel, type ThemeProps } from "../kit";
 import { tableLabel } from "../extras";
-import { JawiBody, ic, makeArt } from "../_jawi/body";
+import { JAWA_WISHES, JawiBody, ic, makeArt } from "../_jawi/body";
 import s from "./styles.module.css";
 
 const FONTS = ["Marcellus", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500", "Pinyon Script"];
@@ -52,6 +52,7 @@ export default function JogloMarunTheme(props: ThemeProps) {
     >
       <JawiBody
         {...props}
+        demoWishes={JAWA_WISHES}
         s={s}
         light="#ecd394"
         dark="#4a1016"

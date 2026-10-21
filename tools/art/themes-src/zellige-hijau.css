@@ -1,0 +1,140 @@
+/* Zellige Hijau — riad Maroko: mosaik zellige hijau zamrud, toska & putih, lengkung tapal kuda, air mancur dan dahan jeruk. */
+.root, .cover {
+  --bg: #f4efe4; --paper: #ece5d6; --ivory: #fbf8f1; --field: #fffdf8; --ink: #17302a; --muted: #4d625b; --line: #d8cfbd;
+  --accent: #155443; --accent2: #1d7c82; --gold: #c99a3e; --gold-l: #f0dca8; --gold-d: #8e6a24;
+  --band-bg: #0f3b31; --band-ink: #f4efe4;
+  --display: "Josefin Sans", "Trebuchet MS", sans-serif; --serif: Lora, Georgia, serif; --script: Parisienne, cursive;
+  --h2: 25px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #155443; --t-accent-ink: #f4efe4; --t-bg: #f4efe4; --t-ink: #17302a; --t-muted: #4d625b; --t-line: #d8cfbd; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: Lora, Georgia, serif; --t-heading-font: "Josefin Sans", sans-serif; --t-heading-weight: 400; --t-heading-size: 22px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg) url(/themes/art/zellige-hijau/plaster.webp); }
+.head h2, .headLight h2 { font-weight: 300; letter-spacing: .06em; text-transform: uppercase; }
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-weight: 600; letter-spacing: .28em; }
+.eyebrow { color: var(--accent2); }
+.intro { font-size: 16px; }
+.divider { width: 210px; border-radius: 2px; box-shadow: 0 2px 6px rgba(15, 59, 49, .12); }
+
+/* opening: plaster niche with a star tile above */
+.salamBlock { position: relative; padding: 64px 28px 56px; }
+.salamBlock::before { content: ""; width: 64px; height: 64px; margin-bottom: 6px; background: url(/themes/art/zellige-hijau/star.webp) center / contain no-repeat; filter: drop-shadow(0 4px 6px rgba(15, 59, 49, .2)); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--accent2); font-size: 10.5px; line-height: 1.7; max-width: 300px; }
+.salamTitle { color: var(--accent); font-size: 44px; }
+
+/* couple: horseshoe portraits ringed with mosaic */
+.couple { background: transparent; gap: 14px; }
+.portrait { margin-bottom: 18px; filter: drop-shadow(0 14px 20px rgba(15, 59, 49, .22)); }
+.portraitFrame { width: 200px; height: 262px; padding: 0; border: 0; border-radius: 0; background: #155443 url(/themes/art/zellige-hijau/mosaic.webp) 0 0 / 120px; clip-path: path("M 13 262 L 13 152 A 100 100 0 1 1 187 152 L 187 262 Z"); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; clip-path: path("M 25 262 L 25 152 A 88 88 0 1 1 175 152 L 175 262 Z"); }
+.monogram { position: relative; z-index: 1; color: var(--ivory); font-size: 96px; text-shadow: 0 2px 10px rgba(0, 0, 0, .4); }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; inset: 0; background: var(--accent); clip-path: path("M 25 262 L 25 152 A 88 88 0 1 1 175 152 L 175 262 Z"); }
+.nick { color: var(--accent); font-size: 46px; }
+.fullName { font-family: var(--display); font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+.amp { color: var(--accent2); font-size: 50px; gap: 12px; }
+.amp img { width: 34px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: deep emerald courtyard with tile strips */
+.countBand { padding: 84px 24px 84px; }
+.zStrip { position: absolute; left: 0; width: 100%; height: 40px; object-fit: cover; object-position: center; pointer-events: none; }
+.zStripT { top: 0; }
+.zStripB { bottom: 0; scale: 1 -1; }
+.count { gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 4px; background: #fbf8f1; box-shadow: inset 0 0 0 3px #f1ece0, inset 0 0 0 4px rgba(21, 84, 67, .35), 0 6px 14px rgba(0, 0, 0, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 300; }
+.count small { color: var(--muted); font-family: var(--display); font-size: 10px; font-style: normal; letter-spacing: .18em; text-transform: uppercase; }
+.headLight .eyebrow { color: #9fd3cc; }
+.ghostBtn { border-color: #9fd3cc; color: #e9f5f2; font-family: var(--display); }
+
+/* events: plaster cards topped with a mosaic strip */
+.events { background: transparent; }
+.event { padding: 46px 20px 24px; overflow: hidden; border-color: var(--line); background: var(--ivory); box-shadow: 0 10px 24px rgba(15, 59, 49, .07); }
+.event::before { inset: 0 0 auto; height: 16px; border: 0; border-radius: 0; background: url(/themes/art/zellige-hijau/mosaic.webp) 0 0 / 80px; }
+.eventNo { top: 26px; width: 34px; height: 34px; border-radius: 0; background: var(--accent2); clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); color: #fff; font-size: 11px; }
+.event h3 { margin-top: 18px; font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.eventTime { color: var(--accent2); font-family: var(--display); }
+.rule { width: 90px; height: 6px; background: url(/themes/art/zellige-hijau/mosaic.webp) 0 0 / 48px; border-radius: 1px; }
+.mapBtn { border-radius: 4px; font-family: var(--display); letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+
+.story { background: transparent; }
+.timeline::before { left: 19px; width: 2px; background: repeating-linear-gradient(var(--accent2) 0 6px, transparent 6px 10px); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 38px; filter: drop-shadow(0 3px 4px rgba(15, 59, 49, .25)); }
+.storyBody h3 { font-family: var(--display); font-size: 18px; font-weight: 600; letter-spacing: .04em; }
+.storyBody small { color: var(--accent2); }
+
+/* gallery: square tiles, the first one under a horseshoe */
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 160px; gap: 6px; padding: 6px; background: url(/themes/art/zellige-hijau/mosaic.webp) 0 0 / 90px; border-radius: 4px; }
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 999px 999px 2px 2px; }
+.tile:nth-child(4n + 5):last-child { grid-column: span 2; }
+
+.wishes { background: rgba(236, 229, 214, .65); }
+.form { border-radius: 6px; border-top: 6px solid var(--accent2); }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.submit { border-radius: 4px; font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.wish { border-radius: 4px; border-left: 4px solid var(--accent2); }
+
+.gifts { background: transparent; }
+.gift { border-radius: 6px; background: var(--band-bg); }
+.gift::after { right: 0; bottom: 0; width: 100%; height: 10px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/zellige-hijau/mosaic.webp) 0 0 / 60px; opacity: .9; }
+.copy { border-radius: 4px; font-family: var(--display); }
+
+/* closing: emerald courtyard with the fountain and an orange bough */
+.closing { padding: 80px 28px 56px; background: var(--band-bg); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 34px; background: url(/themes/art/zellige-hijau/band.webp) center / cover; }
+.closingOrange { position: absolute; z-index: -1; top: 30px; right: -40px; width: 200px; height: auto; opacity: .9; rotate: 8deg; }
+.fountain { width: 220px; height: auto; margin-bottom: 4px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .35)); }
+.thanks { color: var(--gold-l); font-size: 50px; }
+.closingSalam { color: #9fd3cc; font-family: var(--display); font-size: 11px; letter-spacing: .14em; line-height: 1.7; text-transform: uppercase; }
+.music { border-radius: 8px; background: var(--accent2); }
+
+/* ── Cover: the photo seen through a zellige horseshoe arch ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: #f4efe4 url(/themes/art/zellige-hijau/plaster.webp); color: var(--ink); text-align: center; isolation: isolate; }
+.archBox { position: relative; width: 100%; aspect-ratio: 640 / 738; max-height: 56dvh; flex-shrink: 0; }
+.archPhoto { position: absolute; inset: 14% 15% 0; overflow: hidden; background: #c8b9a0; }
+.archPhoto > img, .archPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.arch { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+.orangeL, .orangeR { position: absolute; z-index: 2; width: 150px; height: auto; pointer-events: none; }
+.orangeL { top: -8px; left: -36px; scale: -1 1; rotate: 6deg; transform-origin: 50% 0; animation: bough 9s ease-in-out infinite alternate; }
+.orangeR { top: 2px; right: -46px; width: 128px; rotate: -10deg; transform-origin: 50% 0; animation: boughR 11s ease-in-out -3s infinite alternate; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding: 18px 26px 22px; margin-top: -2px; border-top: 4px solid #155443; }
+.kicker { color: var(--accent2); font-family: var(--display); font-size: 10.5px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--script); font-size: 50px; font-weight: 400; line-height: 1.1; overflow-wrap: break-word; text-wrap: balance; }
+.coverNames em { padding: 0 10px; color: var(--gold); font-style: normal; }
+.coverDate { margin-top: 2px; color: var(--muted); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; width: 100%; }
+.guest small { color: var(--muted); font-size: 13px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 17px; font-weight: 600; }
+.table { border-color: var(--accent2); color: var(--accent2); }
+.openBtn { border-radius: 4px; background: #155443; color: #f4efe4; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; font-size: 12.5px; box-shadow: 0 8px 20px rgba(15, 59, 49, .3), inset 0 0 0 2px #155443, inset 0 0 0 3px rgba(240, 220, 168, .5); }
+.openBtn:hover { background: #1d7c82; }
+.dado { display: block; width: 100%; height: 56px; margin-top: auto; object-fit: cover; flex-shrink: 0; }
+
+/* ── Hero (top of the opened page) ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 24px 30px; overflow: hidden; background: var(--band-bg); color: var(--band-ink); text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 30px; background: url(/themes/art/zellige-hijau/band.webp) center / cover; }
+.hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(60% 40% at 50% 60%, rgba(29, 124, 130, .45), transparent 70%); }
+.heroStar { width: 74px; height: auto; animation: turn 60s linear infinite; }
+.kickerDark { margin-top: 16px; color: #9fd3cc; font-family: var(--display); font-size: 10.5px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: #fbf8f1; font-family: var(--script); font-size: 50px; font-weight: 400; line-height: 1.1; overflow-wrap: break-word; text-wrap: balance; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-style: normal; }
+.heroDate { margin-top: 6px; color: rgba(244, 239, 228, .85); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 14px; color: rgba(244, 239, 228, .85); font-size: 16px; font-style: italic; line-height: 1.55; text-wrap: balance; }
+.heroFountain { width: 240px; height: auto; margin-top: 22px; }
+.sentBox img { width: 72px; }
+
+@keyframes bough { from { rotate: 3deg; } to { rotate: 9deg; } }
+@keyframes boughR { from { rotate: -12deg; } to { rotate: -6deg; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .orangeL, .orangeR, .heroStar { animation: none; }
+}

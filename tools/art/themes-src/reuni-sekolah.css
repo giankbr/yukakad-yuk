@@ -1,0 +1,181 @@
+/* Reuni Sekolah — buku tulis retro: kertas bergaris dengan garis margin merah, coretan pulpen biru, papan kapur berbingkai kayu, foto polaroid berselotip, lencana angkatan. */
+.root, .cover {
+  --bg: #fbf7ea url(/themes/art/reuni-sekolah/paper.webp) repeat; --paper: transparent; --ivory: #fffdf6; --field: #fffdf6; --ink: #2a2f45; --muted: #545a70; --line: #cfd6e4;
+  --accent: #23377e; --accent2: #1a2a66; --gold: #c8423a; --gold-l: #f4f1e6; --gold-d: #c8423a;
+  --band-bg: #2c3d35 url(/themes/art/reuni-sekolah/board.webp) repeat; --band-ink: #f4f1e6;
+  --display: Caveat, "Patrick Hand", cursive; --serif: "Patrick Hand", "Comic Neue", system-ui, sans-serif; --script: Caveat, cursive;
+  --chalk: "Cabin Sketch", Caveat, cursive; --type: "Special Elite", "Courier New", monospace;
+  --h2: 40px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #23377e; --t-accent-ink: #fffdf6; --t-bg: #fbf7ea; --t-ink: #2a2f45; --t-muted: #545a70; --t-line: #cfd6e4; --t-field: #fffdf6;
+  --t-radius: 4px; --t-font: "Patrick Hand", system-ui, sans-serif; --t-heading-font: Caveat, cursive; --t-heading-weight: 700; --t-heading-size: 36px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { position: relative; background: var(--bg); }
+.main::before { content: ""; position: absolute; z-index: 0; top: 0; bottom: 0; left: 30px; width: 5px; border-left: 1.5px solid rgba(200, 66, 58, .55); border-right: 1px solid rgba(200, 66, 58, .35); pointer-events: none; }
+.main > * { position: relative; z-index: 1; }
+
+.head h2, .headLight h2 { font-weight: 700; line-height: 1; }
+.head h2 { color: #23377e; }
+.eyebrow, .role, .salamKicker { color: #c8423a; font-family: var(--type); font-size: 12px; letter-spacing: .18em; }
+.headLight .eyebrow { color: #f2d27a; }
+.headLight h2 { font-family: var(--chalk); font-size: 34px; font-weight: 400; color: #f4f1e6; }
+.salamTitle { font-weight: 700; font-size: 48px; color: #23377e; rotate: -2deg; }
+.salamBlock { padding: 44px 30px 50px 46px; }
+.intro { color: var(--muted); font-size: 19px; line-height: 1.6; }
+.nick { font-weight: 700; font-size: 50px; color: #23377e; }
+.fullName { font-family: var(--type); font-size: 16px; }
+.parents { font-size: 17px; }
+.divider { width: 150px; rotate: -3deg; }
+
+/* sections stay on the notebook page */
+.section { padding-left: 44px; padding-right: 22px; }
+.couple, .story, .wishes, .gallery, .events, .gifts { background: transparent; }
+
+/* people: taped polaroids */
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 200px; height: 238px; padding: 10px 10px 40px; border: 0; border-radius: 2px; background: #fffdf6; box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 10px 22px rgba(42, 47, 69, .18); rotate: -2.5deg; transition: rotate 500ms var(--m-spring), box-shadow 500ms var(--m-spring); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 2.5deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 1px; filter: sepia(.18) saturate(.92) contrast(1.02); }
+.person:hover .portraitFrame { rotate: 0deg; box-shadow: 0 16px 30px rgba(42, 47, 69, .22); }
+.person:hover .portraitFrame > img { scale: 1; }
+.monogram { color: #23377e; font-family: var(--display); font-size: 96px; }
+.portraitFrame:has(.monogram) { background: #fffdf6; }
+.tapeTop { position: absolute; z-index: 3; top: -12px; left: 50%; width: 92px; height: auto; translate: -50% 0; rotate: -4deg; opacity: .92; }
+.amp { color: #c8423a; font-family: var(--display); font-weight: 700; }
+.amp img { width: 46px; }
+
+/* countdown: wooden-framed chalkboard */
+.countBand { margin: 20px 14px; padding: 46px 18px 40px; border: 10px solid #8a5a32; border-radius: 6px; box-shadow: inset 0 0 0 2px rgba(0, 0, 0, .25), inset 0 0 28px rgba(0, 0, 0, .35), 0 10px 22px rgba(42, 47, 69, .25); }
+.countBand::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: -10px; height: 9px; border-radius: 2px; background: #6f4626; box-shadow: 0 2px 0 rgba(0, 0, 0, .2); }
+.chalkBell { position: absolute; z-index: -1; top: 10px; right: 6px; width: 92px; height: auto; opacity: .9; transform-origin: 50% 20%; animation: ring 5s var(--m-spring) infinite; }
+.count > div { border: 0; border-radius: 0; background: none; height: 84px; }
+.count > div + div::before { content: ""; position: absolute; left: -6px; top: 22px; bottom: 22px; width: 2px; background: rgba(244, 241, 230, .35); }
+.count > div::after { display: none; }
+.count b { color: #f4f1e6; font-family: var(--chalk); font-size: 40px; text-shadow: 0 0 6px rgba(244, 241, 230, .25); }
+.count small { color: #f2d27a; font-family: var(--serif); font-style: normal; font-size: 16px; }
+.countTba { font-family: var(--chalk); font-size: 22px; }
+.ghostBtn { border: 1.5px dashed rgba(244, 241, 230, .7); border-radius: 4px; color: #f4f1e6; font-family: var(--serif); font-size: 16px; transition: background 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+
+/* events: index cards with tape */
+.events { gap: 34px; }
+.event { padding: 34px 20px 22px; border: 0; border-radius: 2px; background: #fffdf6 linear-gradient(transparent 38px, rgba(200, 66, 58, .45) 38px, rgba(200, 66, 58, .45) 40px, transparent 40px); box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 10px 20px rgba(42, 47, 69, .14); rotate: -1deg; transition: rotate 400ms var(--m-spring), translate 400ms var(--m-spring), box-shadow 400ms var(--m-spring); }
+.event:nth-of-type(even) { rotate: 1.2deg; }
+.event::before { inset: auto; top: -14px; left: 50%; width: 96px; height: 24px; translate: -50% 0; rotate: 3deg; border: 0; border-radius: 0; background: url(/themes/art/reuni-sekolah/tape.webp) no-repeat center / 100% 100%; }
+.event:hover { rotate: 0deg; translate: 0 -3px; box-shadow: 0 16px 28px rgba(42, 47, 69, .18); border-color: transparent; }
+.eventNo { top: 10px; left: 16px; translate: none; width: auto; height: auto; padding: 0; background: none; color: #c8423a; font-family: var(--type); font-size: 13px; }
+.event h3 { margin-top: 8px; color: #23377e; font-family: var(--display); font-size: 32px; font-weight: 700; }
+.eventDate { font-style: normal; font-size: 18px; }
+.eventTime { color: #c8423a; font-family: var(--type); }
+.rule { width: 120px; height: 8px; background: none; border-bottom: 2px solid #23377e; border-radius: 0 0 50% 50% / 0 0 100% 100%; opacity: .5; }
+.mapBtn { border-radius: 4px; background: #23377e; color: #fffdf6; font-family: var(--serif); font-size: 16px; box-shadow: 3px 3px 0 #c8423a; transition: background 300ms var(--m-spring), box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.mapBtn:hover { background: #1a2a66; translate: -1px -1px; box-shadow: 4px 4px 0 #c8423a; }
+
+/* story: margin notes */
+.timeline::before { left: 21px; width: 0; border-left: 2px dashed rgba(35, 55, 126, .35); background: none; }
+.node { border: 0; background: transparent; }
+.node img { width: 34px; }
+.storyBody small { color: #c8423a; font-family: var(--type); font-size: 14px; }
+.storyBody h3 { color: #23377e; font-family: var(--display); font-size: 28px; font-weight: 700; }
+.storyBody p { font-size: 18px; }
+
+/* gallery: polaroid wall */
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 18px 14px; padding: 6px 4px; }
+.tile { aspect-ratio: 1 / 1.05; height: auto; padding: 8px 8px 30px; border-radius: 2px; background: #fffdf6; box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 8px 18px rgba(42, 47, 69, .18); rotate: -2deg; transition: rotate 400ms var(--m-spring), scale 400ms var(--m-spring), filter 400ms var(--m-ease); }
+.tile:first-child { grid-row: auto; border-radius: 2px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(even) { rotate: 2.5deg; translate: 0 10px; }
+.tile:nth-child(3n) { rotate: -3.5deg; }
+.tile:hover { rotate: 0deg; scale: 1.03; }
+.gallery .head { margin-bottom: 4px; }
+
+/* wishes: sticky-note form */
+.form { border: 0; border-radius: 2px; background: #fff3a8; box-shadow: 0 1px 1px rgba(0, 0, 0, .06), 0 12px 24px rgba(120, 100, 20, .16); rotate: -.6deg; }
+.field > span, .diet, .guestsLabel { color: #23377e; font-family: var(--type); font-size: 12px; }
+.field input, .field textarea { border: 0; border-bottom: 2px solid rgba(35, 55, 126, .35); border-radius: 0; background: transparent; font-family: var(--display); font-size: 24px; padding: 4px 2px; }
+.field input:focus, .field textarea:focus { box-shadow: none; border-color: #23377e; }
+.diet input { font-family: var(--display); }
+.choices button { border: 1.5px solid #23377e; border-radius: 4px; background: transparent; color: #23377e; font-family: var(--serif); font-size: 16px; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { background: #23377e; color: #fff3a8; box-shadow: 3px 3px 0 #c8423a; }
+.step { border-color: #23377e; border-radius: 4px; background: transparent; }
+.submit { border-radius: 4px; background: #c8423a; color: #fffdf6; font-family: var(--serif); font-size: 17px; box-shadow: 3px 3px 0 #23377e; transition: background 300ms var(--m-spring), box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.submit:not(:disabled):hover { background: #b2362f; translate: -1px -1px; box-shadow: 4px 4px 0 #23377e; }
+.wish { border: 0; border-radius: 2px; background: #fffdf6; box-shadow: 0 6px 14px rgba(42, 47, 69, .1); }
+.wish:nth-child(even) { rotate: .8deg; background: #eef4ff; }
+.wish:nth-child(odd) { rotate: -.6deg; }
+.wish strong { color: #23377e; font-family: var(--display); font-size: 24px; font-weight: 700; }
+.wish small { border-radius: 2px; background: rgba(200, 66, 58, .1); color: #c8423a; font-family: var(--type); }
+.closed { border-color: #23377e; }
+.sentBox img { width: 220px; }
+
+/* gifts: kraft envelope */
+.gifts .intro { display: none; }
+.gift { border-radius: 4px; background: #c9a679 linear-gradient(160deg, rgba(255, 255, 255, .12), transparent); color: #2a2f45; box-shadow: 0 10px 22px rgba(42, 47, 69, .18); }
+.gift::after { inset: 0 0 auto 0; width: auto; height: 46px; border: 0; border-radius: 0; box-shadow: none; background: linear-gradient(170deg, rgba(0, 0, 0, .08) 50%, transparent 51%), linear-gradient(190deg, rgba(0, 0, 0, .08) 50%, transparent 51%); background-size: 50% 100%; background-position: left top, right top; background-repeat: no-repeat; z-index: -1; }
+.gift h3 { color: #23377e; font-family: var(--type); font-size: 15px; }
+.giftIcon { border-color: #23377e; }
+.giftNo { font-family: var(--type); color: #2a2f45; }
+.gift small { color: #3f4256; }
+.copy { border: 1.5px solid #23377e; border-radius: 4px; color: #23377e; font-family: var(--serif); font-size: 15px; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.copyOn, .copyOn:hover { background: #23377e; color: #fffdf6; }
+.giftNote { max-width: 320px; color: var(--muted); font-size: 18px; text-align: center; }
+
+/* closing: back on the page with the school doodle */
+.closing { margin: 10px 14px 0; border: 10px solid #8a5a32; border-bottom: 0; border-radius: 6px 6px 0 0; }
+.closing .thanks { font-family: var(--chalk); font-size: 46px; color: #f4f1e6; }
+.closingText { font-size: 18px; }
+.family, .closingNames { display: none; }
+.closingBadge { order: 8; position: relative; width: 120px; margin-top: 10px; }
+.closingBadge img { width: 100%; height: auto; }
+.closingBadge b { position: absolute; left: 0; right: 0; top: 30%; color: #23377e; font-family: var(--type); font-size: 14px; line-height: 1.15; text-align: center; }
+.closingBadge b span { display: block; font-family: var(--chalk); font-size: 26px; color: #c8423a; }
+.closingSign { order: 9; color: #f2d27a; font-family: var(--display); font-size: 26px; }
+.made { order: 10; color: rgba(244, 241, 230, .6); }
+.music { border-color: #c8423a; border-radius: 6px; background: #23377e; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 34px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 30px; width: 5px; border-left: 1.5px solid rgba(200, 66, 58, .55); border-right: 1px solid rgba(200, 66, 58, .35); }
+.board { position: relative; width: calc(100% - 28px); margin-top: 14px; padding: 26px 18px 22px; border: 10px solid #8a5a32; border-radius: 6px; background: #2c3d35 url(/themes/art/reuni-sekolah/board.webp) repeat; color: #f4f1e6; box-shadow: inset 0 0 26px rgba(0, 0, 0, .35), 0 10px 22px rgba(42, 47, 69, .25); }
+.boardKicker { color: #f2d27a; font-family: var(--serif); font-size: 16px; letter-spacing: .06em; }
+.boardTitle { margin-top: 2px; font-family: var(--chalk); font-size: 54px; font-weight: 400; line-height: 1; text-shadow: 0 0 8px rgba(244, 241, 230, .25); }
+.boardSchool { margin-top: 8px; max-width: 100%; font-family: var(--chalk); font-size: 22px; overflow-wrap: anywhere; }
+.boardChalk { position: absolute; top: 6px; right: 6px; width: 64px; height: auto; opacity: .85; transform-origin: 50% 20%; animation: ring 5s var(--m-spring) infinite; }
+.pinRow { position: relative; display: flex; align-items: center; justify-content: center; gap: 0; width: 100%; height: 220px; margin-top: 18px; }
+.polaroid { position: relative; width: 168px; height: 192px; padding: 9px 9px 34px; background: #fffdf6; box-shadow: 0 1px 1px rgba(0, 0, 0, .08), 0 12px 24px rgba(42, 47, 69, .22); rotate: -5deg; translate: 18px 0; }
+.polaroid > img:not([data-nolightbox]), .polaroid > div { width: 100%; height: 100%; object-fit: cover; filter: sepia(.2) saturate(.9); }
+.polaroid .tapeTop { top: -14px; }
+.badge { position: relative; z-index: 2; width: 112px; rotate: 8deg; translate: -16px 26px; animation: swing 4s var(--m-spring) infinite alternate; transform-origin: 50% 0; }
+.badge img { width: 100%; height: auto; }
+.badge b { position: absolute; left: 0; right: 0; top: 27%; color: #23377e; font-family: var(--type); font-size: 12px; font-weight: 400; line-height: 1.1; }
+.badge b span { display: block; color: #c8423a; font-family: var(--chalk); font-size: 25px; }
+.plane { position: absolute; z-index: -1; top: 6px; right: 4px; width: 128px; height: auto; animation: fly 6s ease-in-out infinite alternate; }
+.marginDoodles { position: absolute; z-index: -1; left: 2px; top: 280px; width: 24px; height: auto; opacity: .7; }
+.coverDate { margin-top: 18px; color: #23377e; font-family: var(--display); font-size: 30px; font-weight: 700; rotate: -1.5deg; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 12px; width: 100%; padding: 0 34px 0 46px; }
+.label { position: relative; width: 100%; max-width: 290px; padding: 12px 16px 14px; border: 2px solid #23377e; border-radius: 14px; background: #fffdf6; box-shadow: 0 6px 14px rgba(42, 47, 69, .12); }
+.label::before { content: ""; position: absolute; inset: 4px; border: 1px solid rgba(35, 55, 126, .4); border-radius: 10px; pointer-events: none; }
+.label small { display: block; color: #c8423a; font-family: var(--type); font-size: 12px; letter-spacing: .08em; }
+.label strong { display: block; margin-top: 4px; padding-bottom: 2px; border-bottom: 1.5px dotted rgba(35, 55, 126, .5); color: #23377e; font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1.15; overflow-wrap: anywhere; }
+.label .table { display: inline-block; margin-top: 8px; border: 0; padding: 0; color: #2a2f45; font-family: var(--type); font-size: 13px; letter-spacing: .06em; }
+.openBtn { min-width: 210px; border-radius: 4px; background: #f2c13c; color: #2a2f45; font-family: var(--serif); font-size: 18px; letter-spacing: .02em; box-shadow: 4px 4px 0 #23377e; rotate: -1deg; }
+.openBtn:hover { background: #f5cc56; translate: -1px -1px; box-shadow: 5px 5px 0 #23377e; }
+.pencil { width: 150px; height: auto; margin-top: 14px; rotate: -4deg; }
+.coverSchool { width: 270px; height: auto; margin-top: auto; padding-top: 18px; padding-left: 20px; opacity: .85; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 30px 22px 40px 44px; text-align: center; }
+.hero .board { width: 100%; margin-top: 0; }
+.heroNote { max-width: 300px; margin-top: 22px; color: #23377e; font-family: var(--display); font-size: 25px; line-height: 1.25; rotate: -1deg; text-wrap: pretty; }
+.heroSchool { width: 280px; height: auto; margin-top: 16px; }
+.heroDate { margin-top: 8px; color: #c8423a; font-family: var(--type); font-size: 14px; letter-spacing: .06em; }
+
+@keyframes ring { 0%, 80%, 100% { rotate: 0deg; } 84% { rotate: 12deg; } 88% { rotate: -10deg; } 92% { rotate: 6deg; } 96% { rotate: -3deg; } }
+@keyframes swing { from { rotate: 6deg; } to { rotate: 10deg; } }
+@keyframes fly { from { translate: 0 0; rotate: 0deg; } to { translate: -8px 6px; rotate: -4deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .chalkBell, .boardChalk, .badge, .plane { animation: none; }
+  .event, .tile, .portraitFrame, .mapBtn, .submit, .choices button, .copy, .ghostBtn { transition: none; }
+}

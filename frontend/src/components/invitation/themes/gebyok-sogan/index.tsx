@@ -3,7 +3,7 @@
 // kembar mayang emas, kabut pegunungan dan joglo cat air, serta rangkaian mawar & peoni. Sampul tanpa foto.
 import { Lucide, Photo, ThemeShell, formatDate, guestLabel, type ThemeProps } from "../kit";
 import { tableLabel } from "../extras";
-import { DEFAULT_COPY, JawiBody, ic, makeArt } from "../_jawi/body";
+import { DEFAULT_COPY, JAWA_WISHES, JawiBody, ic, makeArt } from "../_jawi/body";
 import s from "./styles.module.css";
 
 const FONTS = ["Cormorant SC:wght@400;500;600", "EB Garamond:ital,wght@0,400;0,500;0,600;1,400", "Parisienne"];
@@ -46,6 +46,7 @@ export default function GebyokSoganTheme(props: ThemeProps) {
     >
       <JawiBody
         {...props}
+        demoWishes={JAWA_WISHES}
         s={s}
         light="#ecd3a4"
         dark="#4a2f19"

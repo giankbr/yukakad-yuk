@@ -1,0 +1,122 @@
+/* Walimatus Safar — syukuran keberangkatan haji/umrah: hijau tua & emas, lukisan gouache jalan pasir menuju cakrawala, pesawat dan jejak awannya, lentera berlubang bintang, doa safar */
+.root, .cover {
+  --bg: #f6f1e3; --paper: #efe7d2; --ivory: #fffcf3; --field: #fffdf7; --ink: #16302a; --muted: #4f6158; --line: #e0d4b4;
+  --accent: #0f3b2e; --accent2: #165040; --gold: #c9a24e; --gold-l: #ecd48f; --gold-d: #8a6a24;
+  --band-bg: #0f3b2e url(/themes/art/walimatus-safar/velvet.webp) repeat; --band-ink: #f6f1e3;
+  --display: Marcellus, Georgia, serif; --serif: "Noto Serif", Georgia, serif; --script: Marcellus, Georgia, serif;
+  --h2: 26px; --card-r: 2px;
+  --gband: url(/themes/art/walimatus-safar/band.webp) repeat-x center / auto 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0f3b2e; --t-accent-ink: #f6f1e3; --t-bg: #f6f1e3; --t-ink: #16302a; --t-muted: #4f6158; --t-line: #e0d4b4; --t-field: #fffdf7;
+  --t-radius: 4px; --t-font: "Noto Serif", Georgia, serif; --t-heading-font: Marcellus, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 25px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .28em; }
+.head h2 { color: var(--accent); }
+.intro { font-size: 15.5px; line-height: 1.75; }
+.salamBlock { padding: 46px 28px 56px; }
+.salamTitle { color: var(--accent); font-size: 30px; letter-spacing: .04em; }
+.arabic { color: var(--accent); }
+
+/* divider: foil khatam between two hairlines */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider::after { background: linear-gradient(90deg, var(--gold), transparent); }
+.divider img { width: 30px; height: auto; }
+
+/* people (celebrant): monogram on green inside a foil star */
+.couple { gap: 30px; background: var(--paper); }
+.couple::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 26px; background: var(--gband); opacity: .55; }
+.portrait { display: grid; place-items: center; width: 200px; height: 200px; margin-bottom: 6px; }
+.portraitStar { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 60s linear infinite; }
+.portraitFrame { width: 112px; height: 112px; padding: 0; border: 2px solid var(--gold); border-radius: 999px; background: var(--band-bg); box-shadow: 0 0 0 5px rgba(201, 162, 78, .18); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 56px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 34px; letter-spacing: .02em; }
+.fullName { font-family: var(--serif); font-size: 16px; }
+.parents { font-size: 15px; font-style: italic; }
+
+/* countdown */
+.countBand { padding-top: 70px; padding-bottom: 70px; }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 26px; background: var(--gband); }
+.countBand::before { top: 14px; } .countBand::after { bottom: 14px; }
+.count > div { border-radius: 2px; border-color: rgba(236, 212, 143, .55); background: rgba(255, 252, 243, .05); box-shadow: inset 0 0 0 4px rgba(15, 59, 46, 1), inset 0 0 0 5px rgba(236, 212, 143, .3); }
+.count b { font-family: var(--display); }
+.count small { font-style: normal; font-size: 12px; letter-spacing: .1em; }
+.ghostBtn { border-radius: 2px; font-family: var(--serif); }
+
+/* events: ivory cards under a foil band */
+.event { padding: 50px 20px 26px; border-color: var(--line); border-radius: 2px; background: var(--ivory); }
+.event::before { inset: 6px; border-color: rgba(201, 162, 78, .45); border-radius: 0; }
+.event::after { content: ""; position: absolute; top: 14px; left: 14px; right: 14px; height: 22px; background: url(/themes/art/walimatus-safar/band.webp) repeat-x center / auto 22px; opacity: .85; }
+.eventNo { z-index: 1; top: -15px; width: 34px; height: 30px; border-radius: 2px; background: var(--accent); rotate: 0deg; font-family: var(--display); }
+.event h3 { margin-top: 10px; font-family: var(--display); font-size: 21px; }
+.eventTime { font-family: var(--serif); }
+.mapBtn { border-radius: 2px; font-family: var(--serif); }
+
+.story { background: var(--bg); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { font-family: var(--display); }
+.storyBody h3 { font-family: var(--display); }
+
+.wishes { background: var(--paper); }
+.form { border-radius: 2px; }
+.field > span, .diet, .guestsLabel { font-family: var(--display); }
+.choices button, .submit, .step, .field input, .field textarea, .copy { border-radius: 2px; }
+.submit { font-family: var(--display); }
+.wish { border-radius: 2px; }
+.gift, .tile { border-radius: 2px; }
+
+.closing { padding: 92px 28px 84px; }
+.closing::before, .closing::after { content: ""; position: absolute; left: 0; right: 0; height: 26px; background: var(--gband); }
+.closing::before { top: 16px; } .closing::after { bottom: 16px; }
+.closingPlane { position: absolute; z-index: -1; top: 52px; right: -20px; width: 200px; height: auto; opacity: .55; animation: fly 14s ease-in-out infinite alternate; }
+.closingEmblem { width: 76px; height: auto; margin-bottom: 4px; }
+.thanks { font-size: 36px; letter-spacing: .04em; }
+.closingNames { font-size: 26px; letter-spacing: .03em; }
+.music { border-radius: 4px; }
+.sentBox img { width: 80px; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 64px 26px 56px; overflow: hidden; background: var(--band-bg); color: #f6f1e3; text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; left: 0; right: 0; height: 26px; background: var(--gband); }
+.cover::before { top: 14px; } .cover::after { bottom: 14px; }
+.lampL, .lampR { position: absolute; z-index: 1; top: 30px; height: auto; transform-origin: 50% 0; animation: sway 7s ease-in-out infinite alternate; }
+.lampL { left: 14px; width: 52px; }
+.lampR { right: 14px; width: 44px; animation-delay: -3.5s; }
+.kicker { color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .34em; text-transform: uppercase; }
+.scene { position: relative; width: 232px; flex-shrink: 0; margin-top: 14px; filter: drop-shadow(0 14px 26px rgba(0, 0, 0, .35)); }
+.scene > img:first-child { display: block; width: 100%; height: auto; }
+.plane { position: absolute; top: 12%; left: 14%; width: 56%; height: auto; animation: fly 16s ease-in-out infinite alternate; }
+.coverNames { max-width: 100%; margin-top: 18px; color: #fbf3dc; font-family: var(--display); font-size: 31px; font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; color: var(--gold); font-size: 20px; font-style: normal; }
+.coverSub { margin-top: 6px; color: rgba(246, 241, 227, .78); font-size: 14px; font-style: italic; }
+.coverDate { margin-top: 10px; color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 18px; }
+.guest small { color: rgba(246, 241, 227, .72); font-size: 14px; }
+.guest strong { color: #fbf3dc; font-family: var(--display); font-size: 19px; }
+.table { color: var(--gold-l); }
+.openBtn { border-radius: 2px; background: linear-gradient(100deg, #8a6a24, #ecd48f 45%, #c9a24e 62%, #8a6a24); background-size: 220% 100%; color: #0f3b2e; font-family: var(--display); box-shadow: 0 10px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 24px 0; background: var(--band-bg); color: #f6f1e3; text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; top: 14px; left: 0; right: 0; height: 26px; background: var(--gband); }
+.hero::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 200px; background: var(--bg); }
+.hero .scene { width: 270px; }
+.heroKicker { margin-top: 22px; color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: #fbf3dc; font-family: var(--display); font-size: 30px; font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { display: block; color: var(--gold); font-size: 20px; font-style: normal; }
+.heroDate { margin-top: 6px; color: rgba(246, 241, 227, .85); font-size: 14px; }
+.heroNote { max-width: 300px; margin-top: 12px; color: rgba(246, 241, 227, .88); font-size: 15px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+.doa { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; margin-top: 30px; padding: 30px 20px 26px; border: 1px solid var(--gold); background: var(--ivory); color: var(--ink); box-shadow: 0 20px 40px rgba(8, 37, 25, .25), inset 0 0 0 5px var(--ivory), inset 0 0 0 6px rgba(201, 162, 78, .45); }
+.doa > img { position: absolute; top: -24px; width: 48px; height: auto; }
+.doa h2 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 400; letter-spacing: .06em; }
+.doaAr { color: var(--accent); font-family: Amiri, serif; font-size: 23px; line-height: 2; text-wrap: balance; }
+.doaId { max-width: 300px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.65; text-wrap: pretty; }
+.doaSrc { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+
+@keyframes fly { from { translate: 6% 4%; } to { translate: -8% -6%; } }
+@keyframes turn { to { rotate: 360deg; } }

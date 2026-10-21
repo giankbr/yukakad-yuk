@@ -1,0 +1,159 @@
+/* Aceh Pintu — malam hitam berbingkai pintu Aceh berukir, pita kerawang Gayo merah-hijau-kuning, rumah Krong Bade, aksen emas. */
+.root, .cover {
+  --bg: #141111; --paper: #1c1716; --ivory: #221b19; --field: #2a2220; --ink: #f1e8d6; --muted: #c7b9a2; --line: #4a3a2c;
+  --accent: #e2b337; --accent2: #f0c955; --gold: #cda14a; --gold-l: #f2d995; --gold-d: #cda14a;
+  --band-bg: #b8262a; --band-ink: #fff4e0;
+  --display: Marcellus, "Cormorant Garamond", Georgia, serif; --serif: Mulish, "Segoe UI", sans-serif; --script: Marcellus, Georgia, serif;
+  --red: #b8262a; --grn: #2f7a3c; --yel: #e2b337;
+  --kerawang: url(/themes/art/aceh-pintu/kerawang.webp) repeat-x 0 50% / auto 100%;
+  --door: polygon(50% 0, 100% 16%, 100% 100%, 0 100%, 0 16%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e2b337; --t-accent-ink: #141111; --t-bg: #141111; --t-ink: #f1e8d6; --t-muted: #c7b9a2; --t-line: #4a3a2c; --t-field: #2a2220;
+  --t-radius: 4px; --t-font: Mulish, sans-serif; --t-heading-font: Marcellus, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: Mulish, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .3em; color: var(--yel); }
+.head h2 { color: #fff4e0; }
+.divider { width: 180px; }
+
+/* section rhythm: kerawang band between dark rooms */
+.section { padding: 70px 24px 62px; }
+.section::before, .salamBlock::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 26px; background: var(--kerawang); }
+.salamBlock { position: relative; padding: 50px 28px 72px; background: radial-gradient(80% 60% at 50% 30%, #2a1d16, #141111); }
+.salamBlock::after { top: auto; bottom: 0; }
+.arabic { color: var(--gold-l); font-size: 30px; }
+.salamTitle { font-family: var(--display); font-size: 34px; color: #fff4e0; }
+.salamSub { color: var(--gold); font-family: Mulish, sans-serif; font-size: 13px; letter-spacing: .06em; }
+.intro { color: var(--muted); font-size: 16px; }
+
+/* couple: door-shaped portraits */
+.couple { background: var(--paper); }
+.portrait { padding-top: 0; }
+.portraitFrame { width: 190px; height: 262px; padding: 5px; border: 0; border-radius: 0; background: linear-gradient(180deg, #cda14a, #7a5c22); clip-path: var(--door); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--door); }
+.portrait::after { content: ""; position: absolute; left: 50%; top: -18px; width: 54px; height: 54px; translate: -50% 0; background: url(/themes/art/aceh-pintu/medallion.webp) no-repeat center / contain; }
+.portrait::before { content: ""; position: absolute; left: -14px; right: -14px; bottom: -10px; height: 18px; background: var(--kerawang); z-index: 1; }
+.role { margin-top: 10px; }
+.nick { font-family: var(--display); font-size: 44px; color: var(--gold-l); }
+.fullName { font-family: Mulish, sans-serif; font-weight: 700; font-size: 17px; color: #fff4e0; }
+.parents { color: var(--muted); font-size: 15px; }
+.monogram { color: #141111; font-family: var(--display); }
+.amp { color: var(--gold); font-family: var(--display); font-size: 40px; }
+.amp img { width: 64px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: red room with framed digits */
+.countBand { background: radial-gradient(90% 80% at 50% 40%, #c4302f, #8a1a1d); padding-bottom: 92px; }
+.countBand::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 26px; background: var(--kerawang); }
+.headLight .eyebrow { color: #fff1c0; }
+.headLight h2 { font-family: var(--display); }
+.count > div { border-radius: 4px; border: 1px solid rgba(242, 217, 149, .7); background: rgba(20, 17, 17, .55); clip-path: var(--door); height: 96px; padding-top: 12px; }
+.count b { font-family: var(--display); color: #fff4e0; }
+.count small { font-family: Mulish, sans-serif; font-style: normal; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-l); }
+.ghostBtn { font-family: Mulish, sans-serif; font-weight: 700; font-size: 13px; color: #fff4e0; border-color: rgba(255, 244, 224, .7); }
+
+/* events: tall door panels with gable heads */
+.events { background: var(--bg); gap: 26px; }
+.event { padding: 64px 22px 24px; border: 0; border-radius: 0; background: linear-gradient(180deg, #2a201c, #1c1716); clip-path: polygon(50% 0, 100% 46px, 100% 100%, 0 100%, 0 46px); }
+.event::before { inset: 0; border: 0; border-radius: 0; background: linear-gradient(var(--red), var(--red)) 0 46px / 100% 3px no-repeat, linear-gradient(var(--yel), var(--yel)) 0 50px / 100% 2px no-repeat, linear-gradient(var(--grn), var(--grn)) 0 53px / 100% 3px no-repeat; }
+.event:hover { translate: 0 -3px; box-shadow: none; }
+.eventNo { top: 12px; width: 30px; height: 30px; border-radius: 0; rotate: 45deg; background: var(--yel); color: #141111; font-family: Mulish, sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 0; }
+.eventNo { display: grid; }
+.event h3 { font-family: var(--display); font-size: 24px; color: var(--gold-l); }
+.eventDate { font-style: normal; color: #fff4e0; }
+.eventTime { font-family: Mulish, sans-serif; color: var(--yel); font-weight: 700; }
+.rule { background: var(--gold); }
+.event strong { color: #fff4e0; }
+.mapBtn { background: var(--yel); color: #141111; font-family: Mulish, sans-serif; font-weight: 800; letter-spacing: .02em; }
+.mapBtn:hover { background: #f0c955; }
+.mapBtn svg { stroke: #141111; }
+
+.story { background: var(--paper); }
+.node { background: #141111; border-color: var(--gold); }
+.node img { width: 26px; }
+.storyBody small { font-family: Mulish, sans-serif; color: var(--yel); font-weight: 700; }
+.storyBody h3 { font-family: var(--display); color: var(--gold-l); }
+.storyImg { border-radius: 4px; }
+
+.gallery { background: var(--bg); }
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; gap: 10px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: polygon(50% 0, 100% 22px, 100% 100%, 0 100%, 0 22px); }
+.tile:first-child { grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: span 2; }
+
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--line); border-top: 4px solid var(--yel); border-radius: 4px; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { font-family: Mulish, sans-serif; font-weight: 700; color: var(--gold-l); }
+.field input, .field textarea { border-radius: 4px; color: var(--ink); }
+.choices button { border-radius: 4px; color: var(--muted); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--yel); border-color: var(--yel); color: #141111; }
+.step { color: var(--gold-l); }
+.submit { border-radius: 4px; background: var(--red); color: #fff4e0; font-family: Mulish, sans-serif; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: #cf3335; }
+.sent { color: var(--gold-l); }
+.wish { border-radius: 4px; background: var(--ivory); border-left: 3px solid var(--grn); }
+.wish strong { font-family: Mulish, sans-serif; font-weight: 700; color: var(--gold-l); }
+.wish small { background: rgba(226, 179, 55, .16); color: var(--yel); }
+.closed strong { color: var(--gold-l); }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 4px; background: #221b19; border: 1px solid var(--line); padding-top: 40px; }
+.gift::after { inset: 0 0 auto; width: auto; height: 18px; border: 0; border-radius: 0; box-shadow: none; background: var(--kerawang); }
+.gift h3 { font-family: Mulish, sans-serif; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.giftNo { font-family: Mulish, sans-serif; font-weight: 800; color: var(--gold-l); }
+.copy { font-family: Mulish, sans-serif; font-weight: 700; border-radius: 4px; }
+.copyOn, .copyOn:hover { color: #141111; }
+
+.closing { padding-top: 0; background: #141111; }
+.closingKrong { width: calc(100% + 56px); max-width: none; height: auto; margin: 0 -28px 18px; padding: 34px 28px 0; background: linear-gradient(180deg, #f1e6cf 0%, #e9dcc0 78%, #141111 100%); }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--gold-l); }
+.closingSalam { font-family: Mulish, sans-serif; color: var(--yel); }
+.family { font-family: Mulish, sans-serif; }
+.closingNames { font-family: var(--display); color: #fff4e0; }
+.music { background: var(--red); border-color: var(--yel); }
+
+/* ── Cover: looking through a carved pintu Aceh ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; justify-content: center; padding: 176px 50px 64px; overflow: hidden; background: radial-gradient(70% 45% at 50% 46%, #3a2618 0%, #1a1211 70%, #0c0909 100%); color: #f1e8d6; text-align: center; isolation: isolate; }
+.lintel { position: absolute; z-index: 3; top: 0; left: 50%; width: 100%; height: auto; translate: -50% 0; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .55)); }
+.jamb { position: absolute; z-index: 2; top: 0; bottom: 0; width: 34px; background: url(/themes/art/aceh-pintu/jamb.webp) repeat-y 0 0 / 34px auto; box-shadow: 0 0 18px rgba(0, 0, 0, .6); }
+.jambL { left: 0; }
+.jambR { right: 0; scale: -1 1; }
+.threshold { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 30px; background: var(--kerawang); box-shadow: 0 -6px 14px rgba(0, 0, 0, .5); }
+.leaf { position: absolute; z-index: 4; top: 0; bottom: 0; width: 50%; background: linear-gradient(90deg, rgba(0, 0, 0, .35), transparent 30%), url(/themes/art/aceh-pintu/jamb.webp) repeat 0 0 / 120px auto; animation: leafOpen 1.8s cubic-bezier(.6, .05, .25, 1) .5s both; pointer-events: none; }
+.leafL { left: 0; transform-origin: 0 50%; }
+.leafR { right: 0; transform-origin: 100% 50%; animation-name: leafOpenR; }
+.arabicCover { color: var(--gold-l); font-family: Amiri, "Traditional Arabic", serif; font-size: 24px; line-height: 1.6; }
+.kicker { margin-top: 2px; font-family: Mulish, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .18em; color: var(--yel); }
+.coverPhoto { position: relative; width: 170px; height: 220px; margin-top: 16px; padding: 4px; background: linear-gradient(180deg, #cda14a, #7a5c22); clip-path: var(--door); flex-shrink: 0; }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--door); }
+.coverLabel { margin-top: 16px; font-family: Mulish, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(241, 232, 214, .75); }
+.coverNames { max-width: 100%; margin-top: 4px; font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; color: #fff4e0; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; color: var(--gold); font-style: normal; }
+.coverDate { margin-top: 4px; font-size: 14px; font-weight: 600; letter-spacing: .06em; color: var(--gold-l); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 18px; width: 100%; }
+.guest small { color: rgba(241, 232, 214, .7); font-size: 13px; font-style: normal; }
+.guest strong { font-family: Mulish, sans-serif; font-weight: 700; font-size: 17px; color: #fff4e0; }
+.table { border-color: var(--yel); color: var(--yel); font-family: Mulish, sans-serif; border-radius: 4px; }
+.openBtn { min-width: 0; padding: 0 22px; border-radius: 4px; background: var(--yel); color: #141111; font-family: Mulish, sans-serif; font-size: 14px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 10px 24px rgba(0, 0, 0, .45); }
+.openBtn:hover { background: #f0c955; }
+
+/* ── Hero: cream courtyard with the Krong Bade ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 0; overflow: hidden; background: linear-gradient(180deg, #f1e6cf, #e9dcc0); color: #2a1d16; text-align: center; }
+.heroArabic { color: #7a5c22; font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; }
+.heroKicker { margin-top: 10px; font-family: Mulish, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: #8a1a1d; }
+.heroNames { margin-top: 4px; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.1; color: #2a1d16; overflow-wrap: anywhere; }
+.heroNames em { display: block; font-size: 26px; font-style: normal; color: #a37a2a; }
+.heroDate { margin-top: 6px; font-size: 14px; font-weight: 700; letter-spacing: .06em; color: #5a4636; }
+.heroPhoto { width: 230px; height: 300px; margin-top: 22px; padding: 5px; background: linear-gradient(180deg, #cda14a, #7a5c22); clip-path: var(--door); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--door); }
+.heroNote { max-width: 310px; margin-top: 18px; font-size: 15px; font-style: italic; line-height: 1.6; color: #5a4636; }
+.heroKrong { width: calc(100% + 48px); max-width: none; height: auto; margin: 16px -24px 0; display: block; }
+.heroBand { display: block; width: calc(100% + 48px); height: 26px; margin: 0 -24px; background: var(--kerawang); }
+.sentBox img { width: 90px; }
+
+@keyframes leafOpen { from { transform: perspective(900px) rotateY(0deg); } to { transform: perspective(900px) rotateY(-88deg); visibility: hidden; } }
+@keyframes leafOpenR { from { transform: perspective(900px) rotateY(0deg); } to { transform: perspective(900px) rotateY(88deg); visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .leaf { display: none; } }

@@ -1,0 +1,146 @@
+/* Lampung Tapis — merah tua & hitam bersulam benang emas: pita kain tapis, siger Lampung sembilan lekuk, kain kapal tenun. */
+.root, .cover {
+  --bg: #f1e6cf; --paper: #e8d9bb; --ivory: #fbf4e4; --field: #fffaf0; --ink: #2a1210; --muted: #5d4337; --line: #d6bf94;
+  --accent: #7e1620; --accent2: #5c0f17; --gold: #d1a648; --gold-l: #f0d38a; --gold-d: #9a7224;
+  --band-bg: #6e121b; --band-ink: #f6ead2;
+  --display: Italiana, "Cormorant Garamond", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: "Pinyon Script", cursive;
+  --tapis: url(/themes/art/lampung-tapis/tapis.webp) repeat-x 0 50% / auto 100%;
+  --notch: polygon(14px 0, calc(100% - 14px) 0, calc(100% - 14px) 6px, calc(100% - 6px) 6px, calc(100% - 6px) 14px, 100% 14px, 100% calc(100% - 14px), calc(100% - 6px) calc(100% - 14px), calc(100% - 6px) calc(100% - 6px), calc(100% - 14px) calc(100% - 6px), calc(100% - 14px) 100%, 14px 100%, 14px calc(100% - 6px), 6px calc(100% - 6px), 6px calc(100% - 14px), 0 calc(100% - 14px), 0 14px, 6px 14px, 6px 6px, 14px 6px);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7e1620; --t-accent-ink: #f6ead2; --t-bg: #f1e6cf; --t-ink: #2a1210; --t-muted: #5d4337; --t-line: #d6bf94; --t-field: #fffaf0;
+  --t-radius: 2px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: Italiana, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: "EB Garamond", Georgia, serif; font-size: 12px; font-weight: 600; letter-spacing: .3em; color: var(--gold-d); }
+.head h2 { text-transform: uppercase; letter-spacing: .08em; }
+.divider { width: 190px; }
+
+/* every section starts with a tapis band */
+.section { padding: 82px 24px 62px; }
+.section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 34px; background: var(--tapis); }
+.salamBlock { position: relative; padding: 40px 30px 58px; }
+.arabic { color: var(--accent); }
+.salamTitle { font-family: var(--display); font-size: 40px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.salamKicker { font-family: var(--script); font-size: 30px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--gold-d); }
+
+/* couple: dark red cloth, stepped (tumpal) frames */
+.couple { background: #6e121b; color: var(--band-ink); }
+.couple .head h2 { color: var(--gold-l); }
+.couple .eyebrow { color: var(--gold); }
+.portraitFrame { width: 200px; height: 250px; padding: 4px; border: 0; border-radius: 0; background: linear-gradient(160deg, #f0d38a, #9a7224 55%, #e8c56f); clip-path: var(--notch); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--notch); }
+.portrait::after { content: ""; position: absolute; left: -16px; right: -16px; bottom: -14px; height: 22px; background: var(--tapis); clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); }
+.role { color: var(--gold); margin-top: 10px; }
+.nick { font-family: var(--script); color: var(--gold-l); font-size: 54px; }
+.fullName { font-family: var(--display); color: #fff3d8; font-size: 22px; letter-spacing: .06em; }
+.parents { color: rgba(246, 234, 210, .78); }
+.monogram { font-family: var(--display); }
+.amp { color: var(--gold); font-family: var(--script); }
+.amp img { width: 90px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: black cloth + couched-gold squares */
+.countBand { background: #1a0d0c; padding-bottom: 92px; }
+.countBand::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 34px; background: var(--tapis); }
+.headLight h2 { font-family: var(--display); text-transform: uppercase; letter-spacing: .08em; }
+.count > div { border-radius: 0; clip-path: var(--notch); border: 0; background: linear-gradient(180deg, #7e1620, #4a0b12); box-shadow: inset 0 0 0 2px #d1a648; }
+.count b { font-family: var(--display); font-size: 34px; color: var(--gold-l); }
+.count small { font-style: normal; letter-spacing: .14em; text-transform: uppercase; font-size: 11px; }
+.ghostBtn { border-radius: 2px; font-family: "EB Garamond", Georgia, serif; font-size: 15px; letter-spacing: .1em; }
+
+/* events: ledger cards with a numbered side column */
+.events { gap: 18px; }
+.event { display: grid; grid-template-columns: 58px minmax(0, 1fr); column-gap: 16px; row-gap: 4px; align-items: start; justify-items: start; padding: 22px 20px 20px 0; border: 0; border-radius: 0; background: var(--ivory); text-align: left; clip-path: var(--notch); box-shadow: none; }
+.event::before { inset: 0 auto 0 0; width: 58px; border: 0; border-radius: 0; background: linear-gradient(180deg, #7e1620, #4a0b12); }
+.event:hover { translate: 0 -2px; }
+.event > * { grid-column: 2; }
+.eventNo { position: relative; grid-column: 1; grid-row: 1 / span 3; top: auto; left: auto; translate: none; justify-self: center; width: auto; height: auto; background: none; color: var(--gold-l); font-family: var(--display); font-size: 30px; }
+.event h3 { font-family: var(--display); font-size: 26px; letter-spacing: .04em; text-transform: uppercase; }
+.eventDate { font-style: normal; font-weight: 600; }
+.rule { width: 100%; height: 6px; margin: 8px 0; background: url(/themes/art/lampung-tapis/tapis.webp) repeat-x 0 50% / auto 400%; opacity: .9; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; font-family: "EB Garamond", Georgia, serif; font-size: 15px; letter-spacing: .06em; }
+
+.story { background: var(--paper); }
+.node { border-radius: 0; rotate: 45deg; background: #7e1620; border: 2px solid #d1a648; width: 26px; height: 26px; margin: 5px; }
+.node img { width: 0; }
+.timeline::before { left: 17px; }
+.storyBody h3 { font-family: var(--display); text-transform: uppercase; letter-spacing: .04em; }
+.storyImg { border-radius: 0; clip-path: var(--notch); }
+
+/* gallery: kain kapal header art + notched tiles */
+.gallery { background: #1a0d0c; }
+.gallery .head h2 { color: var(--gold-l); }
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 140px; gap: 8px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: var(--notch); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+.wishes { background: var(--bg); }
+.form { border-radius: 0; clip-path: var(--notch); border: 0; box-shadow: none; background: var(--ivory); }
+.field input, .field textarea, .choices button { border-radius: 2px; }
+.submit { border-radius: 2px; letter-spacing: .14em; text-transform: uppercase; font-family: "EB Garamond", Georgia, serif; font-weight: 600; }
+.wish { border-radius: 0; border: 0; border-top: 3px solid var(--gold); background: var(--ivory); }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 0; clip-path: var(--notch); background: linear-gradient(180deg, #7e1620, #4a0b12); }
+.gift::after { inset: auto 0 0; width: auto; height: 22px; border: 0; border-radius: 0; box-shadow: none; background: var(--tapis); right: 0; bottom: 0; }
+.gift { padding-bottom: 40px; }
+.giftIcon, .copy { border-radius: 2px; }
+.gift h3 { letter-spacing: .1em; text-transform: uppercase; }
+
+.closing { padding-top: 92px; padding-bottom: 54px; background: #6e121b; }
+.closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 34px; background: var(--tapis); }
+.closingKapal { width: 300px; height: auto; margin-bottom: 14px; box-shadow: 0 14px 30px rgba(0, 0, 0, .35); }
+.thanks { font-family: var(--display); font-size: 40px; letter-spacing: .1em; text-transform: uppercase; }
+.closingNames { font-family: var(--script); color: var(--gold-l); }
+.music { border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); width: 50px; height: 50px; border: 0; }
+
+/* ── Cover: hanging tapis cloth — bands, siger crown, wide stepped photo window ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 0; overflow: hidden; background: radial-gradient(90% 50% at 50% 42%, #8e1d27 0%, #6e121b 60%, #4a0b12 100%); color: #f6ead2; text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, .05) 0 2px, transparent 2px 4px), repeating-linear-gradient(0deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 4px); }
+.coverBand { width: 100%; height: 64px; flex-shrink: 0; background: url(/themes/art/lampung-tapis/tapis.webp) repeat-x 0 0 / 115.2px 64px; box-shadow: 0 4px 0 #1a0d0c; animation: bandSlide 40s linear infinite; }
+.coverBand:last-child { margin-top: auto; box-shadow: 0 -4px 0 #1a0d0c; animation-direction: reverse; }
+.siger { width: 230px; height: auto; margin-top: 18px; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45)); transform-origin: 50% 100%; animation: sigerGlint 7s ease-in-out infinite; }
+.kicker { margin-top: 4px; font-family: var(--script); font-size: 34px; line-height: 1.1; color: var(--gold-l); }
+.coverLabel { font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: rgba(246, 234, 210, .8); }
+.window { width: calc(100% - 44px); height: 172px; margin-top: 16px; padding: 4px; background: linear-gradient(160deg, #f0d38a, #9a7224 55%, #e8c56f); clip-path: var(--notch); flex-shrink: 0; }
+.window > img, .window > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; clip-path: var(--notch); }
+.coverNames { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 0 12px; max-width: calc(100% - 40px); margin-top: 16px; font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.05; letter-spacing: .1em; text-transform: uppercase; color: #fff3d8; overflow-wrap: anywhere; }
+.coverNames em { font-family: var(--script); font-size: 34px; font-style: normal; letter-spacing: 0; text-transform: none; color: var(--gold); }
+.coverDate { margin-top: 8px; padding: 4px 16px; border-top: 1px solid rgba(209, 166, 72, .6); border-bottom: 1px solid rgba(209, 166, 72, .6); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-l); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 16px 0 18px; padding: 0 24px; }
+.guest small { color: rgba(246, 234, 210, .75); }
+.guest strong { font-family: "EB Garamond", Georgia, serif; font-weight: 600; color: #fff3d8; }
+.table { color: var(--gold-l); border-color: var(--gold); font-family: "EB Garamond", Georgia, serif; border-radius: 2px; }
+.openBtn { border-radius: 2px; clip-path: var(--notch); background: linear-gradient(100deg, #9a7224 0%, #f0d38a 45%, #d1a648 60%, #8a6420 100%); background-size: 220% 100%; color: #4a0b12; font-family: "EB Garamond", Georgia, serif; font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 46px; background: #1a0d0c; color: #f6ead2; text-align: center; }
+.heroBand { width: 100%; height: 48px; background: var(--tapis); }
+.hero .siger { width: 190px; margin-top: 22px; animation: none; }
+.heroKicker { margin-top: 4px; font-family: var(--script); font-size: 30px; color: var(--gold-l); }
+.heroNames { margin-top: 6px; padding: 0 20px; font-family: var(--display); font-size: 40px; font-weight: 400; letter-spacing: .1em; line-height: 1.1; text-transform: uppercase; color: #fff3d8; overflow-wrap: anywhere; }
+.heroNames em { display: block; font-family: var(--script); font-size: 30px; font-style: normal; letter-spacing: 0; text-transform: none; color: var(--gold); }
+.heroDate { margin-top: 8px; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-l); }
+.heroPhoto { width: calc(100% - 48px); height: 360px; margin-top: 24px; padding: 4px; background: linear-gradient(160deg, #f0d38a, #9a7224 55%, #e8c56f); clip-path: var(--notch); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--notch); }
+.heroNote { max-width: 310px; margin-top: 20px; font-size: 18px; font-style: italic; line-height: 1.5; color: rgba(246, 234, 210, .86); }
+.heroKapal { width: calc(100% - 48px); height: auto; margin-top: 26px; box-shadow: 0 12px 26px rgba(0, 0, 0, .45); }
+.sentBox img { width: 160px; }
+
+@keyframes bandSlide { to { background-position: 230.4px 0; } }
+@keyframes sigerGlint { 0%, 100% { filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45)) brightness(1); } 50% { filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .45)) brightness(1.12); } }
+@media (prefers-reduced-motion: reduce) { .coverBand, .siger { animation: none; } }
+.salamTitle { font-size: 28px; letter-spacing: .06em; }
+.eventTime, .giftNo, .wish strong, .field > span, .diet, .guestsLabel, .storyBody small, .count small, .ghostBtn, .copy { font-family: "EB Garamond", Georgia, serif; }
+.eventTime { font-size: 15px; font-weight: 600; }
+.giftNo { font-weight: 600; letter-spacing: .08em; }
+.wish strong { font-weight: 600; }
+.field > span, .diet, .guestsLabel { font-weight: 600; letter-spacing: .14em; }
+.storyBody small { font-weight: 600; letter-spacing: .2em; }

@@ -3,7 +3,7 @@
 // bingkai motif kawung, serta lili biru dan anggrek putih yang dilukis tangan.
 import { Lucide, Photo, ThemeShell, formatDate, guestLabel, type ThemeProps } from "../kit";
 import { tableLabel } from "../extras";
-import { DEFAULT_COPY, JawiBody, ic, makeArt } from "../_jawi/body";
+import { DEFAULT_COPY, JAWA_WISHES, JawiBody, ic, makeArt } from "../_jawi/body";
 import s from "./styles.module.css";
 
 const FONTS = ["Cinzel:wght@400;500", "Cormorant Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500", "Italianno"];
@@ -52,6 +52,7 @@ export default function KawungBiruTheme(props: ThemeProps) {
     >
       <JawiBody
         {...props}
+        demoWishes={JAWA_WISHES}
         s={s}
         light="#dfe6f4"
         dark="#223150"

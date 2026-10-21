@@ -1,0 +1,158 @@
+/* Baby Shower Awan — cat air pastel: balon udara bergaris mint-peach-lilac, awan empuk, bulan sabit, bintang kecil, di atas kertas cat air. */
+.root, .cover {
+  --bg: #fdf8f3 url(/themes/art/baby-shower-awan/paper.webp) repeat; --paper: #f3eefa; --ivory: #fffdfb; --field: #fffdfb; --ink: #4a4060; --muted: #7a7090; --line: #e6dcef;
+  --accent: #7d68ad; --accent2: #6a5799; --gold: #e99a7a; --gold-l: #fff6ef; --gold-d: #5e9e88;
+  --band-bg: #8f7cc0; --band-ink: #fffdfb;
+  --display: Fraunces, Georgia, serif; --serif: Quicksand, system-ui, sans-serif; --script: Fraunces, Georgia, serif;
+  --h2: 30px; --card-r: 36px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7d68ad; --t-accent-ink: #fffdfb; --t-bg: #fdf8f3; --t-ink: #4a4060; --t-muted: #7a7090; --t-line: #e6dcef; --t-field: #fffdfb;
+  --t-radius: 24px; --t-font: Quicksand, system-ui, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+.head h2, .headLight h2 { font-style: italic; font-weight: 400; }
+.eyebrow, .role, .salamKicker { color: #5e9e88; font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; }
+.headLight .eyebrow { color: #fff6ef; }
+.salamTitle { font-style: italic; font-size: 40px; color: var(--accent); }
+.salamBlock { padding-top: 46px; }
+.intro { color: var(--muted); font-weight: 500; }
+.nick { font-style: italic; font-size: 48px; color: #e07f62; }
+.fullName { font-family: var(--serif); font-weight: 700; font-size: 18px; }
+.parents { font-weight: 500; }
+.thanks { font-style: italic; font-size: 50px; color: #fff6ef; }
+.closingNames { font-style: italic; font-size: 32px; }
+.monogram { color: #fffdfb; font-family: var(--display); font-style: italic; font-size: 92px; translate: 0 -10px; }
+.divider { width: 176px; }
+
+/* people: round portraits in the sky, a cloud tucked under each */
+.couple { background: linear-gradient(180deg, #f3eefa, #eef7f2); }
+.person { position: relative; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 196px; height: 196px; padding: 7px; border: 0; border-radius: 50%; background: #cdbbe6; box-shadow: 0 0 0 2px #fffdfb, 0 0 0 4px #e6dcef, 0 18px 30px rgba(125, 104, 173, .18); }
+.personWrap:nth-child(3) .portraitFrame { background: #a8dcc8; }
+.personWrap:nth-child(3) .monogram { color: #fffdfb; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 2px #fffdfb, 0 0 0 4px #e6dcef, 0 22px 36px rgba(125, 104, 173, .24); }
+.portraitCloud { position: absolute; z-index: 2; left: 50%; bottom: -26px; width: 190px; height: auto; translate: -58% 0; animation: drift 9s ease-in-out infinite alternate; }
+.amp { color: #e99a7a; font-family: var(--display); font-style: italic; }
+.amp img { width: 40px; }
+
+/* countdown: twilight band with moon and stars */
+.countBand { background: linear-gradient(180deg, #8f7cc0, #b7a3dc 80%, #f0c6c0); padding-bottom: 72px; }
+.countMoon { position: absolute; z-index: -1; top: 18px; left: 16px; width: 70px; height: auto; animation: floaty 7s ease-in-out infinite alternate; }
+.countStars { position: absolute; z-index: -1; top: 26px; right: 4px; width: 140px; height: auto; opacity: .9; animation: twinkle 4s ease-in-out infinite alternate; }
+.countCloud { position: absolute; z-index: -1; bottom: -12px; width: 240px; height: auto; }
+.countCloudL { left: -60px; }
+.countCloudR { right: -70px; animation: drift 11s ease-in-out infinite alternate; }
+.count { gap: 10px; }
+.count > div { height: 76px; border: 0; border-radius: 50%; aspect-ratio: 1; height: auto; background: rgba(255, 253, 251, .9); box-shadow: 0 8px 18px rgba(74, 64, 96, .16); }
+.count > div::after { display: none; }
+.count b { color: #7d68ad; font-family: var(--display); font-size: 26px; font-weight: 600; }
+.count small { color: #7a7090; font-style: normal; font-size: 12px; font-weight: 600; }
+.ghostBtn { border: 1.5px solid #fffdfb; color: #fffdfb; font-family: var(--serif); font-weight: 700; transition: background 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+
+/* events: blanket cards with stitching */
+.event { border: 0; border-radius: 40px; background: #eef7f2; box-shadow: 0 14px 30px rgba(94, 158, 136, .14); transition: translate 400ms var(--m-spring), box-shadow 400ms var(--m-spring); }
+.event::before { inset: 9px; border: 2px dashed rgba(94, 158, 136, .45); border-radius: 32px; }
+.event:nth-of-type(even) { background: #fdeee6; }
+.event:hover { translate: 0 -4px; border-color: transparent; }
+.eventNo { width: 48px; height: 48px; top: -22px; border-radius: 50%; background: #f8c4a4; color: #fffdfb; font-family: var(--display); font-style: italic; font-size: 17px; box-shadow: 0 6px 12px rgba(233, 154, 122, .35); }
+.event h3 { font-style: italic; color: #7d68ad; font-size: 24px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: #5e9e88; font-family: var(--serif); font-weight: 700; }
+.rule { width: 52px; height: 6px; background: radial-gradient(circle, #e99a7a 2.5px, transparent 3px) 0 0 / 13px 6px repeat-x; }
+.mapBtn, .submit { background: #7d68ad; color: #fffdfb; font-family: var(--serif); font-weight: 700; box-shadow: 0 8px 18px rgba(125, 104, 173, .3); transition: background 300ms var(--m-spring), box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #6a5799; translate: 0 -2px; }
+
+/* story: a string of stars */
+.story { background: #fdf8f3; }
+.timeline::before { width: 0; border-left: 2px dotted #cdbbe6; background: none; }
+.node { border: 0; background: transparent; }
+.node img { width: 26px; }
+.storyBody { padding: 14px 18px; border-radius: 30px 30px 30px 8px; background: #fffdfb; box-shadow: 0 8px 20px rgba(125, 104, 173, .08); }
+.storyBody small { color: #e07f62; font-weight: 700; letter-spacing: .12em; }
+.storyBody h3 { font-style: italic; color: #7d68ad; }
+
+.tile { border-radius: 28px; }
+.tile:first-child { border-radius: 50%; grid-row: span 1; }
+
+/* wishes */
+.wishes { background: linear-gradient(180deg, #fdf8f3, #f3eefa); }
+.form { border: 0; border-radius: 34px; background: #fffdfb; box-shadow: 0 16px 34px rgba(125, 104, 173, .12); }
+.field > span, .diet, .guestsLabel { color: #7d68ad; font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 18px; background: #faf7fd; }
+.choices button { font-weight: 700; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), border-color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { background: #a8dcc8; border-color: #6fb9a0; color: #2f5f50; box-shadow: 0 6px 14px rgba(94, 158, 136, .3); }
+.step { border-color: #cdbbe6; }
+.wish { border: 0; border-radius: 26px; background: #fffdfb; box-shadow: 0 6px 16px rgba(125, 104, 173, .07); }
+.wish strong { color: #7d68ad; font-style: italic; }
+.wish small { background: #eef7f2; color: #5e9e88; font-weight: 700; }
+.sentBox img { width: 160px; }
+
+/* gifts */
+.gift { border-radius: 36px; background: linear-gradient(160deg, #a593d2, #8f7cc0); }
+.gift::after { border-color: rgba(255, 253, 251, .12); }
+.gift h3 { color: #fff6ef; font-style: italic; font-size: 18px; }
+.copy { border-color: #fff6ef; color: #fff6ef; font-family: var(--serif); font-weight: 700; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.copyOn, .copyOn:hover { background: #fff6ef; color: #7d68ad; }
+
+/* closing: sunset sky with the balloon drifting off */
+.closing { background: linear-gradient(180deg, #8f7cc0, #c4b0e0 55%, #f8c4a4); padding-top: 40px; }
+.closingBalloon { width: 120px; height: auto; margin-bottom: 4px; animation: floaty 6s ease-in-out infinite alternate; }
+.closingCloud { position: absolute; z-index: -1; bottom: -10px; width: 260px; height: auto; opacity: .95; }
+.closingCloudL { left: -90px; bottom: -40px; }
+.made { position: relative; z-index: 2; color: #6a5799; }
+.closingCloudR { right: -90px; bottom: 60px; width: 200px; animation: drift 12s ease-in-out infinite alternate; }
+.family, .closingText { color: #fffdfb; }
+.music { border-color: #fff6ef; background: #7d68ad; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 28px 40px; overflow: hidden; background: #fdf8f3 url(/themes/art/baby-shower-awan/sky.webp) no-repeat center top / 100% 100%; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: url(/themes/art/baby-shower-awan/paper.webp) repeat; mix-blend-mode: multiply; opacity: .7; }
+.moon { position: absolute; z-index: -1; top: 36px; right: 34px; width: 74px; height: auto; }
+.stars { position: absolute; z-index: -1; top: 18px; left: 10px; width: 150px; height: auto; animation: twinkle 4s ease-in-out infinite alternate; }
+.balloonWrap { position: relative; width: 170px; height: 262px; margin-top: 18px; flex-shrink: 0; }
+.balloon { width: 100%; height: auto; animation: floaty 6s ease-in-out infinite alternate; }
+.cloudA, .cloudB, .cloudC { position: absolute; z-index: -1; height: auto; }
+.cloudA { top: 196px; left: -70px; width: 220px; animation: drift 10s ease-in-out infinite alternate; }
+.cloudB { top: 120px; right: -60px; width: 170px; animation: drift 13s ease-in-out infinite alternate-reverse; }
+.cloudC { bottom: -10px; left: 50%; width: 300px; translate: -50% 0; opacity: .95; }
+.kicker { margin-top: 18px; color: #5e9e88; font-size: 12px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 8px; color: #6a5799; font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; color: #e99a7a; font-size: 26px; }
+.coverSub { margin-top: 8px; color: var(--muted); font-size: 15px; font-weight: 600; }
+.coverDate { margin-top: 4px; color: #4a4060; font-size: 16px; font-weight: 700; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 20px; width: 100%; }
+.guest { position: relative; padding: 16px 22px; border-radius: 999px; background: rgba(255, 253, 251, .92); box-shadow: 0 12px 26px rgba(125, 104, 173, .14); }
+.guest::before, .guest::after { content: ""; position: absolute; z-index: -1; top: -16px; width: 60px; height: 60px; border-radius: 50%; background: rgba(255, 253, 251, .92); }
+.guest::before { left: 22%; }
+.guest::after { right: 26%; top: -10px; width: 44px; height: 44px; }
+.guest small { color: var(--muted); font-style: normal; font-weight: 600; font-size: 13px; }
+.guest strong { color: #4a4060; font-family: var(--display); font-style: italic; }
+.table { border-color: #cdbbe6; color: #7d68ad; }
+.openBtn { background: #7d68ad; color: #fffdfb; font-family: var(--serif); font-weight: 700; letter-spacing: .04em; box-shadow: 0 10px 22px rgba(125, 104, 173, .35); }
+.openBtn:hover { background: #6a5799; translate: 0 -2px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 24px 56px; overflow: hidden; background: #fdf8f3 url(/themes/art/baby-shower-awan/sky.webp) no-repeat center bottom / 100% 100%; text-align: center; isolation: isolate; }
+.hero .stars { top: 10px; left: auto; right: 0; }
+.hero .balloon { width: 128px; }
+.heroKicker { margin-top: 10px; color: #5e9e88; font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: #6a5799; font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: #e99a7a; padding: 0 6px; }
+.heroDate { margin-top: 6px; font-weight: 700; }
+.heroNote { max-width: 310px; margin-top: 16px; color: var(--muted); font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: pretty; }
+.heroCloud { position: absolute; z-index: -1; bottom: -14px; width: 250px; height: auto; }
+.heroCloudL { left: -70px; }
+.heroCloudR { right: -80px; bottom: 40px; width: 190px; animation: drift 12s ease-in-out infinite alternate; }
+
+@keyframes floaty { from { translate: 0 6px; rotate: -1.5deg; } to { translate: 0 -10px; rotate: 1.5deg; } }
+@keyframes twinkle { from { opacity: .55; scale: .98; } to { opacity: 1; scale: 1.02; } }
+@media (prefers-reduced-motion: reduce) {
+  .balloon, .cloudA, .cloudB, .stars, .countMoon, .countStars, .countCloudR, .portraitCloud, .closingBalloon, .closingCloudR, .heroCloudR { animation: none; }
+  .event, .mapBtn, .submit, .choices button, .copy, .ghostBtn { transition: none; }
+}
+.solo .closingNames { display: none; }

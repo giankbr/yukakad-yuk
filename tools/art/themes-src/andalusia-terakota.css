@@ -1,0 +1,135 @@
+/* Andalusia Terakota — terinspirasi Alhambra: lengkung berlobus dari ukiran plester, muqarnas, ubin cuerda seca terakota & kobalt, batu hangat. */
+.root, .cover {
+  --bg: #efe2cc; --paper: #e7d6ba; --ivory: #f8efe0; --field: #fffaf1; --ink: #3a2418; --muted: #6b5040; --line: #d9c3a2;
+  --accent: #9c4326; --accent2: #23418f; --gold: #c08a3e; --gold-l: #f1d9a6; --gold-d: #8a5a22;
+  --band-bg: #23418f; --band-ink: #f8efe0;
+  --display: "IM Fell English", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: Italianno, cursive;
+  --h2: 30px; --card-r: 4px;
+  --lobe: polygon(6.0% 100.0%, 6.0% 38.2%, 3.8% 36.3%, 2.6% 34.4%, 2.0% 32.4%, 2.1% 30.4%, 2.8% 28.5%, 4.1% 26.8%, 6.0% 25.3%, 8.5% 24.1%, 9.8% 22.5%, 9.3% 20.2%, 9.6% 18.2%, 10.5% 16.3%, 12.0% 14.7%, 13.8% 13.3%, 16.2% 12.3%, 18.9% 11.8%, 22.0% 11.8%, 23.0% 9.8%, 24.1% 7.7%, 25.8% 6.1%, 27.8% 4.9%, 30.1% 4.1%, 32.7% 3.7%, 35.4% 3.8%, 38.2% 4.5%, 40.7% 4.7%, 42.7% 2.9%, 45.0% 1.7%, 47.5% 1.0%, 50.0% 0.8%, 52.5% 1.0%, 55.0% 1.7%, 57.3% 2.9%, 59.3% 4.7%, 61.8% 4.5%, 64.6% 3.8%, 67.3% 3.7%, 69.9% 4.1%, 72.2% 4.9%, 74.2% 6.1%, 75.9% 7.7%, 77.0% 9.8%, 78.0% 11.8%, 81.1% 11.8%, 83.8% 12.3%, 86.2% 13.3%, 88.0% 14.7%, 89.5% 16.3%, 90.4% 18.2%, 90.7% 20.2%, 90.2% 22.5%, 91.5% 24.1%, 94.0% 25.3%, 95.9% 26.8%, 97.2% 28.5%, 97.9% 30.4%, 98.0% 32.4%, 97.4% 34.4%, 96.2% 36.3%, 94.0% 38.2%, 94.0% 38.2%, 94.0% 100.0%);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #9c4326; --t-accent-ink: #f8efe0; --t-bg: #efe2cc; --t-ink: #3a2418; --t-muted: #6b5040; --t-line: #d9c3a2; --t-field: #fffaf1;
+  --t-radius: 4px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: "IM Fell English", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: linear-gradient(90deg, rgba(156, 67, 38, .05), transparent 18%, transparent 82%, rgba(156, 67, 38, .05)), var(--bg); }
+.head h2, .headLight h2 { font-style: italic; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; }
+.eyebrow { color: var(--accent); }
+.divider { width: 230px; }
+
+/* opening: stucco rosette over a cobalt-tile sill */
+.salamBlock { padding: 58px 28px 58px; }
+.salamBlock::before { content: ""; width: 74px; height: 74px; margin-bottom: 4px; background: url(/themes/art/andalusia-terakota/rosette.webp) center / contain no-repeat; }
+.arabic { color: var(--accent2); font-size: 28px; }
+.salamKicker { max-width: 300px; color: var(--accent); line-height: 1.7; }
+.salamTitle { color: var(--accent); font-size: 58px; line-height: 1; }
+
+/* couple: side-by-side feel via alternating alignment, lobed (multifoil) portrait windows */
+.couple { gap: 10px; background: var(--paper); }
+.portrait { margin-bottom: 16px; filter: drop-shadow(0 12px 18px rgba(58, 36, 24, .25)); }
+.portraitFrame { width: 196px; height: 256px; padding: 0; border: 0; border-radius: 0; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 64px; clip-path: var(--lobe); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 11px; width: auto; height: auto; border-radius: 0; clip-path: var(--lobe); }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; inset: 11px; background: var(--accent); clip-path: var(--lobe); }
+.monogram { position: relative; z-index: 1; color: var(--gold-l); font-size: 110px; }
+.role { color: var(--accent2); }
+.nick { color: var(--accent); font-size: 62px; line-height: 1; }
+.fullName { font-family: var(--display); font-size: 19px; font-style: italic; }
+.amp { margin: 18px 0 14px; color: var(--accent2); font-family: var(--display); font-size: 40px; font-style: italic; }
+.amp img { width: 44px; }
+
+/* countdown: cobalt glazed band with tile borders top and bottom */
+.countBand { padding: 78px 24px; background: var(--band-bg); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; width: 100%; height: 32px; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 32px; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.count > div { height: 92px; border: 0; border-radius: 46px 46px 4px 4px; background: #f8efe0; box-shadow: inset 0 0 0 4px #23418f, inset 0 0 0 5px #f1d9a6; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .65) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--accent2); font-size: 13px; }
+.headLight .eyebrow { color: var(--gold-l); }
+
+/* events: tile-framed cards (cuerda-seca border around a stucco panel) */
+.events { background: var(--bg); gap: 26px; }
+.event { padding: 40px 22px 26px; border: 10px solid transparent; border-radius: 4px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 40px border-box; box-shadow: 0 12px 26px rgba(58, 36, 24, .12); }
+.event::before { inset: 4px; border-color: rgba(156, 67, 38, .3); border-radius: 2px; }
+.eventNo { top: 8px; width: auto; height: auto; padding: 0; border-radius: 0; background: none; color: var(--accent2); font-family: var(--display); font-size: 14px; font-style: italic; letter-spacing: .2em; }
+.event h3 { margin-top: 10px; font-size: 26px; font-style: italic; }
+.eventTime { color: var(--accent); }
+.rule { width: 110px; height: 14px; background: url(/themes/art/andalusia-terakota/muqarnas.webp) center / cover; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; background: repeating-linear-gradient(var(--accent) 0 8px, var(--accent2) 8px 16px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { font-size: 22px; font-style: italic; }
+
+/* gallery: three-column arcade rhythm */
+.gallery { background: var(--bg); }
+.mosaic { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 120px; gap: 6px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: none; }
+.tile:first-child { grid-row: span 2; grid-column: span 2; clip-path: var(--lobe); }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.mosaic { grid-auto-flow: dense; }
+
+.wishes { background: var(--paper); }
+.form { border-radius: 4px; border: 0; box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(58, 36, 24, .08); }
+.field input, .field textarea, .choices button { border-radius: 2px; }
+.submit { border-radius: 2px; font-family: var(--serif); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; font-size: 13px; }
+.wish { border-radius: 2px; }
+.wish strong { font-style: italic; }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 4px; background: linear-gradient(160deg, #a4472a, #7d3219); }
+.gift::after { right: -30px; bottom: -30px; width: 120px; height: 120px; border: 0; box-shadow: none; background: url(/themes/art/andalusia-terakota/rosette.webp) center / contain no-repeat; opacity: .25; }
+.copy { border-radius: 2px; }
+
+.closing { padding: 110px 28px 60px; background: linear-gradient(#8f3d22, #6e2c17); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 60px; background: url(/themes/art/andalusia-terakota/muqarnas.webp) top center / auto 60px repeat-x; }
+.closing::after { content: ""; position: absolute; inset: auto 0 0; height: 24px; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 24px; }
+.closingEmblem { width: 110px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-size: 64px; line-height: 1; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .02em; }
+.made { margin-bottom: 18px; }
+.music { border-radius: 4px; background: var(--accent2); }
+
+/* ── Cover: triple arcade of carved plaster, the photo framed by all three arches ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 36px; overflow: hidden; background: radial-gradient(90% 50% at 50% 70%, #f3e7d3, #e4d0ae); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; inset: auto 0 0; height: 28px; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 28px; }
+.arcadeBox { position: relative; width: 100%; aspect-ratio: 640 / 623; max-height: 50dvh; flex-shrink: 0; }
+.arcadePhoto { position: absolute; inset: 31% 4% 0; overflow: hidden; background: #6d4a34; }
+.arcadePhoto > img, .arcadePhoto > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.arcade { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+.cartouche { position: relative; z-index: 2; width: calc(100% - 36px); margin-top: -26px; padding: 9px; border-radius: 3px; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 46px; box-shadow: 0 14px 30px rgba(58, 36, 24, .3); }
+.cartoucheIn { display: flex; flex-direction: column; align-items: center; padding: 16px 14px 14px; border-radius: 2px; background: #f8efe0; box-shadow: inset 0 0 0 1px rgba(156, 67, 38, .35); }
+.kicker { color: var(--accent2); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 2px; color: var(--accent); font-family: var(--script); font-size: 60px; font-weight: 400; line-height: .95; overflow-wrap: break-word; text-wrap: balance; }
+.coverNames em { padding: 0 10px; color: var(--accent2); font-family: var(--display); font-size: 30px; }
+.coverDate { margin-top: 6px; color: var(--muted); font-family: var(--display); font-size: 16px; font-style: italic; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: auto 0; padding: 22px 24px 10px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-style: italic; }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--serif); }
+.openBtn { border-radius: 2px; background: var(--accent); color: #f8efe0; font-family: var(--serif); font-weight: 600; letter-spacing: .2em; text-transform: uppercase; font-size: 13px; box-shadow: 0 10px 22px rgba(156, 67, 38, .35), inset 0 0 0 3px #9c4326, inset 0 0 0 4px rgba(241, 217, 166, .6); }
+.openBtn:hover { background: var(--accent2); box-shadow: 0 10px 22px rgba(35, 65, 143, .35), inset 0 0 0 3px #23418f, inset 0 0 0 4px rgba(241, 217, 166, .6); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 88px 24px 52px; overflow: hidden; background: linear-gradient(#9c4326, #7d3219); color: #f8efe0; text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 64px; background: url(/themes/art/andalusia-terakota/muqarnas.webp) top center / auto 64px repeat-x; }
+.hero::after { content: ""; position: absolute; inset: auto 0 0; height: 26px; background: url(/themes/art/andalusia-terakota/tile.webp) 0 0 / 26px; }
+.heroRosette { width: 96px; height: auto; animation: turn 80s linear infinite; }
+.kickerDark { margin-top: 14px; color: var(--gold-l); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 4px; color: #fbf1df; font-family: var(--script); font-size: 62px; font-weight: 400; line-height: 1; overflow-wrap: break-word; text-wrap: balance; }
+.heroNames em { padding: 0 10px; color: var(--gold-l); font-family: var(--display); font-size: 30px; }
+.heroDate { margin-top: 6px; color: rgba(248, 239, 224, .88); font-family: var(--display); font-size: 17px; font-style: italic; }
+.heroNote { max-width: 300px; margin-top: 16px; color: rgba(248, 239, 224, .85); font-size: 17px; font-style: italic; line-height: 1.5; text-wrap: balance; }
+.sentBox img { width: 90px; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .heroRosette { animation: none; }
+}

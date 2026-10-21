@@ -1,0 +1,150 @@
+/* Papua Cendrawasih — burung cendrawasih gouache, ukiran garis ala Asmat, rajutan noken; merah tanah, oker, hitam, krem. Tata letak rata kiri. */
+.root, .cover {
+  --bg: #f3e6cf; --paper: #ecdcbe; --ivory: #fbf4e6; --field: #fffaf0; --ink: #1d1410; --muted: #5e4434; --line: #d9c19a;
+  --accent: #9c3b1f; --accent2: #7a2c15; --gold: #c98a2b; --gold-l: #f0c46a; --gold-d: #8a521a;
+  --band-bg: #1d1410 url(/themes/art/papua-cendrawasih/noken.webp) repeat center / 160px; --band-ink: #f3e6cf;
+  --display: "Josefin Sans", "Century Gothic", sans-serif; --serif: Mulish, "Segoe UI", sans-serif; --script: "Young Serif", Georgia, serif;
+  --h2: 30px; --card-r: 4px;
+  --ukir: url(/themes/art/papua-cendrawasih/ukir.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #9c3b1f; --t-accent-ink: #fbf4e6; --t-bg: #f3e6cf; --t-ink: #1d1410; --t-muted: #5e4434; --t-line: #d9c19a; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: Mulish, "Segoe UI", sans-serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+.root :focus-visible, .cover :focus-visible { outline-color: var(--accent); }
+
+/* shared bits */
+.ukir { display: block; width: 100%; height: 44px; background: var(--ukir) repeat-x left center / auto 44px; }
+.divider { width: 150px; }
+.eyebrow, .salamKicker, .role { color: var(--accent); font-family: var(--display); font-weight: 700; letter-spacing: .26em; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 0 0 26px; overflow: hidden; background: var(--bg); color: var(--ink); isolation: isolate; }
+.coverTop { position: relative; height: 352px; flex-shrink: 0; }
+.coverPanel { position: absolute; inset: 0 0 auto; z-index: -1; height: 232px; background: linear-gradient(rgba(122, 44, 21, .82), rgba(156, 59, 31, .9)), url(/themes/art/papua-cendrawasih/noken.webp) repeat center / 150px; }
+.coverPanel .ukir { position: absolute; left: 0; right: 0; bottom: -22px; }
+.coverPhoto { position: absolute; z-index: 2; left: 26px; top: 62px; width: 196px; height: 262px; border: 3px solid var(--ink); background: var(--ink); box-shadow: 9px 9px 0 var(--gold); }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.coverMono { display: grid; place-items: center; width: 100%; height: 100%; background: var(--accent2); color: var(--gold-l); font-family: var(--script); font-size: 84px; }
+.coverBird { position: absolute; top: 30px; right: -44px; width: 300px; height: auto; transform-origin: 30% 40%; animation: perch 9s ease-in-out infinite alternate; }
+.salam { margin: 4px 26px 0; color: var(--accent); font-family: var(--script); font-size: 22px; }
+.kicker { margin: 6px 26px 0; color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; margin: 10px 26px 0; color: var(--ink); font-family: var(--script); font-size: 46px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { color: var(--accent); font-family: var(--display); font-size: 26px; font-style: normal; font-weight: 400; line-height: 1.3; }
+.coverDate { margin: 12px 26px 0; color: var(--muted); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin: 22px 26px 0; }
+.guest { align-items: flex-start; max-width: none; padding: 4px 0 4px 14px; border-left: 4px solid var(--accent); text-align: left; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; font-weight: 600; text-wrap: pretty; }
+.table { border-color: var(--gold); color: var(--gold-d); font-weight: 700; }
+.openBtn { border-radius: 3px; background: var(--ink); color: var(--bg); font-weight: 700; box-shadow: 5px 5px 0 var(--accent); text-transform: uppercase; font-size: 13px; letter-spacing: .14em; }
+.openBtn:hover { box-shadow: 7px 7px 0 var(--accent); translate: -1px -1px; }
+.coverFoot { display: block; height: 22px; margin-top: auto; background: url(/themes/art/papua-cendrawasih/noken.webp) repeat-x center / 120px; box-shadow: inset 0 3px 0 var(--accent); }
+.cover .coverFoot { margin-bottom: -26px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 0 0 34px; overflow: hidden; isolation: isolate; }
+.heroPanel { position: absolute; inset: 0 0 auto; z-index: -1; height: 190px; background: linear-gradient(rgba(29, 20, 16, .78), rgba(29, 20, 16, .9)), url(/themes/art/papua-cendrawasih/noken.webp) repeat center / 150px; }
+.heroPhoto { position: relative; width: calc(100% - 52px); height: 236px; margin: 46px 26px 0; border: 3px solid var(--ink); box-shadow: -9px 9px 0 var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBird { position: absolute; top: 4px; right: -12px; width: 150px; height: auto; }
+.kickerDark { margin: 30px 26px 0; color: var(--accent); font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { margin: 6px 26px 0; max-width: calc(100% - 52px); color: var(--ink); font-family: var(--script); font-size: 40px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { color: var(--accent); font-family: var(--display); font-style: normal; font-size: 28px; padding: 0 6px; }
+.heroDate { margin: 8px 26px 0; color: var(--muted); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.heroNote { margin: 18px 26px 0; padding-left: 14px; max-width: 320px; border-left: 3px solid var(--gold); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+.hero .ukir { margin-top: 28px; }
+
+/* ── Opening ── */
+.salamBlock { align-items: flex-start; padding: 28px 26px 50px; text-align: left; }
+.salamTitle { color: var(--ink); font-size: 36px; }
+.intro { max-width: none; font-size: 16.5px; text-align: left; }
+.salamBlock .divider { margin: 2px 0 6px; }
+
+/* ── Sections: left aligned, print-like ── */
+.section { align-items: stretch; padding: 58px 26px; }
+.head { align-items: flex-start; text-align: left; }
+.head h2 { color: var(--ink); font-family: var(--script); }
+.couple { background: var(--paper); gap: 26px; }
+.person { display: grid; grid-template-columns: 138px minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 18px; align-items: start; text-align: left; }
+.portrait { grid-row: 1 / span 4; margin: 0; }
+.portraitFrame { width: 138px; height: 184px; padding: 0; border: 3px solid var(--ink); border-radius: 0; background: var(--accent2); box-shadow: 6px 6px 0 var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.personWrap:last-child .portraitFrame { box-shadow: 6px 6px 0 var(--gold); }
+.role { padding-top: 6px; font-size: 10px; }
+.nick { color: var(--accent); font-size: 34px; line-height: 1.1; }
+.fullName { color: var(--ink); font-family: var(--display); font-size: 15px; font-weight: 600; line-height: 1.35; }
+.parents { margin-top: 8px; font-size: 14.5px; text-wrap: pretty; }
+.monogram { color: var(--gold-l); font-size: 70px; }
+.amp { align-self: flex-start; gap: 10px; margin: 0; color: var(--accent); font-family: var(--script); font-size: 34px; }
+.amp img { width: 110px; }
+.amp img:last-child { display: none; }
+
+.countBand { align-items: center; background: var(--band-bg); }
+.countBand::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(rgba(29, 20, 16, .72), rgba(29, 20, 16, .84)); }
+.count > div { border-radius: 3px; border-color: var(--gold); background: rgba(243, 230, 207, .06); }
+.count b { font-family: var(--script); font-size: 30px; }
+.count small { font-style: normal; font-family: var(--display); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.countDecor { position: absolute; left: 0; right: 0; z-index: -1; filter: saturate(.9); }
+.countDecorT { top: 0; }
+.countDecorB { bottom: 0; }
+.ghostBtn { border-radius: 3px; font-weight: 600; }
+
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 22px 22px 26px; border: 0; border-left: 10px solid var(--accent); border-radius: 0 6px 6px 0; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 var(--line); }
+.event::before { display: none; }
+.event:nth-of-type(even) { border-left-color: var(--ink); }
+.eventNo { top: 14px; right: 16px; left: auto; translate: none; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--script); font-size: 34px; letter-spacing: 0; }
+.event h3 { padding-right: 46px; color: var(--ink); font-family: var(--script); font-size: 23px; }
+.eventDate { font-style: normal; font-weight: 600; font-size: 16px; }
+.eventTime { color: var(--accent); font-weight: 700; }
+.rule { width: 46px; height: 3px; background: var(--gold); }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 3px; background: var(--ink); color: var(--bg); font-weight: 600; box-shadow: 4px 4px 0 var(--gold); }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--paper); }
+.timeline::before { left: 17px; width: 2px; background: repeating-linear-gradient(var(--ink) 0 8px, transparent 8px 13px); }
+.node { width: 28px; height: 28px; margin: 4px 4px 0; border: 3px solid var(--ink); border-radius: 0; background: var(--gold); rotate: 45deg; }
+.timeline li:nth-child(even) .node { background: var(--accent); }
+.storyBody small { color: var(--accent); font-weight: 700; }
+.storyBody h3 { color: var(--ink); font-family: var(--script); }
+.storyImg { border-radius: 3px; }
+
+.mosaic { grid-auto-rows: 140px; gap: 10px; }
+.tile, .tile:first-child { border-radius: 3px; outline: 3px solid var(--ink); outline-offset: -3px; }
+.tile:first-child { box-shadow: 6px 6px 0 var(--accent); }
+
+.form { border: 2px solid var(--ink); border-radius: 4px; box-shadow: 7px 7px 0 var(--ink); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-weight: 700; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.submit { border-radius: 3px; background: var(--ink); color: var(--bg); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.sentBox img { width: 180px; }
+.wish { border-radius: 3px; border-left: 4px solid var(--gold); }
+.wish:nth-child(even) { border-left-color: var(--accent); }
+.wish strong { font-family: var(--script); }
+
+.gift { align-items: flex-start; border-radius: 4px; text-align: left; }
+.gift::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(100deg, rgba(29, 20, 16, .9), rgba(29, 20, 16, .62)); }
+.gift::after { display: none; }
+.gift h3 { font-weight: 700; }
+.giftNo { font-family: var(--script); font-size: 19px; line-height: 1.35; }
+.copy { border-radius: 3px; font-weight: 700; }
+
+.closing { padding-top: 0; background: var(--band-bg); }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(rgba(29, 20, 16, .66), rgba(29, 20, 16, .9)); }
+.closing > .ukir { margin: 0 -28px 26px; width: calc(100% + 56px); }
+.closingBird { width: 170px; height: auto; margin-bottom: -6px; }
+.thanks { font-family: var(--script); font-size: 40px; }
+.closingSalam { font-family: var(--script); font-size: 18px; letter-spacing: 0; }
+.closingNames { font-family: var(--script); font-size: 30px; }
+.music { border-radius: 4px; background: var(--ink); border-color: var(--gold); }
+
+@keyframes perch { 0%, 60% { rotate: 0deg; } 100% { rotate: -1.6deg; } }
+@media (prefers-reduced-motion: reduce) { .coverBird { animation: none; } }
+.heroBare { padding-top: 170px; }
+.heroBare .heroBird { width: 200px; right: 10px; top: 0; }

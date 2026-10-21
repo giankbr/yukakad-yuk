@@ -1,0 +1,184 @@
+/* Madura Sakera — poster tegas merah-hitam-putih: garis Sakera, batik tulis Madura berbunga merah-kuning di atas hitam, rumah tanean lanjang. */
+.root, .cover {
+  --bg: #f4ecdf; --paper: #ebe0cd; --ivory: #fffaf1; --field: #fffdf8; --ink: #160d0b; --muted: #54443c; --line: #160d0b;
+  --accent: #160d0b; --accent2: #c3262c; --gold: #c3262c; --gold-l: #f3c94a; --gold-d: #c3262c;
+  --band-bg: #160d0b url(/themes/art/madura-sakera/batik.webp) repeat 0 0 / 260px; --band-ink: #f8efe0;
+  --display: "Bebas Neue", Impact, "Arial Narrow", sans-serif; --serif: Lora, Georgia, serif; --script: "Bebas Neue", Impact, sans-serif;
+  --red: #c3262c; --black: #160d0b; --yel: #e9b42c;
+  --stripes: url(/themes/art/madura-sakera/stripes.webp) repeat 0 0 / 120px 60px;
+  --h2: 46px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c3262c; --t-accent-ink: #fff; --t-bg: #f4ecdf; --t-ink: #160d0b; --t-muted: #54443c; --t-line: #160d0b; --t-field: #fffdf8;
+  --t-radius: 0px; --t-font: Lora, Georgia, serif; --t-heading-font: "Bebas Neue", Impact, sans-serif; --t-heading-weight: 400; --t-heading-size: 36px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* ── type & heads: left-aligned poster headings ── */
+.eyebrow, .role, .salamKicker { font-family: Lora, Georgia, serif; font-size: 12px; font-weight: 600; letter-spacing: .22em; color: var(--red); }
+.section { align-items: stretch; padding: 64px 22px; }
+.head { align-items: flex-start; text-align: left; gap: 2px; }
+.head h2 { font-size: var(--h2); line-height: .95; letter-spacing: .01em; color: var(--black); text-transform: uppercase; }
+.headLight { align-items: flex-start; text-align: left; gap: 2px; }
+.headLight h2 { font-size: 46px; line-height: .95; text-transform: uppercase; }
+.divider { width: 170px; margin: 8px 0 0 -6px; }
+.headLight .eyebrow { color: var(--yel); }
+
+/* opening: black slab with stripe edge */
+.salamBlock { position: relative; align-items: flex-start; gap: 8px; padding: 58px 26px 56px; background: var(--black); color: #f8efe0; text-align: left; }
+.salamBlock::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--stripes); }
+.salamKicker { color: var(--yel); }
+.salamTitle { color: #fff; font-size: 58px; line-height: .92; text-transform: uppercase; }
+.salamTitle::after { content: ""; display: block; width: 64px; height: 6px; margin-top: 12px; background: var(--red); }
+.salamBlock .divider { display: none; }
+.intro { text-align: left; color: var(--muted); font-size: 16px; max-width: none; }
+.salamBlock .intro { color: rgba(248, 239, 224, .82); }
+
+/* couple: alternating poster rows */
+.couple { gap: 26px; background: var(--paper); }
+.person { display: grid; grid-template-columns: 148px minmax(0, 1fr); grid-auto-rows: min-content; column-gap: 18px; row-gap: 2px; align-items: start; text-align: left; }
+.person > :not(.portrait) { grid-column: 2; }
+.portrait { grid-column: 1; grid-row: 1 / span 6; margin: 0; }
+.personWrap:nth-child(3) .person { grid-template-columns: minmax(0, 1fr) 148px; text-align: right; }
+.personWrap:nth-child(3) .person > :not(.portrait) { grid-column: 1; justify-self: end; }
+.personWrap:nth-child(3) .portrait { grid-column: 2; }
+.portraitFrame { width: 148px; height: 196px; padding: 0; border: 3px solid var(--black); border-radius: 0; background: var(--black); box-shadow: 8px 8px 0 var(--red); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.personWrap:nth-child(3) .portraitFrame { box-shadow: -8px 8px 0 var(--red); }
+.portrait::after { content: ""; position: absolute; left: -3px; right: -3px; bottom: -22px; height: 10px; background: var(--stripes); }
+.role { margin-top: 4px; }
+.nick { font-size: 56px; line-height: .9; color: var(--black); text-transform: uppercase; }
+.fullName { font-family: Lora, Georgia, serif; font-size: 16px; font-weight: 600; }
+.parents { font-size: 14px; max-width: none; text-wrap: pretty; }
+.monogram { color: var(--yel); font-size: 90px; }
+.amp { align-self: center; margin: 0; gap: 12px; color: var(--red); font-family: var(--display); font-size: 64px; }
+.amp img { width: 34px; }
+
+/* countdown: red band, black blocks */
+.countBand { background: var(--red); color: #fff; align-items: stretch; }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 12px; background: var(--stripes); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; }
+.count > div { height: 92px; border: 0; border-radius: 0; background: var(--black); box-shadow: 4px 4px 0 rgba(255, 255, 255, .85); }
+.count > div::after { display: none; }
+.count b { color: #fff; font-size: 46px; line-height: 1; }
+.count small { color: var(--yel); font-family: Lora, Georgia, serif; font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: #fff; font-family: var(--display); font-size: 26px; }
+.ghostBtn { align-self: flex-start; border: 2px solid #fff; border-radius: 0; color: #fff; font-family: Lora, Georgia, serif; font-weight: 600; }
+.ghostBtn:hover { background: var(--black); border-color: var(--black); }
+
+/* events: hard-shadow tickets */
+.events { gap: 26px; }
+.event { align-items: flex-start; padding: 26px 22px 22px; border: 3px solid var(--black); border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 8px 8px 0 var(--black); }
+.event::before { inset: 0 auto 0 0; width: 10px; border: 0; border-radius: 0; background: var(--stripes); background-size: 60px 30px; }
+.event:hover { box-shadow: 11px 11px 0 var(--red); border-color: var(--black); translate: -2px -2px; }
+.event > * { margin-left: 8px; }
+.eventNo { top: 10px; right: 16px; left: auto; translate: none; width: auto; height: auto; background: none; color: var(--red); font-family: var(--display); font-size: 54px; line-height: 1; letter-spacing: 0; opacity: .9; }
+.event h3 { max-width: calc(100% - 60px); font-family: var(--display); font-size: 34px; line-height: 1; text-transform: uppercase; color: var(--black); }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--red); font-family: Lora, Georgia, serif; font-weight: 600; }
+.rule { width: 100%; height: 2px; background: var(--black); }
+.eventAddr { text-wrap: pretty; max-width: none; }
+.mapBtn { border-radius: 0; background: var(--black); color: #fff; font-family: Lora, Georgia, serif; font-weight: 600; box-shadow: 4px 4px 0 var(--red); }
+.mapBtn:hover { background: var(--red); box-shadow: 4px 4px 0 var(--black); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 17px; width: 3px; background: var(--black); }
+.node { width: 30px; height: 30px; margin: 3px; border: 3px solid var(--black); border-radius: 0; background: var(--red); rotate: 45deg; }
+.node img { width: 0; }
+.storyBody small { color: var(--red); font-family: var(--display); font-size: 22px; letter-spacing: .04em; }
+.storyBody h3 { font-family: var(--display); font-size: 28px; line-height: 1; text-transform: uppercase; color: var(--black); }
+.storyImg { border-radius: 0; border: 3px solid var(--black); }
+
+/* gallery: black-framed poster grid */
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; gap: 6px; padding: 6px; background: var(--black); }
+.tile, .tile:first-child { border-radius: 0; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+/* wishes */
+.form { border: 3px solid var(--black); border-radius: 0; box-shadow: 8px 8px 0 var(--red); }
+.field > span, .diet, .guestsLabel { font-family: Lora, Georgia, serif; font-weight: 600; color: var(--black); letter-spacing: .14em; }
+.field input, .field textarea { border: 2px solid var(--black); border-radius: 0; }
+.field input:focus, .field textarea:focus { border-color: var(--red); box-shadow: 4px 4px 0 var(--red); }
+.choices button { border: 2px solid var(--black); border-radius: 0; color: var(--black); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--red); border-color: var(--black); color: #fff; box-shadow: 3px 3px 0 var(--black); }
+.step { border: 2px solid var(--black); border-radius: 0; }
+.submit { border-radius: 0; background: var(--black); color: #fff; font-family: var(--display); font-size: 22px; letter-spacing: .06em; }
+.submit:not(:disabled):hover { background: var(--red); box-shadow: 4px 4px 0 var(--black); }
+.sent { color: var(--black); font-style: normal; font-weight: 600; }
+.wish { border: 0; border-left: 6px solid var(--red); border-radius: 0; background: var(--ivory); }
+.wish:hover { border-color: var(--black); }
+.wish strong { font-family: Lora, Georgia, serif; font-weight: 700; color: var(--black); }
+.wish small { border-radius: 0; background: var(--black); color: #fff; }
+
+/* gifts */
+.gift { align-items: flex-start; padding: 34px 22px 22px; border-radius: 0; background: var(--black); text-align: left; }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: var(--stripes); }
+.gift::after { display: none; }
+.giftIcon { border: 2px solid var(--yel); border-radius: 0; }
+.gift h3 { font-family: var(--display); font-size: 26px; letter-spacing: .04em; color: #fff; }
+.giftNo { font-family: Lora, Georgia, serif; font-weight: 700; font-size: 21px; color: var(--yel); }
+.copy { border: 2px solid #fff; border-radius: 0; color: #fff; font-family: Lora, Georgia, serif; font-weight: 600; }
+.copy:hover { background: var(--red); border-color: var(--red); }
+.copyOn, .copyOn:hover { background: var(--yel); border-color: var(--yel); color: var(--black); }
+.giftCopied { box-shadow: 6px 6px 0 var(--red); }
+
+/* closing */
+.closing { align-items: flex-start; padding: 70px 26px 150px; text-align: left; background: var(--black); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: url(/themes/art/madura-sakera/batik.webp) repeat 0 0 / 240px; opacity: .3; }
+.closingFlower { width: 96px; height: auto; margin-bottom: 4px; }
+.thanks { color: #fff; font-size: 62px; line-height: .92; text-transform: uppercase; }
+.thanks::after { content: ""; display: block; width: 64px; height: 6px; margin-top: 12px; background: var(--red); }
+.closingText { max-width: none; }
+.family { font-family: Lora, Georgia, serif; letter-spacing: .04em; }
+.closingNames { color: var(--yel); font-size: 44px; text-transform: uppercase; }
+.made { margin-top: 8px; }
+.closing::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 140px; background: url(/themes/art/madura-sakera/tanean.webp) no-repeat 50% 100% / 100% auto; }
+.music { border: 2px solid #fff; border-radius: 0; background: var(--red); box-shadow: 4px 4px 0 var(--black); }
+
+/* ── Cover: batik poster, diagonal Sakera stripe, offset photo ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 30px 22px 0; overflow: hidden; background: #160d0b; color: #f8efe0; isolation: isolate; }
+.coverBatik { position: absolute; z-index: -2; inset: -250px 0 0 -250px; background: url(/themes/art/madura-sakera/batik.webp) repeat 0 0 / 250px; animation: batikDrift 60s linear infinite; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(22, 13, 11, .35), rgba(22, 13, 11, .72) 50%, #160d0b 76%, #7d1418 93%, #a51e24); }
+.coverStripe { position: absolute; z-index: -1; left: -30%; right: -30%; top: 270px; height: 74px; background: var(--stripes); rotate: -11deg; box-shadow: 0 6px 0 #160d0b, 0 -6px 0 #160d0b; }
+.coverTop { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.kicker { color: var(--yel); font-family: Lora, Georgia, serif; font-size: 13px; font-weight: 600; letter-spacing: .08em; }
+.coverLabel { font-family: Lora, Georgia, serif; font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: rgba(248, 239, 224, .78); }
+.coverPhoto { position: relative; width: 62%; height: 300px; margin-top: 18px; border: 4px solid #f8efe0; background: #c3262c; box-shadow: 12px 12px 0 #c3262c; overflow: hidden; }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.coverFlower { display: grid; place-items: center; width: 62%; height: 300px; margin-top: 18px; }
+.coverFlower img { width: 80%; height: auto; }
+.coverNames { position: relative; display: flex; flex-direction: column; align-items: flex-end; margin-top: -96px; color: #fff; font-family: var(--display); font-size: 70px; font-weight: 400; line-height: .88; text-align: right; text-transform: uppercase; text-shadow: 4px 4px 0 #160d0b; overflow-wrap: anywhere; }
+.coverNames span { max-width: 100%; }
+.coverNames em { color: var(--yel); font-size: 44px; font-style: normal; line-height: 1; }
+.coverDate { align-self: flex-end; margin-top: 10px; padding: 5px 10px; background: #f8efe0; color: #160d0b; font-family: Lora, Georgia, serif; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+.guestRow { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: stretch; gap: 12px; margin-top: 22px; }
+.guest { align-items: flex-start; max-width: none; padding: 12px 14px 12px 18px; border-left: 6px solid var(--red); background: rgba(248, 239, 224, .96); color: #160d0b; text-align: left; }
+.guest small { font-size: 13px; color: #54443c; }
+.guest strong { font-family: Lora, Georgia, serif; font-size: 17px; font-weight: 700; }
+.table { border: 0; border-radius: 0; background: #160d0b; color: #fff; font-family: Lora, Georgia, serif; }
+.openBtn { align-self: flex-start; min-width: 0; border-radius: 0; background: var(--red); color: #fff; font-family: var(--display); font-size: 22px; letter-spacing: .08em; box-shadow: 5px 5px 0 #f8efe0; }
+.openBtn:hover { background: #a51e24; translate: -2px -2px; box-shadow: 7px 7px 0 #f8efe0; }
+.coverTanean { display: block; width: calc(100% + 44px); height: auto; margin: auto -22px 0; padding-top: 18px; flex-shrink: 0; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; padding: 40px 22px 0; overflow: hidden; background: var(--red); color: #fff; isolation: isolate; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--stripes); }
+.heroKicker { font-family: Lora, Georgia, serif; font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: #ffe7a6; }
+.heroNames { margin-top: 6px; font-family: var(--display); font-size: 76px; font-weight: 400; line-height: .86; text-transform: uppercase; color: #fff; text-shadow: 4px 4px 0 #160d0b; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: #160d0b; font-size: 40px; font-style: normal; text-shadow: none; }
+.heroDate { margin-top: 12px; font-family: Lora, Georgia, serif; font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.heroPhoto { width: 100%; height: 340px; margin-top: 22px; border: 4px solid #160d0b; box-shadow: 10px 10px 0 #160d0b; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { margin-top: 26px; padding-left: 14px; border-left: 4px solid #160d0b; font-size: 16px; font-style: italic; line-height: 1.55; }
+.heroTanean { display: block; width: calc(100% + 44px); height: auto; margin: 22px -22px 0; }
+.sentBox img { width: 110px; }
+
+.root .event, .root .mapBtn, .root .submit, .root .openBtn, .cover .openBtn { transition: background 250ms var(--m-ease), box-shadow 250ms var(--m-ease), scale 250ms var(--m-ease), translate 250ms var(--m-ease), border-color 250ms var(--m-ease); }
+@keyframes batikDrift { to { translate: 250px 250px; } }
+@media (prefers-reduced-motion: reduce) { .coverBatik { animation: none; } }

@@ -3,7 +3,7 @@
 // sepasang wayang kulit (desain orisinal) berlapis prada, medali ukir untuk monogram, dan pinggiran tumpal batik.
 import { Lucide, Photo, ThemeShell, formatDate, guestLabel, type ThemeProps } from "../kit";
 import { tableLabel } from "../extras";
-import { DEFAULT_COPY, JawiBody, ic, makeArt } from "../_jawi/body";
+import { DEFAULT_COPY, JAWA_WISHES, JawiBody, ic, makeArt } from "../_jawi/body";
 import s from "./styles.module.css";
 
 const FONTS = ["Marcellus SC", "Lora:ital,wght@0,400;0,500;0,600;1,400", "Sacramento"];
@@ -58,6 +58,7 @@ export default function WayangMegaTheme(props: ThemeProps) {
     >
       <JawiBody
         {...props}
+        demoWishes={JAWA_WISHES}
         s={s}
         noPhotos
         light="#f1d79a"
