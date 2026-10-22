@@ -1,0 +1,154 @@
+/* Impasto Taman — taman impresionis dalam cat minyak tebal (impasto): kolam teratai, semak mawar, cahaya berbintik; dinding galeri, bingkai emas berlukis, plakat museum, huruf Instrument Serif. */
+.root, .cover {
+  --bg: #f3ecdd; --paper: #e6e4d3; --ivory: #fbf8f1; --field: #fffdf8; --ink: #2f3833; --muted: #646d66; --line: #dcd2bb;
+  --accent: #35604f; --accent2: #264a3c; --gold: #b8893f; --gold-l: #f2dfae; --gold-d: #946a2b;
+  --band-bg: #2c4a40; --band-ink: #f6efe0; --rose: #c25a72; --pond: #7d9fb4;
+  --display: "Instrument Serif", "Spectral", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Monsieur La Doulaise", "Instrument Serif", cursive;
+  --h2: 36px; --card-r: 3px;
+  --frame: url(/themes/art/impasto-taman/frame.webp) 46 stretch;
+  --canvas: url(/themes/art/impasto-taman/canvas.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #35604f; --t-accent-ink: #fbf8f1; --t-bg: #f3ecdd; --t-ink: #2f3833; --t-muted: #646d66; --t-line: #dcd2bb; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: Spectral, Georgia, serif; --t-heading-font: "Instrument Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: var(--canvas) repeat, var(--bg); background-size: 192px; }
+.eyebrow, .salamKicker, .role { color: var(--rose); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .26em; }
+.head h2, .headLight h2 { font-style: italic; letter-spacing: -.01em; line-height: 1.05; }
+.divider { width: 190px; }
+.salamBlock { padding: 30px 30px 58px; }
+.salamTitle { font-family: var(--display); font-size: 40px; font-style: italic; }
+.intro { color: var(--muted); }
+
+/* people: gilt-framed paintings on a sage gallery wall, wall label below */
+.couple { background: var(--canvas) repeat, var(--paper); background-size: 192px; background-blend-mode: multiply; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 270px; padding: 0; border: 20px solid transparent; border-image: var(--frame); border-radius: 0; background: #3b3122; box-shadow: 0 18px 26px -10px rgba(48, 36, 14, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: 0 24px 30px -10px rgba(48, 36, 14, .5); }
+.portraitRoses { position: absolute; z-index: 2; right: -46px; bottom: -26px; width: 128px; height: auto; transform-origin: 70% 80%; animation: sway 7s ease-in-out infinite alternate; }
+.personWrap:nth-of-type(3) .portraitRoses { right: auto; left: -46px; scale: -1 1; transform-origin: 50% 80%; }
+.role { margin-top: 4px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 54px; font-style: italic; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { font-size: 15px; font-style: italic; }
+.amp { color: var(--rose); font-family: var(--display); font-style: italic; font-size: 64px; }
+.amp img { width: 48px; }
+
+/* countdown: the painting, dimmed, behind small framed canvases */
+.countBand { background: var(--band-bg); }
+.countScene { position: absolute; inset: -20px; z-index: -1; background: url(/themes/art/impasto-taman/scene.webp) center 62% / cover; opacity: .34; filter: saturate(.8); animation: drift 26s ease-in-out infinite alternate; }
+.countBand::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(31, 52, 45, .55), rgba(31, 52, 45, .82)); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-style: italic; }
+.count { gap: 8px; }
+.count > div { height: 92px; border: 9px solid transparent; border-image: url(/themes/art/impasto-taman/frame.webp) 46 stretch; border-radius: 0; background: #f5eedd; box-shadow: 0 10px 16px -6px rgba(0, 0, 0, .5); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 32px; line-height: 1; }
+.count small { color: var(--muted); font-size: 12px; font-style: italic; }
+.ghostBtn { border-color: var(--gold-l); border-radius: 3px; font-family: var(--serif); font-style: italic; font-size: 15px; }
+
+/* events: museum placards */
+.events { gap: 26px; }
+.event { align-items: flex-start; gap: 5px; padding: 26px 22px 22px; border: 1px solid var(--line); border-radius: 3px; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 #fff inset, 0 12px 22px -12px rgba(58, 46, 18, .3); }
+.event::before { inset: auto auto 0 0; width: 100%; height: 5px; border: 0; border-radius: 0; background: url(/themes/art/impasto-taman/stroke.webp) left center / 100% 100% no-repeat; opacity: .9; }
+.event:hover { border-color: var(--gold); }
+.eventNo { display: block; position: static; translate: none; width: auto; height: auto; background: none; color: var(--rose); font-family: var(--display); font-size: 17px; font-style: italic; letter-spacing: .02em; }
+.eventNo::before { content: "No. "; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 29px; font-style: italic; line-height: 1.05; }
+.eventDate { font-size: 16px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 44px; height: 2px; background: var(--rose); }
+.event strong { font-size: 17px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; font-style: italic; box-shadow: 0 6px 14px -6px rgba(38, 74, 60, .6); }
+
+/* story */
+.story { background: var(--canvas) repeat, var(--paper); background-size: 192px; background-blend-mode: multiply; }
+.timeline::before { left: 23px; width: 3px; border-radius: 3px; background: linear-gradient(var(--rose), var(--accent) 60%, transparent); }
+.node { width: 48px; height: 48px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody { padding-top: 8px; }
+.storyBody small { color: var(--rose); font-family: var(--serif); font-style: italic; letter-spacing: .04em; font-size: 14px; }
+.storyBody h3 { color: var(--accent2); font-size: 23px; font-style: italic; line-height: 1.15; }
+
+/* gallery: salon hang in gilt frames */
+.mosaic { grid-auto-rows: 140px; gap: 12px; }
+.tile { border: 10px solid transparent; border-image: url(/themes/art/impasto-taman/frame.webp) 46 stretch; border-radius: 0; background: #3b3122; box-shadow: 0 12px 18px -8px rgba(48, 36, 14, .45); }
+.tile:first-child { border-radius: 0; border-width: 14px; }
+
+/* wishes */
+.wishes { background: var(--canvas) repeat, var(--paper); background-size: 192px; background-blend-mode: multiply; }
+.form { border-radius: 3px; background: var(--ivory); box-shadow: 0 14px 26px -16px rgba(58, 46, 18, .4); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; font-size: 11px; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; font-style: italic; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { border-radius: 3px; background: var(--rose); color: #fff; font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+.submit:not(:disabled):hover { background: #a94660; }
+.wish { border: 0; border-left: 4px solid var(--rose); border-radius: 2px; }
+.wish:nth-child(3n + 2) { border-left-color: var(--accent); }
+.wish:nth-child(3n + 3) { border-left-color: var(--pond); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-size: 19px; font-style: italic; }
+.wish small { background: color-mix(in srgb, var(--rose) 12%, transparent); color: var(--rose); }
+.sent { font-family: var(--display); font-size: 22px; }
+
+/* gifts */
+.gift { border-radius: 3px; background: linear-gradient(160deg, #35604f, #23413a); box-shadow: 0 14px 24px -14px rgba(20, 40, 30, .6); }
+.gift::after { right: -34px; bottom: -30px; width: 150px; height: 100px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/impasto-taman/lily.webp) no-repeat center / contain; opacity: .3; }
+.gift h3 { font-family: var(--serif); font-style: italic; font-size: 17px; letter-spacing: .02em; }
+.giftNo { font-family: var(--display); font-size: 25px; letter-spacing: .04em; }
+.gift:not(:has(small)) .giftNo { font-size: 19px; line-height: 1.35; }
+.copy { border-radius: 3px; font-family: var(--serif); font-style: italic; font-size: 13px; }
+
+/* closing */
+.closing { padding: 72px 28px 56px; background: var(--band-bg); }
+.closingScene { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(31, 52, 45, .9), rgba(31, 52, 45, .55) 55%, rgba(31, 52, 45, .92)), url(/themes/art/impasto-taman/scene.webp) center 40% / cover; }
+.closingRoses { width: 230px; height: auto; margin-bottom: -6px; animation: sway 9s ease-in-out infinite alternate; transform-origin: 50% 90%; }
+.thanks { font-family: var(--script); font-size: 58px; color: var(--gold-l); line-height: 1.25; }
+.closingNames { font-family: var(--display); font-style: italic; font-size: 40px; }
+.music { border-radius: 4px; background: var(--rose); border-color: var(--gold-l); }
+
+/* ── Cover: a painting hung on the gallery wall, museum placard below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(12px, 2.2vh, 20px); min-height: 100dvh; padding: clamp(22px, 4vh, 40px) 22px 30px; overflow: hidden; background: radial-gradient(120% 60% at 50% 18%, #f1efe2 0%, transparent 70%), var(--canvas) repeat, #d9dccb; background-size: auto, 192px, auto; background-blend-mode: normal, multiply, normal; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; left: 50%; top: -40px; width: 360px; height: 300px; translate: -50% 0; z-index: -1; background: radial-gradient(closest-side, rgba(255, 246, 214, .75), transparent); pointer-events: none; }
+.hook { position: relative; width: 170px; height: 30px; margin-bottom: calc(-1 * clamp(12px, 2.2vh, 20px) - 12px); background: linear-gradient(to top right, transparent calc(50% - .7px), #7a6544 50%, transparent calc(50% + .7px)) left / 50% 100% no-repeat, linear-gradient(to top left, transparent calc(50% - .7px), #7a6544 50%, transparent calc(50% + .7px)) right / 50% 100% no-repeat; }
+.hook::after { content: ""; position: absolute; left: 50%; top: -4px; width: 8px; height: 8px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e6cf9a, #7a5a2a); box-shadow: 0 2px 3px rgba(0, 0, 0, .3); }
+.painting { position: relative; width: min(304px, 82vw); height: clamp(260px, 41vh, 380px); border: 20px solid transparent; border-image: var(--frame); background: #3b3122; box-shadow: 0 26px 30px -16px rgba(40, 30, 10, .55), 0 4px 8px rgba(40, 30, 10, .15); }
+.paintingInner { position: absolute; inset: 0; overflow: hidden; }
+.scene { position: absolute; inset: -12px; background: url(/themes/art/impasto-taman/scene.webp) center 58% / cover; animation: breathe 18s ease-in-out infinite; }
+.dapple { position: absolute; inset: -30%; background: radial-gradient(circle at 20% 30%, rgba(255, 238, 170, .38) 0 6%, transparent 13%), radial-gradient(circle at 70% 55%, rgba(255, 238, 170, .32) 0 5%, transparent 12%), radial-gradient(circle at 40% 80%, rgba(255, 238, 170, .3) 0 7%, transparent 14%), radial-gradient(circle at 85% 20%, rgba(255, 238, 170, .26) 0 4%, transparent 10%); mix-blend-mode: soft-light; animation: dapple 14s ease-in-out infinite alternate; pointer-events: none; }
+.placard { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: min(300px, 84vw); padding: 16px 20px 15px; background: #fbf8f1; border: 1px solid #e4dbc6; text-align: left; box-shadow: 0 10px 18px -10px rgba(40, 30, 10, .35); }
+.placard::after { content: ""; position: absolute; right: 14px; top: 14px; width: 9px; height: 9px; border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 3px #f6dde3; }
+.kicker { color: var(--rose); font-size: 11px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin: 4px 0 2px; color: var(--accent2); font-family: var(--display); font-size: clamp(40px, 12vw, 50px); font-style: italic; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { color: var(--rose); font-size: .8em; }
+.medium { color: var(--muted); font-size: 14px; font-style: italic; }
+.coverDate { margin-top: 6px; padding-top: 8px; width: 100%; border-top: 1px solid var(--line); color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+.guest { color: var(--ink); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 23px; font-style: italic; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .03em; box-shadow: 0 10px 20px -10px rgba(38, 74, 60, .8); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 24px 34px; text-align: center; }
+.heroKicker { color: var(--rose); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 64px; font-style: italic; font-weight: 400; line-height: .92; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--rose); font-size: .55em; line-height: 1.2; }
+.heroArt { position: relative; margin: 14px 0 10px; }
+.heroFrame { width: 270px; height: 330px; border: 22px solid transparent; border-image: var(--frame); background: #3b3122; box-shadow: 0 22px 28px -14px rgba(40, 30, 10, .5); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; object-fit: cover; }
+.heroRoses { position: absolute; z-index: 2; left: -58px; bottom: -40px; width: 200px; height: auto; transform-origin: 30% 80%; animation: sway 8s ease-in-out infinite alternate; }
+.heroLily { position: absolute; z-index: 2; right: -30px; top: -26px; width: 92px; height: auto; animation: bob 6s ease-in-out infinite; }
+.heroDate { margin-top: 18px; color: var(--ink); font-size: 17px; font-weight: 600; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes dapple { 0% { translate: 0 0; opacity: .7; } 50% { opacity: 1; } 100% { translate: 8% 5%; opacity: .75; } }
+@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+@media (prefers-reduced-motion: reduce) {
+  .scene, .dapple, .countScene, .portraitRoses, .closingRoses, .heroRoses, .heroLily { animation: none; }
+}

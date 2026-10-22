@@ -1,0 +1,183 @@
+/* Shibori Indigo — kain katun celup indigo dengan pola rintang shibori: noren arashi (lilit tiang), petak itajime (lipat-jepit), ledakan kumo (ikat laba-laba), jahitan ori-nui; tata letak Jepang-modern yang tenang, rata kiri, banyak ruang kosong. */
+.root, .cover {
+  --bg: #efede6; --paper: #e6e4db; --ivory: #f6f5f0; --field: #fbfaf6; --ink: #1a2440; --muted: #59617a; --line: #ccd0d9;
+  --accent: #1c2f5e; --accent2: #14244a; --gold: #5b74a6; --gold-l: #f1efe8; --gold-d: #3c5288;
+  --band-bg: #1c2f5e; --band-ink: #f1efe8;
+  --display: "Crimson Pro", Georgia, serif; --serif: "Crimson Pro", Georgia, serif; --script: "Crimson Pro", Georgia, serif;
+  --sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --h2: 38px; --card-r: 3px;
+  --cotton: url(/themes/art/shibori-indigo/cotton.webp);
+  --arashi: url(/themes/art/shibori-indigo/arashi.webp);
+  --itajime: url(/themes/art/shibori-indigo/itajime.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--cotton) repeat center / 160px; line-height: normal;
+}
+.root {
+  --t-accent: #1c2f5e; --t-accent-ink: #f1efe8; --t-bg: #efede6; --t-ink: #1a2440; --t-muted: #59617a; --t-line: #ccd0d9; --t-field: #fbfaf6;
+  --t-radius: 3px; --t-font: "Outfit", Arial, sans-serif; --t-heading-font: "Crimson Pro", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--cotton) repeat center / 160px, var(--bg); }
+.couple, .events, .story, .gallery, .wishes, .gifts, .salamBlock { background: transparent; }
+
+/* type: quiet sans labels, light serif titles, everything flush left */
+.eyebrow, .role, .salamKicker { display: flex; align-items: center; gap: 10px; color: #3c5288; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
+.eyebrow::before, .salamKicker::before { content: ""; width: 9px; height: 9px; background: #1c2f5e; rotate: 45deg; flex-shrink: 0; }
+.head { align-items: flex-start; align-self: stretch; text-align: left; gap: 10px; }
+.head h2, .headLight h2 { font-weight: 300; letter-spacing: -.01em; line-height: 1.05; }
+.section { align-items: stretch; padding: 64px 26px; }
+.divider { width: 168px; margin-left: -6px; }
+.intro { color: var(--muted); font-family: var(--sans); font-size: 16px; font-weight: 300; line-height: 1.8; text-align: left; max-width: none; }
+.salamBlock { align-items: flex-start; padding: 60px 28px 56px; text-align: left; }
+.salamTitle { color: #1c2f5e; font-family: var(--display); font-size: 44px; font-weight: 300; line-height: 1.05; }
+.salamSub { color: #3c5288; font-family: var(--sans); font-size: 14px; font-weight: 300; letter-spacing: .02em; }
+.salamKicker { font-size: 13px; }
+
+/* people: square cloth-framed portraits over a folded itajime swatch */
+.couple { gap: 22px; }
+.person { align-items: flex-start; text-align: left; }
+.portrait { margin-bottom: 18px; }
+.portraitSwatch { position: absolute; z-index: 0; right: -46px; bottom: -34px; width: 120px; rotate: 8deg; pointer-events: none; }
+.portraitSwatch img { width: 100%; height: auto; }
+.portraitFrame { z-index: 1; width: 200px; height: 236px; padding: 0; border: 0; border-radius: 2px; background: var(--arashi) center / 260px, #1c2f5e; box-shadow: 0 18px 30px rgba(20, 36, 74, .18); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.monogram { color: #f1efe8; font-family: var(--display); font-size: 110px; font-weight: 300; text-shadow: 0 2px 18px rgba(20, 36, 74, .6); }
+.nick { color: #1c2f5e; font-family: var(--display); font-size: 52px; font-weight: 300; line-height: 1.05; }
+.fullName { font-family: var(--sans); font-size: 16px; font-weight: 500; letter-spacing: .02em; }
+.parents { max-width: none; font-family: var(--sans); font-size: 15px; font-weight: 300; text-wrap: pretty; }
+.amp { align-self: center; color: #5b74a6; font-family: var(--display); font-size: 54px; font-weight: 300; font-style: italic; gap: 14px; margin: 18px 0 6px; }
+.amp img { width: 46px; }
+
+/* countdown: itajime cloth, cotton tags */
+.countBand { align-items: center; background: var(--itajime) center / 224px, #1c2f5e; padding: 70px 22px; }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(20, 36, 74, .55), rgba(20, 36, 74, .25) 40%, rgba(20, 36, 74, .6)); }
+.headLight .eyebrow { color: #dfe4ef; }
+.headLight .eyebrow::before { background: #f1efe8; }
+.headLight h2 { color: #f1efe8; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 84px; border: 0; border-radius: 2px; background: var(--cotton) center / 160px, #f1efe8; box-shadow: inset 0 0 0 4px #f1efe8, inset 0 0 0 5px rgba(28, 47, 94, .35), 0 10px 18px rgba(8, 16, 36, .3); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .6) 50%, transparent 65%); }
+.count b { color: #1c2f5e; font-family: var(--display); font-size: 34px; font-weight: 400; }
+.count small { color: #59617a; font-family: var(--sans); font-size: 11px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.countTba { color: #f1efe8; font-family: var(--sans); }
+.ghostBtn { border-color: rgba(241, 239, 232, .7); border-radius: 2px; color: #f1efe8; font-family: var(--sans); font-size: 13px; letter-spacing: .1em; background: rgba(20, 36, 74, .35); }
+.countKumo { position: absolute; z-index: -1; width: 150px; opacity: .9; pointer-events: none; }
+.countKumo img { width: 100%; height: auto; }
+.countKumoA { top: -40px; right: -46px; animation: spinSlow 80s linear infinite; }
+.countKumoB { bottom: -52px; left: -50px; width: 130px; animation: spinSlow 100s linear infinite reverse; }
+
+/* events: cloth tag cards — indigo selvedge strip on the left */
+.events { gap: 18px; }
+.event { align-items: flex-start; padding: 22px 20px 22px 78px; border: 0; border-radius: 3px; background: #f6f5f0; text-align: left; box-shadow: 0 1px 0 #ccd0d9, 0 14px 28px rgba(20, 36, 74, .08); overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 56px; border: 0; border-radius: 0; background: var(--arashi) center / 200px, #1c2f5e; }
+.event:hover { translate: 0 -2px; box-shadow: 0 1px 0 #ccd0d9, 0 20px 34px rgba(20, 36, 74, .14); }
+.eventNo { top: 18px; left: 28px; translate: -50% 0; width: 34px; height: 34px; border-radius: 0; background: #f1efe8; color: #1c2f5e; font-family: var(--sans); font-size: 12px; font-weight: 600; rotate: 45deg; }
+.eventNo { left: 28px; }
+.event h3 { color: #1c2f5e; font-size: 28px; font-weight: 400; text-wrap: pretty; }
+.eventDate { font-family: var(--sans); font-size: 15px; font-style: normal; font-weight: 400; }
+.eventTime { color: #3c5288; font-family: var(--sans); font-size: 14px; }
+.rule { width: 48px; height: 2px; background: repeating-linear-gradient(90deg, #5b74a6 0 6px, transparent 6px 10px); }
+.event strong { font-family: var(--sans); font-size: 16px; font-weight: 500; }
+.eventAddr { max-width: none; font-family: var(--sans); font-size: 14px; font-weight: 300; text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 2px; background: #1c2f5e; color: #f1efe8; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; box-shadow: none; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #14244a; }
+
+/* story: kumo knots on a running stitch */
+.timeline::before { left: 21px; width: 0; border-left: 2px dashed #5b74a6; background: none; }
+.node { width: 42px; height: 42px; border: 0; background: none; }
+.node img { width: 42px; border-radius: 999px; }
+.storyBody small { color: #3c5288; font-family: var(--sans); font-size: 12px; letter-spacing: .22em; }
+.storyBody h3 { color: #1c2f5e; font-size: 26px; font-weight: 400; }
+.storyBody p { font-family: var(--sans); font-size: 15px; font-weight: 300; line-height: 1.7; }
+.storyImg { border-radius: 2px; }
+
+/* gallery: an itajime grid of equal squares */
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; gap: 6px; padding: 6px; background: #1c2f5e; border-radius: 2px; }
+.tile, .tile:first-child { aspect-ratio: 1; height: auto; border-radius: 1px; }
+.tile:first-child { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(even):last-child { grid-column: span 2; aspect-ratio: 2 / 1; }
+.tile:hover { filter: saturate(.9) brightness(1.05); }
+
+/* wishes */
+.form { border: 0; border-radius: 3px; background: #f6f5f0; box-shadow: 0 1px 0 #ccd0d9, 0 14px 28px rgba(20, 36, 74, .08); padding: 22px 20px; }
+.field > span, .diet, .guestsLabel { color: #1c2f5e; font-family: var(--sans); font-size: 11px; font-weight: 500; letter-spacing: .2em; }
+.field input, .field textarea { border-radius: 2px; border-color: #ccd0d9; font-family: var(--sans); font-size: 16px; font-weight: 300; }
+.choices button { border-radius: 2px; font-family: var(--sans); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #1c2f5e; border-color: #1c2f5e; color: #f1efe8; }
+.step { border-radius: 2px; border-color: #5b74a6; }
+.wish { border: 0; border-radius: 2px; background: #f6f5f0; box-shadow: inset 3px 0 0 #1c2f5e; }
+.wish strong { color: #1c2f5e; font-family: var(--display); font-size: 20px; }
+.wish small { border-radius: 2px; background: #e1e5ee; color: #1c2f5e; font-family: var(--sans); }
+.wish p { font-family: var(--sans); font-size: 15px; font-weight: 300; }
+.sentBox img { width: 120px; border-radius: 999px; }
+.sent { font-family: var(--display); font-style: normal; font-size: 22px; }
+.empty { font-family: var(--sans); font-size: 15px; }
+
+/* gifts: arashi cloth cards */
+.gifts .intro { margin-bottom: 4px; }
+.gift { align-items: flex-start; text-align: left; border-radius: 3px; background: var(--arashi) center / 300px, #1c2f5e; padding: 24px 22px; box-shadow: 0 14px 26px rgba(20, 36, 74, .2); }
+.gift::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, rgba(20, 36, 74, .75), rgba(20, 36, 74, .35)); }
+.gift::after { display: none; }
+.giftTop { gap: 12px; }
+.giftIcon { border-radius: 2px; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 28px; }
+.gift small { font-family: var(--sans); }
+.copy { border-radius: 2px; border-color: rgba(241, 239, 232, .7); color: #f1efe8; font-family: var(--sans); font-size: 12px; letter-spacing: .12em; }
+.copyOn, .copyOn:hover { background: #f1efe8; color: #1c2f5e; }
+
+/* closing */
+.closing { background: var(--arashi) center / 320px, #1c2f5e; padding: 76px 28px 64px; }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(20, 36, 74, .2), rgba(20, 36, 74, .72) 70%); }
+.closingKumo { width: 150px; height: auto; margin-bottom: 6px; border-radius: 999px; animation: spinSlow 120s linear infinite; }
+.thanks { color: #f1efe8; font-family: var(--display); font-size: 54px; font-weight: 300; }
+.closingText { font-family: var(--sans); font-size: 16px; font-weight: 300; }
+.closingSalam { color: #dfe4ef; font-family: var(--display); font-size: 18px; font-style: italic; letter-spacing: 0; }
+.family { color: #dfe4ef; font-family: var(--sans); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+.closingNames { font-family: var(--display); font-weight: 300; }
+.made { color: rgba(241, 239, 232, .6); font-family: var(--sans); }
+.music { border-radius: 2px; border-color: #dfe4ef; background: #1c2f5e; }
+
+/* ── Cover: a split noren of arashi cloth over cotton ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 0 0 clamp(28px, 5vh, 52px); overflow: hidden; background: var(--cotton) repeat center / 160px, #efede6; isolation: isolate; }
+.noren { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; height: clamp(230px, 40dvh, 400px); flex-shrink: 0; padding: 0 14px; }
+.noren::before { content: ""; position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: 14px; background: linear-gradient(#4a3524, #2e2016); box-shadow: 0 4px 8px rgba(0, 0, 0, .25); }
+.panel { position: relative; background: var(--arashi) center / 300px, #1c2f5e; box-shadow: inset 0 -10px 18px rgba(8, 16, 36, .25), 0 12px 22px rgba(20, 36, 74, .2); transform-origin: 50% 0; animation: noren 9s ease-in-out infinite alternate; }
+.panel:first-child { background-position: 10px 0; }
+.panel:last-child { background-position: -140px 0; animation-delay: -4.5s; }
+.panel::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8, 16, 36, .28), transparent 18%, transparent 82%, rgba(8, 16, 36, .22)); }
+.panel::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: 10px; border-bottom: 2px dashed rgba(241, 239, 232, .55); }
+.norenMark { position: absolute; z-index: 1; top: 46%; left: 50%; width: 156px; translate: -50% -50%; pointer-events: none; }
+.norenMark img { width: 100%; height: auto; border-radius: 999px; animation: spinSlow 90s linear infinite; }
+.norenKicker { position: absolute; z-index: 3; top: 36px; left: 0; right: 0; color: #f1efe8; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .4em; text-align: center; text-transform: uppercase; }
+.coverBody { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 0; padding: 0 28px; flex: 1; }
+.coverPhoto { width: 132px; height: 132px; margin-top: -66px; border: 5px solid #f1efe8; border-radius: 999px; box-shadow: 0 12px 24px rgba(20, 36, 74, .25); object-fit: cover; }
+.coverNames { max-width: 100%; margin-top: 14px; color: #1c2f5e; font-family: var(--display); font-size: 46px; font-weight: 300; line-height: .98; overflow-wrap: anywhere; text-align: left; }
+.coverNames em { display: block; margin: 2px 0; color: #5b74a6; font-size: 34px; font-style: italic; line-height: 1.1; }
+.coverDate { margin-top: 12px; color: var(--ink); font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; margin-top: auto; padding-top: 22px; }
+.guest { align-items: flex-start; padding: 2px 0 2px 16px; border-left: 2px solid #1c2f5e; text-align: left; max-width: 320px; }
+.guest small { color: var(--muted); font-family: var(--sans); font-size: 13px; font-style: normal; font-weight: 300; }
+.guest strong { color: #1c2f5e; font-family: var(--display); font-size: 23px; text-wrap: pretty; }
+.table { border-color: #5b74a6; border-radius: 2px; color: #1c2f5e; font-family: var(--sans); font-size: 11px; }
+.openBtn { border-radius: 2px; background: #1c2f5e; color: #f1efe8; font-family: var(--sans); font-size: 13px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(20, 36, 74, .22); }
+.openBtn:hover { background: #14244a; translate: 0 -2px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 0 0 50px; text-align: left; isolation: isolate; }
+.heroCloth { position: relative; width: 100%; height: 220px; background: var(--itajime) center / 224px, #1c2f5e; }
+.heroCloth::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 36, 74, .2), rgba(20, 36, 74, .55)); }
+.heroPhotoBox { position: relative; z-index: 1; width: calc(100% - 56px); aspect-ratio: 4 / 5; margin: -150px 28px 0; border: 6px solid #f6f5f0; box-shadow: 0 20px 36px rgba(20, 36, 74, .22); }
+.heroPhotoBox > img, .heroPhotoBox > div { width: 100%; height: 100%; object-fit: cover; }
+.heroText { display: flex; flex-direction: column; align-items: flex-start; padding: 26px 28px 0; }
+.heroText .coverKicker { color: #3c5288; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.heroText .coverNames { margin-top: 10px; }
+.heroNote { margin-top: 18px; color: var(--muted); font-family: var(--sans); font-size: 16px; font-weight: 300; line-height: 1.75; text-wrap: pretty; }
+.heroStitch { width: 150px; height: auto; margin-top: 20px; }
+
+@keyframes noren { from { rotate: -.6deg; } to { rotate: .6deg; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .panel, .norenMark img, .countKumoA, .countKumoB, .closingKumo { animation: none; }
+}

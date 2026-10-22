@@ -1,0 +1,156 @@
+/* Musim Gugur — daun maple dan oak musim gugur bergaya cat air (jingga, merah bata, emas, cokelat) dengan urat yang tembus cahaya dan daun yang berguguran pelan; kertas krem hangat, pita merah bata, dan nuansa rumah yang hangat. */
+.root, .cover {
+  --bg: #f6eddc; --paper: #f1e4cc; --ivory: #fbf5e9; --field: #fffaf0; --ink: #3b2418; --muted: #6e5444; --line: #e2cfae;
+  --accent: #8f3a22; --accent2: #742d19; --gold: #d9832b; --gold-l: #fbefd8; --gold-d: #b4462a;
+  --band-bg: #8f3a22; --band-ink: #fbefd8;
+  --display: "DM Serif Display", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Caveat", cursive;
+  --h2: 36px; --card-r: 18px;
+  --paperTex: url(/themes/art/musim-gugur/paper.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--paperTex) repeat center / 180px; line-height: normal;
+}
+.root {
+  --t-accent: #8f3a22; --t-accent-ink: #fbefd8; --t-bg: #f6eddc; --t-ink: #3b2418; --t-muted: #6e5444; --t-line: #e2cfae; --t-field: #fffaf0;
+  --t-radius: 14px; --t-font: "Lora", Georgia, serif; --t-heading-font: "DM Serif Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--paperTex) repeat center / 180px, var(--bg); }
+.couple, .events, .gallery, .wishes, .gifts, .salamBlock { background: transparent; }
+
+/* falling leaves */
+.fall { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+.fall i { position: absolute; top: -60px; left: var(--x); width: var(--w, 34px); animation: leafFall var(--d, 14s) linear var(--t, 0s) infinite; }
+.fall i img { display: block; width: 100%; height: auto; animation: leafSway calc(var(--d, 14s) / 4) ease-in-out var(--t, 0s) infinite alternate; }
+
+/* type */
+.eyebrow, .role, .salamKicker { color: #b4462a; font-family: var(--script); font-size: 24px; letter-spacing: 0; text-transform: none; }
+.head { gap: 4px; }
+.head h2, .headLight h2 { font-weight: 400; }
+.divider { width: 170px; margin-top: 6px; }
+.salamBlock { padding: 56px 30px 60px; }
+.salamKicker { font-size: 26px; }
+.salamTitle { font-family: var(--display); font-size: 38px; color: #8f3a22; }
+.salamSub { font-family: var(--serif); font-style: italic; font-size: 15px; color: #6e5444; }
+.intro { font-size: 17px; line-height: 1.75; }
+
+/* people: warm rounded portraits with a stitched blanket border */
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 206px; height: 252px; padding: 8px; border: 0; border-radius: 30px; background: #fbf5e9; box-shadow: inset 0 0 0 3px #fbf5e9, inset 0 0 0 4.5px rgba(180, 70, 42, .5), 0 16px 30px rgba(110, 60, 30, .18); rotate: -2deg; }
+.portraitFrame::after { content: ""; position: absolute; inset: 4px; border: 1.5px dashed rgba(180, 70, 42, .55); border-radius: 26px; pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 22px; }
+.personWrap:last-child .portraitFrame { rotate: 2deg; }
+.portraitLeaf { position: absolute; z-index: 2; top: -18px; right: -24px; width: 72px; rotate: 24deg; pointer-events: none; }
+.portraitLeaf img { width: 100%; height: auto; filter: drop-shadow(0 4px 6px rgba(80, 40, 20, .2)); }
+.monogram { color: #b4462a; font-family: var(--display); font-size: 104px; }
+.nick { color: #8f3a22; font-family: var(--display); font-size: 50px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { color: #d9832b; font-family: var(--script); font-size: 64px; }
+.amp img { width: 40px; }
+
+/* countdown: brick band with leaves drifting */
+.countBand { background: linear-gradient(170deg, #9a4126, #7a2f1b); padding: 70px 22px; }
+.headLight .eyebrow { color: #f3c98d; }
+.count > div { height: 90px; border: 0; border-radius: 18px; background: #fbefd8; box-shadow: 0 8px 0 rgba(0, 0, 0, .12), 0 14px 24px rgba(40, 10, 0, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .6) 50%, transparent 65%); }
+.count b { color: #8f3a22; font-family: var(--display); font-size: 34px; }
+.count small { color: #6e5444; font-family: var(--script); font-size: 18px; font-style: normal; }
+.ghostBtn { border-color: #f3c98d; color: #fbefd8; font-family: var(--serif); font-size: 14px; }
+
+/* events: cozy cards with a stitched edge and a pinned leaf */
+.events { gap: 30px; }
+.event { padding: 34px 22px 26px; border: 0; border-radius: 22px; background: #fbf5e9; box-shadow: 0 1px 0 #e2cfae, 0 16px 32px rgba(110, 60, 30, .12); }
+.event::before { inset: 8px; border: 1.5px dashed rgba(180, 70, 42, .4); border-radius: 16px; }
+.event:hover { translate: 0 -3px; box-shadow: 0 1px 0 #e2cfae, 0 22px 38px rgba(110, 60, 30, .18); }
+.eventNo { top: -20px; width: 46px; height: 46px; border-radius: 999px; background: url(/themes/art/musim-gugur/maple-red.webp) center / 46px no-repeat; color: #fff; font-family: var(--display); font-size: 15px; text-shadow: 0 1px 4px rgba(80, 20, 0, .6); }
+.event h3 { color: #8f3a22; font-size: 28px; }
+.eventDate { font-style: italic; font-size: 16px; }
+.eventTime { color: #b4462a; font-family: var(--serif); font-weight: 600; }
+.rule { width: 80px; height: 2px; background: repeating-linear-gradient(90deg, #d9832b 0 8px, transparent 8px 13px); }
+.mapBtn, .submit { background: #8f3a22; color: #fbefd8; font-family: var(--serif); font-size: 14px; font-weight: 600; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #742d19; }
+
+/* story */
+.story { background: #f1e4cc; }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(#d9832b, rgba(180, 70, 42, .2)); }
+.node { width: 42px; height: 42px; border: 0; background: #fbf5e9; box-shadow: 0 4px 10px rgba(110, 60, 30, .15); }
+.node img { width: 30px; }
+.timeline li:nth-child(even) .node img { rotate: 30deg; }
+.storyBody { padding: 16px 18px; border-radius: 18px; background: #fbf5e9; }
+.storyBody small { color: #b4462a; font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+.storyBody h3 { color: #8f3a22; font-size: 22px; }
+.storyImg { border-radius: 14px; }
+
+/* gallery: warm snapshots, gently tilted */
+.mosaic { grid-auto-rows: 160px; gap: 12px; padding: 4px; }
+.tile { border: 6px solid #fbf5e9; border-radius: 14px; box-shadow: 0 10px 20px rgba(110, 60, 30, .16); rotate: -1.5deg; }
+.tile:nth-child(even) { rotate: 1.8deg; }
+.tile:first-child { border-radius: 14px; }
+.tile:hover { rotate: 0deg; scale: 1.02; }
+
+/* wishes */
+.form { border: 0; border-radius: 22px; background: #fbf5e9; box-shadow: 0 16px 32px rgba(110, 60, 30, .1); }
+.field > span, .diet, .guestsLabel { color: #8f3a22; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 12px; border-color: #e2cfae; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #8f3a22; border-color: #8f3a22; color: #fbefd8; }
+.step { border-color: #d9832b; }
+.wish { border: 0; border-radius: 16px; background: #fbf5e9; }
+.wish strong { color: #8f3a22; font-family: var(--display); font-size: 18px; }
+.wish small { background: #f6dcc0; color: #8f3a22; }
+.sentBox img { width: 170px; }
+.sent { font-family: var(--display); font-style: normal; }
+
+/* gifts: amber cards */
+.gift { border-radius: 22px; background: linear-gradient(160deg, #c9762a, #9a4126); }
+.gift::after { right: -16px; bottom: -22px; width: 110px; height: 120px; border: 0; border-radius: 0; background: url(/themes/art/musim-gugur/maple-gold.webp) center / contain no-repeat; opacity: .35; box-shadow: none; rotate: -20deg; }
+.gift h3 { font-family: var(--display); font-size: 20px; letter-spacing: .02em; }
+.giftNo { font-family: var(--serif); font-size: 22px; font-weight: 600; line-height: 1.3; }
+.copy { border-color: #fbefd8; color: #fbefd8; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: #fbefd8; color: #8f3a22; }
+
+/* closing: evening brown with a drift of leaves */
+.closing { background: linear-gradient(#5a3322, #3b2418); padding: 72px 28px 150px; }
+.closingPile { position: absolute; z-index: -1; left: -10px; right: -10px; bottom: -8px; }
+.closingPile img { display: block; width: 100%; height: auto; }
+.closingTwig { width: 190px; height: auto; margin-bottom: 4px; transform-origin: 90% 10%; animation: sway 9s ease-in-out infinite alternate; }
+.thanks { color: #fbefd8; font-family: var(--display); font-size: 52px; }
+.closingSalam { color: #f3c98d; font-family: var(--script); font-size: 26px; letter-spacing: 0; }
+.family { color: #e8d4b8; font-family: var(--serif); }
+.closingNames { font-family: var(--display); color: #fbefd8; }
+.made { position: relative; z-index: 1; color: rgba(251, 239, 216, .7); }
+.music { border-color: #f3c98d; background: #8f3a22; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(30px, 5vh, 60px) 26px 0; overflow: hidden; background: var(--paperTex) repeat center / 180px, #f6eddc; text-align: center; isolation: isolate; }
+.coverTwig { position: absolute; z-index: -1; top: -16px; right: -22px; width: 196px; transform-origin: 95% 5%; animation: sway 10s ease-in-out infinite alternate; }
+.coverTwig img, .coverPile img { display: block; width: 100%; height: auto; }
+.coverPile { position: absolute; z-index: -1; left: -14px; right: -14px; bottom: -10px; }
+.coverKicker { color: #b4462a; font-family: var(--script); font-size: 28px; line-height: 1; }
+.coverPhoto { position: relative; width: 196px; height: 232px; margin-top: 18px; flex-shrink: 0; rotate: -2.5deg; }
+.coverPhoto::before { content: ""; position: absolute; inset: 0; border-radius: 26px; border: 2px solid #d9832b; translate: 10px 10px; }
+.coverPhoto > img, .coverPhoto > div { position: relative; width: 100%; height: 100%; border: 6px solid #fbf5e9; border-radius: 26px; object-fit: cover; box-shadow: 0 16px 30px rgba(110, 60, 30, .25); }
+.coverLeaf { position: absolute; z-index: 2; left: -26px; bottom: -14px; width: 70px; rotate: -30deg; }
+.coverLeaf img { width: 100%; height: auto; }
+.coverNames { max-width: 100%; margin-top: 22px; color: #8f3a22; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { display: block; margin: 0; color: #d9832b; font-family: var(--script); font-size: 46px; font-style: normal; line-height: 1; }
+.coverDate { margin-top: 12px; color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 20px; padding-bottom: clamp(84px, 13vh, 130px); }
+.guest { padding: 12px 18px; border-radius: 18px; background: rgba(251, 245, 233, .85); box-shadow: 0 10px 22px rgba(110, 60, 30, .12); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: #8f3a22; font-family: var(--display); font-size: 22px; }
+.table { border-color: #d9832b; color: #b4462a; font-family: var(--serif); font-weight: 600; }
+.openBtn { background: #8f3a22; color: #fbefd8; font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .08em; box-shadow: 0 10px 20px rgba(143, 58, 34, .3); }
+.openBtn:hover { background: #742d19; translate: 0 -2px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 54px 24px 60px; overflow: hidden; text-align: center; isolation: isolate; }
+.hero .coverTwig { width: 200px; }
+.hero .coverPhoto { width: 270px; height: 330px; margin-top: 0; }
+.hero .coverKicker { margin-top: 28px; }
+.heroNote { max-width: 320px; margin-top: 18px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.7; text-wrap: pretty; }
+
+@keyframes leafFall { from { translate: 0 0; } to { translate: var(--dx, 40px) calc(100% + 110vh); } }
+@keyframes leafSway { from { rotate: -40deg; translate: -14px 0; } to { rotate: 50deg; translate: 18px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .fall { display: none; }
+  .coverTwig, .closingTwig { animation: none; }
+}

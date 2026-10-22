@@ -1,0 +1,153 @@
+/* Riau Lancang Kuning — walimah Melayu Riau di tepi laut: perahu lancang kuning bergaya gouache berlapis emas berlayar di atas ombak yang bergerak, selembayung bersilang memahkotai potret bergaya bubung rumah Melayu, tenun Siak benang emas di atas biru laut, kartu berlambung perahu. */
+.root, .cover {
+  --bg: #f6efd9; --paper: #efe3c0; --ivory: #fffaea; --field: #fffdf4; --ink: #14262b; --muted: #4c5a58; --line: #ddcb97;
+  --accent: #0f3a48; --accent2: #1b5868; --gold: #cf9f3e; --gold-l: #f1d58a; --gold-d: #8a6420;
+  --band-bg: #17434f; --band-ink: #fbf1d4;
+  --display: "Della Respira", Georgia, serif; --serif: "Sorts Mill Goudy", Georgia, serif; --script: "Imperial Script", cursive;
+  --kuning: #e9b724; --hijau: #1f5b3a; --laut: #17434f;
+  --tenun: url(/themes/art/riau-lancang/tenun.webp) repeat 0 0 / 180px;
+  --wave: url(/themes/art/riau-lancang/laut.webp) repeat-x 0 0 / auto 92px;
+  --gable: polygon(50% 0, 100% 24%, 100% 100%, 0 100%, 0 24%);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0f3a48; --t-accent-ink: #fbf1d4; --t-bg: #f6efd9; --t-ink: #14262b; --t-muted: #4c5a58; --t-line: #ddcb97; --t-field: #fffdf4;
+  --t-radius: 8px; --t-font: "Sorts Mill Goudy", Georgia, serif; --t-heading-font: "Della Respira", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-d); }
+.head h2 { color: var(--accent); }
+.divider { width: 220px; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 54px 30px 58px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--gold-d); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 23px; line-height: 1.35; }
+
+/* couple: portrait under a Malay roof gable crowned with selembayung */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { width: 214px; height: 300px; margin: 52px 0 16px; }
+.portrait > img { position: absolute; z-index: 3; top: -58px; left: 50%; width: 150px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 4px rgba(15, 58, 72, .3)); }
+.portrait::before { content: ""; position: absolute; inset: -8px; background: var(--tenun); background-size: 120px; clip-path: var(--gable); }
+.portraitFrame { position: absolute; inset: 0; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: var(--accent); clip-path: var(--gable); box-shadow: inset 0 0 0 3px var(--kuning); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 96px; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 54px; }
+.fullName { font-family: var(--display); font-size: 18px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 54px; }
+.amp img { width: 80px; }
+
+/* countdown: sails on the sea */
+.countBand { background: var(--wave), linear-gradient(var(--paper) 0 52px, var(--laut) 52px); padding: 112px 24px 66px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 98px; padding-top: 8px; border: 0; border-radius: 0; background: var(--kuning); clip-path: polygon(18% 0, 100% 12%, 92% 82%, 50% 100%, 8% 82%, 0 12%); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .35) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--accent); font-family: var(--display); font-size: 10px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--display); }
+
+/* events: cards shaped like a hull, with a tenun deck */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 50px 22px 34px; border: 1px solid var(--gold); border-radius: 10px 10px 50% 50% / 10px 10px 34px 34px; background: var(--ivory); box-shadow: 0 10px 22px rgba(15, 58, 72, .1); }
+.event::before { inset: 0 0 auto; height: 24px; border: 0; border-radius: 9px 9px 0 0; background: var(--tenun); background-size: 110px; box-shadow: inset 0 -3px 0 var(--kuning); }
+.eventNo { top: 10px; width: 46px; height: 26px; background: var(--kuning); color: var(--accent); font-family: var(--display); box-shadow: 0 0 0 3px var(--ivory); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 23px; }
+.eventTime { color: var(--gold-d); font-family: var(--display); }
+.rule { background: var(--kuning); height: 2px; }
+.event strong { font-family: var(--display); font-weight: 400; }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--display); }
+.mapBtn:hover { background: var(--hijau); }
+
+/* story: a voyage line */
+.story { background: var(--paper); }
+.timeline::before { left: 20px; width: 2px; background: repeating-linear-gradient(180deg, var(--accent) 0 6px, transparent 6px 10px); }
+.node { border: 0; background: var(--accent); box-shadow: 0 0 0 3px var(--kuning); }
+.node img { width: 26px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+.storyImg { border-radius: 8px; }
+
+/* gallery on the sea */
+.gallery { background: var(--wave), linear-gradient(var(--paper) 0 52px, var(--laut) 52px); padding-top: 112px; }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: var(--band-ink); }
+.mosaic { grid-auto-rows: 130px; }
+.tile { border-radius: 8px; box-shadow: 0 0 0 2px rgba(241, 213, 138, .6); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 120px 120px 8px 8px / 60px 60px 8px 8px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-color: var(--gold); border-radius: 10px; border-top: 6px solid var(--kuning); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); }
+.field input, .field textarea { border-radius: 8px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.submit { background: var(--accent); color: var(--gold-l); font-family: var(--display); letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--hijau); }
+.sent { font-family: var(--display); color: var(--accent); }
+.sentBox img { width: 160px; }
+.wish { border-radius: 10px; border-left: 4px solid var(--kuning); }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { background: rgba(233, 183, 36, .22); color: var(--gold-d); }
+
+/* gifts: tenun Siak envelopes */
+.gifts { background: var(--paper); }
+.gift { border-radius: 10px; background: linear-gradient(rgba(15, 58, 72, .78), rgba(15, 58, 72, .9)), var(--tenun); box-shadow: inset 0 0 0 1px var(--gold), inset 0 0 0 5px rgba(15, 58, 72, .6), inset 0 0 0 6px var(--gold-d); }
+.gift::after { display: none; }
+.giftIcon { background: var(--kuning); border-color: var(--kuning); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-family: var(--display); }
+.copy { border-color: var(--gold-l); font-family: var(--display); }
+.copyOn, .copyOn:hover { background: var(--kuning); color: var(--accent); }
+
+/* closing: the lancang sails home */
+.closing { padding: 112px 26px 0; background: var(--wave), linear-gradient(var(--paper) 0 52px, var(--laut) 52px); }
+.closingEmblem { width: 150px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 52px; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 13px; line-height: 1.5; }
+.closingNames { font-family: var(--script); font-size: 42px; }
+.closingBoat { order: 10; position: relative; width: calc(100% + 52px); margin: 18px -26px 0; padding: 0 30px; background: var(--wave); background-position: 0 100%; background-size: auto 70px; }
+.closingBoat img { display: block; width: 100%; height: auto; animation: bob 6s ease-in-out infinite alternate; }
+.made { color: rgba(251, 241, 212, .55); }
+.music { background: var(--accent); border-color: var(--kuning); }
+
+/* ── Cover: tenun Siak sky, selembayung crown, the lancang kuning on a rolling sea ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 34px 24px 0; overflow: hidden; background: linear-gradient(180deg, rgba(15, 58, 72, .72), rgba(15, 58, 72, .9) 60%, var(--laut)), var(--tenun); color: var(--band-ink); text-align: center; isolation: isolate; }
+.crown { width: 92px; height: auto; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .35)); }
+.bismillah { margin-top: 10px; color: var(--gold-l); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.kicker { margin-top: 4px; font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-l); }
+.coverNames { max-width: 100%; margin-top: 6px; font-family: var(--script); font-size: 56px; font-weight: 400; line-height: 1.05; color: var(--kuning); overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 2px 10px rgba(0, 0, 0, .3); }
+.coverNames em { display: block; font-family: var(--display); font-size: 20px; font-style: normal; letter-spacing: .3em; color: var(--band-ink); }
+.coverDate { margin-top: 8px; padding: 5px 16px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--band-ink); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 14px; }
+.guest small { color: rgba(251, 241, 212, .8); font-size: 15px; }
+.guest strong { font-family: var(--display); font-size: 19px; color: var(--band-ink); }
+.table { border-color: var(--gold-l); color: var(--gold-l); }
+.openBtn { padding: 0 28px; background: var(--kuning); color: var(--accent); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.openBtn:hover { background: var(--gold-l); }
+.sea { position: relative; width: calc(100% + 48px); margin: auto -24px 0; padding-top: 10px; flex-shrink: 0; }
+.sea::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 74px; background: url(/themes/art/riau-lancang/laut.webp) repeat-x 0 100% / auto 74px; animation: tide 30s linear infinite; }
+.boat { position: relative; z-index: 1; display: block; width: 66%; height: auto; margin: 0 auto -6px; animation: bob 6s ease-in-out infinite alternate; transform-origin: 50% 90%; }
+
+/* ── Hero: the couple's photo framed in tenun, a little sea below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 22px 0; overflow: hidden; background: var(--bg); text-align: center; }
+.heroKicker { font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-d); }
+.heroNames { max-width: 100%; margin-top: 8px; font-family: var(--script); font-size: 60px; font-weight: 400; line-height: 1.05; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-family: var(--display); font-size: 26px; font-style: normal; color: var(--gold-d); margin: 0 8px; }
+.heroDate { margin-top: 6px; font-family: var(--display); font-size: 14px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); }
+.heroFrame { position: relative; width: 100%; max-width: 330px; margin-top: 22px; padding: 10px; border-radius: 160px 160px 12px 12px / 90px 90px 12px 12px; background: var(--tenun); background-size: 120px; box-shadow: 0 14px 30px rgba(15, 58, 72, .25); }
+.heroPhoto { aspect-ratio: 4 / 4.4; overflow: hidden; border-radius: 150px 150px 6px 6px / 82px 82px 6px 6px; background: var(--accent); box-shadow: 0 0 0 3px var(--kuning); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { max-width: 320px; margin-top: 20px; font-size: 17px; font-style: italic; line-height: 1.6; color: var(--muted); text-wrap: pretty; }
+.heroWave { width: calc(100% + 44px); height: 70px; margin: 26px -22px 0; background: url(/themes/art/riau-lancang/laut.webp) repeat-x 0 100% / auto 70px; }
+
+@keyframes bob { from { translate: 0 0; rotate: -1deg; } to { translate: 0 -6px; rotate: 1deg; } }
+@keyframes tide { to { background-position: -560px 100%; } }
+@media (prefers-reduced-motion: reduce) { .boat, .sea::after, .closingBoat img { animation: none; } }

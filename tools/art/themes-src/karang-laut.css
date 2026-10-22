@@ -1,0 +1,165 @@
+/* Karang Laut — taman karang bawah laut bergaya cat air: karang bercabang, karang otak, kipas laut ungu, rumput laut, ikan karang kecil, gelembung naik, dan pantulan cahaya (kaustik) yang menari di air biru. */
+.root, .cover {
+  --bg: #eef8f6; --paper: #e2f2f0; --ivory: #f8fcfb; --field: #ffffff; --ink: #0f2f48; --muted: #4a6a7c; --line: #bfdcdc;
+  --accent: #0d3a63; --accent2: #0a2e50; --gold: #e8735a; --gold-l: #f4fbfa; --gold-d: #c4553f;
+  --band-bg: #0d3a63; --band-ink: #f4fbfa;
+  --display: "Fraunces", Georgia, serif; --serif: "Nunito Sans", "Helvetica Neue", Arial, sans-serif; --script: "Fraunces", Georgia, serif;
+  --h2: 34px; --card-r: 24px;
+  --water: url(/themes/art/karang-laut/water.webp);
+  --caustic: url(/themes/art/karang-laut/caustic.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0d3a63; --t-accent-ink: #f4fbfa; --t-bg: #eef8f6; --t-ink: #0f2f48; --t-muted: #4a6a7c; --t-line: #bfdcdc; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Nunito Sans", Arial, sans-serif; --t-heading-font: "Fraunces", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+
+/* moving caustic light, reused on every "underwater" surface */
+.caustics { position: absolute; z-index: -1; inset: 0; background: var(--caustic) 0 0 / 260px; opacity: .3; mix-blend-mode: soft-light; animation: caustic 26s linear infinite; pointer-events: none; }
+.bubbles { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+.bubbles i { position: absolute; bottom: -30px; width: var(--s, 14px); height: var(--s, 14px); background: url(/themes/art/karang-laut/bubble.webp) center / contain no-repeat; animation: rise var(--d, 12s) linear var(--w, 0s) infinite; }
+
+/* type */
+.eyebrow, .role, .salamKicker { color: #c4553f; font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-weight: 400; font-style: italic; letter-spacing: -.01em; }
+.divider { width: 150px; }
+.salamBlock { padding: 56px 30px 60px; }
+.salamKicker { font-size: 13px; }
+.salamTitle { font-family: var(--display); font-size: 40px; font-style: italic; color: #0d3a63; }
+.salamSub { font-family: var(--serif); color: #1f7f9e; font-size: 15px; }
+.intro { font-size: 17px; line-height: 1.7; }
+
+/* people: round bubble portraits resting on brain coral */
+.couple { background: linear-gradient(#eef8f6, #e2f2f0); }
+.portrait { margin-bottom: 26px; }
+.portraitFrame { width: 214px; height: 214px; padding: 7px; border: 0; border-radius: 999px; background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(124, 201, 208, .55) 45%, rgba(31, 127, 158, .5)); box-shadow: 0 16px 30px rgba(13, 58, 99, .2), inset 0 0 0 1px rgba(255, 255, 255, .7); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.portraitFrame::after { content: ""; position: absolute; top: 22px; left: 36px; width: 46px; height: 24px; border-radius: 999px; background: rgba(255, 255, 255, .55); rotate: -30deg; filter: blur(2px); pointer-events: none; }
+.portraitCoral { position: absolute; z-index: 2; left: 50%; bottom: -24px; width: 120px; translate: -50% 0; pointer-events: none; }
+.portraitCoral img { width: 100%; height: auto; }
+.monogram { color: #f4fbfa; font-family: var(--display); font-size: 96px; font-style: italic; text-shadow: 0 4px 18px rgba(13, 58, 99, .45); }
+.nick { color: #0d3a63; font-family: var(--display); font-size: 50px; font-style: italic; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { color: #e8735a; font-family: var(--display); font-size: 56px; font-style: italic; }
+.amp img { width: 36px; }
+.amp img:last-child { scale: 1 1; }
+
+/* countdown: deep water band with bubbles */
+.countBand { background: var(--water) center bottom / cover, #0d3a63; padding: 72px 22px; }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(rgba(13, 58, 99, .35), rgba(13, 58, 99, .1) 40%, rgba(10, 36, 66, .55)); }
+.headLight .eyebrow { color: #ffd9c9; }
+.count { gap: 10px; }
+.count > div { height: 76px; width: 72px; border: 0; border-radius: 999px; background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .55), rgba(255, 255, 255, .14) 50%, rgba(255, 255, 255, .06)); box-shadow: inset 0 0 0 1.5px rgba(244, 251, 250, .7), 0 10px 22px rgba(4, 20, 40, .25); backdrop-filter: blur(3px); }
+.count > div:nth-child(odd) { translate: 0 -6px; }
+.count b { color: #f4fbfa; font-family: var(--display); font-size: 28px; }
+.count small { color: rgba(244, 251, 250, .85); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(244, 251, 250, .7); color: #f4fbfa; font-family: var(--serif); font-weight: 600; background: rgba(13, 58, 99, .3); }
+.countFish { position: absolute; z-index: -1; top: 30px; left: 0; width: 120px; animation: swim 34s linear infinite; pointer-events: none; }
+.countFish img { width: 100%; height: auto; }
+
+/* events: frosted "sea glass" cards with a coral tab */
+.events { background: #eef8f6; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: 26px; background: #f8fcfb; box-shadow: 0 1px 0 #bfdcdc, 0 18px 34px rgba(13, 58, 99, .1); }
+.event::before { inset: auto 0 0 0; height: 6px; border: 0; border-radius: 0 0 26px 26px; background: linear-gradient(90deg, #7cc9d0, #1f7f9e, #e8735a); }
+.event:hover { translate: 0 -3px; box-shadow: 0 1px 0 #bfdcdc, 0 24px 40px rgba(13, 58, 99, .16); }
+.eventNo { top: -18px; width: 40px; height: 40px; border-radius: 999px; background: radial-gradient(circle at 35% 30%, #fbd0c2, #e8735a 70%); color: #fff; font-family: var(--display); font-size: 15px; font-style: italic; box-shadow: 0 6px 14px rgba(196, 85, 63, .3); }
+.event h3 { color: #0d3a63; font-size: 28px; font-style: italic; }
+.eventDate { font-style: normal; font-weight: 700; font-size: 16px; }
+.eventTime { color: #1f7f9e; font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 8px; background: radial-gradient(circle, #7cc9d0 2.4px, transparent 3px) 0 50% / 14px 8px repeat-x; }
+.mapBtn, .submit { background: #0d3a63; color: #f4fbfa; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .04em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #1f7f9e; }
+
+/* story */
+.story { background: #e2f2f0; }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(#7cc9d0, #1f7f9e); }
+.node { width: 40px; height: 40px; border: 0; background: radial-gradient(circle at 32% 28%, #fff, #bfe6ea 55%, #7cc9d0); box-shadow: 0 6px 12px rgba(13, 58, 99, .18); }
+.node img { width: 30px; }
+.storyBody { padding: 16px 18px; border-radius: 20px; background: #f8fcfb; }
+.storyBody small { color: #c4553f; font-weight: 700; }
+.storyBody h3 { color: #0d3a63; font-size: 22px; font-style: italic; }
+.storyImg { border-radius: 16px; }
+
+/* gallery: pebble shapes */
+.gallery { background: #eef8f6; }
+.mosaic { gap: 10px; }
+.tile { border-radius: 42% 58% 46% 54% / 52% 44% 56% 48%; }
+.tile:first-child { border-radius: 120px 120px 34px 34px; }
+.tile:nth-child(4n + 4) { border-radius: 30px 90px 30px 90px; }
+
+/* wishes */
+.wishes { background: #e2f2f0; }
+.form { border: 0; border-radius: 26px; background: #f8fcfb; box-shadow: 0 18px 34px rgba(13, 58, 99, .08); }
+.field > span, .diet, .guestsLabel { color: #0d3a63; font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 14px; border-color: #bfdcdc; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #0d3a63; border-color: #0d3a63; color: #f4fbfa; }
+.step { border-color: #7cc9d0; }
+.wish { border: 0; border-radius: 20px; background: #f8fcfb; }
+.wish strong { color: #0d3a63; font-family: var(--display); font-size: 18px; font-style: italic; }
+.wish small { background: #ffe3da; color: #c4553f; font-weight: 700; }
+.sentBox img { width: 130px; }
+.sent { font-family: var(--display); }
+
+/* gifts: deep-water cards with dancing light */
+.gifts { background: #eef8f6; }
+.gift { border-radius: 26px; background: linear-gradient(160deg, #1f7f9e, #0d3a63 70%); padding: 26px 22px; box-shadow: 0 18px 30px rgba(13, 58, 99, .2); }
+.gift::after { inset: 0; right: auto; bottom: auto; width: 100%; height: 100%; border: 0; border-radius: 0; background: var(--caustic) 0 0 / 220px; opacity: .22; box-shadow: none; animation: caustic 30s linear infinite; }
+.gift h3 { font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #ffd9c9; }
+.giftNo { font-family: var(--display); font-size: 25px; line-height: 1.25; }
+.copy { border-color: rgba(244, 251, 250, .7); color: #f4fbfa; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: #f4fbfa; color: #0d3a63; }
+
+/* closing: back under water */
+.closing { background: var(--water) center / cover, #0d3a63; padding: 76px 28px 190px; }
+.closingReef { position: absolute; z-index: -1; left: -20px; right: -20px; bottom: 34px; }
+.closingReef img { display: block; width: 100%; height: auto; }
+.closingFish { position: absolute; z-index: -1; top: 40%; left: 0; width: 110px; animation: swim 40s linear -12s infinite; }
+.closingFish img { width: 100%; height: auto; }
+.closingFan { width: 120px; height: auto; transform-origin: 50% 100%; animation: sway 8s ease-in-out infinite alternate; }
+.thanks { color: #f4fbfa; font-family: var(--display); font-style: italic; font-size: 52px; }
+.closingSalam { color: #ffd9c9; font-family: var(--display); font-style: italic; font-size: 18px; letter-spacing: .02em; }
+.family { color: #d6eef0; font-family: var(--serif); font-weight: 600; }
+.closingNames { font-family: var(--display); font-style: italic; }
+.made { position: absolute; bottom: 10px; left: 0; right: 0; color: rgba(15, 47, 72, .7); }
+.music { border-color: #7cc9d0; background: #0d3a63; }
+
+/* ── Cover: the reef seen from the shallows ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(34px, 6vh, 60px) 26px 0; overflow: hidden; background: var(--water) center top / cover, #1f7f9e; text-align: center; isolation: isolate; }
+.coverReef { position: absolute; z-index: -1; left: -30px; right: -30px; bottom: -6px; pointer-events: none; }
+.coverReef img { display: block; width: 100%; height: auto; }
+.coverFan { position: absolute; z-index: -1; left: -26px; bottom: 120px; width: 130px; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite alternate; opacity: .9; }
+.coverFan img, .coverFish img { width: 100%; height: auto; }
+.coverFish { position: absolute; z-index: -1; top: 46%; left: 0; width: 110px; animation: swim 30s linear infinite; }
+.coverKicker { color: #0d3a63; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .32em; text-transform: uppercase; }
+.bubblePhoto { position: relative; width: 160px; height: 160px; margin-top: 16px; padding: 6px; flex-shrink: 0; border-radius: 999px; background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, .35) 45%, rgba(255, 255, 255, .15)); box-shadow: 0 16px 30px rgba(13, 58, 99, .25); }
+.bubblePhoto > img, .bubblePhoto > div { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+.bubblePhoto::after { content: ""; position: absolute; top: 16px; left: 28px; width: 40px; height: 20px; border-radius: 999px; background: rgba(255, 255, 255, .6); rotate: -30deg; filter: blur(2px); }
+.coverNames { max-width: 100%; margin-top: 16px; color: #f4fbfa; font-family: var(--display); font-size: 54px; font-style: italic; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 2px 20px rgba(13, 58, 99, .45); }
+.coverNames em { display: block; margin: 4px 0; color: #ffd9c9; font-size: 34px; }
+.coverDate { margin-top: 12px; color: #f4fbfa; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; text-shadow: 0 1px 10px rgba(13, 58, 99, .5); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 20px; padding-bottom: clamp(130px, 20vh, 180px); }
+.guest { padding: 14px 18px; border-radius: 22px; background: rgba(244, 251, 250, .78); box-shadow: 0 12px 26px rgba(13, 58, 99, .2), inset 0 0 0 1px rgba(255, 255, 255, .8); backdrop-filter: blur(6px); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: #0d3a63; font-family: var(--display); font-size: 22px; font-style: italic; }
+.table { border-color: #e8735a; color: #c4553f; font-family: var(--serif); font-weight: 700; }
+.openBtn { background: #e8735a; color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .1em; box-shadow: 0 10px 22px rgba(196, 85, 63, .35); }
+.openBtn:hover { background: #d9634b; translate: 0 -2px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 0; overflow: hidden; background: var(--water) center top / cover, #1f7f9e; text-align: center; isolation: isolate; }
+.hero .bubblePhoto { width: 230px; height: 230px; margin-top: 0; }
+.hero .coverKicker { margin-top: 22px; }
+.heroNote { max-width: 330px; margin-top: 16px; color: #f4fbfa; font-size: 16px; line-height: 1.7; text-shadow: 0 1px 10px rgba(13, 58, 99, .5); text-wrap: pretty; }
+.heroReef { position: relative; width: calc(100% + 60px); margin-top: 10px; }
+.heroReef img { display: block; width: 100%; height: auto; }
+
+@keyframes caustic { to { background-position: 260px 520px; } }
+@keyframes rise { 0% { translate: 0 0; opacity: 0; } 10% { opacity: .9; } 100% { translate: 18px -110vh; opacity: 0; } }
+@keyframes swim { from { translate: 450px 0; } to { translate: -200px 16px; } }
+@media (prefers-reduced-motion: reduce) {
+  .caustics, .bubbles i, .countFish, .closingFish, .closingFan, .coverFan, .coverFish, .gift::after { animation: none; }
+  .bubbles { display: none; }
+}

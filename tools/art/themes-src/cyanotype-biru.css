@@ -1,0 +1,176 @@
+/* Cyanotype Biru — cetak matahari cyanotype: kertas berlapis biru prusia dengan sapuan kuas di tepinya, siluet putih paku-pakuan, rumput liar, dan renda Queen Anne's lace; foto duotone biru-putih dan label spesimen ketik. */
+.root, .cover {
+  --bg: #eef1ee; --paper: #e4e9e7; --ivory: #f6f7f3; --field: #fbfcfa; --ink: #16294a; --muted: #4c5d78; --line: #c3cfdb;
+  --accent: #1f4a80; --accent2: #163b6a; --gold: #5a83b4; --gold-l: #eef3f6; --gold-d: #2c5a92;
+  --band-bg: #1f4a80; --band-ink: #eef3f6;
+  --display: "Libre Caslon Display", "Spectral", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Libre Caslon Display", Georgia, serif;
+  --mono: "Courier Prime", "Courier New", monospace;
+  --h2: 36px; --card-r: 2px;
+  --blue: url(/themes/art/cyanotype-biru/tile.webp);
+  --edge: url(/themes/art/cyanotype-biru/edge.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f4a80; --t-accent-ink: #eef3f6; --t-bg: #eef1ee; --t-ink: #16294a; --t-muted: #4c5d78; --t-line: #c3cfdb; --t-field: #fbfcfa;
+  --t-radius: 2px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Libre Caslon Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--bg); }
+
+/* a brush-coated blue print: tile texture clipped by the painted brush-edge mask */
+.print { background: var(--blue) center / 192px, #1f4a80; -webkit-mask: var(--edge) center / 100% 100% no-repeat; mask: var(--edge) center / 100% 100% no-repeat; }
+
+/* duotone photo: grey print screened with prussian blue (shadows blue, highlights paper) */
+.duo { position: relative; overflow: hidden; background: #1f4a80; isolation: isolate; }
+.duo > img, .duo > div { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.12) brightness(1.04); }
+.duo::after { content: ""; position: absolute; inset: 0; background: #1d4a83; mix-blend-mode: screen; pointer-events: none; }
+.duo::before { content: ""; position: absolute; z-index: 1; inset: 0; background: #e8eef0; mix-blend-mode: multiply; pointer-events: none; }
+
+/* type */
+.eyebrow, .role, .salamKicker { color: #2c5a92; font-family: var(--mono); font-size: 13px; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-weight: 400; letter-spacing: -.01em; }
+.divider { width: 196px; }
+.salamBlock { padding: 56px 30px 60px; }
+.arabic { color: #1f4a80; font-size: 28px; }
+.salamTitle { font-family: var(--display); font-size: 38px; color: #1f4a80; }
+.salamSub { font-family: var(--serif); font-style: italic; font-size: 16px; color: #2c5a92; }
+.intro { color: var(--muted); font-size: 18px; }
+
+/* people: brush-coated prints, monogram exposed white */
+.couple { background: var(--paper); gap: 16px; }
+.portrait { margin-bottom: 10px; }
+.portraitFrame { width: 206px; height: 252px; padding: 0; border: 0; border-radius: 0; background: var(--blue) center / 192px, #1f4a80; -webkit-mask: var(--edge) center / 100% 100% no-repeat; mask: var(--edge) center / 100% 100% no-repeat; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: grayscale(1) sepia(.6) hue-rotate(180deg) saturate(1.6) contrast(1.05); }
+.portraitSprig { position: absolute; z-index: 2; right: 10px; bottom: 12px; width: 70px; opacity: .9; pointer-events: none; }
+.portraitSprig img { width: 100%; height: auto; }
+.monogram { color: #eef3f6; font-family: var(--display); font-size: 120px; line-height: 1; text-shadow: 0 0 14px rgba(238, 243, 246, .5); }
+.nick { color: #1f4a80; font-family: var(--display); font-size: 54px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.parents { font-size: 17px; }
+.amp { color: #5a83b4; font-family: var(--display); font-size: 60px; font-style: italic; gap: 18px; }
+.amp img { width: 70px; }
+
+/* countdown: blue sheet, typed paper labels */
+.countBand { background: var(--blue) center / 192px, #1f4a80; padding: 70px 22px 76px; }
+.countGrass { position: absolute; z-index: -1; bottom: -6px; width: 170px; opacity: .55; pointer-events: none; }
+.countGrass img { width: 100%; height: auto; }
+.countGrassL { left: -24px; }
+.countGrassR { right: -24px; scale: -1 1; }
+.headLight .eyebrow { color: #c9d8e8; }
+.headLight h2 { color: #eef3f6; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 86px; border: 0; border-radius: 1px; background: #f6f7f3; box-shadow: 0 1px 0 #c3cfdb, 0 10px 18px rgba(6, 22, 48, .3); rotate: -1.2deg; }
+.count > div:nth-child(2) { rotate: .8deg; }
+.count > div:nth-child(3) { rotate: -.5deg; }
+.count > div:nth-child(4) { rotate: 1.4deg; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%); }
+.count b { color: #1f4a80; font-family: var(--display); font-size: 34px; }
+.count small { color: #4c5d78; font-family: var(--mono); font-size: 11px; font-style: normal; letter-spacing: .1em; text-transform: uppercase; }
+.countTba { color: #eef3f6; font-family: var(--mono); }
+.ghostBtn { border-color: #c9d8e8; border-radius: 2px; color: #eef3f6; font-family: var(--mono); font-size: 13px; }
+
+/* events: herbarium specimen labels */
+.events { background: var(--bg); gap: 30px; }
+.event { align-items: flex-start; padding: 22px 22px 22px; border: 1px solid #9fb3c9; border-radius: 1px; background: #fbfcfa; text-align: left; box-shadow: 4px 5px 0 #c9d8e8; }
+.event::before { inset: 5px; border: 1px solid #dbe3ea; border-radius: 0; }
+.event:hover { border-color: #1f4a80; box-shadow: 6px 8px 0 #9fb3c9; }
+.eventNo { top: -14px; left: 18px; translate: 0 0; width: auto; height: 26px; padding: 0 10px; border-radius: 1px; background: #1f4a80; color: #eef3f6; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; white-space: nowrap; }
+.eventNo { display: flex; align-items: center; }
+.eventNo::before { content: "Spesimen No.\00a0"; }
+.event h3 { color: #1f4a80; font-size: 30px; text-wrap: pretty; }
+.eventDate { font-family: var(--mono); font-size: 15px; font-style: normal; color: var(--ink); }
+.eventTime { color: #2c5a92; font-family: var(--mono); font-size: 14px; }
+.rule { width: 100%; height: 0; margin: 8px 0; border-top: 1px dashed #9fb3c9; background: none; }
+.event strong { font-size: 19px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 2px; background: #1f4a80; color: #eef3f6; font-family: var(--mono); font-size: 14px; letter-spacing: .06em; box-shadow: none; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #163b6a; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 0; border-left: 1.5px dashed #5a83b4; background: none; }
+.node { width: 40px; height: 40px; border: 0; background: var(--blue) center / 120px, #1f4a80; box-shadow: 0 0 0 4px var(--paper); }
+.node img { width: 24px; }
+.storyBody small { color: #2c5a92; font-family: var(--mono); font-size: 13px; letter-spacing: .1em; }
+.storyBody h3 { color: #1f4a80; font-size: 24px; }
+
+/* gallery: duotone prints mounted on paper */
+.mosaic { position: relative; gap: 10px; isolation: isolate; }
+.mosaic::after { content: ""; position: absolute; inset: 0; background: #1d4a83; mix-blend-mode: screen; pointer-events: none; }
+.tile, .tile:first-child { border-radius: 0; filter: grayscale(1) contrast(1.14); }
+.tile:hover { filter: grayscale(1) contrast(1.25) brightness(1.06); }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 1px solid #9fb3c9; border-radius: 1px; background: #fbfcfa; box-shadow: 5px 6px 0 #c9d8e8; }
+.field > span, .diet, .guestsLabel { color: #1f4a80; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 1px; border-color: #c3cfdb; }
+.choices button { border-radius: 1px; font-family: var(--mono); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #1f4a80; border-color: #1f4a80; color: #eef3f6; }
+.step { border-radius: 1px; border-color: #5a83b4; }
+.wish { border-radius: 1px; border: 0; border-left: 3px solid #1f4a80; background: #fbfcfa; }
+.wish strong { color: #1f4a80; font-family: var(--display); font-size: 19px; }
+.wish small { border-radius: 1px; background: #dde6ee; color: #1f4a80; font-family: var(--mono); }
+.sentBox img { width: 140px; }
+.sent { font-family: var(--display); font-style: normal; }
+
+/* gifts: blue prints with a fern ghost */
+.gift { border-radius: 0; background: var(--blue) center / 192px, #1f4a80; -webkit-mask: var(--edge) center / 100% 100% no-repeat; mask: var(--edge) center / 100% 100% no-repeat; padding: 30px 26px; }
+.gift::after { right: -20px; bottom: -40px; width: 120px; height: 220px; border: 0; border-radius: 0; background: url(/themes/art/cyanotype-biru/fern.webp) center / contain no-repeat; opacity: .32; box-shadow: none; rotate: 18deg; }
+.gift h3 { font-family: var(--mono); font-size: 14px; letter-spacing: .18em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 25px; line-height: 1.25; }
+.gift:has(.copy) small + .copy { margin-top: 12px; }
+.copy { border-radius: 2px; border-color: #c9d8e8; color: #eef3f6; font-family: var(--mono); font-size: 13px; }
+.copyOn, .copyOn:hover { background: #eef3f6; color: #1f4a80; }
+
+/* closing */
+.closing { background: var(--blue) center / 192px, #1f4a80; padding: 74px 28px 66px; }
+.closingFern { position: absolute; z-index: -1; top: 24px; left: -36px; width: 150px; opacity: .7; transform-origin: 50% 100%; animation: sway 9s ease-in-out infinite alternate; }
+.closingLace { position: absolute; z-index: -1; bottom: -20px; right: -40px; width: 180px; opacity: .6; transform-origin: 50% 100%; animation: sway 11s ease-in-out -3s infinite alternate; }
+.closingFern img, .closingLace img { width: 100%; height: auto; }
+.closingCard { width: 150px; height: auto; margin-bottom: 8px; rotate: -3deg; filter: drop-shadow(0 10px 16px rgba(4, 16, 38, .35)); }
+.thanks { color: #eef3f6; font-family: var(--display); font-size: 52px; }
+.closingSalam { color: #c9d8e8; font-family: var(--serif); font-size: 16px; font-style: italic; }
+.family { color: #c9d8e8; font-family: var(--mono); font-size: 13px; }
+.closingNames { font-family: var(--display); }
+.made { color: rgba(238, 243, 246, .6); }
+.music { border-radius: 2px; border-color: #c9d8e8; background: #1f4a80; }
+
+/* ── Cover: one big brush-coated print ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0; overflow: hidden; background: #eef1ee; text-align: center; isolation: isolate; }
+.sheet { position: absolute; z-index: -2; inset: 6px 4px; -webkit-mask-image: url(/themes/art/cyanotype-biru/sheet.webp); mask-image: url(/themes/art/cyanotype-biru/sheet.webp); }
+.coverFern { position: absolute; z-index: -1; left: 6px; top: 34%; width: 118px; rotate: -6deg; transform-origin: 50% 100%; animation: sway 10s ease-in-out infinite alternate; }
+.coverLace { position: absolute; z-index: -1; top: 26px; right: -6px; width: 150px; transform-origin: 30% 100%; animation: sway 12s ease-in-out -4s infinite alternate; }
+.coverGrass { position: absolute; z-index: -1; right: 8px; bottom: 10px; width: 160px; opacity: .8; }
+.coverFern img, .coverLace img, .coverGrass img { width: 100%; height: auto; }
+.coverInner { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; min-height: 100dvh; padding: clamp(36px, 6vh, 64px) 34px clamp(30px, 5vh, 56px); }
+.coverKicker { color: #c9d8e8; font-family: var(--mono); font-size: 13px; letter-spacing: .26em; text-transform: uppercase; }
+.coverPhoto { width: 176px; height: 214px; margin-top: 18px; flex-shrink: 0; border: 7px solid #f3f5f1; box-shadow: 0 14px 26px rgba(4, 16, 38, .35); rotate: -2deg; }
+.coverNames { max-width: 100%; margin-top: 20px; color: #f3f6f7; font-family: var(--display); font-size: 52px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; text-shadow: 0 2px 18px rgba(6, 22, 48, .35); }
+.coverNames em { display: block; margin: 2px 0; color: #c9d8e8; font-family: var(--serif); font-size: 30px; font-style: italic; line-height: 1.2; }
+.coverDate { margin-top: 12px; color: #eef3f6; font-family: var(--mono); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; padding-top: 22px; }
+.guest { position: relative; padding: 12px 16px 14px; border: 1px solid #c3cfdb; background: #f6f7f3; color: var(--ink); box-shadow: 0 10px 22px rgba(4, 16, 38, .3); rotate: 1deg; }
+.guest small { color: var(--muted); font-family: var(--mono); font-size: 12px; font-style: normal; letter-spacing: .04em; }
+.guest strong { color: #1f4a80; font-family: var(--display); font-size: 22px; }
+.table { border-color: #5a83b4; border-radius: 1px; color: #1f4a80; font-family: var(--mono); font-size: 11px; }
+.openBtn { border: 1px solid #eef3f6; border-radius: 2px; background: #eef3f6; color: #1f4a80; font-family: var(--mono); font-size: 14px; letter-spacing: .1em; box-shadow: 0 8px 18px rgba(4, 16, 38, .3); }
+.openBtn:hover { background: #ffffff; translate: 0 -2px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 22px 46px; background: #eef1ee; text-align: center; isolation: isolate; }
+.heroPrint { position: relative; width: 100%; max-width: 346px; aspect-ratio: 4 / 5; padding: 24px; }
+.heroPrint .print { position: absolute; inset: 0; }
+.heroPhoto { position: relative; width: 100%; height: 100%; -webkit-mask: var(--edge) center / 100% 100% no-repeat; mask: var(--edge) center / 100% 100% no-repeat; }
+.heroSprig { position: absolute; z-index: 2; right: 2px; bottom: -6px; width: 92px; pointer-events: none; }
+.heroSprig img { width: 100%; height: auto; }
+.heroCaption { margin-top: 10px; color: var(--muted); font-family: var(--mono); font-size: 12px; letter-spacing: .08em; }
+.hero .coverKicker { margin-top: 26px; color: #2c5a92; }
+.hero .coverNames { color: #1f4a80; font-size: 50px; text-shadow: none; margin-top: 10px; }
+.hero .coverNames em { color: #5a83b4; }
+.hero .coverDate { color: var(--ink); }
+.heroNote { max-width: 330px; margin-top: 20px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@media (prefers-reduced-motion: reduce) {
+  .coverFern, .coverLace, .closingFern, .closingLace { animation: none; }
+}

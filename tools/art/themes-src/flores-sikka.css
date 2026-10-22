@@ -1,0 +1,163 @@
+/* Flores Sikka — pernikahan Katolik di Maumere: tenun ikat Sikka nila-cokelat bermotif halus (ikat lungsin tingkat benang), danau tiga warna Kelimutu dan bukit Flores dalam cat air, foto berbentuk danau, kotak hitung mundur berwarna tiga danau. */
+.root, .cover {
+  --bg: #f5eee0; --paper: #ece2cf; --ivory: #fbf7ee; --field: #fffdf7; --ink: #231a26; --muted: #5c5058; --line: #dccfb8;
+  --accent: #2b2130; --accent2: #3d4a70; --gold: #a24a27; --gold-l: #e8d8b4; --gold-d: #8a3c1e;
+  --band-bg: #2b2130; --band-ink: #f5eee0;
+  --display: "Tenor Sans", "Jost", sans-serif; --serif: Castoro, Georgia, serif; --script: "Mea Culpa", cursive;
+  --tiwu1: #2fb5a6; --tiwu2: #3c8f5a; --tiwu3: #2d2a2a; --karat: #a24a27;
+  --ikat: url(/themes/art/flores-sikka/ikat.webp) repeat 0 0 / 216px;
+  --pita: url(/themes/art/flores-sikka/pita.webp) repeat-x 0 50% / auto 100%;
+  --lake1: 58% 42% 55% 45% / 48% 60% 40% 52%;
+  --lake2: 44% 56% 40% 60% / 56% 44% 58% 42%;
+  --h2: 29px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2b2130; --t-accent-ink: #f5eee0; --t-bg: #f5eee0; --t-ink: #231a26; --t-muted: #5c5058; --t-line: #dccfb8; --t-field: #fffdf7;
+  --t-radius: 6px; --t-font: Castoro, Georgia, serif; --t-heading-font: "Tenor Sans", sans-serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--karat); }
+.head h2 { color: var(--accent); letter-spacing: .04em; text-transform: uppercase; font-size: 25px; }
+
+/* divider: three lake-coloured threads around a woven star */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; }
+.divider i { flex: 1; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--tiwu1) 0 33%, var(--tiwu2) 33% 66%, var(--tiwu3) 66%); }
+.divider i:last-child { background: linear-gradient(90deg, var(--tiwu3) 0 33%, var(--tiwu2) 33% 66%, var(--tiwu1) 66%); }
+.divider img { width: 28px; height: auto; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 56px 30px 60px; background: var(--bg); }
+.salamKicker { color: var(--karat); }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 54px; line-height: 1.05; }
+
+/* couple: portraits shaped like crater lakes */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { width: 230px; height: 270px; margin-bottom: 18px; }
+.portrait::before { content: ""; position: absolute; inset: -9px; border: 2px solid var(--karat); border-radius: var(--lake2); opacity: .7; }
+.portraitFrame { width: 100%; height: 100%; padding: 0; border: 0; border-radius: var(--lake1); background: var(--tiwu1); box-shadow: 0 0 0 5px var(--ivory); }
+.portraitFrame > img, .portraitFrame > div { border-radius: var(--lake1); }
+.amp + .person .portraitFrame, .amp + .person .portraitFrame > img { border-radius: var(--lake2); }
+.amp + .person .portraitFrame { background: var(--tiwu2); }
+.amp + .person .portrait::before { border-radius: var(--lake1); }
+.portrait > img { position: absolute; z-index: 2; left: 4px; bottom: -6px; width: 54px; height: auto; }
+.monogram { color: var(--ivory); font-family: var(--script); font-size: 110px; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 60px; line-height: 1; }
+.fullName { font-family: var(--display); font-size: 17px; letter-spacing: .04em; }
+.amp { color: var(--karat); font-family: var(--script); font-size: 56px; }
+.amp img { width: 30px; }
+
+/* countdown: on the ikat cloth, four lake-coloured pools */
+.countBand { padding: 70px 22px; background: linear-gradient(rgba(43, 33, 48, .82), rgba(43, 33, 48, .9)), var(--ikat); }
+.countBand::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 24px; background: var(--pita); }
+.countBand::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 24px; background: var(--pita); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-size: 24px; letter-spacing: .06em; text-transform: uppercase; }
+.count { gap: 10px; }
+.count > div { height: 84px; border: 0; border-radius: var(--lake1); background: var(--tiwu1); }
+.count > div:nth-child(2) { background: var(--tiwu2); border-radius: var(--lake2); }
+.count > div:nth-child(3) { background: #3a3234; border-radius: var(--lake1); box-shadow: inset 0 0 0 1px rgba(232, 216, 180, .3); }
+.count > div:nth-child(4) { background: var(--karat); border-radius: var(--lake2); }
+.count b { color: var(--ivory); font-family: var(--display); font-size: 28px; }
+.count small { color: rgba(251, 247, 238, .85); font-family: var(--display); font-size: 10px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--display); }
+
+/* events: cream cards hemmed with a band of Sikka ikat */
+.events { gap: 22px; background: var(--bg); }
+.event { padding: 64px 22px 26px; border: 0; border-radius: 6px; background: var(--ivory); box-shadow: 0 10px 24px rgba(43, 33, 48, .1); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 22px; border: 0; border-radius: 0; background: var(--pita); }
+.eventNo { top: 26px; left: 50%; translate: -50% 0; width: auto; height: auto; background: none; color: var(--karat); font-family: var(--script); font-size: 34px; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 20px; letter-spacing: .06em; text-transform: uppercase; }
+.eventTime { color: var(--karat); font-family: var(--display); }
+.rule { height: 3px; width: 66px; background: linear-gradient(90deg, var(--tiwu1) 0 33%, var(--tiwu2) 33% 66%, var(--tiwu3) 66%); }
+.event strong { font-family: var(--serif); font-weight: 400; font-size: 19px; }
+.mapBtn { border-radius: 6px; background: var(--accent); color: var(--gold-l); font-family: var(--display); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--tiwu1), var(--tiwu2), var(--tiwu3)); width: 2px; }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--karat); font-family: var(--display); }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 19px; letter-spacing: .04em; }
+.storyImg { border-radius: var(--lake2); }
+
+/* gallery */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 140px; gap: 10px; }
+.tile { border-radius: 8px; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: var(--lake1); }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5) { border-radius: var(--lake2); }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 6px; background: var(--ivory); box-shadow: 0 10px 24px rgba(43, 33, 48, .08); position: relative; overflow: hidden; padding-top: 38px; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 16px; background: var(--pita); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); }
+.field input, .field textarea { border-radius: 6px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.submit { border-radius: 6px; background: var(--accent); color: var(--gold-l); font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); }
+.sentBox img { width: 70px; }
+.wish { border-radius: 6px; border: 0; border-left: 4px solid var(--tiwu1); }
+.wish:nth-child(3n + 2) { border-left-color: var(--tiwu2); }
+.wish:nth-child(3n) { border-left-color: var(--tiwu3); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 15px; letter-spacing: .03em; }
+.wish small { background: rgba(162, 74, 39, .12); color: var(--karat); }
+
+/* gifts: dark ikat */
+.gifts { background: var(--bg); }
+.gift { border-radius: 6px; background: linear-gradient(rgba(43, 33, 48, .84), rgba(43, 33, 48, .92)), var(--ikat); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold-l); background: var(--karat); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); letter-spacing: .1em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); }
+.copy { border-color: var(--gold-l); font-family: var(--display); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: Flores hills over the woven cloth */
+.closing { padding: 0 26px 56px; background: linear-gradient(var(--bg) 0 150px, transparent 150px), linear-gradient(rgba(43, 33, 48, .86), rgba(43, 33, 48, .94)), var(--ikat); }
+.closingHills { width: calc(100% + 52px); margin: 0 -26px 8px; }
+.closingHills img { display: block; width: 100%; height: auto; }
+.closingHills::after { content: ""; display: block; height: 22px; background: var(--pita); }
+.closingEmblem { width: 56px; height: auto; margin-top: 8px; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 64px; }
+.closingSalam { color: var(--tiwu1); font-family: var(--display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.closingNames { font-family: var(--script); font-size: 48px; }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: watercolour Kelimutu with the photo set like a fourth lake ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 40px 0 0; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: var(--pita); }
+.kicker { padding: 0 24px; font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--karat); }
+.coverNames { max-width: 100%; margin-top: 6px; padding: 0 20px; font-family: var(--script); font-size: 64px; font-weight: 400; line-height: .95; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { margin: 0 6px; font-family: var(--display); font-size: 24px; font-style: normal; color: var(--karat); vertical-align: middle; }
+.coverDate { margin-top: 14px; font-family: var(--display); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
+.lakes { position: relative; width: 100%; margin-top: 4px; }
+.lakesArt { display: block; width: 112%; height: auto; margin-left: -6%; animation: mist 14s ease-in-out infinite alternate; }
+.lakePhoto { position: relative; z-index: 2; width: 196px; height: 150px; margin: -78px auto 0; border-radius: var(--lake1); overflow: hidden; background: var(--tiwu1); box-shadow: 0 0 0 5px var(--ivory), 0 14px 26px rgba(43, 33, 48, .25); }
+.lakePhoto > img, .lakePhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 18px; padding: 0 24px 56px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { font-family: var(--serif); font-size: 20px; color: var(--ink); }
+.table { border-color: var(--karat); color: var(--karat); }
+.openBtn { padding: 0 28px; border-radius: 6px; background: var(--accent); color: var(--gold-l); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(43, 33, 48, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: Salam damai on the dark ikat, hills below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 58px 0 0; overflow: hidden; background: linear-gradient(rgba(43, 33, 48, .8), rgba(43, 33, 48, .9)), var(--ikat); color: var(--band-ink); text-align: center; }
+.heroKicker { padding: 0 24px; font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--tiwu1); }
+.heroNames { max-width: 100%; margin-top: 6px; padding: 0 20px; font-family: var(--script); font-size: 66px; font-weight: 400; line-height: .95; color: var(--ivory); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { margin: 0 6px; font-family: var(--display); font-size: 24px; font-style: normal; color: var(--gold-l); vertical-align: middle; }
+.heroDate { margin-top: 10px; font-family: var(--display); font-size: 13px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-l); }
+.heroNote { max-width: 310px; margin-top: 16px; padding: 0 12px; font-size: 17px; font-style: italic; line-height: 1.6; color: rgba(245, 238, 224, .86); text-wrap: pretty; }
+.heroHills { position: relative; width: 100%; margin-top: 26px; background: var(--bg); }
+.heroHills::before { content: ""; display: block; height: 22px; background: var(--pita); }
+.heroHills img { display: block; width: 100%; height: auto; margin-top: -2px; background: var(--bg); }
+
+@keyframes mist { from { translate: -6px 0; } to { translate: 6px 0; } }
+@media (prefers-reduced-motion: reduce) { .lakesArt { animation: none; } }

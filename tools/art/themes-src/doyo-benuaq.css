@@ -1,0 +1,179 @@
+/* Doyo Benuaq — pernikahan di Kutai Barat: tenun ulap doyo serat daun yang kasar ditenun benang demi benang (ikat lungsin hitam-merah di atas serat alam), lamin panjang bertiang ulin di tepi Mahakam, tata letak rata kiri seperti lembar kain yang dibentangkan. */
+.root, .cover {
+  --bg: #ece1c8; --paper: #e3d4b3; --ivory: #f6efdf; --field: #fbf7ec; --ink: #22180f; --muted: #5d4935; --line: #cfb88f;
+  --accent: #8b2b1d; --accent2: #a5402a; --gold: #a88a5a; --gold-l: #ead8b0; --gold-d: #6c4c30;
+  --band-bg: #2a1d15; --band-ink: #efe4cb;
+  --display: Kurale, Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: Kurale, Georgia, serif;
+  --blk: #2a1d15; --red: #8b2b1d; --sungai: #3e5a48; --fibre: #c4a97c;
+  --doyo: url(/themes/art/doyo-benuaq/doyo.webp) repeat 0 0 / 230px;
+  --strip: url(/themes/art/doyo-benuaq/doyo.webp) repeat-y 0 0 / 150px;
+  --pita: url(/themes/art/doyo-benuaq/pita.webp) repeat-x 0 50% / auto 100%;
+  --notch: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8b2b1d; --t-accent-ink: #f6efdf; --t-bg: #ece1c8; --t-ink: #22180f; --t-muted: #5d4935; --t-line: #cfb88f; --t-field: #fbf7ec;
+  --t-radius: 3px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: Kurale, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+
+/* left-aligned heads with a short woven strip as divider */
+.section { align-items: stretch; padding: 60px 26px; }
+.head { align-items: flex-start; text-align: left; }
+.head h2 { color: var(--blk); text-wrap: balance; }
+.divider { display: block; width: 132px; height: 22px; background: var(--pita); border-radius: 2px; box-shadow: 0 2px 4px rgba(42, 29, 21, .2); }
+
+/* opening: fibre cloth panel */
+.salamBlock { align-items: flex-start; gap: 12px; padding: 54px 28px 58px 112px; background: linear-gradient(90deg, transparent 84px, var(--bg) 84px), var(--strip); text-align: left; }
+.salamKicker { color: var(--accent); }
+.salamTitle { color: var(--blk); font-family: var(--display); font-size: 34px; line-height: 1.15; }
+.salamBlock .intro { text-align: left; font-size: 17px; }
+
+/* couple: portrait beside the name, alternating sides */
+.couple { gap: 26px; background: var(--paper); }
+.person { display: grid; grid-template-columns: 136px minmax(0, 1fr); column-gap: 18px; row-gap: 3px; align-items: center; align-content: center; text-align: left; }
+.person > .portrait { grid-row: 1 / span 4; margin: 0; width: 136px; height: 184px; }
+.person > :not(.portrait) { grid-column: 2; justify-self: start; }
+.amp + .person { grid-template-columns: minmax(0, 1fr) 136px; text-align: right; }
+.amp + .person > .portrait { grid-column: 2; }
+.amp + .person > :not(.portrait) { grid-column: 1; justify-self: end; }
+.portraitFrame { width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; background: var(--blk); clip-path: var(--notch); box-shadow: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portrait > img { position: absolute; z-index: 2; width: 40px; height: auto; right: -14px; top: -14px; }
+.amp + .person .portrait > img { right: auto; left: -14px; }
+.portrait::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 14px; background: var(--pita); }
+.monogram { color: var(--fibre); font-family: var(--display); font-size: 74px; }
+.role { font-size: 11px; letter-spacing: .2em; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; line-height: 1.05; }
+.fullName { font-family: var(--display); font-size: 17px; }
+.parents { margin-top: 2px; font-size: 15px; line-height: 1.45; text-wrap: pretty; }
+.amp { justify-content: center; margin: 0; color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 30px; }
+
+/* countdown: dark fibre, numbers on woven tablets */
+.countBand { align-items: center; padding: 74px 24px 70px; background: var(--blk); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: var(--pita); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: var(--fibre); }
+.headLight h2 { font-family: var(--display); }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 0; border-radius: 0; background: linear-gradient(rgba(246, 239, 223, .88), rgba(246, 239, 223, .88)), var(--doyo); clip-path: var(--notch); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(139, 43, 29, .14) 50%, transparent 65%); }
+.count b { color: var(--blk); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--accent); font-family: var(--serif); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--fibre); }
+.ghostBtn { border-color: var(--fibre); border-radius: 3px; color: var(--band-ink); font-family: var(--serif); font-weight: 700; }
+
+/* events: cards with a woven doyo selvedge on the left */
+.events { gap: 22px; background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 20px 24px 50px; border: 0; border-radius: 0; background: var(--ivory); text-align: left; clip-path: var(--notch); box-shadow: none; }
+.event::before { inset: 0 auto 0 0; width: 30px; border: 0; border-radius: 0; background: var(--strip); background-size: 120px; background-position: -6px 0; }
+.event:hover { box-shadow: none; translate: 4px 0; }
+.eventNo { position: static; translate: none; width: auto; height: auto; place-items: start; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .1em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; text-wrap: balance; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--gold-d); font-weight: 700; font-family: var(--serif); }
+.rule { width: 50px; height: 3px; background: var(--blk); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 19px; }
+.eventAddr { max-width: 100%; text-wrap: pretty; }
+.mapBtn { border-radius: 3px; background: var(--blk); color: var(--band-ink); font-family: var(--serif); font-weight: 700; box-shadow: none; }
+.mapBtn:hover { background: var(--accent); box-shadow: none; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 4px; left: 19px; background: repeating-linear-gradient(180deg, var(--blk) 0 8px, var(--red) 8px 12px, var(--fibre) 12px 16px); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--accent); font-weight: 700; }
+.storyBody h3 { color: var(--blk); font-family: var(--display); font-size: 22px; }
+.storyImg { border-radius: 0; clip-path: var(--notch); }
+
+/* gallery: by the river */
+.gallery { background: var(--sungai); }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: var(--band-ink); }
+.mosaic { grid-template-columns: 1.2fr 1fr; grid-auto-rows: 132px; gap: 8px; }
+.tile { border-radius: 0; clip-path: var(--notch); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 0; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(2) { grid-row: span 2; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--notch); box-shadow: none; padding: 26px 20px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; }
+.field input, .field textarea { border-radius: 3px; font-family: var(--serif); }
+.choices button { border-radius: 3px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--blk); background: var(--blk); color: var(--band-ink); }
+.step { border-radius: 3px; border-color: var(--blk); }
+.submit { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--blk); }
+.sent { font-family: var(--display); color: var(--accent); }
+.sentBox img { width: 80px; }
+.wish { border: 0; border-left: 5px solid var(--red); border-radius: 0; background: var(--ivory); }
+.wish strong { color: var(--blk); font-family: var(--display); }
+.wish small { border-radius: 3px; background: rgba(139, 43, 29, .1); color: var(--accent); }
+.empty { align-self: flex-start; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gifts .intro { text-align: left; max-width: none; }
+.gift { align-items: flex-start; padding: 24px 20px 22px 52px; border-radius: 0; background: var(--blk); text-align: left; clip-path: var(--notch); box-shadow: none; }
+.gift::after { inset: 0 auto 0 0; width: 30px; height: auto; border: 0; border-radius: 0; box-shadow: none; background: var(--strip); background-size: 120px; z-index: 0; }
+.giftIcon { border-radius: 3px; border-color: var(--fibre); }
+.gift h3 { color: var(--fibre); font-family: var(--display); font-size: 17px; }
+.giftNo { font-family: var(--display); font-size: 19px; letter-spacing: .03em; line-height: 1.35; }
+.copy { border-radius: 3px; border-color: var(--fibre); color: var(--band-ink); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--fibre); color: var(--blk); }
+.giftCopied { box-shadow: none; outline: 3px solid var(--accent); }
+
+/* closing: the lamin at dusk over the river */
+.closing { align-items: flex-start; padding: 0 28px 54px; background: var(--blk); text-align: left; }
+.closingLamin { width: calc(100% + 56px); margin: 0 -28px 18px; background: var(--bg); }
+.closingLamin img { display: block; width: 100%; height: auto; }
+.closingEmblem { width: 60px; height: auto; }
+.thanks { color: var(--band-ink); font-family: var(--display); font-size: 46px; }
+.closingText { max-width: none; }
+.closingSalam { color: var(--fibre); font-family: var(--display); font-size: 16px; }
+.family { color: rgba(239, 228, 203, .8); }
+.closingNames { color: var(--fibre); font-family: var(--display); font-size: 34px; }
+.closing::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; right: 0; width: 26px; background: var(--strip); background-size: 120px; opacity: .9; }
+.music { border-radius: 3px; background: var(--accent); border-color: var(--fibre); }
+
+/* ── Cover: a woven doyo selvedge down the left, forest leaves above, a pinned photo ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; min-height: 100dvh; padding: 64px 24px 36px 102px; overflow: hidden; background: linear-gradient(90deg, transparent 78px, rgba(42, 29, 21, .5) 78px 80px, var(--bg) 80px), var(--strip); color: var(--ink); text-align: left; isolation: isolate; }
+.daun { position: absolute; z-index: 1; top: -6px; right: -30px; width: 250px; height: auto; transform-origin: 85% 0; animation: rustle 7s ease-in-out infinite alternate; }
+.kicker { position: relative; z-index: 2; font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); }
+.pinned { position: relative; z-index: 2; width: 100%; max-width: 252px; aspect-ratio: 4 / 5; margin-top: 16px; padding: 8px 8px 30px; background: var(--ivory); box-shadow: 0 14px 28px rgba(42, 29, 21, .25), 0 1px 0 rgba(42, 29, 21, .2); rotate: -2deg; }
+.pinned::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: 9px; height: 14px; background: var(--pita); }
+.pinPhoto { width: 100%; height: 100%; overflow: hidden; background: var(--blk); }
+.pinPhoto > img, .pinPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.pinKait { position: absolute; z-index: 3; top: -18px; left: 50%; width: 40px; height: auto; translate: -50% 0; }
+.coverNames { position: relative; z-index: 2; max-width: 100%; margin-top: 22px; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: .98; color: var(--blk); overflow-wrap: anywhere; }
+.coverNames em { display: block; font-size: 30px; font-style: normal; color: var(--accent); }
+.coverDate { position: relative; z-index: 2; margin-top: 10px; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; width: 100%; margin-top: 16px; }
+.guest { align-items: flex-start; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { font-family: var(--display); font-size: 20px; color: var(--ink); text-wrap: pretty; }
+.table { border-color: var(--accent); border-radius: 3px; color: var(--accent); }
+.openBtn { min-width: 0; padding: 0 24px; border-radius: 3px; background: var(--blk); color: var(--band-ink); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 8px 18px rgba(42, 29, 21, .3); }
+.openBtn:hover { background: var(--accent); }
+
+/* ── Hero: the long lamin by the river, names written below like a cloth label ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 0 0 46px; overflow: hidden; background: var(--bg); text-align: left; }
+.heroLamin { width: 100%; height: auto; }
+.heroText { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: -6px; padding: 0 26px 0 30px; border-left: 0; }
+.heroKicker { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { max-width: 100%; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1; color: var(--blk); overflow-wrap: anywhere; }
+.heroNames em { font-size: 34px; font-style: normal; color: var(--accent); margin: 0 6px; }
+.heroDate { display: inline-block; margin-top: 6px; padding: 6px 12px; background: var(--blk); color: var(--band-ink); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.heroNote { max-width: 330px; margin-top: 10px; font-size: 18px; font-style: italic; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+.heroPita { width: 100%; height: 22px; margin-top: 4px; background: var(--pita); }
+
+@keyframes rustle { from { rotate: -1.5deg; } to { rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) { .daun { animation: none; } }

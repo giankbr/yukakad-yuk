@@ -1,0 +1,170 @@
+/* Khitan Pangeran — khitanan bertema pangeran kecil (gouache + foil emas): istana berkubah bawang, mahkota bertatah permata, bendera segitiga, bintang delapan, bulan sabit; malam biru kerajaan berpola bintang, kartu gulungan gading, huruf Lilita One & Cinzel Decorative. */
+.root, .cover {
+  --bg: #fbf3e2; --paper: #f4e8cc; --ivory: #fffaf0; --field: #ffffff; --ink: #1b2a5c; --muted: #56618a; --line: #e9d7ae;
+  --accent: #2f5cc4; --accent2: #1d3f97; --gold: #d9a93f; --gold-l: #ffe7a6; --gold-d: #a8761c;
+  --band-bg: #1a3586; --band-ink: #fff6e2; --navy: #12245e; --red: #c8413a;
+  --display: "Lilita One", "Nunito", system-ui, sans-serif; --serif: Nunito, system-ui, sans-serif; --script: "Lilita One", system-ui, sans-serif; --deco: "Cinzel Decorative", Georgia, serif;
+  --h2: 32px; --card-r: 26px;
+  --tile: url(/themes/art/khitan-pangeran/tile.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f5cc4; --t-accent-ink: #ffffff; --t-bg: #fbf3e2; --t-ink: #1b2a5c; --t-muted: #56618a; --t-line: #e9d7ae; --t-field: #ffffff;
+  --t-radius: 20px; --t-font: Nunito, system-ui, sans-serif; --t-heading-font: "Lilita One", Nunito, sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px; font-weight: 500;
+}
+.main { background: var(--bg); }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--deco); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: none; }
+.head h2, .headLight h2 { font-family: var(--display); letter-spacing: .01em; line-height: 1.05; }
+.head h2 { color: var(--accent2); text-shadow: 0 3px 0 #f1dca8; }
+
+/* divider: gold star between two tapering gold rules */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider::after { background: linear-gradient(90deg, var(--gold), transparent); }
+.divider img { width: 30px; height: auto; animation: twirl 8s linear infinite; }
+
+.salamBlock { padding: 38px 28px 58px; }
+.arabic { color: var(--accent2); font-size: 30px; }
+.salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; line-height: 1.6; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; }
+.intro { color: var(--muted); }
+
+/* celebrant: royal medallion with the crown on top */
+.couple { background: var(--paper); }
+.couple::before { content: ""; position: absolute; inset: 0; background: radial-gradient(70% 40% at 50% 30%, rgba(255, 255, 255, .6), transparent); pointer-events: none; }
+.portrait { margin: 34px 0 18px; }
+.portraitFrame { width: 220px; height: 220px; padding: 10px; border: 0; border-radius: 50%; background: conic-gradient(from 0deg, #f6d27a, #b98428, #f6d27a, #c8922f, #f6d27a); box-shadow: 0 0 0 6px var(--accent2), 0 0 0 9px var(--gold), 0 18px 30px -12px rgba(18, 36, 94, .5); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 50% 35%, #3a68d0, #163584 70%); color: var(--gold-l); font-family: var(--display); font-size: 104px; text-shadow: 0 5px 0 #0e2363; }
+.portraitCrown { position: absolute; z-index: 2; left: 50%; top: -66px; width: 150px; height: auto; translate: -50% 0; rotate: -6deg; transform-origin: 50% 100%; animation: crownBob 3.2s var(--m-spring) infinite; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 60px; line-height: 1; text-shadow: 0 4px 0 #f1dca8; }
+.fullName { font-family: var(--deco); font-size: 17px; font-weight: 700; }
+.parents { font-size: 16px; }
+
+/* countdown: royal night with star lattice, dome-window digits */
+.countBand { padding-top: 66px; background: var(--tile) repeat, var(--band-bg); background-size: 120px; }
+.countBand::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(80% 60% at 50% 0%, rgba(255, 231, 166, .18), transparent), linear-gradient(180deg, rgba(18, 36, 94, .2), rgba(18, 36, 94, .6)); }
+.countMoon { position: absolute; z-index: -1; right: 18px; top: 18px; width: 64px; height: auto; animation: glowPulse 5s ease-in-out infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; text-shadow: 0 3px 0 #0e2363; }
+.count > div { height: 96px; border: 3px solid var(--gold); border-radius: 50% 50% 12px 12px / 42% 42% 12px 12px; background: var(--ivory); box-shadow: 0 6px 0 #0e2363; }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 32px; line-height: 1; padding-top: 10px; }
+.count small { color: var(--gold-d); font-style: normal; font-weight: 800; font-size: 12px; }
+.ghostBtn { border: 2.5px solid var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 800; transition: background .3s var(--m-spring), scale .3s var(--m-spring), translate .3s var(--m-spring); }
+
+/* events: royal decree scrolls */
+.events { gap: 34px; padding-top: 70px; }
+.event { padding: 44px 22px 26px; border: 3px solid var(--gold); border-radius: 28px; background: var(--ivory); box-shadow: 0 7px 0 #e8d29c; transition: translate .4s var(--m-spring), box-shadow .4s var(--m-spring); }
+.event::before { inset: 7px; border: 1.5px dashed color-mix(in srgb, var(--gold) 70%, transparent); border-radius: 21px; }
+.event:hover { translate: 0 -4px; box-shadow: 0 11px 0 #e8d29c; }
+.eventNo { top: -26px; width: 52px; height: 52px; padding-top: 4px; background: url(/themes/art/khitan-pangeran/star.webp) center / contain no-repeat; color: var(--navy); font-family: var(--display); font-size: 16px; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 25px; }
+.eventDate { font-style: normal; font-weight: 800; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 50px; height: 5px; border-radius: 5px; background: linear-gradient(90deg, var(--accent), var(--gold), var(--red)); }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 0 5px 0 var(--navy); transition: background .3s, box-shadow .3s var(--m-spring), scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); translate: 0 -2px; box-shadow: 0 7px 0 var(--navy); }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 2px 0 var(--navy); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; border-radius: 4px; background: repeating-linear-gradient(var(--gold) 0 10px, transparent 10px 16px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 42px; }
+.storyBody { padding: 12px 16px 14px; border: 2px solid var(--line); border-radius: 20px; background: var(--ivory); }
+.storyBody small { align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+
+/* gallery */
+.tile { border: 4px solid var(--gold); border-radius: 20px; }
+.tile:first-child { border-radius: 50% 50% 20px 20px / 30% 30% 20px 20px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 3px solid var(--gold); border-radius: 28px; box-shadow: 0 7px 0 #e8d29c; }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 16px; }
+.choices button { border: 2px solid var(--line); font-weight: 800; transition: background .3s var(--m-spring), color .3s, border-color .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--navy); }
+.step { border: 2px solid var(--gold); }
+.wish { border: 2px solid var(--line); border-radius: 22px 22px 22px 6px; }
+.wish strong { color: var(--accent2); font-family: var(--display); font-size: 17px; }
+.wish small { background: #fff0c4; color: var(--gold-d); font-weight: 800; }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 120px; animation: crownBob 3s var(--m-spring) infinite; }
+
+/* gifts */
+.gift { border-radius: 28px; background: var(--tile) repeat, var(--band-bg); background-size: 120px; box-shadow: 0 7px 0 var(--navy); }
+.gift::after { right: 14px; bottom: auto; top: 14px; width: 44px; height: 44px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/khitan-pangeran/star.webp) center / contain no-repeat; opacity: .9; }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.giftIcon { border: 2px solid var(--gold); }
+.giftNo { font-family: var(--display); font-size: 23px; letter-spacing: .04em; }
+.copy { border: 2px solid var(--gold); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold); color: var(--navy); }
+
+/* closing: the palace under the moon */
+.closing { padding-bottom: 0; background: var(--tile) repeat, var(--band-bg); background-size: 120px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; text-shadow: 0 4px 0 #0e2363; }
+.closingSalam { font-size: 13px; line-height: 1.5; }
+.closingNames { display: none; }
+.closingName { order: 8; max-width: 100%; color: #fff; font-family: var(--display); font-size: 40px; overflow-wrap: anywhere; text-shadow: 0 4px 0 #0e2363; }
+.closingStage { order: 9; position: relative; width: calc(100% + 56px); height: 270px; margin-top: 6px; }
+.closingPalace { position: absolute; left: 50%; bottom: 0; width: 390px; height: auto; translate: -50% 0; }
+.closingMoon { position: absolute; right: 30px; top: 0; width: 70px; height: auto; animation: glowPulse 5s ease-in-out infinite; }
+.made { order: 10; margin: 0; padding: 12px 0 20px; position: relative; z-index: 2; width: calc(100% + 56px); background: #12245e; color: rgba(255, 246, 226, .6); }
+.music { border: 2.5px solid var(--gold); background: var(--accent2); box-shadow: 0 4px 0 var(--navy); }
+
+/* ── Cover: royal night, bunting, crown, palace ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 78px 22px 0; overflow: hidden; background: radial-gradient(90% 50% at 50% 28%, rgba(255, 231, 166, .22), transparent 70%), var(--tile) repeat, #1a3586; background-size: auto, 120px, auto; text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(14, 30, 84, .55), rgba(14, 30, 84, 0) 40%, rgba(14, 30, 84, .5)); pointer-events: none; }
+.bunting { position: absolute; z-index: 3; left: 50%; top: -6px; width: 470px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: flutter 5s ease-in-out infinite alternate; }
+.moon { position: absolute; right: 22px; top: 92px; width: 66px; height: auto; animation: glowPulse 5s ease-in-out infinite; }
+.twinkle { position: absolute; height: auto; animation: twinkle 3s var(--m-spring) infinite; }
+.t1 { left: 26px; top: 120px; width: 22px; }
+.t2 { left: 64px; top: 220px; width: 14px; animation-delay: .8s; }
+.t3 { right: 60px; top: 210px; width: 18px; animation-delay: 1.6s; }
+.bismillah { color: var(--gold-l); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.crown { width: 128px; height: auto; margin: 4px 0 -4px; transform-origin: 50% 100%; animation: crownBob 3.2s var(--m-spring) infinite; }
+.kicker { color: var(--gold-l); font-family: var(--deco); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+.coverName { max-width: 100%; margin-top: 2px; color: var(--gold-l); font-family: var(--display); font-size: clamp(60px, 19vw, 78px); font-weight: 400; line-height: .95; overflow-wrap: anywhere; text-shadow: 0 4px 0 #b9852a, 0 9px 0 #0e2363; }
+.ribbon { position: relative; margin-top: 8px; padding: 6px 26px; background: var(--red); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 4px 0 #8e2420; }
+.ribbon::before, .ribbon::after { content: ""; position: absolute; top: 6px; width: 20px; height: 100%; background: #a8322c; z-index: -1; }
+.ribbon::before { left: -14px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 40% 50%); }
+.ribbon::after { right: -14px; clip-path: polygon(0 0, 100% 0, 60% 50%, 100% 100%, 0 100%); }
+.coverDate { margin-top: 12px; color: #fff; font-family: var(--serif); font-size: 16px; font-weight: 800; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 14px; width: 100%; }
+.guest { padding: 12px 20px; border: 3px solid var(--gold); border-radius: 22px; background: var(--ivory); max-width: 310px; box-shadow: 0 6px 0 #0e2363; color: var(--ink); }
+.guest small { color: var(--muted); font-style: normal; font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-weight: 800; }
+.openBtn { background: linear-gradient(180deg, #f6d27a, #d9a93f); color: var(--navy); font-family: var(--serif); font-size: 16px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 6px 0 #8a5f16; }
+.openBtn:hover { translate: 0 -2px; box-shadow: 0 8px 0 #8a5f16; }
+.openBtn:active { translate: 0 4px; box-shadow: 0 2px 0 #8a5f16; }
+.stage { position: relative; width: calc(100% + 44px); height: 270px; margin-top: auto; flex-shrink: 0; }
+.palace { position: absolute; left: 50%; bottom: 0; width: 400px; max-width: none; height: auto; translate: -50% 0; }
+.stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: #12245e; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 70px 24px 56px; overflow: hidden; background: var(--tile) repeat, var(--band-bg); background-size: 120px; text-align: center; isolation: isolate; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 50% at 50% 40%, rgba(255, 231, 166, .2), transparent), linear-gradient(180deg, transparent 60%, rgba(14, 30, 84, .5)); }
+.heroBunting { position: absolute; left: 50%; top: -6px; width: 440px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: flutter 5s ease-in-out infinite alternate; }
+.heroCrown { width: 110px; height: auto; margin-bottom: 4px; animation: crownBob 3.2s var(--m-spring) infinite; transform-origin: 50% 100%; }
+.heroKicker { color: var(--gold-l); font-family: var(--deco); font-size: 14px; font-weight: 700; letter-spacing: .1em; }
+.heroName { max-width: 100%; color: var(--gold-l); font-family: var(--display); font-size: 62px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 #b9852a, 0 8px 0 #0e2363; }
+.heroAge { margin-top: 10px; padding: 4px 16px; border-radius: 999px; background: var(--ivory); color: var(--accent2); font-weight: 800; font-size: 15px; box-shadow: 0 4px 0 #0e2363; }
+.heroDate { margin-top: 14px; color: #fff; font-weight: 800; }
+.heroNote { max-width: 320px; margin-top: 18px; padding: 14px 18px; border: 3px solid var(--gold); border-radius: 24px; background: var(--ivory); color: var(--ink); font-size: 16px; line-height: 1.55; text-wrap: pretty; box-shadow: 0 6px 0 #0e2363; }
+
+@keyframes crownBob { 0%, 100% { translate: -50% 0; } 50% { translate: -50% -7px; } }
+.crown, .heroCrown, .sentBox img { animation-name: bob; }
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: -3deg; } 50% { translate: 0 -7px; rotate: 3deg; } }
+@keyframes flutter { from { rotate: -1deg; } to { rotate: 1deg; } }
+@keyframes twinkle { 0%, 100% { scale: 1; opacity: 1; } 50% { scale: .6; opacity: .6; } }
+@keyframes twirl { to { rotate: 360deg; } }
+@keyframes glowPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15) drop-shadow(0 0 10px rgba(255, 231, 166, .6)); } }
+@media (prefers-reduced-motion: reduce) {
+  .divider img, .portraitCrown, .countMoon, .sentBox img, .bunting, .moon, .twinkle, .crown, .closingMoon, .heroBunting, .heroCrown { animation: none; }
+  .event, .mapBtn, .submit, .choices button, .ghostBtn { transition: none; }
+}

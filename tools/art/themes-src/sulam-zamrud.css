@@ -1,0 +1,165 @@
+/* Sulam Zamrud — syari tanpa foto: sutra hijau zamrud bersulam benang emas: tali emas yang dijahit tindih (couching), bintang delapan sulam satin, bunga satin gading dan merah muda, monogram dalam karangan daun, bingkai kartu dari tali emas. */
+.root, .cover {
+  --bg: #0f5b44; --paper: #0c4e3a; --ivory: #f6efdc; --field: #fffaf0; --ink: #1f2a22; --muted: #52604f; --line: #dccb9c;
+  --accent: #0f5b44; --accent2: #0b4a37; --gold: #d0ab55; --gold-l: #f2dc9a; --gold-d: #8c6a27;
+  --band-bg: #0b4a37; --band-ink: #f6efdc;
+  --display: Prata, Georgia, serif; --serif: "Sorts Mill Goudy", Georgia, serif; --script: "Imperial Script", cursive;
+  --emerald: #0f5b44; --emerald-d: #083a2b; --blush: #d69a88;
+  --silk: url(/themes/art/sulam-zamrud/silk.webp) repeat 0 0 / 240px;
+  --linen: repeating-linear-gradient(0deg, rgba(140, 106, 39, .045) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(140, 106, 39, .04) 0 1px, transparent 1px 3px), #f6efdc;
+  --cord: url(/themes/art/sulam-zamrud/cord.webp) 44 / 26px stretch;
+  --h2: 29px;
+  font-family: var(--serif); color: var(--band-ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #f2dc9a; --t-accent-ink: #0b4a37; --t-bg: #0f5b44; --t-ink: #f6efdc; --t-muted: rgba(246, 239, 220, .8); --t-line: rgba(242, 220, 154, .4); --t-field: rgba(255, 250, 240, .08);
+  --t-radius: 4px; --t-font: "Sorts Mill Goudy", Georgia, serif; --t-heading-font: Prata, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+  background: var(--silk);
+}
+.main { background: var(--silk); }
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.head h2 { color: var(--band-ink); }
+.divider { width: 190px; }
+
+/* ivory linen rooms alternate with the emerald silk */
+.salamBlock, .countBand, .events, .wishes { background: var(--linen); color: var(--ink); }
+.salamBlock .eyebrow, .countBand .eyebrow, .events .eyebrow, .wishes .eyebrow, .salamKicker { color: var(--gold-d); }
+.events .head h2, .wishes .head h2 { color: var(--emerald); }
+.salamBlock, .countBand, .events, .wishes { box-shadow: inset 0 10px 0 -6px var(--gold), inset 0 -10px 0 -6px var(--gold); }
+
+.salamBlock { gap: 12px; padding: 64px 28px 62px; }
+.arabic { color: var(--emerald); font-size: 30px; }
+.salamTitle { color: var(--emerald); font-family: var(--display); font-size: 25px; line-height: 1.35; }
+.salamBlock .intro { color: var(--muted); }
+
+/* couple: monograms in embroidered wreaths */
+.couple { gap: 16px; background: transparent; }
+.portrait { display: grid; place-items: center; width: 236px; height: 242px; margin-bottom: 10px; }
+.pWreath { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; }
+.portraitFrame { width: 160px; height: 160px; padding: 0; border: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #13694f, var(--emerald-d)); box-shadow: inset 0 0 0 1px rgba(242, 220, 154, .35), inset 0 6px 18px rgba(0, 0, 0, .35); translate: 0 2px; }
+.person:hover .portraitFrame { box-shadow: inset 0 0 0 1px rgba(242, 220, 154, .5), inset 0 6px 18px rgba(0, 0, 0, .35); }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 96px; line-height: 1; translate: 4px 6px; text-shadow: 0 1px 0 var(--gold-d), 0 2px 3px rgba(0, 0, 0, .4); }
+.role { color: var(--gold-l); }
+.nick { color: var(--band-ink); font-family: var(--display); font-size: 40px; }
+.fullName { color: var(--gold-l); font-family: var(--serif); font-size: 20px; }
+.parents { color: rgba(246, 239, 220, .82); font-size: 17px; }
+.amp { margin: 10px 0; color: var(--gold-l); font-family: var(--script); font-size: 64px; }
+
+/* countdown on linen: tiles framed with the gold cord */
+.countBand { padding: 64px 20px; color: var(--ink); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--emerald); font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 78px)); gap: 6px; }
+.count > div { height: 96px; border: 18px solid transparent; border-image: url(/themes/art/sulam-zamrud/cord.webp) 44 / 18px stretch; border-radius: 0; background: var(--field); background-clip: padding-box; }
+.count > div::after { display: none; }
+.count b { color: var(--emerald); font-family: var(--display); font-size: 25px; }
+.count small { color: var(--muted); font-size: 13px; }
+.countTba { color: var(--emerald); }
+.ghostBtn { border-color: var(--gold-d); color: var(--emerald); background: var(--field); }
+.ghostBtn svg { stroke: var(--emerald); }
+.ghostBtn:hover { background: #fff; }
+
+/* events: ivory cards in a couched-cord frame */
+.events { gap: 26px; }
+.event { padding: 22px 12px 18px; border: 26px solid transparent; border-image: var(--cord); border-radius: 0; background: var(--field); background-clip: padding-box; color: var(--ink); }
+.event::before { display: none; }
+.event:hover { border-color: transparent; box-shadow: 0 16px 30px rgba(15, 91, 68, .12); }
+.eventNo { top: -26px; width: 34px; height: 26px; border-radius: 0 0 17px 17px; background: var(--emerald); color: var(--gold-l); font-size: 12px; }
+.event h3 { color: var(--emerald); font-family: var(--display); font-size: 22px; }
+.eventTime { color: var(--gold-d); }
+.event strong { font-family: var(--display); font-weight: 400; }
+.mapBtn { background: var(--emerald); color: var(--gold-l); box-shadow: inset 0 0 0 1px var(--gold); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story on silk, satin-stitch stars as nodes */
+.story { background: transparent; }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 38px; }
+.timeline::before { left: 23px; width: 2px; background: repeating-linear-gradient(180deg, var(--gold) 0 6px, transparent 6px 10px); }
+.storyBody small { color: var(--gold-l); }
+.storyBody h3 { color: var(--band-ink); font-family: var(--display); font-size: 21px; }
+.storyBody p { color: rgba(246, 239, 220, .82); font-size: 17px; }
+.storyImg { border-radius: 4px; }
+
+/* gallery (only shown when the couple uploads photos) */
+.gallery { background: transparent; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 2px var(--gold); }
+.tile:first-child { border-radius: 110px 110px 4px 4px; }
+
+/* wishes on linen */
+.form { padding: 20px 10px; border: 26px solid transparent; border-image: var(--cord); border-radius: 0; background: var(--field); background-clip: padding-box; box-shadow: none; color: var(--ink); }
+.field > span, .diet, .guestsLabel { color: var(--emerald); }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--emerald); border-color: var(--emerald); color: var(--gold-l); }
+.submit { border-radius: 4px; background: var(--emerald); color: var(--gold-l); box-shadow: inset 0 0 0 1px var(--gold); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--emerald); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 64px; }
+.wish { border-radius: 4px; background: var(--field); border-color: var(--line); color: var(--ink); }
+.wish strong { color: var(--emerald); }
+.empty { color: var(--muted); }
+.closed { border-color: var(--line); color: var(--ink); }
+.closed p { color: var(--muted); }
+
+/* gifts on silk */
+.gifts { background: transparent; }
+.gifts .intro { color: rgba(246, 239, 220, .85); }
+.gift { padding: 18px 10px 16px; border: 26px solid transparent; border-image: var(--cord); border-radius: 0; background: var(--field); background-clip: padding-box; color: var(--ink); }
+.gift::after { display: none; }
+.giftIcon { border: 0; background: var(--emerald); }
+.gift h3 { color: var(--emerald); font-family: var(--display); }
+.giftNo { color: var(--ink); }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--emerald); color: var(--emerald); }
+.copy:not(.copyOn) svg { stroke: var(--emerald); }
+.copy:hover { background: rgba(15, 91, 68, .07); }
+.copyOn, .copyOn:hover { background: var(--emerald); color: var(--gold-l); }
+
+/* closing: the medallion between two sprays */
+.closing { padding: 70px 28px 60px; background: transparent; }
+.closingSpray { position: absolute; z-index: -1; width: 190px; height: auto; opacity: .6; }
+.closingSpray:first-child { top: -10px; left: -60px; scale: 1 -1; }
+.closingSpray:nth-child(2) { bottom: -30px; right: -66px; scale: -1 1; }
+.closingMedal { width: 200px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 34px; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 12.5px; line-height: 1.5; }
+.family { font-family: var(--display); }
+.closingNames { color: var(--band-ink); font-family: var(--script); font-size: 46px; }
+.music { background: var(--emerald-d); border-color: var(--gold); }
+
+/* ── Cover: an embroidered silk panel: sprays in two corners, the monogram wreath ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 60px 24px 56px; overflow: hidden; background: radial-gradient(70% 50% at 50% 38%, rgba(29, 115, 86, .55), transparent 70%), var(--silk); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 12px; z-index: 1; border: 26px solid transparent; border-image: var(--cord); pointer-events: none; }
+.coverSpray { position: absolute; z-index: 0; width: 230px; height: auto; }
+.coverSprayA { top: 18px; left: -30px; scale: 1 -1; }
+.coverSprayB { bottom: 18px; right: -30px; scale: -1 1; }
+.monoWrap { position: relative; z-index: 2; display: grid; place-items: center; width: 200px; height: 205px; flex-shrink: 0; }
+.monoWrap > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mono { position: relative; display: flex; align-items: baseline; gap: 2px; color: var(--gold-l); font-family: var(--script); font-size: 62px; line-height: 1; text-shadow: 0 1px 0 var(--gold-d), 0 2px 4px rgba(0, 0, 0, .35); translate: 0 6px; }
+.mono i { font-size: 34px; font-style: normal; color: rgba(242, 220, 154, .8); }
+.kicker { position: relative; z-index: 2; margin-top: 16px; font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.coverNames { position: relative; z-index: 2; max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.15; color: var(--band-ink); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { font-family: var(--script); font-size: 46px; font-style: normal; color: var(--gold-l); margin: 0 6px; }
+.coverDate { position: relative; z-index: 2; margin-top: 8px; font-family: var(--display); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-l); }
+.guestCard { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 300px; margin-top: 18px; padding: 10px 6px 8px; border: 22px solid transparent; border-image: url(/themes/art/sulam-zamrud/cord.webp) 44 / 22px stretch; background: var(--field); background-clip: padding-box; color: var(--ink); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { font-family: var(--display); font-size: 19px; color: var(--emerald); }
+.table { border-color: var(--gold-d); color: var(--gold-d); }
+.openBtn { min-width: 0; padding: 0 24px; background: var(--emerald); color: var(--gold-l); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; box-shadow: inset 0 0 0 1px var(--gold), 0 8px 18px rgba(8, 58, 43, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: the embroidered medallion with a slow gold-thread sheen ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 58px; text-align: center; }
+.medalWrap { position: relative; width: 300px; height: 300px; }
+.medalWrap > img { width: 100%; height: 100%; }
+.medalSheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 38%, rgba(255, 240, 200, .55) 50%, transparent 62%) no-repeat; background-size: 300% 100%; -webkit-mask: url(/themes/art/sulam-zamrud/medallion.webp) center / 100% 100%; mask: url(/themes/art/sulam-zamrud/medallion.webp) center / 100% 100%; mix-blend-mode: soft-light; animation: thread 9s ease-in-out infinite; pointer-events: none; }
+.heroKicker { margin-top: 14px; font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.heroNames { max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.15; color: var(--band-ink); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-family: var(--script); font-size: 50px; font-style: normal; color: var(--gold-l); margin: 0 8px; }
+.heroDate { margin-top: 8px; font-family: var(--display); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-l); }
+.heroNote { max-width: 320px; margin-top: 14px; font-size: 18px; font-style: italic; line-height: 1.55; color: rgba(246, 239, 220, .82); }
+
+@keyframes thread { 0%, 15% { background-position: 100% 0; } 85%, 100% { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .medalSheen { animation: none; display: none; } }

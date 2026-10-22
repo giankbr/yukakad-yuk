@@ -1,0 +1,186 @@
+/* Ultah Istana — ulang tahun anak di istana dongeng (pena & cat air, desain orisinal): menara pastel bertopi bengkok, jendela hati, bendera berkibar, taman bunga, kupu-kupu; halaman buku cerita bab demi bab, huruf Cherry Swash & Fredoka. */
+.root, .cover {
+  --bg: #fff7fb; --paper: #f6effb; --ivory: #ffffff; --field: #fffdfe; --ink: #4f3a5c; --muted: #7d6a88; --line: #ecdff0;
+  --accent: #e0668f; --accent2: #c94d79; --gold: #b694e6; --gold-l: #fff4f8; --gold-d: #8c6fc4;
+  --band-bg: #bcd9f4; --band-ink: #4f3a5c; --pen: #6a4f74; --mint: #bfe4d2; --butter: #fbe39a; --pink: #f4b6c9; --lilac: #d7c3f0; --peach: #f8c4a4; --sky: #bcd9f4;
+  --display: "Cherry Swash", "Fredoka", Georgia, serif; --serif: Fredoka, system-ui, sans-serif; --script: "Cherry Swash", Georgia, serif;
+  --h2: 33px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e0668f; --t-accent-ink: #ffffff; --t-bg: #fff7fb; --t-ink: #4f3a5c; --t-muted: #7d6a88; --t-line: #ecdff0; --t-field: #fffdfe;
+  --t-radius: 18px; --t-font: Fredoka, system-ui, sans-serif; --t-heading-font: "Cherry Swash", Georgia, serif; --t-heading-weight: 700; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px; font-weight: 400;
+}
+.main { background: var(--bg); }
+/* chapter eyebrows: "Bab ..." on a little ribbon */
+.eyebrow, .salamKicker, .role { padding: 3px 14px; border-radius: 4px; background: var(--lilac); color: var(--pen); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--accent2); font-family: var(--display); font-weight: 700; line-height: 1.08; }
+.divider { width: 110px; animation: tiara 4s ease-in-out infinite; }
+.salamBlock { padding: 38px 28px 60px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 700; }
+.intro { color: var(--muted); }
+.salamBlock .intro::first-letter { float: left; margin: 4px 8px 0 0; color: var(--accent); font-family: var(--display); font-size: 52px; font-weight: 700; line-height: .8; }
+.salamBlock .intro { text-align: left; }
+
+/* section edges: a hand-drawn scallop like a storybook page */
+.section::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 16px; background: radial-gradient(circle at 12px 16px, var(--sec, var(--bg)) 11px, var(--pen) 11.5px 12.6px, transparent 13px) 0 0 / 24px 16px repeat-x; opacity: .9; pointer-events: none; }
+.couple, .story, .wishes { --sec: var(--paper); background: var(--paper); }
+.events, .gallery, .gifts { --sec: var(--bg); }
+.countBand { --sec: var(--sky); }
+.countBand::before { z-index: 1; }
+
+/* celebrant: arched castle window with a tiara on top */
+.portrait { margin: 26px 0 16px; }
+.portraitFrame { width: 206px; height: 244px; padding: 9px; border: 2.5px solid var(--pen); border-radius: 103px 103px 18px 18px; background: repeating-linear-gradient(45deg, var(--pink) 0 10px, #f9cbd9 10px 20px); box-shadow: 6px 7px 0 var(--lilac); }
+.portraitFrame > img, .portraitFrame > div { border: 2px solid var(--pen); border-radius: 94px 94px 10px 10px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: radial-gradient(circle at 50% 30%, #fff, #fdeef4); color: var(--accent); font-family: var(--display); font-size: 108px; font-weight: 700; }
+.portraitTiara { position: absolute; z-index: 2; left: 50%; top: -34px; width: 120px; height: auto; translate: -50% 0; animation: tiara 4s ease-in-out infinite; }
+.portraitFly { position: absolute; z-index: 2; right: -40px; top: 40px; width: 46px; height: auto; animation: flutterFly 6s ease-in-out infinite; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 58px; font-weight: 700; line-height: 1; }
+.fullName { font-weight: 600; font-size: 20px; }
+
+/* countdown: four little pastel towers with cone roofs */
+.countBand { padding-top: 64px; background: linear-gradient(180deg, var(--sky), #d9e8f8 60%, #f8e3ee); color: var(--ink); }
+.countCloud { position: absolute; z-index: -1; width: 140px; height: auto; opacity: .95; animation: drift 14s ease-in-out infinite alternate; }
+.countCloudA { left: -30px; top: 40px; }
+.countCloudB { right: -36px; bottom: 50px; width: 160px; animation-delay: -6s; }
+.headLight .eyebrow { background: #fff; color: var(--pen); }
+.headLight h2 { color: var(--accent2); }
+.count { gap: 12px; margin-top: 26px; }
+.count > div { height: 82px; overflow: visible; border: 2.5px solid var(--pen); border-radius: 4px 4px 10px 10px; background: var(--butter); box-shadow: 4px 5px 0 rgba(106, 79, 116, .2); }
+.count > div::before { content: ""; position: absolute; left: -8px; right: -8px; bottom: calc(100% + 1px); height: 36px; background: var(--roof, var(--accent)); clip-path: polygon(50% 0, 100% 100%, 0 100%); filter: drop-shadow(0 0 0 var(--pen)); }
+.count > div:nth-child(1) { background: var(--mint); }
+.count > div:nth-child(2) { background: var(--pink); }
+.count > div:nth-child(2) { --roof: var(--gold); }
+.count > div:nth-child(3) { background: var(--butter); }
+.count > div:nth-child(3) { --roof: #f6a37e; }
+.count > div:nth-child(4) { background: var(--lilac); }
+.count > div:nth-child(4) { --roof: #7fb6e6; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 700; line-height: 1; }
+.count small { color: var(--pen); font-style: normal; font-weight: 600; font-size: 12px; }
+.countTba { color: var(--ink); }
+.ghostBtn { border: 2.5px solid var(--pen); background: #fff; color: var(--pen); font-family: var(--serif); font-weight: 600; transition: background .3s var(--m-spring), scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.ghostBtn:hover { background: var(--gold-l); }
+
+/* events: storybook pages, slightly tilted, with a stacked page behind */
+.events { gap: 30px; }
+.event { padding: 34px 22px 26px; border: 2.5px solid var(--pen); border-radius: 20px; background: #fff; box-shadow: 7px 8px 0 var(--lilac); rotate: -1deg; transition: rotate .4s var(--m-spring), translate .4s var(--m-spring), box-shadow .4s var(--m-spring); }
+.event:nth-of-type(even) { rotate: 1deg; }
+.event::before { inset: 8px; border: 1.5px dashed var(--pink); border-radius: 14px; }
+.event:hover { rotate: 0deg; translate: 0 -3px; border-color: var(--pen); }
+.eventNo { top: -18px; width: 64px; height: 34px; border: 2.5px solid var(--pen); border-radius: 8px; background: var(--butter); color: var(--pen); font-family: var(--display); font-size: 15px; font-weight: 700; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 25px; font-weight: 700; }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 60px; height: 6px; border-radius: 6px; background: repeating-linear-gradient(90deg, var(--pink) 0 10px, var(--mint) 10px 20px, var(--butter) 20px 30px); }
+.mapBtn, .submit { border: 2.5px solid var(--pen); background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 600; box-shadow: 4px 4px 0 var(--pen); transition: background .3s, box-shadow .3s var(--m-spring), scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); translate: -1px -1px; box-shadow: 5px 5px 0 var(--pen); }
+.mapBtn:active, .submit:not(:disabled):active { translate: 3px 3px; box-shadow: 1px 1px 0 var(--pen); }
+
+/* story */
+.timeline::before { left: 21px; width: 3px; background: repeating-linear-gradient(var(--pen) 0 6px, transparent 6px 12px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 42px; animation: flutterFly 6s ease-in-out infinite; }
+li:nth-child(2) .node img { animation-delay: -2s; }
+li:nth-child(3) .node img { animation-delay: -4s; }
+.storyBody { padding: 12px 16px 14px; border: 2px solid var(--pen); border-radius: 18px; background: #fff; box-shadow: 4px 5px 0 var(--pink); }
+.storyBody small { align-self: flex-start; padding: 1px 10px; border-radius: 4px; background: var(--mint); color: var(--pen); font-weight: 600; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-weight: 700; font-size: 21px; }
+
+/* gallery */
+.tile { border: 2.5px solid var(--pen); border-radius: 16px; box-shadow: 4px 5px 0 var(--lilac); }
+.tile:first-child { border-radius: 50% 50% 16px 16px / 36% 36% 16px 16px; }
+
+/* wishes */
+.form { border: 2.5px solid var(--pen); border-radius: 22px; box-shadow: 7px 8px 0 var(--pink); }
+.field > span, .diet, .guestsLabel { color: var(--pen); font-family: var(--serif); font-weight: 600; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border: 2px solid var(--line); font-weight: 600; transition: background .3s var(--m-spring), color .3s, border-color .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--pen); background: var(--butter); color: var(--pen); box-shadow: 3px 3px 0 var(--pen); }
+.step { border: 2px solid var(--pen); color: var(--pen); }
+.wish { border: 2px solid var(--pen); border-radius: 18px 18px 18px 4px; box-shadow: 3px 4px 0 var(--line); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-weight: 700; }
+.wish small { background: var(--mint); color: #2f6a4f; font-weight: 600; }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; font-weight: 700; }
+.sentBox img { width: 140px; }
+
+/* gifts */
+.gift { border: 2.5px solid var(--pen); border-radius: 22px; background: linear-gradient(160deg, #f7c2d3, #dcc8f3); color: var(--ink); box-shadow: 6px 7px 0 var(--lilac); }
+.gift::after { right: -16px; bottom: -14px; width: 92px; height: 92px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/ultah-istana/cake.webp) no-repeat center / contain; opacity: .55; }
+.gift h3 { color: var(--pen); font-family: var(--serif); font-weight: 600; }
+.giftIcon { border: 2px solid var(--pen); background: var(--accent); }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 700; }
+.gift small { color: var(--muted); }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; font-weight: 500; line-height: 1.4; }
+.copy { border: 2px solid var(--pen); background: #fff; color: var(--pen); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--butter); color: var(--pen); }
+
+/* closing: "...and the party lived happily ever after" */
+.closing { padding-bottom: 0; background: linear-gradient(180deg, #f8e3ee, var(--sky)); color: var(--ink); }
+.thanks { color: var(--accent2); font-family: var(--display); font-size: 48px; font-weight: 700; }
+.closingText { color: var(--ink); }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { display: none; }
+.closingName { order: 8; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 700; overflow-wrap: anywhere; }
+.closingStage { order: 9; position: relative; width: calc(100% + 56px); height: 330px; margin-top: 4px; }
+.closingCastle { position: absolute; left: 50%; bottom: 40px; width: 300px; aspect-ratio: 1; translate: -50% 0; }
+.closingGarden { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; }
+.closingCloud { position: absolute; left: 10px; top: 0; width: 110px; height: auto; animation: drift 12s ease-in-out infinite alternate; }
+.made { order: 10; margin: 0; padding: 10px 0 18px; position: relative; z-index: 2; width: calc(100% + 56px); background: #9fcf8e; color: rgba(79, 58, 92, .75); }
+.music { border: 2.5px solid var(--pen); background: var(--accent); box-shadow: 3px 3px 0 var(--pen); }
+
+/* ── Cover: a storybook page opening onto the castle ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(30px, 6vh, 60px) 24px 0; overflow: hidden; background: linear-gradient(180deg, #cfe3f7 0%, #e9eefa 35%, #fbe6f0 70%, #fff7fb 100%); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 10px; border: 2px solid rgba(106, 79, 116, .35); border-radius: 18px; pointer-events: none; }
+.cloud { position: absolute; z-index: -1; height: auto; animation: drift 16s ease-in-out infinite alternate; }
+.cloudA { left: -40px; top: 22%; width: 140px; }
+.cloudB { right: -50px; top: 6%; width: 150px; animation-delay: -8s; }
+.fly { position: absolute; z-index: 4; height: auto; animation: flutterFly 7s ease-in-out infinite; }
+.flyA { left: 30px; top: 36%; width: 40px; }
+.flyB { right: 34px; bottom: 30%; width: 32px; animation-delay: -3s; }
+.once { color: var(--pen); font-family: var(--display); font-size: 16px; font-style: italic; }
+.kicker { margin-top: 10px; padding: 3px 14px; border-radius: 4px; background: #fff; color: var(--pen); font-size: 13px; font-weight: 600; letter-spacing: .08em; box-shadow: 2px 3px 0 var(--lilac); }
+.coverName { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: clamp(58px, 18vw, 76px); font-weight: 700; line-height: .95; overflow-wrap: anywhere; text-shadow: 3px 3px 0 #fff, 6px 6px 0 var(--lilac); }
+.age { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: var(--pen); font-size: 16px; font-weight: 600; }
+.age b { display: grid; place-items: center; width: 54px; height: 54px; border: 2.5px solid var(--pen); border-radius: 50%; background: var(--butter); color: var(--accent2); font-family: var(--display); font-size: 30px; font-weight: 700; box-shadow: 3px 3px 0 var(--pen); animation: pop 3s var(--m-spring) infinite; }
+.coverDate { margin-top: 10px; color: var(--ink); font-size: 16px; font-weight: 600; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; width: 100%; }
+.guest { padding: 10px 18px; border: 2.5px solid var(--pen); border-radius: 18px; background: #fff; max-width: 300px; box-shadow: 4px 5px 0 var(--pink); color: var(--ink); }
+.guest small { color: var(--muted); font-style: normal; font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-weight: 700; font-size: 21px; }
+.table { border-color: var(--pen); color: var(--pen); }
+.openBtn { border: 2.5px solid var(--pen); background: var(--accent); color: #fff; font-family: var(--serif); font-size: 16px; font-weight: 600; box-shadow: 4px 4px 0 var(--pen); }
+.openBtn:hover { translate: -1px -1px; box-shadow: 5px 5px 0 var(--pen); }
+.openBtn:active { translate: 3px 3px; box-shadow: 1px 1px 0 var(--pen); }
+.stage { position: relative; width: calc(100% + 48px); height: 340px; margin-top: auto; flex-shrink: 0; }
+.castleBox { position: absolute; left: 50%; bottom: 30px; width: 350px; aspect-ratio: 1; translate: -50% 0; }
+.castle { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pennant { position: absolute; width: 11%; height: auto; transform-origin: 0 50%; animation: wave 2.4s ease-in-out infinite; }
+.p1 { left: 22.1%; top: 11.4%; }
+.p2 { left: 48.9%; top: 0.6%; animation-delay: -.6s; }
+.p3 { left: 74.5%; top: 18%; animation-delay: -1.2s; }
+.p4 { left: 65%; top: 37%; width: 8%; animation-delay: -1.8s; }
+.garden { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 60px; overflow: hidden; background: linear-gradient(180deg, #e9eefa, var(--bg)); text-align: center; isolation: isolate; }
+.heroCake { width: 150px; height: auto; margin-bottom: 6px; }
+.heroKicker { color: var(--pen); font-family: var(--display); font-size: 17px; font-style: italic; }
+.heroName { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 60px; font-weight: 700; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 #fff, 5px 5px 0 var(--lilac); }
+.heroAge { display: block; margin-top: 4px; color: var(--gold-d); font-size: .6em; }
+.heroDate { margin-top: 10px; color: var(--ink); font-weight: 600; }
+.heroNote { max-width: 320px; margin-top: 18px; padding: 14px 18px; border: 2.5px solid var(--pen); border-radius: 20px 20px 20px 6px; background: #fff; color: var(--ink); font-size: 16px; line-height: 1.55; text-wrap: pretty; box-shadow: 5px 6px 0 var(--mint); }
+.heroFly { position: absolute; right: 36px; top: 40px; width: 44px; height: auto; animation: flutterFly 7s ease-in-out infinite; }
+
+@keyframes wave { 0%, 100% { rotate: -4deg; scale: 1 1; } 50% { rotate: 5deg; scale: .9 1.05; } }
+@keyframes flutterFly { 0%, 100% { translate: 0 0; rotate: -6deg; } 25% { translate: 8px -10px; scale: .85 1; } 50% { translate: 14px -2px; rotate: 6deg; scale: 1 1; } 75% { translate: 4px 6px; scale: .85 1; } }
+@keyframes tiara { 0%, 100% { translate: -50% 0; } 50% { translate: -50% -4px; } }
+.divider { animation-name: bob; }
+@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+@keyframes pop { 0%, 80%, 100% { scale: 1; } 88% { scale: 1.15; } }
+@media (prefers-reduced-motion: reduce) {
+  .divider, .portraitTiara, .portraitFly, .countCloud, .node img, .closingCloud, .cloud, .fly, .age b, .pennant, .heroFly { animation: none; }
+  .event, .mapBtn, .submit, .choices button, .ghostBtn { transition: none; }
+}

@@ -1,0 +1,182 @@
+/* Kilim Anatolia — pernikahan Islami bernuansa kilim tenun datar Anatolia: tenunan wol merah bata, nila, kunyit dan krem dengan celah slit-tapestry, belah ketupat bertangga, pita gigi gergaji, dan rumbai benang di tepi. */
+.root, .cover {
+  --bg: #ece0c3; --paper: #e6d6b3; --ivory: #f4ead3; --field: #fbf5e6; --ink: #2b1810; --muted: #5d4334; --line: #cdb48a;
+  --accent: #a23a24; --accent2: #8a2f1c; --gold: #d69a2c; --gold-l: #f0c86a; --gold-d: #9a6a16;
+  --band-bg: #2a3263; --band-ink: #f4ead3;
+  --display: "Reem Kufi", "Trebuchet MS", sans-serif; --serif: Vollkorn, Georgia, serif; --script: "Reem Kufi", sans-serif;
+  --indigo: #2a3263; --brick: #a23a24; --saffron: #d69a2c; --brown: #3b2219;
+  --field-bg: url(/themes/art/kilim-anatolia/field.webp) repeat 50% 0 / 168px auto;
+  --cream-bg: url(/themes/art/kilim-anatolia/cream.webp) repeat 0 0 / 120px auto;
+  --indigo-bg: url(/themes/art/kilim-anatolia/indigo.webp) repeat 0 0 / 120px auto;
+  --border-bg: url(/themes/art/kilim-anatolia/border.webp) repeat-x 50% 50% / auto 100%;
+  --fringe-bg: url(/themes/art/kilim-anatolia/fringe.webp) repeat-x 50% 0 / 80px 100%;
+  --lozenge: polygon(50% 5.6%, 90.2% 28.7%, 90.2% 71.3%, 50% 94.4%, 9.8% 71.3%, 9.8% 28.7%);
+  --step: polygon(55% 0%, 55% 10%, 65% 10%, 65% 20%, 75% 20%, 75% 30%, 85% 30%, 85% 40%, 95% 40%, 95% 60%, 85% 60%, 85% 70%, 75% 70%, 75% 80%, 65% 80%, 65% 90%, 55% 90%, 55% 100%, 45% 100%, 45% 90%, 35% 90%, 35% 80%, 25% 80%, 25% 70%, 15% 70%, 15% 60%, 5% 60%, 5% 40%, 15% 40%, 15% 30%, 25% 30%, 25% 20%, 35% 20%, 35% 10%, 45% 10%, 45% 0%);
+  --h2: 29px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #a23a24; --t-accent-ink: #f4ead3; --t-bg: #ece0c3; --t-ink: #2b1810; --t-muted: #5d4334; --t-line: #cdb48a; --t-field: #fbf5e6;
+  --t-radius: 0px; --t-font: Vollkorn, Georgia, serif; --t-heading-font: "Reem Kufi", sans-serif; --t-heading-weight: 600; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+  background: var(--cream-bg);
+}
+.main { background: var(--cream-bg); }
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--brick); }
+.head h2 { color: var(--indigo); font-weight: 600; letter-spacing: .01em; }
+.divider { width: 150px; }
+
+/* woven bands: a sawtooth border strip on the edges of every coloured band */
+.salamBlock, .countBand, .gallery, .gifts, .closing { position: relative; }
+.salamBlock::before, .countBand::before, .gallery::before, .gifts::before, .closing::before,
+.salamBlock::after, .countBand::after, .gallery::after, .gifts::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 40px; background: var(--border-bg); pointer-events: none; }
+.salamBlock::before, .countBand::before, .gallery::before, .gifts::before, .closing::before { top: 0; }
+.salamBlock::after, .countBand::after, .gallery::after, .gifts::after { bottom: 0; }
+
+/* opening: indigo plain-weave band */
+.salamBlock { gap: 12px; padding: 76px 28px 80px; background: var(--indigo-bg); color: var(--band-ink); }
+.arabic { color: var(--gold-l); font-size: 28px; }
+.salamKicker { color: var(--gold-l); }
+.salamTitle { color: var(--band-ink); font-family: var(--display); font-size: 25px; font-weight: 500; line-height: 1.35; }
+.salamBlock .intro { color: rgba(244, 234, 211, .88); }
+
+/* couple: woven lozenge windows */
+.couple { gap: 16px; background: transparent; }
+.portrait { width: 196px; height: 228px; margin-bottom: 14px; }
+.pFrame { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; filter: drop-shadow(0 8px 10px rgba(59, 34, 25, .3)); }
+.portraitFrame { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; background: var(--indigo); clip-path: var(--lozenge); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+.nick { color: var(--brick); font-family: var(--display); font-size: 44px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 20px; font-weight: 500; }
+.parents { font-size: 16.5px; }
+.amp { margin: 14px 0 8px; color: var(--indigo); font-family: var(--display); font-size: 40px; }
+.amp img { width: 64px; }
+
+/* countdown: the red kilim field, cream woven tiles */
+.countBand { padding: 78px 22px 82px; background: linear-gradient(rgba(43, 22, 14, .5), rgba(43, 22, 14, .58)), var(--field-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-weight: 600; }
+.count { gap: 9px; }
+.count > div { height: 92px; border: 0; border-radius: 0; background: var(--cream-bg); box-shadow: inset 0 0 0 2px var(--brown), inset 0 0 0 5px var(--ivory), inset 0 0 0 7px var(--saffron), 0 8px 18px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--indigo); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.count small { color: var(--brick); font-family: var(--display); font-size: 10px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-radius: 0; border-color: var(--gold-l); background: rgba(42, 50, 99, .7); font-family: var(--display); font-weight: 500; }
+
+/* events: woven cream panels topped with a border strip, a stepped-diamond number */
+.events { gap: 30px; background: transparent; }
+.event { padding: 58px 22px 28px; border: 0; border-radius: 0; background: var(--cream-bg); box-shadow: inset 0 0 0 2px var(--brown), 0 12px 24px rgba(59, 34, 25, .14); }
+.event::before { inset: 0 0 auto; height: 34px; border: 0; border-radius: 0; background: var(--border-bg); box-shadow: 0 2px 0 var(--brown); }
+.event:hover { box-shadow: inset 0 0 0 2px var(--brick), 0 16px 30px rgba(59, 34, 25, .2); }
+.eventNo { top: 20px; width: 50px; height: 50px; border-radius: 0; background: var(--indigo); color: var(--gold-l); font-size: 13px; font-weight: 600; clip-path: var(--step); }
+.event h3 { margin-top: 22px; color: var(--brick); font-family: var(--display); font-size: 24px; font-weight: 600; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--indigo); font-family: var(--display); font-weight: 500; }
+.rule { width: 90px; height: 6px; background: repeating-linear-gradient(90deg, var(--brick) 0 6px, var(--saffron) 6px 12px, var(--indigo) 12px 18px); }
+.event strong { font-family: var(--display); font-weight: 600; font-size: 18px; }
+.mapBtn { border-radius: 0; background: var(--indigo); color: var(--gold-l); font-family: var(--display); font-weight: 500; box-shadow: inset 0 -3px 0 var(--saffron); }
+.mapBtn:hover { background: var(--brick); }
+
+/* story */
+.story { background: transparent; }
+.timeline::before { left: 20px; width: 4px; background: repeating-linear-gradient(180deg, var(--brick) 0 8px, var(--saffron) 8px 12px, var(--indigo) 12px 20px, var(--saffron) 20px 24px); }
+.node { border: 0; background: none; }
+.nodeMark { width: 30px; height: 30px; background: var(--brick); clip-path: var(--step); box-shadow: none; position: relative; }
+.nodeMark::after { content: ""; position: absolute; inset: 9px; background: var(--saffron); clip-path: var(--step); }
+.storyBody small { color: var(--brick); font-family: var(--display); font-weight: 600; }
+.storyBody h3 { color: var(--indigo); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.storyBody p { font-size: 17px; }
+.storyImg { border-radius: 0; box-shadow: 0 0 0 2px var(--brown); }
+
+/* gallery on the red field */
+.gallery { padding: 80px 22px; background: linear-gradient(rgba(43, 22, 14, .45), rgba(43, 22, 14, .55)), var(--field-bg); }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: var(--band-ink); }
+.mosaic { gap: 10px; grid-auto-rows: 140px; }
+.tile { border-radius: 0; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 5px var(--brown); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; justify-self: center; width: 76%; border-radius: 0; clip-path: var(--lozenge); box-shadow: none; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5n + 5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: transparent; }
+.form { border: 0; border-radius: 0; background: var(--ivory); box-shadow: inset 0 0 0 2px var(--brown), inset 0 0 0 6px var(--ivory), inset 0 0 0 8px var(--saffron), 0 10px 24px rgba(59, 34, 25, .1); padding: 24px 20px; }
+.field > span, .diet, .guestsLabel { color: var(--brick); font-family: var(--display); font-weight: 600; }
+.field input, .field textarea { border-radius: 0; border-color: var(--line); font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 0; font-family: var(--display); font-size: 15px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--indigo); border-color: var(--indigo); color: var(--gold-l); }
+.step { border-radius: 0; border-color: var(--brick); color: var(--brick); }
+.submit { border-radius: 0; background: var(--brick); color: var(--ivory); font-family: var(--display); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; box-shadow: inset 0 -4px 0 var(--brown); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--indigo); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 130px; }
+.wish { border: 0; border-radius: 0; background: var(--ivory); box-shadow: inset 4px 0 0 var(--brick), inset 0 0 0 1px var(--line); }
+.wish strong { color: var(--indigo); font-family: var(--display); font-weight: 600; }
+.wish small { border-radius: 0; background: rgba(214, 154, 44, .22); color: var(--brown); font-family: var(--display); }
+
+/* gifts: cream woven cards on indigo */
+.gifts { padding: 80px 22px; background: var(--indigo-bg); }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts .head h2 { color: var(--band-ink); }
+.gifts .intro { color: rgba(244, 234, 211, .86); }
+.gift { border-radius: 0; background: var(--cream-bg); color: var(--ink); box-shadow: inset 0 0 0 2px var(--brown), inset 0 0 0 6px var(--ivory), inset 0 0 0 8px var(--brick); padding: 26px 20px 24px; }
+.gift::after { display: none; }
+.giftIcon { border: 0; border-radius: 0; background: var(--brick); clip-path: var(--step); width: 40px; height: 40px; }
+.gift h3 { color: var(--brick); font-family: var(--display); font-weight: 600; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+.giftNo { color: var(--indigo); font-family: var(--display); font-weight: 600; }
+.gift small { color: var(--muted); }
+.copy { border-radius: 0; border-color: var(--indigo); color: var(--indigo); font-family: var(--display); font-weight: 600; }
+.copy:not(.copyOn) svg { stroke: var(--indigo); }
+.copy:hover { background: rgba(42, 50, 99, .08); }
+.copyOn, .copyOn:hover { background: var(--indigo); color: var(--gold-l); }
+
+/* closing: indigo with the gul and a fringe hanging off the bottom */
+.closing { padding: 84px 28px 92px; background: var(--indigo-bg); }
+.closing::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: var(--fringe-bg); }
+.closingGul { width: 150px; height: auto; margin-bottom: 8px; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .35)); }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 36px; font-weight: 600; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 13px; line-height: 1.5; }
+.family { font-family: var(--display); }
+.closingNames { font-family: var(--display); font-size: 30px; font-weight: 600; }
+.music { border-radius: 0; background: var(--brick); border-color: var(--saffron); clip-path: var(--step); width: 50px; height: 50px; border: 0; }
+
+/* ── Cover: a hanging kilim: fringe, sawtooth border, red field, the photo in a woven lozenge ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 86px 24px 92px; overflow: hidden; background: var(--field-bg); color: var(--ink); text-align: center; isolation: isolate; }
+.fringeTop, .fringeBottom { position: absolute; left: 0; right: 0; z-index: 3; height: 30px; background: var(--fringe-bg); pointer-events: none; }
+.fringeTop { top: 0; scale: 1 -1; }
+.fringeBottom { bottom: 0; }
+.cover::before, .cover::after { content: ""; position: absolute; z-index: 2; left: 0; right: 0; height: 52px; background: var(--border-bg); }
+.cover::before { top: 26px; }
+.cover::after { bottom: 26px; }
+.coverWindow { position: relative; z-index: 2; width: 212px; height: 246px; flex-shrink: 0; filter: drop-shadow(0 12px 16px rgba(30, 12, 6, .45)); }
+.coverWindow > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.coverPhoto { position: absolute; inset: 0; clip-path: var(--lozenge); background: var(--indigo); }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.coverPhoto > span { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 72px; }
+.coverPanel { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; max-width: 330px; margin-top: -14px; padding: 30px 18px 20px; background: var(--cream-bg); box-shadow: inset 0 0 0 2px var(--brown), inset 0 0 0 6px var(--ivory), inset 0 0 0 8px var(--saffron), 0 16px 30px rgba(30, 12, 6, .4); }
+.kicker { font-family: var(--display); font-size: 11.5px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--brick); }
+.coverNames { max-width: 100%; font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.12; color: var(--indigo); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { font-style: normal; color: var(--brick); margin: 0 6px; }
+.coverDate { margin-top: 2px; font-family: var(--display); font-size: 13px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.coverRule { width: 120px; height: 6px; margin: 10px 0 8px; background: repeating-linear-gradient(90deg, var(--brick) 0 6px, var(--saffron) 6px 12px, var(--indigo) 12px 18px); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { font-family: var(--display); font-weight: 600; font-size: 19px; color: var(--ink); }
+.table { border-radius: 0; border-color: var(--brick); color: var(--brick); font-family: var(--display); font-weight: 600; }
+.openBtn { margin-top: 14px; min-width: 0; padding: 0 24px; border-radius: 0; background: var(--indigo); color: var(--gold-l); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: inset 0 -4px 0 var(--saffron), 0 8px 18px rgba(30, 12, 6, .35); }
+.openBtn:hover { background: var(--brick); }
+
+/* ── Hero: cream weave, the gul medallion swinging gently like a hung rug ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 34px 24px 56px; text-align: center; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--border-bg); }
+.heroGul { width: 176px; height: auto; margin: 34px 0 8px; filter: drop-shadow(0 12px 14px rgba(59, 34, 25, .28)); transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.heroKicker { margin-top: 14px; font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--brick); }
+.heroNames { max-width: 100%; margin-top: 4px; font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.12; color: var(--indigo); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--brick); margin: 0 8px; }
+.heroDate { margin-top: 8px; font-family: var(--display); font-size: 14px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.heroNote { max-width: 320px; margin-top: 14px; font-size: 18px; font-style: italic; line-height: 1.55; color: var(--muted); }
+
+@keyframes swing { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@media (prefers-reduced-motion: reduce) { .heroGul { animation: none; } }

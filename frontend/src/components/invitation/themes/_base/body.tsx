@@ -50,6 +50,10 @@ export type JawiCopy = {
   wishPlaceholder?: string;
   /** Text shown when RSVP is closed (thank-you mode). */
   closedNote?: string;
+  /** Sentence above the gift cards (e.g. infaq wording). */
+  giftIntro?: string;
+  /** Label above the family names in the closing; `null` hides the family line. */
+  familyLabel?: string | null;
 };
 
 export const DEFAULT_COPY: JawiCopy = {
@@ -318,7 +322,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
         {data.gifts.length > 0 && (
           <section className={`${s.section} ${s.gifts}`} aria-labelledby="jw-gift">
             <Head s={s} divider={slots.divider} id="jw-gift" kicker={copy.gifts[0]} title={copy.gifts[1]} />
-            <p className={s.intro}>Doa restu Anda adalah kado terindah bagi kami. Jika berkenan memberi tanda kasih, dapat melalui:</p>
+            <p className={s.intro}>{copy.giftIntro ?? "Doa restu Anda adalah kado terindah bagi kami. Jika berkenan memberi tanda kasih, dapat melalui:"}</p>
             {data.gifts.map(gift => {
               const info = giftInfo(gift);
               const isCopied = !!info.copy && copied === info.copy;
@@ -353,7 +357,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
           <p className={s.thanks}>{copy.closing.thanks}</p>
           <p className={s.closingText}>{copy.closing.text}</p>
           {copy.closing.salam && <p className={s.closingSalam}>{copy.closing.salam}</p>}
-          <p className={s.family}>Keluarga Besar<br />{families || couple}</p>
+          {copy.familyLabel !== null && <p className={s.family}>{copy.familyLabel ?? "Keluarga Besar"}<br />{families || couple}</p>}
           <p className={s.closingNames}>{couple}</p>
           <a href="/" target="_blank" rel="noreferrer" className={s.made}>dibuat dengan ♥ di Rawuh</a>
         </footer>
