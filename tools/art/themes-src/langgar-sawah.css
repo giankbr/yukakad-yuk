@@ -1,0 +1,151 @@
+/* Langgar Sawah — langgar kayu kecil berpanggung di tepi sawah hijau pada sore yang hangat: pematang, pohon kelapa, kolam ikan, dinding gedek anyaman bambu, atap ijuk, dan bedug di serambi; hangat dan bersahaja seperti kampung halaman. */
+.root, .cover {
+  --bg: #f6eedb; --paper: #fbf5e6; --ivory: #fffaf0; --field: #fffdf6; --ink: #2e2a1c; --muted: #6b6248; --line: #e2d5b4;
+  --accent: #3f6b2a; --accent2: #567f34; --gold: #d39a2e; --gold-l: #f6dc9a; --gold-d: #8a5a34;
+  --band-bg: #3f6b2a; --band-ink: #fbf5e6;
+  --display: "Alegreya", Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: "Caveat Brush", cursive;
+  --gedek: url(/themes/art/langgar-sawah/gedek.webp) 0 0 / 144px 144px repeat;
+  --paddy: repeating-linear-gradient(180deg, #4f7f30 0 14px, #5d8f38 14px 26px, #6c9a3c 26px 34px, #8a7a4a 34px 36px);
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3f6b2a; --t-accent-ink: #fbf5e6; --t-bg: #f6eedb; --t-ink: #2e2a1c; --t-muted: #6b6248; --t-line: #e2d5b4; --t-field: #fffdf6;
+  --t-radius: 12px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: "Alegreya", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--script); font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--gold-d); }
+.head h2 { font-family: var(--display); font-style: italic; font-weight: 500; color: var(--accent); }
+.divider { width: 210px; }
+.section { padding: 62px 22px; }
+
+.salamBlock { padding: 50px 26px 56px; background: var(--paper); }
+.arabic { color: var(--accent); font-size: 29px; }
+.salamTitle { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 30px; color: var(--accent); }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.75; }
+
+/* couple: round "jendela" portraits rimmed with woven bamboo */
+.couple { gap: 12px; background: var(--bg); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 222px; height: 222px; padding: 13px; border: 0; border-radius: 50%; background: var(--gedek); box-shadow: 0 0 0 4px #8a5a34, 0 16px 28px rgba(46, 42, 28, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: 0 0 0 3px #8a5a34; }
+.pPadi { position: absolute; z-index: 2; bottom: -18px; left: 50%; width: 200px; height: auto; translate: -50% 0; pointer-events: none; }
+.monogram { color: var(--gold-l); }
+.nick { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 46px; color: var(--accent); }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--gold-d); }
+.parents { font-size: 15.5px; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 52px; }
+.amp img { width: 26px; }
+
+/* countdown: the paddy itself, digits on gedek tablets */
+.countBand { padding: 70px 18px 60px; background: linear-gradient(180deg, rgba(36, 60, 22, .55), rgba(36, 60, 22, .35)), var(--paddy); }
+.headLight .eyebrow { font-family: var(--script); font-size: 24px; letter-spacing: 0; text-transform: none; color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-style: italic; font-weight: 500; color: #fbf5e6; }
+.count > div { height: 86px; border: 0; border-radius: 10px; background: linear-gradient(rgba(251, 245, 230, .86), rgba(251, 245, 230, .86)), var(--gedek); box-shadow: inset 0 -5px 0 #8a5a34, 0 10px 18px rgba(20, 30, 10, .3); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); font-weight: 700; color: var(--accent); font-size: 31px; }
+.count small { font-family: var(--serif); font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-d); }
+.ghostBtn { border-color: var(--gold-l); color: #fbf5e6; font-family: var(--serif); font-weight: 700; border-radius: 10px; }
+
+/* events: paper notices pinned to the gedek wall of the langgar */
+.events { gap: 26px; background: var(--gedek); }
+.events .head { padding: 12px 22px 16px; border-radius: 14px; background: rgba(251, 245, 230, .92); box-shadow: 0 10px 20px rgba(46, 42, 28, .18); }
+.event { padding: 38px 22px 26px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 14px 24px rgba(46, 42, 28, .28); }
+.event:nth-of-type(odd) { rotate: -1.2deg; }
+.event:nth-of-type(even) { rotate: 1deg; }
+.event::before { inset: -8px auto auto 50%; width: 70px; height: 20px; translate: -50% 0; border: 0; border-radius: 2px; background: rgba(211, 154, 46, .55); }
+.eventNo { top: 18px; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.event h3 { margin-top: 12px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: 27px; color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 700; color: var(--ink); }
+.eventTime { font-family: var(--serif); color: var(--gold-d); }
+.rule { width: 70px; height: 2px; background: var(--gold); }
+.mapBtn { border-radius: 10px; background: var(--accent); color: #fbf5e6; font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(180deg, #8a7a4a 0 6px, transparent 6px 10px); }
+.node { border: 2px solid var(--gold); background: var(--ivory); }
+.node img { width: 30px; }
+.storyBody small { font-family: var(--script); font-size: 21px; letter-spacing: 0; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 23px; color: var(--accent); }
+.storyImg { border-radius: 10px; }
+
+.gallery { background: var(--bg); }
+.mosaic { gap: 8px; }
+.tile, .tile:first-child { border-radius: 10px; }
+.tile:first-child { border-radius: 110px 110px 10px 10px; }
+
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 14px; background: var(--ivory); box-shadow: inset 0 6px 0 var(--accent), 0 14px 26px rgba(46, 42, 28, .1); padding-top: 26px; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; color: var(--accent); }
+.field input, .field textarea { border-radius: 10px; }
+.choices button { border-radius: 10px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fbf5e6; }
+.submit { border-radius: 10px; background: var(--gold-d); color: #fbf5e6; font-family: var(--serif); font-weight: 700; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: #9e6a40; }
+.sent { font-family: var(--script); font-style: normal; font-size: 28px; color: var(--accent); }
+.sentBox img { width: 150px; }
+.wish { border-radius: 12px; border: 0; box-shadow: inset 0 -3px 0 var(--line); }
+.wish strong { font-family: var(--display); font-weight: 700; color: var(--accent); }
+.wish small { background: rgba(63, 107, 42, .12); color: var(--accent); }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 14px; background: linear-gradient(180deg, rgba(36, 60, 22, .78), rgba(36, 60, 22, .9)), var(--paddy); }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; }
+.giftNo { font-family: var(--display); font-weight: 700; color: #fbf5e6; }
+.copy { border-radius: 10px; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { color: var(--accent); }
+
+/* closing: the paddies at dusk, palms either side, the bedug */
+.closing { padding: 60px 26px 66px; background: linear-gradient(180deg, var(--bg), #f1dfb3); color: var(--ink); }
+.closingDecor { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.closingDecor img { position: absolute; bottom: -10px; width: 96px; height: auto; transform-origin: 50% 100%; animation: palmSway 8s ease-in-out infinite alternate; }
+.closingDecor img:first-child { left: -30px; }
+.closingDecor img:last-child { right: -34px; scale: -1 1; animation-delay: -4s; }
+.closingBedug { width: 168px; height: auto; margin-bottom: 4px; }
+.thanks { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 40px; color: var(--accent); }
+.closingText { color: var(--muted); }
+.closingSalam { font-family: var(--serif); font-weight: 700; color: var(--gold-d); }
+.family { font-family: var(--serif); color: var(--muted); }
+.closingNames { font-family: var(--script); color: var(--gold-d); font-size: 42px; }
+.made { color: rgba(46, 42, 28, .5); }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: the afternoon sky over the paddies, names in the sky, guest card on gedek ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--gedek); color: var(--ink); text-align: center; isolation: isolate; }
+.scene { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; aspect-ratio: 780 / 1150; max-height: 72dvh; padding-top: 30px; background: url(/themes/art/langgar-sawah/sawah.webp) 50% 100% / cover no-repeat; }
+.scene::after { content: ""; position: absolute; inset: auto 0 0; height: 40px; background: linear-gradient(transparent, rgba(46, 42, 28, .28)); pointer-events: none; }
+.light { position: absolute; z-index: 0; top: 8%; left: -10%; width: 70%; height: 50%; background: radial-gradient(closest-side, rgba(255, 238, 190, .5), transparent); pointer-events: none; animation: glow 9s ease-in-out infinite alternate; }
+.scene > p, .scene > h1 { position: relative; z-index: 1; }
+.arabicCover { font-family: Amiri, "Traditional Arabic", serif; font-size: 24px; line-height: 1.5; color: #2f4f20; }
+.kicker { margin-top: 2px; font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: #5a4a22; }
+.coverLabel { margin-top: 16px; font-family: var(--script); font-size: 24px; color: var(--gold-d); }
+.coverNames { max-width: calc(100% - 40px); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 500; line-height: 1.02; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 1px 0 rgba(255, 250, 230, .6); }
+.coverNames em { padding: 0 8px; font-family: var(--script); font-size: 40px; font-style: normal; color: var(--gold-d); }
+.coverDate { margin-top: 8px; font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #4a3a1a; }
+.coverFoot { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; flex: 1 0 auto; padding: 22px 24px 30px; }
+.cover .guest { max-width: 320px; padding: 14px 20px 16px; border-radius: 12px; background: rgba(251, 245, 230, .95); box-shadow: inset 0 5px 0 var(--accent), 0 12px 22px rgba(46, 42, 28, .3); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--accent); }
+.table { border-color: var(--gold-d); color: var(--gold-d); font-family: var(--serif); font-weight: 700; border-radius: 6px; }
+.openBtn { border-radius: 12px; background: var(--accent); color: #fbf5e6; font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .06em; box-shadow: inset 0 -4px 0 #2a4a1a, 0 10px 20px rgba(46, 42, 28, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: a photo like a postcard from the village, a padi sprig tucked in ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 22px 50px; background: linear-gradient(180deg, #f3e3bd, var(--paper)); color: var(--ink); text-align: center; }
+.heroKicker { font-family: var(--script); font-size: 24px; color: var(--gold-d); }
+.heroNames { margin-top: 2px; font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 500; line-height: 1.08; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 8px; font-family: var(--script); font-style: normal; color: var(--gold-d); }
+.heroDate { margin-top: 6px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.postcard { position: relative; width: 100%; margin-top: 26px; padding: 12px 12px 44px; border-radius: 4px; background: var(--ivory); box-shadow: 0 18px 32px rgba(46, 42, 28, .22); rotate: 1.2deg; }
+.heroPhoto { height: 290px; overflow: hidden; border-radius: 2px; background: #2e2a1c; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.postcard p { position: absolute; right: 16px; bottom: 10px; font-family: var(--script); font-size: 22px; color: var(--gold-d); }
+.heroPadi { position: absolute; z-index: 2; left: -30px; bottom: 10px; width: 190px; height: auto; rotate: -14deg; pointer-events: none; }
+.heroNote { max-width: 320px; margin-top: 30px; font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.7; color: var(--muted); }
+
+@keyframes palmSway { from { rotate: -1.5deg; } to { rotate: 1.8deg; } }
+@keyframes glow { from { opacity: .6; translate: 0 0; } to { opacity: 1; translate: 12px 6px; } }
+@media (prefers-reduced-motion: reduce) { .closingDecor img, .light { animation: none; } }

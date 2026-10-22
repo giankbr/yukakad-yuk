@@ -1,0 +1,173 @@
+/* Hutan Bambu — hutan bambu yang menjulang: batang-batang bambu bergouache dengan ruas dan cincin bedak, satu batang bambu kuning bergaris, semburan daun, berkas cahaya miring dan daun yang gugur perlahan; foto di dalam ruas bambu, kartu acara seperti bilah bambu; Bellefair + Gentium Book Plus + Mrs Saint Delafield, hijau bambu dan emas. */
+.root, .cover {
+  --bg: #eef0dc; --paper: #e5ebd1; --ivory: #f8f8ec; --field: #fbfbf2; --ink: #25321f; --muted: #57644d; --line: #cfd8b6;
+  --accent: #3d6631; --accent2: #2f5426; --gold: #c4a23e; --gold-l: #f0dc94; --gold-d: #866a1c;
+  --band-bg: #2d4628; --band-ink: #f3f1dc;
+  --culm: #6f9440; --culm-d: #2f4a1f; --mist: rgba(246, 247, 232, .92);
+  --display: Bellefair, "Times New Roman", serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Mrs Saint Delafield", cursive;
+  --h2: 30px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3d6631; --t-accent-ink: #f8f8ec; --t-bg: #eef0dc; --t-ink: #25321f; --t-muted: #57644d; --t-line: #cfd8b6; --t-field: #fbfbf2;
+  --t-radius: 6px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: Bellefair, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 64px 26px; }
+
+/* headings: airy caps, a bamboo sprig underneath */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .36em; text-transform: uppercase; }
+.head { gap: 6px; }
+.head h2 { color: var(--accent2); font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; }
+.divider { display: block; width: 150px; margin-top: 4px; }
+.divider img { display: block; width: 100%; height: auto; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 56px 32px 60px; background: var(--bg); }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 54px; line-height: 1.1; }
+.salamSub { max-width: 300px; color: var(--muted); font-family: var(--serif); font-size: 15px; font-style: italic; line-height: 1.5; letter-spacing: 0; }
+.intro { color: var(--muted); }
+
+/* couple: portraits inside a tall bamboo segment */
+.couple { gap: 22px; background: linear-gradient(180deg, var(--paper), var(--bg)); }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 196px; height: 292px; padding: 6px; border: 1.5px solid var(--gold); border-radius: 999px; background: var(--ivory); box-shadow: 0 18px 34px rgba(37, 50, 31, .14); transition: box-shadow .9s var(--m-ease), translate .9s var(--m-ease); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.person:hover .portraitFrame { translate: 0 -3px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #4f7a34, #7c9c40 35%, #5f8436 70%, #3f6a2a); color: var(--gold-l); font-family: var(--script); font-size: 110px; }
+.peek { position: absolute; z-index: 2; left: 50%; bottom: -26px; width: 170px; translate: -50% 0; }
+.peek img { display: block; width: 100%; height: auto; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 56px; line-height: 1.2; }
+.fullName { font-family: var(--display); font-size: 19px; letter-spacing: .04em; }
+.amp { gap: 10px; color: var(--gold); font-family: var(--script); font-size: 60px; }
+.amp img { width: 54px; rotate: -18deg; }
+.amp img:last-child { rotate: 18deg; }
+
+/* countdown: inside the grove */
+.countBand { padding: 74px 22px 80px; background: linear-gradient(180deg, rgba(31, 48, 27, .72), rgba(31, 48, 27, .9)), url(/themes/art/hutan-bambu/grove.webp) center / cover; }
+.countRays { position: absolute; z-index: -1; inset: 0; background: url(/themes/art/hutan-bambu/rays.webp) right top / 100% 100% no-repeat; mix-blend-mode: screen; opacity: .5; animation: shafts 9s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; }
+.count { gap: 10px; }
+.count > div { height: 100px; border: 0; border-top: 3px double rgba(240, 220, 148, .8); border-bottom: 3px double rgba(240, 220, 148, .8); border-radius: 4px; background: linear-gradient(90deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .16) 32%, rgba(0, 0, 0, .12)); }
+.count > div::after { display: none; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 34px; }
+.count small { font-family: var(--display); font-style: normal; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(240, 220, 148, .7); font-family: var(--display); letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+
+/* events: bamboo slips with node bands */
+.events { gap: 30px; background: var(--bg); }
+.event { padding: 40px 22px 34px; border: 1px solid var(--line); border-radius: 6px; background: linear-gradient(90deg, rgba(111, 148, 64, .06), transparent 18%, transparent 82%, rgba(111, 148, 64, .08)), var(--ivory); box-shadow: 0 10px 24px rgba(37, 50, 31, .07); }
+.event::before { inset: 12px 0 auto; height: 6px; border: 0; border-top: 1.5px solid var(--gold); border-bottom: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); border-radius: 0; }
+.event::after { content: ""; position: absolute; left: 0; right: 0; bottom: 12px; height: 6px; border-top: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); border-bottom: 1.5px solid var(--gold); pointer-events: none; }
+.eventNo { top: -15px; width: 30px; height: 30px; border: 1.5px solid var(--gold); background: var(--ivory); color: var(--accent); font-size: 12px; letter-spacing: 0; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 23px; letter-spacing: .05em; text-transform: uppercase; }
+.eventTime { font-family: var(--serif); }
+.rule { width: 34px; height: 6px; background: none; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.mapBtn, .submit { background: var(--accent); color: var(--ivory); font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 12px; }
+
+/* story: a thin culm with nodes as the timeline */
+.story { background: var(--paper); }
+.timeline::before { left: 19px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(180deg, transparent 0 70px, #2f4a1f 70px 72px, #e9edcf 72px 75px), linear-gradient(90deg, #4f7a34, #8aac4c 40%, #5f8436); }
+.node { width: 40px; height: 40px; border: 1px solid var(--gold); background: var(--ivory); }
+.node img { width: 32px; rotate: -30deg; }
+.storyBody { padding-top: 6px; }
+.storyBody small { font-family: var(--display); letter-spacing: .24em; text-transform: uppercase; font-size: 11px; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+
+/* gallery: tall segments */
+.mosaic { grid-auto-rows: 170px; gap: 10px; }
+.tile { border-radius: 8px; }
+.tile:first-child { border-radius: 999px; }
+.tile:nth-child(4n + 4) { border-radius: 8px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 8px; border-top: 3px double var(--gold); }
+.field > span, .diet, .guestsLabel { font-family: var(--display); letter-spacing: .18em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--ivory); }
+.wish { border-radius: 6px; border-left: 3px solid var(--culm); }
+.wish strong { font-family: var(--display); font-size: 17px; letter-spacing: .03em; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 8px; background: linear-gradient(90deg, #2a4325, #3d5c33 40%, #2d4628); }
+.gift::after { right: -10px; bottom: -6px; width: 150px; height: 60px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/hutan-bambu/sprig.webp) center / contain no-repeat; opacity: .3; rotate: -12deg; }
+.gift h3 { font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); }
+
+/* closing: back into the grove at dusk */
+.closing { padding: 150px 30px 72px; background: linear-gradient(180deg, rgba(31, 48, 27, .55), rgba(25, 38, 22, .92) 55%), url(/themes/art/hutan-bambu/grove.webp) center top / cover; }
+.closeStand { position: absolute; z-index: -1; top: -10px; bottom: -10px; width: 160px; pointer-events: none; opacity: .9; }
+.closeStand img { display: block; height: 100%; width: auto; }
+.closeL { left: -86px; }
+.closeR { right: -86px; scale: -1 1; }
+.closeCanopy { position: absolute; z-index: -1; top: -6px; left: 50%; width: 560px; max-width: none; height: auto; translate: -50% 0; }
+.closingEmblem { width: 130px; height: auto; }
+.thanks { font-family: var(--script); font-size: 62px; }
+.closingNames { font-family: var(--script); font-size: 48px; }
+.family { font-family: var(--display); letter-spacing: .14em; }
+
+.music { background: var(--accent); }
+
+/* falling leaves (cover + countdown + closing) */
+.fall { position: absolute; z-index: 3; inset: 0; overflow: hidden; pointer-events: none; }
+.fall img { position: absolute; top: -40px; width: 46px; height: auto; opacity: 0; animation: leafFall 16s linear infinite; }
+.fall img:nth-child(1) { left: 62%; animation-delay: 1s; }
+.fall img:nth-child(2) { left: 30%; width: 38px; animation-delay: 6s; animation-duration: 19s; }
+.fall img:nth-child(3) { left: 82%; width: 34px; animation-delay: 11s; animation-duration: 17s; }
+
+/* ── Cover: a misty clearing between two stands of bamboo ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 132px 38px 44px; overflow: hidden; background: url(/themes/art/hutan-bambu/grove.webp) center / cover; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 58% 46% at 50% 52%, var(--mist), rgba(246, 247, 232, .7) 60%, rgba(238, 240, 220, .15)), linear-gradient(180deg, transparent 70%, rgba(238, 240, 220, .85)); }
+.coverRays { position: absolute; z-index: 0; inset: 0; background: url(/themes/art/hutan-bambu/rays.webp) center top / 100% 100% no-repeat; mix-blend-mode: screen; opacity: .75; animation: shafts 10s ease-in-out infinite alternate; pointer-events: none; }
+.stand { position: absolute; z-index: 1; top: -24px; bottom: -24px; pointer-events: none; }
+.stand img { display: block; height: 100%; width: auto; transform-origin: 50% 100%; animation: culmSway 14s ease-in-out infinite alternate; }
+.standR img { animation-delay: -5s; }
+.standL { left: -128px; }
+.standR { right: -128px; scale: -1 1; }
+.coverCanopy { position: absolute; z-index: 2; top: -8px; left: 50%; width: 640px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: canopySway 12s ease-in-out infinite alternate; pointer-events: none; }
+.coverKicker { position: relative; z-index: 4; color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .4em; text-transform: uppercase; }
+.coverNames { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 18px; color: var(--accent2); font-family: var(--display); font-size: 46px; font-weight: 400; letter-spacing: .14em; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 -4px; color: var(--gold); font-family: var(--script); font-size: 64px; font-style: normal; letter-spacing: 0; line-height: .9; text-transform: none; }
+.coverRule { position: relative; z-index: 4; width: 1px; height: 46px; margin: 18px 0 14px; background: linear-gradient(var(--gold), transparent); }
+.coverDate { position: relative; z-index: 4; color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .22em; text-transform: uppercase; }
+.guestCard { position: relative; z-index: 4; width: 100%; max-width: 290px; margin-top: 30px; padding: 16px 18px 14px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); background: rgba(248, 248, 236, .8); backdrop-filter: blur(2px); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; letter-spacing: .03em; }
+.table { border-color: var(--gold); color: var(--gold-d); }
+.openBtn { position: relative; z-index: 4; margin-top: 22px; background: var(--accent); color: var(--ivory); font-family: var(--display); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(37, 50, 31, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: the couple inside one tall bamboo segment ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 150px 26px 64px; overflow: hidden; background: linear-gradient(180deg, var(--paper), var(--bg)); text-align: center; isolation: isolate; }
+.heroCanopy { position: absolute; z-index: 1; top: -6px; left: 50%; width: 600px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: canopySway 12s ease-in-out infinite alternate; }
+.heroKicker { position: relative; z-index: 2; padding: 4px 12px; border-radius: 999px; background: rgba(229, 235, 209, .85); color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .4em; text-transform: uppercase; }
+.capsuleWrap { position: relative; margin-top: 20px; }
+.capsule { position: relative; width: 224px; height: 360px; padding: 7px; overflow: hidden; border: 1.5px solid var(--gold); border-radius: 999px; background: var(--ivory); box-shadow: 0 22px 40px rgba(37, 50, 31, .18); }
+.capsule > img, .capsule > div { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+.capsuleWrap::before, .capsuleWrap::after { content: ""; position: absolute; z-index: 1; left: -10px; right: -10px; height: 7px; border-top: 1.5px solid var(--gold); border-bottom: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 2px; pointer-events: none; }
+.capsuleWrap::before { top: 22%; left: auto; width: 14px; right: -12px; }
+.capsuleWrap::after { top: 74%; left: -12px; right: auto; width: 14px; }
+.capsuleArt { display: block; width: 100%; height: 100%; border-radius: 999px; background: url(/themes/art/hutan-bambu/grove.webp) 40% center / cover; }
+.heroCulm { position: absolute; z-index: -1; top: -120px; left: -118px; height: 560px; pointer-events: none; opacity: .85; -webkit-mask-image: linear-gradient(#000 62%, transparent 92%); mask-image: linear-gradient(#000 62%, transparent 92%); }
+.heroCulm img { display: block; height: 100%; width: auto; }
+.heroNames { max-width: 100%; margin-top: 26px; color: var(--accent); font-family: var(--script); font-size: 58px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
+.heroDate { margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: 14px; letter-spacing: .26em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 16px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes culmSway { from { rotate: -.5deg; } to { rotate: .6deg; } }
+@keyframes shafts { from { opacity: .35; } to { opacity: .8; } }
+@keyframes canopySway { from { rotate: -.8deg; } to { rotate: .8deg; } }
+@keyframes leafFall {
+  0% { opacity: 0; translate: 0 0; rotate: 10deg; }
+  8% { opacity: .9; }
+  50% { translate: -40px 50vh; rotate: 150deg; }
+  90% { opacity: .85; }
+  100% { opacity: 0; translate: 20px 100vh; rotate: 300deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fall { display: none; }
+  .coverRays, .countRays, .coverCanopy, .heroCanopy, .stand img { animation: none; }
+}

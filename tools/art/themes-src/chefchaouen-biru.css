@@ -1,0 +1,168 @@
+/* Chefchaouen Biru — lorong kota tua bercat kapur biru yang menanjak berundak, pintu lengkung biru tua berpaku, pot geranium merah tergantung di dinding, dan lapisan kapur biru di atas kapur putih; sejuk, cerah, dan bersahaja. */
+.root, .cover {
+  --bg: #eef3f6; --paper: #f6f9fb; --ivory: #ffffff; --field: #fbfdff; --ink: #1d2c46; --muted: #56637a; --line: #cbd9e8;
+  --accent: #24508f; --accent2: #3f74c4; --gold: #e8b33a; --gold-l: #ffe7a8; --gold-d: #c4472f;
+  --band-bg: #2c5aa8; --band-ink: #f6f9fb;
+  --display: "El Messiri", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Italianno", cursive;
+  --kapur: url(/themes/art/chefchaouen-biru/kapur.webp) 0 0 / 300px 300px repeat;
+  --putih: url(/themes/art/chefchaouen-biru/kapur-putih.webp) 0 0 / 320px 320px repeat;
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #24508f; --t-accent-ink: #f6f9fb; --t-bg: #eef3f6; --t-ink: #1d2c46; --t-muted: #56637a; --t-line: #cbd9e8; --t-field: #fbfdff;
+  --t-radius: 14px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "El Messiri", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--putih); }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; font-style: italic; letter-spacing: .14em; text-transform: none; color: var(--gold-d); }
+.head h2 { font-family: var(--display); font-weight: 600; color: var(--accent); }
+.divider { width: 210px; }
+.section { padding: 62px 22px; background: transparent; }
+
+.salamBlock { padding: 50px 26px 56px; }
+.arabic { color: var(--accent); font-size: 29px; }
+.salamTitle { font-family: var(--display); font-weight: 600; font-size: 28px; color: var(--accent); }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.75; }
+
+/* couple: arched blue door-surrounds around each portrait */
+.couple { gap: 12px; background: var(--kapur); color: var(--band-ink); }
+.couple .head h2, .couple .nick { color: #ffffff; }
+.couple .eyebrow, .couple .role { color: var(--gold-l); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 206px; height: 270px; padding: 10px; border: 0; border-radius: 103px 103px 4px 4px; background: #f6f9fb; box-shadow: inset 0 0 0 10px #f6f9fb, inset 0 0 0 16px #24508f, 0 18px 30px rgba(14, 36, 72, .3); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 96px 96px 2px 2px; border: 8px solid #24508f; }
+.pPot { position: absolute; z-index: 2; bottom: -14px; right: -48px; width: 84px; height: auto; pointer-events: none; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
+.personWrap:last-of-type .pPot { right: auto; left: -48px; animation-delay: -2.5s; }
+.monogram { color: var(--gold-l); }
+.nick { font-family: var(--display); font-weight: 600; font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; color: #ffffff; }
+.parents { color: rgba(246, 249, 251, .86); font-size: 15px; }
+.amp { color: var(--gold-l); font-family: var(--script); font-size: 66px; }
+.amp img { width: 40px; }
+
+/* countdown: white wall, digits in small arched blue windows */
+.countBand { padding: 66px 18px 58px; background: var(--putih); color: var(--ink); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { font-family: var(--display); font-weight: 600; color: var(--accent); }
+.count > div { height: 96px; border: 0; border-radius: 37px 37px 4px 4px; background: var(--kapur); box-shadow: inset 0 0 0 4px #24508f, 0 0 0 4px #f6f9fb, 0 0 0 6px #cbd9e8, 0 10px 18px rgba(14, 36, 72, .18); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); font-weight: 600; color: #ffffff; font-size: 30px; }
+.count small { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--gold-l); }
+.countTba { color: var(--accent); }
+.ghostBtn { border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.ghostBtn:hover { background: rgba(36, 80, 143, .08); }
+.countPot { position: absolute; z-index: -1; top: 24px; width: 70px; height: auto; pointer-events: none; transform-origin: 50% 0; animation: swing 6s ease-in-out infinite alternate; }
+.countPot:first-of-type { left: 14px; }
+.countPot:nth-of-type(2) { right: 14px; animation-delay: -3s; }
+
+/* events: arched white plaster niches with a painted blue band */
+.events { gap: 26px; background: var(--kapur); }
+.events .head h2 { color: #ffffff; }
+.events .eyebrow { color: var(--gold-l); }
+.event { padding: 92px 22px 28px; border: 0; border-radius: 160px 160px 14px 14px; background: var(--putih); box-shadow: inset 0 0 0 7px #f6f9fb, inset 0 0 0 12px #2c5aa8, 0 18px 30px rgba(14, 36, 72, .28); }
+.event::before { display: none; }
+.eventNo { top: 32px; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--ink); font-weight: 600; box-shadow: 0 4px 0 #b88a22; }
+.event h3 { font-family: var(--display); font-weight: 600; font-size: 25px; color: var(--accent); }
+.eventDate { font-style: italic; color: var(--gold-d); }
+.eventTime { font-family: var(--serif); color: var(--muted); }
+.rule { width: 70px; height: 3px; border-radius: 2px; background: var(--accent2); }
+.mapBtn { border-radius: 999px; background: var(--accent); color: #f6f9fb; font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--putih); }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--accent2), rgba(63, 116, 196, .1)); }
+.node { border: 0; border-radius: 18px 18px 3px 3px; background: var(--accent); }
+.node img { width: 26px; }
+.storyBody small { font-family: var(--serif); font-style: italic; font-size: 14px; letter-spacing: .06em; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-weight: 600; font-size: 22px; color: var(--accent); }
+.storyImg { border-radius: 70px 70px 6px 6px; }
+
+/* gallery: arched windows */
+.gallery { background: var(--kapur); }
+.gallery .head h2 { color: #ffffff; }
+.gallery .eyebrow { color: var(--gold-l); }
+.mosaic { gap: 10px; }
+.tile { border-radius: 70px 70px 6px 6px; box-shadow: 0 0 0 4px #f6f9fb; }
+.tile:first-child { border-radius: 90px 90px 6px 6px; }
+.tile:nth-child(4n + 4) { border-radius: 6px; }
+
+.wishes { background: var(--putih); }
+.form { border: 0; border-radius: 18px; background: #ffffff; box-shadow: inset 0 0 0 5px #2c5aa8, 0 14px 26px rgba(14, 36, 72, .1); padding: 24px 20px; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.field input, .field textarea { border-radius: 10px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #f6f9fb; }
+.submit { background: var(--accent); color: #f6f9fb; font-family: var(--serif); font-weight: 600; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { font-family: var(--script); font-style: normal; font-size: 36px; color: var(--accent); }
+.sentBox img { width: 96px; }
+.wish { border-radius: 14px; border: 0; box-shadow: inset 4px 0 0 var(--gold); }
+.wish strong { font-family: var(--display); font-weight: 600; color: var(--accent); }
+.wish small { background: rgba(36, 80, 143, .1); color: var(--accent); }
+
+.gifts { background: var(--kapur); }
+.gifts .head h2 { color: #ffffff; }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts > .intro { color: rgba(246, 249, 251, .9); }
+.gift { border-radius: 90px 90px 14px 14px; padding: 54px 20px 24px; background: #f6f9fb; color: var(--ink); box-shadow: inset 0 0 0 6px #f6f9fb, inset 0 0 0 10px #2c5aa8, 0 16px 26px rgba(14, 36, 72, .25); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--accent); background: var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.giftNo { font-family: var(--display); font-weight: 600; color: var(--ink); }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.copy:hover { background: rgba(36, 80, 143, .08); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #f6f9fb; }
+
+/* closing: the alley again, steps leading up */
+.closing { padding: 0 0 54px; background: var(--putih); color: var(--ink); }
+.closingScene { position: relative; width: 100%; height: 330px; margin-bottom: 18px; overflow: hidden; border-radius: 0 0 50% 50% / 0 0 40px 40px; }
+.closingScene > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.thanks, .closingText, .closingSalam, .family, .closingNames, .made { margin-left: 26px; margin-right: 26px; }
+.thanks { font-family: var(--display); font-weight: 600; font-size: 38px; color: var(--accent); }
+.closingText { color: var(--muted); }
+.closingSalam { font-family: var(--serif); font-weight: 600; color: var(--gold-d); }
+.family { font-family: var(--serif); color: var(--muted); }
+.closingNames { font-family: var(--script); color: var(--accent); font-size: 50px; }
+.made { color: rgba(29, 44, 70, .5); }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent); border-color: #f6f9fb; }
+
+/* ── Cover: the painted alley inside a tall blue-banded arch on a white lime wall ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 26px 24px 28px; overflow: hidden; background: var(--putih); color: var(--ink); text-align: center; isolation: isolate; }
+.arabicCover { font-family: Amiri, "Traditional Arabic", serif; font-size: 23px; line-height: 1.5; color: var(--accent); }
+.kicker { font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-d); }
+.archWin { position: relative; width: 252px; height: 330px; margin-top: 16px; padding: 9px; border-radius: 130px 130px 6px 6px; background: #f6f9fb; box-shadow: inset 0 0 0 9px #f6f9fb, inset 0 0 0 15px #2c5aa8, 0 20px 34px rgba(14, 36, 72, .25); }
+.archWin > div { width: 100%; height: 100%; overflow: hidden; border-radius: 120px 120px 2px 2px; border: 7px solid #2c5aa8; }
+.alley { display: block; width: 100%; height: 100%; background: url(/themes/art/chefchaouen-biru/lorong.webp) 50% 40% / cover no-repeat; animation: climb 18s ease-in-out infinite alternate; }
+.coverPot { position: absolute; z-index: 2; top: 120px; width: 70px; height: auto; pointer-events: none; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
+.coverPot:first-of-type { left: -46px; }
+.coverPot:nth-of-type(2) { right: -46px; top: 190px; animation-delay: -2s; }
+.coverLabel { margin-top: 18px; font-family: var(--serif); font-size: 15px; font-style: italic; color: var(--muted); }
+.coverNames { max-width: 100%; font-family: var(--display); font-size: 42px; font-weight: 600; line-height: 1.12; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; font-family: var(--script); font-size: 54px; font-style: normal; font-weight: 400; color: var(--gold-d); }
+.coverDate { margin-top: 4px; padding: 5px 16px; border-radius: 999px; background: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #f6f9fb; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: auto; padding-top: 20px; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-weight: 600; font-size: 20px; color: var(--ink); }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: var(--gold); color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .08em; box-shadow: inset 0 -4px 0 #b88a22, 0 10px 20px rgba(14, 36, 72, .22); }
+.openBtn:hover { background: #f0c050; }
+
+/* ── Hero: photo standing in a lime-washed doorway ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 22px 48px; background: var(--kapur); color: #ffffff; text-align: center; }
+.heroKicker { font-family: var(--serif); font-size: 15px; font-style: italic; color: var(--gold-l); }
+.heroNames { margin-top: 2px; font-family: var(--display); font-size: 42px; font-weight: 600; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 8px; font-family: var(--script); font-weight: 400; font-style: normal; color: var(--gold-l); }
+.heroDate { margin-top: 6px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255, 255, 255, .9); }
+.door { position: relative; width: 300px; max-width: 100%; aspect-ratio: 360 / 512; margin-top: 26px; }
+.heroPhoto { position: absolute; inset: 8% 12% 0; overflow: hidden; border-radius: 999px 999px 0 0 / 120px 120px 0 0; background: #1d2c46; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.doorFrame { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.doorFrame img { display: block; width: 100%; height: 100%; }
+.heroPot { position: absolute; z-index: 2; bottom: -6px; right: -18px; width: 92px; height: auto; pointer-events: none; }
+.heroNote { max-width: 320px; margin-top: 26px; font-size: 16.5px; font-style: italic; line-height: 1.7; color: rgba(255, 255, 255, .92); }
+
+@keyframes swing { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes climb { from { scale: 1.02; translate: 0 2%; } to { scale: 1.12; translate: 0 -3%; } }
+@media (prefers-reduced-motion: reduce) { .pPot, .countPot, .coverPot, .alley { animation: none; } }

@@ -1,0 +1,146 @@
+/* Lemon Amalfi — cat air cerah + ubin majolika berglasir: desa tebing berwarna pastel dengan kubah berubin di atas kebun lemon dan laut biru toska, dahan lemon, ubin biru-kuning; potret dalam piring keramik, angka hitung mundur di piring, Fraunces + Figtree. */
+.root, .cover {
+  --bg: #fffdf6; --paper: #fdf5d9; --ivory: #ffffff; --field: #fffef9; --ink: #1d2f55; --muted: #4f5d78; --line: #dfe3ee;
+  --accent: #1f4f9c; --accent2: #163c79; --gold: #f5cf2e; --gold-l: #fbe679; --gold-d: #b8860b;
+  --band-bg: #1f4f9c; --band-ink: #fffdf6; --leaf: #5d8a3c; --lemon: #f5cf2e; --sea: #2c9bb8;
+  --display: Fraunces, Georgia, serif; --serif: Figtree, "Helvetica Neue", sans-serif; --script: Fraunces, Georgia, serif;
+  --h2: 38px; --card-r: 22px;
+  --tile: url(/themes/art/lemon-amalfi/tile.webp);
+  --band: url(/themes/art/lemon-amalfi/band.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f4f9c; --t-accent-ink: #ffffff; --t-bg: #fffdf6; --t-ink: #1d2f55; --t-muted: #4f5d78; --t-line: #dfe3ee; --t-field: #fffef9;
+  --t-radius: 18px; --t-font: Figtree, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 500; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.eyebrow, .salamKicker, .role { color: var(--leaf); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; font-weight: 500; letter-spacing: -.01em; }
+.divider { width: 150px; height: 40px; border-radius: 4px; object-fit: cover; box-shadow: 0 2px 6px rgba(31, 79, 156, .15); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; font-weight: 500; }
+.intro { color: var(--muted); }
+.section:nth-of-type(odd):not(.countBand) { background: var(--bg); }
+
+/* people: portraits on ceramic plates, a lemon tucked at the rim */
+.couple { background: var(--paper); }
+.portraitFrame { width: 226px; height: 226px; padding: 15px; border: 0; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 6px var(--accent), inset 0 0 0 9px #fff, inset 0 0 0 12px var(--lemon), 0 16px 26px -12px rgba(31, 79, 156, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitLemon { position: absolute; z-index: 2; right: -40px; bottom: -14px; width: 110px; height: auto; transform-origin: 20% 20%; animation: lemonSway 6s ease-in-out infinite alternate; }
+.personWrap:nth-of-type(3) .portraitLemon { right: auto; left: -40px; scale: -1 1; transform-origin: 50% 20%; }
+.monogram { color: var(--accent); font-family: var(--display); font-style: italic; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 48px; font-style: italic; font-weight: 500; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { color: var(--gold-d); font-family: var(--display); font-style: italic; }
+.amp img { width: 54px; }
+
+/* countdown: cobalt band, tiles faintly through, numbers on plates */
+.countBand { background: var(--band-bg); }
+.countBand::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--tile) 0 0 / 90px; opacity: .14; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 76px; border: 0; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4px var(--lemon), inset 0 0 0 7px #fff, inset 0 0 0 8.5px var(--accent), 0 8px 14px -6px rgba(0, 0, 0, .4); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 600; line-height: 1; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 600; }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: white cards with a maiolica band */
+.events { gap: 24px; background: var(--bg); }
+.event { padding: 46px 22px 24px; border: 0; border-radius: 22px; background: #fff; box-shadow: 0 0 0 1.5px var(--line), 0 18px 28px -18px rgba(31, 79, 156, .4); overflow: hidden; }
+.event::before { inset: 0 0 auto 0; height: 22px; border: 0; border-radius: 0; background: var(--band) 0 50% / auto 22px repeat-x; }
+.eventNo { top: 30px; width: 40px; height: 40px; border-radius: 50%; background: var(--lemon); color: var(--accent2); font-family: var(--display); font-weight: 600; font-size: 14px; box-shadow: 0 0 0 3px #fff; }
+.event h3 { margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 28px; font-style: italic; font-weight: 500; }
+.eventTime { color: var(--leaf); font-family: var(--serif); font-weight: 700; }
+.rule { background: var(--lemon); height: 3px; border-radius: 3px; }
+.event strong { font-family: var(--serif); font-weight: 700; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; border-radius: 3px; background: linear-gradient(var(--lemon), var(--leaf)); }
+.node { width: 44px; height: 44px; border: 2px solid var(--accent); background: #fff; }
+.node img { width: 34px; }
+.storyBody small { color: var(--leaf); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-style: italic; font-weight: 500; }
+.storyImg { border-radius: 16px; }
+
+/* gallery */
+.mosaic { grid-auto-rows: 150px; gap: 10px; }
+.tile { border-radius: 18px; box-shadow: 0 0 0 4px #fff, 0 10px 18px -10px rgba(31, 79, 156, .5); }
+.tile:first-child { border-radius: 110px 110px 18px 18px; }
+
+.tile:nth-child(5):last-child { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 22px; background: #fff; box-shadow: 0 0 0 1.5px var(--line), 0 16px 26px -18px rgba(31, 79, 156, .4); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 12px; font-family: var(--serif); }
+.choices button { font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.step { border-color: var(--accent); }
+.submit { background: var(--lemon); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 8px 16px -8px rgba(184, 134, 11, .7); }
+.submit:not(:disabled):hover { background: var(--gold-l); }
+.wish { border: 0; border-radius: 16px; background: #fff; box-shadow: 0 0 0 1.5px var(--line); }
+.wish strong { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 18px; }
+.wish small { background: color-mix(in srgb, var(--lemon) 35%, transparent); color: var(--accent2); font-weight: 600; }
+.sent { font-family: var(--display); color: var(--accent); }
+
+/* gifts: cobalt cards with a lemon corner */
+.gift { border-radius: 22px; background: var(--accent); box-shadow: 0 18px 26px -18px rgba(31, 79, 156, .8); }
+.gift::after { right: -40px; bottom: -40px; width: 130px; height: 126px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/lemon-amalfi/lemon.webp) center / contain no-repeat; opacity: .85; rotate: -20deg; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 19px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.gift:not(:has(small)) .giftNo { max-width: 240px; font-size: 16px; font-weight: 500; line-height: 1.5; }
+.copy { border-color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--lemon); color: var(--accent2); }
+
+/* closing */
+.closing { padding-top: 196px; }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--tile) 0 0 / 90px; opacity: .14; }
+.closingBranch { position: absolute; top: -34px; left: 50%; z-index: -1; width: 300px; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: lemonSway 8s ease-in-out infinite alternate; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 500; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 16px; font-style: italic; }
+.closingNames { font-family: var(--display); font-style: italic; font-size: 36px; }
+.music { background: var(--accent); border-color: var(--lemon); }
+
+/* ── Cover: tiled wall, a white window onto the coast, lemons over the frame ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: clamp(24px, 4vh, 40px) 18px; overflow: hidden; background: var(--tile) 0 0 / 96px, #fbf8ef; text-align: center; isolation: isolate; }
+.panel { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(6px, 1.2vh, 10px); width: min(350px, 92vw); padding: 12px 12px clamp(16px, 2.6vh, 22px); border-radius: 180px 180px 26px 26px; background: #fffdf6; box-shadow: 0 0 0 5px #fff, 0 0 0 9px var(--accent), 0 24px 40px -18px rgba(22, 60, 121, .65); }
+.coast { position: relative; width: 100%; height: clamp(230px, 36vh, 330px); overflow: hidden; border-radius: 170px 170px 8px 8px; background: #bfe0ec; }
+.coast > span { position: absolute; inset: -6px; background: url(/themes/art/lemon-amalfi/coast.webp) 30% 38% / cover; animation: sunDrift 18s ease-in-out infinite alternate; }
+.bandStrip { width: 100%; height: 22px; margin-top: -2px; border-radius: 3px; background: var(--band) 0 50% / auto 22px repeat-x; }
+.coverBranch { position: absolute; z-index: 3; top: -18px; left: -60px; width: 260px; height: auto; rotate: -12deg; transform-origin: 10% 10%; animation: lemonSway 7s ease-in-out infinite alternate; }
+.kicker { margin-top: 4px; color: var(--leaf); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: clamp(38px, 11.5vw, 48px); font-style: italic; font-weight: 500; line-height: 1; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-size: .7em; }
+.coverDate { color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.guest { margin-top: 2px; color: var(--ink); }
+.guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 20px; font-style: italic; font-weight: 500; }
+.table { border-color: var(--leaf); color: var(--leaf); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 4px; background: var(--lemon); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 10px 20px -10px rgba(184, 134, 11, .9); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 46px 22px 34px; overflow: hidden; background: var(--bg); text-align: center; }
+.heroBranch { position: absolute; top: -34px; right: -118px; width: 250px; height: auto; rotate: 8deg; transform-origin: 90% 0; animation: lemonSway 7s ease-in-out infinite alternate; }
+.heroKicker { position: relative; color: var(--leaf); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { position: relative; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 58px; font-style: italic; font-weight: 500; line-height: .95; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-size: .55em; line-height: 1.3; }
+.heroArt { position: relative; margin: 18px 0 8px; }
+.heroFrame { width: 290px; height: 360px; overflow: hidden; border-radius: 150px 150px 22px 22px; box-shadow: 0 0 0 6px #fff, 0 0 0 10px var(--accent), 0 22px 34px -16px rgba(22, 60, 121, .55); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBand { position: absolute; left: 6px; right: 6px; bottom: 16px; height: 22px; background: var(--band) 0 50% / auto 22px repeat-x; box-shadow: 0 2px 6px rgba(0, 0, 0, .2); }
+.heroLemon { position: absolute; z-index: 2; left: -34px; bottom: -24px; width: 110px; height: auto; rotate: -14deg; }
+.heroDate { color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .06em; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 16px; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes lemonSway { from { rotate: var(--r0, -2deg); } to { rotate: var(--r1, 2deg); } }
+@keyframes sunDrift { from { scale: 1.02; translate: -4px 0; } to { scale: 1.06; translate: 4px -3px; } }
+.coverBranch { --r0: -14deg; --r1: -10deg; }
+.heroBranch { --r0: 6deg; --r1: 10deg; }
+@media (prefers-reduced-motion: reduce) {
+  .coast > span, .coverBranch, .heroBranch, .portraitLemon, .closingBranch { animation: none; }
+}

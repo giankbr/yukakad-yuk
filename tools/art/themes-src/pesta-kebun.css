@@ -1,0 +1,156 @@
+/* Pesta Kebun — pesta ulang tahun dewasa di kebun saat senja: langit lavender-jingga, meja panjang berlinen dengan stoples bunga liar, lilin dalam kaca dan kue bertingkat, lampu bohlam yang berayun, pohon dengan lampion kertas, buket bunga liar dalam stoples (cat air + gouache); label kertas kraft untuk tamu, foto polaroid tergantung di tali lampu; Petrona + Karla + Homemade Apple, linen, ungu senja dan kuning lampion. */
+.root, .cover {
+  --bg: #f6efe4; --paper: #efe4d6; --ivory: #fffaf2; --field: #fffcf6; --ink: #2e2a3a; --muted: #625a6c; --line: #e2d3c2;
+  --accent: #4a4170; --accent2: #3a3260; --gold: #e0a95a; --gold-l: #ffe3a8; --gold-d: #a8682a;
+  --band-bg: #3d3a5e; --band-ink: #fbf2e2;
+  --coral: #e8735a; --sage: #6d8a54; --kraft: #d9b98c; --kraft-d: #a9875a;
+  --display: Petrona, Georgia, serif; --serif: Karla, "Helvetica Neue", sans-serif; --script: "Homemade Apple", cursive;
+  --h2: 32px; --card-r: 14px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4a4170; --t-accent-ink: #fffaf2; --t-bg: #f6efe4; --t-ink: #2e2a3a; --t-muted: #625a6c; --t-line: #e2d3c2; --t-field: #fffcf6;
+  --t-radius: 12px; --t-font: Karla, sans-serif; --t-heading-font: Petrona, serif; --t-heading-weight: 500; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 64px 24px; }
+
+/* headings: Petrona italic, a wildflower sprig */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-style: italic; font-weight: 500; }
+.divider { display: block; width: 130px; margin-top: 2px; }
+.divider img { display: block; width: 100%; height: auto; }
+
+/* opening */
+.salamBlock { gap: 14px; padding: 58px 30px 62px; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 26px; line-height: 1.7; }
+.intro { color: var(--muted); }
+
+/* celebrant: a polaroid hanging from the light string */
+.couple { padding-top: 70px; background: linear-gradient(180deg, var(--paper), var(--bg)); }
+.portrait { margin-bottom: 18px; padding-top: 40px; }
+.portraitLights { position: absolute; z-index: 2; top: 0; left: 50%; width: 330px; translate: -50% 0; }
+.portraitLights img { display: block; width: 100%; height: auto; }
+.portraitFrame { width: 210px; height: 252px; padding: 10px 10px 42px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 14px 28px rgba(46, 42, 58, .2); rotate: -2.5deg; transform-origin: 50% 0; transition: rotate .8s var(--m-ease), box-shadow .8s var(--m-ease); }
+.portraitFrame::before { content: ""; position: absolute; z-index: 1; top: -14px; left: 50%; width: 14px; height: 26px; translate: -50% 0; border-radius: 3px; background: linear-gradient(90deg, #b48a5a, #d9b98c 50%, #a8865a); box-shadow: 0 2px 3px rgba(0, 0, 0, .2); }
+.person:hover .portraitFrame { rotate: 1deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 1px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: linear-gradient(180deg, #6f5f8e, #f2b08a); color: var(--ivory); font-family: var(--display); font-size: 100px; font-style: italic; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 52px; font-style: italic; font-weight: 500; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: .02em; }
+.parents { font-family: var(--script); font-size: 15px; line-height: 2; color: var(--gold-d); }
+
+/* countdown: dusk with swaying bulbs */
+.countBand { padding: 96px 20px 74px; background: linear-gradient(180deg, rgba(40, 38, 70, .35), rgba(40, 38, 70, .75)), url(/themes/art/pesta-kebun/sky.webp) center 20% / cover; }
+.countLights { position: absolute; z-index: -1; top: 6px; left: 50%; width: 420px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count { gap: 10px; }
+.count > div { height: 82px; border: 0; border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 50% 40%, rgba(255, 227, 168, .95), rgba(224, 169, 90, .9) 70%); box-shadow: 0 0 26px rgba(255, 200, 110, .55); }
+.count > div::after { display: none; }
+.count > div::before { content: ""; position: absolute; top: 0; left: 50%; width: 24px; height: 6px; translate: -50% 0; border-radius: 0 0 4px 4px; background: #2a2226; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 28px; font-weight: 600; }
+.count small { color: #5a3c2a; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+
+/* events: linen card pinned with a kraft tag */
+.events { gap: 26px; }
+.event { padding: 40px 22px 28px; border: 1px solid var(--line); border-radius: 14px; background: var(--ivory); box-shadow: 0 12px 26px rgba(46, 42, 58, .08); }
+.event::before { inset: 7px; border: 1px dashed color-mix(in srgb, var(--sage) 45%, transparent); border-radius: 9px; }
+.eventNo { top: -14px; width: 52px; height: 30px; border-radius: 4px 4px 4px 4px; background: var(--kraft); color: #4a3424; font-family: var(--serif); font-weight: 700; clip-path: polygon(14% 0, 100% 0, 100% 100%, 14% 100%, 0 50%); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; font-style: italic; font-weight: 500; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; background: var(--sage); }
+.mapBtn, .submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 700; letter-spacing: .03em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story: a light string as the timeline, bulbs as nodes */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: #3a3238; }
+.node { width: 22px; height: 30px; margin: 4px 7px 0; border: 0; border-radius: 50% 50% 46% 46%; background: radial-gradient(circle at 50% 45%, #fffaf0, #ffe3a0 45%, #f0b45c); box-shadow: 0 0 16px rgba(255, 190, 90, .8); animation: bulb 3s ease-in-out infinite alternate; }
+[data-revealed] .node, li[data-revealed] .node { animation: bloomIn 1.1s var(--m-ease) 200ms both, bulb 3s ease-in-out 1.4s infinite alternate; }
+.node::before { content: ""; position: absolute; top: -6px; left: 50%; width: 10px; height: 7px; translate: -50% 0; border-radius: 2px; background: #3a3238; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-style: italic; font-weight: 500; font-size: 22px; }
+
+/* gallery: polaroids */
+.gallery { background: var(--bg); }
+.mosaic { gap: 14px; }
+.tile { padding: 6px 6px 20px; border-radius: 2px; background: var(--ivory); box-shadow: 0 8px 18px rgba(46, 42, 58, .15); rotate: -1.5deg; }
+.tile:nth-child(2n) { rotate: 1.5deg; }
+.tile:first-child { border-radius: 2px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border-radius: 14px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--ivory); }
+.wish { border-radius: 4px 14px 14px 4px; border-left: 4px solid var(--kraft); }
+.wish strong { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 18px; }
+.sent { color: var(--accent); }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: 14px; background: linear-gradient(170deg, #4a4170, #3d3a5e 60%, #5a4a6a); }
+.gift::after { right: -8px; bottom: -10px; width: 110px; height: 150px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/pesta-kebun/bouquet.webp) center / contain no-repeat; opacity: .28; rotate: 10deg; }
+.gift h3 { font-family: var(--display); font-style: italic; font-size: 19px; letter-spacing: .02em; }
+.giftNo { font-family: var(--serif); font-weight: 700; }
+
+/* closing: the party scene again */
+.closing { padding: 110px 30px 220px; background: linear-gradient(180deg, rgba(40, 38, 70, .2), rgba(40, 38, 70, .45) 60%, rgba(40, 38, 70, .1)), url(/themes/art/pesta-kebun/sky.webp) center bottom / cover; }
+.closeLights { position: absolute; z-index: -1; top: 4px; left: 50%; width: 440px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.closeTree { position: absolute; z-index: -1; bottom: 120px; width: 220px; height: auto; }
+.closeTreeL { left: -110px; }
+.closeTreeR { right: -110px; scale: -1 1; }
+.closeTable { position: absolute; z-index: -1; left: 50%; bottom: 0; width: 470px; max-width: none; height: auto; translate: -50% 0; }
+.closingEmblem { width: 90px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 52px; font-style: italic; font-weight: 500; text-shadow: 0 2px 18px rgba(40, 38, 70, .5); }
+.closingText { text-shadow: 0 1px 10px rgba(40, 38, 70, .6); }
+.family { font-family: var(--script); font-size: 13px; letter-spacing: 0; line-height: 2; }
+.closingNames { font-family: var(--display); font-style: italic; font-size: 40px; }
+.made { position: relative; z-index: 1; color: rgba(251, 242, 226, .75); }
+.music { background: var(--accent); }
+
+/* ── Cover: dusk party under the trees ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 150px 28px 190px; overflow: hidden; background: url(/themes/art/pesta-kebun/sky.webp) center bottom / cover; color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 60% 34% at 50% 40%, rgba(40, 38, 70, .35), transparent 70%); }
+.coverLights { position: absolute; z-index: 2; left: 50%; width: 440px; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; pointer-events: none; }
+.coverLights1 { top: 8px; }
+.coverLights2 { top: 64px; width: 400px; scale: -1 1; animation-duration: 8.5s; opacity: .85; }
+.coverTree { position: absolute; z-index: 1; bottom: 128px; width: 236px; height: auto; pointer-events: none; }
+.coverTreeL { left: -104px; }
+.coverTreeR { right: -104px; scale: -1 1; }
+.coverTable { position: absolute; z-index: 3; left: 50%; bottom: 0; width: 480px; max-width: none; height: auto; translate: -50% 0; pointer-events: none; }
+.kicker { position: relative; z-index: 4; color: var(--gold-l); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.coverName { position: relative; z-index: 4; max-width: 100%; margin-top: 10px; color: var(--band-ink); font-family: var(--display); font-size: 62px; font-style: italic; font-weight: 500; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 2px 20px rgba(40, 38, 70, .55); }
+.ageLine { position: relative; z-index: 4; display: flex; align-items: center; gap: 12px; margin-top: 12px; color: var(--gold-l); font-family: var(--display); font-size: 16px; font-style: italic; }
+.ageLine b { font-size: 46px; font-style: normal; font-weight: 600; line-height: 1; text-shadow: 0 0 22px rgba(255, 200, 110, .7); }
+.coverDate { position: relative; z-index: 4; margin-top: 10px; color: var(--band-ink); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.tag { position: relative; z-index: 4; width: 100%; max-width: 270px; margin-top: 26px; padding: 18px 18px 14px 34px; border-radius: 6px; background: linear-gradient(170deg, #e4c79c, var(--kraft) 60%, #cfae80); color: #3a2a1c; box-shadow: 0 10px 22px rgba(30, 24, 40, .35); clip-path: polygon(22px 0, 100% 0, 100% 100%, 22px 100%, 0 50%); rotate: -2deg; }
+.tag::before { content: ""; position: absolute; left: 12px; top: 50%; width: 9px; height: 9px; translate: 0 -50%; border-radius: 50%; background: #3d3a5e; box-shadow: 0 0 0 2px #f6efe4; }
+.guest small { color: #5a4430; font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .06em; }
+.guest strong { margin-top: 6px; color: #2e2a3a; font-family: var(--script); font-size: 17px; line-height: 1.8; }
+.table { border-color: #6a5034; color: #4a3424; font-family: var(--serif); }
+.openBtn { position: relative; z-index: 4; margin-top: 20px; background: var(--gold); color: #2e2a3a; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .06em; box-shadow: 0 0 28px rgba(255, 200, 110, .55), 0 8px 18px rgba(30, 24, 40, .35); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -1px; }
+
+/* ── Hero: a wildflower jar in front of a big "30" ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 60px 24px 56px; overflow: hidden; background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(224, 169, 90, .18), transparent 70%), var(--bg); text-align: center; isolation: isolate; }
+.heroKicker { color: var(--gold-d); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.heroStage { position: relative; display: grid; place-items: center; width: 100%; height: 300px; margin-top: 6px; }
+.heroAge { position: absolute; top: 0; left: 50%; translate: -50% 0; color: transparent; font-family: var(--display); font-size: 230px; font-weight: 600; line-height: 1; -webkit-text-stroke: 2px color-mix(in srgb, var(--gold) 70%, transparent); letter-spacing: -.02em; }
+.heroJar { position: relative; z-index: 1; width: 170px; margin-top: 30px; transform-origin: 50% 100%; animation: breeze 6s ease-in-out infinite alternate; }
+.heroJar img { display: block; width: 100%; height: auto; }
+.heroName { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 52px; font-style: italic; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; }
+.heroDate { margin-top: 8px; color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 14px; color: var(--muted); font-size: 16px; line-height: 1.65; text-wrap: pretty; }
+
+@keyframes swing { from { rotate: -.7deg; } to { rotate: .7deg; } }
+@keyframes bulb { from { opacity: .75; box-shadow: 0 0 10px rgba(255, 190, 90, .5); } to { opacity: 1; box-shadow: 0 0 20px rgba(255, 190, 90, .9); } }
+@keyframes breeze { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverLights, .countLights, .closeLights, .node, [data-revealed] .node, .heroJar { animation: none; }
+}

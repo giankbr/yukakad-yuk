@@ -1,0 +1,151 @@
+/* Mandailing Gordang — pernikahan Islami Mandailing: bagas godang beratap ijuk dengan bidang singap bindu merah-putih-hitam dan sopo di sampingnya, di antara bukit hijau dan sawah berundak Tapanuli Selatan (cat air + gouache), sembilan gordang sambilan kayu berkulit sapi berdiri di atas rak, bingkai berbentuk rumah; hijau hutan, merah, hitam, putih, dan emas. */
+.root, .cover {
+  --bg: #f4f1e2; --paper: #e7ebd6; --ivory: #fffdf4; --field: #fffef9; --ink: #1e2a1e; --muted: #55604e; --line: #d4d8bc;
+  --accent: #1f5a34; --accent2: #2f7a46; --gold: #d4a440; --gold-l: #f0d48a; --gold-d: #8a6a22;
+  --band-bg: #173a26; --band-ink: #f4f1e2;
+  --display: "Zilla Slab", Georgia, serif; --serif: Vollkorn, Georgia, serif; --script: "Zilla Slab", Georgia, serif;
+  --red: #b02a26; --black: #1e1a16;
+  --gable: polygon(50% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f5a34; --t-accent-ink: #f4f1e2; --t-bg: #f4f1e2; --t-ink: #1e2a1e; --t-muted: #55604e; --t-line: #d4d8bc; --t-field: #fffef9;
+  --t-radius: 4px; --t-font: Vollkorn, Georgia, serif; --t-heading-font: "Zilla Slab", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--red); }
+.head h2 { color: var(--accent); font-weight: 600; }
+
+/* divider: red and black rules meeting at a drum */
+.divider { display: flex; align-items: center; gap: 10px; width: 200px; }
+.divider i { flex: 1; height: 6px; border-top: 3px solid var(--red); border-bottom: 2px solid var(--black); }
+.divider img { width: 20px; height: auto; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 60px 30px 62px; background: var(--bg); }
+.salamBlock::before { content: ""; width: 220px; height: 15px; margin-bottom: 14px; background: url(/themes/art/mandailing-gordang/bindu.webp) center / auto 100% repeat-x; }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 600; }
+
+/* couple: house-shaped frames */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 210px; height: 270px; padding: 6px; border: 0; border-radius: 0; background: linear-gradient(var(--red), var(--black)); clip-path: var(--gable); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--gable); }
+.pg { position: absolute; z-index: 2; right: -26px; bottom: -6px; width: 40px; height: auto; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; font-weight: 600; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.amp { color: var(--red); font-family: var(--display); font-size: 44px; font-weight: 600; }
+.amp img { width: 22px; }
+
+/* countdown: four drums beating in turn */
+.countBand { padding: 70px 20px 72px; background: radial-gradient(90% 60% at 50% 0, #2f6a40 0, transparent 70%), var(--band-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-weight: 600; }
+.count > div { height: 98px; padding-top: 10px; overflow: visible; border: 0; border-radius: 0 0 6px 6px; background: linear-gradient(90deg, #6a3e20, #a8703e 35%, #7a4a2a 70%, #3e2416); box-shadow: inset 0 -12px 0 rgba(0, 0, 0, .18); animation: beat 2.4s ease-in-out infinite; }
+.count > div::before { content: ""; position: absolute; top: -9px; left: 0; right: 0; height: 18px; border-radius: 50%; background: radial-gradient(#f5ead0, #d8c18c); box-shadow: 0 0 0 2px #4a2e18; }
+.count > div::after { display: none; }
+.count > div:nth-child(2) { animation-delay: .3s; }
+.count > div:nth-child(3) { animation-delay: .6s; }
+.count > div:nth-child(4) { animation-delay: .9s; }
+.count b { color: var(--ivory); font-family: var(--display); font-size: 30px; font-weight: 600; text-shadow: 0 2px 0 rgba(0, 0, 0, .3); }
+.count small { color: var(--gold-l); font-style: normal; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.ghostBtn { border-radius: 4px; border-color: var(--gold); color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+
+/* events: white cards topped by a bindu band */
+.events { gap: 28px; background: var(--bg); }
+.event { padding: 40px 22px 26px; border: 1px solid var(--line); border-radius: 4px; background: url(/themes/art/mandailing-gordang/bindu.webp) top center / auto 14px repeat-x, var(--ivory); }
+.event::before { inset: 20px 6px 6px; border-radius: 2px; border-color: color-mix(in srgb, var(--accent) 22%, transparent); }
+.eventNo { top: 22px; width: auto; height: auto; padding: 0 10px; border-radius: 0; background: var(--ivory); color: var(--red); font-family: var(--display); font-weight: 700; }
+.event h3 { margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 600; }
+.eventTime { color: var(--red); font-family: var(--display); font-weight: 600; }
+.rule { width: 60px; height: 6px; background: none; border-top: 3px solid var(--red); border-bottom: 2px solid var(--black); }
+.mapBtn { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; left: 20px; background: linear-gradient(var(--red), var(--black)); }
+.node { border: 0; border-radius: 0; background: none; }
+.node img { width: 18px; }
+.storyBody small { color: var(--red); font-family: var(--display); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.storyImg { border-radius: 4px; }
+
+/* gallery: the lead image wears the roof line */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 140px; gap: 8px; }
+.tile, .tile:nth-child(4n + 4) { border-radius: 4px; }
+.tile:first-child { border-radius: 0; clip-path: var(--gable); }
+.tile:last-child:nth-child(4n + 1) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border-radius: 4px; border-color: var(--line); border-top: 5px solid var(--red); background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.submit { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; font-size: 14px; }
+.sentBox img { width: 50px; }
+.wish { border-radius: 4px; border-left: 4px solid var(--red); }
+.wish:nth-child(2n) { border-left-color: var(--black); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 17px; font-weight: 600; }
+.wish small { background: rgba(176, 42, 38, .1); color: var(--red); }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { padding-top: 34px; border-radius: 4px; background: url(/themes/art/mandailing-gordang/bindu.webp) top center / auto 12px repeat-x, radial-gradient(90% 60% at 50% 0, #2f6a40 0, transparent 70%), var(--band-bg); }
+.gift::after { border-color: rgba(240, 212, 138, .07); }
+.giftIcon { border-color: var(--gold); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 19px; font-weight: 600; }
+.copy { border-radius: 4px; border-color: var(--gold); color: var(--gold-l); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: forest green, the nine drums standing along the bottom */
+.closing { padding: 66px 28px 180px; background: radial-gradient(90% 50% at 50% 100%, #2f6a40 0, transparent 70%), var(--band-bg); }
+.closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: url(/themes/art/mandailing-gordang/bindu.webp) center / auto 100% repeat-x; }
+.closeDrums { position: absolute; z-index: -1; left: 50%; bottom: 0; width: 360px; height: auto; translate: -50% 0; }
+.closingEmblem { width: 28px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.closingSalam { font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--gold-l); line-height: 1.5; white-space: pre-line; }
+.closingNames { font-family: var(--display); font-size: 32px; font-weight: 600; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: forest green, the hills seen through a house-shaped window, the nine drums along the floor ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 22px 0 0; overflow: hidden; background: radial-gradient(90% 40% at 50% 40%, #2a5e3a 0, transparent 75%), #173a26; color: var(--band-ink); text-align: center; isolation: isolate; }
+.bismillah { font-family: Amiri, serif; font-size: 23px; line-height: 1.5; color: var(--gold-l); }
+.salam { font-size: 13px; font-style: italic; color: rgba(244, 241, 226, .8); }
+.window { position: relative; width: 250px; height: 270px; margin-top: 14px; padding: 5px; background: linear-gradient(var(--red), var(--black)); clip-path: var(--gable); }
+.windowIn { display: block; width: 100%; height: 100%; overflow: hidden; clip-path: var(--gable); background: #e7ebd6; }
+.windowIn > img { display: block; width: 100%; height: 100%; object-fit: cover; scale: 1.3; transform-origin: 46% 60%; }
+.kicker { margin-top: 14px; font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+.coverNames { max-width: 100%; margin-top: 4px; padding: 0 24px; font-family: var(--display); font-size: 42px; font-weight: 600; line-height: 1.05; color: var(--ivory); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { margin: 0 8px; font-style: normal; color: var(--red); }
+.coverDate { margin-top: 6px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-l); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 14px; padding: 0 28px; }
+.guest small { color: rgba(244, 241, 226, .72); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 19px; font-weight: 600; color: var(--ivory); }
+.table { border-color: var(--gold); color: var(--gold-l); }
+.openBtn { border-radius: 4px; background: var(--red); color: var(--ivory); font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.openBtn:hover { background: #c83a32; }
+.drums { position: relative; width: 100%; margin-top: auto; padding-top: 16px; }
+.drums::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: #0f2a1a; }
+.drums > img { position: relative; display: block; width: 92%; height: auto; margin: 0 auto; transform-origin: 50% 100%; animation: thump 2.4s ease-in-out infinite; }
+
+/* ── Hero: house-shaped photo above a bindu sill ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 56px; background: var(--bg); text-align: center; }
+.heroKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--red); }
+.heroHouse { position: relative; width: 290px; height: 340px; margin-top: 16px; padding: 7px; background: linear-gradient(var(--red), var(--black)); clip-path: var(--gable); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; clip-path: var(--gable); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroSill { display: block; width: 320px; max-width: 100%; height: auto; margin-top: -2px; }
+.heroNames { max-width: 100%; margin-top: 22px; font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.05; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { margin: 0 8px; font-style: normal; color: var(--red); }
+.heroDate { margin-top: 10px; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes beat { 0%, 70%, 100% { scale: 1; } 78% { scale: 1.05 .96; } 86% { scale: .99 1.02; } }
+@keyframes thump { 0%, 80%, 100% { scale: 1; } 86% { scale: 1.006 .985; } 92% { scale: 1; } }
+@media (prefers-reduced-motion: reduce) { .count > div, .drums > img { animation: none; } }

@@ -1,0 +1,188 @@
+/* Abstrak Sapuan — lukisan abstrak kontemporer: sapuan kuas lebar dan blok pisau palet blush, sage, ochre, arang di atas kanvas gesso; tata letak katalog galeri rata kiri bernomor, Bricolage Grotesque + Literata + tanda tangan pelukis. */
+.root, .cover {
+  --bg: #f1ece3; --paper: #e9e3d8; --ivory: #fbf9f5; --field: #fffdf9; --ink: #2d2b2a; --muted: #6b6560; --line: #d9d0c3;
+  --accent: #2d2b2a; --accent2: #4a4541; --gold: #cf973f; --gold-l: #f3d9a6; --gold-d: #a8742a;
+  --band-bg: #2f2c2b; --band-ink: #f4efe7; --blush: #e4ac9c; --blush-d: #c98473; --sage: #a3b398; --ochre: #cf973f;
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif; --serif: Literata, Georgia, serif; --script: "Mrs Saint Delafield", cursive;
+  --h2: 40px; --card-r: 0px;
+  --gesso: url(/themes/art/abstrak-sapuan/gesso.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2d2b2a; --t-accent-ink: #fbf9f5; --t-bg: #f1ece3; --t-ink: #2d2b2a; --t-muted: #6b6560; --t-line: #d9d0c3; --t-field: #fffdf9;
+  --t-radius: 0px; --t-font: Literata, Georgia, serif; --t-heading-font: "Bricolage Grotesque", Arial, sans-serif; --t-heading-weight: 700; --t-heading-size: 34px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px; counter-reset: room;
+}
+.main { background: var(--gesso) repeat, var(--bg); background-size: 192px; }
+
+/* catalogue headings: left-aligned, numbered rooms, sweep underline */
+.section { align-items: stretch; padding: 64px 26px; }
+.head { align-items: flex-start; text-align: left; gap: 6px; }
+.head h2, .headLight h2 { font-family: var(--display); font-weight: 700; letter-spacing: -.035em; line-height: .98; text-align: left; text-wrap: balance; }
+.eyebrow { display: flex; align-items: center; gap: 10px; color: var(--muted); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .16em; }
+.head .eyebrow::before { counter-increment: room; content: counter(room, decimal-leading-zero); color: var(--blush-d); font-size: 13px; letter-spacing: .04em; }
+.head .eyebrow::after { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .5; order: 1; }
+.head .eyebrow::before { order: 0; }
+.divider { width: 170px; margin-left: -6px; }
+.headLight { align-items: flex-start; text-align: left; }
+.headLight .eyebrow { color: var(--gold-l); }
+
+.salamBlock { align-items: flex-start; padding: 26px 26px 58px; text-align: left; }
+.salamKicker { color: var(--blush-d); font-family: var(--display); font-weight: 600; letter-spacing: .2em; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+.salamBlock .divider { margin: 4px 0 4px -6px; }
+.intro { max-width: 340px; color: var(--muted); font-size: 16px; text-align: left; }
+.gifts > .intro { align-self: flex-start; }
+
+/* people: stretched canvases, the second hung to the right */
+.couple { gap: 8px; background: transparent; }
+.person { align-items: flex-start; text-align: left; }
+.personWrap:nth-of-type(3) .person { align-items: flex-end; text-align: right; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 222px; height: 284px; padding: 0; border: 0; border-radius: 0; background: var(--paper); box-shadow: 6px 8px 0 -1px rgba(45, 43, 42, .14), 14px 22px 30px -16px rgba(45, 43, 42, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: saturate(.9); }
+.person:hover .portraitFrame { box-shadow: 6px 8px 0 -1px rgba(45, 43, 42, .18), 18px 28px 34px -16px rgba(45, 43, 42, .5); }
+.portraitSwoosh { position: absolute; z-index: 0; left: -44px; bottom: 4px; width: 250px; height: auto; rotate: -8deg; }
+.personWrap:nth-of-type(3) .portraitSwoosh { left: auto; right: -46px; scale: -1 1; rotate: 8deg; }
+.portrait > :not(.portraitSwoosh) { position: relative; z-index: 1; }
+.monogram { color: var(--ink); font-family: var(--display); font-weight: 800; }
+.role { color: var(--blush-d); font-family: var(--display); font-weight: 600; letter-spacing: .18em; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 800; letter-spacing: -.045em; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 16px; font-style: italic; }
+.parents { font-size: 15px; text-wrap: pretty; }
+.amp { align-self: center; gap: 4px; margin: 26px 0 18px; color: var(--blush-d); font-family: var(--script); font-size: 76px; }
+.amp img { width: 46px; }
+.amp img:last-child { scale: 1 1; rotate: 90deg; }
+
+/* countdown: dark painted wall, numbers on tilted white knife-cut cards */
+.countBand { align-items: stretch; padding: 70px 26px 64px; background: var(--band-bg); }
+.countScene { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(36, 33, 32, .25), rgba(36, 33, 32, .7)), url(/themes/art/abstrak-sapuan/band.webp) center / cover; }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.count > div { height: 96px; border: 0; border-radius: 0; background: #f6f1e8; box-shadow: 5px 6px 0 rgba(0, 0, 0, .25); rotate: -2deg; }
+.count > div:nth-child(2) { rotate: 1.5deg; translate: 0 6px; background: #f2d6cb; }
+.count > div:nth-child(3) { rotate: -1deg; background: #dde3d3; }
+.count > div:nth-child(4) { rotate: 2.2deg; translate: 0 4px; background: #f3dfb9; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 34px; font-weight: 800; letter-spacing: -.04em; }
+.count small { color: var(--muted); font-family: var(--display); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); font-family: var(--display); }
+.ghostBtn { align-self: flex-start; border-radius: 0; border-color: var(--band-ink); color: var(--band-ink); font-family: var(--display); font-weight: 600; }
+
+/* events: wall labels */
+.events { gap: 22px; background: transparent; }
+.event { align-items: flex-start; gap: 4px; padding: 24px 22px 22px 26px; border: 0; border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 rgba(45, 43, 42, .06), 0 16px 26px -20px rgba(45, 43, 42, .5); }
+.event::before { inset: 0 auto 0 0; width: 6px; border: 0; border-radius: 0; background: var(--blush); }
+.event:nth-of-type(2)::before { background: var(--sage); }
+.event:nth-of-type(3)::before { background: var(--ochre); }
+.event:hover { box-shadow: 0 1px 0 rgba(45, 43, 42, .06), 0 22px 30px -18px rgba(45, 43, 42, .55); }
+.eventNo { position: static; translate: none; display: block; width: auto; height: auto; background: none; color: var(--muted); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .16em; }
+.eventNo::before { content: "Karya "; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 27px; font-weight: 700; letter-spacing: -.03em; line-height: 1.05; }
+.eventDate { font-size: 16px; }
+.eventTime { color: var(--blush-d); font-family: var(--display); font-weight: 600; }
+.rule { width: 100%; height: 1px; margin: 8px 0; background: var(--line); }
+.event strong { font-size: 16px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--display); font-weight: 600; box-shadow: 4px 4px 0 var(--blush); }
+.mapBtn:hover { background: var(--accent2); box-shadow: 6px 6px 0 var(--blush); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; background: linear-gradient(var(--ink), var(--blush) 50%, var(--ochre)); border-radius: 2px; }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 42px; }
+.storyBody small { color: var(--blush-d); font-family: var(--display); font-weight: 600; letter-spacing: .12em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+.storyImg { border-radius: 0; }
+
+/* gallery: salon wall of mounted prints */
+.gallery { background: transparent; }
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 120px; gap: 14px; }
+.tile { border: 7px solid #fff; border-radius: 0; box-shadow: 0 14px 20px -12px rgba(45, 43, 42, .5); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 0; }
+.tile:nth-child(2) { grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes: guest book on a plinth */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 0; background: var(--ivory); box-shadow: 8px 8px 0 var(--sage); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--display); font-weight: 600; letter-spacing: .12em; font-size: 11px; }
+.field input, .field textarea { border: 0; border-bottom: 1.5px solid var(--line); border-radius: 0; background: transparent; padding-left: 2px; }
+.field input:focus, .field textarea:focus { border-color: var(--ink); box-shadow: none; }
+.choices button { border-radius: 0; font-family: var(--display); font-weight: 600; font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--ink); border-color: var(--ink); color: var(--ivory); box-shadow: 3px 3px 0 var(--blush); }
+.step { border-radius: 0; border-color: var(--ink); }
+.submit { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--display); font-weight: 700; letter-spacing: .04em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border: 0; border-radius: 0; background: var(--ivory); box-shadow: inset 4px 0 0 var(--blush); }
+.wish:nth-child(3n + 2) { box-shadow: inset 4px 0 0 var(--sage); }
+.wish:nth-child(3n + 3) { box-shadow: inset 4px 0 0 var(--ochre); }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 16px; }
+.wish small { border-radius: 0; background: var(--paper); color: var(--ink); font-family: var(--display); font-weight: 600; }
+.sent { color: var(--ink); font-family: var(--display); font-size: 20px; font-style: normal; font-weight: 600; }
+.sentBox img { width: 110px; }
+
+/* gifts: gesso cards with a knife-painted corner */
+.gifts { background: transparent; }
+.gift { align-items: flex-start; border-radius: 0; background: var(--ivory); color: var(--ink); text-align: left; box-shadow: 0 18px 26px -20px rgba(45, 43, 42, .55); }
+.gift::after { right: -18px; bottom: -22px; width: 120px; height: 120px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/abstrak-sapuan/blocks.webp) center / contain no-repeat; opacity: .9; }
+.giftIcon { border-color: var(--line); background: var(--ink); }
+.gift h3 { color: var(--ink); font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: 0; }
+.giftNo { font-family: var(--display); font-weight: 700; letter-spacing: .02em; font-size: 23px; }
+.gift:not(:has(small)) .giftNo { max-width: 82%; font-family: var(--serif); font-size: 17px; font-weight: 400; line-height: 1.45; }
+.gift small { color: var(--muted); }
+.copy { border-radius: 0; border-color: var(--ink); background: var(--ink); color: var(--ivory); font-family: var(--display); font-weight: 600; }
+.copy:hover { background: var(--accent2); }
+.copyOn, .copyOn:hover { background: var(--blush); border-color: var(--blush); color: var(--ink); }
+
+/* closing */
+.closing { align-items: flex-start; padding: 80px 26px 54px; text-align: left; background: var(--band-bg); }
+.closingScene { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(36, 33, 32, .85), rgba(36, 33, 32, .55) 60%, rgba(36, 33, 32, .9)), url(/themes/art/abstrak-sapuan/band.webp) center / cover; }
+.closingBlocks { width: 120px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 70px; line-height: 1; }
+.closingText { max-width: 320px; }
+.closingSalam { color: var(--blush); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.family { font-family: var(--display); }
+.closingNames { font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -.04em; }
+.made { align-self: flex-start; }
+.music { border-radius: 0; background: var(--ink); border-color: var(--blush); box-shadow: 4px 4px 0 var(--blush); }
+
+/* ── Cover: a large abstract canvas hung off-centre, catalogue typography below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: clamp(10px, 1.8vh, 16px); min-height: 100dvh; padding: 0 26px clamp(22px, 4vh, 36px); overflow: hidden; background: var(--gesso) repeat, var(--bg); background-size: 192px; text-align: left; isolation: isolate; }
+.canvasWrap { position: relative; width: calc(100% + 26px); height: clamp(300px, 52vh, 470px); margin: 0 0 clamp(8px, 2vh, 18px) -26px; box-shadow: 10px 14px 0 -2px rgba(45, 43, 42, .1), 24px 34px 40px -24px rgba(45, 43, 42, .5); overflow: hidden; }
+.canvasPaint { position: absolute; inset: -14px; background: url(/themes/art/abstrak-sapuan/painting.webp) 30% 40% / cover; animation: canvasDrift 22s ease-in-out infinite alternate; }
+.canvasTag { position: absolute; right: 12px; bottom: 12px; padding: 5px 9px; background: rgba(251, 249, 245, .92); color: var(--ink); font-family: var(--display); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.kicker { display: flex; align-items: center; gap: 10px; color: var(--blush-d); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.kicker::after { content: ""; width: 40px; height: 1px; background: currentColor; }
+.coverNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: clamp(46px, 14vw, 60px); font-weight: 800; letter-spacing: -.05em; line-height: .9; overflow-wrap: anywhere; }
+.coverNames em { display: inline-block; margin: 0 .06em; color: var(--blush-d); font-family: var(--script); font-size: .95em; font-style: normal; font-weight: 400; letter-spacing: 0; line-height: .5; vertical-align: -.1em; }
+.coverDate { color: var(--muted); font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .08em; }
+.guest { align-items: flex-start; max-width: 320px; padding-left: 14px; border-left: 3px solid var(--sage); color: var(--ink); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.table { border-color: var(--ink); border-radius: 0; color: var(--ink); font-family: var(--display); font-weight: 600; }
+.openBtn { margin-top: 4px; border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--display); font-size: 14px; font-weight: 700; letter-spacing: .06em; box-shadow: 5px 5px 0 var(--blush); }
+.openBtn:hover { background: var(--accent2); box-shadow: 7px 7px 0 var(--blush); }
+
+/* ── Hero: catalogue cover page ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 46px 26px 30px; text-align: left; }
+.heroKicker { display: flex; justify-content: space-between; width: 100%; padding-bottom: 10px; border-bottom: 1.5px solid var(--ink); color: var(--ink); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: 64px; font-weight: 800; letter-spacing: -.055em; line-height: .88; overflow-wrap: anywhere; }
+.heroNames em { display: block; margin: -.05em 0 -.1em .5em; color: var(--blush-d); font-family: var(--script); font-size: 1.15em; font-style: normal; font-weight: 400; letter-spacing: 0; line-height: .8; }
+.heroArt { position: relative; align-self: stretch; margin: 26px 0 6px; }
+.heroSwoosh { position: absolute; z-index: 0; right: -40px; top: -40px; width: 330px; height: auto; rotate: 10deg; animation: swooshBreathe 9s ease-in-out infinite alternate; }
+.heroFrame { position: relative; z-index: 1; width: 84%; height: 360px; background: var(--paper); box-shadow: 8px 10px 0 -2px rgba(45, 43, 42, .12), 20px 30px 36px -22px rgba(45, 43, 42, .55); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBlocks { position: absolute; z-index: 2; right: 0; bottom: -34px; width: 116px; height: auto; }
+.heroCaption { margin-top: 14px; color: var(--muted); font-size: 14px; font-style: italic; }
+.heroCaption b { color: var(--ink); font-family: var(--display); font-style: normal; font-weight: 700; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 17px; font-weight: 700; }
+.heroNote { max-width: 320px; color: var(--muted); font-size: 16px; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes canvasDrift { from { translate: -6px 0; scale: 1.02; } to { translate: 6px -4px; scale: 1.05; } }
+@keyframes swooshBreathe { from { rotate: 8deg; scale: 1; } to { rotate: 12deg; scale: 1.04; } }
+@media (prefers-reduced-motion: reduce) {
+  .canvasPaint, .heroSwoosh { animation: none; }
+}

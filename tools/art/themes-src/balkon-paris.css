@@ -1,0 +1,152 @@
+/* Balkon Paris — ilustrasi gouache matte ala sketsa perjalanan: fasad batu krem, jendela Prancis berdaun jendela biru batu, balkon besi tempa, untaian wisteria/lilac musim semi, tenda kafe bergaris; papan nama jalan enamel untuk nama mempelai, kartu menu bistro; Italiana + EB Garamond + Parisienne. */
+.root, .cover {
+  --bg: #f7f1e6; --paper: #efe6d6; --ivory: #fffbf4; --field: #fffdf8; --ink: #36304a; --muted: #6c6578; --line: #ddd2c2;
+  --accent: #5a4a82; --accent2: #43386a; --gold: #a986c9; --gold-l: #e8dcf3; --gold-d: #7a5ea8;
+  --band-bg: #3e3550; --band-ink: #f7f1e6; --slate: #7f93a6; --enamel: #2c4470; --iron: #2a2830; --lilac: #c4a3dc;
+  --display: Italiana, "Cormorant Garamond", Georgia, serif; --serif: "EB Garamond", Garamond, Georgia, serif; --script: Parisienne, cursive;
+  --h2: 38px; --card-r: 4px;
+  --stone: url(/themes/art/balkon-paris/stone.webp);
+  --awning: url(/themes/art/balkon-paris/awning.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a4a82; --t-accent-ink: #fffbf4; --t-bg: #f7f1e6; --t-ink: #36304a; --t-muted: #6c6578; --t-line: #ddd2c2; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: Italiana, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 36px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--stone) repeat, var(--bg); background-size: 320px; }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 500; letter-spacing: .3em; }
+.head h2, .headLight h2 { font-family: var(--display); letter-spacing: .02em; }
+.divider { width: 150px; }
+.salamTitle { font-family: var(--script); color: var(--accent2); font-size: 42px; }
+.intro { font-size: 18px; }
+
+/* people: French-window portraits with a balcony rail */
+.couple { background: transparent; }
+.portrait { margin-bottom: 26px; }
+.portraitFrame { width: 206px; height: 286px; padding: 8px; border: 0; border-radius: 103px 103px 4px 4px; background: #f5ecdc; box-shadow: inset 0 0 0 1.5px #d9c9ad, 0 0 0 7px #ece0ca, 0 0 0 8.5px #d4c3a5, 0 18px 30px -12px rgba(54, 48, 74, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 95px 95px 2px 2px; }
+.portraitFrame::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(245, 236, 220, .7); border-radius: 90px 90px 2px 2px; pointer-events: none; }
+.portraitRail { position: absolute; z-index: 3; left: 50%; bottom: -22px; width: 250px; height: auto; translate: -50% 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.nick { color: var(--accent2); font-family: var(--script); font-size: 52px; }
+.fullName { font-family: var(--display); font-size: 20px; letter-spacing: .04em; }
+.parents { font-style: italic; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 60px; }
+.amp img { width: 64px; }
+
+/* countdown: plum band under a café awning, numbers on enamel plaques */
+.countBand { padding-top: 92px; background: var(--band-bg); }
+.awningTop { position: absolute; top: 0; left: 0; right: 0; height: 66px; background: var(--awning) repeat-x 0 0 / 240px 66px; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .25)); }
+.countBand::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(90% 60% at 50% 110%, rgba(169, 134, 201, .35), transparent 70%); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 2px solid #f7f1e6; border-radius: 10px; background: var(--enamel); box-shadow: 0 0 0 3px var(--enamel), 0 0 0 4.5px #6f9a7a, 0 10px 18px -6px rgba(0, 0, 0, .5); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .16) 50%, transparent 65%); }
+.count b { color: #fff; font-family: var(--display); font-size: 32px; }
+.count small { color: #dfe6f2; font-size: 14px; }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-size: 15px; letter-spacing: .1em; }
+
+/* events: bistro menu cards */
+.events { gap: 24px; }
+.event { padding: 34px 24px 26px; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); }
+.event::before { inset: 7px; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 2px; }
+.eventNo { width: auto; height: auto; padding: 4px 14px; border-radius: 2px; background: var(--enamel); color: #fff; font-family: var(--display); font-size: 13px; box-shadow: 0 0 0 2px var(--ivory), 0 0 0 3px #6f9a7a; }
+.event h3 { color: var(--accent2); font-family: var(--script); font-size: 36px; line-height: 1.1; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 16px; letter-spacing: .06em; }
+.rule { width: 100%; height: 0; border-top: 2px dotted var(--line); background: none; }
+.event strong { font-family: var(--display); font-size: 21px; font-weight: 400; letter-spacing: .03em; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; letter-spacing: .08em; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 20%, transparent)); }
+.node { width: 46px; height: 46px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: 15px; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 23px; }
+.storyBody p { font-size: 17px; }
+
+/* gallery: a row of tall windows */
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 70px 70px 3px 3px; box-shadow: 0 0 0 4px #f5ecdc, 0 0 0 5.5px #d4c3a5; }
+.tile:first-child { border-radius: 140px 140px 3px 3px; }
+.tile:nth-child(4n + 4) { border-radius: 4px; }
+
+.tile:nth-child(5):last-child { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border-radius: 4px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); letter-spacing: .2em; }
+.field input, .field textarea { border-radius: 3px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 3px; font-family: var(--serif); font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; letter-spacing: .12em; }
+.wish { border-radius: 4px; border-left: 3px solid var(--lilac); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-size: 18px; }
+.wish small { background: color-mix(in srgb, var(--lilac) 25%, transparent); color: var(--accent2); }
+.sent { font-family: var(--script); font-size: 30px; font-style: normal; }
+
+/* gifts: enamel plaques */
+.gift { border: 2px solid #f7f1e6; border-radius: 12px; background: var(--enamel); box-shadow: 0 0 0 4px var(--enamel), 0 0 0 5.5px #6f9a7a, 0 16px 24px -14px rgba(44, 68, 112, .7); }
+.gift::after { right: -10px; bottom: -14px; width: 110px; height: 104px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/balkon-paris/sprig.webp) center / contain no-repeat; opacity: .5; rotate: 180deg; }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 19px; letter-spacing: .08em; }
+.giftNo { font-family: var(--display); font-size: 25px; letter-spacing: .08em; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 18px; line-height: 1.45; letter-spacing: 0; }
+.copy { border-radius: 3px; border-color: #dfe6f2; color: #fff; font-family: var(--serif); font-size: 14px; letter-spacing: .08em; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--enamel); }
+
+/* closing: evening under the wisteria */
+.closing { padding: 110px 28px 56px; }
+.closingWisteria { position: absolute; top: 0; z-index: -1; width: 160px; height: auto; transform-origin: 50% 0; animation: wisteriaSway 8s ease-in-out infinite alternate; }
+.closingWisteria:first-child { left: -20px; }
+.closingWisteria:nth-child(2) { right: -20px; scale: -1 1; animation-delay: -3s; }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(80% 50% at 50% 100%, rgba(169, 134, 201, .3), transparent 70%); }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 56px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+.closingNames { font-family: var(--display); font-size: 34px; }
+.music { background: var(--enamel); border-color: #f7f1e6; }
+
+/* ── Cover: café awning, the balcony window, an enamel street-name plaque ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1.6vh, 14px); min-height: 100dvh; padding: 0 20px 26px; overflow: hidden; background: var(--stone) repeat, #f3ebdd; background-size: 320px; text-align: center; isolation: isolate; }
+.coverAwning { width: calc(100% + 40px); height: 66px; flex-shrink: 0; margin-bottom: clamp(0px, 1vh, 8px); background: var(--awning) repeat-x 0 0 / 240px 66px; filter: drop-shadow(0 6px 6px rgba(54, 48, 74, .22)); }
+.windowArt { position: relative; width: min(316px, 80vw); margin-top: -8px; }
+.windowArt img { display: block; width: 100%; height: auto; }
+.coverWis { position: absolute; z-index: 1; top: 52px; width: 120px; height: auto; transform-origin: 50% 0; animation: wisteriaSway 9s ease-in-out infinite alternate; }
+.coverWisL { left: -34px; }
+.coverWisR { right: -34px; scale: -1 1; animation-delay: -4s; }
+.plaque { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 2px; width: min(330px, 88vw); margin-top: -46px; padding: 12px 16px 12px; border: 2px solid #f7f1e6; border-radius: 12px; background: var(--enamel); box-shadow: 0 0 0 4px var(--enamel), 0 0 0 5.5px #6f9a7a, 0 18px 28px -14px rgba(26, 40, 70, .7); }
+.plaque::after { content: ""; position: absolute; inset: 0; border-radius: 10px; background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .14) 45%, transparent 60%); pointer-events: none; }
+.kicker { color: #c9d4e6; font-family: var(--serif); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: #fff; font-family: var(--display); font-size: clamp(34px, 10.5vw, 44px); font-weight: 400; line-height: 1.02; letter-spacing: .02em; overflow-wrap: anywhere; }
+.coverNames em { color: var(--lilac); font-family: var(--script); font-size: .8em; font-style: normal; }
+.coverDate { color: #dfe6f2; font-family: var(--serif); font-size: 15px; font-style: italic; }
+.guest { width: min(300px, 84vw); max-width: none; padding: 10px 14px; border: 1px solid var(--line); border-radius: 3px; background: rgba(255, 251, 244, .9); color: var(--ink); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; letter-spacing: .14em; box-shadow: 0 10px 22px -10px rgba(67, 56, 106, .8); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: the photo as a French window with a balcony rail ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 22px 34px; overflow: hidden; text-align: center; }
+.heroAwning { width: calc(100% + 44px); height: 66px; background: var(--awning) repeat-x 0 0 / 240px 66px; filter: drop-shadow(0 6px 6px rgba(54, 48, 74, .2)); }
+.heroKicker { margin-top: 18px; color: var(--gold-d); font-size: 13px; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold); font-family: var(--script); font-size: .66em; font-style: normal; line-height: 1.3; }
+.heroArt { position: relative; margin: 22px 0 30px; }
+.heroFrame { position: relative; width: 262px; height: 360px; padding: 9px; border-radius: 131px 131px 4px 4px; background: #f5ecdc; box-shadow: inset 0 0 0 1.5px #d9c9ad, 0 0 0 8px #ece0ca, 0 0 0 9.5px #d4c3a5, 0 22px 34px -14px rgba(54, 48, 74, .5); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; border-radius: 122px 122px 2px 2px; object-fit: cover; }
+.heroRail { position: absolute; z-index: 2; left: 50%; bottom: -30px; width: 320px; height: auto; translate: -50% 0; }
+.heroWis { position: absolute; z-index: 2; top: -18px; width: 132px; height: auto; transform-origin: 50% 0; animation: wisteriaSway 7s ease-in-out infinite alternate; }
+.heroWisL { left: -52px; }
+.heroWisR { right: -52px; scale: -1 1; animation-delay: -2.5s; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 21px; letter-spacing: .06em; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes wisteriaSway { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverWis, .heroWis, .closingWisteria { animation: none; }
+}

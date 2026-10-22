@@ -1,0 +1,154 @@
+/* Wisuda Santri — wisuda & khataman pesantren dalam hijau dan putih: tumpukan kitab bersampul polos berpeci, gapura pondok putih bertajug hijau di antara pohon mangga, sarung kotak-kotak terlipat; kartu bertulang kitab, bingkai segi delapan, pita motif sarung. */
+.root, .cover {
+  --bg: #fbfbf6; --paper: #e8f1e7; --ivory: #ffffff; --field: #ffffff; --ink: #1f3a2a; --muted: #5b6f61; --line: #d3e2d2;
+  --accent: #2f6b48; --accent2: #1d4630; --gold: #c9b26a; --gold-l: #f4efd9; --gold-d: #8f7a35;
+  --band-bg: #1d4630; --band-ink: #fbfbf6;
+  --plaid: repeating-linear-gradient(90deg, #1d4630 0 7px, #fbfbf6 7px 10px, #2f6b48 10px 20px, #c9b26a 20px 22px, #2f6b48 22px 32px, #fbfbf6 32px 35px, #1d4630 35px 42px, #a7c7a8 42px 47px);
+  --display: "Castoro", Georgia, serif; --serif: "Mulish", system-ui, sans-serif; --script: "Castoro", Georgia, serif;
+  --h2: 30px; --card-r: 14px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f6b48; --t-accent-ink: #fbfbf6; --t-bg: #fbfbf6; --t-ink: #1f3a2a; --t-muted: #5b6f61; --t-line: #d3e2d2; --t-field: #ffffff;
+  --t-radius: 12px; --t-font: "Mulish", system-ui, sans-serif; --t-heading-font: "Castoro", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.main { background: var(--bg); }
+
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 11.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.head h2 { color: var(--accent2); }
+.divider { width: 170px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { font-size: 17px; }
+
+/* opening */
+.salamBlock { padding: 56px 28px 60px; background: var(--paper); }
+.arabic { color: var(--accent2); font-size: 30px; }
+.salamKicker { color: var(--accent); font-size: 12px; letter-spacing: .08em; text-transform: none; font-weight: 700; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 36px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: 12px; }
+
+/* celebrant: octagon frame */
+.couple { background: var(--bg); }
+.portraitFrame { width: 210px; height: 210px; padding: 8px; border: 0; border-radius: 0; background: var(--accent); clip-path: polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%); }
+.portraitFrame::before { content: ""; position: absolute; inset: 8px; background: var(--ivory); clip-path: polygon(29% 0, 71% 0, 100% 29%, 100% 71%, 71% 100%, 29% 100%, 0 71%, 0 29%); }
+.monogram { position: relative; color: var(--accent); font-family: var(--display); font-size: 96px; }
+.portraitKitab { position: absolute; z-index: 2; right: -40px; bottom: -22px; width: 104px; height: auto; }
+.portrait { margin-bottom: 24px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 46px; }
+.fullName { font-weight: 700; font-family: var(--serif); }
+
+/* countdown */
+.countBand { padding-top: 72px; background: var(--accent2); }
+.countBand::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--plaid); }
+.countSarung { position: absolute; z-index: -1; right: -40px; bottom: -6px; width: 170px; height: auto; opacity: .3; }
+.count > div { border: 0; border-radius: 10px; background: var(--ivory); box-shadow: inset 0 5px 0 var(--gold); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); }
+.count small { color: var(--muted); font-style: normal; font-size: 12px; font-weight: 700; }
+.headLight .eyebrow { color: var(--gold); }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+
+/* events: kitab-spine cards */
+.event { align-items: flex-start; padding: 26px 20px 22px 34px; border: 0; border-radius: 4px 14px 14px 4px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 12px 26px rgba(29, 70, 48, .08); text-align: left; }
+.event::before { inset: 0 auto 0 0; width: 16px; border: 0; border-radius: 4px 0 0 4px; background: linear-gradient(90deg, var(--accent2) 0 10px, var(--gold) 10px 12px, var(--accent) 12px); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 3px 10px; border-radius: 999px; background: var(--paper); color: var(--accent); font-family: var(--serif); font-weight: 800; font-size: 11px; }
+.event h3 { color: var(--accent2); font-size: 23px; }
+.eventDate { font-style: normal; font-weight: 700; font-size: 16px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 40px; height: 3px; background: var(--plaid); }
+.eventAddr { text-align: left; }
+.mapBtn, .submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 800; letter-spacing: .04em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--accent2); }
+
+/* gallery */
+.tile { border-radius: 8px; }
+.tile:first-child { border-radius: 8px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-color: var(--line); border-top: 6px solid var(--accent); border-radius: 6px 6px 14px 14px; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 800; }
+.choices .choiceOn, .choices .choiceOn:hover { color: var(--ivory); }
+.wish { border-color: var(--line); border-radius: 4px 14px 14px 4px; box-shadow: inset 5px 0 0 var(--accent); }
+.wish strong { color: var(--accent2); }
+.sentBox img { width: 70px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 14px; background: var(--accent); }
+.gift::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--plaid); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 800; letter-spacing: .08em; }
+.copy { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing */
+.closing { padding-bottom: 0; background: var(--accent2); }
+.closingStar { width: 64px; height: auto; }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--ivory); }
+.closingSalam { margin-top: 4px; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+.closingNames { font-family: var(--display); font-size: 32px; }
+.closingGate { order: 20; position: relative; width: calc(100% + 56px); margin-top: 20px; padding-top: 10px; background: linear-gradient(180deg, transparent 0 40%, #e8f1e7 40%); }
+.closingGate img { display: block; width: 100%; height: auto; }
+.closingGate::after { content: ""; display: block; height: 12px; background: var(--plaid); }
+.made { order: 21; margin: 0; padding: 14px 0 18px; width: calc(100% + 56px); background: var(--accent2); color: rgba(251, 251, 246, .7); }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 22px 0; overflow: hidden; text-align: center; isolation: isolate; background: radial-gradient(ellipse 90% 30% at 50% 100%, #d7e8d6, transparent 70%), var(--bg); }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 14px 14px auto; height: 70%; border: 1.5px solid var(--accent); border-bottom: 0; border-radius: 180px 180px 0 0; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 22px 22px auto; height: calc(70% - 8px); border: 1px solid var(--gold); border-bottom: 0; border-radius: 172px 172px 0 0; }
+.coverBismillah { margin-top: 34px; color: var(--accent2); font-family: Amiri, serif; font-size: 25px; line-height: 1.6; }
+.coverStar { width: 44px; height: auto; margin-top: 10px; }
+.coverKicker { margin-top: 14px; color: var(--gold-d); font-size: 11.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.coverLabel { margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 19px; font-style: italic; }
+.coverName { max-width: 100%; margin-top: 8px; color: var(--accent2); font-family: var(--display); font-size: 58px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverDate { margin-top: 10px; padding: 6px 16px; border-radius: 999px; background: var(--paper); color: var(--accent2); font-size: 13.5px; font-weight: 800; letter-spacing: .06em; }
+.guest { margin-top: 18px; color: var(--ink); }
+.guest small { color: var(--muted); font-style: normal; font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); }
+.openBtn { margin-top: 14px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14.5px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 6px 0 var(--accent2); }
+.openBtn:hover { background: var(--accent2); translate: 0 -2px; }
+.coverGate { position: relative; width: calc(100% + 44px); margin-top: auto; padding-top: 18px; flex-shrink: 0; }
+.coverGate img { display: block; width: 100%; height: auto; }
+.coverGate::after { content: ""; display: block; height: 14px; background: var(--plaid); }
+
+/* ── Hero: syahadah card + doa as kitab spines ── */
+.hero { display: flex; flex-direction: column; align-items: center; padding: 44px 22px 56px; background: var(--bg); text-align: center; }
+.heroKitab { width: 230px; height: auto; margin-bottom: -6px; position: relative; z-index: 1; }
+.syahadah { position: relative; width: 100%; padding: 34px 22px 28px; border: 2px solid var(--accent); border-radius: 6px; background: var(--ivory); outline: 1px solid var(--gold); outline-offset: -8px; }
+.syahadah > img { position: absolute; width: 30px; height: auto; }
+.syahadah > img:nth-of-type(1) { top: -15px; left: -15px; }
+.syahadah > img:nth-of-type(2) { top: -15px; right: -15px; }
+.syahadah > img:nth-of-type(3) { bottom: -15px; left: -15px; }
+.syahadah > img:nth-of-type(4) { bottom: -15px; right: -15px; }
+.heroKicker { color: var(--gold-d); font-size: 11.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.heroLead { margin-top: 12px; color: var(--muted); font-family: var(--display); font-size: 16px; font-style: italic; }
+.heroName { margin-top: 6px; color: var(--accent2); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroFull { margin-top: 4px; color: var(--ink); font-weight: 700; overflow-wrap: anywhere; }
+.heroNote { margin-top: 14px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+.heroDate { display: inline-block; margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--accent); font-weight: 800; font-size: 14px; letter-spacing: .06em; }
+.doaTitle { margin-top: 42px; color: var(--accent2); font-family: var(--display); font-size: 26px; font-weight: 400; }
+.doaSub { margin-top: 4px; color: var(--muted); font-size: 15px; }
+.spines { display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 20px; }
+.spines li { position: relative; display: grid; grid-template-columns: 1fr; padding: 16px 18px 16px 54px; border-radius: 4px 10px 10px 4px; background: var(--accent); color: var(--ivory); text-align: left; box-shadow: 0 3px 0 rgba(29, 70, 48, .25); }
+.spines li::before { content: ""; position: absolute; top: 0; bottom: 0; left: 18px; width: 14px; background: var(--plaid); opacity: .9; }
+.spines li:nth-child(2) { margin: 0 10px 0 -4px; background: var(--gold-l); color: var(--ink); }
+.spines li:nth-child(3) { margin: 0 -2px 0 8px; background: var(--accent2); }
+.spines h3 { font-family: var(--display); font-size: 19px; font-weight: 400; }
+.spines p { margin-top: 3px; font-size: 14.5px; line-height: 1.5; opacity: .88; }
+
+@keyframes rise { from { translate: 0 6px; } to { translate: 0 -4px; } }
+.coverStar { animation: rise 4s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .coverStar { animation: none !important; }
+}

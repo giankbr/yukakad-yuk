@@ -1,0 +1,162 @@
+/* Sentani Kayu — pernikahan Kristen Sentani: lukisan kulit kayu kombouw (garis hitam, isian putih kapur dan merah oker di atas kain kulit kayu cokelat), ikan dan spiral, serta Danau Sentani berpulau di bawah Pegunungan Cycloop. */
+.root, .cover {
+  --bg: #efe4d0; --paper: #e6d6bb; --ivory: #f7efe1; --field: #fffaf1; --ink: #1d1612; --muted: #5e4a3c; --line: #cdb898;
+  --accent: #1d1612; --accent2: #a9472b; --gold: #a9472b; --gold-l: #eee3cf; --gold-d: #a9472b;
+  --band-bg: #1d1612; --band-ink: #eee3cf;
+  --display: "Zilla Slab", Georgia, serif; --serif: "Karla", system-ui, sans-serif; --script: "Zilla Slab", Georgia, serif;
+  --ochre: #a9472b; --clay: #eee3cf; --barkc: #8a5a34;
+  --bark: url(/themes/art/sentani-kayu/bark.webp);
+  --lake: url(/themes/art/sentani-kayu/lake.webp);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #a9472b; --t-accent-ink: #ffffff; --t-bg: #efe4d0; --t-ink: #1d1612; --t-muted: #5e4a3c; --t-line: #cdb898; --t-field: #fffaf1;
+  --t-radius: 0px; --t-font: "Karla", system-ui, sans-serif; --t-heading-font: "Zilla Slab", Georgia, serif; --t-heading-weight: 700; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--ochre); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-weight: 700; line-height: 1.05; letter-spacing: -.01em; color: var(--ink); }
+.divider { width: 180px; }
+/* bark surfaces */
+.barked { background: linear-gradient(rgba(29, 22, 18, .25), rgba(29, 22, 18, .25)), var(--bark) 0 0 / 300px; color: var(--clay); }
+
+/* ── Cover: a bark painting hung on bark cloth, names in clay white, a painted-outline guest card ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 26px 22px 26px; overflow: hidden; background: radial-gradient(120% 80% at 50% 30%, rgba(29, 22, 18, 0), rgba(29, 22, 18, .7)), var(--bark) 0 0 / 300px, #5c3b23; color: var(--clay); text-align: center; isolation: isolate; }
+.panel { width: min(74%, 270px); height: auto; rotate: -1.5deg; filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .45)); animation: hang 9s ease-in-out infinite alternate; transform-origin: 50% 0; }
+.salam { margin-top: 16px; font-family: var(--display); font-size: 15px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #f0b79d; }
+.kicker { margin-top: 4px; font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: rgba(238, 227, 207, .8); }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 12px; max-width: 100%; margin-top: 8px; font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { font-size: 34px; font-style: normal; color: #f0b79d; }
+.coverDate { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.card { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 330px; margin-top: auto; padding: 18px 18px 20px; border: 3px solid var(--ink); background: var(--clay); color: var(--ink); box-shadow: 7px 7px 0 var(--ochre); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { font-family: var(--display); font-size: 22px; font-weight: 700; }
+.table { border: 2px solid var(--ink); border-radius: 0; color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.openBtn { min-width: 220px; border: 2px solid var(--ink); border-radius: 0; background: var(--ochre); color: #fff; font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: .1em; box-shadow: 4px 4px 0 var(--ink); }
+.openBtn:hover { translate: -1px -1px; box-shadow: 5px 5px 0 var(--ink); }
+
+/* ── Hero: the lake painting, names in the sky, photo nailed like a board over the water ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 34px; background: var(--bg); text-align: center; overflow: hidden; }
+.heroLake { width: 100%; aspect-ratio: 900 / 640; background: var(--lake) no-repeat 50% 50% / cover; }
+.heroText { position: absolute; top: 26px; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; padding: 0 22px; }
+.heroKicker { font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--ochre); }
+.heroNames { max-width: 100%; margin-top: 4px; font-family: var(--display); font-size: 44px; font-weight: 700; line-height: 1; color: var(--ink); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--ochre); }
+.heroPhotoWrap { position: relative; width: calc(100% - 64px); margin-top: -96px; rotate: 1.5deg; }
+.heroPhoto { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border: 4px solid var(--ink); background: var(--barkc); box-shadow: -10px 10px 0 var(--ochre); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPhoto > span { display: grid; place-items: center; height: 100%; color: var(--clay); font-family: var(--display); font-size: 110px; font-weight: 700; }
+.heroFish { position: absolute; left: -26px; bottom: -30px; width: 120px; height: auto; rotate: -14deg; animation: swim 7s ease-in-out infinite alternate; }
+.heroDate { margin-top: 44px; padding: 8px 18px; border: 2px solid var(--ink); font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 18px; padding: 0 24px; color: var(--muted); font-family: var(--display); font-size: 19px; font-style: italic; line-height: 1.45; text-wrap: balance; }
+
+/* opening on bark cloth */
+.salamBlock { gap: 12px; padding: 60px 28px 64px; background: linear-gradient(rgba(29, 22, 18, .35), rgba(29, 22, 18, .35)), var(--bark) 0 0 / 300px; }
+.salamKicker { color: #f0b79d; }
+.salamTitle { color: var(--clay); font-family: var(--display); font-size: 54px; font-weight: 700; }
+.salamBlock .intro { color: rgba(238, 227, 207, .9); font-size: 16.5px; }
+
+/* couple: clay ground, portraits in thick painted frames with a spiral pinned to the corner */
+.couple { gap: 10px; background: var(--bg); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 216px; height: 272px; padding: 0; border: 4px solid var(--ink); border-radius: 0; background: var(--barkc); box-shadow: 9px 9px 0 var(--ochre); }
+.personWrap:nth-child(3) .portraitFrame { box-shadow: -9px 9px 0 var(--ochre); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portraitArt { position: absolute; z-index: 2; top: -22px; right: -24px; width: 58px; height: auto; animation: turn 18s linear infinite; }
+.personWrap:nth-child(3) .portraitArt { right: auto; left: -24px; animation-direction: reverse; }
+.monogram { color: var(--clay); font-family: var(--display); font-weight: 700; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 700; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { margin: 26px 0 16px; color: var(--ochre); font-family: var(--display); font-size: 52px; font-weight: 700; }
+.amp img { width: 64px; }
+
+/* countdown: black band, dotted clay boxes */
+.countBand { padding: 64px 22px; background: radial-gradient(70% 60% at 50% 120%, rgba(169, 71, 43, .45), transparent 70%), #1d1612; }
+.headLight h2 { color: var(--clay); font-size: 36px; }
+.headLight .eyebrow { color: #f0b79d; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 84px; border: 2px dotted rgba(238, 227, 207, .7); border-radius: 0; background: rgba(169, 71, 43, .18); }
+.count > div::after { display: none; }
+.count b { color: var(--clay); font-family: var(--display); font-size: 32px; font-weight: 700; }
+.count small { color: #f0b79d; font-size: 10.5px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--clay); }
+.ghostBtn { border: 2px solid var(--clay); border-radius: 0; color: var(--clay); font-family: var(--serif); font-weight: 700; }
+
+/* events: painted-outline cards */
+.events { gap: 26px; }
+.event { align-items: flex-start; padding: 30px 20px 22px; border: 3px solid var(--ink); border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 7px 7px 0 var(--ochre); }
+.event::before { display: none; }
+.event:hover { border-color: var(--ink); box-shadow: 9px 9px 0 var(--ochre); }
+.eventNo { top: -16px; left: 18px; translate: none; width: 52px; height: 30px; border: 2px solid var(--ink); border-radius: 0; background: var(--ochre); color: #fff; font-family: var(--display); font-size: 15px; font-weight: 700; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 700; }
+.eventDate { color: var(--ochre); font-size: 15px; font-style: normal; font-weight: 700; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.rule { width: 100%; height: 6px; margin: 8px 0; background: radial-gradient(circle, var(--ink) 1.6px, transparent 2px) 0 50% / 10px 6px repeat-x; }
+.event strong { font-size: 17px; font-weight: 700; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border: 2px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--clay); font-family: var(--serif); font-weight: 700; box-shadow: 3px 3px 0 var(--ochre); }
+.mapBtn:hover { background: var(--ochre); color: #fff; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(var(--ink) 0 10px, transparent 10px 16px); }
+.node { width: 44px; height: 44px; border: 0; background: none; margin-left: -4px; }
+.node img { width: 40px; }
+.storyBody small { color: var(--ochre); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; font-weight: 700; }
+.storyImg { border: 3px solid var(--ink); border-radius: 0; }
+
+/* gallery on bark */
+.gallery { background: linear-gradient(rgba(29, 22, 18, .3), rgba(29, 22, 18, .3)), var(--bark) 0 0 / 300px; }
+.gallery .head h2 { color: var(--clay); }
+.gallery .eyebrow { color: #f0b79d; }
+.mosaic { gap: 10px; }
+.tile { border: 3px solid var(--clay); border-radius: 0; }
+.tile:first-child { border-radius: 0; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 3px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 7px 7px 0 var(--ochre); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 0; }
+.field input:focus, .field textarea:focus { border-color: var(--ink); box-shadow: 3px 3px 0 var(--ochre); }
+.choices button { border: 2px solid var(--ink); border-radius: 0; color: var(--ink); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ochre); color: #fff; box-shadow: 3px 3px 0 var(--ink); }
+.step { border: 2px solid var(--ink); border-radius: 0; color: var(--ink); }
+.submit { border: 2px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--clay); font-family: var(--display); font-size: 15px; font-weight: 700; }
+.submit:not(:disabled):hover { background: var(--ochre); color: #fff; }
+.closed { border: 2px dashed var(--ink); border-radius: 0; }
+.sentBox img { width: 120px; animation: swim 5s ease-in-out infinite alternate; }
+.sent { color: var(--ink); font-family: var(--display); font-weight: 700; font-style: normal; }
+.wish { border: 2px solid var(--ink); border-radius: 0; background: var(--ivory); }
+.wish:hover { border-color: var(--ochre); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.wish small { border-radius: 0; background: var(--ochre); color: #fff; font-weight: 700; }
+
+/* gifts: black boards */
+.gifts { background: var(--paper); }
+.gift { align-items: flex-start; border: 3px solid var(--ink); border-radius: 0; background: linear-gradient(rgba(29, 22, 18, .78), rgba(29, 22, 18, .78)), var(--bark) 0 0 / 300px; text-align: left; box-shadow: 7px 7px 0 var(--ochre); }
+.gift::after { display: none; }
+.gift h3 { color: #f0b79d; font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+.giftIcon { border-radius: 0; border: 2px solid rgba(238, 227, 207, .5); }
+.giftNo { font-family: var(--display); font-size: 22px; font-weight: 700; line-height: 1.25; }
+.copy { border: 2px solid var(--clay); border-radius: 0; color: var(--clay); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--clay); color: var(--ink); }
+
+/* closing: lake at dusk under the bark */
+.closing { padding: 0 26px 54px; background: #1d1612; }
+.closingLake { width: calc(100% + 52px); aspect-ratio: 900 / 640; margin: 0 -26px 10px; background: linear-gradient(rgba(29, 22, 18, 0) 55%, #1d1612), var(--lake) no-repeat 50% 50% / cover; }
+.closingEmblem { width: 130px; height: auto; margin-top: -40px; animation: swim 7s ease-in-out infinite alternate; }
+.thanks { color: var(--clay); font-family: var(--display); font-size: 46px; font-weight: 700; }
+.closingSalam { color: #f0b79d; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.family { color: rgba(238, 227, 207, .78); font-family: var(--serif); }
+.closingNames { color: var(--clay); font-family: var(--display); font-weight: 700; font-size: 34px; }
+.music { border: 2px solid var(--clay); border-radius: 0; background: var(--ochre); }
+
+@keyframes hang { from { rotate: -1.8deg; } to { rotate: .6deg; } }
+@keyframes swim { from { translate: -6px 0; } to { translate: 8px -4px; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .panel, .heroFish, .portraitArt, .sentBox img, .closingEmblem { animation: none; } }
