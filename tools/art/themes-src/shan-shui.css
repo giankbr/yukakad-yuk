@@ -1,0 +1,181 @@
+/* Shan Shui — lukisan tinta pegunungan Tionghoa di atas sutra tua: gulungan gantung yang terbuka perlahan, puncak berlapis kabut, pinus, air terjun, sapuan hijau giok dan oker yang tipis, stempel merah 囍, dan amplop angpao untuk tanda kasih. */
+.root, .cover {
+  --bg: #ece5d3; --paper: #e3dbc5; --ivory: #f6f1e4; --field: #fbf8ef; --ink: #22211f; --muted: #57534c; --line: #cfc5ad;
+  --accent: #2a2826; --accent2: #111; --gold: #b8322a; --gold-l: #f6f1e4; --gold-d: #9a2a22;
+  --wood: #4a2f22; --jade: #6f9488; --red: #b8322a;
+  --band-bg: #e3dbc5; --band-ink: #22211f;
+  --display: "Cormorant Upright", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Ma Shan Zheng", "Cormorant Upright", serif;
+  --h2: 38px; --card-r: 3px;
+  --silk: url(/themes/art/shan-shui/silk.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--silk) repeat center / 360px; line-height: normal;
+}
+.root {
+  --t-accent: #2a2826; --t-accent-ink: #f6f1e4; --t-bg: #ece5d3; --t-ink: #22211f; --t-muted: #57534c; --t-line: #cfc5ad; --t-field: #fbf8ef;
+  --t-radius: 3px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Cormorant Upright", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--silk) repeat center / 360px, var(--bg); }
+
+.eyebrow, .role { color: var(--muted); font-family: var(--serif); font-size: 12px; letter-spacing: .34em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-weight: 500; line-height: 1.1; }
+.headLight .eyebrow { color: var(--muted); }
+.head { gap: 6px; }
+.divider { width: 190px; margin-top: 8px; }
+
+/* ── Opening ── */
+.salamBlock { gap: 10px; padding: 60px 30px 64px; }
+.salamBlock::before { content: "囍"; display: grid; place-items: center; width: 64px; height: 64px; margin-bottom: 8px; background: url(/themes/art/shan-shui/seal.webp) center / contain no-repeat; color: #f6e9d8; font-family: var(--script); font-size: 40px; line-height: 1; }
+.salamKicker { color: var(--muted); font-family: var(--serif); font-size: 12px; letter-spacing: .34em; text-transform: uppercase; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 500; }
+.salamSub { max-width: 300px; color: var(--muted); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: 0; line-height: 1.55; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.75; }
+
+/* ── People: moon-gate portraits under a pine ── */
+.couple { gap: 18px; background: transparent; padding-top: 64px; }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 228px; height: 228px; padding: 0; border: 9px solid #efe8d6; border-radius: 50%; background: #efe8d6 url(/themes/art/shan-shui/range.webp) center bottom 18% / 210% auto no-repeat; box-shadow: 0 0 0 2px var(--wood), 0 0 0 7px #efe8d6, 0 0 0 8px rgba(74, 47, 34, .45), 0 18px 34px rgba(40, 35, 25, .16); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitPine { position: absolute; z-index: 2; top: -30px; right: -64px; width: 170px; pointer-events: none; }
+.portraitPine img { display: block; width: 100%; height: auto; transform-origin: 100% 0; animation: sway 9s ease-in-out infinite alternate; }
+.personWrap:last-child .portraitPine { right: auto; left: -64px; scale: -1 1; }
+.monogram { margin-top: -30px; color: var(--accent); font-family: var(--display); font-size: 92px; font-weight: 500; }
+.role { margin-top: 6px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 500; line-height: 1.05; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.parents { font-size: 16px; }
+.amp { color: var(--red); font-family: var(--display); font-size: 54px; }
+.amp img { width: 26px; }
+
+/* ── Countdown: silk band with the range ── */
+.countBand { padding: 70px 22px 150px; background: linear-gradient(rgba(227, 219, 197, .6), rgba(227, 219, 197, .6)), var(--silk) repeat center / 360px; }
+.countRange { position: absolute; z-index: -1; left: -10px; right: -10px; bottom: -6px; }
+.countRange img { display: block; width: 100%; height: auto; mask-image: linear-gradient(#000 60%, transparent 96%); }
+.countMist { position: absolute; z-index: 0; left: -40px; bottom: 30px; width: 300px; opacity: .9; pointer-events: none; }
+.countMist img { display: block; width: 100%; height: auto; animation: mistDrift 18s ease-in-out infinite alternate; }
+.count { gap: 12px; grid-template-columns: repeat(4, minmax(0, 68px)); }
+.count > div { height: 112px; padding-top: 18px; border: 0; border-top: 6px solid var(--wood); border-bottom: 6px solid var(--wood); border-radius: 2px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 10px 18px rgba(40, 35, 25, .14); justify-content: flex-start; }
+.count > div::before { position: absolute; top: 8px; color: var(--red); font-family: var(--script); font-size: 17px; line-height: 1; }
+.count > div:nth-child(1)::before { content: "天"; }
+.count > div:nth-child(2)::before { content: "時"; }
+.count > div:nth-child(3)::before { content: "分"; }
+.count > div:nth-child(4)::before { content: "秒"; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .6) 50%, transparent 65%); }
+.count b { margin-top: 12px; color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { color: var(--muted); font-size: 13px; font-style: normal; }
+.countTba { color: var(--accent); }
+.ghostBtn { position: relative; z-index: 1; border-color: var(--accent); background: rgba(246, 241, 228, .8); color: var(--accent); font-family: var(--serif); font-size: 14px; }
+.ghostBtn:hover { background: var(--ivory); border-color: var(--red); }
+
+/* ── Events: little hanging scrolls ── */
+.events { gap: 30px; }
+.event { padding: 40px 24px 30px; border: 0; border-top: 9px solid var(--wood); border-bottom: 9px solid var(--wood); border-radius: 3px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 16px 30px rgba(40, 35, 25, .12); }
+.event::before { inset: 10px 10px; border: 1px solid rgba(74, 47, 34, .2); border-radius: 0; }
+.event:hover { border-color: var(--wood); }
+.eventNo { top: 14px; left: auto; right: 16px; translate: none; width: 30px; height: 30px; border-radius: 2px; background: url(/themes/art/shan-shui/seal.webp) center / contain no-repeat; color: #f6e9d8; font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; font-weight: 600; }
+.eventDate { font-size: 17px; }
+.eventTime { color: var(--red); font-family: var(--serif); }
+.rule { width: 70px; height: 2px; background: var(--accent); opacity: .7; }
+.mapBtn, .submit { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; letter-spacing: .06em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--red); }
+
+/* ── Story ── */
+.story { background: linear-gradient(rgba(227, 219, 197, .55), rgba(227, 219, 197, .55)), var(--silk) repeat center / 360px; }
+.timeline::before { left: 19px; width: 2px; background: linear-gradient(var(--accent), rgba(42, 40, 38, .1)); }
+.node { width: 32px; height: 32px; margin-left: 3px; border: 0; border-radius: 2px; background: none; }
+.node img { width: 30px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-size: 13px; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 600; }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 160px; gap: 12px; }
+.tile { border: 6px solid var(--ivory); border-radius: 2px; box-shadow: 0 0 0 1px var(--line), 0 10px 20px rgba(40, 35, 25, .12); filter: saturate(.8) sepia(.12); }
+.tile:first-child { border-radius: 50%; grid-column: span 2; grid-row: span 2; aspect-ratio: 1; height: auto; width: 100%; justify-self: center; max-width: 320px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:hover { filter: saturate(1) sepia(0); }
+
+/* ── Wishes ── */
+.form { border: 1px solid var(--line); border-radius: 3px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 12px; letter-spacing: .2em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.wish { border-radius: 2px; }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 19px; font-weight: 600; }
+.wish small { background: rgba(184, 50, 42, .1); color: var(--red); }
+.sentBox img { width: 60px; }
+.sent { font-family: var(--display); font-size: 22px; font-style: normal; color: var(--accent); }
+
+/* ── Gifts: red angpao envelopes ── */
+.gift { padding: 54px 20px 26px; border-radius: 8px; background: linear-gradient(170deg, #c13a2e, #9e2820); color: #f8e7c9; box-shadow: 0 16px 30px rgba(120, 30, 20, .25); }
+.gift::before { content: ""; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 44px; background: #a52b23; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.gift::after { content: "囍"; right: -4px; bottom: -30px; width: auto; height: auto; border: 0; border-radius: 0; box-shadow: none; color: rgba(236, 196, 120, .22); font-family: var(--script); font-size: 120px; line-height: 1; }
+.giftIcon { border-color: rgba(236, 196, 120, .7); }
+.gift h3 { color: #ecc478; font-family: var(--display); font-size: 21px; font-weight: 600; letter-spacing: .04em; }
+.giftNo { color: #f8e7c9; font-family: var(--display); font-size: 25px; font-weight: 600; }
+.gift small { color: rgba(248, 231, 201, .8); }
+.copy { border-color: #ecc478; color: #f8e7c9; font-family: var(--serif); }
+.copyOn, .copyOn:hover { background: #ecc478; color: #8f2a22; }
+
+/* ── Closing ── */
+.closing { padding: 74px 28px 190px; background: linear-gradient(rgba(214, 205, 182, .55), rgba(214, 205, 182, .55)), var(--silk) repeat center / 360px; color: var(--ink); }
+.closingPine { position: absolute; z-index: -1; top: -6px; right: -30px; width: 230px; }
+.closingPine img { display: block; width: 100%; height: auto; transform-origin: 100% 0; animation: sway 10s ease-in-out infinite alternate; }
+.closingRange { position: absolute; z-index: -1; left: -10px; right: -10px; bottom: -6px; }
+.closingRange img { display: block; width: 100%; height: auto; }
+.closingSeal { display: grid; place-items: center; width: 72px; height: 72px; background: url(/themes/art/shan-shui/seal.webp) center / contain no-repeat; color: #f6e9d8; font-family: var(--script); font-size: 46px; line-height: 1; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 500; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--red); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 500; }
+.made { position: relative; z-index: 1; color: rgba(34, 33, 31, .6); }
+.made:hover { color: var(--red); }
+.music { border-color: var(--wood); background: var(--accent); }
+
+/* ── Cover: a hanging scroll that unrolls ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(18px, 3vh, 40px) 22px 0; overflow: hidden; background: var(--silk) repeat center / 360px, #e6dfcc; text-align: center; isolation: isolate; }
+.coverKicker { color: var(--muted); font-family: var(--serif); font-size: 12px; letter-spacing: .36em; text-transform: uppercase; }
+.hanging { position: relative; display: flex; flex-direction: column; align-items: center; margin-top: 10px; filter: drop-shadow(0 16px 22px rgba(40, 35, 25, .25)); }
+.rod { position: relative; z-index: 2; display: block; width: calc(var(--pw) + 58px); }
+.rod img { display: block; width: 100%; height: auto; }
+.hanging { --pw: min(232px, 27dvh); }
+.mount { overflow: hidden; padding: 20px 13px 30px; background: linear-gradient(rgba(84, 98, 96, .88), rgba(70, 82, 80, .9)), var(--silk) repeat center / 200px; animation: unroll 2.4s cubic-bezier(.45, .05, .2, 1) .2s both; }
+.painting { position: relative; width: var(--pw); aspect-ratio: 560 / 1064; overflow: hidden; outline: 2px solid #c9b88c; outline-offset: 0; background: #ece3cc; }
+.paintImg { position: absolute; inset: 0; }
+.paintImg img { display: block; width: 100%; height: 100%; }
+.moon { position: absolute; left: 8%; top: 4.5%; width: 42%; aspect-ratio: 1; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 2px rgba(34, 33, 31, .55), 0 0 0 5px rgba(236, 227, 204, .9); }
+.moon > img, .moon > div { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) sepia(.15); }
+.inscription { position: absolute; top: 4%; right: 7%; display: flex; flex-direction: row-reverse; gap: 4px; writing-mode: vertical-rl; }
+.inscription strong { color: var(--ink); font-family: var(--display); font-size: clamp(24px, 3.4dvh, 30px); font-weight: 600; line-height: 1; white-space: nowrap; }
+.inscription strong em { margin: 6px 0; color: var(--red); font-style: normal; }
+.inscription small { color: var(--muted); font-family: var(--serif); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.sealSmall { position: absolute; left: 10%; top: 50%; display: grid; place-items: center; width: 30px; height: 30px; background: url(/themes/art/shan-shui/seal.webp) center / contain no-repeat; color: #f6e9d8; font-family: var(--script); font-size: 20px; line-height: 1; }
+.paintMist { position: absolute; left: -20%; bottom: 22%; width: 90%; pointer-events: none; }
+.paintMist img { display: block; width: 100%; height: auto; animation: mistDrift 16s ease-in-out infinite alternate; }
+.coverDate { margin-top: 16px; color: var(--accent); font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .12em; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 12px; padding-bottom: clamp(40px, 8vh, 90px); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.table { border-color: var(--red); color: var(--red); font-family: var(--serif); letter-spacing: .12em; }
+.openBtn { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; letter-spacing: .14em; box-shadow: 0 10px 20px rgba(40, 35, 25, .25); }
+.openBtn:hover { background: var(--red); translate: 0 -2px; }
+
+/* ── Hero: moon gate with the range in front ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 22px 60px; overflow: hidden; text-align: center; isolation: isolate; }
+.gate { position: relative; width: 290px; height: 290px; margin-top: 16px; }
+.gatePhoto { position: absolute; inset: 0; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 3px var(--wood), 0 0 0 9px #efe8d6, 0 0 0 10px rgba(74, 47, 34, .4); }
+.gatePhoto > img, .gatePhoto > div { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) sepia(.1); }
+.gateRange { position: absolute; left: -60px; right: -60px; bottom: -34px; }
+.gateRange img { display: block; width: 100%; height: auto; mask-image: linear-gradient(#000 55%, transparent 92%); }
+.gateMist { position: absolute; left: -30px; bottom: 6px; width: 260px; }
+.gateMist img { display: block; width: 100%; height: auto; animation: mistDrift 18s ease-in-out infinite alternate; }
+.heroNames { margin-top: 40px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--red); font-size: 34px; font-style: normal; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 16.5px; font-style: italic; line-height: 1.7; text-wrap: pretty; }
+
+@keyframes unroll { from { max-height: 0; } to { max-height: 720px; } }
+@keyframes mistDrift { from { translate: -24px 0; } to { translate: 40px -6px; } }
+@media (prefers-reduced-motion: reduce) {
+  .mount, .paintMist img, .countMist img, .gateMist img, .portraitPine img, .closingPine img { animation: none; }
+}

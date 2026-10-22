@@ -1,0 +1,163 @@
+/* Fes Tembaga — pernikahan Islami bernuansa riad Fes di malam hari: lentera tembaga berlubang yang menebar titik-titik cahaya bintang di dinding tadelakt saffron dan mawar, serta frieze kayu cedar berukir; tembaga, saffron, mawar, dan cokelat cedar. */
+.root, .cover {
+  --bg: #f6e9d9; --paper: #f1dccb; --ivory: #fcf5ec; --field: #fffaf3; --ink: #3a1d10; --muted: #7a5440; --line: #e6cdb6;
+  --accent: #8a4421; --accent2: #a8572c; --gold: #d99a4e; --gold-l: #ffdca0; --gold-d: #8a5a24;
+  --band-bg: #26120a; --band-ink: #f8e8d4;
+  --display: "Cormorant Upright", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --label: "Tenor Sans", system-ui, sans-serif; --script: "Cormorant Upright", Georgia, serif;
+  --night: #26120a; --cedar: #4a2414; --copper: #8a4421; --rose: #cf8a7a; --saffron: #e3a25c;
+  --tad: url(/themes/art/fes-tembaga/tadelakt.webp) repeat 0 0 / 260px;
+  --tad-rose: url(/themes/art/fes-tembaga/rose.webp) repeat 0 0 / 260px;
+  --cedar-b: url(/themes/art/fes-tembaga/cedar.webp) repeat-x 0 50% / auto 100%;
+  --dots: url(/themes/art/fes-tembaga/dots.webp) no-repeat 50% 0 / 100% auto;
+  --h2: 38px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8a4421; --t-accent-ink: #fcf5ec; --t-bg: #f6e9d9; --t-ink: #3a1d10; --t-muted: #7a5440; --t-line: #e6cdb6; --t-field: #fffaf3;
+  --t-radius: 18px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Cormorant Upright", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 36px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--accent2); font-family: var(--label); font-size: 11.5px; letter-spacing: .26em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-weight: 600; line-height: 1.05; color: var(--cedar); }
+.divider { width: 160px; }
+
+/* night rooms lit by the lantern's dots */
+.salamBlock, .countBand, .gallery, .closing { position: relative; isolation: isolate; }
+.countBand, .gallery, .closing, .cover { background: radial-gradient(70% 45% at 50% 30%, rgba(227, 162, 92, .42), transparent 70%), linear-gradient(rgba(38, 18, 10, .72), rgba(38, 18, 10, .9)), var(--tad); }
+
+/* opening: saffron wall, cedar lintel */
+.salamBlock { gap: 12px; padding: 76px 26px 62px; background: radial-gradient(60% 40% at 50% 0%, rgba(255, 220, 160, .5), transparent 70%), var(--tad); }
+.salamBlock::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30px; background: var(--cedar-b); }
+.arabic { color: var(--cedar); font-size: 30px; }
+.salamKicker { color: var(--cedar); }
+.salamTitle { color: var(--night); font-family: var(--display); font-size: 34px; font-weight: 600; line-height: 1.15; }
+.salamBlock .intro { max-width: 340px; padding: 20px 20px; border-radius: 170px 170px 18px 18px / 70px 70px 18px 18px; background: rgba(252, 245, 236, .82); color: var(--ink); padding: 40px 24px 22px; box-shadow: 0 12px 30px rgba(74, 36, 20, .2); }
+
+/* couple: capsule portraits in copper rings */
+.couple { gap: 16px; background: var(--bg); }
+.portraitFrame { width: 200px; height: 290px; padding: 6px; border: 0; border-radius: 999px; background: linear-gradient(135deg, #d58a52, #8a4421 45%, #3a1a0c 70%, #d58a52); box-shadow: 0 0 0 5px var(--bg), 0 0 0 6px var(--gold), 0 18px 30px rgba(74, 36, 20, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.portraitMedal { position: absolute; z-index: 2; left: 50%; bottom: -26px; width: 56px; height: auto; translate: -50% 0; }
+.portrait { margin-bottom: 30px; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+.nick { color: var(--cedar); font-family: var(--display); font-size: 50px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.amp { color: var(--copper); font-family: var(--display); font-size: 52px; }
+.amp img { width: 42px; }
+
+/* countdown: night wall, copper discs */
+.countBand { padding: 72px 22px 72px; }
+.countBand::before { opacity: .42; content: ""; position: absolute; z-index: -1; inset: 0; background: var(--dots); background-size: 140% auto; background-position: 50% -60px; animation: flicker 5s ease-in-out infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count > div { width: 72px; height: 72px; border: 0; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #d58a52, #8a4421 55%, #3a1a0c); box-shadow: 0 0 0 2px #c9a04e, 0 0 24px rgba(255, 176, 74, .35); }
+.count > div::after { display: none; }
+.count b { color: #fff0c4; font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1; }
+.count small { color: #ffdca0; font-family: var(--label); font-size: 9.5px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--gold); font-family: var(--label); }
+
+/* events: polished plaster panels under a cedar lintel */
+.events { gap: 28px; background: var(--bg); }
+.event { padding: 50px 22px 28px; border: 0; border-radius: 24px; background: var(--tad-rose); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35), 0 16px 30px rgba(74, 36, 20, .14); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 24px; border: 0; border-radius: 0; background: var(--cedar-b); }
+.event:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .5), 0 20px 36px rgba(74, 36, 20, .2); }
+.eventNo { top: 34px; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #d58a52, #8a4421 60%, #3a1a0c); color: #fff0c4; font-family: var(--label); font-size: 11px; box-shadow: 0 0 0 2px #c9a04e; }
+.event h3 { margin-top: 20px; color: var(--night); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.eventDate { color: var(--night); font-style: italic; }
+.eventTime { color: var(--copper); font-family: var(--label); }
+.rule { width: 60px; height: 2px; background: var(--copper); }
+.event strong { color: var(--night); font-family: var(--display); font-weight: 700; font-size: 21px; }
+.eventAddr { color: #5c3524; }
+.mapBtn { background: var(--night); color: var(--gold-l); font-family: var(--label); }
+.mapBtn:hover { background: var(--copper); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 2px; background: repeating-linear-gradient(var(--copper) 0 3px, transparent 3px 9px); }
+.node { width: 42px; height: 42px; border: 0; background: none; }
+.node img { width: 42px; }
+.storyBody small { color: var(--copper); font-family: var(--label); }
+.storyBody h3 { color: var(--cedar); font-family: var(--display); font-size: 25px; font-weight: 600; }
+
+/* gallery at night */
+.gallery { padding: 76px 22px; }
+.gallery::before { opacity: .42; content: ""; position: absolute; z-index: -1; inset: 0; background: var(--dots); background-size: 150% auto; background-position: 50% -40px; animation: flicker 6s ease-in-out -2s infinite; }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: var(--band-ink); }
+.mosaic { gap: 10px; grid-auto-rows: 140px; }
+.tile { border-radius: 999px 999px 14px 14px; box-shadow: 0 0 0 2px rgba(201, 160, 78, .7); }
+.tile:first-child { grid-row: span 2; }
+.tile:nth-child(2), .tile:nth-child(3) { border-radius: 14px; }
+.tile:nth-child(4n + 4) { grid-column: span 2; border-radius: 14px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 22px; border-color: var(--line); background: var(--ivory); }
+.field > span, .diet, .guestsLabel { font-family: var(--label); }
+.field input, .field textarea { border-radius: 12px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--copper); background: var(--copper); color: #fff0c4; }
+.submit { background: var(--night); color: var(--gold-l); font-family: var(--label); letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--copper); }
+.sentBox img { width: 90px; }
+.sent { color: var(--copper); font-family: var(--display); font-size: 24px; font-weight: 600; font-style: normal; }
+.wish { border-radius: 18px; }
+.wish strong { color: var(--cedar); font-family: var(--display); font-weight: 700; font-size: 18px; }
+.wish small { background: #f3dcc6; color: var(--copper); }
+
+/* gifts: copper plates */
+.gifts { background: var(--paper); }
+.gift { border-radius: 22px; background: radial-gradient(120% 90% at 20% 0%, #c27845, #8a4421 45%, #3a1a0c); box-shadow: inset 0 0 0 1px rgba(255, 220, 160, .35), 0 14px 26px rgba(74, 36, 20, .25); }
+.gift::after { border-color: rgba(255, 220, 160, .12); }
+.gift h3 { color: var(--gold-l); font-family: var(--label); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { color: #fff0c4; font-family: var(--display); font-size: 27px; font-weight: 600; }
+.copy { border-color: var(--gold-l); font-family: var(--label); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--night); }
+
+/* closing: the lantern again */
+.closing { padding: 0 26px 60px; }
+.closing::before { opacity: .42; content: ""; position: absolute; z-index: -1; inset: 0; background: var(--dots); background-size: 150% auto; background-position: 50% 0; animation: flicker 5s ease-in-out -1s infinite; }
+.closingEmblem { width: 104px; height: auto; margin-bottom: 18px; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; font-weight: 600; }
+.closingSalam { color: var(--gold-l); font-family: var(--label); font-size: 12px; letter-spacing: .1em; line-height: 1.6; }
+.family { font-family: var(--label); font-size: 12px; }
+.closingNames { font-family: var(--display); font-weight: 600; font-size: 38px; }
+.music { background: var(--copper); border-color: var(--gold-l); }
+
+/* ── Cover: a dim tadelakt wall under a cedar lintel, the copper lantern hanging and scattering star dots ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 22px 34px; overflow: hidden; color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -2; top: 0; left: 0; right: 0; height: 28px; z-index: 2; background: var(--cedar-b); }
+.coverDots { position: absolute; z-index: -1; top: 30px; -webkit-mask-image: radial-gradient(closest-side, #000 82%, transparent); mask-image: radial-gradient(closest-side, #000 82%, transparent); left: 50%; width: 520px; height: 667px; translate: -50% 0; background: var(--dots); background-size: 100% 100%; animation: flicker 5s ease-in-out infinite; pointer-events: none; }
+.lanternWrap { position: relative; width: 120px; height: 307px; flex-shrink: 0; margin-top: 20px; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.lanternWrap img { width: 100%; height: auto; filter: brightness(1.18) drop-shadow(0 0 22px rgba(255, 170, 80, .55)); }
+.kicker { margin-top: 16px; font-family: var(--label); font-size: 11.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.coverNames { max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 54px; font-weight: 600; line-height: 1; color: #fff3e0; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 2px 18px rgba(255, 160, 70, .35); }
+.coverNames em { display: block; font-size: 36px; font-style: normal; color: var(--saffron); }
+.coverDate { margin-top: 10px; font-family: var(--label); font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: #f1cfa6; }
+.plate { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 320px; margin-top: auto; padding: 22px 18px 20px; border-radius: 26px; background: var(--tad-rose); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4), 0 18px 34px rgba(0, 0, 0, .45); }
+.guest small { color: #5c3524; font-size: 14.5px; }
+.guest strong { font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--night); }
+.table { border-color: var(--copper); color: var(--copper); font-family: var(--label); }
+.openBtn { background: var(--night); color: var(--gold-l); font-family: var(--label); font-size: 13px; letter-spacing: .14em; box-shadow: 0 8px 18px rgba(38, 18, 10, .35); }
+.openBtn:hover { background: var(--copper); }
+.coverSpacer { height: 26px; flex-shrink: 0; }
+
+/* ── Hero: saffron wall; the photo under a cedar lintel with a lantern hanging at its side ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 22px 44px; text-align: center; background: radial-gradient(70% 30% at 70% 10%, rgba(255, 220, 160, .45), transparent 70%), var(--tad); }
+.heroKicker { font-family: var(--label); font-size: 11.5px; letter-spacing: .3em; text-transform: uppercase; color: var(--cedar); }
+.heroNames { max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1; color: var(--night); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--ivory); }
+.heroDate { margin-top: 8px; font-family: var(--label); font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--cedar); }
+.heroFrame { position: relative; width: 86%; margin-top: 34px; align-self: flex-start; }
+.heroFrame::before, .heroFrame::after { content: ""; position: absolute; z-index: 2; left: -10px; right: -10px; height: 26px; background: var(--cedar-b); box-shadow: 0 6px 12px rgba(38, 18, 10, .3); }
+.heroFrame::before { top: -14px; }
+.heroFrame::after { bottom: -14px; }
+.heroPhoto { width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: var(--night); box-shadow: 0 20px 40px rgba(74, 36, 20, .3); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPhoto > span { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 100px; }
+.heroLantern { position: absolute; z-index: 3; top: -14px; right: -64px; width: 62px; height: auto; transform-origin: 50% 0; animation: swing 6s ease-in-out -2s infinite alternate; }
+.heroNote { max-width: 320px; margin-top: 40px; color: var(--night); font-family: var(--display); font-size: 21px; font-style: italic; line-height: 1.4; }
+
+@keyframes flicker { 0%, 100% { filter: brightness(1); } 30% { filter: brightness(.82); } 55% { filter: brightness(1.12); } 75% { filter: brightness(.9); } }
+@keyframes swing { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@media (prefers-reduced-motion: reduce) { .coverDots, .lanternWrap, .heroLantern, .closingEmblem, .countBand::before, .gallery::before, .closing::before { animation: none; } }

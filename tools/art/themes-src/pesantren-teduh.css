@@ -1,0 +1,157 @@
+/* Pesantren Teduh — halaman pesantren yang teduh di sore hari: surau kayu berserambi, bedug di tiang, pohon kamboja yang berbunga, halaman berpasir yang disapu lidi, dan bayang daun yang bergerak pelan; hangat dan bersahaja. */
+.root, .cover {
+  --bg: #f6ecd9; --paper: #fbf4e6; --ivory: #fffaf0; --field: #fffdf7; --ink: #3b2a1e; --muted: #6f5a48; --line: #e3d2b4;
+  --accent: #5e3b20; --accent2: #7a5030; --gold: #c0643a; --gold-l: #f6dcae; --gold-d: #9a4e2a;
+  --band-bg: #3f5a34; --band-ink: #fbf4e6;
+  --display: "Kurale", "Literata", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Caveat", cursive;
+  --leaf: #3f5a34; --tile: #c0643a;
+  --dapple: url(/themes/art/pesantren-teduh/dapple.webp) 0 0 / 300px 300px repeat;
+  --genteng: radial-gradient(circle at 50% 0, transparent 9px, var(--tile) 9.5px) 0 0 / 20px 12px repeat-x;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5e3b20; --t-accent-ink: #fbf4e6; --t-bg: #f6ecd9; --t-ink: #3b2a1e; --t-muted: #6f5a48; --t-line: #e3d2b4; --t-field: #fffdf7;
+  --t-radius: 8px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Kurale", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--script); font-size: 22px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--gold-d); }
+.head h2 { font-family: var(--display); color: var(--accent); }
+.divider { width: 200px; }
+
+.section { padding: 60px 24px; }
+.salamBlock { padding: 46px 28px 56px; background: var(--paper); }
+.arabic { color: var(--accent); font-size: 29px; }
+.salamTitle { font-family: var(--display); font-size: 28px; color: var(--accent); }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+
+/* couple: photos on wooden boards with a kamboja sprig */
+.couple { gap: 10px; background: var(--bg); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 206px; height: 256px; padding: 9px; border: 0; border-radius: 6px; background: linear-gradient(90deg, #6e4424, #9a6a3e 30%, #7a4c28 60%, #9a6a3e 85%, #6e4424); box-shadow: 0 14px 26px rgba(59, 42, 30, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.pSprig { position: absolute; z-index: 2; top: -36px; right: -74px; width: 170px; height: auto; pointer-events: none; }
+.personWrap:last-of-type .pSprig { right: auto; left: -74px; scale: -1 1; }
+.nick { font-family: var(--display); font-size: 44px; color: var(--accent); }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--leaf); }
+.parents { font-size: 15px; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 54px; }
+.amp img { width: 30px; animation: sway 5s ease-in-out infinite alternate; }
+
+/* countdown: green shade of the kamboja, leaf shadows drifting, wooden tablets */
+.countBand { padding: 66px 18px 58px; background: linear-gradient(180deg, #3f5a34, #4d6a3e); }
+.countBand::before { content: ""; position: absolute; inset: -40px; z-index: -1; background: var(--dapple); opacity: .9; animation: dapple 26s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: #fbf4e6; }
+.count > div { height: 92px; border: 0; border-radius: 6px; background: linear-gradient(180deg, #fbf4e6, #f2e3c6); box-shadow: inset 0 -6px 0 #9a6a3e, 0 10px 18px rgba(20, 30, 10, .25); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--accent); font-size: 31px; }
+.count small { font-family: var(--script); font-style: normal; font-size: 17px; color: var(--gold-d); }
+.ghostBtn { border-color: var(--gold-l); color: #fbf4e6; font-family: var(--serif); border-radius: 6px; }
+
+/* events: papan under a genteng eave */
+.events { background: var(--paper); gap: 26px; }
+.event { padding: 44px 22px 26px; border: 1px solid var(--line); border-radius: 6px; background: var(--ivory); box-shadow: 0 10px 22px rgba(59, 42, 30, .08); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 0; background: var(--genteng); }
+.eventNo { top: 26px; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.event h3 { margin-top: 16px; font-family: var(--display); font-size: 27px; color: var(--accent); }
+.eventDate { color: var(--leaf); font-weight: 600; font-style: normal; }
+.eventTime { font-family: var(--serif); color: var(--gold-d); }
+.rule { background: var(--line); width: 70px; height: 2px; }
+.mapBtn { border-radius: 6px; background: var(--leaf); color: #fbf4e6; font-family: var(--serif); }
+.mapBtn:hover { background: #4d6a3e; }
+
+.story { background: var(--bg); }
+.timeline::before { left: 20px; width: 2px; background: linear-gradient(#9a6a3e, rgba(154, 106, 62, .15)); }
+.node { border-color: var(--line); background: var(--ivory); }
+.node img { width: 26px; }
+.storyBody small { font-family: var(--script); font-size: 20px; letter-spacing: 0; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-size: 22px; color: var(--accent); }
+.storyImg { border-radius: 6px; }
+
+.gallery { background: var(--paper); }
+.mosaic { padding: 8px; border-radius: 6px; background: linear-gradient(90deg, #6e4424, #9a6a3e 30%, #7a4c28 60%, #9a6a3e 85%, #6e4424); gap: 6px; }
+.tile, .tile:first-child { border-radius: 3px; }
+
+.wishes { background: var(--bg); }
+.form { border-radius: 8px; border-color: var(--line); background: var(--ivory); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.field input, .field textarea { border-radius: 6px; }
+.choices button { border-radius: 6px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--leaf); border-color: var(--leaf); color: #fbf4e6; }
+.submit { border-radius: 6px; background: var(--accent); color: #fbf4e6; font-family: var(--serif); font-weight: 600; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { font-family: var(--script); font-style: normal; font-size: 28px; color: var(--accent); }
+.sentBox img { width: 120px; }
+.wish { border-radius: 8px; border-left: 4px solid var(--tile); }
+.wish strong { font-family: var(--display); color: var(--accent); }
+.wish small { background: rgba(63, 90, 52, .12); color: var(--leaf); }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 8px; padding-top: 38px; background: var(--leaf); }
+.gift::after { inset: 0 0 auto; width: auto; height: 14px; border: 0; border-radius: 0; box-shadow: none; background: var(--genteng); z-index: 0; }
+.gift h3 { font-family: var(--serif); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); color: #fbf4e6; }
+.copy { border-radius: 6px; font-family: var(--serif); }
+.copyOn, .copyOn:hover { color: var(--leaf); }
+
+/* closing: the swept yard at dusk with the bedug */
+.closing { padding: 56px 28px 60px; background: linear-gradient(180deg, var(--bg), #ead8b4); color: var(--ink); }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--dapple); opacity: .6; animation: dapple 30s ease-in-out infinite alternate; }
+.closingDecor { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.closingDecor img { position: absolute; }
+.clSprig { top: 0; right: -60px; width: 220px; height: auto; }
+.clFlower { width: 30px; height: auto; top: -20px; animation: drop 13s linear infinite; }
+.clFlower:nth-of-type(2) { left: 18%; }
+.clFlower:nth-of-type(3) { left: 58%; animation-delay: 6s; }
+.closingBedug { width: 190px; height: auto; margin-bottom: 6px; }
+.thanks { font-family: var(--display); font-size: 44px; color: var(--accent); }
+.closingText { color: var(--muted); }
+.closingSalam { font-family: var(--serif); font-weight: 600; color: var(--leaf); }
+.family { font-family: var(--serif); color: var(--muted); }
+.closingNames { font-family: var(--script); color: var(--gold-d); font-size: 42px; }
+.made { color: rgba(59, 42, 30, .5); }
+.made:hover { color: var(--gold-d); }
+.music { background: var(--leaf); border-color: var(--gold-l); }
+
+/* ── Cover: warm afternoon over the surau, shade drifting over the sandy yard ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 44px 0 0; overflow: hidden; background: radial-gradient(60% 30% at 18% 18%, rgba(255, 226, 160, .9), rgba(255, 226, 160, 0) 70%), linear-gradient(180deg, #f7e2bd 0%, #fbf0dc 48%); color: var(--ink); text-align: center; isolation: isolate; }
+.cover > * { flex-shrink: 0; }
+.arabicCover { font-family: Amiri, "Traditional Arabic", serif; font-size: 25px; line-height: 1.5; color: var(--accent); }
+.kicker { margin-top: 2px; font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--leaf); }
+.coverLabel { margin-top: 16px; font-family: var(--script); font-size: 26px; color: var(--gold-d); }
+.coverNames { max-width: calc(100% - 40px); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; font-family: var(--script); font-size: 40px; font-style: normal; color: var(--gold); }
+.coverDate { margin-top: 8px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--leaf); }
+.scene { position: relative; width: 100%; margin-top: 4px; }
+.scene > img:first-child { display: block; width: 112%; max-width: none; height: auto; margin-left: -9%; }
+.fallFlower { position: absolute; top: 4%; width: 24px; height: auto; animation: drop 10s linear infinite; pointer-events: none; }
+.f1 { left: 16%; }
+.f2 { left: 34%; width: 18px; animation-delay: 4s; animation-duration: 12s; }
+.yard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; flex: 1 0 auto; margin-top: -6px; padding: 10px 24px 32px; background: linear-gradient(180deg, #e9d6b0, #e2cc9e); isolation: isolate; }
+.yard::before { content: ""; position: absolute; inset: -160px 0 0; z-index: -1; background: var(--dapple); opacity: .5; animation: dapple 24s ease-in-out infinite alternate; pointer-events: none; }
+.guest small { color: #6f5a48; font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 21px; color: var(--accent); }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--serif); border-radius: 6px; }
+.openBtn { border-radius: 6px; background: var(--accent); color: #fbf4e6; font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .06em; box-shadow: inset 0 -4px 0 #3e2614, 0 10px 20px rgba(59, 42, 30, .28); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: a photo pinned to the wooden papan pengumuman, handwritten note ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 22px 44px; overflow: hidden; background: linear-gradient(180deg, #f7e2bd, var(--paper)); color: var(--ink); text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--dapple); opacity: .55; animation: dapple 28s ease-in-out infinite alternate; }
+.heroKicker { font-family: var(--script); font-size: 24px; color: var(--gold-d); }
+.heroNames { margin-top: 2px; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; color: var(--accent); overflow-wrap: anywhere; }
+.heroNames em { padding: 0 8px; font-family: var(--script); font-style: normal; color: var(--gold); }
+.heroDate { margin-top: 6px; font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--leaf); }
+.papan { position: relative; width: 100%; margin-top: 26px; padding: 14px; border-radius: 6px; background: linear-gradient(90deg, #6e4424, #9a6a3e 30%, #7a4c28 60%, #9a6a3e 85%, #6e4424); box-shadow: 0 18px 32px rgba(59, 42, 30, .25); rotate: -1deg; }
+.papan::before { content: ""; position: absolute; inset: -12px 18px auto; height: 14px; background: var(--genteng); }
+.heroPhoto { height: 300px; overflow: hidden; border-radius: 2px; background: #3b2a1e; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.noteCard { position: absolute; right: 10px; bottom: -30px; padding: 10px 14px 12px; max-width: 200px; background: #fffdf3; box-shadow: 0 6px 14px rgba(59, 42, 30, .2); rotate: 3deg; font-family: var(--script); font-size: 22px; line-height: 1.1; color: var(--accent); text-align: left; }
+.noteCard::before { content: ""; position: absolute; top: -6px; left: 50%; width: 12px; height: 12px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #e48a5a, #a8482a); box-shadow: 0 2px 3px rgba(0, 0, 0, .3); }
+.heroSprig { position: absolute; z-index: 2; left: -40px; top: -40px; width: 170px; height: auto; pointer-events: none; }
+.heroNote { max-width: 320px; margin-top: 52px; font-size: 16px; font-style: italic; line-height: 1.7; color: var(--muted); }
+
+@keyframes dapple { from { translate: 0 0; } to { translate: 40px 24px; } }
+@keyframes drop { 0% { translate: 0 0; rotate: 0deg; opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { translate: 60px 70vh; rotate: 300deg; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .countBand::before, .closing::before, .hero::before, .yard::before, .fallFlower, .clFlower, .amp img { animation: none; } .fallFlower, .clFlower { display: none; } }

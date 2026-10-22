@@ -1,0 +1,160 @@
+/* Bridal Shower — pesta para sahabat untuk sang calon pengantin (cat air & foil rose gold, desain orisinal): dua gelas sampanye merah muda bersulang, jubah sutra di gantungan kayu, karangan mawar dengan pita, selempang "Bride to Be", gelembung; label butik bergantung, cermin oval, huruf Gloock, Mrs Saint Delafield & Figtree. */
+.root, .cover {
+  --bg: #fdf1f0; --paper: #f9e3e4; --ivory: #fffaf8; --field: #fffdfc; --ink: #5a2a3e; --muted: #8a6170; --line: #f0d3d6;
+  --accent: #b8506e; --accent2: #943d58; --gold: #d29a86; --gold-l: #fff1ec; --gold-d: #a8705e;
+  --band-bg: #7d2f4f; --band-ink: #fff4f2; --blush: #f6c9d0; --champ: #f7dcc8; --rg: linear-gradient(120deg, #c98a78, #f2c9b4 45%, #b9786a);
+  --display: Gloock, Georgia, serif; --serif: Figtree, system-ui, sans-serif; --script: "Mrs Saint Delafield", "Gloock", cursive;
+  --h2: 32px; --card-r: 20px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b8506e; --t-accent-ink: #ffffff; --t-bg: #fdf1f0; --t-ink: #5a2a3e; --t-muted: #8a6170; --t-line: #f0d3d6; --t-field: #fffdfc;
+  --t-radius: 16px; --t-font: Figtree, system-ui, sans-serif; --t-heading-font: Gloock, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+
+/* eyebrow: rose-gold small caps between hairlines */
+.eyebrow, .salamKicker, .role { display: inline-flex; align-items: center; gap: 10px; color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.eyebrow::before, .eyebrow::after, .salamKicker::before, .salamKicker::after { content: ""; width: 26px; height: 1px; background: var(--gold); }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-weight: 400; line-height: 1.15; }
+.head h2::first-letter { color: var(--accent); }
+.divider { width: 120px; margin-top: 4px; }
+
+.salamBlock { padding: 40px 30px 58px; background: linear-gradient(180deg, var(--paper), var(--bg)); }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 58px; line-height: 1; }
+.salamSub { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.intro { color: var(--muted); }
+
+/* the bride: an oval vanity mirror with a satin bow */
+.couple { background: var(--paper); }
+.portrait { margin: 26px 0 18px; }
+.portraitFrame { width: 228px; height: 296px; padding: 10px; border: 0; border-radius: 50%; background: var(--rg); box-shadow: 0 18px 40px rgba(122, 47, 79, .18); }
+.portraitFrame::before { content: ""; position: absolute; inset: 5px; z-index: 1; border: 1px solid rgba(255, 255, 255, .7); border-radius: 50%; pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, var(--blush)); color: var(--accent); font-family: var(--script); font-size: 130px; }
+.portraitBow { position: absolute; z-index: 2; left: 50%; bottom: -20px; width: 130px; height: auto; translate: -50% 0; }
+.portraitBubbles { position: absolute; z-index: 2; right: -46px; top: 10px; width: 46px; height: auto; animation: fizz 6s ease-in-out infinite; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 72px; line-height: 1.1; }
+.fullName { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.parents { color: var(--muted); font-style: italic; }
+
+/* countdown: four hanging boutique tags */
+.countBand { padding-top: 60px; background: radial-gradient(circle at 20% 10%, rgba(255, 210, 220, .18), transparent 40%), var(--band-bg); }
+.headLight .eyebrow { color: var(--champ); }
+.headLight .eyebrow::before, .headLight .eyebrow::after { background: var(--champ); }
+.headLight h2 { color: #fff4f2; }
+.count { gap: 12px; padding-top: 18px; }
+.count > div { height: 96px; overflow: visible; padding-top: 14px; border: 0; border-radius: 6px 6px 14px 14px; background: #fff7f4; box-shadow: 0 10px 20px rgba(0, 0, 0, .18); rotate: -3deg; transform-origin: 50% -18px; animation: tag 5s ease-in-out infinite; }
+.count > div:nth-child(even) { rotate: 3deg; animation-delay: -2.5s; }
+.count > div::before { content: ""; position: absolute; left: 50%; top: 8px; width: 9px; height: 9px; translate: -50% 0; border: 1.5px solid var(--gold); border-radius: 50%; background: var(--band-bg); }
+.count > div::after { inset: auto; left: 50%; top: -22px; width: 1px; height: 26px; translate: 0 0; background: var(--champ); animation: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--champ); }
+.countBubbles { position: absolute; z-index: -1; width: 70px; height: auto; opacity: .5; animation: fizz 7s ease-in-out infinite; }
+.cb1 { left: 10px; bottom: 30px; }
+.cb2 { right: 14px; top: 34px; width: 54px; animation-delay: -3s; }
+.ghostBtn { border-color: var(--champ); color: #fff4f2; font-family: var(--serif); font-size: 14px; letter-spacing: .04em; }
+
+/* events: a lace-edged menu card */
+.event { padding: 40px 24px 30px; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 16px 34px rgba(122, 47, 79, .08); }
+.event::before { inset: 8px; border: 1px solid var(--gold); border-radius: 2px; }
+.event::after { content: ""; position: absolute; left: 0; right: 0; top: -9px; height: 10px; background: radial-gradient(circle at 8px 10px, var(--ivory) 7px, transparent 7.5px) 0 0 / 16px 10px repeat-x; }
+.eventNo { top: -16px; width: auto; min-width: 56px; height: 30px; padding: 0 14px; font-size: 12px; border-radius: 999px; background: var(--rg); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.event h3 { color: var(--accent); font-family: var(--script); font-size: 44px; line-height: 1.05; }
+.eventDate { color: var(--ink); font-family: var(--display); font-style: normal; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 90px; height: 10px; background: url(/themes/art/bridal-shower/bow.webp) no-repeat center / contain; }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .08em; transition: background .3s, box-shadow .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 0; border-left: 1.5px dashed var(--gold); background: none; }
+.node { width: 44px; height: 44px; border: 1px solid var(--gold); background: var(--ivory); }
+.node img { width: 34px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 16px; background: var(--ivory); box-shadow: 0 8px 22px rgba(122, 47, 79, .07); }
+.storyBody small { color: var(--gold-d); font-weight: 600; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+
+/* gallery: polaroids pinned with tape */
+.mosaic { gap: 12px; grid-auto-rows: 160px; }
+.tile { padding: 6px 6px 20px; border-radius: 3px; background: #fff; box-shadow: 0 10px 22px rgba(122, 47, 79, .14); rotate: -2deg; object-fit: cover; }
+.tile:first-child { border-radius: 3px; rotate: 1.5deg; }
+.tile:nth-child(3) { rotate: 2.5deg; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 16px 34px rgba(122, 47, 79, .08); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .2em; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.wish { border: 0; border-left: 3px solid var(--blush); border-radius: 4px 16px 16px 4px; box-shadow: 0 6px 16px rgba(122, 47, 79, .06); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-size: 17px; }
+.wish small { background: var(--paper); color: var(--accent2); }
+.sent { color: var(--accent); font-family: var(--script); font-size: 36px; font-style: normal; line-height: 1.1; }
+.sentBox img { width: 130px; }
+
+/* gifts: a gift box card with rose-gold ribbon cross */
+.gifts { background: var(--paper); }
+.gift { overflow: visible; margin-top: 18px; padding: 40px 20px 24px; border-radius: 10px; background: linear-gradient(180deg, #e7b7a6 0 14px, var(--ivory) 14px); color: var(--ink); box-shadow: 0 16px 34px rgba(122, 47, 79, .1); }
+.gift::after { z-index: 1; left: 50%; right: auto; top: -22px; bottom: auto; width: 116px; height: 40px; translate: -50% 0; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/bridal-shower/bow.webp) no-repeat center / contain; }
+.gift h3 { color: var(--accent2); font-family: var(--display); font-size: 18px; letter-spacing: 0; }
+.giftIcon { border: 0; background: var(--accent); }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 24px; letter-spacing: .04em; }
+.gift small { color: var(--muted); }
+.copy { border: 1px solid var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.copy:hover { background: var(--paper); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #fff; }
+
+/* closing */
+.closing { padding-bottom: 50px; background: linear-gradient(180deg, var(--bg), var(--paper)); color: var(--ink); }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 68px; line-height: 1; }
+.closingText { color: var(--muted); }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.closingGlasses { width: 150px; height: auto; margin-bottom: -6px; }
+.hosts { order: 9; color: var(--gold-d); font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; line-height: 1.7; }
+.made { order: 10; color: rgba(90, 42, 62, .5); }
+.made:hover { color: var(--accent); }
+.music { border: 0; background: var(--accent); }
+
+/* ── Cover: a blush dressing-room page ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(52px, 9vh, 90px) 24px 36px; overflow: hidden; background: radial-gradient(ellipse at 50% 38%, #fffaf8 0, #fdf1f0 45%, #f8dfe1 100%); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(210, 154, 134, .6); pointer-events: none; }
+.rosesTop, .rosesBot { position: absolute; z-index: 1; width: 230px; height: auto; pointer-events: none; }
+.rosesTop { left: -26px; top: -18px; }
+.rosesBot { right: -26px; bottom: -14px; rotate: 180deg; }
+.kicker { position: relative; z-index: 2; color: var(--gold-d); font-size: 12px; font-weight: 600; letter-spacing: .4em; text-transform: uppercase; }
+.forBride { position: relative; z-index: 2; margin-top: 6px; color: var(--muted); font-family: var(--display); font-size: 15px; font-style: italic; }
+.coverName { position: relative; z-index: 2; max-width: 100%; margin-top: 2px; color: var(--accent); font-family: var(--script); font-size: clamp(92px, 30vw, 124px); font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.sash { position: relative; z-index: 3; display: grid; place-items: center; width: 330px; max-width: 100%; margin-top: -26px; rotate: -6deg; }
+.sash img { width: 100%; height: auto; }
+.sash span { position: absolute; inset: 0; display: grid; place-items: center; padding-bottom: 2px; color: var(--accent2); font-family: var(--display); font-size: 17px; letter-spacing: .3em; text-transform: uppercase; }
+.glassBox { position: relative; z-index: 1; width: 156px; margin-top: 8px; }
+.glasses { display: block; width: 100%; height: auto; transform-origin: 50% 100%; animation: cheers 4.5s ease-in-out infinite; }
+.fizz { position: absolute; left: 42%; top: -46px; width: 34px; height: auto; animation: fizz 4s ease-in-out infinite; }
+.coverDate { position: relative; z-index: 2; margin-top: 12px; padding: 6px 18px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); color: var(--ink); font-family: var(--display); font-size: 17px; }
+.tag { position: relative; z-index: 2; margin-top: 22px; padding: 22px 20px 14px; border-radius: 6px 6px 14px 14px; background: #fff; box-shadow: 0 12px 28px rgba(122, 47, 79, .12); color: var(--ink); }
+.tag::before { content: ""; position: absolute; left: 50%; top: 7px; width: 9px; height: 9px; translate: -50% 0; border: 1.5px solid var(--gold); border-radius: 50%; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); }
+.openBtn { position: relative; z-index: 2; margin-top: 18px; background: var(--rg); background-size: 200% 100%; color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 24px rgba(168, 112, 94, .35); }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero: the robe on its hanger ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 26px 44px; overflow: hidden; background: linear-gradient(180deg, #f8dfe1, var(--bg)); text-align: center; }
+.rail { position: absolute; left: 0; right: 0; top: 34px; height: 4px; background: var(--rg); opacity: .8; }
+.robe { width: 180px; height: auto; transform-origin: 50% 0; animation: swing 6s ease-in-out infinite; }
+.heroKicker { margin-top: 14px; color: var(--gold-d); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroName { max-width: 100%; color: var(--accent); font-family: var(--script); font-size: 84px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes fizz { 0%, 100% { translate: 0 0; opacity: .9; } 50% { translate: 4px -12px; opacity: .6; } }
+@keyframes cheers { 0%, 70%, 100% { rotate: 0deg; } 78% { rotate: -2.5deg; } 86% { rotate: 2deg; } 92% { rotate: -1deg; } }
+@keyframes swing { 0%, 100% { rotate: -2.5deg; } 50% { rotate: 2.5deg; } }
+@keyframes tag { 0%, 100% { rotate: -3deg; } 50% { rotate: 1deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .portraitBubbles, .count > div, .countBubbles, .glasses, .fizz, .robe { animation: none; }
+}

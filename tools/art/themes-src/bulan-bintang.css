@@ -1,0 +1,177 @@
+/* Bulan Bintang — tanpa foto: langit malam pastel periwinkle ke lilac, bulan sabit cat air yang lembut, bintang yang berkelip pelan, dan gumpalan awan. */
+.root, .cover {
+  --bg: #f3eefb; --paper: #faf7fd; --ivory: #fffdfe; --field: #ffffff; --ink: #3b3866; --muted: #6c6890; --line: #ddd3ef;
+  --accent: #5a5fa6; --accent2: #6d73b8; --gold: #d9bf86; --gold-l: #fff1cc; --gold-d: #9a7d44;
+  --band-bg: #7d88cc; --band-ink: #fffaf3;
+  --display: "Bellefair", "Cormorant Garamond", Georgia, serif; --serif: "Mulish", "Nunito Sans", system-ui, sans-serif; --script: "Italianno", cursive;
+  --sky: url(/themes/art/bulan-bintang/sky.webp) center top / cover no-repeat;
+  --night: linear-gradient(180deg, #7d88cc 0%, #9a9fd8 45%, #c4b2e2 100%);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a5fa6; --t-accent-ink: #fffaf3; --t-bg: #f3eefb; --t-ink: #3b3866; --t-muted: #6c6890; --t-line: #ddd3ef; --t-field: #ffffff;
+  --t-radius: 22px; --t-font: "Mulish", system-ui, sans-serif; --t-heading-font: "Bellefair", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--accent2); }
+.head h2 { font-family: var(--display); color: var(--ink); }
+.divider { width: 190px; }
+
+/* ── section rhythm: soft cloud edges between lilac and white ── */
+.section { padding: 64px 24px; }
+.salamBlock { padding: 46px 30px 58px; background: linear-gradient(180deg, #f6eefc, var(--bg)); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--accent2); }
+.salamTitle { font-family: var(--display); font-size: 27px; color: var(--ink); }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+
+/* couple: monogram moons */
+.couple { background: var(--paper); gap: 12px; }
+.portrait { display: grid; place-items: center; width: 250px; height: 250px; margin-bottom: 8px; }
+.pMedal { position: absolute; inset: 0; width: 100%; height: 100%; animation: drift 9s ease-in-out infinite alternate; }
+.portraitFrame { position: relative; width: 150px; height: 150px; padding: 0; border: 0; border-radius: 50%; background: transparent; }
+.monogram { color: var(--accent); font-family: var(--script); font-size: 110px; line-height: 1; translate: 0 6px; }
+.nick { font-family: var(--display); font-size: 44px; color: var(--ink); }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--accent); }
+.parents { font-size: 15px; }
+.amp { margin: 18px 0; gap: 12px; color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 28px; height: 28px; animation: twinkle 3.8s ease-in-out infinite; }
+.amp img:last-child { animation-delay: 1.9s; }
+
+/* countdown: a band of night sky, each unit a small moon */
+.countBand { padding: 70px 18px 92px; background: var(--sky); background-position: center 30%; }
+.countDecor { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.countDecor img { position: absolute; }
+.cdMoon { top: -14px; right: -52px; width: 130px; height: auto; opacity: .85; animation: floaty 10s ease-in-out infinite alternate; }
+.cdStar { width: 22px; height: 22px; animation: twinkle 4s ease-in-out infinite; }
+.cdStar:nth-of-type(2) { top: 40px; left: 30px; }
+.cdStar:nth-of-type(3) { top: 120px; left: 70%; width: 14px; height: 14px; animation-delay: 1.3s; }
+.cdStar:nth-of-type(4) { top: 64%; left: 12px; width: 16px; height: 16px; animation-delay: 2.4s; }
+.cdClouds { bottom: -6px; left: 50%; width: 140%; max-width: none; height: auto; translate: -50% 0; opacity: .95; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: #fffaf3; text-shadow: 0 2px 16px rgba(60, 50, 120, .25); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 76px; width: 76px; border: 0; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #fffaf0, #fbefd6 55%, #f0dcae 100%); box-shadow: 0 0 0 6px rgba(255, 244, 214, .18), 0 0 26px rgba(255, 240, 200, .55); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--accent); font-size: 28px; line-height: 1; }
+.count small { font-family: var(--serif); font-style: normal; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.countTba { color: #fffaf3; }
+.ghostBtn { position: relative; z-index: 1; border-color: rgba(255, 250, 243, .7); color: #fffaf3; font-family: var(--serif); font-weight: 600; background: rgba(90, 95, 166, .25); backdrop-filter: blur(4px); }
+
+/* events: cloud-white cards with a moon-arch top */
+.events { background: var(--bg); gap: 30px; }
+.event { padding: 46px 22px 28px; border: 0; border-radius: 120px 120px 26px 26px; background: var(--ivory); box-shadow: 0 18px 40px rgba(90, 80, 160, .1); }
+.event::before { inset: 8px; border: 1px solid var(--line); border-radius: 112px 112px 20px 20px; }
+.eventNo { top: 14px; width: auto; height: auto; padding: 0; background: transparent; color: var(--gold-d); font-family: var(--display); font-size: 16px; letter-spacing: .3em; }
+.event h3 { font-family: var(--display); font-size: 28px; color: var(--ink); }
+.eventDate { color: var(--accent); font-style: normal; font-weight: 600; font-size: 16px; }
+.eventTime { font-family: var(--serif); color: var(--gold-d); font-weight: 600; }
+.rule { background: var(--gold); width: 40px; }
+.event strong { color: var(--ink); font-weight: 700; font-size: 17px; }
+.mapBtn { background: var(--accent); color: #fffaf3; font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: linear-gradient(var(--gold), rgba(217, 191, 134, .1)); }
+.node { border: 0; background: transparent; }
+.node img { width: 34px; animation: twinkle 4.5s ease-in-out infinite; }
+.timeline li:nth-child(2) .node img { animation-delay: 1.5s; }
+.timeline li:nth-child(3) .node img { animation-delay: 3s; }
+.storyBody small { font-family: var(--serif); font-weight: 700; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-size: 23px; color: var(--ink); }
+.storyBody p { font-size: 15px; }
+.storyImg { border-radius: 20px; }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 20px; }
+.tile:first-child { border-radius: 120px 120px 20px 20px; }
+
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 16px 40px rgba(90, 80, 160, .1); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; color: var(--accent); letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 14px; background: #fbf9ff; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fffaf3; }
+.submit { background: var(--accent); color: #fffaf3; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; font-size: 22px; }
+.sentBox img { width: 64px; }
+.wish { border: 0; border-radius: 20px; background: var(--ivory); box-shadow: 0 6px 18px rgba(90, 80, 160, .06); }
+.wish strong { font-family: var(--serif); font-weight: 700; color: var(--ink); }
+.wish small { background: #eee8fa; color: var(--accent); }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 26px; background: var(--night); box-shadow: 0 16px 34px rgba(90, 80, 160, .2); }
+.gift::after { right: 20px; bottom: auto; top: 18px; border: 0; width: 34px; height: 34px; box-shadow: inset -9px 5px 0 0 rgba(255, 244, 214, .7); }
+.gift h3 { font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; color: var(--gold-l); }
+.giftNo { font-family: var(--display); font-size: 26px; color: #fffaf3; }
+.giftIcon { border-color: rgba(255, 241, 204, .6); }
+.copy { border-color: rgba(255, 241, 204, .7); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: the night returns — moon over clouds */
+.closing { padding: 52px 28px 110px; background: var(--sky); background-position: center 20%; }
+.closingDecor { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.closingDecor img { position: absolute; }
+.clClouds { bottom: -96px; left: 50%; width: 150%; max-width: none; height: auto; translate: -50% 0; opacity: .7; }
+.clPuff { top: 6%; left: -60px; width: 170px; height: auto; opacity: .75; animation: drift 14s ease-in-out infinite alternate; }
+.closingMoon { width: 150px; height: auto; margin-bottom: 4px; animation: floaty 9s ease-in-out infinite alternate; }
+.thanks { font-family: var(--script); font-size: 60px; color: #fffaf3; text-shadow: 0 2px 18px rgba(60, 50, 120, .3); }
+.closingText, .family, .closingNames, .closingSalam { text-shadow: 0 1px 14px rgba(70, 60, 140, .5); }
+.closingText { color: #fffaf3; }
+.closingSalam { font-family: var(--serif); font-weight: 600; color: #fffaf3; }
+.family { font-family: var(--serif); color: rgba(255, 250, 243, .9); }
+.closingNames { font-family: var(--display); color: #fffaf3; font-size: 32px; }
+.made { color: rgba(59, 56, 102, .55); position: relative; z-index: 1; }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: pastel night sky, big crescent, twinkling stars, a cloud bank to rest the guest card on ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 54px 24px 0; overflow: hidden; background: var(--sky); color: #fffaf3; text-align: center; isolation: isolate; }
+.cover > * { flex-shrink: 0; }
+.coverMoon { position: absolute; z-index: -1; top: 4px; right: -50px; width: 214px; height: auto; animation: floaty 10s ease-in-out infinite alternate; }
+.coverStar { position: absolute; z-index: -1; width: 24px; height: 24px; animation: twinkle 4s ease-in-out infinite; }
+.s1 { top: 70px; left: 28px; }
+.s2 { top: 180px; left: 62%; width: 14px; height: 14px; animation-delay: 1.2s; }
+.s3 { top: 300px; left: 14%; width: 18px; height: 18px; animation-delay: 2.1s; }
+.s4 { top: 46%; right: 26px; width: 20px; height: 20px; animation-delay: .6s; }
+.s5 { top: 30px; left: 46%; width: 12px; height: 12px; animation-delay: 2.8s; }
+.coverPuff { position: absolute; z-index: -1; top: 38%; left: -50px; width: 190px; height: auto; opacity: .85; animation: drift 16s ease-in-out infinite alternate; }
+.arabicCover { margin-top: 150px; font-family: Amiri, "Traditional Arabic", serif; font-size: 25px; line-height: 1.6; color: #fffaf3; text-shadow: 0 2px 14px rgba(60, 50, 120, .3); }
+.kicker { margin-top: 4px; font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.coverLabel { margin-top: 22px; font-family: var(--script); font-size: 34px; line-height: 1; color: #fffaf3; }
+.coverNames { max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 58px; font-weight: 400; line-height: .98; color: #fffaf3; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 4px 24px rgba(60, 50, 120, .3); }
+.coverNames em { display: block; margin: 2px 0; font-family: var(--script); font-size: 54px; font-style: normal; color: var(--gold-l); }
+.coverDate { margin-top: 14px; padding: 6px 16px; border-radius: 999px; background: rgba(255, 250, 243, .16); font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #fffaf3; }
+.cloudBed { position: relative; width: calc(100% + 48px); margin-top: auto; padding-top: 70px; }
+.cloudBed > img { position: absolute; top: 0; left: 50%; width: 150%; max-width: none; height: auto; translate: -50% 0; pointer-events: none; }
+.guestCard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 6px 24px 40px; background: #f6eefc; color: var(--ink); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 23px; color: var(--ink); }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: var(--accent); color: #fffaf3; font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 24px rgba(90, 95, 166, .35); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: monogram medallion under the night sky, sliding into lilac clouds ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 0; overflow: hidden; background: var(--sky); color: #fffaf3; text-align: center; isolation: isolate; }
+.heroMedal { position: relative; display: grid; place-items: center; width: 260px; height: 260px; }
+.heroMedal img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.heroMono { position: relative; color: var(--accent); font-family: var(--script); font-size: 84px; line-height: 1; translate: 0 6px; }
+.heroMono i { padding: 0 2px; font-style: normal; font-size: 48px; color: var(--gold-d); }
+.heroKicker { margin-top: 18px; font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.heroNames { margin-top: 6px; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-shadow: 0 3px 20px rgba(60, 50, 120, .3); }
+.heroNames em { padding: 0 8px; font-family: var(--script); font-size: 46px; font-style: normal; color: var(--gold-l); }
+.heroDate { margin-top: 8px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.heroStar { position: absolute; z-index: -1; width: 20px; height: 20px; animation: twinkle 4s ease-in-out infinite; }
+.h1s { top: 34px; left: 30px; }
+.h2s { top: 120px; right: 34px; width: 14px; height: 14px; animation-delay: 1.6s; }
+.h3s { top: 250px; left: 20px; width: 12px; height: 12px; animation-delay: 2.6s; }
+.heroClouds { position: relative; width: calc(100% + 48px); margin-top: 22px; }
+.heroClouds img { display: block; width: 140%; max-width: none; height: auto; margin-left: -20%; }
+.heroNote { width: calc(100% + 48px); margin-top: -2px; padding: 4px 34px 34px; background: #f6eefc; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.7; }
+
+@keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 45% { opacity: .35; scale: .72; } 60% { opacity: .9; scale: 1.06; } }
+@keyframes floaty { from { translate: 0 0; } to { translate: -8px 10px; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverMoon, .coverStar, .coverPuff, .heroStar, .pMedal, .amp img, .cdMoon, .cdStar, .node img, .clPuff, .closingMoon { animation: none; }
+}

@@ -1,0 +1,165 @@
+/* Mamluk Kairo — pernikahan Islami bernuansa arsitektur Mamluk di Kairo: dinding batu ablaq berlapis terang-gelap, portal bermuqarnas dengan ambang batu bersambung (joggled), lampu kuningan berenamel, dan palet batu pasir, merah bata, basal, serta biru enamel. */
+.root, .cover {
+  --bg: #f2e7d2; --paper: #ebdcc0; --ivory: #faf4e8; --field: #fffcf5; --ink: #2f2520; --muted: #6c5a4b; --line: #e0cfb0;
+  --accent: #8e4528; --accent2: #a9583a; --gold: #b98a3e; --gold-l: #ecd08a; --gold-d: #7a5a22;
+  --band-bg: #2f2622; --band-ink: #f2e7d2;
+  --display: Forum, Georgia, serif; --serif: "Libre Caslon Text", Georgia, serif; --script: Forum, Georgia, serif;
+  --basalt: #2f2622; --rust: #a9583a; --enamel: #2e5d8a; --lime: #e9d6b0;
+  --ablaq: url(/themes/art/mamluk-kairo/ablaq.webp) repeat 0 0 / 187px auto;
+  --ablaq-s: url(/themes/art/mamluk-kairo/ablaq.webp) repeat-x 0 0 / 120px 44px;
+  --arch: polygon(0 100%, 0 30%, 2% 22%, 6% 15%, 12% 9%, 20% 4.5%, 30% 1.8%, 40% .5%, 50% 0, 60% .5%, 70% 1.8%, 80% 4.5%, 88% 9%, 94% 15%, 98% 22%, 100% 30%, 100% 100%);
+  --h2: 36px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e4528; --t-accent-ink: #faf4e8; --t-bg: #f2e7d2; --t-ink: #2f2520; --t-muted: #6c5a4b; --t-line: #e0cfb0; --t-field: #fffcf5;
+  --t-radius: 6px; --t-font: "Libre Caslon Text", Georgia, serif; --t-heading-font: Forum, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--basalt); letter-spacing: .02em; }
+.divider { width: 170px; }
+
+/* opening on basalt, framed by ablaq courses */
+.salamBlock { position: relative; padding: 80px 26px 74px; background: var(--basalt); color: var(--band-ink); }
+.salamBlock::before, .salamBlock::after { content: ""; position: absolute; left: 0; right: 0; height: 44px; background: var(--ablaq-s); }
+.salamBlock::before { top: 0; }
+.salamBlock::after { bottom: 0; background-position: 60px 0; }
+.arabic { color: var(--gold-l); font-size: 30px; }
+.salamKicker { color: #e3b38f; }
+.salamTitle { color: var(--band-ink); font-family: var(--display); font-size: 32px; line-height: 1.2; }
+.salamBlock .intro { color: #e4d6bf; }
+
+/* couple: portraits under pointed arches edged in ablaq */
+.couple { gap: 14px; background: var(--bg); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 290px; padding: 10px; border: 0; border-radius: 0; background: var(--ablaq); background-size: 120px auto; clip-path: var(--arch); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--arch); }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--basalt); color: var(--gold-l); font-family: var(--display); clip-path: var(--arch); }
+.nick { color: var(--basalt); font-family: var(--display); font-size: 48px; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { color: var(--rust); font-family: var(--display); font-size: 50px; }
+.amp img { width: 44px; }
+
+/* countdown: alternating voussoir blocks on basalt */
+.countBand { padding: 70px 22px 72px; background: radial-gradient(70% 50% at 50% 0%, rgba(236, 208, 138, .16), transparent 70%), var(--basalt); }
+.headLight .eyebrow { color: #e3b38f; }
+.headLight h2 { color: var(--band-ink); }
+.count { gap: 0; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 92px; border: 0; border-radius: 0; background: var(--lime); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15); }
+.count > div:nth-child(even) { background: var(--rust); }
+.count > div::after { display: none; }
+.count b { color: var(--basalt); font-family: var(--display); font-size: 34px; }
+.count small { color: #6c5a4b; font-size: 12px; }
+.count > div:nth-child(even) b { color: #fbefdc; }
+.count > div:nth-child(even) small { color: #f3d2bd; }
+.ghostBtn { border-color: var(--gold); font-family: var(--display); letter-spacing: .1em; }
+
+/* events: stone tablets with an ablaq cornice */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 58px 22px 26px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(47, 38, 34, .1); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 30px; border: 0; border-radius: 0; background: var(--ablaq-s); background-size: 120px 44px; }
+.event:hover { box-shadow: 0 0 0 1px var(--gold), 0 16px 30px rgba(47, 38, 34, .14); }
+.eventNo { top: 40px; width: 36px; height: 36px; border-radius: 50%; background: var(--enamel); color: #fbefdc; font-family: var(--display); font-size: 14px; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4px var(--gold); }
+.event h3 { margin-top: 16px; color: var(--basalt); font-family: var(--display); font-size: 28px; }
+.eventDate { color: var(--accent); }
+.eventTime { color: var(--gold-d); font-family: var(--display); letter-spacing: .06em; }
+.rule { width: 80px; height: 8px; background: repeating-linear-gradient(90deg, var(--lime) 0 10px, var(--basalt) 10px 20px); box-shadow: 0 0 0 1px #c9b089; }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 21px; }
+.mapBtn { border-radius: 2px; background: var(--basalt); color: var(--gold-l); font-family: var(--display); letter-spacing: .08em; }
+.mapBtn:hover { background: var(--rust); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 4px; background: repeating-linear-gradient(var(--lime) 0 12px, var(--rust) 12px 24px, var(--lime) 24px 36px, var(--basalt) 36px 48px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody small { color: var(--accent); font-family: var(--display); font-size: 14px; }
+.storyBody h3 { color: var(--basalt); font-family: var(--display); font-size: 24px; }
+
+/* gallery on basalt with lamp-light */
+.gallery { padding: 80px 22px 74px; background: radial-gradient(60% 40% at 50% 0%, rgba(255, 190, 110, .18), transparent 70%), var(--basalt); }
+.gallery::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 44px; background: var(--ablaq-s); }
+.gallery .eyebrow { color: #e3b38f; }
+.gallery .head h2 { color: var(--band-ink); }
+.mosaic { gap: 8px; grid-auto-rows: 136px; }
+.tile { border-radius: 0; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; clip-path: var(--arch); }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5n + 5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 4px; border-color: var(--line); background: var(--ivory); }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--rust); background: var(--rust); color: #fbefdc; }
+.submit { border-radius: 3px; background: var(--basalt); color: var(--gold-l); font-family: var(--display); font-size: 15px; letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--rust); }
+.sentBox img { width: 80px; }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; font-size: 24px; }
+.wish { border-radius: 3px; border-top: 4px solid var(--lime); box-shadow: inset 0 3px 0 var(--rust); }
+.wish strong { color: var(--basalt); font-family: var(--display); font-size: 18px; }
+.wish small { border-radius: 2px; background: #eedccd; color: var(--accent); }
+
+/* gifts: basalt plaques with brass inlay */
+.gifts { background: var(--paper); }
+.gift { border-radius: 2px; background: linear-gradient(rgba(47, 38, 34, .92), rgba(47, 38, 34, .96)), var(--ablaq); box-shadow: inset 0 0 0 4px var(--basalt), inset 0 0 0 5px var(--gold); }
+.gift::after { display: none; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.giftNo { color: #fbefdc; font-family: var(--display); font-size: 25px; }
+.copy { border-radius: 2px; border-color: var(--gold); font-family: var(--display); letter-spacing: .1em; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--basalt); }
+
+/* closing: the wall with a lamp */
+.closing { padding: 0 26px 58px; background: linear-gradient(transparent 0, transparent 230px, var(--basalt) 230px), url(/themes/art/mamluk-kairo/ablaq.webp) repeat 50% 0 / 187px auto; }
+.closingEmblem { width: 96px; height: auto; margin-bottom: 24px; transform-origin: 50% 0; animation: lampSwing 8s ease-in-out infinite alternate; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 42px; }
+.closingSalam { color: #e3b38f; font-family: var(--display); font-size: 14px; letter-spacing: .08em; line-height: 1.6; }
+.family { font-family: var(--display); font-size: 14px; }
+.closingNames { font-family: var(--display); font-size: 36px; }
+.music { border-radius: 4px; background: var(--enamel); border-color: var(--gold-l); }
+
+/* ── Cover: an ablaq wall with the muqarnas portal; the couple seen through the doorway; text on a basalt plinth ── */
+.cover { display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--basalt); color: var(--band-ink); text-align: center; }
+.wall { position: relative; flex-shrink: 0; height: 472px; background: var(--ablaq); background-position: 50% 0; }
+.portal { position: absolute; left: 50%; top: 0; width: 300px; height: 472px; translate: -50% 0; }
+.portal > img { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+.door { position: absolute; z-index: 0; left: 23.5%; right: 23.5%; top: 58%; bottom: 0; overflow: hidden; background: #1d140e; }
+.door > img, .door > div { width: 100%; height: 100%; object-fit: cover; }
+.door > span { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 60px; }
+.lampL, .lampR { position: absolute; z-index: 2; top: 0; width: 40px; height: auto; transform-origin: 50% 0; animation: lampSwing 7s ease-in-out infinite alternate; }
+.lampL { left: 4px; }
+.lampR { right: 4px; animation-delay: -3s; }
+.plinth { position: relative; display: flex; flex-direction: column; align-items: center; flex: 1; padding: 18px 22px 30px; }
+.plinth::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--rust); }
+.kicker { margin-top: 10px; font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: #e3b38f; }
+.coverNames { max-width: 100%; margin-top: 2px; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.05; color: var(--band-ink); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { font-style: normal; color: var(--gold-l); }
+.coverDate { margin-top: 4px; font-family: var(--display); font-size: 15px; letter-spacing: .16em; color: var(--gold-l); }
+.guest { margin-top: 14px; }
+.guest small { color: #cdbda5; font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 22px; color: var(--band-ink); }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--display); }
+.openBtn { margin-top: 16px; border-radius: 2px; background: var(--lime); color: var(--basalt); font-family: var(--display); font-size: 15px; letter-spacing: .14em; box-shadow: 0 0 0 1px var(--lime), 0 0 0 4px var(--basalt), 0 0 0 5px var(--gold); }
+.openBtn:hover { background: var(--gold-l); }
+
+/* ── Hero: a pointed arch edged in ablaq, with a brass lamp ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 40px; text-align: center; background: var(--bg); }
+.heroKicker { font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+.heroNames { max-width: 100%; margin-top: 4px; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.05; color: var(--basalt); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--rust); }
+.heroDate { margin-top: 6px; font-family: var(--display); font-size: 15px; letter-spacing: .16em; color: var(--muted); }
+.heroArch { position: relative; width: 300px; max-width: 100%; margin-top: 30px; }
+.heroFrame { padding: 14px; background: var(--ablaq); background-size: 150px auto; clip-path: var(--arch); }
+.heroPhoto { width: 100%; aspect-ratio: 3 / 4.2; overflow: hidden; background: var(--basalt); clip-path: var(--arch); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPhoto > span { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 100px; }
+.heroLamp { position: absolute; top: 0; left: -46px; width: 52px; height: auto; transform-origin: 50% 0; animation: lampSwing 7s ease-in-out infinite alternate; }
+.heroNote { max-width: 320px; margin-top: 26px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes lampSwing { from { rotate: -2deg; } to { rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) { .lampL, .lampR, .heroLamp, .closingEmblem { animation: none; } }

@@ -1,0 +1,164 @@
+/* Raja Ampat — pernikahan Kristen Papua: gugusan pulau karst berpayung hutan di laguna toska jernih, langit luas berawan, cat air yang terang; pasir, toska, biru laut dalam, dan aksen bintang laut. */
+.root, .cover {
+  --bg: #f7f2e4; --paper: #eef5f1; --ivory: #fffdf7; --field: #ffffff; --ink: #12354a; --muted: #4f6b78; --line: #cfe2df;
+  --accent: #1d6f8a; --accent2: #2a8fa6; --gold: #e07b4f; --gold-l: #fdf3df; --gold-d: #b85a35;
+  --band-bg: #1d6f8a; --band-ink: #f4fbf8;
+  --display: "Instrument Serif", Georgia, serif; --serif: "Hanken Grotesk", system-ui, sans-serif; --script: "Instrument Serif", Georgia, serif;
+  --sea: #2fb3b6; --deep: #12354a; --sand: #f3ead3; --sky: #cfe6ee; --coral: #e07b4f;
+  --scene: url(/themes/art/raja-ampat/scene.webp);
+  --wave: url(/themes/art/raja-ampat/wave.webp);
+  --h2: 40px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d6f8a; --t-accent-ink: #ffffff; --t-bg: #f7f2e4; --t-ink: #12354a; --t-muted: #4f6b78; --t-line: #cfe2df; --t-field: #ffffff;
+  --t-radius: 22px; --t-font: "Hanken Grotesk", system-ui, sans-serif; --t-heading-font: "Instrument Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 38px; --t-heading-align: left; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--accent2); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.head { align-items: flex-start; width: 100%; text-align: left; gap: 6px; }
+.head h2, .headLight h2 { font-style: italic; line-height: 1.05; letter-spacing: -.01em; color: var(--deep); }
+.divider { width: 150px; margin-left: -6px; }
+.section { align-items: stretch; padding: 64px 24px; }
+
+/* opening: open sky, cloud drifting behind the salam */
+.salamBlock { position: relative; align-items: flex-start; gap: 12px; padding: 70px 28px 64px; background: linear-gradient(#cfe6ee, #eef5f1 70%, var(--bg)); text-align: left; overflow: hidden; isolation: isolate; }
+.salamBlock::before { content: ""; position: absolute; z-index: -1; top: 18px; right: -80px; width: 260px; height: 88px; background: url(/themes/art/raja-ampat/cloud.webp) no-repeat center / contain; opacity: .9; animation: cloudDrift 38s ease-in-out infinite alternate; }
+.salamKicker { color: var(--accent2); }
+.salamTitle { color: var(--deep); font-family: var(--display); font-size: 58px; font-style: italic; line-height: .95; }
+.salamBlock .intro { max-width: 340px; color: var(--muted); font-size: 16.5px; line-height: 1.7; text-align: left; }
+
+/* couple: pebble portraits staggered left / right */
+.couple { gap: 8px; background: var(--bg); }
+.person { align-items: flex-start; text-align: left; }
+.personWrap:nth-child(3) .person { align-items: flex-end; text-align: right; }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 236px; height: 290px; padding: 0; border: 0; border-radius: 58% 42% 46% 54% / 44% 50% 50% 56%; background: var(--sea); box-shadow: 14px 16px 0 -2px #cde9e3; }
+.personWrap:nth-child(3) .portraitFrame { border-radius: 42% 58% 54% 46% / 50% 44% 56% 50%; box-shadow: -14px 16px 0 -2px #f3dcc8; }
+.portraitFrame > img, .portraitFrame > div { border-radius: inherit; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-style: italic; }
+.nick { color: var(--deep); font-family: var(--display); font-size: 54px; font-style: italic; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { align-self: center; margin: 22px 0 10px; color: var(--coral); font-family: var(--display); font-size: 64px; font-style: italic; }
+.amp img { width: 34px; }
+.amp img:last-child { rotate: 24deg; scale: 1; }
+
+/* countdown: lagoon band with a foam shoreline */
+.countBand { align-items: center; padding: 120px 22px 64px; background: var(--wave) repeat-x 0 0 / 600px 75px, linear-gradient(#4ab6b8 60px, #2a9aa8 45%, #1d6f8a); background-color: var(--bg); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(60% 30% at 30% 70%, rgba(255, 255, 255, .14), transparent), radial-gradient(50% 24% at 80% 40%, rgba(255, 255, 255, .1), transparent); }
+.headLight h2 { color: #fff; font-size: 40px; }
+.headLight .eyebrow { color: #e4fbf6; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 74px; width: 74px; border: 1.5px solid rgba(255, 255, 255, .55); border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .35), rgba(255, 255, 255, .08) 60%); animation: bob 6s ease-in-out infinite; }
+.count > div:nth-child(2) { animation-delay: -1.5s; }
+.count > div:nth-child(3) { animation-delay: -3s; }
+.count > div:nth-child(4) { animation-delay: -4.5s; }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; line-height: 1; }
+.count small { color: #dff6f2; font-size: 10.5px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: #fff; }
+.ghostBtn { border-color: rgba(255, 255, 255, .7); color: #fff; font-family: var(--serif); font-weight: 600; }
+
+/* events: tide cards with a sea-coloured spine */
+.events { gap: 22px; background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 22px 24px 76px; border: 0; border-radius: 26px 26px 26px 6px; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 #e8e0c8, 0 16px 34px rgba(18, 53, 74, .08); overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 54px; border: 0; border-radius: 0; background: linear-gradient(#4ab6b8, #1d6f8a); }
+.event:hover { box-shadow: 0 1px 0 #e8e0c8, 0 20px 40px rgba(18, 53, 74, .14); }
+.eventNo { top: 24px; left: 27px; translate: -50% 0; width: auto; height: auto; background: none; color: #fff; font-family: var(--display); font-size: 26px; font-style: italic; letter-spacing: 0; }
+.event h3 { color: var(--deep); font-family: var(--display); font-size: 30px; font-style: italic; line-height: 1.05; }
+.eventDate { color: var(--accent); font-size: 15px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--muted); font-family: var(--serif); }
+.rule { width: 40px; height: 3px; border-radius: 2px; background: var(--coral); }
+.event strong { font-size: 17px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { background: var(--deep); color: #fff; font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent); }
+
+/* story: a lagoon chart line with sea stars */
+.story { background: linear-gradient(var(--bg), #eaf4f1); }
+.timeline::before { width: 2px; background: repeating-linear-gradient(var(--sea) 0 8px, transparent 8px 14px); }
+.node { border: 0; background: none; }
+.node img { width: 32px; }
+.storyBody small { color: var(--coral); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--deep); font-family: var(--display); font-size: 26px; font-style: italic; }
+.storyBody p { font-size: 15.5px; }
+
+/* gallery: shallow-water band */
+.gallery { padding-top: 110px; background: var(--wave) repeat-x 200px 0 / 600px 75px, linear-gradient(#4ab6b8 60px, #8fd6cb 45%, #d9efe6); background-color: #eaf4f1; }
+.gallery .eyebrow { color: #0f4f63; }
+.mosaic { grid-auto-rows: 132px; gap: 10px; }
+.tile { border-radius: 22px; box-shadow: 0 10px 22px rgba(18, 53, 74, .18); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 120px 120px 22px 22px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(3n + 6) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: #d9efe6; }
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 16px 34px rgba(18, 53, 74, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.field input, .field textarea { border-radius: 14px; background: #f6faf8; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--deep); background: var(--deep); color: #fff; }
+.submit { background: var(--coral); color: #fff; font-family: var(--serif); font-weight: 600; }
+.submit:not(:disabled):hover { background: var(--gold-d); }
+.sentBox img { width: 70px; }
+.sent { color: var(--deep); font-family: var(--display); font-size: 24px; }
+.wish { border: 0; border-radius: 20px 20px 20px 4px; background: rgba(255, 255, 255, .78); }
+.wish strong { color: var(--deep); font-family: var(--serif); font-weight: 600; }
+.wish small { background: #d4efe9; color: var(--accent); }
+
+/* gifts: deep-water cards */
+.gifts { background: var(--bg); }
+.gift { align-items: flex-start; border-radius: 26px; background: linear-gradient(150deg, #2a9aa8, #1d6f8a 55%, #12354a); text-align: left; padding: 24px 22px; }
+.gift::after { border-color: rgba(255, 255, 255, .08); }
+.giftNo { font-family: var(--display); font-size: 27px; letter-spacing: .02em; }
+.gift h3 { color: #dff6f2; font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+.copy { border-color: rgba(255, 255, 255, .7); color: #fff; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--deep); }
+
+/* closing: back to the lagoon */
+.closing { min-height: 640px; justify-content: flex-end; padding: 80px 26px 54px; background: linear-gradient(rgba(18, 53, 74, 0) 30%, rgba(18, 53, 74, .55) 62%, rgba(18, 53, 74, .92)), var(--scene) no-repeat 50% 54% / cover; }
+.closingEmblem { position: absolute; top: 46px; left: 50%; width: 220px; height: auto; translate: -50% 0; opacity: .95; animation: cloudDrift 30s ease-in-out infinite alternate; }
+.thanks { color: #fff; font-family: var(--display); font-size: 56px; font-style: italic; }
+.closingText { color: #e6f6f2; }
+.closingSalam { color: #ffd7bf; font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.family { color: #d7ece8; font-family: var(--serif); }
+.closingNames { color: #fff; font-family: var(--display); font-style: italic; font-size: 40px; }
+.music { background: var(--deep); border-color: #fff; }
+
+/* ── Cover: the lagoon painting, names in the wide sky, a sand card floating on the shallows ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 54px 26px 34px; overflow: hidden; background: var(--scene) no-repeat 50% 100% / cover, #bcd9e4; color: var(--deep); isolation: isolate; }
+.cloudA, .cloudB { position: absolute; z-index: -1; height: auto; pointer-events: none; }
+.cloudA { top: 30%; left: -40px; width: 170px; opacity: .85; animation: cloudDrift 26s ease-in-out infinite alternate; }
+.cloudB { top: 4%; right: -60px; width: 200px; opacity: .7; animation: cloudDrift 34s ease-in-out -8s infinite alternate-reverse; }
+.salam { font-family: var(--display); font-size: 30px; font-style: italic; color: var(--coral); }
+.kicker { margin-top: 6px; font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #2d5b6e; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 10px; font-family: var(--display); font-size: 70px; font-style: italic; font-weight: 400; line-height: .9; letter-spacing: -.015em; color: var(--deep); overflow-wrap: anywhere; }
+.coverNames em { align-self: flex-start; margin: 2px 0 2px 40%; font-size: 46px; color: var(--coral); }
+.coverNames span:last-child { align-self: flex-end; text-align: right; }
+.coverDate { align-self: flex-end; margin-top: 14px; padding: 6px 14px; border-radius: 999px; background: rgba(255, 255, 255, .55); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--deep); backdrop-filter: blur(3px); }
+.tide { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: auto; padding: 22px 18px 20px; border-radius: 28px 28px 28px 8px; background: rgba(255, 253, 247, .86); box-shadow: 0 18px 40px rgba(18, 53, 74, .25); text-align: center; backdrop-filter: blur(6px); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { font-family: var(--display); font-size: 25px; font-style: italic; color: var(--deep); }
+.table { border-color: var(--sea); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 210px; background: var(--deep); color: #fff; font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .12em; box-shadow: 0 10px 22px rgba(18, 53, 74, .3); }
+.openBtn:hover { background: var(--accent); }
+
+/* ── Hero: sky, names, the photo as an island of its own with a painted islet at its foot ── */
+.hero { position: relative; display: flex; flex-direction: column; padding: 46px 24px 30px; background: linear-gradient(#bcd9e4, #dcecef 50%, #eef5f1); overflow: hidden; isolation: isolate; }
+.hero .cloudA { top: 12px; left: auto; right: -50px; width: 190px; }
+.heroKicker { font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #2d5b6e; }
+.heroNames { max-width: 100%; margin-top: 8px; font-family: var(--display); font-size: 54px; font-style: italic; font-weight: 400; line-height: .95; color: var(--deep); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--coral); }
+.heroDate { margin-top: 10px; font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.heroPhotoWrap { position: relative; margin: 26px -4px 0; }
+.heroPhoto { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 190px 190px 30px 30px; background: var(--sea); box-shadow: 0 22px 44px rgba(18, 53, 74, .22); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPhoto > span { display: grid; place-items: center; height: 100%; color: #fff; font-family: var(--display); font-size: 110px; font-style: italic; }
+.heroIsle { position: absolute; right: -34px; bottom: -58px; width: 250px; height: auto; }
+.heroNote { max-width: 300px; margin-top: 70px; color: var(--muted); font-family: var(--display); font-size: 22px; font-style: italic; line-height: 1.35; }
+
+@keyframes cloudDrift { from { translate: -18px 0; } to { translate: 26px -4px; } }
+@keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+@media (prefers-reduced-motion: reduce) { .salamBlock::before, .count > div, .cloudA, .cloudB, .closingEmblem { animation: none; } }

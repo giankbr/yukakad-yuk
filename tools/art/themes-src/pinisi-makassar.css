@@ -1,0 +1,160 @@
+/* Pinisi Makassar — pernikahan Islami Bugis-Makassar: pinisi bertiang dua berlayar tujuh di senja Pantai Losari (cat air), lipa' sabbe kotak sutra Makassar merah-marun berbenang emas; potret berbentuk layar gaff, kartu berlunas sabbe, ungu senja dan jingga. */
+.root, .cover {
+  --bg: #f8eee6; --paper: #f1e2d6; --ivory: #fffaf4; --field: #fffdf9; --ink: #2a1c2e; --muted: #6a5a66; --line: #e6d2c2;
+  --accent: #3b2448; --accent2: #5a3462; --gold: #d29a3a; --gold-l: #f6d29a; --gold-d: #9a6a22;
+  --band-bg: #2e1d3c; --band-ink: #f8eee6;
+  --display: "Young Serif", Georgia, serif; --serif: "Hanken Grotesk", "Segoe UI", sans-serif; --script: Allura, cursive;
+  --sabbe-red: #b0202c; --dusk: #f4b88a;
+  --sabbe: url(/themes/art/pinisi-makassar/sabbe.webp) repeat 0 0 / 144px;
+  --sail: polygon(0 12%, 100% 0, 90% 100%, 0 100%);
+  --h2: 29px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3b2448; --t-accent-ink: #f8eee6; --t-bg: #f8eee6; --t-ink: #2a1c2e; --t-muted: #6a5a66; --t-line: #e6d2c2; --t-field: #fffdf9;
+  --t-radius: 2px; --t-font: "Hanken Grotesk", sans-serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--sabbe-red); }
+.head h2 { color: var(--accent); }
+
+/* divider: the little pinisi riding a hand-drawn swell */
+.divider { position: relative; display: flex; flex-direction: column; align-items: center; width: 180px; }
+.divider img { width: 64px; height: auto; margin-bottom: -6px; }
+.divider i { display: block; width: 100%; height: 8px; background: radial-gradient(circle at 50% 0, transparent 5px, var(--gold) 5px 6.5px, transparent 7px) 0 0 / 14px 8px repeat-x; opacity: .85; }
+[data-revealed] .divider img { animation: bob 5s ease-in-out infinite alternate; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 54px 30px 58px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; }
+
+/* couple: each portrait cut like a gaff sail hoisted on its mast */
+.couple { gap: 16px; background: var(--paper); }
+.portrait { width: 230px; height: 286px; margin-bottom: 20px; padding-left: 10px; }
+.portrait::before { content: ""; position: absolute; left: 0; top: -14px; bottom: -10px; width: 7px; border-radius: 3px; background: linear-gradient(90deg, #3e1d14, #7a4a2c 50%, #3e1d14); }
+.portrait::after { content: ""; position: absolute; left: 4px; right: 8px; bottom: -6px; height: 6px; border-radius: 3px; background: linear-gradient(#7a4a2c, #3e1d14); }
+.portraitFrame { width: 220px; height: 280px; padding: 0; border: 0; border-radius: 0; background: var(--accent); clip-path: var(--sail); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.amp + .person .portrait { padding-left: 0; padding-right: 10px; }
+.amp + .person .portrait::before { left: auto; right: 0; }
+.amp + .person .portraitFrame { clip-path: polygon(0 0, 100% 12%, 100% 100%, 10% 100%); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.amp { color: var(--sabbe-red); font-family: var(--script); font-size: 64px; }
+.amp img { width: 52px; }
+
+/* countdown: four ivory labels stitched on lipa' sabbe silk */
+.countBand { padding: 66px 20px 72px; background: linear-gradient(rgba(46, 29, 60, .78), rgba(46, 29, 60, .88)), var(--sabbe); }
+.headLight h2 { font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count > div { height: 90px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 0 0 3px rgba(210, 154, 58, .9), 0 10px 18px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--sabbe-red); font-size: 10px; font-weight: 700; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: tall cards with a sabbe keel along the bottom */
+.events { gap: 24px; background: var(--bg); }
+.event { padding: 34px 22px 46px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 12px 26px rgba(59, 36, 72, .1); overflow: hidden; }
+.event::before { inset: auto 0 0; height: 18px; border: 0; border-radius: 0; background: var(--sabbe); }
+.eventNo { position: static; translate: none; width: auto; height: auto; margin-bottom: 4px; background: none; color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; }
+.eventNo::before { content: "Acara "; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.eventTime { color: var(--sabbe-red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 46px; height: 3px; background: var(--sabbe-red); }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .08em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: repeating-linear-gradient(var(--gold) 0 6px, transparent 6px 10px); }
+.node { border: 0; background: var(--ivory); box-shadow: 0 0 0 2px var(--gold); }
+.node img { width: 30px; }
+.storyBody small { color: var(--sabbe-red); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 20px; }
+.storyImg { border-radius: 2px; clip-path: polygon(0 8%, 100% 0, 96% 100%, 0 100%); }
+
+/* gallery: a fleet of sails */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 140px; gap: 10px; }
+.tile { border-radius: 2px; }
+.tile:first-child { clip-path: polygon(0 8%, 100% 0, 92% 100%, 0 100%); }
+.tile:nth-child(2) { clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%); }
+.tile:nth-child(3) { clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%); }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 10px 26px rgba(59, 36, 72, .08); position: relative; overflow: hidden; padding-bottom: 32px; }
+.form::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: var(--sabbe); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 2px; font-family: var(--serif); }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 120px; }
+.wish { border-radius: 2px; border: 0; box-shadow: inset 4px 0 0 var(--sabbe-red); }
+.wish:nth-child(2n) { box-shadow: inset 4px 0 0 var(--gold); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 16px; }
+.wish small { background: rgba(176, 32, 44, .1); color: var(--sabbe-red); }
+
+/* gifts: folded sabbe silk */
+.gifts { background: var(--bg); }
+.gift { border-radius: 2px; background: linear-gradient(rgba(46, 29, 60, .82), rgba(46, 29, 60, .9)), var(--sabbe); box-shadow: inset 0 0 0 1px rgba(210, 154, 58, .55); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold); background: rgba(176, 32, 44, .5); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; }
+.copy { border-radius: 2px; border-color: var(--gold); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: dusk band, the pinisi sailing home */
+.closing { padding: 0 28px 62px; background: var(--band-bg); }
+.closingSea { position: relative; width: calc(100% + 56px); height: 250px; margin: 0 -28px 18px; overflow: hidden; }
+.closingSea img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; }
+.closingSea::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 55%, var(--band-bg)); }
+.closingSea::before { content: ""; position: absolute; z-index: 1; left: 0; right: 0; top: 0; height: 14px; background: var(--sabbe); }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--gold-l); }
+.closingSalam { font-family: var(--serif); font-size: 14px; color: var(--dusk); }
+.closingNames { font-family: var(--script); font-size: 50px; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: dusk sky carries the names, the pinisi sails across Losari below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: #3b2f5c; color: var(--band-ink); text-align: center; isolation: isolate; }
+.coverTop { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; padding: 34px 24px 0; }
+.bismillah { margin-bottom: 4px; font-family: Amiri, serif; font-size: 23px; line-height: 1.9; color: var(--gold-l); }
+.salam { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: rgba(248, 238, 230, .78); }
+.kicker { margin-top: 12px; font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: var(--dusk); }
+.coverNames { max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.02; color: var(--ivory); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; margin: 2px 0; font-family: var(--script); font-size: 44px; font-style: normal; color: var(--gold-l); }
+.coverDate { margin-top: 10px; font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-l); }
+.sea { position: relative; width: 100%; margin-top: -30px; }
+.seaArt { display: block; width: 100%; height: auto; }
+.sea::before { content: ""; position: absolute; z-index: 1; inset: 0 0 auto; height: 90px; background: linear-gradient(#3b2f5c, transparent); }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: calc(100% - 36px); margin: -176px 18px 0; padding: 18px 20px 34px; border-radius: 2px; background: rgba(46, 29, 60, .78); backdrop-filter: blur(4px); box-shadow: 0 14px 30px rgba(0, 0, 0, .3); overflow: hidden; }
+.guestWrap::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px; background: var(--sabbe); }
+.guest small { color: rgba(248, 238, 230, .75); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 19px; color: var(--ivory); }
+.table { border-color: var(--gold); color: var(--gold-l); }
+.openBtn { border-radius: 2px; background: var(--gold); color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.openBtn:hover { background: var(--gold-l); }
+.coverPad { height: 26px; }
+
+/* ── Hero: the couple's photo as a mainsail on its mast, ship emblem below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 50px; background: linear-gradient(#f4dccb, var(--bg) 60%); text-align: center; }
+.heroSail { position: relative; width: 270px; height: 340px; padding-left: 12px; margin-bottom: 22px; }
+.heroSail::before { content: ""; position: absolute; left: 0; top: -18px; bottom: -14px; width: 8px; border-radius: 3px; background: linear-gradient(90deg, #3e1d14, #7a4a2c 50%, #3e1d14); }
+.heroSail::after { content: ""; position: absolute; left: 4px; right: 18px; bottom: -8px; height: 7px; border-radius: 3px; background: linear-gradient(#7a4a2c, #3e1d14); }
+.heroPhoto { width: 258px; height: 336px; overflow: hidden; clip-path: var(--sail); background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--sabbe-red); }
+.heroNames { max-width: 100%; margin-top: 8px; font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.05; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { margin: 0 8px; font-family: var(--script); font-size: 46px; font-style: normal; color: var(--sabbe-red); }
+.heroDate { margin-top: 10px; font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--accent2); }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+.heroShip { width: 130px; height: auto; margin-top: 18px; }
+
+@keyframes bob { from { translate: 0 1px; rotate: -1.5deg; } to { translate: 0 -2px; rotate: 1.5deg; } }
+@media (prefers-reduced-motion: reduce) { .divider img { animation: none; } }
