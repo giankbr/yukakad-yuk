@@ -1,0 +1,151 @@
+/* Kerinci Danau — Kerinci, Jambi, seperti poster gouache: Gunung Kerinci yang menjulang di atas kebun teh Kayu Aro, Danau Kerinci yang tenang di depannya, dan papan ukir rumah larik (keluk paku, bunga empat kelopak) berwarna oker dan merah di atas kayu tua. */
+.root, .cover {
+  --bg: #f3ead7; --paper: #faf4e6; --ivory: #fffaf0; --field: #fffdf7; --ink: #2a2118; --muted: #645847; --line: #e2d4b6;
+  --accent: #3f6a32; --accent2: #4f7e3c; --gold: #d9a441; --gold-l: #f0cf86; --gold-d: #a8352a;
+  --wood-c: #4a2a19; --lake: #5f7896; --violet: #5e5a7c; --tea: #e4ebd2;
+  --band-bg: #4a2a19; --band-ink: #f6ecd8;
+  --display: "Young Serif", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Young Serif", Georgia, serif; --label: "Josefin Sans", system-ui, sans-serif;
+  --wood: url(/themes/art/kerinci-danau/wood.webp) 0 0 / 200px 200px repeat #4a2a19;
+  --larik: url(/themes/art/kerinci-danau/larik.webp) 0 50% / auto 100% repeat-x;
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3f6a32; --t-accent-ink: #faf4e6; --t-bg: #f3ead7; --t-ink: #2a2118; --t-muted: #645847; --t-line: #e2d4b6; --t-field: #fffdf7;
+  --t-radius: 14px; --t-font: "Lora", Georgia, serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--label); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-d); }
+.head h2 { font-family: var(--display); color: var(--accent); }
+.divider { width: 200px; }
+.section { padding: 62px 22px; }
+
+.salamBlock { padding: 54px 26px 58px; background: var(--paper); }
+.arabic { color: var(--violet); font-size: 28px; }
+.salamTitle { font-family: var(--display); font-size: 30px; line-height: 1.2; color: var(--accent); }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.75; }
+
+/* couple: egg-shaped frames like the sun over the lake, ochre ring, a tea sprig tucked at the side */
+.couple { gap: 14px; background: var(--tea); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 206px; height: 258px; padding: 8px; border: 0; border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%; background: var(--gold); box-shadow: 0 0 0 5px var(--tea), 0 0 0 7px var(--accent), 0 18px 30px rgba(42, 33, 24, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50% 50% 46% 46% / 56% 56% 44% 44%; }
+.pSprig { position: absolute; z-index: 2; right: -34px; bottom: -14px; width: 72px; height: auto; rotate: 24deg; pointer-events: none; }
+.monogram { font-family: var(--display); color: var(--ivory); }
+.nick { font-family: var(--display); font-size: 42px; color: var(--accent); }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--wood-c); }
+.parents { font-size: 15.5px; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 46px; }
+.amp img:first-child { rotate: -90deg; }
+.amp img:last-child { rotate: 90deg; scale: 1; }
+
+/* countdown: a carved board between two larik rails */
+.countBand { padding: 84px 18px 80px; background: var(--wood); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 48px; background: var(--larik); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: var(--band-ink); }
+.count > div { height: 90px; border: 0; border-radius: 14px; background: var(--paper); box-shadow: inset 0 -6px 0 var(--gold), 0 10px 18px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--accent); font-size: 31px; }
+.count small { font-family: var(--label); font-style: normal; font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--wood-c); }
+.ghostBtn { border-radius: 999px; border-color: var(--gold); color: var(--gold-l); font-family: var(--label); font-weight: 600; }
+
+/* events: tickets for a day by the lake; a blue lake strip on top, rounded corners */
+.events { gap: 24px; background: var(--paper); }
+.event { padding: 34px 22px 26px; border: 0; border-radius: 18px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 26px rgba(42, 33, 24, .1); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 10px; border: 0; border-radius: 0; background: linear-gradient(90deg, var(--lake), var(--violet)); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold); font-family: var(--display); font-size: 40px; line-height: 1; }
+.event h3 { font-family: var(--display); font-size: 25px; color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 600; color: var(--ink); }
+.eventTime { font-family: var(--label); font-weight: 600; color: var(--gold-d); }
+.rule { width: 80px; height: 2px; background: var(--gold); }
+.mapBtn { border-radius: 999px; background: var(--lake); color: #fff; font-family: var(--label); font-weight: 600; }
+.mapBtn:hover { background: var(--violet); }
+
+.story { background: var(--tea); }
+.timeline::before { left: 21px; width: 3px; background: linear-gradient(var(--accent), var(--gold)); border-radius: 3px; }
+.node { border: 2px solid var(--accent); background: var(--ivory); }
+.node img { width: 22px; }
+.storyBody small { font-family: var(--label); font-weight: 600; font-size: 12px; letter-spacing: .18em; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-size: 22px; color: var(--accent); }
+.storyImg { border-radius: 14px; }
+
+.gallery { background: var(--paper); }
+.tile { border-radius: 16px; }
+.tile:first-child { border-radius: 16px 16px 90px 16px; }
+
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 18px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 26px rgba(42, 33, 24, .08); }
+.field > span, .diet, .guestsLabel { font-family: var(--label); font-weight: 600; letter-spacing: .12em; color: var(--accent); }
+.field input, .field textarea { border-radius: 12px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { background: var(--wood-c); color: var(--gold-l); font-family: var(--label); font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: #6a3d24; }
+.sent { font-family: var(--display); font-style: normal; font-size: 22px; color: var(--accent); }
+.sentBox img { width: 80px; }
+.wish { border-radius: 16px; border: 0; box-shadow: 0 0 0 1px var(--line); }
+.wish strong { font-family: var(--display); color: var(--accent); }
+.wish small { background: var(--tea); color: var(--accent); }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 18px; background: var(--wood); padding-top: 48px; }
+.gift::after { display: none; }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 30px; background: var(--larik); }
+.gift h3 { font-family: var(--label); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; color: var(--gold-l); }
+.giftNo { font-family: var(--display); color: var(--band-ink); }
+.copy { font-family: var(--label); font-weight: 600; }
+.copyOn, .copyOn:hover { color: var(--wood-c); }
+
+/* closing: the poster again — volcano, tea, lake — fading up into the page */
+.closing { padding: 340px 26px 56px; background: url(/themes/art/kerinci-danau/scene.webp) 50% 12% / cover no-repeat; }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, var(--paper) 0, transparent 22%, transparent 34%, rgba(42, 33, 24, .55) 52%, rgba(42, 33, 24, .86) 100%); }
+.closingEmblem { width: 110px; height: auto; }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--gold-l); }
+.closingText { color: rgba(246, 236, 216, .92); }
+.closingSalam { font-family: var(--label); font-weight: 600; color: var(--gold-l); }
+.family { font-family: var(--label); color: rgba(246, 236, 216, .86); }
+.closingNames { font-family: var(--display); color: var(--band-ink); font-size: 32px; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: the poster full-bleed, names on a carved signboard hung over the tea slopes ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: url(/themes/art/kerinci-danau/scene.webp) 50% 0 / cover no-repeat #6c7aa6; color: var(--ink); text-align: center; isolation: isolate; }
+.plume { position: absolute; z-index: 0; top: 10%; left: 52%; width: 120px; height: 60px; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 250, 245, .55), transparent); filter: blur(4px); animation: plume 12s ease-in-out infinite alternate; pointer-events: none; }
+.arabicCover { position: relative; margin-top: 30px; font-family: Amiri, "Traditional Arabic", serif; font-size: 24px; line-height: 1.5; color: #f8f2ff; text-shadow: 0 1px 6px rgba(40, 36, 70, .4); }
+.kicker { position: relative; font-family: var(--label); font-size: 11px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: #f3ecff; }
+.board { position: relative; z-index: 1; width: calc(100% - 44px); margin-top: auto; padding: 44px 18px 40px; border-radius: 6px; background: var(--wood); color: var(--band-ink); box-shadow: 0 18px 34px rgba(20, 14, 8, .45); }
+.board::before, .board::after { content: ""; position: absolute; left: 0; right: 0; height: 30px; background: var(--larik); }
+.board::before { top: 0; border-radius: 6px 6px 0 0; }
+.board::after { bottom: 0; border-radius: 0 0 6px 6px; }
+.rope { position: absolute; bottom: 100%; width: 2px; height: 60px; background: repeating-linear-gradient(180deg, #8a6a46 0 4px, #5a4430 4px 7px); }
+.rope:first-of-type { left: 22%; }
+.rope:last-of-type { right: 22%; }
+.coverLabel { font-family: var(--label); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold-l); }
+.coverNames { margin-top: 8px; font-family: var(--display); font-size: 39px; font-weight: 400; line-height: 1.05; color: var(--band-ink); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 6px; font-style: normal; color: var(--gold); }
+.coverDate { margin-top: 10px; font-family: var(--serif); font-size: 16px; font-style: italic; color: var(--gold-l); }
+.foot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; width: calc(100% - 44px); margin: 18px 0 26px; padding: 16px 18px 18px; border-radius: 18px; background: rgba(255, 250, 240, .94); box-shadow: 0 14px 28px rgba(20, 30, 50, .3); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 20px; color: var(--accent); }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); font-weight: 600; }
+.openBtn { border-radius: 999px; background: var(--accent); color: var(--paper); font-family: var(--label); font-weight: 600; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(42, 33, 24, .25); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: names over the tea-green paper, the photo in a carved wooden frame with a larik rail under it ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 22px 46px; background: linear-gradient(180deg, var(--tea), var(--paper)); text-align: center; }
+.heroKicker { font-family: var(--label); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-d); }
+.heroNames { margin-top: 8px; font-family: var(--display); font-size: 42px; line-height: 1.08; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 8px; font-style: normal; color: var(--gold); }
+.heroDate { margin-top: 6px; font-size: 16px; font-style: italic; color: var(--ink); }
+.frame { position: relative; width: 100%; margin-top: 26px; padding: 12px 12px 42px; border-radius: 8px; background: var(--wood); box-shadow: 0 18px 32px rgba(42, 33, 24, .28); }
+.heroPhoto { height: 260px; overflow: hidden; border-radius: 4px; background: #2a2118; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.frameRail { position: absolute; left: 0; right: 0; bottom: 0; height: 32px; border-radius: 0 0 8px 8px; background: var(--larik); }
+.heroSprig { position: absolute; z-index: 2; left: -22px; top: -40px; width: 80px; height: auto; rotate: -24deg; pointer-events: none; animation: sprig 7s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.heroNote { max-width: 320px; margin-top: 28px; font-size: 17px; font-style: italic; line-height: 1.7; color: var(--muted); }
+
+@keyframes plume { from { translate: 0 0; opacity: .5; } to { translate: 26px -12px; opacity: .9; } }
+@keyframes sprig { from { rotate: -26deg; } to { rotate: -20deg; } }
+@media (prefers-reduced-motion: reduce) { .plume, .heroSprig { animation: none; } }

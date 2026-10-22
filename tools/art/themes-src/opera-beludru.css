@@ -1,0 +1,171 @@
+/* Opera Beludru — malam gala di gedung opera: tirai beludru merah bergouache yang tersibak saat undangan dibuka, valance berumbai emas, lampu kristal yang berayun pelan, deretan balkon loge bersepuh emas; sampul berupa kartu program dan tiket masuk berlubang sobek, hero berupa panggung prosenium berbingkai emas, acara sebagai halaman program per babak, hitung mundur dalam medali emas di depan balkon; Rozha One + Spectral + Marcellus SC + Monsieur La Doulaise, merah beludru, emas sepuh dan gading program. */
+.root, .cover {
+  --bg: #f4ead6; --paper: #efe2c8; --ivory: #fbf5e8; --field: #fffaf0; --ink: #2a1013; --muted: #6e4e48; --line: #dcc79e;
+  --accent: #7a0f1c; --accent2: #5e0a15; --gold: #c9a04e; --gold-l: #f0d590; --gold-d: #9a7430;
+  --band-bg: #5e0a15; --band-ink: #f7ead2;
+  --velvet: #7a0f1c; --velvet-d: #2a0408; --night: #14060a;
+  --display: "Rozha One", "Bodoni Moda", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Monsieur La Doulaise", cursive; --caps: "Marcellus SC", Georgia, serif;
+  --h2: 34px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a0f1c; --t-accent-ink: #f7ead2; --t-bg: #f4ead6; --t-ink: #2a1013; --t-muted: #6e4e48; --t-line: #dcc79e; --t-field: #fffaf0;
+  --t-radius: 2px; --t-font: Spectral, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 66px 24px; }
+
+/* headings: programme typography */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--caps); font-size: 13px; letter-spacing: .26em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); letter-spacing: .01em; }
+.head { gap: 6px; }
+.divider { display: block; width: 180px; height: auto; margin-top: 6px; }
+
+/* opening: the programme's first page */
+.salamBlock { gap: 12px; margin: 34px 18px 0; padding: 46px 26px 44px; border: 1px solid var(--gold); background: var(--ivory); box-shadow: inset 0 0 0 5px var(--ivory), inset 0 0 0 6px color-mix(in srgb, var(--gold) 60%, transparent); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.1; }
+.salamSub { color: var(--gold-d); font-family: var(--caps); font-size: 13px; letter-spacing: .16em; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* cast */
+.couple { gap: 14px; background: transparent; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 206px; height: 270px; padding: 7px; border: 0; border-radius: 103px 103px 4px 4px; background: linear-gradient(160deg, #f0d590, #9a7430 40%, #e8c97a 60%, #7a5a20); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--gold) 70%, transparent), 0 18px 34px rgba(42, 16, 19, .3); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 97px 97px 2px 2px; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--gold), 0 22px 40px rgba(42, 16, 19, .36); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 97px 97px 2px 2px; background: radial-gradient(circle at 50% 30%, #9a1a28, var(--velvet-d)); color: var(--gold-l); font-family: var(--display); font-size: 96px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; line-height: 1.05; }
+.fullName { color: var(--ink); font-family: var(--caps); font-size: 17px; letter-spacing: .08em; }
+.parents { color: var(--muted); font-style: italic; }
+.amp { margin: 18px 0 6px; color: var(--gold-d); font-family: var(--script); font-size: 72px; }
+.amp img { width: 20px; height: auto; }
+
+/* countdown: gilt loge medallions in front of the balcony tier */
+.countBand { padding: 196px 18px 64px; background: linear-gradient(180deg, rgba(20, 6, 10, 0) 0, rgba(20, 6, 10, .2) 150px, var(--band-bg) 230px), url(/themes/art/opera-beludru/balcony.webp) center top / 100% auto no-repeat, var(--band-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count { grid-template-columns: repeat(4, 74px); gap: 8px; }
+.count > div { width: 74px; height: 92px; border: 0; border-radius: 50%; background: radial-gradient(ellipse at 50% 35%, #8a1626, #3e0710 75%); box-shadow: 0 0 0 3px #c9a04e, 0 0 0 5px #5a3a12, 0 0 0 6px #f0d590, 0 10px 20px rgba(0, 0, 0, .4); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 236, 190, .25) 50%, transparent 65%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 28px; line-height: 1; }
+.count small { color: var(--band-ink); font-family: var(--caps); font-size: 11px; font-style: normal; letter-spacing: .1em; }
+.countTba { color: var(--gold-l); font-family: var(--caps); }
+.ghostBtn { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--caps); letter-spacing: .14em; }
+
+/* events: one programme page per act */
+.events { gap: 30px; background: var(--bg); counter-reset: babak; }
+.event { counter-increment: babak; padding: 54px 24px 32px; border: 1px solid var(--gold); border-radius: 2px; background: var(--ivory); box-shadow: inset 0 0 0 5px var(--ivory), inset 0 0 0 6px color-mix(in srgb, var(--gold) 55%, transparent), 0 16px 30px rgba(42, 16, 19, .14); }
+.event::before { display: none; }
+.event:hover { border-color: var(--gold-d); }
+.eventNo { top: 20px; width: auto; height: auto; padding: 0 12px; background: var(--ivory); color: var(--gold-d); font-family: var(--caps); font-size: 0; letter-spacing: .3em; }
+.eventNo::before { content: "Babak " counter(babak, upper-roman); font-size: 13px; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { color: var(--ink); font-size: 17px; }
+.eventTime { color: var(--gold-d); font-family: var(--caps); font-size: 14px; letter-spacing: .06em; }
+.rule { width: 110px; height: 1px; margin: 10px 0; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.event strong { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--caps); letter-spacing: .12em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story: synopsis */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 15%, transparent)); }
+.node { border: 0; background: radial-gradient(circle at 40% 35%, #f0d590, #9a7430); box-shadow: 0 0 0 3px var(--paper), 0 0 0 4px var(--gold); }
+.node img { width: 14px; }
+.storyBody small { color: var(--gold-d); font-family: var(--caps); font-size: 13px; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+
+/* gallery: gilt frames on red damask */
+.gallery { background: radial-gradient(ellipse at 50% 0, rgba(255, 200, 140, .14), transparent 60%), linear-gradient(180deg, #6a0c18, #3e0710); }
+.gallery .head h2 { color: var(--band-ink); }
+.gallery .eyebrow { color: var(--gold-l); }
+.mosaic { grid-auto-rows: 160px; gap: 12px; }
+.tile { padding: 5px; border-radius: 2px; background: linear-gradient(140deg, #f0d590, #8a6428 35%, #e8c97a 55%, #6a4a18); box-shadow: 0 10px 20px rgba(0, 0, 0, .4); }
+.tile:first-child { border-radius: 90px 90px 2px 2px; }
+
+/* wishes: applause cards */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--gold); border-radius: 2px; background: var(--ivory); box-shadow: inset 0 0 0 4px var(--ivory), inset 0 0 0 5px color-mix(in srgb, var(--gold) 45%, transparent), 0 14px 30px rgba(42, 16, 19, .1); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--caps); letter-spacing: .14em; text-transform: none; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--caps); letter-spacing: .06em; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.step { border-radius: 2px; }
+.submit { border-radius: 2px; background: linear-gradient(180deg, #8a1626, var(--accent)); color: var(--gold-l); font-family: var(--caps); letter-spacing: .16em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sentBox img { width: 140px; }
+.sent { color: var(--accent); font-family: var(--display); }
+.wish { border-radius: 2px; border-color: var(--line); border-top: 2px solid var(--gold); background: var(--ivory); }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { border-radius: 2px; background: rgba(122, 15, 28, .08); font-family: var(--caps); letter-spacing: .06em; }
+
+/* gifts: velvet boxes */
+.gifts { background: var(--paper); }
+.gift { border-radius: 3px; background: radial-gradient(ellipse at 50% 0, rgba(255, 200, 150, .18), transparent 60%), linear-gradient(170deg, #8a1626, #4a0812); box-shadow: inset 0 0 0 1px rgba(240, 213, 144, .5), inset 0 0 0 6px rgba(0, 0, 0, .12), inset 0 0 0 7px rgba(240, 213, 144, .35), 0 14px 28px rgba(42, 16, 19, .25); }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--caps); letter-spacing: .14em; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; font-family: var(--caps); letter-spacing: .1em; }
+
+/* closing: the curtain falls again */
+.closing { padding: 160px 28px 70px; background: radial-gradient(ellipse 70% 40% at 50% 60%, rgba(255, 190, 120, .18), transparent 70%), var(--night); }
+.closeDrape { position: absolute; z-index: -1; top: 0; bottom: 0; width: 74px; background: url(/themes/art/opera-beludru/curtain.webp) center / 230px 100%; clip-path: polygon(0 0, 100% 0, 45% 55%, 100% 100%, 0 100%); }
+.closeDrapeL { left: 0; }
+.closeDrapeR { right: 0; scale: -1 1; }
+.closeValance { position: absolute; z-index: 0; top: 0; left: 0; width: 100%; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; }
+.closingEmblem { display: block; width: 150px; height: auto; margin-bottom: 4px; }
+.closingText, .family, .closingSalam, .closingNames, .made, .thanks { position: relative; z-index: 1; max-width: 250px; }
+.closingSalam { font-family: var(--caps); letter-spacing: .12em; }
+.family { font-family: var(--caps); }
+.closingNames { color: var(--band-ink); font-family: var(--script); font-size: 54px; line-height: 1.1; max-width: 260px; }
+
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: closed curtains, a programme and a ticket ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 214px 22px 34px; overflow: hidden; background: radial-gradient(ellipse 80% 50% at 50% 70%, #7a2a1a, var(--night) 70%); color: var(--ink); text-align: center; isolation: isolate; }
+.curtain { position: absolute; z-index: 1; top: 0; bottom: 0; width: 53%; background: url(/themes/art/opera-beludru/curtain.webp) center / 100% 100%; transition: translate 1.3s cubic-bezier(.6, .05, .25, 1); }
+.curtainL { left: 0; }
+.curtainR { right: 0; scale: -1 1; }
+.parting .curtainL { translate: -96% 0; }
+.parting .curtainR { translate: 96% 0; }
+.parting .programme, .parting .ticket, .parting .openBtn, .parting .chandelier { filter: opacity(0) blur(3px); transition: filter .7s ease; }
+.footlight { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 120px; background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(255, 180, 100, .35), transparent 70%); pointer-events: none; }
+.valance { position: absolute; z-index: 4; top: 0; left: 0; width: 100%; height: auto; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .5)); }
+.chandelier { position: absolute; z-index: 3; top: 30px; left: 50%; width: 176px; margin-left: -88px; transform-origin: 50% 0; animation: chandSway 9s ease-in-out infinite alternate; }
+.chandelier img { display: block; width: 100%; height: auto; }
+.programme { position: relative; z-index: 5; width: 100%; max-width: 300px; padding: 26px 22px 22px; border: 1px solid var(--gold); background: var(--ivory); box-shadow: inset 0 0 0 5px var(--ivory), inset 0 0 0 6px var(--gold), 0 26px 50px rgba(0, 0, 0, .6); }
+.progKicker { color: var(--gold-d); font-family: var(--caps); font-size: 12px; letter-spacing: .26em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: -2px 0 -10px; color: var(--gold-d); font-family: var(--script); font-size: 54px; font-style: normal; line-height: 1; }
+.progRule { display: block; width: 150px; height: auto; margin: 12px auto 8px; }
+.coverDate { color: var(--ink); font-family: var(--caps); font-size: 14px; letter-spacing: .12em; }
+.ticket { position: relative; z-index: 5; display: grid; grid-template-columns: 1fr 74px; width: 100%; max-width: 300px; margin-top: 14px; background: linear-gradient(180deg, #f0d590, #d9b462); color: var(--ink); text-align: left; box-shadow: 0 16px 30px rgba(0, 0, 0, .5); -webkit-mask: radial-gradient(circle 9px at calc(100% - 74px) 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 9px at calc(100% - 74px) 100%, transparent 98%, #000) bottom / 100% 51% no-repeat; mask: radial-gradient(circle 9px at calc(100% - 74px) 0, transparent 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 9px at calc(100% - 74px) 100%, transparent 98%, #000) bottom / 100% 51% no-repeat; }
+.ticket .guest { align-items: flex-start; padding: 12px 14px 12px 16px; text-align: left; }
+.ticket .guest small { color: #5a3a12; font-family: var(--caps); font-size: 11px; font-style: normal; letter-spacing: .12em; }
+.ticket .guest strong { color: var(--accent2); font-family: var(--display); font-size: 19px; }
+.stub { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border-left: 2px dashed rgba(90, 58, 18, .5); color: var(--accent2); font-family: var(--caps); font-size: 10px; letter-spacing: .14em; }
+.stub b { font-family: var(--display); font-size: 17px; font-weight: 400; letter-spacing: 0; text-align: center; overflow-wrap: anywhere; padding: 0 4px; }
+.openBtn { position: relative; z-index: 5; margin-top: 20px; border: 1px solid var(--gold-l); border-radius: 2px; background: linear-gradient(180deg, #9a1a28, var(--accent2)); color: var(--gold-l); font-family: var(--caps); font-size: 14px; letter-spacing: .16em; box-shadow: 0 10px 24px rgba(0, 0, 0, .5); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 14px 30px rgba(0, 0, 0, .55), 0 0 26px rgba(240, 213, 144, .2); }
+
+/* ── Hero: the proscenium ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 120px 20px 50px; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 50% 55%, #5a1a14, var(--night) 75%); color: var(--band-ink); text-align: center; isolation: isolate; }
+.heroValance { position: absolute; z-index: 3; top: 0; left: 0; width: 100%; height: auto; }
+.heroDrape { position: absolute; z-index: 2; top: 0; bottom: 0; width: 64px; background: url(/themes/art/opera-beludru/curtain.webp) center / 230px 100%; clip-path: polygon(0 0, 100% 0, 40% 52%, 100% 100%, 0 100%); }
+.heroDrapeL { left: 0; }
+.heroDrapeR { right: 0; scale: -1 1; }
+.stage { position: relative; z-index: 1; width: 100%; max-width: 270px; height: 330px; padding: 8px; border-radius: 135px 135px 4px 4px; background: linear-gradient(150deg, #f0d590, #8a6428 35%, #e8c97a 55%, #6a4a18); box-shadow: 0 0 0 4px var(--night), 0 0 0 5px rgba(240, 213, 144, .5), 0 0 60px rgba(255, 170, 90, .2); }
+.stage > img, .stage > div { width: 100%; height: 100%; border-radius: 128px 128px 2px 2px; object-fit: cover; }
+.heroKicker { margin-top: 26px; color: var(--gold-l); font-family: var(--caps); font-size: 13px; letter-spacing: .24em; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--band-ink); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-l); font-family: var(--script); font-size: 46px; font-style: normal; line-height: .9; }
+.heroDate { margin-top: 10px; color: var(--gold-l); font-family: var(--caps); font-size: 13px; letter-spacing: .16em; }
+.heroNote { max-width: 300px; margin-top: 12px; color: color-mix(in srgb, var(--band-ink) 80%, transparent); font-size: 16px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes chandSway { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .chandelier { animation: none; }
+  .curtain { transition: none; }
+}

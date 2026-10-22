@@ -52,6 +52,8 @@ export type JawiCopy = {
   closedNote?: string;
   /** Sentence above the gift cards (e.g. infaq wording). */
   giftIntro?: string;
+  /** Title of the address (send-a-gift) card; defaults to "Kirim Kado". */
+  giftAddressTitle?: string;
   /** Label above the family names in the closing; `null` hides the family line. */
   familyLabel?: string | null;
 };
@@ -278,7 +280,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
             <div ref={sentRef} className={`${s.form} ${s.sentBox}`} role="status">
               {slots.sentArt}
               <p className={s.sent}>{copy.sent}</p>
-              {!demo && wishes.pending && <p className={s.sentNote}>Ucapan akan tampil setelah disetujui oleh mempelai.</p>}
+              {!demo && wishes.pending && <p className={s.sentNote}>Ucapan akan tampil setelah disetujui.</p>}
               {demo && <p className={s.sentNote}>Ini pratinjau, ucapan hanya tampil di daftar.</p>}
               <button type="button" className={s.submit} onClick={() => { wishes.reset(); rsvp.reset(); }}>Tulis Lagi</button>
             </div>
@@ -326,7 +328,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
             {data.gifts.map(gift => {
               const info = giftInfo(gift);
               const isCopied = !!info.copy && copied === info.copy;
-              const title = gift.type === "bank" ? (/^bank/i.test(info.title) ? info.title : `Bank ${info.title}`) : gift.type === "address" ? "Kirim Kado" : info.title;
+              const title = gift.type === "bank" ? (/^bank/i.test(info.title) ? info.title : `Bank ${info.title}`) : gift.type === "address" ? (copy.giftAddressTitle ?? "Kirim Kado") : info.title;
               const icon = gift.type === "bank" ? ic.landmark : gift.type === "address" ? ic.gift : gift.type === "qris" ? ic.qrCode : ic.wallet;
               return (
                 <div key={gift.id} className={isCopied ? `${s.gift} ${s.giftCopied}` : s.gift}>

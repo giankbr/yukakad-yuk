@@ -1,0 +1,174 @@
+/* Kaili Souraja — gading, kayu jati, dan ungu-magenta sarung Donggala: gable Rumah Souraja (Banua Mbaso) berukir bunga sebagai bingkai foto, Teluk Palu di antara bukit lembah, dan tenun Donggala sebagai pinggiran. */
+.root, .cover {
+  --bg: #f6efe2; --paper: #efe4d0; --ivory: #fffaf1; --field: #fffcf6; --ink: #36200f; --muted: #6e5a4a; --line: #e0d0b6;
+  --accent: #6b3f24; --accent2: #b23a6e; --gold: #c79a3e; --gold-l: #f3dfae; --gold-d: #8a6526;
+  --band-bg: #4a1838; --band-ink: #fbf1e4;
+  --display: "Della Respira", Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: "Imperial Script", "Della Respira", cursive;
+  --plum: #4a1838; --magenta: #b23a6e; --teal: #2f6b55; --teak: #6b3f24;
+  --tenun: url(/themes/art/kaili-souraja/tenun.webp);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6b3f24; --t-accent-ink: #fffaf1; --t-bg: #f6efe2; --t-ink: #36200f; --t-muted: #6e5a4a; --t-line: #e0d0b6; --t-field: #fffcf6;
+  --t-radius: 6px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: "Della Respira", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* type */
+.eyebrow, .role, .salamKicker { color: var(--magenta); font-family: var(--serif); font-size: 12.5px; font-weight: 700; letter-spacing: .28em; }
+.head h2 { color: var(--teak); }
+.divider { width: 170px; }
+.intro { font-size: 17px; line-height: 1.7; }
+
+/* a woven selvedge (tenun Donggala) runs down both edges of the page */
+.main { position: relative; }
+.main::before, .main::after { content: ""; position: absolute; z-index: 3; top: 0; bottom: 0; width: 9px; background: var(--tenun) 0 0 / 60px auto repeat; pointer-events: none; }
+.main::before { left: 0; }
+.main::after { right: 0; }
+
+/* opening */
+.salamBlock { padding: 54px 34px 58px; background: var(--bg); }
+.arabic { color: var(--teak); font-size: 27px; }
+.salamKicker { letter-spacing: .14em; font-size: 14px; }
+.salamTitle { color: var(--teak); font-family: var(--display); font-size: 34px; }
+
+/* couple: portraits shaped like the Souraja front (gable over a wall), teak frame, tenun sill */
+.couple { gap: 20px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portrait::after { content: ""; position: absolute; left: 10px; right: 10px; bottom: -12px; height: 12px; background: var(--tenun) 0 0 / 60px auto repeat-x; box-shadow: 0 6px 14px rgba(54, 32, 15, .2); }
+.portraitFrame { width: 214px; height: 262px; padding: 7px; border: 0; border-radius: 0; background: linear-gradient(160deg, #8a5a34, var(--teak) 40%, #3c220f); clip-path: polygon(50% 0, 100% 30%, 100% 100%, 0 100%, 0 30%); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(50% 0, 100% 30.5%, 100% 100%, 0 100%, 0 30.5%); }
+.monogram { color: var(--gold-l); font-family: var(--script); }
+.nick { color: var(--teak); font-family: var(--script); font-size: 60px; }
+.fullName { font-family: var(--display); font-size: 19px; }
+.parents { font-size: 16px; }
+.amp { color: var(--magenta); font-family: var(--script); font-size: 58px; }
+.amp img { width: 40px; }
+
+/* countdown: plum cloth with a woven band top and bottom */
+.countBand { padding-top: 74px; padding-bottom: 74px; background: var(--plum); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: var(--tenun) 0 0 / 120px auto repeat-x; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: #f0b9d2; }
+.headLight h2 { color: var(--band-ink); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 84px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: inset 0 0 0 3px var(--ivory), inset 0 0 0 4px var(--gold); }
+.count > div::after { display: none; }
+.count b { color: var(--plum); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+
+/* events: left-aligned boards with a woven edge and a magenta tag */
+.events { gap: 22px; }
+.event { align-items: flex-start; gap: 5px; padding: 26px 22px 24px 34px; border: 0; border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 0 12px 28px rgba(54, 32, 15, .08), 0 0 0 1px var(--line); }
+.event::before { inset: 0 auto 0 0; width: 14px; border: 0; border-radius: 4px 0 0 4px; background: var(--tenun) 0 0 / 60px auto repeat; }
+.eventNo { top: 18px; right: 16px; left: auto; translate: none; width: auto; height: 26px; padding: 0 10px; border-radius: 2px; background: var(--magenta); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .16em; }
+.event h3 { padding-right: 52px; color: var(--teak); font-size: 26px; text-wrap: pretty; }
+.eventDate { font-family: var(--display); font-size: 17px; font-style: normal; }
+.eventTime { color: var(--teal); font-family: var(--serif); font-weight: 700; }
+.rule { width: 46px; height: 3px; margin: 8px 0 6px; background: var(--gold); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 19px; }
+.eventAddr { text-align: left; text-wrap: pretty; }
+.mapBtn { border-radius: 4px; background: var(--teak); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.mapBtn:hover { background: var(--plum); }
+
+/* story: bomba flowers on a gold thread */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--magenta) 40%, transparent)); }
+.node { width: 38px; height: 38px; border: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { color: var(--magenta); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--teak); font-size: 22px; }
+.storyImg { border-radius: 4px; }
+
+/* gallery: the first photo under a gable */
+.mosaic { grid-auto-rows: 150px; gap: 8px; }
+.tile { border-radius: 4px; }
+.tile:first-child { grid-row: span 2; border-radius: 0; clip-path: polygon(50% 0, 100% 22%, 100% 100%, 0 100%, 0 22%); }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.form { position: relative; padding-top: 34px; border: 0; border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 14px 30px rgba(54, 32, 15, .07); overflow: hidden; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--tenun) 0 0 / 60px auto repeat-x; }
+.field > span, .diet, .guestsLabel { color: var(--teak); font-family: var(--serif); font-weight: 800; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--plum); border-color: var(--plum); color: #fff; }
+.submit { border-radius: 4px; background: var(--magenta); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--plum); }
+.step { border-color: var(--teak); color: var(--teak); }
+.wish { border-radius: 4px; border-left: 4px solid var(--magenta); }
+.wish strong { font-family: var(--display); font-size: 17px; color: var(--teak); }
+.wish small { background: color-mix(in srgb, var(--teal) 14%, transparent); color: var(--teal); }
+
+/* gifts: plum cloth, woven hem */
+.gift { padding-bottom: 34px; border-radius: 4px; background: var(--plum); }
+.gift::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--tenun) 0 0 / 60px auto repeat-x; }
+.gift::after { border-color: rgba(243, 223, 174, .08); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); font-size: 23px; }
+.copy { border-radius: 4px; border-color: var(--gold); font-family: var(--serif); font-weight: 700; }
+
+/* closing: gable emblem, then the bay at the bottom */
+.closing { padding: 70px 30px 230px; background: linear-gradient(var(--bg) 0, var(--bg) calc(100% - 270px), color-mix(in srgb, var(--bg) 0%, transparent) calc(100% - 150px)), url(/themes/art/kaili-souraja/bay.webp) 50% 100% / 100% auto no-repeat, var(--bg); color: var(--ink); }
+.closingGable { width: 230px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--teak); font-family: var(--script); font-size: 64px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--magenta); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--teak); font-family: var(--display); font-size: 30px; }
+.made { position: absolute; bottom: 14px; left: 0; right: 0; color: rgba(255, 250, 241, .85); text-shadow: 0 1px 4px rgba(0, 0, 0, .4); }
+.made:hover { color: #fff; }
+.music { border: 0; border-radius: 6px; background: var(--magenta); box-shadow: 0 0 0 3px var(--ivory), 0 6px 16px rgba(54, 32, 15, .3); }
+
+/* ── Cover: the Souraja as a photo frame (gable over the photo "wall"), standing above Teluk Palu ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 30px 26px 26px; overflow: hidden; background: radial-gradient(130% 80% at 50% 30%, #fffaf0, #f6efe2 55%, #ecdfc6); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; top: 0; bottom: 0; width: 12px; background: var(--tenun) 0 0 / 60px auto repeat; }
+.cover::before { left: 0; }
+.cover::after { right: 0; }
+.coverArabic { color: var(--teak); font-family: Amiri, serif; font-size: 21px; line-height: 1.6; }
+.coverKicker { color: var(--magenta); font-size: 12.5px; font-weight: 700; letter-spacing: .2em; }
+.house { position: relative; display: flex; flex-direction: column; align-items: center; width: 288px; margin-top: 10px; }
+.house > img { position: relative; z-index: 2; display: block; width: 100%; height: auto; }
+.wall { position: relative; z-index: 1; width: 76%; height: 168px; margin-top: -4px; padding: 0 9px; background: linear-gradient(90deg, #3c220f, var(--teak) 12%, #8a5a34 50%, var(--teak) 88%, #3c220f); box-shadow: 0 16px 30px rgba(54, 32, 15, .28); }
+.wall > div, .wall > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.wallEmpty { display: block; width: 100%; height: 100%; background: linear-gradient(#e7d6b9, #cbb38c); }
+.bayStrip { position: relative; z-index: 0; width: calc(100% + 52px); height: 132px; margin: -40px -26px 0; overflow: hidden; }
+.bayStrip img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 36%; }
+.bayStrip::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(246, 239, 226, .9) 0, transparent 22%, transparent 78%, #f2e8d6); }
+.coverLabel { margin-top: 12px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 2px; color: var(--teak); font-family: var(--script); font-size: 56px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--magenta); font-size: 40px; font-style: normal; padding: 0 8px; }
+.coverDate { margin-top: 4px; color: var(--plum); font-family: var(--display); font-size: 17px; letter-spacing: .08em; }
+.guestCard { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 318px; margin-top: 14px; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--magenta); color: var(--magenta); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 4px; background: var(--plum); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 var(--magenta), 0 12px 22px rgba(74, 24, 56, .3); }
+.openBtn:hover { background: var(--magenta); translate: 0 -2px; }
+
+/* ── Hero: the bay painting full-bleed, names on ivory below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 30px 52px; background: var(--bg); text-align: center; }
+.heroBay { position: relative; width: calc(100% + 60px); margin: 0 -30px; }
+.heroBay img { display: block; width: 100%; height: auto; }
+.heroBay::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 62%, var(--bg)); }
+.heroKicker { position: relative; margin-top: 4px; color: var(--magenta); font-size: 12.5px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { margin-top: 6px; color: var(--teak); font-family: var(--script); font-size: 66px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--magenta); font-size: 44px; font-style: normal; }
+.heroDate { margin-top: 10px; padding: 6px 16px; border-top: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); color: var(--plum); font-family: var(--display); font-size: 17px; letter-spacing: .08em; }
+.heroNote { position: relative; max-width: 330px; margin-top: 24px; padding: 16px 18px 16px 30px; border-radius: 4px; background: var(--ivory); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-align: left; box-shadow: 0 0 0 1px var(--line); }
+.heroNote::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 12px; border-radius: 4px 0 0 4px; background: var(--tenun) 0 0 / 60px auto repeat; }
+.sentBox img { width: 92px; }
+
+/* motion: elegant. The gable settles down over the photo, the bay drifts, bomba nodes turn slowly */
+.house > img { animation: gableDown 1.6s var(--m-ease) .2s both; }
+.bayStrip img { animation: bayDrift 26s ease-in-out infinite alternate; }
+.node img { animation: spin 60s linear infinite; }
+.root .event { transition: box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease), scale 600ms var(--m-ease); }
+.event:hover { translate: 0 -3px; box-shadow: 0 18px 34px rgba(54, 32, 15, .13), 0 0 0 1px var(--gold); }
+@keyframes gableDown { from { opacity: 0; translate: 0 -18px; } }
+@keyframes bayDrift { from { scale: 1.04; translate: -6px 0; } to { scale: 1.08; translate: 6px 0; } }
+@media (prefers-reduced-motion: reduce) { .house > img, .bayStrip img, .node img { animation: none; } }

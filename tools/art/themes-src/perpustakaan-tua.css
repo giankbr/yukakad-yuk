@@ -1,0 +1,195 @@
+/* Perpustakaan Tua — ruang baca tua bergaya gouache: dinding rak kenari penuh punggung buku kulit bersepuh, tangga perpustakaan di rel kuningan, lampu meja hijau dengan cahaya hangat, ex-libris berukir sebagai bingkai nama; halaman judul buku sebagai hero, kartu katalog untuk acara, punggung buku untuk hitung mundur, daftar isi untuk kisah, buku tamu bergaris; Sorts Mill Goudy + Vollkorn + Mrs Saint Delafield, marun, hijau botol, kenari dan kertas tua. */
+.root, .cover {
+  --bg: #efe4cc; --paper: #e8dbbf; --ivory: #f7f0e0; --field: #fbf7ec; --ink: #2e1f15; --muted: #6b5641; --line: #cdb892;
+  --accent: #6b1f1f; --accent2: #842a24; --gold: #b48a3c; --gold-l: #ecd08a; --gold-d: #8a6428;
+  --band-bg: #2a170e; --band-ink: #f1e4c8;
+  --green: #24503a; --green-d: #173828; --walnut: #3a2416; --rule: #b9c6d8;
+  --display: "Sorts Mill Goudy", "Iowan Old Style", Georgia, serif; --serif: Vollkorn, Georgia, serif; --script: "Mrs Saint Delafield", cursive;
+  --h2: 32px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6b1f1f; --t-accent-ink: #f7f0e0; --t-bg: #efe4cc; --t-ink: #2e1f15; --t-muted: #6b5641; --t-line: #cdb892; --t-field: #fbf7ec;
+  --t-radius: 2px; --t-font: Vollkorn, Georgia, serif; --t-heading-font: "Sorts Mill Goudy", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: url(/themes/art/perpustakaan-tua/paper.webp) 0 0 / 256px, var(--bg); }
+.section { padding: 64px 26px; }
+
+/* headings: small-caps chapter line, italic Goudy title, a printer's fleuron */
+.eyebrow, .salamKicker, .role { color: var(--accent); font-family: var(--serif); font-size: 13px; font-variant: small-caps; letter-spacing: .18em; text-transform: lowercase; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-style: italic; letter-spacing: .005em; }
+.divider { display: block; width: 150px; height: auto; margin-top: 4px; opacity: .92; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 60px 32px 58px; background: transparent; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; font-style: italic; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; letter-spacing: 0; }
+.intro { color: var(--muted); font-size: 17px; }
+.salamBlock .intro::first-letter { float: left; margin: 4px 6px 0 0; color: var(--accent); font-family: var(--display); font-size: 52px; line-height: .8; }
+
+/* people: two photographs tipped into the page with paper corners */
+.couple { gap: 14px; background: transparent; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 1.6deg; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 268px; padding: 10px 10px 30px; border: 0; border-radius: 1px; background: #fbf6ea; box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 14px 26px rgba(58, 36, 22, .22); rotate: -1.8deg; overflow: visible; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: sepia(.45) contrast(1.04) brightness(.98); }
+.portraitFrame::before, .portraitFrame::after { content: ""; position: absolute; z-index: 2; width: 34px; height: 34px; background: linear-gradient(135deg, var(--walnut) 50%, transparent 50%); opacity: .88; }
+.portraitFrame::before { top: 2px; left: 2px; }
+.portraitFrame::after { right: 2px; bottom: 22px; rotate: 180deg; }
+.person:hover .portraitFrame { box-shadow: 0 18px 34px rgba(58, 36, 22, .28); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--paper); color: var(--accent); font-family: var(--display); font-size: 110px; font-style: italic; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-variant: small-caps; letter-spacing: .06em; }
+.parents { color: var(--muted); font-style: italic; }
+.amp { margin: 18px 0 8px; color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 70px; }
+
+/* countdown: four volumes on a walnut shelf */
+.countBand { padding: 70px 18px 44px; background: linear-gradient(180deg, rgba(20, 11, 6, .4), rgba(20, 11, 6, .7)), url(/themes/art/perpustakaan-tua/shelf.webp) center 30% / cover; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); font-style: italic; }
+.count { grid-template-columns: repeat(4, 68px); gap: 6px; align-items: end; }
+.count > div { width: 68px; height: 128px; justify-content: flex-start; gap: 8px; padding-top: 18px; border: 0; border-radius: 3px 3px 0 0; background: linear-gradient(90deg, rgba(0, 0, 0, .35), transparent 22%, rgba(255, 240, 210, .12) 38%, transparent 55%, rgba(0, 0, 0, .4)), linear-gradient(180deg, transparent 10px, var(--gold) 10px 12px, transparent 12px 15px, var(--gold) 15px 16px, transparent 16px calc(100% - 18px), var(--gold) calc(100% - 18px) calc(100% - 17px), transparent calc(100% - 17px)), var(--spine, #6b1f1f); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .3); transition: translate 600ms var(--m-ease); }
+.count > div:nth-child(1) { --spine: #6b1f1f; height: 136px; }
+.count > div:nth-child(2) { --spine: #24503a; height: 120px; }
+.count > div:nth-child(3) { --spine: #1f3550; height: 130px; }
+.count > div:nth-child(4) { --spine: #7a4a1e; height: 116px; }
+.count > div:hover { translate: 0 -8px; }
+.count > div::after { display: none; }
+.count b { display: grid; place-items: center; width: 52px; height: 40px; margin-top: 8px; border-radius: 1px; background: #efe3c6; color: var(--walnut); font-family: var(--display); font-size: 24px; box-shadow: inset 0 0 0 1px rgba(58, 36, 22, .35); }
+.count small { color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-style: normal; font-variant: small-caps; letter-spacing: .14em; }
+.countTba { color: var(--gold-l); font-style: italic; }
+.countShelf { position: relative; z-index: 1; align-self: stretch; height: 26px; margin: -24px -18px 0; background: linear-gradient(180deg, #8a5a34, #5a3620 30%, #3a2214); box-shadow: 0 8px 14px rgba(0, 0, 0, .45); }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-style: italic; letter-spacing: .02em; }
+.countBand > .headLight { order: 1; }
+.countBand > .count, .countBand > .countTba { order: 2; }
+.countBand > .countShelf { order: 3; }
+.countBand > .ghostBtn { order: 4; margin-top: 6px; }
+
+/* events: catalogue cards in a green-felt drawer */
+.events { gap: 26px; background: radial-gradient(ellipse 90% 60% at 50% 0, rgba(255, 220, 150, .12), transparent 70%), linear-gradient(180deg, var(--green), var(--green-d)); }
+.events .head h2 { color: #f3e8cf; }
+.events .eyebrow { color: var(--gold-l); }
+.events .divider { filter: brightness(2.2) saturate(.6); }
+.event { align-items: flex-start; gap: 0; padding: 50px 22px 40px; border: 0; border-radius: 3px; background: repeating-linear-gradient(180deg, transparent 0 25px, var(--rule) 25px 26px) 0 50px / 100% calc(100% - 50px) no-repeat, linear-gradient(180deg, transparent 0 38px, #c0392b 38px 39.5px, transparent 39.5px), #fbf7ec; text-align: left; box-shadow: 0 14px 26px rgba(0, 0, 0, .35); }
+.event:nth-child(odd) { rotate: -.6deg; }
+.event:nth-child(even) { rotate: .5deg; }
+.event::before { inset: auto; left: 50%; bottom: 12px; width: 18px; height: 18px; translate: -50% 0; border: 0; border-radius: 50%; background: var(--green-d); box-shadow: inset 0 2px 3px rgba(0, 0, 0, .5); }
+.event:hover { translate: 0 -4px; box-shadow: 0 20px 30px rgba(0, 0, 0, .4); }
+.eventNo { top: 12px; left: 22px; white-space: nowrap; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--accent); font-family: var(--serif); font-size: 13px; letter-spacing: .14em; }
+.eventNo::before { content: "Kat. No. "; font-variant: small-caps; }
+.event h3 { margin-top: 2px; color: var(--ink); font-family: var(--display); font-size: 24px; font-style: italic; line-height: 26px; }
+.eventDate { color: var(--ink); font-size: 16px; font-style: normal; line-height: 26px; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-size: 15px; line-height: 26px; }
+.rule { display: none; }
+.event strong { color: var(--ink); font-size: 16px; font-weight: 600; line-height: 26px; }
+.eventAddr { max-width: none; color: var(--muted); font-size: 15px; line-height: 26px; text-align: left; }
+.mapBtn { margin-top: 14px; margin-bottom: 10px; border-radius: 2px; background: var(--accent); color: #f7f0e0; font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .02em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story: table of contents */
+.story { background: transparent; }
+.timeline { counter-reset: bab; gap: 22px; }
+.timeline::before { display: none; }
+.timeline li { counter-increment: bab; gap: 14px; padding-bottom: 20px; border-bottom: 1px dotted var(--gold-d); }
+.timeline li:last-child { border-bottom: 0; }
+.node { width: 46px; height: 46px; border: 0; border-radius: 0; background: none; }
+.node::before { content: counter(bab, upper-roman); color: var(--accent); font-family: var(--display); font-size: 30px; font-style: italic; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-size: 13px; font-variant: small-caps; letter-spacing: .14em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; font-style: italic; }
+.storyBody p { color: var(--muted); }
+
+/* gallery: plates with captions */
+.gallery { background: var(--paper); counter-reset: gbr; }
+.mosaic { grid-auto-rows: 170px; gap: 14px 12px; }
+.tile { padding: 7px 7px 22px; border-radius: 1px; background: #fbf6ea; box-shadow: 0 8px 18px rgba(58, 36, 22, .2); filter: sepia(.25); }
+.tile:first-child { border-radius: 1px; }
+.tile:hover { filter: sepia(0) saturate(1.05); }
+
+/* wishes: the guest book */
+.wishes { background: transparent; }
+.form { border: 1px solid var(--line); border-radius: 2px; background: repeating-linear-gradient(180deg, transparent 0 31px, rgba(185, 198, 216, .6) 31px 32px), var(--field); box-shadow: 0 12px 26px rgba(58, 36, 22, .12); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 13px; font-variant: small-caps; letter-spacing: .14em; text-transform: lowercase; }
+.field input, .field textarea { border-color: var(--line); border-radius: 2px; background: rgba(255, 255, 255, .7); }
+.field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(107, 31, 31, .12); }
+.choices button { border-radius: 2px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #f7f0e0; }
+.step { border-radius: 2px; border-color: var(--gold-d); }
+.submit { border-radius: 2px; background: var(--accent); color: #f7f0e0; font-family: var(--serif); font-size: 16px; font-style: italic; letter-spacing: .02em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sentBox img { width: 220px; }
+.sent { color: var(--accent); font-family: var(--display); }
+.wish { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; padding: 14px 4px; }
+.wish:hover { border-color: var(--gold-d); box-shadow: none; }
+.wish strong { color: var(--ink); font-family: var(--script); font-size: 30px; line-height: 1; }
+.wish small { background: transparent; border: 1px solid var(--accent); border-radius: 1px; color: var(--accent); font-variant: small-caps; letter-spacing: .1em; }
+.wish p { font-style: italic; }
+
+/* gifts: tooled leather covers */
+.gifts { background: var(--paper); }
+.gift { border-radius: 3px; background: linear-gradient(90deg, rgba(0, 0, 0, .25), transparent 8%), linear-gradient(160deg, #7a2420, #4e1414); box-shadow: inset 0 0 0 7px rgba(0, 0, 0, .12), inset 0 0 0 8px rgba(236, 208, 138, .5), inset 0 0 0 11px transparent, inset 0 0 0 12px rgba(236, 208, 138, .3), 0 12px 24px rgba(58, 36, 22, .25); }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--display); font-size: 19px; font-style: italic; letter-spacing: .02em; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; font-family: var(--serif); font-style: italic; }
+
+/* closing: lamplight and "Tamat" */
+.closing { padding: 60px 28px 60px; background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 190, 110, .22), transparent 70%), linear-gradient(180deg, #2a170e, #1c100a); }
+.closingLamp { width: 210px; margin-bottom: -6px; }
+.closingLamp img { display: block; width: 100%; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 54px; font-style: italic; }
+.closingEmblem { display: block; width: 200px; height: auto; margin-bottom: 4px; }
+.closingNames { color: var(--band-ink); font-family: var(--script); font-size: 56px; line-height: 1.1; }
+.family { font-family: var(--serif); font-variant: small-caps; letter-spacing: .14em; }
+.made { position: relative; z-index: 2; }
+
+.music { border-color: var(--gold); background: var(--green); }
+
+/* lamp with breathing glow (cover + closing) */
+.lamp { position: relative; display: block; }
+.lamp::before { content: ""; position: absolute; left: 50%; bottom: -10%; width: 170%; height: 110%; translate: -50% 0; background: radial-gradient(closest-side, rgba(255, 196, 110, .32), rgba(255, 196, 110, .08) 60%, transparent); pointer-events: none; animation: lampGlow 4.6s ease-in-out infinite alternate; }
+.lamp img { position: relative; display: block; width: 100%; height: auto; }
+
+/* ── Cover: the shelf wall and an ex-libris plate ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 40px 20px 150px; overflow: hidden; background: linear-gradient(180deg, rgba(20, 11, 6, .15), rgba(20, 11, 6, .5) 70%, rgba(20, 11, 6, .85)), url(/themes/art/perpustakaan-tua/shelf.webp) center top / cover, #2a170e; color: var(--ink); text-align: center; isolation: isolate; }
+.plate { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 312px; min-height: 480px; padding: 112px 34px 96px; background: url(/themes/art/perpustakaan-tua/plate.webp) center / 100% 100% no-repeat, url(/themes/art/perpustakaan-tua/paper.webp) 0 0 / 256px, #efe4cc; box-shadow: 0 0 0 1px rgba(58, 36, 22, .2), 0 26px 50px rgba(0, 0, 0, .55); rotate: -.8deg; }
+.exLibris { position: absolute; top: 100px; left: 0; right: 0; color: var(--accent); font-family: var(--display); font-size: 12px; font-style: italic; letter-spacing: .3em; text-transform: uppercase; }
+.coverKicker { margin-top: 14px; color: var(--muted); font-family: var(--serif); font-size: 13px; font-variant: small-caps; letter-spacing: .2em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 42px; font-style: italic; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold-d); font-family: var(--script); font-size: 40px; font-style: normal; line-height: .9; }
+.coverDate { margin-top: 10px; color: var(--ink); font-family: var(--serif); font-size: 14px; letter-spacing: .08em; }
+.coverRule { width: 70%; height: 1px; margin: 14px 0 12px; background: var(--gold-d); opacity: .6; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; font-style: italic; }
+.table { border-color: var(--accent); border-radius: 1px; color: var(--accent); font-family: var(--serif); font-variant: small-caps; letter-spacing: .14em; }
+.openBtn { position: relative; z-index: 2; margin-top: 24px; border: 1px solid var(--gold); border-radius: 2px; background: linear-gradient(180deg, #2e5e44, var(--green)); color: #f3e8cf; font-family: var(--serif); font-size: 16px; font-style: italic; letter-spacing: .02em; box-shadow: 0 10px 24px rgba(0, 0, 0, .5); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 14px 30px rgba(0, 0, 0, .55), 0 0 30px rgba(255, 200, 120, .15); }
+.coverLamp { position: absolute; z-index: 1; left: -14px; bottom: 4px; width: 172px; }
+.coverDesk { position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 40px; background: linear-gradient(180deg, #6a4128, #3a2214 40%, #24140c); box-shadow: 0 -1px 0 rgba(255, 200, 140, .3); }
+
+/* ── Hero: a title page ── */
+.hero { position: relative; display: flex; justify-content: center; padding: 44px 16px 52px; background: linear-gradient(180deg, #2a170e, #3a2416); }
+.page { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 340px; padding: 30px 26px 34px 34px; background: linear-gradient(90deg, rgba(58, 36, 22, .28), rgba(58, 36, 22, 0) 9%), url(/themes/art/perpustakaan-tua/paper.webp) 0 0 / 256px, #f1e7d0; color: var(--ink); text-align: center; box-shadow: 4px 0 0 #e4d6b6, 7px 1px 0 #d8c8a4, 10px 2px 0 #cbb994, 0 24px 40px rgba(0, 0, 0, .5); }
+.pageKicker { color: var(--accent); font-family: var(--serif); font-size: 13px; font-variant: small-caps; letter-spacing: .22em; }
+.pagePhoto { position: relative; width: 100%; height: 230px; margin-top: 16px; padding: 8px; background: #fbf6ea; box-shadow: 0 8px 16px rgba(58, 36, 22, .25); rotate: 1deg; }
+.pagePhoto > img, .pagePhoto > div { width: 100%; height: 100%; object-fit: cover; filter: sepia(.35) contrast(1.03); }
+.pagePhoto::before, .pagePhoto::after { content: ""; position: absolute; z-index: 2; width: 26px; height: 26px; background: linear-gradient(135deg, var(--walnut) 50%, transparent 50%); }
+.pagePhoto::before { top: 0; left: 0; }
+.pagePhoto::after { right: 0; bottom: 0; rotate: 180deg; }
+.heroNames { max-width: 100%; margin-top: 22px; color: var(--accent); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-family: var(--script); font-size: 38px; font-style: normal; line-height: 1; }
+.heroNote { max-width: 260px; margin-top: 12px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
+.colophon { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 18px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink); font-size: 13px; font-variant: small-caps; letter-spacing: .16em; }
+.colophon span:last-child { color: var(--muted); font-style: italic; font-variant: normal; letter-spacing: .02em; }
+
+/* dust drifting in the lamp light */
+.mote { position: absolute; z-index: 1; width: 3px; height: 3px; border-radius: 50%; background: rgba(255, 226, 160, .7); filter: blur(.4px); animation: mote 12s ease-in-out infinite; }
+
+@keyframes lampGlow { from { opacity: .7; scale: .97; } to { opacity: 1; scale: 1.03; } }
+@keyframes mote { 0%, 100% { translate: 0 0; opacity: 0; } 20% { opacity: .9; } 50% { translate: 14px -40px; opacity: .6; } 80% { opacity: .8; } 90% { translate: -6px -70px; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .lamp::before, .mote { animation: none; }
+  .mote { display: none; }
+  .count > div { transition: none; }
+}

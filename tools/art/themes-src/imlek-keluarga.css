@@ -1,0 +1,166 @@
+/* Imlek Keluarga — undangan makan malam reuni Imlek keluarga di atas kertas beras krem: tiga lampion merah yang berayun pelan, ranting meihua bertinta dengan kuntum merah muda, medali kertas gunting merah berhuruf 福 emas, kartu tamu berupa angpao, meja bundar reuni dilihat dari atas, jeruk mandarin bergouache dan awan keberuntungan emas; nomor acara dalam angka Tionghoa, angpao untuk tanda kasih; Shippori Mincho + Literata + Ma Shan Zheng, merah pernis, emas, krem dan oranye jeruk. */
+.root, .cover {
+  --bg: #f6eedd; --paper: #f1e6cf; --ivory: #fbf6ea; --field: #fffbf2; --ink: #2a1a14; --muted: #6e5040; --line: #e4cfa8;
+  --accent: #b3131b; --accent2: #8e0c12; --gold: #d8a640; --gold-l: #f4d68a; --gold-d: #a07422;
+  --band-bg: #a8111a; --band-ink: #fbefd6;
+  --lacquer: #c4161c; --deep: #6e0a10; --jade: #2f6a4a; --orange: #f08a1c;
+  --display: "Shippori Mincho", "Songti SC", Georgia, serif; --serif: Literata, Georgia, serif; --script: "Shippori Mincho", Georgia, serif; --han: "Ma Shan Zheng", "Shippori Mincho", serif;
+  --h2: 30px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b3131b; --t-accent-ink: #fbefd6; --t-bg: #f6eedd; --t-ink: #2a1a14; --t-muted: #6e5040; --t-line: #e4cfa8; --t-field: #fffbf2;
+  --t-radius: 4px; --t-font: Literata, Georgia, serif; --t-heading-font: "Shippori Mincho", Georgia, serif; --t-heading-weight: 700; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: url(/themes/art/imlek-keluarga/paper.webp) 0 0 / 256px, var(--bg); }
+.section { padding: 64px 24px; }
+
+/* headings: red seal kicker, bold mincho title, gold clouds */
+.eyebrow, .salamKicker, .role { color: var(--accent); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-weight: 700; letter-spacing: .02em; }
+.divider { display: block; width: 170px; height: auto; margin-top: 6px; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 60px 28px 58px; background: transparent; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 700; }
+.salamSub { color: var(--gold-d); font-family: var(--display); font-size: 14px; letter-spacing: .12em; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* hosts: the family under a papercut medallion */
+.couple { gap: 12px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 200px; height: 200px; padding: 0; border: 0; border-radius: 50%; background: transparent; overflow: visible; }
+.monogram { display: none; }
+.hostSeal { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; }
+.hostSeal img { display: block; width: 200px; height: auto; }
+.hostSeal b { position: absolute; color: var(--gold-l); font-family: var(--han); font-size: 70px; font-weight: 400; line-height: 1; text-shadow: 0 1px 0 rgba(0, 0, 0, .2); }
+.person:hover .portraitFrame { box-shadow: none; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 700; line-height: 1.15; }
+.fullName { color: var(--ink); font-family: var(--display); font-size: 18px; font-weight: 600; }
+.parents { max-width: 320px; color: var(--muted); }
+
+/* countdown: four lanterns on a red band */
+.countBand { padding: 70px 18px 70px; background: radial-gradient(ellipse 80% 60% at 50% 0, rgba(255, 190, 90, .25), transparent 70%), linear-gradient(180deg, #b3131b, #8e0c12); }
+.countLanterns { position: absolute; z-index: -1; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 10px; opacity: .35; pointer-events: none; }
+.countLanterns img { width: 46px; height: auto; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, 72px); gap: 8px; }
+.count > div { width: 72px; height: 86px; border: 0; border-radius: 40% / 46%; background: radial-gradient(ellipse at 50% 45%, #ffb35a, #e8451c 55%, #a8111a 100%); box-shadow: inset 0 0 0 2px rgba(110, 10, 16, .35), 0 -6px 0 -2px var(--gold), 0 6px 0 -2px var(--gold), 0 10px 18px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count b { color: #fffaf0; font-family: var(--display); font-size: 28px; font-weight: 700; text-shadow: 0 1px 2px rgba(110, 10, 16, .6); }
+.count small { color: #fff3dc; font-family: var(--serif); font-size: 12px; font-style: normal; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); border-radius: 4px; color: var(--gold-l); font-family: var(--display); }
+
+/* events: cards with red lattice corners and Chinese numerals */
+.events { gap: 28px; background: transparent; counter-reset: ev; }
+.event { counter-increment: ev; padding: 46px 22px 28px; border: 2px solid var(--accent); border-radius: 4px; background: linear-gradient(var(--accent), var(--accent)) 8px 8px / 26px 3px no-repeat, linear-gradient(var(--accent), var(--accent)) 8px 8px / 3px 26px no-repeat, linear-gradient(var(--accent), var(--accent)) calc(100% - 8px) 8px / 26px 3px no-repeat, linear-gradient(var(--accent), var(--accent)) calc(100% - 8px) 8px / 3px 26px no-repeat, linear-gradient(var(--accent), var(--accent)) 8px calc(100% - 8px) / 26px 3px no-repeat, linear-gradient(var(--accent), var(--accent)) 8px calc(100% - 8px) / 3px 26px no-repeat, linear-gradient(var(--accent), var(--accent)) calc(100% - 8px) calc(100% - 8px) / 26px 3px no-repeat, linear-gradient(var(--accent), var(--accent)) calc(100% - 8px) calc(100% - 8px) / 3px 26px no-repeat, var(--ivory); box-shadow: 0 14px 28px rgba(110, 10, 16, .12); }
+.event::before { inset: 14px; border: 1px solid rgba(216, 166, 64, .6); border-radius: 2px; }
+.event:hover { border-color: var(--accent2); }
+.eventNo { top: -20px; width: 40px; height: 40px; border-radius: 4px; background: var(--accent); color: var(--gold-l); font-size: 0; rotate: 45deg; box-shadow: 0 6px 14px rgba(110, 10, 16, .3); }
+.eventNo::before { content: counter(ev, cjk-decimal); rotate: -45deg; font-family: var(--han); font-size: 22px; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 700; }
+.eventDate { color: var(--ink); font-size: 17px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 90px; background: var(--gold); }
+.mapBtn { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story: blossoms along an ink line */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(#3a2a22, rgba(58, 42, 34, .15)); }
+.node { width: 40px; height: 40px; border: 0; background: radial-gradient(circle, #fff6f2 55%, transparent 56%); }
+.node img { width: 38px; }
+.storyBody small { color: var(--accent); font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 20px; font-weight: 700; }
+
+/* gallery: moon gate */
+.gallery { background: transparent; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4px var(--gold); }
+.mosaic { grid-auto-rows: 230px; }
+.tile:first-child { grid-row: span 1; border-radius: 999px; }
+
+/* wishes: cards with a red seal */
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); font-weight: 600; letter-spacing: .1em; }
+.choices button { border-radius: 4px; font-family: var(--display); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.step { border-radius: 4px; border-color: var(--accent); }
+.submit { border-radius: 4px; background: linear-gradient(180deg, #c4161c, var(--accent2)); color: var(--gold-l); font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sentBox img { width: 160px; }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; font-weight: 600; }
+.wish { border-radius: 4px; border-color: var(--line); background: var(--ivory); }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 700; }
+.wish small { border-radius: 3px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-weight: 600; rotate: -4deg; }
+
+/* gifts: angpao envelopes */
+.gifts { background: transparent; }
+.gift { padding: 44px 20px 26px; border-radius: 6px; background: radial-gradient(circle at 50% 0, #d8a640 0 22px, transparent 23px), linear-gradient(180deg, #c4161c, #a8111a); box-shadow: inset 0 0 0 6px rgba(0, 0, 0, .08), inset 0 0 0 7px rgba(244, 214, 138, .55), 0 14px 26px rgba(110, 10, 16, .25); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { font-family: var(--display); font-weight: 700; }
+.giftNo { font-family: var(--display); font-weight: 700; }
+.copy { border-radius: 4px; border-color: var(--gold-l); font-family: var(--display); }
+
+/* closing: lanterns over the red table cloth */
+.closing { padding: 150px 26px 64px; background: radial-gradient(ellipse 80% 50% at 50% 0, rgba(255, 180, 80, .3), transparent 70%), linear-gradient(180deg, #a8111a, #6e0a10); }
+.closeLanterns { position: absolute; z-index: -1; top: 0; left: 0; right: 0; display: flex; justify-content: space-around; pointer-events: none; }
+.closeLanterns > span { display: block; width: 62px; transform-origin: 50% 0; animation: lanternSway 6s ease-in-out infinite alternate; }
+.closeLanterns > span:nth-child(2) { width: 78px; margin-top: -30px; animation-delay: -2s; }
+.closeLanterns > span:nth-child(3) { animation-delay: -4s; }
+.closeLanterns img { display: block; width: 100%; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 40px; font-weight: 700; }
+.closingEmblem { display: block; width: 150px; height: auto; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 30px; font-weight: 700; }
+
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* lanterns hanging from the top, swaying (cover) */
+.lanterns { position: absolute; z-index: 2; top: 0; left: 0; right: 0; height: 0; pointer-events: none; }
+.lanterns > span { position: absolute; top: 0; display: block; transform-origin: 50% 0; animation: lanternSway 6.5s ease-in-out infinite alternate; }
+.lanterns img { display: block; width: 100%; height: auto; }
+.lanternA { left: 14px; width: 64px; }
+.lanternB { left: 96px; width: 46px; margin-top: -6px; animation-delay: -2.4s !important; }
+.lanternC { right: 16px; width: 72px; margin-top: -10px; animation-delay: -4.1s !important; }
+
+/* ── Cover: rice paper, lanterns, a papercut 福 and an angpao for the guest ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 150px 24px 40px; overflow: hidden; background: url(/themes/art/imlek-keluarga/paper.webp) 0 0 / 256px, var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 10px; z-index: 0; border: 2px solid var(--accent); box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--gold); pointer-events: none; }
+.coverPlum { position: absolute; z-index: 1; top: 74px; right: -96px; width: 290px; height: auto; }
+.medal { position: relative; z-index: 2; display: grid; place-items: center; width: 168px; height: 168px; }
+.medal img { display: block; width: 100%; height: auto; }
+.medal b { position: absolute; color: var(--gold-l); font-family: var(--han); font-size: 64px; font-weight: 400; line-height: 1; }
+.greet { position: relative; z-index: 2; margin-top: 14px; color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 800; letter-spacing: .02em; }
+.greetSub { position: relative; z-index: 2; margin-top: 2px; color: var(--gold-d); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .16em; }
+.coverName { position: relative; z-index: 2; max-width: 100%; margin-top: 16px; color: var(--ink); font-family: var(--display); font-size: 26px; font-weight: 700; line-height: 1.2; overflow-wrap: anywhere; }
+.coverLabel { position: relative; z-index: 2; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.coverDate { position: relative; z-index: 2; margin-top: 4px; color: var(--muted); font-size: 15px; }
+.angpao { position: relative; z-index: 2; width: 100%; max-width: 280px; margin-top: 18px; padding: 30px 18px 16px; border-radius: 6px; background: radial-gradient(circle at 50% 0, var(--gold) 0 16px, transparent 17px), linear-gradient(180deg, #c4161c, #a8111a); color: var(--band-ink); box-shadow: inset 0 0 0 5px rgba(0, 0, 0, .06), inset 0 0 0 6px rgba(244, 214, 138, .55), 0 14px 26px rgba(110, 10, 16, .3); }
+.angpao .guest small { color: #fbe3b8; font-size: 13px; font-style: normal; }
+.angpao .guest strong { color: var(--gold-l); font-family: var(--display); font-weight: 700; }
+.angpao .table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--display); }
+.openBtn { position: relative; z-index: 2; margin-top: 18px; border-radius: 4px; background: var(--ink); color: var(--gold-l); font-family: var(--display); font-weight: 700; letter-spacing: .1em; box-shadow: 0 10px 22px rgba(42, 26, 20, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.coverOranges { position: absolute; z-index: 1; left: 14px; bottom: 16px; width: 104px; height: auto; }
+
+/* ── Hero: the reunion table ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 54px 22px 40px; overflow: hidden; text-align: center; }
+.heroHan { color: var(--accent); font-family: var(--han); font-size: 40px; line-height: 1; letter-spacing: .16em; }
+.heroKicker { margin-top: 8px; color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.heroName { max-width: 100%; margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 32px; font-weight: 800; line-height: 1.15; overflow-wrap: anywhere; }
+.heroTable { position: relative; width: 300px; max-width: 100%; margin-top: 22px; }
+.heroTable img { display: block; width: 100%; height: auto; animation: tableTurn 80s linear infinite; }
+.heroDate { margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 16px; font-weight: 700; }
+.heroNote { max-width: 310px; margin-top: 10px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+.heroPlum { position: absolute; z-index: -1; top: 6px; left: -90px; width: 260px; height: auto; scale: -1 1; opacity: .85; }
+
+@keyframes lanternSway { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes tableTurn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .lanterns > span, .closeLanterns > span, .heroTable img { animation: none !important; }
+}

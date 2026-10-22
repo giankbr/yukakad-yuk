@@ -1,0 +1,182 @@
+/* Tolaki Kendari — malam hitam, merah tenun, dan emas: matahari terbenam di Teluk Kendari menjadi bingkai foto bundar, rumah laika berkaki tinggi, dan pita tenun Tolaki merah-hitam-emas sebagai bahasa garis. */
+.root, .cover {
+  --bg: #17110f; --paper: #211714; --ivory: #241a17; --field: #2b201c; --ink: #f3e6cc; --muted: #c9b79e; --line: #4a3a30;
+  --accent: #e0a84a; --accent2: #c33a2e; --gold: #c9963a; --gold-l: #ecc777; --gold-d: #a87a2a;
+  --band-bg: #8f1d19; --band-ink: #fff3de;
+  --display: Forum, "Cinzel", Georgia, serif; --serif: Figtree, system-ui, sans-serif; --script: Ephesis, Forum, cursive;
+  --red: #a8231f; --red-l: #e0614f; --black: #17110f;
+  --weave: url(/themes/art/tolaki-kendari/weave.webp);
+  --h2: 33px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c9963a; --t-accent-ink: #17110f; --t-bg: #17110f; --t-ink: #f3e6cc; --t-muted: #c9b79e; --t-line: #4a3a30; --t-field: #2b201c;
+  --t-radius: 2px; --t-font: Figtree, system-ui, sans-serif; --t-heading-font: Forum, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--red-l); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; }
+.head h2, .headLight h2 { color: var(--gold-l); letter-spacing: .04em; }
+.divider { width: 180px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.section { padding: 64px 24px; }
+
+/* opening */
+.salamBlock { padding: 48px 30px 60px; background: var(--bg); }
+.arabic { color: var(--gold-l); font-size: 28px; }
+.salamKicker { color: var(--red-l); font-size: 13.5px; letter-spacing: .14em; }
+.salamTitle { color: var(--gold-l); font-family: var(--display); font-size: 36px; letter-spacing: .03em; }
+
+/* couple: chamfered (octagonal) gold frames, like the stepped diamonds of the weave */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 216px; height: 270px; padding: 3px; border: 0; border-radius: 0; background: linear-gradient(150deg, var(--gold-l), var(--gold-d) 45%, var(--gold)); clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 84%, 78% 100%, 22% 100%, 0 84%, 0 16%); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 84%, 78% 100%, 22% 100%, 0 84%, 0 16%); }
+.portrait::after { content: ""; position: absolute; left: 50%; bottom: -14px; width: 28px; height: 28px; translate: -50% 0; rotate: 45deg; border: 2px solid var(--gold); background: var(--red); }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.nick { color: var(--gold-l); font-family: var(--display); font-size: 46px; letter-spacing: .04em; }
+.fullName { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { color: var(--red-l); font-family: var(--script); font-size: 64px; }
+.amp img { width: 34px; }
+
+/* countdown: red cloth framed by the weave */
+.countBand { padding: 84px 24px; background: radial-gradient(120% 90% at 50% 50%, #a8231f, #6e1512); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 30px; background: var(--weave) 0 0 / auto 30px repeat-x; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: #ffd9a8; }
+.headLight h2 { color: #fff3de; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 84px; border: 0; border-radius: 0; background: var(--black); clip-path: polygon(16% 0, 84% 0, 100% 16%, 100% 84%, 84% 100%, 16% 100%, 0 84%, 0 16%); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(236, 199, 119, .18) 50%, transparent 65%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 31px; }
+.count small { color: var(--muted); font-size: 10.5px; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.countTba { color: #fff3de; }
+.ghostBtn { border-radius: 2px; border-color: var(--gold-l); color: #fff3de; font-family: var(--serif); font-weight: 700; letter-spacing: .08em; }
+
+/* events: black boards, weave header, gold hairlines */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 50px 22px 26px; border: 1px solid var(--gold-d); border-radius: 0; background: var(--ivory); }
+.event::before { inset: 0 0 auto 0; height: 22px; border: 0; border-radius: 0; background: var(--weave) 0 0 / auto 22px repeat-x; }
+.eventNo { top: 8px; width: 40px; height: 40px; border-radius: 0; rotate: 45deg; border: 2px solid var(--gold); background: var(--red); color: transparent; }
+.eventNo::after { content: ""; position: absolute; inset: 11px; background: var(--gold-l); }
+.event h3 { color: var(--gold-l); font-size: 28px; letter-spacing: .04em; }
+.eventDate { color: var(--ink); font-family: var(--display); font-size: 18px; font-style: normal; }
+.eventTime { color: var(--red-l); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 1px; background: var(--gold); }
+.event strong { color: var(--ink); font-family: var(--display); font-weight: 400; font-size: 20px; }
+.eventAddr { color: var(--muted); }
+.mapBtn { border-radius: 2px; background: var(--gold); color: var(--black); font-family: var(--serif); font-weight: 800; letter-spacing: .08em; }
+.mapBtn:hover { background: var(--gold-l); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--gold), var(--red)); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--red-l); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--gold-l); font-size: 23px; }
+.storyBody p { color: var(--muted); }
+.storyImg { border-radius: 0; }
+
+/* gallery */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 160px; gap: 6px; }
+.tile { border-radius: 0; }
+.tile:first-child { grid-row: span 2; border-radius: 0; clip-path: polygon(30% 0, 70% 0, 100% 12%, 100% 100%, 0 100%, 0 12%); }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--gold-d); border-radius: 0; background: var(--bg); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.field input, .field textarea { border-color: var(--line); border-radius: 0; background: var(--field); color: var(--ink); }
+.field input:focus, .field textarea:focus { border-color: var(--gold); }
+.choices button { border-color: var(--line); border-radius: 0; background: var(--field); color: var(--muted); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.guests { color: var(--ink); }
+.submit { border-radius: 0; background: var(--gold); color: var(--black); font-family: var(--serif); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--gold-l); }
+.step { border-color: var(--gold); background: var(--field); color: var(--gold-l); }
+.step:hover { background: var(--line); }
+.closed { border-color: var(--line); }
+.sent { color: var(--gold-l); }
+.wish { border-radius: 0; border-color: var(--line); background: var(--bg); }
+.wish:hover { border-color: var(--gold-d); }
+.wish strong { color: var(--gold-l); font-family: var(--display); font-size: 18px; }
+.wish small { background: color-mix(in srgb, var(--red) 40%, transparent); color: #ffe0c4; }
+.wish p { color: var(--muted); }
+.empty { color: var(--muted); }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { padding: 22px 24px; border-radius: 0; background: #2a1512; border: 1px solid var(--gold-d); }
+.gift::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 10px; background: var(--weave) 0 0 / auto 26px repeat-y; }
+.gift::after { border-color: rgba(201, 150, 58, .08); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.giftIcon { border-radius: 0; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.giftNo { color: #fff3de; font-family: var(--display); font-size: 24px; }
+.copy { border-radius: 0; border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--black); }
+
+/* closing: dusk returns at the top, fading into night */
+.closing { padding: 250px 30px 60px; background: var(--bg); color: var(--ink); }
+.closingSky { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 360px; object-fit: cover; object-position: 50% 30%; -webkit-mask-image: linear-gradient(#000 40%, transparent); mask-image: linear-gradient(#000 40%, transparent); }
+.closingMotif { width: 74px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; letter-spacing: .04em; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--red-l); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 54px; }
+.made { color: rgba(243, 230, 204, .5); }
+.made:hover { color: var(--gold-l); }
+.music { border: 1.5px solid var(--gold); border-radius: 0; rotate: 45deg; background: var(--red); }
+.music svg { rotate: -45deg; }
+
+/* ── Cover: dusk over Teluk Kendari; the photo is the setting sun ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 26px; overflow: hidden; background: var(--black); color: var(--ink); text-align: center; isolation: isolate; }
+.sky { position: relative; width: 100%; height: max(380px, 54dvh); overflow: hidden; }
+.sky > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 64% 34%; }
+.sky::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(23, 17, 15, .45), transparent 26%, transparent 74%, var(--black)); }
+.skyTop { position: absolute; z-index: 2; top: 18px; left: 0; right: 0; }
+.coverArabic { color: #fff3de; font-family: Amiri, serif; font-size: 21px; line-height: 1.6; text-shadow: 0 1px 8px rgba(0, 0, 0, .4); }
+.coverKicker { color: #ffd9a8; font-size: 12px; font-weight: 700; letter-spacing: .22em; text-shadow: 0 1px 6px rgba(0, 0, 0, .4); }
+.sun { position: absolute; z-index: 1; top: 28%; left: 50%; width: 150px; height: 150px; translate: -50% 0; border-radius: 50%; padding: 4px; background: conic-gradient(from 20deg, var(--gold-l), var(--gold-d), var(--gold-l), var(--gold), var(--gold-l)); box-shadow: 0 0 0 7px rgba(255, 216, 144, .22), 0 0 60px 18px rgba(255, 190, 110, .55); }
+.sun > div, .sun > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+.sunEmpty { display: block; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(#fff0c4, #f7c46c); }
+.coverWeave { position: relative; z-index: 2; width: 100%; height: 30px; margin-top: -6px; background: var(--weave) 0 0 / auto 30px repeat-x; }
+.coverBody { display: flex; flex-direction: column; align-items: center; width: 100%; padding: 18px 24px 0; }
+.coverLabel { color: var(--red-l); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 8px; color: var(--gold-l); font-family: var(--display); font-size: 44px; font-weight: 400; letter-spacing: .05em; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { display: inline-block; padding: 0 10px; color: var(--red-l); font-family: var(--script); font-size: 46px; font-style: normal; }
+.coverDate { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .12em; }
+.guestCard { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 320px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: #fff3de; font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--red-l); color: var(--red-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 0; background: var(--gold); color: var(--black); font-family: var(--serif); font-size: 13.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%); }
+.openBtn:hover { background: var(--gold-l); }
+
+/* ── Hero: weave bands, the laika on its posts, names in gold ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 26px 54px; background: radial-gradient(110% 60% at 50% 34%, #3a1e18, var(--bg) 70%); text-align: center; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30px; background: var(--weave) 0 0 / auto 30px repeat-x; }
+.heroLaika { width: 250px; height: auto; margin-top: 58px; }
+.heroKicker { margin-top: 18px; color: var(--red-l); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { margin-top: 8px; color: var(--gold-l); font-family: var(--display); font-size: 48px; font-weight: 400; letter-spacing: .05em; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--red-l); font-family: var(--script); font-size: 48px; font-style: normal; }
+.heroDate { margin-top: 12px; padding: 7px 18px; background: var(--red); color: #fff3de; font-family: var(--display); font-size: 17px; letter-spacing: .1em; clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0 50%); }
+.heroNote { max-width: 320px; margin-top: 24px; color: var(--muted); font-size: 16.5px; font-style: italic; line-height: 1.65; }
+.sentBox img { width: 70px; }
+
+/* motion (elegant): the sun rises into place and breathes its glow; the weave drifts slowly; diamonds turn */
+.sun { animation: sunSet 2.2s var(--m-ease) .2s both, sunGlow 6s ease-in-out 2.4s infinite alternate; }
+.coverWeave, .hero::before { animation: weaveDrift 60s linear infinite; }
+.node img { animation: spin 50s linear infinite; }
+.root .event { transition: border-color 600ms var(--m-ease), translate 600ms var(--m-ease), scale 600ms var(--m-ease), box-shadow 600ms var(--m-ease); }
+.event:hover { border-color: var(--gold-l); translate: 0 -3px; box-shadow: 0 16px 34px rgba(0, 0, 0, .4); }
+@keyframes sunSet { from { opacity: 0; translate: -50% 26px; } }
+@keyframes sunGlow { to { box-shadow: 0 0 0 9px rgba(255, 216, 144, .16), 0 0 80px 26px rgba(255, 190, 110, .45); } }
+@keyframes weaveDrift { to { background-position: -411.43px 0; } }
+@media (prefers-reduced-motion: reduce) { .sun, .coverWeave, .hero::before, .node img { animation: none; } }

@@ -1,0 +1,160 @@
+/* Mezquita Cordoba — cahaya keemasan di aula berpilar: lengkung ganda tapal kuda dengan batu baji bata merah dan batu gading berselang, kolom berderet, dan bingkai alfiz untuk foto. Arsitektur, geometri, dan flora saja. */
+.root, .cover {
+  --bg: #f4e8d4; --paper: #ecdcc0; --ivory: #fbf3e4; --field: #fffaf0; --ink: #2e1c12; --muted: #6e5643; --line: #dcc8a6;
+  --accent: #8a3520; --accent2: #a8432c; --gold: #d9a441; --gold-l: #f4d488; --gold-d: #9a6c24;
+  --band-bg: #2e1c12; --band-ink: #fbf0dc;
+  --display: "Cormorant Upright", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Monsieur La Doulaise", "Cormorant Upright", cursive;
+  --brick: #a8432c; --stone: #f1e2c4; --umber: #2e1c12;
+  --vous: repeating-linear-gradient(90deg, var(--brick) 0 16px, var(--stone) 16px 32px);
+  --ring: repeating-conic-gradient(from -90deg at 50% 46%, var(--brick) 0 7.5deg, var(--stone) 7.5deg 15deg);
+  --h2: 36px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8a3520; --t-accent-ink: #fbf3e4; --t-bg: #f4e8d4; --t-ink: #2e1c12; --t-muted: #6e5643; --t-line: #dcc8a6; --t-field: #fffaf0;
+  --t-radius: 10px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Cormorant Upright", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--brick); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; }
+.head h2 { color: var(--umber); font-weight: 600; }
+.headLight h2 { font-weight: 600; }
+.divider { width: 180px; }
+.intro { font-size: 17px; line-height: 1.75; }
+
+/* the arcade frieze crowns every light section */
+.section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 54px; background: url(/themes/art/mezquita-cordoba/frieze.webp) 0 0 / auto 54px repeat-x; opacity: .9; pointer-events: none; }
+.section { padding-top: 92px; }
+.countBand::before { display: none; }
+.countBand { padding-top: 64px; }
+
+/* opening */
+.salamBlock { padding: 40px 30px 60px; }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamKicker { letter-spacing: .12em; font-size: 14px; }
+.salamTitle { color: var(--umber); font-family: var(--display); font-size: 40px; font-weight: 600; }
+
+/* couple: horseshoe portraits whose border is a ring of voussoirs */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 222px; height: 286px; padding: 13px; border: 0; border-radius: 999px 999px 10px 10px / 640px 640px 10px 10px; background: var(--ring); box-shadow: 0 14px 30px rgba(46, 28, 18, .2), inset 0 0 0 2px rgba(217, 164, 65, .8); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px 999px 4px 4px / 600px 600px 4px 4px; box-shadow: 0 0 0 2px var(--gold); }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.portraitFrame:has(.monogram) { background: var(--ring); }
+.nick { color: var(--accent); font-family: var(--script); font-size: 68px; line-height: 1.2; }
+.fullName { font-family: var(--display); font-size: 21px; font-weight: 600; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 60px; }
+.amp img { width: 34px; }
+
+/* countdown: dark umber hall, horseshoe counters */
+.countBand { padding-bottom: 72px; background: radial-gradient(120% 80% at 50% 10%, #5a381e, var(--umber) 70%); }
+.countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 70px; background: url(/themes/art/mezquita-cordoba/frieze.webp) 0 100% / auto 70px repeat-x; opacity: .16; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 96px; padding-top: 10px; border: 0; border-radius: 999px 999px 6px 6px / 70px 70px 6px 6px; background: var(--ring); }
+.count > div::before { content: ""; position: absolute; inset: 7px; border-radius: 999px 999px 3px 3px / 64px 64px 3px 3px; background: var(--umber); }
+.count > div::after { display: none; }
+.count b, .count small { position: relative; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { color: rgba(251, 240, 220, .75); font-size: 12px; }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+
+/* events: cream panels under a voussoir band */
+.events { gap: 26px; }
+.event { padding: 44px 22px 26px; border: 1px solid var(--line); border-radius: 10px; background: var(--ivory); }
+.event::before { inset: 0 0 auto 0; height: 12px; border: 0; border-radius: 10px 10px 0 0; background: var(--vous); }
+.eventNo { top: 26px; left: 50%; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; font-weight: 600; letter-spacing: .3em; }
+.event h3 { margin-top: 18px; color: var(--accent); font-size: 30px; font-weight: 600; }
+.eventDate { font-size: 17px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 90px; height: 6px; margin: 8px 0; background: repeating-linear-gradient(90deg, var(--brick) 0 9px, var(--stone) 9px 18px); border-radius: 1px; }
+.event strong { font-family: var(--display); font-weight: 600; font-size: 21px; }
+.mapBtn { border-radius: 999px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--umber); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--brick), var(--gold)); }
+.node { width: 40px; height: 44px; border: 0; border-radius: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { color: var(--brick); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-size: 23px; font-weight: 600; }
+.storyImg { border-radius: 120px 120px 10px 10px / 70px 70px 10px 10px; }
+
+/* gallery */
+.mosaic { grid-auto-rows: 160px; gap: 8px; }
+.tile { border-radius: 8px; }
+.tile:first-child { grid-row: span 2; border-radius: 999px 999px 8px 8px / 170px 170px 8px 8px; }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.form { position: relative; padding-top: 30px; border-radius: 10px; overflow: hidden; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--vous); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.submit { background: var(--umber); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.wish { border-radius: 10px; }
+.wish strong { font-family: var(--display); font-size: 19px; font-weight: 600; color: var(--accent); }
+
+/* gifts: umber with a voussoir head */
+.gift { padding-top: 34px; border-radius: 10px; background: var(--umber); }
+.gift::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--vous); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 20px; font-weight: 600; letter-spacing: .04em; }
+.giftNo { color: #fbf0dc; font-family: var(--display); font-size: 25px; font-weight: 600; }
+.copy { font-family: var(--serif); }
+
+/* closing: the hall again, light at the end of the aisle */
+.closing { padding: 300px 30px 60px; background: var(--umber); }
+.closingHall { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 440px; object-fit: cover; object-position: 50% 40%; -webkit-mask-image: linear-gradient(#000 45%, transparent); mask-image: linear-gradient(#000 45%, transparent); }
+.closingMotif { width: 70px; height: auto; margin-top: -60px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 48px; font-weight: 600; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 14px; letter-spacing: .06em; }
+.family { font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 44px; line-height: 1.3; }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: the hall behind, an alfiz-framed horseshoe arch around the photo ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 28px 24px 28px; overflow: hidden; background: var(--umber); color: var(--band-ink); text-align: center; isolation: isolate; }
+.coverHall { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(rgba(31, 19, 11, .55), rgba(31, 19, 11, .15) 30%, rgba(31, 19, 11, .55) 58%, rgba(31, 19, 11, .92)); }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.coverKicker { color: #f6e2bc; font-size: 12.5px; font-weight: 700; letter-spacing: .2em; }
+.arch { position: relative; width: 226px; aspect-ratio: 480 / 656; margin: 12px 0 4px; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .45)); }
+.arch > img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.archPhoto { position: absolute; z-index: 0; top: 15.6%; left: 16.4%; right: 16.4%; bottom: 0; overflow: hidden; border-radius: 999px 999px 0 0 / 260px 260px 0 0; background: #6a4422; }
+.archPhoto > img, .archPhoto > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; }
+.archEmpty { position: absolute; z-index: 0; top: 15.6%; left: 16.4%; right: 16.4%; bottom: 0; border-radius: 999px 999px 0 0 / 260px 260px 0 0; background: radial-gradient(#f6d590, #9a6a3a); }
+.coverLabel { margin-top: 10px; color: var(--gold-l); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: #fbf0dc; font-family: var(--script); font-size: 42px; font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-l); font-family: var(--display); font-size: 34px; font-style: normal; padding: 0 8px; }
+.coverDate { display: inline-block; margin-top: 2px; color: var(--gold-l); font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .08em; }
+.guestCard { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 322px; margin-top: 14px; }
+.guest small { color: rgba(251, 240, 220, .8); font-size: 14px; }
+.guest strong { color: #fbf0dc; font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+.openBtn { position: relative; border-radius: 999px; background: var(--brick); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .1em; box-shadow: 0 0 0 2px rgba(244, 212, 136, .7), 0 10px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { background: #8a3520; translate: 0 -2px; }
+
+/* ── Hero: the frieze arcade overhead, names under a voussoir-striped date band ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 104px 28px 56px; background: linear-gradient(var(--paper), var(--bg) 40%); text-align: center; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 84px; background: url(/themes/art/mezquita-cordoba/frieze.webp) 0 0 / auto 84px repeat-x; }
+.heroEmblem { width: 78px; height: auto; }
+.heroKicker { margin-top: 14px; color: var(--brick); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { margin-top: 6px; color: var(--accent); font-family: var(--script); font-size: 70px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-family: var(--display); font-size: 34px; font-style: normal; line-height: 1; }
+.heroDate { position: relative; margin-top: 16px; padding: 14px 20px 8px; color: var(--umber); font-family: var(--display); font-size: 20px; font-weight: 600; letter-spacing: .06em; }
+.heroDate::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: repeating-linear-gradient(90deg, var(--brick) 0 10px, var(--stone) 10px 20px); }
+.heroNote { max-width: 320px; margin-top: 22px; color: var(--muted); font-size: 16.5px; font-style: italic; line-height: 1.7; }
+.sentBox img { width: 70px; }
+
+/* motion (elegant): the photo glows in like light at the end of the aisle; the hall breathes slowly; frieze drifts */
+.archPhoto { animation: dawn 2.4s var(--m-ease) .3s both; }
+.coverHall { animation: hallBreathe 30s ease-in-out infinite alternate; }
+.hero::before { animation: friezeDrift 80s linear infinite; }
+.root .event { transition: box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease), scale 600ms var(--m-ease), border-color 600ms var(--m-ease); }
+.event:hover { translate: 0 -3px; border-color: var(--gold); box-shadow: 0 18px 34px rgba(46, 28, 18, .12); }
+@keyframes dawn { from { opacity: 0; filter: brightness(1.8) sepia(.6); } }
+@keyframes hallBreathe { from { scale: 1; } to { scale: 1.06; } }
+@keyframes friezeDrift { to { background-position: -448px 0; } }
+@media (prefers-reduced-motion: reduce) { .archPhoto, .coverHall, .hero::before { animation: none; } }

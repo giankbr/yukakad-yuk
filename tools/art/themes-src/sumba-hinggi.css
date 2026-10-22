@@ -1,0 +1,132 @@
+/* Sumba Hinggi — adat Sumba Timur: kain hinggi bermotif kuda, ayam, rusa, dan udang dalam ikat merah kombu, sabana keemasan dengan rumah beratap menara, dan rumbai kain di setiap tepi. */
+.root, .cover {
+  --bg: #f3e4c6; --paper: #ecd8b2; --ivory: #faf1de; --field: #fffaf0; --ink: #2f1c14; --muted: #6a4f3d; --line: #dcc39a;
+  --accent: #7d2f1e; --accent2: #5e2114; --gold: #c99a3e; --gold-l: #f0d79a; --gold-d: #8f6420;
+  --band-bg: #6e2818; --band-ink: #f6e9cf; --ind: #28324d;
+  --display: Federant, "Alegreya", Georgia, serif; --serif: Alegreya, Georgia, serif; --script: Federant, "Alegreya", serif;
+  --h2: 29px; --card-r: 4px;
+  --figs: url(/themes/art/sumba-hinggi/figs.webp); --geo: url(/themes/art/sumba-hinggi/geo.webp); --fringe: url(/themes/art/sumba-hinggi/fringe.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7d2f1e; --t-accent-ink: #faf1de; --t-bg: #f3e4c6; --t-ink: #2f1c14; --t-muted: #6a4f3d; --t-line: #dcc39a; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: Alegreya, Georgia, serif; --t-heading-font: Federant, Alegreya, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* type: textile caps, indigo small labels */
+.eyebrow, .salamKicker, .role { color: var(--ind); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; }
+.head h2 { color: var(--accent); letter-spacing: .02em; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 16px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 88px; }
+.divider { width: 150px; height: 27px; border-radius: 2px; box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent); }
+
+/* section rhythm: a woven band separates sections */
+.events, .story, .wishes { border-top: 10px solid transparent; border-image: var(--geo) 0 0 100% 0 / 10px 0 0 0 round; }
+
+/* ── People: stepped-corner frames like lozenge tips ── */
+.couple { background: var(--paper); }
+.portraitFrame { width: 210px; height: 264px; padding: 7px; border: 0; border-radius: 0; background: var(--accent); clip-path: polygon(14px 0, calc(100% - 14px) 0, calc(100% - 14px) 7px, calc(100% - 7px) 7px, calc(100% - 7px) 14px, 100% 14px, 100% calc(100% - 14px), calc(100% - 7px) calc(100% - 14px), calc(100% - 7px) calc(100% - 7px), calc(100% - 14px) calc(100% - 7px), calc(100% - 14px) 100%, 14px 100%, 14px calc(100% - 7px), 7px calc(100% - 7px), 7px calc(100% - 14px), 0 calc(100% - 14px), 0 14px, 7px 14px, 7px 7px, 14px 7px); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: inherit; }
+.portrait::after { content: ""; position: absolute; left: 50%; bottom: -16px; width: 150px; height: 22px; translate: -50% 0; background: var(--figs) 0 50% / auto 22px repeat-x; border: 2px solid var(--accent); }
+.portrait { margin-bottom: 30px; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 48px; }
+
+/* ── Countdown: a hinggi panel with figure rows top and bottom ── */
+.countBand { padding: 96px 22px; background: var(--figs) 0 0 / auto 64px repeat-x, var(--figs) 30px 100% / auto 64px repeat-x, #6e2818; }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: 64px 0; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, .04) 0 2px, transparent 2px 4px); }
+.count > div { border: 0; border-radius: 0; background: #f6e9cf; box-shadow: inset 0 0 0 2px #28324d, inset 0 0 0 5px #f6e9cf, inset 0 0 0 6px #c99a3e; }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); }
+.count small { color: var(--ind); font-style: normal; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.headLight .eyebrow { color: var(--gold-l); }
+.ghostBtn { border-radius: 2px; border-color: var(--gold); font-family: var(--serif); font-weight: 700; }
+
+/* ── Events ── */
+.event { padding: 46px 22px 26px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); }
+.event::before { inset: 0 0 auto 0; height: 26px; border: 0; border-radius: 0; background: var(--geo) 0 0 / auto 26px repeat-x; }
+.eventNo { top: 12px; width: 40px; height: 26px; border-radius: 0; background: var(--ind); color: var(--gold-l); font-family: var(--serif); font-weight: 700; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0 50%); }
+.event h3 { color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 700; color: var(--ind); }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 6px; background: repeating-linear-gradient(90deg, var(--accent) 0 6px, var(--gold) 6px 9px, var(--ind) 9px 15px, var(--gold) 15px 18px); }
+.mapBtn { border-radius: 2px; font-family: var(--serif); font-weight: 700; }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 20px; width: 4px; background: repeating-linear-gradient(180deg, var(--accent) 0 8px, var(--gold) 8px 11px, var(--ind) 11px 19px, var(--gold) 19px 22px); }
+.node { border: 2px solid var(--accent); border-radius: 0; rotate: 45deg; width: 32px; height: 32px; margin: 2px; background: var(--ivory); }
+.node img { width: 26px; rotate: -45deg; }
+.storyBody small { color: var(--ind); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--accent); }
+
+/* ── Gallery ── */
+.mosaic { gap: 6px; grid-auto-rows: 160px; }
+.tile, .tile:first-child { border-radius: 0; box-shadow: 0 0 0 3px var(--accent); }
+
+/* ── Wishes ── */
+.form { border: 0; border-radius: 2px; background: var(--ivory); box-shadow: inset 0 0 0 1px var(--line), inset 0 0 0 5px var(--ivory), inset 0 0 0 6px color-mix(in srgb, var(--ind) 40%, transparent); }
+.field > span, .diet, .guestsLabel { color: var(--ind); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); }
+.submit { border-radius: 2px; font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.wish { border-radius: 2px; border-left: 4px solid var(--accent); }
+.wish strong { font-family: var(--serif); font-weight: 700; }
+.wish small { background: color-mix(in srgb, var(--ind) 12%, transparent); color: var(--ind); }
+.sentBox img { width: 140px; }
+
+/* ── Gifts ── */
+.gift { border-radius: 2px; padding-bottom: 40px; background: var(--geo) 0 100% / auto 22px repeat-x, #6e2818; }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; font-family: var(--serif); font-weight: 700; }
+.copyOn svg { animation: softPop 500ms var(--m-ease) both; }
+
+/* ── Closing: the cloth end with its fringe ── */
+.closing { padding: 92px 28px 96px; background: var(--figs) 0 0 / auto 64px repeat-x, var(--fringe) 0 100% / auto 45px repeat-x, linear-gradient(#6e2818, #6e2818) 0 0 / 100% calc(100% - 40px) no-repeat; background-color: var(--bg); }
+.closingEmblem { width: 150px; height: auto; margin-bottom: 4px; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .3)); }
+.thanks { font-family: var(--display); font-size: 42px; }
+.closingSalam { font-family: var(--serif); font-style: italic; font-size: 15px; }
+.family { font-family: var(--serif); }
+.closingNames { font-family: var(--display); font-size: 30px; }
+.music { border-radius: 4px; border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: sky and savanna above, the hinggi cloth below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: linear-gradient(180deg, #f6e2bb 0%, #f3d6a2 46%, #e9c487 60%); text-align: center; isolation: isolate; }
+.sun { position: absolute; z-index: -1; top: 12%; left: 50%; width: 220px; height: 220px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, rgba(255, 246, 220, .9), rgba(255, 236, 190, 0) 68%); animation: glowSun 9s ease-in-out infinite alternate; }
+.kicker { margin-top: clamp(36px, 7vh, 64px); color: var(--ind); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .36em; text-transform: uppercase; }
+.shalom { margin-top: 8px; color: var(--gold-d); font-family: var(--serif); font-size: 18px; font-style: italic; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 12px; max-width: 100%; margin-top: 10px; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-style: normal; font-size: 38px; }
+.coverDate { margin-top: 10px; color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .08em; }
+.scene { position: relative; width: 100%; margin-top: auto; flex-shrink: 0; line-height: 0; }
+.sabana { display: block; width: 100%; height: auto; }
+.cloth { position: relative; z-index: 2; width: 100%; padding: 74px 22px 64px; background: var(--figs) 0 0 / auto 58px repeat-x, var(--geo) 0 calc(100% - 44px) / auto 22px repeat-x, var(--fringe) 0 100% / auto 45px repeat-x, linear-gradient(#6e2818, #6e2818) 0 0 / 100% calc(100% - 40px) no-repeat; margin-top: -6px; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; margin: 0 auto 24px; }
+.guest { color: var(--band-ink); }
+.guest small { color: color-mix(in srgb, var(--band-ink) 80%, transparent); font-size: 14px; font-style: italic; }
+.guest strong { font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 2px; background: #f6e9cf; color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; font-size: 13px; box-shadow: 0 0 0 1px #f6e9cf, 0 0 0 4px #6e2818, 0 0 0 5px var(--gold); }
+.openBtn:hover { background: #fff6e2; translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 34px 22px 44px; background: var(--bg); text-align: center; }
+.heroKicker { color: var(--ind); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-style: normal; padding: 0 8px; }
+.heroDate { margin-top: 6px; color: var(--ink); font-weight: 700; letter-spacing: .06em; }
+.heroCloth { width: 100%; margin-top: 22px; padding: 8px 8px 0; background: #6e2818; }
+.heroPhoto { width: 100%; aspect-ratio: 5 / 4; overflow: hidden; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroBand { display: block; height: 46px; margin: 8px -8px 0; background: var(--figs) 0 50% / 195px 46px repeat-x; animation: weave 60s linear infinite; }
+.heroFringe { display: block; height: 30px; margin: 0 0 0; background: var(--fringe) 0 0 / auto 30px repeat-x; }
+.heroNote { max-width: 320px; margin-top: 18px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.5; }
+
+@keyframes glowSun { from { opacity: .7; scale: .95; } to { opacity: 1; scale: 1.05; } }
+@keyframes weave { to { background-position: -1950px 50%; } }

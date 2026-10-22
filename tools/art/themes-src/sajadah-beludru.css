@@ -1,0 +1,139 @@
+/* Sajadah Beludru — Islami, terinspirasi bahasa desain sajadah beludru: relung mihrab berbordir emas dengan sudut hijau tua, lentera gantung, pita tepi, rumbai, dan beludru merah anggur. */
+.root, .cover {
+  --bg: #f4ead8; --paper: #ede0c8; --ivory: #fbf6ea; --field: #fffcf4; --ink: #2a1016; --muted: #6b4f50; --line: #dcc8a6;
+  --accent: #5c1124; --accent2: #3c0915; --gold: #c9a14a; --gold-l: #f1dc9c; --gold-d: #8a6a2a;
+  --band-bg: #4a0d1c; --band-ink: #f6ecd6; --teal: #1d4a44;
+  --display: Gloock, "EB Garamond", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: Gloock, Georgia, serif;
+  --h2: 29px; --card-r: 10px;
+  --velvet: url(/themes/art/sajadah-beludru/velvet.webp); --vteal: url(/themes/art/sajadah-beludru/velvet-teal.webp);
+  --border: url(/themes/art/sajadah-beludru/border.webp); --fringe: url(/themes/art/sajadah-beludru/fringe.webp);
+  --arch: path("M0 400 L0 150 C0 70 70 26 150 0 C230 26 300 70 300 150 L300 400 Z");
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5c1124; --t-accent-ink: #fbf6ea; --t-bg: #f4ead8; --t-ink: #2a1016; --t-muted: #6b4f50; --t-line: #dcc8a6; --t-field: #fffcf4;
+  --t-radius: 10px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: Gloock, "EB Garamond", serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+/* type */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 500; letter-spacing: .3em; }
+.head h2 { color: var(--accent); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.intro { color: var(--muted); font-size: 18px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.parents { font-size: 17px; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 90px; margin-top: 40px; }
+
+/* divider: embroidered rosette between couched gold lines */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 190px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 3px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.divider img { width: 38px; height: auto; animation: turn 40s linear infinite; }
+
+/* ── People: pointed-arch windows ── */
+.couple { background: var(--paper); }
+.portrait { filter: drop-shadow(0 12px 18px rgba(60, 9, 21, .2)); }
+.portraitFrame { width: 216px; height: 288px; padding: 0; border: 0; border-radius: 0; background: var(--gold); clip-path: path("M0 288 L0 108 C0 50 50 19 108 0 C166 19 216 50 216 108 L216 288 Z"); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 5px; width: auto; height: auto; border-radius: 0; clip-path: path("M0 278 L0 104 C0 47 47 18 103 0 C159 18 206 47 206 104 L206 278 Z"); }
+.portraitFrame:has(.monogram) { background: var(--velvet) 0 0 / 192px, var(--accent); box-shadow: inset 0 0 0 5px var(--gold); }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 46px; }
+.amp img { width: 34px; }
+
+/* ── Countdown: a velvet runner edged with the embroidered border ── */
+.countBand { padding: 84px 22px; background: var(--border) 0 0 / 240px 38px repeat-x, var(--border) 0 100% / 240px 38px repeat-x, var(--velvet) 0 0 / 192px; }
+.count > div { height: 98px; border: 0; border-radius: 0; background: var(--ivory); clip-path: path("M0 98 L0 34 C0 16 16 7 36 0 C56 7 72 16 72 34 L72 98 Z"); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(201, 161, 74, .25) 50%, transparent 65%); }
+.count b { margin-top: 14px; color: var(--accent); font-family: var(--display); font-size: 29px; }
+.count small { color: var(--gold-d); font-style: normal; font-size: 13px; letter-spacing: .06em; }
+.ghostBtn { font-family: var(--serif); font-size: 15px; }
+
+/* ── Events: arch-topped cards ── */
+.events { gap: 26px; }
+.event { padding: 58px 22px 26px; border: 1px solid var(--line); border-radius: 160px 160px 10px 10px / 70px 70px 10px 10px; background: var(--ivory); }
+.event::before { inset: 7px; border-color: color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 152px 152px 6px 6px / 64px 64px 6px 6px; }
+.eventNo { top: 18px; width: 34px; height: 34px; border-radius: 50%; background: var(--teal); color: var(--gold-l); font-family: var(--display); font-size: 14px; letter-spacing: 0; }
+.event h3 { font-family: var(--display); }
+.eventDate { font-size: 18px; }
+.eventTime { font-family: var(--serif); font-size: 16px; }
+.rule { width: 80px; height: 3px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); background: none; }
+.mapBtn { background: var(--velvet) 0 0 / 192px, var(--accent); font-family: var(--serif); font-size: 15px; box-shadow: inset 0 0 0 1px var(--gold), 0 6px 14px rgba(60, 9, 21, .2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; border-left: 1px solid var(--gold); border-right: 1px solid var(--gold); background: none; left: 20px; }
+.node { border: 0; background: var(--accent); box-shadow: 0 0 0 2px var(--gold); }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { font-family: var(--display); }
+
+/* ── Gallery ── */
+.mosaic { gap: 8px; grid-auto-rows: 156px; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px var(--ivory), 0 0 0 5px color-mix(in srgb, var(--gold) 60%, transparent); }
+.tile:first-child { border-radius: 0; clip-path: path("M0 320 L0 90 C0 42 40 16 86 0 C132 16 172 42 172 90 L172 320 Z"); box-shadow: none; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border-radius: 12px; border-color: var(--line); box-shadow: inset 0 4px 0 var(--teal), 0 10px 24px rgba(60, 9, 21, .06); }
+.field > span, .diet, .guestsLabel { color: var(--teal); font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); }
+.submit { background: var(--velvet) 0 0 / 192px, var(--accent); font-family: var(--serif); font-size: 16px; box-shadow: inset 0 0 0 1px var(--gold); }
+.wish { border-radius: 10px; }
+.wish strong { font-family: var(--display); }
+.wish small { background: color-mix(in srgb, var(--teal) 12%, transparent); color: var(--teal); }
+.sentBox img { width: 110px; }
+
+/* ── Gifts ── */
+.gift { padding: 54px 20px 52px; border-radius: 10px; background: var(--border) 0 0 / 200px 32px repeat-x, var(--border) 0 100% / 200px 32px repeat-x, var(--velvet) 0 0 / 192px; }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--serif); font-size: 17px; }
+.giftNo { font-family: var(--display); }
+.copy { font-family: var(--serif); font-size: 14px; }
+
+/* ── Closing: the rug's lower edge with its fringe ── */
+.closing { padding: 70px 28px 104px; background: var(--fringe) 0 100% / 160px 56px repeat-x, var(--bg); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0 0 52px; background: var(--border) 0 100% / 240px 38px repeat-x, var(--velvet) 0 0 / 192px; }
+.closingLamp { width: 70px; height: auto; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.thanks { font-family: var(--display); font-size: 42px; }
+.closingSalam { font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { font-family: var(--serif); font-size: 14px; }
+.closingNames { font-family: var(--display); font-size: 30px; }
+.made { margin-bottom: 8px; }
+.music { background: var(--velvet) 0 0 / 192px, var(--accent); }
+
+/* ── Cover: the whole rug ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 72px 20px 78px; overflow: hidden; background: url(/themes/art/sajadah-beludru/fringe-up.webp) 0 0 / 160px 56px repeat-x, var(--fringe) 0 100% / 160px 56px repeat-x, var(--border) 0 46px / 240px 38px repeat-x, var(--border) 0 calc(100% - 46px) / 240px 38px repeat-x, var(--velvet) 0 0 / 192px; background-color: #2a0610; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, transparent 0 7px, var(--gold) 7px 8px, transparent 8px 11px, var(--teal) 11px 17px, var(--gold) 17px 18px, transparent 18px calc(100% - 18px), var(--gold) calc(100% - 18px) calc(100% - 17px), var(--teal) calc(100% - 17px) calc(100% - 11px), transparent calc(100% - 11px) calc(100% - 8px), var(--gold) calc(100% - 8px) calc(100% - 7px), transparent calc(100% - 7px)); }
+.field2 { position: relative; display: flex; flex: 1; flex-direction: column; align-items: center; width: 100%; padding: 0 0 18px; }
+.mihrab { position: absolute; top: 0; left: 0; width: 100%; height: auto; }
+.lamp { position: relative; z-index: 1; width: 44px; height: auto; margin-top: 21%; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.inside { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0; width: 64%; margin-top: 4px; }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 22px; line-height: 1.7; }
+.kicker { margin-top: 6px; color: var(--gold-l); font-family: var(--serif); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: #f6ecd6; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+.coverNames em { margin: 4px 0; color: var(--gold); font-style: normal; font-size: 30px; }
+.coverDate { margin-top: 12px; color: var(--gold-l); font-size: 17px; font-style: italic; }
+.guestWrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 74%; margin-top: auto; padding-top: 20px; }
+.guest { color: #f6ecd6; }
+.guest small { color: color-mix(in srgb, #f6ecd6 78%, transparent); font-size: 15px; }
+.guest strong { font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+.openBtn { min-width: 0; width: 100%; max-width: 220px; background: linear-gradient(110deg, #b88d3c, #f1dc9c 45%, #c9a14a 60%, #9a7330); background-size: 220% 100%; color: var(--accent2); font-family: var(--serif); font-size: 16px; font-weight: 600; box-shadow: 0 8px 18px rgba(0, 0, 0, .3); }
+.openBtn:hover { background-position: 100% 0; translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 40px; background: var(--bg); text-align: center; }
+.heroArch { position: relative; width: 300px; height: 400px; max-width: 100%; background: var(--gold); clip-path: var(--arch); }
+.heroPhoto { position: absolute; inset: 6px; overflow: hidden; clip-path: path("M0 388 L0 146 C0 68 67 25 144 0 C221 25 288 68 288 146 L288 388 Z"); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroLamp { position: absolute; z-index: 2; top: 38px; left: 50%; width: 40px; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: swingC 7s ease-in-out infinite alternate; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .35)); }
+.heroKicker { margin-top: 26px; color: var(--gold-d); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-style: normal; padding: 0 8px; }
+.heroDate { margin-top: 6px; color: var(--ink); font-style: italic; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.5; }
+
+@keyframes swing { from { rotate: -2deg; } to { rotate: 2deg; } }
+@keyframes swingC { from { rotate: -2deg; } to { rotate: 2deg; } }
+@keyframes turn { to { rotate: 360deg; } }

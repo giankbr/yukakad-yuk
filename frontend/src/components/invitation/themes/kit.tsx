@@ -155,12 +155,14 @@ export function guestLabel(data: InvitationData, fallback = "Tamu Undangan") {
 }
 
 export function coupleLabel(data: InvitationData, joiner = " & ") {
-  return `${data.couple.bride}${joiner}${data.couple.groom}`;
+  const groom = data.couple.groom?.trim();
+  return groom ? `${data.couple.bride}${joiner}${groom}` : data.couple.bride;
 }
 
 /** Initials like "R&B". */
 export function coupleInitials(data: InvitationData, joiner = "&") {
-  return `${data.couple.bride.slice(0, 1)}${joiner}${data.couple.groom.slice(0, 1)}`.toUpperCase();
+  const groom = data.couple.groom?.trim();
+  return (groom ? `${data.couple.bride.slice(0, 1)}${joiner}${groom.slice(0, 1)}` : data.couple.bride.slice(0, 1)).toUpperCase();
 }
 
 export function safeUrl(url?: string) {

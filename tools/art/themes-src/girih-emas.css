@@ -1,0 +1,176 @@
+/* Girih Emas — ubin girih Persia (desagon, dasi kupu-kupu, pentagon) bergaris emas tempa di biru malam: medali roset girih, bingkai iwan berujung lancip, pita frieze, kartu gading bergaris emas ganda. */
+.root, .cover {
+  --bg: #0b1633; --paper: #0e1c40; --ivory: #f4ecd9; --field: #fffaf0; --ink: #1a2238; --muted: #59607a; --line: #d9cba6;
+  --accent: #0e1c40; --accent2: #16285a; --gold: #caa553; --gold-l: #ecd59a; --gold-d: #9a7b35;
+  --band-bg: #081129; --band-ink: #efe3c4;
+  --display: Marcellus, "Cormorant Garamond", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: Marcellus, Georgia, serif;
+  --night-ink: #efe3c4; --night-muted: rgba(239, 227, 196, .72);
+  --panel: url(/themes/art/girih-emas/panel.webp); --frieze: url(/themes/art/girih-emas/frieze.webp);
+  --arch: polygon(11.6% 91%, 11.6% 40.2%, 11.8% 37.4%, 12.7% 34.6%, 14.1% 31.9%, 16% 29.5%, 18.3% 27.2%, 21.1% 25.4%, 22.6% 24.5%, 25.7% 22.2%, 28.7% 20%, 31.8% 17.9%, 34.8% 16%, 37.8% 14.4%, 40.9% 13%, 43.9% 11.9%, 47% 10.9%, 50% 10%, 53% 10.9%, 56.1% 11.9%, 59.1% 13%, 62.2% 14.4%, 65.2% 16%, 68.2% 17.9%, 71.3% 20%, 74.3% 22.2%, 77.4% 24.5%, 78.9% 25.4%, 81.7% 27.2%, 84% 29.5%, 85.9% 31.9%, 87.3% 34.6%, 88.2% 37.4%, 88.4% 40.2%, 88.4% 91%);
+  --dec: polygon(50% 0, 79.4% 9.5%, 97.6% 34.5%, 97.6% 65.5%, 79.4% 90.5%, 50% 100%, 20.6% 90.5%, 2.4% 65.5%, 2.4% 34.5%, 20.6% 9.5%);
+  --h2: 25px;
+  font-family: var(--serif); color: var(--night-ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #caa553; --t-accent-ink: #0b1633; --t-bg: #0b1633; --t-ink: #efe3c4; --t-muted: rgba(239, 227, 196, .72); --t-line: rgba(202, 165, 83, .4); --t-field: #0e1c40;
+  --t-radius: 2px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: Marcellus, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 24px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* type */
+.eyebrow, .role, .salamKicker { color: var(--gold); font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.head h2 { color: var(--gold-l); font-family: var(--display); font-size: var(--h2); letter-spacing: .12em; text-transform: uppercase; }
+.divider { width: 160px; }
+.section { padding: 64px 24px; }
+.intro { color: var(--night-muted); font-size: 18px; }
+
+/* opening: centred on a faint field of girih */
+.salamBlock { position: relative; gap: 12px; padding: 56px 28px 60px; overflow: hidden; isolation: isolate; }
+.salamBlock::before { content: ""; position: absolute; z-index: -1; inset: 0; background: var(--panel) repeat-x center top / 230px auto; opacity: .16; -webkit-mask: radial-gradient(70% 60% at 50% 50%, transparent 30%, #000 100%); mask: radial-gradient(70% 60% at 50% 50%, transparent 30%, #000 100%); }
+.arabic { color: var(--gold-l); font-size: 30px; }
+.salamKicker { color: var(--gold); }
+.salamTitle { color: var(--night-ink); font-family: var(--display); font-size: 27px; line-height: 1.3; letter-spacing: .02em; text-wrap: balance; }
+
+/* couple: arch-framed portraits (the iwan frame painted over the photo) */
+.couple { gap: 16px; background: var(--band-bg); }
+.portrait { width: 240px; height: 308px; margin-bottom: 18px; }
+.pIwan { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.portraitFrame { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 0; background: #16285a; clip-path: var(--arch); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.role { color: var(--gold); }
+.nick { color: var(--gold-l); font-family: var(--display); font-size: 38px; letter-spacing: .14em; text-transform: uppercase; }
+.fullName { color: var(--night-ink); font-family: var(--serif); font-size: 19px; font-style: italic; }
+.parents { color: var(--night-muted); font-size: 16px; }
+.amp { gap: 16px; margin: 18px 0 14px; color: var(--gold); font-family: var(--display); font-size: 30px; }
+.amp img { width: 28px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: decagon tiles between two frieze bands */
+.countBand { padding: 84px 20px 82px; background: var(--bg); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 50px; background: var(--frieze) repeat-x center / auto 100%; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: var(--gold); }
+.headLight h2 { color: var(--gold-l); font-family: var(--display); font-size: 24px; letter-spacing: .12em; text-transform: uppercase; }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 8px; }
+.count > div { height: auto; aspect-ratio: 1; border: 0; border-radius: 0; background: var(--gold); clip-path: var(--dec); isolation: isolate; }
+.count > div::before { content: ""; position: absolute; z-index: -1; inset: 2px; background: radial-gradient(circle at 50% 35%, #1b3068, #0b1633 80%); clip-path: var(--dec); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 236, 190, .25) 50%, transparent 65%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 27px; line-height: 1; }
+.count small { color: var(--night-muted); font-family: var(--display); font-size: 9px; font-style: normal; letter-spacing: .18em; text-transform: uppercase; }
+.ghostBtn { border-radius: 2px; font-family: var(--display); letter-spacing: .16em; text-transform: uppercase; font-size: 11px; }
+
+/* events: ivory cards with a double gold rule and a star badge */
+.events { gap: 34px; background: var(--band-bg); }
+.event { padding: 44px 22px 26px; border: 1px solid var(--gold); border-radius: 2px; background: var(--ivory); color: var(--ink); }
+.event::before { inset: 5px; border: 1px solid var(--gold); border-radius: 0; }
+.event:hover { border-color: var(--gold-d); box-shadow: 0 18px 40px rgba(0, 0, 0, .4); }
+.eventNo { top: -26px; width: 52px; height: 52px; border-radius: 0; background: url(/themes/art/girih-emas/bintang.webp) center / contain no-repeat; color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 22px; letter-spacing: .1em; text-transform: uppercase; }
+.eventDate { color: var(--ink); font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--display); letter-spacing: .06em; }
+.rule { width: 80px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.event strong { color: var(--ink); }
+.eventAddr { color: var(--muted); }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
+
+/* story */
+.story { background: var(--bg); }
+.timeline::before { background: linear-gradient(var(--gold), rgba(202, 165, 83, .15)); }
+.node { border: 0; background: transparent; }
+.node img { width: 34px; }
+.storyBody small { color: var(--gold); font-family: var(--display); }
+.storyBody h3 { color: var(--gold-l); font-family: var(--display); letter-spacing: .06em; }
+.storyBody p { color: var(--night-muted); }
+
+/* gallery: gold-ruled tiles, first one arched */
+.gallery { background: var(--band-bg); }
+.tile { border-radius: 0; box-shadow: 0 0 0 1px rgba(202, 165, 83, .55); }
+.tile:first-child { border-radius: 0; clip-path: var(--arch); box-shadow: none; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--gold); border-radius: 2px; background: var(--ivory); color: var(--ink); outline: 1px solid rgba(202, 165, 83, .5); outline-offset: 4px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; color: var(--muted); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--gold-l); }
+.guests { color: var(--ink); }
+.step { border-radius: 2px; }
+.submit { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--display); letter-spacing: .18em; text-transform: uppercase; font-size: 12px; }
+.sent { color: var(--accent); }
+.sentNote { color: var(--muted); }
+.closed { color: var(--ink); border-color: var(--gold); }
+.closed p { color: var(--muted); }
+.empty { color: var(--night-muted); }
+.wish { border: 1px solid rgba(202, 165, 83, .35); border-radius: 2px; background: var(--paper); }
+.wish:hover { border-color: var(--gold); }
+.wish strong { color: var(--gold-l); font-family: var(--display); letter-spacing: .04em; }
+.wish small { border-radius: 2px; background: rgba(202, 165, 83, .16); color: var(--gold-l); }
+.wish p { color: var(--night-muted); }
+
+/* gifts */
+.gifts { background: var(--band-bg); }
+.gift { padding-top: 38px; border: 1px solid rgba(202, 165, 83, .6); border-radius: 2px; background: var(--paper); }
+.gift::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 16px; background: var(--frieze) repeat-x center / auto 100%; opacity: .9; }
+.gift::after { display: none; }
+.giftIcon { border-radius: 0; border-color: var(--gold); clip-path: var(--dec); background: rgba(202, 165, 83, .14); }
+.gift h3 { font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); color: var(--gold-l); }
+.copy { border-radius: 2px; font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 11px; }
+
+/* closing */
+.closing { padding: 70px 28px 60px; background: var(--bg); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: var(--panel) repeat-x center top / 230px auto; opacity: .3; -webkit-mask: radial-gradient(75% 55% at 50% 45%, transparent 35%, #000 100%); mask: radial-gradient(75% 55% at 50% 45%, transparent 35%, #000 100%); }
+.closingRosette { width: 150px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 30px; letter-spacing: .12em; text-transform: uppercase; }
+.closingText { color: var(--night-muted); }
+.closingSalam { color: var(--gold); font-family: var(--display); letter-spacing: .1em; }
+.family { color: var(--night-muted); font-family: var(--display); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 26px; letter-spacing: .16em; text-transform: uppercase; }
+.music { border-radius: 0; clip-path: var(--dec); border: 0; background: var(--gold); }
+
+/* ── Cover: the girih field, a rosette, a gold cartouche ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 40px 26px 82px; overflow: hidden; background: var(--bg); color: var(--night-ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -2; inset: 0; background: var(--panel) repeat-x center top / 230px auto; opacity: .55; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(62% 40% at 50% 52%, rgba(11, 22, 51, .97) 40%, rgba(11, 22, 51, .55) 75%, rgba(11, 22, 51, .2) 100%); }
+.frieze { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; background: var(--frieze) repeat-x center / auto 100%; }
+.arabicCover { color: var(--gold-l); font-family: Amiri, serif; font-size: 26px; line-height: 1.6; text-shadow: 0 2px 10px rgba(0, 0, 0, .6); }
+.rosetteWrap { position: relative; width: 210px; height: 210px; margin-top: 18px; }
+.rosette { width: 100%; height: 100%; filter: drop-shadow(0 10px 26px rgba(0, 0, 0, .55)); animation: turn 240s linear infinite; }
+.kicker { margin-top: 22px; color: var(--gold); font-family: var(--display); font-size: 11px; letter-spacing: .36em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 12px; color: var(--gold-l); font-family: var(--display); font-size: 38px; font-weight: 400; letter-spacing: .16em; line-height: 1.12; text-transform: uppercase; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(0, 0, 0, .5); }
+.coverNames em { display: flex; align-items: center; gap: 12px; margin: 4px 0; color: var(--gold); font-size: 20px; font-style: normal; letter-spacing: 0; }
+.coverNames em::before, .coverNames em::after { content: ""; width: 44px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.coverNames em::after { scale: -1 1; }
+.coverDate { margin-top: 14px; color: var(--night-ink); font-family: var(--display); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.cartouche { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 320px; margin-top: 26px; padding: 18px 18px 20px; background: rgba(8, 17, 41, .75); clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px); }
+.cartouche::before { content: ""; position: absolute; inset: 0; background: linear-gradient(var(--gold), var(--gold)) top / 100% 1px no-repeat, linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat; opacity: .7; pointer-events: none; }
+.guest small { color: var(--night-muted); }
+.guest strong { color: var(--night-ink); font-family: var(--display); font-size: 19px; letter-spacing: .03em; }
+.table { border-radius: 0; color: var(--gold-l); font-family: var(--display); }
+.openBtn { border-radius: 2px; background: linear-gradient(100deg, #9a7b35 0%, #f1dc9f 45%, #caa553 60%, #8d6f2c 100%); background-size: 220% 100%; color: #0b1633; font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 10px 26px rgba(0, 0, 0, .45); }
+.openBtn:hover { background-position: 100% 0; translate: 0 -1px; }
+
+/* ── Hero: an iwan with the couple photo ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 90px; overflow: hidden; text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -2; inset: 0; background: var(--panel) repeat-x center top / 230px auto; opacity: .4; }
+.hero::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(60% 50% at 50% 40%, rgba(11, 22, 51, .9) 30%, rgba(11, 22, 51, .35) 100%); }
+.hero .frieze { height: 48px; }
+.iwanBox { position: relative; width: 280px; aspect-ratio: 320 / 410; }
+.heroPhoto { position: absolute; inset: 0; clip-path: var(--arch); background: #16285a; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPhoto > img { object-position: 30% 50%; }
+.heroIwan { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+.heroKicker { margin-top: 22px; color: var(--gold); font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--gold-l); font-family: var(--display); font-size: 32px; font-weight: 400; letter-spacing: .14em; line-height: 1.2; text-transform: uppercase; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--night-ink); font-family: var(--display); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 16px; color: var(--night-muted); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: balance; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .rosette { animation: none !important; }
+}

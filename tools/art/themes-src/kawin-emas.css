@@ -1,0 +1,165 @@
+/* Kawin Emas — syukuran 50 tahun pernikahan: album foto keluarga bersampul kulit cokelat dengan cap emas, halaman krem berisi cetakan foto bersudut hitam, keterangan bertulisan mesin ketik, krisan emas dan karat bergaya cat air, serta karangan daun berlapis emas untuk angka lima puluh. */
+.root, .cover {
+  --bg: #f3e9d3; --paper: #f8f1e1; --ivory: #fffaf0; --field: #fffcf4; --ink: #2e2015; --muted: #6b5a45; --line: #e2d2b0;
+  --accent: #6e3f1c; --accent2: #85512a; --gold: #c9a04a; --gold-l: #ecd08a; --gold-d: #8a6420;
+  --rust: #b8612e; --kraft: #e6d6b4;
+  --band-bg: #4b2a19; --band-ink: #f5e8cc;
+  --display: "Playfair Display", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: "Pinyon Script", cursive; --type: "Special Elite", "Courier New", monospace;
+  --leather: url(/themes/art/kawin-emas/leather.webp) 0 0 / 220px 220px repeat #4b2a19;
+  --foil: linear-gradient(120deg, #8a6420, #e9cc7c 30%, #b88a34 52%, #f3dc98 70%, #9a7228);
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6e3f1c; --t-accent-ink: #fffaf0; --t-bg: #f3e9d3; --t-ink: #2e2015; --t-muted: #6b5a45; --t-line: #e2d2b0; --t-field: #fffcf4;
+  --t-radius: 3px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: "Playfair Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--type); font-size: 13px; letter-spacing: .08em; text-transform: none; color: var(--rust); }
+.head h2 { font-family: var(--display); font-style: italic; color: var(--accent); }
+.divider { width: 200px; }
+.section { padding: 64px 22px; }
+
+.salamBlock { padding: 56px 26px 60px; background: var(--paper); }
+.arabic { color: var(--gold-d); font-size: 28px; }
+.salamKicker { color: var(--rust); }
+.salamTitle { font-family: var(--display); font-style: italic; font-size: 31px; line-height: 1.2; color: var(--accent); }
+.intro { color: var(--muted); font-size: 18px; line-height: 1.7; }
+
+/* couple: two old prints on an album page, sepia, black photo corners, typewriter captions */
+.couple { gap: 10px; background: var(--kraft); }
+.personWrap:nth-of-type(odd) .portrait { rotate: -2.5deg; }
+.personWrap:nth-of-type(even) .portrait { rotate: 2deg; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 250px; padding: 10px 10px 34px; border: 0; border-radius: 0; background: #fffdf6; box-shadow: 0 12px 24px rgba(46, 32, 21, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: sepia(.55) contrast(1.05) brightness(1.02); }
+.portrait::before, .portrait::after { content: ""; position: absolute; z-index: 2; width: 34px; height: 34px; background: #2a1e16; pointer-events: none; }
+.portrait::before { top: -6px; left: -6px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.portrait::after { right: -6px; bottom: -6px; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.pCap { position: absolute; z-index: 1; left: 0; right: 0; bottom: 8px; font-family: var(--type); font-size: 12px; color: var(--muted); pointer-events: none; }
+.monogram { font-family: var(--script); color: var(--gold-d); }
+.role { font-size: 14px; }
+.nick { font-family: var(--script); font-size: 52px; line-height: 1.1; color: var(--accent); }
+.fullName { font-family: var(--display); font-size: 18px; color: var(--ink); }
+.parents { font-size: 16px; font-style: italic; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 56px; }
+.amp img { width: 52px; }
+
+/* countdown: the leather album cover, gold tooled frame */
+.countBand { padding: 66px 18px 62px; background: var(--leather); }
+.countBand::before { content: ""; position: absolute; inset: 14px; border: 2px solid var(--gold); box-shadow: inset 0 0 0 4px #4b2a19, inset 0 0 0 5px rgba(201, 160, 74, .6); pointer-events: none; }
+.headLight .eyebrow { font-family: var(--type); letter-spacing: .08em; text-transform: none; color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-style: italic; color: var(--band-ink); }
+.count > div { border: 0; border-radius: 3px; background: var(--paper); box-shadow: 0 8px 16px rgba(0, 0, 0, .35); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--accent); }
+.count small { font-family: var(--type); font-style: normal; font-size: 12px; color: var(--rust); }
+.ghostBtn { border-radius: 3px; border-color: var(--gold); color: var(--gold-l); font-family: var(--type); }
+
+/* events: typed index cards pinned on the page */
+.events { gap: 26px; background: var(--paper); }
+.event { padding: 34px 22px 24px; border: 0; border-radius: 2px; background: repeating-linear-gradient(180deg, #fffdf6 0 27px, #e8eef0 27px 28px); box-shadow: 0 12px 22px rgba(46, 32, 21, .14); }
+.event:nth-of-type(odd) { rotate: -.8deg; }
+.event:nth-of-type(even) { rotate: .8deg; }
+.event::before { inset: 0 auto 0 26px; width: 1px; border: 0; border-radius: 0; background: rgba(184, 97, 46, .5); }
+.eventNo { top: -12px; width: auto; height: auto; padding: 4px 12px; border-radius: 0; background: rgba(236, 208, 138, .85); color: var(--accent); font-family: var(--type); font-size: 12px; rotate: -3deg; }
+.event h3 { font-family: var(--display); font-style: italic; font-size: 25px; color: var(--accent); }
+.eventDate { font-family: var(--type); font-style: normal; font-size: 15px; color: var(--ink); }
+.eventTime { font-family: var(--type); color: var(--rust); }
+.rule { width: 60px; height: 2px; background: var(--foil); }
+.mapBtn { border-radius: 3px; background: var(--accent); color: var(--band-ink); font-family: var(--type); }
+.mapBtn:hover { background: var(--accent2); }
+
+.story { background: var(--kraft); }
+.timeline::before { left: 21px; width: 2px; background: var(--foil); }
+.node { border: 0; background: none; }
+.node img { width: 42px; }
+.storyBody small { font-family: var(--type); font-size: 13px; letter-spacing: .04em; color: var(--rust); }
+.storyBody h3 { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--accent); }
+.storyBody p { font-size: 17px; }
+
+/* gallery: album prints with photo corners, sepia that warms on hover */
+.gallery { background: var(--paper); }
+.mosaic { gap: 14px; grid-auto-rows: 140px; }
+.tile, .tile:first-child { border-radius: 0; border: 7px solid #fffdf6; box-shadow: 0 8px 16px rgba(46, 32, 21, .22); filter: sepia(.5); }
+.tile:nth-child(odd) { rotate: -1.6deg; }
+.tile:nth-child(even) { rotate: 1.4deg; }
+.tile:hover { filter: sepia(.1) saturate(1.05); }
+
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 12px 24px rgba(46, 32, 21, .1); }
+.field > span, .diet, .guestsLabel { font-family: var(--type); letter-spacing: .04em; text-transform: none; color: var(--accent); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--band-ink); }
+.submit { border-radius: 3px; background: var(--foil); color: #3a2410; font-family: var(--type); letter-spacing: .06em; }
+.submit:not(:disabled):hover { background: var(--foil); filter: brightness(1.06); }
+.sent { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--accent); }
+.sentBox img { width: 120px; }
+.wish { border-radius: 2px; border: 0; background: #fffdf6; box-shadow: 0 6px 14px rgba(46, 32, 21, .1); }
+.wish:nth-child(odd) { rotate: -.5deg; }
+.wish:nth-child(even) { rotate: .5deg; }
+.wish strong { font-family: var(--display); font-style: italic; color: var(--accent); }
+.wish small { border-radius: 2px; background: var(--kraft); color: var(--accent); font-family: var(--type); }
+.wish p { font-size: 17px; }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 3px; background: var(--leather); outline: 1.5px solid var(--gold); outline-offset: -8px; }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--type); letter-spacing: .04em; color: var(--gold-l); }
+.giftNo { font-family: var(--display); color: var(--band-ink); }
+.copy { border-radius: 3px; font-family: var(--type); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: back cover of the album */
+.closing { padding: 60px 26px 60px; background: var(--leather); }
+.closing::before { content: ""; position: absolute; inset: 14px; border: 2px solid var(--gold); box-shadow: inset 0 0 0 4px #4b2a19, inset 0 0 0 5px rgba(201, 160, 74, .6); pointer-events: none; }
+.seal { position: relative; display: grid; place-items: center; width: 170px; height: 168px; }
+.seal img { position: absolute; inset: 0; width: 100%; height: auto; }
+.seal b { font-family: var(--display); font-size: 58px; font-weight: 600; line-height: 1; background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.thanks { font-family: var(--script); font-size: 50px; color: var(--gold-l); }
+.closingText { color: rgba(245, 232, 204, .9); }
+.closingSalam { font-family: var(--type); color: var(--gold-l); }
+.closingNames { font-family: var(--script); color: var(--band-ink); font-size: 40px; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: the album itself — tooled leather, a gold wreath around 50, krisan spilling over the corner ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; padding: 40px 30px 34px; background: var(--leather); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 16px; z-index: -1; border: 2px solid var(--gold); box-shadow: inset 0 0 0 5px #4b2a19, inset 0 0 0 6.5px rgba(201, 160, 74, .7); pointer-events: none; }
+.cover::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: 28px; width: 10px; background: linear-gradient(90deg, rgba(0, 0, 0, .3), rgba(255, 220, 170, .08), rgba(0, 0, 0, .25)); pointer-events: none; }
+.coverBouquet { position: absolute; z-index: 1; right: -84px; bottom: 150px; width: 330px; height: auto; rotate: -8deg; transform-origin: 80% 90%; animation: bouquet 10s ease-in-out infinite alternate; pointer-events: none; }
+.kicker { font-family: var(--type); font-size: 13px; letter-spacing: .06em; color: var(--gold-l); }
+.wreath { position: relative; display: grid; place-items: center; width: 236px; height: 233px; margin-top: 12px; }
+.wreath img { position: absolute; inset: 0; width: 100%; height: auto; }
+.wreath b { margin-top: -8px; font-family: var(--display); font-size: 88px; font-weight: 600; line-height: 1; background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 2px 0 rgba(0, 0, 0, .35)); }
+.wreath small { position: absolute; bottom: 54px; font-family: var(--type); font-size: 12px; letter-spacing: .3em; color: var(--gold-l); }
+.coverLabel { margin-top: 10px; font-family: var(--display); font-size: 15px; font-style: italic; color: var(--gold-l); }
+.coverNames { position: relative; z-index: 2; max-width: 100%; margin-top: 4px; font-family: var(--script); font-size: 56px; font-weight: 400; line-height: 1.1; color: var(--band-ink); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; font-style: normal; color: var(--gold); }
+.coverDate { margin-top: 8px; font-family: var(--type); font-size: 14px; color: var(--gold-l); }
+.plate { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 300px; margin-top: auto; }
+.cover .guest { padding: 12px 16px; border: 1px solid var(--gold); border-radius: 2px; background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 3px var(--paper), inset 0 0 0 4px var(--line), 0 10px 22px rgba(0, 0, 0, .35); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--accent); }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--type); border-radius: 2px; }
+.openBtn { border-radius: 3px; background: var(--foil); background-size: 200% 100%; color: #3a2410; font-family: var(--type); font-size: 14px; letter-spacing: .06em; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero: the first album page — one print, tucked krisan, a typed caption ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 22px 50px; background: var(--paper); text-align: center; }
+.heroKicker { font-family: var(--type); font-size: 13px; letter-spacing: .06em; color: var(--rust); }
+.heroNames { margin-top: 4px; font-family: var(--script); font-size: 52px; font-weight: 400; line-height: 1.1; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 8px; font-style: normal; color: var(--gold); }
+.heroDate { margin-top: 4px; font-family: var(--display); font-style: italic; font-size: 17px; color: var(--ink); }
+.print { position: relative; width: 100%; margin-top: 28px; padding: 12px 12px 46px; background: #fffdf6; box-shadow: 0 16px 30px rgba(46, 32, 21, .24); rotate: -1.5deg; }
+.print::before, .print::after { content: ""; position: absolute; z-index: 2; width: 40px; height: 40px; background: #2a1e16; pointer-events: none; }
+.print::before { top: -7px; left: -7px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.print::after { right: -7px; bottom: -7px; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.heroPhoto { height: 250px; overflow: hidden; background: #2e2015; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; filter: sepia(.35); }
+.print p { position: absolute; left: 16px; bottom: 14px; font-family: var(--type); font-size: 13px; color: var(--muted); }
+.heroKrisan { position: absolute; z-index: 3; right: -26px; top: -40px; width: 120px; height: auto; rotate: 14deg; pointer-events: none; }
+.heroNote { max-width: 330px; margin-top: 30px; font-size: 18px; font-style: italic; line-height: 1.7; color: var(--muted); }
+
+@keyframes bouquet { from { rotate: -9deg; } to { rotate: -5deg; } }
+@media (prefers-reduced-motion: reduce) { .coverBouquet { animation: none; } }

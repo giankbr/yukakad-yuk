@@ -1,0 +1,161 @@
+/* Priangan Kacapi — adat Sunda Priangan: jendela bilik anyaman bambu yang membingkai sawah terasering, kacapi parahu bergaya gouache, suling bambu, dan untaian padi menguning. */
+.root, .cover {
+  --bg: #f3e7cb; --paper: #ecdcb7; --ivory: #fbf5e4; --field: #fffaf0; --ink: #3a2416; --muted: #6b5340; --line: #dbc597;
+  --accent: #6b3a1f; --accent2: #552e18; --gold: #b8863a; --gold-l: #f3dfa8; --gold-d: #7f5c22;
+  --band-bg: #4a2b18; --band-ink: #f6ead0; --leaf: #5d7429;
+  --display: "Della Respira", "Lora", Georgia, serif; --serif: Lora, Georgia, serif; --script: Caveat, "Lora", cursive;
+  --h2: 30px; --card-r: 8px;
+  --bilik: url(/themes/art/priangan-kacapi/bilik.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6b3a1f; --t-accent-ink: #fbf5e4; --t-bg: #f3e7cb; --t-ink: #3a2416; --t-muted: #6b5340; --t-line: #dbc597; --t-field: #fffaf0;
+  --t-radius: 8px; --t-font: Lora, Georgia, serif; --t-heading-font: "Della Respira", Lora, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+
+/* type */
+.eyebrow, .salamKicker, .role { color: var(--leaf); font-family: var(--script); font-size: 22px; font-weight: 600; letter-spacing: .01em; text-transform: none; }
+.head h2 { color: var(--accent); }
+.headLight .eyebrow { color: #c9d37f; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+.arabic { color: var(--accent); font-size: 25px; }
+.intro { color: var(--muted); font-size: 16.5px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+
+/* divider: the suling lying across, with a soft shadow */
+.divider { width: 176px; filter: drop-shadow(0 3px 2px rgba(74, 43, 24, .12)); }
+.salamBlock { padding: 36px 30px 54px; }
+
+/* ── People: snapshots pinned to a bilik wall ── */
+.couple { background: linear-gradient(rgba(243, 231, 203, .86), rgba(243, 231, 203, .9)), var(--bilik) 0 0 / 192px; gap: 14px; }
+.personWrap:nth-child(3) .person { margin-top: 4px; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 262px; padding: 9px 9px 34px; border: 0; border-radius: 3px; background: #fbf5e4; box-shadow: 0 10px 22px rgba(74, 43, 24, .18), 0 1px 0 rgba(74, 43, 24, .2); rotate: -2.2deg; transition: rotate 900ms var(--m-ease), box-shadow 700ms var(--m-ease); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 2deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.person:hover .portraitFrame { rotate: 0deg; box-shadow: 0 16px 30px rgba(74, 43, 24, .22); }
+.portraitFrame:has(.monogram) { background: var(--accent); }
+.padiPin { position: absolute; z-index: 2; top: -26px; right: -30px; width: 76px; height: auto; rotate: 18deg; transform-origin: 40% 100%; animation: sway 6s ease-in-out infinite alternate; }
+.personWrap:nth-child(3) .padiPin { right: auto; left: -30px; scale: -1 1; animation-delay: -3s; }
+.amp { margin: 4px 0; color: var(--leaf); font-family: var(--script); font-size: 54px; }
+.amp img { width: 64px; }
+
+/* ── Countdown: the kacapi soundboard, strings across, numbers on the bridges ── */
+.countBand { background:
+  repeating-linear-gradient(180deg, transparent 0 13px, rgba(246, 234, 208, .14) 13px 14px),
+  linear-gradient(180deg, #5a341d, #3f2414); }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(246, 222, 170, .1) 50%, transparent 70%); background-size: 220% 100%; animation: strum 9s ease-in-out infinite; }
+.countDecorL, .countDecorR { position: absolute; z-index: -1; bottom: -6px; width: 92px; height: auto; opacity: .5; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite alternate; }
+.countDecorL { left: -18px; }
+.countDecorR { right: -18px; scale: -1 1; animation-delay: -3.5s; }
+.count { gap: 10px; }
+.count > div { height: 92px; border: 0; border-radius: 4px; background: linear-gradient(180deg, #f3dfa8, #d9b56c); clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%); box-shadow: none; }
+.count > div::after { display: none; }
+.count b { color: #4a2b18; font-family: var(--display); font-size: 30px; margin-top: 12px; }
+.count small { color: #6b4a26; font-family: var(--serif); font-style: italic; font-size: 13px; }
+.ghostBtn { border-color: #d9b56c; color: #f3dfa8; font-family: var(--serif); }
+
+/* ── Events: left-aligned boards with a woven edge ── */
+.events { gap: 18px; }
+.event { align-items: flex-start; padding: 22px 20px 22px 34px; border: 1px solid var(--line); border-radius: 8px; background: var(--ivory); text-align: left; overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 14px; border: 0; border-radius: 0; background: var(--bilik) 0 0 / 96px; box-shadow: inset -1px 0 0 rgba(74, 43, 24, .25); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--leaf); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+.event h3 { font-size: 23px; text-wrap: pretty; }
+.eventDate { font-style: normal; font-weight: 600; font-size: 16px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 44px; height: 3px; margin: 8px 0 6px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 13px); }
+.eventAddr { text-wrap: pretty; }
+.mapBtn { border-radius: 6px; font-family: var(--serif); font-weight: 600; }
+
+/* ── Story: a bamboo pole with nodes, padi at each point ── */
+.story { background: var(--paper); }
+.timeline::before { left: 19px; width: 6px; border-radius: 6px; background: repeating-linear-gradient(180deg, #d6b26e 0 46px, #a9803f 46px 49px); opacity: .9; }
+.node { width: 38px; height: 38px; border: 2px solid #d6b26e; background: var(--ivory); }
+.node img { width: 26px; }
+.storyBody small { color: var(--leaf); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+
+/* ── Gallery: prints on bilik ── */
+.gallery { background: linear-gradient(rgba(243, 231, 203, .82), rgba(243, 231, 203, .88)), var(--bilik) 0 0 / 192px; }
+.mosaic { gap: 12px; grid-auto-rows: 146px; }
+.tile { border: 6px solid #fbf5e4; border-radius: 3px; box-shadow: 0 6px 14px rgba(74, 43, 24, .16); }
+.tile:first-child { border-radius: 3px; }
+.tile:nth-child(odd) { rotate: -1deg; }
+.tile:nth-child(even) { rotate: 1.2deg; }
+
+/* ── Wishes ── */
+.form { border: 1.5px dashed #b8863a; border-radius: 10px; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .08em; }
+.field input, .field textarea { border-radius: 6px; }
+.choices button { border-radius: 6px; }
+.submit { border-radius: 6px; font-family: var(--serif); font-weight: 600; }
+.wish { border-radius: 4px 14px 14px 14px; border-left: 4px solid var(--gold); }
+.wish strong { font-family: var(--serif); font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--leaf) 14%, transparent); color: var(--leaf); }
+.sentBox img { width: 150px; }
+
+/* ── Gifts: dark kacapi wood ── */
+.gift { border-radius: 10px; background: repeating-linear-gradient(180deg, transparent 0 11px, rgba(246, 234, 208, .08) 11px 12px), linear-gradient(160deg, #5a341d, #3f2414); }
+.gift::after { display: none; }
+.gift h3, .giftNo { font-family: var(--serif); }
+.copy { border-radius: 6px; font-family: var(--serif); }
+
+/* ── Closing: morning over the terraces ── */
+.closing { padding-bottom: 0; background: linear-gradient(180deg, #f6ebcf, #efdcae 70%); color: var(--ink); }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--leaf); font-family: var(--serif); font-size: 14px; font-style: italic; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.closingSawah { order: 20; display: block; width: calc(100% + 56px); max-width: none; height: auto; margin: 8px -28px 0; }
+.made { order: 21; margin: -40px 0 16px; position: relative; z-index: 2; color: #fbf5e4; text-shadow: 0 1px 3px rgba(40, 30, 10, .7); }
+.made:hover { color: #fff; }
+.music { border-color: #d9b56c; background: #5a341d; }
+
+/* ── Cover: a window cut in the bilik wall ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 16px; overflow: hidden; background: #c9a364 var(--bilik) 0 0 / 192px; isolation: isolate; }
+.window { position: relative; display: flex; flex: 1; flex-direction: column; align-items: center; min-height: calc(100dvh - 32px); padding: clamp(40px, 8vh, 76px) 22px 0; overflow: hidden; border-radius: 4px; background: linear-gradient(180deg, #f7ecd0 0%, #f3e3bd 40%, #ead6a4 100%); box-shadow: inset 0 0 0 3px #8a6430, inset 0 0 0 6px #e2c68a, inset 0 6px 18px rgba(74, 43, 24, .35); text-align: center; }
+.greet { color: var(--leaf); font-family: var(--script); font-size: 30px; font-weight: 600; line-height: 1; rotate: -3deg; }
+.kicker { margin-top: 10px; color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 12px; color: var(--accent); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--leaf); font-family: var(--script); font-size: 40px; font-style: normal; }
+.coverDate { margin-top: 12px; padding: 4px 14px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); color: var(--ink); font-size: 15px; font-style: italic; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 18px; }
+.guest { padding: 12px 16px; border-radius: 6px; background: rgba(251, 245, 228, .78); box-shadow: 0 1px 0 rgba(138, 100, 48, .3); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--leaf); color: var(--leaf); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.openBtn { border-radius: 6px; background: var(--accent); color: #f6ead0; font-family: var(--serif); font-weight: 600; letter-spacing: .06em; box-shadow: 0 6px 14px rgba(74, 43, 24, .28); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.scene { position: relative; width: calc(100% + 44px); margin: auto -22px 0; padding-top: 16px; flex-shrink: 0; }
+.scene { overflow: hidden; }
+.sawah { display: block; width: 128%; max-width: none; height: auto; margin-left: -14%; }
+.coverKacapi { position: absolute; z-index: 2; left: 50%; top: 2px; width: 94%; max-width: none; height: auto; translate: -50% 0; rotate: -3deg; filter: drop-shadow(0 8px 6px rgba(40, 22, 10, .3)); animation: bob 7s ease-in-out infinite alternate; }
+.padiL, .padiR { position: absolute; z-index: 1; top: 46px; width: 74px; height: auto; transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite alternate; }
+.padiL { left: 10px; rotate: -8deg; }
+.padiR { right: 10px; scale: -1 1; animation-delay: -3s; }
+
+/* ── Hero: a photo framed in woven bamboo, suling hung above ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 24px 30px; background: var(--bg); text-align: center; }
+.heroSuling { width: 250px; height: auto; margin-bottom: -6px; position: relative; z-index: 2; filter: drop-shadow(0 4px 3px rgba(74, 43, 24, .2)); animation: bob 8s ease-in-out infinite alternate; }
+.heroFrame { width: 100%; padding: 10px; border-radius: 4px; background: var(--bilik) 0 0 / 120px; box-shadow: 0 12px 26px rgba(74, 43, 24, .2), inset 0 0 0 2px #8a6430; }
+.heroPhoto { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; box-shadow: 0 0 0 2px #e2c68a; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { margin-top: 26px; color: var(--leaf); font-family: var(--script); font-size: 24px; font-weight: 600; }
+.heroNames { max-width: 100%; margin-top: 2px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--leaf); font-family: var(--script); font-style: normal; padding: 0 6px; }
+.heroDate { margin-top: 8px; color: var(--ink); font-style: italic; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-family: var(--script); font-size: 21px; line-height: 1.3; }
+
+@keyframes strum { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+@keyframes bob { from { translate: -50% 0; rotate: -3deg; } to { translate: -50% -4px; rotate: -2.2deg; } }
+.heroSuling { --x: 0; }
+.heroSuling { animation-name: bobFlat; }
+@keyframes bobFlat { from { translate: 0 0; rotate: -1deg; } to { translate: 0 -4px; rotate: .6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .countBand::after { display: none; }
+  .portraitFrame { transition: none; }
+}
