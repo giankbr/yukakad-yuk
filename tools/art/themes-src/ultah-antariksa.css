@@ -1,0 +1,157 @@
+/* Ultah Antariksa — ulang tahun anak di luar angkasa: roket gouache krem-merah dengan api berkedip, planet bercincin, bulan tersenyum, helm astronaut sebagai bingkai foto, langit malam berbintang. */
+.root, .cover {
+  --bg: #fbf3e2; --paper: #f4e9d2; --ivory: #fffaf0; --field: #fffdf7; --ink: #1d1b3a; --muted: #5a5878; --line: #e5d8bb;
+  --accent: #1b2452; --accent2: #2b3a7a; --gold: #f7c95a; --gold-l: #fff1c8; --gold-d: #d99a2c;
+  --band-bg: #1b2452; --band-ink: #f6ecd6;
+  --display: "Exo 2", "Quicksand", system-ui, sans-serif; --serif: Quicksand, system-ui, sans-serif; --script: "Exo 2", system-ui, sans-serif;
+  --h2: 30px; --card-r: 26px;
+  --sky: url(/themes/art/ultah-antariksa/sky.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1b2452; --t-accent-ink: #fff1c8; --t-bg: #fbf3e2; --t-ink: #1d1b3a; --t-muted: #5a5878; --t-line: #e5d8bb; --t-field: #fffdf7;
+  --t-radius: 20px; --t-font: Quicksand, system-ui, sans-serif; --t-heading-font: "Exo 2", system-ui, sans-serif; --t-heading-weight: 700; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px; font-weight: 500;
+}
+.main { background: #fbf3e2 radial-gradient(circle, rgba(27, 36, 82, .07) 1.2px, transparent 1.6px) 0 0 / 22px 22px; }
+
+/* type */
+.head h2, .headLight h2 { font-weight: 800; letter-spacing: -.01em; }
+.eyebrow, .role, .salamKicker { display: inline-block; padding: 5px 14px; border-radius: 999px; background: #e8573f; color: #fff6ec; font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.headLight .eyebrow { background: #f7c95a; color: #1b2452; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: auto; }
+.divider img { width: 16px; height: auto; }
+.divider img:nth-child(2) { width: 26px; rotate: 14deg; }
+.divider img:nth-child(3) { rotate: -10deg; }
+.salamBlock { padding-top: 44px; }
+.salamTitle { color: #1b2452; font-family: var(--display); font-size: 34px; font-weight: 800; line-height: 1.1; }
+.intro { font-weight: 500; }
+
+/* people: astronaut helmet portrait */
+.couple { background: transparent; }
+.portrait { width: 260px; height: 280px; margin-bottom: 6px; }
+.portraitFrame { position: absolute; left: 46px; top: 51px; width: 168px; height: 164px; padding: 0; border: 0; border-radius: 50%; background: #1b2452 var(--sky) center / 220px auto; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: none; }
+.helmet { position: absolute; z-index: 2; inset: 0; width: 260px; height: 280px; transform-origin: 50% 90%; animation: bob 5s ease-in-out infinite alternate; }
+.portrait:has(.helmet) .portraitFrame { animation: bob 5s ease-in-out infinite alternate; }
+.monogram { color: #fff1c8; font-family: var(--display); font-size: 88px; font-weight: 800; text-shadow: 0 4px 0 #e8573f; }
+.nick { color: #e8573f; font-family: var(--display); font-size: 54px; font-weight: 800; letter-spacing: -.02em; }
+.fullName { font-family: var(--display); font-weight: 600; font-size: 20px; color: #1b2452; }
+.parents { font-weight: 500; }
+
+/* countdown: launch control */
+.countBand { background: #1b2452 var(--sky) center / cover; padding: 66px 22px; }
+.count { gap: 8px; }
+.count > div { height: 82px; border: 3px solid #f7c95a; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #3b4b94, #222c63 70%); box-shadow: 0 0 0 5px rgba(247, 201, 90, .14); }
+.count > div::after { display: none; }
+.count b { color: #fff1c8; font-family: var(--display); font-weight: 800; font-size: 26px; }
+.count small { color: #f7c95a; font-style: normal; font-size: 11px; font-weight: 700; letter-spacing: .06em; }
+.ghostBtn { border: 2px solid #f7c95a; color: #fff1c8; font-family: var(--display); font-weight: 700; }
+.countPlanet { position: absolute; z-index: -1; height: auto; }
+.countPlanetA { top: 10px; left: -60px; width: 170px; rotate: -8deg; animation: drift 14s ease-in-out infinite alternate; }
+.countPlanetB { bottom: 14px; right: -16px; width: 70px; animation: spin 50s linear infinite; }
+
+/* events: mission card */
+.events { background: transparent; }
+.event { border: 3px solid #1b2452; border-radius: 28px; background: #fffaf0; box-shadow: 0 7px 0 #1b2452; padding: 40px 22px 26px; transition: translate 400ms var(--m-spring), box-shadow 400ms var(--m-spring), scale 300ms var(--m-spring); }
+.event::before { inset: auto 18px 12px; height: 0; border: 0; border-top: 2px dashed rgba(27, 36, 82, .18); border-radius: 0; }
+.event:hover { translate: 0 -4px; box-shadow: 0 11px 0 #1b2452; border-color: #1b2452; }
+.eventNo { top: -18px; width: auto; height: 34px; padding: 0 14px; background: #e8573f; color: #fff; font-weight: 800; box-shadow: 0 4px 0 #b63a2a; }
+.eventNo { white-space: nowrap; }
+.eventNo::before { content: "MISI "; letter-spacing: .1em; }
+.event h3 { color: #1b2452; font-weight: 800; font-size: 24px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: #e8573f; font-weight: 700; font-family: var(--display); }
+.rule { height: 4px; width: 50px; border-radius: 4px; background: repeating-linear-gradient(90deg, #f7c95a 0 8px, transparent 8px 13px); }
+.mapBtn, .submit { background: #e8573f; color: #fff; font-family: var(--display); font-weight: 700; box-shadow: 0 5px 0 #b63a2a; transition: background 300ms var(--m-spring), box-shadow 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #ef6a52; translate: 0 -2px; box-shadow: 0 7px 0 #b63a2a; }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 2px 0 #b63a2a; }
+
+/* story: orbit path with stars */
+.story { background: transparent; }
+.timeline::before { left: 20px; width: 3px; background: repeating-linear-gradient(#1b2452 0 6px, transparent 6px 12px); opacity: .35; }
+.node { width: 44px; height: 44px; border: 3px solid #1b2452; background: #1b2452; }
+.node img { width: 24px; }
+.timeline li:nth-child(even) .node img { rotate: 18deg; }
+.storyBody { padding: 12px 16px 14px; border-radius: 22px; background: #fffaf0; border: 2px solid #e5d8bb; }
+.storyBody small { display: inline-block; align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: #1b2452; color: #f7c95a; font-weight: 700; letter-spacing: .08em; }
+.storyBody h3 { color: #1b2452; font-weight: 700; }
+
+.tile { border-radius: 24px; border: 4px solid #fffaf0; }
+.tile:first-child { border-radius: 50% 50% 24px 24px; }
+
+/* wishes */
+.wishes { background: transparent; }
+.form { border: 3px solid #1b2452; border-radius: 28px; background: #fffaf0; box-shadow: 0 7px 0 #1b2452; }
+.field > span, .diet, .guestsLabel { color: #1b2452; font-family: var(--display); font-weight: 700; letter-spacing: .08em; }
+.field input, .field textarea { border: 2px solid #e5d8bb; border-radius: 16px; }
+.choices button { border: 2px solid #e5d8bb; font-family: var(--display); font-size: 14px; font-weight: 700; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), border-color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { background: #1b2452; border-color: #1b2452; color: #f7c95a; box-shadow: 0 4px 0 #0d1436; }
+.step { border: 2px solid #1b2452; color: #1b2452; }
+.wish { border: 2px solid #e5d8bb; border-radius: 22px 22px 22px 6px; background: #fffaf0; }
+.wish strong { color: #1b2452; font-family: var(--display); font-weight: 700; }
+.wish small { background: #fde1d9; color: #b63a2a; font-weight: 700; }
+.sentBox img { width: 110px; }
+
+/* gifts */
+.gift { border-radius: 28px; background: #1b2452 var(--sky) center / cover; box-shadow: 0 7px 0 #0d1436; }
+.gift::after { border-color: rgba(247, 201, 90, .14); }
+.gift h3 { color: #fff1c8; font-family: var(--display); font-weight: 700; }
+.giftIcon { border: 2px solid #f7c95a; }
+.copy { border: 2px solid #f7c95a; color: #fff1c8; font-weight: 700; transition: background 300ms var(--m-spring), color 300ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.copyOn, .copyOn:hover { background: #f7c95a; color: #1b2452; border-color: #f7c95a; }
+
+/* closing: lift-off */
+.closing { background: #1b2452 var(--sky) center bottom / cover; }
+.closingMoon { position: absolute; z-index: -1; top: 26px; right: -30px; width: 120px; height: auto; opacity: .9; }
+.launch { position: relative; width: 120px; height: 230px; margin-bottom: 6px; }
+.launch img { position: absolute; height: auto; }
+.launch .rocket { left: 50%; translate: -50% 0; width: 96px; bottom: 54px; }
+.launch .flame { left: 50%; translate: -50% 0; width: 46px; bottom: -36px; transform-origin: 50% 0; animation: flicker .5s ease-in-out infinite alternate; }
+.thanks { color: #fff1c8; font-family: var(--display); font-weight: 800; font-size: 46px; }
+.family { color: #c8cbe8; }
+.closingNames { color: #f7c95a; font-family: var(--display); font-weight: 800; }
+.made { color: rgba(246, 236, 214, .65); }
+.music { border: 2px solid #f7c95a; background: #e8573f; box-shadow: 0 4px 0 #b63a2a; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: clamp(70px, 14vh, 130px) 26px 0; overflow: hidden; background: #1b2452 var(--sky) center top / cover; color: #f6ecd6; text-align: center; isolation: isolate; }
+.planet { position: absolute; z-index: -1; top: 24px; left: -54px; width: 190px; height: auto; rotate: -10deg; animation: drift 16s ease-in-out infinite alternate; }
+.moon { position: absolute; z-index: -1; top: 10px; right: -18px; width: 110px; height: auto; animation: bob 6s ease-in-out infinite alternate; }
+.pill { padding: 6px 16px; border-radius: 999px; background: #f7c95a; color: #1b2452; font-family: var(--display); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 #d99a2c; rotate: -2deg; }
+.coverName { max-width: 100%; margin-top: 14px; color: #fff1c8; font-family: var(--display); font-size: 74px; font-weight: 800; line-height: .95; letter-spacing: -.02em; overflow-wrap: anywhere; text-shadow: 0 5px 0 #e8573f; }
+.age { display: flex; align-items: center; gap: 10px; margin-top: 16px; color: #c8cbe8; font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.age b { position: relative; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #e8573f; color: #fff; font-size: 30px; font-weight: 800; box-shadow: 0 4px 0 #b63a2a; }
+.age b::before { content: ""; position: absolute; inset: -9px -16px; border: 2.5px solid #f7c95a; border-radius: 50%; rotate: -18deg; animation: orbit 6s linear infinite; }
+.coverDate { margin-top: 12px; color: #f6ecd6; font-family: var(--display); font-size: 16px; font-weight: 600; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 22px; width: 100%; }
+.guest { padding: 14px 18px; border: 2px dashed rgba(247, 201, 90, .6); border-radius: 24px; background: rgba(20, 26, 63, .55); max-width: 300px; backdrop-filter: blur(2px); }
+.guest small { color: #c8cbe8; font-style: normal; font-size: 14px; }
+.guest strong { color: #fff1c8; font-family: var(--display); font-weight: 700; }
+.table { border-color: #f7c95a; color: #f7c95a; font-weight: 700; }
+.openBtn { background: #e8573f; color: #fff; font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: .03em; box-shadow: 0 6px 0 #b63a2a; }
+.openBtn:hover { background: #ef6a52; translate: 0 -2px; box-shadow: 0 8px 0 #b63a2a; }
+.openBtn:active { translate: 0 4px; box-shadow: 0 2px 0 #b63a2a; }
+.pad { position: relative; width: 100%; height: 280px; margin-top: auto; flex-shrink: 0; }
+.pad .rocket { position: absolute; right: 22px; bottom: 100px; width: 100px; height: auto; rotate: 12deg; animation: hover 3s var(--m-spring) infinite alternate; }
+.pad .flame { position: absolute; right: 74px; bottom: 10px; width: 46px; height: auto; rotate: 12deg; transform-origin: 50% 0; animation: flicker .5s ease-in-out infinite alternate, hover 3s var(--m-spring) infinite alternate; }
+.pad .planet2 { position: absolute; left: 8px; bottom: 40px; width: 82px; height: auto; animation: spin 40s linear infinite; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 60px 24px 66px; overflow: hidden; background: #1b2452 var(--sky) center / cover; text-align: center; isolation: isolate; }
+.hero .moon { top: 18px; right: 14px; width: 86px; }
+.heroKicker { color: #f7c95a; font-family: var(--display); font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.heroName { max-width: 100%; margin-top: 8px; color: #fff1c8; font-family: var(--display); font-size: 56px; font-weight: 800; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 #e8573f; }
+.heroDate { margin-top: 10px; color: #c8cbe8; font-family: var(--display); font-weight: 600; }
+.heroPlanet { width: 230px; height: auto; margin-top: 22px; animation: drift 14s ease-in-out infinite alternate; }
+.heroNote { max-width: 320px; margin-top: 20px; padding: 14px 18px; border-radius: 24px 24px 24px 6px; background: #fffaf0; color: var(--ink); font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -8px; } }
+@keyframes hover { from { translate: 0 0; } to { translate: -4px -14px; } }
+@keyframes flicker { from { scale: 1 .86; opacity: .85; } to { scale: 1.06 1.08; opacity: 1; } }
+@keyframes orbit { to { rotate: 342deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .planet, .moon, .pad .rocket, .pad .flame, .pad .planet2, .launch .flame, .age b::before, .helmet, .portraitFrame, .heroPlanet, .countPlanetA, .countPlanetB { animation: none; }
+  .event, .mapBtn, .submit, .choices button, .copy { transition: none; }
+}

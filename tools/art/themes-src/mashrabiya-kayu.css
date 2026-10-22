@@ -1,0 +1,149 @@
+/* Mashrabiya Kayu — kisi-kisi kayu bubut mashrabiya (jeruji, manik, simpul kubus) yang menyaring cahaya madu menjadi pola bayangan di dinding plester; walnut, madu, krem. */
+.root, .cover {
+  --bg: #f4ead8; --paper: #ece0c9; --ivory: #fbf6ec; --field: #fffcf6; --ink: #2f1d10; --muted: #6a5240; --line: #dccab0;
+  --accent: #5a3118; --accent2: #b06f2e; --gold: #d29a4e; --gold-l: #f3d39c; --gold-d: #96601f;
+  --band-bg: #33200f; --band-ink: #f4ead8;
+  --display: "El Messiri", "Trebuchet MS", sans-serif; --serif: "Crimson Pro", Georgia, serif; --script: "El Messiri", serif;
+  --h2: 27px; --card-r: 3px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a3118; --t-accent-ink: #f4ead8; --t-bg: #f4ead8; --t-ink: #2f1d10; --t-muted: #6a5240; --t-line: #dccab0; --t-field: #fffcf6;
+  --t-radius: 3px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: "El Messiri", sans-serif; --t-heading-weight: 500; --t-heading-size: 25px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) url(/themes/art/mashrabiya-kayu/plaster.webp); }
+.head { gap: 6px; }
+.head h2, .headLight h2 { font-weight: 500; letter-spacing: .01em; }
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-weight: 500; letter-spacing: .26em; }
+.eyebrow { color: var(--accent2); font-size: 11.5px; }
+.divider { width: 210px; margin-top: 4px; filter: drop-shadow(0 3px 2px rgba(51, 32, 15, .25)); }
+.intro { font-size: 18px; }
+
+/* opening: on the sunlit wall, the shadow pattern falling across the salam */
+.salamBlock { position: relative; padding: 70px 28px 60px; background: #e7d5b6 url(/themes/art/mashrabiya-kayu/wall.webp) 30% 0 / 640px auto no-repeat; isolation: isolate; }
+.salamBlock::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, transparent 50%, var(--bg)); }
+.arabic { color: var(--accent); font-size: 30px; text-shadow: 0 1px 0 rgba(255, 244, 220, .8); }
+.salamKicker { color: var(--accent); font-size: 11px; line-height: 1.7; max-width: 290px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 600; }
+.salamBlock .intro { color: #4d3826; }
+
+/* couple: ogee-topped windows framed in walnut */
+.couple { background: transparent; gap: 12px; }
+.portrait { margin-bottom: 18px; filter: drop-shadow(10px 16px 14px rgba(51, 32, 15, .28)); }
+.portraitFrame { width: 196px; height: 262px; padding: 0; border: 0; border-radius: 0; background: linear-gradient(115deg, #8a5228, #4c2812 55%, #6e3f1e); clip-path: path("M 0 262 L 0 84 C 0 34 66 36 98 0 C 130 36 196 34 196 84 L 196 262 Z"); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; clip-path: path("M 9 253 L 9 88 C 9 46 70 46 98 13 C 126 46 187 46 187 88 L 187 253 Z"); }
+.monogram { position: relative; z-index: 1; color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; inset: 0; background: #3b2414 url(/themes/art/mashrabiya-kayu/panel.webp) center / cover; clip-path: path("M 9 253 L 9 88 C 9 46 70 46 98 13 C 126 46 187 46 187 88 L 187 253 Z"); opacity: .9; }
+.role { color: var(--accent2); font-size: 11px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.1; }
+.fullName { font-family: var(--serif); font-size: 19px; font-style: italic; }
+.amp { color: var(--accent2); font-family: var(--display); font-size: 40px; gap: 14px; margin: 18px 0 14px; }
+.amp img { width: 38px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: dark walnut room, two backlit screens at the edges */
+.countBand { padding: 78px 24px; background: radial-gradient(70% 60% at 50% 40%, #5a3418, #2a190c 75%); }
+.countPanel { position: absolute; z-index: -1; top: 50%; width: 150px; height: auto; translate: 0 -50%; opacity: .5; pointer-events: none; }
+.countPanelL { left: -70px; }
+.countPanelR { right: -70px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 8px; }
+.count > div { height: 86px; border: 0; border-radius: 2px; background: #f4ead8; box-shadow: inset 0 3px 0 var(--gold), 0 10px 18px rgba(0, 0, 0, .35); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 226, 160, .55) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 500; }
+.count small { color: var(--muted); font-family: var(--display); font-size: 10.5px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.ghostBtn { border-radius: 2px; border-color: var(--gold); color: var(--gold-l); }
+
+/* events: plaster cards with a lattice rail on top and the sun's patch in the corner */
+.events { background: transparent; gap: 26px; }
+.event { padding: 50px 22px 26px; overflow: hidden; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 1px 0 #dccab0, 0 14px 28px rgba(51, 32, 15, .1); }
+.event::before { inset: 0 0 auto; height: 12px; border: 0; border-radius: 0; background: linear-gradient(180deg, #8a5228, #4c2812 45%, #2a170a); }
+.eventNo { top: 24px; left: auto; right: 18px; translate: none; width: auto; height: auto; border-radius: 0; background: none; color: color-mix(in srgb, var(--gold) 55%, transparent); font-family: var(--display); font-size: 34px; letter-spacing: 0; }
+.event h3 { margin-top: 6px; font-family: var(--display); font-size: 24px; font-weight: 600; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--accent2); font-family: var(--display); letter-spacing: .06em; }
+.rule { width: 150px; height: 16px; margin: 8px 0; background: url(/themes/art/mashrabiya-kayu/band.webp) center / contain no-repeat; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+
+.story { background: rgba(236, 224, 201, .55); }
+.timeline::before { left: 19px; width: 3px; background: repeating-linear-gradient(#7a4a26 0 8px, transparent 8px 11px, #7a4a26 11px 13px, transparent 13px 16px); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 40px; filter: drop-shadow(0 3px 3px rgba(51, 32, 15, .35)); }
+.storyBody h3 { font-family: var(--display); font-size: 21px; font-weight: 600; }
+.storyBody small { color: var(--accent2); font-family: var(--display); }
+
+/* gallery: photos set into a walnut lattice frame */
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 150px; gap: 7px; padding: 7px; background: linear-gradient(115deg, #7a4a26, #3b2010 60%, #5a3118); border-radius: 2px; box-shadow: 0 14px 26px rgba(51, 32, 15, .25); }
+.tile { border-radius: 0; }
+.tile:first-child { border-radius: 999px 999px 0 0; }
+.tile:nth-child(4n + 5):last-child { grid-column: span 2; }
+
+.wishes { background: rgba(236, 224, 201, .55); }
+.form { border-radius: 3px; border: 0; border-top: 10px solid #4c2812; box-shadow: 0 12px 26px rgba(51, 32, 15, .1); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--display); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); }
+.submit { border-radius: 2px; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.wish { border-radius: 2px; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 14px 4px; }
+.wish:hover { box-shadow: none; }
+.wish strong { font-weight: 600; }
+
+.gifts { background: transparent; }
+.gift { border-radius: 3px; background: linear-gradient(160deg, #4c2812, #2a170a); box-shadow: inset 0 0 0 1px rgba(243, 211, 156, .3), inset 0 0 0 6px #33200f, inset 0 0 0 7px rgba(243, 211, 156, .18), 0 14px 26px rgba(51, 32, 15, .25); }
+.gift::after { right: -30px; bottom: -40px; width: 150px; height: 150px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/mashrabiya-kayu/rosette.webp) center / contain no-repeat; opacity: .22; }
+.copy { border-radius: 2px; }
+
+/* closing: back on the sunlit wall */
+.closing { padding: 84px 28px 60px; background: #e2cfae url(/themes/art/mashrabiya-kayu/wall.webp) 70% 0 / 680px auto no-repeat; color: var(--ink); }
+.closing::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(231, 213, 182, 0) 30%, rgba(231, 213, 182, .7) 60%, #e7d5b6); }
+.closingPanel { position: absolute; z-index: -1; top: 22px; left: -84px; width: 140px; height: auto; opacity: .85; filter: drop-shadow(14px 18px 12px rgba(51, 32, 15, .3)); }
+.emblem { width: 104px; height: auto; filter: drop-shadow(0 8px 10px rgba(51, 32, 15, .35)); }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.closingText { color: #4d3826; }
+.closingSalam { color: var(--accent); font-family: var(--display); font-size: 11px; letter-spacing: .14em; line-height: 1.7; text-transform: uppercase; }
+.family { color: var(--muted); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.made { color: color-mix(in srgb, var(--ink) 45%, transparent); }
+.made:hover { color: var(--accent); }
+.music { border-radius: 3px; background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: a mashrabiya window on a sunlit wall, the photo seen through its arch ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: #e7d5b6; color: var(--ink); text-align: center; isolation: isolate; }
+.wallBg { position: absolute; z-index: -2; inset: -20px; background: linear-gradient(180deg, transparent 52%, rgba(231, 213, 182, .75) 72%), #e7d5b6 url(/themes/art/mashrabiya-kayu/wall.webp) 62% 0 / max(640px, 110%) auto no-repeat; animation: sunMove 26s ease-in-out infinite alternate; }
+.sun { position: absolute; z-index: -1; top: -10%; right: -30%; width: 120%; height: 70%; background: radial-gradient(closest-side, rgba(255, 214, 140, .45), transparent); animation: sunPulse 9s ease-in-out infinite alternate; pointer-events: none; }
+.bay { position: relative; width: min(82%, 46dvh); aspect-ratio: 640 / 800; margin-top: 4.5dvh; flex-shrink: 0; filter: drop-shadow(16px 22px 16px rgba(51, 32, 15, .38)); }
+.bayPhoto { position: absolute; inset: 12% 18.4% 14.6%; overflow: hidden; background: #b88a5a; }
+.bayPhoto > img, .bayPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.screen { position: absolute; inset: 0; width: 100%; height: 100%; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 16px 26px 26px; }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 2px; color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.12; overflow-wrap: break-word; }
+.coverNames em { padding: 0 8px; color: var(--accent2); font-style: normal; font-weight: 400; }
+.coverDate { margin-top: 4px; color: var(--muted); font-size: 17px; font-style: italic; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 14px; width: 100%; }
+.guest { padding: 10px 16px; border-block: 1px solid rgba(90, 49, 24, .3); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; font-weight: 500; }
+.table { border-color: var(--accent2); color: var(--accent2); border-radius: 2px; }
+.openBtn { border-radius: 2px; background: linear-gradient(115deg, #6e3f1e, #3b2010); color: var(--gold-l); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; font-size: 12.5px; box-shadow: 0 10px 20px rgba(51, 32, 15, .35), inset 0 0 0 1px rgba(243, 211, 156, .35); transition: background-position 900ms var(--m-ease), box-shadow 400ms var(--m-ease), filter 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.openBtn:hover { filter: brightness(1.15); }
+
+/* ── Hero (top of the opened page): a backlit screen in a walnut room ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 46px; overflow: hidden; background: radial-gradient(80% 50% at 50% 30%, #6a3d1c, #2a190c 80%); color: var(--band-ink); text-align: center; isolation: isolate; }
+.heroPanel { width: 210px; height: auto; filter: drop-shadow(0 0 30px rgba(240, 170, 80, .45)); }
+.heroRay { position: absolute; z-index: -1; top: 30px; left: 50%; width: 420px; height: 520px; translate: -50% 0; background: conic-gradient(from 160deg at 50% 0, transparent, rgba(255, 210, 140, .16) 6%, transparent 12%, rgba(255, 210, 140, .12) 18%, transparent 24%); filter: blur(4px); animation: rays 14s ease-in-out infinite alternate; pointer-events: none; }
+.kickerDark { margin-top: 22px; color: var(--gold-l); font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: #fbf3e2; font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.12; overflow-wrap: break-word; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-style: normal; font-weight: 400; }
+.heroDate { margin-top: 6px; color: rgba(244, 234, 216, .85); font-size: 18px; font-style: italic; }
+.heroNote { max-width: 300px; margin-top: 14px; color: rgba(244, 234, 216, .8); font-size: 17px; line-height: 1.55; text-wrap: balance; }
+.sentBox img { width: 80px; }
+
+@keyframes sunMove { from { translate: -8px -4px; } to { translate: 10px 6px; } }
+@keyframes sunPulse { from { opacity: .6; } to { opacity: 1; } }
+@keyframes rays { from { rotate: -4deg; opacity: .7; } to { rotate: 4deg; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .wallBg, .sun, .heroRay { animation: none; }
+}

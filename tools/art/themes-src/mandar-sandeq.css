@@ -1,0 +1,162 @@
+/* Mandar Sandeq — cahaya pesisir: perahu layar sandeq di laut biru cat air, sarung sutra lipaq saqbe bermotif kotak, dan bentuk layar segitiga. */
+.root, .cover {
+  --bg: #f6f1e6; --paper: #e8f0f2; --ivory: #fffdf8; --field: #ffffff; --ink: #14283c; --muted: #4d6072; --line: #cfdbe2;
+  --accent: #1d557f; --accent2: #163a5c; --gold: #c99a3c; --gold-l: #f3d79a; --gold-d: #8c6420;
+  --band-bg: #163a5c; --band-ink: #f6f1e6;
+  --display: Prata, Georgia, serif; --serif: Karla, system-ui, sans-serif; --script: Prata, Georgia, serif;
+  --lipaq: url(/themes/art/mandar-sandeq/lipaq.webp) repeat 0 0 / 171px;
+  --maroon: #7d1f2b; --sea: #2f79a8; --sail: #f7f0e2;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d557f; --t-accent-ink: #fff; --t-bg: #f6f1e6; --t-ink: #14283c; --t-muted: #4d6072; --t-line: #cfdbe2; --t-field: #ffffff;
+  --t-radius: 14px; --t-font: Karla, system-ui, sans-serif; --t-heading-font: Prata, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; color: var(--maroon); }
+/* left-aligned headings with the wave underneath */
+.section { align-items: stretch; padding: 62px 24px; }
+.head { align-items: flex-start; text-align: left; gap: 6px; }
+.head h2 { color: var(--accent2); line-height: 1.15; }
+.divider { width: 170px; margin-left: -8px; }
+.intro { text-align: left; max-width: none; font-size: 16.5px; line-height: 1.7; }
+
+/* opening: sea-blue panel with a sail cut-out corner */
+.salamBlock { position: relative; align-items: flex-start; padding: 56px 26px 60px; overflow: hidden; background: var(--band-bg); color: var(--band-ink); text-align: left; isolation: isolate; }
+.salamBlock::after { content: ""; position: absolute; z-index: -1; right: -30px; top: 20px; width: 150px; height: 190px; background: rgba(246, 241, 230, .08); clip-path: polygon(70% 0, 72% 100%, 0 96%); }
+.arabic { align-self: center; color: var(--gold-l); font-size: 28px; }
+.salamKicker { color: var(--gold-l); }
+.salamTitle { color: #fff; font-family: var(--display); font-size: 40px; }
+.salamSub { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: 0; line-height: 1.5; }
+.salamBlock .divider { filter: brightness(1.9) saturate(.6); }
+.salamBlock .intro { color: rgba(246, 241, 230, .86); }
+
+/* couple: sail-shaped portraits, mirrored */
+.couple { gap: 30px; background: var(--paper); }
+.person { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; row-gap: 3px; align-items: start; text-align: left; }
+.person > :not(.portrait) { grid-column: 2; }
+.portrait { grid-column: 1; grid-row: 1 / span 6; margin: 0; }
+.personWrap:nth-child(3) .person { grid-template-columns: minmax(0, 1fr) 150px; text-align: right; }
+.personWrap:nth-child(3) .person > :not(.portrait) { grid-column: 1; justify-self: end; }
+.personWrap:nth-child(3) .portrait { grid-column: 2; }
+.portraitFrame { width: 150px; height: 210px; padding: 0; border: 0; border-radius: 4px 120px 4px 4px; background: var(--sea); box-shadow: 0 14px 28px rgba(22, 58, 92, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 4px 120px 4px 4px; }
+.personWrap:nth-child(3) .portraitFrame, .personWrap:nth-child(3) .portraitFrame > img { border-radius: 120px 4px 4px 4px; }
+.portrait::after { content: ""; position: absolute; left: 8px; right: 8px; bottom: -10px; height: 10px; border-radius: 0 0 6px 6px; background: var(--lipaq); }
+.role { margin-top: 18px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 36px; line-height: 1.1; }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.parents { max-width: none; font-size: 14.5px; text-wrap: pretty; }
+.amp { align-self: center; margin: 0; gap: 12px; color: var(--gold); font-family: var(--display); font-size: 40px; }
+.amp img { width: 60px; }
+.monogram { color: var(--sail); font-family: var(--display); font-size: 80px; }
+
+/* countdown: lipaq silk band with a navy sail plate */
+.countBand { align-items: center; padding: 70px 20px; background: var(--maroon); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: var(--lipaq); }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: 26px 16px; border-radius: 4px 40px 4px 40px; background: rgba(22, 58, 92, .93); box-shadow: 0 12px 30px rgba(0, 0, 0, .3); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; }
+.count { grid-template-columns: repeat(4, minmax(0, 70px)); gap: 8px; }
+.count > div { height: 84px; border: 0; border-bottom: 3px solid var(--gold); border-radius: 4px 22px 4px 4px; background: rgba(246, 241, 230, .1); }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; }
+.count small { color: var(--gold-l); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--gold-l); border-radius: 4px 18px 4px 18px; color: #fff; font-family: var(--serif); font-weight: 700; }
+
+/* events: white cards with a sail corner */
+.events { gap: 20px; }
+.event { align-items: flex-start; padding: 28px 22px 24px 22px; border: 0; border-radius: 4px 34px 4px 34px; background: var(--ivory); text-align: left; box-shadow: 0 10px 28px rgba(22, 58, 92, .09); overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 6px; border: 0; border-radius: 0; background: var(--lipaq); }
+.event::after { content: ""; position: absolute; right: 16px; top: 16px; width: 34px; height: 46px; background: color-mix(in srgb, var(--sea) 16%, transparent); clip-path: polygon(70% 0, 72% 100%, 0 92%); }
+.eventNo { position: static; translate: none; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 14px; letter-spacing: .14em; }
+.event h3 { color: var(--accent2); font-size: 24px; max-width: calc(100% - 40px); }
+.eventDate { font-style: normal; font-weight: 700; color: var(--ink); }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; background: var(--line); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 18px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 4px 18px 4px 18px; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--maroon); }
+
+/* story: wave line */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--sea), color-mix(in srgb, var(--sea) 15%, transparent)); }
+.node { border: 0; border-radius: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--maroon); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--accent2); }
+.storyImg { border-radius: 4px 26px 4px 26px; }
+
+/* gallery: sail tiles */
+.mosaic { grid-auto-rows: 150px; gap: 8px; }
+.tile { border-radius: 4px 26px 4px 4px; }
+.tile:first-child { border-radius: 4px 140px 4px 4px; }
+.tile:nth-child(4n + 4) { border-radius: 4px 4px 4px 26px; }
+
+/* wishes */
+.form { border: 0; border-radius: 4px 30px 4px 30px; box-shadow: 0 12px 30px rgba(22, 58, 92, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border-radius: 4px 14px 4px 14px; }
+.choices button { border-radius: 4px 16px 4px 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.submit { border-radius: 4px 22px 4px 22px; background: var(--maroon); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border: 0; border-radius: 4px 20px 4px 20px; box-shadow: inset 4px 0 0 var(--sea); }
+.wish strong { font-family: var(--display); color: var(--accent2); }
+.wish small { background: color-mix(in srgb, var(--sea) 14%, transparent); color: var(--accent2); }
+
+/* gifts: navy with lipaq hem */
+.gift { align-items: flex-start; padding: 24px 22px 32px; border-radius: 4px 34px 4px 34px; text-align: left; }
+.gift::after { right: 0; left: 0; bottom: 0; width: auto; height: 12px; border: 0; border-radius: 0; box-shadow: none; background: var(--lipaq); z-index: 0; }
+.gift h3 { font-family: var(--display); color: #fff; font-size: 19px; letter-spacing: 0; }
+.giftNo { color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copy { border-radius: 4px 14px 4px 14px; font-family: var(--serif); font-weight: 700; }
+
+/* closing */
+.closing { padding: 64px 26px 0; background: linear-gradient(180deg, #e3eef3, #f6f1e6 40%); color: var(--ink); }
+.closingBoat { width: 120px; height: auto; }
+.thanks { color: var(--accent2); font-family: var(--display); font-size: 42px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--maroon); font-family: var(--serif); font-size: 14px; font-weight: 700; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.made { color: rgba(20, 40, 60, .5); margin-bottom: 26px; }
+.closingSea { order: 10; display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px; }
+.music { border: 0; border-radius: 4px 22px 4px 22px; background: var(--maroon); }
+
+/* ── Cover: sky, Bismillah, names, sandeq fleet on the sea ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: linear-gradient(180deg, #a9cfe3, #d6e4e6 30%, #f3dcc0 52%, #f3dcc0); color: var(--ink); text-align: center; isolation: isolate; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 40px 24px 0; }
+.coverArabic { color: var(--accent2); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.coverKicker { color: var(--maroon); font-size: 12px; font-weight: 800; letter-spacing: .2em; }
+.coverLabel { margin-top: 10px; color: var(--accent2); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--maroon); font-size: 28px; font-style: normal; }
+.coverDate { color: var(--accent2); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.coverSea { position: relative; z-index: 1; display: block; width: 116%; max-width: none; height: auto; margin: -70px 0 0; animation: bob 7s var(--m-ease) infinite alternate; transform-origin: 50% 70%; }
+.coverGuest { position: absolute; z-index: 3; left: 18px; right: 18px; bottom: 22px; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 16px 16px 18px; border-radius: 4px 30px 4px 30px; background: rgba(255, 253, 248, .92); box-shadow: 0 14px 30px rgba(22, 58, 92, .25); }
+.coverGuest::after { content: ""; position: absolute; left: 20px; right: 20px; bottom: 0; height: 5px; background: var(--lipaq); }
+.guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--display); font-size: 19px; color: var(--accent2); }
+.table { border-color: var(--gold); border-radius: 4px 12px 4px 12px; color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 4px 22px 4px 22px; background: var(--accent2); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .1em; }
+.openBtn:hover { background: var(--maroon); translate: 0 -2px; }
+
+/* ── Hero: sail-cut photo with names ── */
+.hero { position: relative; display: flex; flex-direction: column; padding: 46px 24px 0; overflow: hidden; background: linear-gradient(180deg, #e3eef3, var(--bg)); isolation: isolate; }
+.heroKicker { color: var(--maroon); font-size: 12px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; align-items: baseline; margin-top: 6px; color: var(--accent2); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-style: normal; padding: 0 8px; font-size: 34px; }
+.heroDate { margin-top: 6px; color: var(--accent); font-size: 15px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.heroPhoto { position: relative; width: 100%; height: 420px; margin-top: 24px; overflow: hidden; border-radius: 4px 220px 4px 4px; box-shadow: 0 18px 36px rgba(22, 58, 92, .22); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { margin-top: 24px; padding: 0 0 0 16px; border-left: 3px solid var(--gold); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+.heroWave { display: block; width: 220px; height: auto; margin: 26px 0 30px -8px; }
+.sentBox img { width: 120px; }
+
+.root .event, .root .mapBtn, .root .submit { transition: background 400ms var(--m-ease), box-shadow 400ms var(--m-ease), translate 400ms var(--m-ease), scale 400ms var(--m-ease); }
+.event:hover { translate: 0 -3px; box-shadow: 0 16px 34px rgba(22, 58, 92, .15); }
+@keyframes bob { from { translate: 0 0; rotate: -.4deg; } to { translate: 0 -6px; rotate: .4deg; } }
+@media (prefers-reduced-motion: reduce) { .coverSea { animation: none; } }

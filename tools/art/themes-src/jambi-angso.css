@@ -1,0 +1,152 @@
+/* Jambi Angso Duo — kain batik Jambi bermotif angso duo merah sepang, nila dan kuning, tumpal pucuk rebung, rumah Kajang Leko di tepian Batanghari saat senja. */
+.root, .cover {
+  --bg: #f3e6c8; --paper: #f8eed8; --ivory: #fcf6e8; --field: #fffaf0; --ink: #1f2a4c; --muted: #5d5a66; --line: #ddc9a0;
+  --accent: #27365e; --accent2: #34477a; --gold: #d9a62e; --gold-l: #f2cf74; --gold-d: #a87a16;
+  --band-bg: #27365e; --band-ink: #f6ead2;
+  --display: Prata, "Playfair Display", Georgia, serif; --serif: "Work Sans", "Segoe UI", sans-serif; --script: Prata, Georgia, serif;
+  --indigo: #27365e; --sepang: #9b3a2a; --kuning: #d9a62e;
+  --batik: url(/themes/art/jambi-angso/batik.webp) repeat 0 0 / 200px auto;
+  --tumpal: url(/themes/art/jambi-angso/tumpal.webp) repeat-x 0 0 / auto 100%;
+  --hex: polygon(18% 0, 82% 0, 100% 50%, 82% 100%, 18% 100%, 0 50%);
+  --h2: 29px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #27365e; --t-accent-ink: #f6ead2; --t-bg: #f3e6c8; --t-ink: #1f2a4c; --t-muted: #5d5a66; --t-line: #ddc9a0; --t-field: #fffaf0;
+  --t-radius: 3px; --t-font: "Work Sans", sans-serif; --t-heading-font: Prata, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .32em; color: var(--sepang); text-transform: uppercase; }
+.head h2 { color: var(--indigo); }
+.divider { width: 200px; }
+
+.section { padding: 62px 24px 58px; }
+.salamBlock { position: relative; padding: 48px 28px 62px; background: var(--paper); }
+.salamBlock::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: var(--tumpal); }
+.arabic { color: var(--indigo); font-size: 30px; }
+.salamTitle { font-family: var(--display); font-size: 27px; color: var(--sepang); }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+/* couple: egg-shaped portraits with kuning + nila rings and the angso roundel */
+.couple { background: var(--bg); }
+.portrait { padding-bottom: 26px; }
+.portraitFrame { width: 196px; height: 254px; padding: 5px; border: 0; border-radius: 50% / 50%; background: var(--kuning); box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--indigo), 0 16px 30px rgba(31, 42, 76, .18); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50% / 50%; }
+.portrait::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 70px; height: 64px; translate: -50% 0; background: url(/themes/art/jambi-angso/angso.webp) no-repeat center / contain; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .2)); }
+.role { margin-top: 4px; }
+.nick { font-family: var(--display); font-size: 42px; color: var(--indigo); }
+.fullName { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--sepang); }
+.monogram { color: var(--indigo); font-family: var(--display); }
+.amp { color: var(--sepang); font-family: var(--display); font-size: 40px; }
+.amp img { width: 72px; }
+
+/* countdown: nila cloth under a tumpal hem, hexagonal kapal sanggat counters */
+.countBand { padding: 74px 20px 62px; background: radial-gradient(80% 70% at 50% 40%, #33467c, #1f2a4c); }
+.countBand::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 34px; background: var(--tumpal); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: #f6ead2; }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 0; clip-path: var(--hex); background: var(--kuning); isolation: isolate; }
+.count > div::before { content: ""; position: absolute; inset: 3px; clip-path: var(--hex); background: #7a2a1f; z-index: -1; }
+.count b { font-family: var(--display); color: #fff1cf; font-size: 28px; }
+.count small { font-family: var(--serif); font-style: normal; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-l); }
+.ghostBtn { font-family: var(--serif); font-weight: 600; font-size: 13px; color: #f6ead2; border-color: var(--gold); border-radius: 3px; }
+
+/* events: kain cards with a batik selvage on the left */
+.events { background: var(--paper); gap: 22px; }
+.event { align-items: flex-start; padding: 26px 20px 22px 44px; border: 1px solid var(--line); border-radius: 3px; background: var(--ivory); text-align: left; overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 22px; border: 0; border-radius: 0; background: var(--batik); background-size: 110px auto; border-right: 2px solid var(--kuning); }
+.eventNo { top: 20px; left: auto; right: 16px; translate: 0 0; width: 38px; height: 38px; border-radius: 50%; background: var(--indigo); color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: 0; }
+.event h3 { padding-right: 44px; font-family: var(--display); font-size: 23px; color: var(--indigo); text-wrap: pretty; }
+.eventDate { font-style: normal; font-weight: 600; color: var(--sepang); }
+.eventTime { font-family: var(--serif); font-weight: 600; color: var(--gold-d); }
+.rule { width: 46px; height: 3px; background: var(--kuning); }
+.event strong { color: var(--ink); }
+.eventAddr { text-align: left; text-wrap: pretty; }
+.mapBtn { border-radius: 3px; background: var(--sepang); color: #fff1cf; font-family: var(--serif); font-weight: 600; letter-spacing: .04em; box-shadow: none; }
+.mapBtn:hover { background: #b0452f; }
+
+.story { background: var(--bg); }
+.timeline::before { width: 2px; background: repeating-linear-gradient(var(--sepang) 0 6px, transparent 6px 10px, var(--indigo) 10px 16px, transparent 16px 20px); }
+.node { width: 40px; height: 40px; border: 0; border-radius: 0; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); background: var(--indigo); }
+.node img { width: 30px; }
+.storyBody small { font-family: var(--serif); color: var(--sepang); font-weight: 600; }
+.storyBody h3 { font-family: var(--display); color: var(--indigo); }
+.storyImg { border-radius: 3px; }
+
+/* gallery: leaf-cut tiles */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile, .tile:first-child { border-radius: 70px 3px 70px 3px; }
+.tile:nth-child(even) { border-radius: 3px 70px 3px 70px; }
+
+.wishes { background: var(--bg); }
+.form { position: relative; padding-top: 44px; border: 1px solid var(--line); border-radius: 3px; background: var(--ivory); overflow: hidden; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 22px; background: var(--tumpal); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--indigo); letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--indigo); border-color: var(--indigo); color: var(--gold-l); }
+.submit { border-radius: 3px; background: var(--sepang); color: #fff1cf; font-family: var(--serif); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: #b0452f; }
+.sent { color: var(--indigo); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 110px; }
+.wish { border-radius: 3px; border-left: 4px solid var(--sepang); }
+.wish strong { font-family: var(--serif); font-weight: 600; color: var(--indigo); }
+.wish small { background: rgba(39, 54, 94, .1); color: var(--indigo); }
+
+.gifts { background: var(--paper); }
+.gift { align-items: flex-start; padding: 22px 20px 22px 46px; border-radius: 3px; background: var(--indigo); text-align: left; }
+.gift::after { inset: 0 auto 0 0; width: 26px; height: auto; border: 0; border-radius: 0; box-shadow: none; z-index: 0; background: var(--batik); background-size: 110px auto; border-right: 2px solid var(--kuning); }
+.gift h3 { font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); color: var(--gold-l); font-size: 22px; letter-spacing: .03em; }
+.copy { font-family: var(--serif); font-weight: 600; border-radius: 3px; }
+.copyOn, .copyOn:hover { color: var(--indigo); }
+
+/* closing: dusk on the Batanghari */
+.closing { padding: 0 28px 58px; background: linear-gradient(180deg, #2a2440 0%, #1f2a4c 40%); }
+.closingRiver { width: calc(100% + 56px); max-width: none; height: auto; margin: 0 -28px 14px; display: block; -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent); mask-image: linear-gradient(180deg, #000 80%, transparent); }
+.thanks { font-family: var(--display); font-size: 42px; color: var(--gold-l); }
+.closingSalam { font-family: var(--serif); font-weight: 600; font-size: 13px; color: var(--gold-l); }
+.family { font-family: var(--serif); }
+.closingNames { font-family: var(--display); font-size: 30px; }
+.music { background: var(--sepang); border-color: var(--gold-l); }
+
+/* ── Cover: a length of batik with a cream kain panel hemmed by tumpal ── */
+.cover { position: relative; display: flex; align-items: center; justify-content: center; min-height: 100dvh; padding: 26px 18px; overflow: hidden; background: var(--batik); background-size: 190px auto; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(80% 60% at 50% 50%, rgba(80, 26, 16, .15), rgba(60, 20, 12, .5)); }
+.panel { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 50px 22px 46px; background: linear-gradient(180deg, #fbf3e0, #f3e6c8); color: var(--ink); text-align: center; box-shadow: 0 20px 50px rgba(30, 10, 6, .5); }
+.panel::before, .panel::after { content: ""; position: absolute; left: 0; right: 0; height: 30px; background: var(--tumpal); }
+.panel::before { top: 0; scale: 1 -1; }
+.panel::after { bottom: 0; }
+.arabicCover { color: var(--indigo); font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; line-height: 1.5; }
+.kicker { margin-top: 6px; font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--sepang); }
+.egg { width: 150px; height: 192px; margin-top: 16px; padding: 4px; flex-shrink: 0; border-radius: 50% / 50%; background: var(--kuning); box-shadow: 0 0 0 3px #fbf3e0, 0 0 0 5px var(--indigo); }
+.egg > img, .egg > div { width: 100%; height: 100%; border-radius: 50% / 50%; object-fit: cover; }
+.coverLabel { margin-top: 16px; font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+.coverNames { max-width: 100%; margin-top: 4px; font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.12; color: var(--indigo); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; font-size: 22px; font-style: normal; color: var(--sepang); }
+.coverDate { margin-top: 8px; font-size: 14px; font-weight: 600; letter-spacing: .08em; color: var(--sepang); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--serif); font-weight: 600; font-size: 17px; color: var(--ink); }
+.table { border-color: var(--sepang); color: var(--sepang); font-family: var(--serif); font-weight: 600; border-radius: 3px; }
+.openBtn { min-width: 0; padding: 0 24px; border-radius: 3px; background: var(--indigo); color: #f6ead2; font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 8px 18px rgba(31, 42, 76, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: Batanghari at dusk, names in the sky ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; overflow: hidden; background: var(--paper); color: var(--ink); text-align: center; }
+.heroScene { position: relative; width: 100%; aspect-ratio: 780 / 520; background: url(/themes/art/jambi-angso/river.webp) no-repeat center bottom / cover; }
+.heroText { position: absolute; left: 0; right: 0; top: 30px; display: flex; flex-direction: column; align-items: center; padding: 0 20px; }
+.heroKicker { font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: #f2cf74; }
+.heroNames { margin-top: 8px; font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.1; color: #fff3dc; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(20, 16, 40, .5); }
+.heroNames em { padding: 0 8px; font-style: normal; color: var(--gold-l); font-size: 28px; }
+.heroDate { margin-top: 6px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #f6ead2; }
+.heroPhoto { position: relative; width: calc(100% - 48px); height: 230px; margin-top: -18px; padding: 5px; border-radius: 3px; background: var(--ivory); box-shadow: 0 0 0 2px var(--kuning), 0 18px 36px rgba(31, 42, 76, .3); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+.heroAngso { width: 96px; height: auto; margin-top: -48px; position: relative; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .25)); }
+.heroNote { max-width: 320px; margin: 14px 24px 40px; font-size: 16px; font-style: italic; line-height: 1.6; color: var(--muted); }
+.heroAngso { animation: paddle 6s var(--m-ease) infinite alternate; }
+
+@keyframes paddle { from { translate: -3px 0; } to { translate: 3px -2px; } }
+@media (prefers-reduced-motion: reduce) { .heroAngso { animation: none; } }

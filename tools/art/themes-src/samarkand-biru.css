@@ -1,0 +1,153 @@
+/* Samarkand Biru — langit lapis yang dalam, portal iwan berlapis bata berglasir dan geometri bintang-silang, kubah melon toska bergaris, ruang putih gading seperti ubin. */
+.root, .cover {
+  --bg: #f4f0e6; --paper: #ece6d6; --ivory: #fbf9f3; --field: #ffffff; --ink: #14204a; --muted: #4e5874; --line: #cfd6df;
+  --accent: #1f4a9e; --accent2: #2a5cb8; --gold: #ddb04a; --gold-l: #f0d27c; --gold-d: #a9821e;
+  --band-bg: #142159; --band-ink: #eef2f7;
+  --display: "El Messiri", Marcellus, Georgia, serif; --serif: Spectral, Georgia, serif; --script: "El Messiri", Georgia, serif;
+  --lap: #142159; --tq: #2b9fa3; --tq-l: #58c4bd; --cb: #1f4a9e;
+  --girih: url(/themes/art/samarkand-biru/girih.webp) repeat 0 0 / 120px auto;
+  --arch: polygon(0.0% 100.0%, 0.0% 50.2%, 0.7% 42.8%, 2.8% 35.5%, 6.3% 28.5%, 11.0% 22.0%, 17.0% 16.0%, 24.0% 10.7%, 32.0% 6.2%, 40.7% 2.6%, 50.0% 0.0%, 59.3% 2.6%, 68.0% 6.2%, 76.0% 10.7%, 83.0% 16.0%, 89.0% 22.0%, 93.7% 28.5%, 97.2% 35.5%, 99.3% 42.8%, 100.0% 50.2%, 100.0% 100.0%);
+  --star: polygon(50% 0%, 61% 23%, 85% 15%, 77% 39%, 100% 50%, 77% 61%, 85% 85%, 61% 77%, 50% 100%, 39% 77%, 15% 85%, 23% 61%, 0% 50%, 23% 39%, 15% 15%, 39% 23%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f4a9e; --t-accent-ink: #ffffff; --t-bg: #f4f0e6; --t-ink: #14204a; --t-muted: #4e5874; --t-line: #cfd6df; --t-field: #ffffff;
+  --t-radius: 2px; --t-font: Spectral, Georgia, serif; --t-heading-font: "El Messiri", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; color: var(--tq); text-transform: uppercase; }
+.head h2, .headLight h2 { font-weight: 600; }
+.head h2 { color: var(--lap); }
+.divider { width: 190px; }
+
+.section { padding: 64px 24px 60px; }
+.salamBlock { position: relative; padding: 52px 28px 60px; background: var(--ivory); }
+.salamBlock::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: var(--girih); background-size: 56px auto; }
+.arabic { color: var(--cb); font-size: 31px; }
+.salamTitle { font-family: var(--display); font-weight: 600; font-size: 30px; color: var(--lap); }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* couple: pointed-arch iwan portraits with a turquoise glazed frame */
+.couple { background: var(--bg); }
+.portraitFrame { width: 196px; height: 262px; padding: 6px; border: 0; border-radius: 0; clip-path: var(--arch); background: linear-gradient(180deg, var(--tq-l), var(--tq) 40%, #1d7377); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--arch); }
+.portrait::after { content: ""; position: absolute; left: 50%; top: -22px; width: 44px; height: 44px; translate: -50% 0; background: url(/themes/art/samarkand-biru/star.webp) no-repeat center / contain; }
+.portrait::before { content: ""; position: absolute; left: -18px; right: -18px; bottom: -8px; height: 14px; background: var(--girih); background-size: 42px auto; border-block: 2px solid var(--gold); }
+.nick { font-family: var(--display); font-weight: 600; font-size: 44px; color: var(--lap); }
+.fullName { font-family: var(--serif); font-weight: 600; font-size: 18px; color: var(--cb); }
+.monogram { color: #fff; font-family: var(--display); }
+.amp { color: var(--tq); font-family: var(--display); font-size: 44px; }
+.amp img { width: 46px; }
+
+/* countdown: lapis night, star tiles */
+.countBand { padding: 66px 18px 62px; background: radial-gradient(90% 70% at 50% 30%, #23338a, #101a4a); }
+.countBand::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--girih); background-size: 56px auto; }
+.countBand::after { content: ""; position: absolute; inset: auto 0 0; height: 14px; background: var(--girih); background-size: 56px auto; }
+.headLight .eyebrow { color: var(--tq-l); }
+.headLight h2 { font-family: var(--display); color: #f4f0e6; }
+.count { grid-template-columns: repeat(4, minmax(0, 80px)); gap: 4px; }
+.count > div { height: 82px; border: 0; border-radius: 0; clip-path: var(--star); background: var(--tq); isolation: isolate; }
+.count > div::before { content: ""; position: absolute; inset: 4px; z-index: -1; clip-path: var(--star); background: #142159; }
+.count b { font-family: var(--display); font-weight: 600; color: var(--gold-l); font-size: 26px; line-height: 1; }
+.count small { font-family: var(--display); font-style: normal; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: #cfe8ea; }
+.ghostBtn { font-family: var(--display); font-weight: 600; color: #f4f0e6; border-color: var(--tq-l); border-radius: 2px; }
+
+/* events: white glazed panels framed in a tile border */
+.events { background: var(--paper); gap: 22px; }
+.event { padding: 36px 20px 26px; border: 12px solid transparent; border-image: url(/themes/art/samarkand-biru/girih.webp) 40 round; border-radius: 0; background: var(--ivory) padding-box; }
+.event::before { inset: 4px; border: 1px solid rgba(31, 74, 158, .25); border-radius: 0; }
+.event:hover { border-color: transparent; }
+.eventNo { top: 6px; width: 40px; height: 40px; border-radius: 0; clip-path: var(--star); background: var(--cb); color: #fff; font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: 0; }
+.event h3 { margin-top: 18px; font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--lap); }
+.eventDate { font-style: normal; font-weight: 600; color: var(--cb); }
+.eventTime { font-family: var(--display); color: var(--tq); font-weight: 600; }
+.rule { width: 70px; height: 3px; background: linear-gradient(90deg, var(--cb) 0 33%, var(--tq) 33% 66%, var(--gold) 66%); }
+.mapBtn { border-radius: 2px; background: var(--lap); color: #fff; font-family: var(--display); font-weight: 600; letter-spacing: .06em; }
+.mapBtn:hover { background: var(--cb); }
+
+.story { background: var(--bg); }
+.timeline::before { background: linear-gradient(var(--tq), var(--cb)); width: 2px; }
+.node { border: 0; border-radius: 0; clip-path: var(--star); background: transparent; width: 40px; height: 40px; }
+.node img { width: 40px; }
+.storyBody small { font-family: var(--display); color: var(--tq); font-weight: 600; }
+.storyBody h3 { font-family: var(--display); font-weight: 600; color: var(--lap); }
+.storyImg { border-radius: 2px; }
+
+/* gallery: arch-topped columns */
+.gallery { background: var(--ivory); }
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 120px; gap: 10px; }
+.tile, .tile:first-child { border-radius: 0; }
+.tile { grid-row: span 2; clip-path: var(--arch); }
+.tile:first-child { grid-row: span 3; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(3n + 2) { grid-row: span 3; }
+
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--line); border-top: 0; border-radius: 0; background: var(--ivory); position: relative; padding-top: 34px; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: var(--girih); background-size: 56px auto; }
+.field > span, .diet, .guestsLabel { font-family: var(--display); font-weight: 600; color: var(--cb); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--tq); border-color: var(--tq); color: #fff; }
+.submit { border-radius: 2px; background: var(--lap); color: #fff; font-family: var(--display); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--cb); }
+.sent { color: var(--lap); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 90px; }
+.wish { border-radius: 0; border-left: 4px solid var(--tq); }
+.wish strong { font-family: var(--display); font-weight: 600; color: var(--lap); }
+.wish small { background: rgba(43, 159, 163, .14); color: #1d7377; }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 0; padding: 30px 20px 24px; background: linear-gradient(160deg, #23338a, #142159); clip-path: polygon(0 14px, 50% 0, 100% 14px, 100% 100%, 0 100%); }
+.gift::after { inset: auto 0 0; width: auto; height: 12px; border: 0; border-radius: 0; box-shadow: none; background: var(--girih); background-size: 48px auto; z-index: 0; }
+.gift h3 { font-family: var(--display); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-weight: 600; color: var(--gold-l); }
+.gift small { margin-bottom: 10px; }
+.copy { font-family: var(--display); font-weight: 600; border-radius: 2px; border-color: var(--tq-l); }
+.copyOn, .copyOn:hover { color: var(--lap); }
+
+.closing { padding: 34px 28px 54px; background: linear-gradient(180deg, #101a4a, #142159 60%, #0e1640); }
+.closingDomes { width: 100%; height: auto; margin-bottom: 4px; }
+.closingBase { display: block; width: calc(100% + 56px); height: 14px; margin: -16px -28px 18px; background: var(--girih); background-size: 56px auto; }
+.thanks { font-family: var(--display); font-weight: 600; font-size: 44px; color: var(--gold-l); }
+.closingSalam { font-family: var(--display); color: var(--tq-l); }
+.family { font-family: var(--display); }
+.closingNames { font-family: var(--display); font-weight: 600; font-size: 30px; }
+.music { background: var(--tq); border-color: var(--gold-l); }
+
+/* ── Cover: the photo framed by a tiled Timurid iwan under a lapis sky ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 26px 0 0; overflow: hidden; background: radial-gradient(60% 30% at 50% 20%, #2a3d9a 0%, rgba(42, 61, 154, 0) 70%), linear-gradient(180deg, #0e1745 0%, #182a6a 55%, #1f3480 100%); color: #f4f0e6; text-align: center; isolation: isolate; }
+.cover > * { flex-shrink: 0; }
+.arabicCover { color: var(--gold-l); font-family: Amiri, "Traditional Arabic", serif; font-size: 23px; line-height: 1.5; }
+.kicker { margin-top: 6px; font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .22em; color: var(--tq-l); text-transform: uppercase; }
+.iwan { position: relative; width: 330px; max-width: 86%; aspect-ratio: 600 / 800; margin-top: 12px; }
+.iwanPhoto { position: absolute; left: 27%; right: 27%; top: 34%; bottom: 0; overflow: hidden; background: #0e1745; }
+.iwanPhoto > img, .iwanPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.iwanArt { position: absolute; inset: 0; width: 100%; height: 100%; }
+.plinth { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; flex: 1 0 auto; padding: 22px 24px 30px; background: linear-gradient(180deg, #142159, #0e1745); border-top: 14px solid transparent; border-image: url(/themes/art/samarkand-biru/girih.webp) 40 0 0 0 round; }
+.coverLabel { font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: #cfe8ea; }
+.coverNames { max-width: 100%; font-family: var(--display); font-size: 40px; font-weight: 600; line-height: 1.12; color: #fff; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; font-style: normal; color: var(--tq-l); font-weight: 400; }
+.coverDate { font-size: 15px; font-style: italic; color: var(--gold-l); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 12px; }
+.guest small { color: rgba(244, 240, 230, .72); font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--display); font-weight: 600; font-size: 19px; color: #fff; }
+.table { border-color: var(--tq-l); color: var(--tq-l); font-family: var(--display); border-radius: 2px; }
+.openBtn { min-width: 0; padding: 0 24px; border-radius: 2px; background: var(--tq); color: #fff; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(0, 0, 0, .4); }
+.openBtn:hover { background: #33b0b3; }
+
+/* ── Hero: names, arch photo and the domes skyline ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 0; overflow: hidden; background: linear-gradient(180deg, #0e1745 0%, #182a6a 60%, #23338a 100%); color: #f4f0e6; text-align: center; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 16px; background: var(--girih); background-size: 56px auto; }
+.heroKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--tq-l); }
+.heroNames { margin-top: 6px; font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.1; color: #fff; overflow-wrap: anywhere; }
+.heroNames em { display: block; font-size: 26px; font-weight: 400; font-style: normal; color: var(--gold-l); }
+.heroDate { margin-top: 6px; font-size: 16px; font-style: italic; color: #cfe8ea; }
+.heroPhoto { width: 236px; height: 316px; margin-top: 22px; padding: 6px; clip-path: var(--arch); background: linear-gradient(180deg, var(--gold-l), var(--tq) 30%, #1d7377); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--arch); }
+.heroNote { max-width: 320px; margin-top: 18px; font-size: 16px; font-style: italic; line-height: 1.6; color: #dbe3f0; }
+.heroDomes { width: calc(100% + 48px); max-width: none; height: auto; margin: 20px -24px 14px; display: block; }
+.iwanArt { animation: glazeIn 1.6s var(--m-ease) both; }
+@keyframes glazeIn { from { opacity: 0; filter: saturate(.3) brightness(1.3); } }
+@media (prefers-reduced-motion: reduce) { .iwanArt { animation: none; } }

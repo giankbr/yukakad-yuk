@@ -1,0 +1,326 @@
+/* Mughal Marmer — marmer putih bertatah batu (pietra dura): akik merah, lapis lazuli, giok, dan oniks dipoles rata; lengkung Mughal berlekuk, jali berlubang, gading & emas lembut. */
+.root *, .cover * { box-sizing: border-box; }
+:where(.root, .cover) :where(h1, h2, h3, p, ol, cite) { margin: 0; }
+:where(.root, .cover) :where(ol) { padding: 0; list-style: none; }
+.root :where(button, input, textarea, select), .cover :where(button, input, textarea, select) { font: inherit; color: inherit; }
+:where(.root, .cover) :where(button) { cursor: pointer; border: 0; background: none; padding: 0; }
+:where(.root, .cover) :where(a) { color: inherit; text-decoration: none; }
+.root :focus-visible, .cover :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.root img[data-nolightbox], .cover img[data-nolightbox] { user-select: none; pointer-events: none; }
+
+.divider { display: block; width: 168px; height: auto; }
+.eyebrow { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; }
+
+/* ── Opening ── */
+.main { display: flex; flex-direction: column; background: var(--bg); }
+.salamBlock { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 30px 54px; text-align: center; }
+.arabic { color: var(--accent); font-family: Amiri, "Traditional Arabic", serif; font-size: 26px; line-height: 1.7; }
+.salamKicker { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 40px; line-height: 1.15; }
+.salamSub { color: var(--accent); font-family: var(--display); font-size: 13px; letter-spacing: .04em; }
+.intro { max-width: 330px; color: var(--muted); font-size: 17px; line-height: 1.65; text-align: center; text-wrap: pretty; }
+
+/* ── Sections ── */
+.section { position: relative; display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 60px 24px; }
+.head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-size: var(--h2, 28px); font-weight: 400; line-height: 1.2; text-wrap: balance; }
+
+.couple { gap: 18px; background: var(--paper); }
+.personWrap { display: contents; }
+.person { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; text-align: center; }
+.portrait { position: relative; margin-bottom: 16px; }
+.portraitFrame { position: relative; display: grid; place-items: center; width: 210px; height: 268px; padding: 6px; overflow: hidden; border: 1.5px solid var(--gold); border-radius: 105px 105px 12px 12px; background: var(--accent); transition: box-shadow 700ms var(--m-ease); }
+.portraitFrame > img, .portraitFrame > div { width: 100%; height: 100%; border-radius: 99px 99px 8px 8px; object-fit: cover; cursor: zoom-in; transition: scale 1.2s var(--m-ease); }
+.person:hover .portraitFrame { box-shadow: 0 16px 34px rgba(0, 0, 0, .18); }
+.person:hover .portraitFrame > img { scale: 1.03; }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 100px; line-height: 1; }
+.role { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.nick { max-width: 100%; color: var(--accent); font-family: var(--script); font-size: 48px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
+.fullName { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 18px; overflow-wrap: anywhere; }
+.parents { max-width: 300px; margin-top: 4px; color: var(--muted); font-size: 16px; line-height: 1.5; white-space: pre-line; text-wrap: balance; }
+.amp { display: flex; align-items: center; gap: 14px; margin: 10px 0; color: var(--gold); font-family: var(--script); font-size: 56px; line-height: 1; }
+.amp img { width: 56px; height: auto; }
+.amp img:last-child { scale: -1 1; }
+
+.countBand { gap: 24px; overflow: hidden; background: var(--band-bg); color: var(--band-ink); isolation: isolate; }
+.headLight { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count { display: grid; grid-template-columns: repeat(4, minmax(0, 72px)); gap: 10px; }
+.count > div { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; height: 88px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--gold-l) 60%, transparent); border-radius: 36px 36px 10px 10px; background: rgba(255, 250, 240, .07); }
+.count > div::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 236, 190, .2) 50%, transparent 65%); translate: -120% 0; animation: glint 10s var(--m-ease) infinite; pointer-events: none; }
+.count > div:nth-child(2)::after { animation-delay: .4s; }
+.count > div:nth-child(3)::after { animation-delay: .8s; }
+.count > div:nth-child(4)::after { animation-delay: 1.2s; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 30px; font-weight: 400; font-variant-numeric: tabular-nums; }
+.count small { color: color-mix(in srgb, var(--band-ink) 78%, transparent); font-size: 14px; font-style: italic; }
+.countTba { color: var(--gold-l); font-family: var(--display); font-size: 16px; letter-spacing: .08em; }
+.ghostBtn { display: flex; align-items: center; gap: 8px; padding: 11px 20px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: .04em; transition: background 400ms var(--m-ease), border-color 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.ghostBtn:hover { background: rgba(255, 236, 190, .12); border-color: var(--gold-l); translate: 0 -1px; }
+
+.events { gap: 20px; background: var(--bg); }
+.event { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 32px 20px 24px; border: 1px solid var(--line); border-radius: var(--card-r, 18px); background: var(--ivory); text-align: center; transition: box-shadow 700ms var(--m-ease), border-color 700ms var(--m-ease), translate 700ms var(--m-ease); }
+.event::before { content: ""; position: absolute; inset: 6px; border: 1px solid color-mix(in srgb, var(--gold) 30%, transparent); border-radius: calc(var(--card-r, 18px) - 5px); pointer-events: none; }
+.event:hover { border-color: var(--gold); box-shadow: 0 14px 30px rgba(0, 0, 0, .08); translate: 0 -2px; }
+.eventNo { position: absolute; top: -14px; left: 50%; translate: -50% 0; display: grid; place-items: center; width: 44px; height: 28px; border-radius: 999px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .1em; }
+.event h3 { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 21px; font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; text-wrap: balance; }
+.eventDate { color: var(--ink); font-size: 17px; font-style: italic; }
+.eventTime { display: flex; align-items: center; gap: 6px; color: var(--gold-d); font-family: var(--display); font-size: 14px; }
+.rule { width: 60px; height: 1px; margin: 6px 0; background: var(--gold); }
+.event strong { max-width: 100%; color: var(--ink); font-size: 18px; font-weight: 600; overflow-wrap: anywhere; }
+.eventAddr { max-width: 290px; color: var(--muted); font-size: 15px; line-height: 1.45; overflow-wrap: anywhere; text-wrap: balance; }
+.mapBtn { display: flex; align-items: center; gap: 7px; margin-top: 10px; padding: 10px 18px; border-radius: 999px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: .03em; box-shadow: 0 6px 16px rgba(0, 0, 0, .15); transition: background 400ms var(--m-ease), box-shadow 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.mapBtn:hover { background: var(--accent2); translate: 0 -1px; box-shadow: 0 10px 22px rgba(0, 0, 0, .2); }
+
+.story { background: var(--paper); }
+.timeline { position: relative; display: flex; flex-direction: column; gap: 26px; width: 100%; padding-left: 4px; }
+.timeline::before { content: ""; position: absolute; top: 14px; bottom: 12px; left: 21px; width: 1px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 20%, transparent)); transform-origin: 50% 0; }
+.timeline li { position: relative; display: flex; gap: 16px; }
+.node { position: relative; display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border: 1px solid var(--gold); border-radius: 999px; background: var(--ivory); }
+.node img { width: 26px; height: auto; }
+.storyBody { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; padding-top: 4px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .2em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 20px; font-weight: 400; overflow-wrap: anywhere; }
+.storyBody p { color: var(--muted); font-size: 16px; line-height: 1.55; }
+.storyImg { width: 100%; height: 170px; margin-top: 8px; border-radius: 12px; }
+
+.gallery { background: var(--bg); }
+.mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; gap: 8px; width: 100%; }
+.tile { width: 100%; height: 100%; border-radius: 12px; cursor: zoom-in; transition: filter 700ms var(--m-ease), scale 700ms var(--m-ease); }
+.tile:first-child { grid-row: span 2; border-radius: 90px 90px 12px 12px; }
+.tile:nth-child(4n + 4) { grid-column: span 2; }
+.tile:hover { filter: saturate(1.08) brightness(1.04); }
+
+.wishes { gap: 16px; background: var(--paper); }
+.form { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 20px 18px; border: 1px solid var(--line); border-radius: 18px; background: var(--ivory); box-shadow: 0 10px 30px rgba(0, 0, 0, .05); }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field > span, .diet { color: var(--accent); font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.field input, .field textarea { width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--field); color: var(--ink); font-size: 16px; line-height: 1.3; transition: border-color 400ms var(--m-ease), box-shadow 400ms var(--m-ease); }
+.field textarea { min-height: 84px; resize: vertical; }
+.diet input { font-family: var(--serif); letter-spacing: normal; text-transform: none; }
+.field input::placeholder, .field textarea::placeholder { color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent); }
+.choices { display: flex; gap: 8px; }
+.choices button { flex: 1; min-width: 0; height: 42px; border: 1px solid var(--line); border-radius: 999px; background: var(--field); color: var(--muted); font-size: 15px; font-weight: 500; transition: background 450ms var(--m-ease), color 450ms var(--m-ease), border-color 450ms var(--m-ease), box-shadow 450ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.choices button:hover { border-color: var(--gold); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); box-shadow: 0 6px 14px rgba(0, 0, 0, .18); }
+.guests { color: var(--ink); font-size: 18px; }
+.guestsLabel { color: var(--accent); font-family: var(--display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.step { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 999px; background: var(--field); color: var(--accent); font-size: 18px; line-height: 1; transition: background 300ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.step:hover { background: var(--paper); }
+.submit { height: 46px; border-radius: 999px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 14px; letter-spacing: .06em; transition: background 450ms var(--m-ease), box-shadow 450ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.submit:not(:disabled):hover { background: var(--accent2); box-shadow: 0 10px 22px rgba(0, 0, 0, .2); }
+.submit:disabled { opacity: .6; cursor: default; }
+.error { color: #a3341c; font-size: 15px; }
+.sentBox { align-items: center; gap: 12px; padding: 28px 20px; text-align: center; }
+.sentBox img { width: 120px; height: auto; animation: bloomIn 1.2s var(--m-ease) both; }
+.sent { color: var(--accent); font-size: 20px; font-style: italic; line-height: 1.4; }
+.sentNote { color: var(--muted); font-size: 15px; }
+.sentBox .submit { padding: 0 26px; }
+.closed { display: grid; gap: 4px; padding: 12px 14px; border: 1px dashed var(--t-line); border-radius: 12px; color: var(--t-ink); text-align: center; }
+.closed strong { font-size: 16px; font-weight: 600; }
+.closed p { margin: 0; color: var(--t-muted); font-size: 14px; line-height: 1.5; }
+.empty { color: var(--muted); font-size: 16px; font-style: italic; }
+.wishList { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+.wish { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 14px; background: var(--ivory); border: 1px solid var(--line); transition: border-color 500ms var(--m-ease), box-shadow 500ms var(--m-ease); }
+.wish:hover { border-color: var(--gold); box-shadow: 0 8px 20px rgba(0, 0, 0, .05); }
+.wish > div { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.wish strong { min-width: 0; color: var(--accent); font-family: var(--display); font-size: 16px; font-weight: 400; overflow-wrap: anywhere; }
+.wish small { flex-shrink: 0; padding: 2px 10px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--accent); font-size: 12px; }
+.wish p { color: var(--muted); font-size: 16px; line-height: 1.5; overflow-wrap: anywhere; }
+
+.gifts { gap: 16px; background: var(--bg); }
+.gift { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; padding: 22px 20px; overflow: hidden; border-radius: 18px; background: var(--band-bg); color: var(--band-ink); text-align: center; transition: box-shadow 600ms var(--m-ease); isolation: isolate; }
+.gift::after { content: ""; position: absolute; z-index: -1; right: -40px; bottom: -40px; width: 140px; height: 140px; border: 18px solid rgba(255, 236, 190, .07); border-radius: 999px; box-shadow: 0 0 0 14px rgba(255, 236, 190, .05); }
+.giftCopied { box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 55%, transparent); }
+.giftTop { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.giftIcon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid color-mix(in srgb, var(--gold-l) 50%, transparent); border-radius: 999px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 16px; font-weight: 400; letter-spacing: .06em; }
+.giftNo { max-width: 100%; font-family: var(--display); font-size: 21px; font-weight: 400; letter-spacing: .06em; overflow-wrap: anywhere; }
+.gift small { color: color-mix(in srgb, var(--band-ink) 75%, transparent); font-size: 15px; overflow-wrap: anywhere; }
+.qris { width: 150px; height: 150px; margin-top: 8px; border-radius: 10px; background: #fff; }
+.copy { display: flex; align-items: center; gap: 6px; margin-top: 12px; padding: 8px 16px; border: 1px solid var(--gold); border-radius: 999px; color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .06em; transition: background 400ms var(--m-ease), color 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.copy:hover { background: rgba(255, 236, 190, .12); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+.copyOn svg { animation: softPop 500ms var(--m-ease) both; }
+
+.closing { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 64px 28px 60px; overflow: hidden; background: var(--band-bg); color: var(--band-ink); text-align: center; isolation: isolate; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 54px; line-height: 1.1; }
+.closingText { max-width: 310px; color: color-mix(in srgb, var(--band-ink) 86%, transparent); font-size: 17px; line-height: 1.6; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .04em; }
+.family { margin-top: 8px; color: color-mix(in srgb, var(--band-ink) 80%, transparent); font-family: var(--display); font-size: 13px; letter-spacing: .08em; line-height: 1.7; }
+.closingNames { color: var(--band-ink); font-family: var(--script); font-size: 36px; overflow-wrap: anywhere; }
+.made { margin-top: 14px; color: color-mix(in srgb, var(--band-ink) 45%, transparent); font-size: 14px; font-style: italic; transition: color 400ms var(--m-ease); }
+.made:hover { color: var(--gold-l); }
+
+.music { position: fixed; right: max(16px, calc(50% - 215px + 16px)); bottom: 100px; z-index: 20; display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid var(--gold); border-radius: 999px; background: var(--accent); box-shadow: 0 6px 16px rgba(0, 0, 0, .25); transition: box-shadow 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.musicOn svg { animation: spin 7s linear infinite; }
+
+.openBtn { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 200px; height: 46px; padding: 0 24px; border-radius: 999px; font-family: var(--display); font-size: 14px; letter-spacing: .08em; transition: background-position 900ms var(--m-ease), box-shadow 400ms var(--m-ease), scale 300ms var(--m-ease), translate 300ms var(--m-ease); }
+.guest { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; max-width: 300px; }
+.guest small { font-size: 15px; font-style: italic; }
+.guest strong { max-width: 100%; font-family: var(--display); font-size: 20px; font-weight: 400; line-height: 1.3; overflow-wrap: anywhere; text-wrap: balance; }
+.table { margin-top: 4px; padding: 3px 12px; border: 1px solid var(--gold); border-radius: 999px; font-family: var(--display); font-size: 11px; letter-spacing: .14em; }
+
+[data-revealed] .timeline::before, .timeline[data-revealed]::before { animation: drawDown 1.6s var(--m-ease) .3s both; }
+[data-revealed] .node, li[data-revealed] .node { animation: bloomIn 1.1s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
+[data-revealed] .divider { animation: unfurl 1.4s var(--m-ease) calc(var(--rd, 0ms) + 200ms) both; }
+
+@keyframes glint { 0%, 72% { translate: -120% 0; } 100% { translate: 120% 0; } }
+@keyframes drawDown { from { transform: scaleY(0); } }
+@keyframes bloomIn { from { opacity: 0; scale: .4; rotate: -30deg; } }
+@keyframes softPop { from { opacity: 0; scale: .5; } }
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes unfurl { from { clip-path: inset(0 50% 0 50%); opacity: 0; } }
+@keyframes sway { from { rotate: -2.5deg; } to { rotate: 2.5deg; } }
+@keyframes drift { from { translate: -12px 0; } to { translate: 16px -6px; } }
+@keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.025; } }
+@media (prefers-reduced-motion: reduce) {
+  .count > div::after { display: none; }
+  .root *, .cover * { animation: none !important; }
+  .openBtn, .ghostBtn, .mapBtn, .event, .portraitFrame, .portraitFrame > img, .tile, .choices button, .submit, .step, .copy, .wish, .gift, .music { transition: none; }
+}
+
+/* ── Theme ── */
+.root, .cover {
+  --bg: #f6f1e6; --paper: #efe7d8; --ivory: #fcfaf5; --field: #fffdf9; --ink: #2b2a33; --muted: #5f5b60; --line: #ddd3c2;
+  --accent: #29467f; --accent2: #b24a2c; --gold: #b8955a; --gold-l: #ead7ae; --gold-d: #8a6a35;
+  --band-bg: #8a3a28; --band-ink: #fbf3e8;
+  --display: Prata, Georgia, serif; --serif: Spectral, Georgia, serif; --script: Prata, serif;
+  --h2: 27px; --card-r: 4px;
+  --cusp: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 260'%3E%3Cpath d='M0 260V150L0 150 1 132 5 115 10 99 18 83 28 68 40 55 53 43 67 34 83 26 100 20 117 26 133 34 147 43 160 55 172 68 182 83 190 99 195 115 199 132 200 150L200 150V260z'/%3E%3Ccircle cx='15.4' cy='132.3' r='27.2'/%3E%3Ccircle cx='29.9' cy='90.2' r='27.2'/%3E%3Ccircle cx='59.5' cy='56.1' r='27.2'/%3E%3Ccircle cx='100' cy='35.3' r='27.2'/%3E%3Ccircle cx='140.5' cy='56.1' r='27.2'/%3E%3Ccircle cx='170.1' cy='90.2' r='27.2'/%3E%3Ccircle cx='184.6' cy='132.3' r='27.2'/%3E%3C/svg%3E");
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #29467f; --t-accent-ink: #fcfaf5; --t-bg: #f6f1e6; --t-ink: #2b2a33; --t-muted: #5f5b60; --t-line: #ddd3c2; --t-field: #fffdf9;
+  --t-radius: 4px; --t-font: Spectral, Georgia, serif; --t-heading-font: Prata, serif; --t-heading-weight: 400; --t-heading-size: 24px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg) url(/themes/art/mughal-marmer/marble.webp) 0 0 / 480px; }
+.head h2, .headLight h2 { font-weight: 400; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-weight: 500; letter-spacing: .3em; }
+.eyebrow { color: var(--gold-d); font-size: 11px; }
+.divider { width: 230px; }
+.intro { font-size: 17px; }
+
+/* opening: an inlaid flowering plant above the salam */
+.salamBlock { padding: 60px 28px 56px; }
+.salamBlock::before { content: ""; width: 110px; height: 166px; margin-bottom: 4px; background: url(/themes/art/mughal-marmer/spray.webp) center / contain no-repeat; }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamKicker { color: var(--gold-d); font-size: 10.5px; line-height: 1.7; max-width: 300px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+
+/* couple: cusped Mughal-arch portraits with a soft-gold rim */
+.couple { background: transparent; gap: 12px; }
+.portrait { margin-bottom: 18px; filter: drop-shadow(0 14px 18px rgba(43, 42, 51, .16)); }
+.portraitFrame { width: 200px; height: 260px; padding: 0; border: 0; border-radius: 0; background: linear-gradient(135deg, #e3cc98, #a98244 45%, #ead7ae 70%, #9a7438); -webkit-mask: var(--cusp) center / 100% 100% no-repeat; mask: var(--cusp) center / 100% 100% no-repeat; }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; -webkit-mask: var(--cusp) center / calc(100% - 12px) calc(100% - 12px) no-repeat; mask: var(--cusp) center / calc(100% - 12px) calc(100% - 12px) no-repeat; }
+.monogram { position: relative; z-index: 1; color: var(--accent); font-family: var(--display); font-size: 84px; }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; inset: 0; background: var(--ivory) url(/themes/art/mughal-marmer/marble.webp) center / 300px; -webkit-mask: var(--cusp) center / calc(100% - 12px) calc(100% - 12px) no-repeat; mask: var(--cusp) center / calc(100% - 12px) calc(100% - 12px) no-repeat; }
+.role { color: var(--gold-d); font-size: 10.5px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; line-height: 1.15; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.amp { color: var(--accent2); font-family: var(--display); font-size: 38px; gap: 12px; margin: 16px 0 12px; }
+.amp img { width: 40px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: red sandstone with marble jali screens at the sides */
+.countBand { padding: 80px 24px; background: radial-gradient(80% 70% at 50% 45%, #a24a33, #742c1d 80%); }
+.countJali { position: absolute; z-index: -1; top: 50%; width: 128px; height: auto; translate: 0 -50%; opacity: .95; pointer-events: none; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .25)); }
+.countJaliL { left: -78px; }
+.countJaliR { right: -78px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 0; border-radius: 40px 40px 3px 3px; background: #fbf8f1 url(/themes/art/mughal-marmer/marble.webp) center / 240px; box-shadow: inset 0 0 0 2px #fbf8f1, inset 0 0 0 3px rgba(41, 70, 127, .5), 0 8px 16px rgba(0, 0, 0, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .8) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--accent2); font-family: var(--serif); font-size: 11px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.ghostBtn { border-radius: 4px; border-color: var(--gold-l); color: #fbf3e8; }
+
+/* events: marble cards with onyx hairlines and an inlaid flower medallion */
+.events { background: transparent; gap: 34px; }
+.event { padding: 50px 22px 28px; border: 0; border-radius: 4px; background: var(--ivory) url(/themes/art/mughal-marmer/marble.webp) center / 360px; box-shadow: inset 0 0 0 1px #2b2a33, inset 0 0 0 5px var(--ivory), inset 0 0 0 6px var(--gold), 0 14px 28px rgba(43, 42, 51, .08); }
+.event::before { display: none; }
+.eventNo { top: -24px; width: 48px; height: 48px; border-radius: 0; background: url(/themes/art/mughal-marmer/flower.webp) center / contain no-repeat; color: transparent; font-size: 0; }
+.event h3 { font-family: var(--display); font-size: 23px; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-weight: 500; }
+.rule { width: 120px; height: 14px; background: url(/themes/art/mughal-marmer/border.webp) center / contain no-repeat; }
+.mapBtn { border-radius: 4px; background: var(--accent); color: #fcfaf5; letter-spacing: .08em; }
+
+.story { background: rgba(239, 231, 216, .6); }
+.timeline::before { left: 19px; width: 1px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 10%, transparent)); box-shadow: 4px 0 0 rgba(43, 42, 51, .3); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody h3 { font-family: var(--display); font-size: 20px; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-weight: 500; }
+
+/* gallery: the first photo under a cusped arch, thin gold rims */
+.gallery { background: transparent; }
+.mosaic { gap: 8px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 1px var(--gold), 0 8px 16px rgba(43, 42, 51, .1); }
+.tile:first-child { border-radius: 0; box-shadow: none; -webkit-mask: var(--cusp) center / 100% 100% no-repeat; mask: var(--cusp) center / 100% 100% no-repeat; }
+.tile:nth-child(4n + 5):last-child { grid-column: span 2; }
+
+.wishes { background: rgba(239, 231, 216, .6); }
+.form { border-radius: 4px; border: 0; box-shadow: inset 0 0 0 1px var(--gold), 0 12px 26px rgba(43, 42, 51, .06); }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.submit { border-radius: 3px; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.wish { border-radius: 3px; }
+.wish strong { font-family: var(--display); }
+
+/* gifts: lapis cards with a gold inner rule */
+.gifts { background: transparent; }
+.gift { border-radius: 4px; background: linear-gradient(160deg, #2f4f8e, #1c2f5c); box-shadow: inset 0 0 0 6px #1c2f5c, inset 0 0 0 7px rgba(234, 215, 174, .55), 0 14px 26px rgba(28, 47, 92, .25); }
+.gift::after { right: -26px; bottom: -26px; width: 120px; height: 120px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/mughal-marmer/flower.webp) center / contain no-repeat; opacity: .35; }
+.copy { border-radius: 3px; }
+
+/* closing: marble with the inlaid plant */
+.closing { padding: 70px 28px 60px; background: var(--paper) url(/themes/art/mughal-marmer/marble.webp) 0 0 / 480px; color: var(--ink); box-shadow: inset 0 10px 0 #8a3a28, inset 0 12px 0 var(--gold); }
+.emblem { width: 140px; height: auto; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 36px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 11px; letter-spacing: .16em; line-height: 1.7; text-transform: uppercase; }
+.family { color: var(--muted); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.made { color: color-mix(in srgb, var(--ink) 45%, transparent); }
+.made:hover { color: var(--accent); }
+.music { border-radius: 999px; background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: the photo framed by an inlaid cusped arch on white marble ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--bg) url(/themes/art/mughal-marmer/marble.webp) 0 0 / 480px; color: var(--ink); text-align: center; isolation: isolate; }
+.archBox { position: relative; width: min(100%, 50dvh); aspect-ratio: 560 / 718; flex-shrink: 0; }
+.archPhoto { position: absolute; inset: 11% 14% 0; overflow: hidden; background: #d9cfbf; }
+.archPhoto > img, .archPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.arch { position: absolute; inset: 0; width: 100%; height: 100%; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 14px 26px 26px; }
+.coverText::before { content: ""; width: 100%; max-width: 330px; height: 2px; margin-bottom: 14px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.kicker { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.15; overflow-wrap: break-word; }
+.coverNames em { padding: 0 8px; color: var(--accent2); font-style: normal; }
+.coverDate { margin-top: 4px; color: var(--muted); font-size: 14px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.coverRule { width: 200px; height: auto; margin-top: 10px; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 10px; width: 100%; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.table { border-color: var(--gold); color: var(--gold-d); border-radius: 3px; }
+.openBtn { border-radius: 3px; background: var(--accent); color: #fcfaf5; font-family: var(--serif); font-weight: 500; letter-spacing: .2em; text-transform: uppercase; font-size: 12.5px; box-shadow: inset 0 0 0 1px #29467f, inset 0 0 0 3px #fcfaf5, inset 0 0 0 4px var(--gold), 0 10px 22px rgba(41, 70, 127, .3); }
+.openBtn:hover { background: #33579b; }
+
+/* ── Hero (top of the opened page): sandstone gateway with marble names panel ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 34px 18px 40px; overflow: hidden; background: linear-gradient(180deg, #8a3a28, #6f2b1c); color: var(--ink); text-align: center; isolation: isolate; }
+.heroPanel { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; padding: 40px 22px 34px; background: var(--ivory) url(/themes/art/mughal-marmer/marble.webp) center / 420px; box-shadow: inset 0 0 0 1px #2b2a33, inset 0 0 0 6px var(--ivory), inset 0 0 0 7px var(--gold), 0 18px 30px rgba(0, 0, 0, .3); border-radius: 170px 170px 4px 4px; }
+.heroSpray { width: 128px; height: auto; margin-top: 36px; animation: bloom 7s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.kickerDark { margin-top: 10px; color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.15; overflow-wrap: break-word; }
+.heroNames em { padding: 0 8px; color: var(--accent2); font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--muted); font-size: 13px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 280px; margin-top: 14px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.55; text-wrap: balance; }
+.sentBox img { width: 72px; }
+.glint { position: absolute; inset: 0; z-index: 3; background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .35) 50%, transparent 60%) 0 0 / 300% 100% no-repeat; animation: sheen 9s ease-in-out infinite; pointer-events: none; mix-blend-mode: soft-light; }
+
+@keyframes bloom { from { scale: 1; } to { scale: 1.035; } }
+@keyframes sheen { 0%, 60% { background-position: 120% 0; } 100% { background-position: -20% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .heroSpray, .glint { animation: none; }
+}

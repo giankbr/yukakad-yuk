@@ -1,0 +1,163 @@
+/* Gorontalo Karawo — lila, mint, dan krem yang lembut: sulaman kerawang karawo (kisi benang tercabut dan sulaman terhitung), jahitan putus-putus, rumah adat Dulohupa cat air. */
+.root, .cover {
+  --bg: #f8f3ec; --paper: #f2ebf5; --ivory: #fffdf9; --field: #fffdfa; --ink: #3f3150; --muted: #6c607a; --line: #ddd0e6;
+  --accent: #7a5ca1; --accent2: #5c9a86; --gold: #b49bd0; --gold-l: #f6effb; --gold-d: #5c9a86;
+  --band-bg: #8a6fae; --band-ink: #fffaf3;
+  --display: "Gilda Display", Georgia, serif; --serif: "Nunito Sans", system-ui, sans-serif; --script: Allura, "Gilda Display", cursive;
+  --lilac: #b49bd0; --mint: #98cdb9; --rose: #e8a3a0; --plum: #5a4470;
+  --stitch: 1.6px dashed;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a5ca1; --t-accent-ink: #fff; --t-bg: #f8f3ec; --t-ink: #3f3150; --t-muted: #6c607a; --t-line: #ddd0e6; --t-field: #fffdfa;
+  --t-radius: 18px; --t-font: "Nunito Sans", system-ui, sans-serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; color: var(--accent2); }
+.head h2 { color: var(--plum); }
+.divider { width: 150px; }
+.intro { font-size: 16.5px; line-height: 1.7; }
+
+/* opening: karawo band on top, open and airy */
+.salamBlock { position: relative; padding: 78px 28px 58px; background: var(--bg); }
+.salamBlock::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 52px; background: url(/themes/art/gorontalo-karawo/band.webp) repeat-x 0 0 / auto 52px; }
+.arabic { color: var(--plum); font-size: 28px; }
+.salamKicker { font-size: 13px; letter-spacing: .14em; color: var(--accent); }
+.salamTitle { color: var(--plum); font-size: 54px; }
+
+/* couple: round portraits ringed by a running stitch, mint/lilac halo offset */
+.couple { gap: 22px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portrait::before { content: ""; position: absolute; z-index: 0; inset: 14px -14px -10px 14px; border-radius: 999px; background: var(--mint); opacity: .55; }
+.personWrap:nth-child(3) .portrait::before { inset: 14px 14px -10px -14px; background: var(--lilac); }
+.portraitFrame { z-index: 1; width: 214px; height: 214px; padding: 7px; border: 0; border-radius: 999px; background: var(--ivory); box-shadow: 0 12px 30px rgba(90, 68, 112, .14); }
+.portraitFrame::after { content: ""; position: absolute; inset: 3px; border: var(--stitch) var(--accent); border-radius: 999px; pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.nick { color: var(--plum); font-size: 56px; }
+.fullName { font-family: var(--display); font-size: 19px; color: var(--ink); }
+.parents { font-size: 15px; }
+.amp { gap: 12px; color: var(--accent2); font-size: 52px; }
+.amp img { width: 46px; }
+.monogram { color: var(--accent); }
+
+/* countdown: lilac cloth, stitched round counters */
+.countBand { background: var(--band-bg); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 10px; border: var(--stitch) rgba(255, 250, 243, .55); border-radius: 26px; }
+.headLight .eyebrow { color: #e4f5ee; }
+.headLight h2 { color: #fffaf3; }
+.count { gap: 10px; }
+.count > div { height: 74px; width: 74px; border: 0; border-radius: 999px; background: #fffaf3; }
+.count > div::before { content: ""; position: absolute; inset: 4px; border: 1.4px dashed var(--accent); border-radius: 999px; }
+.count > div::after { display: none; }
+.count b { color: var(--plum); font-family: var(--display); font-size: 26px; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.countTba { color: #fffaf3; }
+.ghostBtn { border-color: rgba(255, 250, 243, .7); color: #fffaf3; font-family: var(--serif); font-weight: 700; }
+
+/* events: sewn patches */
+.events { gap: 24px; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 10px 28px rgba(90, 68, 112, .09); }
+.event::before { inset: 8px; border: var(--stitch) var(--gold); border-radius: 20px; }
+.event:nth-child(odd)::before { border-color: var(--mint); }
+.eventNo { top: -15px; width: 54px; height: 30px; background: var(--mint); color: var(--plum); font-family: var(--serif); font-weight: 800; }
+.event:nth-child(odd) .eventNo { background: var(--lilac); color: #fff; }
+.event h3 { color: var(--plum); font-size: 25px; }
+.eventDate { font-family: var(--display); font-style: normal; font-size: 18px; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.rule { width: 90px; height: 0; border-top: 2px dashed var(--lilac); background: none; }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 19px; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--plum); }
+
+/* story: stitched path */
+.timeline::before { width: 0; border-left: 2px dashed var(--lilac); background: none; }
+.node { border: 0; background: var(--mint); }
+.node::after { content: ""; position: absolute; inset: 9px; border-radius: 999px; background: var(--ivory); }
+.node img { display: none; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--plum); font-size: 22px; }
+.storyImg { border-radius: 20px; }
+
+/* gallery: soft rounded tiles */
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 22px; }
+.tile:first-child { grid-row: span 2; border-radius: 999px 999px 22px 22px; }
+.tile:nth-child(4n + 4) { grid-column: span 2; border-radius: 22px; }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.form { border: 0; border-radius: 26px; box-shadow: 0 12px 34px rgba(90, 68, 112, .1); }
+.field > span, .diet, .guestsLabel { color: var(--plum); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.submit { background: var(--accent2); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.step { color: var(--plum); }
+.wish { border-radius: 20px; border-style: dashed; border-color: var(--lilac); }
+.wish strong { font-family: var(--display); font-size: 17px; color: var(--plum); }
+.wish small { background: color-mix(in srgb, var(--mint) 45%, transparent); color: var(--plum); }
+
+/* gifts */
+.gift { border-radius: 26px; background: var(--band-bg); }
+.gift::before { content: ""; position: absolute; inset: 7px; border: var(--stitch) rgba(255, 250, 243, .55); border-radius: 20px; pointer-events: none; }
+.gift::after { border-color: rgba(255, 250, 243, .1); box-shadow: 0 0 0 14px rgba(255, 250, 243, .06); }
+.gift h3 { color: #fffaf3; font-family: var(--serif); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); font-size: 23px; }
+.copy { border-color: rgba(255, 250, 243, .8); color: #fffaf3; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: #fffaf3; color: var(--plum); }
+
+/* closing: cream with karawo band and the house */
+.closing { padding: 96px 28px 64px; background: linear-gradient(180deg, var(--paper), #e9def0); color: var(--ink); }
+.closing::before { content: ""; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 52px; background: url(/themes/art/gorontalo-karawo/band.webp) repeat-x 0 0 / auto 52px; }
+.closingMotif { width: 150px; height: auto; }
+.thanks { color: var(--plum); font-size: 64px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--accent2); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-size: 44px; }
+.made { color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.made:hover { color: var(--accent); }
+.music { border: 0; background: var(--accent); box-shadow: 0 0 0 3px #fffaf3, 0 6px 16px rgba(90, 68, 112, .3); }
+
+/* ── Cover: karawo band, Bismillah, photo inside an embroidered cloth frame ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 66px 22px 30px; overflow: hidden; background: radial-gradient(120% 70% at 50% 40%, #fffaf2, #f1e8f4 60%, #e4daee); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 52px; background: url(/themes/art/gorontalo-karawo/band.webp) repeat-x 0 0 / auto 52px; animation: bandDrift 50s linear infinite; }
+.cover::after { content: ""; position: absolute; z-index: -1; left: -10%; right: -10%; bottom: -60px; height: 220px; border-radius: 50%; background: color-mix(in srgb, var(--mint) 35%, transparent); filter: blur(30px); }
+.coverArabic { color: var(--plum); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.coverKicker { color: var(--accent2); font-size: 12px; font-weight: 800; letter-spacing: .18em; }
+.coverFrame { position: relative; width: 236px; aspect-ratio: 432 / 522; margin: 14px 0 6px; }
+.coverFrame img[data-nolightbox] { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.coverPhoto { position: absolute; z-index: 0; top: 18.5%; bottom: 18.5%; left: 22.5%; right: 22.5%; overflow: hidden; border-radius: 300px 300px 0 0; background: var(--lilac); }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.coverEmpty { position: absolute; z-index: 0; top: 18.5%; bottom: 18.5%; left: 22.5%; right: 22.5%; border-radius: 300px 300px 0 0; background: linear-gradient(#efe6f6, #dfeee8); }
+.coverLabel { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--plum); font-family: var(--script); font-size: 58px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--accent2); font-size: 40px; font-style: normal; padding: 0 6px; }
+.coverDate { margin-top: 2px; color: var(--accent); font-family: var(--display); font-size: 17px; letter-spacing: .06em; }
+.guestCard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 320px; margin-top: 14px; padding: 14px 16px 16px; border-radius: 22px; background: rgba(255, 253, 249, .78); }
+.guestCard::before { content: ""; position: absolute; inset: 5px; border: 1.4px dashed var(--lilac); border-radius: 18px; pointer-events: none; }
+.guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--display); font-size: 19px; color: var(--plum); }
+.table { border-color: var(--mint); background: color-mix(in srgb, var(--mint) 30%, transparent); color: var(--plum); font-family: var(--serif); font-weight: 700; }
+.openBtn { position: relative; z-index: 1; background: var(--accent2); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .08em; box-shadow: 0 8px 20px rgba(92, 154, 134, .35); }
+.openBtn:hover { background: var(--accent); translate: 0 -2px; }
+
+/* ── Hero: Dulohupa painting first, names beneath ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 22px 48px; overflow: hidden; background: linear-gradient(180deg, #efe7f4, var(--bg) 46%); text-align: center; isolation: isolate; }
+.heroHouse { display: block; width: calc(100% + 44px); max-width: none; height: auto; margin: 14px -22px 0; }
+.heroKicker { margin-top: 6px; color: var(--accent2); font-size: 12px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { margin-top: 4px; color: var(--plum); font-family: var(--script); font-size: 64px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--accent2); font-size: 42px; font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 18px; letter-spacing: .05em; }
+.heroNote { position: relative; max-width: 320px; margin-top: 22px; padding: 18px 20px; border-radius: 20px; background: var(--ivory); color: var(--muted); font-size: 15.5px; font-style: italic; line-height: 1.6; }
+.heroNote::before { content: ""; position: absolute; inset: 5px; border: 1.4px dashed var(--mint); border-radius: 16px; pointer-events: none; }
+.sentBox img { width: 140px; }
+
+.root .event, .root .count > div { transition: box-shadow 600ms var(--m-ease), translate 600ms var(--m-ease), scale 600ms var(--m-ease); }
+.event:hover { translate: 0 -3px; box-shadow: 0 16px 34px rgba(90, 68, 112, .14); }
+[data-revealed] .portraitFrame::after { animation: stitchSpin 1.8s var(--m-ease) both; }
+@keyframes bandDrift { to { background-position: -332.8px 0; } }
+@keyframes stitchSpin { from { rotate: -40deg; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cover::before { animation: none; } }

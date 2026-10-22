@@ -1,0 +1,147 @@
+/* Oasis Kurma — oasis di siang hari dalam gouache segar: langit biru pucat, bukit pasir aprikot, kolam toska yang memantulkan pohon kurma, dan tandan kurma kuning keemasan. */
+.root, .cover {
+  --bg: #f8f0e2; --paper: #f2e6cf; --ivory: #fffbf3; --field: #fffdf8; --ink: #33291f; --muted: #6b5d4e; --line: #e6d6b8;
+  --accent: #1f6670; --accent2: #c46a2a; --gold: #d58a2c; --gold-l: #f6d58e; --gold-d: #a4581f;
+  --band-bg: #2f8a98; --band-ink: #f4fbfa;
+  --display: "Yeseva One", Georgia, serif; --serif: Karla, "Trebuchet MS", sans-serif; --script: "Yeseva One", serif;
+  --h2: 27px; --card-r: 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f6670; --t-accent-ink: #fffbf3; --t-bg: #f8f0e2; --t-ink: #33291f; --t-muted: #6b5d4e; --t-line: #e6d6b8; --t-field: #fffdf8;
+  --t-radius: 18px; --t-font: Karla, sans-serif; --t-heading-font: "Yeseva One", serif; --t-heading-weight: 400; --t-heading-size: 24px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg) url(/themes/art/oasis-kurma/sand.webp); }
+.section { padding: 64px 24px; }
+.head h2, .headLight h2 { font-weight: 400; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-weight: 700; letter-spacing: .24em; }
+.eyebrow { color: var(--accent2); font-size: 11px; }
+.divider { width: 210px; }
+.intro { font-size: 16.5px; line-height: 1.7; }
+
+/* opening: a cloud of sky behind the salam */
+.salamBlock { padding: 66px 28px 60px; background: linear-gradient(180deg, #cfe6f2, rgba(248, 240, 226, 0)); }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamKicker { color: var(--accent); font-size: 10.5px; line-height: 1.7; max-width: 290px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+
+/* couple: capsule portraits like windows onto the sky */
+.couple { background: transparent; gap: 14px; }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 184px; height: 264px; padding: 7px; border: 0; border-radius: 999px; background: #fffbf3; box-shadow: 0 0 0 2px #8fc3e6, 0 18px 30px rgba(31, 102, 112, .18); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.portraitFrame:has(.monogram) { background: linear-gradient(180deg, #a9d0ea, #f3e2c2); }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 86px; }
+.portraitDates { position: absolute; z-index: 2; right: -26px; bottom: 16px; width: 82px; height: auto; rotate: -8deg; filter: drop-shadow(0 6px 6px rgba(51, 41, 31, .2)); }
+.role { color: var(--accent2); font-size: 11px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; line-height: 1.12; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.amp { color: var(--gold); font-family: var(--display); font-size: 44px; gap: 10px; margin: 16px 0 10px; }
+.amp img { width: 54px; }
+
+/* countdown: the pool — turquoise water with light dashes, dunes at the rim */
+.countBand { padding: 92px 24px 104px; background: repeating-linear-gradient(180deg, transparent 0 22px, rgba(244, 251, 250, .14) 22px 24px), linear-gradient(180deg, #5fb9c1, #2f8a98 60%, #23707f); }
+.countDune { position: absolute; z-index: -1; left: 0; width: 100%; height: 66px; object-fit: cover; object-position: top; pointer-events: none; }
+.countDuneT { top: -2px; scale: 1 -1; }
+.countDuneB { bottom: -2px; }
+.headLight .eyebrow { color: #fbe3a8; }
+.count { gap: 8px; }
+.count > div { height: 92px; border: 0; border-radius: 999px; background: #fffbf3; box-shadow: 0 10px 18px rgba(18, 64, 74, .28); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(143, 195, 230, .45) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--accent2); font-family: var(--serif); font-size: 10.5px; font-weight: 700; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(244, 251, 250, .7); color: #f4fbfa; }
+
+/* events: sun-bleached rounded cards with a date bunch hanging over the top */
+.events { background: transparent; gap: 40px; }
+.event { padding: 56px 22px 28px; border: 0; background: var(--ivory); box-shadow: 0 1px 0 #e6d6b8, 0 18px 30px rgba(51, 41, 31, .08); }
+.event::before { inset: 0 0 auto; height: 8px; border: 0; border-radius: var(--card-r) var(--card-r) 0 0; background: linear-gradient(90deg, #8fc3e6, #5fb9c1); }
+.eventNo { top: -20px; width: 56px; height: 56px; border-radius: 999px; background: #c46a2a url(/themes/art/oasis-kurma/dates.webp) center 60% / 40px no-repeat; color: transparent; font-size: 0; box-shadow: 0 0 0 5px var(--bg); }
+.event h3 { font-family: var(--display); font-size: 24px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.rule { width: 110px; height: 22px; background: url(/themes/art/oasis-kurma/sprig.webp) center / contain no-repeat; }
+.mapBtn { background: var(--accent); color: #fffbf3; font-family: var(--serif); font-weight: 700; }
+
+.story { background: linear-gradient(180deg, transparent, rgba(207, 230, 242, .5), transparent); }
+.timeline::before { left: 19px; width: 2px; background: repeating-linear-gradient(#d58a2c 0 4px, transparent 4px 10px); }
+.node { width: 42px; height: 42px; border: 0; background: #fffbf3; box-shadow: 0 0 0 2px #8fc3e6; }
+.node img { width: 30px; }
+.storyBody h3 { font-family: var(--display); font-size: 20px; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+
+.gallery { background: transparent; }
+.mosaic { gap: 10px; }
+.tile { border-radius: 22px; }
+.tile:first-child { border-radius: 999px 999px 22px 22px; }
+.tile:nth-child(4n + 5):last-child { grid-column: span 2; }
+
+.wishes { background: rgba(242, 230, 207, .55); }
+.form { border: 0; border-radius: 26px; box-shadow: 0 16px 30px rgba(51, 41, 31, .08); }
+.field input, .field textarea { border-radius: 14px; }
+.submit { font-family: var(--serif); font-weight: 700; letter-spacing: .08em; background: var(--accent2); color: #fffbf3; }
+.submit:not(:disabled):hover { background: #a9561f; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: #fffbf3; }
+.wish { border-radius: 20px; border: 0; }
+.wish strong { font-family: var(--display); }
+
+.gifts { background: transparent; }
+.gift { border-radius: 26px; background: linear-gradient(160deg, #2f8a98, #1f6670); }
+.gift::after { right: -20px; bottom: -14px; width: 120px; height: 106px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/oasis-kurma/dates.webp) center / contain no-repeat; opacity: .5; }
+.copy { border-color: var(--gold-l); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: under the palms, sky over the dunes */
+.closing { padding: 74px 28px 60px; background: linear-gradient(180deg, #9fcbe8, #dcecf1 46%, #f6ead2 72%); color: var(--ink); }
+.closingDune { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: 46%; object-fit: cover; object-position: top; opacity: .9; pointer-events: none; }
+.closingPalm { position: absolute; z-index: -1; top: 10px; width: 150px; height: auto; pointer-events: none; transform-origin: 50% 100%; }
+.closingPalmL { left: -64px; animation: sway 8s ease-in-out infinite alternate; }
+.closingPalmR { right: -70px; width: 128px; top: 60px; scale: -1 1; animation: sway 10s ease-in-out -3s infinite alternate; }
+.emblem { width: 96px; height: auto; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 36px; }
+.closingText { color: #4c4033; }
+.closingSalam { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .14em; line-height: 1.7; text-transform: uppercase; }
+.family { color: var(--muted); }
+.closingNames { color: var(--accent2); font-family: var(--display); font-size: 30px; }
+.made { color: color-mix(in srgb, var(--ink) 45%, transparent); }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent2); border-color: #fffbf3; }
+
+/* ── Cover: a bright oasis, the photo in a tall capsule over the pool, date palms in front ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: #f8f0e2 url(/themes/art/oasis-kurma/scene.webp) center top / 100% auto no-repeat; color: var(--ink); text-align: center; isolation: isolate; }
+.capsule { position: relative; z-index: 1; width: min(60%, 26dvh); aspect-ratio: 3 / 4.3; margin-top: 6dvh; flex-shrink: 0; padding: 7px; border-radius: 999px; background: #fffbf3; box-shadow: 0 0 0 2px rgba(143, 195, 230, .9), 0 22px 40px rgba(31, 102, 112, .25); }
+.capsule > img, .capsule > div { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+.palmL, .palmR { position: absolute; z-index: 2; height: auto; pointer-events: none; transform-origin: 50% 100%; }
+.palmL { top: 2dvh; left: -19%; width: 50%; animation: sway 9s ease-in-out infinite alternate; }
+.palmR { top: 13dvh; right: -20%; width: 41%; scale: -1 1; animation: sway 11s ease-in-out -4s infinite alternate; }
+.coverText { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: auto; padding: 18px 26px 28px; }
+.kicker { color: var(--accent2); font-family: var(--serif); font-size: 11.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.12; overflow-wrap: break-word; }
+.coverNames em { padding: 0 8px; color: var(--gold); font-style: normal; }
+.coverDate { margin-top: 4px; color: var(--muted); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; width: 100%; }
+.guest { padding: 12px 18px; border-radius: 22px; background: rgba(255, 251, 243, .78); box-shadow: 0 6px 18px rgba(51, 41, 31, .06); }
+.guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.table { border-color: var(--accent2); color: var(--accent2); }
+.openBtn { background: var(--accent2); color: #fffbf3; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; font-size: 14px; box-shadow: 0 12px 24px rgba(196, 106, 42, .35); }
+.openBtn:hover { background: #a9561f; }
+
+/* ── Hero (top of the opened page): open sky with a frond sprig ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 128px; overflow: hidden; background: linear-gradient(180deg, #86bde3, #cfe6f2 70%, #e9f3f4); color: var(--ink); text-align: center; isolation: isolate; }
+.heroSun { position: absolute; z-index: -1; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 999px; background: radial-gradient(closest-side, rgba(255, 246, 214, .95), rgba(255, 246, 214, 0)); animation: glowSun 7s ease-in-out infinite alternate; }
+.heroSprig { width: 220px; height: auto; }
+.heroDune { position: absolute; z-index: -1; left: 0; bottom: -2px; width: 100%; height: 110px; object-fit: cover; object-position: top; }
+.kickerDark { margin-top: 16px; color: var(--accent2); font-family: var(--serif); font-size: 11.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.12; overflow-wrap: break-word; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-style: normal; }
+.heroDate { margin-top: 6px; color: #3d5a60; font-size: 15px; font-weight: 700; }
+.heroNote { max-width: 300px; margin-top: 14px; color: #3d5a60; font-size: 16px; line-height: 1.6; text-wrap: balance; }
+.sentBox img { width: 80px; }
+
+@keyframes sway { from { rotate: -1.6deg; } to { rotate: 1.8deg; } }
+@keyframes glowSun { from { opacity: .7; scale: 1; } to { opacity: 1; scale: 1.08; } }
+@media (prefers-reduced-motion: reduce) {
+  .palmL, .palmR, .closingPalmL, .closingPalmR, .heroSun { animation: none; }
+}

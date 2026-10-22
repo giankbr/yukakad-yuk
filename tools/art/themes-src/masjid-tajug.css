@@ -1,0 +1,152 @@
+/* Masjid Tajug — pagi hangat di halaman berpasir masjid kuno beratap tajug tumpang tiga, kayu jati, sirap, gapura paduraksa bata merah, dan pohon sawo kecik. */
+.root, .cover {
+  --bg: #f5ead6; --paper: #fbf3e4; --ivory: #fffaf0; --field: #fffcf5; --ink: #3a2414; --muted: #6e5848; --line: #e2cfae;
+  --accent: #7a4a26; --accent2: #8f5a30; --gold: #c98f45; --gold-l: #f2d29a; --gold-d: #9a6326;
+  --band-bg: #4a2c18; --band-ink: #fbf0dc;
+  --display: "Libre Caslon Display", "Playfair Display", Georgia, serif; --serif: "Libre Caslon Text", Georgia, serif; --script: "Libre Caslon Display", Georgia, serif;
+  --teak: #7a4a26; --teak-d: #4a2c18; --brick: #a5482e; --leaf: #4f6b3a;
+  --sirap: url(/themes/art/masjid-tajug/sirap.webp) repeat 0 0 / 120px auto;
+  --wood: linear-gradient(90deg, #5a341c, #8a5630 30%, #6e4224 55%, #8a5630 80%, #5a341c);
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a4a26; --t-accent-ink: #fbf0dc; --t-bg: #f5ead6; --t-ink: #3a2414; --t-muted: #6e5848; --t-line: #e2cfae; --t-field: #fffcf5;
+  --t-radius: 2px; --t-font: "Libre Caslon Text", Georgia, serif; --t-heading-font: "Libre Caslon Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; color: var(--brick); text-transform: uppercase; }
+.head h2 { color: var(--teak-d); }
+.divider { width: 200px; }
+
+.section { padding: 62px 24px 60px; }
+.salamBlock { position: relative; padding: 50px 28px 58px; background: linear-gradient(180deg, var(--paper), var(--bg)); }
+.arabic { color: var(--teak); font-size: 30px; }
+.salamTitle { font-family: var(--display); font-size: 32px; color: var(--teak-d); }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+
+/* couple: each portrait is a small pavilion — sirap roof over a teak frame */
+.couple { background: var(--paper); gap: 14px; }
+.portrait { padding-top: 46px; margin-bottom: 20px; }
+.portrait::before { content: ""; position: absolute; top: 0; left: 50%; width: 250px; height: 52px; translate: -50% 0; background: var(--sirap); background-size: 80px auto; clip-path: polygon(16% 0, 84% 0, 100% 86%, 100% 100%, 0 100%, 0 86%); box-shadow: inset 0 -6px 0 #7a4a26; z-index: 1; }
+.portrait::after { content: ""; position: absolute; top: -18px; left: 50%; width: 18px; height: 22px; translate: -50% 0; border-radius: 50% 50% 4px 4px; background: radial-gradient(circle at 40% 35%, #d9894e, #a45a36 60%, #7a3e24); }
+.portraitFrame { width: 196px; height: 246px; padding: 8px; border: 0; border-radius: 0; background: var(--wood); box-shadow: 0 16px 30px rgba(58, 36, 20, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.nick { font-family: var(--display); font-size: 48px; color: var(--teak-d); }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--leaf); }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.amp { color: var(--brick); font-family: var(--display); font-size: 44px; }
+.amp img { width: 76px; }
+
+/* countdown: under the serambi eaves — teak with a sirap fringe */
+.countBand { padding: 78px 20px 62px; background: linear-gradient(180deg, #4a2c18, #5e3820); }
+.countBand::before { content: ""; position: absolute; inset: 0 0 auto; height: 30px; background: var(--sirap); background-size: 96px auto; box-shadow: 0 6px 0 #7a4a26; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: #fbf0dc; }
+.count > div { height: 92px; border: 0; border-radius: 2px; background: #fbf0dc; box-shadow: inset 0 -8px 0 var(--brick), 0 8px 16px rgba(0, 0, 0, .25); padding-bottom: 6px; }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--teak-d); font-size: 32px; }
+.count small { font-family: var(--serif); font-style: normal; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ghostBtn { font-family: var(--serif); font-size: 13px; color: #fbf0dc; border-color: var(--gold-l); border-radius: 2px; }
+
+/* events: boards under a sirap eave, brick plinth */
+.events { background: var(--bg); gap: 26px; }
+.event { padding: 50px 22px 30px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); box-shadow: inset 0 -7px 0 var(--brick), 0 10px 24px rgba(58, 36, 20, .08); }
+.event::before { inset: 0 0 auto; height: 22px; border: 0; border-radius: 0; background: var(--sirap); background-size: 72px auto; box-shadow: 0 4px 0 var(--teak); }
+.eventNo { top: 36px; width: auto; height: auto; padding: 0 10px; border-radius: 0; background: var(--ivory); color: var(--brick); font-family: var(--display); font-size: 14px; letter-spacing: .2em; }
+.event h3 { margin-top: 8px; font-family: var(--display); font-size: 27px; color: var(--teak-d); }
+.eventDate { color: var(--leaf); font-weight: 700; font-style: normal; }
+.eventTime { font-family: var(--serif); color: var(--gold-d); }
+.rule { background: var(--teak); width: 54px; }
+.event strong { color: var(--ink); font-weight: 700; }
+.mapBtn { border-radius: 2px; background: var(--leaf); color: #fbf0dc; font-family: var(--serif); font-size: 13px; }
+.mapBtn:hover { background: #5d7c45; }
+
+.story { background: var(--paper); }
+.timeline::before { width: 3px; left: 20px; background: var(--wood); }
+.node { border-radius: 2px; background: var(--ivory); border: 1px solid var(--line); }
+.nodeRoof { display: block; width: 26px; height: 22px; background: var(--sirap); background-size: 40px auto; clip-path: polygon(50% 0, 64% 30%, 58% 30%, 76% 62%, 68% 62%, 100% 100%, 0 100%, 32% 62%, 24% 62%, 42% 30%, 36% 30%); }
+.storyBody small { font-family: var(--serif); color: var(--brick); font-weight: 700; }
+.storyBody h3 { font-family: var(--display); font-size: 22px; color: var(--teak-d); }
+.storyImg { border-radius: 2px; }
+
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 140px; gap: 6px; padding: 6px; background: var(--wood); }
+.tile, .tile:first-child { border-radius: 0; }
+.tile:first-child { grid-row: span 2; grid-column: span 2; }
+.tile:nth-child(4n + 4) { grid-column: span 2; }
+
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); box-shadow: inset 0 5px 0 var(--teak); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; color: var(--teak); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--teak); border-color: var(--teak); color: #fbf0dc; }
+.submit { border-radius: 2px; background: var(--brick); color: #fbf0dc; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: #b9563a; }
+.sent { color: var(--teak-d); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 120px; }
+.wish { border-radius: 2px; border-left: 4px solid var(--leaf); }
+.wish strong { font-family: var(--serif); font-weight: 700; color: var(--teak-d); }
+.wish small { background: rgba(79, 107, 58, .12); color: var(--leaf); }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 2px; background: var(--teak-d); padding-top: 44px; box-shadow: inset 0 -6px 0 var(--brick); }
+.gift::after { inset: 0 0 auto; width: auto; height: 20px; border: 0; border-radius: 0; box-shadow: 0 3px 0 var(--teak); background: var(--sirap); background-size: 64px auto; z-index: 0; }
+.gift h3 { font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); color: var(--gold-l); font-size: 24px; }
+.copy { font-family: var(--serif); border-radius: 2px; }
+.copyOn, .copyOn:hover { color: var(--teak-d); }
+
+/* closing: morning courtyard with the paduraksa gate (the doorway shows the sky) */
+.closing { padding: 40px 28px 56px; background: linear-gradient(180deg, #fbe9c8 0%, #f5ead6 52%, #e9d6ae 100%); color: var(--ink); }
+.closingGate { width: 230px; height: auto; margin-bottom: 6px; filter: drop-shadow(0 12px 14px rgba(90, 40, 20, .2)); }
+.closingTrees { position: absolute; z-index: -1; left: 0; right: 0; top: 120px; display: flex; justify-content: space-between; pointer-events: none; }
+.closingTrees img { width: 150px; height: auto; margin: 0 -40px; opacity: .9; }
+.closingTrees img:last-child { scale: -1 1; }
+.thanks { font-family: var(--display); font-size: 46px; color: var(--teak-d); }
+.closingText { color: var(--muted); }
+.closingSalam { font-family: var(--serif); font-size: 13px; color: var(--leaf); }
+.family { font-family: var(--serif); color: var(--muted); }
+.closingNames { font-family: var(--display); color: var(--brick); font-size: 34px; }
+.made { color: rgba(58, 36, 20, .5); }
+.made:hover { color: var(--brick); }
+.music { background: var(--teak); border-color: var(--gold-l); }
+
+/* ── Cover: morning light over the masjid tajug and its sandy courtyard ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 40px 0 0; overflow: hidden; background: radial-gradient(46% 26% at 16% 30%, rgba(255, 228, 170, .95), rgba(255, 228, 170, 0) 70%), linear-gradient(180deg, #f8e2bf 0%, #fbeedb 46%, #f7ead2 64%); color: var(--ink); text-align: center; isolation: isolate; }
+.cover > * { flex-shrink: 0; }
+.arabicCover { color: var(--teak); font-family: Amiri, "Traditional Arabic", serif; font-size: 24px; line-height: 1.5; }
+.kicker { margin-top: 6px; font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .22em; color: var(--brick); text-transform: uppercase; }
+.coverLabel { margin-top: 18px; font-family: var(--serif); font-size: 14px; font-style: italic; color: var(--muted); }
+.coverNames { max-width: calc(100% - 40px); margin-top: 2px; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; color: var(--teak-d); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; font-size: 28px; font-style: italic; color: var(--brick); }
+.coverDate { margin-top: 10px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--leaf); }
+.coverScene { width: 124%; max-width: none; height: auto; margin: 6px -12% 0; }
+.yard { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 14px; width: 100%; flex: 1 0 auto; margin-top: -2px; padding: 14px 24px 32px; background: linear-gradient(180deg, #e3cc9a, #d9bf8a); }
+.guest small { color: #5e4630; font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--serif); font-weight: 700; font-size: 18px; color: var(--teak-d); }
+.table { border-color: var(--teak); color: var(--teak); font-family: var(--serif); border-radius: 2px; }
+.openBtn { min-width: 0; padding: 0 24px; border-radius: 2px; background: var(--teak); color: #fbf0dc; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; box-shadow: inset 0 -4px 0 #5a341c, 0 10px 20px rgba(74, 44, 24, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: the photo seen from under the serambi (sirap eave + teak pillars) ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 0 40px; overflow: hidden; background: linear-gradient(180deg, #fbeedb, var(--paper)); color: var(--ink); text-align: center; }
+.heroKicker { font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--brick); }
+.heroNames { margin-top: 6px; padding: 0 20px; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; color: var(--teak-d); overflow-wrap: anywhere; }
+.heroNames em { padding: 0 10px; font-size: 30px; font-style: italic; color: var(--brick); }
+.heroDate { margin-top: 8px; font-size: 15px; font-style: italic; color: var(--leaf); }
+.serambi { position: relative; width: 100%; margin-top: 26px; padding: 0 22px; }
+.eave { display: block; height: 40px; margin: 0 -2px; background: var(--sirap); background-size: 96px auto; clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%); box-shadow: inset 0 -7px 0 #7a4a26; }
+.bay { position: relative; display: grid; grid-template-columns: 16px 1fr 16px; gap: 0; }
+.pillar { background: var(--wood); box-shadow: inset -3px 0 0 rgba(0, 0, 0, .18); }
+.heroPhoto { height: 300px; background: #3a2414; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.umpak { display: grid; grid-template-columns: 26px 1fr 26px; margin: 0 -5px; }
+.umpak span { height: 12px; background: linear-gradient(180deg, #8a8070, #6a6258); }
+.umpak span:nth-child(2) { background: linear-gradient(180deg, #e3cc9a, #d9bf8a); }
+.heroNote { max-width: 320px; margin-top: 22px; padding: 0 20px; font-size: 16px; font-style: italic; line-height: 1.65; color: var(--muted); }
+.heroDivider { width: 200px; height: auto; margin-top: 16px; }
+.coverScene { animation: dawn 2.6s var(--m-ease) both; }
+@keyframes dawn { from { filter: brightness(.86) saturate(.8); } }
+@media (prefers-reduced-motion: reduce) { .coverScene { animation: none; } }
