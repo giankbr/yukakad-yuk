@@ -1,0 +1,161 @@
+/* Buton Wolio — Benteng Keraton Buton di atas bukit, istana Kamali bertingkat, tenun Buton bergaris merah-kuning-hijau, dan selat biru Buton; bahasa bentuk: tembok bergerigi benteng. */
+.root, .cover {
+  --bg: #f4eddc; --paper: #e9dfc8; --ivory: #fffaf0; --field: #fffdf8; --ink: #1b2430; --muted: #5a5a58; --line: #dccfb2;
+  --accent: #1c5a86; --accent2: #12324e; --gold: #f2c21b; --gold-l: #ffe48a; --gold-d: #9a6d0a;
+  --band-bg: #12324e; --band-ink: #f4eddc;
+  --display: "Young Serif", Georgia, serif; --serif: Barlow, system-ui, sans-serif; --script: "Young Serif", Georgia, serif;
+  --tenun: url(/themes/art/buton-wolio/tenun.webp) repeat 0 0 / 180px 180px;
+  --red: #c8202a; --green: #178a4a; --stone: #d9cdb2; --stone-d: #8a7c64;
+  /* merlons: a crenellated top edge for any box */
+  --crenel: linear-gradient(#000 0 0) 0 14px / 100% calc(100% - 14px) no-repeat, repeating-linear-gradient(90deg, #000 0 22px, transparent 22px 34px) 6px 0 / 100% 15px no-repeat;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1c5a86; --t-accent-ink: #fff; --t-bg: #f4eddc; --t-ink: #1b2430; --t-muted: #5a5a58; --t-line: #dccfb2; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: Barlow, system-ui, sans-serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12.5px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--red); }
+.head h2 { color: var(--accent2); }
+.divider { width: 200px; }
+.intro { font-size: 17px; }
+
+/* tenun stripe edge between sections */
+.section + .section:not(.countBand)::before, .salamBlock::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--tenun); }
+
+/* opening: limestone */
+.salamBlock { position: relative; padding: 60px 26px 60px; background: var(--stone); }
+.arabic { color: var(--accent2); font-size: 28px; }
+.salamKicker { color: var(--red); }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 38px; }
+.salamSub { max-width: 300px; color: #4a4438; font-family: var(--serif); font-size: 16.5px; font-style: italic; letter-spacing: 0; line-height: 1.5; }
+.salamBlock .intro { color: #3f3a30; }
+
+/* couple: portraits are fort windows (crenellated tops) */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; padding: 9px; background: var(--stone); -webkit-mask: var(--crenel); mask: var(--crenel); }
+.portraitFrame { width: 214px; height: 270px; margin-top: 8px; padding: 0; border: 0; border-radius: 0; background: var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.role { color: var(--red); }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { font-size: 16px; }
+.amp { color: var(--red); font-family: var(--display); font-size: 42px; }
+.amp img { width: 50px; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 90px; }
+
+/* countdown: the cloth itself, navy plaques */
+.countBand { padding: 66px 18px; background: var(--red) var(--tenun); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 30px 14px; height: auto; background: rgba(18, 50, 78, .94); -webkit-mask: var(--crenel); mask: var(--crenel); }
+.headLight { padding-top: 14px; }
+.headLight .eyebrow { color: var(--gold); }
+.headLight h2 { color: #fff; }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 8px; }
+.count > div { height: 82px; border: 0; border-bottom: 4px solid var(--gold); border-radius: 0; background: rgba(244, 237, 220, .1); }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; }
+.count small { color: var(--gold-l); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.ghostBtn { margin-bottom: 8px; border-color: var(--gold); border-radius: 0; color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+
+/* events: stone-crowned cards */
+.events { gap: 24px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 0; background: var(--ivory); -webkit-mask: var(--crenel); mask: var(--crenel); box-shadow: inset 0 -5px 0 var(--stone); }
+.event::before { inset: 14px 0 auto; height: 6px; border: 0; border-radius: 0; background: var(--tenun); }
+.eventNo { top: 32px; width: auto; height: auto; padding: 2px 10px; border-radius: 0; background: var(--accent2); color: var(--gold); font-family: var(--serif); font-weight: 700; font-size: 12px; }
+.event h3 { margin-top: 18px; color: var(--accent2); font-size: 25px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 50px; height: 3px; background: var(--gold); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 19px; }
+.mapBtn { border-radius: 0; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.mapBtn:hover { background: var(--red); }
+
+/* story: on the Buton strait */
+.story { background: var(--accent); }
+.story .head h2 { color: #fff; }
+.story .eyebrow { color: var(--gold); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(180deg, var(--gold) 0 10px, var(--red) 10px 20px, var(--green) 20px 30px); }
+.node { width: 30px; height: 30px; margin: 3px; border: 3px solid var(--gold); border-radius: 0; background: var(--accent2); rotate: 45deg; }
+.node img { display: none; }
+.storyBody small { color: var(--gold); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: #fff; }
+.storyBody p { color: rgba(244, 237, 220, .84); }
+.storyImg { border-radius: 0; }
+
+/* gallery */
+.mosaic { grid-auto-rows: 146px; gap: 6px; }
+.tile { border-radius: 0; }
+.tile:first-child { border-radius: 0; -webkit-mask: var(--crenel); mask: var(--crenel); }
+
+/* wishes */
+.form { border: 0; border-radius: 0; box-shadow: inset 0 5px 0 var(--accent); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border-radius: 0; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 0; font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent2); border-color: var(--accent2); color: var(--gold); }
+.submit { border-radius: 0; background: var(--red); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border: 0; border-left: 6px solid var(--red); border-radius: 0; }
+.wish:nth-child(3n + 2) { border-left-color: var(--gold); }
+.wish:nth-child(3n + 3) { border-left-color: var(--green); }
+.wish strong { color: var(--accent2); }
+.wish small { border-radius: 0; background: rgba(28, 90, 134, .12); color: var(--accent); font-weight: 700; }
+
+/* gifts */
+.gift { padding: 24px 20px 24px 34px; border-radius: 0; text-align: center; }
+.gift::after { inset: 0 auto 0 0; width: 14px; height: auto; border: 0; border-radius: 0; box-shadow: none; background: var(--tenun); z-index: 0; }
+.gift h3 { color: var(--gold); font-family: var(--display); font-size: 19px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.copy { border-color: var(--gold); border-radius: 0; color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold); color: var(--accent2); }
+
+/* closing: up the hill to the keraton */
+.closing { padding: 66px 26px 0; background: linear-gradient(180deg, var(--accent2), #2e6f9e 70%, #8ec3e0); }
+.closingMalige { width: 110px; height: auto; }
+.thanks { color: #fff; font-family: var(--display); font-size: 44px; }
+.closingSalam { color: var(--gold); font-family: var(--serif); font-size: 14px; font-weight: 700; }
+.family { font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 32px; }
+.made { margin-bottom: 20px; color: rgba(244, 237, 220, .7); }
+.closingKeraton { order: 10; display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px; }
+.music { border-color: var(--gold); border-radius: 0; background: var(--red); }
+
+/* ── Cover: the keraton on its hill above, a crenellated limestone plaque below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: linear-gradient(180deg, #8ec3e0, #d3e7ee 40%, var(--bg) 60%); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 14px; background: var(--tenun); }
+.coverScene { position: relative; z-index: 0; display: block; width: 136%; max-width: none; height: auto; margin: -30px 0 0; animation: drift 14s var(--m-ease) infinite alternate; }
+.coverPlaque { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; width: calc(100% - 28px); margin: -110px 0 30px; padding: 34px 20px 26px; background: var(--ivory); -webkit-mask: var(--crenel); mask: var(--crenel); box-shadow: inset 0 -6px 0 var(--stone); }
+.coverPlaque::before { content: ""; position: absolute; top: 14px; left: 0; right: 0; height: 8px; background: var(--tenun); }
+.coverArabic { color: var(--accent2); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.coverKicker { color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: .2em; }
+.coverLabel { margin-top: 6px; color: var(--muted); font-size: 12.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--red); font-size: 34px; font-style: normal; line-height: 1.1; }
+.coverDate { color: var(--accent); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.coverRule { width: 160px; height: auto; margin: 6px 0 4px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--red); border-radius: 0; color: var(--red); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 10px; border-radius: 0; background: var(--accent2); color: var(--gold); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--red); }
+.openBtn:hover { background: var(--accent); translate: -1px -1px; box-shadow: 5px 5px 0 var(--red); }
+
+/* ── Hero: strait-blue band, names, fort-window photo ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 54px; background: var(--accent2); color: #fff; text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: var(--tenun); }
+.heroKicker { color: var(--gold); font-size: 12.5px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 4px; color: #fff; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-style: normal; padding: 0 6px; }
+.heroDate { margin-top: 4px; color: var(--gold-l); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroPhotoWrap { position: relative; margin-top: 30px; padding: 12px; background: var(--stone); -webkit-mask: var(--crenel); mask: var(--crenel); }
+.heroPhoto { position: relative; width: 300px; height: 380px; margin-top: 10px; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroWall { display: block; width: calc(100% + 48px); max-width: none; height: auto; margin: -2px -24px 0; }
+.heroNote { max-width: 320px; margin-top: 26px; color: rgba(244, 237, 220, .86); font-size: 17px; font-style: italic; line-height: 1.6; }
+.heroMalige { width: 90px; height: auto; margin-top: 20px; }
+.sentBox img { width: 90px; }
+
+.root .event { transition: translate 300ms var(--m-ease), scale 300ms var(--m-ease); }
+.event:hover { translate: 0 -3px; }
+@keyframes drift { from { translate: -8px 0; } to { translate: 8px -4px; } }
+@media (prefers-reduced-motion: reduce) { .coverScene { animation: none; } }

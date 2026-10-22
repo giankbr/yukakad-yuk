@@ -1,0 +1,170 @@
+/* Maluku Tifa — tifa berukir dengan ikatan rotan, tenun ikat Tanimbar sampai ke benang, cengkih & pala, dan laut toska kepulauan Maluku. */
+.root, .cover {
+  --bg: #f6efe0; --paper: #efe4cf; --ivory: #fffbf2; --field: #fffdf8; --ink: #2b1712; --muted: #6b5246; --line: #e2d3b8;
+  --accent: #0d6f7a; --accent2: #4a1c17; --gold: #c99a45; --gold-l: #f0d79a; --gold-d: #8f6524;
+  --band-bg: #4a1c17; --band-ink: #f6efe0;
+  --display: "Bricolage Grotesque", system-ui, sans-serif; --serif: "Crimson Pro", Georgia, serif; --script: "Bricolage Grotesque", system-ui, sans-serif;
+  --ikat: url(/themes/art/maluku-tifa/ikat.webp) repeat 0 0 / 108px 144px;
+  --turq: #1aa3a3; --teal: #0b4a5a; --rust: #a8442a; --hide: #e3c99c; --rattan: #c79a58;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0d6f7a; --t-accent-ink: #fff; --t-bg: #f6efe0; --t-ink: #2b1712; --t-muted: #6b5246; --t-line: #e2d3b8; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: "Bricolage Grotesque", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+/* the whole column runs along a woven ikat selvedge on the left */
+.main { position: relative; }
+.main::before { content: ""; position: absolute; z-index: 5; top: 0; bottom: 0; left: 0; width: 12px; background: var(--ikat); box-shadow: 2px 0 6px rgba(43, 23, 18, .18); pointer-events: none; }
+
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--rust); }
+.section { align-items: stretch; padding: 64px 24px 64px 36px; }
+.head { align-items: flex-start; text-align: left; gap: 6px; }
+.head h2, .headLight h2 { font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+.head h2 { color: var(--accent2); }
+.divider { width: 190px; margin-left: -6px; }
+.intro { max-width: none; text-align: left; font-size: 18px; line-height: 1.6; }
+
+/* opening: Syalom on deep teal sea */
+.salamBlock { position: relative; align-items: flex-start; gap: 10px; padding: 62px 26px 66px 38px; overflow: hidden; background: linear-gradient(160deg, var(--accent) 0%, var(--teal) 100%); color: var(--band-ink); text-align: left; isolation: isolate; }
+.salamBlock::after { content: ""; position: absolute; z-index: -1; right: -40px; bottom: -36px; width: 200px; height: 140px; background: url(/themes/art/maluku-tifa/sprig.webp) center / contain no-repeat; opacity: .35; rotate: -12deg; }
+.salamKicker { color: var(--gold-l); }
+.salamTitle { color: #fff; font-family: var(--display); font-size: 46px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.salamSub { color: var(--gold-l); font-family: var(--serif); font-size: 18px; font-style: italic; letter-spacing: 0; line-height: 1.45; }
+.salamBlock .intro { color: rgba(246, 239, 224, .88); }
+.salamBlock .divider { filter: brightness(1.6) saturate(.7); }
+
+/* couple: portraits as prints in an ikat mat, tilted */
+.couple { gap: 30px; background: var(--paper); }
+.person { align-items: flex-start; text-align: left; }
+.portrait { margin: 0 0 20px 4px; }
+.portraitFrame { width: 224px; height: 284px; padding: 10px; border: 0; border-radius: 4px; background: var(--ikat); box-shadow: 0 16px 30px rgba(43, 23, 18, .25); rotate: -2deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.personWrap:nth-child(3) .person { align-items: flex-end; text-align: right; }
+.personWrap:nth-child(3) .portrait { margin: 0 4px 20px 0; }
+.personWrap:nth-child(3) .portraitFrame { rotate: 2deg; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 46px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 20px; font-weight: 600; }
+.parents { max-width: 290px; font-size: 17px; text-wrap: pretty; }
+.amp { align-self: center; color: var(--turq); font-family: var(--display); font-size: 44px; font-weight: 800; }
+.amp img { width: 88px; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 90px; font-weight: 800; }
+
+/* countdown: ikat cloth with drum-head dials */
+.countBand { align-items: flex-start; padding: 64px 22px 70px 36px; background: var(--accent2); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: var(--ikat); opacity: .38; }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(43, 23, 18, .55), rgba(43, 23, 18, .15) 70%); pointer-events: none; }
+.headLight { align-items: flex-start; text-align: left; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; }
+.count { align-self: stretch; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.count > div { height: auto; aspect-ratio: 1; border: 4px solid var(--rattan); border-radius: 50%; background: radial-gradient(circle at 38% 32%, #f6e6c4, var(--hide) 55%, #c9a77a); box-shadow: 0 0 0 2px #6b3520, 0 8px 16px rgba(0, 0, 0, .35); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 25px; font-weight: 800; }
+.count small { color: #6b3520; font-family: var(--display); font-size: 9.5px; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); border-radius: 6px; color: #fff; background: rgba(43, 23, 18, .5); font-family: var(--display); font-weight: 600; }
+
+/* events: cards headed with an ikat strip */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 40px 22px 24px; border: 0; border-radius: 6px; background: var(--ivory); text-align: left; overflow: hidden; box-shadow: 0 10px 26px rgba(43, 23, 18, .1); }
+.event::before { inset: 0 0 auto; height: 16px; border: 0; border-radius: 0; background: var(--ikat); }
+.eventNo { position: absolute; top: 24px; right: 18px; left: auto; translate: none; width: auto; height: auto; background: none; color: color-mix(in srgb, var(--turq) 30%, transparent); font-family: var(--display); font-size: 48px; font-weight: 800; letter-spacing: -.04em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; font-weight: 800; letter-spacing: -.02em; }
+.eventDate { font-style: normal; font-weight: 600; font-size: 18px; }
+.eventTime { color: var(--rust); font-family: var(--display); font-weight: 600; }
+.rule { width: 100%; height: 1px; background: var(--line); }
+.event strong { font-family: var(--display); font-weight: 600; font-size: 18px; }
+.eventAddr { max-width: none; font-size: 16.5px; text-wrap: pretty; }
+.mapBtn { border-radius: 6px; background: var(--accent); color: #fff; font-family: var(--display); font-weight: 600; }
+.mapBtn:hover { background: var(--rust); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(180deg, var(--rattan) 0 8px, transparent 8px 13px); }
+.node { width: 38px; height: 38px; border: 3px solid var(--rattan); background: radial-gradient(circle at 38% 32%, #f6e6c4, var(--hide)); }
+.node img { display: none; }
+.storyBody small { color: var(--rust); font-family: var(--display); font-weight: 700; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-weight: 800; letter-spacing: -.02em; }
+.storyBody p { font-size: 17.5px; }
+.storyImg { border-radius: 4px; }
+
+/* gallery: turquoise lagoon */
+.gallery { background: linear-gradient(180deg, #e2f3ef, var(--bg)); }
+.mosaic { grid-auto-rows: 132px; gap: 6px; }
+.tile { border-radius: 4px; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 4px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(2n) { grid-column: span 2; }
+
+/* wishes */
+.form { border: 0; border-radius: 6px; box-shadow: 0 10px 26px rgba(43, 23, 18, .09); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--display); font-weight: 700; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 4px; font-family: var(--display); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.submit { border-radius: 4px; background: var(--rust); color: #fff; font-family: var(--display); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border: 0; border-left: 4px solid var(--turq); border-radius: 4px; }
+.wish strong { color: var(--accent2); font-family: var(--display); font-weight: 700; }
+.wish small { background: rgba(26, 163, 163, .14); color: var(--accent); font-family: var(--display); }
+.wish p { font-size: 17px; }
+
+/* gifts */
+.gift { align-items: flex-start; padding: 34px 22px 24px; border-radius: 6px; text-align: left; }
+.gift::after { inset: 0 0 auto; width: auto; height: 12px; border: 0; border-radius: 0; box-shadow: none; background: var(--ikat); z-index: 0; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 0; }
+.giftNo { font-family: var(--display); font-size: 20px; font-weight: 600; letter-spacing: .02em; }
+.copy { border-radius: 4px; font-family: var(--display); font-weight: 600; }
+
+/* closing */
+.closing { padding: 70px 26px 0 38px; background: linear-gradient(180deg, var(--teal), #083540); }
+.closingTifa { width: 150px; height: auto; transform-origin: 50% 100%; animation: beat 2.6s var(--m-ease) infinite; }
+.thanks { color: #fff; font-family: var(--display); font-size: 50px; font-weight: 800; letter-spacing: -.03em; }
+.closingText { font-size: 18px; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.family { font-family: var(--display); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 32px; font-weight: 800; }
+.made { margin-bottom: 26px; }
+.closingCloth { order: 10; display: block; align-self: stretch; height: 44px; margin: 0 -26px 0 -38px; background: var(--ikat); }
+.music { border-color: var(--gold-l); border-radius: 6px; background: var(--rust); }
+
+/* ── Cover: sand, ikat selvedge, big type, tifa drums and a clove sprig ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 100dvh; overflow: hidden; padding: 0 0 0 20px; background: linear-gradient(180deg, #d7efe9 0%, var(--bg) 42%, #efe2c8 100%); color: var(--ink); text-align: left; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: 3; top: 0; bottom: 0; left: 0; width: 20px; background: var(--ikat); box-shadow: 2px 0 8px rgba(43, 23, 18, .2); }
+.coverSprig { position: absolute; z-index: 1; top: 6px; right: -40px; width: 230px; height: auto; rotate: 8deg; animation: sway 7s var(--m-ease) infinite alternate; transform-origin: 90% 60%; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 118px 24px 0 26px; }
+.coverKicker { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.coverLabel { color: var(--rust); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 4px; color: var(--accent2); font-family: var(--display); font-size: 60px; font-weight: 800; letter-spacing: -.045em; line-height: .92; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--turq); font-size: 40px; font-style: normal; line-height: 1.1; }
+.coverDate { margin-top: 10px; color: var(--ink); font-family: var(--serif); font-size: 20px; font-style: italic; }
+.coverTifa { position: absolute; z-index: 1; right: -12px; bottom: 150px; width: 212px; height: auto; transform-origin: 50% 100%; animation: beat 3.2s var(--m-ease) infinite; }
+.coverGuest { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; width: calc(100% - 40px); margin: auto 0 26px 22px; padding: 18px 18px 18px; border-radius: 6px; background: rgba(255, 251, 242, .94); box-shadow: 0 14px 30px rgba(43, 23, 18, .2); }
+.coverGuest .guest { align-items: flex-start; max-width: none; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 19px; font-weight: 700; text-wrap: pretty; }
+.table { border-color: var(--rust); border-radius: 4px; color: var(--rust); font-family: var(--display); font-weight: 600; }
+.openBtn { border-radius: 6px; background: var(--accent); color: #fff; font-family: var(--display); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.openBtn:hover { background: var(--rust); translate: 0 -2px; }
+
+/* ── Hero: lagoon panorama, names, photo pinned on ikat ── */
+.hero { position: relative; display: flex; flex-direction: column; padding: 0 22px 50px 34px; overflow: hidden; background: var(--bg); isolation: isolate; }
+.heroSea { display: block; width: calc(100% + 56px); max-width: none; height: auto; margin: 0 -22px 0 -34px; }
+.heroKicker { margin-top: 22px; color: var(--rust); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 4px; color: var(--accent2); font-family: var(--display); font-size: 50px; font-weight: 800; letter-spacing: -.04em; line-height: .95; overflow-wrap: anywhere; }
+.heroNames em { color: var(--turq); font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--muted); font-size: 19px; font-style: italic; }
+.heroPhotoWrap { position: relative; align-self: stretch; margin-top: 28px; padding: 12px; border-radius: 6px; background: var(--ikat); box-shadow: 0 18px 34px rgba(43, 23, 18, .25); rotate: 1.5deg; }
+.heroPhoto { position: relative; width: 100%; height: 380px; overflow: hidden; border-radius: 3px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { margin-top: 30px; color: var(--muted); font-size: 19px; font-style: italic; line-height: 1.55; }
+.heroTwig { width: 200px; height: auto; margin: 22px 0 0 -6px; }
+.sentBox img { width: 120px; }
+
+.root .event { transition: box-shadow 300ms var(--m-ease), translate 300ms var(--m-ease), scale 300ms var(--m-ease); }
+.event:hover { translate: 0 -3px; box-shadow: 0 16px 32px rgba(43, 23, 18, .15); }
+@keyframes beat { 0%, 70%, 100% { scale: 1 1; } 76% { scale: 1.02 .975; } 84% { scale: .995 1.01; } }
+@media (prefers-reduced-motion: reduce) { .coverTifa, .coverSprig, .closingTifa { animation: none; } }

@@ -1,0 +1,174 @@
+/* Istana Maimun — pernikahan Melayu Deli kuning diraja: lengkung istana bertatah ukiran emas, kubah hijau, songket Deli bertabur pucuk rebung, rumbai lebah bergantung, kartu bersudut lengkung. */
+.root, .cover {
+  --bg: #fbf3dc; --paper: #f6e9c4; --ivory: #fffaea; --field: #fffdf4; --ink: #2a2113; --muted: #6a5634; --line: #e3cf98;
+  --accent: #21463a; --accent2: #2d5a46; --gold: #c99a3c; --gold-l: #f3d77e; --gold-d: #8e6a1f;
+  --band-bg: #21463a; --band-ink: #fbf1d2;
+  --display: "Gilda Display", "Cormorant Garamond", Georgia, serif; --serif: "Crimson Pro", Georgia, serif; --script: "Great Vibes", cursive;
+  --hijau: #21463a; --hijau-d: #163329; --kuning: #e6b62a; --kayu: #5a3519;
+  --songket: url(/themes/art/istana-maimun/songket.webp) repeat 0 0 / 180px;
+  --lebah: url(/themes/art/istana-maimun/lebah.webp) repeat-x 0 0 / auto 100%;
+  --arch: polygon(50% 0, 62% 8%, 74% 13.5%, 82% 19%, 88% 24%, 92% 30%, 95% 35%, 100% 41%, 100% 100%, 0 100%, 0 41%, 5% 35%, 8% 30%, 12% 24%, 18% 19%, 26% 13.5%, 38% 8%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #21463a; --t-accent-ink: #fbf1d2; --t-bg: #fbf3dc; --t-ink: #2a2113; --t-muted: #6a5634; --t-line: #e3cf98; --t-field: #fffdf4;
+  --t-radius: 4px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-d); }
+.head h2 { color: var(--hijau); letter-spacing: .02em; }
+.divider { width: 200px; }
+.intro { font-size: 18px; }
+
+/* every room hangs a lebah bergantung fringe from its top edge */
+.couple::before, .events::before, .wishes::before, .closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30px; background: var(--lebah); pointer-events: none; }
+.couple, .events, .wishes { padding-top: 76px; }
+
+/* opening: royal green room */
+.salamBlock { gap: 12px; padding: 62px 30px 64px; background: radial-gradient(90% 60% at 50% 0, #2d5a46, transparent 70%), var(--hijau); color: var(--band-ink); }
+.arabic { color: var(--gold-l); font-size: 27px; }
+.salamKicker { color: var(--gold-l); }
+.salamTitle { color: #fbf1d2; font-family: var(--display); font-size: 25px; line-height: 1.3; }
+.salamBlock .intro { color: rgba(251, 241, 210, .85); }
+
+/* couple: portraits stand inside the carved palace arch */
+.couple { gap: 18px; background: var(--bg); }
+.portrait { width: 236px; height: 316px; margin-bottom: 14px; }
+.portrait > img { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 10px 16px rgba(60, 35, 5, .3)); }
+.portraitFrame { position: absolute; left: 10.5%; right: 10.5%; top: 22%; bottom: 1.5%; width: auto; height: auto; padding: 0; border: 0; border-radius: 0; background: var(--hijau); clip-path: var(--arch); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 92px; }
+.nick { color: var(--hijau); font-family: var(--script); font-size: 56px; }
+.fullName { font-family: var(--display); font-size: 19px; }
+.parents { font-size: 17px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 54px; }
+.amp img { width: 76px; }
+
+/* countdown: songket band with green pointed-arch niches */
+.countBand { padding: 62px 24px 64px; background: linear-gradient(180deg, rgba(120, 80, 0, .12), rgba(120, 80, 0, .2)), var(--songket); color: var(--ink); }
+.countBand::before { content: ""; position: absolute; inset: 22px 14px; z-index: -1; border: 1px solid rgba(90, 53, 25, .45); background: rgba(255, 248, 226, .82); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--hijau); font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 100px; padding-top: 16px; border: 0; border-radius: 0; background: var(--hijau); clip-path: var(--arch); }
+.count > div::before { content: ""; position: absolute; inset: 4px; background: linear-gradient(180deg, #2d5a46, #163329); clip-path: var(--arch); z-index: -1; }
+.count > div { isolation: isolate; box-shadow: inset 0 0 0 2px var(--gold); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 29px; }
+.count small { color: #fbf1d2; font-family: var(--display); font-size: 10px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.countTba { color: var(--hijau); }
+.ghostBtn { border-color: var(--hijau); border-radius: 4px; color: var(--hijau); font-family: var(--display); }
+.ghostBtn svg { stroke: var(--hijau); }
+.ghostBtn:hover { background: rgba(33, 70, 58, .08); }
+
+/* events: ivory cards with a green tympanum crowned by a gold arch */
+.events { gap: 34px; background: var(--paper); }
+.event { padding: 0 22px 26px; overflow: hidden; border: 1px solid var(--gold); border-radius: 120px 120px 4px 4px; background: var(--ivory); box-shadow: 0 12px 26px rgba(90, 53, 25, .12); }
+.event::before { inset: 6px; border-color: rgba(201, 154, 60, .55); border-radius: 114px 114px 2px 2px; }
+.eventNo { position: relative; top: 0; left: auto; translate: none; width: calc(100% + 44px); height: 92px; margin: 0 -22px 12px; border-radius: 0; background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, .15)), var(--hijau); color: var(--gold-l); font-family: var(--display); font-size: 24px; letter-spacing: .1em; place-items: end center; padding-bottom: 14px; box-shadow: inset 0 -4px 0 var(--gold); }
+.event h3 { font-family: var(--display); color: var(--hijau); font-size: 23px; }
+.eventDate { font-family: var(--serif); font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--display); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 18px; }
+.eventAddr { font-size: 16px; }
+.mapBtn { border-radius: 4px; background: var(--hijau); color: var(--gold-l); font-family: var(--display); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--bg); }
+.node { border: 0; background: none; width: 34px; height: 34px; }
+.nodeMark { width: 24px; height: 30px; background: var(--hijau); clip-path: var(--arch); box-shadow: inset 0 0 0 2px var(--gold); }
+.timeline::before { left: 20px; background: linear-gradient(var(--gold), rgba(201, 154, 60, .2)); }
+.storyBody small { color: var(--gold-d); font-family: var(--display); }
+.storyBody h3 { color: var(--hijau); font-family: var(--display); font-size: 21px; }
+.storyBody p { font-size: 17px; }
+.storyImg { border-radius: 4px; }
+
+/* gallery: green hall of arches */
+.gallery { background: radial-gradient(80% 40% at 50% 0, #2d5a46, transparent 70%), var(--hijau); }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: #fbf1d2; }
+.mosaic { grid-template-columns: 1fr 1fr 1fr; grid-auto-rows: 120px; gap: 8px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 1px rgba(243, 215, 126, .6); }
+.tile:first-child { grid-column: span 3; grid-row: span 3; justify-self: center; width: 76%; border-radius: 0; clip-path: var(--arch); box-shadow: none; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(2) { grid-column: span 2; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-color: var(--line); border-radius: 4px; }
+.field > span, .diet, .guestsLabel { color: var(--hijau); font-family: var(--display); }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 4px; font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--hijau); border-color: var(--hijau); color: var(--gold-l); }
+.submit { border-radius: 4px; background: var(--hijau); color: var(--gold-l); font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { font-family: var(--display); color: var(--hijau); }
+.wish { border-radius: 4px; border-top: 3px solid var(--kuning); }
+.wish strong { color: var(--hijau); font-family: var(--display); }
+.wish small { background: rgba(230, 182, 42, .2); color: var(--gold-d); }
+.sentBox img { width: 220px; }
+
+/* gifts: songket envelopes on green */
+.gifts { background: var(--hijau); }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts .head h2 { color: #fbf1d2; }
+.gifts .intro { color: rgba(251, 241, 210, .84); }
+.gift { padding: 26px 20px; border-radius: 4px; background: linear-gradient(rgba(255, 248, 226, .86), rgba(255, 248, 226, .86)), var(--songket); color: var(--ink); box-shadow: inset 0 0 0 1px var(--gold), inset 0 0 0 5px rgba(255, 248, 226, .6), inset 0 0 0 6px var(--gold-d), 0 12px 24px rgba(0, 0, 0, .25); }
+.gift::after { display: none; }
+.giftIcon { background: var(--hijau); border-color: var(--gold); }
+.gift h3 { color: var(--hijau); font-family: var(--display); letter-spacing: .12em; text-transform: uppercase; font-size: 14px; }
+.giftNo { color: var(--ink); font-family: var(--display); }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--hijau); border-radius: 4px; color: var(--hijau); font-family: var(--display); }
+.copy:hover { background: rgba(33, 70, 58, .1); }
+.copyOn, .copyOn:hover { background: var(--hijau); color: var(--gold-l); }
+
+/* closing: the palace at dusk-gold */
+.closing { gap: 12px; padding: 80px 28px 0; background: linear-gradient(180deg, var(--bg), #f5df9f); color: var(--ink); }
+.closingDiv { width: 220px; height: auto; }
+.thanks { color: var(--hijau); font-family: var(--script); font-size: 58px; }
+.closingText { color: var(--muted); font-size: 18px; }
+.closingSalam { color: var(--gold-d); font-family: var(--display); font-size: 13px; line-height: 1.5; }
+.family { color: var(--muted); }
+.closingNames { color: var(--hijau); font-family: var(--script); font-size: 42px; }
+.made { color: rgba(42, 33, 19, .5); }
+.closingIstana { order: 10; width: calc(100% + 56px); margin: 6px -28px 0; pointer-events: none; }
+.closingIstana img { display: block; width: 100%; height: auto; }
+.music { background: var(--hijau); border-color: var(--gold-l); }
+
+/* ── Cover: songket hall, a carved palace arch framing the couple ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 62px 26px 44px; overflow: hidden; background: radial-gradient(70% 46% at 50% 56%, rgba(255, 248, 226, .94), rgba(255, 248, 226, .6) 70%, rgba(255, 248, 226, .2)), var(--songket); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: 3; top: 0; left: 0; right: 0; height: 40px; background: var(--lebah); filter: drop-shadow(0 3px 3px rgba(60, 35, 5, .3)); }
+.cover::after { content: ""; position: absolute; z-index: 0; left: 0; right: 0; bottom: 0; height: 14px; background: var(--hijau); box-shadow: 0 -3px 0 var(--gold); }
+.archWrap { position: relative; z-index: 2; width: 236px; height: 316px; flex-shrink: 0; }
+.archWrap > img { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 12px 18px rgba(60, 35, 5, .35)); }
+.archPhoto { position: absolute; left: 10.5%; right: 10.5%; top: 22%; bottom: 1.5%; background: var(--hijau); clip-path: var(--arch); }
+.archPhoto > img, .archPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.archGlow { position: absolute; z-index: 1; left: 10.5%; right: 10.5%; top: 22%; bottom: 1.5%; clip-path: var(--arch); background: linear-gradient(180deg, rgba(243, 215, 126, .35), transparent 40%); animation: archLight 7s ease-in-out infinite alternate; pointer-events: none; }
+.kicker { position: relative; z-index: 2; margin-top: 18px; font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-d); }
+.coverNames { position: relative; z-index: 2; max-width: 100%; margin-top: 6px; font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.05; color: var(--hijau); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { margin: 0 8px; font-family: var(--script); font-size: 44px; font-style: normal; color: var(--gold-d); }
+.coverDate { position: relative; z-index: 2; margin-top: 10px; padding: 5px 18px; background: var(--hijau); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%); }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 18px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { font-family: var(--display); font-size: 20px; color: var(--ink); }
+.table { border-color: var(--gold-d); border-radius: 4px; color: var(--gold-d); }
+.openBtn { min-width: 0; padding: 0 26px; border-radius: 4px; background: var(--hijau); color: var(--gold-l); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; box-shadow: inset 0 0 0 1px var(--gold), 0 10px 22px rgba(33, 70, 58, .35); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: the palace itself, painted across the page ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 0 56px; overflow: hidden; background: linear-gradient(180deg, #f8e7b4, var(--bg) 62%); text-align: center; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 34px; background: var(--lebah); }
+.heroKicker { padding: 0 24px; font-family: var(--display); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold-d); }
+.heroNames { max-width: 100%; margin-top: 8px; padding: 0 24px; font-family: var(--script); font-size: 58px; font-weight: 400; line-height: 1.05; color: var(--hijau); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-family: var(--display); font-size: 30px; font-style: normal; color: var(--gold-d); margin: 0 6px; }
+.heroIstana { width: 100%; height: auto; margin-top: 10px; }
+.heroDate { margin-top: 4px; padding: 0 24px; font-family: var(--display); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; color: var(--hijau); }
+.heroNote { max-width: 320px; margin-top: 14px; padding: 0 12px; font-size: 18px; font-style: italic; line-height: 1.55; color: var(--muted); }
+
+@keyframes archLight { from { opacity: .4; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .archGlow { animation: none; } }
+.copy:not(.copyOn) svg { stroke: var(--hijau); }

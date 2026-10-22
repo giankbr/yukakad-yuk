@@ -1,0 +1,167 @@
+/* Langit Subuh — the calm minute before sunrise in wet-on-wet watercolour: powder-blue to apricot dawn sky, a low skyline of distant domes and minarets dissolving in morning mist, a soft fan of first light; airy minimal type, capsule portraits, horizon-line rhythm */
+.root, .cover {
+  --bg: #f8f2ea; --paper: #f3ece6; --ivory: #fffcf8; --field: #ffffff; --ink: #3f4170; --muted: #6f6e8e; --line: #e2dbe6;
+  --accent: #5d5f96; --accent2: #474980; --gold: #e3ae8e; --gold-l: #fbe6d2; --gold-d: #b97f63;
+  --lilac: #c9bfdc; --sky: #b5c3e2; --peach: #f4c9b3;
+  --dawn: linear-gradient(180deg, #b7c3e1, #d6c8e0 38%, #f1d0cc 66%, #fbe2c8);
+  --band-bg: #e3d2df url(/themes/art/langit-subuh/sky.webp) center 30% / cover; --band-ink: #3f4170;
+  --display: "Cormorant Garamond", Georgia, serif; --serif: "Nunito Sans", system-ui, sans-serif; --script: "Cormorant Garamond", Georgia, serif;
+  --h2: 36px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) url(/themes/art/langit-subuh/paper.webp) repeat; line-height: normal;
+}
+.root {
+  --t-accent: #5d5f96; --t-accent-ink: #ffffff; --t-bg: #f8f2ea; --t-ink: #3f4170; --t-muted: #6f6e8e; --t-line: #e2dbe6; --t-field: #ffffff;
+  --t-radius: 20px; --t-font: "Nunito Sans", system-ui, sans-serif; --t-heading-font: "Cormorant Garamond", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 36px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.root, .cover { font-variant-numeric: lining-nums; }
+.main { background: transparent; }
+.eyebrow, .role, .salamKicker, .field > span, .diet, .guestsLabel, .storyBody small { font-family: var(--serif); font-weight: 600; letter-spacing: .28em; }
+.eyebrow { color: var(--gold-d); font-size: 10.5px; }
+.head { gap: 10px; }
+.head h2, .headLight h2 { color: var(--ink); font-weight: 500; line-height: 1.1; }
+.divider { width: 190px; }
+.intro, .parents, .eventAddr, .storyBody p, .wish p { color: var(--muted); font-size: 16px; }
+.section { padding: 66px 26px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 60px 30px 62px; gap: 12px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { max-width: 290px; color: var(--gold-d); font-size: 10.5px; line-height: 1.9; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 500; font-style: italic; }
+
+/* ── People: capsule windows with the sun rising at their foot ── */
+.couple { gap: 10px; background: linear-gradient(180deg, transparent, rgba(201, 191, 220, .22) 30%, rgba(244, 201, 179, .2) 70%, transparent); }
+.portrait { margin-bottom: 22px; }
+.portrait > img { position: absolute; z-index: 1; left: 50%; bottom: -16px; width: 92px; height: auto; translate: -50% 0; }
+.portraitFrame { width: 176px; height: 262px; padding: 5px; border: 0; border-radius: 999px; background: var(--dawn); box-shadow: 0 18px 36px rgba(93, 95, 150, .16); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.person:hover .portraitFrame { box-shadow: 0 22px 44px rgba(93, 95, 150, .24); }
+.monogram { color: #ffffff; font-family: var(--display); font-size: 90px; }
+.role { color: var(--gold-d); font-size: 10.5px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 500; }
+.fullName { color: var(--accent); font-family: var(--display); font-size: 21px; font-style: italic; font-weight: 500; }
+.amp { margin: 22px 0 10px; gap: 18px; color: var(--gold-d); font-family: var(--display); font-size: 46px; font-style: italic; }
+.amp::before, .amp::after { content: ""; width: 64px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.amp::after { background: linear-gradient(90deg, var(--gold), transparent); }
+
+/* ── Countdown: numbers floating in the dawn sky above the skyline ── */
+.countBand { gap: 26px; padding: 64px 18px 150px; }
+.countRays { position: absolute; z-index: -1; left: 50%; bottom: 40px; width: 560px; max-width: none; height: auto; translate: -50% 0; opacity: .8; animation: dawnBreath 10s ease-in-out infinite alternate; pointer-events: none; }
+.countSkyline { position: absolute; z-index: -1; left: 50%; bottom: -4px; width: 620px; max-width: none; height: auto; translate: -50% 0; pointer-events: none; }
+.headLight .eyebrow { color: var(--gold-d); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; max-width: 330px; gap: 0; }
+.count > div { height: 84px; border: 0; border-radius: 0; background: none; }
+.count > div + div { border-left: 1px solid rgba(63, 65, 112, .22); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 44px; font-variant-numeric: lining-nums tabular-nums; font-weight: 500; line-height: 1; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 10.5px; font-style: normal; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.countTba { color: var(--ink); }
+.ghostBtn { border-color: rgba(63, 65, 112, .35); background: rgba(255, 255, 255, .35); color: var(--ink); font-family: var(--serif); font-weight: 600; font-size: 12.5px; backdrop-filter: blur(4px); }
+.ghostBtn:hover { background: rgba(255, 255, 255, .6); border-color: var(--ink); }
+
+/* ── Events: quiet cards, each opening with a horizon line ── */
+.events { gap: 22px; background: transparent; }
+.event { padding: 34px 22px 26px; border: 0; border-radius: 26px; background: rgba(255, 252, 248, .8); box-shadow: 0 1px 0 rgba(255, 255, 255, .9) inset, 0 16px 36px rgba(93, 95, 150, .1); }
+.event::before { inset: 0 0 auto 0; height: 5px; border: 0; border-radius: 26px 26px 0 0; background: var(--dawn); background: linear-gradient(90deg, var(--sky), var(--lilac), var(--peach)); }
+.event:hover { box-shadow: 0 1px 0 rgba(255, 255, 255, .9) inset, 0 22px 44px rgba(93, 95, 150, .16); }
+.eventNo { position: static; translate: none; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--serif); font-weight: 600; font-size: 11px; letter-spacing: .3em; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 500; }
+.eventDate { color: var(--accent); font-family: var(--display); font-size: 19px; font-style: italic; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-size: 13.5px; text-align: center; }
+.rule { width: 120px; height: 1px; margin: 10px 0; background: linear-gradient(90deg, transparent, var(--lilac), var(--gold), transparent); }
+.event strong { color: var(--ink); font-size: 16.5px; font-weight: 700; }
+.mapBtn { background: var(--ink); color: #ffffff; font-family: var(--serif); font-weight: 600; font-size: 13px; letter-spacing: .04em; }
+.mapBtn:hover { background: var(--accent); }
+
+/* ── Story: small suns rising along a dawn-coloured line ── */
+.story { background: linear-gradient(180deg, transparent, rgba(181, 195, 226, .18) 30%, rgba(244, 201, 179, .18) 70%, transparent); }
+.timeline::before { left: 21px; width: 2px; border-radius: 2px; background: linear-gradient(var(--sky), var(--lilac) 50%, var(--peach)); }
+.node { width: 40px; height: 40px; margin-left: 2px; border: 0; background: #fffcf8; box-shadow: 0 0 0 1px var(--line), 0 6px 14px rgba(93, 95, 150, .12); overflow: hidden; }
+.node img { width: 34px; translate: 0 4px; }
+.storyBody small { color: var(--gold-d); font-size: 10.5px; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 500; }
+.storyImg { border-radius: 20px; }
+
+/* ── Gallery ── */
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 22px; }
+.tile:first-child { border-radius: 999px 999px 22px 22px; }
+.tile:nth-child(4n + 1):last-child:not(:first-child) { grid-column: span 2; }
+
+/* ── Wishes ── */
+.wishes { background: linear-gradient(180deg, transparent, rgba(201, 191, 220, .18) 40%, transparent); }
+.form { padding: 24px 20px; border: 0; border-radius: 26px; background: rgba(255, 252, 248, .85); box-shadow: 0 16px 36px rgba(93, 95, 150, .1); }
+.field > span, .diet { color: var(--accent); font-size: 10.5px; }
+.field input, .field textarea { border-color: var(--line); border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: #ffffff; }
+.step { border-color: var(--lilac); }
+.submit { background: var(--ink); color: #ffffff; font-family: var(--serif); font-weight: 600; letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.sentBox img { width: 110px; }
+.sent { color: var(--accent); font-family: var(--display); font-size: 23px; }
+.wish { border: 0; border-radius: 20px; background: rgba(255, 252, 248, .8); box-shadow: 0 8px 20px rgba(93, 95, 150, .07); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 19px; font-weight: 600; }
+.wish small { background: rgba(201, 191, 220, .35); color: var(--accent2); }
+
+/* ── Gifts: cards washed in the dawn gradient ── */
+.gift { border-radius: 26px; background: linear-gradient(160deg, #c3cbe6, #dccde2 50%, #f6d6c6); color: var(--ink); box-shadow: 0 14px 30px rgba(93, 95, 150, .14); }
+.gift::after { right: -50px; bottom: -70px; width: 170px; height: 170px; border: 0; border-radius: 50%; background: radial-gradient(circle, rgba(255, 243, 220, .9), transparent 70%); box-shadow: none; }
+.giftIcon { border-color: rgba(63, 65, 112, .3); background: rgba(255, 255, 255, .35); }
+.gift h3 { color: var(--ink); font-family: var(--serif); font-weight: 700; font-size: 14px; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 28px; font-weight: 600; }
+.gift small { color: var(--muted); }
+.copy { border-color: rgba(63, 65, 112, .4); color: var(--ink); font-family: var(--serif); font-weight: 600; }
+.copy:hover { background: rgba(255, 255, 255, .45); }
+.copyOn, .copyOn:hover { background: var(--ink); color: #ffffff; }
+
+/* ── Closing: back to the horizon ── */
+.closing { padding: 70px 28px 250px; }
+.closeRays { position: absolute; z-index: -1; left: 50%; bottom: 40px; width: 640px; max-width: none; height: auto; translate: -50% 0; animation: dawnBreath 10s ease-in-out infinite alternate; pointer-events: none; }
+.closeSkyline { position: absolute; z-index: -1; left: 50%; bottom: -4px; width: 680px; max-width: none; height: auto; translate: -50% 0; pointer-events: none; }
+.closeSun { width: 120px; height: auto; margin-bottom: -4px; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 500; font-style: italic; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--accent); font-family: var(--display); font-size: 17px; font-style: italic; font-weight: 500; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 12.5px; letter-spacing: .1em; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 500; }
+.made { position: relative; z-index: 1; color: rgba(63, 65, 112, .55); }
+.music { border-color: rgba(255, 255, 255, .7); background: var(--accent); }
+
+/* ── Cover: dawn sky, names in the quiet upper air, skyline in the mist below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--band-bg); text-align: center; isolation: isolate; }
+.coverTop { display: flex; flex-direction: column; align-items: center; padding: 64px 26px 0; }
+.coverArabic { color: var(--accent2); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.kicker { margin-top: 10px; color: var(--ink); font-family: var(--serif); font-size: 10.5px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; opacity: .8; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 18px; color: var(--ink); font-family: var(--display); font-size: 60px; font-weight: 500; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { margin: 4px 0; color: var(--gold-d); font-size: 34px; font-style: italic; }
+.coverDate { display: flex; align-items: center; gap: 12px; margin-top: 20px; color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 34px; height: 1px; background: currentColor; opacity: .4; }
+.dawn { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 200px; }
+.dawnRays { position: absolute; left: 50%; bottom: 20px; width: 660px; max-width: none; height: auto; translate: -50% 0; animation: dawnBreath 10s ease-in-out infinite alternate; }
+.dawnSkyline { position: absolute; left: 50%; bottom: -2px; width: 640px; max-width: none; height: auto; translate: -50% 0; }
+.coverFoot { position: relative; display: flex; flex-direction: column; align-items: center; align-self: stretch; padding: 0 24px 30px; background: linear-gradient(180deg, rgba(248, 242, 234, .0), #f8f2ea 40%); }
+.guest { max-width: 318px; padding: 14px 18px; border-radius: 22px; background: rgba(255, 252, 248, .7); box-shadow: 0 10px 26px rgba(93, 95, 150, .1); backdrop-filter: blur(6px); }
+.guest small { color: var(--muted); font-size: 13px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 23px; font-weight: 600; }
+.table { border-color: var(--lilac); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { margin-top: 14px; background: var(--ink); color: #ffffff; font-family: var(--serif); font-weight: 600; font-size: 13px; letter-spacing: .14em; box-shadow: 0 10px 24px rgba(63, 65, 112, .28); }
+.openBtn:hover { background: var(--accent); }
+
+/* ── Hero: capsule photo rising out of the sky wash ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 52px 24px 50px; overflow: hidden; text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 0; height: 470px; background: var(--band-bg); -webkit-mask: linear-gradient(#000 55%, transparent); mask: linear-gradient(#000 55%, transparent); }
+.heroSkyline { position: absolute; z-index: -1; top: 250px; left: 50%; width: 600px; max-width: none; height: auto; translate: -50% 0; opacity: .75; }
+.heroPhoto { width: 246px; height: 372px; padding: 6px; border-radius: 999px; background: var(--dawn); box-shadow: 0 24px 48px rgba(63, 65, 112, .2); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 999px; object-fit: cover; }
+.heroKicker { margin-top: 30px; color: var(--gold-d); font-family: var(--serif); font-size: 10.5px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 48px; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--gold-d); font-size: 34px; font-style: italic; }
+.heroDate { margin-top: 10px; color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 16px; color: var(--muted); font-family: var(--display); font-size: 20px; font-style: italic; font-weight: 500; line-height: 1.45; text-wrap: balance; }
+
+@keyframes dawnBreath { from { opacity: .55; scale: .97; } to { opacity: 1; scale: 1.03; } }
+@media (prefers-reduced-motion: reduce) {
+  .dawnRays, .countRays, .closeRays { animation: none; }
+}

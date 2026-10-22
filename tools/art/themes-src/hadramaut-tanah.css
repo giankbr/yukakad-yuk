@@ -1,0 +1,157 @@
+/* Hadramaut Tanah — a walled town of Hadrami mud-brick tower houses at blue hour: straw-flecked adobe, whitewashed lime crowns with stepped parapets, carved teak shutters and doors, date palms; lime-washed plaster pages, tower-top cards with merlons, window-shaped portraits */
+.root, .cover {
+  --bg: #ecdcc2; --paper: #e4cfb0; --ivory: #f6efe2; --field: #fbf6ec; --ink: #3b2416; --muted: #6e5440; --line: #d2b892;
+  --accent: #8a4f28; --accent2: #6e3c1e; --gold: #c99a4a; --gold-l: #f3dca8; --gold-d: #9a6a2a;
+  --mud: #b27a4a; --mud-d: #7e4f2c; --lime: #f4ede0; --teak: #4a2e1a; --dusk: #2f4466; --dusk-l: #8ea0c0; --lit: #ffd58a;
+  --band-bg: #2f4466 url(/themes/art/hadramaut-tanah/sky.webp) center 30% / cover; --band-ink: #f6efe2;
+  --display: "Gloock", "DM Serif Display", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Gloock", Georgia, serif;
+  --teeth: conic-gradient(from 135deg at 50% 0, #000 90deg, transparent 0) 0 100% / 16px 9px repeat-x;
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) url(/themes/art/hadramaut-tanah/adobe.webp) repeat; line-height: normal;
+}
+.root {
+  --t-accent: #8a4f28; --t-accent-ink: #f6efe2; --t-bg: #ecdcc2; --t-ink: #3b2416; --t-muted: #6e5440; --t-line: #d2b892; --t-field: #fbf6ec;
+  --t-radius: 6px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Gloock", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17.5px;
+}
+.main { background: transparent; }
+.eyebrow, .role, .salamKicker, .field > span, .diet, .guestsLabel, .storyBody small { font-family: var(--serif); font-weight: 700; letter-spacing: .2em; }
+.eyebrow { color: var(--mud); font-size: 12px; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-weight: 400; }
+.divider { width: 170px; }
+.intro, .parents, .eventAddr, .storyBody p, .wish p { color: var(--muted); font-size: 17.5px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 54px 30px 58px; }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamKicker { max-width: 300px; color: var(--dusk); font-size: 12px; letter-spacing: .14em; line-height: 1.7; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; }
+
+/* ── People: photos set in lime-framed tower windows ── */
+.couple { gap: 14px; background: linear-gradient(180deg, transparent, rgba(178, 122, 74, .14) 50%, transparent); }
+.portrait { margin-bottom: 18px; padding: 0 0 10px; }
+.portraitFrame { width: 188px; height: 252px; padding: 9px; border: 0; border-radius: 94px 94px 3px 3px; background: var(--lime); box-shadow: 0 0 0 7px var(--mud), 0 0 0 9px var(--mud-d), 0 18px 30px rgba(90, 50, 20, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 86px 86px 2px 2px; }
+.portrait::after { content: ""; position: absolute; left: -18px; right: -18px; bottom: 0; height: 12px; border-radius: 2px; background: var(--lime); box-shadow: 0 3px 0 var(--mud-d); }
+.person:hover .portraitFrame { box-shadow: 0 0 0 7px var(--mud), 0 0 0 9px var(--mud-d), 0 0 34px rgba(255, 179, 71, .45); }
+.monogram { color: var(--mud); font-family: var(--display); font-size: 90px; }
+.role { color: var(--mud); font-size: 12px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 44px; }
+.fullName { color: var(--accent2); font-family: var(--serif); font-size: 19px; font-style: italic; }
+.amp { margin: 14px 0; gap: 12px; color: var(--mud); font-family: var(--display); font-size: 40px; }
+.amp img { width: 48px; }
+
+/* ── Countdown: lime windows against the blue-hour sky ── */
+.countBand { padding: 58px 20px 66px; gap: 24px; }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0 0; height: 46%; background: url(/themes/art/hadramaut-tanah/town.webp) center bottom / 120% auto no-repeat; opacity: .5; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--lime); text-shadow: 0 2px 14px rgba(20, 30, 50, .45); }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 10px; }
+.count > div { height: 90px; border: 0; border-radius: 36px 36px 3px 3px; background: var(--lime); box-shadow: 0 0 0 4px var(--mud), 0 10px 20px rgba(20, 30, 50, .35); }
+.count > div::before { content: ""; position: absolute; inset: 8px 8px auto 8px; height: 6px; border-radius: 3px; background: var(--lit); box-shadow: 0 0 10px rgba(255, 179, 71, .8); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 213, 138, .35) 50%, transparent 65%); }
+.count b { margin-top: 6px; color: var(--teak); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--mud-d); font-size: 13px; font-style: italic; }
+.countTba { color: var(--lime); }
+.ghostBtn { border-color: var(--lime); background: rgba(47, 68, 102, .5); color: var(--lime); font-family: var(--serif); font-weight: 700; }
+
+/* ── Events: lime-washed tower tops with mud parapets ── */
+.events { gap: 40px; background: transparent; padding-top: 64px; }
+.event { margin-top: 10px; padding: 34px 22px 28px; border: 6px solid var(--mud); border-radius: 3px; background: var(--lime); box-shadow: 0 0 0 2px var(--mud-d), 0 16px 30px rgba(90, 50, 20, .14); }
+.event::before { inset: -17px -8px auto -8px; height: 11px; border: 0; border-radius: 0; background: var(--mud-d); -webkit-mask: var(--teeth); mask: var(--teeth); }
+.event:hover { border-color: var(--mud); box-shadow: 0 0 0 2px var(--mud-d), 0 20px 36px rgba(90, 50, 20, .2); }
+.eventNo { top: 12px; width: 32px; height: 40px; border-radius: 16px 16px 2px 2px; background: var(--teak); color: var(--lit); font-family: var(--display); font-size: 14px; box-shadow: inset 0 0 0 3px #6a4024, 0 0 12px rgba(255, 179, 71, .4); }
+.event h3 { margin-top: 30px; color: var(--ink); font-family: var(--display); font-size: 26px; }
+.eventDate { color: var(--accent2); font-size: 18px; }
+.eventTime { color: var(--mud); font-family: var(--serif); font-weight: 700; font-size: 15px; }
+.rule { width: 70px; height: 4px; border-radius: 2px; background: var(--mud); }
+.event strong { color: var(--ink); font-size: 19px; }
+.mapBtn { border-radius: 4px; background: var(--teak); color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 14px; }
+.mapBtn:hover { background: var(--mud-d); }
+
+/* ── Story: lit windows as nodes ── */
+.story { background: linear-gradient(180deg, transparent, rgba(178, 122, 74, .14) 50%, transparent); }
+.timeline::before { left: 20px; width: 4px; background: repeating-linear-gradient(var(--mud) 0 14px, transparent 14px 18px); }
+.node { width: 30px; height: 38px; margin-left: 4px; border: 4px solid var(--lime); border-radius: 15px 15px 2px 2px; background: linear-gradient(var(--lit), #f0a84a); box-shadow: 0 0 0 2px var(--mud), 0 0 14px rgba(255, 179, 71, .55); }
+.storyBody small { color: var(--mud); font-size: 12px; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; }
+.storyImg { border: 5px solid var(--lime); border-radius: 3px; box-shadow: 0 0 0 3px var(--mud); }
+
+/* ── Gallery: windows in a mud wall ── */
+.gallery { background: transparent; }
+.mosaic { gap: 12px; padding: 14px; border-radius: 4px; background: var(--mud) linear-gradient(170deg, rgba(255, 220, 170, .18), transparent 60%); box-shadow: inset 0 0 0 3px var(--mud-d); }
+.tile { border: 4px solid var(--lime); border-radius: 3px; }
+.tile:first-child { border-radius: 120px 120px 3px 3px; }
+.tile:hover { filter: brightness(1.06) saturate(1.06); }
+.tile:nth-child(4n + 1):last-child:not(:first-child) { grid-column: span 2; }
+
+/* ── Wishes ── */
+.wishes { background: linear-gradient(180deg, transparent, rgba(47, 68, 102, .08) 50%, transparent); }
+.form { border: 5px solid var(--mud); border-radius: 3px; background: var(--lime); box-shadow: 0 0 0 2px var(--mud-d); }
+.field > span, .diet { color: var(--mud); font-size: 12px; }
+.field input, .field textarea { border-color: #d9c6a6; border-radius: 3px; background: var(--field); }
+.field input:focus, .field textarea:focus { border-color: var(--mud); box-shadow: 0 0 0 3px rgba(178, 122, 74, .2); }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--teak); background: var(--teak); color: var(--gold-l); }
+.step { border-color: var(--mud); border-radius: 3px; }
+.submit { border-radius: 3px; background: var(--teak); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.submit:not(:disabled):hover { background: var(--mud-d); }
+.sentBox img { width: 110px; }
+.wish { border: 0; border-left: 5px solid var(--mud); border-radius: 3px; background: var(--ivory); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 17px; }
+.wish small { border-radius: 3px; background: rgba(178, 122, 74, .16); color: var(--mud-d); }
+
+/* ── Gifts: carved teak panels ── */
+.gift { border-radius: 4px; background: linear-gradient(90deg, rgba(0, 0, 0, .12), transparent 18%, transparent 82%, rgba(0, 0, 0, .12)), repeating-linear-gradient(90deg, #4a2e1a 0 7px, #533420 7px 9px, #46291a 9px 15px); box-shadow: inset 0 0 0 5px #6a4024, inset 0 0 0 7px #2f1c10, 0 14px 26px rgba(60, 30, 10, .25); }
+.gift::after { display: none; }
+.giftIcon { border-color: rgba(243, 220, 168, .5); background: rgba(243, 220, 168, .08); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.giftNo { color: var(--lime); font-family: var(--display); font-size: 23px; }
+.copy { border-radius: 3px; border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--teak); }
+
+/* ── Closing: the carved door under the blue-hour sky ── */
+.closing { padding: 60px 28px 60px; }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(20, 30, 50, .15), rgba(20, 30, 50, .45)); }
+.door { width: 150px; height: auto; margin-bottom: 6px; filter: drop-shadow(0 10px 18px rgba(20, 30, 50, .45)); }
+.thanks { color: var(--lime); font-family: var(--display); font-size: 40px; text-shadow: 0 2px 14px rgba(20, 30, 50, .5); }
+.closingText { color: rgba(246, 239, 226, .92); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-style: italic; }
+.family { font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .12em; }
+.closingNames { color: var(--lime); font-family: var(--display); font-size: 32px; }
+.music { border-color: var(--lime); background: var(--teak); }
+
+/* ── Cover: the town rising into the blue hour ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--band-bg); text-align: center; isolation: isolate; }
+.coverTop { display: flex; flex-direction: column; align-items: center; padding: 42px 24px 0; }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.kicker { margin-top: 6px; color: var(--lime); font-family: var(--serif); font-weight: 700; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; opacity: .9; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: var(--lime); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 2px 18px rgba(20, 30, 50, .5); }
+.coverNames em { margin: 2px 0; color: var(--gold-l); font-family: var(--serif); font-size: 24px; font-style: italic; }
+.coverDate { margin-top: 10px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: .16em; }
+.town { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 230px; margin-top: 4px; background: url(/themes/art/hadramaut-tanah/town.webp) center bottom / 100% auto no-repeat; }
+.townGlow { position: absolute; z-index: -1; left: -10%; right: -10%; bottom: 18%; height: 46%; background: radial-gradient(50% 60% at 50% 100%, rgba(255, 190, 120, .55), transparent 70%); animation: dusk 9s ease-in-out infinite alternate; pointer-events: none; }
+.coverBottom { position: relative; display: flex; flex-direction: column; align-items: center; align-self: stretch; padding: 0 24px 30px; background: #ecdcc2 url(/themes/art/hadramaut-tanah/adobe.webp); }
+.guest { max-width: 320px; margin-top: -8px; padding: 14px 18px; border: 4px solid var(--mud); border-radius: 3px; background: var(--lime); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.table { border-radius: 3px; border-color: var(--mud); color: var(--mud-d); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 14px; border-radius: 4px; background: var(--teak); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; box-shadow: 0 8px 18px rgba(60, 30, 10, .3); }
+.openBtn:hover { background: var(--mud-d); }
+
+/* ── Hero: photo behind a lime-framed tower window ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 46px; text-align: center; }
+.heroTrim { display: block; width: 260px; height: auto; margin-bottom: -2px; }
+.heroPhoto { position: relative; width: 276px; height: 360px; padding: 10px; border-radius: 138px 138px 3px 3px; background: var(--lime); box-shadow: 0 0 0 9px var(--mud), 0 0 0 11px var(--mud-d), 0 24px 40px rgba(90, 50, 20, .25); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 128px 128px 2px 2px; object-fit: cover; }
+.heroSill { width: 320px; height: 14px; margin-top: 12px; border-radius: 2px; background: var(--lime); box-shadow: 0 4px 0 var(--mud-d); }
+.heroKicker { margin-top: 26px; color: var(--mud); font-family: var(--serif); font-weight: 700; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--mud); font-family: var(--serif); font-size: 26px; font-style: italic; }
+.heroDate { margin-top: 8px; color: var(--accent2); font-family: var(--serif); font-weight: 700; font-size: 14px; letter-spacing: .14em; }
+.heroNote { max-width: 310px; margin-top: 14px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: balance; }
+
+@keyframes dusk { from { opacity: .45; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .townGlow { animation: none; }
+}

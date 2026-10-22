@@ -1,0 +1,150 @@
+/* Natal Keluarga — Natal hangat di rumah: pohon cemara bergouache dengan lampu kuning & ornamen, lilin menyala, bintang emas, ranting cemara & poinsettia, merah–hijau–krem. */
+.root, .cover {
+  --bg: #f4ead3; --paper: #efe2c4; --ivory: #fbf5e6; --field: #fffaf0; --ink: #2b2219; --muted: #6a5a48; --line: #e0cfa8;
+  --accent: #24573c; --accent2: #173d2b; --gold: #c9a24e; --gold-l: #f6e7bd; --gold-d: #9a7631;
+  --red: #b8322c; --red-d: #86211f;
+  --band-bg: #86211f; --band-ink: #fbf5e6;
+  --display: "Young Serif", Georgia, serif; --serif: Alegreya, Georgia, serif; --script: Parisienne, cursive;
+  --h2: 30px; --card-r: 10px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #24573c; --t-accent-ink: #fbf5e6; --t-bg: #f4ead3; --t-ink: #2b2219; --t-muted: #6a5a48; --t-line: #e0cfa8; --t-field: #fffaf0;
+  --t-radius: 10px; --t-font: Alegreya, Georgia, serif; --t-heading-font: "Young Serif", serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--bg); }
+
+/* type */
+.eyebrow, .salamKicker, .role { color: #b8322c; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .26em; }
+.head h2 { color: #24573c; }
+.salamBlock { position: relative; padding-top: 52px; }
+.salamTitle { color: #b8322c; font-family: var(--script); font-size: 58px; line-height: 1; }
+.salamSub { color: #24573c; font-family: var(--display); font-size: 17px; }
+.intro { color: var(--muted); font-size: 18px; }
+.divider { width: 46px; }
+
+/* people: wreath portraits (host families) */
+.couple { background: #24573c; color: #fbf5e6; }
+.couple .head h2 { color: #fbf5e6; }
+.couple .eyebrow, .couple .role { color: #f6e7bd; }
+.couple .fullName { color: #fbf5e6; }
+.couple .parents { color: rgba(251, 245, 230, .8); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 176px; height: 176px; padding: 8px; border: 2px solid #c9a24e; border-radius: 50%; background: #fbf5e6; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: #b8322c; font-family: var(--display); font-size: 84px; }
+.wreath { position: absolute; z-index: 2; left: 50%; bottom: -30px; width: 210px; height: auto; translate: -50% 0; }
+.nick { color: #f6e7bd; font-family: var(--display); font-size: 40px; }
+.amp { color: #f6e7bd; font-family: var(--script); }
+.amp img { width: 34px; }
+
+/* countdown: deep red with a string of lights */
+.countBand { padding-top: 78px; background: #86211f radial-gradient(ellipse at 50% 40%, #a1302a, #86211f 70%); }
+.countLights { position: absolute; z-index: -1; top: 6px; left: -10px; width: calc(100% + 20px); height: 40px; object-fit: cover; transform-origin: 50% 0; animation: sway 7s ease-in-out infinite alternate; }
+.count > div { border: 1px solid rgba(246, 231, 189, .5); border-radius: 10px; background: rgba(0, 0, 0, .12); }
+.count b { font-family: var(--display); color: #f6e7bd; }
+.count small { color: #f3d9c8; }
+
+/* events: gift tags */
+.events { background: var(--bg); }
+.event { border: 0; border-radius: 10px; background: #fbf5e6; box-shadow: 0 10px 24px rgba(43, 34, 25, .1); padding: 44px 22px 28px; clip-path: polygon(14% 0, 86% 0, 100% 10%, 100% 100%, 0 100%, 0 10%); }
+.event::before { inset: 8px; border: 1px dashed rgba(184, 50, 44, .4); border-radius: 6px; }
+.eventNo { top: 14px; width: 16px; height: 16px; border-radius: 50%; background: #f4ead3; box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25); color: transparent; font-size: 0; }
+.event h3 { color: #b8322c; font-family: var(--display); font-size: 24px; }
+.eventDate { font-size: 19px; }
+.eventTime { color: #24573c; font-family: var(--serif); font-weight: 700; font-size: 16px; }
+.rule { width: 60px; height: 2px; background: #c9a24e; }
+.mapBtn, .submit { background: #24573c; color: #fbf5e6; font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .04em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #173d2b; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(#b8322c, rgba(184, 50, 44, .15)); }
+.node { width: 44px; height: 44px; border-color: #c9a24e; background: #fbf5e6; }
+.node img { width: 34px; }
+.storyBody small { color: #b8322c; font-weight: 700; letter-spacing: .18em; }
+.storyBody h3 { color: #24573c; font-family: var(--display); font-size: 21px; }
+.storyBody p { font-size: 17px; }
+
+/* gallery: polaroids on a cord */
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 4px; border: 8px solid #fbf5e6; border-bottom-width: 22px; box-shadow: 0 10px 20px rgba(43, 34, 25, .16); }
+.tile:nth-child(odd) { rotate: -1.6deg; }
+.tile:nth-child(even) { rotate: 1.4deg; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; background: #fbf5e6; box-shadow: 0 10px 24px rgba(43, 34, 25, .08); }
+.field > span, .diet, .guestsLabel { color: #24573c; font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.field input, .field textarea { font-family: var(--serif); font-size: 17px; }
+.choices button { font-family: var(--serif); font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #b8322c; border-color: #b8322c; color: #fbf5e6; }
+.wish { border: 0; border-left: 3px solid #24573c; border-radius: 6px; background: #fbf5e6; }
+.wish strong { color: #b8322c; font-family: var(--display); font-size: 16px; }
+.wish small { background: #e6efe0; color: #24573c; }
+.wish p { font-size: 17px; }
+.sentBox img { width: 110px; }
+.sent { color: #24573c; }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: 10px; background: #24573c; }
+.gift::after { right: -30px; bottom: -30px; border-color: rgba(246, 231, 189, .08); }
+.gift h3 { font-family: var(--display); color: #f6e7bd; }
+.giftNo { font-family: var(--display); }
+.copy { border-color: #f6e7bd; }
+.copyOn, .copyOn:hover { background: #f6e7bd; color: #24573c; }
+
+/* closing: candlelight */
+.closing { background: #14301f url(/themes/art/natal-keluarga/night.webp) center / cover; padding-top: 40px; }
+.closingCandles { position: relative; width: 240px; margin: 0 auto 6px; }
+.closingCandles > img:first-child { width: 100%; height: auto; }
+.thanks { color: #f6e7bd; font-family: var(--script); font-size: 60px; }
+.closingSalam { font-family: var(--display); font-size: 16px; letter-spacing: .02em; color: #f6e7bd; }
+.closingNames { font-family: var(--display); font-size: 26px; }
+.music { background: #b8322c; border-color: #f6e7bd; }
+
+/* candle flames */
+.flame { position: absolute; z-index: 2; width: 7%; height: auto; translate: -50% -82%; transform-origin: 50% 85%; animation: flicker 2.6s ease-in-out infinite; }
+.flame1 { left: 24.4%; top: 17%; animation-delay: -.7s; }
+.flame2 { left: 50.3%; top: 2%; }
+.flame3 { left: 75.8%; top: 22%; animation-delay: -1.4s; }
+
+/* ── Cover ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 72px 26px 0; overflow: hidden; background: #14301f url(/themes/art/natal-keluarga/night.webp) center / cover; color: #fbf5e6; text-align: center; isolation: isolate; }
+.coverLights { position: absolute; z-index: 1; top: -4px; left: -16px; width: calc(100% + 32px); height: 46px; object-fit: cover; transform-origin: 50% 0; animation: sway 8s ease-in-out infinite alternate; }
+.kicker { color: #f6e7bd; font-size: 13px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.greet { margin-top: 8px; color: #f6e7bd; font-family: var(--script); font-size: 52px; line-height: 1; }
+.coverName { max-width: 100%; margin-top: 8px; color: #fbf5e6; font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.12; overflow-wrap: anywhere; text-wrap: balance; }
+.coverDate { margin-top: 10px; color: #f3d9c8; font-size: 17px; font-style: italic; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 22px; width: 100%; }
+.guest { position: relative; max-width: 290px; padding: 22px 20px 14px; border-radius: 6px; background: #fbf5e6; color: var(--ink); clip-path: polygon(16% 0, 84% 0, 100% 16%, 100% 100%, 0 100%, 0 16%); box-shadow: 0 10px 20px rgba(0, 0, 0, .3); rotate: -2deg; }
+.guest::before { content: ""; position: absolute; top: 8px; left: 50%; width: 10px; height: 10px; translate: -50% 0; border-radius: 50%; background: #14301f; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: #b8322c; font-family: var(--display); font-size: 20px; }
+.table { border-color: #c9a24e; color: #9a7631; }
+.openBtn { background: #b8322c; color: #fbf5e6; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .06em; box-shadow: 0 8px 18px rgba(0, 0, 0, .3), inset 0 0 0 1px rgba(246, 231, 189, .4); }
+.openBtn:hover { background: #c83c35; translate: 0 -1px; }
+.scene { position: relative; z-index: 2; width: calc(100% + 52px); height: 330px; margin-top: auto; flex-shrink: 0; }
+.scene .tree { position: absolute; left: 50%; bottom: -6px; width: 230px; height: auto; translate: -50% 0; }
+.scene .star { position: absolute; left: 50%; bottom: 290px; width: 58px; height: auto; translate: -50% 0; animation: twinkle 4s ease-in-out infinite; }
+.scene .candles { position: absolute; left: 4px; bottom: 6px; width: 130px; }
+.scene .candles > img:first-child { width: 100%; height: auto; }
+.scene .sprigR { position: absolute; right: -28px; bottom: 14px; width: 150px; height: auto; rotate: -24deg; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 20px; overflow: hidden; text-align: center; }
+.heroSprig { position: absolute; top: -10px; width: 190px; height: auto; }
+.heroSprigL { left: -58px; rotate: 12deg; }
+.heroSprigR { right: -58px; scale: -1 1; rotate: -12deg; }
+.heroStar { width: 52px; height: auto; margin-top: 30px; animation: twinkle 4s ease-in-out infinite; }
+.heroKicker { margin-top: 10px; color: #b8322c; font-size: 13px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.heroName { max-width: 100%; margin-top: 6px; color: #24573c; font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNote { max-width: 320px; margin-top: 12px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes flicker { 0%, 100% { scale: 1 1; rotate: -1deg; opacity: 1; } 30% { scale: .94 1.06; rotate: 2deg; } 60% { scale: 1.04 .95; rotate: -2deg; opacity: .9; } }
+@keyframes twinkle { 0%, 100% { scale: 1; filter: brightness(1); } 50% { scale: 1.08; filter: brightness(1.18); } }
+@media (prefers-reduced-motion: reduce) {
+  .flame, .scene .star, .heroStar, .coverLights, .countLights { animation: none; }
+}

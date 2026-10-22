@@ -1,0 +1,191 @@
+/* Osing Gajah Oling — pernikahan Osing Banyuwangi: batik gajah oling malam-krem di atas sogan hitam, rumah Osing di antara kebun kopi kaki Ijen, ranting kopi cat air, kartu bertepi kain batik. */
+.root, .cover {
+  --bg: #f4ecdc; --paper: #efe4cc; --ivory: #fbf6ea; --field: #fffaf0; --ink: #1d1712; --muted: #5e4b3a; --line: #d9c7a6;
+  --accent: #a5322a; --accent2: #8a2620; --gold: #b58a4a; --gold-l: #efe2c6; --gold-d: #7a5a30;
+  --band-bg: #1d1712; --band-ink: #efe2c6;
+  --display: Fraunces, "Young Serif", Georgia, serif; --serif: Figtree, "Segoe UI", sans-serif; --script: Fraunces, Georgia, serif;
+  --sogan: #1d1712; --wax: #efe2c6; --merah: #a5322a; --hijau: #5f7a3c; --kopi: #6b4a2e;
+  --batik: url(/themes/art/osing-gajah-oling/batik.webp) repeat 0 0 / 210px;
+  --dark-room: linear-gradient(180deg, rgba(29, 23, 18, .86), rgba(29, 23, 18, .78)), var(--batik);
+  --gable: polygon(50% 0, 100% 19%, 100% 100%, 0 100%, 0 19%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #a5322a; --t-accent-ink: #fbf6ea; --t-bg: #f4ecdc; --t-ink: #1d1712; --t-muted: #5e4b3a; --t-line: #d9c7a6; --t-field: #fffaf0;
+  --t-radius: 3px; --t-font: Figtree, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* divider: sogan-ink version on cream rooms, wax-cream version on the dark batik rooms */
+.divider { position: relative; width: 168px; }
+.divider img { display: block; width: 100%; height: auto; }
+.divider img + img { display: none; }
+.salamBlock .divider img, .countBand .divider img, .gallery .divider img, .gifts .divider img { display: none; }
+.salamBlock .divider img + img, .countBand .divider img + img, .gallery .divider img + img, .gifts .divider img + img { display: block; }
+
+/* section heads sit left with a red selvedge rule, like the edge of a kain panjang */
+.head { align-items: flex-start; width: 100%; padding-left: 16px; border-left: 3px solid var(--merah); text-align: left; }
+.head h2 { font-weight: 500; font-size: var(--h2); letter-spacing: -.01em; }
+.head h2, .headLight h2 { color: var(--ink); }
+.eyebrow { font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; color: var(--merah); }
+.section { align-items: stretch; gap: 24px; padding: 64px 24px; }
+
+/* opening on the batik cloth */
+.salamBlock { align-items: flex-start; gap: 12px; padding: 60px 30px 64px; background: var(--dark-room); color: var(--wax); text-align: left; }
+.arabic { align-self: stretch; color: var(--wax); font-size: 25px; text-align: right; }
+.salamKicker { color: #e0a08f; font-family: var(--serif); font-weight: 700; letter-spacing: .3em; }
+.salamTitle { color: var(--wax); font-family: var(--display); font-size: 30px; font-style: italic; font-weight: 400; line-height: 1.2; }
+.salamBlock .intro { max-width: none; color: rgba(239, 226, 198, .84); font-size: 16px; text-align: left; }
+
+/* couple: gable-roof portraits (rumah Osing tikel balung) with a coffee sprig */
+.couple { gap: 20px; align-items: center; background: var(--bg); }
+.couple .head { align-self: stretch; }
+.portrait { margin-bottom: 18px; }
+.portraitArt { position: absolute; z-index: 3; left: -46px; bottom: -14px; width: 150px; pointer-events: none; rotate: -14deg; }
+.portraitArt img { display: block; width: 100%; height: auto; }
+.personWrap:nth-child(3) .portraitArt { left: auto; right: -46px; scale: -1 1; rotate: 14deg; }
+.portraitFrame { width: 214px; height: 262px; padding: 8px; border: 0; border-radius: 0; background: var(--sogan); clip-path: var(--gable); }
+.portraitFrame::after { content: ""; position: absolute; inset: 4px; background: var(--wax); clip-path: var(--gable); z-index: -1; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--gable); }
+.portraitFrame { isolation: isolate; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--wax); font-family: var(--display); font-style: italic; }
+.role { color: var(--merah); font-family: var(--serif); font-weight: 700; letter-spacing: .28em; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 400; }
+.fullName { font-family: var(--display); font-weight: 500; font-size: 19px; }
+.parents { font-size: 15px; }
+.amp { margin: 18px 0 16px; gap: 12px; color: var(--merah); font-family: var(--display); font-style: italic; font-size: 46px; }
+.amp img { width: 78px; }
+
+/* countdown: dark batik band, digits printed on cream cloth squares */
+.countBand { align-items: center; padding: 66px 24px; background: var(--dark-room); }
+.headLight { align-items: center; }
+.headLight .eyebrow { color: #e0a08f; }
+.headLight h2 { color: var(--wax); font-family: var(--display); font-style: italic; font-weight: 400; font-size: 30px; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: 92px; border: 0; border-radius: 2px; background: var(--wax); box-shadow: inset 0 5px 0 var(--merah), 3px 3px 0 rgba(239, 226, 198, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .45) 50%, transparent 65%); }
+.count b { color: var(--ink); font-family: var(--display); font-size: 32px; font-weight: 500; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.countTba { color: var(--wax); }
+.ghostBtn { border-color: var(--wax); border-radius: 2px; color: var(--wax); font-family: var(--serif); font-weight: 700; font-size: 13px; }
+
+/* events: cloth cards with a batik selvedge strip down the left, text set flush left */
+.events { gap: 22px; background: var(--bg); }
+.event { align-items: flex-start; gap: 6px; padding: 26px 20px 24px 40px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 5px 5px 0 rgba(29, 23, 18, .1); }
+.event::before { inset: 0 auto 0 0; width: 20px; border: 0; border-radius: 0; background: linear-gradient(90deg, transparent 80%, var(--merah) 80%), var(--batik); background-size: auto, 140px; }
+.event:hover { border-color: var(--gold); box-shadow: 7px 7px 0 rgba(165, 50, 42, .16); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--merah); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: 0; }
+.event h3 { font-family: var(--display); font-size: 24px; font-weight: 500; color: var(--ink); text-wrap: pretty; }
+.eventDate { color: var(--muted); font-family: var(--display); font-size: 16px; }
+.eventTime { color: var(--merah); font-family: var(--serif); font-weight: 700; }
+.rule { width: 46px; height: 2px; background: var(--sogan); }
+.event strong { font-size: 17px; font-weight: 700; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--sogan); color: var(--wax); font-family: var(--serif); font-weight: 700; box-shadow: 3px 3px 0 var(--merah); }
+.mapBtn:hover { background: #2e241c; box-shadow: 4px 4px 0 var(--merah); }
+
+/* story */
+.story { background: var(--paper); }
+.node { width: 36px; height: 36px; border: 0; background: none; }
+.nodeMark { width: 16px; height: 16px; rotate: 45deg; background: var(--merah); box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--sogan); }
+.timeline::before { width: 2px; left: 21px; background: repeating-linear-gradient(var(--sogan) 0 6px, transparent 6px 11px); }
+.storyBody small { color: var(--merah); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 500; }
+.storyImg { border-radius: 2px; }
+
+/* gallery on batik */
+.gallery { background: var(--dark-room); }
+.gallery .head { border-left-color: #e0a08f; }
+.gallery .head h2 { color: var(--wax); }
+.gallery .eyebrow { color: #e0a08f; }
+.mosaic { grid-auto-rows: 140px; gap: 10px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 3px var(--wax); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 0; clip-path: var(--gable); box-shadow: none; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 2px; border-color: var(--line); box-shadow: 6px 6px 0 rgba(29, 23, 18, .08); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-weight: 700; font-size: 11px; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--sogan); background: var(--sogan); color: var(--wax); }
+.step { border-color: var(--sogan); color: var(--ink); }
+.submit { border-radius: 2px; background: var(--merah); color: #fbf6ea; font-family: var(--serif); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--ink); font-family: var(--display); }
+.wish { border-radius: 2px; border-left: 3px solid var(--merah); }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.wish small { background: rgba(95, 122, 60, .14); color: #44592a; }
+.sentBox img { width: 150px; }
+
+/* gifts: cream cloth envelopes on batik */
+.gifts { background: var(--dark-room); }
+.gifts .head h2 { color: var(--wax); }
+.gifts .eyebrow { color: #e0a08f; }
+.gifts .head { border-left-color: #e0a08f; }
+.gifts .intro { max-width: none; color: rgba(239, 226, 198, .82); text-align: left; }
+.gift { align-items: flex-start; padding: 22px 20px 22px 24px; border-radius: 2px; background: var(--wax); color: var(--ink); text-align: left; box-shadow: inset 0 -6px 0 var(--merah), 4px 4px 0 rgba(239, 226, 198, .2); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--sogan); background: var(--sogan); }
+.gift h3 { color: var(--merah); font-family: var(--serif); font-weight: 800; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-weight: 500; font-size: 23px; letter-spacing: .03em; }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--sogan); border-radius: 2px; color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: rgba(29, 23, 18, .07); }
+.copyOn, .copyOn:hover { background: var(--sogan); color: var(--wax); }
+
+/* closing: the village at the foot of Ijen */
+.closing { gap: 12px; padding: 66px 28px 0; background: linear-gradient(180deg, var(--bg), #efe6d2); color: var(--ink); }
+.closingKopi { width: 210px; height: auto; margin-bottom: 2px; }
+.thanks { color: var(--ink); font-family: var(--display); font-style: italic; font-size: 46px; font-weight: 400; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--merah); font-family: var(--serif); font-size: 13px; font-weight: 700; line-height: 1.5; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 600; letter-spacing: .06em; }
+.closingNames { color: var(--ink); font-family: var(--display); font-style: italic; font-size: 32px; }
+.made { position: relative; z-index: 2; margin-top: 4px; color: rgba(29, 23, 18, .5); }
+.closingScene { order: 10; position: relative; z-index: 0; width: calc(100% + 56px); margin: -18px -28px 0; pointer-events: none; }
+.closingScene img { display: block; width: 100%; height: auto; -webkit-mask-image: linear-gradient(transparent, #000 22%); mask-image: linear-gradient(transparent, #000 22%); }
+.music { border-color: var(--wax); background: var(--sogan); }
+
+/* ── Cover: the Ijen morning over a rumah Osing, then the batik cloth ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 28px 44px; overflow: hidden; background: linear-gradient(180deg, rgba(29, 23, 18, .74), rgba(29, 23, 18, .9)), var(--batik); color: var(--wax); text-align: center; isolation: isolate; }
+.coverScene { position: relative; z-index: 0; width: calc(100% + 56px); margin: 0 -28px; height: 262px; overflow: hidden; background: #f1e9d9; }
+.coverScene img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; animation: mist 18s ease-in-out infinite alternate; }
+.coverScene::after { content: ""; position: absolute; inset: auto 0 0; height: 70px; background: linear-gradient(transparent, rgba(29, 23, 18, .82)); }
+.coverCurl { position: absolute; z-index: 0; right: -70px; bottom: 120px; width: 210px; opacity: .42; pointer-events: none; animation: oling 11s ease-in-out infinite alternate; transform-origin: 30% 90%; }
+.coverCurl img { display: block; width: 100%; height: auto; }
+.coverCurl + .coverCurl { right: auto; left: -84px; bottom: 300px; width: 170px; opacity: .3; scale: -1 1; animation-delay: -4s; }
+.coverPhoto { position: relative; z-index: 2; width: 150px; height: 184px; margin-top: -96px; padding: 7px; background: var(--wax); clip-path: var(--gable); flex-shrink: 0; }
+.coverPhoto > img, .coverPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--gable); }
+.kicker { position: relative; z-index: 2; margin-top: 22px; font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: #e0a08f; }
+.coverNames { position: relative; z-index: 2; max-width: 100%; margin-top: 8px; font-family: var(--display); font-size: 46px; font-weight: 400; font-style: italic; line-height: 1.02; color: var(--wax); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { display: block; margin: 2px 0; font-size: 26px; font-style: normal; color: #e0a08f; }
+.coverDate { position: relative; z-index: 2; margin-top: 14px; font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--wax); }
+.coverDate::before, .coverDate::after { content: ""; display: inline-block; width: 22px; height: 2px; margin: 0 10px; vertical-align: middle; background: var(--merah); }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; margin-top: auto; padding-top: 26px; }
+.guest { padding: 14px 16px; border: 1px solid rgba(239, 226, 198, .35); background: rgba(29, 23, 18, .55); max-width: 320px; }
+.guest small { color: rgba(239, 226, 198, .75); font-size: 13px; font-style: normal; }
+.guest strong { font-family: var(--display); font-weight: 500; font-size: 19px; color: var(--wax); }
+.table { border-color: #e0a08f; border-radius: 2px; color: #e0a08f; font-family: var(--serif); font-weight: 700; }
+.openBtn { min-width: 0; padding: 0 26px; border-radius: 2px; background: var(--merah); color: #fbf6ea; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--wax); }
+.openBtn:hover { background: #b93a30; box-shadow: 5px 5px 0 var(--wax); }
+
+/* ── Hero: cream cloth, gable photo, a coffee sprig crossing ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 56px 28px 60px; overflow: hidden; background: var(--bg); text-align: left; }
+.heroKopi { position: absolute; z-index: 2; top: 210px; right: -36px; width: 200px; rotate: -24deg; pointer-events: none; }
+.heroKopi img { display: block; width: 100%; height: auto; }
+.heroKicker { font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--merah); }
+.heroNames { max-width: 100%; margin-top: 8px; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1; color: var(--ink); overflow-wrap: anywhere; }
+.heroNames em { display: block; margin: 4px 0; font-size: 30px; font-style: italic; color: var(--merah); }
+.heroPhoto { position: relative; z-index: 1; align-self: stretch; height: 360px; margin-top: 26px; padding: 9px; background: var(--sogan); clip-path: var(--gable); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--gable); }
+.heroDate { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+.heroDate::before { content: ""; width: 28px; height: 3px; background: var(--merah); }
+.heroNote { margin-top: 14px; font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.55; color: var(--muted); }
+
+@keyframes mist { from { scale: 1.02; translate: 0 0; } to { scale: 1.08; translate: -8px 4px; } }
+@keyframes oling { from { rotate: -3deg; } to { rotate: 4deg; } }
+@media (prefers-reduced-motion: reduce) { .coverScene img, .coverCurl { animation: none; } }
+.copy:not(.copyOn) svg { stroke: var(--sogan); }

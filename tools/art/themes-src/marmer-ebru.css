@@ -1,0 +1,165 @@
+/* Marmer Ebru — Turkish paper marbling (ebru): blush, teal and ochre raked into gel-git combs with gold-ink threads; a bookbinder's endpaper cover with a pasted label plate, marbled fore-edges on ivory cards, a teal feathered bath for the countdown, hatip blooms and a turning nightingale's-nest spiral */
+.root, .cover {
+  --bg: #f4ece0; --paper: #ede3d3; --ivory: #fbf7f0; --field: #fffdf8; --ink: #2b3434; --muted: #5f6463; --line: #ddd0bd;
+  --accent: #1f5a5a; --accent2: #164646; --gold: #b8913f; --gold-l: #ecd49a; --gold-d: #8f6c2a;
+  --blush: #c97c72; --blush-l: #f2cfc6; --teal: #3f8582; --ochre: #c9973f;
+  --band-bg: #1f4f4f; --band-ink: #f4ece0;
+  --display: "Bodoni Moda", "Didot", Georgia, serif; --serif: "Jost", "Futura", system-ui, sans-serif; --script: "Bodoni Moda", Georgia, serif; --label: "Jost", system-ui, sans-serif;
+  --marble: url(/themes/art/marmer-ebru/sheet.webp);
+  --h2: 31px;
+  font-family: var(--serif); font-weight: 400; color: var(--ink); background: var(--bg) url(/themes/art/marmer-ebru/paper.webp) repeat; line-height: normal;
+}
+.root {
+  --t-accent: #1f5a5a; --t-accent-ink: #fbf7f0; --t-bg: #f4ece0; --t-ink: #2b3434; --t-muted: #5f6463; --t-line: #ddd0bd; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: "Jost", system-ui, sans-serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: transparent; }
+.eyebrow, .role, .salamKicker, .field > span, .diet, .guestsLabel, .storyBody small, .heroKicker, .kicker { font-family: var(--label); font-weight: 500; letter-spacing: .26em; text-transform: uppercase; }
+.eyebrow { color: var(--blush); font-size: 11px; }
+.head { gap: 10px; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; color: var(--accent); letter-spacing: -.01em; }
+.divider { width: 176px; margin-top: 2px; }
+.intro { font-weight: 300; font-size: 16.5px; line-height: 1.75; }
+
+/* ── Opening ── */
+.salamBlock { gap: 12px; padding: 54px 30px 56px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { max-width: 260px; color: var(--blush); font-size: 11px; line-height: 1.8; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; line-height: 1.15; text-wrap: balance; }
+
+/* ── People: rectangular plates on a marbled mat, side by side text below ── */
+.couple { gap: 26px; background: transparent; }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 200px; height: 250px; padding: 12px; border: 0; border-radius: 0; background: var(--marble) center / 380px auto; box-shadow: 0 1px 0 rgba(255, 255, 255, .6) inset, 0 14px 30px rgba(31, 79, 79, .18); }
+.personWrap:last-child .portraitFrame { background-position: 70% 80%; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; outline: 5px solid var(--ivory); box-shadow: 0 0 0 6px var(--gold); }
+.portraitFrame:has(.monogram) { background-color: var(--paper); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--ivory); color: var(--accent); font-family: var(--display); font-size: 92px; font-style: italic; }
+.portraitBloom { position: absolute; z-index: 2; right: -18px; bottom: -22px; width: 64px; height: auto; rotate: 14deg; }
+.role { color: var(--blush); font-size: 11px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; line-height: 1.05; }
+.fullName { font-family: var(--serif); font-size: 16.5px; font-weight: 500; letter-spacing: .02em; }
+.parents { font-size: 15px; font-weight: 300; }
+.amp { gap: 16px; margin: 6px 0; color: var(--gold); font-family: var(--display); font-size: 50px; font-style: italic; }
+.amp img { width: 34px; }
+.amp img:last-child { scale: 1; }
+
+/* ── Countdown: a teal feathered bath ── */
+.countBand, .closing { position: relative; background: var(--band-bg); }
+.bath { position: absolute; z-index: -1; inset: -20px; background: linear-gradient(rgba(14, 44, 44, .72), rgba(14, 44, 44, .8)), url(/themes/art/marmer-ebru/bath.webp) center / 780px auto; animation: bathFlow 40s ease-in-out infinite alternate; }
+.countBand { padding: 64px 20px 66px; }
+.headLight h2 { color: var(--band-ink); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: 92px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: inset 0 0 0 4px var(--ivory), inset 0 0 0 5px var(--gold), 0 10px 22px rgba(0, 0, 0, .28); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(201, 151, 63, .16) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 500; }
+.count small { color: var(--blush); font-family: var(--label); font-size: 10.5px; font-style: normal; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); border-radius: 2px; color: var(--band-ink); font-family: var(--label); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
+
+/* ── Events: ivory plates with a marbled fore-edge ── */
+.events { gap: 26px; background: transparent; }
+.event { --card-r: 2px; align-items: flex-start; padding: 26px 22px 24px 40px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 0 12px 28px rgba(31, 79, 79, .08); }
+.event::before { inset: 0 auto 0 0; width: 18px; border: 0; border-radius: 0; background: var(--marble) 20% 30% / 300px auto; box-shadow: inset -1px 0 0 var(--gold); }
+.event:nth-of-type(2n)::before { background-position: 80% 70%; }
+.event:hover { border-color: var(--gold); }
+.eventNo { top: 22px; left: auto; right: 18px; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold); font-family: var(--display); font-size: 22px; font-style: italic; letter-spacing: 0; }
+.event h3 { padding-right: 34px; color: var(--accent); font-size: 25px; font-style: italic; }
+.eventDate { color: var(--blush); font-family: var(--label); font-size: 12.5px; font-style: normal; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-size: 15px; }
+.rule { width: 44px; height: 1px; margin: 8px 0; background: var(--gold); }
+.event strong { font-size: 17px; font-weight: 500; }
+.eventAddr { max-width: none; font-weight: 300; text-wrap: pretty; }
+.mapBtn { margin-top: 12px; border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; }
+
+/* ── Story: hatip blooms on a gold thread ── */
+.story { background: color-mix(in srgb, var(--paper) 65%, transparent); }
+.timeline::before { left: 21px; width: 1px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 15%, transparent)); }
+.node { width: 38px; height: 38px; border: 0; background: none; }
+.node img { width: 36px; }
+.storyBody { padding: 4px 0 2px 16px; border-left: 1px solid var(--line); }
+.storyBody small { color: var(--blush); font-size: 11px; }
+.storyBody h3 { font-size: 21px; font-style: italic; }
+.storyBody p { font-weight: 300; line-height: 1.65; }
+
+/* ── Gallery: prints on a marbled board ── */
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 140px; gap: 10px; padding: 12px; background: var(--marble) center / 520px auto; box-shadow: 0 14px 30px rgba(31, 79, 79, .16); }
+.tile { border-radius: 0; outline: 4px solid var(--ivory); outline-offset: -4px; }
+.tile:first-child { border-radius: 0; }
+.tile:last-child:nth-child(4n + 1) { grid-column: span 2; }
+
+/* ── Wishes ── */
+.wishes { background: color-mix(in srgb, var(--paper) 65%, transparent); }
+.form { border-radius: 2px; border-top: 6px solid transparent; border-image: var(--marble) 30 0 0 0 / 6px 0 0 0 stretch; box-shadow: 0 12px 28px rgba(31, 79, 79, .08); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-size: 10.5px; }
+.field input, .field textarea { border-radius: 2px; font-family: var(--serif); font-weight: 400; }
+.choices button { border-radius: 2px; font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { color: var(--ivory); }
+.submit, .sentBox .submit { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 12.5px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.sentBox img { width: 110px; }
+.sent { font-family: var(--display); font-size: 21px; }
+.wish { border-radius: 2px; border-left: 3px solid var(--blush); }
+.wish:nth-child(3n + 2) { border-left-color: var(--teal); }
+.wish:nth-child(3n + 3) { border-left-color: var(--ochre); }
+.wish strong { font-family: var(--display); font-size: 17px; font-style: italic; }
+.wish small { border-radius: 2px; font-family: var(--label); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; }
+.wish p { font-weight: 300; }
+
+/* ── Gifts: teal plates, marbled top edge ── */
+.gifts { background: transparent; }
+.gift { padding: 30px 20px 24px; border-radius: 2px; background: var(--accent); }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: var(--marble) center 40% / 420px auto; box-shadow: inset 0 -1px 0 var(--gold); }
+.gift::after { right: -50px; bottom: -50px; border-color: rgba(236, 212, 154, .08); }
+.gift h3 { font-family: var(--label); font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 22px; font-weight: 500; letter-spacing: .03em; line-height: 1.35; text-wrap: balance; }
+.giftIcon { border-color: rgba(236, 212, 154, .5); }
+.copy { border-radius: 2px; font-family: var(--label); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
+
+/* ── Closing ── */
+.closing { padding: 70px 28px 64px; }
+.nest { display: block; width: 132px; height: 132px; margin-bottom: 6px; padding: 10px; border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 1px var(--gold), 0 0 0 7px rgba(251, 247, 240, .12), 0 14px 30px rgba(0, 0, 0, .3); }
+.nest img { display: block; width: 100%; height: 100%; animation: turn 60s linear infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 34px; font-style: italic; line-height: 1.2; text-wrap: balance; }
+.closingText { font-weight: 300; }
+.closingSalam { font-family: var(--label); font-size: 11px; letter-spacing: .14em; line-height: 1.7; text-transform: uppercase; }
+.family { font-family: var(--label); font-size: 12.5px; font-weight: 300; letter-spacing: .1em; }
+.closingNames { font-family: var(--display); font-size: 38px; font-style: italic; }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: endpaper with a pasted label plate ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 34px; overflow: hidden; background: var(--bg) url(/themes/art/marmer-ebru/paper.webp) repeat; text-align: center; isolation: isolate; }
+.endpaper { position: relative; width: 100%; height: 54dvh; min-height: 320px; overflow: hidden; }
+.sheetArt { position: absolute; left: 50%; bottom: 0; width: 780px; max-width: none; height: auto; min-height: 100%; translate: -50% 0; object-fit: cover; object-position: 50% 100%; transform-origin: 50% 60%; animation: float 28s ease-in-out infinite alternate; }
+.plate { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; width: min(310px, calc(100% - 44px)); margin-top: -96px; padding: 34px 22px 26px; background: var(--ivory); box-shadow: inset 0 0 0 6px var(--ivory), inset 0 0 0 7px var(--gold), inset 0 0 0 10px var(--ivory), inset 0 0 0 11px color-mix(in srgb, var(--gold) 45%, transparent), 0 18px 40px rgba(31, 79, 79, .22); }
+.plateBloom { position: absolute; top: -30px; left: 50%; width: 58px; height: auto; translate: -50% 0; }
+.kicker { color: var(--blush); font-size: 10.5px; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold); font-size: 30px; }
+.coverDate { margin-top: 6px; padding-top: 10px; border-top: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); color: var(--ink); font-family: var(--label); font-size: 11.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.guest { margin-top: 24px; padding: 0 24px; }
+.guest small { color: var(--muted); font-family: var(--label); font-size: 13px; font-style: normal; font-weight: 300; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-style: italic; }
+.table { border-color: var(--gold); border-radius: 2px; color: var(--gold-d); font-family: var(--label); font-size: 10.5px; }
+.openBtn { margin-top: 18px; border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 12.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 10px 24px rgba(31, 79, 79, .3); transition: background .4s, box-shadow .4s, scale .3s var(--m-ease), translate .3s var(--m-ease); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: the first photo on a marbled mat ── */
+.hero { display: flex; flex-direction: column; align-items: center; padding: 40px 24px 52px; text-align: center; }
+.mat { position: relative; padding: 16px; background: var(--marble) 30% 40% / 640px auto; box-shadow: 0 18px 40px rgba(31, 79, 79, .2); rotate: -1.2deg; }
+.heroPhoto { width: 262px; height: 330px; padding: 6px; background: var(--ivory); box-shadow: inset 0 0 0 1px var(--gold); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { margin-top: 34px; color: var(--blush); font-size: 11px; }
+.heroNames { margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 .18em; color: var(--gold); font-size: .7em; }
+.heroDate { margin-top: 12px; color: var(--ink); font-family: var(--label); font-size: 12px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 16px; color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: balance; }
+
+@keyframes float { from { scale: 1.02; translate: -51% 0; } to { scale: 1.08; translate: -49% 6px; } }
+@keyframes bathFlow { from { background-position: 0 0, 0% 30%; } to { background-position: 0 0, 100% 70%; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .sheetArt, .bath, .nest img { animation: none; }
+}
