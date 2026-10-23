@@ -3,6 +3,7 @@ import type { GiftMethod, InvitationData, InvitationExtras } from "@/components/
 import { FALLBACK_THEME, isTheme, loadTheme } from "@/components/invitation/themes/registry";
 import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
 import { eventTypeLabel } from "@/lib/event-types";
+import { libraryTrack } from "@/lib/music-library";
 import { at, first, getContent, getGuest, getInvitation, guestNameFrom, longDateWIB, previewTokenFrom, timeRange } from "./data";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://rawuh.id";
@@ -112,7 +113,8 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
     },
     events: events.length ? events : invitation.events,
     stories: storyList.length ? storyList : undefined,
-    music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music) } : undefined,
+    // A built-in library track also carries its title and tempo (now-playing chip, beat pulse).
+    music: settings.music_url ? { url: settings.music_url, autoplay: Boolean(settings.autoplay_music), title: libraryTrack(settings.music_url)?.title, bpm: libraryTrack(settings.music_url)?.bpm } : undefined,
     extras: settings.sections_config && typeof settings.sections_config === "object" && !Array.isArray(settings.sections_config)
       ? settings.sections_config as InvitationExtras : undefined,
   };

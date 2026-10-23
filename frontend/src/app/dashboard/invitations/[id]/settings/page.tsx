@@ -4,7 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { MusicNotes as PhMusicNotes } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
+import { MusicLibrary } from "@/components/dashboard/MusicLibrary";
 import { TemplatePicker } from "@/components/dashboard/TemplatePicker";
+import { themeMood } from "@/components/invitation/themes/mood";
+import { libraryTrack } from "@/lib/music-library";
 import { apiFetch } from "@/lib/api";
 import { getSectionsConfig, patchSectionsConfig } from "@/lib/sections-config";
 import { useAuthToken, useRouteParams } from "@/lib/useAuthToken";
@@ -23,6 +26,8 @@ type Settings = {
 const MAX_MUSIC_BYTES = 10 << 20;
 
 function trackName(url: string) {
+  const builtIn = libraryTrack(url);
+  if (builtIn) return `${builtIn.title} · lagu bawaan Rawuh`;
   try {
     const name = decodeURIComponent(new URL(url).pathname.split("/").pop() ?? "");
     return name.replace(/^[0-9a-f]{8,}(?:-[0-9a-f]{4,})*[-_]/i, "") || "Musik latar";
@@ -149,7 +154,7 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
             <div className={styles.panelHead}>
               <div>
                 <h2 id="music-heading">Musik latar</h2>
-                <p>MP3, maksimal 10 MB. Tamu bisa menjeda musik kapan saja lewat tombol di pojok layar.</p>
+                <p>Pilih lagu bawaan Rawuh atau unggah MP3 sendiri (maks. 10 MB). Tamu bisa menjeda musik kapan saja lewat tombol di pojok layar.</p>
               </div>
             </div>
 
@@ -163,13 +168,26 @@ export default function SettingsPage({ params }: { params: Promise<{ id: string 
                   <audio controls preload="none" src={music} />
                 </div>
                 <div className={styles.trackActions}>
-                  <button type="button" className={styles.ghost} disabled={busy !== ""} onClick={() => fileInput.current?.click()}>Ganti</button>
+                  <button type="button" className={styles.ghost} disabled={busy !== ""} onClick={() => fileInput.current?.click()}>Unggah lain</button>
                   <button type="button" className={styles.danger} disabled={busy !== ""} onClick={() => saveSettings({ music_url: "", autoplay_music: false }, "Musik dihapus dari undangan.")}>Hapus</button>
                 </div>
               </div>
-            ) : (
+            ) : null}
+
+            <div className={styles.subhead}>
+              <h3>Lagu bawaan Rawuh</h3>
+              <p>Bebas royalti, siap dipakai. Dengarkan dulu, lalu tekan Pakai.</p>
+            </div>
+            <MusicLibrary current={music} recommended={templateId ? themeMood(templateId).mood : undefined} disabled={busy !== ""}
+              onPick={(track) => saveSettings(
+                // First music for this invitation: start it when the cover opens, like an upload would be expected to.
+                { music_url: track.file, autoplay_music: music ? settings.autoplay_music : true },
+                `${track.title} dipakai sebagai musik undangan.`,
+              )} />
+
+            {!music && (
               <button type="button" className={styles.drop} disabled={busy !== ""} onClick={() => fileInput.current?.click()}>
-                <strong>{busy === "upload" ? "Mengunggah musik..." : "Unggah musik"}</strong>
+                <strong>{busy === "upload" ? "Mengunggah musik..." : "Atau unggah MP3 sendiri"}</strong>
                 <span>Klik untuk memilih file MP3 dari perangkatmu</span>
               </button>
             )}
