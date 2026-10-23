@@ -1,0 +1,188 @@
+/* Bordir Tasik — bordir kerancang Tasikmalaya di atas voile katun putih: kelopak satin timbul, daun tulang ikan, sulur tusuk tangkai, lubang kerancang berpinggir feston yang memperlihatkan lapisan hijau pupus di baliknya; panel sampul seperti muka mukena dengan tepi bergerigi, foto dalam bingkai bordir, hitung mundur dalam ram sulam kayu, kartu bertepi tusuk jelujur; Cormorant Upright + Sorts Mill Goudy + Mrs Saint Delafield, putih gading dan hijau pupus. */
+.root, .cover {
+  --bg: #fbfaf4; --paper: #dfe9d3; --ivory: #fdfcf7; --field: #ffffff; --ink: #33443a; --muted: #67776a; --line: #d6dfcb;
+  --accent: #4f6f52; --accent2: #3d5a41; --gold: #9dbb8c; --gold-l: #eef4e6; --gold-d: #6b8a60;
+  --band-bg: #dfe9d3; --band-ink: #33443a;
+  --hoop: #d8b98b; --hoop-d: #b08e5e; --stitch: #8ea782;
+  --display: "Cormorant Upright", "Cormorant Garamond", serif; --serif: "Sorts Mill Goudy", Georgia, serif; --script: "Mrs Saint Delafield", cursive;
+  --voile: url("/themes/art/bordir-tasik/voile.webp") 0 0 / 128px 128px;
+  --linen: url("/themes/art/bordir-tasik/linen.webp") 0 0 / 128px 128px;
+  --hem: url("/themes/art/bordir-tasik/hem.webp");
+  --h2: 34px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4f6f52; --t-accent-ink: #fdfcf7; --t-bg: #fbfaf4; --t-ink: #33443a; --t-muted: #67776a; --t-line: #d6dfcb; --t-field: #ffffff;
+  --t-radius: 8px; --t-font: "Sorts Mill Goudy", Georgia, serif; --t-heading-font: "Cormorant Upright", serif; --t-heading-weight: 600; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--voile), var(--bg); }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-size: var(--h2); font-weight: 600; letter-spacing: .01em; }
+.divider { width: 190px; height: auto; }
+
+/* White voile sections hang over green linen ones with an embroidered scalloped hem. */
+.section { padding: 64px 24px 72px; }
+.couple, .story, .wishes { background: var(--linen), var(--paper); }
+.events, .gallery, .gifts { background: var(--voile), var(--bg); }
+.events, .gallery, .gifts { padding-bottom: 104px; }
+.events::after, .gallery::after, .gifts::after, .hero::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; bottom: -28px; height: 74px; background: var(--hem) 50% 100% / 390px auto repeat-x; pointer-events: none; }
+
+/* ── Hero: the photograph with the mukena hem falling over it ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 80px; background: var(--voile), var(--bg); text-align: center; }
+.hero::after { bottom: -30px; }
+.heroPhoto { position: relative; width: 100%; height: 470px; overflow: hidden; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.heroHem { position: absolute; z-index: 1; left: 0; right: 0; bottom: -2px; height: 92px; background: var(--hem) 50% 100% / 390px auto repeat-x; rotate: 180deg; pointer-events: none; }
+.heroBody { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: -4px; padding: 6px 28px 0; }
+.heroKicker { color: var(--gold-d); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-direction: column; align-items: center; color: var(--accent); font-family: var(--display); font-size: 58px; font-weight: 600; line-height: .98; overflow-wrap: anywhere; }
+.heroNames em { margin: 2px 0 -4px; color: var(--gold-d); font-family: var(--script); font-size: 46px; font-style: normal; font-weight: 400; line-height: 1; }
+.heroDate { padding: 6px 18px; border: 1.5px dashed var(--stitch); border-radius: 999px; color: var(--ink); font-size: 15px; letter-spacing: .06em; }
+.heroNote { max-width: 300px; margin-top: 4px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* ── Opening ── */
+.salamBlock { padding: 40px 28px 64px; background: var(--linen), var(--paper); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 54px; line-height: 1.05; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* ── Couple: photos inside an embroidered oval ── */
+.couple { gap: 14px; }
+.portrait { display: grid; place-items: center; width: 270px; height: 330px; margin-bottom: 6px; }
+.portraitFrame { width: 188px; height: 252px; padding: 0; border: 0; border-radius: 50%; background: var(--gold-l); box-shadow: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 14px 28px -14px rgba(51, 68, 58, .5); }
+.ovalRim { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.ovalRim img { width: 254px; height: auto; transition: rotate 1.6s var(--m-ease); }
+.person:hover .ovalRim img { rotate: -1.5deg; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 90px; }
+.role { margin-top: 2px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 18px; }
+.parents { color: var(--muted); }
+.amp { gap: 10px; margin: 18px 0 8px; color: var(--gold-d); font-family: var(--script); font-size: 60px; }
+.amp img { width: 46px; }
+
+/* ── Countdown: four embroidery hoops ── */
+.countBand { padding: 62px 16px 64px; background: var(--voile), var(--bg); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--accent); }
+.count { grid-template-columns: repeat(4, 76px); gap: 10px; }
+.count > div { width: 76px; height: 76px; border: 0; border-radius: 50%; background: var(--voile), #fff; box-shadow: 0 0 0 4px var(--hoop), 0 0 0 5px var(--hoop-d), inset 0 0 0 3px var(--hoop-d), inset 0 0 0 5px rgba(255, 255, 255, .9), 0 8px 14px -6px rgba(90, 64, 30, .45); }
+.count > div::before { content: ""; position: absolute; top: -9px; left: 50%; width: 12px; height: 8px; translate: -50% 0; border-radius: 2px 2px 0 0; background: linear-gradient(90deg, var(--hoop-d), #e9cfa6, var(--hoop-d)); }
+.count > div::after { display: none; }
+.count > div { overflow: visible; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 12px; font-style: italic; }
+.countTba { color: var(--accent); }
+.ghostBtn { border: 1.5px dashed var(--stitch); color: var(--accent); font-family: var(--serif); }
+.ghostBtn:hover { background: var(--gold-l); border-color: var(--accent); }
+
+/* ── Events: voile cards edged with running stitch, a spray in the corner ── */
+.events { gap: 26px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 4px; background: var(--voile), var(--ivory); box-shadow: 0 1px 0 var(--line), 0 18px 30px -22px rgba(51, 68, 58, .55); overflow: hidden; }
+.event::before { inset: 9px; border: 1.5px dashed color-mix(in srgb, var(--stitch) 75%, transparent); border-radius: 2px; }
+.event:hover { box-shadow: 0 1px 0 var(--line), 0 24px 34px -22px rgba(51, 68, 58, .6); }
+.event::after { content: ""; position: absolute; top: -8px; right: -10px; width: 116px; height: 112px; background: url("/themes/art/bordir-tasik/corner.webp") 0 0 / contain no-repeat; scale: -1 -1; pointer-events: none; }
+.eventNo { position: relative; top: auto; left: auto; translate: none; width: 40px; height: 40px; margin-bottom: 6px; border: 1.5px dashed var(--stitch); border-radius: 50%; background: var(--gold-l); color: var(--accent); font-family: var(--display); font-size: 16px; font-weight: 600; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 28px; font-weight: 600; }
+.eventDate { color: var(--ink); font-size: 17px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 15px; }
+.rule { width: 90px; height: 0; border-top: 1.5px dashed var(--stitch); background: none; }
+.event strong { font-family: var(--serif); font-weight: 400; font-size: 18px; color: var(--accent); }
+.mapBtn { background: var(--accent); color: #fdfcf7; font-family: var(--serif); letter-spacing: .04em; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4.5px rgba(255, 255, 255, .45); }
+
+/* ── Story ── */
+.timeline::before { left: 21px; width: 0; border-left: 1.5px dashed var(--stitch); background: none; }
+.node { width: 38px; height: 38px; border: 0; background: transparent; }
+.node img { width: 38px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 600; }
+.storyImg { border-radius: 4px; }
+
+/* ── Gallery: photographs pinned in stitched mounts ── */
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 4px; outline: 1.5px dashed rgba(255, 255, 255, .85); outline-offset: -9px; }
+.tile:first-child { border-radius: 50% 50% 4px 4px / 34% 34% 4px 4px; }
+
+/* ── Wishes ── */
+.form { border: 0; border-radius: 6px; background: var(--voile), var(--ivory); box-shadow: inset 0 0 0 8px var(--ivory), inset 0 0 0 9.5px color-mix(in srgb, var(--stitch) 60%, transparent), 0 16px 28px -20px rgba(51, 68, 58, .5); padding: 26px 22px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 6px; }
+.choices button { border-radius: 6px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: #fdfcf7; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4.5px rgba(255, 255, 255, .45); }
+.step { border-style: dashed; color: var(--accent); }
+.submit { border-radius: 6px; background: var(--accent); color: #fdfcf7; font-family: var(--serif); font-size: 15px; letter-spacing: .1em; box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5.5px rgba(255, 255, 255, .45); }
+.sentBox img { width: 92px; }
+.sent { color: var(--accent); font-family: var(--display); font-size: 24px; font-style: normal; font-weight: 600; }
+.wish { border: 0; border-radius: 4px; background: var(--voile), var(--ivory); box-shadow: inset 0 0 0 6px var(--ivory), inset 0 0 0 7.5px color-mix(in srgb, var(--stitch) 45%, transparent); padding: 18px 20px; }
+.wish:hover { box-shadow: inset 0 0 0 6px var(--ivory), inset 0 0 0 7.5px var(--stitch), 0 10px 20px -14px rgba(51, 68, 58, .5); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 19px; font-weight: 600; }
+.wish small { background: var(--gold-l); color: var(--gold-d); }
+
+/* ── Gifts: embroidered name labels ── */
+.gift { border-radius: 4px; background: var(--linen), var(--paper); color: var(--ink); box-shadow: inset 0 0 0 9px var(--paper), inset 0 0 0 10.5px var(--stitch); padding: 28px 22px; }
+.gift::after { display: none; }
+.giftIcon { border: 1.5px dashed var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--display); font-size: 21px; font-weight: 600; letter-spacing: .02em; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 26px; font-weight: 600; }
+.gift small { color: var(--muted); }
+.copy { border: 1.5px dashed var(--accent); color: var(--accent); font-family: var(--serif); }
+.copy:hover { background: var(--ivory); }
+.copyOn, .copyOn:hover { border-style: solid; background: var(--accent); color: #fdfcf7; }
+
+/* ── Closing ── */
+.closing { padding: 84px 28px 64px; background: var(--linen), var(--paper); color: var(--ink); }
+.closingSpray { width: 96px; height: auto; }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 62px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 13px; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.made { color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.made:hover { color: var(--accent); }
+.music { border: 1.5px dashed var(--accent); background: var(--ivory); }
+
+/* ── Cover: the face of a mukena — a voile panel hung over pale-green lining ── */
+.cover { position: relative; display: flex; align-items: flex-start; justify-content: center; min-height: 100dvh; padding: 0 16px; overflow: hidden; background: var(--linen), var(--paper); color: var(--ink); text-align: center; isolation: isolate; }
+.panel { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 342px; margin-bottom: 120px; padding: 30px 22px 76px; background: var(--voile), var(--bg); box-shadow: 0 0 0 1px rgba(51, 68, 58, .05), 0 30px 40px -30px rgba(51, 68, 58, .5); }
+.panel::before { content: ""; position: absolute; inset: 10px 10px 54px; border-left: 1.5px dashed color-mix(in srgb, var(--stitch) 70%, transparent); border-right: 1.5px dashed color-mix(in srgb, var(--stitch) 70%, transparent); pointer-events: none; }
+.panel::after { content: ""; position: absolute; left: 0; right: 0; bottom: -34px; height: 80px; background: var(--hem) 50% 100% / 390px auto repeat-x; pointer-events: none; }
+.coverArabic { color: var(--accent); font-family: Amiri, serif; font-size: 24px; line-height: 1.6; }
+.coverKicker { color: var(--gold-d); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.medal { position: relative; display: grid; place-items: center; width: 250px; height: 250px; margin: 2px 0 0; }
+.medal > span { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.medal > span img { width: 250px; height: auto; }
+.medalPhoto { width: 164px; height: 164px; overflow: hidden; border-radius: 50%; background: var(--gold-l); }
+.medalPhoto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.medalMono { display: grid; place-items: center; width: 100%; height: 100%; color: var(--accent); font-family: var(--display); font-size: 64px; font-weight: 600; }
+.coverNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { padding: 0 8px; color: var(--gold-d); font-family: var(--script); font-size: 40px; font-style: normal; font-weight: 400; }
+.coverDate { color: var(--muted); font-size: 15px; letter-spacing: .08em; }
+.cover .guest { margin-top: 6px; padding: 12px 14px; border: 1.5px dashed color-mix(in srgb, var(--stitch) 80%, transparent); border-radius: 6px; background: rgba(255, 255, 255, .55); }
+.cover .guest small { color: var(--muted); font-size: 14px; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.table { border: 1.5px dashed var(--stitch); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { margin-top: 10px; border-radius: 6px; background: var(--accent); color: #fdfcf7; font-family: var(--serif); font-size: 15px; letter-spacing: .1em; box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5.5px rgba(255, 255, 255, .5), 0 10px 18px -10px rgba(51, 68, 58, .6); }
+.openBtn:hover { background: var(--accent2); box-shadow: inset 0 0 0 4px var(--accent2), inset 0 0 0 5.5px rgba(255, 255, 255, .5), 0 14px 22px -10px rgba(51, 68, 58, .6); }
+.coverCorner { position: absolute; z-index: -1; width: 170px; height: auto; pointer-events: none; }
+.coverCornerL { left: -24px; bottom: -6px; }
+.coverCornerR { right: -24px; bottom: -6px; scale: -1 1; }
+
+/* signature motion: the medallion breathes like fabric on a hoop; the hem sways */
+.medal > span img { animation: hoop 9s var(--m-ease) infinite alternate; }
+.panel::after { animation: hemSway 7s var(--m-ease) infinite alternate; transform-origin: 50% 0; }
+[data-revealed] .ovalRim img, .person[data-revealed] .ovalRim img { animation: stitchIn 1.6s var(--m-ease) both; }
+@keyframes hoop { from { rotate: -1.2deg; scale: 1; } to { rotate: 1.2deg; scale: 1.012; } }
+@keyframes hemSway { from { translate: -4px 0; } to { translate: 4px 1px; } }
+@keyframes stitchIn { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0); } }
+@media (max-width: 370px) {
+  .coverNames { font-size: 40px; }
+  .heroNames { font-size: 50px; }
+  .count { grid-template-columns: repeat(4, 68px); gap: 8px; }
+  .count > div { width: 68px; height: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .medal > span img, .panel::after, .ovalRim img { animation: none; }
+}

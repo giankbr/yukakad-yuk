@@ -1,0 +1,187 @@
+/* Malam Tahun Baru — undangan pesta malam tahun baru (bukan pernikahan): langit malam biru petrol yang dilukis dengan kembang api emas, koral, dan mint di atas siluet gedung kota berjendela terang, jam emas yang jarumnya bergerak menuju tengah malam, konfeti dan pita foil yang berjatuhan, tiket masuk bersobekan untuk tamu, poster pesta dengan angka 31.12 raksasa, hitung mundur berupa ubin jam lipat, kartu acara seperti tiket, dua gelas yang berdenting di penutup; Big Shoulders Display + Outfit + Parisienne, petrol malam, emas sampanye, koral, mint. */
+.root, .cover {
+  --bg: #061a21; --paper: #0a242d; --ivory: #0e2c36; --field: #0b2630; --ink: #f4ecd8; --muted: #a9c2c4; --line: #1f4651;
+  --accent: #e6bf6e; --accent2: #c99d47; --gold: #e6bf6e; --gold-l: #fff0c4; --gold-d: #e6bf6e;
+  --band-bg: #04141a; --band-ink: #f4ecd8;
+  --coral: #ff6f61; --mint: #7fe3c8;
+  --display: "Big Shoulders Display", "Bebas Neue", Impact, sans-serif; --serif: Outfit, system-ui, sans-serif; --script: Parisienne, cursive;
+  --h2: 44px; --card-r: 14px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e6bf6e; --t-accent-ink: #061a21; --t-bg: #061a21; --t-ink: #f4ecd8; --t-muted: #a9c2c4; --t-line: #1f4651; --t-field: #0b2630;
+  --t-radius: 12px; --t-font: Outfit, system-ui, sans-serif; --t-heading-font: "Big Shoulders Display", Impact, sans-serif; --t-heading-weight: 800; --t-heading-size: 40px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 64px 22px; }
+.eyebrow, .role { color: var(--mint); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.head { gap: 10px; }
+.head h2, .headLight h2 { color: var(--gold); font-family: var(--display); font-size: var(--h2); font-weight: 800; letter-spacing: .02em; line-height: 1; text-transform: uppercase; }
+.divider { width: 160px; }
+
+/* ── hero: the party poster ── */
+.hero { position: relative; display: flex; flex-direction: column; padding: 56px 24px 46px; overflow: hidden; background: radial-gradient(ellipse at 80% 0, #123f4a, transparent 60%), var(--bg); }
+.heroBurst { position: absolute; z-index: 0; width: 170px; height: auto; pointer-events: none; animation: pop 5.5s var(--m-spring, ease) infinite; }
+.heroBurstA { right: -30px; top: -10px; }
+.heroBurstB { right: 90px; top: 120px; width: 110px; animation-delay: 2.2s; }
+.heroKicker { position: relative; color: var(--mint); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroBig { position: relative; margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 70px; font-weight: 800; line-height: .86; letter-spacing: .01em; text-transform: uppercase; }
+.heroBig span { display: block; color: var(--gold); }
+.heroBig s { color: color-mix(in srgb, var(--ink) 45%, transparent); text-decoration-thickness: 5px; text-decoration-color: var(--coral); }
+.heroHost { position: relative; margin-top: 16px; color: var(--ink); font-size: 17px; }
+.heroHost b { color: var(--gold); font-weight: 600; }
+.facts { position: relative; display: grid; grid-template-columns: 1fr 1fr; margin-top: 22px; border-block: 1px solid var(--line); }
+.facts > div { display: flex; flex-direction: column; gap: 3px; padding: 14px 10px 14px 0; }
+.facts > div + div { padding-left: 14px; border-left: 1px solid var(--line); }
+.facts small { color: var(--mint); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.facts strong { color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.3; overflow-wrap: anywhere; }
+.heroNote { position: relative; margin-top: 18px; color: var(--muted); font-size: 17px; line-height: 1.6; }
+.heroCoupes { position: relative; align-self: center; width: 210px; height: auto; margin-top: 18px; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 40px 28px 60px; }
+.salamKicker { color: var(--mint); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.salamTitle { color: var(--gold); font-family: var(--script); font-size: 46px; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* hosts */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 190px; height: 190px; padding: 0; border: 2px solid var(--gold); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #16505d, #082029 70%); box-shadow: 0 0 0 8px rgba(230, 191, 110, .1), 0 0 40px rgba(230, 191, 110, .25); }
+.monogram { color: var(--gold); font-family: var(--display); font-size: 104px; font-weight: 800; }
+.hostBurst { position: absolute; z-index: -1; left: 50%; top: 50%; width: 300px; translate: -50% -50%; pointer-events: none; opacity: .9; }
+.hostBurst img { display: block; width: 100%; height: auto; animation: spinSlow 60s linear infinite; }
+.couple .portrait { isolation: isolate; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.fullName { color: var(--gold); font-family: var(--serif); font-size: 17px; font-weight: 500; }
+.parents { color: var(--muted); }
+
+/* countdown: flip-clock tiles */
+.countBand { padding: 70px 14px 64px; background: url("/themes/art/malam-tahun-baru/sky.webp") 50% 12% / cover, var(--band-bg); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(rgba(4, 20, 26, .55), rgba(4, 20, 26, .82)); }
+.countPop { position: absolute; z-index: -1; width: 120px; height: auto; pointer-events: none; animation: pop 4.8s var(--m-spring, ease) infinite; }
+.countPopA { left: -14px; top: 18px; }
+.countPopB { right: -20px; top: 60px; animation-delay: 1.6s; }
+.headLight .eyebrow { color: var(--mint); }
+.headLight h2 { color: var(--ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 8px; }
+.count > div { height: 98px; border: 0; border-radius: 10px; background: linear-gradient(#173b44 0 50%, #11313a 50%); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .3), 0 10px 20px -10px #000; }
+.count > div::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0, 0, 0, .45); z-index: 2; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 240, 196, .14) 50%, transparent 65%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 46px; font-weight: 800; line-height: 1; }
+.count small { color: var(--mint); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.countTba { color: var(--gold); font-family: var(--display); font-size: 28px; }
+.ghostBtn { border: 1.5px solid var(--gold); color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .06em; transition: background .3s, border-color .3s, scale .35s var(--m-spring), translate .35s var(--m-spring); }
+
+/* events: party tickets */
+.events { gap: 18px; }
+.event { align-items: flex-start; padding: 24px 22px 22px 98px; border: 0; border-radius: 14px; background: radial-gradient(circle at 78px 0, var(--bg) 9px, transparent 9.5px), radial-gradient(circle at 78px 100%, var(--bg) 9px, transparent 9.5px), linear-gradient(90deg, var(--gold) 0 78px, var(--ivory) 78px); text-align: left; box-shadow: 0 16px 30px -18px #000; transition: translate .35s var(--m-spring), box-shadow .35s var(--m-ease), rotate .35s var(--m-spring); }
+.event::before { inset: 14px auto 14px 78px; width: 0; border: 0; border-left: 2px dashed rgba(6, 26, 33, .35); border-radius: 0; }
+.event:hover { border-color: transparent; translate: 0 -3px; rotate: -.6deg; box-shadow: 0 22px 34px -18px #000; }
+.eventNo { top: 50%; left: 39px; translate: -50% -50%; width: auto; height: auto; background: none; color: #061a21; font-family: var(--display); font-size: 40px; font-weight: 800; letter-spacing: 0; rotate: -90deg; }
+.event h3 { color: var(--gold); font-size: 28px; font-weight: 800; text-align: left; text-transform: uppercase; line-height: 1; }
+.eventDate { color: var(--ink); font-size: 16px; font-style: normal; }
+.eventTime { color: var(--mint); font-family: var(--serif); font-size: 15px; font-weight: 600; }
+.rule { width: 46px; height: 2px; background: var(--coral); }
+.event strong { color: var(--ink); font-weight: 600; }
+.eventAddr { max-width: none; text-align: left; color: var(--muted); }
+.mapBtn { background: var(--gold); color: #061a21; font-family: var(--serif); font-size: 14px; font-weight: 700; transition: background .3s, scale .35s var(--m-spring), translate .35s var(--m-spring); }
+.mapBtn:hover { background: var(--gold-l); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--gold), var(--coral), transparent); }
+.node { width: 42px; height: 42px; border: 0; background: radial-gradient(circle, rgba(230, 191, 110, .25), transparent 70%); }
+.node img { width: 44px; }
+.storyBody small { color: var(--coral); font-family: var(--display); font-size: 20px; font-weight: 800; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-size: 26px; font-weight: 800; text-transform: uppercase; }
+
+/* gallery */
+.mosaic { gap: 10px; }
+.tile, .tile:first-child { border-radius: 14px; box-shadow: 0 0 0 2px var(--gold), 0 14px 24px -14px #000; }
+.tile:first-child { border-radius: 14px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--line); border-radius: 16px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--mint); font-family: var(--serif); font-weight: 600; letter-spacing: .16em; }
+.field input, .field textarea { border-color: var(--line); background: var(--field); color: var(--ink); }
+.choices button { border-color: var(--line); background: var(--field); color: var(--muted); font-weight: 600; transition: background .3s, color .3s, border-color .3s, scale .35s var(--m-spring), translate .35s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--gold); background: var(--gold); color: #061a21; scale: 1.04; }
+.step { border-color: var(--gold); background: var(--field); color: var(--gold); }
+.submit { background: var(--gold); color: #061a21; font-family: var(--display); font-size: 22px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; transition: background .3s, box-shadow .3s, scale .35s var(--m-spring), translate .35s var(--m-spring); }
+.submit:not(:disabled):hover { background: var(--gold-l); box-shadow: 0 0 24px rgba(230, 191, 110, .45); }
+.sentBox img { width: 130px; }
+.sent { color: var(--gold); font-family: var(--display); font-size: 26px; font-style: normal; font-weight: 800; }
+.closed { border-color: var(--line); }
+.wish { border: 1px solid var(--line); border-radius: 14px; background: var(--ivory); transition: border-color .3s, translate .35s var(--m-spring); }
+.wish:hover { border-color: var(--gold); translate: 0 -2px; }
+.wish strong { color: var(--gold); font-family: var(--serif); font-weight: 600; }
+.wish small { background: rgba(127, 227, 200, .14); color: var(--mint); }
+
+/* gifts: the patungan jar card */
+.gifts { background: var(--paper); }
+.gift { border-radius: 16px; background: linear-gradient(140deg, #ff7f6e, #e2574d); color: #2a0c0a; }
+.gift::after { border-color: rgba(255, 240, 196, .18); }
+.giftIcon { border-color: rgba(42, 12, 10, .3); }
+.gift h3 { color: #2a0c0a; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 34px; font-weight: 800; }
+.gift small { color: rgba(42, 12, 10, .78); }
+.copy { border: 1.5px solid #2a0c0a; color: #2a0c0a; font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: rgba(42, 12, 10, .08); }
+.copyOn, .copyOn:hover { background: #2a0c0a; color: var(--gold-l); }
+
+/* closing */
+.closing { padding: 60px 24px 60px; background: url("/themes/art/malam-tahun-baru/sky.webp") 50% 100% / cover, var(--band-bg); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(rgba(4, 20, 26, .9), rgba(4, 20, 26, .55) 50%, rgba(4, 20, 26, .85)); }
+.closeCoupes { display: block; width: 190px; height: auto; transform-origin: 50% 100%; animation: clink 4s var(--m-spring, ease) infinite; }
+.thanks { color: var(--gold); font-family: var(--display); font-size: 56px; font-weight: 800; line-height: .92; text-transform: uppercase; }
+.closingText { color: var(--ink); }
+.closingSalam { color: var(--gold-l); font-family: var(--script); font-size: 28px; letter-spacing: 0; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 34px; font-weight: 800; text-transform: uppercase; }
+.music { border: 1.5px solid var(--gold); background: #0e2c36; }
+
+/* ── Cover: the sky over the city, the clock reaching midnight, a ticket for the guest ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 100dvh; padding: 40px 20px 150px; overflow: hidden; background: url("/themes/art/malam-tahun-baru/sky.webp") 50% 100% / cover, #061a21; color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -2; inset: 0; background: linear-gradient(rgba(4, 20, 26, .2), rgba(4, 20, 26, .5) 40%, rgba(4, 20, 26, .15) 80%); }
+.confetti { position: absolute; z-index: -1; inset: -450px 0 0; background: url("/themes/art/malam-tahun-baru/confetti.webp") 0 0 / 390px 450px repeat; animation: fall 30s linear infinite; pointer-events: none; opacity: .6; }
+.pop { position: absolute; z-index: -1; width: 130px; height: auto; pointer-events: none; animation: pop 5s var(--m-spring, ease) infinite; }
+.popA { left: -20px; top: 40px; }
+.popB { right: -24px; top: 210px; width: 110px; animation-delay: 1.7s; }
+.popC { left: 40px; top: 420px; width: 90px; animation-delay: 3.3s; }
+.clock { position: relative; width: 150px; height: 150px; margin-bottom: 8px; filter: drop-shadow(0 0 22px rgba(230, 191, 110, .35)); }
+.clock img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.clock .hm { rotate: 0deg; animation: toMidM 3.2s var(--m-ease) .6s both; }
+.clock .hh { rotate: 0deg; animation: toMidH 3.2s var(--m-ease) .6s both; }
+.kicker { color: var(--mint); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverDate { color: var(--gold); font-family: var(--display); font-size: 104px; font-weight: 800; line-height: .82; letter-spacing: -.01em; text-shadow: 0 0 30px rgba(230, 191, 110, .4); }
+.coverDate small { display: block; margin-top: 4px; color: var(--ink); font-size: 32px; letter-spacing: .32em; text-shadow: none; }
+.coverTitle { margin-top: 2px; color: var(--gold-l); font-family: var(--script); font-size: 40px; font-weight: 400; line-height: 1.1; }
+.coverHost { color: var(--ink); font-size: 15px; }
+.coverHost b { color: var(--gold); font-weight: 600; }
+.ticket { position: relative; display: flex; align-items: stretch; width: 100%; max-width: 320px; margin-top: 16px; border-radius: 12px; background: radial-gradient(circle at 74% 0, transparent 9px, #f4ecd8 9.5px) top / 100% 51% no-repeat, radial-gradient(circle at 74% 100%, transparent 9px, #f4ecd8 9.5px) bottom / 100% 51% no-repeat; color: #061a21; text-align: left; filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .45)); }
+.ticket .guest { flex: 1; align-items: flex-start; padding: 14px 16px; max-width: none; }
+.ticket .guest small { color: #3b5a60; font-size: 12px; font-style: normal; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.ticket .guest strong { font-family: var(--display); font-size: 24px; font-weight: 800; text-transform: uppercase; line-height: 1.05; }
+.stub { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 26%; border-left: 2px dashed rgba(6, 26, 33, .3); font-family: var(--display); font-size: 15px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.stub b { font-size: 30px; }
+.table { border-color: #061a21; color: #061a21; font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 14px; background: var(--gold); color: #061a21; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .08em; box-shadow: 0 0 0 0 rgba(230, 191, 110, .5), 0 10px 22px -10px #000; }
+.openBtn:hover { background: var(--gold-l); box-shadow: 0 0 26px rgba(230, 191, 110, .5); translate: 0 -2px; }
+
+@keyframes pop { 0%, 100% { opacity: 0; scale: .2; } 10% { opacity: 1; scale: 1; } 30% { opacity: .7; scale: 1.08; } 45% { opacity: 0; scale: 1.12; } }
+@keyframes fall { to { translate: 0 450px; } }
+@keyframes toMidM { from { rotate: -36deg; } to { rotate: 0deg; } }
+@keyframes toMidH { from { rotate: -3deg; } to { rotate: 0deg; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@keyframes clink { 0%, 70%, 100% { rotate: 0deg; } 76% { rotate: -3deg; } 82% { rotate: 2deg; } 88% { rotate: 0deg; } }
+@media (max-width: 370px) {
+  .coverDate { font-size: 92px; }
+  .heroBig { font-size: 60px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .confetti, .pop, .heroBurst, .countPop, .hostBurst img, .closeCoupes, .clock .hm, .clock .hh { animation: none; }
+  .pop, .heroBurst, .countPop { opacity: .8; }
+  .event, .wish, .choices button, .submit, .mapBtn, .copy, .ghostBtn { transition: none; }
+}

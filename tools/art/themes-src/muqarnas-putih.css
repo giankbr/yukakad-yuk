@@ -1,0 +1,175 @@
+/* Muqarnas Putih — kubah muqarnas plester putih dilihat dari bawah: sel-sel sarang lebah bertingkat mengelilingi oculus bintang delapan yang menurunkan cahaya emas pucat; gading, putih, dan emas lembut, potret berbentuk relung lancip, dan list muqarnas yang menggantung di setiap kartu. */
+.root, .cover {
+  --bg: #f7f3ea; --paper: #fbf8f1; --ivory: #fffdf8; --field: #f6f1e6; --ink: #3b3226; --muted: #7b6f5c; --line: #e6dcc8;
+  --accent: #7d6233; --accent2: #93763f; --gold: #c9a961; --gold-l: #ead6a0; --gold-d: #9c7f45;
+  --band-bg: #efe6d2; --band-ink: #3b3226;
+  --display: Bellefair, "Cormorant Garamond", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Pinyon Script", Bellefair, cursive;
+  --frieze: url(/themes/art/muqarnas-putih/frieze.webp);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #9c7f45; --t-accent-ink: #fffdf8; --t-bg: #f7f3ea; --t-ink: #3b3226; --t-muted: #7b6f5c; --t-line: #e6dcc8; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: Spectral, Georgia, serif; --t-heading-font: Bellefair, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 11.5px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.head { gap: 10px; }
+.head h2, .headLight h2 { color: var(--ink); letter-spacing: .02em; }
+.divider { width: 150px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.8; }
+.section { padding: 76px 26px 70px; }
+
+/* opening: plain ivory, Arabic set in Amiri */
+.salamBlock { padding: 56px 30px 66px; background: var(--paper); }
+.arabic { color: var(--accent); font-size: 27px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 38px; letter-spacing: .02em; }
+
+/* couple: lancet niches; a hanging muqarnas cornice runs along the top of the section */
+.couple { gap: 20px; padding-top: 104px; background: var(--bg); }
+.couple::before, .wishes::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 52px; background: var(--frieze) 0 0 / auto 52px repeat-x; filter: drop-shadow(0 3px 3px rgba(120, 96, 60, .12)); }
+.portrait { margin-bottom: 22px; padding-top: 4px; }
+.portrait > img { position: absolute; z-index: 2; top: -26px; left: 50%; width: 48px; height: auto; translate: -50% 0; filter: drop-shadow(0 3px 4px rgba(120, 96, 60, .2)); }
+.portraitFrame { width: 210px; height: 270px; padding: 3px; border: 0; border-radius: 0; background: linear-gradient(160deg, var(--gold-l), var(--gold) 50%, var(--gold-d)); clip-path: path("M0 270 V112 Q0 26 105 0 Q210 26 210 112 V270 Z"); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: path("M0 264 V110 Q0 25 102 0 Q204 25 204 110 V264 Z"); }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: radial-gradient(circle at 50% 30%, #fffdf8, #efe5d1); color: var(--gold-d); font-family: var(--display); font-size: 90px; clip-path: path("M0 264 V110 Q0 25 102 0 Q204 25 204 110 V264 Z"); }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; letter-spacing: .02em; }
+.fullName { color: var(--accent); font-family: var(--serif); font-size: 18px; font-style: italic; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { gap: 18px; color: var(--gold-d); font-family: var(--script); font-size: 58px; }
+.amp img { width: 30px; }
+
+/* countdown: the vault returns faintly behind pointed-arch tiles */
+.countBand { padding: 80px 24px; background: radial-gradient(90% 70% at 50% 45%, #fffaf0, var(--band-bg) 75%); }
+.countVault { position: absolute; z-index: -1; top: 50%; left: 50%; width: 560px; max-width: none; height: auto; translate: -50% -50%; opacity: .5; -webkit-mask-image: radial-gradient(circle, #000 35%, transparent 70%); mask-image: radial-gradient(circle, #000 35%, transparent 70%); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--ink); }
+.count { gap: 9px; }
+.count > div { height: 96px; border: 1px solid rgba(201, 169, 97, .55); border-radius: 36px 36px 4px 4px / 46px 46px 4px 4px; background: rgba(255, 253, 248, .86); box-shadow: 0 8px 20px rgba(120, 96, 60, .08); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(234, 214, 160, .35) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--muted); font-size: 12.5px; }
+.countTba { color: var(--accent); }
+.ghostBtn { border-color: var(--gold); color: var(--accent); font-family: var(--serif); font-size: 13.5px; }
+.ghostBtn:hover { background: rgba(201, 169, 97, .12); }
+
+/* events: white cards with a muqarnas cornice hanging from the top edge */
+.events { gap: 30px; background: var(--paper); }
+.event { padding: 64px 22px 28px; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 12px 30px rgba(120, 96, 60, .06); overflow: hidden; }
+.event::before { inset: 0 0 auto 0; height: 44px; border: 0; border-radius: 0; background: var(--frieze) 50% 0 / auto 44px repeat-x; }
+.eventNo { top: 48px; width: auto; height: auto; padding: 0; border-radius: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .3em; }
+.event h3 { margin-top: 12px; color: var(--ink); font-size: 28px; letter-spacing: .02em; }
+.eventDate { color: var(--accent); font-family: var(--serif); }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 500; }
+.rule { width: 46px; height: 7px; margin: 8px 0; background: none; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.event strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 400; }
+.mapBtn { border: 1px solid var(--gold); background: var(--ivory); color: var(--accent); font-family: var(--serif); font-weight: 500; box-shadow: none; }
+.mapBtn:hover { background: var(--gold-l); color: var(--ink); }
+
+/* story */
+.story { background: var(--bg); }
+.timeline::before { background: linear-gradient(var(--gold), rgba(201, 169, 97, .1)); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--ink); font-size: 23px; }
+
+/* gallery: the first photo is a lancet window */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 160px; gap: 7px; }
+.tile { border-radius: 3px; }
+.tile:first-child { border-radius: 0; clip-path: polygon(0 100%, 0 32%, 8% 18%, 22% 7%, 50% 0, 78% 7%, 92% 18%, 100% 32%, 100% 100%); }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.wishes { padding-top: 104px; background: var(--bg); }
+.form { border-color: var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 12px 30px rgba(120, 96, 60, .06); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.field input, .field textarea { border-radius: 3px; background: var(--field); }
+.choices button { border-radius: 3px; background: var(--field); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--gold-d); background: var(--gold-d); color: #fffdf8; }
+.submit { border-radius: 3px; background: var(--accent); color: #fffdf8; font-family: var(--serif); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.step { color: var(--accent); }
+.wish { border-radius: 3px; border-color: var(--line); border-top: 2px solid var(--gold-l); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.wish small { background: rgba(201, 169, 97, .16); color: var(--accent); }
+
+/* gifts: pale gold cards */
+.gifts { background: var(--paper); }
+.gift { padding: 24px 22px; border: 1px solid rgba(201, 169, 97, .5); border-radius: 4px; background: linear-gradient(170deg, #fffaf0, #f1e7d2); color: var(--ink); }
+.gift::after { right: -30px; bottom: -30px; border-color: rgba(201, 169, 97, .14); box-shadow: 0 0 0 12px rgba(201, 169, 97, .07); }
+.gift h3 { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.giftIcon { border-color: var(--gold); background: var(--accent); }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 25px; }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--gold); color: var(--accent); font-family: var(--serif); font-weight: 500; }
+.copy:hover { background: rgba(201, 169, 97, .14); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #fffdf8; }
+
+/* closing: the dome hangs above, light falling on the text */
+.closing { padding: 0 30px 64px; background: var(--bg); color: var(--ink); }
+.closingVault { width: 430px; max-width: none; height: auto; margin: -170px 0 6px; -webkit-mask-image: linear-gradient(transparent 40%, #000 62%, #000 80%, transparent); mask-image: linear-gradient(transparent 40%, #000 62%, #000 80%, transparent); }
+.closingStar { width: 56px; height: auto; margin-top: -40px; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 48px; letter-spacing: .02em; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 13.5px; letter-spacing: .1em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.made { color: rgba(59, 50, 38, .45); }
+.made:hover { color: var(--accent); }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: looking up into the vault; the couple's initials sit in the oculus light ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 24px 34px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.cover > * { position: relative; z-index: 1; }
+.cover > .dome { z-index: 0; }
+.dome { position: relative; flex-shrink: 0; width: 470px; height: 470px; margin-top: -78px; }
+.dome > img { width: 100%; height: 100%; }
+.dome::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 0deg at 50% 50%, rgba(255, 244, 210, .0), rgba(255, 244, 210, .4) 12%, rgba(255, 244, 210, 0) 30%, rgba(160, 130, 80, .08) 60%, rgba(255, 244, 210, 0) 80%); mix-blend-mode: soft-light; }
+.domeFade { position: absolute; left: -10px; right: -10px; bottom: -2px; height: 120px; background: linear-gradient(transparent, var(--bg) 78%); }
+.oculus { position: absolute; z-index: 2; top: 50%; left: 50%; display: grid; place-items: center; width: 108px; height: 108px; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 252, 238, .95) 30%, rgba(255, 246, 214, .0) 72%); color: var(--accent); font-family: var(--display); font-size: 25px; letter-spacing: .1em; line-height: 1; }
+.oculus span { display: block; color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.coverArabic { position: relative; z-index: 2; margin-top: -84px; color: var(--accent); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.coverKicker { margin-top: 6px; color: var(--gold-d); font-size: 11.5px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 12px; color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 400; letter-spacing: .03em; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold-d); font-family: var(--script); font-size: 38px; font-style: normal; line-height: 1; }
+.coverDate { display: flex; align-items: center; gap: 12px; margin-top: 14px; color: var(--accent); font-size: 14px; letter-spacing: .24em; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 26px; height: 7px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+.guestCard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; margin-top: 24px; padding: 54px 20px 22px; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 14px 34px rgba(120, 96, 60, .08); }
+.guestCard::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--frieze) 50% 0 / auto 40px repeat-x; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { border: 1px solid var(--gold-d); border-radius: 3px; background: linear-gradient(110deg, var(--accent), #a88a50 45%, var(--accent)); background-size: 220% 100%; color: #fffdf8; font-family: var(--serif); font-size: 13px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero: the photo framed below a muqarnas niche hood ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 26px 60px; background: var(--bg); text-align: center; }
+.portal { position: relative; width: 280px; height: 400px; }
+.portalHood { position: absolute; z-index: 2; top: 0; left: 0; width: 280px; height: auto; filter: drop-shadow(0 4px 6px rgba(120, 96, 60, .12)); }
+.portal .heroPhoto { position: absolute; top: 120px; left: 7px; right: 7px; bottom: 0; overflow: hidden; border: 1px solid var(--gold); border-top: 0; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
+.portalPlain { position: absolute; top: 120px; left: 7px; right: 7px; bottom: 0; border: 1px solid var(--gold); border-top: 0; background: radial-gradient(circle at 50% 0, #fffaf0, #efe5d1); }
+.heroKicker { margin-top: 30px; color: var(--gold-d); font-size: 11.5px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 400; letter-spacing: .03em; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { padding: 0 10px; color: var(--gold-d); font-family: var(--script); font-size: 38px; font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--accent); font-size: 14px; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 22px; color: var(--muted); font-size: 16.5px; font-style: italic; line-height: 1.7; }
+.sentBox img { width: 64px; }
+
+/* motion (elegant): the light turns slowly across the vault and the oculus breathes; cornices unfurl */
+.dome::after { animation: lightTurn 90s linear infinite; }
+.oculus { animation: oculusGlow 7s ease-in-out infinite alternate; }
+.dome > img { animation: domeIn 2.4s var(--m-ease) both; }
+.countVault { animation: spinSlow 240s linear infinite; }
+.root .event { transition: border-color 700ms var(--m-ease), translate 700ms var(--m-ease), scale 700ms var(--m-ease), box-shadow 700ms var(--m-ease); }
+.event:hover { border-color: var(--gold); translate: 0 -2px; box-shadow: 0 18px 38px rgba(120, 96, 60, .12); }
+[data-revealed].event::before, [data-revealed] .event::before { animation: unfurl 1.6s var(--m-ease) .2s both; }
+@keyframes lightTurn { to { rotate: 360deg; } }
+@keyframes oculusGlow { from { box-shadow: 0 0 30px 6px rgba(255, 240, 200, .5); } to { box-shadow: 0 0 60px 18px rgba(255, 236, 190, .75); } }
+@keyframes domeIn { from { opacity: 0; scale: 1.06; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .dome::after, .oculus, .dome > img, .countVault, .event::before { animation: none; } }

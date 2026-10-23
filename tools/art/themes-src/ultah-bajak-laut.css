@@ -1,0 +1,167 @@
+/* Ultah Bajak Laut — undangan ulang tahun anak sebagai peta harta karun: kertas perkamen bergaris kisi, kapal kayu bajak laut yang ramah, jejak titik-titik menuju pulau bertanda X, burung beo, teropong, kompas, dan peti harta; cat air dengan garis pena sepia, angka hitung mundur di koin emas. */
+.root, .cover {
+  --bg: #efdcb4; --paper: #f4e6c6; --ivory: #fbf3e0; --field: #fffaf0; --ink: #3e2717; --muted: #6f5338; --line: #d8bf91;
+  --accent: #d4473a; --accent2: #b8362b; --gold: #e8b33c; --gold-l: #f6d168; --gold-d: #a87414;
+  --band-bg: #2f8f9c; --band-ink: #fffaf0;
+  --display: "Titan One", "Baloo 2", system-ui, sans-serif; --serif: "Baloo 2", system-ui, sans-serif; --script: "Gochi Hand", cursive;
+  --teal: #2f9aa6; --navy: #263247; --wood: #8a5530;
+  --parch: url(/themes/art/ultah-bajak-laut/parchment.webp);
+  --grid: repeating-linear-gradient(0deg, rgba(74, 46, 28, .07) 0 1px, transparent 1px 46px), repeating-linear-gradient(90deg, rgba(74, 46, 28, .07) 0 1px, transparent 1px 46px);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--parch) 0 0 / 512px; line-height: normal;
+}
+.root {
+  --t-accent: #d4473a; --t-accent-ink: #fffaf0; --t-bg: #efdcb4; --t-ink: #3e2717; --t-muted: #6f5338; --t-line: #d8bf91; --t-field: #fffaf0;
+  --t-radius: 14px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Titan One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.main { background: var(--grid), var(--parch) 0 0 / 512px, var(--bg); }
+
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--script); font-size: 19px; letter-spacing: .02em; text-transform: none; }
+.head { gap: 6px; }
+.head h2, .headLight h2 { color: var(--ink); line-height: 1.15; }
+.divider { width: 190px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.6; font-weight: 500; }
+.section { padding: 64px 22px; background: transparent; }
+.salamBlock, .couple, .events, .story, .gallery, .wishes, .gifts { background: transparent; }
+
+/* opening */
+.salamBlock { padding: 46px 28px 56px; }
+.salamKicker { font-size: 22px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.15; text-shadow: 2px 2px 0 var(--ivory); }
+
+/* the captain: a gold coin with a rope rim, the parrot keeping watch */
+.portrait { margin-bottom: 14px; }
+.portrait > img { position: absolute; z-index: 2; right: -64px; bottom: -6px; width: 96px; height: auto; transform-origin: 50% 100%; }
+.portraitFrame { width: 200px; height: 200px; padding: 8px; border: 4px dashed var(--wood); border-radius: 50%; background: radial-gradient(circle at 38% 32%, #fbe7a2, var(--gold) 55%, var(--gold-d)); box-shadow: 0 0 0 6px var(--ivory), 0 10px 20px rgba(62, 39, 23, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; color: var(--ink); font-family: var(--display); font-size: 92px; text-shadow: 3px 3px 0 rgba(255, 246, 214, .7); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; text-shadow: 3px 3px 0 var(--ivory); }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 16px; font-weight: 500; }
+
+/* countdown: the open sea; numbers on gold coins; the ship sails across */
+.countBand { padding: 74px 20px 150px; background: linear-gradient(#3aa7b2, #237e8c); }
+.countBand::before { content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 22px; background: radial-gradient(circle at 23px -6px, transparent 22px, #3aa7b2 23px) 0 0 / 46px 22px repeat-x; rotate: 180deg; }
+.countShip { position: absolute; z-index: -1; bottom: 14px; left: 14px; width: 120px; height: auto; opacity: .9; }
+.headLight .eyebrow { color: #fff3c4; }
+.headLight h2 { color: #fffaf0; text-shadow: 2px 2px 0 rgba(30, 60, 70, .4); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 78px)); }
+.count > div { height: 78px; border: 3px solid var(--gold-d); border-radius: 50%; background: radial-gradient(circle at 36% 30%, #fff0b8, var(--gold) 58%, #c8901f); box-shadow: inset 0 0 0 4px rgba(255, 240, 190, .5), 0 6px 0 #8a5c10; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 26px; line-height: 1; }
+.count small { color: var(--ink); font-size: 12px; font-style: normal; font-weight: 700; }
+.countTba { color: #fffaf0; font-family: var(--script); font-size: 22px; }
+.ghostBtn { border: 2px solid #fffaf0; color: #fffaf0; font-family: var(--serif); font-weight: 700; }
+
+/* events: a map note pinned with a red X */
+.events { gap: 22px; }
+.event { padding: 36px 20px 24px; border: 2.5px dashed var(--wood); border-radius: 18px; background: rgba(251, 243, 224, .9); box-shadow: 0 8px 0 rgba(138, 85, 48, .25); }
+.event::before { display: none; }
+.eventNo { top: -20px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fffaf0; font-family: var(--display); font-size: 15px; letter-spacing: 0; box-shadow: 0 4px 0 var(--accent2); }
+.event h3 { color: var(--ink); font-size: 24px; }
+.eventDate { color: var(--accent2); font-family: var(--serif); font-weight: 800; font-style: normal; }
+.eventTime { color: var(--teal); font-family: var(--serif); font-weight: 800; }
+.rule { width: 90px; height: 4px; background: radial-gradient(circle, var(--wood) 2px, transparent 2.5px) 0 0 / 11px 4px repeat-x; }
+.event strong { font-family: var(--serif); font-weight: 800; }
+.mapBtn { background: var(--teal); color: #fff; font-family: var(--serif); font-weight: 800; box-shadow: 0 5px 0 #1f6e78; transition: background .3s, scale .25s var(--m-spring), translate .25s var(--m-spring), box-shadow .25s; }
+.mapBtn:hover { background: #3aa7b2; translate: 0 -2px; }
+.mapBtn:active { translate: 0 3px; box-shadow: 0 2px 0 #1f6e78; }
+
+/* story: a dotted route with compass stops */
+.timeline::before { width: 0; border-left: 4px dotted var(--wood); background: none; }
+.node { border: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { color: var(--accent); font-family: var(--script); font-size: 18px; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; }
+
+.tile { border: 4px solid var(--ivory); border-radius: 14px; box-shadow: 0 6px 0 rgba(138, 85, 48, .25); }
+
+/* wishes: message in a bottle */
+.form { border: 2.5px solid var(--wood); border-radius: 20px; background: var(--ivory); box-shadow: 0 8px 0 rgba(138, 85, 48, .25); }
+.field > span, .diet, .guestsLabel { color: var(--teal); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 12px; }
+.choices button { border: 2px solid var(--line); font-weight: 700; transition: background .3s, color .3s, border-color .3s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.choices button:active { scale: .94; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fffaf0; box-shadow: 0 4px 0 var(--accent2); }
+.submit { border-radius: 14px; background: var(--accent); color: #fffaf0; font-family: var(--display); font-size: 17px; letter-spacing: .04em; box-shadow: 0 6px 0 var(--accent2); transition: background .3s, box-shadow .25s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.submit:not(:disabled):hover { background: #e2564a; box-shadow: 0 6px 0 var(--accent2); }
+.submit:not(:disabled):active { translate: 0 4px; box-shadow: 0 2px 0 var(--accent2); }
+.step { border: 2px solid var(--wood); color: var(--ink); }
+.wish { border: 2px solid var(--line); border-radius: 16px; background: var(--ivory); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.wish small { background: rgba(47, 154, 166, .16); color: #1f6e78; font-weight: 700; }
+
+/* gifts: the treasure chest */
+.giftsChest { width: 150px; height: auto; margin-bottom: -6px; }
+.gift { padding: 22px 20px; border: 3px solid #5e3820; border-radius: 18px; background: linear-gradient(#9a5f34, #7a4626); box-shadow: inset 0 0 0 4px rgba(232, 179, 60, .5), 0 8px 0 rgba(62, 39, 23, .3); }
+.gift::after { border-color: rgba(232, 179, 60, .12); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 17px; letter-spacing: .02em; }
+.giftIcon { border: 2px solid var(--gold); background: rgba(0, 0, 0, .15); }
+.giftNo { font-family: var(--serif); font-size: 22px; font-weight: 800; line-height: 1.3; }
+.copy { border: 2px solid var(--gold-l); color: #fffaf0; font-family: var(--serif); font-weight: 800; transition: background .3s, color .3s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.copy:active { scale: .94; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--ink); }
+
+/* closing: the island, the chest found */
+.closing { padding: 56px 26px 60px; background: linear-gradient(transparent, rgba(47, 154, 166, .18)); color: var(--ink); }
+.closingIsland { width: 270px; height: auto; margin-bottom: -6px; }
+.closingName { color: var(--accent); font-family: var(--display); font-size: 56px; line-height: 1; text-shadow: 3px 3px 0 var(--ivory); }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 38px; }
+.closingText { color: var(--muted); font-weight: 500; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.closingNames { color: var(--accent); font-family: var(--script); font-size: 34px; }
+.made { color: rgba(62, 39, 23, .55); }
+.made:hover { color: var(--accent); }
+.music { border: 3px solid var(--gold); background: var(--accent); }
+
+/* ── Cover: the treasure map ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 20px 22px; overflow: hidden; background: var(--grid), var(--parch) 0 0 / 512px, var(--bg); text-align: center; isolation: isolate; box-shadow: inset 0 0 60px rgba(120, 72, 30, .35), inset 0 0 12px rgba(120, 72, 30, .4); }
+.cover > * { position: relative; z-index: 2; }
+.cover > .mapArt { position: absolute; z-index: 1; inset: 0; pointer-events: none; }
+.compass { position: absolute; top: 12px; right: 10px; width: 62px; height: auto; opacity: .9; }
+.ribbon { padding: 7px 26px 9px; margin-right: 34px; background: var(--accent); color: #fffaf0; font-family: var(--display); font-size: 14px; letter-spacing: .06em; clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%); box-shadow: 0 4px 0 var(--accent2); }
+.coverName { max-width: 100%; margin-top: 16px; color: var(--accent); font-family: var(--display); font-size: 82px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 4px 4px 0 var(--ivory), 6px 6px 0 rgba(62, 39, 23, .25); }
+.ageRow { display: flex; align-items: center; gap: 10px; margin-top: 6px; color: var(--ink); font-family: var(--script); font-size: 24px; }
+.age { display: grid; place-items: center; width: 56px; height: 56px; border: 3px solid var(--gold-d); border-radius: 50%; background: radial-gradient(circle at 36% 30%, #fff0b8, var(--gold) 58%, #c8901f); color: var(--ink); font-family: var(--display); font-size: 28px; box-shadow: 0 4px 0 #8a5c10; }
+.coverDate { margin-top: 8px; padding: 2px 12px; border-bottom: 3px dotted var(--wood); color: var(--ink); font-size: 18px; font-weight: 800; }
+.voyage { position: relative; width: 390px; height: 290px; margin: 6px -20px 0; }
+.ship { position: absolute; top: 4px; left: 8px; width: 196px; height: auto; transform-origin: 50% 80%; }
+.island { position: absolute; right: 0; bottom: 8px; width: 196px; height: auto; }
+.telescope { position: absolute; left: 34px; bottom: 26px; width: 104px; height: auto; rotate: -8deg; }
+.trail { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.trail path { fill: none; stroke: #4a2e1c; stroke-width: 4; stroke-linecap: round; stroke-dasharray: .1 13; opacity: .8; }
+.note { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 330px; margin-top: auto; padding: 22px 18px 18px; border: 2.5px solid var(--wood); border-radius: 20px; background: var(--ivory); box-shadow: 0 8px 0 rgba(138, 85, 48, .3); }
+.parrot { position: absolute; top: -96px; left: -6px; width: 72px; height: auto; transform-origin: 50% 100%; }
+.note > span:first-of-type { color: var(--teal); font-family: var(--script); font-size: 20px; }
+.guest small { color: var(--muted); font-size: 14.5px; font-style: normal; font-weight: 500; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border: 2px solid var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.openBtn { border-radius: 16px; background: var(--accent); color: #fffaf0; font-family: var(--display); font-size: 18px; letter-spacing: .03em; box-shadow: 0 6px 0 var(--accent2); transition: background .3s, box-shadow .25s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.openBtn:hover { background: #e2564a; }
+.openBtn:active { translate: 0 4px; box-shadow: 0 2px 0 var(--accent2); }
+
+/* ── Hero: Captain's log page ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 22px 50px; text-align: center; }
+.heroShip { width: 260px; height: auto; transform-origin: 50% 80%; }
+.heroKicker { margin-top: 8px; color: var(--teal); font-family: var(--script); font-size: 22px; }
+.heroName { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 64px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 4px 4px 0 var(--ivory); }
+.heroAge { margin-top: 8px; padding: 4px 16px; border-radius: 999px; background: var(--navy); color: var(--gold-l); font-family: var(--display); font-size: 18px; text-shadow: none; }
+.heroDate { margin-top: 12px; color: var(--ink); font-size: 18px; font-weight: 800; }
+.heroNote { max-width: 320px; margin-top: 16px; padding: 14px 16px; border: 2px dashed var(--wood); border-radius: 14px; background: rgba(251, 243, 224, .7); color: var(--muted); font-family: var(--script); font-size: 20px; line-height: 1.4; }
+.sentBox img { width: 110px; }
+
+/* motion (playful): the ship bobs, the parrot bounces, the trail marches, the compass needle hunts */
+.ship, .heroShip { animation: bob 3.2s ease-in-out infinite; }
+.parrot, .portrait > img { animation: hop 2.6s var(--m-spring) infinite; }
+.trail path { animation: march 1.6s linear infinite; }
+.compass { animation: hunt 6s ease-in-out infinite alternate; }
+.countShip { animation: sail 22s linear infinite; }
+.root .event { transition: translate 400ms var(--m-spring), rotate 400ms var(--m-spring), scale 400ms var(--m-spring); }
+.event:hover { translate: 0 -4px; rotate: -.6deg; }
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -7px; rotate: 2deg; } }
+@keyframes hop { 0%, 70%, 100% { translate: 0 0; } 78% { translate: 0 -10px; } 86% { translate: 0 0; } 92% { translate: 0 -4px; } }
+@keyframes march { to { stroke-dashoffset: -13.1; } }
+@keyframes hunt { 0% { rotate: -12deg; } 60% { rotate: 9deg; } 100% { rotate: -4deg; } }
+@keyframes sail { from { translate: -150px 0; } to { translate: 420px 0; } }
+@media (prefers-reduced-motion: reduce) { .ship, .heroShip, .parrot, .portrait > img, .trail path, .compass, .countShip { animation: none; } }

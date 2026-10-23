@@ -1,0 +1,155 @@
+/* Sambas Lunggi — ungu terong bertabur benang emas kain lunggi, pinggir pucuk rebung merah-emas, dan Keraton Alwatzikhoebillah kuning di pertemuan sungai Sambas. */
+.root, .cover {
+  --bg: #f7efdf; --paper: #3d1533; --ivory: #fffaf0; --field: #fffaf2; --ink: #2b1424; --muted: #6e5463; --line: #e3cfa8;
+  --accent: #8e1b3f; --accent2: #6f1231; --gold: #d2a64a; --gold-l: #f0d58d; --gold-d: #a87d2a;
+  --band-bg: #8e1b3f; --band-ink: #fff4e2;
+  --display: "Cormorant SC", "Cormorant Garamond", Georgia, serif; --serif: Lustria, Georgia, serif; --script: "Pinyon Script", cursive;
+  --plum: #3d1533; --plum-d: #2a0d23; --crim: #8e1b3f; --yel: #e8c24a;
+  --lunggi: url(/themes/art/sambas-lunggi/lunggi.webp) repeat 0 0 / 240px 240px;
+  --lunggi-dim: linear-gradient(rgba(42, 13, 35, .74), rgba(42, 13, 35, .74)), url(/themes/art/sambas-lunggi/lunggi.webp) repeat 0 0 / 240px 240px;
+  --pucuk: url(/themes/art/sambas-lunggi/pucuk.webp) repeat-x 0 50% / auto 100%;
+  --octa: polygon(24% 0, 76% 0, 100% 15%, 100% 85%, 76% 100%, 24% 100%, 0 85%, 0 15%);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e1b3f; --t-accent-ink: #fff4e2; --t-bg: #f7efdf; --t-ink: #2b1424; --t-muted: #6e5463; --t-line: #e3cfa8; --t-field: #fffaf2;
+  --t-radius: 6px; --t-font: Lustria, Georgia, serif; --t-heading-font: Lustria, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: Lustria, serif; font-size: 11px; letter-spacing: .3em; }
+.head h2 { color: var(--crim); font-weight: 600; letter-spacing: .02em; }
+.divider { width: 200px; }
+
+/* plum lunggi rooms alternate with ivory rooms */
+.salamBlock { padding: 54px 28px 60px; background: var(--bg); }
+.arabic { color: var(--crim); font-size: 28px; }
+.salamKicker { color: var(--gold-d); letter-spacing: .14em; text-transform: none; font-size: 13px; }
+.salamTitle { color: var(--crim); font-size: 44px; }
+.intro { color: var(--muted); }
+
+.couple, .story, .wishes { background: var(--lunggi-dim); color: #fff4e2; }
+.couple::before, .story::before, .wishes::before, .couple::after, .story::after, .wishes::after { content: ""; position: absolute; left: 0; right: 0; height: 30px; background: var(--pucuk); }
+.couple::before, .story::before, .wishes::before { top: 0; }
+.couple::after, .story::after, .wishes::after { bottom: 0; scale: 1 -1; }
+.section { padding: 78px 24px 80px; }
+.couple .eyebrow, .story .eyebrow, .wishes .eyebrow { color: var(--gold-l); }
+.couple .head h2, .story .head h2, .wishes .head h2 { color: var(--gold-l); }
+
+/* couple: octagonal frames in gold thread */
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 196px; height: 250px; padding: 5px; border: 0; border-radius: 0; background: linear-gradient(160deg, #f0d58d, #a87d2a 60%, #f0d58d); clip-path: var(--octa); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--octa); }
+.portrait::after { content: ""; position: absolute; left: 50%; bottom: -26px; width: 52px; height: 52px; translate: -50% 0; background: url(/themes/art/sambas-lunggi/bunga.webp) no-repeat center / contain; }
+.role { margin-top: 14px; color: var(--gold-l); }
+.nick { color: #fff4e2; font-size: 52px; }
+.fullName { color: var(--gold-l); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.parents { color: #e6d3d9; font-size: 15px; }
+.monogram { color: var(--plum); }
+.amp { color: var(--gold); font-size: 64px; }
+.amp img { width: 40px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: crimson songket band */
+.countBand { padding: 82px 24px 84px; background: radial-gradient(90% 70% at 50% 45%, #a62550, #6f1231); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 30px; background: var(--pucuk); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; scale: 1 -1; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-weight: 600; color: #fff4e2; }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); }
+.count > div { height: 78px; border: 0; border-radius: 0; background: var(--plum); clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%); box-shadow: inset 0 0 0 2px var(--gold); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { color: #ecd7de; font-size: 12px; }
+.ghostBtn { border-color: var(--gold-l); color: #fff4e2; font-family: Lustria, serif; }
+
+/* events: ivory cards with a woven crimson head */
+.events { background: var(--bg); }
+.event { padding: 58px 22px 26px; border: 1px solid var(--line); border-radius: 6px; background: var(--ivory); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 30px; border: 0; border-radius: 0; background: var(--pucuk); }
+.eventNo { top: 38px; width: 34px; height: 34px; border-radius: 0; background: var(--plum); color: var(--gold-l); clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); font-size: 12px; letter-spacing: 0; }
+.event h3 { margin-top: 10px; color: var(--crim); font-size: 26px; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: Lustria, serif; }
+.mapBtn { background: var(--plum); color: var(--gold-l); font-family: Lustria, serif; }
+.mapBtn:hover { background: var(--crim); }
+
+.timeline::before { background: linear-gradient(var(--gold-l), color-mix(in srgb, var(--gold) 30%, transparent)); }
+.node { border: 0; background: transparent; }
+.node img { width: 36px; }
+.storyBody small { color: var(--gold-l); font-family: Lustria, serif; }
+.storyBody h3 { color: #fff4e2; font-size: 22px; font-weight: 600; }
+.storyBody p { color: #e6d3d9; }
+
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 160px; }
+.tile { border-radius: 4px; }
+.tile:first-child { border-radius: 0; clip-path: var(--octa); }
+
+.form { border: 0; border-radius: 8px; background: var(--ivory); box-shadow: 0 0 0 2px var(--gold), 0 18px 36px rgba(0, 0, 0, .3); color: var(--ink); }
+.field > span, .diet, .guestsLabel { color: var(--crim); font-family: Lustria, serif; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--plum); border-color: var(--plum); color: var(--gold-l); }
+.submit { background: var(--crim); color: #fff4e2; font-family: Lustria, serif; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.empty { color: #e6d3d9; }
+.wish { border: 0; border-radius: 6px; background: rgba(255, 244, 226, .08); box-shadow: inset 0 0 0 1px rgba(240, 213, 141, .35); }
+.wish strong { color: var(--gold-l); font-family: var(--display); font-size: 18px; font-weight: 600; }
+.wish small { background: rgba(240, 213, 141, .16); color: var(--gold-l); }
+.wish p { color: #ecdde2; }
+.wish:hover { border-color: transparent; box-shadow: inset 0 0 0 1px var(--gold); }
+.sent { color: var(--crim); }
+.sentBox img { width: 90px; }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 6px; background: var(--lunggi-dim); box-shadow: inset 0 0 0 2px var(--gold); padding-top: 26px; }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--display); font-size: 19px; font-weight: 600; }
+.giftNo { font-family: Lustria, serif; font-size: 20px; font-weight: 400; line-height: 1.35; letter-spacing: .04em; color: #fff4e2; }
+.copy { border-color: var(--gold); font-family: Lustria, serif; }
+.copyOn, .copyOn:hover { color: var(--plum); }
+
+/* closing: the palace again, under a lunggi sky of gold flowers */
+.closing { padding: 0 24px 54px; background: var(--lunggi-dim); }
+.closingScene { display: block; width: calc(100% + 48px); max-width: none; height: auto; margin: 0 -24px 0; }
+.closingBand { display: block; width: calc(100% + 48px); height: 30px; margin: 0 -24px 26px; background: var(--pucuk); }
+.closingBunga { width: 74px; height: auto; margin-bottom: 4px; animation: turn 70s linear infinite; }
+.thanks { color: var(--gold-l); font-size: 52px; }
+.closingText { color: #ecdde2; }
+.closingSalam { color: var(--gold-l); font-family: Lustria, serif; }
+.family { color: #e6d3d9; font-family: var(--display); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.closingNames { color: #fff4e2; }
+.music { background: var(--plum); border-color: var(--gold); }
+
+/* ── Cover: palace window over lunggi cloth ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 40px; overflow: hidden; background: radial-gradient(120% 60% at 50% 62%, rgba(42, 13, 35, .82), rgba(42, 13, 35, .25) 80%), var(--lunggi); color: #fff4e2; text-align: center; isolation: isolate; }
+.coverScene { position: relative; width: 100%; aspect-ratio: 720 / 400; overflow: hidden; }
+.coverScene img { display: block; width: 100%; height: auto; margin-top: -9%; animation: dawn 16s var(--m-ease) infinite alternate; }
+.coverBand { display: block; width: 100%; height: 30px; flex-shrink: 0; background: var(--pucuk); box-shadow: 0 6px 14px rgba(0, 0, 0, .35); }
+.coverBunga { width: 62px; height: auto; margin-top: 22px; animation: turn 60s linear infinite; }
+.arabicCover { margin: 8px 0 6px; color: var(--gold-l); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.kicker { color: var(--gold-l); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; padding: 0 24px; color: #fff4e2; font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold); font-family: var(--script); font-size: 60px; font-style: normal; font-weight: 400; line-height: 1.1; }
+.coverDate { margin-top: 12px; color: var(--gold-l); font-size: 14px; letter-spacing: .12em; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: calc(100% - 48px); margin-top: 20px; padding: 16px 14px 18px; border-radius: 6px; background: rgba(42, 13, 35, .72); box-shadow: inset 0 0 0 1px rgba(240, 213, 141, .5); }
+.guest small { color: #e6d3d9; font-size: 14px; }
+.guest strong { color: #fff4e2; font-family: var(--display); font-weight: 600; font-size: 22px; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: Lustria, serif; }
+.openBtn { min-width: 0; background: linear-gradient(120deg, #a87d2a, #f0d58d 45%, #c99a3a); background-size: 200% 100%; color: var(--plum-d); font-family: Lustria, serif; font-size: 14px; letter-spacing: .06em; box-shadow: 0 10px 24px rgba(0, 0, 0, .4); }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 54px; background: var(--lunggi-dim); color: #fff4e2; text-align: center; }
+.heroScene { display: block; width: 100%; height: auto; }
+.heroBand { display: block; align-self: stretch; height: 30px; background: var(--pucuk); }
+.heroKicker { margin-top: 34px; color: var(--gold-l); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; padding: 0 22px; color: #fff4e2; font-family: var(--display); font-size: 46px; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold); font-family: var(--script); font-size: 54px; font-style: normal; font-weight: 400; }
+.heroDate { margin-top: 8px; color: var(--gold-l); font-size: 14px; letter-spacing: .12em; }
+.heroPhoto { width: 226px; height: 286px; margin-top: 26px; padding: 5px; background: linear-gradient(160deg, #f0d58d, #a87d2a 60%, #f0d58d); clip-path: var(--octa); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; clip-path: var(--octa); }
+.heroNote { max-width: 310px; margin-top: 20px; padding: 0 20px; color: #ecdde2; font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes dawn { from { scale: 1.02; translate: 0 0; } to { scale: 1.08; translate: -2% 1%; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .coverScene img, .coverBunga, .closingBunga { animation: none; } }

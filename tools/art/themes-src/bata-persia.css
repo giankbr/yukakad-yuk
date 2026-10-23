@@ -1,0 +1,157 @@
+/* Bata Persia — Islami, bata banna'i Persia: dinding bata krem dengan kisi belah ketupat dari ujung bata berglasir pirus dan kobalt, lengkung runcing berplester, bintang ubin glasir; kartu beratap lengkung runcing, monogram di relung bata. */
+.root, .cover {
+  --bg: #f3e8d6; --paper: #eadcc4; --ivory: #fbf5ea; --field: #fffaf1; --ink: #2a2118; --muted: #65584a; --line: #dccbb0;
+  --accent: #22488a; --accent2: #183466; --gold: #2a9893; --gold-l: #f0dfc2; --gold-d: #9b6a3a;
+  --turq: #2a9893; --buff: #d6b486;
+  --band-bg: #1d3f7a; --band-ink: #f6ecdc;
+  --display: "Reem Kufi", Georgia, sans-serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Reem Kufi", Georgia, sans-serif;
+  --h2: 29px; --card-r: 4px;
+  --pointed: polygon(0 64px, 5% 44px, 13% 26px, 25% 12px, 38% 4px, 50% 0, 62% 4px, 75% 12px, 87% 26px, 95% 44px, 100% 64px, 100% 100%, 0 100%);
+  --brick: url(/themes/art/bata-persia/tile.webp) repeat 0 0 / 252px 224px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #22488a; --t-accent-ink: #fbf5ea; --t-bg: #f3e8d6; --t-ink: #2a2118; --t-muted: #65584a; --t-line: #dccbb0; --t-field: #fffaf1;
+  --t-radius: 4px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Reem Kufi", Georgia, sans-serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+/* type */
+.eyebrow, .role { color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.divider { width: 170px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); font-size: 12px; font-weight: 500; letter-spacing: .14em; }
+
+/* opening */
+.salamBlock { padding: 52px 30px 58px; }
+.arabic { color: var(--accent); font-size: 29px; }
+.salamKicker { color: var(--turq); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; text-transform: none; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 500; line-height: 1.25; text-wrap: balance; }
+
+/* couple: monograms set in brick niches */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 190px; height: 250px; padding: 12px; border: 0; border-radius: 0; background: var(--brick); clip-path: var(--pointed); box-shadow: none; }
+.portraitFrame::after { content: ""; position: absolute; inset: 12px; background: var(--accent2); clip-path: var(--pointed); z-index: 0; }
+.portraitFrame > img, .portraitFrame > div { position: relative; z-index: 1; border-radius: 0; clip-path: var(--pointed); }
+.monogram { position: relative; z-index: 1; color: var(--gold-l); font-family: var(--display); font-size: 92px; font-weight: 500; }
+.portraitStar { position: absolute; z-index: 2; bottom: -16px; left: 50%; width: 40px; height: auto; translate: -50% 0; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 500; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.amp { color: var(--turq); font-family: var(--display); font-size: 40px; }
+.amp img { width: 60px; }
+
+/* countdown: brick wall with glazed number tiles */
+.countBand { padding: 70px 24px; background: var(--brick); color: var(--ink); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 36px 18px; background: rgba(243, 232, 214, .94); }
+.countBand .headLight .eyebrow { color: var(--gold-d); }
+.countBand .headLight h2 { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.count > div { height: 80px; border: 0; border-radius: 2px; background: linear-gradient(160deg, #2b5596, var(--accent2)); box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .12), 0 6px 14px rgba(24, 52, 102, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .25) 50%, transparent 65%); }
+.count b { color: #fbf5ea; font-size: 28px; font-weight: 500; }
+.count small { color: #bfe3df; font-style: normal; font-size: 12px; letter-spacing: .06em; }
+.countBand .ghostBtn { border-color: var(--accent); color: var(--accent); }
+.countBand .ghostBtn svg { stroke: var(--accent) !important; }
+.countBand .ghostBtn:hover { background: rgba(34, 72, 138, .08); }
+.countTba { color: var(--accent); }
+
+/* events: plaster cards under a pointed arch */
+.events { background: var(--bg); gap: 24px; }
+.event { padding: 76px 22px 28px; border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--pointed); box-shadow: none; }
+.event::before { display: none; }
+.event { box-shadow: inset 0 -4px 0 var(--turq); }
+.events { filter: drop-shadow(0 10px 18px rgba(42, 33, 24, .08)); }
+.eventNo { top: 22px; width: 40px; height: 40px; border-radius: 0; background: var(--turq); color: #fbf5ea; font-size: 12px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.event h3 { margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 23px; font-weight: 500; }
+.eventTime { color: var(--turq); font-family: var(--serif); font-weight: 700; }
+.rule { width: 120px; height: 14px; background: url(/themes/art/bata-persia/divider.webp) no-repeat center / contain; }
+.mapBtn, .submit { border-radius: 2px; background: var(--accent); color: #fbf5ea; font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .08em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; background: repeating-linear-gradient(var(--buff) 0 10px, var(--turq) 10px 14px); }
+.node { width: 42px; height: 42px; border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-weight: 500; }
+
+/* gallery */
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 0; clip-path: var(--pointed); }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 2px; border: 1px solid var(--line); box-shadow: inset 0 4px 0 var(--turq); }
+.field input, .field textarea, .choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fbf5ea; }
+.wish { border-radius: 2px; box-shadow: inset 4px 0 0 var(--turq); border-color: var(--line); }
+.wish strong { font-family: var(--display); }
+.wish small { background: color-mix(in srgb, var(--turq) 14%, transparent); color: #1d6f6b; }
+.sentBox img { width: 80px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 2px; background: linear-gradient(160deg, #2b5596, var(--accent2)); }
+.gift::after { right: -30px; bottom: -30px; width: 120px; height: 120px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/bata-persia/panel.webp) center / cover; opacity: .18; rotate: 45deg; }
+.gift h3 { color: #bfe3df; font-family: var(--display); }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; border-color: #7fc8c2; color: #e5f4f1; }
+.copyOn, .copyOn:hover { background: #bfe3df; color: var(--accent2); }
+
+/* closing: the brick wall again, a plaster niche in the middle */
+.closing { padding: 70px 22px 56px; background: var(--brick); color: var(--ink); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 28px 16px 22px; background: var(--bg); clip-path: var(--pointed); }
+.closingPanel { width: 92px; height: auto; margin-top: 18px; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 36px; font-weight: 500; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--turq); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: var(--muted); font-family: var(--display); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 500; }
+.made { color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.made:hover { color: var(--accent); }
+.music { border-radius: 2px; rotate: 45deg; }
+.music svg { rotate: -45deg; }
+
+/* ── Cover: a pointed brick arch, names on its plaster recess; a plinth below with the guest ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0; overflow: hidden; background: var(--brick); text-align: center; isolation: isolate; }
+.archWrap { position: relative; width: 100%; max-width: 430px; aspect-ratio: 540 / 720; }
+.archWrap > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.archText { position: absolute; z-index: 1; left: 22%; right: 22%; top: 21%; bottom: 3%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+.bism { color: var(--accent); font-family: Amiri, serif; font-size: 21px; line-height: 1.5; }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin: 6px 0; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; line-height: 1.06; overflow-wrap: anywhere; }
+.coverNames i { color: var(--turq); font-size: 26px; font-style: normal; }
+.coverStar { width: 34px; height: auto; animation: turn 60s linear infinite; }
+.coverDate { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
+.plinth { position: relative; z-index: 1; display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 14px; width: 100%; padding: 32px 24px 28px; background: var(--bg); }
+.plinth::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 18px; background: url(/themes/art/bata-persia/band.webp) repeat-x 0 0 / auto 18px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.table { border-color: var(--turq); color: #1d6f6b; }
+.openBtn { border-radius: 2px; background: var(--accent); color: #fbf5ea; font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .12em; box-shadow: 0 8px 18px rgba(24, 52, 102, .25), inset 0 -3px 0 var(--turq); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: square photo in a glazed frame with star corners ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 48px 24px 54px; background: var(--bg); text-align: center; }
+.heroKicker { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 290px; height: 290px; margin: 16px 0 10px; padding: 14px; background: var(--brick); box-shadow: 0 16px 30px rgba(42, 33, 24, .16); }
+.heroFrame::before { content: ""; position: absolute; inset: 10px; border: 3px solid var(--accent); pointer-events: none; z-index: 1; }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroCorner { position: absolute; z-index: 2; width: 40px; height: auto; }
+.heroCorner:nth-of-type(1) { top: -14px; left: -14px; }
+.heroCorner:nth-of-type(2) { top: -14px; right: -14px; }
+.heroCorner:nth-of-type(3) { bottom: -14px; left: -14px; }
+.heroCorner:nth-of-type(4) { bottom: -14px; right: -14px; }
+.heroNames { max-width: 100%; margin-top: 16px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 500; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--turq); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
+.heroNote { max-width: 320px; margin-top: 10px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverStar { animation: none !important; }
+}

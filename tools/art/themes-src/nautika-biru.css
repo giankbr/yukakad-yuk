@@ -1,0 +1,152 @@
+/* Nautika Biru — nuansa bahari yang rapi: garis biru-putih lukisan tangan, untaian bendera isyarat, jendela kapal kuningan, kompas, jangkar bertali tambang, dan pelabuhan pagi dengan perahu layar serta mercusuar; navy, putih, merah isyarat, kuningan; Bodoni Moda + Josefin Sans. */
+.root, .cover {
+  --bg: #f5f2ea; --paper: #e8edf1; --ivory: #fffdf8; --field: #fffdf8; --ink: #1b2a4a; --muted: #56627a; --line: #cfd6df;
+  --accent: #1b2a4a; --accent2: #c23b2e; --gold: #b8893a; --gold-l: #ecd395; --gold-d: #8a6420; --red: #c23b2e; --sea: #4f7fa8;
+  --band-bg: #1b2a4a; --band-ink: #f5f2ea;
+  --display: "Bodoni Moda", "Didot", Georgia, serif; --serif: "Josefin Sans", "Helvetica Neue", sans-serif; --script: "Bodoni Moda", Georgia, serif;
+  --h2: 34px; --card-r: 16px;
+  --stripe: url(/themes/art/nautika-biru/stripe.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1b2a4a; --t-accent-ink: #f5f2ea; --t-bg: #f5f2ea; --t-ink: #1b2a4a; --t-muted: #56627a; --t-line: #cfd6df; --t-field: #fffdf8;
+  --t-radius: 14px; --t-font: "Josefin Sans", "Helvetica Neue", sans-serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+
+/* ── type ── */
+.eyebrow, .salamKicker, .role { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; font-weight: 500; letter-spacing: -.005em; }
+.head h2 { color: var(--ink); }
+.salamBlock { padding: 46px 28px 56px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; font-style: italic; font-weight: 500; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.divider { width: 220px; }
+.divider img { display: block; width: 100%; height: auto; }
+
+/* ── people: portholes ── */
+.couple { gap: 8px; background: var(--paper); padding-bottom: 66px; }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 214px; height: 214px; padding: 0; border: 0; border-radius: 50%; background: var(--ink); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; height: 100%; border-radius: 50%; }
+.portraitArt { position: absolute; z-index: 2; left: -22px; top: -22px; width: 258px; height: 258px; max-width: none; }
+.person:hover .portraitFrame { box-shadow: 0 18px 40px rgba(27, 42, 74, .25); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 96px; font-style: italic; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 500; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { margin: 24px 0 14px; color: var(--red); font-family: var(--display); font-size: 58px; font-style: italic; }
+.amp img { width: 86px; }
+.amp img:last-child { scale: -1 1; }
+
+/* ── countdown: navy deck, compass turning behind ── */
+.countBand { padding: 70px 22px 64px; background: var(--ink); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 14px; background: var(--stripe) 0 0 / 64px; opacity: .9; }
+.countCompass { position: absolute; z-index: -1; left: 50%; top: 50%; width: 330px; height: auto; margin: -165px 0 0 -165px; opacity: .14; animation: spin 140s linear infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 10px; }
+.count > div { height: 84px; border: 1.5px solid var(--gold); border-radius: 50%; aspect-ratio: 1; height: auto; background: rgba(245, 242, 234, .05); }
+.count > div::after { display: none; }
+.count b { color: var(--band-ink); font-family: var(--display); font-size: 28px; font-weight: 500; line-height: 1; }
+.count small { color: var(--gold-l); font-family: var(--serif); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-radius: 999px; font-family: var(--serif); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+
+/* ── events: tickets on a rope ── */
+.events { gap: 26px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 16px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 30px rgba(27, 42, 74, .08); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 10px; border: 0; border-radius: 0; background: var(--stripe) 0 0 / 40px; opacity: 1; }
+.eventNo { top: 22px; left: auto; right: 18px; translate: none; width: 40px; height: 40px; border: 2px solid var(--red); border-radius: 50%; background: var(--ivory); color: var(--red); font-family: var(--display); font-size: 15px; font-style: italic; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; font-style: italic; font-weight: 500; max-width: 240px; }
+.eventDate { font-family: var(--serif); font-size: 16px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.rule { width: 90px; height: 2px; background: repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 12px); }
+.event strong { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.mapBtn { background: var(--ink); color: var(--band-ink); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+.mapBtn:hover { background: var(--red); }
+
+/* ── story: a logbook with a rope line ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; background: repeating-linear-gradient(170deg, #b99a64 0 4px, #e0caa0 4px 7px); }
+.node { border: 2px solid var(--gold); background: var(--ink); }
+.node img { width: 28px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; font-style: italic; font-weight: 500; }
+
+/* ── gallery ── */
+.mosaic { gap: 10px; }
+.tile { border-radius: 14px; }
+.tile:first-child { border-radius: 999px 999px 14px 14px; }
+
+/* ── wishes: message in a bottle ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 18px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 16px 34px rgba(27, 42, 74, .08); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .16em; }
+.choices button { font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--band-ink); }
+.submit { background: var(--red); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--ink); }
+.wish { border: 0; border-left: 3px solid var(--sea); border-radius: 4px 14px 14px 4px; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; font-style: italic; }
+.wish small { background: var(--paper); color: var(--ink); font-weight: 600; }
+.sent { color: var(--ink); font-family: var(--display); }
+
+/* ── gifts ── */
+.gift { border-radius: 18px; }
+.gift::after { right: -30px; bottom: -30px; width: 120px; height: 120px; border: 10px solid rgba(236, 211, 149, .16); box-shadow: none; }
+.gift h3 { font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 22px; line-height: 1.3; }
+.copy { font-family: var(--serif); font-weight: 600; }
+
+/* ── closing ── */
+.closing { padding: 74px 26px 70px; }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 14px; background: var(--stripe) 0 0 / 64px; }
+.closingAnchor { width: 104px; height: auto; transform-origin: 50% 0; animation: sway 6s ease-in-out infinite alternate; }
+.thanks { color: var(--band-ink); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 500; }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 32px; font-style: italic; }
+.family { font-family: var(--serif); }
+.music { border-color: var(--gold); background: var(--red); }
+
+/* ── cover: stripes, flags and a porthole ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 22px 26px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.stripes { position: absolute; z-index: -1; inset: 0 0 auto; height: 260px; background: var(--stripe) 0 0 / 80px; }
+.stripes::after { content: ""; position: absolute; inset: auto 0 -1px; height: 40px; background: linear-gradient(transparent, var(--bg)); }
+.coverFlags { position: relative; width: calc(100% + 44px); max-width: none; height: auto; margin: 0 -22px; transform-origin: 50% 0; animation: flutter 5s ease-in-out infinite alternate; }
+.porthole { position: relative; width: 262px; height: 262px; margin-top: 6px; }
+.portholeGlass { position: absolute; inset: 24px; overflow: hidden; border-radius: 50%; background: var(--ink); }
+.portholeGlass > img { width: 100%; height: 100%; object-fit: cover; }
+.portholeRing { position: absolute; inset: 0; width: 100%; height: auto; filter: drop-shadow(0 10px 16px rgba(15, 25, 48, .35)); }
+.kicker { margin-top: 20px; color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: clamp(44px, 14vw, 58px); font-style: italic; font-weight: 500; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-size: .6em; }
+.coverKnot { width: 200px; height: auto; margin-top: 10px; }
+.coverDate { margin-top: 4px; color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; padding-top: 18px; }
+.guest { padding: 12px 16px; border-radius: 14px; background: var(--ink); color: var(--band-ink); box-shadow: 0 0 0 4px var(--bg), 0 0 0 5.5px var(--gold); }
+.guest small { color: var(--gold-l); font-style: normal; font-size: 13px; }
+.guest strong { font-family: var(--display); font-size: 21px; font-style: italic; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { background: var(--red); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 22px rgba(194, 59, 46, .3); }
+.openBtn:hover { background: #a8302a; translate: 0 -1px; }
+.coverCompass { position: absolute; z-index: -1; left: -64px; top: 360px; width: 150px; height: auto; opacity: .85; animation: spin 120s linear infinite; }
+
+/* ── hero: the harbour with a brass nameplate ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 50px; text-align: center; }
+.heroScene { position: relative; width: 100%; aspect-ratio: 700 / 556; overflow: hidden; }
+.heroScene img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.heroScene::after { content: ""; position: absolute; inset: auto 0 0; height: 14px; background: var(--stripe) 0 0 / 64px; }
+.heroBoatGlint { position: absolute; left: 0; right: 0; top: 56%; height: 44%; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .16) 45%, transparent 60%); background-size: 200% 100%; animation: sea 9s ease-in-out infinite alternate; pointer-events: none; }
+.plaque { position: relative; z-index: 1; margin: -48px 24px 0; padding: 18px 26px 16px; border-radius: 12px; background: linear-gradient(160deg, #e3c27c, #b8893a 55%, #9c7230); color: #2a1c08; box-shadow: inset 0 0 0 2px rgba(255, 240, 200, .5), inset 0 0 0 6px rgba(90, 61, 20, .35), 0 12px 24px rgba(15, 25, 48, .25); }
+.plaque::before, .plaque::after { content: ""; position: absolute; top: 50%; width: 8px; height: 8px; margin-top: -4px; border-radius: 50%; background: #7a561e; box-shadow: inset 1px 1px 0 rgba(255, 240, 200, .6); }
+.plaque::before { left: 10px; }
+.plaque::after { right: 10px; }
+.heroKicker { color: #5a3d14; font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 4px; color: #1b1206; font-family: var(--display); font-size: 36px; font-style: italic; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; }
+.heroDate { margin-top: 22px; color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 10px; color: var(--muted); font-family: var(--display); font-size: 19px; font-style: italic; line-height: 1.35; }
+.heroAnchor { width: 70px; height: auto; margin-top: 18px; }
+
+@keyframes flutter { from { rotate: -.6deg; translate: 0 -2px; } to { rotate: .6deg; translate: 0 2px; } }
+@keyframes sea { from { background-position: 0 0; } to { background-position: 100% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverFlags, .coverCompass, .countCompass, .closingAnchor, .heroBoatGlint { animation: none; }
+}

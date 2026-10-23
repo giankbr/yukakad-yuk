@@ -1,0 +1,166 @@
+/* Linocut Bunga — cetak cukil lino dua warna: lembar cetak bunga madat, kosmos, dan rumput liar dengan bekas cukilan, tinta merah tua dan hitam yang sedikit meleset registrasinya di atas kertas krem; tipografi Alegreya bergaya buku cetak tangan dan catatan pensil di margin. */
+.root, .cover {
+  --bg: #f2e8d5; --paper: #ebdfc8; --ivory: #f8f1e3; --field: #fbf6ec; --ink: #1d1a17; --muted: #5e554a; --line: #cdbd9f;
+  --accent: #1d1a17; --accent2: #3a332c; --gold: #b3271f; --gold-l: #f2e8d5; --gold-d: #b3271f; --red: #b3271f; --red-d: #8a1b15; --pencil: #6f6a63;
+  --band-bg: #1d1a17; --band-ink: #f2e8d5;
+  --display: "Alegreya", Georgia, serif; --serif: "Alegreya Sans", "Helvetica Neue", sans-serif; --script: "Caveat", cursive;
+  --h2: 34px; --card-r: 0px;
+  --paper-tx: url(/themes/art/linocut-bunga/paper.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--paper-tx) 0 0 / 256px, var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b3271f; --t-accent-ink: #f8f1e3; --t-bg: #f2e8d5; --t-ink: #1d1a17; --t-muted: #5e554a; --t-line: #cdbd9f; --t-field: #fbf6ec;
+  --t-radius: 0px; --t-font: "Alegreya Sans", "Helvetica Neue", sans-serif; --t-heading-font: "Alegreya", Georgia, serif; --t-heading-weight: 800; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--paper-tx) 0 0 / 256px, var(--bg); }
+
+/* ── type: letterpress caps + pencil notes ── */
+.eyebrow, .salamKicker, .role { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-family: var(--display); font-weight: 800; line-height: 1.05; letter-spacing: -.01em; }
+.head h2 { color: var(--ink); }
+.salamBlock { gap: 12px; padding: 50px 28px 58px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 800; line-height: 1.05; }
+.salamTitle::after { content: ""; display: block; width: 46px; height: 5px; margin: 12px auto 0; background: var(--red); translate: 3px 2px; box-shadow: -3px -2px 0 var(--ink); }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.divider { width: 210px; }
+.divider img { display: block; width: 100%; height: auto; }
+
+/* ── people: printing plates with a red registration shadow ── */
+.couple { gap: 10px; padding-bottom: 70px; background: var(--paper); }
+.personWrap:first-of-type .person { margin-top: 8px; }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 214px; height: 270px; padding: 0; border: 5px solid var(--ink); border-radius: 0; background: var(--ink); box-shadow: 8px 7px 0 var(--red); overflow: hidden; }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; height: 100%; border-radius: 0; filter: grayscale(1) contrast(1.18) brightness(1.02); }
+.portraitFrame::after { content: ""; position: absolute; inset: 0; background: var(--paper-tx) 0 0 / 200px; mix-blend-mode: multiply; opacity: .55; pointer-events: none; }
+.person:hover .portraitFrame { box-shadow: 11px 10px 0 var(--red); }
+.portraitArt { position: absolute; z-index: 2; right: -34px; bottom: -26px; width: 92px; height: auto; rotate: 14deg; }
+.personWrap:nth-of-type(2) .portraitArt { right: auto; left: -34px; rotate: -12deg; }
+.portraitFrame:has(.monogram) { background: var(--ivory); }
+.monogram { color: var(--red); font-family: var(--display); font-size: 120px; font-weight: 800; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 52px; font-weight: 800; line-height: 1; }
+.fullName { margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: 18px; font-style: italic; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { margin: 26px 0 18px; color: var(--red); font-family: var(--display); font-size: 70px; font-style: italic; font-weight: 700; }
+.amp img { width: 60px; }
+
+/* ── countdown: a black key block with a carved frieze on top ── */
+.countBand { padding: 0 20px 56px; background: var(--ink); }
+.countFrieze { display: block; width: calc(100% + 40px); max-width: none; height: auto; margin: 0 -20px 10px; }
+.headLight .eyebrow { color: #e2604f; }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; }
+.count > div { height: 92px; border: 2px solid var(--band-ink); border-radius: 0; background: transparent; box-shadow: 4px 3px 0 var(--red); }
+.count > div::after { display: none; }
+.count b { color: var(--band-ink); font-family: var(--display); font-size: 36px; font-weight: 800; line-height: 1; }
+.count small { color: #d7c9ae; font-family: var(--serif); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); font-family: var(--display); font-size: 20px; font-style: italic; }
+.ghostBtn { border: 2px solid var(--band-ink); border-radius: 0; color: var(--band-ink); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+.ghostBtn:hover { background: var(--red); border-color: var(--red); }
+
+/* ── events: proof cards ── */
+.events { gap: 30px; }
+.event { padding: 34px 22px 26px; border: 2px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 7px 6px 0 var(--red); }
+.event::before { inset: auto 14px 10px auto; width: 80px; height: auto; border: 0; content: "cetakan " counter(ev) "/2"; color: var(--pencil); font-family: var(--script); font-size: 17px; text-align: right; }
+.events { counter-reset: ev; }
+.event { counter-increment: ev; }
+.event:hover { border-color: var(--ink); box-shadow: 10px 9px 0 var(--red); }
+.eventNo { top: -16px; left: 22px; translate: none; width: 44px; height: 32px; border-radius: 0; background: var(--ink); color: var(--band-ink); font-family: var(--display); font-size: 16px; font-weight: 800; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 26px; font-weight: 800; }
+.eventDate { font-family: var(--display); font-size: 18px; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.rule { width: 70px; height: 4px; background: var(--red); box-shadow: -3px -2px 0 var(--ink); }
+.event strong { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.mapBtn { border-radius: 0; background: var(--ink); color: var(--band-ink); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; box-shadow: 4px 3px 0 var(--red); }
+.mapBtn:hover { background: var(--red); box-shadow: 4px 3px 0 var(--ink); }
+
+/* ── story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; width: 3px; background: var(--ink); }
+.node { width: 42px; height: 42px; border: 0; background: transparent; }
+.node img { width: 42px; }
+.storyBody small { color: var(--red); font-family: var(--script); font-size: 19px; letter-spacing: 0; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; font-weight: 800; }
+.storyBody p { font-size: 16px; }
+
+/* ── gallery: proofs pinned on the drying line ── */
+.gallery { gap: 30px; }
+.mosaic { grid-auto-rows: 150px; gap: 14px; }
+.tile { border: 4px solid var(--ivory); border-radius: 0; box-shadow: 0 0 0 1.5px var(--ink), 5px 5px 0 1.5px var(--red); filter: grayscale(1) contrast(1.12); }
+.tile:first-child { border-radius: 0; }
+.tile:nth-child(3n + 2) { rotate: 1.2deg; }
+.tile:nth-child(3n) { rotate: -1deg; }
+.tile:hover { filter: grayscale(.2) contrast(1.05); }
+
+/* ── wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 2px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 7px 6px 0 var(--ink); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .16em; }
+.field input, .field textarea { border: 1.5px solid var(--ink); border-radius: 0; background: var(--field); }
+.field input:focus, .field textarea:focus { border-color: var(--red); box-shadow: 3px 3px 0 var(--red); }
+.choices button { border: 1.5px solid var(--ink); border-radius: 0; color: var(--ink); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--red); background: var(--red); color: var(--ivory); box-shadow: 3px 3px 0 var(--ink); }
+.step { border: 1.5px solid var(--ink); border-radius: 0; color: var(--ink); }
+.submit { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--serif); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; box-shadow: 5px 4px 0 var(--red); }
+.submit:not(:disabled):hover { background: var(--red); box-shadow: 5px 4px 0 var(--ink); }
+.wish { border: 0; border-top: 2px solid var(--ink); border-radius: 0; background: transparent; padding: 12px 2px 6px; }
+.wish:hover { border-color: var(--red); box-shadow: none; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; font-weight: 800; }
+.wish small { border-radius: 0; background: var(--red); color: var(--ivory); font-weight: 700; }
+.sent { color: var(--ink); font-family: var(--display); font-size: 22px; }
+
+/* ── gifts: black blocks ── */
+.gift { border-radius: 0; box-shadow: 6px 5px 0 var(--red); }
+.gift::after { display: none; }
+.giftIcon { border-radius: 0; border-color: var(--band-ink); }
+.gift h3 { color: #e2604f; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 22px; font-weight: 800; line-height: 1.3; }
+.copy { border: 1.5px solid var(--band-ink); border-radius: 0; color: var(--band-ink); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.copyOn, .copyOn:hover { background: var(--band-ink); color: var(--ink); }
+
+/* ── closing ── */
+.closing { padding: 0 26px 70px; }
+.closingFrieze { display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px 26px; scale: 1 -1; }
+.closingBloom { width: 110px; height: auto; animation: spinSlow 60s linear infinite; }
+.thanks { color: var(--band-ink); font-family: var(--display); font-size: 46px; font-weight: 800; }
+.closingNames { color: #e2604f; font-family: var(--script); font-size: 40px; }
+.family { font-family: var(--serif); letter-spacing: .1em; }
+.music { border: 2px solid var(--band-ink); border-radius: 0; background: var(--red); box-shadow: 3px 3px 0 var(--ink); }
+
+/* ── cover: one print on its sheet ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 18px 22px 26px; overflow: hidden; background: var(--paper-tx) 0 0 / 256px, var(--bg); text-align: center; }
+.sheetTop { display: flex; justify-content: space-between; width: 100%; color: var(--pencil); font-family: var(--script); font-size: 17px; }
+.plate { position: relative; width: min(78vw, 316px); margin-top: 8px; }
+.coverPrint { display: block; width: 100%; height: auto; animation: roller 2.2s cubic-bezier(.5, .1, .2, 1) .15s both; }
+.caption { display: flex; justify-content: space-between; align-items: baseline; width: min(78vw, 316px); margin-top: 6px; color: var(--pencil); font-family: var(--script); font-size: 17px; }
+.caption b { color: var(--ink); font-size: 21px; font-weight: 600; rotate: -3deg; }
+.kicker { margin-top: 16px; color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 4px; color: var(--ink); font-family: var(--display); font-size: clamp(40px, 12.5vw, 52px); font-weight: 800; line-height: 1; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.coverNames em { color: var(--red); font-style: italic; font-weight: 700; }
+.coverDate { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 17px; font-style: italic; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; padding-top: 18px; }
+.guest { padding: 10px 14px; border: 1.5px solid var(--ink); background: var(--ivory); box-shadow: 4px 3px 0 var(--red); }
+.guest small { color: var(--muted); font-style: normal; font-size: 13px; }
+.guest strong { font-family: var(--display); font-size: 20px; font-weight: 700; }
+.table { border-radius: 0; border-color: var(--red); color: var(--red); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; box-shadow: 5px 4px 0 var(--red); }
+.openBtn:hover { background: var(--red); box-shadow: 5px 4px 0 var(--ink); translate: 0 -1px; }
+
+/* ── hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 46px; overflow: hidden; text-align: center; }
+.heroFrieze { display: block; width: 100%; height: auto; }
+.heroKicker { margin-top: 30px; color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 6px; padding: 0 20px; color: var(--ink); font-family: var(--display); font-size: 58px; font-weight: 800; line-height: .95; overflow-wrap: anywhere; }
+.heroNames em { color: var(--red); font-size: .7em; font-style: italic; font-weight: 700; }
+.heroPlate { position: relative; width: 250px; height: 310px; margin-top: 26px; border: 6px solid var(--ink); background: var(--ink); box-shadow: 9px 8px 0 var(--red); }
+.heroPlate > img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15); }
+.heroStalks { position: absolute; z-index: 2; right: -6px; bottom: 190px; width: 112px; height: auto; transform-origin: 50% 100%; animation: sway 7s ease-in-out infinite alternate; }
+.heroStalksL { position: absolute; z-index: 2; left: -10px; bottom: 210px; width: 92px; height: auto; scale: -1 1; transform-origin: 50% 100%; animation: sway 8s ease-in-out -2s infinite alternate; }
+.heroDate { margin-top: 26px; color: var(--ink); font-family: var(--display); font-size: 19px; font-style: italic; }
+.heroNote { max-width: 300px; margin-top: 10px; color: var(--pencil); font-family: var(--script); font-size: 21px; line-height: 1.25; }
+
+@keyframes roller { 0% { clip-path: inset(0 100% 0 0); opacity: .4; } 100% { clip-path: inset(0 0 0 0); opacity: 1; } }
+@keyframes spinSlow { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverPrint, .heroStalks, .heroStalksL, .closingBloom { animation: none; }
+}

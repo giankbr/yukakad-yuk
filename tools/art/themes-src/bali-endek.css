@@ -1,0 +1,160 @@
+/* Bali Endek — kain endek ikat hijau giok bergaris magenta dan kuning kunyit sebagai bingkai kain di setiap kartu dan potret, penjor janur yang melengkung di atas nama, canang sari di sudut, dan sawah berundak Ubud yang hijau di bawahnya. */
+.root, .cover {
+  --bg: #f8f3e6; --paper: #fdf9ef; --ivory: #fffcf4; --field: #f4eedf; --ink: #1d2a28; --muted: #5e6a62; --line: #e4dcc6;
+  --accent: #1d6b66; --accent2: #155450; --gold: #e3a52e; --gold-l: #f3cf6e; --gold-d: #b97f17;
+  --band-bg: #1d6b66; --band-ink: #fdf6e3;
+  --display: "Della Respira", Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: Italianno, cursive;
+  --mag: #b2306a; --rice: #8fc24a; --rice-l: #e9f2d6;
+  --endek: url(/themes/art/bali-endek/endek.webp);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d6b66; --t-accent-ink: #fdf6e3; --t-bg: #f8f3e6; --t-ink: #1d2a28; --t-muted: #5e6a62; --t-line: #e4dcc6; --t-field: #fffcf4;
+  --t-radius: 6px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: "Della Respira", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--mag); font-family: var(--serif); font-size: 12.5px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent2); }
+.divider { width: 200px; }
+.intro { color: var(--muted); font-size: 17.5px; line-height: 1.7; }
+.section { padding: 70px 24px; }
+
+/* opening */
+.salamBlock { padding: 54px 30px 64px; background: var(--paper); }
+.salamKicker { color: var(--mag); font-size: 14px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 31px; line-height: 1.25; }
+.salamSub { color: var(--gold-d); font-family: var(--display); font-size: 20px; }
+
+/* couple: portraits framed in a band of endek cloth */
+.couple { gap: 22px; background: var(--bg); }
+.portrait { margin-bottom: 20px; }
+.portrait > img { position: absolute; z-index: 2; top: -18px; right: -22px; width: 58px; height: auto; rotate: 12deg; filter: drop-shadow(0 4px 5px rgba(0, 0, 0, .15)); }
+.portraitFrame { width: 206px; height: 262px; padding: 0; border: 9px solid transparent; border-radius: 6px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--endek) 0 0 / 120px border-box; box-shadow: 0 14px 30px rgba(29, 42, 40, .16); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: 0 18px 36px rgba(29, 42, 40, .22); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--rice-l); color: var(--accent); font-family: var(--display); font-size: 84px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 46px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18.5px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { color: var(--mag); font-family: var(--script); font-size: 78px; }
+.amp img { width: 34px; }
+
+/* countdown on the endek cloth itself */
+.countBand { padding: 80px 22px; background: linear-gradient(rgba(16, 60, 57, .78), rgba(16, 60, 57, .86)), var(--endek) 0 0 / 240px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fdf6e3; }
+.count > div { height: 90px; border: 0; border-radius: 6px; background: var(--ivory); box-shadow: inset 0 -5px 0 var(--mag), 0 10px 20px rgba(0, 0, 0, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(243, 207, 110, .35) 50%, transparent 65%); }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 31px; }
+.count small { color: var(--muted); font-size: 13px; font-style: normal; font-weight: 700; letter-spacing: .08em; }
+.countTba { color: #fdf6e3; }
+.ghostBtn { border-color: var(--gold-l); color: #fdf6e3; font-family: var(--serif); font-weight: 700; }
+
+/* events: a strip of endek across the top of each card, a saffron number */
+.events { gap: 26px; background: var(--paper); }
+.event { padding: 50px 22px 26px; border: 0; border-radius: 8px; background: var(--ivory); box-shadow: 0 12px 30px rgba(29, 42, 40, .09); overflow: hidden; }
+.event::before { inset: 0 0 auto 0; height: 22px; border: 0; border-radius: 0; background: var(--endek) 0 0 / 120px; }
+.eventNo { top: 8px; width: 34px; height: 34px; border: 3px solid var(--ivory); border-radius: 50%; background: var(--gold); color: var(--ink); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: 0; }
+.event h3 { color: var(--accent2); font-size: 27px; }
+.eventDate { color: var(--mag); font-family: var(--serif); font-weight: 700; font-style: normal; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 2px; background: linear-gradient(90deg, var(--mag), var(--gold)); }
+.event strong { font-family: var(--display); font-weight: 400; font-size: 20px; }
+.mapBtn { background: var(--accent); color: #fdf6e3; font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--mag); }
+
+/* story */
+.story { background: var(--bg); }
+.timeline::before { width: 2px; background: linear-gradient(var(--rice), var(--accent)); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--mag); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--accent2); font-size: 22px; }
+
+/* gallery: photos mounted like prints with an endek mat on the first */
+.gallery { background: var(--rice-l); }
+.mosaic { gap: 10px; }
+.tile { border-radius: 4px; }
+.tile:first-child { border: 6px solid transparent; border-radius: 4px; background: var(--endek) 0 0 / 120px border-box; }
+.tile:last-child:nth-child(4n + 1):not(:first-child) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 8px; background: var(--ivory); box-shadow: 0 12px 30px rgba(29, 42, 40, .08); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border-radius: 6px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fdf6e3; }
+.submit { border-radius: 6px; background: var(--mag); color: #fff; font-family: var(--serif); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: #962658; }
+.wish { border: 0; border-radius: 8px; box-shadow: inset 4px 0 0 var(--rice); }
+.wish strong { color: var(--accent2); font-family: var(--display); }
+.wish small { background: rgba(178, 48, 106, .1); color: var(--mag); }
+
+/* gifts: jade cards edged with endek */
+.gifts { background: var(--paper); }
+.gift { padding: 24px 22px; border: 6px solid transparent; border-radius: 10px; background: linear-gradient(var(--accent), var(--accent2)) padding-box, var(--endek) 0 0 / 120px border-box; }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 22px; line-height: 1.3; }
+.copy { border-color: var(--gold-l); color: #fdf6e3; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: terraces at the foot, penjor arching over the farewell */
+.closing { padding: 70px 30px 300px; background: linear-gradient(var(--bg), var(--rice-l)); color: var(--ink); }
+.closingSawah { position: absolute; z-index: -1; left: -15%; bottom: 0; width: 130%; max-width: none; height: auto; }
+.closingPenjor { position: absolute; z-index: -1; top: 26px; left: -8px; width: 120px; height: auto; opacity: .9; }
+.closingCanang { width: 120px; height: auto; }
+.thanks { color: var(--accent2); font-family: var(--display); font-size: 48px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--mag); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent2); font-family: var(--script); font-size: 60px; }
+.made { color: rgba(29, 42, 40, .5); }
+.made:hover { color: var(--mag); }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: an endek waistband on top, the penjor arching over right-aligned names, Ubud terraces below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-end; min-height: 100dvh; padding: 0 24px 26px; overflow: hidden; background: linear-gradient(#f2efdc, #eef3df 55%, #e6efcf); color: var(--ink); text-align: right; isolation: isolate; }
+.cover > * { position: relative; z-index: 2; }
+.cover > .scene { position: absolute; z-index: 0; inset: 0; pointer-events: none; }
+.sawah { position: absolute; left: -22%; bottom: 0; width: 144%; max-width: none; height: auto; }
+.penjorBox { position: absolute; left: -10px; bottom: 150px; width: 220px; transform-origin: 30% 100%; }
+.penjorBox img { width: 100%; height: auto; }
+.band { align-self: stretch; display: grid; place-items: center; height: 92px; margin: 0 -24px; background: var(--endek) 0 0 / 200px; box-shadow: inset 0 -6px 0 var(--mag), inset 0 -9px 0 var(--gold); }
+.band span { padding: 6px 16px; border-radius: 3px; background: rgba(16, 60, 57, .82); color: #fdf6e3; font-family: var(--display); font-size: 17px; letter-spacing: .12em; }
+.coverKicker { margin-top: 44px; color: var(--mag); font-size: 13px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: flex-end; max-width: 72%; margin-top: 8px; color: var(--accent2); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.04; overflow-wrap: anywhere; }
+.coverNames em { color: var(--mag); font-family: var(--script); font-size: 60px; font-style: normal; line-height: .8; }
+.coverDate { margin-top: 12px; color: var(--ink); font-size: 17px; font-weight: 700; letter-spacing: .04em; }
+.coverPlace { margin-top: 2px; color: var(--muted); font-size: 15px; font-style: italic; }
+.coverSpacer { flex: 1 0 150px; }
+.guestCard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; align-self: center; width: 100%; max-width: 330px; padding: 22px 20px 20px; border: 7px solid transparent; border-radius: 10px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--endek) 0 0 / 120px border-box; text-align: center; box-shadow: 0 16px 34px rgba(29, 42, 40, .25); }
+.coverCanang { position: absolute; top: -46px; right: -14px; width: 104px; height: auto; rotate: 8deg; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--mag); color: var(--mag); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 6px; background: var(--accent); color: #fdf6e3; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 8px 18px rgba(29, 107, 102, .3); }
+.openBtn:hover { background: var(--mag); }
+
+/* ── Hero: a tilted print of the couple framed in endek, a penjor beside it ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 26px 60px; overflow: hidden; background: linear-gradient(#eef3df, var(--bg)); text-align: center; }
+.heroFrame { position: relative; width: 270px; height: 330px; rotate: -2.5deg; border: 10px solid transparent; border-radius: 6px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--endek) 0 0 / 130px border-box; box-shadow: 0 18px 36px rgba(29, 42, 40, .22); }
+.heroFrame .heroPhoto { width: 100%; height: 100%; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.heroPenjor { position: absolute; top: 10px; right: -6px; width: 108px; height: auto; }
+.heroKicker { margin-top: 32px; color: var(--mag); font-size: 13px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent2); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--mag); font-family: var(--script); font-size: 56px; font-style: normal; line-height: .85; }
+.heroDate { margin-top: 12px; color: var(--ink); font-size: 17px; font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 20px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.65; }
+.sentBox img { width: 120px; }
+
+/* motion (elegant): penjor sways in the breeze; the canang settles; endek frames get a slow sheen */
+.penjorBox, .heroPenjor, .closingPenjor { animation: penjorSway 6s ease-in-out infinite alternate; transform-origin: 20% 100%; }
+.coverCanang { animation: settle 1.8s var(--m-ease) .8s both; }
+.root .event { transition: translate 600ms var(--m-ease), box-shadow 600ms var(--m-ease), scale 600ms var(--m-ease); }
+.event:hover { translate: 0 -3px; box-shadow: 0 18px 36px rgba(29, 42, 40, .14); }
+@keyframes penjorSway { from { rotate: -1.4deg; } to { rotate: 1.6deg; } }
+@keyframes settle { from { opacity: 0; translate: 0 -16px; rotate: -6deg; } }
+@media (prefers-reduced-motion: reduce) { .penjorBox, .heroPenjor, .closingPenjor, .coverCanang { animation: none; } }

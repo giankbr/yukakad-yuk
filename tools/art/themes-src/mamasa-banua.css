@@ -1,0 +1,150 @@
+/* Mamasa Banua — adat Mamasa: lembah pinus berkabut dan sawah berundak cat air, banua beratap perahu yang berat dan rendah, papan ukir dicat merah-kuning-hitam-putih; sampul berpapan ukir hitam, kotak hitung mundur belah ketupat. */
+.root, .cover {
+  --bg: #eef0e8; --paper: #e3e7db; --ivory: #fafaf4; --field: #ffffff; --ink: #1f231d; --muted: #545d51; --line: #cfd5c6;
+  --accent: #2f4a39; --accent2: #1c3024; --gold: #d29a2e; --gold-l: #f0d08a; --gold-d: #8f6518;
+  --red: #a8322a; --blk: #1f1a17;
+  --band-bg: #1f1a17; --band-ink: #f3ece0;
+  --display: Kurale, Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: Kurale, Georgia, serif;
+  --h2: 30px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f4a39; --t-accent-ink: #fafaf4; --t-bg: #eef0e8; --t-ink: #1f231d; --t-muted: #545d51; --t-line: #cfd5c6; --t-field: #ffffff;
+  --t-radius: 2px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: Kurale, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+/* type */
+.eyebrow, .role { color: var(--red); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 200px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 18px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+
+/* opening */
+.salamBlock { padding: 52px 30px 56px; }
+.salamKicker { color: var(--red); font-family: var(--serif); font-weight: 700; letter-spacing: .2em; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.2; text-wrap: balance; }
+
+/* couple: plank frames with a painted medallion pinned at the top */
+.couple { gap: 16px; background: var(--paper); }
+.portrait { margin-bottom: 18px; padding-top: 30px; }
+.portraitMed { position: absolute; z-index: 2; top: 0; left: 50%; width: 64px; height: auto; translate: -50% 0; }
+.portraitFrame { width: 214px; height: 270px; padding: 9px; border: 0; border-radius: 2px; background: var(--blk); box-shadow: inset 0 0 0 3px var(--blk), inset 0 0 0 5px var(--gold), 0 14px 28px rgba(31, 26, 23, .18); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 48px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.amp { color: var(--red); font-family: var(--display); font-size: 44px; }
+.amp img { width: 70px; }
+
+/* countdown: the carved black board with diamonds */
+.countBand { gap: 30px; padding: 82px 24px 86px; background: var(--blk); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 36px; background: url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 36px; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; scale: 1 -1; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: #f3ece0; }
+.count { grid-template-columns: repeat(4, 74px); gap: 8px; margin: 6px 0; }
+.count > div { width: 74px; height: 74px; gap: 1px; border: 0; border-radius: 0; background: var(--gold); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.count > div::after { display: none; }
+.count > div::before { content: ""; position: absolute; inset: 3px; background: var(--red); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.count b, .count small { position: relative; }
+.count b { color: #fff6e0; font-size: 21px; line-height: 1; }
+.count small { color: var(--gold-l); font-size: 10px; font-style: normal; letter-spacing: .04em; line-height: 1; }
+.ghostBtn { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.countPines { position: absolute; z-index: -1; bottom: 30px; width: 110px; height: auto; opacity: .22; }
+.countPinesL { left: -18px; }
+.countPinesR { right: -18px; scale: -1 1; }
+
+/* events: white cards topped by a carved strip */
+.events { background: var(--bg); gap: 24px; }
+.event { padding: 50px 22px 26px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory) url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 26px; box-shadow: 0 10px 22px rgba(31, 35, 29, .07); }
+.event::before { display: none; }
+.eventNo { top: 36px; left: 18px; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; }
+.event h3 { color: var(--accent); font-size: 23px; }
+.eventDate { font-style: normal; font-weight: 500; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 80px; height: 3px; background: linear-gradient(90deg, var(--red) 0 33%, var(--gold) 33% 66%, var(--blk) 66%); }
+.mapBtn, .submit { border-radius: 2px; background: var(--accent); color: #fafaf4; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--red) 0 8px, var(--gold) 8px 16px, var(--blk) 16px 24px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 42px; }
+.storyBody small { color: var(--red); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-size: 22px; }
+
+/* gallery */
+.mosaic { gap: 6px; }
+.tile, .tile:first-child { border-radius: 2px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 2px; border-top: 4px solid var(--blk); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fafaf4; }
+.wish { border-radius: 2px; border-left: 4px solid var(--gold); }
+.wish small { background: color-mix(in srgb, var(--red) 12%, transparent); color: var(--red); }
+.sentBox img { width: 90px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { padding-top: 40px; border-radius: 2px; background: var(--blk) url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 22px; }
+.gift::after { display: none; }
+.gift h3 { color: var(--gold-l); }
+.copy { border-radius: 2px; border-color: var(--gold); }
+.copyOn, .copyOn:hover { background: var(--gold); color: var(--blk); }
+
+/* closing: pine green dusk */
+.closing { padding: 74px 28px 64px; background: linear-gradient(180deg, var(--accent), var(--accent2)); }
+.closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 30px; background: url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 30px; }
+.closingPines { position: absolute; z-index: -1; bottom: -6px; width: 150px; height: auto; opacity: .35; }
+.closingPinesL { left: -26px; }
+.closingPinesR { right: -26px; scale: -1 1; }
+.closingMed { width: 78px; height: auto; margin-bottom: 6px; }
+.thanks { font-family: var(--display); font-size: 42px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.closingNames { font-family: var(--display); font-size: 32px; }
+.music { border-radius: 2px; rotate: 45deg; background: var(--red); border-color: var(--gold); }
+.music svg { rotate: -45deg; }
+
+/* ── Cover: the valley fills the screen, a carved black board carries the names ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 20px 30px; overflow: hidden; background: linear-gradient(180deg, var(--bg) 30%, #93ad58 30%, #6f8c40); text-align: center; isolation: isolate; }
+.valley { position: relative; z-index: -1; flex: 1 0 auto; width: calc(100% + 40px); min-height: 330px; margin: 0 -20px -70px; }
+.valley img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; object-position: 78% 0; }
+.mist { position: absolute; z-index: 0; left: -30%; right: -30%; top: 13%; height: 80px; background: radial-gradient(closest-side, rgba(244, 246, 240, .6), rgba(244, 246, 240, 0)); animation: drift 18s ease-in-out infinite alternate; }
+.kicker { position: absolute; z-index: 1; top: 38px; left: 0; right: 0; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.board { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 350px; padding: 50px 22px 26px; background: var(--blk); color: #f3ece0; box-shadow: 0 22px 40px rgba(20, 24, 18, .35); }
+.board::before, .board::after { content: ""; position: absolute; left: 0; right: 0; height: 26px; background: url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 26px; }
+.board::before { top: 0; }
+.board::after { bottom: 0; scale: 1 -1; }
+.boardMed { position: absolute; top: -34px; left: 50%; width: 66px; translate: -50% 0; }
+.boardMed img { display: block; width: 100%; height: auto; }
+.coverNames { max-width: 100%; margin-top: 6px; color: var(--gold-l); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames i { color: #f3ece0; font-size: .62em; font-style: normal; }
+.coverDate { color: #f3ece0; font-size: 14px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin: 10px 0 24px; padding-top: 14px; border-top: 1px solid rgba(240, 208, 138, .3); }
+.guest small { color: rgba(243, 236, 224, .75); }
+.guest strong { color: #fff; font-family: var(--display); }
+.table { border-color: var(--gold); color: var(--gold-l); }
+.openBtn { border-radius: 2px; background: var(--red); color: #fff6e0; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; box-shadow: inset 0 0 0 1px var(--gold); }
+.openBtn:hover { background: #8c2620; translate: 0 -1px; }
+
+/* ── Hero: panoramic photo under a carved strip ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 0 48px; background: var(--bg); text-align: center; }
+.heroPhoto { width: 100%; height: 300px; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBand { display: block; width: 100%; height: 30px; background: url(/themes/art/mamasa-banua/band.webp) repeat-x 0 0 / auto 30px; }
+.heroKicker { margin-top: 30px; color: var(--red); font-size: 13px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { max-width: 100%; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--gold-d); font-style: normal; }
+.heroDate { margin-top: 4px; color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 12px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.55; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mist { animation: none !important; }
+}

@@ -22,7 +22,7 @@ export default async function InvitationDemoPage({ searchParams }: { searchParam
     // `?to=` is already URL-decoded; hyphens stay as typed (e.g. "Siti Nur-Aini").
     guestName: to?.replace(/\s+/g, " ").trim().slice(0, 80).trim() || named.guestName,
     // "?selesai=1" previews the after-the-event thank-you mode.
-    extras: selesai === "1" ? { ...named.extras, thankYou: { mode: "on" as const } } : named.extras,
+    extras: selesai === "1" ? { ...named.extras, thankYou: { ...named.extras?.thankYou, mode: "on" as const } } : named.extras,
   };
   const slug = `demo-${id}`;
   return (

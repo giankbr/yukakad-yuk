@@ -1,0 +1,162 @@
+/* Latte Syari — tanpa foto, hangat seperti kopi susu: cangkir latte dilihat dari atas dengan busa bertumpuk yang berputar pelan, lapisan susu-karamel-espresso bergelombang, lelehan karamel sebagai pembatas, monogram di atas busa cangkir, kartu acara berbentuk mug, sleeve kertas kraft untuk amplop; Gloock + Literata + Ephesis, krem, latte, karamel dan espresso. */
+.root, .cover {
+  --bg: #f6ecdd; --paper: #efe0cb; --ivory: #fffaf2; --field: #fffdf8; --ink: #3b2419; --muted: #7a5c48; --line: #e3cfb3;
+  --accent: #6b4430; --accent2: #3b2419; --gold: #b97a45; --gold-l: #f3dcc0; --gold-d: #9a6236;
+  --band-bg: #3b2419; --band-ink: #fbf4e8;
+  --cream: #efe0cb; --latte: #cfa57d; --cara: #b97a45; --esp: #3b2419;
+  --display: Gloock, "DM Serif Display", serif; --serif: Literata, Georgia, serif; --script: Ephesis, cursive;
+  --h2: 34px; --card-r: 28px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6b4430; --t-accent-ink: #fbf4e8; --t-bg: #f6ecdd; --t-ink: #3b2419; --t-muted: #7a5c48; --t-line: #e3cfb3; --t-field: #fffdf8;
+  --t-radius: 22px; --t-font: Literata, Georgia, serif; --t-heading-font: Gloock, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--script); font-size: 26px; letter-spacing: 0; text-transform: none; line-height: 1; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-size: var(--h2); font-weight: 400; }
+.divider { width: 180px; height: auto; }
+.section { padding: 64px 22px; }
+
+/* ── Hero: an espresso pour, the couple's initials floating on foam ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 54px 24px 150px; overflow: hidden; background: radial-gradient(120% 70% at 50% 0, #5a3626, var(--esp) 70%); color: var(--band-ink); text-align: center; isolation: isolate; }
+.heroWaves { position: absolute; z-index: -1; left: 0; bottom: -2px; width: 100%; height: auto; rotate: 180deg; scale: -1 1; }
+.heroKicker { color: var(--gold-l); font-family: var(--script); font-size: 28px; }
+.heroCup { position: relative; display: grid; place-items: center; width: 200px; height: 200px; margin: 8px 0 6px; }
+.heroCup img { position: absolute; inset: 0; width: 100%; height: auto; }
+.heroCup b { position: relative; color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 400; letter-spacing: -.02em; }
+.heroCup b i { color: var(--gold); font-family: var(--script); font-size: 34px; font-style: normal; padding: 0 2px; }
+.heroNames { color: var(--band-ink); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--latte); font-family: var(--script); font-style: normal; padding: 0 8px; }
+.heroDate { display: inline-flex; padding: 7px 18px; border-radius: 999px; background: rgba(251, 244, 232, .1); box-shadow: inset 0 0 0 1px rgba(243, 220, 192, .35); color: var(--gold-l); font-size: 15px; }
+.heroNote { max-width: 300px; color: rgba(251, 244, 232, .82); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+/* ── Opening ── */
+.salamBlock { padding: 20px 30px 60px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { font-size: 24px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.intro { color: var(--muted); font-size: 16.5px; }
+
+/* ── Couple: monograms on foam ── */
+.couple { background: var(--paper); gap: 12px; }
+.portrait { display: grid; place-items: center; width: 200px; height: 200px; margin-bottom: 10px; }
+.cupArt { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.cupArt img { width: 200px; height: auto; transition: rotate 1.4s var(--m-ease); }
+.person:hover .cupArt img { rotate: 24deg; }
+.portraitFrame { z-index: 1; width: 120px; height: 120px; padding: 0; border: 0; border-radius: 50%; background: transparent; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 68px; line-height: 1; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; }
+.fullName { font-size: 17px; }
+.amp { margin: 14px 0; gap: 12px; color: var(--cara); font-family: var(--script); font-size: 58px; }
+.amp img { width: 62px; }
+
+/* ── Countdown: espresso band, four saucers ── */
+.countBand { padding: 66px 16px; background: radial-gradient(90% 60% at 50% 100%, #5a3626, var(--esp) 70%); }
+.headLight .eyebrow { color: var(--latte); }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, 74px); gap: 10px; }
+.count > div { width: 74px; height: 74px; border: 0; border-radius: 50%; background: radial-gradient(circle, var(--ivory) 0 52%, #efe4d2 53% 66%, #d9c7ad 67% 69%, var(--ivory) 70%); box-shadow: 0 8px 14px -6px rgba(0, 0, 0, .5); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 24px; line-height: 1; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; }
+.ghostBtn { border-color: var(--latte); color: var(--gold-l); font-family: var(--serif); }
+
+/* ── Events: mug-shaped cards ── */
+.events { gap: 30px; }
+.event { width: calc(100% - 34px); margin-right: 34px; padding: 30px 22px 26px; border: 0; border-radius: 22px 22px 54px 54px; background: var(--ivory); box-shadow: 0 2px 0 var(--line), 0 22px 30px -22px rgba(59, 36, 25, .55); overflow: visible; }
+.event::before { inset: auto; top: 26%; right: -34px; width: 44px; height: 70px; border: 12px solid var(--ivory); border-left: 0; border-radius: 0 40px 40px 0; box-shadow: 4px 6px 10px -6px rgba(59, 36, 25, .4); }
+.event::after { content: ""; position: absolute; top: 10px; left: 50%; width: 60%; height: 10px; translate: -50% 0; border-radius: 999px; background: linear-gradient(90deg, transparent, rgba(185, 122, 69, .25), transparent); pointer-events: none; }
+.event:hover { box-shadow: 0 2px 0 var(--line), 0 28px 34px -22px rgba(59, 36, 25, .6); }
+.eventNo { position: relative; top: auto; left: auto; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--cara); font-family: var(--script); font-size: 30px; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { color: var(--ink); font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 70px; height: 3px; border-radius: 3px; background: var(--latte); }
+.event strong { color: var(--accent); font-weight: 600; }
+.mapBtn { background: var(--accent); color: var(--ivory); font-family: var(--serif); box-shadow: 0 6px 14px -6px rgba(59, 36, 25, .6); }
+.mapBtn:hover { background: var(--esp); }
+
+/* ── Story: a caramel line with beans ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; border-radius: 3px; background: linear-gradient(var(--cara), var(--latte)); }
+.node { width: 44px; height: 32px; border: 0; background: transparent; }
+.node img { width: 50px; }
+.storyBody small { color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 24px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 28px; background: var(--ivory); box-shadow: 0 22px 34px -26px rgba(59, 36, 25, .6); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 16px; background: #fffdf8; }
+.choices button { font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--ivory); }
+.submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 600; letter-spacing: .06em; }
+.submit:not(:disabled):hover { background: var(--esp); }
+.sentBox img { width: 120px; }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; font-size: 22px; }
+.wish { border: 0; border-radius: 22px 22px 22px 6px; background: var(--ivory); box-shadow: 0 10px 20px -16px rgba(59, 36, 25, .5); }
+.wish:nth-child(even) { border-radius: 22px 22px 6px 22px; background: #fbf1e2; }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { background: var(--gold-l); color: var(--gold-d); }
+
+/* ── Gifts: kraft cup sleeves ── */
+.gifts { background: var(--paper); }
+.gift { border-radius: 26px; background: repeating-linear-gradient(90deg, rgba(0, 0, 0, .035) 0 2px, transparent 2px 7px), linear-gradient(#c79a6c, #b98a5a); color: var(--esp); box-shadow: inset 0 3px 0 rgba(255, 255, 255, .25), 0 18px 26px -18px rgba(59, 36, 25, .7); }
+.gift::after { inset: 12px; right: auto; bottom: auto; width: auto; height: auto; border: 0; border-radius: 18px; box-shadow: none; }
+.giftIcon { border-color: rgba(59, 36, 25, .4); background: rgba(255, 250, 242, .3); }
+.gift h3 { color: var(--esp); font-family: var(--display); font-size: 19px; letter-spacing: .02em; }
+.giftNo { color: var(--esp); font-family: var(--display); font-size: 25px; }
+.gift small { color: rgba(59, 36, 25, .8); }
+.copy { border-color: var(--esp); color: var(--esp); font-family: var(--serif); font-weight: 600; }
+.copy:hover { background: rgba(255, 250, 242, .3); }
+.copyOn, .copyOn:hover { background: var(--esp); color: var(--ivory); }
+
+/* ── Closing ── */
+.closing { padding: 150px 26px 60px; background: var(--esp); }
+.closeWaves { position: absolute; z-index: -1; top: -2px; left: 0; width: 100%; height: auto; }
+.closeCup { width: 150px; height: auto; margin-top: -20px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 42px; }
+.closingText { color: rgba(251, 244, 232, .85); }
+.closingSalam { color: var(--latte); font-family: var(--serif); }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 32px; }
+.made:hover { color: var(--gold-l); }
+.music { border-color: var(--latte); background: var(--esp); }
+
+/* ── Cover: a latte from above, the names beside it, milk and coffee pooling below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 100dvh; padding: 30px 26px 150px; overflow: hidden; background: var(--paper); color: var(--ink); isolation: isolate; }
+.coverStain { position: absolute; z-index: -2; top: -70px; left: -90px; width: 280px; height: auto; opacity: .55; }
+.coverArabic { align-self: center; color: var(--accent); font-family: Amiri, serif; font-size: 25px; line-height: 1.5; }
+.coverSalam { align-self: center; margin-top: 2px; color: var(--muted); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+.coverCup { position: relative; align-self: flex-end; width: 250px; margin: 6px -74px 0 0; }
+.coverCup img { display: block; width: 100%; height: auto; animation: tilt 16s var(--m-ease) infinite alternate; }
+.coverKicker { margin-top: -44px; color: var(--gold-d); font-family: var(--script); font-size: 30px; line-height: 1; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { color: var(--cara); font-family: var(--script); font-size: 46px; font-style: normal; line-height: .9; padding-left: 4px; }
+.coverDate { margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--latte); color: var(--ink); font-size: 15px; }
+.cover .guest { align-items: flex-start; max-width: none; margin-top: 18px; padding: 14px 18px; border-radius: 22px 22px 22px 6px; background: var(--ivory); box-shadow: 0 14px 24px -18px rgba(59, 36, 25, .6); text-align: left; }
+.cover .guest small { color: var(--muted); font-size: 14px; }
+.cover .guest strong { color: var(--accent); font-family: var(--display); font-size: 20px; }
+.table { border: 0; background: var(--gold-l); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { margin-top: 18px; background: var(--esp); color: var(--ivory); font-family: var(--serif); font-weight: 600; letter-spacing: .06em; box-shadow: 0 12px 20px -10px rgba(59, 36, 25, .7); }
+.openBtn:hover { background: var(--accent); }
+.coverWaves { position: absolute; z-index: -1; left: 0; bottom: -2px; width: 100%; height: auto; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@keyframes tilt { from { rotate: -7deg; } to { rotate: 7deg; } }
+.heroCup img { animation: turn 80s linear infinite; }
+.closeCup { animation: turn 90s linear infinite reverse; }
+@media (max-width: 370px) {
+  .coverNames { font-size: 46px; }
+  .coverCup { width: 230px; }
+  .count { grid-template-columns: repeat(4, 68px); gap: 8px; }
+  .count > div { width: 68px; height: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coverCup img, .heroCup img, .closeCup { animation: none; }
+}

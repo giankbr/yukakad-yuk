@@ -1,0 +1,175 @@
+/* Flora Gelap — lukisan alam benda bunga orisinal bergaya lukisan klasik Belanda: peoni, tulip bergaris api, mawar, larkspur, dan kupu-kupu dalam jambangan batu di atas birai, disinari tajam dari kiri atas di latar hampir hitam; sampul berupa lukisan penuh dengan nama mempelai tertera di birai batu, hero berupa potongan detail lukisan dan label museum, potret mempelai dalam bingkai oval klasik, garis tipis oker dan merah madder; IM Fell English + Spectral, hitam umber, gading, merah mawar tua, oker. */
+.root, .cover {
+  --bg: #0d0b0a; --paper: #141009; --ivory: #19140f; --field: #1d1712; --ink: #efe4cf; --muted: #b3a48c; --line: #3b3129;
+  --accent: #e8d9bf; --accent2: #c9b48f; --gold: #b8904a; --gold-l: #efe4cf; --gold-d: #c49a52;
+  --band-bg: #0a0807; --band-ink: #efe4cf;
+  --madder: #b5525a; --rose: #d9a7a0; --umber: #14100d;
+  --display: "IM Fell English", "Cormorant Garamond", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "IM Fell English", serif;
+  --still: url("/themes/art/flora-gelap/still.webp");
+  --h2: 34px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b5525a; --t-accent-ink: #f7efe0; --t-bg: #0d0b0a; --t-ink: #efe4cf; --t-muted: #b3a48c; --t-line: #3b3129; --t-field: #1d1712;
+  --t-radius: 2px; --t-font: Spectral, Georgia, serif; --t-heading-font: "IM Fell English", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 70px 26px; }
+.eyebrow, .role { color: var(--rose); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.head { gap: 12px; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-size: var(--h2); font-weight: 400; letter-spacing: .01em; }
+.divider { width: 170px; }
+
+/* ── hero: a detail of the painting with its museum label ── */
+.hero { position: relative; display: grid; gap: 26px; padding: 54px 26px 40px; background: var(--bg); }
+.detail { position: relative; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; box-shadow: 0 0 0 1px rgba(239, 228, 207, .14), 0 30px 50px -24px #000; }
+.detail span { position: absolute; inset: 0; background: var(--still) 40% 28% / 190% auto no-repeat; animation: kb 26s var(--m-ease) infinite alternate; }
+.detail small { position: absolute; left: 12px; bottom: 10px; color: rgba(239, 228, 207, .7); font-size: 12px; font-style: italic; letter-spacing: .08em; }
+.label { position: relative; display: flex; flex-direction: column; gap: 8px; padding: 4px 0 0 18px; border-left: 1px solid var(--gold); }
+.heroKicker { color: var(--rose); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.heroNames { display: flex; flex-direction: column; align-items: flex-start; }
+.heroNames em { margin: 2px 0 2px 1.2em; color: var(--gold-d); font-size: .66em; line-height: .9; }
+.heroMeta { color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.5; }
+.heroNote { margin-top: 4px; color: var(--ink); font-size: 17px; line-height: 1.6; opacity: .85; text-wrap: pretty; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 30px 30px 66px; }
+.salamKicker { color: var(--rose); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .34em; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 40px; font-style: italic; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* couple: oval portraits in the old manner */
+.couple { gap: 16px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 206px; height: 262px; padding: 0; border: 1px solid var(--gold); border-radius: 50%; background: #0a0807; box-shadow: 0 0 0 7px var(--paper), 0 0 0 8px rgba(184, 144, 74, .55), 0 26px 40px -18px #000; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; filter: saturate(.85) contrast(1.05); }
+.portraitRose { position: absolute; z-index: 2; left: 50%; bottom: -26px; width: 92px; translate: -50% 0; pointer-events: none; }
+.portraitRose img { display: block; width: 100%; height: auto; }
+.monogram { color: var(--gold-d); font-family: var(--display); font-style: italic; }
+.role { margin-top: 14px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 44px; line-height: 1.1; }
+.fullName { color: var(--accent2); font-family: var(--serif); font-size: 18px; font-style: italic; font-weight: 400; }
+.parents { color: var(--muted); }
+.amp { gap: 12px; margin: 18px 0 6px; color: var(--gold-d); font-family: var(--display); font-size: 50px; font-style: italic; }
+.amp img { width: 50px; }
+
+/* countdown between two flamed tulips */
+.countBand { padding: 74px 18px 70px; background: radial-gradient(ellipse at 30% 20%, #241a13, transparent 60%), var(--band-bg); }
+.countTulip { position: absolute; z-index: -1; bottom: -20px; width: 74px; height: auto; opacity: .9; pointer-events: none; }
+.countTulipL { left: -6px; rotate: -8deg; }
+.countTulipR { right: -6px; scale: -1 1; rotate: 8deg; }
+.headLight .eyebrow { color: var(--rose); }
+.count { grid-template-columns: repeat(4, minmax(0, 66px)); gap: 8px; }
+.count > div { height: 86px; border: 1px solid rgba(239, 228, 207, .22); border-radius: 1px; background: rgba(239, 228, 207, .03); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(239, 200, 150, .12) 50%, transparent 65%); }
+.count b { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.count small { color: var(--muted); font-size: 13px; }
+.countTba { color: var(--ink); font-family: var(--display); }
+.ghostBtn { border: 1px solid var(--gold); border-radius: 1px; color: var(--ink); font-family: var(--serif); font-size: 14px; letter-spacing: .08em; }
+.ghostBtn:hover { background: rgba(184, 144, 74, .12); border-color: var(--gold-d); }
+
+/* events: framed plates */
+.events { gap: 24px; background: var(--bg); }
+.event { align-items: flex-start; padding: 34px 24px 26px; border: 1px solid var(--line); border-radius: 1px; background: var(--ivory); text-align: left; }
+.event::before { inset: 6px; border-color: rgba(184, 144, 74, .22); border-radius: 0; }
+.event:hover { border-color: var(--gold); box-shadow: 0 24px 40px -22px #000; }
+.eventNo { top: 26px; left: auto; right: 22px; translate: none; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 30px; font-style: italic; letter-spacing: 0; opacity: .8; }
+.event h3 { color: var(--ink); font-size: 27px; text-align: left; padding-right: 40px; }
+.eventDate { color: var(--rose); font-size: 16px; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-size: 15px; }
+.rule { width: 46px; background: var(--madder); }
+.event strong { color: var(--ink); font-weight: 500; }
+.eventAddr { max-width: none; text-align: left; }
+.mapBtn { border: 1px solid var(--gold); border-radius: 1px; background: transparent; color: var(--ink); font-family: var(--serif); font-size: 14px; letter-spacing: .06em; box-shadow: none; }
+.mapBtn:hover { background: var(--madder); border-color: var(--madder); color: #fff7ea; box-shadow: none; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--gold), transparent); }
+.node { width: 42px; height: 42px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody small { color: var(--rose); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; }
+.storyBody h3 { color: var(--ink); font-size: 24px; font-style: italic; }
+.storyBody p { color: var(--muted); }
+
+/* gallery: prints with a passe-partout */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 170px; gap: 12px; }
+.tile, .tile:first-child { border: 8px solid #e9dfc9; border-radius: 0; box-shadow: 0 20px 30px -16px #000; }
+.tile:first-child { grid-column: span 2; grid-row: span 1; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--line); border-radius: 1px; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--rose); font-family: var(--serif); font-weight: 600; letter-spacing: .2em; }
+.field input, .field textarea { border-color: var(--line); border-radius: 1px; background: var(--field); color: var(--ink); }
+.choices button { border-color: var(--line); border-radius: 1px; background: var(--field); color: var(--muted); }
+.choices button:hover { border-color: var(--gold); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--madder); background: var(--madder); color: #fff7ea; }
+.step { border-color: var(--gold); background: var(--field); color: var(--ink); }
+.submit { border-radius: 1px; background: var(--madder); color: #fff7ea; font-family: var(--serif); font-size: 15px; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: #9a3f47; }
+.sentBox img { width: 110px; }
+.sent { color: var(--ink); font-family: var(--display); }
+.closed { border-color: var(--line); }
+.wish { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; padding: 16px 4px; }
+.wish:hover { border-color: var(--gold); box-shadow: none; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.wish small { background: rgba(181, 82, 90, .18); color: var(--rose); }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border: 1px solid rgba(184, 144, 74, .4); border-radius: 1px; background: linear-gradient(160deg, #3a1519, #1c0b0d); color: var(--ink); }
+.gift::after { border-color: rgba(239, 228, 207, .05); }
+.gift h3 { color: var(--rose); font-family: var(--serif); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 25px; letter-spacing: .03em; line-height: 1.3; }
+.copy { border-radius: 1px; font-family: var(--serif); font-size: 13px; letter-spacing: .1em; }
+.copyOn, .copyOn:hover { background: var(--ink); color: #2a0f12; }
+
+/* closing */
+.closing { padding: 30px 26px 60px; background: #080605; }
+.closeArt { display: flex; align-items: flex-end; justify-content: center; gap: 0; margin-bottom: 6px; }
+.closeArt img { display: block; height: auto; }
+.closeArt img:first-child { width: 70px; rotate: -10deg; translate: 10px 0; }
+.closeArt img:nth-child(2) { width: 120px; }
+.closeArt img:last-child { width: 70px; scale: -1 1; rotate: 10deg; translate: -10px 0; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--serif); letter-spacing: .14em; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.music { border: 1px solid var(--gold); background: #2a0f12; }
+
+/* ── Cover: the painting, names inscribed on the stone ledge ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 8px; min-height: 100dvh; padding: 0 22px 34px; overflow: hidden; background: #0a0807; color: var(--ink); text-align: center; isolation: isolate; }
+.painting { position: absolute; z-index: -2; inset: 0 0 auto; height: min(566px, 70dvh); }
+.painting > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.painting::after { content: ""; position: absolute; inset: auto 0 0; height: 46%; background: linear-gradient(transparent, #0a0807 88%); }
+.coverFly { position: absolute; z-index: -1; left: 66%; top: 30%; width: 50px; height: auto; transform-origin: 50% 60%; animation: flutter 1.6s ease-in-out infinite alternate, flyDrift 14s var(--m-ease) infinite alternate; }
+.coverPetal { position: absolute; z-index: -1; left: 40%; top: 36%; width: 24px; height: auto; opacity: 0; animation: petalFall 16s var(--m-ease) 3s infinite; }
+.kicker { color: var(--rose); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1; text-shadow: 0 2px 14px #000; overflow-wrap: anywhere; }
+.coverNames { display: flex; flex-direction: column; align-items: center; }
+.coverNames em { margin: 2px 0 4px; color: var(--gold-d); font-size: .62em; line-height: .9; }
+.coverDate { color: var(--muted); font-size: 15px; font-style: italic; letter-spacing: .04em; }
+.coverRule { width: 56px; height: 1px; margin: 8px 0 6px; background: var(--gold); }
+.cover .guest small { color: var(--muted); }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; }
+.table { border-color: var(--gold); color: var(--accent2); font-family: var(--serif); }
+.openBtn { margin-top: 12px; border: 1px solid var(--gold); border-radius: 1px; background: rgba(10, 8, 7, .6); color: var(--ink); font-family: var(--serif); font-size: 14px; letter-spacing: .18em; text-transform: uppercase; }
+.openBtn:hover { background: var(--madder); border-color: var(--madder); color: #fff7ea; }
+
+@keyframes kb { from { scale: 1; translate: 0 0; } to { scale: 1.08; translate: -2% 1%; } }
+@keyframes flutter { from { scale: 1 1; } to { scale: .35 1; } }
+@keyframes flyDrift { 0% { translate: 0 0; rotate: -6deg; } 50% { translate: -40px -30px; rotate: 4deg; } 100% { translate: 10px -60px; rotate: -2deg; } }
+@keyframes petalFall { 0% { opacity: 0; translate: 0 0; rotate: 0deg; } 8% { opacity: .95; } 80% { opacity: .9; translate: -70px 250px; rotate: 160deg; } 100% { opacity: 0; translate: -76px 270px; rotate: 180deg; } }
+@media (max-width: 370px) {
+  .coverNames { font-size: 42px; }
+  .heroNames { font-size: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .detail span, .coverFly, .coverPetal { animation: none; }
+  .coverPetal { opacity: 0; }
+}
