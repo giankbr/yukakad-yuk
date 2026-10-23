@@ -1,0 +1,147 @@
+/* Bangka Cual — tenun cual Bangka: kain sutra merah lembut dengan bunga tenun benang emas dan merah muda, tepian tumpal pucuk rebung, kartu gading seperti label kain, dan pantai granit bertoska dengan rumah panggung Melayu sebagai pemandangan penutup. */
+.root, .cover {
+  --bg: #f8f0e3; --paper: #f1e4d0; --ivory: #fffaf1; --field: #fffdf8; --ink: #3a1418; --muted: #6e4d4a; --line: #e3cfb4;
+  --accent: #7d1f2a; --accent2: #5e1822; --gold: #c79a45; --gold-l: #f0d898; --gold-d: #9c7630;
+  --band-bg: #6a1a25; --band-ink: #fff3e2;
+  --rose: #d77a7c; --sea: #2f8b93;
+  --display: "Gilda Display", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Pinyon Script", cursive;
+  --cual: #a22f38 url(/themes/art/bangka-cual/cual.webp) 0 0 / 240px;
+  --tumpal: url(/themes/art/bangka-cual/tumpal.webp) 0 0 / 240px 52px repeat-x;
+  --h2: 30px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7d1f2a; --t-accent-ink: #fff3e2; --t-bg: #f8f0e3; --t-ink: #3a1418; --t-muted: #6e4d4a; --t-line: #e3cfb4; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "Lora", Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* ── divider: a woven flower between two gold threads ── */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 190px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 7px; background: linear-gradient(var(--gold), var(--gold)) center / 100% 1.5px no-repeat, radial-gradient(circle, var(--gold) 2.5px, transparent 3px) 0 50% / 7px 7px no-repeat; }
+.divider::after { scale: -1 1; }
+.divider img { width: 34px; height: auto; }
+.eyebrow { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .3em; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+
+/* ── cover: the whole screen is the cloth; an ivory label is stitched on it ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 70px 22px 70px; overflow: hidden; background: var(--cual); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; z-index: 1; left: 0; right: 0; height: 52px; background: var(--tumpal); }
+.cover::before { top: 0; scale: 1 -1; }
+.cover::after { bottom: 0; }
+.sheen { position: absolute; z-index: 0; inset: 0; background: linear-gradient(105deg, transparent 30%, rgba(255, 228, 170, .2) 46%, transparent 60%) 0 0 / 260% 100%; animation: sheen 14s ease-in-out infinite; pointer-events: none; }
+.label { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 330px; padding: 74px 22px 24px; background: var(--ivory); border-radius: 3px; box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6.5px var(--gold), 0 18px 40px rgba(40, 6, 10, .45); }
+.label::before { content: ""; position: absolute; inset: 9px; border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); pointer-events: none; }
+.coverFlower { position: absolute; top: -58px; left: 50%; width: 118px; height: auto; translate: -50% 0; filter: drop-shadow(0 6px 10px rgba(40, 6, 10, .35)); }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .34em; text-transform: uppercase; }
+.bismillah { color: var(--accent); font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; line-height: 1.6; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--script); font-size: 58px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 -4px; color: var(--gold); font-family: var(--display); font-size: 22px; font-style: normal; }
+.coverDate { padding: 6px 16px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); color: var(--ink); font-family: var(--display); font-size: 14px; letter-spacing: .16em; text-transform: uppercase; }
+.label .guest { margin-top: 8px; color: var(--ink); }
+.label .guest small { color: var(--muted); }
+.label .table { border-color: var(--gold); color: var(--accent); }
+.openBtn { position: relative; z-index: 2; margin-top: 26px; background: linear-gradient(100deg, #e9c877, #c99a45 45%, #f0d898 70%, #c99a45) 0 0 / 220% 100%; color: var(--accent2); font-weight: 600; box-shadow: 0 0 0 1.5px #fff3e2, 0 10px 24px rgba(40, 6, 10, .45); }
+.openBtn:hover { background-position: 100% 0; translate: 0 -1px; }
+
+/* ── hero: a strip of cloth with the photo hung over it ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 0 48px; background: var(--bg); text-align: center; }
+.heroCloth { position: absolute; top: 0; left: 0; right: 0; height: 230px; background: var(--cual); }
+.heroCloth::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 52px; background: var(--tumpal); }
+.heroPhotoWrap { position: relative; z-index: 1; margin-top: 50px; padding: 8px; background: var(--ivory); box-shadow: 0 0 0 1.5px var(--gold) inset, 0 20px 38px rgba(40, 6, 10, .32); }
+.heroPhoto { width: 260px; height: 330px; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBadge { position: absolute; z-index: 2; bottom: -30px; left: 50%; width: 64px; height: auto; translate: -50% 0; }
+.heroKicker { margin-top: 44px; color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { max-width: 340px; color: var(--accent); font-family: var(--script); font-size: 54px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-family: var(--display); font-size: 26px; font-style: normal; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* ── opening ── */
+.salamBlock { padding: 30px 28px 56px; background: var(--bg); }
+.salamKicker { color: var(--gold-d); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.arabic { color: var(--accent); }
+
+/* ── couple: framed like folded cloth, one portrait per side ── */
+.couple { gap: 26px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 216px; height: 270px; padding: 0; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 0 0 7px var(--ivory), 0 0 0 8.5px var(--gold), 0 16px 30px rgba(58, 20, 24, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portrait::before { content: ""; position: absolute; z-index: 2; top: -8px; left: -8px; right: -8px; height: 26px; background: var(--tumpal); background-size: 120px 26px; scale: 1 -1; }
+.portraitBadge { position: absolute; z-index: 3; bottom: -26px; left: 50%; width: 52px; height: auto; translate: -50% 0; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--cual); color: var(--gold-l); font-size: 96px; }
+.role { margin-top: 10px; color: var(--gold-d); }
+.nick { color: var(--accent); font-size: 52px; }
+.fullName { font-family: var(--display); font-size: 18px; }
+.amp { color: var(--gold); font-family: var(--display); font-size: 40px; }
+.amp img { width: 30px; }
+
+/* ── countdown: on the cloth itself ── */
+.countBand { padding: 74px 20px 70px; background: var(--cual); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 52px; background: var(--tumpal); }
+.countBand::before { top: 0; scale: 1 -1; }
+.countBand::after { bottom: 0; }
+.headLight { padding: 10px 22px 12px; background: rgba(78, 14, 22, .78); border: 1px solid color-mix(in srgb, var(--gold) 70%, transparent); }
+.headLight h2 { color: #fff3e2; font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count > div { height: 90px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 0 0 1.5px var(--gold) inset, 0 8px 18px rgba(40, 6, 10, .35); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(216, 178, 92, .28) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--gold-d); font-size: 13px; font-style: normal; letter-spacing: .08em; }
+.countTba { padding: 8px 16px; background: rgba(78, 14, 22, .78); }
+.countBand .ghostBtn { background: rgba(78, 14, 22, .82); border-color: var(--gold-l); color: #fff3e2; }
+
+/* ── events: ivory cards with a cloth selvedge on the left ── */
+.events { background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 22px 24px 46px; border-radius: 3px; text-align: left; }
+.event::before { inset: 0 auto 0 0; width: 24px; border: 0; border-radius: 0; background: var(--cual); background-size: 120px; box-shadow: 1.5px 0 0 var(--gold); }
+.eventNo { top: 18px; right: 18px; left: auto; width: auto; height: auto; translate: none; background: none; color: color-mix(in srgb, var(--gold) 75%, transparent); font-size: 30px; }
+.event h3 { max-width: calc(100% - 50px); text-align: left; }
+.rule { width: 46px; background: var(--gold); }
+.eventAddr { text-align: left; max-width: none; }
+.mapBtn { border-radius: 2px; }
+
+/* ── story ── */
+.story { background: var(--paper); }
+.node { width: 40px; height: 40px; border: 0; background: var(--accent); box-shadow: 0 0 0 1.5px var(--gold); }
+.node img { width: 28px; }
+.timeline::before { left: 23px; }
+.storyBody small { color: var(--gold-d); font-size: 13px; }
+
+/* ── gallery ── */
+.mosaic { gap: 6px; }
+.tile, .tile:first-child { border-radius: 2px; }
+.tile:first-child { box-shadow: 0 0 0 4px var(--ivory), 0 0 0 5.5px var(--gold); }
+
+/* ── wishes / gifts ── */
+.wishes { background: var(--paper); }
+.form { border-radius: 3px; box-shadow: 0 0 0 1px var(--gold) inset, 0 10px 26px rgba(58, 20, 24, .07); }
+.choices button { border-radius: 2px; }
+.submit { border-radius: 2px; background: var(--accent); color: #fff3e2; }
+.wish { border-left: 4px solid var(--rose); border-radius: 2px; }
+.gift { padding-top: 46px; border-radius: 3px; background: var(--band-bg); }
+.gift::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 26px; background: var(--tumpal); background-size: 120px 26px; scale: 1 -1; }
+.gift::after { display: none; }
+.copy { border-radius: 2px; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* ── closing: the granite beach of Bangka, the cloth below it ── */
+.closing { padding: 0 28px 56px; background: var(--band-bg); }
+.closingScene { position: relative; z-index: -1; display: block; width: calc(100% + 56px); margin: 0 -28px 6px; aspect-ratio: 820 / 547; background: url(/themes/art/bangka-cual/pantai.webp) center / cover; -webkit-mask-image: linear-gradient(#000 72%, transparent); mask-image: linear-gradient(#000 72%, transparent); }
+.closingFlower { width: 64px; height: auto; margin-top: -40px; animation: turn 60s linear infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 38px; }
+.closingNames { color: #fff3e2; font-family: var(--script); font-size: 44px; }
+.music { border-radius: 4px; background: var(--accent); }
+
+.sentBox img { width: 90px; }
+
+@keyframes sheen { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+@keyframes turn { to { rotate: 360deg; } }
+.coverFlower { animation: breathe 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sheen, .coverFlower, .closingFlower { animation: none; }
+}
+.heroBare .heroCloth { height: 64px; }
+.heroBare .heroKicker { margin-top: 100px; }

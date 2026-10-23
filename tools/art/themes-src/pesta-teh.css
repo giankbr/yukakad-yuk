@@ -1,0 +1,159 @@
+/* Pesta Teh — ulang tahun dewasa yang anggun: teko dan cangkir porselen biru-putih bertepi emas, tingkat kue berisi macaron dan scone, mawar cat air, doily kertas renda di atas dinding bergaris biru bebek; taplak renda, kartu menu teh. */
+.root, .cover {
+  --bg: #fbf6ef; --paper: #eef4f2; --ivory: #fffdf9; --field: #fffdf9; --ink: #2d2a33; --muted: #69636d; --line: #e4dbd0;
+  --accent: #2f569b; --accent2: #3d68b0; --gold: #c4a15a; --gold-l: #f1e2bc; --gold-d: #9a7a3a;
+  --rose: #c76f80; --rose-d: #a9505f; --blush: #f6dedd; --duck: #dbe8e6;
+  --band-bg: #2a4d8c; --band-ink: #fbf8f2;
+  --display: "Gilda Display", "Cormorant Garamond", Georgia, serif; --serif: Lora, Georgia, serif; --script: "Pinyon Script", cursive;
+  --lace: url(/themes/art/pesta-teh/lace.webp);
+  --stripe: repeating-linear-gradient(90deg, #dbe8e6 0 22px, #e6efed 22px 44px);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f569b; --t-accent-ink: #fbf8f2; --t-bg: #fbf6ef; --t-ink: #2d2a33; --t-muted: #69636d; --t-line: #e4dbd0; --t-field: #fffdf9;
+  --t-radius: 14px; --t-font: Lora, Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* type */
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11.5px; font-style: italic; letter-spacing: .16em; text-transform: none; color: var(--rose-d); }
+.head h2, .headLight h2 { font-family: var(--display); letter-spacing: .01em; }
+.divider { width: 170px; }
+.section { padding: 62px 24px; }
+
+/* opening on striped wallpaper with a lace edge below */
+.salamBlock { position: relative; gap: 12px; padding: 58px 30px 76px; background: var(--stripe); }
+.salamBlock::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 35px; background: var(--lace) 0 0 / 200px 35px repeat-x; rotate: 180deg; }
+.salamKicker { font-size: 14px; }
+.salamTitle { font-family: var(--script); font-size: 46px; color: var(--accent); line-height: 1.15; }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.75; }
+.salamBlock .intro { padding: 18px 18px; border-radius: 16px; background: rgba(255, 253, 249, .82); }
+
+/* celebrant: a porcelain plate monogram with roses */
+.couple { gap: 18px; background: var(--bg); }
+.portrait { margin-bottom: 10px; }
+.portraitFrame { width: 220px; height: 220px; padding: 12px; border: 0; border-radius: 50%; background: radial-gradient(circle, #fff 56%, #eef2f8 57%, #fff 62%, #f2f4f8 100%); box-shadow: 0 0 0 3px var(--gold), 0 0 0 9px #fff, 0 0 0 10px #d9e0ec, 0 18px 30px -12px rgba(45, 42, 51, .35); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 3px var(--gold), 0 0 0 9px #fff, 0 0 0 10px #d9e0ec, 0 22px 36px -12px rgba(45, 42, 51, .4); }
+.pRoses { position: absolute; z-index: 2; top: -36px; left: -70px; width: 200px; height: auto; rotate: -14deg; pointer-events: none; }
+.monogram { color: var(--accent); font-family: var(--script); font-size: 96px; }
+.role { font-size: 14px; }
+.nick { font-family: var(--script); font-size: 56px; color: var(--accent); }
+.fullName { font-family: var(--display); font-size: 20px; letter-spacing: .04em; }
+.parents { font-style: italic; }
+
+/* countdown: blush band, digits on saucers */
+.countBand { background: var(--blush); color: var(--ink); }
+.countCup { position: absolute; z-index: -1; right: -40px; bottom: -14px; width: 190px; height: auto; opacity: .9; rotate: -6deg; }
+.headLight .eyebrow { color: var(--rose-d); }
+.headLight h2 { color: var(--accent); }
+.count { gap: 10px; grid-template-columns: repeat(4, minmax(0, 72px)); }
+.count > div { height: auto; aspect-ratio: 1; border: 0; border-radius: 50%; background: radial-gradient(circle, #fff 58%, #f2f4f8 60%, #fff 66%); box-shadow: 0 0 0 2px var(--gold), 0 8px 14px -8px rgba(45, 42, 51, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--rose-d); font-size: 11px; }
+.countTba { color: var(--accent); }
+.ghostBtn { border-color: var(--rose); color: var(--rose-d); font-family: var(--serif); font-style: italic; }
+.ghostBtn:hover { background: #fff; }
+.ghostBtn svg { stroke: var(--rose-d); }
+
+/* events: tea-menu cards with a lace top */
+.events { gap: 26px; background: var(--paper); }
+.event { padding: 46px 22px 28px; border: 0; border-radius: 4px 4px 18px 18px; background: var(--ivory); box-shadow: 0 16px 30px -20px rgba(45, 42, 51, .4); }
+.event::before { inset: 10px; top: 38px; border: 1px solid var(--line); border-radius: 2px 2px 12px 12px; }
+.event::after { content: ""; position: absolute; top: -10px; left: 0; right: 0; height: 35px; background: var(--lace) 0 0 / 200px 35px repeat-x; pointer-events: none; }
+.eventNo { position: relative; top: auto; left: auto; translate: none; z-index: 1; width: auto; height: auto; margin: -8px 0 2px; padding: 0 10px; background: var(--ivory); color: var(--rose-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.eventNo::before { content: "Menu "; font-family: var(--serif); font-size: 11px; font-style: italic; letter-spacing: .1em; }
+.event h3 { font-family: var(--display); font-size: 27px; color: var(--accent); }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--rose-d); font-family: var(--serif); font-style: italic; }
+.rule { width: 110px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-style: italic; letter-spacing: .02em; }
+
+/* story: a string of teacups */
+.story { background: var(--bg); }
+.timeline::before { width: 0; border-left: 1.5px dotted var(--rose); background: none; }
+.node { border: 1.5px solid var(--gold); background: #fff; }
+.node img { width: 26px; }
+.storyBody small { font-family: var(--serif); font-style: italic; color: var(--rose-d); letter-spacing: .08em; font-size: 14px; }
+.storyBody h3 { font-family: var(--display); font-size: 22px; color: var(--accent); }
+
+/* gallery (uploaded photos only): oval cameo frames */
+.tile { border-radius: 999px; box-shadow: 0 0 0 3px #fff, 0 0 0 4px var(--gold); }
+.tile:first-child { border-radius: 999px; }
+
+/* wishes: guest book page */
+.wishes { background: var(--stripe); }
+.form { border: 0; border-radius: 18px; background: var(--ivory); box-shadow: 0 16px 34px -22px rgba(45, 42, 51, .45); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-style: italic; font-size: 13px; letter-spacing: .04em; text-transform: none; color: var(--accent); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--rose); background: var(--rose); color: #fff; }
+.sent { font-family: var(--script); font-style: normal; font-size: 32px; color: var(--accent); }
+.wish { border: 0; border-radius: 16px; background: rgba(255, 253, 249, .94); }
+.wish strong { font-family: var(--display); font-size: 17px; color: var(--accent); }
+.wish small { background: var(--blush); color: var(--rose-d); font-style: italic; }
+
+/* gifts: porcelain-blue cards */
+.gifts { background: var(--bg); }
+.gift { border-radius: 18px; background: var(--band-bg); }
+.gift::after { border-color: rgba(255, 255, 255, .07); }
+.gift h3 { font-family: var(--display); font-size: 19px; color: #fff; letter-spacing: .02em; }
+.giftNo { font-family: var(--display); font-size: 22px; letter-spacing: .06em; }
+.copy { border-color: rgba(241, 226, 188, .7); font-family: var(--serif); font-style: italic; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--band-bg); }
+
+/* closing: porcelain blue with a lace hem */
+.closing { gap: 12px; padding: 64px 26px 76px; background: var(--band-bg); }
+.closing::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 35px; background: var(--lace) 0 0 / 200px 35px repeat-x; rotate: 180deg; opacity: .95; }
+.clEmblem { position: relative; display: grid; place-items: center; width: 210px; aspect-ratio: 1; margin-bottom: 4px; }
+.clEmblem > img:first-child { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 240s linear infinite; }
+.clEmblem::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: #fffdf9; }
+.clEmblem > img:last-child { position: relative; width: 116px; height: auto; translate: 0 -4px; }
+.thanks { font-family: var(--script); font-size: 58px; color: #fff; }
+.closingNames { font-family: var(--script); font-size: 44px; color: var(--gold-l); }
+.family { font-family: var(--serif); font-style: italic; letter-spacing: .04em; }
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── hero: the cake stand with the birthday number ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 44px 24px 50px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.heroScene { position: relative; width: 320px; height: 300px; margin-bottom: 6px; }
+.heroStand { position: absolute; left: 50%; top: 0; width: 220px; height: auto; translate: -50% 0; }
+.heroRoses { position: absolute; left: -40px; bottom: -10px; width: 190px; height: auto; rotate: 10deg; }
+.heroCup { position: absolute; right: -14px; bottom: 6px; width: 150px; height: auto; }
+.heroAge { color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { color: var(--accent); font-family: var(--script); font-size: 60px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .06em; }
+.heroNote { max-width: 320px; margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.65; text-wrap: pretty; }
+
+/* ── Cover: striped parlour wall, a lace doily invitation, tea set on a lace-edged table ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--stripe); isolation: isolate; text-align: center; }
+.kicker { position: relative; z-index: 2; margin-top: 26px; padding: 5px 16px; border-radius: 999px; background: rgba(255, 253, 249, .85); color: var(--rose-d); font-size: 13px; font-style: italic; letter-spacing: .06em; }
+.doily { position: relative; z-index: 1; display: grid; place-items: center; width: 344px; aspect-ratio: 1; margin-top: 8px; }
+.doily > img { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 240s linear infinite; }
+.doilyText { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 236px; height: 236px; justify-content: center; border-radius: 50%; background: #fffdf9; }
+.doilyAge { color: var(--gold-d); font-family: var(--display); font-size: 12.5px; letter-spacing: .28em; text-transform: uppercase; }
+.coverNames { color: var(--accent); font-family: var(--script); font-size: 54px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverFull { max-width: 200px; color: var(--ink); font-family: var(--display); font-size: 14px; letter-spacing: .06em; line-height: 1.35; }
+.coverDate { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--gold); color: var(--ink); font-size: 13.5px; font-style: italic; }
+.coverRoses { position: absolute; z-index: 2; top: 54px; left: -64px; width: 230px; height: auto; rotate: -18deg; pointer-events: none; }
+.tea { position: relative; z-index: 2; width: 100%; height: 190px; margin-top: auto; }
+.tableTop { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: var(--blush); }
+.tableTop::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 35px; background: var(--lace) 0 0 / 200px 35px repeat-x; }
+.pot { position: absolute; z-index: 2; left: 8px; bottom: 48px; width: 196px; height: auto; }
+.stand { position: absolute; z-index: 1; right: 10px; bottom: 52px; width: 140px; height: auto; }
+.cup { position: absolute; z-index: 3; left: 50%; bottom: 18px; width: 124px; height: auto; translate: -30% 0; }
+.steam { position: absolute; z-index: 3; left: calc(50% + 4px); bottom: 74px; width: 26px; height: 46px; border-left: 2px solid rgba(255, 255, 255, .9); border-radius: 50%; filter: blur(.6px); opacity: 0; animation: steam 4.5s ease-in-out infinite; }
+.steam + .steam { left: calc(50% + 18px); animation-delay: 2.2s; }
+.coverFoot { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 4px 24px 28px; background: var(--blush); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent); font-family: var(--display); font-size: 21px; }
+.coverFoot .table { border-color: var(--rose); color: var(--rose-d); font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .04em; }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-style: italic; letter-spacing: .04em; box-shadow: 0 10px 20px -10px rgba(47, 86, 155, .7); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@keyframes steam { 0% { opacity: 0; translate: 0 6px; scale: .8 1; } 40% { opacity: .8; } 100% { opacity: 0; translate: 4px -26px; scale: 1.1 1.2; } }
+@media (prefers-reduced-motion: reduce) {
+  .doily > img, .steam, .clEmblem > img:first-child { animation: none; }
+  .steam { display: none; }
+}

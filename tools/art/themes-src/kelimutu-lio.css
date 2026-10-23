@@ -1,0 +1,162 @@
+/* Kelimutu Lio — adat NTT (Ende-Lio): fajar di atas lautan awan dan tiga danau kawah Kelimutu (toska, hijau lumut, hitam kemerahan) dilukis tangan; tenun ikat Lio hitam dengan belah ketupat merah bata dan kunyit sebagai bingkai potret, pita kartu, dan latar; teks kiri-rata seperti label tenun. */
+.root, .cover {
+  --bg: #f3ead9; --paper: #ebdfc8; --ivory: #fbf6ec; --field: #fffdf8; --ink: #24170f; --muted: #6a5646; --line: #dccbb0;
+  --accent: #1d1512; --accent2: #a9381f; --gold: #d39a3c; --gold-l: #f2c97a; --gold-d: #9a5a1c;
+  --rust: #a9381f; --turq: #2fa79b; --moss: #5a6230; --oxb: #4a1814; --night: #151834; --dusk: #2b2d58;
+  --band-bg: #151834; --band-ink: #f4ead6;
+  --display: "Young Serif", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Young Serif", Georgia, serif;
+  --ikat: url(/themes/art/kelimutu-lio/ikat.webp) 0 0 / 120px 120px;
+  --h2: 30px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #a9381f; --t-accent-ink: #fbf6ec; --t-bg: #f3ead9; --t-ink: #24170f; --t-muted: #6a5646; --t-line: #dccbb0; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* ── type & heads: left-aligned like a woven label ── */
+.eyebrow, .role, .salamKicker { color: var(--rust); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.section { align-items: stretch; padding: 64px 24px; }
+.head { align-items: flex-start; text-align: left; gap: 6px; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 150px; }
+.divider img { display: block; width: 100%; height: auto; }
+.head .divider { margin-left: -6px; }
+.intro { max-width: none; color: var(--muted); font-size: 17px; text-align: left; }
+
+/* ikat selvage strip used on bands */
+.ikatEdge { display: block; height: 30px; background: var(--ikat); background-size: 60px 60px; box-shadow: inset 0 3px 0 var(--gold), inset 0 -3px 0 var(--gold); }
+
+/* ── Opening ── */
+.salamBlock { align-items: flex-start; padding: 56px 28px 56px; text-align: left; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.15; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-size: 15px; font-style: italic; }
+
+/* ── Couple: portraits framed by a woven ikat border ── */
+.couple { gap: 26px; background: var(--paper); }
+.person { align-items: flex-start; text-align: left; gap: 3px; }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 210px; height: 260px; padding: 11px; border: 0; border-radius: 6px; background: var(--ikat); box-shadow: 0 0 0 2px var(--gold), 0 18px 34px rgba(29, 21, 18, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: linear-gradient(180deg, var(--dusk), var(--night)); color: var(--gold-l); font-family: var(--display); font-size: 90px; }
+.portraitArt { position: absolute; z-index: 2; right: -22px; bottom: -22px; width: 56px; height: auto; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.parents { max-width: 320px; text-align: left; }
+.amp { align-self: center; color: var(--rust); font-family: var(--display); font-size: 48px; margin: 4px 0; }
+.amp img { width: 30px; }
+
+/* ── Countdown: night sky over the sea of clouds ── */
+.countBand { align-items: center; padding: 70px 20px 150px; background: radial-gradient(1.4px 1.4px at 12% 18%, #f4ead2 50%, transparent 51%), radial-gradient(1px 1px at 32% 8%, #f4ead2 50%, transparent 51%), radial-gradient(1.2px 1.2px at 72% 22%, #f4ead2 50%, transparent 51%), radial-gradient(1px 1px at 88% 12%, #f4ead2 50%, transparent 51%), radial-gradient(1.6px 1.6px at 58% 30%, #fff3d8 50%, transparent 51%), linear-gradient(180deg, var(--night), var(--dusk) 55%, #7b4c6c 82%, #d8896a); }
+.countClouds { position: absolute; z-index: -1; left: -10%; right: -10%; bottom: -6px; height: 150px; background: url(/themes/art/kelimutu-lio/clouds.webp) repeat-x 0 100% / auto 100%; animation: cloudDrift 60s linear infinite alternate; pointer-events: none; }
+.count { gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 50% / 42%; box-shadow: inset 0 -10px 18px rgba(0, 0, 0, .28), inset 0 6px 10px rgba(255, 255, 255, .12); }
+.count > div:nth-child(1) { background: var(--turq); }
+.count > div:nth-child(2) { background: var(--moss); }
+.count > div:nth-child(3) { background: var(--oxb); }
+.count > div:nth-child(4) { background: #23254a; box-shadow: inset 0 0 0 1px rgba(242, 201, 122, .5); }
+.count b { color: #fff8ea; font-family: var(--display); font-size: 28px; }
+.count small { color: rgba(255, 248, 234, .82); font-size: 12px; font-style: normal; letter-spacing: .08em; }
+.headLight h2 { color: #fff8ea; font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.countBand .ghostBtn { border-color: var(--gold-l); border-radius: 4px; color: #fff8ea; font-family: var(--serif); font-weight: 600; background: rgba(21, 24, 52, .55); }
+
+/* ── Events: cards with an ikat selvage on the left, text left-aligned ── */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 20px 24px 40px; border: 0; border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 0 12px 28px rgba(29, 21, 18, .1), inset 0 0 0 1px var(--line); }
+.event::before { inset: 0 auto 0 0; width: 20px; border: 0; border-radius: 4px 0 0 4px; background: var(--ikat); background-size: 60px 60px; box-shadow: inset -2px 0 0 var(--gold); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--rust); font-family: var(--display); font-size: 15px; letter-spacing: .1em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 23px; text-wrap: pretty; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 46px; height: 3px; background: var(--rust); }
+.eventAddr { text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; letter-spacing: .04em; box-shadow: inset 0 -3px 0 var(--rust), 0 6px 16px rgba(29, 21, 18, .2); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #33251f; }
+
+/* ── Story: on the dark ikat cloth ── */
+.story { background: linear-gradient(rgba(29, 21, 18, .9), rgba(29, 21, 18, .9)), var(--ikat); color: #f4ead6; }
+.story .eyebrow { color: var(--gold-l); }
+.story .head h2 { color: #fff8ea; }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--gold) 0 8px, transparent 8px 14px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: #fff8ea; font-family: var(--display); }
+.storyBody p { color: rgba(244, 234, 214, .82); }
+.storyImg { border-radius: 4px; }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 140px; }
+.tile { border-radius: 4px; }
+.tile:first-child { border-radius: 50% / 40%; box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--turq); }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 4px; background: var(--ivory); box-shadow: inset 0 0 0 1px var(--line), 0 10px 26px rgba(29, 21, 18, .08); border-top: 8px solid transparent; background-clip: padding-box; position: relative; }
+.form::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; background: var(--ikat); background-size: 40px 40px; }
+.field > span, .diet, .guestsLabel { color: var(--rust); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea, .choices button, .step { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.wish { border-radius: 4px; border-color: var(--line); box-shadow: inset 4px 0 0 var(--rust); }
+.wish strong { font-family: var(--display); }
+.wish small { border-radius: 3px; background: rgba(169, 56, 31, .1); color: var(--rust); }
+.sentBox img { width: 64px; }
+
+/* ── Gifts: woven dark cards ── */
+.gifts { background: var(--bg); }
+.gift { align-items: flex-start; padding: 24px 22px 24px 22px; border-radius: 4px; background: linear-gradient(rgba(29, 21, 18, .93), rgba(29, 21, 18, .93)), var(--ikat); text-align: left; box-shadow: 0 0 0 2px var(--gold) inset, 0 16px 30px rgba(29, 21, 18, .25); }
+.gift::after { display: none; }
+.giftIcon { border: 0; border-radius: 4px; background: var(--rust); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.copy { border-radius: 4px; border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* ── Closing: dawn again, clouds at the foot ── */
+.closing { padding: 0 26px 190px; background: linear-gradient(180deg, var(--night), var(--dusk) 45%, #7b4c6c 75%, #d8896a); }
+.closing > .ikatEdge { align-self: stretch; margin: 0 -26px 56px; }
+.closingClouds { position: absolute; z-index: -1; left: -10%; right: -10%; bottom: 0; height: 170px; background: url(/themes/art/kelimutu-lio/clouds.webp) repeat-x 0 100% / auto 100%; animation: cloudDrift 70s linear infinite alternate-reverse; pointer-events: none; }
+.closingEmblem { width: 64px; height: auto; }
+.thanks { color: #fff8ea; font-family: var(--display); font-size: 40px; }
+.closingText { color: rgba(244, 234, 214, .88); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: rgba(244, 234, 214, .85); font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 30px; }
+.made { color: rgba(29, 21, 18, .7); position: relative; z-index: 1; }
+.music { border: 0; border-radius: 4px; background: var(--rust); box-shadow: 0 0 0 2px var(--gold-l), 0 6px 16px rgba(0, 0, 0, .3); }
+
+/* ── Cover: the painted dawn, names in the starry sky, guest over the dark crater rim ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 100dvh; padding: 56px 26px 0; overflow: hidden; background: #1d1512 url(/themes/art/kelimutu-lio/scene.webp) no-repeat 50% 0 / 100% auto; color: #fff8ea; text-align: left; isolation: isolate; }
+.coverText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; max-width: 100%; }
+.kicker { color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; color: #fff8ea; font-family: var(--display); font-size: 52px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 2px 18px rgba(10, 12, 30, .55); }
+.coverNames i { color: var(--gold-l); font-family: var(--serif); font-size: 30px; font-style: italic; line-height: 1.2; }
+.coverDate { margin-top: 6px; padding: 6px 12px; border-left: 3px solid var(--rust); background: rgba(21, 24, 52, .6); color: #fff8ea; font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.coverFoot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; width: calc(100% + 52px); margin: auto -26px 0; padding: 60px 26px 26px; background: linear-gradient(180deg, transparent, rgba(29, 21, 18, .9) 38%, #1d1512); }
+.guest { align-items: flex-start; max-width: 320px; }
+.guest small { color: rgba(244, 234, 214, .85); }
+.guest strong { color: #fff8ea; font-family: var(--display); font-size: 21px; text-align: left; }
+.table { border-color: var(--gold); color: var(--gold-l); border-radius: 3px; font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 210px; border-radius: 4px; background: var(--rust); color: #fff8ea; font-family: var(--serif); font-weight: 600; letter-spacing: .1em; box-shadow: 0 0 0 2px var(--gold), 0 12px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { background: #bb4426; translate: 0 -1px; }
+.cover > .ikatEdge { position: relative; z-index: 1; align-self: stretch; margin: 0 -26px; }
+
+/* ── Hero: tall oval photo in a woven frame, lakes underneath ── */
+.hero { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 0 0 52px; background: var(--bg); }
+.hero > .ikatEdge { align-self: stretch; }
+.heroInner { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 40px 26px 0; width: 100%; }
+.heroKicker { color: var(--rust); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.heroFrame { align-self: center; width: 268px; height: 340px; margin: 14px 0 8px; padding: 12px; border-radius: 50%; background: var(--ikat); box-shadow: 0 0 0 3px var(--gold), 0 22px 40px rgba(29, 21, 18, .25); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; border-radius: 50%; background: var(--night); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroLakes { align-self: center; width: 220px; height: auto; margin-top: -26px; position: relative; }
+.heroNames { max-width: 100%; margin-top: 14px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames i { color: var(--rust); font-family: var(--serif); font-style: italic; }
+.heroDate { color: var(--gold-d); font-size: 16px; font-weight: 600; letter-spacing: .06em; }
+.heroNote { max-width: 330px; margin-top: 8px; padding-left: 14px; border-left: 3px solid var(--turq); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes cloudDrift { from { translate: 0 0; } to { translate: -8% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .countClouds, .closingClouds { animation: none !important; }
+}

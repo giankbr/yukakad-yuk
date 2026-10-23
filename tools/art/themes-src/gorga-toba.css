@@ -1,0 +1,150 @@
+/* Gorga Toba — Batak Toba: papan gorga hitam dengan ukiran spiral merah-putih (cetak cukil), danau Toba dari Samosir dalam cat air di jendela sampul, plakat nama hitam, bingkai potret berbentuk muka rumah adat yang melebar ke atas, pita ipon-ipon; Zilla Slab + Alegreya. */
+.root, .cover {
+  --bg: #efe9dd; --paper: #e7dfd0; --ivory: #f8f4ec; --field: #fbf8f2; --ink: #1d1916; --muted: #5e544b; --line: #d6cbb9;
+  --accent: #1d1916; --accent2: #ad2a1f; --gold: #ad2a1f; --gold-l: #f1ebdf; --gold-d: #ad2a1f;
+  --red: #ad2a1f; --red-d: #7e1c14; --lake: #4f7e98;
+  --band-bg: #1d1916; --band-ink: #f1ebdf;
+  --ipon: url("/themes/art/gorga-toba/ipon.webp");
+  --display: "Zilla Slab", Rockwell, serif; --serif: Alegreya, Georgia, serif; --script: "Zilla Slab", serif;
+  --h2: 32px; --card-r: 0;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d1916; --t-accent-ink: #f1ebdf; --t-bg: #efe9dd; --t-ink: #1d1916; --t-muted: #5e544b; --t-line: #d6cbb9; --t-field: #fbf8f2;
+  --t-radius: 0px; --t-font: Alegreya, Georgia, serif; --t-heading-font: "Zilla Slab", serif; --t-heading-weight: 700; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+/* ── Cover: greeting, carved lintel, lake window, black name plaque ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 26px 0 30px; overflow: hidden; background: radial-gradient(90% 40% at 50% 0, #f8f4ec, transparent 70%), var(--bg); text-align: center; }
+.horas { color: var(--red); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 700; line-height: 1; letter-spacing: .01em; }
+.coverKicker { margin: 8px 0 16px; color: var(--ink); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.lintel { display: block; width: 104%; max-width: none; height: auto; margin: 0 -2%; }
+.window { position: relative; width: calc(100% - 28px); height: 250px; margin-top: -4px; border: 7px solid var(--ink); border-top: 0; background: url("/themes/art/gorga-toba/toba.webp") 30% 78% / cover; }
+.window::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(29, 25, 22, .18), transparent 30%); }
+.plaque { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; width: calc(100% - 52px); margin-top: -64px; padding: 34px 18px 22px; background: var(--ink); color: var(--band-ink); box-shadow: 0 14px 30px rgba(29, 25, 22, .3); }
+.plaque::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 18px; background: var(--ipon) 0 0 / auto 100% repeat-x; }
+.plaque::after { content: ""; position: absolute; inset: 26px 8px 8px; border: 1px solid rgba(241, 235, 223, .35); pointer-events: none; }
+.plaqueLabel { color: #e6a59c; font-family: var(--display); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; color: #fff; font-family: var(--display); font-size: 40px; font-weight: 700; line-height: 1.05; text-transform: uppercase; letter-spacing: .04em; overflow-wrap: anywhere; }
+.coverNames i { margin: 2px 0; color: #e0574a; font-size: 15px; font-weight: 600; letter-spacing: .3em; text-transform: lowercase; }
+.coverDate { margin-top: 6px; color: var(--band-ink); font-size: 16px; font-style: italic; }
+.guestBox { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 22px 24px 0; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--red); color: var(--red); font-family: var(--display); font-weight: 600; }
+.openBtn { height: 48px; border-radius: 0; background: var(--red); color: #fff; font-family: var(--display); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; box-shadow: 5px 5px 0 var(--ink); }
+.openBtn:hover { background: var(--red-d); translate: -1px -1px; box-shadow: 6px 6px 0 var(--ink); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 44px 0 52px; background: var(--bg); text-align: center; }
+.heroDesa { width: 92px; height: auto; }
+.heroKicker { color: var(--red); font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { padding: 0 20px; color: var(--ink); font-family: var(--display); font-size: 42px; font-weight: 700; line-height: 1.05; text-transform: uppercase; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { display: block; color: var(--red); font-size: 15px; font-weight: 600; letter-spacing: .3em; text-transform: lowercase; }
+.heroDate { color: var(--muted); font-size: 17px; font-style: italic; }
+.heroFrame { position: relative; width: calc(100% - 40px); margin-top: 18px; }
+.heroFrame .lintel { width: 108%; margin: 0 -4%; }
+.heroPhoto { width: 100%; height: 300px; margin-top: -2px; overflow: hidden; border: 6px solid var(--ink); border-top: 0; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { max-width: 310px; margin-top: 18px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+/* ── Headings and divider: red kicker, slab title, ipon band with the desa na ualu ── */
+.eyebrow, .salamKicker, .role { color: var(--red); font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-weight: 700; }
+.divider { position: relative; display: grid; place-items: center; width: 200px; height: 40px; }
+.divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 16px; translate: 0 -50%; background: var(--ipon) 0 0 / auto 100% repeat-x; }
+.divider img { position: relative; width: 40px; height: auto; }
+[data-revealed] .divider img { animation: gtTurn 1.6s var(--m-ease) .2s both; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 18px 28px 56px; }
+.salamTitle { color: var(--red); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 700; }
+.salamSub { color: var(--ink); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+
+/* couple: facade-shaped frames (wider at the top, like the Batak house front) */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 230px; height: 280px; padding: 0; border: 0; border-radius: 0; background: var(--ink); clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%); }
+.portraitFrame::before { content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 22px; background: var(--ipon) 0 0 / auto 100% repeat-x; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(3% 0, 97% 0, 87.5% calc(100% - 6px), 12.5% calc(100% - 6px)); }
+.monogram { color: var(--band-ink); font-family: var(--display); font-weight: 700; font-size: 96px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.fullName { color: var(--red); font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.amp { margin: 14px 0; color: var(--red); font-family: var(--display); font-size: 16px; font-weight: 600; letter-spacing: .3em; }
+.amp span { font-size: 0; }
+.amp span::after { content: "dohot"; font-size: 16px; }
+.amp img { width: 44px; }
+
+/* countdown: black board between ipon bands */
+.countBand { padding: 72px 20px 70px; background: var(--ipon) top / auto 22px repeat-x, var(--ipon) bottom / auto 22px repeat-x, var(--band-bg); }
+.headLight .eyebrow { color: #e6a59c; }
+.headLight h2 { color: #fff; font-family: var(--display); font-weight: 700; }
+.count { gap: 8px; }
+.count > div { height: 86px; border: 2px solid var(--red); border-radius: 0; background: rgba(241, 235, 223, .04); box-shadow: inset 0 0 0 4px var(--band-bg), inset 0 0 0 5px rgba(241, 235, 223, .3); }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 32px; font-weight: 700; }
+.count small { color: #e6a59c; font-style: normal; font-size: 13px; letter-spacing: .06em; }
+.ghostBtn { border-color: var(--band-ink); border-radius: 0; color: var(--band-ink); font-family: var(--display); font-weight: 600; }
+
+/* events: white boards with a carved header strip */
+.events { gap: 26px; }
+.event { padding: 40px 20px 24px; border: 2px solid var(--ink); border-radius: 0; background: var(--ipon) top / auto 18px repeat-x, var(--ivory); box-shadow: 6px 6px 0 rgba(29, 25, 22, .14); }
+.event::before { display: none; }
+.event:hover { border-color: var(--ink); box-shadow: 9px 9px 0 rgba(173, 42, 31, .25); }
+.eventNo { top: 26px; width: 40px; height: 26px; border-radius: 0; background: var(--red); color: #fff; font-family: var(--display); font-weight: 700; }
+.event h3 { margin-top: 14px; color: var(--ink); font-family: var(--display); font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.eventDate { color: var(--red); }
+.eventTime { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.rule { width: 70px; height: 3px; background: linear-gradient(90deg, var(--ink) 0 33%, var(--band-ink) 33% 66%, var(--red) 66%); }
+.mapBtn, .submit { border-radius: 0; background: var(--ink); color: #fff; font-family: var(--display); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--red); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--red); box-shadow: 4px 4px 0 var(--ink); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; left: 20px; background: linear-gradient(var(--red), var(--ink)); }
+.node { border: 0; border-radius: 50%; background: none; }
+.node img { width: 36px; }
+.storyBody small { color: var(--red); font-family: var(--display); font-weight: 700; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-weight: 700; }
+
+/* gallery */
+.tile, .tile:first-child { border: 4px solid var(--ink); border-radius: 0; }
+.tile:first-child { clip-path: polygon(0 0, 100% 0, 92% 100%, 8% 100%); }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 2px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 6px 6px 0 rgba(29, 25, 22, .12); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--display); font-weight: 700; }
+.field input, .field textarea { border-radius: 0; border-color: var(--line); }
+.choices button { border-radius: 0; font-family: var(--display); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.step { border-color: var(--ink); border-radius: 0; }
+.sentBox img { width: 80px; }
+.wish { border-radius: 0; border-left: 4px solid var(--red); }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 700; }
+.wish small { border-radius: 0; background: var(--ink); color: #fff; }
+
+/* gifts */
+.gift { border-radius: 0; padding-top: 40px; background: var(--ipon) top / auto 18px repeat-x, var(--band-bg); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--red); border-radius: 0; background: var(--red); }
+.gift h3 { color: #fff; font-family: var(--display); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-weight: 600; }
+.copy { border-color: var(--band-ink); border-radius: 0; color: var(--band-ink); font-family: var(--display); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--band-ink); color: var(--ink); }
+
+/* closing: the lake fading into the black board */
+.closing { padding: 0 26px 60px; }
+.closingLake { position: relative; z-index: -1; width: calc(100% + 52px); height: 240px; margin: 0 -26px 8px; background: linear-gradient(180deg, transparent 50%, var(--band-bg)), url("/themes/art/gorga-toba/toba.webp") 50% 40% / cover; }
+.closingLintel { width: calc(100% + 30px); max-width: none; height: auto; margin: -70px -15px 14px; }
+.thanks { color: #fff; font-family: var(--display); font-size: 40px; font-weight: 700; font-style: italic; }
+.closingSalam { color: #e6a59c; font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: .14em; }
+.family { font-family: var(--serif); font-size: 15px; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 30px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.music { border-color: var(--red); border-radius: 0; background: var(--ink); }
+
+@keyframes gtTurn { from { opacity: 0; rotate: -90deg; scale: .6; } }
+@media (prefers-reduced-motion: reduce) {
+  [data-revealed] .divider img { animation: none; }
+}

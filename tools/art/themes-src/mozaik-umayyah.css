@@ -1,0 +1,117 @@
+/* Mozaik Umayyah — mozaik kaca berlatar emas ala dinding masjid Umayyah: pepohonan, sungai, dan paviliun bertiang tersusun dari tessera hijau, toska, mutiara, dan emas di bawah pelengkung; latar hijau zamrud tua, bingkai foto berbingkai kepingan emas, dan pita sulur mozaik sebagai pemisah. */
+.root, .cover {
+  --bg: #f4eedc; --paper: #ebe2c8; --ivory: #fbf7ea; --field: #fffdf6; --ink: #1d2a22; --muted: #4f5a4f; --line: #d8cba5;
+  --accent: #17402f; --accent2: #0f2d22; --gold: #c9a14b; --gold-l: #ecd38c; --gold-d: #8f6c27;
+  --band-bg: #0f2d22; --band-ink: #f4eedc;
+  --teal: #2f6f73;
+  --display: "El Messiri", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "El Messiri", Georgia, serif;
+  --scene: url(/themes/art/mozaik-umayyah/scene.webp);
+  --frieze: url(/themes/art/mozaik-umayyah/frieze.webp) center / auto 100% repeat-x;
+  --green-ground: radial-gradient(ellipse 120% 70% at 50% 0%, #1b4a37 0%, transparent 70%), radial-gradient(ellipse 90% 60% at 50% 100%, #163f2f 0%, transparent 70%), #0f2d22;
+  --h2: 30px; --card-r: 8px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #17402f; --t-accent-ink: #f4eedc; --t-bg: #f4eedc; --t-ink: #1d2a22; --t-muted: #4f5a4f; --t-line: #d8cba5; --t-field: #fffdf6;
+  --t-radius: 8px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "El Messiri", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow { color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.divider { display: flex; align-items: flex-end; justify-content: center; gap: 12px; width: 200px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 2px; margin-bottom: 5px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider::after { scale: -1 1; }
+.divider img { width: 36px; height: auto; }
+
+/* mosaic gold border (frames cut from the gold ground of the mosaic) */
+.tessera { background: var(--scene) 50% 6% / 520px auto; }
+
+/* ── cover: mosaic under a round arch, frieze, then the names on green ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 24px 24px 28px; overflow: hidden; background: var(--green-ground); color: var(--band-ink); text-align: center; isolation: isolate; }
+.arch { position: relative; flex-shrink: 0; width: 236px; height: 276px; padding: 9px; border-radius: 118px 118px 6px 6px; box-shadow: 0 0 0 1.5px var(--gold), 0 0 0 7px #0f2d22, 0 0 0 8px color-mix(in srgb, var(--gold) 55%, transparent), 0 24px 50px rgba(0, 0, 0, .45); }
+.archInner { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 109px 109px 2px 2px; background: var(--scene) 50% 100% / cover; box-shadow: inset 0 0 0 2px #3a2d1a; }
+.archInner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 35%, rgba(255, 240, 200, .38) 48%, transparent 60%) 0 0 / 300% 100%; mix-blend-mode: soft-light; animation: glintSweep 9s ease-in-out infinite; }
+.coverFrieze { display: block; width: calc(100% + 48px); height: 40px; margin: 20px -24px 14px; background: var(--frieze); box-shadow: 0 1px 0 var(--gold), 0 -1px 0 var(--gold); }
+.bismillah { color: var(--gold-l); font-family: Amiri, "Traditional Arabic", serif; font-size: 23px; line-height: 1.5; }
+.kicker { margin-top: 4px; color: var(--gold-l); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 6px; color: #fbf7ea; font-family: var(--display); font-size: 44px; font-weight: 500; line-height: 1.12; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--gold); font-size: 26px; font-style: normal; }
+.coverDate { margin-top: 8px; color: #e9e1c8; font-family: var(--display); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
+.cover .guest { margin-top: 14px; padding: 12px 18px; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); border-radius: 6px; background: rgba(6, 24, 17, .5); }
+.cover .guest small { color: #d8d0b6; }
+.cover .guest strong { color: #fbf7ea; }
+.cover .table { border-color: var(--gold); color: var(--gold-l); }
+.openBtn { margin-top: 20px; background: linear-gradient(100deg, #e6c878, #c9a14b 45%, #f1dc9c 70%, #c9a14b) 0 0 / 220% 100%; color: #0f2d22; font-weight: 600; box-shadow: 0 10px 24px rgba(0, 0, 0, .4); }
+.openBtn:hover { background-position: 100% 0; translate: 0 -1px; }
+
+/* ── hero ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 22px 46px; background: var(--bg); text-align: center; }
+.heroFrieze { display: block; width: calc(100% + 44px); height: 40px; margin: 0 -22px 34px; background: var(--frieze); }
+.heroFrame { width: 270px; height: 350px; padding: 9px; border-radius: 135px 135px 8px 8px; box-shadow: 0 0 0 1.5px var(--gold-d), 0 18px 34px rgba(15, 45, 34, .25); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; border-radius: 126px 126px 2px 2px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { margin-top: 18px; color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 340px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; line-height: 1.15; overflow-wrap: anywhere; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-style: normal; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 4px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+.heroScene { width: 100%; max-width: 330px; aspect-ratio: 4 / 3; margin-top: 8px; border-radius: 4px; background: var(--scene) 50% 92% / 100% auto; box-shadow: 0 0 0 1.5px var(--gold), 0 0 0 6px var(--bg), 0 0 0 7px color-mix(in srgb, var(--gold) 50%, transparent); }
+
+/* ── opening ── */
+.salamBlock { padding: 26px 28px 56px; }
+.arabic { color: var(--accent); }
+.salamKicker { color: var(--gold-d); font-weight: 600; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 500; }
+
+/* ── couple: arched frames with tessera borders ── */
+.couple { background: var(--paper); }
+.portraitFrame { width: 210px; height: 270px; padding: 8px; border: 0; border-radius: 105px 105px 6px 6px; background: var(--scene) 50% 6% / 520px auto; box-shadow: 0 0 0 1.5px var(--gold-d), 0 14px 28px rgba(15, 45, 34, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 97px 97px 2px 2px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 97px 97px 2px 2px; background: var(--green-ground); color: var(--gold-l); font-family: var(--display); font-size: 90px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.role { font-weight: 600; }
+.amp { color: var(--gold); font-family: var(--display); font-size: 40px; }
+.amp img { width: 34px; }
+
+/* ── countdown ── */
+.countBand { padding: 84px 20px 84px; background: var(--green-ground); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 40px; background: var(--frieze); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight h2 { font-family: var(--display); font-weight: 500; }
+.count > div { border-radius: 40px 40px 6px 6px; border-color: color-mix(in srgb, var(--gold) 70%, transparent); background: rgba(251, 247, 234, .06); }
+.count b { font-family: var(--display); font-size: 32px; font-weight: 500; }
+.count small { font-style: normal; letter-spacing: .06em; }
+
+/* ── events: arch-topped cards ── */
+.event { padding-top: 46px; border-color: color-mix(in srgb, var(--gold) 60%, transparent); border-radius: 150px 150px 10px 10px; }
+.event::before { border-radius: 145px 145px 6px 6px; }
+.eventNo { top: 14px; translate: -50% 0; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-size: 13px; letter-spacing: .3em; }
+.event h3 { font-family: var(--display); font-size: 23px; font-weight: 500; }
+.mapBtn { background: var(--accent); }
+
+/* ── story / gallery ── */
+.story { background: var(--paper); }
+.node { border-radius: 18px 18px 4px 4px; background: var(--ivory); }
+.node img { width: 24px; }
+.tile:first-child { border-radius: 120px 120px 8px 8px; }
+
+/* ── wishes / gifts / closing ── */
+.wishes { background: var(--paper); }
+.form { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.submit { color: var(--gold-l); }
+.gift { background: var(--green-ground); border-radius: 80px 80px 10px 10px; padding-top: 34px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent); }
+.gift::after { display: none; }
+.closing { padding: 90px 28px 60px; background: var(--green-ground); }
+.closingFrieze { position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--frieze); }
+.closingTree { width: 78px; height: auto; }
+.thanks { font-family: var(--display); font-size: 40px; font-weight: 500; }
+.closingNames { font-family: var(--display); font-size: 32px; font-weight: 500; }
+.music { border-radius: 14px 14px 4px 4px; }
+.sentBox img { width: 70px; }
+
+@keyframes glintSweep { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .archInner::after { animation: none; display: none; }
+}

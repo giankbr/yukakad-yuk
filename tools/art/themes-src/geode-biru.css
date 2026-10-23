@@ -1,0 +1,156 @@
+/* Geode Biru — mewah: irisan geode agate biru dengan pita konsentris, rongga kristal berkilau dan tepian daun emas di atas biru malam; kartu marmer putih bersudut faset, garis emas tipis, Bodoni miring. */
+.root, .cover {
+  --bg: #f4f2ee; --paper: #ebe9e4; --ivory: #fbfaf7; --field: #fdfcfa; --ink: #13213f; --muted: #556079; --line: #d9d6cf;
+  --accent: #142a57; --accent2: #23468a; --gold: #c3a052; --gold-l: #ecd79f; --gold-d: #9a7a32;
+  --navy: #0d1a33; --navy2: #132449; --ice: #a9c7ea;
+  --band-bg: #0d1a33; --band-ink: #eef2f9;
+  --display: "Bodoni Moda", "Libre Caslon Display", Georgia, serif; --serif: Jost, system-ui, sans-serif; --script: "Bodoni Moda", Georgia, serif;
+  --marble: url(/themes/art/geode-biru/marble.webp);
+  --cut: 16px;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--marble); line-height: normal;
+}
+.root *, .cover * { --facet: polygon(var(--cut) 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, var(--cut) 100%, 0 calc(100% - var(--cut)), 0 var(--cut)); }
+.root {
+  --t-accent: #142a57; --t-accent-ink: #ecd79f; --t-bg: #f4f2ee; --t-ink: #13213f; --t-muted: #556079; --t-line: #d9d6cf; --t-field: #fdfcfa;
+  --t-radius: 0px; --t-font: Jost, system-ui, sans-serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: var(--bg) var(--marble); }
+
+/* type: tracked Jost caps, Bodoni italic headings */
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .42em; color: var(--gold-d); }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; font-weight: 400; letter-spacing: -.005em; }
+.divider { width: 160px; }
+.section { padding: 64px 24px; }
+
+/* opening */
+.salamBlock { gap: 14px; padding: 60px 30px 64px; }
+.salamTitle { font-family: var(--display); font-style: italic; font-size: 36px; line-height: 1.12; color: var(--accent); text-wrap: balance; }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.75; }
+
+/* couple: night-blue section, faceted gold-edged frames */
+.couple { gap: 22px; background: var(--navy); }
+.couple .head h2 { color: var(--gold-l); }
+.couple .eyebrow { color: var(--gold); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 216px; height: 276px; padding: 2px; border: 0; border-radius: 0; background: linear-gradient(150deg, #f0dc9e, #b48a36 45%, #ecd79f 70%, #9a7a32); clip-path: var(--facet); --cut: 26px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--facet); --cut: 25px; }
+.person:hover .portraitFrame { box-shadow: none; }
+.pSlice { position: absolute; z-index: 2; right: -34px; bottom: -24px; width: 86px; height: auto; rotate: -14deg; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .45)); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-style: italic; background: var(--navy2); width: 100%; height: 100%; display: grid; place-items: center; clip-path: var(--facet); --cut: 25px; }
+.role { color: var(--gold); }
+.nick { font-family: var(--display); font-style: italic; font-size: 46px; color: var(--gold-l); }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--band-ink); letter-spacing: .04em; }
+.parents { color: #aab4c8; font-size: 15.5px; }
+.amp { color: var(--gold); font-family: var(--display); font-style: italic; font-size: 48px; }
+.amp img { width: 46px; }
+
+/* countdown: marble band with faceted navy tiles */
+.countBand { background: var(--paper) var(--marble); color: var(--ink); }
+.countLeaf { position: absolute; z-index: -1; left: 50%; top: 26px; width: 260px; height: auto; translate: -50% 0; opacity: .5; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--accent); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 96px; border: 0; border-radius: 0; background: var(--navy); clip-path: var(--facet); --cut: 12px; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(169, 199, 234, .22) 50%, transparent 65%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 33px; }
+.count small { color: var(--ice); font-family: var(--serif); font-size: 10.5px; font-style: normal; letter-spacing: .2em; text-transform: uppercase; }
+.countTba { color: var(--accent); }
+.ghostBtn { border-color: var(--gold); border-radius: 0; color: var(--accent); font-family: var(--serif); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.ghostBtn:hover { background: rgba(195, 160, 82, .12); }
+.ghostBtn svg { stroke: var(--gold-d); }
+
+/* events: faceted marble cards with a gold hairline */
+.events { gap: 30px; }
+.event { padding: 38px 22px 28px; border: 0; border-radius: 0; background: var(--gold); clip-path: var(--facet); isolation: isolate; }
+.event::before { inset: 1.5px; z-index: -1; border: 0; border-radius: 0; background: var(--ivory) var(--marble); clip-path: var(--facet); --cut: 15.4px; }
+.event:hover { box-shadow: none; translate: 0 -2px; }
+.eventNo { position: static; translate: none; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: .1em; }
+.event h3 { font-family: var(--display); font-style: italic; font-size: 27px; color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 500; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 90px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.event strong { font-weight: 500; font-size: 17px; }
+.mapBtn, .submit { border-radius: 0; background: var(--navy); color: var(--gold-l); font-family: var(--serif); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; box-shadow: none; clip-path: var(--facet); --cut: 9px; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper) var(--marble); }
+.timeline::before { background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 10%, transparent)); }
+.node { width: 40px; height: 40px; border: 0; border-radius: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { font-family: var(--serif); color: var(--gold-d); letter-spacing: .3em; }
+.storyBody h3 { font-family: var(--display); font-style: italic; font-size: 23px; color: var(--accent); }
+.storyImg { border-radius: 0; }
+
+/* gallery: faceted tiles */
+.mosaic { gap: 6px; }
+.tile { border-radius: 0; clip-path: var(--facet); --cut: 14px; }
+.tile:first-child { border-radius: 0; --cut: 30px; }
+
+/* wishes */
+.form { border: 1px solid var(--gold); border-radius: 0; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 500; letter-spacing: .24em; color: var(--accent); font-size: 11px; }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--navy); background: var(--navy); color: var(--gold-l); }
+.step { border-radius: 0; }
+.sent { font-family: var(--display); color: var(--accent); }
+.wish { border-radius: 0; border-color: var(--line); background: var(--ivory); border-left: 2px solid var(--gold); }
+.wish strong { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--accent); }
+.wish small { border-radius: 0; background: rgba(20, 42, 87, .08); letter-spacing: .06em; }
+
+/* gifts: night-blue faceted cards with the slice in the corner */
+.gift { border-radius: 0; background: linear-gradient(150deg, #132449, #0d1a33); clip-path: var(--facet); }
+.gift::after { right: -50px; bottom: -50px; border-color: rgba(169, 199, 234, .08); box-shadow: 0 0 0 14px rgba(169, 199, 234, .05); }
+.giftIcon { border-radius: 0; border-color: var(--gold); rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--gold-l); letter-spacing: 0; }
+.giftNo { font-family: var(--display); font-size: 23px; letter-spacing: .1em; }
+.copy { border-radius: 0; font-family: var(--serif); letter-spacing: .16em; text-transform: uppercase; font-size: 11px; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--navy); }
+
+/* closing */
+.closing { gap: 12px; padding: 70px 28px 60px; background: radial-gradient(120% 70% at 50% 0%, #1b3466, var(--navy) 70%); }
+.clGeode { width: 170px; height: auto; margin-bottom: 8px; animation: turn 120s linear infinite; filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .5)); }
+.thanks { font-family: var(--display); font-style: italic; font-size: 46px; color: var(--gold-l); }
+.closingNames { font-family: var(--display); font-style: italic; font-size: 32px; }
+.family { font-family: var(--serif); letter-spacing: .14em; }
+.music { border-radius: 0; border-color: var(--gold); background: var(--navy); clip-path: var(--facet); --cut: 10px; }
+
+/* ── hero: faceted photo with the geode slice set beside it ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 50px 24px 58px; overflow: hidden; background: radial-gradient(110% 60% at 50% 10%, #1b3466, var(--navy) 70%); color: var(--band-ink); text-align: center; isolation: isolate; }
+.heroFrame { position: relative; width: 250px; height: 320px; margin-bottom: 18px; }
+.heroPhoto { position: absolute; inset: 0; padding: 2px; background: linear-gradient(150deg, #f0dc9e, #b48a36 45%, #ecd79f 70%, #9a7a32); clip-path: var(--facet); --cut: 34px; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; clip-path: var(--facet); --cut: 33px; }
+.heroSlice { position: absolute; z-index: 2; left: -48px; bottom: -30px; width: 128px; height: auto; rotate: 12deg; filter: drop-shadow(0 12px 16px rgba(0, 0, 0, .5)); }
+.heroKicker { color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: .42em; text-transform: uppercase; }
+.heroNames { color: var(--gold-l); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--ice); }
+.heroDate { color: var(--band-ink); font-size: 13px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 6px; color: #b8c3d8; font-size: 16px; line-height: 1.65; text-wrap: pretty; }
+
+/* ── Cover: a polished geode slab rising off the top-right corner, names set on night blue ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 0 28px 30px; overflow: hidden; background: radial-gradient(90% 55% at 85% 12%, #1d3a70, transparent 70%), var(--navy); color: var(--band-ink); isolation: isolate; }
+.coverGeode { position: absolute; z-index: 0; top: -70px; right: -120px; width: 430px; max-width: none; height: auto; animation: turn 160s linear infinite; filter: drop-shadow(-14px 22px 30px rgba(0, 0, 0, .55)); pointer-events: none; }
+.coverLeaf { position: absolute; z-index: 1; top: 318px; left: -40px; width: 300px; height: auto; rotate: -8deg; opacity: .95; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: auto; padding-top: 360px; }
+.kicker { color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: .44em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; color: var(--gold-l); font-family: var(--display); font-size: 62px; font-style: italic; font-weight: 400; line-height: .98; overflow-wrap: anywhere; text-shadow: 0 2px 18px rgba(5, 12, 26, .6); }
+.coverNames em { margin: 4px 0 2px 6px; color: var(--ice); font-size: 34px; }
+.coverDate { display: flex; align-items: center; gap: 12px; color: var(--band-ink); font-size: 12.5px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.coverDate::before { content: ""; width: 34px; height: 1px; background: var(--gold); }
+.coverFoot { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 30px; padding: 18px 18px; background: var(--gold); clip-path: var(--facet); --cut: 14px; isolation: isolate; }
+.coverFoot::before { content: ""; position: absolute; inset: 1px; z-index: -1; background: #0f1e3c; clip-path: var(--facet); --cut: 13.6px; }
+.guest { align-items: flex-start; max-width: 190px; text-align: left; }
+.guest small { color: #aab4c8; font-size: 13px; font-style: normal; }
+.guest strong { color: var(--band-ink); font-family: var(--display); font-style: italic; font-size: 19px; }
+.table { border-color: var(--gold); border-radius: 0; color: var(--gold-l); font-family: var(--serif); }
+.openBtn { flex-direction: column; flex-shrink: 0; gap: 4px; min-width: 0; width: 104px; height: 82px; padding: 0 10px; border-radius: 0; background: linear-gradient(150deg, #f0dc9e, #c3a052 55%, #9a7a32); color: var(--navy); font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .14em; line-height: 1.3; text-transform: uppercase; clip-path: var(--facet); --cut: 10px; }
+.openBtn:hover { translate: 0 -1px; background-position: 30% 0; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverGeode, .clGeode { animation: none; }
+}

@@ -1,0 +1,135 @@
+/* Dies Natalis — undangan dies natalis kampus bergaya piagam: kertas perkamen dengan bingkai garis ganda, lambang orisinal berenamel hijau toska dan emas, angka tahun besar bertekstur foil emas, pita satin emas, gedung rektorat bermenara jam dalam gaya gravir, dan laurel emas sebagai pemisah. */
+.root, .cover {
+  --bg: #f4ecd8; --paper: #ece2c9; --ivory: #fbf6e8; --field: #fffcf3; --ink: #1c2b2d; --muted: #4f5b5a; --line: #d6c8a6;
+  --accent: #173b41; --accent2: #0f2a2f; --gold: #c9a24c; --gold-l: #ecd38c; --gold-d: #8c6a26;
+  --band-bg: #173b41; --band-ink: #f4ecd8;
+  --verm: #b03a2e;
+  --display: "Bodoni Moda", Didot, Georgia, serif; --serif: "Libre Caslon Text", Georgia, serif; --script: "Cormorant SC", Georgia, serif;
+  --foil: url(/themes/art/dies-natalis/foil.webp) 0 0 / 260px;
+  --h2: 30px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #173b41; --t-accent-ink: #f4ecd8; --t-bg: #f4ecd8; --t-ink: #1c2b2d; --t-muted: #4f5b5a; --t-line: #d6c8a6; --t-field: #fffcf3;
+  --t-radius: 2px; --t-font: "Libre Caslon Text", Georgia, serif; --t-heading-font: "Bodoni Moda", Didot, Georgia, serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow { color: var(--verm); font-family: var(--script); font-size: 15px; font-weight: 600; letter-spacing: .24em; text-transform: none; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.divider { width: 170px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { font-size: 16px; line-height: 1.75; }
+
+/* foil text */
+.foilText { background: var(--foil); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+
+/* ── cover: a diploma-like charter ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 34px 26px 0; overflow: hidden; background: radial-gradient(ellipse 90% 60% at 50% 30%, #faf4e4, transparent 75%), #efe5cc; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 12px; border: 1.5px solid var(--accent); outline: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: -6px; pointer-events: none; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 24px; border: 1px solid color-mix(in srgb, var(--gold) 70%, transparent); pointer-events: none; }
+.crest { width: 96px; height: auto; filter: drop-shadow(0 6px 10px rgba(23, 59, 65, .2)); }
+.ribbon { position: relative; display: grid; place-items: center; width: 280px; max-width: 100%; aspect-ratio: 600 / 84; margin-top: 8px; }
+.ribbon img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ribbon span { position: relative; margin-top: -4px; color: #1f1608; font-family: var(--script); font-size: 17px; font-weight: 700; letter-spacing: .3em; }
+.number { margin: 2px 0 -6px; font-family: var(--display); font-size: 150px; font-weight: 600; line-height: .95; letter-spacing: -.04em; filter: drop-shadow(0 2px 0 #7a5a22) drop-shadow(0 8px 14px rgba(23, 59, 65, .18)); animation: foilShift 12s ease-in-out infinite alternate; }
+.ordinal { color: var(--accent); font-family: var(--script); font-size: 18px; font-weight: 600; letter-spacing: .22em; }
+.inst { max-width: 320px; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 500; line-height: 1.15; text-transform: uppercase; letter-spacing: .04em; overflow-wrap: anywhere; text-wrap: balance; }
+.titleOnly { max-width: 320px; margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; line-height: 1.1; overflow-wrap: anywhere; }
+.coverDate { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--gold); color: var(--ink); font-family: var(--script); font-size: 17px; font-weight: 600; letter-spacing: .14em; }
+.cover .guest { margin-top: 12px; }
+.cover .guest small { color: var(--muted); }
+.cover .guest strong { color: var(--ink); font-family: var(--serif); font-size: 17px; }
+.cover .table { border-color: var(--gold); color: var(--accent); }
+.openBtn { margin-top: 14px; border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--script); font-size: 16px; font-weight: 700; letter-spacing: .14em; box-shadow: 0 0 0 1px var(--gold) inset, 0 10px 22px rgba(23, 59, 65, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.coverCampus { width: calc(100% + 4px); max-width: 380px; height: auto; margin-top: auto; padding-top: 14px; opacity: .92; }
+
+/* ── hero ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 46px 24px 40px; background: var(--bg); text-align: center; }
+.heroCrest { width: 76px; height: auto; }
+.heroKicker { margin-top: 6px; color: var(--verm); font-family: var(--script); font-size: 15px; font-weight: 600; letter-spacing: .3em; }
+.heroTitle { max-width: 340px; color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 500; line-height: 1.12; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNum { font-family: var(--display); font-size: 92px; font-weight: 600; line-height: .9; filter: drop-shadow(0 2px 0 #7a5a22); }
+.heroDate { padding: 7px 18px; background: var(--accent); color: var(--gold-l); font-family: var(--script); font-size: 16px; font-weight: 600; letter-spacing: .14em; }
+.heroNote { max-width: 310px; margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+.heroCampus { width: 100%; max-width: 360px; height: auto; margin-top: 12px; }
+
+/* ── opening ── */
+.salamBlock { padding: 20px 28px 56px; }
+.salamKicker { color: var(--verm); font-family: var(--script); font-size: 15px; font-weight: 600; letter-spacing: .24em; text-transform: none; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 500; line-height: 1.2; }
+
+/* ── hosts: seal medallions ── */
+.couple { background: var(--paper); }
+.portraitFrame { width: 176px; height: 176px; padding: 0; border: 0; border-radius: 50%; background: radial-gradient(circle, #23525a 0%, var(--accent) 65%); box-shadow: 0 0 0 4px var(--gold), 0 0 0 8px var(--paper), 0 0 0 9px var(--gold-d), 0 14px 26px rgba(23, 59, 65, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { font-size: 0; }
+.seal { position: absolute; z-index: 2; top: 50%; left: 50%; width: 92px; height: auto; translate: -50% -54%; pointer-events: none; }
+.role { color: var(--verm); font-family: var(--script); font-size: 15px; font-weight: 600; letter-spacing: .24em; text-transform: none; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 500; line-height: 1.15; }
+.fullName { font-family: var(--serif); font-size: 15px; font-style: italic; }
+.parents { font-size: 15px; }
+
+/* ── countdown ── */
+.countBand { background: var(--accent); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 10px; border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-weight: 500; }
+.count > div { border-radius: 2px; border-color: color-mix(in srgb, var(--gold) 70%, transparent); box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4px color-mix(in srgb, var(--gold) 45%, transparent); }
+.count b { font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { font-family: var(--script); font-size: 14px; font-style: normal; font-weight: 600; letter-spacing: .08em; }
+.ghostBtn { border-radius: 2px; font-family: var(--script); font-weight: 700; letter-spacing: .1em; }
+
+/* ── events: programme cards ── */
+.event { align-items: flex-start; padding: 22px 20px 22px 76px; border-color: var(--accent); text-align: left; }
+.event::before { inset: 4px; border-color: color-mix(in srgb, var(--gold) 60%, transparent); border-radius: 0; }
+.eventNo { top: 20px; left: 18px; translate: none; width: 44px; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 36px; font-weight: 600; letter-spacing: -.02em; }
+.event h3 { font-family: var(--display); font-size: 22px; font-weight: 600; text-align: left; }
+.eventDate { font-size: 15px; }
+.eventAddr { max-width: none; text-align: left; font-size: 14px; }
+.event strong { font-size: 16px; }
+.mapBtn { border-radius: 2px; font-family: var(--script); font-weight: 700; letter-spacing: .08em; }
+
+/* ── story: history milestones ── */
+.story { background: var(--paper); }
+.node { width: 40px; height: 40px; border-color: var(--gold-d); background: var(--ivory); }
+.node img { width: 24px; }
+.timeline::before { left: 23px; background: var(--gold-d); }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 26px; font-weight: 600; letter-spacing: 0; }
+.storyBody h3 { font-family: var(--display); font-weight: 600; }
+.storyBody p { font-size: 15px; line-height: 1.65; }
+.tile, .tile:first-child { border-radius: 2px; }
+.mosaic { grid-auto-rows: 170px; }
+.tile:first-child { grid-row: auto; grid-column: span 2; }
+
+/* ── wishes / gifts ── */
+.wishes { background: var(--paper); }
+.form { border-radius: 2px; border-color: var(--gold); }
+.choices button, .submit, .field input, .field textarea { border-radius: 2px; }
+.submit { font-family: var(--script); font-size: 16px; font-weight: 700; letter-spacing: .12em; }
+.wish { border-radius: 2px; border-left: 3px solid var(--gold); }
+.gift { border-radius: 2px; box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5px color-mix(in srgb, var(--gold) 55%, transparent); }
+.gift::after { display: none; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; }
+
+/* ── closing: back on parchment, under the clock tower ── */
+.closing { padding-bottom: 0; background: var(--paper); color: var(--ink); }
+.closingCrest { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.closingCrest img { width: 88px; height: auto; }
+.closingCrest p { max-width: 300px; color: var(--accent); font-family: var(--display); font-size: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; line-height: 1.25; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--verm); font-family: var(--script); font-size: 15px; font-weight: 600; letter-spacing: .14em; }
+.closingNames { display: none; }
+.made { margin-top: 4px; color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.made:hover { color: var(--accent); }
+.closingCampus { order: 99; width: 100%; max-width: 380px; height: auto; margin-top: 8px; }
+.music { border-radius: 2px; }
+.sentBox img { width: 70px; }
+
+@keyframes foilShift { from { background-position: 0 0; } to { background-position: 180px 60px; } }
+@media (prefers-reduced-motion: reduce) {
+  .number { animation: none; }
+}
+.tile:nth-child(2):last-child { grid-column: span 2; }

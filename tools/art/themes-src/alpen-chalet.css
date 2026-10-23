@@ -1,0 +1,152 @@
+/* Alpen Chalet — gouache cerah: langit Alpen, puncak bersalju, chalet kayu dengan kotak bunga geranium merah di padang bunga liar; foto mempelai sebagai jendela berdaun jendela hijau, papan kayu dan aksen hati ukir. */
+.root, .cover {
+  --bg: #fbf7ee; --paper: #f1f5ef; --ivory: #fffdf8; --field: #fffdf8; --ink: #1f2a37; --muted: #57606b; --line: #dcd6c8;
+  --accent: #1f3a5c; --accent2: #2c5079; --gold: #a8683a; --gold-l: #f6e7c8; --gold-d: #8a5230;
+  --red: #c4342b; --red-d: #a32820; --meadow: #5d8f3a; --pine: #2f5a3c; --wood: #8a5230;
+  --band-bg: #22436a; --band-ink: #f4f7fb;
+  --display: Fraunces, "Young Serif", Georgia, serif; --serif: Figtree, system-ui, sans-serif; --script: Fraunces, Georgia, serif;
+  --sky: url(/themes/art/alpen-chalet/sky.webp);
+  --h2: 31px; --card-r: 14px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c4342b; --t-accent-ink: #ffffff; --t-bg: #fbf7ee; --t-ink: #1f2a37; --t-muted: #57606b; --t-line: #dcd6c8; --t-field: #fffdf8;
+  --t-radius: 12px; --t-font: Figtree, system-ui, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* type */
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 11.5px; font-weight: 700; letter-spacing: .22em; color: var(--red); }
+.head h2, .headLight h2 { font-family: var(--display); font-weight: 600; letter-spacing: -.01em; font-variation-settings: "SOFT" 100, "WONK" 1; }
+.divider { width: 176px; }
+.section { padding: 62px 22px; }
+
+/* opening: sky-tinted panel */
+.salamBlock { gap: 12px; padding: 56px 28px 60px; background: linear-gradient(#eaf3f8, var(--bg)); }
+.salamTitle { font-family: var(--display); font-size: 34px; font-weight: 600; font-style: italic; line-height: 1.15; color: var(--accent); text-wrap: balance; }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.7; }
+
+/* couple: each portrait is a chalet window with a geranium box */
+.couple { gap: 26px; background: var(--paper); }
+.portrait { margin-bottom: 30px; }
+.portraitFrame { width: 214px; height: 262px; padding: 8px; border: 0; border-radius: 6px; background: #fffdf8; box-shadow: 0 0 0 3px var(--wood), 0 14px 26px -12px rgba(31, 42, 55, .4); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 3px; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 3px var(--wood), 0 20px 32px -12px rgba(31, 42, 55, .45); }
+.pBox { position: absolute; z-index: 2; left: 50%; bottom: -30px; width: 250px; height: auto; translate: -50% 0; }
+.monogram { color: var(--accent); font-family: var(--display); font-style: italic; }
+.nick { font-family: var(--display); font-size: 44px; font-weight: 600; color: var(--accent); letter-spacing: -.01em; }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.amp { color: var(--red); font-family: var(--display); font-style: italic; font-size: 50px; }
+.amp img { width: 44px; }
+
+/* countdown: deep alpine blue, peaks rising behind */
+.countBand { padding: 66px 22px 150px; background: linear-gradient(#1c3a5f, #2c5683); }
+.countPeaks { position: absolute; z-index: -1; left: -10px; right: -10px; bottom: -4px; width: calc(100% + 20px); max-width: none; height: auto; opacity: .9; }
+.headLight .eyebrow { color: #f3c9a3; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 92px; border: 0; border-radius: 12px; background: rgba(255, 255, 255, .94); box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .35); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .6) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 32px; }
+.count small { color: var(--red); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border: 0; background: #fff; color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .02em; box-shadow: 0 6px 14px -6px rgba(0, 0, 0, .4); }
+.ghostBtn:hover { background: #fff; translate: 0 -2px; }
+.ghostBtn svg { stroke: var(--red); }
+
+/* events: wooden signboards with carved hearts */
+.events { gap: 30px; }
+.event { padding: 36px 20px 24px; border: 0; border-radius: 14px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 12px 24px -16px rgba(31, 42, 55, .35); }
+.event::before { inset: auto 0 0 0; height: 8px; border: 0; border-radius: 0 0 14px 14px; background: repeating-linear-gradient(90deg, var(--red) 0 12px, #fff 12px 24px); opacity: .85; }
+.event:hover { box-shadow: 0 0 0 1px var(--gold), 0 18px 30px -16px rgba(31, 42, 55, .4); }
+.eventNo { top: -16px; width: 54px; height: 32px; border-radius: 6px; background: var(--wood); color: #fff3df; font-family: var(--display); font-weight: 600; font-size: 14px; box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .18); }
+.event h3 { font-family: var(--display); font-weight: 600; font-size: 24px; color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 600; color: var(--ink); font-size: 16px; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 26px; height: 22px; margin: 4px 0; background: var(--red); clip-path: path("M13 21 L2.5 10.5 A5.6 5.6 0 0 1 13 3.6 A5.6 5.6 0 0 1 23.5 10.5 Z"); }
+.event strong { font-weight: 700; font-size: 17px; }
+.mapBtn, .submit, .openBtn { background: var(--red); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .02em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--red-d); }
+
+/* story: trail map with gentian nodes */
+.story { background: var(--paper); }
+.timeline::before { width: 0; border-left: 2px dashed var(--meadow); background: none; }
+.node { border: 2px solid var(--meadow); background: #fff; }
+.node img { width: 28px; }
+.storyBody small { font-family: var(--serif); font-weight: 700; color: var(--red); letter-spacing: .14em; }
+.storyBody h3 { font-family: var(--display); font-weight: 600; font-size: 21px; color: var(--accent); }
+.storyImg { border-radius: 10px; }
+
+/* gallery: window panes */
+.mosaic { gap: 10px; }
+.tile { border-radius: 8px; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--wood); }
+.tile:first-child { border-radius: 8px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 16px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 30px -18px rgba(31, 42, 55, .35); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; letter-spacing: .1em; color: var(--accent); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.submit { font-size: 15px; }
+.step { border-color: var(--line); }
+.sent { font-family: var(--display); font-style: italic; color: var(--accent); }
+.wish { border: 0; border-radius: 14px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line); }
+.wish strong { font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--accent); }
+.wish small { background: #fdeceb; color: var(--red-d); font-weight: 600; }
+
+/* gifts: painted-wood blue cards */
+.gifts { background: var(--paper); }
+.gift { border-radius: 16px; background: linear-gradient(160deg, #22436a, #2e5888); }
+.gift::after { right: -30px; bottom: -36px; border-color: rgba(255, 255, 255, .07); }
+.gift h3 { font-family: var(--display); font-weight: 600; font-size: 18px; color: #fff; letter-spacing: 0; }
+.giftNo { font-family: var(--display); font-weight: 600; font-size: 22px; letter-spacing: .04em; }
+.copy { border: 0; background: rgba(255, 255, 255, .14); color: #fff; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--accent); }
+
+/* closing: pine-green dusk, meadow flowers along the bottom */
+.closing { gap: 12px; padding: 64px 26px 120px; background: linear-gradient(#2f5a3c, #23452e); }
+.clFlowers { position: absolute; z-index: -1; left: -6px; bottom: -6px; width: calc(100% + 12px); max-width: none; height: auto; transform-origin: 50% 100%; animation: breeze 7s ease-in-out infinite alternate; }
+.clEmblem { width: 70px; height: auto; margin-bottom: 4px; animation: breathe 8s ease-in-out infinite; }
+.thanks { font-family: var(--display); font-weight: 600; font-style: italic; font-size: 46px; color: #fff; }
+.closingNames { font-family: var(--display); font-weight: 600; font-size: 32px; color: #fff; }
+.family { font-family: var(--serif); font-weight: 600; letter-spacing: .04em; }
+.made { color: rgba(255, 255, 255, .75); }
+.music { border: 2px solid #fff; background: var(--red); }
+
+/* ── hero: the couple photo as a chalet window ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 46px 22px 50px; background: linear-gradient(#e3eff6, var(--bg) 70%); text-align: center; }
+.window { position: relative; display: grid; grid-template-columns: 62px 220px 62px; align-items: stretch; margin-bottom: 34px; }
+.shutter { width: 62px; height: 100%; object-fit: fill; }
+.shutterR { scale: -1 1; }
+.heroPhoto { position: relative; width: 220px; height: 280px; padding: 8px; border-radius: 6px 6px 0 0; background: #fffdf8; box-shadow: 0 0 0 3px var(--wood); }
+.heroPhoto > img { width: 100%; height: 100%; border-radius: 3px; object-fit: cover; }
+.heroPhoto::after { content: ""; position: absolute; inset: 8px; border-radius: 3px; background: linear-gradient(90deg, transparent calc(50% - 2px), #fffdf8 calc(50% - 2px) calc(50% + 2px), transparent calc(50% + 2px)), linear-gradient(transparent calc(45% - 2px), #fffdf8 calc(45% - 2px) calc(45% + 2px), transparent calc(45% + 2px)); pointer-events: none; }
+.heroBox { position: absolute; z-index: 2; left: 50%; bottom: -36px; width: 290px; height: auto; translate: -50% 0; }
+.heroKicker { color: var(--red); font-size: 11.5px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--red); font-style: italic; font-weight: 400; }
+.heroDate { color: var(--ink); font-size: 15px; font-weight: 600; }
+.heroNote { max-width: 330px; margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* ── Cover: sky with names, a painted Alpine scene below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: #b9d9ee var(--sky) center top / 100% 100% no-repeat; isolation: isolate; text-align: center; }
+.coverText { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 46px 24px 0; }
+.kicker { padding: 5px 14px; border-radius: 999px; background: rgba(255, 255, 255, .72); color: var(--red-d); font-size: 11.5px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin-top: 4px; color: #142a46; font-family: var(--display); font-size: 58px; font-weight: 600; line-height: .98; letter-spacing: -.015em; overflow-wrap: anywhere; text-shadow: 0 1px 0 rgba(255, 255, 255, .55), 0 0 22px rgba(225, 240, 250, .9); }
+.coverNames em { margin: 2px 0; color: var(--red); font-size: 40px; font-style: italic; font-weight: 400; }
+.coverDate { margin-top: 6px; color: #142a46; font-size: 14px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.scene { position: relative; z-index: 1; flex: 1 0 auto; width: 100%; min-height: 490px; margin-top: -10px; }
+.peaks { position: absolute; left: -20px; right: -20px; top: 0; width: calc(100% + 40px); max-width: none; height: auto; }
+.chalet { position: absolute; left: 0; right: 0; bottom: 92px; width: 100%; height: auto; }
+.flowers { position: absolute; left: -10px; bottom: -4px; width: calc(100% + 20px); max-width: none; height: auto; transform-origin: 50% 100%; animation: breeze 6s ease-in-out infinite alternate; }
+.coverFoot { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 12px; width: calc(100% - 40px); margin: -112px 0 22px; padding: 16px 18px 18px; border-radius: 16px; background: rgba(255, 253, 248, .96); box-shadow: 0 16px 34px -14px rgba(20, 42, 70, .5); }
+.coverFoot::before { content: ""; position: absolute; top: 0; left: 18px; right: 18px; height: 6px; border-radius: 0 0 6px 6px; background: repeating-linear-gradient(90deg, var(--red) 0 10px, #fff 10px 20px); }
+.guest small { color: var(--muted); font-size: 13.5px; font-style: normal; }
+.guest strong { color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 20px; }
+.table { border-color: var(--red); color: var(--red-d); font-family: var(--serif); font-weight: 700; }
+.openBtn { box-shadow: 0 10px 20px -8px rgba(164, 40, 32, .6); }
+.openBtn:hover { background: var(--red-d); translate: 0 -1px; }
+
+@keyframes breeze { from { transform: skewX(-1.4deg); } to { transform: skewX(1.4deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .flowers, .clFlowers, .clEmblem { animation: none; }
+}

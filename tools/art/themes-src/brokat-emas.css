@@ -1,0 +1,168 @@
+/* Brokat Emas — kain brokat marun dengan tenunan benang emas timbul: tirai brokat berlipit dengan rumbai emas, panel sutra gading, galon emas, dan bunga damask yang megah. */
+.root, .cover {
+  --bg: #f7efe0; --paper: #efe3cd; --ivory: #fffaf0; --field: #fffcf6; --ink: #2c0e15; --muted: #6b4b4f; --line: #e0cfae;
+  --accent: #5a1023; --accent2: #3d0914; --gold: #c99a3e; --gold-l: #f0d58e; --gold-d: #8a6224;
+  --band-bg: #3a0812; --band-ink: #fbf2e2;
+  --display: "Bodoni Moda", Georgia, serif; --serif: "Cormorant Garamond", Georgia, serif; --script: "Monsieur La Doulaise", cursive;
+  --tile: url(/themes/art/brokat-emas/tile.webp);
+  --galon: url(/themes/art/brokat-emas/galon.webp);
+  --brocade: linear-gradient(rgba(44, 6, 16, .42), rgba(44, 6, 16, .42)), var(--tile) 0 0 / 240px 240px;
+  --brocade-dim: linear-gradient(rgba(36, 4, 12, .8), rgba(36, 4, 12, .8)), var(--tile) 0 0 / 240px 240px;
+  --silk: linear-gradient(160deg, #fffaf0 0%, #f6ecd8 38%, #fffaf2 55%, #efe2c8 100%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a1023; --t-accent-ink: #fbf2e2; --t-bg: #f7efe0; --t-ink: #2c0e15; --t-muted: #6b4b4f; --t-line: #e0cfae; --t-field: #fffcf6;
+  --t-radius: 6px; --t-font: "Cormorant Garamond", Georgia, serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 18px;
+}
+.main { background: var(--silk); }
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 10px; font-weight: 500; letter-spacing: .34em; color: var(--gold-d); }
+.head h2 { color: var(--accent); font-style: italic; }
+.headLight h2 { font-style: italic; }
+.divider { width: 220px; }
+.section { padding: 64px 22px 60px; }
+.galonTop::before, .countBand::before, .gifts::before, .closing::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: var(--galon) repeat-x 0 0 / auto 22px; z-index: 1;
+}
+.countBand::after, .gifts::after { content: ""; position: absolute; inset: auto 0 0; height: 22px; background: var(--galon) repeat-x 0 0 / auto 22px; }
+
+/* opening */
+.salamBlock { padding: 36px 26px 58px; }
+.arabic { max-width: 100%; color: var(--accent); font-size: 25px; text-wrap: balance; }
+.salamKicker { color: var(--gold-d); }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 46px; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 17px; }
+.intro { font-size: 19px; }
+
+/* couple: oval brocade cameos */
+.couple { background: transparent; gap: 14px; }
+.portrait { display: grid; place-items: center; margin-bottom: 22px; }
+.portraitFrame { width: 164px; height: 214px; padding: 0; border: 2px solid var(--gold); border-radius: 50%; background: radial-gradient(closest-side, var(--accent) 0 80%, rgba(90, 16, 35, .5) 81%, transparent 84%), var(--brocade); box-shadow: 0 0 0 6px var(--ivory), 0 0 0 7.5px var(--gold), 0 18px 30px rgba(58, 8, 18, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 6px var(--ivory), 0 0 0 7.5px var(--gold), 0 22px 36px rgba(58, 8, 18, .32); }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 74px; translate: -4px 4px; }
+.portraitArt { position: absolute; z-index: 2; bottom: -66px; left: 50%; width: 46px; height: auto; translate: -50% 0; }
+.role { color: var(--gold-d); }
+.nick { font-family: var(--script); font-size: 58px; color: var(--accent); }
+.fullName { font-family: var(--display); font-size: 17px; font-style: italic; color: var(--ink); }
+.parents { color: var(--muted); font-size: 17px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 48px; }
+
+/* countdown on brocade */
+.countBand { background: var(--brocade-dim); padding: 76px 18px 80px; }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); }
+.count > div { height: 92px; border: 1.5px solid var(--gold); border-radius: 999px; background: var(--silk); box-shadow: 0 0 0 4px rgba(201, 154, 62, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--muted); font-size: 14px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .12em; }
+
+/* events: ivory silk labels sewn onto brocade */
+.events { gap: 24px; }
+.event { padding: 12px; border: 0; border-radius: 8px; background: var(--brocade); box-shadow: 0 16px 30px rgba(58, 8, 18, .22); }
+.event::before { inset: 12px; border: 1px solid var(--gold); border-radius: 3px; background: var(--silk); z-index: 0; }
+.event > * { position: relative; z-index: 1; }
+.event:hover { box-shadow: 0 20px 36px rgba(58, 8, 18, .3); }
+.eventNo { position: relative; top: auto; left: auto; translate: none; margin-top: 26px; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .3em; }
+.event h3 { margin-top: 4px; font-family: var(--display); font-style: italic; font-size: 24px; color: var(--accent); }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--display); font-size: 13px; }
+.event strong { font-family: var(--display); font-size: 16px; font-weight: 500; }
+.eventAddr { margin: 0 14px; font-size: 16px; }
+.mapBtn { margin-bottom: 26px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .1em; }
+
+/* story */
+.timeline::before { background: linear-gradient(var(--gold), rgba(201, 154, 62, .2)); }
+.node { border: 1.5px solid var(--gold); background: var(--accent); }
+.node img { width: 24px; }
+.storyBody small { font-family: var(--display); font-size: 11px; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-style: italic; color: var(--accent); }
+.storyBody p { font-size: 17px; }
+
+/* wishes */
+.wishes { background: transparent; }
+.form { border: 1px solid var(--gold); border-radius: 6px; background: var(--ivory); box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6px rgba(201, 154, 62, .5), 0 16px 30px rgba(58, 8, 18, .08); }
+.field > span, .diet, .guestsLabel { font-family: var(--display); font-size: 10px; letter-spacing: .24em; color: var(--accent); }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 4px; font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.step { border-radius: 4px; }
+.submit { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); }
+.wish { border-radius: 4px; border-color: var(--line); background: var(--ivory); }
+.wish strong { font-family: var(--display); font-style: italic; color: var(--accent); }
+.wish small { background: rgba(90, 16, 35, .08); color: var(--accent); }
+
+/* gifts on brocade */
+.gifts { background: var(--brocade-dim); padding: 80px 22px 80px; }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts .head h2 { color: var(--band-ink); }
+.gifts .intro { color: rgba(251, 242, 226, .86); }
+.gift { border: 1px solid var(--gold); border-radius: 4px; background: var(--silk); color: var(--ink); }
+.gift::after { inset: 6px; right: 6px; bottom: 6px; width: auto; height: auto; border: 1px solid rgba(201, 154, 62, .5); border-radius: 2px; box-shadow: none; }
+.giftIcon { border-color: var(--gold); background: var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--display); font-style: italic; }
+.giftNo { color: var(--ink); font-family: var(--display); }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--accent); color: var(--accent); font-family: var(--display); }
+.copy svg { stroke: var(--accent); }
+.copy:hover { background: rgba(90, 16, 35, .06); }
+.copyOn, .copyOn:hover { background: var(--accent); color: var(--gold-l); }
+.copyOn svg { stroke: var(--gold-l); }
+
+/* closing: drapes part over the brocade */
+.closing { background: var(--brocade-dim); padding: 120px 26px 60px; }
+.closeDrape { position: absolute; z-index: -1; top: 16px; width: 104px; height: auto; }
+.closeDrapeL { left: -6px; }
+.closeDrapeR { right: -6px; scale: -1 1; }
+.closingEmblem { width: 96px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 62px; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 11px; letter-spacing: .14em; }
+.family { font-family: var(--display); font-size: 12px; }
+.closingNames { color: var(--band-ink); font-family: var(--script); font-size: 46px; }
+.music { background: var(--accent); border-color: var(--gold); }
+.sentBox img { width: 74px; }
+
+/* ── Cover: brocade wall, two drapes tied back with gold tassels, an ivory silk card ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 70px 26px 40px; overflow: hidden; background: var(--brocade); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: 2; inset: 0 0 auto; height: 28px; background: var(--galon) repeat-x 0 0 / auto 28px; box-shadow: 0 6px 12px rgba(0, 0, 0, .35); }
+.drape { position: absolute; z-index: 1; top: 18px; width: 150px; height: auto; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45)); }
+.drapeL { left: -14px; }
+.drapeR { right: -14px; scale: -1 1; }
+.tassel { position: absolute; z-index: 3; top: 236px; width: 34px; height: auto; transform-origin: 50% 0; animation: tassel 5s ease-in-out infinite alternate; }
+.tasselL { left: 30px; }
+.tasselR { right: 30px; animation-delay: -2.5s; }
+.card { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; max-width: 286px; padding: 70px 20px 28px; border: 1.5px solid var(--gold); border-radius: 6px; background: var(--silk); box-shadow: 0 0 0 6px rgba(255, 250, 240, .9), 0 0 0 7.5px var(--gold), 0 24px 46px rgba(0, 0, 0, .45); }
+.cardMedal { position: absolute; top: -46px; left: 50%; width: 84px; height: auto; translate: -50% 0; filter: drop-shadow(0 6px 8px rgba(40, 4, 12, .5)); }
+.cardMedalBg { position: absolute; top: -52px; left: 50%; width: 104px; height: 104px; translate: -50% 0; border: 1.5px solid var(--gold); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--ivory), 0 0 0 5.5px var(--gold); }
+.coverArabic { color: var(--accent); font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; line-height: 1.5; }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 10px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 2px; color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; font-weight: 400; line-height: 1.08; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-family: var(--script); font-size: 52px; font-style: normal; line-height: .9; }
+.coverDate { color: var(--ink); font-family: var(--display); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.coverDivider { width: 190px; height: auto; margin: 6px 0 4px; }
+.guest small { color: var(--muted); font-size: 16px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; font-style: italic; }
+.table { border-color: var(--gold); color: var(--accent); font-family: var(--display); font-size: 10px; }
+.openBtn { margin-top: 8px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(58, 8, 18, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: brocade panel with the damask bloom ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 26px 56px; background: var(--brocade-dim); color: var(--band-ink); text-align: center; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: var(--galon) repeat-x 0 0 / auto 22px; }
+.hero::after { content: ""; position: absolute; inset: auto 0 0; height: 22px; background: var(--galon) repeat-x 0 0 / auto 22px; }
+.heroMedal { width: 150px; height: auto; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .5)); }
+.heroKicker { margin-top: 14px; color: var(--gold-l); font-family: var(--display); font-size: 10px; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { display: flex; flex-direction: column; align-items: center; margin-top: 6px; color: #fff6e6; font-family: var(--display); font-size: 38px; font-style: italic; font-weight: 400; line-height: 1.1; }
+.heroNames span { overflow-wrap: anywhere; max-width: 100%; }
+.heroNames em { color: var(--gold-l); font-family: var(--script); font-size: 54px; font-style: normal; line-height: .9; }
+.heroDate { margin-top: 10px; color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 16px; color: rgba(251, 242, 226, .88); font-size: 18px; font-style: italic; line-height: 1.6; }
+
+@keyframes tassel { from { rotate: -4deg; } to { rotate: 4deg; } }

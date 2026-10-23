@@ -1,0 +1,152 @@
+/* Sabana Afrika — sabana senja dalam pita-pita gouache tebal: langit terung-anggur-jingga-emas, matahari raksasa yang rendah, akasia berpuncak datar, jerapah dan gajah dalam siluet, rumput emas; kartu bergaris pita senja, potret cakram matahari, dan cakrawala siluet di pita hitung mundur. */
+.root, .cover {
+  --bg: #f5e6cc; --paper: #eedab6; --ivory: #fbf1de; --field: #fffaf0; --ink: #2a1418; --muted: #6a4a3e; --line: #dcc29a;
+  --accent: #561d33; --accent2: #3f1426; --gold: #e2752c; --gold-l: #ffd681; --gold-d: #bb4329;
+  --aub: #2f1528; --madder: #86283a; --burnt: #bb4329; --orange: #e2752c; --sun: #f0a43e; --cream: #fbeed6;
+  --band-bg: #2f1528; --band-ink: #fbeed6;
+  --display: "Shrikhand", "Georgia", serif; --serif: "Spectral", Georgia, serif; --script: "Shrikhand", Georgia, serif; --label: "Archivo", "Helvetica Neue", sans-serif;
+  --h2: 30px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #561d33; --t-accent-ink: #fbeed6; --t-bg: #f5e6cc; --t-ink: #2a1418; --t-muted: #6a4a3e; --t-line: #dcc29a; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Shrikhand", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) url(/themes/art/sabana-afrika/paper.webp) 0 0 / 360px; }
+
+/* type: Archivo labels with a burnt-orange rule, Shrikhand headings */
+.eyebrow, .salamKicker, .role { color: var(--burnt); font-family: var(--label); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); line-height: 1.1; }
+.head { gap: 10px; }
+.divider { width: 170px; }
+.intro { color: var(--muted); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+
+/* opening */
+.salamBlock { padding: 50px 28px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+
+/* couple: sun-disc portraits with an offset orange disc and a lone acacia at the foot */
+.couple { gap: 18px; background: linear-gradient(var(--paper), var(--bg)); }
+.portrait { margin-bottom: 20px; }
+.portrait::before { content: ""; position: absolute; z-index: 0; inset: 0; translate: 14px 12px; border-radius: 50%; background: var(--orange); }
+.portraitFrame { z-index: 1; width: 220px; height: 220px; padding: 0; border: 5px solid var(--cream); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.personWrap:nth-child(even) .portrait::before { translate: -14px 12px; background: var(--sun); }
+.portraitTree { position: absolute; z-index: 2; left: -44px; bottom: -14px; width: 120px; height: auto; }
+.personWrap:nth-child(even) .portraitTree { left: auto; right: -44px; scale: -1 1; }
+.monogram { color: var(--sun); font-family: var(--display); font-size: 92px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.amp { gap: 18px; margin: 18px 0 8px; color: var(--burnt); font-family: var(--display); font-size: 44px; }
+.amp img { width: 50px; }
+
+/* countdown: aubergine dusk band with the savanna horizon and a giraffe walking across */
+.countBand { padding: 64px 20px 170px; background: linear-gradient(#2f1528 0%, #561d33 46%, #86283a 72%, #bb4329 100%); }
+.countRidge { position: absolute; z-index: -1; left: -20px; right: -20px; bottom: -2px; height: 120px; background: url(/themes/art/sabana-afrika/ridge.webp) 30% 100% / auto 100% repeat-x; }
+.walker { position: absolute; z-index: -1; bottom: 16px; left: 0; width: 46px; animation: walk 46s linear infinite; }
+.walker img { display: block; width: 100%; height: auto; filter: brightness(.6); }
+.countBand .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--cream); font-family: var(--display); }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 0; border-radius: 50% 50% 6px 6px; background: rgba(251, 238, 214, .1); box-shadow: inset 0 -4px 0 var(--orange); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 28px; }
+.count small { color: rgba(251, 238, 214, .85); font-family: var(--label); font-size: 10px; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--gold-l); color: var(--cream); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: rgba(47, 21, 40, .45); }
+
+/* events: cream cards with a banded sunset header and a sun-disc number */
+.events { gap: 30px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 14px 26px rgba(86, 29, 51, .1); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 0; background: linear-gradient(var(--accent) 0 4px, var(--burnt) 4px 8px, var(--sun) 8px 12px, transparent 12px); }
+.event:hover { box-shadow: 0 1px 0 var(--line), 0 18px 32px rgba(86, 29, 51, .16); }
+.eventNo { top: 22px; left: auto; right: 18px; translate: none; width: 40px; height: 40px; border-radius: 50%; background: var(--sun); color: var(--accent); font-family: var(--label); font-weight: 800; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 23px; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--burnt); font-family: var(--label); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+.rule { width: 120px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--burnt) 0 33%, var(--orange) 33% 66%, var(--sun) 66%); }
+.mapBtn, .submit { background: var(--accent); color: var(--cream); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--burnt); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 3px; background: linear-gradient(var(--burnt), var(--sun)); }
+.node { width: 40px; height: 40px; border: 0; background: transparent; }
+.node img { width: 40px; }
+.storyBody small { color: var(--burnt); font-family: var(--label); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+
+/* gallery: wide horizon frames */
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 132px; gap: 10px; }
+.tile, .tile:first-child { border-radius: 3px; box-shadow: 0 0 0 4px var(--ivory), 0 8px 18px rgba(86, 29, 51, .14); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 160px 160px 3px 3px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 4px; box-shadow: 0 1px 0 var(--line), 0 12px 28px rgba(86, 29, 51, .1); border-top: 6px solid var(--burnt); }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; font-family: var(--label); font-size: 13px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); }
+.wish { border: 0; border-left: 4px solid var(--orange); border-radius: 0 4px 4px 0; }
+.wish:nth-child(even) { border-left-color: var(--madder); }
+.wish strong { font-family: var(--serif); font-weight: 700; }
+.wish small { background: rgba(226, 117, 44, .16); color: var(--burnt); font-family: var(--label); font-weight: 700; }
+
+/* gifts */
+.gift { border-radius: 4px; background: linear-gradient(160deg, #561d33, #2f1528); }
+.gift::after { right: -60px; bottom: -70px; width: 170px; height: 170px; border: 0; background: radial-gradient(circle, rgba(240, 164, 62, .45) 0 55%, transparent 56%); box-shadow: none; }
+.gift h3 { color: var(--sun); font-family: var(--label); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { font-family: var(--serif); font-weight: 600; }
+.copy { border-color: var(--sun); color: var(--gold-l); font-family: var(--label); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--sun); color: var(--accent); }
+
+/* closing: dusk with the banded sun and the horizon */
+.closing { padding: 64px 26px 150px; background: linear-gradient(#2f1528 0%, #561d33 55%, #86283a 100%); }
+.closeRidge { position: absolute; z-index: -1; left: -30px; right: -30px; bottom: -2px; height: 110px; background: url(/themes/art/sabana-afrika/ridge.webp) 70% 100% / auto 100% repeat-x; }
+.emblem { width: 120px; height: auto; animation: rise 1.6s var(--m-ease) both; }
+.thanks { color: var(--sun); font-family: var(--display); font-size: 44px; }
+.closingNames { color: var(--cream); font-family: var(--display); font-size: 30px; }
+.family { color: rgba(251, 238, 214, .8); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.made { position: relative; z-index: 1; color: rgba(251, 238, 214, .6); }
+.music { border-color: var(--sun); background: var(--accent); }
+
+/* ── Cover: the full savanna poster, names in the deep upper sky, guest on the dark grass ── */
+.cover { position: relative; display: flex; flex-direction: column; justify-content: space-between; align-items: center; min-height: 100dvh; padding: 52px 22px 34px; overflow: hidden; background: var(--aub); color: var(--cream); text-align: center; isolation: isolate; }
+.scene { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 34%; background: linear-gradient(transparent, rgba(24, 10, 8, .55) 40%, rgba(24, 10, 8, .8)); }
+.sunGlow { position: absolute; z-index: -1; left: 57%; top: 67%; width: 150vw; max-width: 640px; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: radial-gradient(circle, rgba(255, 214, 129, .3), transparent 60%); mix-blend-mode: screen; animation: glowBreath 7s ease-in-out infinite alternate; pointer-events: none; }
+.coverTop { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.kicker { padding-bottom: 10px; border-bottom: 2px solid var(--orange); color: var(--gold-l); font-family: var(--label); font-size: 11px; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--cream); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 3px 3px 0 #86283a, 0 2px 18px rgba(20, 6, 12, .45); }
+.coverNames em { margin: 2px 0; color: var(--sun); font-size: 32px; font-style: normal; text-shadow: 2px 2px 0 #2f1528; }
+.coverDate { padding: 6px 14px; border-radius: 2px; background: rgba(47, 21, 40, .72); color: var(--cream); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.guest { color: var(--cream); }
+.guest small { color: rgba(251, 238, 214, .85); }
+.guest strong { color: var(--cream); font-family: var(--serif); font-size: 21px; font-weight: 600; text-shadow: 0 1px 8px rgba(0, 0, 0, .5); }
+.table { border-color: var(--sun); color: var(--gold-l); font-family: var(--label); font-weight: 700; }
+.openBtn { background: var(--sun); color: var(--aub); font-family: var(--label); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 3px rgba(240, 164, 62, .25), 0 10px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -2px; }
+
+/* ── Hero: a panorama print framed by sunset bands ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 46px 20px 50px; background: var(--aub); color: var(--cream); text-align: center; isolation: isolate; }
+.hero::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 16px; background: linear-gradient(var(--madder) 0 5px, var(--burnt) 5px 10px, var(--sun) 10px); }
+.heroKicker { color: var(--gold-l); font-family: var(--label); font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.pano { position: relative; width: 100%; margin: 6px 0 4px; padding-bottom: 6px; }
+.heroPhoto { width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 170px 170px 2px 2px; box-shadow: 0 0 0 4px var(--orange), 0 0 0 8px var(--aub), 0 0 0 11px var(--sun); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.panoSun { display: block; width: 62%; height: auto; margin: 0 auto; }
+.panoRidge { position: absolute; left: -20px; right: -20px; bottom: -4px; width: calc(100% + 40px); height: auto; pointer-events: none; }
+.heroNames { max-width: 100%; color: var(--cream); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 3px 3px 0 var(--madder); }
+.heroNames em { color: var(--sun); font-size: .62em; font-style: normal; }
+.heroDate { color: var(--gold-l); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 320px; color: rgba(251, 238, 214, .86); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+@keyframes walk { from { translate: -60px 0; } to { translate: calc(min(100vw, 430px) + 20px) 0; } }
+@keyframes glowBreath { from { opacity: .7; scale: .96; } to { opacity: 1; scale: 1.04; } }
+@keyframes rise { from { translate: 0 24px; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .walker, .sunGlow, .emblem { animation: none !important; }
+}

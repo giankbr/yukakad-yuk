@@ -1,0 +1,146 @@
+/* Baju Bodo — adat Makassar/Bugis: baju bodo jingga yang tembus pandang (cat air dengan lipatan halus) tergantung di tongkat kayu di atas lipatan sarung lipa' sabbe kotak-kotak, kalung emas, pantai Losari saat senja; potret berupa potongan kain sabbe dengan inisial, Bodoni Moda + Jost. */
+.root, .cover {
+  --bg: #f7eee2; --paper: #f1e3d0; --ivory: #fffaf3; --field: #fffcf8; --ink: #12383d; --muted: #5d6463; --line: #e8d7c0;
+  --accent: #12383d; --accent2: #0b2a2e; --gold: #c99a3f; --gold-l: #f6dfa6; --gold-d: #a2742a;
+  --tang: #ec5418; --tang-d: #b8380f; --emer: #159a6a;
+  --band-bg: #12383d; --band-ink: #fbf1e2;
+  --sabbe: url("/themes/art/baju-bodo/sabbe.webp");
+  --display: "Bodoni Moda", Didot, Georgia, serif; --serif: Jost, "Helvetica Neue", sans-serif; --script: "Bodoni Moda", serif;
+  --h2: 34px; --card-r: 18px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #12383d; --t-accent-ink: #f6dfa6; --t-bg: #f7eee2; --t-ink: #12383d; --t-muted: #5d6463; --t-line: #e8d7c0; --t-field: #fffcf8;
+  --t-radius: 14px; --t-font: Jost, sans-serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+
+/* ── Cover: garment display (sheer blouse over a folded sabbe sarong), Bodoni names ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100svh; padding: 30px 22px 30px; overflow: hidden; background: radial-gradient(70% 40% at 50% 34%, #fff6ea, transparent 70%), var(--bg); text-align: center; }
+.cover::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--sabbe) 0 0 / 120px; }
+.bism { color: var(--ink); font-family: Amiri, serif; font-size: 22px; line-height: 1.5; }
+.tabe { margin-top: 4px; color: var(--tang); font-family: var(--display); font-size: 26px; font-style: italic; font-weight: 500; }
+.coverKicker { margin-top: 2px; color: var(--ink); font-size: 11px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.display { position: relative; width: 100%; height: 270px; margin: 22px 0 8px; }
+.sarong { position: absolute; left: 50%; top: 96px; width: 80%; height: 168px; translate: -50% 0; rotate: -2deg; border-radius: 3px; background: var(--sabbe) 0 0 / 150px; box-shadow: 0 16px 26px rgba(18, 56, 61, .22), inset 0 -18px 0 rgba(0, 0, 0, .12); }
+.sarong::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 255, 255, .18), transparent 30%, rgba(0, 0, 0, .14)); }
+.bodo { position: absolute; left: 50%; top: 0; width: 112%; max-width: none; height: auto; translate: -50% 0; transform-origin: 50% 6%; animation: bbBreeze 7s ease-in-out infinite alternate; }
+.kalung { position: absolute; left: 50%; bottom: -30px; width: 70%; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 4px rgba(18, 56, 61, .25)); }
+.coverNames { margin-top: 30px; color: var(--ink); font-family: var(--display); font-size: 54px; font-style: italic; font-weight: 500; line-height: 1; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames i { margin: 0 .18em; color: var(--tang); font-weight: 400; }
+.coverDate { margin-top: 10px; color: var(--ink); font-size: 14px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.guestBox { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding-top: 34px; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.table { border-color: var(--tang); color: var(--tang-d); font-family: var(--serif); font-weight: 500; }
+.openBtn { border-radius: 999px; background: var(--ink); color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 8px 20px rgba(18, 56, 61, .25), inset 0 0 0 2px rgba(246, 223, 166, .28); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: Losari at dusk, a sabbe-bordered photo, names ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 0 50px; background: var(--bg); text-align: center; }
+.heroSea { width: 100%; height: 210px; background: linear-gradient(180deg, transparent 60%, var(--bg)), url("/themes/art/baju-bodo/losari.webp") 50% 50% / cover; }
+.heroPhoto { width: 240px; height: 300px; margin-top: -120px; padding: 9px; border-radius: 120px 120px 6px 6px; background: var(--sabbe) 0 0 / 110px; box-shadow: 0 18px 34px rgba(18, 56, 61, .25); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 112px 112px 2px 2px; object-fit: cover; }
+.heroKalung { width: 180px; height: auto; margin-top: -24px; position: relative; }
+.heroKicker { margin-top: 8px; color: var(--tang-d); font-size: 11px; font-weight: 500; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { padding: 0 20px; color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 500; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames i { margin: 0 .16em; color: var(--tang); }
+.heroDate { color: var(--muted); font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 8px; color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+/* ── Headings: italic Bodoni, divider = sabbe ribbon with a gold rosette ── */
+.eyebrow, .salamKicker, .role { color: var(--tang-d); font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .32em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-style: italic; font-weight: 500; }
+.divider { position: relative; display: grid; place-items: center; width: 150px; height: 30px; }
+.divider::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 6px; translate: 0 -50%; border-radius: 3px; background: var(--sabbe) 0 0 / 60px; }
+.divider img { position: relative; width: 30px; height: auto; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .2)); }
+[data-revealed] .divider img { animation: bbSpin 1.4s var(--m-ease) .25s both; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 54px 30px 56px; }
+.arabic { color: var(--ink); }
+.salamTitle { color: var(--tang); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 500; }
+.salamSub { color: var(--ink); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+
+/* couple: fabric-swatch portraits */
+.couple { gap: 12px; background: var(--paper); }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 210px; height: 250px; padding: 10px; border: 0; border-radius: 6px; background: var(--sabbe) 0 0 / 120px; box-shadow: 0 14px 28px rgba(18, 56, 61, .22); rotate: -1.5deg; transition: rotate .7s var(--m-ease), box-shadow .7s var(--m-ease); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 1.5deg; }
+.person:hover .portraitFrame { rotate: 0deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 3px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 3px; background: radial-gradient(circle at 50% 45%, #fffaf3 0 38%, rgba(255, 250, 243, .9) 39%, rgba(255, 250, 243, .9) 41%, transparent 42%); color: var(--ink); font-family: var(--display); font-size: 84px; font-style: italic; }
+.peek { position: absolute; z-index: 2; left: 50%; bottom: -34px; width: 150px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 6px rgba(18, 56, 61, .25)); }
+.role { margin-top: 18px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 500; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 500; }
+.amp { color: var(--tang); font-family: var(--display); font-style: italic; }
+.amp img { width: 40px; }
+
+/* countdown: deep sea band with sabbe selvedges */
+.countBand { padding: 70px 18px 66px; background: var(--sabbe) top / 120px 12px repeat-x, var(--sabbe) bottom / 120px 12px repeat-x, radial-gradient(70% 60% at 50% 0, #1d5a60, transparent 70%), var(--band-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; font-family: var(--display); font-style: italic; font-weight: 500; }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 0; border-radius: 45px 45px 12px 12px; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 1px rgba(246, 223, 166, .35); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; font-weight: 500; }
+.count small { color: rgba(251, 241, 226, .8); font-style: normal; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+
+/* events: cards with a sabbe band on top */
+.events { gap: 22px; }
+.event { padding: 44px 22px 26px; border: 0; border-radius: 18px; background: var(--sabbe) top / 120px 14px repeat-x, var(--ivory); box-shadow: 0 12px 28px rgba(18, 56, 61, .09); overflow: hidden; }
+.event::before { inset: 22px 8px 8px; border-color: rgba(201, 154, 63, .35); border-radius: 12px; }
+.eventNo { top: 30px; height: 24px; border-radius: 999px; background: var(--tang); color: #fff; font-family: var(--serif); font-weight: 500; }
+.event h3 { margin-top: 16px; color: var(--ink); font-family: var(--display); font-size: 26px; font-style: italic; font-weight: 500; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 500; }
+.eventTime { color: var(--tang-d); font-family: var(--serif); font-weight: 500; }
+.rule { background: var(--gold); }
+.event strong { font-weight: 500; }
+.mapBtn, .submit { background: var(--ink); color: var(--gold-l); font-family: var(--serif); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--tang-d); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 2px; background: linear-gradient(var(--tang), var(--emer)); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { color: var(--tang-d); font-family: var(--serif); font-weight: 500; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; font-style: italic; font-weight: 500; }
+
+/* gallery */
+.tile { border-radius: 10px; }
+.tile:first-child { border-radius: 110px 110px 10px 10px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 18px; box-shadow: 0 12px 30px rgba(18, 56, 61, .08); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-weight: 500; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--tang); border-color: var(--tang); color: #fff; }
+.sentBox img { width: 160px; }
+.wish strong { color: var(--ink); font-family: var(--display); font-style: italic; font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--tang) 14%, transparent); color: var(--tang-d); }
+
+/* gifts: teal cards with a sabbe selvedge */
+.gift { padding-bottom: 26px; background: var(--sabbe) bottom / 120px 10px repeat-x, var(--band-bg); }
+.gift::after { border-color: rgba(246, 223, 166, .06); }
+.giftIcon { border-color: var(--gold); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 19px; font-style: italic; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-weight: 500; letter-spacing: .1em; }
+.copy { font-family: var(--serif); }
+
+/* closing: Losari fades into the sea band */
+.closing { padding: 0 26px 60px; }
+.closingSea { position: relative; z-index: -1; width: calc(100% + 52px); height: 230px; margin: 0 -26px 0; background: linear-gradient(180deg, transparent 45%, var(--band-bg)), url("/themes/art/baju-bodo/losari.webp") 50% 50% / cover; }
+.closingBodo { width: 220px; height: auto; margin-top: -50px; animation: bbBreeze 7s ease-in-out infinite alternate; transform-origin: 50% 0; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 500; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 12px; letter-spacing: .08em; }
+.family { font-family: var(--serif); }
+.closingNames { color: #fff; font-family: var(--display); font-size: 34px; font-style: italic; }
+.music { border-color: var(--gold); background: var(--ink); }
+
+@keyframes bbBreeze { from { rotate: -.8deg; } to { rotate: .8deg; } }
+@keyframes bbSpin { from { opacity: 0; rotate: -120deg; scale: .5; } }
+@media (prefers-reduced-motion: reduce) {
+  .bodo, .closingBodo, [data-revealed] .divider img { animation: none; }
+}

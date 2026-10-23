@@ -1,0 +1,158 @@
+/* Kristal Syari — syari tanpa foto: kristal bening bersegi dilukis cat air abu perak di atas kertas gading, pelangi cahaya lembut yang jatuh miring, cincin kristal segi enam untuk monogram, kilau kecil yang berkedip pelan; tata letak editorial rata kiri, tipografi Italiana dan Jost tipis, sangat bersih. */
+.root, .cover {
+  --bg: #f7f4ee; --paper: #f1ede5; --ivory: #fffdf9; --field: #ffffff; --ink: #2f3742; --muted: #69727e; --line: #dfe2e6;
+  --accent: #3d4a5a; --accent2: #2a3440; --gold: #a9b4bf; --gold-l: #e6ebf0; --gold-d: #6f7c8a;
+  --band-bg: #eceef2; --band-ink: #2f3742;
+  --display: "Italiana", Georgia, serif; --serif: "Jost", system-ui, sans-serif; --script: "Italiana", Georgia, serif;
+  --spectrum: linear-gradient(90deg, #f2a3ad, #f5c59a, #f0e29a, #acdcb9, #9fcbec, #c3abe6);
+  --spill: url(/themes/art/kristal-syari/spill.webp) no-repeat;
+  --hex: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%);
+  --h2: 32px; --card-r: 2px;
+  font-family: var(--serif); font-weight: 300; color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3d4a5a; --t-accent-ink: #ffffff; --t-bg: #f7f4ee; --t-ink: #2f3742; --t-muted: #69727e; --t-line: #dfe2e6; --t-field: #ffffff;
+  --t-radius: 2px; --t-font: "Jost", system-ui, sans-serif; --t-heading-font: "Italiana", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* type */
+.eyebrow, .role { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 400; letter-spacing: .34em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 170px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+.section { padding: 70px 26px; }
+
+/* opening: spectral light falls across */
+.salamBlock { position: relative; padding: 60px 28px 64px; background: var(--spill) 50% 20% / 560px auto, var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 14px; font-weight: 400; letter-spacing: .04em; text-wrap: balance; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.15; text-wrap: balance; }
+
+/* couple: monogram inside a faceted crystal ring */
+.couple { gap: 18px; background: var(--ivory); }
+.portrait { margin-bottom: 14px; }
+.portraitRing { position: absolute; z-index: 2; top: -33px; left: -26px; width: calc(100% + 48px); height: auto; pointer-events: none; }
+.portraitFrame { width: 170px; height: 170px; padding: 0; border: 0; border-radius: 50%; background: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 84px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 400; letter-spacing: .02em; }
+.parents { font-size: 15px; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 44px; margin: 18px 0 14px; }
+.amp img { width: 80px; }
+
+/* countdown: pale silver band with the rainbow spill and glints */
+.countBand { padding: 76px 20px; background: var(--spill) 50% 50% / 640px auto, linear-gradient(180deg, #eef0f4, #e6e9ef); color: var(--ink); }
+.countGlints { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
+.count { gap: 8px; }
+.count > div { height: 82px; border: 0; border-radius: 0; background: linear-gradient(160deg, #ffffff, #dfe4ea); clip-path: var(--hex); box-shadow: none; }
+.count > div::before { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 40%, rgba(159, 203, 236, .35) 50%, rgba(243, 163, 173, .3) 58%, transparent 66%); }
+.count b, .count small { position: relative; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--accent); font-family: var(--display); }
+.countBand .ghostBtn { border-color: var(--accent); border-radius: 2px; color: var(--accent); font-family: var(--serif); font-weight: 400; }
+.countBand .ghostBtn:hover { background: rgba(61, 74, 90, .06); }
+
+/* events: crisp white cards, spectral hairline on top, left-aligned */
+.events { gap: 18px; }
+.event { align-items: flex-start; padding: 30px 24px 26px; border: 0; border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 var(--line), 0 18px 40px rgba(47, 55, 66, .07); }
+.event::before { inset: 0 0 auto; height: 3px; border: 0; border-radius: 0; background: var(--spectrum); opacity: .8; }
+.eventNo { position: static; translate: none; width: 34px; height: 30px; margin-bottom: 4px; border-radius: 0; background: var(--gold-l); color: var(--accent); clip-path: var(--hex); font-family: var(--serif); font-size: 12px; font-weight: 400; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.eventDate { font-style: normal; font-weight: 400; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 40px; background: var(--gold); }
+.event strong { font-weight: 500; }
+.eventAddr { text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 2px; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 400; letter-spacing: .08em; box-shadow: none; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); box-shadow: 0 8px 18px rgba(47, 55, 66, .18); }
+
+/* story */
+.story { background: var(--ivory); }
+.timeline::before { left: 21px; background: linear-gradient(var(--gold), transparent); }
+.node { border: 0; background: none; }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+
+/* gallery (only uploaded photos) */
+.tile, .tile:first-child { border-radius: 2px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 18px 40px rgba(47, 55, 66, .06); position: relative; }
+.form::before { content: ""; position: absolute; inset: 0 0 auto; height: 3px; background: var(--spectrum); opacity: .8; }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-weight: 400; letter-spacing: .2em; }
+.field input, .field textarea, .choices button, .step { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wish { border-radius: 2px; border-color: var(--line); }
+.wish strong { font-family: var(--serif); font-weight: 500; }
+.wish small { border-radius: 2px; background: var(--gold-l); color: var(--accent); }
+.sentBox img { width: 120px; }
+
+/* gifts: frosted glass cards */
+.gifts { background: var(--spill) 50% 30% / 560px auto, var(--paper); }
+.gift { border-radius: 2px; background: rgba(255, 255, 255, .72); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line), 0 18px 40px rgba(47, 55, 66, .08); backdrop-filter: blur(6px); }
+.gift::after { display: none; }
+.giftIcon { border: 0; border-radius: 0; background: var(--accent); clip-path: var(--hex); }
+.gift h3 { color: var(--accent); font-family: var(--serif); font-weight: 400; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); font-size: 24px; }
+.gift small { color: var(--muted); }
+.copy { border-radius: 2px; border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 400; }
+.copy:hover { background: rgba(61, 74, 90, .06); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #fff; }
+
+/* closing */
+.closing { padding: 70px 28px 60px; background: var(--spill) 50% 70% / 600px auto, var(--bg); color: var(--ink); }
+.closingCluster { width: 150px; height: auto; margin-bottom: -4px; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 13px; letter-spacing: .04em; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 34px; }
+.made { color: var(--muted); }
+.music { border: 1px solid var(--gold); border-radius: 0; background: var(--accent); clip-path: var(--hex); }
+
+/* glints */
+.glint { position: absolute; width: 28px; height: 28px; opacity: 0; scale: .2; animation: twinkle 6s ease-in-out infinite; pointer-events: none; }
+.glint img { display: block; width: 100%; height: 100%; }
+
+/* ── Cover: crystals on the upper right, the name block set flush left below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-end; min-height: 100dvh; padding: 40px 28px 44px; overflow: hidden; background: var(--spill) -60px 60px / 620px auto, var(--bg); color: var(--ink); text-align: left; isolation: isolate; }
+.cover::after { content: ""; position: absolute; left: 28px; top: 0; bottom: 0; width: 1px; background: linear-gradient(transparent, var(--gold) 30%, var(--gold) 70%, transparent); opacity: .5; }
+.bism { position: absolute; top: 34px; left: 28px; color: var(--accent); font-family: Amiri, serif; font-size: 20px; line-height: 1.6; }
+.crystals { position: absolute; z-index: -1; top: 56px; right: -34px; width: min(290px, 76%); aspect-ratio: 440 / 475; }
+.crystals > img { display: block; width: 100%; height: 100%; }
+.coverBody { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; max-width: 100%; padding-left: 18px; }
+.kicker { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 400; letter-spacing: .36em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 60px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.coverNames i { color: var(--gold-d); font-family: var(--display); font-size: 34px; font-style: normal; line-height: 1.1; }
+.coverRule { width: 64px; height: 2px; background: var(--spectrum); }
+.coverDate { color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; }
+.guest { align-items: flex-start; margin-top: 10px; }
+.guest small { color: var(--muted); font-style: normal; font-size: 13px; letter-spacing: .04em; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 24px; text-align: left; }
+.table { border-color: var(--gold); border-radius: 2px; color: var(--accent); font-family: var(--serif); font-weight: 400; }
+.openBtn { margin-top: 12px; min-width: 210px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 400; letter-spacing: .18em; text-transform: uppercase; font-size: 12px; }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: faceted ring with initials ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 60px 26px 56px; background: var(--ivory); text-align: center; }
+.heroKicker { color: var(--gold-d); font-size: 11px; font-weight: 400; letter-spacing: .34em; text-transform: uppercase; }
+.heroRing { position: relative; display: grid; place-items: center; width: 250px; height: 244px; margin: 14px 0 6px; }
+.heroRing > img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.heroInitials { position: relative; translate: -2px -12px; color: var(--accent); font-family: var(--display); font-size: 64px; line-height: 1; }
+.heroInitials i { color: var(--gold-d); font-size: 34px; font-style: normal; margin: 0 4px; }
+.heroNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--gold-d); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 14px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 10px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+@keyframes twinkle { 0%, 100% { opacity: 0; scale: .2; rotate: 0deg; } 10% { opacity: .95; scale: 1; } 22% { opacity: 0; scale: .3; rotate: 40deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .glint { display: none; animation: none !important; }
+}

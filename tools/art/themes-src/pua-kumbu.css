@@ -1,0 +1,171 @@
+/* Pua Kumbu — tenun ikat lungsin Dayak Iban merah tanah, hitam dan krem: kain pua tergantung di kayu, motif belah ketupat berkait, buaya dan pakis, serta rumah panjai di tepi Kapuas saat senja. */
+.root, .cover {
+  --bg: #f1e6cf; --paper: #e9dbbd; --ivory: #f8f1e1; --field: #fcf8ee; --ink: #2a1a12; --muted: #6a5244; --line: #d6bf99;
+  --accent: #7a2e1c; --accent2: #5e2214; --gold: #b9853f; --gold-l: #eadbbd; --gold-d: #8a5527;
+  --band-bg: #21150f; --band-ink: #f1e6cf;
+  --display: "Young Serif", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Young Serif", Georgia, serif;
+  --notch: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  --diamond: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  --weave-c: url(/themes/art/pua-kumbu/weave-c.webp);
+  --weave-d: url(/themes/art/pua-kumbu/weave.webp);
+  --band: url(/themes/art/pua-kumbu/band.webp);
+  --h2: 29px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a2e1c; --t-accent-ink: #f8f1e1; --t-bg: #f1e6cf; --t-ink: #2a1a12; --t-muted: #6a5244; --t-line: #d6bf99; --t-field: #fcf8ee;
+  --t-radius: 4px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) var(--weave-c) repeat; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .28em; color: var(--gold-d); }
+.head h2 { color: var(--accent2); }
+.divider { width: 220px; }
+.section { padding: 64px 22px 60px; }
+
+/* woven band edges between sections */
+.couple::before, .gifts::before, .wishes::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 26px; background: var(--band) repeat-x 0 0 / auto 26px;
+}
+.couple, .gifts, .wishes { padding-top: 76px; }
+
+/* opening */
+.salamBlock { padding: 34px 26px 58px; }
+.salamKicker { color: var(--accent); }
+.salamTitle { font-family: var(--display); font-size: 33px; color: var(--accent2); }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 16px; }
+.intro { color: var(--muted); font-size: 18px; }
+
+/* couple: diamond frames on an ikat lozenge */
+.couple { background: var(--paper) var(--weave-c) repeat; gap: 10px; }
+.person { gap: 6px; }
+.portrait { display: grid; place-items: center; width: 236px; height: 262px; margin-bottom: 8px; }
+.portraitArt { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 12px rgba(40, 20, 10, .28)); }
+.portraitFrame { width: 118px; height: 130px; outline: 0; padding: 0; border: 0; border-radius: 0; clip-path: var(--diamond); background: var(--band-bg); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 58px; }
+.role { color: var(--accent); }
+.nick { font-family: var(--display); font-size: 40px; color: var(--accent2); }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--ink); }
+.parents { color: var(--muted); }
+.amp { margin: 18px 0 8px; color: var(--accent); font-family: var(--display); font-size: 44px; }
+.amp img { width: 34px; height: auto; }
+
+.amp img:last-child { scale: 1 1; }
+
+/* countdown: dark woven cloth with ikat bands */
+.countBand { background: var(--band-bg) var(--weave-d) repeat; padding: 82px 18px 84px; }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 26px; background: var(--band) repeat-x 0 0 / auto 26px; z-index: -1; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.countMotif { position: absolute; z-index: -1; top: 50%; left: 50%; width: 300px; height: auto; translate: -50% -50%; opacity: .14; }
+.headLight .eyebrow { color: var(--gold); }
+.headLight h2 { font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 86px; border: 0; border-radius: 0; clip-path: var(--notch); background: var(--gold-l); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .35) 50%, transparent 65%); }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 29px; }
+.count small { color: var(--muted); font-style: normal; font-family: var(--serif); font-weight: 700; font-size: 13px; }
+.ghostBtn { border-radius: 0; clip-path: var(--notch); border: 0; background: rgba(234, 219, 189, .14); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.ghostBtn:hover { background: rgba(234, 219, 189, .24); }
+
+/* events: notched cloth cards with a woven edge */
+.events { gap: 26px; }
+.event { padding: 46px 22px 26px; border: 0; border-radius: 0; clip-path: var(--notch); background: var(--ivory); box-shadow: none; }
+.event::before { inset: 0 0 auto; height: 18px; border: 0; border-radius: 0; background: var(--band) repeat-x 0 0 / auto 18px; }
+.event:hover { translate: 0 -2px; box-shadow: none; }
+.eventNo { top: 26px; width: 40px; height: 40px; position: relative; top: auto; left: auto; translate: none; margin-bottom: 4px; border-radius: 0; clip-path: var(--diamond); background: var(--band-bg); color: var(--gold-l); font-family: var(--display); font-size: 13px; }
+.event h3 { font-family: var(--display); font-size: 23px; color: var(--accent2); }
+.eventDate { font-style: normal; font-weight: 700; color: var(--ink); }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.rule { width: 90px; height: 6px; background: linear-gradient(90deg, var(--band-bg) 0 30%, var(--accent) 30% 70%, var(--band-bg) 70%); }
+.mapBtn { border-radius: 0; clip-path: var(--notch); background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); box-shadow: none; }
+
+/* story */
+.story { background: var(--paper) var(--weave-c) repeat; }
+.timeline::before { left: 21px; width: 3px; background: repeating-linear-gradient(var(--accent) 0 10px, var(--band-bg) 10px 14px, transparent 14px 20px); }
+.node { width: 40px; height: 44px; border: 0; border-radius: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { font-family: var(--serif); font-weight: 700; color: var(--accent); letter-spacing: .14em; }
+.storyBody h3 { font-family: var(--display); color: var(--accent2); }
+.storyImg { border-radius: 0; clip-path: var(--notch); }
+
+/* gallery */
+.mosaic { gap: 6px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: var(--notch); }
+
+/* wishes */
+.wishes { background: var(--bg) var(--weave-c) repeat; }
+.form { border: 0; border-radius: 0; clip-path: var(--notch); background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; color: var(--accent); letter-spacing: .12em; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.step { border-radius: 4px; border-color: var(--accent); }
+.submit { border-radius: 0; clip-path: var(--notch); background: var(--band-bg); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent); box-shadow: none; }
+.sent { color: var(--accent2); }
+.wish { border: 0; border-left: 5px solid var(--accent); border-radius: 0; background: var(--ivory); }
+.wish strong { font-family: var(--display); color: var(--accent2); }
+.wish small { border-radius: 2px; background: var(--paper); color: var(--accent2); }
+
+/* gifts: dark woven cards */
+.gifts { background: var(--paper) var(--weave-c) repeat; }
+.gift { border-radius: 0; clip-path: var(--notch); background: var(--band-bg) var(--weave-d) repeat; padding: 38px 20px 24px; }
+.gift::after { inset: 0 0 auto; right: auto; bottom: auto; width: 100%; height: 16px; border: 0; border-radius: 0; box-shadow: none; z-index: 0; background: var(--band) repeat-x 0 0 / auto 16px; }
+.giftIcon { border-radius: 0; clip-path: var(--diamond); border: 0; background: var(--accent); width: 40px; height: 40px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-family: var(--display); font-size: 19px; line-height: 1.35; color: #fff8ea; }
+.copy { border-radius: 0; clip-path: var(--notch); border: 0; background: rgba(234, 219, 189, .14); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: rgba(234, 219, 189, .26); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: dusk over the longhouse */
+.closing { background: var(--band-bg) var(--weave-d) repeat; padding: 66px 26px 0; gap: 12px; }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 26px; background: var(--band) repeat-x 0 0 / auto 26px; }
+.closingEmblem { width: 110px; height: auto; margin-top: 8px; }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--gold-l); }
+.closingText { color: rgba(241, 230, 207, .86); }
+.closingSalam { color: var(--gold); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.family { color: rgba(241, 230, 207, .78); font-family: var(--serif); font-size: 14px; }
+.closingNames { font-family: var(--display); font-size: 28px; color: var(--gold-l); }
+.made { position: relative; z-index: 1; margin: 18px 0 18px; color: rgba(241, 230, 207, .55); }
+.closingBetang { order: 99; display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: -10px -26px 0; }
+.music { background: var(--accent); border-color: var(--gold-l); border-radius: 0; clip-path: var(--diamond); width: 52px; height: 52px; }
+.sentBox img { width: 80px; }
+
+/* ── Cover: a pua hangs from its rod over the dark room, the longhouse at dusk below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 34px; overflow: hidden; background: var(--band-bg) var(--weave-d) repeat; color: var(--band-ink); text-align: center; isolation: isolate; }
+.coverKain { display: block; width: 100%; height: auto; margin-top: -4px; transform-origin: 50% 0; animation: hang 9s ease-in-out infinite alternate; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45)); }
+.coverText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 12px 24px 0; }
+.kicker { color: var(--gold); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 4px; color: var(--gold-l); font-family: var(--display); font-size: 41px; font-weight: 400; line-height: 1.05; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { margin: 4px 0; color: var(--gold); font-family: var(--serif); font-size: 26px; font-style: italic; }
+.coverDate { margin-top: 10px; padding: 7px 18px; clip-path: var(--notch); background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.coverBetang { display: block; width: 100%; height: auto; margin-top: -26px; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: -22px; padding: 0 24px; position: relative; }
+.guest small { color: rgba(241, 230, 207, .78); font-size: 15px; }
+.guest strong { color: #fff8ea; font-family: var(--display); font-size: 21px; }
+.table { border: 0; background: rgba(234, 219, 189, .16); color: var(--gold-l); font-family: var(--serif); font-weight: 700; border-radius: 0; clip-path: var(--notch); padding: 4px 16px; }
+.openBtn { border-radius: 0; clip-path: var(--notch); background: var(--gold-l); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .1em; }
+.openBtn:hover { background: #fff3da; translate: 0 -1px; }
+
+/* ── Hero: photo in a notched woven frame ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 30px; text-align: center; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 26px; background: var(--band) repeat-x 0 0 / auto 26px; }
+.heroKicker { margin-top: 6px; color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 272px; margin-top: 18px; padding: 10px; clip-path: var(--notch); background: var(--band-bg) var(--weave-d) repeat; }
+.heroFrame::after { content: ""; position: absolute; inset: auto 0 0; height: 18px; background: var(--band) repeat-x 0 0 / auto 18px; }
+.heroPhoto { display: grid; height: 330px; overflow: hidden; clip-path: var(--notch); background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 12px; max-width: 100%; margin-top: 22px; color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.15; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--serif); font-style: italic; }
+.heroDate { margin-top: 8px; color: var(--ink); font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 14px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes hang { from { rotate: -.5deg; } to { rotate: .5deg; } }

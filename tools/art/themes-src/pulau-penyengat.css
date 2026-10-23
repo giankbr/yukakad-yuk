@@ -1,0 +1,162 @@
+/* Pulau Penyengat — Melayu Riau kuning dan hijau: masjid kuning di seberang selat, pompong yang berlayar dari Tanjungpinang, lebah bergantung, selembayung dan awan larat bercat gouache. */
+.root, .cover {
+  --bg: #fbf4e0; --paper: #edf2e4; --ivory: #fffaee; --field: #fffdf6; --ink: #173a2b; --muted: #57695c; --line: #dcd9bd;
+  --accent: #23603f; --accent2: #174732; --gold: #d9a521; --gold-l: #f3d672; --gold-d: #96700f;
+  --band-bg: #23603f; --band-ink: #fbf4e0; --sea: #3c8f87; --sea-d: #245f5c;
+  --display: "Della Respira", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Ephesis", cursive;
+  --gate: polygon(0 16%, 50% 0, 100% 16%, 100% 100%, 0 100%);
+  --eave: url(/themes/art/pulau-penyengat/eave.webp);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #23603f; --t-accent-ink: #fbf4e0; --t-bg: #fbf4e0; --t-ink: #173a2b; --t-muted: #57695c; --t-line: #dcd9bd; --t-field: #fffdf6;
+  --t-radius: 14px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Della Respira", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .26em; color: var(--gold-d); }
+.head h2 { color: var(--accent2); }
+.divider { width: 230px; }
+.section { padding: 62px 22px 58px; }
+.couple::before, .events::before, .gifts::before { content: ""; position: absolute; inset: 0 0 auto; height: 40px; background: var(--eave) repeat-x 0 0 / auto 40px; }
+.couple, .events, .gifts { padding-top: 84px; }
+
+/* opening */
+.salamBlock { padding: 30px 26px 56px; }
+.arabic { color: var(--accent); font-size: 27px; }
+.salamKicker { color: var(--gold-d); }
+.salamTitle { font-family: var(--display); font-size: 31px; color: var(--accent2); }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; font-size: 16px; }
+
+/* couple: photos in a carved Malay gate frame */
+.couple { background: var(--paper); gap: 12px; }
+.portrait { margin: 40px 0 22px; }
+.portrait::before { content: ""; position: absolute; inset: -9px; clip-path: var(--gate); background: linear-gradient(var(--gold-l), var(--gold) 40%, var(--gold-d)); }
+.portraitFrame { z-index: 1; width: 196px; height: 256px; padding: 0; border: 0; border-radius: 0; clip-path: var(--gate); background: var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.portraitCrest { position: absolute; z-index: 2; top: -9px; left: 50%; width: 124px; height: auto; translate: -50% -72%; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+.role { color: var(--gold-d); }
+.nick { font-family: var(--script); font-size: 54px; color: var(--accent2); }
+.fullName { font-family: var(--display); font-size: 19px; color: var(--ink); }
+.parents { color: var(--muted); }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 60px; }
+.amp img { width: 34px; }
+.amp img:last-child { scale: 1 1; }
+
+/* countdown: the strait, a pompong crossing */
+.countBand { background: linear-gradient(180deg, #cfe1d6, var(--sea) 55%, var(--sea-d)); padding: 64px 18px 110px; }
+.headLight .eyebrow { color: #fff7d8; }
+.headLight h2 { color: #fffaee; font-family: var(--display); }
+.count > div { height: 84px; border: 0; border-radius: 16px 16px 6px 6px; background: var(--ivory); box-shadow: 0 8px 18px rgba(20, 60, 50, .2); }
+.count > div::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; background: var(--gold); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-style: normal; font-size: 13px; }
+.ghostBtn { border-color: rgba(255, 250, 238, .8); color: #fffaee; font-family: var(--serif); font-weight: 600; }
+.countBoat { position: absolute; z-index: -1; bottom: 22px; left: 50%; width: 130px; height: auto; margin-left: -65px; animation: cross 30s linear infinite; }
+
+/* events: green-headed cards */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 0 0 24px; overflow: hidden; border: 1.5px solid var(--accent); border-radius: 16px; background: var(--ivory); box-shadow: 0 12px 26px rgba(23, 58, 43, .07); }
+.event::before { inset: 5px; border: 1px solid var(--gold); border-radius: 12px; }
+.eventNo { position: static; translate: none; width: 100%; height: auto; padding: 14px 0 10px; border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 14px; letter-spacing: .2em; }
+.event h3 { margin-top: 18px; padding: 0 18px; font-family: var(--display); font-size: 24px; color: var(--accent2); }
+.event > * { margin-left: 18px; margin-right: 18px; }
+.event > .eventNo { margin: 0; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-weight: 600; }
+.rule { width: 70px; height: 3px; background: var(--gold); border-radius: 3px; }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--gold), var(--accent)); }
+.node { border: 2px solid var(--accent); background: var(--ivory); }
+.node img { width: 26px; }
+.storyBody small { color: var(--gold-d); font-weight: 600; letter-spacing: .12em; }
+.storyBody h3 { font-family: var(--display); color: var(--accent2); }
+
+/* gallery */
+.gallery { background: var(--bg); }
+.tile { border-radius: 10px; }
+.tile:first-child { border-radius: 0; clip-path: var(--gate); }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 1.5px solid var(--accent); border-radius: 16px; box-shadow: none; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); letter-spacing: .12em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.submit { background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent2); }
+.wish { border: 0; border-top: 3px solid var(--gold); border-radius: 4px 4px 14px 14px; }
+.wish strong { font-family: var(--display); color: var(--accent2); }
+.wish small { background: #e3eedf; color: var(--accent2); }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: 16px; background: var(--accent); padding-top: 34px; }
+.gift::after { right: auto; bottom: auto; left: 0; top: 0; width: 100%; height: 24px; border: 0; border-radius: 0; box-shadow: none; background: var(--eave) repeat-x 0 0 / auto 24px; }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-family: var(--display); color: #fffaee; }
+.copy { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: the island scene again */
+.closing { background: var(--bg); color: var(--ink); padding: 0 26px 30px; gap: 10px; }
+.closingScene { display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px -10px; }
+.closingEmblem { width: 140px; height: auto; margin-top: 8px; }
+.thanks { font-family: var(--script); font-size: 56px; color: var(--accent2); }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-weight: 600; font-size: 13px; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 14px; }
+.closingNames { font-family: var(--display); font-size: 27px; color: var(--accent2); }
+.made { color: rgba(23, 58, 43, .55); }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent); border-color: var(--gold); }
+.sentBox img { width: 70px; }
+
+/* ── Cover: carved eave, crest, names over the morning sky; the mosque across the strait; green jetty at the foot ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.coverEave { width: 100%; height: 46px; flex-shrink: 0; background: var(--eave) repeat-x 0 0 / auto 46px; }
+.coverCrest { width: 150px; height: auto; margin: 12px 0 4px; }
+.coverArabic { margin-top: 6px; color: var(--accent); font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; line-height: 1.5; }
+.kicker { margin-top: 2px; color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 10px; max-width: 100%; margin-top: 8px; padding: 0 22px; color: var(--accent2); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; }
+.coverNames span { overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-family: var(--script); font-size: 46px; font-style: normal; }
+.coverDate { margin-top: 6px; color: var(--ink); font-size: 16px; font-style: italic; }
+.coverScene { position: relative; width: 100%; margin-top: -40px; flex-shrink: 0; }
+.coverScene > img:first-child { display: block; width: 100%; height: auto; }
+.boat1, .boat2 { position: absolute; height: auto; animation: bob 4.5s ease-in-out infinite alternate; }
+.boat1 { left: 40%; bottom: 14%; width: 33%; }
+.boat2 { left: 64%; bottom: 27%; width: 19%; scale: -1 1; animation-duration: 5.5s; animation-delay: -2s; }
+.coverFoot { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 12px; width: 100%; margin-top: -2px; padding: 20px 24px 30px; background: var(--accent); color: var(--band-ink); }
+.coverFoot { position: relative; }
+.coverFoot::before { content: ""; position: absolute; top: -22px; left: 0; right: 0; height: 24px; background: var(--eave) repeat-x 0 0 / auto 24px; rotate: 180deg; }
+.guest small { color: rgba(251, 244, 224, .82); font-size: 15px; }
+.guest strong { color: #fffaee; font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: var(--gold); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .08em; box-shadow: 0 8px 18px rgba(0, 0, 0, .18); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -1px; }
+
+/* ── Hero: a carved window photo and a pantun ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 24px 34px; text-align: center; background: var(--bg); }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 40px; background: var(--eave) repeat-x 0 0 / auto 40px; }
+.heroKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroWin { position: relative; width: 264px; margin-top: 18px; padding: 10px; clip-path: var(--gate); background: linear-gradient(var(--gold), var(--gold-d)); }
+.heroPhoto { display: grid; height: 340px; overflow: hidden; clip-path: var(--gate); background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 70px; }
+.heroNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 10px; max-width: 100%; margin-top: 20px; color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.15; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-size: 42px; font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--muted); font-style: italic; }
+.heroNote { max-width: 320px; margin-top: 18px; padding: 16px 20px; border-left: 3px solid var(--gold); border-radius: 0 14px 14px 0; background: var(--paper); color: var(--accent2); font-size: 16px; font-style: italic; line-height: 1.65; text-align: left; white-space: pre-line; }
+
+@keyframes bob { from { translate: 0 0; rotate: -1deg; } to { translate: 0 -4px; rotate: 1deg; } }
+@keyframes cross { from { translate: -300px 0; } to { translate: 300px 0; } }
