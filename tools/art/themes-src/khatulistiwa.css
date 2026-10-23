@@ -1,0 +1,168 @@
+/* Khatulistiwa — adat Melayu Pontianak di garis khatulistiwa: lukisan gouache orisinal tugu obelisk berbola dunia dengan cincin dan panah emas, Sungai Kapuas yang lebar dengan speedboat, rumah panggung Melayu di seberang, dan tenun corak insang merah-emas; sampul berupa langit siang krem dengan nama rata kiri di samping tugu, garis ekuator emas sebagai pembatas, potret bundar bercincin seperti bola dunia, nomor acara bertanda derajat; Della Respira + Gentium Book Plus + Monsieur La Doulaise, krem, teal Kapuas, merah insang, emas. */
+.root, .cover {
+  --bg: #f4ead2; --paper: #efe1c2; --ivory: #fbf5e6; --field: #fffaf0; --ink: #1d2a28; --muted: #55605a; --line: #d9c79c;
+  --accent: #1d5b5e; --accent2: #123c40; --gold: #c99a34; --gold-l: #f0d27a; --gold-d: #8a6218;
+  --band-bg: #123c40; --band-ink: #f6ecd4;
+  --red: #a8322b; --red-d: #6e1d1a; --river: #7c9a8e;
+  --display: "Della Respira", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Monsieur La Doulaise", cursive;
+  --insang: url("/themes/art/khatulistiwa/insang.webp");
+  --scene: url("/themes/art/khatulistiwa/scene.webp");
+  --h2: 31px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d5b5e; --t-accent-ink: #f6ecd4; --t-bg: #f4ead2; --t-ink: #1d2a28; --t-muted: #55605a; --t-line: #d9c79c; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Della Respira", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent2); }
+.divider { width: 250px; }
+
+/* opening */
+.salamBlock { position: relative; padding: 58px 28px 60px; background: var(--ivory); }
+.salamBlock::before { content: ""; position: absolute; inset: 0 0 auto; height: 18px; background: var(--insang) repeat-x 0 0 / auto 72px; }
+.arabic { margin-top: 10px; color: var(--accent2); font-size: 28px; }
+.salamKicker { color: var(--muted); font-family: var(--serif); font-size: 16px; font-style: italic; letter-spacing: .02em; text-transform: none; }
+.salamTitle { color: var(--red); font-family: var(--display); font-size: 34px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; }
+
+/* couple: round portraits wrapped in a tilted gilt ring, like the globe on the tugu */
+.couple { gap: 14px; background: var(--bg); }
+.portrait { margin: 18px 0 22px; }
+.portrait::after { content: ""; position: absolute; z-index: 2; inset: 42% -34px auto; height: 64px; border: 3px solid var(--gold); border-top-color: transparent; border-radius: 50%; rotate: -12deg; pointer-events: none; filter: drop-shadow(0 2px 0 rgba(138, 98, 24, .5)); }
+.portrait::before { content: ""; position: absolute; z-index: 0; inset: 42% -34px auto; height: 64px; border: 3px solid color-mix(in srgb, var(--gold) 55%, transparent); border-bottom-color: transparent; border-radius: 50%; rotate: -12deg; }
+.portraitFrame { z-index: 1; width: 220px; height: 220px; padding: 6px; border: 0; border-radius: 50%; background: var(--accent); box-shadow: inset 0 0 0 2px var(--gold-l); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 88px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 40px; }
+.fullName { color: var(--red); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 70px; }
+.amp img { width: 70px; }
+
+/* countdown: Kapuas teal between two insang selvedges, a speedboat crossing */
+.countBand { padding: 80px 20px 86px; background: linear-gradient(#174b4e, #123c40); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: var(--insang) repeat-x 0 0 / auto 88px; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.countBoat { position: absolute; z-index: -1; bottom: 30px; left: 0; width: 130px; height: auto; opacity: .55; animation: crossing 26s linear infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count { gap: 8px; }
+.count > div { height: 92px; border: 1px solid color-mix(in srgb, var(--gold-l) 55%, transparent); border-radius: 4px; background: rgba(246, 236, 212, .06); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; }
+.count small { color: #e9dcbb; font-style: normal; font-size: 13px; letter-spacing: .06em; }
+.ghostBtn { border-radius: 4px; font-family: var(--serif); font-weight: 700; }
+
+/* events: cream cards with an insang spine and degree-numbered headers */
+.events { gap: 22px; background: var(--paper); }
+.event { align-items: flex-start; padding: 26px 22px 24px 42px; overflow: hidden; border: 0; border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 0 0 0 1px var(--line), 0 12px 24px rgba(60, 40, 10, .1); }
+.event::before { inset: 0 auto 0 0; width: 20px; border: 0; border-radius: 0; background: var(--insang) repeat-y 0 0 / 88px auto; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .08em; }
+.eventNo { display: flex; align-items: baseline; white-space: nowrap; }
+.eventNo::after { content: "°"; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 24px; }
+.eventDate { color: var(--ink); }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); }
+.eventAddr { text-align: left; }
+.mapBtn { border-radius: 4px; background: var(--accent); color: #f6ecd4; font-family: var(--serif); font-weight: 700; }
+
+/* story */
+.story { background: var(--bg); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--gold) 0 6px, transparent 6px 11px); }
+.node { width: 42px; height: 42px; border: 0; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 2px var(--gold); }
+.node img { width: 18px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+.storyImg { border-radius: 4px; }
+
+/* gallery */
+.gallery { background: var(--ivory); }
+.mosaic { gap: 10px; }
+.tile { border-radius: 4px; }
+.tile:first-child { border-radius: 999px 999px 4px 4px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { position: relative; padding-top: 32px; overflow: hidden; border: 0; border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 14px 26px rgba(60, 40, 10, .1); }
+.form::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: var(--insang) repeat-x 0 0 / auto 64px; }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: #f6ecd4; }
+.step { border-radius: 4px; }
+.submit { border-radius: 4px; background: var(--red); color: #fff4dc; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; box-shadow: inset 0 0 0 1.5px var(--gold); }
+.submit:not(:disabled):hover { background: var(--red-d); }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; }
+.wish { border: 0; border-left: 4px solid var(--red); border-radius: 4px; }
+.wish strong { color: var(--accent2); font-family: var(--display); }
+
+/* gifts: insang cloth cases */
+.gifts { background: var(--bg); }
+.gift { border-radius: 4px; background: linear-gradient(rgba(70, 14, 12, .62), rgba(40, 8, 6, .74)), var(--insang) 0 0 / 128px auto; box-shadow: inset 0 0 0 2px var(--gold), 0 14px 26px rgba(60, 20, 10, .22); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold-l); background: var(--accent2); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 19px; }
+.giftNo { color: #fff6e2; font-family: var(--serif); font-weight: 700; }
+.gift small { color: rgba(255, 240, 214, .92); }
+.copy { border-radius: 4px; background: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: teal river night with the tugu and a rumah Melayu */
+.closing { padding: 76px 28px 0; background: linear-gradient(#174b4e, #0f3236); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: var(--insang) repeat-x 0 0 / auto 88px; }
+.closingEmblem { width: 70px; height: auto; margin-top: 10px; filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .35)); }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 40px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { font-family: var(--serif); letter-spacing: .04em; font-size: 14px; }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 50px; }
+.closingScene { order: 99; display: block; width: 300px; height: auto; margin: 16px auto 0; }
+.made { position: relative; z-index: 1; margin-bottom: 26px; }
+.music { border-radius: 50%; background: var(--accent2); }
+.sentBox img { width: 60px; }
+
+/* ── Cover: the noon sky over the Kapuas; names left of the tugu ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 52px 26px 26px; overflow: hidden; background: #f4ead2 var(--scene) 100% 100% / cover no-repeat; color: var(--ink); isolation: isolate; }
+.coverText { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 62%; text-align: left; }
+.kicker { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coord { display: flex; align-items: center; gap: 8px; color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .12em; }
+.coord::before { content: ""; width: 22px; height: 2px; background: var(--gold); }
+.coverNames { display: flex; flex-direction: column; align-items: flex-start; max-width: 100%; margin-top: 8px; color: var(--accent2); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 0 4px; color: var(--red); font-family: var(--script); font-size: 52px; font-style: normal; line-height: .9; }
+.coverDate { margin-top: 10px; color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.coverBottom { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: auto; }
+.guestBox { position: relative; width: 100%; max-width: 330px; padding: 14px 16px 14px 34px; overflow: hidden; border-radius: 4px; background: rgba(251, 245, 230, .96); box-shadow: 0 12px 26px rgba(18, 60, 64, .3); text-align: center; }
+.guestBox::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 18px; background: var(--insang) repeat-y 0 0 / 72px auto; }
+.guest { max-width: none; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 700; border-radius: 4px; }
+.openBtn { border-radius: 4px; background: var(--red); color: #fff4dc; font-family: var(--serif); font-weight: 700; letter-spacing: .12em; box-shadow: inset 0 0 0 1.5px var(--gold-l), 0 10px 22px rgba(110, 29, 26, .4); }
+.openBtn:hover { background: var(--red-d); translate: 0 -1px; }
+
+/* ── Hero: insang selvedge, photo in a gilt-ringed globe, an equator line under the names ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 70px 24px 56px; background: var(--ivory); text-align: center; }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: var(--insang) repeat-x 0 0 / auto 88px; }
+.heroGlobe { position: relative; width: 270px; height: 270px; margin-bottom: 22px; }
+.heroGlobe::before, .heroGlobe::after { content: ""; position: absolute; inset: 40% -40px auto; height: 80px; border: 3px solid var(--gold); border-radius: 50%; rotate: -12deg; pointer-events: none; }
+.heroGlobe::before { z-index: 0; border-bottom-color: transparent; opacity: .55; }
+.heroGlobe::after { z-index: 2; border-top-color: transparent; animation: orbit 9s ease-in-out infinite alternate; }
+.heroPhoto { position: relative; z-index: 1; width: 100%; height: 100%; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 6px var(--accent), 0 0 0 8px var(--gold-l), 0 18px 34px rgba(18, 60, 64, .3); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 76px; }
+.heroKicker { color: var(--red); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 12px; max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--red); font-family: var(--script); font-style: normal; font-size: 48px; }
+.heroDivider { width: 280px; height: auto; margin: 4px 0; }
+.heroDate { color: var(--ink); font-size: 16px; font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 8px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes crossing { from { translate: -140px 0; } to { translate: 520px 0; } }
+@keyframes orbit { from { rotate: -14deg; } to { rotate: -8deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .countBoat, .heroGlobe::after { animation: none; }
+}

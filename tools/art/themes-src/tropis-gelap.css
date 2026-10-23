@@ -1,0 +1,176 @@
+/* Tropis Gelap — lukisan gouache hutan tropis gelap: monstera, daun pisang dan palem hijau tua dengan bunga cenderawasih dan anthurium, disinari satu berkas cahaya hangat dari kanan atas di latar hampir hitam; sampul berupa lukisan penuh dengan nama di tengah "rongga" hutan, hero asimetris dengan foto tegak dan label, potret berbingkai bentuk daun, kartu acara bergaris jingga; Bodoni Moda + Spectral, hitam hijau, hijau tua, jingga strelitzia, merah anthurium. */
+.root, .cover {
+  --bg: #0b100d; --paper: #0f1914; --ivory: #13201a; --field: #0e1713; --ink: #efe7d6; --muted: #b4b6a4; --line: #2c4234;
+  --accent: #f0913a; --accent2: #f6a85a; --gold: #c9a86a; --gold-l: #efdcb0; --gold-d: #d8b678;
+  --band-bg: #070b09; --band-ink: #efe7d6;
+  --red: #d0313a; --leaf: #2f6b47; --leaf-l: #8fbf7a; --on-accent: #1b0f06;
+  --display: "Bodoni Moda", "Playfair Display", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Bodoni Moda", Georgia, serif;
+  --jungle: url("/themes/art/tropis-gelap/jungle.webp");
+  --h2: 34px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #f0913a; --t-accent-ink: #1b0f06; --t-bg: #0b100d; --t-ink: #efe7d6; --t-muted: #b4b6a4; --t-line: #2c4234; --t-field: #0e1713;
+  --t-radius: 2px; --t-font: Spectral, Georgia, serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: left; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+
+/* section rhythm: left-aligned headings with a hanging leaf divider, alternating black / forest */
+.section { align-items: stretch; gap: 24px; padding: 72px 26px; }
+.head { align-items: flex-start; gap: 10px; text-align: left; }
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-size: var(--h2); font-style: italic; font-weight: 400; line-height: 1.1; }
+.divider { width: 190px; margin-left: -6px; }
+
+/* opening */
+.salamBlock { position: relative; align-items: flex-start; padding: 70px 30px 64px; overflow: hidden; background: var(--paper); text-align: left; isolation: isolate; }
+.salamBlock::after { content: ""; position: absolute; z-index: -1; right: -90px; bottom: -60px; width: 260px; height: 260px; background: url("/themes/art/tropis-gelap/corner.webp") no-repeat center / contain; opacity: .5; rotate: 180deg; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 38px; font-style: italic; line-height: 1.12; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.salamBlock .intro { max-width: 320px; color: var(--muted); text-align: left; }
+.intro { color: var(--muted); }
+
+/* couple: leaf-shaped frames, the groom mirrored */
+.couple { gap: 26px; background: var(--bg); }
+.couple .head { margin-bottom: 4px; }
+.person { align-items: flex-start; text-align: left; }
+.personWrap:nth-of-type(odd) .person { align-items: flex-end; text-align: right; }
+.portrait { margin-bottom: 18px; }
+.portraitArt { position: absolute; z-index: 2; bottom: -26px; left: -30px; width: 110px; height: auto; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .6)); }
+.personWrap:nth-of-type(odd) .portraitArt { left: auto; right: -30px; scale: -1 1; }
+.portraitFrame { width: 228px; height: 300px; padding: 0; border: 0; border-radius: 150px 4px 150px 4px; background: var(--ivory); box-shadow: 0 0 0 1px var(--gold), 0 0 0 7px var(--bg), 0 0 0 8px color-mix(in srgb, var(--gold) 45%, transparent), 0 24px 40px rgba(0, 0, 0, .6); }
+.personWrap:nth-of-type(odd) .portraitFrame { border-radius: 4px 150px 4px 150px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: inherit; filter: saturate(.92) contrast(1.04); }
+.person:hover .portraitFrame { box-shadow: 0 0 0 1px var(--gold-l), 0 0 0 7px var(--bg), 0 0 0 8px var(--gold), 0 28px 46px rgba(0, 0, 0, .7); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 110px; }
+.role { margin-top: 4px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-style: italic; line-height: 1.05; }
+.fullName { color: var(--gold-l); font-family: var(--serif); font-size: 17px; letter-spacing: .02em; }
+.parents { color: var(--muted); font-size: 15px; text-wrap: pretty; }
+.amp { align-self: center; gap: 16px; margin: 4px 0; color: var(--accent); font-family: var(--display); font-size: 64px; font-style: italic; }
+.amp img { width: 46px; }
+
+/* countdown: a slice of the painted jungle */
+.countBand { align-items: center; padding: 84px 22px; background: linear-gradient(rgba(5, 9, 7, .74), rgba(5, 9, 7, .82)), var(--jungle) center 40% / cover; }
+.headLight { align-items: center; }
+.headLight .eyebrow { color: var(--accent); }
+.headLight h2 { font-style: italic; }
+.count { gap: 0; grid-template-columns: repeat(4, minmax(0, 76px)); border-block: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); }
+.count > div { height: 96px; border: 0; border-radius: 0; background: none; }
+.count > div + div { border-left: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 36px; font-style: italic; }
+.count small { color: var(--gold-d); font-size: 12px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.ghostBtn { border-radius: 2px; border-color: var(--accent); color: var(--ink); font-family: var(--serif); font-weight: 600; letter-spacing: .08em; }
+.ghostBtn:hover { background: rgba(240, 145, 58, .14); border-color: var(--accent2); }
+
+/* events: dark cards with an orange spine and a big outlined numeral */
+.events { gap: 18px; background: var(--paper); }
+.event { align-items: flex-start; padding: 30px 22px 24px 26px; border: 0; border-left: 3px solid var(--accent); border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 0 18px 34px rgba(0, 0, 0, .35); }
+.event::before { inset: 0 0 auto auto; width: 120px; height: 120px; border: 0; border-radius: 0; background: url("/themes/art/tropis-gelap/leaf.webp") no-repeat right top / 110px auto; opacity: .35; }
+.event:hover { border-color: var(--accent2); box-shadow: 0 22px 40px rgba(0, 0, 0, .5); }
+.eventNo { position: static; translate: none; display: block; width: auto; height: auto; margin-bottom: 2px; background: none; color: transparent; font-family: var(--display); font-size: 46px; font-style: italic; line-height: 1; -webkit-text-stroke: 1px var(--gold); }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 26px; font-style: italic; }
+.eventDate { color: var(--gold-l); font-style: normal; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.rule { width: 46px; height: 1px; background: var(--gold); }
+.event strong { color: var(--ink); }
+.eventAddr { color: var(--muted); text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--on-accent); font-family: var(--serif); font-weight: 600; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--bg); }
+.timeline::before { left: 21px; background: linear-gradient(var(--accent), color-mix(in srgb, var(--leaf) 50%, transparent)); }
+.node { width: 42px; height: 42px; border: 0; border-radius: 50% 4px 50% 4px; background: var(--leaf); box-shadow: 0 0 0 1px var(--gold); }
+.node img { width: 32px; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; font-style: italic; }
+.storyBody p { color: var(--muted); }
+.storyImg { border-radius: 2px; }
+
+/* gallery: a staggered contact sheet */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 132px; gap: 10px; }
+.tile { border-radius: 2px; }
+.tile:first-child { grid-row: span 2; border-radius: 120px 2px 2px 2px; }
+.tile:nth-child(3) { grid-row: span 2; border-radius: 2px 2px 120px 2px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-top: 3px solid var(--accent); border-radius: 2px; background: var(--ivory); box-shadow: 0 18px 34px rgba(0, 0, 0, .35); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.field input, .field textarea { border-color: var(--line); border-radius: 2px; background: var(--field); color: var(--ink); }
+.field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240, 145, 58, .18); }
+.choices button { border-radius: 2px; background: var(--field); color: var(--muted); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--on-accent); }
+.guests { color: var(--ink); }
+.step { border-radius: 2px; border-color: var(--line); background: var(--field); color: var(--ink); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--on-accent); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--ink); font-family: var(--display); }
+.closed { border-color: var(--line); }
+.wish { border: 0; border-left: 2px solid var(--leaf); border-radius: 2px; background: var(--paper); }
+.wish strong { color: var(--ink); font-family: var(--display); font-style: italic; font-size: 17px; }
+.wish small { background: rgba(240, 145, 58, .16); color: var(--accent2); }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { align-items: flex-start; border-radius: 2px; background: linear-gradient(rgba(7, 12, 9, .86), rgba(7, 12, 9, .92)), var(--jungle) center / cover; text-align: left; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--accent); border-radius: 50% 4px 50% 4px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 19px; }
+.giftNo { color: var(--ink); font-family: var(--serif); font-weight: 600; letter-spacing: .05em; }
+.copy { border-color: var(--accent); border-radius: 2px; color: var(--ink); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--accent); color: var(--on-accent); }
+
+/* closing */
+.closing { padding: 90px 28px 64px; background: linear-gradient(rgba(5, 9, 7, .58), rgba(5, 9, 7, .9) 70%), var(--jungle) center 70% / cover; }
+.closingEmblem { width: 190px; height: auto; filter: drop-shadow(0 12px 20px rgba(0, 0, 0, .7)); }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 48px; font-style: italic; }
+.closingText { color: rgba(239, 231, 214, .88); }
+.family { color: var(--gold-l); font-family: var(--serif); font-size: 14px; }
+.closingNames { color: var(--accent2); font-family: var(--display); font-size: 34px; font-style: italic; }
+.music { border-color: var(--accent); border-radius: 50% 4px 50% 4px; background: #0e1713; }
+.sentBox img { width: 140px; }
+
+/* ── cover: the full painting; names sit in the dark clearing ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 40px 30px; overflow: hidden; background: #070b09; color: var(--ink); text-align: center; isolation: isolate; }
+.coverBg { position: absolute; z-index: -2; inset: -2%; background: var(--jungle) center / cover; animation: canopy 30s ease-in-out infinite alternate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(60% 34% at 50% 48%, rgba(5, 8, 6, .72), rgba(5, 8, 6, .2) 70%, transparent); }
+.coverInner { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 320px; }
+.kicker { color: var(--accent2); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .4em; text-transform: uppercase; text-shadow: 0 1px 8px #000; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: #f6efe0; font-family: var(--display); font-size: 56px; font-style: italic; font-weight: 400; line-height: .98; text-shadow: 0 2px 18px rgba(0, 0, 0, .9); }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--accent); font-size: 40px; }
+.coverDate { display: flex; align-items: center; gap: 12px; margin-top: 6px; color: var(--gold-l); font-size: 15px; letter-spacing: .1em; text-shadow: 0 1px 8px #000; }
+.coverDate::before, .coverDate::after { content: ""; width: 26px; height: 1px; background: var(--gold); }
+.guestBox { width: 100%; margin-top: 22px; padding: 14px 16px; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); background: rgba(6, 10, 8, .78); backdrop-filter: blur(3px); }
+.guest small { color: #d7d4c2; }
+.guest strong { color: #f6efe0; font-family: var(--display); font-style: italic; font-size: 21px; }
+.table { border-color: var(--accent); color: var(--accent2); font-family: var(--serif); border-radius: 2px; }
+.openBtn { margin-top: 18px; border-radius: 2px; background: var(--accent); color: var(--on-accent); font-family: var(--serif); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; font-size: 12px; box-shadow: 0 12px 26px rgba(0, 0, 0, .6); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── hero: tall photo at the right, a label hanging over it at the left ── */
+.hero { position: relative; display: grid; grid-template-columns: 1fr; padding: 40px 0 56px; overflow: hidden; background: var(--bg); isolation: isolate; }
+.heroCorner { position: absolute; z-index: 2; top: -18px; left: -24px; width: 190px; height: auto; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .7)); }
+.heroPhotoWrap { justify-self: end; width: 74%; height: 440px; margin-right: 0; overflow: hidden; border-radius: 0 0 0 180px; box-shadow: -14px 18px 40px rgba(0, 0, 0, .55); }
+.heroPhoto { width: 100%; height: 100%; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; background: var(--ivory); color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 90px; }
+.heroLabel { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 84%; margin: -110px 0 0; padding: 26px 24px 26px 26px; background: var(--ivory); border-left: 3px solid var(--accent); box-shadow: 0 20px 40px rgba(0, 0, 0, .55); }
+.heroKicker { color: var(--accent); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 10px; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 400; line-height: 1.05; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--accent); font-size: 30px; }
+.heroDate { color: var(--gold-l); font-size: 15px; letter-spacing: .06em; }
+.heroNote { max-width: 300px; margin-top: 8px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.55; }
+
+@keyframes canopy { from { scale: 1; translate: 0 0; } to { scale: 1.06; translate: -1% -1%; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverBg { animation: none; }
+}

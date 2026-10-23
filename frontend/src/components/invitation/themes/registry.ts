@@ -394,6 +394,30 @@ const loaders: Record<string, () => Promise<DemoModule>> = {
   "pelantikan-pengurus": () => import("./pelantikan-pengurus/demo"),
   "pentas-seni": () => import("./pentas-seni/demo"),
   "isra-miraj": () => import("./isra-miraj/demo"),
+  "batik-betawi": () => import("./batik-betawi/demo"),
+  "kampung-naga": () => import("./kampung-naga/demo"),
+  "dieng-telaga": () => import("./dieng-telaga/demo"),
+  "majapahit-bata": () => import("./majapahit-bata/demo"),
+  "khatulistiwa": () => import("./khatulistiwa/demo"),
+  "muaro-jambi": () => import("./muaro-jambi/demo"),
+  "abu-syari": () => import("./abu-syari/demo"),
+  "mustard-syari": () => import("./mustard-syari/demo"),
+  "tadelakt-maroko": () => import("./tadelakt-maroko/demo"),
+  "jumputan-syari": () => import("./jumputan-syari/demo"),
+  "anyaman-pandan": () => import("./anyaman-pandan/demo"),
+  "mawar-putih": () => import("./mawar-putih/demo"),
+  "tinta-kuas": () => import("./tinta-kuas/demo"),
+  "sketsa-kota": () => import("./sketsa-kota/demo"),
+  "line-art": () => import("./line-art/demo"),
+  "tropis-gelap": () => import("./tropis-gelap/demo"),
+  "toko-roti": () => import("./toko-roti/demo"),
+  "sepeda-tandem": () => import("./sepeda-tandem/demo"),
+  "ultah-pemadam": () => import("./ultah-pemadam/demo"),
+  "ultah-sains": () => import("./ultah-sains/demo"),
+  "ultah-balok": () => import("./ultah-balok/demo"),
+  "kelas-workshop": () => import("./kelas-workshop/demo"),
+  "pesta-bbq": () => import("./pesta-bbq/demo"),
+  "bazar-kuliner": () => import("./bazar-kuliner/demo"),
   "khitan-ceria": () => import("./khitan-ceria/demo"),
   "aqiqah-bintang": () => import("./aqiqah-bintang/demo"),
   "ultah-balon": () => import("./ultah-balon/demo"),
@@ -403,6 +427,9 @@ const loaders: Record<string, () => Promise<DemoModule>> = {
   "wisuda-toga": () => import("./wisuda-toga/demo"),
   "tujuh-bulanan": () => import("./tujuh-bulanan/demo"),
 };
+
+/** Themes that render their own music button (the page then skips the generic <MusicPlayer>). */
+export const themesWithOwnMusic = new Set(["jawa"]);
 
 /** Theme used for invitations whose template is missing or retired. */
 export const FALLBACK_THEME = "linen-putih";

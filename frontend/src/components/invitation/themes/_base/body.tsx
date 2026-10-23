@@ -54,6 +54,8 @@ export type JawiCopy = {
   giftIntro?: string;
   /** Title of the address (send-a-gift) card; defaults to "Kirim Kado". */
   giftAddressTitle?: string;
+  /** Label of the wish textarea; defaults to "Ucapan & Doa". */
+  wishLabel?: string;
   /** Label above the family names in the closing; `null` hides the family line. */
   familyLabel?: string | null;
 };
@@ -296,7 +298,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
               if (!rsvpClosed && rsvp.status !== "sent") void rsvp.submit({ name, attendance, guests, diet: String(form.get("diet") ?? "").trim() || undefined });
             }}>
               <label className={s.field}><span>Nama</span><input name="name" required maxLength={100} defaultValue={plainName(data.guestName)} placeholder="Nama Anda" autoComplete="name" /></label>
-              <label className={s.field}><span>Ucapan &amp; Doa</span><textarea name="message" required maxLength={500} rows={3} placeholder={copy.wishPlaceholder ?? (celebrant ? "Tuliskan doa dan ucapan terbaik…" : "Tuliskan doa restu untuk kedua mempelai…")} /></label>
+              <label className={s.field}><span>{copy.wishLabel ?? "Ucapan & Doa"}</span><textarea name="message" required maxLength={500} rows={3} placeholder={copy.wishPlaceholder ?? (celebrant ? "Tuliskan doa dan ucapan terbaik…" : "Tuliskan doa restu untuk kedua mempelai…")} /></label>
               {rsvpClosed ? <div className={s.closed} role="status"><strong>Konfirmasi kehadiran sudah ditutup</strong><p>{copy.closedNote ?? "Terima kasih atas doa dan perhatiannya. Ucapan masih bisa dikirim lewat form ini."}</p></div> : (
                 <div className={s.choices} role="radiogroup" aria-label="Kehadiran">
                   {(["yes", "maybe", "no"] as Attendance[]).map(value => (
@@ -366,7 +368,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
       </main>
 
       {music.visible && !music.failed && (
-        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} {...music.attrs} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
+        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
           <Lucide icon={ic.music} size={18} color={light} />
         </button>
       )}

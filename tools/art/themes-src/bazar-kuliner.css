@@ -1,0 +1,185 @@
+/* Bazar Kuliner — poster festival jajanan malam: deretan tenda bergaris merah, toska, dan mustard di bawah untaian lampu, kerumunan siluet, sate, martabak manis, dan es cendol dilukis gouache; langit ungu malam, kartu berbentuk tiket berlubang, judul Bowlby One berbayang tebal, Bricolage Grotesque dan Caveat Brush ala papan harga. */
+.root, .cover {
+  --bg: #231a3d; --paper: #2c2250; --ivory: #fdf3e0; --field: #fffaf0; --ink: #2a1d18; --muted: #6b584c; --line: #e5cfa8;
+  --accent: #d9463b; --accent2: #a8302a; --gold: #f0b13a; --gold-l: #ffd36b; --gold-d: #c98a22; --teal: #1f8a86;
+  --night-ink: #fdf3e0; --night-muted: #cbbfdc;
+  --band-bg: #d9463b; --band-ink: #fdf3e0;
+  --display: "Bowlby One", "Arial Black", sans-serif; --serif: "Bricolage Grotesque", system-ui, sans-serif; --script: "Caveat Brush", cursive;
+  --notch: radial-gradient(circle at 0 50%, transparent 11px, #000 11.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 11px, #000 11.5px) right / 51% 100% no-repeat;
+  --notch-s: radial-gradient(circle at 0 50%, transparent 5px, #000 5.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 5px, #000 5.5px) right / 51% 100% no-repeat;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--night-ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #d9463b; --t-accent-ink: #fdf3e0; --t-bg: #fdf3e0; --t-ink: #2a1d18; --t-muted: #6b584c; --t-line: #e5cfa8; --t-field: #fffaf0;
+  --t-radius: 14px; --t-font: "Bricolage Grotesque", system-ui, sans-serif; --t-heading-font: "Bowlby One", sans-serif; --t-heading-weight: 400; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+/* shared: night sections, cream ticket cards */
+.eyebrow, .salamKicker { color: var(--gold-l); font-family: var(--script); font-size: 22px; letter-spacing: .01em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--gold); font-family: var(--display); font-size: var(--h2); line-height: 1.1; text-shadow: 3px 3px 0 var(--accent2); }
+.divider { width: 200px; }
+.section { padding: 60px 22px; }
+.intro { color: var(--night-muted); }
+.main { background: var(--bg); }
+
+/* opening */
+.salamBlock { padding: 54px 26px 56px; background: var(--bg); }
+.salamTitle { color: var(--ivory); font-family: var(--display); font-size: 30px; line-height: 1.15; }
+.salamSub { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+
+/* people = the organisers: round stall badges */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 176px; height: 176px; padding: 8px; border: 3px dashed var(--gold); border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--paper), 0 0 0 9px var(--accent); }
+.personWrap:nth-of-type(odd) .portraitFrame { background: var(--teal); box-shadow: 0 0 0 6px var(--paper), 0 0 0 9px var(--teal); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--ivory); font-family: var(--display); font-size: 74px; }
+.portraitArt { position: absolute; z-index: 2; right: -34px; bottom: -14px; width: 70px; height: auto; rotate: 10deg; }
+.role { padding: 4px 14px; border-radius: 6px; background: var(--gold); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.nick { margin-top: 8px; color: var(--ivory); font-family: var(--display); font-size: 30px; line-height: 1.15; }
+.fullName { color: var(--gold-l); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { color: var(--night-muted); font-size: 15.5px; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 30px; }
+.amp span { font-size: 0; }
+.amp span::after { content: "bersama"; font-size: 30px; }
+.amp img { width: 110px; }
+
+/* countdown: red band, numbers on ticket stubs */
+.countBand { background: var(--accent); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 26px, transparent 26px 52px); }
+.headLight .eyebrow { color: var(--ivory); }
+.headLight h2 { color: var(--ivory); text-shadow: 3px 3px 0 var(--accent2); }
+.count { gap: 8px; }
+.count > div { height: 92px; border: 0; border-radius: 6px; background: var(--ivory); mask: var(--notch-s); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--ink); font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.countLights { position: absolute; z-index: -1; top: -14px; left: 50%; width: 420px; height: auto; translate: -50% 0; animation: twinkle 3.2s ease-in-out infinite alternate; }
+.ghostBtn { border: 2px solid var(--ivory); color: var(--ivory); font-family: var(--serif); font-weight: 800; transition: background 250ms var(--m-ease), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.ghostBtn:hover { background: rgba(253, 243, 224, .14); translate: 0 -2px; }
+
+/* events: admission tickets with notches and a tear-off stub */
+.events { gap: 22px; background: var(--bg); }
+.event { padding: 28px 22px 26px; border: 0; border-radius: 10px; background: var(--ivory); color: var(--ink); mask: var(--notch); transition: rotate 400ms var(--m-spring), translate 400ms var(--m-spring); }
+.event::before { inset: auto 22px 76px 22px; height: 0; border: 0; border-top: 2px dashed var(--line); border-radius: 0; }
+.event:nth-of-type(odd) { rotate: -1.2deg; }
+.event:nth-of-type(even) { rotate: 1.2deg; }
+.event:hover { rotate: 0deg; translate: 0 -3px; box-shadow: none; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 3px 12px; border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .16em; white-space: nowrap; }
+.eventNo::before { content: "TIKET "; }
+.event h3 { margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: 21px; }
+.eventDate { color: var(--accent); font-family: var(--serif); font-style: normal; font-weight: 800; }
+.eventTime { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 4px; border-radius: 2px; background: var(--gold); }
+.event strong { color: var(--ink); font-weight: 800; }
+.eventAddr { color: var(--muted); }
+.mapBtn { margin-top: 26px; border: 2px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--serif); font-weight: 800; box-shadow: 0 4px 0 var(--ink); transition: box-shadow 250ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.mapBtn:hover { background: var(--gold-l); translate: 0 -2px; box-shadow: 0 6px 0 var(--ink); }
+
+/* story = tenant lanes: a chalkboard menu */
+.story { background: #1d2b29; }
+.story .head h2 { color: var(--ivory); text-shadow: 3px 3px 0 var(--teal); }
+.timeline { padding: 22px 16px 22px 10px; border: 8px solid #7a4a28; border-radius: 10px; background: #233632; box-shadow: inset 0 0 40px rgba(0, 0, 0, .35); }
+.timeline::before { top: 34px; bottom: 34px; left: 31px; width: 0; border-left: 2px dashed rgba(253, 243, 224, .35); background: none; }
+.node { width: 44px; height: 44px; border: 2px solid var(--gold); background: #233632; }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-l); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+.storyBody h3 { color: var(--ivory); font-family: var(--script); font-size: 26px; }
+.storyBody p { color: #d8e2dc; font-size: 15.5px; }
+
+/* gallery */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile, .tile:first-child { border: 5px solid var(--ivory); border-radius: 8px; }
+.tile:nth-child(odd) { rotate: -1.5deg; }
+.tile:nth-child(even) { rotate: 1.5deg; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 16px; background: var(--ivory); color: var(--ink); box-shadow: 0 10px 0 var(--accent); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 10px; }
+.guests { color: var(--ink); }
+.choices button { padding: 0 4px; border: 2px solid var(--ink); color: var(--ink); font-size: 14px; font-weight: 700; transition: background 300ms var(--m-ease), color 300ms var(--m-ease), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--gold); color: var(--ink); box-shadow: 0 3px 0 var(--ink); }
+.step { border: 2px solid var(--ink); color: var(--ink); }
+.submit { border: 2px solid var(--ink); background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 4px 0 var(--ink); }
+.submit:not(:disabled):hover { background: var(--accent2); translate: 0 -2px; box-shadow: 0 6px 0 var(--ink); }
+.sent { color: var(--accent); font-family: var(--script); font-size: 26px; font-style: normal; }
+.sentNote { color: var(--muted); }
+.sentBox img { width: 120px; }
+.closed { border-color: var(--line); }
+.empty { color: var(--night-muted); }
+.wish { border: 0; border-left: 6px solid var(--gold); border-radius: 12px; background: var(--ivory); }
+.wish:nth-child(3n + 2) { border-left-color: var(--teal); }
+.wish:nth-child(3n) { border-left-color: var(--accent); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.wish small { background: var(--ink); color: var(--gold-l); font-weight: 700; }
+.wish p { color: var(--muted); }
+
+/* gifts = tenant registration */
+.gifts { background: var(--paper); }
+.gift { border: 0; border-radius: 14px; background: var(--teal); mask: var(--notch); }
+.gift::after { border-color: rgba(253, 243, 224, .1); box-shadow: 0 0 0 14px rgba(253, 243, 224, .06); }
+.giftIcon { border-color: var(--ivory); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.giftNo { color: var(--ivory); font-family: var(--display); font-size: 20px; }
+.gift small { color: rgba(253, 243, 224, .85); }
+.copy { border: 2px solid var(--ivory); color: var(--ivory); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+/* closing */
+.closing { padding: 40px 24px 60px; background: var(--bg); color: var(--ivory); }
+.closingLights { width: calc(100% + 48px); max-width: none; height: auto; margin: 0 -24px 6px; animation: twinkle 3s ease-in-out infinite alternate; }
+.closingEmblem { width: 200px; height: auto; margin-bottom: 6px; }
+.thanks { color: var(--gold); font-family: var(--display); font-size: 36px; text-shadow: 3px 3px 0 var(--accent2); }
+.closingText { color: var(--night-muted); }
+.closingNames { color: var(--ivory); font-family: var(--script); font-size: 30px; line-height: 1.2; }
+.made { color: rgba(253, 243, 224, .5); }
+.made:hover { color: var(--gold-l); }
+.music { border: 2px solid var(--gold); background: var(--accent); }
+
+/* ── Cover: a festival poster — title, date chips, the lit stalls and crowd, then the guest's ticket ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 24px 0 22px; overflow: hidden; background: radial-gradient(120% 50% at 50% 0%, #3a2c66, var(--bg) 70%); color: var(--ivory); text-align: center; isolation: isolate; }
+.kicker { padding: 5px 14px; border-radius: 4px; background: var(--ivory); color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; rotate: -2deg; }
+.coverTitle { max-width: 360px; margin: 12px 18px 0; color: var(--gold); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.02; text-shadow: 3px 3px 0 var(--accent), 6px 6px 0 #14101f; overflow-wrap: anywhere; text-wrap: balance; }
+.coverChips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 18px 0; }
+.coverChips span { padding: 6px 14px; border: 2px solid var(--ivory); border-radius: 999px; color: var(--ivory); font-size: 13.5px; font-weight: 800; letter-spacing: .04em; }
+.coverChips span:first-child { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+.coverHost { margin-top: 10px; padding: 0 22px; color: var(--night-muted); font-family: var(--script); font-size: 20px; line-height: 1.2; }
+.stallsWrap { position: relative; width: 100%; margin-top: 4px; aspect-ratio: 780 / 676; flex-shrink: 0; }
+.stalls { position: absolute; inset: 0; width: 100%; height: 100%; }
+.coverFoot { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: -34px; padding: 0 20px; }
+.ticket { display: grid; grid-template-columns: 1fr auto; width: 100%; max-width: 350px; border-radius: 10px; background: var(--ivory); color: var(--ink); text-align: left; mask: var(--notch); box-shadow: 0 10px 24px rgba(0, 0, 0, .35); }
+.coverFoot .guest { align-items: flex-start; max-width: none; padding: 14px 10px 14px 24px; }
+.guest small { color: var(--accent); font-size: 11px; font-style: normal; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 800; text-wrap: pretty; }
+.guestVia { color: var(--muted); font-size: 13px; }
+.table { border: 0; background: var(--ink); color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.stub { display: grid; place-items: center; width: 82px; padding: 0 10px; border-left: 2px dashed var(--line); }
+.stub img { width: 34px; height: auto; rotate: -8deg; }
+.openBtn { border: 2px solid var(--ink); background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 5px 0 var(--ink); transition: box-shadow 250ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.openBtn:hover { translate: 0 -2px; box-shadow: 0 7px 0 var(--ink); }
+
+/* ── Hero: a market photo pinned under the light garland, the snacks laid out on a cream tablecloth ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 10px 22px 50px; overflow: hidden; background: var(--bg); text-align: center; }
+.heroLights { width: 420px; max-width: none; height: auto; margin-bottom: -8px; animation: twinkle 3.4s ease-in-out infinite alternate; }
+.heroPhoto { position: relative; display: grid; width: 300px; height: 330px; overflow: hidden; border: 7px solid var(--ivory); border-radius: 8px; background: var(--paper); box-shadow: 0 16px 34px rgba(0, 0, 0, .4); rotate: 1.5deg; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold); font-family: var(--display); font-size: 80px; }
+.heroFood { display: flex; align-items: flex-end; justify-content: center; gap: 4px; margin-top: -40px; position: relative; z-index: 2; }
+.heroFood img:nth-child(1) { width: 130px; height: auto; rotate: -6deg; }
+.heroFood img:nth-child(2) { width: 54px; height: auto; }
+.heroFood img:nth-child(3) { width: 120px; height: auto; rotate: 5deg; }
+.heroKicker { margin-top: 14px; color: var(--gold-l); font-family: var(--script); font-size: 22px; }
+.heroTitle { max-width: 100%; color: var(--gold); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.08; text-shadow: 3px 3px 0 var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroDate { margin-top: 12px; padding: 5px 16px; border-radius: 999px; background: var(--ivory); color: var(--accent); font-size: 14px; font-weight: 800; letter-spacing: .04em; }
+.heroNote { max-width: 330px; margin-top: 18px; color: var(--night-muted); font-size: 16.5px; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes twinkle { from { opacity: .78; filter: brightness(.95); } to { opacity: 1; filter: brightness(1.15); } }
+@media (prefers-reduced-motion: reduce) {
+  .countLights, .closingLights, .heroLights { animation: none; }
+  .event, .ghostBtn, .mapBtn, .openBtn { transition: none; }
+}

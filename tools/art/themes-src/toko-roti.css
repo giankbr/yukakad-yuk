@@ -1,0 +1,167 @@
+/* Toko Roti — toko roti klasik yang hangat: tenda bergaris merah-krem berlekuk, papan nama cokelat, etalase kayu hijau pistachio berisi kue bertingkat, makaron, roti, croissant dan label harga kapur, kotak kue berpita tali merah-putih; kartu seperti label kraft, digit hitung mundur di atas kue kering. */
+.root, .cover {
+  --bg: #fbf1e2; --paper: #f4e4cb; --ivory: #fffaf2; --field: #fffdf8; --ink: #3b2318; --muted: #75594a; --line: #ecd5b8;
+  --accent: #c63d4b; --accent2: #962a37; --gold: #f2c75c; --gold-l: #fde3a0; --gold-d: #a8761c;
+  --band-bg: #c63d4b; --band-ink: #fffaf2;
+  --cocoa: #5a3826; --cocoa-d: #3b2318; --pista: #9cc5a1; --pista-d: #3f7d6b; --kraft: #d9b88a; --crust: #c98a4a;
+  --display: "Cherry Swash", Georgia, serif; --serif: "Karla", "Helvetica Neue", sans-serif; --script: "Gochi Hand", cursive;
+  --twine: repeating-linear-gradient(45deg, #c63d4b 0 5px, #fffaf2 5px 10px);
+  --gingham: repeating-linear-gradient(0deg, rgba(198, 61, 75, .42) 0 13px, transparent 13px 26px), repeating-linear-gradient(90deg, rgba(198, 61, 75, .42) 0 13px, transparent 13px 26px), #fffaf2;
+  --wall: repeating-linear-gradient(90deg, rgba(255, 255, 255, .08) 0 2px, transparent 2px 46px), linear-gradient(#a6cdaa, #93bf98);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c63d4b; --t-accent-ink: #fffaf2; --t-bg: #fbf1e2; --t-ink: #3b2318; --t-muted: #75594a; --t-line: #ecd5b8; --t-field: #fffdf8;
+  --t-radius: 14px; --t-font: "Karla", sans-serif; --t-heading-font: "Cherry Swash", serif; --t-heading-weight: 700; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--pista-d); font-family: var(--script); font-size: 22px; letter-spacing: .01em; text-transform: none; }
+.head h2 { color: var(--accent); font-weight: 700; }
+.divider { width: 220px; }
+.section { padding: 62px 22px; }
+.intro { color: var(--muted); }
+.twined { border: 4px solid transparent; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--twine) border-box; }
+
+/* opening */
+.salamBlock { padding: 44px 26px 54px; }
+.salamTitle { color: var(--cocoa); font-family: var(--display); font-weight: 700; font-size: 34px; }
+.salamSub { color: var(--accent); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+
+/* people: photos in twine-wrapped cake-box frames */
+.couple { background: var(--wall); }
+.couple .head h2 { color: var(--cocoa-d); }
+.couple .eyebrow { color: var(--cocoa); }
+.portrait { margin: 10px 0 22px; }
+.portraitFrame { width: 214px; height: 260px; padding: 0; border: 6px solid transparent; border-radius: 22px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--twine) border-box; box-shadow: 0 10px 0 rgba(59, 35, 24, .12); rotate: -1.5deg; transition: rotate .3s var(--m-spring), box-shadow .3s; }
+.person:nth-child(2) .portraitFrame, .personWrap:nth-child(3) .portraitFrame { rotate: 1.5deg; }
+.person:hover .portraitFrame { rotate: 0deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 16px; }
+.portraitTag { position: absolute; z-index: 2; right: -34px; bottom: -14px; width: 92px; height: auto; rotate: -12deg; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 16px; background: var(--gingham); color: var(--accent); font-family: var(--display); font-size: 88px; }
+.role { color: var(--cocoa); }
+.nick { color: var(--accent); font-family: var(--display); font-weight: 700; font-size: 46px; }
+.fullName { color: var(--cocoa-d); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: #4d3528; }
+.amp { color: var(--cocoa); font-family: var(--display); font-weight: 700; font-size: 50px; }
+.amp img { width: 64px; }
+
+/* countdown: cherry band with round cookies */
+.countBand { padding: 64px 14px 60px; background: radial-gradient(circle at 12px 12px, rgba(255, 255, 255, .14) 2px, transparent 3px) 0 0 / 24px 24px, var(--accent); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { grid-template-columns: repeat(4, minmax(0, 80px)); gap: 8px; }
+.count > div { width: 80px; height: 80px; border: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #f0c48c, #c98a4a 70%, #a8692f); box-shadow: inset 0 -4px 0 rgba(90, 50, 20, .35), 0 5px 0 var(--accent2); }
+.count > div::after { display: none; }
+.count b { color: var(--cocoa-d); font-family: var(--display); font-weight: 700; font-size: 28px; }
+.count small { color: var(--cocoa-d); font-style: normal; font-weight: 700; font-size: 12px; }
+.ghostBtn { border: 0; background: var(--ivory); color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: 0; box-shadow: 0 4px 0 var(--accent2); transition: background .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.ghostBtn:hover { background: #fff; translate: 0 -2px; }
+
+/* events: pastry-box cards with a striped lid and a price-tag number */
+.events { gap: 30px; }
+.event { padding: 50px 22px 26px; border: 0; border-radius: 16px; overflow: hidden; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 8px 0 #ead2b2; transition: translate .25s var(--m-spring), box-shadow .25s; }
+.event::before { inset: 0 0 auto; height: 22px; border: 0; border-radius: 0; background: repeating-linear-gradient(90deg, #f1a7b3 0 16px, var(--ivory) 16px 32px); box-shadow: inset 0 -3px 0 rgba(198, 61, 75, .25); }
+.event:hover { translate: 0 -3px; }
+.eventNo { top: 32px; width: 58px; height: 28px; border-radius: 0 6px 6px 0; clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%); background: var(--cocoa); color: var(--gold-l); font-family: var(--script); font-size: 17px; letter-spacing: 0; padding-left: 8px; }
+.event h3 { margin-top: 14px; color: var(--accent); font-weight: 700; font-size: 26px; }
+.eventDate { color: var(--cocoa-d); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--pista-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 90px; height: 5px; border-radius: 3px; background: var(--twine); }
+.mapBtn { background: var(--pista-d); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: 0; box-shadow: 0 4px 0 #2b5a4c; transition: background .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.mapBtn:hover { background: #4a8e7a; translate: 0 -2px; }
+
+/* story: croissant nodes on a twine line */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 4px; border-radius: 2px; background: var(--twine); }
+.node { width: 48px; height: 48px; border: 3px solid var(--ivory); border-radius: 50%; background: var(--gold-l); box-shadow: 0 3px 0 #e0c48a; }
+.node img { width: 34px; }
+.storyBody { padding: 16px 18px; border-radius: 16px; background: var(--ivory); box-shadow: 0 5px 0 #ead2b2; }
+.storyBody small { color: var(--accent); font-family: var(--script); font-size: 18px; letter-spacing: 0; }
+.storyBody h3 { color: var(--cocoa-d); font-weight: 700; font-size: 22px; }
+
+/* gallery: snapshots taped to the counter */
+.mosaic { gap: 12px; }
+.tile, .tile:first-child { border-radius: 14px; border: 5px solid var(--ivory); box-shadow: 0 6px 0 #ead2b2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 18px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 8px 0 #ead2b2; }
+.field > span, .diet, .guestsLabel { color: var(--cocoa); font-family: var(--serif); font-weight: 800; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 12px; border-width: 2px; }
+.choices button { border-width: 2px; font-weight: 700; transition: background .2s, color .2s, border-color .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--accent2); }
+.step { border-width: 2px; border-color: var(--accent); }
+.submit { background: var(--accent); color: #fff; font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: .02em; box-shadow: 0 5px 0 var(--accent2); transition: background .2s, box-shadow .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.submit:not(:disabled):hover { background: #d4515e; translate: 0 -2px; }
+.sent { color: var(--cocoa-d); font-family: var(--script); font-style: normal; font-size: 24px; }
+.sentBox img { width: 150px; animation: wobble 2.4s var(--m-spring) infinite; }
+.wish { border: 0; border-radius: 16px; box-shadow: 0 0 0 1px var(--line), 0 4px 0 #ead2b2; }
+.wish strong { color: var(--accent); font-family: var(--display); font-weight: 700; }
+.wish small { background: color-mix(in srgb, var(--pista) 40%, transparent); color: var(--pista-d); font-weight: 700; }
+
+/* gifts: kraft labels tied with twine */
+.gifts { background: var(--paper); }
+.gift { padding: 30px 22px 24px; border-radius: 14px; background: linear-gradient(rgba(255, 255, 255, .08), rgba(0, 0, 0, .04)), var(--kraft); color: var(--cocoa-d); box-shadow: 0 6px 0 #b8935f; }
+.gift::after { inset: 0 auto 0 50%; right: auto; bottom: auto; width: 6px; height: auto; margin-left: -3px; border: 0; border-radius: 0; box-shadow: none; background: var(--twine); opacity: .55; }
+.giftTop, .giftNo, .gift small, .copy, .qris { position: relative; z-index: 1; }
+.giftTop { padding: 4px 14px; border-radius: 999px; background: var(--kraft); }
+.giftIcon { border: 0; background: var(--accent); }
+.gift h3 { color: var(--cocoa-d); font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: 0; }
+.giftNo { padding: 0 8px; background: var(--kraft); color: var(--cocoa-d); }
+.gift small { padding: 0 8px; background: var(--kraft); color: #5a3826; }
+.copy { border: 0; background: var(--cocoa); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: 0; }
+.copy:hover { background: var(--cocoa-d); }
+.copyOn, .copyOn:hover { background: var(--ivory); color: var(--accent); }
+
+/* closing: back at the shop front under the awning */
+.closing { padding: 110px 26px 56px; background: var(--wall); color: var(--ink); }
+.closingAwning { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; height: auto; }
+.closingEmblem { width: 170px; height: auto; animation: wobble 4s var(--m-spring) infinite; transform-origin: 50% 100%; }
+.thanks { color: var(--accent); font-family: var(--display); font-weight: 700; font-size: 46px; text-shadow: 0 3px 0 rgba(255, 250, 242, .7); }
+.closingText { color: var(--cocoa-d); font-weight: 500; }
+.family { color: var(--cocoa); font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+.closingNames { padding: 6px 22px 10px; border-radius: 14px; background: var(--cocoa); color: var(--gold-l); font-family: var(--display); font-weight: 700; font-size: 32px; box-shadow: inset 0 0 0 3px var(--cocoa), inset 0 0 0 5px rgba(253, 227, 160, .6); }
+.made { color: rgba(59, 35, 24, .62); }
+.made:hover { color: var(--accent); }
+.music { border: 3px solid #fff; background: var(--accent); }
+
+/* ── Cover: the bakery front ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--wall); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 30%; background: repeating-linear-gradient(90deg, #fffaf2 0 22px, #f1e2c8 22px 24px), #fffaf2; box-shadow: 0 -8px 0 var(--cocoa); }
+.awning { position: relative; z-index: 3; display: block; width: 100%; height: auto; transform-origin: 50% 0; animation: flutter 5s ease-in-out infinite; }
+.sign { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 2px; width: min(330px, 86vw); margin-top: 6px; padding: 14px 18px 16px; border-radius: 18px; background: linear-gradient(rgba(255, 255, 255, .05), rgba(0, 0, 0, .12)), var(--cocoa); color: var(--ivory); box-shadow: inset 0 0 0 4px var(--cocoa), inset 0 0 0 6px rgba(253, 227, 160, .65), 0 8px 0 rgba(59, 35, 24, .25); }
+.kicker { color: var(--gold-l); font-family: var(--script); font-size: 19px; }
+.coverNames { max-width: 100%; color: #fffaf2; font-family: var(--display); font-size: 42px; font-weight: 700; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames i { color: var(--gold); font-style: normal; }
+.coverDate { margin-top: 4px; color: var(--gold-l); font-weight: 700; font-size: 15px; letter-spacing: .04em; }
+.window { position: relative; z-index: 1; width: 88%; height: auto; margin-top: 12px; filter: drop-shadow(0 8px 0 rgba(59, 35, 24, .2)); }
+.coverFoot { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; padding: 6px 16px 22px; }
+.parcel { display: flex; align-items: flex-end; justify-content: center; width: 100%; }
+.boxArt { flex: none; width: 138px; height: auto; margin-right: -18px; animation: hop 3.6s var(--m-spring) infinite; transform-origin: 50% 100%; }
+.guest { position: relative; flex: 1; max-width: 230px; padding: 12px 14px 12px 30px; border-radius: 6px 12px 12px 6px; background: radial-gradient(circle at 15px 50%, var(--bg) 5px, transparent 6px), linear-gradient(rgba(255, 255, 255, .12), rgba(0, 0, 0, .04)), var(--kraft); color: var(--cocoa-d); clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%); rotate: -3deg; text-align: left; align-items: flex-start; }
+.guest small { color: #5a3826; font-size: 13px; font-style: normal; }
+.guest strong { color: var(--cocoa-d); font-family: var(--display); font-size: 19px; font-weight: 700; text-wrap: pretty; }
+.table { border: 0; background: var(--accent); color: #fff; font-family: var(--script); font-size: 15px; letter-spacing: 0; }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: .02em; box-shadow: 0 0 0 3px var(--ivory), 0 6px 0 3px var(--accent2); }
+.openBtn:hover { background: #d4515e; translate: 0 -2px; }
+.openBtn:active { translate: 0 3px; }
+
+/* ── Hero: a gingham table, the cake, the names ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 22px 46px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.heroCloth { width: calc(100% + 44px); height: 120px; margin: 0 -22px -86px; background: var(--gingham); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.heroPhoto { position: relative; width: 250px; height: 300px; border: 7px solid transparent; border-radius: 26px; overflow: hidden; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--twine) border-box; box-shadow: 0 10px 0 rgba(59, 35, 24, .12); rotate: 2deg; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 19px; object-fit: cover; }
+.heroCake { position: absolute; z-index: 2; left: calc(50% - 190px); top: 250px; width: 130px; height: auto; animation: wobble 4s var(--m-spring) infinite; transform-origin: 50% 100%; }
+.heroKicker { margin-top: 18px; color: var(--pista-d); font-family: var(--script); font-size: 22px; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 700; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--cocoa); font-style: normal; }
+.heroDate { padding: 6px 18px 6px 28px; background: radial-gradient(circle at 12px 50%, var(--bg) 4px, transparent 5px), var(--cocoa); color: var(--gold-l); font-weight: 700; clip-path: polygon(12px 0, 100% 0, 100% 100%, 12px 100%, 0 50%); }
+.heroNote { max-width: 320px; margin-top: 6px; color: var(--muted); line-height: 1.6; text-wrap: pretty; }
+
+@keyframes flutter { 0%, 100% { scale: 1 1; } 50% { scale: 1 1.035; } }
+@keyframes hop { 0%, 80%, 100% { translate: 0 0; rotate: 0deg; } 86% { translate: 0 -8px; rotate: -3deg; } 92% { translate: 0 0; rotate: 2deg; } }
+@keyframes wobble { 0%, 100% { rotate: 0deg; } 25% { rotate: -2.5deg; } 75% { rotate: 2.5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .awning, .boxArt, .heroCake, .closingEmblem, .sentBox img { animation: none; }
+}

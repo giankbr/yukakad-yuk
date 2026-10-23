@@ -1,0 +1,166 @@
+/* Mawar Putih — syar'i dan anggun: bulan sabit rangkaian mawar putih bergaya cat air-gouache dengan dedaunan hijau tua di atas kertas gading; tata letak asimetris rata kiri, sudut-sudut berbentuk daun (lancip di dua sisi), pita hijau tua; Italiana, Gentium Book Plus, Monsieur La Doulaise, Amiri. */
+.root, .cover {
+  --bg: #f8f4ea; --paper: #f1ebdd; --ivory: #fffdf7; --field: #fffdf8; --ink: #1f2e25; --muted: #56645a; --line: #dcd5c2;
+  --accent: #1f3d2c; --accent2: #2f5a40; --gold: #b49a62; --gold-l: #ece3c9; --gold-d: #7d6a3f;
+  --band-bg: #17301f; --band-ink: #f4efe2;
+  --display: "Italiana", "Cormorant", serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Monsieur La Doulaise", cursive;
+  --leaf: 0 46px 0 46px; --leaf-s: 0 22px 0 22px;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f3d2c; --t-accent-ink: #f4efe2; --t-bg: #f8f4ea; --t-ink: #1f2e25; --t-muted: #56645a; --t-line: #dcd5c2; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Italiana", serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+  background-image: radial-gradient(circle at 20% 0%, rgba(255, 253, 247, .9), transparent 60%);
+}
+
+/* shared */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .14em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-size: var(--h2); letter-spacing: .06em; text-transform: uppercase; }
+.divider { width: 180px; }
+.section { padding: 64px 26px; }
+.head { gap: 6px; }
+
+/* opening */
+.salamBlock { padding: 56px 30px 58px; gap: 12px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { font-size: 14px; letter-spacing: .02em; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.2; }
+.salamSub { color: var(--gold-d); font-family: var(--script); font-size: 38px; letter-spacing: 0; line-height: 1; }
+.intro { color: var(--muted); max-width: 320px; }
+
+/* couple: leaf-cut portraits, a rose resting on the top corner */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 214px; height: 270px; padding: 0; border: 0; border-radius: 0 84px 0 84px; background: var(--accent); box-shadow: 0 0 0 1px var(--gold), 0 0 0 7px var(--paper), 0 0 0 8px color-mix(in srgb, var(--gold) 60%, transparent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0 84px 0 84px; }
+.personWrap:nth-of-type(odd) .portraitFrame, .personWrap:nth-of-type(odd) .portraitFrame > img, .personWrap:nth-of-type(odd) .portraitFrame > div { border-radius: 84px 0 84px 0; }
+.portraitArt { position: absolute; z-index: 2; top: -26px; left: -30px; width: 96px; height: auto; pointer-events: none; }
+.personWrap:nth-of-type(odd) .portraitArt { left: auto; right: -30px; }
+.monogram { color: var(--gold-l); font-family: var(--script); font-size: 120px; }
+.role { margin-top: 4px; font-size: 14px; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 64px; line-height: 1.05; }
+.fullName { color: var(--ink); font-family: var(--display); font-size: 19px; letter-spacing: .06em; }
+.parents { color: var(--muted); font-size: 15.5px; font-style: italic; }
+.amp { gap: 16px; margin: 14px 0; color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 70px; }
+
+/* countdown: deep green band, foliage reaching in from two corners */
+.countBand { background: var(--band-bg); gap: 26px; padding-bottom: 70px; }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 14px; border: 1px solid rgba(236, 227, 201, .2); border-radius: var(--leaf); pointer-events: none; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; }
+.count { gap: 10px; }
+.count > div { height: 90px; border: 1px solid rgba(236, 227, 201, .45); border-radius: var(--leaf-s); background: rgba(255, 253, 247, .05); }
+.count b { color: var(--band-ink); font-family: var(--display); font-size: 34px; }
+.count small { color: var(--gold-l); font-size: 13px; }
+.countLeaf { position: absolute; z-index: -1; width: 170px; height: auto; opacity: .95; transform-origin: 0% 100%; animation: leafSway 9s ease-in-out infinite alternate; }
+.countLeafL { left: -18px; bottom: -14px; }
+.countLeafR { right: -18px; top: -14px; scale: -1 -1; transform-origin: 50% 50%; animation-delay: -4s; }
+.ghostBtn { border-color: rgba(236, 227, 201, .6); color: var(--band-ink); font-family: var(--serif); font-style: italic; }
+
+/* events: ivory cards with leaf corners and a green title strip */
+.events { gap: 26px; background: var(--bg); }
+.event { gap: 0; padding: 0 0 26px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--leaf); background: var(--ivory); }
+.event::before { display: none; }
+.event:hover { border-color: var(--gold); }
+.event h3 { width: 100%; padding: 22px 20px 18px; background: var(--accent); color: var(--band-ink); font-family: var(--display); font-size: 23px; letter-spacing: .08em; text-transform: uppercase; }
+.eventNo { position: static; translate: none; order: -1; width: 100%; height: auto; padding: 16px 0 0; border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .12em; }
+.eventDate { margin-top: 16px; color: var(--ink); font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 40px; background: var(--gold); }
+.event strong, .eventAddr { padding: 0 22px; }
+.event > :not(.eventNo, h3, .eventDate) { margin-top: 8px; }
+.event strong { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.mapBtn { border-radius: var(--leaf-s); background: var(--accent); color: var(--band-ink); font-family: var(--serif); font-style: italic; letter-spacing: .02em; }
+
+/* story: rose heads on a thin gold stem */
+.story { background: var(--paper); }
+.timeline { gap: 30px; }
+.timeline::before { left: 23px; background: linear-gradient(var(--accent2), color-mix(in srgb, var(--accent2) 15%, transparent)); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .06em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; letter-spacing: .05em; }
+
+/* gallery */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: var(--leaf-s); }
+.tile:first-child { border-radius: 0 90px 0 90px; }
+.tile:nth-child(4n + 4) { border-radius: 90px 0 90px 0; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border-radius: var(--leaf); padding: 24px 20px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .06em; text-transform: none; }
+.field input, .field textarea { border-radius: 2px 14px 2px 14px; }
+.choices button { border-radius: var(--leaf-s); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--band-ink); border-color: var(--accent); }
+.submit { border-radius: var(--leaf-s); background: var(--accent); color: var(--band-ink); font-family: var(--display); font-size: 16px; letter-spacing: .14em; text-transform: uppercase; }
+.sent { color: var(--accent); }
+.sentBox img { width: 110px; }
+.wish { border-radius: 0 18px 0 18px; background: var(--ivory); border-left: 3px solid var(--accent2); }
+.wish strong { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.wish small { background: color-mix(in srgb, var(--accent2) 12%, transparent); color: var(--accent); font-style: italic; }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: var(--leaf); background: var(--band-bg); padding: 26px 22px; }
+.gift::after { border-color: rgba(236, 227, 201, .06); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; letter-spacing: .1em; text-transform: uppercase; }
+.giftNo { color: var(--band-ink); font-family: var(--serif); letter-spacing: .08em; }
+.copy { border-radius: var(--leaf-s); border-color: rgba(236, 227, 201, .6); color: var(--gold-l); font-family: var(--serif); font-style: italic; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing */
+.closing { padding: 70px 28px 64px; background: var(--band-bg); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 14px; border: 1px solid rgba(236, 227, 201, .2); border-radius: var(--leaf); }
+.closingEmblem { width: 250px; height: auto; margin: -8px 0 6px; }
+.thanks { color: var(--band-ink); font-family: var(--display); font-size: 34px; letter-spacing: .06em; line-height: 1.25; text-transform: uppercase; }
+.closingText { color: rgba(244, 239, 226, .86); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-style: italic; }
+.family { color: rgba(244, 239, 226, .8); font-family: var(--serif); font-style: italic; letter-spacing: .02em; }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 54px; line-height: 1.1; }
+.made { color: rgba(244, 239, 226, .5); }
+.music { border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Cover: a crescent of white roses bleeding off the left edge, text set flush-left beneath ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 0 0 26px; overflow: hidden; background: var(--bg); color: var(--ink); isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(120% 60% at 30% 22%, #fffdf7 0 35%, transparent 70%); }
+.wreathWrap { position: relative; width: 100%; height: 352px; flex-shrink: 0; }
+.wreath { position: absolute; top: -28px; left: -54px; width: 380px; height: auto; animation: wreathBreath 14s ease-in-out infinite alternate; transform-origin: 30% 50%; }
+.coverArabic { position: absolute; top: 122px; left: 168px; right: 18px; color: var(--accent); font-family: Amiri, serif; font-size: 25px; line-height: 1.6; text-align: center; }
+.coverSalam { position: absolute; top: 184px; left: 168px; right: 18px; color: var(--gold-d); font-size: 13.5px; font-style: italic; text-align: center; }
+.coverText { position: relative; display: flex; flex-direction: column; gap: 6px; margin: 18px 28px 0 34px; padding-left: 20px; border-left: 1px solid var(--gold); }
+.kicker { color: var(--gold-d); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.coverNames { display: flex; flex-direction: column; color: var(--accent); font-family: var(--script); font-size: 64px; font-weight: 400; line-height: .98; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { padding-left: 46px; color: var(--gold-d); font-family: var(--display); font-size: 26px; font-style: normal; line-height: 1.1; }
+.coverDate { margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .14em; text-transform: uppercase; }
+.coverFoot { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin: auto 18px 0; padding: 22px 24px 24px; border-radius: var(--leaf); background: var(--band-bg); color: var(--band-ink); }
+.coverFoot .guest { align-items: flex-start; max-width: none; text-align: left; }
+.guest small { color: var(--gold-l); font-size: 14px; }
+.guest strong { color: var(--band-ink); font-family: var(--serif); font-size: 20px; font-weight: 700; text-wrap: pretty; }
+.table { border-color: rgba(236, 227, 201, .6); color: var(--gold-l); font-family: var(--serif); font-style: italic; letter-spacing: .06em; }
+.openBtn { min-width: 0; height: 46px; padding: 0 22px; border-radius: var(--leaf-s); background: var(--ivory); color: var(--accent); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); }
+.openBtn:hover { translate: 0 -1px; background: #fff; }
+
+/* ── Hero: leaf-cut photo, a posy of roses resting on its lower edge ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 52px; background: var(--bg); text-align: center; }
+.heroPhoto { position: relative; display: grid; width: 286px; height: 360px; overflow: hidden; border-radius: 0 110px 0 110px; background: var(--accent); box-shadow: 0 18px 40px rgba(31, 61, 44, .18); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--script); font-size: 120px; }
+.heroCluster { position: relative; z-index: 2; width: 320px; height: auto; margin-top: -92px; }
+.heroKicker { margin-top: 6px; color: var(--gold-d); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.heroNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--script); font-size: 58px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--display); font-size: 28px; font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 20px; color: var(--muted); font-size: 16.5px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes wreathBreath { from { scale: 1; rotate: 0deg; } to { scale: 1.02; rotate: .8deg; } }
+@keyframes leafSway { from { rotate: -1.5deg; } to { rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .wreath, .countLeaf { animation: none; }
+}

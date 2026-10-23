@@ -1,0 +1,165 @@
+/* Batik Betawi — kain batik pesisir Betawi: badan kain merah bermotif kembang kelapa dan ondel-ondel kecil, kepala kain krem dengan tumpal hijau-kuning, panel nusa kelapa (nyiur, perahu, ombak). Ceria, terang, khas pesisir Jakarta. */
+.root, .cover {
+  --bg: #fbf2df; --paper: #f6e7c8; --ivory: #fffaf0; --field: #fffdf7; --ink: #2b1712; --muted: #6a4a3c; --line: #e2c99c;
+  --accent: #b51f27; --accent2: #8f1820; --gold: #e9a91d; --gold-l: #ffd35a; --gold-d: #17602f;
+  --green: #1f7a3e; --green-d: #155a2c; --yel: #f2b62a;
+  --band-bg: #8f1820; --band-ink: #fff4dc;
+  --display: "Rozha One", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Rozha One", Georgia, serif; --label: "Alegreya Sans", system-ui, sans-serif;
+  --kain: url(/themes/art/batik-betawi/kain.webp);
+  --tumpal: url(/themes/art/batik-betawi/tumpal.webp);
+  --tumpalH: url(/themes/art/batik-betawi/tumpalH.webp);
+  --h2: 31px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b51f27; --t-accent-ink: #fff4dc; --t-bg: #fbf2df; --t-ink: #2b1712; --t-muted: #6a4a3c; --t-line: #e2c99c; --t-field: #fffdf7;
+  --t-radius: 6px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .salamKicker, .role { color: var(--green); font-family: var(--label); font-size: 12px; font-weight: 800; letter-spacing: .26em; }
+.head h2 { color: var(--accent); }
+.divider { width: 230px; }
+
+/* a strip of tumpal teeth (horizontal, pointing down) used as section borders */
+.teeth { display: block; width: 100%; height: 33px; background: var(--tumpalH) 0 0 / 40px 33px repeat-x; }
+
+/* ── Opening: cream kepala with tumpal teeth hanging from the top ── */
+.salamBlock { position: relative; padding: 64px 30px 56px; background: var(--bg); }
+.salamBlock::before { content: ""; position: absolute; inset: 0 0 auto; height: 33px; background: var(--tumpalH) 0 0 / 40px 33px repeat-x; }
+.arabic { color: var(--green); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.intro { color: var(--muted); }
+
+/* ── Couple: badan kain band with cream cards ── */
+.couple { gap: 26px; padding: 64px 22px; background: var(--kain) 0 0 / 220px 220px, var(--accent); }
+.couple .head { padding: 18px 26px 16px; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 4px var(--yel), 0 0 0 7px var(--green); }
+.person { padding: 26px 18px 26px; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 4px var(--yel), 0 0 0 7px var(--green), 0 16px 30px rgba(60, 8, 10, .35); }
+.portrait { margin: 0 0 14px; }
+.portraitArt { position: absolute; z-index: 2; top: -26px; left: 50%; width: 64px; height: auto; translate: -50% 0; animation: spin 40s linear infinite; }
+.portraitFrame { width: 200px; height: 250px; padding: 6px; border: 0; border-radius: 4px; background: var(--green); box-shadow: inset 0 0 0 3px var(--yel); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.monogram { color: var(--yel); font-family: var(--display); }
+.role { color: var(--accent); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; }
+.fullName { font-family: var(--serif); font-weight: 700; font-size: 19px; }
+.amp { margin: -4px 0; }
+.amp span { display: grid; place-items: center; width: 64px; height: 64px; border: 3px solid var(--yel); border-radius: 999px; background: var(--green); color: var(--yel); font-family: var(--display); font-size: 34px; }
+.amp img { width: 74px; }
+
+/* ── Countdown: kepala kain with tumpal on both sides ── */
+.countBand { padding: 64px 52px; background: var(--bg); color: var(--ink); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; width: 33px; background: var(--tumpal) 0 0 / 33px 40px repeat-y; }
+.countBand::before { left: 0; }
+.countBand::after { right: 0; scale: -1 1; }
+.headLight .eyebrow { color: var(--green); }
+.headLight h2 { color: var(--accent); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 66px)); }
+.count > div { height: 84px; border: 0; border-radius: 4px; background: var(--accent); box-shadow: inset 0 0 0 3px var(--yel); }
+.count > div:nth-child(even) { background: var(--green); }
+.count b { color: #fff4dc; font-family: var(--display); font-size: 30px; }
+.count small { color: #ffe9b0; font-family: var(--label); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; }
+.countTba { color: var(--accent); }
+.ghostBtn { border: 2px solid var(--green); background: var(--ivory); color: var(--green); font-family: var(--label); font-weight: 800; letter-spacing: .06em; }
+.ghostBtn:hover { background: #fff1cf; border-color: var(--green); }
+
+/* ── Events: little folded kain cards (cream panel, green edge, tumpal teeth at the top) ── */
+.events { gap: 30px; padding-top: 70px; background: var(--paper); }
+.event { padding: 76px 22px 28px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 3px var(--green), 0 12px 26px rgba(80, 40, 10, .12); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 33px; border: 0; border-radius: 0; background: var(--tumpalH) 0 0 / 40px 33px repeat-x; }
+.event:hover { box-shadow: 0 0 0 3px var(--green), 0 18px 34px rgba(80, 40, 10, .18); }
+.eventNo { top: 42px; width: 40px; height: 24px; background: var(--yel); color: var(--ink); font-family: var(--label); font-weight: 800; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--green); font-family: var(--label); font-weight: 800; }
+.rule { width: 90px; height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--accent) 33%, var(--yel) 33% 66%, var(--green) 66%); }
+.mapBtn { border-radius: 4px; background: var(--accent); color: #fff4dc; font-family: var(--label); font-weight: 800; letter-spacing: .06em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--bg); }
+.timeline::before { width: 3px; left: 20px; background: repeating-linear-gradient(var(--accent) 0 12px, var(--yel) 12px 18px, var(--green) 18px 30px); }
+.node { width: 42px; height: 42px; border: 3px solid var(--yel); background: var(--accent); }
+.node img { width: 32px; }
+.storyBody small { color: var(--green); font-family: var(--label); font-weight: 800; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+
+/* ── Gallery: photos framed like small batik swatches ── */
+.gallery { background: var(--paper); }
+.mosaic { gap: 10px; }
+.tile, .tile:first-child { border-radius: 3px; box-shadow: 0 0 0 3px var(--yel), 0 0 0 6px var(--green); }
+.tile:first-child { border-radius: 3px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 4px; box-shadow: 0 0 0 3px var(--green), 0 12px 26px rgba(80, 40, 10, .1); }
+.field > span, .diet, .guestsLabel { color: var(--green); font-family: var(--label); font-weight: 800; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff4dc; }
+.submit { border-radius: 4px; background: var(--accent); color: #fff4dc; font-family: var(--label); font-size: 16px; font-weight: 800; letter-spacing: .08em; }
+.sent { color: var(--green); }
+.wish { border: 0; border-left: 5px solid var(--accent); border-radius: 4px; }
+.wish:nth-child(3n + 2) { border-left-color: var(--green); }
+.wish:nth-child(3n) { border-left-color: var(--yel); }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { background: #e8f2e6; color: var(--green-d); font-family: var(--label); font-weight: 700; }
+
+/* ── Gifts: green kain cards ── */
+.gifts { background: var(--paper); }
+.gift { border-radius: 4px; background: var(--green); box-shadow: inset 0 0 0 3px var(--yel); }
+.gift:nth-of-type(even) { background: var(--accent); }
+.gift::after { width: 130px; height: 130px; border: 0; box-shadow: none; background: url(/themes/art/batik-betawi/kembang.webp) center / contain no-repeat; opacity: .28; }
+.giftIcon { border-color: var(--yel); }
+.gift h3 { color: var(--gold-l); font-family: var(--label); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: 14px; }
+.giftNo { color: #fff; font-family: var(--display); font-size: 20px; line-height: 1.35; }
+.gift small { color: #fff1d4; }
+.copy { border-color: var(--yel); color: #ffe7a6; font-family: var(--label); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--yel); color: var(--ink); }
+
+/* ── Closing: badan kain under a deep red veil ── */
+.closing { padding: 72px 30px 56px; background: linear-gradient(rgba(120, 14, 20, .86), rgba(120, 14, 20, .9)), var(--kain) 0 0 / 220px 220px, var(--accent); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 33px; background: var(--tumpalH) 0 0 / 40px 33px repeat-x; }
+.closingEmblem { width: 120px; height: auto; animation: spin 60s linear infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; }
+.closingText { color: #fff4dc; }
+.family { color: #ffe9b0; font-family: var(--label); font-weight: 700; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 34px; }
+.made { color: rgba(255, 240, 210, .7); }
+.music { border-color: var(--yel); background: var(--green); }
+
+/* ── Cover: a kain panjang laid out, red badan kain around a cream kepala with tumpal teeth on both sides ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 92px 22px 54px; overflow: hidden; background: var(--kain) 0 0 / 220px 220px, var(--accent); text-align: center; isolation: isolate; }
+.kepala { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; padding: 0 50px 30px; background: var(--bg); box-shadow: 0 0 0 4px var(--yel), 0 0 0 8px var(--green), 0 22px 50px rgba(50, 6, 8, .5); animation: unrollKain 1.2s var(--m-ease) both; }
+.kepala::before, .kepala::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40px; background: var(--tumpal) 0 0 / 40px 48px repeat-y; pointer-events: none; }
+.kepala::before { left: 0; }
+.kepala::after { right: 0; scale: -1 1; }
+.coverKembang { width: 150px; height: auto; margin: -78px 0 2px; filter: drop-shadow(0 4px 8px rgba(90, 20, 10, .25)); animation: spin 50s linear infinite; }
+.kicker { color: var(--green); font-family: var(--label); font-size: 12px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.salam { color: var(--accent); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.coverNames { display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { display: grid; place-items: center; width: 40px; height: 40px; margin: 4px 0; border-radius: 999px; background: var(--green); color: var(--yel); font-size: 24px; font-style: normal; }
+.coverDate { padding: 5px 16px; border-radius: 3px; background: var(--green); color: #fff4dc; font-family: var(--label); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 8px; padding-top: 14px; border-top: 2px dotted var(--accent); }
+.guest small { color: var(--muted); font-style: italic; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.table { border-color: var(--green); color: var(--green); font-family: var(--label); font-weight: 800; }
+.openBtn { min-width: 0; width: 100%; max-width: 230px; border-radius: 4px; background: var(--accent); color: #fff4dc; font-family: var(--label); font-size: 15px; font-weight: 800; letter-spacing: .1em; box-shadow: 0 0 0 3px var(--yel), 0 10px 20px rgba(120, 14, 20, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: nusa kelapa panel, photo framed in badan kain, names ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 0 46px; background: var(--paper); text-align: center; }
+.nusa { display: block; width: 100%; height: 150px; background: url(/themes/art/batik-betawi/nusa.webp) 0 100% / 380px 150px repeat-x; animation: tide 40s linear infinite; }
+.heroFrame { position: relative; width: calc(100% - 64px); margin-top: -40px; padding: 12px; border-radius: 3px; background: var(--kain) 0 0 / 160px 160px, var(--accent); box-shadow: 0 0 0 4px var(--yel), 0 18px 34px rgba(80, 20, 10, .25); }
+.heroPhoto { display: grid; height: 330px; overflow: hidden; border-radius: 2px; box-shadow: 0 0 0 3px var(--yel); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { margin-top: 14px; color: var(--green); font-family: var(--label); font-size: 12px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: calc(100% - 40px); color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--green); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 18px; font-style: italic; }
+.heroNote { max-width: 310px; padding: 14px 18px; border-left: 5px solid var(--green); border-radius: 3px; background: var(--ivory); color: var(--muted); font-size: 16px; line-height: 1.55; text-align: left; }
+
+@keyframes unrollKain { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes tide { to { background-position: 380px 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .kepala, .coverKembang, .nusa, .portraitArt, .closingEmblem { animation: none; }
+}

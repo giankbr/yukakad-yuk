@@ -1,0 +1,177 @@
+/* Line Art — satu garis tinta yang tak terputus membentuk sepasang kekasih, sapuan cat air biru kobalt sebagai satu-satunya warna, ranting bunga bergaris tunggal, dan ruang putih yang lapang. Tata letak rata kiri bernomor, garis rambut, dan foto hitam-putih. */
+.root, .cover {
+  --bg: #faf8f3; --paper: #f3f0e9; --ivory: #ffffff; --field: #ffffff; --ink: #1d1b19; --muted: #6b6660; --line: #e2ddd3;
+  --accent: #1d1b19; --accent2: #000000; --gold: #3150c4; --gold-l: #ffffff; --gold-d: #3150c4;
+  --blue: #3150c4; --blue-s: #e8ecfa;
+  --band-bg: #faf8f3; --band-ink: #1d1b19;
+  --display: "Cormorant Upright", Georgia, serif; --serif: "Manrope", system-ui, sans-serif; --script: "Cormorant Upright", serif;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d1b19; --t-accent-ink: #ffffff; --t-bg: #faf8f3; --t-ink: #1d1b19; --t-muted: #6b6660; --t-line: #e2ddd3; --t-field: #ffffff;
+  --t-radius: 0px; --t-font: "Manrope", system-ui, sans-serif; --t-heading-font: "Cormorant Upright", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 38px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { counter-reset: sec; }
+.root :focus-visible { outline-color: var(--blue); }
+
+/* numbered, left-aligned section heads */
+.section { align-items: stretch; gap: 26px; padding: 72px 28px; }
+.head { align-items: flex-start; gap: 6px; text-align: left; }
+.head::before { counter-increment: sec; content: counter(sec, decimal-leading-zero); color: var(--blue); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .2em; }
+.eyebrow { color: var(--muted); font-family: var(--serif); font-size: 11px; font-weight: 500; letter-spacing: .3em; }
+.head h2, .headLight h2 { color: var(--ink); font-size: 42px; font-weight: 400; line-height: 1.05; }
+.divider { width: 170px; margin-top: 6px; margin-left: -6px; }
+.salamBlock .divider { margin-left: 0; }
+
+/* hero: a quiet title page */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 34px 28px 20px; }
+.heroArt { align-self: flex-end; width: 82%; height: auto; margin-right: -28px; -webkit-mask-image: linear-gradient(#000 70%, transparent 98%); mask-image: linear-gradient(#000 70%, transparent 98%); }
+.heroKicker { color: var(--blue); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { color: var(--ink); font-family: var(--display); font-size: 58px; font-weight: 400; line-height: .95; overflow-wrap: anywhere; }
+.heroNames em { display: block; padding-left: 34px; color: var(--muted); font-size: 34px; font-style: normal; }
+.heroDate { display: flex; gap: 14px; align-items: center; color: var(--ink); font-size: 13px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; }
+.heroDate::before { content: ""; width: 40px; height: 1px; background: var(--ink); }
+.heroNote { max-width: 290px; margin-top: 10px; color: var(--muted); font-family: var(--display); font-size: 22px; line-height: 1.35; }
+
+/* opening */
+.salamBlock { align-items: flex-start; gap: 12px; padding: 56px 28px 40px; text-align: left; }
+.salamKicker { color: var(--blue); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .32em; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 40px; line-height: 1.1; }
+.intro { max-width: 320px; color: var(--muted); font-size: 16px; line-height: 1.75; text-align: left; }
+
+/* couple: black-and-white portraits, alternating sides, a line sprig over each */
+.couple { gap: 30px; background: var(--bg); }
+.person { align-items: flex-start; text-align: left; }
+.personWrap:last-child .person { align-items: flex-end; text-align: right; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 260px; padding: 0; border: 0; border-radius: 0; background: var(--paper); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: grayscale(1) contrast(1.04); }
+.portrait > img { position: absolute; z-index: 1; right: -38px; bottom: -26px; width: 64px; height: auto; rotate: 8deg; }
+.personWrap:last-child .portrait > img { right: auto; left: -38px; rotate: -8deg; scale: -1 1; }
+.monogram { color: var(--ink); font-family: var(--display); }
+.role { color: var(--blue); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; line-height: 1; }
+.fullName { font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+.parents { max-width: 260px; color: var(--muted); font-size: 14px; text-wrap: pretty; }
+.amp { align-self: center; margin: 0; color: var(--blue); font-family: var(--display); font-size: 60px; }
+
+/* countdown: hairline grid on paper */
+.countBand { gap: 22px; border-block: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.countBand .headLight { align-items: flex-start; text-align: left; }
+.headLight .eyebrow { color: var(--muted); }
+.headLight h2 { color: var(--ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; width: 100%; border-left: 1px solid var(--line); }
+.count > div { height: 104px; border: 0; border-right: 1px solid var(--line); border-radius: 0; background: none; }
+.count > div::after { display: none; }
+.count b { color: var(--blue); font-family: var(--display); font-size: 44px; font-weight: 400; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 10px; font-style: normal; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.countTba { color: var(--ink); }
+.ghostBtn { align-self: flex-start; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 6px 0; color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.ghostBtn:hover { background: none; border-color: var(--blue); color: var(--blue); }
+
+/* events: no cards, just rules */
+.events { gap: 0; }
+.event { align-items: flex-start; gap: 6px; padding: 26px 0 30px; border: 0; border-top: 1px solid var(--ink); border-radius: 0; background: none; text-align: left; }
+.event:hover { border-color: var(--blue); box-shadow: none; translate: 0; }
+.event::before { display: none; }
+.eventNo { position: absolute; top: 20px; right: 0; left: auto; translate: none; width: auto; height: auto; background: none; color: var(--blue); font-family: var(--display); font-size: 40px; letter-spacing: 0; }
+.event h3 { max-width: 80%; color: var(--ink); font-size: 32px; text-align: left; }
+.eventDate { color: var(--ink); font-size: 15px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-size: 14px; }
+.rule { display: none; }
+.event strong { margin-top: 8px; font-size: 16px; font-weight: 600; }
+.eventAddr { max-width: none; font-size: 14px; text-wrap: pretty; }
+.mapBtn { margin-top: 8px; padding: 6px 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: none; color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: none; }
+.mapBtn:hover { background: none; color: var(--blue); border-color: var(--blue); box-shadow: none; }
+
+/* story */
+.story { background: var(--bg); }
+.timeline { gap: 34px; padding-left: 0; }
+.timeline::before { left: 5px; width: 1px; background: var(--ink); }
+.node { width: 11px; height: 11px; margin-top: 9px; border: 1.5px solid var(--ink); background: var(--bg); }
+.timeline li:last-child .node { border-color: var(--blue); background: var(--blue); }
+.storyBody small { color: var(--blue); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .28em; }
+.storyBody h3 { color: var(--ink); font-size: 26px; }
+.storyBody p { font-size: 15px; line-height: 1.7; }
+
+/* gallery: monochrome until touched */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 170px; gap: 6px; }
+.tile, .tile:first-child { border-radius: 0; filter: grayscale(1); }
+.tile:hover { filter: grayscale(0); }
+
+/* wishes: underline fields */
+.wishes { background: var(--bg); }
+.form { gap: 16px; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--muted); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .24em; }
+.field input, .field textarea { padding: 10px 0; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; background: none; }
+.field input:focus, .field textarea:focus { border-color: var(--blue); box-shadow: 0 1px 0 var(--blue); }
+.choices { gap: 0; border: 1px solid var(--ink); }
+.choices button { height: 44px; border: 0; border-right: 1px solid var(--ink); border-radius: 0; background: none; color: var(--ink); font-size: 14px; }
+.choices button:last-child { border-right: 0; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--ink); color: #fff; box-shadow: none; }
+.step { border-color: var(--ink); border-radius: 0; background: none; color: var(--ink); }
+.submit { border-radius: 0; background: var(--ink); color: #fff; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--blue); box-shadow: none; }
+.sentBox { align-items: flex-start; padding: 0; text-align: left; }
+.sentBox img { width: 60px; }
+.sent { color: var(--ink); font-family: var(--display); font-size: 26px; font-style: normal; }
+.wishList { gap: 0; }
+.wish { padding: 18px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; }
+.wish:hover { border-color: var(--blue); box-shadow: none; }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 600; }
+.wish small { border-radius: 0; background: none; color: var(--blue); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 10px; }
+.wish p { font-size: 15px; }
+.empty { color: var(--muted); }
+
+/* gifts: hairline cards */
+.gifts { background: var(--bg); }
+.intro { text-align: left; }
+.gift { align-items: flex-start; padding: 22px 20px; border: 1px solid var(--ink); border-radius: 0; background: #fff; color: var(--ink); text-align: left; }
+.gift::after { display: none; }
+.giftIcon { border: 0; border-radius: 0; background: var(--blue); }
+.gift h3 { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 26px; line-height: 1.2; }
+.gift small { color: var(--muted); }
+.copy { border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; padding: 6px 0; color: var(--ink); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 11px; }
+.copy:hover { background: none; color: var(--blue); }
+.copyOn, .copyOn:hover { background: none; color: var(--blue); border-color: var(--blue); }
+.giftCopied { box-shadow: 4px 4px 0 var(--blue); }
+
+/* closing */
+.closing { align-items: flex-start; padding: 70px 28px 56px; border-top: 1px solid var(--line); background: var(--bg); color: var(--ink); text-align: left; }
+.closingArt { align-self: flex-end; width: 84px; height: auto; margin: 0 6px -8px 0; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 56px; line-height: 1; }
+.closingText { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 12px; letter-spacing: .1em; }
+.closingNames { color: var(--blue); font-family: var(--display); font-size: 34px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--blue); }
+.music { border: 1px solid var(--ink); border-radius: 0; background: #fff; }
+.musicOn { background: var(--blue); border-color: var(--blue); }
+
+/* ── Cover: the drawing bleeds off the right edge, the words sit low on the left ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--bg); color: var(--ink); isolation: isolate; }
+.coverTop { display: flex; justify-content: space-between; padding: 24px 24px 0; color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverTop span:last-child { color: var(--blue); }
+.coverArt { align-self: flex-end; width: 92%; max-width: 380px; height: auto; margin: 6px -14px 0 0; -webkit-mask-image: linear-gradient(#000 70%, transparent 98%); mask-image: linear-gradient(#000 70%, transparent 98%); }
+.coverText { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: auto; padding: 0 28px 40px; }
+.coverNames { color: var(--ink); font-family: var(--display); font-size: 62px; font-weight: 400; line-height: .92; overflow-wrap: anywhere; }
+.coverNames em { display: block; padding-left: 40px; color: var(--muted); font-size: 36px; font-style: normal; line-height: 1.1; }
+.coverDate { display: flex; align-items: center; gap: 12px; color: var(--ink); font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.coverDate::before { content: ""; width: 36px; height: 1px; background: var(--ink); }
+.coverRow { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; width: 100%; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.guest { align-items: flex-start; max-width: none; min-width: 0; text-align: left; }
+.guest small { color: var(--muted); font-size: 12px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; line-height: 1.15; text-wrap: pretty; }
+.table { border-color: var(--blue); border-radius: 0; color: var(--blue); font-family: var(--serif); font-weight: 600; }
+.openBtn { flex-shrink: 0; min-width: 0; height: 44px; padding: 0 16px; border-radius: 0; background: var(--ink); color: #fff; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.openBtn:hover { background: var(--blue); }
+
+/* signature: the line draws itself in (left to right reveal) */
+.coverArt, .heroArt { animation: drawIn 2.6s var(--m-ease) .2s both; }
+@keyframes drawIn { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .coverArt, .heroArt { animation: none; }
+}

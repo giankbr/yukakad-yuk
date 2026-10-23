@@ -1,0 +1,174 @@
+/* Ultah Sains — pesta ulang tahun ilmuwan cilik: buku catatan lab bergaris kotak, meja lab gouache dengan labu Erlenmeyer yang bergelembung, rak tabung reaksi, gunung soda kue berbusa, kaca pembesar, roket mini, gelas ukur untuk usia, dan doodle atom; warna jas lab putih, mint, toska dan biru tua. */
+.root, .cover {
+  --bg: #f7fcfb; --paper: #e8f6f2; --ivory: #ffffff; --field: #ffffff; --ink: #1d3357; --muted: #4f6380; --line: #cfe6e1;
+  --accent: #24406e; --accent2: #2f8f9d; --gold: #2f8f9d; --gold-l: #bfe8dc; --gold-d: #23767f;
+  --band-bg: #24406e; --band-ink: #f4fbff;
+  --display: "Fredoka", "Baloo 2", system-ui, sans-serif; --serif: "Lexend", system-ui, sans-serif; --script: "Fredoka", system-ui, sans-serif; --mono: "Space Mono", ui-monospace, monospace;
+  --mag: #e2427f; --orange: #f39a2b; --lime: #8fcf3c; --yellow: #ffd23f; --teal: #2f8f9d; --mint: #bfe8dc;
+  --grid: linear-gradient(rgba(47, 143, 157, .1) 1px, transparent 1px) 0 0 / 22px 22px, linear-gradient(90deg, rgba(47, 143, 157, .1) 1px, transparent 1px) 0 0 / 22px 22px;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #24406e; --t-accent-ink: #ffffff; --t-bg: #f7fcfb; --t-ink: #1d3357; --t-muted: #4f6380; --t-line: #cfe6e1; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Lexend", system-ui, sans-serif; --t-heading-font: "Fredoka", system-ui, sans-serif; --t-heading-weight: 600; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--grid), var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.head { gap: 6px; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.divider { width: 170px; }
+
+.bubble { position: absolute; width: 22px; height: auto; pointer-events: none; animation: rise 6s ease-in infinite; }
+
+/* ── Cover: a page of the lab notebook — tape label, the name, the age in a beaker, a lab pass, then the bench ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: max(36px, 6vh) 20px 0; overflow: hidden; background: var(--grid), var(--bg); text-align: center; isolation: isolate; }
+.rocketWrap { position: absolute; z-index: 0; top: 20px; right: 14px; width: 62px; animation: hover 3.4s ease-in-out infinite alternate; rotate: 18deg; }
+.rocketWrap .rocket { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.rocketWrap .flame { position: absolute; left: 50%; top: 92%; width: 22px; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: flicker .25s ease-in-out infinite alternate; }
+.cover .atomFloat { position: absolute; z-index: 0; top: 150px; left: 10px; width: 58px; height: auto; opacity: .8; animation: spin 26s linear infinite; }
+.tape { position: relative; z-index: 1; padding: 6px 16px; background: var(--yellow); color: var(--ink); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; rotate: -3deg; box-shadow: 0 2px 0 rgba(29, 51, 87, .15); clip-path: polygon(2% 0, 98% 4%, 100% 50%, 97% 100%, 1% 96%, 0 50%); }
+.coverName { position: relative; z-index: 1; max-width: 100%; margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 76px; font-weight: 700; line-height: .95; overflow-wrap: anywhere; text-shadow: 4px 4px 0 var(--mint); }
+.ageRow { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.beaker { position: relative; display: grid; place-items: center; width: 86px; }
+.beaker img { display: block; width: 100%; height: auto; }
+.beaker b { position: absolute; left: 0; right: 4px; bottom: 10%; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 700; line-height: 1; }
+.ageText { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; text-align: left; }
+.ageText small { color: var(--muted); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.ageText strong { color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 600; line-height: 1.1; }
+.coverDate { position: relative; z-index: 1; margin-top: 12px; color: var(--ink); font-family: var(--mono); font-size: 13px; font-weight: 700; }
+.pass { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 330px; margin-top: max(18px, 5vh); padding: 0 18px 18px; overflow: hidden; border: 2.5px solid var(--accent); border-radius: 22px; background: #fff; box-shadow: 0 6px 0 var(--accent); }
+.passHead { display: flex; justify-content: space-between; width: calc(100% + 36px); padding: 7px 16px; background: var(--teal); color: #fff; font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pass .guest small { color: var(--muted); font-size: 13px; font-style: normal; }
+.pass .guest strong { color: var(--accent); font-family: var(--display); font-size: 23px; font-weight: 600; }
+.table { border: 2px solid var(--teal); color: var(--gold-d); font-family: var(--mono); font-weight: 700; letter-spacing: .06em; }
+.openBtn { min-width: 220px; background: var(--mag); color: #fff; font-family: var(--display); font-size: 16px; font-weight: 600; letter-spacing: .02em; box-shadow: 0 5px 0 #a72a5b; }
+.openBtn:hover { background: #ea5690; }
+.bench { position: relative; z-index: 1; width: calc(100% + 40px); margin: auto -20px -16px; padding-top: 8px; }
+.benchImg { display: block; width: 100%; height: auto; }
+.bench .bubble { left: 50%; bottom: 62%; width: 22px; }
+.bench .bubble:nth-child(2) { left: 46%; animation-delay: -2s; width: 16px; }
+.bench .bubble:nth-child(3) { left: 54%; animation-delay: -4s; width: 18px; }
+
+/* ── Hero: the atom doodle spinning over the name ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 40px; background: var(--grid), var(--bg); text-align: center; overflow: hidden; }
+.heroAtom { width: 132px; height: auto; animation: spin 30s linear infinite; }
+.heroKicker { margin-top: 14px; color: var(--mag); font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroName { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroDate { margin-top: 10px; color: var(--muted); font-family: var(--mono); font-size: 12.5px; font-weight: 700; }
+.heroNote { position: relative; max-width: 320px; margin-top: 24px; padding: 16px 18px; border: 2px dashed var(--teal); border-radius: 16px; background: #fff; color: var(--muted); font-size: 15.5px; line-height: 1.55; text-wrap: balance; }
+.heroNote::before { content: "Hipotesis"; position: absolute; top: -11px; left: 16px; padding: 1px 8px; background: var(--teal); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border-radius: 6px; }
+
+/* opening */
+.salamBlock { gap: 10px; padding: 30px 28px 52px; background: var(--grid), var(--bg); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 600; line-height: 1.15; }
+.intro { font-size: 15.5px; }
+
+/* celebrant: a petri dish monogram */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 200px; padding: 10px; border: 3px solid var(--accent); border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fff, var(--mint) 70%); box-shadow: 0 0 0 8px #fff, 0 0 0 10.5px var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 96px; font-weight: 700; }
+.portraitArt { position: absolute; z-index: 2; right: -26px; bottom: -12px; width: 62px; height: auto; rotate: 10deg; animation: wobble 4s ease-in-out infinite alternate; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 700; }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.parents { font-size: 14.5px; }
+.amp { color: var(--mag); font-family: var(--display); font-size: 40px; }
+.amp img { width: 30px; }
+
+/* countdown: navy band, each number in a test tube filling up */
+.countBand { padding: 60px 20px 66px; background: radial-gradient(40% 30% at 85% 15%, rgba(255, 210, 63, .25), transparent 70%), var(--band-bg); }
+.countBand .bubble { bottom: 10px; left: 10%; }
+.countBand .bubble + .bubble { left: 86%; animation-delay: -3s; }
+.headLight .eyebrow { color: var(--yellow); }
+.headLight h2 { color: #fff; font-weight: 600; }
+.count { grid-template-columns: repeat(4, minmax(0, 66px)); gap: 12px; }
+.count > div { height: 118px; justify-content: flex-end; padding-bottom: 14px; border: 2.5px solid #dff3ff; border-radius: 10px 10px 34px 34px; background: linear-gradient(transparent 46%, var(--c, var(--mag)) 46%); }
+.count > div:nth-child(2) { --c: var(--orange); }
+.count > div:nth-child(3) { --c: var(--lime); }
+.count > div:nth-child(4) { --c: #48a8e8; }
+.count > div::after { background: linear-gradient(90deg, transparent 18%, rgba(255, 255, 255, .55) 22%, transparent 28%); translate: 0 0; animation: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; font-weight: 700; line-height: 1; text-shadow: 0 2px 0 rgba(29, 51, 87, .35); }
+.count small { color: #fff; font-family: var(--mono); font-size: 9.5px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.ghostBtn { border: 2px solid var(--yellow); color: #fff; font-family: var(--display); font-size: 14px; font-weight: 600; }
+
+/* events: white lab cards with a chunky outline */
+.events { gap: 22px; background: var(--grid), var(--bg); }
+.event { padding: 34px 20px 24px; border: 2.5px solid var(--accent); border-radius: 24px; background: #fff; box-shadow: 0 6px 0 var(--accent); }
+.event::before { display: none; }
+.event:hover { box-shadow: 0 8px 0 var(--accent); }
+.eventNo { top: -18px; width: 40px; height: 40px; border: 2.5px solid var(--accent); background: var(--yellow); color: var(--accent); font-family: var(--display); font-size: 16px; font-weight: 700; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 600; }
+.eventDate { color: var(--mag); font-family: var(--display); font-size: 17px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--muted); font-family: var(--mono); font-size: 13px; font-weight: 700; }
+.rule { width: 90px; height: 8px; background: radial-gradient(circle, var(--teal) 3px, transparent 3.5px) 0 50% / 15px 8px repeat-x; }
+.event strong { font-size: 16px; }
+.eventAddr { font-size: 14.5px; }
+.mapBtn { background: var(--teal); color: #fff; box-shadow: 0 4px 0 #1f6c76; font-family: var(--display); font-size: 14px; font-weight: 600; }
+.mapBtn:hover { background: #3aa0ad; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; border-radius: 3px; background: repeating-linear-gradient(var(--teal) 0 8px, transparent 8px 14px); }
+.node { border: 2.5px solid var(--accent); background: #fff; }
+.node img { width: 28px; animation: spin 14s linear infinite; }
+.storyBody small { color: var(--mag); font-family: var(--mono); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.storyBody p { font-size: 15px; }
+
+.gallery { background: var(--bg); }
+.tile { border: 2.5px solid var(--accent); border-radius: 18px; }
+.tile:first-child { border-radius: 90px 90px 18px 18px; }
+
+/* wishes */
+.wishes { background: var(--grid), var(--bg); }
+.form { border: 2.5px solid var(--accent); border-radius: 24px; box-shadow: 0 6px 0 var(--accent); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border-width: 2px; font-family: var(--display); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.step { border: 2px solid var(--accent); }
+.submit { background: var(--mag); color: #fff; font-family: var(--display); font-size: 16px; font-weight: 600; box-shadow: 0 5px 0 #a72a5b; }
+.submit:not(:disabled):hover { background: #ea5690; box-shadow: 0 5px 0 #a72a5b; }
+.sentBox img { width: 60px; }
+.sent { color: var(--accent); font-family: var(--display); font-size: 21px; font-style: normal; font-weight: 600; }
+.wish { border: 2px solid var(--line); border-radius: 20px; background: #fff; }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 16px; font-weight: 600; }
+.wish small { background: var(--mint); color: var(--accent); font-weight: 600; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border: 2.5px solid var(--accent); border-radius: 24px; background: var(--teal); box-shadow: 0 6px 0 var(--accent); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 17px; font-weight: 600; }
+.giftNo { font-family: var(--mono); font-size: 20px; font-weight: 700; }
+.gift small { color: rgba(255, 255, 255, .85); }
+.copy { border: 2px solid #fff; color: #fff; font-family: var(--display); font-size: 13px; font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--yellow); border-color: var(--yellow); color: var(--accent); }
+
+/* closing: navy band, the rocket lifts off over the name */
+.closing { padding: 60px 28px 60px; background: radial-gradient(50% 30% at 50% 0, rgba(191, 232, 220, .25), transparent 70%), var(--band-bg); }
+.launch { position: relative; width: 70px; margin-bottom: 76px; animation: hover 3s ease-in-out infinite alternate; }
+.launch .rocket { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+.launch .flame { position: absolute; left: 50%; top: 92%; width: 24px; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: flicker .25s ease-in-out infinite alternate; }
+.closingAtom { position: absolute; z-index: -1; left: -30px; bottom: -30px; width: 150px; height: auto; opacity: .3; animation: spin 40s linear infinite; }
+.thanks { color: var(--yellow); font-family: var(--display); font-size: 48px; font-weight: 700; }
+.closingText { font-size: 15.5px; }
+.family { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 36px; font-weight: 700; }
+.made { color: rgba(244, 251, 255, .55); }
+.music { border: 2px solid var(--yellow); background: var(--mag); }
+
+@keyframes rise { 0% { opacity: 0; translate: 0 0; scale: .6; } 15% { opacity: 1; } 100% { opacity: 0; translate: 10px -160px; scale: 1.2; } }
+@keyframes hover { from { translate: 0 0; } to { translate: 0 -10px; } }
+@keyframes flicker { from { scale: 1 .85; opacity: .85; } to { scale: 1.05 1.1; opacity: 1; } }
+@keyframes wobble { from { rotate: 4deg; } to { rotate: 16deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .bubble { display: none; }
+  .rocketWrap, .rocketWrap .flame, .launch, .launch .flame, .atomFloat, .heroAtom, .node img, .portraitArt, .closingAtom { animation: none; }
+}
+@media (max-width: 370px) {
+  .coverName { font-size: 64px; }
+  .count { gap: 8px; }
+}
