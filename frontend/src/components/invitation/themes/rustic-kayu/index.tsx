@@ -311,7 +311,7 @@ export default function RusticKayuTheme({ data, slug, guestToken, demo, skipCove
       </main>
 
       {music.visible && !music.failed && (
-        <button type="button" className={`${s.music} ${music.playing ? s.musicOn : ""}`} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
+        <button type="button" className={`${s.music} ${music.playing ? s.musicOn : ""}`} onClick={music.toggle} aria-pressed={music.playing} {...music.attrs} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
           <Icon d={ic.music} size={18} />
         </button>
       )}

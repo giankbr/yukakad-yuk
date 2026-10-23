@@ -19,8 +19,14 @@ function accentOf(from: Element | null) {
   return accent || "#d4a24c";
 }
 
+// One burst per action: ThemeShell celebrates every accepted RSVP / wish, and some themes also celebrate on their own.
+let lastBurst = 0;
+
 export function celebrate(from: Element | null, origin?: { x: number; y: number }) {
   if (typeof window === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const now = Date.now();
+  if (now - lastBurst < 900) return;
+  lastBurst = now;
   const flavour = flavourOf(from);
   if (flavour === "crisp") return;
   navigator.vibrate?.(flavour === "playful" ? [12, 40, 12] : 10);

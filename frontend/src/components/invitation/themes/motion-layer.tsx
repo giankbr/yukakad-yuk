@@ -8,6 +8,8 @@ import { useCallback, useEffect, useRef, useState, type CSSProperties } from "re
 import { createPortal } from "react-dom";
 import { TOAST_EVENT } from "@/lib/celebrate";
 import m from "./motion-layer.module.css";
+import type { AmbientKind, CoverExit } from "./mood";
+import { useMusicState } from "./music";
 
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -250,4 +252,210 @@ export function enhanceMain(main: HTMLElement | null) {
   window.addEventListener("scroll", onScroll, { passive: true });
   update();
   return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(frame); img.removeAttribute("data-parallax"); };
+}
+
+/* ── Cover exit ─────────────────────────────────────────────────── */
+
+const SPLIT_CLOSED = "polygon(0% 0%, 50% 0%, 50% 100%, 50% 100%, 50% 0%, 100% 0%, 100% 100%, 0% 100%)";
+const SPLIT_OPEN = "polygon(0% 0%, 0% 0%, 0% 100%, 100% 100%, 100% 0%, 100% 0%, 100% 100%, 0% 100%)";
+
+/**
+ * Plays the cover's leave transition and resolves with how long to keep the cover mounted (ms).
+ * `lift` is the CSS class fallback (kit.coverLeave); the others animate the cover and/or reveal the main page.
+ */
+export function leaveCover(exit: CoverExit, cover: HTMLElement | null, main: HTMLElement | null): number {
+  if (reduced()) return 0;
+  if (!cover || exit === "lift") return 650;
+  const ease = "cubic-bezier(.65, 0, .35, 1)";
+  if (exit === "doors") {
+    // Two halves part from the middle, like gebyok / palace doors.
+    cover.animate([{ clipPath: SPLIT_CLOSED }, { clipPath: SPLIT_OPEN }], { duration: 1000, easing: ease, fill: "forwards" });
+    cover.animate([{ opacity: 1 }, { opacity: 1, offset: 0.7 }, { opacity: 0 }], { duration: 1000, fill: "forwards" });
+    return 1000;
+  }
+  if (exit === "iris") {
+    // The page opens from the centre in a widening circle while the cover dissolves.
+    main?.animate([{ clipPath: "circle(0% at 50% 50vh)" }, { clipPath: "circle(150vmax at 50% 50vh)" }], { duration: 1100, easing: "cubic-bezier(.5, 0, .2, 1)" });
+    cover.animate([{ opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(6px)" }], { duration: 700, delay: 120, easing: "ease-out", fill: "forwards" });
+    return 900;
+  }
+  if (exit === "rise") {
+    // A curtain pulled up.
+    cover.animate([{ translate: "0 0" }, { translate: "0 -100%" }], { duration: 900, easing: ease, fill: "forwards" });
+    return 900;
+  }
+  // pop: a quick spring zoom-out, paired with confetti from the button.
+  cover.animate([{ opacity: 1, scale: 1 }, { opacity: 0, scale: 1.12 }], { duration: 480, easing: "cubic-bezier(.34, 1.56, .64, 1)", fill: "forwards" });
+  return 480;
+}
+
+/* ── Ambient particles ──────────────────────────────────────────── */
+
+type Particle = { x: number; y: number; vx: number; vy: number; size: number; spin: number; angle: number; phase: number; hue: number; life: number };
+
+const AMBIENT_COUNT: Record<Exclude<AmbientKind, "none">, number> = { petals: 14, gold: 26, glow: 10, leaves: 10, confetti: 18, sparkle: 14 };
+
+function spawn(kind: Exclude<AmbientKind, "none">, w: number, h: number, initial: boolean): Particle {
+  const rising = kind === "glow" || kind === "gold";
+  const falling = kind === "petals" || kind === "leaves" || kind === "confetti";
+  const y = initial ? Math.random() * h : falling ? -20 : rising ? h + 20 : Math.random() * h;
+  const sizes = { petals: [7, 12], gold: [1.2, 2.6], glow: [10, 22], leaves: [8, 13], confetti: [4, 7], sparkle: [4, 8] }[kind];
+  return {
+    x: Math.random() * w, y,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: falling ? 0.35 + Math.random() * 0.45 : rising ? -(0.12 + Math.random() * 0.3) : 0,
+    size: sizes[0] + Math.random() * (sizes[1] - sizes[0]),
+    spin: (Math.random() - 0.5) * 0.03, angle: Math.random() * Math.PI * 2,
+    phase: Math.random() * Math.PI * 2, hue: Math.random(), life: kind === "sparkle" ? Math.random() * 1 : 1,
+  };
+}
+
+/**
+ * A few slow particles drifting over the invitation (petals, gold dust, glowing lights, leaves, confetti, sparkles),
+ * tinted by the theme's --t-accent. Off under prefers-reduced-motion, in easy-read mode and while the tab is hidden.
+ */
+export function Ambient({ kind, width }: { kind: AmbientKind; width: number }) {
+  const canvas = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const element = canvas.current;
+    if (kind === "none" || !element || reduced()) return;
+    const ctx = element.getContext("2d");
+    if (!ctx) return;
+    const root = element.closest("[data-motion]") ?? document.documentElement;
+    const accent = getComputedStyle(root).getPropertyValue("--t-accent").trim() || "#d4a24c";
+    const palette = kind === "confetti"
+      ? [accent, "#ffd166", "#ef476f", "#06d6a0", "#118ab2"]
+      : kind === "leaves" ? [accent, "#7a9a5b", "#a3b56b", "#c58b4e"]
+      : kind === "petals" ? [accent, "#f4b6c2", "#f9d5dc", "#ffffff"]
+      : kind === "glow" ? [accent, "#fff3c4"]
+      : [accent, "#f6d87a", "#ffffff"];
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    let w = 0, h = 0;
+    const resize = () => {
+      w = element.clientWidth; h = element.clientHeight;
+      element.width = Math.round(w * dpr); element.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    const count = AMBIENT_COUNT[kind];
+    const particles = Array.from({ length: count }, () => spawn(kind, w, h, true));
+    let frame = 0, last = performance.now(), running = true;
+    const draw = (now: number) => {
+      frame = requestAnimationFrame(draw);
+      const dt = Math.min(48, now - last) / 16.7;
+      last = now;
+      ctx.clearRect(0, 0, w, h);
+      if (document.documentElement.dataset.easyRead === "1") return;
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.phase += 0.012 * dt;
+        p.angle += p.spin * dt;
+        p.x += (p.vx + Math.sin(p.phase) * (kind === "petals" || kind === "leaves" ? 0.35 : 0.12)) * dt;
+        p.y += p.vy * dt;
+        if (kind === "sparkle") p.life -= 0.004 * dt;
+        const out = p.y > h + 30 || p.y < -30 || p.x < -30 || p.x > w + 30 || p.life <= 0;
+        if (out) { particles[i] = spawn(kind, w, h, false); continue; }
+        // Fade in/out near the top and bottom so particles never pop.
+        const edge = Math.min(1, Math.min(p.y + 30, h + 30 - p.y) / 120);
+        const color = palette[Math.floor(p.hue * palette.length) % palette.length];
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.fillStyle = color;
+        if (kind === "petals") {
+          ctx.globalAlpha = 0.55 * edge;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, p.size * 0.55, p.size * Math.abs(Math.cos(p.phase * 1.6)) * 0.32 + p.size * 0.12, 0, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (kind === "leaves") {
+          ctx.globalAlpha = 0.5 * edge;
+          const s = p.size;
+          ctx.beginPath();
+          ctx.moveTo(-s / 2, 0);
+          ctx.quadraticCurveTo(0, -s * 0.42, s / 2, 0);
+          ctx.quadraticCurveTo(0, s * 0.42, -s / 2, 0);
+          ctx.fill();
+        } else if (kind === "confetti") {
+          ctx.globalAlpha = 0.6 * edge;
+          ctx.scale(1, Math.cos(p.phase * 2.2));
+          ctx.fillRect(-p.size / 2, -p.size * 0.22, p.size, p.size * 0.44);
+        } else if (kind === "glow") {
+          const twinkle = 0.55 + Math.sin(p.phase * 1.7) * 0.25;
+          const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size);
+          gradient.addColorStop(0, color);
+          gradient.addColorStop(1, "transparent");
+          ctx.globalAlpha = 0.32 * twinkle * edge;
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (kind === "gold") {
+          ctx.globalAlpha = (0.35 + Math.sin(p.phase * 2.3) * 0.3) * edge;
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 6;
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          // sparkle: a four-point star that fades in and out once.
+          const life = Math.max(0, p.life);
+          ctx.globalAlpha = Math.sin(life * Math.PI) * 0.7;
+          const s = p.size;
+          ctx.beginPath();
+          ctx.moveTo(0, -s); ctx.quadraticCurveTo(0, 0, s, 0); ctx.quadraticCurveTo(0, 0, 0, s);
+          ctx.quadraticCurveTo(0, 0, -s, 0); ctx.quadraticCurveTo(0, 0, 0, -s);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    };
+    const onVisibility = () => {
+      if (document.hidden && running) { running = false; cancelAnimationFrame(frame); }
+      else if (!document.hidden && !running) { running = true; last = performance.now(); frame = requestAnimationFrame(draw); }
+    };
+    frame = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("resize", resize); document.removeEventListener("visibilitychange", onVisibility); };
+  }, [kind]);
+  if (kind === "none") return null;
+  return <canvas ref={canvas} className={m.ambient} style={{ "--col": `${width}px` } as CSSProperties} aria-hidden="true" />;
+}
+
+/* ── Now playing ────────────────────────────────────────────────── */
+
+/** "♪ Gamelan Keraton" — announces the track for a moment the first time the backsound starts. */
+export function MusicChip() {
+  const music = useMusicState();
+  const [shown, setShown] = useState<number>(0);
+  useEffect(() => {
+    if (!music.announced || !music.title) return;
+    const show = setTimeout(() => setShown(music.announced), 0);
+    const hide = setTimeout(() => setShown(0), 3200);
+    return () => { clearTimeout(show); clearTimeout(hide); };
+  }, [music.announced, music.title]);
+  if (!shown || !music.title) return null;
+  return (
+    <div className={m.musicChip} role="status" aria-live="polite" key={shown}>
+      <span className={m.eq} aria-hidden="true"><i /><i /><i /></span>
+      <span>{music.title}</span>
+    </div>
+  );
+}
+
+/* ── Action feedback ────────────────────────────────────────────── */
+
+/** Fired by useRsvp / useWishes when a guest's RSVP or wish has been accepted. */
+export const FEEDBACK_EVENT = "rawuh:feedback";
+export function feedback(kind: "rsvp" | "wish") {
+  if (typeof window === "undefined") return;
+  // The submit button that's still focused is where the celebration bursts from.
+  const from = document.activeElement instanceof HTMLElement && document.activeElement !== document.body ? document.activeElement : null;
+  window.dispatchEvent(new CustomEvent(FEEDBACK_EVENT, { detail: { kind, from } }));
+}
+
+/** A springy "boop" on the element the guest just tapped (copy buttons and the like). */
+export function boop(element: Element | null) {
+  if (!(element instanceof HTMLElement) || reduced() || typeof element.animate !== "function") return;
+  element.animate([{ scale: "1" }, { scale: "1.12" }, { scale: "0.97" }, { scale: "1" }], { duration: 420, easing: "cubic-bezier(.34, 1.56, .64, 1)" });
 }

@@ -51,7 +51,7 @@ export type InvitationData = {
   /** Table/seat label of the guest who opened their personal link (e.g. "12", "VIP A"). */
   guestTable?: string;
   /** Background music uploaded from the dashboard (settings.music_url / autoplay_music). */
-  music?: { url: string; autoplay?: boolean };
+  music?: { url: string; autoplay?: boolean; title?: string; bpm?: number };
   /** Optional extra sections managed from the dashboard (stored in settings.sections_config). */
   extras?: InvitationExtras;
   /** Online envelope paid through Rawuh (Mayar); present only when active for this invitation. */

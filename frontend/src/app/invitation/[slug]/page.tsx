@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { GiftMethod, InvitationData, InvitationExtras } from "@/components/invitation/types";
-import { FALLBACK_THEME, isTheme, loadTheme, themesWithOwnMusic } from "@/components/invitation/themes/registry";
+import { FALLBACK_THEME, isTheme, loadTheme } from "@/components/invitation/themes/registry";
 import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
 import { eventTypeLabel } from "@/lib/event-types";
 import { at, first, getContent, getGuest, getInvitation, guestNameFrom, longDateWIB, previewTokenFrom, timeRange } from "./data";
@@ -120,7 +120,8 @@ export default async function PublicInvitationPage({ params, searchParams }: Pro
     <InvitationProvider data={data} slug={slug} guestToken={guestToken} theme={themeId}>
       {/* Guests returning from the envelope payment skip the cover so they land on the thank-you note. */}
       <Theme data={data} slug={slug} guestToken={guestToken} skipCover={amplop === "selesai"} />
-      {!themesWithOwnMusic.has(themeId) && <MusicPlayer music={data.music} />}
+      {/* Hides itself when the theme renders its own music button. */}
+      <MusicPlayer music={data.music} />
     </InvitationProvider>
   );
 }

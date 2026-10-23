@@ -310,7 +310,7 @@ export default function DayakBorneoTheme({ data, slug, guestToken, demo, skipCov
       </main>
 
       {music.visible && !music.failed && (
-        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
+        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} {...music.attrs} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
           <Lucide icon={ic.music} size={18} />
         </button>
       )}

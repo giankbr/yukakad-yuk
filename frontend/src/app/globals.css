@@ -3035,6 +3035,18 @@ body,
 }
 :where([data-motion]) :where(button, a[href], summary, input, textarea, select):focus-visible { outline: 2px solid var(--t-accent, currentColor); outline-offset: 3px; }
 
+/* Music buttons (theme or generic, marked by useMusic().attrs): a ring pulses on the track's beat while it plays. */
+:where([data-music-btn])::after {
+	content: ""; position: absolute; inset: -3px; border: 2px solid var(--t-accent, currentColor); border-radius: inherit;
+	opacity: 0; pointer-events: none;
+}
+:where([data-music-btn][data-playing])::after { animation: rw-m-beat var(--music-beat, .9s) cubic-bezier(.2, .7, .3, 1) infinite; }
+@keyframes rw-m-beat {
+	0% { opacity: .55; scale: 1; }
+	100% { opacity: 0; scale: 1.45; }
+}
+@media (prefers-reduced-motion: reduce) { :where([data-music-btn][data-playing])::after { animation: none; } }
+
 /* Cover: slow Ken Burns on big photos, a breathing call-to-action. */
 [data-kenburns] { animation: rw-m-kenburns 22s ease-in-out infinite alternate; transform-origin: 50% 40%; }
 @keyframes rw-m-kenburns { from { scale: 1; translate: 0 0; } to { scale: 1.1; translate: -1.5% -2%; } }

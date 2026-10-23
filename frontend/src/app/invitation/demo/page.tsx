@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import type { InvitationData } from "@/components/invitation/types";
 import { FALLBACK_THEME, isTheme, loadTheme } from "@/components/invitation/themes/registry";
-import { InvitationProvider } from "@/components/invitation/themes/kit";
+import { InvitationProvider, MusicPlayer } from "@/components/invitation/themes/kit";
+import { demoMusic } from "@/components/invitation/themes/mood";
 
 export const metadata: Metadata = { title: "Demo undangan — Rawuh", robots: { index: false, follow: false } };
 
@@ -23,11 +24,14 @@ export default async function InvitationDemoPage({ searchParams }: { searchParam
     guestName: to?.replace(/\s+/g, " ").trim().slice(0, 80).trim() || named.guestName,
     // "?selesai=1" previews the after-the-event thank-you mode.
     extras: selesai === "1" ? { ...named.extras, thankYou: { ...named.extras?.thankYou, mode: "on" as const } } : named.extras,
+    // Demos play a backsound matching the theme's mood (synthesized, royalty-free; see tools/audio).
+    music: named.music ?? demoMusic(id),
   };
   const slug = `demo-${id}`;
   return (
     <InvitationProvider data={data} slug={slug} demo theme={id}>
       <Theme data={data} slug={slug} demo skipCover={open === "1"} />
+      <MusicPlayer music={data.music} />
     </InvitationProvider>
   );
 }

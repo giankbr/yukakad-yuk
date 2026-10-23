@@ -303,7 +303,7 @@ export default function MarmerRoseGoldTheme({ data, slug, guestToken, demo, skip
       </main>
 
       {music.visible && !music.failed && (
-        <button type="button" className={`${s.music} ${music.playing ? s.musicOn : ""}`} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
+        <button type="button" className={`${s.music} ${music.playing ? s.musicOn : ""}`} onClick={music.toggle} aria-pressed={music.playing} {...music.attrs} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
           <Lucide icon={ic.music} size={17} color="#fff" />
         </button>
       )}
