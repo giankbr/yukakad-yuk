@@ -1,0 +1,168 @@
+/* Ultah Panda — ulang tahun anak di hutan bambu: panda lucu orisinal bergaya gouache buku cerita, papan nama bambu yang digantung, kue berbalut bambu dengan lilin, hitung mundur wajah panda, kartu bertelinga panda; hijau lembut dan hitam-putih. */
+.root, .cover {
+  --bg: #f1f8e8; --paper: #e1f0d2; --ivory: #fffdf6; --field: #ffffff; --ink: #23302a; --muted: #56655a; --line: #cfe3bf;
+  --accent: #3d7a36; --accent2: #2c5e28; --gold: #f3a7a4; --gold-l: #fde5e2; --gold-d: #c95350;
+  --band-bg: #25262a; --band-ink: #ffffff;
+  --panda: #25262a; --bam: #7fbf5a;
+  --grove: url("/themes/art/ultah-panda/grove.webp");
+  --display: "Lilita One", "Arial Rounded MT Bold", sans-serif; --serif: "Nunito", "Trebuchet MS", sans-serif; --script: "Lilita One", sans-serif;
+  --h2: 32px; --card-r: 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3d7a36; --t-accent-ink: #ffffff; --t-bg: #f1f8e8; --t-ink: #23302a; --t-muted: #56655a; --t-line: #cfe3bf; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Nunito", sans-serif; --t-heading-font: "Lilita One", sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px; font-weight: 600;
+}
+.main { background: radial-gradient(circle, rgba(127, 191, 90, .12) 0 2px, transparent 2.5px) 0 0 / 22px 22px, var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .12em; }
+.head h2 { color: var(--panda); letter-spacing: .01em; }
+.divider { width: 210px; }
+.intro { color: var(--muted); font-weight: 600; }
+.section { padding: 62px 22px; }
+
+/* opening */
+.salamBlock { padding: 40px 26px 56px; }
+.salamKicker { color: var(--gold-d); text-transform: none; letter-spacing: .02em; font-size: 17px; }
+.salamTitle { color: var(--panda); font-family: var(--display); font-size: 33px; text-wrap: balance; }
+
+/* celebrant: a round bamboo frame with a panda peeking over the top */
+.couple { background: var(--paper); }
+.portrait { margin: 56px 0 18px; }
+.portrait > img { position: absolute; z-index: 2; top: -64px; left: 50%; width: 150px; height: auto; translate: -50% 0; animation: peek 5s ease-in-out infinite; }
+.portraitFrame { z-index: 3; width: 210px; height: 210px; padding: 0; border: 0; border-radius: 50%; background: repeating-conic-gradient(var(--bam) 0 26deg, #3d7a36 26deg 29deg); box-shadow: 0 10px 0 #b6d89b, 0 18px 26px rgba(40, 80, 30, .18); }
+.portraitFrame::after { content: ""; position: absolute; inset: 14px; border-radius: 50%; background: var(--ivory); }
+.portraitFrame > img, .portraitFrame > div, .monogram { position: relative; z-index: 1; }
+.portraitFrame > img, .portraitFrame > div { width: calc(100% - 28px); height: calc(100% - 28px); margin: 14px; border-radius: 50%; }
+.monogram { color: var(--panda); font-family: var(--display); font-size: 96px; }
+.role { color: var(--gold-d); }
+.nick { color: var(--panda); font-family: var(--display); font-size: 52px; }
+.fullName { color: var(--accent2); font-family: var(--serif); font-weight: 800; }
+.parents { font-weight: 600; }
+
+/* countdown: panda faces on a black band */
+.countBand { padding: 64px 14px 70px; background: radial-gradient(ellipse at 50% 0, rgba(127, 191, 90, .22), transparent 65%), #2d3b31; }
+.countBand::before { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 0; height: 18px; background: radial-gradient(circle at 12px -2px, var(--paper) 12px, transparent 12.5px) 0 0 / 24px 18px repeat-x; }
+.headLight .eyebrow { color: #b9e092; }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 8px; margin-top: 12px; }
+.count > div { height: 76px; overflow: visible; border: 0; border-radius: 50%; background: radial-gradient(ellipse 5px 3.5px at 50% 82%, var(--panda) 98%, transparent), radial-gradient(circle 6px at 20% 66%, rgba(243, 167, 164, .7) 98%, transparent), radial-gradient(circle 6px at 80% 66%, rgba(243, 167, 164, .7) 98%, transparent), #fff; box-shadow: 0 5px 0 #c9cdbf; }
+.count > div::before { content: ""; position: absolute; z-index: -1; top: -9px; left: -2px; right: -2px; height: 32px; background: radial-gradient(circle at 14px 16px, #111214 13px, transparent 13.5px), radial-gradient(circle at calc(100% - 14px) 16px, #111214 13px, transparent 13.5px); }
+.count > div::after { display: none; }
+.count b { position: relative; margin-top: -4px; color: var(--panda); font-family: var(--display); font-size: 27px; line-height: 1; }
+.count small { position: absolute; bottom: -26px; color: #fff; font-size: 12px; font-style: normal; font-weight: 800; }
+.countTba { color: #fff; }
+.ghostBtn { margin-top: 18px; border: 0; background: var(--bam); color: var(--panda); font-family: var(--serif); font-weight: 800; box-shadow: 0 4px 0 #4f9142; transition: background .2s, box-shadow .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.ghostBtn:hover { background: #95d06d; translate: 0 -2px; }
+
+/* events: cards with panda ears */
+.events { gap: 40px; padding-top: 70px; }
+.event { padding: 34px 22px 26px; border: 0; border-radius: var(--card-r); background: var(--ivory); box-shadow: 0 6px 0 #cfe3bf, 0 14px 24px rgba(40, 80, 30, .1); }
+.event::before { inset: -18px 24px auto; height: 44px; border: 0; border-radius: 0; z-index: -1; background: radial-gradient(circle at 22px 22px, var(--panda) 21px, transparent 21.5px), radial-gradient(circle at calc(100% - 22px) 22px, var(--panda) 21px, transparent 21.5px); }
+.event { isolation: isolate; }
+.event:hover { translate: 0 -3px; }
+.eventNo { top: -14px; width: 46px; height: 30px; background: var(--bam); color: var(--panda); font-family: var(--display); font-size: 16px; box-shadow: 0 3px 0 #4f9142; }
+.event h3 { color: var(--panda); font-family: var(--display); font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 800; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 70px; height: 8px; border-radius: 4px; background: repeating-linear-gradient(90deg, var(--bam) 0 18px, #3d7a36 18px 21px); }
+.event strong { font-weight: 800; }
+.mapBtn { background: var(--panda); color: #fff; font-family: var(--serif); font-weight: 800; box-shadow: 0 4px 0 #000; transition: background .2s, box-shadow .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.mapBtn:hover { background: #3a3b40; translate: 0 -2px; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 6px; border-radius: 3px; background: repeating-linear-gradient(var(--bam) 0 26px, #3d7a36 26px 29px); }
+.node { width: 50px; height: 48px; border: 0; background: none; }
+.node img { width: 50px; }
+.storyBody { padding: 14px 16px; border-radius: 22px; background: var(--ivory); box-shadow: 0 4px 0 #cfe3bf; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--panda); font-family: var(--display); font-size: 23px; }
+.tile, .tile:first-child { border-radius: 24px; }
+
+/* wishes */
+.form { border: 0; border-radius: 28px; background: var(--ivory); box-shadow: 0 6px 0 #cfe3bf, 0 14px 24px rgba(40, 80, 30, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; letter-spacing: .08em; }
+.field input, .field textarea { border-width: 2px; border-radius: 14px; }
+.choices button { border-width: 2px; font-weight: 800; transition: background .2s, color .2s, border-color .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--panda); border-color: var(--panda); color: #fff; box-shadow: 0 4px 0 #000; }
+.step { border-width: 2px; border-color: var(--accent); }
+.submit { background: var(--accent); color: #fff; font-family: var(--display); font-size: 20px; letter-spacing: .03em; box-shadow: 0 5px 0 var(--accent2); transition: background .2s, box-shadow .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.submit:not(:disabled):hover { background: var(--accent2); translate: 0 -2px; }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; font-size: 24px; }
+.sentBox img { width: 120px; }
+.wish { border: 0; border-radius: 22px; box-shadow: 0 4px 0 #d9ebc8; }
+.wish strong { color: var(--panda); font-family: var(--display); font-size: 19px; }
+.wish small { background: var(--gold-l); color: var(--gold-d); font-weight: 800; }
+
+/* gifts: black-and-white panda cards */
+.gift { border-radius: var(--card-r); background: var(--panda); box-shadow: 0 6px 0 #000; padding: 28px 20px 24px; }
+.gift::after { right: auto; left: 50%; top: auto; bottom: -70px; width: 160px; height: 110px; translate: -50% 0; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .06); box-shadow: none; }
+.giftIcon { border: 0; background: var(--gold-d); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 21px; letter-spacing: .02em; }
+.giftNo { color: #fff; font-family: var(--display); font-size: 20px; font-weight: 400; letter-spacing: .03em; line-height: 1.3; }
+.gift small { color: rgba(255, 255, 255, .85); }
+.copy { border: 0; background: var(--bam); color: var(--panda); font-family: var(--serif); font-weight: 800; box-shadow: 0 3px 0 #4f9142; }
+.copy:hover { background: #95d06d; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--panda); }
+
+/* closing: the panda and the cake on a grassy bank */
+.closing { padding: 64px 26px 0; background: linear-gradient(var(--bg), var(--paper)); color: var(--ink); }
+.closingEmblem { width: 96px; height: auto; animation: wiggle 4s ease-in-out infinite; }
+.thanks { color: var(--panda); font-family: var(--display); font-size: 46px; }
+.closingText { color: var(--muted); font-weight: 600; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.made { position: relative; z-index: 1; margin: 10px 0 6px; color: var(--muted); }
+.closingBank { order: 99; position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 4px; width: calc(100% + 52px); margin: 8px -26px 0; padding: 0 20px; background: linear-gradient(transparent 70%, #b9dc9b 70%); }
+.closingBank img { height: auto; }
+.closingBank img:first-child { width: 150px; }
+.closingBank img:last-child { width: 130px; margin-bottom: 6px; }
+.music { background: var(--panda); border: 3px solid #fff; }
+
+/* ── Cover: a bamboo signboard hung between two bamboo groves ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 16px; overflow: hidden; background: linear-gradient(#e6f4d9, #f1f8e8 55%, #dff0cf); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; width: 96px; background: var(--grove) 0 0 / 96px auto repeat-y; animation: rustle 7s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.cover::before { left: -14px; }
+.cover::after { right: -14px; scale: -1 1; animation-delay: -3s; }
+.ropes { position: relative; width: 190px; height: 92px; flex-shrink: 0; border-left: 3px solid #a8865a; border-right: 3px solid #a8865a; }
+.signWrap { position: relative; width: min(100%, 300px); margin-top: -2px; }
+.peek { position: absolute; z-index: 2; top: -88px; left: 50%; width: 150px; height: auto; translate: -50% 0; animation: peek 5s ease-in-out infinite; }
+.sign { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 26px 18px 22px; border-radius: 24px; background: var(--ivory); box-shadow: 0 0 0 9px var(--bam), 0 0 0 12px #3d7a36, 0 18px 28px rgba(40, 80, 30, .22); animation: swing 6s ease-in-out infinite alternate; transform-origin: 50% -60px; }
+.kicker { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--panda); font-family: var(--display); font-size: 56px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-wrap: balance; }
+.age { display: flex; align-items: center; gap: 8px; padding: 4px 14px 4px 4px; border-radius: 999px; background: var(--panda); color: #fff; font-size: 14px; font-weight: 800; }
+.age b { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: var(--panda); font-family: var(--display); font-size: 20px; font-weight: 400; }
+.coverDate { color: var(--accent2); font-size: 15px; font-weight: 800; }
+.coverFoot { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 30px; }
+.guest { padding: 12px 20px; border-radius: 22px; background: rgba(255, 253, 246, .95); box-shadow: 0 5px 0 #cfe3bf, 0 10px 20px rgba(40, 80, 30, .12); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; font-weight: 700; }
+.guest strong { color: var(--panda); font-family: var(--display); font-size: 22px; letter-spacing: .01em; }
+.table { border: 0; background: var(--gold-l); color: var(--gold-d); font-weight: 800; }
+.openBtn { background: var(--panda); color: #fff; font-family: var(--display); font-size: 19px; letter-spacing: .03em; box-shadow: 0 5px 0 #000; }
+.openBtn:hover { background: #3a3b40; translate: 0 -2px; }
+.coverBank { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: center; gap: 0; width: calc(100% + 32px); margin: auto -16px 0; padding: 10px 18px 0; background: radial-gradient(ellipse 70% 60px at 50% 100%, #b9dc9b 98%, transparent); }
+.coverPanda { width: 160px; height: auto; margin-bottom: 8px; animation: bounceSit 4s var(--m-spring) infinite; transform-origin: 50% 100%; }
+.coverCake { width: 138px; height: auto; margin-bottom: 10px; }
+
+/* ── Hero: name inside a bamboo ring, a panda peeking over the top ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 96px 22px 40px; background: linear-gradient(#e6f4d9, var(--bg)); text-align: center; overflow: hidden; }
+.heroRing { position: relative; display: grid; place-items: center; width: 280px; height: 280px; border-radius: 50%; background: repeating-conic-gradient(var(--bam) 0 22deg, #3d7a36 22deg 25deg); box-shadow: 0 10px 0 #b6d89b, 0 20px 30px rgba(40, 80, 30, .18); }
+.heroRing::before { content: ""; position: absolute; inset: 16px; border-radius: 50%; background: var(--ivory); }
+.heroPeek { position: absolute; z-index: 0; top: -74px; left: 50%; width: 170px; height: auto; translate: -50% 0; }
+.heroRing { isolation: isolate; }
+.heroRing::before { z-index: 1; }
+.heroInner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 34px; }
+.heroKicker { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.heroNames { max-width: 210px; color: var(--panda); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-wrap: balance; }
+.heroAge { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; background: var(--panda); color: #fff; font-family: var(--display); font-size: 30px; }
+.heroDate { margin-top: 22px; color: var(--ink); font-weight: 800; }
+.heroNote { max-width: 320px; margin-top: 12px; color: var(--muted); font-size: 17px; font-weight: 600; line-height: 1.6; }
+
+@keyframes peek { 0%, 70%, 100% { translate: -50% 0; } 80% { translate: -50% 10px; } 90% { translate: -50% -3px; } }
+@keyframes swing { from { rotate: -1.4deg; } to { rotate: 1.4deg; } }
+@keyframes rustle { from { rotate: -.8deg; } to { rotate: .8deg; } }
+@keyframes bounceSit { 0%, 80%, 100% { scale: 1 1; } 86% { scale: 1.04 .95; } 92% { scale: .98 1.03; } }
+@keyframes wiggle { 0%, 100% { rotate: -5deg; } 50% { rotate: 5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .cover::before, .cover::after, .peek, .sign, .coverPanda, .portrait > img, .closingEmblem { animation: none; }
+}

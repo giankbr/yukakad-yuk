@@ -1,0 +1,153 @@
+/* Isra Mi'raj — undangan peringatan Isra Mi'raj dari DKM / majelis taklim: langit malam nila yang dilukis dengan pita bintang yang naik ke langit dan bulan sabit, siluet masjid berkubah dan bermenara dengan serambi yang menyala hangat, lentera kuningan berlubang bintang, dan bintang delapan dari foil; kartu berpuncak mihrab, nila dan lavender dengan emas; Reem Kufi, Spectral, Amiri. Tanpa figur, tanpa kaligrafi yang digambar. */
+.root, .cover {
+  --bg: #f1eef6; --paper: #e6e1f0; --ivory: #fbfaff; --field: #ffffff; --ink: #1c1c3f; --muted: #57577a; --line: #d4cfe4;
+  --accent: #26296a; --accent2: #15173d; --gold: #c9a35a; --gold-l: #ecd59b; --gold-d: #8a6726; --amber: #f0a94a;
+  --band-bg: #15173d; --band-ink: #f1eef6;
+  --display: "Reem Kufi", "Segoe UI", sans-serif; --serif: "Spectral", Georgia, serif; --script: "Spectral", Georgia, serif;
+  --mihrab: 50% 50% 14px 14px / 34% 34% 14px 14px;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #26296a; --t-accent-ink: #f1eef6; --t-bg: #f1eef6; --t-ink: #1c1c3f; --t-muted: #57577a; --t-line: #d4cfe4; --t-field: #ffffff;
+  --t-radius: 14px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Reem Kufi", sans-serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+/* shared */
+.eyebrow, .salamKicker { color: var(--gold-d); font-family: var(--display); font-size: 12px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.salamKicker { letter-spacing: .1em; line-height: 1.6; text-wrap: balance; }
+.head h2 { color: var(--accent); font-weight: 500; letter-spacing: .01em; }
+.divider { display: flex; align-items: center; gap: 12px; width: 200px; }
+.divider i { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider i:last-child { background: linear-gradient(90deg, var(--gold), transparent); }
+.divider img { width: 26px; height: auto; }
+.section { padding: 62px 24px; }
+
+/* opening */
+.salamBlock { padding: 50px 28px 52px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 27px; font-weight: 500; line-height: 1.3; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.intro { color: var(--muted); }
+
+/* people: mihrab niches with a star (no photos) */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { display: grid; place-items: center; margin-bottom: 16px; }
+.portrait > img { position: absolute; z-index: 2; width: 66px; height: auto; animation: twinkle 6s ease-in-out infinite; }
+.portraitFrame { width: 170px; height: 210px; padding: 6px; border: 1.5px solid var(--gold); border-radius: var(--mihrab); background: radial-gradient(60% 50% at 50% 40%, #2f2f7a, var(--accent2)); box-shadow: inset 0 0 0 5px var(--accent2), inset 0 0 0 6px rgba(236, 213, 155, .5), 0 16px 30px rgba(21, 23, 61, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: var(--mihrab); }
+.monogram { opacity: 0; }
+.role { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .2em; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 27px; font-weight: 500; line-height: 1.25; text-wrap: balance; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-style: italic; }
+.parents { color: var(--muted); font-size: 15px; }
+
+/* countdown: the night sky */
+.countBand { background: linear-gradient(180deg, rgba(14, 16, 48, .5), rgba(21, 23, 61, .85)), url(/themes/art/isra-miraj/sky.webp) center 30% / cover, var(--band-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-weight: 500; }
+.count > div { border: 1px solid rgba(236, 213, 155, .5); border-radius: 36px 36px 10px 10px / 30px 30px 10px 10px; background: rgba(241, 238, 246, .06); backdrop-filter: blur(2px); }
+.count b { color: var(--gold-l); font-family: var(--display); font-weight: 500; }
+.count small { font-style: normal; font-family: var(--serif); }
+.ghostBtn { font-family: var(--display); border-color: var(--gold); }
+.countLamps { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
+.countLamps img { position: absolute; top: -40px; width: 46px; height: auto; transform-origin: 50% 0; animation: sway 8s ease-in-out infinite alternate; }
+.countLamps img:first-child { left: 14px; }
+.countLamps img:last-child { right: 14px; animation-delay: -3s; }
+
+/* events: mihrab-topped cards */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 56px 22px 26px; border: 1px solid var(--line); border-radius: 160px 160px 16px 16px / 70px 70px 16px 16px; background: var(--ivory); }
+.event::before { border-radius: 154px 154px 12px 12px / 64px 64px 12px 12px; border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.eventNo { top: 16px; width: 40px; height: 40px; border-radius: 50%; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 14px; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 21px; font-weight: 500; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--display); }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--display); }
+
+/* story: tonight's rundown */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--gold), rgba(201, 163, 90, .15)); }
+.node { border-color: var(--gold); background: var(--accent2); }
+.node img { width: 22px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .12em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 19px; font-weight: 500; }
+
+/* gallery (only shows uploaded photos) */
+.tile:first-child { border-radius: var(--mihrab); }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-color: var(--line); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); font-weight: 500; }
+.submit, .choices button { font-family: var(--display); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); }
+.sent { color: var(--accent); }
+.sentBox img { width: 70px; }
+.wish strong { color: var(--accent); font-family: var(--display); font-weight: 500; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { background: linear-gradient(170deg, #26296a, #15173d); border-radius: 120px 120px 16px 16px / 50px 50px 16px 16px; padding-top: 34px; }
+.gift::after { right: auto; left: 50%; bottom: auto; top: -70px; margin-left: -70px; border-width: 1px; border-color: rgba(236, 213, 155, .25); box-shadow: 0 0 0 16px rgba(236, 213, 155, .04); }
+.gift h3 { font-family: var(--display); font-weight: 500; }
+.giftNo { font-family: var(--display); font-weight: 500; }
+.copy { font-family: var(--display); }
+
+/* closing: the mosque at night */
+.closing { padding: 64px 28px 0; background: linear-gradient(180deg, rgba(14, 16, 48, .2), rgba(14, 16, 48, 0) 60%), url(/themes/art/isra-miraj/sky.webp) 15% 100% / 190% auto no-repeat, var(--band-bg); }
+.closingStar { width: 64px; height: auto; animation: twinkle 6s ease-in-out infinite; }
+.thanks { font-family: var(--display); font-size: 34px; font-weight: 500; line-height: 1.25; }
+.closingText { color: rgba(241, 238, 246, .9); }
+.closingSalam { font-family: var(--serif); font-size: 15px; font-style: italic; }
+.closingHost { color: var(--gold-l); font-family: var(--display); font-size: 13px; letter-spacing: .08em; line-height: 1.7; }
+.closingNames { display: none; }
+.made { color: rgba(241, 238, 246, .55); }
+.closingMasjid { order: 99; width: calc(100% + 56px); max-width: none; height: auto; margin: 12px -28px 0; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: night sky with a rising band of stars, a lit mosque on the horizon, lanterns overhead ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 74px 24px 0; overflow: hidden; background: var(--band-bg); color: var(--band-ink); text-align: center; isolation: isolate; }
+.sky { position: absolute; z-index: -2; inset: 0; background: url(/themes/art/isra-miraj/sky.webp) center bottom / cover; animation: drift 40s ease-in-out infinite alternate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(80% 45% at 50% 34%, rgba(10, 12, 38, .55), transparent 75%); pointer-events: none; }
+.lamp { position: absolute; z-index: 1; top: -6px; width: 52px; height: auto; transform-origin: 50% 0; animation: sway 7s ease-in-out infinite alternate; }
+.lamp1 { left: 14px; top: -34px; width: 46px; }
+.lamp2 { left: 64px; top: -70px; width: 36px; animation-delay: -2s; }
+.lamp3 { right: 18px; top: -58px; width: 42px; animation-delay: -4s; }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 25px; line-height: 1.6; }
+.coverSalam { margin-top: 4px; color: rgba(241, 238, 246, .85); font-size: 14px; font-style: italic; }
+.coverKicker { margin-top: 22px; color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .32em; text-transform: uppercase; }
+.coverTitle { max-width: 330px; margin-top: 8px; color: #fbf8ff; font-family: var(--display); font-size: 31px; font-weight: 500; line-height: 1.2; text-wrap: balance; text-shadow: 0 2px 18px rgba(10, 12, 38, .8); }
+.coverStar { width: 40px; height: auto; margin-top: 14px; animation: twinkle 6s ease-in-out infinite; }
+.coverTopic { max-width: 300px; margin-top: 12px; color: var(--gold-l); font-size: 18px; font-style: italic; line-height: 1.45; text-shadow: 0 1px 10px rgba(10, 12, 38, .9); }
+.coverDate { margin-top: 10px; color: #fbf8ff; font-family: var(--display); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+.coverFoot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 20px; }
+.guestBox { width: 100%; max-width: 320px; padding: 14px 16px; border: 1px solid rgba(236, 213, 155, .45); border-radius: 14px; background: rgba(14, 16, 48, .62); backdrop-filter: blur(6px); }
+.guest { margin: 0 auto; }
+.guest small { color: rgba(241, 238, 246, .8); font-size: 14px; }
+.guest strong { color: #fbf8ff; font-family: var(--display); font-size: 19px; font-weight: 500; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--display); }
+.openBtn { background: linear-gradient(180deg, #ecd59b, #c9a35a); color: var(--accent2); font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .1em; box-shadow: 0 0 24px rgba(240, 169, 74, .35), 0 8px 18px rgba(0, 0, 0, .3); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 0 30px rgba(240, 169, 74, .5), 0 10px 22px rgba(0, 0, 0, .35); }
+.masjid { position: relative; z-index: 0; width: calc(100% + 48px); max-width: none; height: auto; margin: auto -24px 0; padding-top: 18px; }
+
+/* ── Hero: a mihrab panel holding the theme of the tausiyah ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 50px; background: var(--bg); text-align: center; }
+.heroArch { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 330px; padding: 76px 24px 30px; overflow: hidden; border: 1.5px solid var(--gold); border-radius: 50% 50% 18px 18px / 26% 26% 18px 18px; background: linear-gradient(180deg, rgba(14, 16, 48, .35), rgba(21, 23, 61, .92) 55%), url(/themes/art/isra-miraj/sky.webp) center 20% / cover; color: var(--band-ink); box-shadow: inset 0 0 0 6px rgba(21, 23, 61, .6), inset 0 0 0 7px rgba(236, 213, 155, .45), 0 20px 40px rgba(21, 23, 61, .25); isolation: isolate; }
+.heroStar { width: 50px; height: auto; margin-bottom: 4px; }
+.heroKicker { color: var(--gold-l); font-family: var(--display); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.heroTopic { color: #fbf8ff; font-family: var(--display); font-size: 29px; font-weight: 500; line-height: 1.25; text-wrap: balance; }
+.heroLabel { color: rgba(241, 238, 246, .85); font-size: 15px; font-style: italic; text-wrap: balance; }
+.heroWith { margin-top: 8px; color: var(--gold-l); font-size: 16px; line-height: 1.5; text-wrap: balance; }
+.heroDate { margin-top: 6px; padding: 6px 14px; border: 1px solid rgba(236, 213, 155, .5); border-radius: 999px; color: #fbf8ff; font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
+.heroLamps { position: absolute; z-index: -1; top: -30px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 22px; }
+.heroLamps img { width: 34px; height: auto; transform-origin: 50% 0; animation: sway 8s ease-in-out infinite alternate; }
+.heroLamps img:last-child { animation-delay: -3s; }
+
+@keyframes sway { from { rotate: -2deg; } to { rotate: 2deg; } }
+@keyframes twinkle { 0%, 100% { opacity: 1; scale: 1; } 50% { opacity: .75; scale: .94; } }
+@keyframes drift { from { background-position: 48% 100%; } to { background-position: 52% 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .lamp, .sky, .coverStar, .closingStar, .portrait > img, .countLamps img, .heroLamps img { animation: none; }
+}

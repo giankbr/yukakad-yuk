@@ -1,0 +1,164 @@
+/* Sidomukti Solo — batik Sidomukti pengantin Surakarta: kisi belah ketupat berisi kupu dan bunga dalam sogan-krem dengan isen-isen cecek, roncean melati, bingkai belah ketupat, dan pendapa bertinta sepia. */
+.root, .cover {
+  --bg: #f3e8d3; --paper: #eadbbf; --ivory: #fbf5e8; --field: #fffaf0; --ink: #2b1d14; --muted: #6a5040; --line: #d4bd96;
+  --accent: #5a3418; --accent2: #3a2010; --gold: #b07a3a; --gold-l: #f3e2bc; --gold-d: #8a5a28;
+  --band-bg: #2b1d14; --band-ink: #f6ecd8;
+  --display: "Bodoni Moda", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "Imperial Script", cursive;
+  --batik: url(/themes/art/sidomukti-solo/batik.webp);
+  --batik-dim: linear-gradient(rgba(43, 29, 20, .74), rgba(43, 29, 20, .74)), var(--batik) repeat 0 0 / 240px;
+  --notch: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% calc(100% - 18px), calc(100% - 18px) 100%, 18px 100%, 0 calc(100% - 18px), 0 18px);
+  --lozenge: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  --h2: 32px; --card-r: 0;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a3418; --t-accent-ink: #f6ecd8; --t-bg: #f3e8d3; --t-ink: #2b1d14; --t-muted: #6a5040; --t-line: #d4bd96; --t-field: #fffaf0;
+  --t-radius: 0px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .08em; text-transform: none; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; }
+.divider { width: 250px; }
+
+/* a narrow batik selvedge (tumpal-free edge) separating sections */
+.section::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: var(--batik) repeat-x 0 0 / 120px; opacity: .9; }
+.section.couple::before, .section.events::before { display: none; }
+
+/* opening */
+.salamBlock { padding: 54px 30px 58px; background: var(--ivory); }
+.arabic { color: var(--accent); font-size: 27px; }
+.salamKicker { color: var(--muted); font-size: 15px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 42px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: 16px; }
+
+/* couple: lozenge portraits edged in batik, like a Sidomukti cell */
+.couple { gap: 10px; background: var(--paper); }
+.portrait { margin: 6px 0 14px; }
+.portraitArt { position: absolute; z-index: 2; bottom: -30px; left: 50%; width: 64px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 4px rgba(43, 29, 20, .3)); }
+.portraitFrame { width: 250px; height: 250px; padding: 14px; border: 0; border-radius: 0; background: var(--batik) 0 0 / 200px; clip-path: var(--lozenge); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--lozenge); }
+.portraitFrame::after { content: ""; position: absolute; inset: 11px; clip-path: var(--lozenge); box-shadow: inset 0 0 0 3px var(--gold-l); pointer-events: none; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; clip-path: var(--lozenge); background: var(--ivory); color: var(--accent); font-family: var(--display); font-style: italic; font-size: 72px; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 54px; }
+.fullName { font-family: var(--display); font-size: 18px; }
+.parents { font-size: 15px; }
+.amp { margin: 22px 0 10px; color: var(--gold-d); font-family: var(--script); font-size: 60px; }
+.amp img { width: 64px; }
+
+/* countdown: the cloth itself, cream notched patches */
+.countBand { padding: 70px 18px; background: var(--batik-dim); }
+.countBand::before { display: none; }
+.countDecor { position: absolute; z-index: -1; inset: 0; background: radial-gradient(60% 50% at 50% 50%, rgba(43, 29, 20, .6), transparent 75%); }
+.headLight { padding: 16px 26px 14px; background: var(--ivory); clip-path: var(--notch); }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--accent); }
+.count { gap: 8px; }
+.count > div { height: 86px; border: 0; border-radius: 0; background: var(--ivory); clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 32px; }
+.count small { color: var(--gold-d); font-style: italic; font-size: 13px; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-radius: 0; border-color: var(--gold-l); background: rgba(43, 29, 20, .7); color: var(--gold-l); font-family: var(--serif); }
+
+/* events: cream cloth labels with a batik spine down the left */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 22px 24px 46px; border: 0; border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 0 10px 24px rgba(43, 29, 20, .1); }
+.event::before { inset: 0 auto 0 0; width: 26px; border: 0; border-radius: 0; background: var(--batik) 0 0 / 160px; }
+.event::after { content: ""; position: absolute; inset: 8px 8px 8px 34px; border: 1px solid var(--line); pointer-events: none; }
+.eventNo { position: static; translate: none; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--display); font-style: italic; font-size: 15px; letter-spacing: .2em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 28px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); }
+.rule { width: 70px; background: var(--accent); }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--serif); clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0 50%); padding: 10px 24px; box-shadow: none; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: repeating-linear-gradient(var(--accent) 0 4px, transparent 4px 9px); }
+.node { width: 38px; height: 38px; border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--lozenge); }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-style: italic; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 23px; }
+.storyImg { border-radius: 0; }
+
+/* gallery: notched panels on a lattice */
+.mosaic { gap: 6px; padding: 6px; background: var(--batik) 0 0 / 200px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: var(--notch); }
+
+/* wishes */
+.form { border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--notch); box-shadow: none; outline: 1px solid var(--line); outline-offset: -8px; padding: 26px 22px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-style: italic; letter-spacing: .04em; text-transform: none; font-size: 15px; }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; }
+.choices .choiceOn, .choices .choiceOn:hover { color: var(--gold-l); }
+.step { border-radius: 0; border-color: var(--accent); }
+.submit { border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--serif); letter-spacing: .08em; }
+.sent { font-family: var(--display); }
+.wish { border: 0; border-radius: 0; background: var(--ivory); box-shadow: inset 4px 0 0 var(--accent); }
+.wish strong { font-family: var(--display); font-style: italic; font-size: 18px; }
+
+/* gifts: sogan-tua cards edged in batik */
+.gift { border: 10px solid transparent; border-radius: 0; background: linear-gradient(var(--band-bg), var(--band-bg)) padding-box, var(--batik) border-box; background-size: auto, 160px; padding: 24px 18px 20px; }
+.gift::after { display: none; }
+.giftIcon { border-radius: 0; clip-path: var(--lozenge); border: 0; background: var(--accent); width: 42px; height: 42px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 20px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-size: 19px; line-height: 1.4; }
+.copy { border-radius: 0; border-color: var(--gold-l); font-family: var(--serif); }
+
+/* closing: the cloth, then the pendopo on cream */
+.closing { padding: 70px 28px 0; background: var(--batik-dim); }
+.closingEmblem { width: 120px; height: auto; animation: flutter 4.5s ease-in-out infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-style: italic; font-size: 34px; text-shadow: 0 2px 10px rgba(20, 12, 6, .6); }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 48px; }
+.family { font-family: var(--serif); font-style: italic; letter-spacing: .02em; font-size: 15px; }
+.closingSalam { font-family: var(--serif); font-style: italic; font-size: 15px; }
+.closingStage { order: 99; position: relative; width: calc(100% + 56px); margin: 22px -28px 0; padding: 26px 0 0; background: var(--bg); clip-path: polygon(0 26px, 50% 0, 100% 26px, 100% 100%, 0 100%); }
+.closingStage img { display: block; width: 100%; height: auto; }
+.made { order: 100; position: relative; z-index: 1; width: calc(100% + 56px); margin: 0 -28px; padding: 6px 0 22px; background: var(--bg); color: var(--muted); }
+.made:hover { color: var(--accent); }
+.music { border-radius: 0; clip-path: var(--lozenge); border: 0; width: 50px; height: 50px; background: var(--accent); }
+.sentBox img { width: 110px; }
+
+/* ── Cover: the Sidomukti cloth, a notched cream label, melati strands, pleated wiru hem ── */
+.cover { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100dvh; padding: 54px 30px 104px; overflow: hidden; background: var(--batik) repeat 0 0 / 260px; color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(75% 55% at 50% 48%, rgba(43, 29, 20, .55), rgba(43, 29, 20, .2) 80%); }
+.wiru { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 74px; background: repeating-linear-gradient(90deg, rgba(20, 12, 6, .45) 0 3px, rgba(20, 12, 6, .12) 3px 12px, rgba(255, 238, 205, .2) 12px 15px, transparent 15px 26px), var(--batik) repeat 0 0 / 180px; box-shadow: 0 -6px 14px rgba(20, 12, 6, .4); clip-path: polygon(0 10px, 100% 0, 100% 100%, 0 100%); }
+.ronce { position: absolute; z-index: 2; top: -6px; width: 52px; height: auto; transform-origin: 50% 0; animation: sway 6s ease-in-out infinite alternate; filter: drop-shadow(0 4px 4px rgba(20, 12, 6, .45)); }
+.ronceL { left: 12px; }
+.ronceR { right: 12px; animation-delay: -3s; scale: -1 1; }
+.label { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 312px; padding: 34px 22px 30px; background: var(--ivory); clip-path: var(--notch); box-shadow: 0 0 0 1px var(--line); }
+.label::before { content: ""; position: absolute; inset: 8px; border: 1px solid var(--gold); clip-path: polygon(13px 0, calc(100% - 13px) 0, 100% 13px, 100% calc(100% - 13px), calc(100% - 13px) 100%, 13px 100%, 0 calc(100% - 13px), 0 13px); pointer-events: none; }
+.coverKupu { width: 76px; height: auto; animation: flutter 4.5s ease-in-out infinite; }
+.kicker { color: var(--gold-d); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .06em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 400; line-height: 1.02; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold-d); font-family: var(--script); font-size: 40px; font-style: normal; }
+.coverDate { color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.coverRule { width: 150px; height: auto; margin: 2px 0; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); border-radius: 0; color: var(--accent); font-family: var(--serif); }
+.openBtn { position: relative; z-index: 3; margin-top: 22px; border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-size: 15px; letter-spacing: .1em; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0 50%); padding: 0 36px; box-shadow: none; }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: the pendopo in sepia wash, names above, the photo framed in batik ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 46px; background: var(--bg); text-align: center; overflow: hidden; }
+.heroKicker { color: var(--gold-d); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .06em; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 12px; max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 42px; font-style: italic; font-weight: 400; line-height: 1.1; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-style: normal; font-size: 40px; }
+.heroDate { margin-top: 4px; font-weight: 700; letter-spacing: .04em; }
+.heroPendopo { width: calc(100% + 48px); max-width: none; height: auto; margin: 6px -24px -64px; opacity: .92; }
+.heroFrame { position: relative; z-index: 1; width: 292px; padding: 14px; background: var(--batik) 0 0 / 200px; clip-path: var(--notch); }
+.heroFrame::after { content: ""; position: absolute; inset: 11px; border: 2px solid var(--gold-l); clip-path: var(--notch); pointer-events: none; }
+.heroPhoto { height: 340px; overflow: hidden; clip-path: var(--notch); background: var(--paper); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--accent); font-family: var(--display); font-style: italic; font-size: 76px; }
+.heroNote { max-width: 320px; margin-top: 22px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes flutter { 0%, 100% { scale: 1 1; translate: 0 0; } 50% { scale: .9 1; translate: 0 -3px; } }
+@media (prefers-reduced-motion: reduce) {
+  .ronce, .coverKupu, .closingEmblem { animation: none; }
+}

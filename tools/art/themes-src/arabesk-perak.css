@@ -1,0 +1,171 @@
+/* Arabesk Perak — filigri perak arabesk (sulur islimi, palmet terbelah, dua batang yang saling menganyam) di atas beludru hitam; kartusy lengkung runcing, tenang dan mewah. */
+.root, .cover {
+  --bg: #0c0b0e; --paper: #111014; --ivory: #16151a; --field: #0e0d11; --ink: #ecebe6; --muted: #b0aea8; --line: #34343c;
+  --accent: #e2e5ec; --accent2: #a4afc6; --gold: #9ea8bc; --gold-l: #e7eaf0; --gold-d: #a9b1c2;
+  --band-bg: #070709; --band-ink: #ecebe6;
+  --display: "Forum", Georgia, serif; --serif: "Cormorant Garamond", Georgia, serif; --script: "Forum", Georgia, serif;
+  --silver: linear-gradient(135deg, #6f7686 0%, #e9ecf2 22%, #9aa3b5 42%, #f4f6fa 60%, #7d8597 82%, #c9ced9 100%);
+  --lancet: polygon(0% 100%, 0% 52%, .7% 44.5%, 2.8% 37.1%, 6.2% 30%, 10.9% 23.3%, 16.9% 17.2%, 23.9% 11.6%, 31.8% 6.9%, 40.6% 3%, 50% 0%, 59.4% 3%, 68.2% 6.9%, 76.1% 11.6%, 83.1% 17.2%, 89.1% 23.3%, 93.8% 30%, 97.2% 37.1%, 99.3% 44.5%, 100% 52%, 100% 100%);
+  --lancet-low: polygon(0% 100%, 0% 85px, .7% 72px, 2.8% 61px, 6.2% 49px, 10.9% 38px, 16.9% 28px, 23.9% 19px, 31.8% 11px, 40.6% 5px, 50% 0px, 59.4% 5px, 68.2% 11px, 76.1% 19px, 83.1% 28px, 89.1% 38px, 93.8% 49px, 97.2% 61px, 99.3% 72px, 100% 85px, 100% 100%);
+  --h2: 32px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) url(/themes/art/arabesk-perak/velvet.webp) 0 0 / 384px; line-height: normal;
+}
+.root {
+  --t-accent: #d9dde6; --t-accent-ink: #0c0b0e; --t-bg: #0c0b0e; --t-ink: #ecebe6; --t-muted: #b0aea8; --t-line: #34343c; --t-field: #0e0d11;
+  --t-radius: 4px; --t-font: "Cormorant Garamond", Georgia, serif; --t-heading-font: "Forum", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-style: italic; font-weight: 500; letter-spacing: .14em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--gold-l); font-weight: 400; letter-spacing: .04em; }
+.divider { width: 220px; opacity: .95; }
+.intro { color: var(--muted); font-size: 18px; line-height: 1.7; }
+
+/* opening: quiet, centred, generous */
+.salamBlock { padding: 64px 30px 60px; gap: 12px; }
+.arabic { color: var(--gold-l); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; letter-spacing: .03em; }
+
+/* couple: two lancet windows side by side, the "&" between them */
+.couple { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start; column-gap: 6px; row-gap: 26px; padding: 64px 16px; background: transparent; }
+.couple > .head { grid-column: 1 / -1; }
+.person { gap: 3px; }
+.portrait { display: grid; justify-items: center; margin-bottom: 14px; }
+.portrait > img { width: 74px; height: auto; margin-bottom: -6px; }
+.portraitFrame { width: 140px; height: 190px; padding: 2.5px; border: 0; border-radius: 0; background: var(--silver); clip-path: var(--lancet); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--lancet); }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 70px; }
+.role { font-size: 12px; letter-spacing: .08em; }
+.nick { color: var(--gold-l); font-family: var(--display); font-size: 32px; letter-spacing: .02em; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.parents { color: var(--muted); font-size: 14.5px; line-height: 1.45; }
+.amp { flex-direction: column; gap: 6px; margin: 92px 0 0; color: var(--gold); font-family: var(--display); font-size: 30px; }
+.amp img { width: 26px; }
+.amp img:last-child { scale: 1 -1; }
+
+/* countdown: numerals between hairline rules, a faint silver rosette behind */
+.countBand { padding: 74px 20px; background: rgba(4, 4, 6, .72); border-block: 1px solid #2a2a31; }
+.countRosette { position: absolute; z-index: -1; top: 50%; left: 50%; width: 330px; height: auto; translate: -50% -50%; opacity: .16; animation: turn 120s linear infinite; }
+.count { grid-template-columns: repeat(4, minmax(0, 76px)); gap: 0; }
+.count > div { height: 86px; border: 0; border-left: 1px solid #3c3d46; border-radius: 0; background: none; }
+.count > div:first-child { border-left: 0; }
+.count > div::after { display: none; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 38px; }
+.count small { color: var(--muted); font-size: 14px; }
+.ghostBtn { border-color: #5b6170; color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+
+/* events: lancet-topped silver-edged panels */
+.events { gap: 30px; background: transparent; }
+.event { padding: 100px 22px 30px; border: 0; border-radius: 0; background: none; clip-path: var(--lancet-low); isolation: isolate; }
+.event::before { z-index: -2; inset: 0; border: 0; border-radius: 0; background: var(--silver); clip-path: var(--lancet-low); }
+.event::after { content: ""; position: absolute; z-index: -1; inset: 1.5px; background: #121116 url(/themes/art/arabesk-perak/velvet.webp) 0 0 / 384px; clip-path: var(--lancet-low); }
+.event:hover { box-shadow: none; translate: 0 -2px; }
+.eventNo { top: 44px; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .2em; }
+.event h3 { color: var(--gold-l); font-family: var(--display); font-size: 28px; }
+.eventDate { color: var(--ink); font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.rule { width: 120px; height: 18px; background: url(/themes/art/arabesk-perak/band.webp) center / contain no-repeat; }
+.event strong { color: var(--ink); font-size: 19px; }
+.eventAddr { color: var(--muted); font-size: 16px; }
+.mapBtn { background: var(--silver); color: #121116; font-family: var(--serif); font-size: 15px; font-weight: 700; box-shadow: 0 6px 18px rgba(0, 0, 0, .5); }
+.mapBtn:hover { background: var(--silver); filter: brightness(1.08); }
+
+.story { background: rgba(0, 0, 0, .28); }
+.timeline::before { background: linear-gradient(#9ea8bc, rgba(158, 168, 188, .08)); }
+.node { width: 40px; height: 40px; border: 0; background: #0c0b0e; }
+.node img { width: 38px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 14px; letter-spacing: .2em; }
+.storyBody h3 { color: var(--gold-l); font-family: var(--display); font-size: 23px; }
+.storyBody p { color: var(--muted); font-size: 16.5px; }
+
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 170px; gap: 6px; }
+.tile { border-radius: 2px; outline: 1px solid #4a4e59; outline-offset: 3px; }
+.tile:first-child { border-radius: 0; clip-path: var(--lancet); outline: 0; }
+
+.wishes { background: transparent; }
+.form { border: 1px solid #3a3b44; border-radius: 4px; background: rgba(18, 17, 22, .92); box-shadow: 0 0 0 4px rgba(12, 11, 14, .9), 0 0 0 5px #2a2b32; }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 700; }
+.field input, .field textarea { border-color: #34343c; border-radius: 3px; background: var(--field); color: var(--ink); font-family: var(--serif); font-size: 17px; }
+.field input:focus, .field textarea:focus { border-color: var(--gold-d); box-shadow: 0 0 0 3px rgba(164, 175, 198, .18); }
+.choices button { border-color: #3a3b44; border-radius: 3px; background: var(--field); color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: transparent; background: var(--silver); color: #121116; }
+.guests { color: var(--ink); }
+.step { border-color: #5b6170; background: var(--field); color: var(--gold-l); }
+.step:hover { background: #1d1c22; }
+.submit { border-radius: 3px; background: var(--silver); color: #121116; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--silver); filter: brightness(1.08); }
+.sent { color: var(--gold-l); }
+.closed { border-color: #3a3b44; }
+.wish { border: 0; border-left: 2px solid #6f7686; border-radius: 0; background: rgba(22, 21, 26, .9); }
+.wish strong { color: var(--gold-l); font-family: var(--display); font-size: 18px; }
+.wish small { background: rgba(164, 175, 198, .14); color: var(--gold-l); }
+.sentBox img { width: 110px; }
+
+.gifts { background: transparent; }
+.gift { border: 1px solid #3a3b44; border-radius: 4px; background: rgba(7, 7, 9, .9); }
+.gift::after { inset: 10px auto auto 50%; width: 150px; height: 14px; translate: -50% 0; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/arabesk-perak/band.webp) center / contain no-repeat; opacity: .8; }
+.giftTop { margin-top: 14px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 20px; }
+.giftIcon { border-color: #5b6170; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 24px; }
+.copy { border-color: #5b6170; color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--silver); color: #121116; }
+
+.closing { padding: 70px 28px 64px; background: rgba(4, 4, 6, .8); border-top: 1px solid #2a2a31; }
+.closingEmblem { width: 150px; height: auto; margin-bottom: 6px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 40px; letter-spacing: .03em; }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 30px; }
+.music { border-color: #8c95a8; background: #16151a; }
+
+/* ── Cover: one lancet-arch cartouche of silver filigree on black velvet; all text lives inside the arch ── */
+.cover { position: relative; display: grid; place-items: center; min-height: 100dvh; padding: 12px; overflow: hidden; background: radial-gradient(70% 45% at 50% 42%, #1c1b22, rgba(12, 11, 14, 0) 70%), var(--bg) url(/themes/art/arabesk-perak/velvet.webp) 0 0 / 384px; color: var(--ink); text-align: center; isolation: isolate; }
+.cartouche { position: relative; width: min(100%, 410px, calc((100dvh - 24px) * .6047)); aspect-ratio: 780 / 1290; container-type: inline-size; }
+.archArt { position: absolute; inset: 0; width: 100%; height: 100%; }
+.archIn { position: absolute; inset: 27% 22% 5% 22%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; }
+.arabicTop { color: var(--gold-l); font-family: Amiri, serif; font-size: max(17px, 5.2cqw); line-height: 1.6; }
+.kicker { margin-top: 1.6cqw; color: var(--gold-d); font-family: var(--serif); font-size: max(13px, 3.6cqw); font-style: italic; font-weight: 600; letter-spacing: .08em; }
+.coverNames { max-width: 100%; margin-top: 2.4cqw; color: #f4f5f8; font-family: var(--display); font-size: clamp(32px, 11cqw, 46px); font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 2px 14px #000; }
+.coverNames em { display: block; margin: 1cqw 0; color: var(--gold); font-size: .6em; font-style: normal; }
+.coverDate { margin-top: 3cqw; color: var(--ink); font-family: var(--serif); font-size: max(15px, 4.2cqw); font-weight: 600; letter-spacing: .05em; }
+.coverRule { width: 70%; height: auto; margin: 4cqw 0 3.4cqw; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 4cqw; width: 100%; }
+.guest small { color: var(--muted); font-size: max(13px, 3.6cqw); }
+.guest strong { color: #f4f5f8; font-family: var(--display); font-size: max(17px, 5cqw); }
+.table { border-color: #5b6170; color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-weight: 600; }
+.openBtn { min-width: 0; width: 100%; max-width: 190px; height: 44px; border-radius: 3px; background: var(--silver); background-size: 200% 100%; color: #121116; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; white-space: nowrap; padding: 0 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, .6); }
+.openBtn:hover { background-position: 100% 0; translate: 0 -1px; }
+
+/* ── Hero: the bride/couple photo in a silver lancet window under a finial ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 42px 24px 48px; text-align: center; }
+.heroFinial { width: 96px; height: auto; margin-bottom: -4px; }
+.heroArch { width: 236px; height: 320px; padding: 3px; background: var(--silver); clip-path: var(--lancet); }
+.heroArch > img { width: 100%; height: 100%; object-fit: cover; clip-path: var(--lancet); }
+.heroEmblem { width: 130px; height: auto; margin: 6px 0 0; }
+.kickerDark { margin-top: 26px; color: var(--gold-d); font-family: var(--serif); font-size: 14px; font-style: italic; font-weight: 600; letter-spacing: .08em; }
+.heroNames { max-width: 100%; margin-top: 8px; color: #f4f5f8; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 10px; color: var(--gold); font-size: .7em; font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: .1em; }
+.heroNote { max-width: 310px; margin-top: 18px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.6; text-wrap: balance; }
+.heroBand { width: 230px; height: auto; margin-top: 22px; }
+
+/* signature motion: the silver catches light slowly (sheen sweep on the cartouche) */
+.cartouche::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 40%, rgba(235, 240, 250, .16) 50%, transparent 60%) 0 0 / 300% 100%; mask: url(/themes/art/arabesk-perak/arch.webp) center / 100% 100% no-repeat; animation: sheen 9s var(--m-ease) infinite; pointer-events: none; }
+@keyframes sheen { 0%, 30% { background-position: 100% 0; } 100% { background-position: 0 0; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .cartouche::after, .countRosette { animation: none; }
+}
+@media (max-width: 370px) {
+  .couple { column-gap: 2px; padding-inline: 10px; }
+  .portraitFrame { width: 124px; height: 168px; }
+  .nick { font-size: 28px; }
+  .amp { margin-top: 80px; }
+}
+.gift .giftNo:not(:has(+ small)) { font-family: var(--serif); font-size: 18px; font-weight: 500; letter-spacing: .01em; line-height: 1.5; }
+/* keep the cartouche still (the cover's text is aligned to it), so no Ken Burns zoom on it */
+.archArt { animation: hold 1s both; }
+@keyframes hold { to { opacity: 1; } }

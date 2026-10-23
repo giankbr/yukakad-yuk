@@ -1,0 +1,180 @@
+/* Selancar Retro — poster selancar 70-an bergaya sablon: matahari senja bergaris, ombak bergulung dengan buih krem, palem miring, dan van kemping dua warna membawa papan selancar; garis-garis senja, kartu tebal dengan bayangan offset, potret berbentuk papan selancar; Shrikhand dan Karla. */
+.root, .cover {
+  --bg: #f6e8cc; --paper: #f1dab0; --ivory: #fff6e3; --field: #fffaf0; --ink: #3a2620; --muted: #6e5444; --line: #3a2620;
+  --accent: #1d6a70; --accent2: #17485a; --gold: #ee8a35; --gold-l: #f2b440; --gold-d: #c8453a; --coral: #e0603a; --teal-l: #5fb5a8;
+  --band-bg: #1d6a70; --band-ink: #fff6e3;
+  --display: "Shrikhand", "Cooper Black", serif; --serif: "Karla", system-ui, sans-serif; --script: "Shrikhand", serif;
+  --stripes: linear-gradient(180deg, #f2b440 0 20%, #f19f3b 20% 40%, #ee8a35 40% 60%, #e0603a 60% 80%, #c8453a 80% 100%);
+  --board: 50% 50% 50% 50% / 66% 66% 34% 34%;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d6a70; --t-accent-ink: #fff6e3; --t-bg: #f6e8cc; --t-ink: #3a2620; --t-muted: #6e5444; --t-line: #d9bd8a; --t-field: #fffaf0;
+  --t-radius: 14px; --t-font: "Karla", system-ui, sans-serif; --t-heading-font: "Shrikhand", serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+/* shared */
+.eyebrow, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); text-shadow: 2px 2px 0 var(--gold-l); }
+.divider { width: 150px; }
+.section { padding: 62px 22px; }
+.section + .section::before { content: ""; position: absolute; top: -7px; left: 0; right: 0; height: 14px; background: var(--stripes); }
+
+/* opening */
+.salamBlock { padding: 44px 26px 50px; }
+.salamTitle { color: var(--gold-d); font-family: var(--display); font-size: 36px; text-shadow: 3px 3px 0 var(--gold-l); }
+.salamSub { color: var(--accent); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.intro { color: var(--muted); }
+
+/* couple: surfboard-shaped portraits leaning on each other */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 172px; height: 304px; padding: 7px; border: 3px solid var(--ink); border-radius: var(--board); background: var(--ivory); box-shadow: 7px 7px 0 var(--accent); rotate: -3deg; transition: rotate 450ms var(--m-spring), box-shadow 450ms var(--m-ease); }
+.personWrap:nth-of-type(odd) .portraitFrame { rotate: 3deg; box-shadow: -7px 7px 0 var(--coral); }
+.person:hover .portraitFrame { rotate: 0deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: var(--board); }
+.portraitFrame::after { content: ""; position: absolute; top: 7px; bottom: 7px; left: 50%; width: 10px; margin-left: -5px; background: linear-gradient(90deg, transparent 0 2px, rgba(255, 246, 227, .85) 2px 4px, var(--coral) 4px 6px, rgba(255, 246, 227, .85) 6px 8px, transparent 8px); opacity: .9; pointer-events: none; mask-image: linear-gradient(180deg, #000 0 14%, transparent 14% 86%, #000 86%); }
+.monogram { color: var(--gold-d); font-family: var(--display); font-size: 92px; }
+.role { padding: 4px 14px; border-radius: 999px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.nick { margin-top: 6px; color: var(--gold-d); font-family: var(--display); font-size: 46px; line-height: 1.05; text-shadow: 3px 3px 0 var(--gold-l); }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 800; }
+.parents { color: var(--muted); font-size: 15px; }
+.amp { color: var(--accent); font-family: var(--display); font-size: 52px; }
+.amp img { width: 22px; rotate: -12deg; }
+.amp img:last-child { scale: 1 1; rotate: 12deg; }
+
+/* countdown: sunset stripes */
+.countBand { background: var(--stripes); color: var(--ink); }
+.countBand::after { content: ""; position: absolute; z-index: -1; left: 50%; bottom: -120px; width: 300px; height: 300px; margin-left: -150px; border-radius: 50%; background: radial-gradient(circle, rgba(251, 229, 173, .9) 0 60%, transparent 61%); }
+.headLight .eyebrow { color: var(--ink); }
+.headLight h2 { color: var(--ivory); text-shadow: 3px 3px 0 var(--accent2); }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 9px; }
+.count > div { height: 88px; border: 3px solid var(--ink); border-radius: 16px; background: var(--ivory); box-shadow: 4px 4px 0 var(--accent2); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--ink); font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.countTba { color: var(--ink); }
+.ghostBtn { border: 3px solid var(--ink); background: var(--ivory); color: var(--ink); font-family: var(--serif); font-weight: 800; box-shadow: 4px 4px 0 var(--ink); transition: box-shadow 250ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.ghostBtn:hover { background: var(--ivory); translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink); }
+.countPalm { position: absolute; z-index: -1; bottom: -10px; width: 110px; height: auto; opacity: .85; transform-origin: 50% 100%; animation: sway 6s ease-in-out infinite alternate; }
+.countPalmL { left: -20px; }
+.countPalmR { right: -24px; scale: -1 1; animation-delay: -2s; }
+
+/* events: chunky surf-shop tags */
+.events { gap: 26px; background: var(--bg); }
+.event { padding: 36px 20px 24px; border: 3px solid var(--ink); border-radius: 22px; background: var(--ivory); box-shadow: 7px 7px 0 var(--coral); }
+.event:nth-of-type(even) { box-shadow: 7px 7px 0 var(--accent); }
+.event::before { inset: auto 0 auto 0; top: 22px; height: 0; border: 0; }
+.event:hover { border-color: var(--ink); translate: -2px -2px; box-shadow: 10px 10px 0 var(--coral); }
+.eventNo { top: -20px; width: 46px; height: 46px; border: 3px solid var(--ink); border-radius: 50%; background: var(--gold-l); color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.eventDate { font-family: var(--serif); font-style: normal; font-weight: 800; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 100%; height: 8px; background: var(--stripes); border-radius: 4px; }
+.event strong { font-weight: 800; }
+.mapBtn { border: 3px solid var(--ink); background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 800; box-shadow: 4px 4px 0 var(--ink); transition: box-shadow 250ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.mapBtn:hover { background: var(--accent2); translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; left: 20px; background: repeating-linear-gradient(180deg, var(--ink) 0 8px, transparent 8px 14px); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+.storyBody p { color: var(--muted); }
+
+/* gallery: polaroids tossed on the sand */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 160px; gap: 14px; }
+.tile { border: 7px solid var(--ivory); border-bottom-width: 22px; border-radius: 4px; box-shadow: 0 8px 18px rgba(58, 38, 32, .2); rotate: -2deg; transition: rotate 450ms var(--m-spring), scale 450ms var(--m-spring), filter 700ms var(--m-ease); }
+.tile:nth-child(even) { rotate: 2.5deg; }
+.tile:first-child { border-radius: 4px; }
+.tile:hover { rotate: 0deg; scale: 1.03; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 3px solid var(--ink); border-radius: 22px; background: var(--ivory); box-shadow: 7px 7px 0 var(--accent); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.field input, .field textarea { border: 2px solid #d9bd8a; border-radius: 12px; }
+.choices button { border: 2px solid var(--ink); font-weight: 700; transition: background 300ms var(--m-ease), color 300ms var(--m-ease), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--gold-l); color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.step { border: 2px solid var(--ink); }
+.submit { border: 3px solid var(--ink); background: var(--coral); color: var(--ivory); font-family: var(--serif); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--ink); }
+.submit:not(:disabled):hover { background: var(--gold-d); translate: -2px -2px; box-shadow: 6px 6px 0 var(--ink); }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 120px; }
+.wish { border: 2px solid var(--ink); border-radius: 16px; }
+.wish:nth-child(3n + 1) { box-shadow: 4px 4px 0 var(--gold-l); }
+.wish:nth-child(3n + 2) { box-shadow: 4px 4px 0 var(--teal-l); }
+.wish:nth-child(3n) { box-shadow: 4px 4px 0 var(--coral); }
+.wish strong { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.wish small { background: var(--gold-l); color: var(--ink); font-weight: 700; }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border: 3px solid var(--ink); border-radius: 22px; background: var(--accent); box-shadow: 7px 7px 0 var(--gold-l); padding-top: 34px; }
+.gift::after { inset: 0 0 auto 0; width: auto; height: 14px; border: 0; border-radius: 0; box-shadow: none; background: var(--stripes); z-index: 0; right: 0; bottom: auto; }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.giftNo { font-family: var(--display); color: var(--ivory); }
+.copy { border: 2px solid var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--ink); }
+
+/* closing */
+.closing { background: var(--bg); color: var(--ink); padding-bottom: 64px; }
+.closing::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: linear-gradient(180deg, #f2b440 0 25%, #ee8a35 25% 50%, #e0603a 50% 75%, #1d6a70 75%); }
+.closingEmblem { width: 230px; height: auto; margin-bottom: -6px; }
+.thanks { color: var(--gold-d); font-family: var(--display); font-size: 48px; text-shadow: 3px 3px 0 var(--gold-l); }
+.closingText { color: var(--muted); }
+.family { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 34px; text-shadow: 3px 3px 0 var(--gold-l); }
+.made { color: rgba(58, 38, 32, .55); }
+.made:hover { color: var(--gold-d); }
+.music { background: var(--coral); border: 3px solid var(--ink); }
+
+/* ── Cover: names stamped above a retro surf poster, the camper van parked across its corner ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 20px 28px; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: auto 0 0 0; height: 30%; background: linear-gradient(180deg, transparent, rgba(241, 205, 143, .7)); }
+.kicker { padding: 5px 14px; border: 2px solid var(--ink); border-radius: 999px; background: var(--gold-l); color: var(--ink); font-family: var(--serif); font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; rotate: -2deg; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 10px; max-width: 100%; margin-top: 14px; color: var(--gold-d); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; text-shadow: 3px 3px 0 var(--accent); }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { color: var(--accent); font-style: normal; font-size: 40px; text-shadow: 2px 2px 0 var(--gold-l); }
+.coverDate { margin-top: 10px; padding: 6px 16px; border-radius: 999px; background: var(--accent); color: var(--ivory); font-size: 13.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.posterWrap { position: relative; width: 100%; max-width: 344px; margin: 22px 0 0; }
+.poster { display: block; width: 100%; height: auto; border: 7px solid var(--ivory); border-radius: 26px; outline: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--coral); rotate: -1.5deg; }
+.van { position: absolute; right: -22px; bottom: -40px; width: 64%; height: auto; animation: bob 2.6s var(--m-spring) infinite alternate; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 48px; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 20px; font-weight: 800; }
+.table { border: 2px solid var(--ink); background: var(--ivory); color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.openBtn { border: 3px solid var(--ink); background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; box-shadow: 5px 5px 0 var(--ink); transition: box-shadow 250ms var(--m-spring), scale 300ms var(--m-spring), translate 300ms var(--m-spring); }
+.openBtn:hover { translate: -2px -2px; box-shadow: 7px 7px 0 var(--ink); }
+
+/* ── Hero: a postcard from the beach ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 22px 48px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 210px; background: var(--stripes); }
+.card { position: relative; width: 300px; padding: 10px 10px 54px; border: 3px solid var(--ink); border-radius: 6px; background: var(--ivory); box-shadow: 8px 8px 0 var(--accent); rotate: 2deg; }
+.heroPhoto { position: relative; display: grid; height: 330px; overflow: hidden; border-radius: 3px; background: var(--paper); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-d); font-family: var(--display); font-size: 90px; }
+.cardText { position: absolute; left: 14px; bottom: 12px; color: var(--accent); font-family: var(--display); font-size: 22px; rotate: -3deg; }
+.stamp { position: absolute; right: -14px; bottom: 18px; width: 70px; height: auto; rotate: 16deg; }
+.boardL, .boardR { position: absolute; z-index: -1; top: 30px; width: 46px; height: auto; }
+.boardL { left: 8px; rotate: -14deg; }
+.boardR { right: 8px; rotate: 12deg; }
+.heroKicker { margin-top: 30px; color: var(--gold-d); font-size: 12px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 10px; max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.05; text-shadow: 3px 3px 0 var(--gold-l); }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--ink); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; font-size: 13.5px; }
+.heroNote { max-width: 330px; margin-top: 20px; padding: 14px 18px; border: 2px dashed var(--ink); border-radius: 16px; color: var(--ink); font-size: 16px; line-height: 1.55; white-space: pre-line; text-wrap: pretty; }
+
+@keyframes bob { from { translate: 0 0; rotate: 0deg; } to { translate: 0 -5px; rotate: -1deg; } }
+@keyframes sway { from { rotate: -3deg; } to { rotate: 3deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .van, .countPalm { animation: none; }
+  .portraitFrame, .tile, .ghostBtn, .mapBtn, .openBtn { transition: none; }
+}

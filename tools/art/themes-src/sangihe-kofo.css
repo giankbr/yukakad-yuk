@@ -1,0 +1,164 @@
+/* Sangihe Kofo — tenun kofo serat abaka Sangihe (garis lungsin halus berkilau serat) membingkai lukisan pulau gunung api di laut biru dan perahu bercadik; kartu berpinggir tenun, potret berselendang kofo, laut dalam pada pita hitung mundur. */
+.root, .cover {
+  --bg: #f3ead6; --paper: #eadfc5; --ivory: #fbf6ea; --field: #fffdf7; --ink: #1c2633; --muted: #5a5246; --line: #d6c6a1;
+  --accent: #1f3f66; --accent2: #12304f; --gold: #b08a52; --gold-l: #f1e3bf; --gold-d: #9a4225;
+  --band-bg: #14355a; --band-ink: #f3ead6;
+  --rust: #9a4225; --sea: #14355a;
+  --kofo: url("/themes/art/sangihe-kofo/kofo.webp") 0 0 / 166px 180px;
+  --display: "Marcellus SC", "Times New Roman", serif; --serif: "Della Respira", Georgia, serif; --script: "Cormorant Upright", Georgia, serif;
+  --h2: 34px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f3f66; --t-accent-ink: #f3ead6; --t-bg: #f3ead6; --t-ink: #1c2633; --t-muted: #5a5246; --t-line: #d6c6a1; --t-field: #fffdf7;
+  --t-radius: 4px; --t-font: "Della Respira", serif; --t-heading-font: "Cormorant Upright", serif; --t-heading-weight: 600; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--rust); font-family: var(--display); font-size: 12px; letter-spacing: .26em; }
+.head h2, .headLight h2 { font-family: var(--script); font-weight: 600; letter-spacing: .01em; }
+.head h2 { color: var(--accent2); }
+.divider { width: 180px; }
+.intro { color: var(--muted); }
+
+/* opening: a kofo runner across the top of the salam */
+.salamBlock { position: relative; padding: 58px 28px 56px; background: var(--ivory); }
+.salamBlock::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: var(--kofo); box-shadow: 0 2px 0 rgba(28, 38, 51, .12); }
+.salamKicker { font-size: 13px; }
+.salamTitle { color: var(--accent2); font-family: var(--script); font-size: 46px; font-weight: 600; }
+
+/* couple: square portraits with a kofo sash across the foot */
+.couple { gap: 20px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portrait > img { position: absolute; z-index: 3; top: -24px; left: 50%; width: 46px; height: auto; translate: -50% 0; filter: drop-shadow(0 3px 3px rgba(28, 38, 51, .25)); }
+.portraitFrame { width: 214px; height: 262px; padding: 8px 8px 30px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 16px 28px rgba(28, 38, 51, .16); }
+.portraitFrame::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: var(--kofo); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--accent); font-family: var(--script); font-size: 100px; }
+.nick { color: var(--accent2); font-family: var(--script); font-weight: 600; font-size: 50px; }
+.fullName { font-family: var(--serif); font-size: 18px; }
+.amp { color: var(--rust); font-family: var(--script); font-size: 54px; }
+.amp img { width: 34px; }
+
+/* countdown: deep sea band, kofo weave peeking at both edges, an outrigger drifting */
+.countBand { padding: 66px 18px 92px; background: radial-gradient(ellipse at 50% 0, rgba(120, 160, 190, .25), transparent 60%), linear-gradient(#1b4570, #102b49); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; width: 14px; background: var(--kofo); opacity: .9; }
+.countBand::before { left: 0; }
+.countBand::after { right: 0; }
+.countDecor { position: absolute; z-index: -1; left: 0; right: 0; bottom: 14px; height: 70px; pointer-events: none; }
+.countDecor img { position: absolute; left: 8%; bottom: 0; width: 120px; height: auto; animation: bob 5s ease-in-out infinite; }
+.headLight .eyebrow { color: #e3c08c; }
+.headLight h2 { color: var(--band-ink); }
+.count > div { height: 84px; border: 0; border-top: 8px solid transparent; border-radius: 2px; background: var(--kofo) top / 166px 180px no-repeat, rgba(243, 234, 214, .08); border-image: none; box-shadow: inset 0 0 0 1px rgba(243, 234, 214, .25); }
+.count > div { background: linear-gradient(#1d4a74, #163a5e) padding-box, var(--kofo) border-box; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 30px; }
+.count small { font-style: normal; font-family: var(--serif); font-size: 13px; }
+.ghostBtn { border-color: rgba(241, 227, 191, .6); color: var(--gold-l); font-family: var(--display); border-radius: 2px; }
+
+/* events: cards with a kofo selvedge down the left, text left-aligned */
+.events { gap: 24px; }
+.event { align-items: flex-start; padding: 26px 22px 24px 40px; border: 1px solid var(--line); border-radius: 2px; text-align: left; box-shadow: 0 10px 24px rgba(28, 38, 51, .07); }
+.event::before { inset: 0 auto 0 0; width: 16px; border: 0; border-radius: 0; background: var(--kofo); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--rust); font-family: var(--display); font-size: 13px; letter-spacing: .2em; }
+.event h3 { color: var(--accent2); font-family: var(--script); font-weight: 600; font-size: 30px; text-wrap: pretty; }
+.eventDate { font-style: normal; font-weight: 400; }
+.eventTime { color: var(--rust); font-family: var(--display); letter-spacing: .06em; }
+.rule { width: 46px; height: 3px; margin: 8px 0; background: var(--rust); }
+.eventAddr { text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--display); letter-spacing: .08em; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 2px; background: repeating-linear-gradient(var(--rust) 0 6px, transparent 6px 10px); }
+.node { width: 44px; height: 48px; border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody { padding: 4px 0 0; }
+.storyBody small { color: var(--rust); font-family: var(--display); letter-spacing: .18em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--script); font-weight: 600; font-size: 25px; }
+
+/* gallery: straight-cut tiles on a woven ground */
+.gallery { background: var(--kofo); }
+.gallery .head { padding: 14px 22px 12px; background: var(--ivory); box-shadow: 0 6px 14px rgba(28, 38, 51, .16); }
+.gallery .head h2 { font-size: 30px; }
+.mosaic { gap: 6px; padding: 6px; background: var(--ivory); box-shadow: 0 14px 30px rgba(28, 38, 51, .2); }
+.tile, .tile:first-child { border-radius: 0; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 2px; border-top: 0; box-shadow: 0 14px 28px rgba(28, 38, 51, .08); position: relative; padding-top: 30px; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: var(--kofo); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--display); letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.submit { border-radius: 2px; background: var(--rust); color: #fbf1dc; font-family: var(--display); letter-spacing: .14em; }
+.submit:not(:disabled):hover { background: #7f341c; }
+.sent { color: var(--accent2); font-family: var(--script); font-style: normal; font-size: 24px; font-weight: 600; }
+.wish { border-radius: 2px; border-left: 4px solid var(--rust); }
+.wish strong { color: var(--accent2); font-family: var(--script); font-weight: 600; font-size: 20px; }
+.wish small { background: rgba(154, 66, 37, .1); color: var(--rust); }
+
+/* gifts: indigo cards with a kofo hem */
+.gifts { background: var(--paper); }
+.gift { border-radius: 2px; padding: 34px 20px 22px; background: linear-gradient(160deg, #1f4a75, #12304f); }
+.gift::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--kofo); }
+.gift::after { display: none; }
+.giftIcon { border-color: rgba(241, 227, 191, .5); }
+.gift h3 { font-family: var(--display); letter-spacing: .12em; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; font-family: var(--display); letter-spacing: .1em; }
+
+/* closing: the sea and the volcano at night-fall */
+.closing { min-height: 560px; padding: 70px 28px 46px; background: linear-gradient(rgba(16, 43, 73, .58), rgba(12, 34, 58, .92) 70%), url("/themes/art/sangihe-kofo/scene.webp") center 62% / cover; }
+.closing::before, .closing::after { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; width: 14px; background: var(--kofo); }
+.closing::before { left: 0; }
+.closing::after { right: 0; }
+.closingEmblem { width: 56px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-weight: 600; font-size: 54px; }
+.closingText { color: rgba(243, 234, 214, .9); }
+.family { color: rgba(243, 234, 214, .85); font-family: var(--display); }
+.closingNames { color: #fff; font-family: var(--script); font-weight: 600; }
+.made { color: rgba(243, 234, 214, .6); }
+.music { border-radius: 4px; background: var(--rust); border-color: var(--gold-l); }
+
+/* ── Cover: painted island scene framed by two kofo selvedges ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 40px 34px 30px; overflow: hidden; background: #f5ecd8; color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; z-index: 3; top: 0; bottom: 0; width: 16px; background: var(--kofo); box-shadow: 0 0 0 1px rgba(28, 38, 51, .08); }
+.cover::before { left: 0; }
+.cover::after { right: 0; }
+.sceneWrap { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; aspect-ratio: 780 / 1500; }
+.scene { display: block; width: 100%; height: 100%; -webkit-mask-image: linear-gradient(transparent, #000 9%); mask-image: linear-gradient(transparent, #000 9%); }
+.smoke { position: absolute; left: 59.4%; top: 35.2%; width: 30%; height: auto; opacity: .75; translate: 0 -100%; transform-origin: 0 100%; animation: plume 14s ease-in-out infinite alternate; }
+.boat { position: absolute; left: 3%; top: 60.5%; width: 26%; height: auto; animation: bob 5.5s ease-in-out infinite; }
+.syalom { color: var(--rust); font-family: var(--display); font-size: 13px; letter-spacing: .3em; }
+.kicker { margin-top: 10px; color: var(--muted); font-family: var(--display); font-size: 12px; letter-spacing: .28em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin-top: 10px; color: var(--accent2); font-family: var(--script); font-size: 56px; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--rust); font-size: 34px; font-style: normal; }
+.coverDate { margin-top: 14px; padding: 6px 14px; border-top: 1px solid rgba(154, 66, 37, .4); border-bottom: 1px solid rgba(154, 66, 37, .4); color: var(--ink); font-family: var(--display); font-size: 14px; letter-spacing: .16em; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; }
+.guest { position: relative; max-width: 290px; padding: 22px 18px 14px; background: var(--ivory); box-shadow: 0 12px 26px rgba(6, 20, 36, .35); }
+.guest::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 9px; background: var(--kofo); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--script); font-weight: 600; font-size: 22px; }
+.table { border-color: var(--rust); color: var(--rust); font-family: var(--display); }
+.openBtn { border-radius: 2px; background: var(--gold-l); color: var(--accent2); font-family: var(--display); font-size: 14px; letter-spacing: .16em; box-shadow: 0 0 0 1px rgba(241, 227, 191, .5), 0 10px 22px rgba(6, 20, 36, .4); }
+.openBtn:hover { background: #fff6dc; translate: 0 -1px; }
+
+/* ── Hero: the photo pinned on a kofo runner ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 50px; background: var(--bg); text-align: center; }
+.runner { position: relative; width: 100%; padding: 30px 0; display: flex; justify-content: center; }
+.runner::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 170px; translate: -50% 0; background: var(--kofo); box-shadow: 0 8px 20px rgba(28, 38, 51, .2); }
+.heroPhotoBox { position: relative; width: 250px; height: 320px; padding: 8px; background: var(--ivory); rotate: -1.5deg; box-shadow: 0 18px 30px rgba(28, 38, 51, .28); }
+.heroPhotoBox > img, .heroPhotoBox > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; width: 100%; height: 100%; background: var(--accent); color: var(--gold-l); font-family: var(--script); font-size: 90px; }
+.heroKicker { margin-top: 30px; color: var(--rust); font-family: var(--display); font-size: 12px; letter-spacing: .28em; }
+.heroNames { margin-top: 8px; color: var(--accent2); font-family: var(--script); font-size: 48px; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--rust); font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 14px; letter-spacing: .14em; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 16px; line-height: 1.65; font-style: italic; }
+
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: -1deg; } 50% { translate: 6px -5px; rotate: 1.5deg; } }
+@keyframes plume { from { scale: .92; opacity: .55; } to { scale: 1.08; opacity: .8; } }
+@media (prefers-reduced-motion: reduce) {
+  .smoke, .boat, .countDecor img { animation: none; }
+}

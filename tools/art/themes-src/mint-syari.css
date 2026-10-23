@@ -1,0 +1,161 @@
+/* Mint Syari — syari tanpa foto: putih bersih dan hijau mint segar, tangkai daun mint cat air yang bergerigi, jendela lengkung bersapuan mint dengan monogram, tata letak modern rata kiri. */
+.root, .cover {
+  --bg: #ffffff; --paper: #eef8f3; --ivory: #ffffff; --field: #f6fbf8; --ink: #173f33; --muted: #557066; --line: #cfe8dc;
+  --accent: #1f6f55; --accent2: #155a44; --gold: #45b383; --gold-l: #ffffff; --gold-d: #23875f;
+  --band-bg: #1f6f55; --band-ink: #ffffff;
+  --display: "Fraunces", Georgia, serif; --serif: "Figtree", system-ui, sans-serif; --script: "Fraunces", Georgia, serif;
+  --wash: url(/themes/art/mint-syari/wash.webp);
+  --disc: url(/themes/art/mint-syari/disc.webp);
+  --h2: 34px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f6f55; --t-accent-ink: #ffffff; --t-bg: #ffffff; --t-ink: #173f33; --t-muted: #557066; --t-line: #cfe8dc; --t-field: #f6fbf8;
+  --t-radius: 18px; --t-font: "Figtree", system-ui, sans-serif; --t-heading-font: "Fraunces", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.divider { width: 170px; margin-left: -6px; }
+.monogram { font-family: var(--display); }
+
+/* left-aligned, airy, modern */
+.section { align-items: stretch; padding: 66px 26px; }
+.head { align-items: flex-start; text-align: left; }
+.head h2 { color: var(--ink); font-family: var(--display); font-weight: 300; line-height: 1.08; }
+
+/* opening */
+.salamBlock { align-items: flex-start; padding: 54px 26px 60px; text-align: left; background: var(--paper); border-radius: 0 0 40px 40px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--muted); font-weight: 500; letter-spacing: .02em; text-transform: none; font-size: 15px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-weight: 300; font-size: 40px; line-height: 1.05; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-weight: 600; font-size: 14px; letter-spacing: .04em; }
+.intro { max-width: none; text-align: left; color: var(--muted); }
+
+/* couple: monogram discs beside the names (no photos) */
+.couple { gap: 20px; background: var(--bg); }
+.amp { justify-content: flex-start; margin: 0 0 0 30px; color: var(--gold); font-family: var(--display); font-style: italic; font-weight: 300; font-size: 54px; }
+.amp img { width: 60px; }
+.amp img:first-child { display: none; }
+.person { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 18px; row-gap: 2px; align-items: start; text-align: left; }
+.portrait { grid-row: 1 / span 4; margin: 0; }
+.portraitArt { position: absolute; z-index: 2; right: -14px; bottom: -6px; width: 56px; height: auto; rotate: 16deg; }
+.portraitFrame { width: 112px; height: 112px; padding: 0; border: 0; border-radius: 999px; background: var(--disc) center / 100% 100% no-repeat; box-shadow: none; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--accent); font-size: 54px; font-weight: 300; font-style: italic; }
+.role { align-self: end; padding-top: 6px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.05; }
+.fullName { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.parents { grid-column: 1 / -1; max-width: none; margin-top: 12px; padding: 12px 16px; border-radius: 16px; background: var(--paper); font-size: 15px; text-wrap: pretty; }
+
+/* countdown: deep mint panel with rounded corners inside the page */
+.countBand { margin: 0 14px; border-radius: 34px; padding: 54px 20px; align-items: center; }
+.countLeaf { position: absolute; z-index: -1; width: 110px; height: auto; opacity: .35; }
+.countLeafA { top: -18px; right: -14px; rotate: 30deg; animation: drift 9s ease-in-out infinite alternate; }
+.countLeafB { bottom: -26px; left: -10px; rotate: -150deg; animation: drift 11s ease-in-out infinite alternate-reverse; }
+.headLight h2 { font-family: var(--display); font-weight: 300; font-size: 32px; }
+.headLight .eyebrow { color: #bdebd4; }
+.count { gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 20px; background: rgba(255, 255, 255, .12); }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--display); font-weight: 300; font-size: 34px; }
+.count small { color: #c8eedc; font-style: normal; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(255, 255, 255, .5); color: #fff; font-family: var(--serif); font-weight: 600; }
+.ghostBtn:hover { background: rgba(255, 255, 255, .12); }
+
+/* events: clean rounded cards, left aligned */
+.events { gap: 16px; }
+.event { align-items: flex-start; padding: 26px 22px 22px; border: 1px solid var(--line); border-radius: var(--card-r); background: #fff; text-align: left; box-shadow: 0 14px 34px rgba(31, 111, 85, .08); }
+.event::before { display: none; }
+.eventNo { position: static; translate: none; width: auto; height: 26px; padding: 0 12px; margin-bottom: 10px; background: var(--paper); color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 12px; }
+.event h3 { color: var(--ink); font-family: var(--display); font-weight: 400; font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 100%; height: 1px; background: var(--line); margin: 10px 0; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 600; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); border-radius: 40px; margin: 0 0; }
+.node { border: 0; background: #fff; box-shadow: 0 4px 12px rgba(31, 111, 85, .12); }
+.node img { width: 24px; }
+.timeline::before { background: var(--line); width: 2px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; }
+
+/* gallery (only if the couple uploads photos) */
+.tile, .tile:first-child { border-radius: 22px; }
+
+/* wishes */
+.form { border: 1px solid var(--line); border-radius: 24px; background: #fff; box-shadow: 0 14px 34px rgba(31, 111, 85, .08); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; font-size: 11px; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { color: #fff; }
+.submit { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .04em; }
+.sent { font-family: var(--display); font-style: normal; }
+.wish { border-radius: 18px; background: var(--paper); border: 0; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.wish small { background: #fff; }
+
+/* gifts */
+.gift { align-items: flex-start; border-radius: 24px; text-align: left; padding: 24px 22px; }
+.gift::after { border-color: rgba(255, 255, 255, .08); }
+.giftIcon { border-color: rgba(255, 255, 255, .4); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 21px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-weight: 700; font-size: 18px; line-height: 1.4; }
+.copy { border-color: rgba(255, 255, 255, .6); color: #fff; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--accent); }
+
+/* closing: light mint with the sprigs growing up from the bottom */
+.closing { align-items: flex-start; text-align: left; padding: 72px 26px 0; background: var(--paper); color: var(--ink); border-radius: 40px 40px 0 0; margin-top: 20px; }
+.closingEmblem { width: 70px; height: auto; rotate: -20deg; }
+.thanks { color: var(--ink); font-family: var(--display); font-weight: 300; font-size: 40px; line-height: 1.1; }
+.closingText { max-width: none; color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-weight: 600; font-size: 14px; }
+.family { color: var(--muted); font-family: var(--serif); letter-spacing: .02em; }
+.closingNames { color: var(--accent); font-family: var(--display); font-style: italic; font-weight: 300; font-size: 36px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--accent); }
+.closingCluster { order: 99; display: block; align-self: center; width: 300px; height: auto; margin: 18px 0 -4px; }
+.music { border: 0; background: var(--accent); }
+.sentBox img { width: 90px; }
+
+/* ── Cover: salam on white, a mint-washed arch window with the monogram, sprigs growing into it ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 30px 26px 30px; overflow: hidden; background: #fff; color: var(--ink); text-align: center; isolation: isolate; }
+.coverArabic { color: var(--accent); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.coverSalam { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.arch { position: relative; flex: 0 0 auto; display: grid; place-items: center; width: 250px; height: 330px; margin: 18px 0 8px; place-items: start center; padding-top: 58px; background: var(--wash) center / 100% 100% no-repeat; }
+.archMono { position: relative; z-index: 1; color: var(--accent); font-family: var(--display); font-size: 64px; font-style: italic; font-weight: 300; line-height: 1; letter-spacing: -.02em; }
+.archMono i { margin: 0 4px; color: var(--gold); font-size: 40px; }
+.coverCluster { position: absolute; bottom: -22px; left: 50%; width: 218px; height: auto; translate: -50% 0; }
+.floatLeaf { position: absolute; z-index: -1; width: 46px; height: auto; opacity: .85; }
+.floatA { top: 21%; left: 8%; rotate: -30deg; animation: drift 8s ease-in-out infinite alternate; }
+.floatB { top: 40%; right: 7%; rotate: 140deg; width: 36px; animation: drift 10s ease-in-out infinite alternate-reverse; }
+.kicker { margin-top: 14px; color: var(--gold-d); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 10px; max-width: 100%; margin-top: 4px; color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.1; }
+.coverNames span { overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold); font-style: italic; font-weight: 300; }
+.coverDate { margin-top: 6px; padding: 5px 14px; border-radius: 999px; background: var(--paper); color: var(--accent); font-size: 14px; font-weight: 700; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--line); background: var(--paper); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .04em; box-shadow: 0 12px 26px rgba(31, 111, 85, .28); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: mint panel, names set large on the left, a sprig on the right, a two-column fact row ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 14px 14px 0; padding: 46px 22px 30px; overflow: hidden; border-radius: 34px; background: var(--paper); text-align: left; isolation: isolate; }
+.heroSprig { position: absolute; z-index: -1; top: -20px; right: -26px; width: 140px; height: auto; rotate: 8deg; }
+.heroKicker { color: var(--gold-d); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNames { display: flex; flex-direction: column; max-width: 76%; color: var(--ink); font-family: var(--display); font-size: 52px; font-weight: 300; line-height: .98; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-style: italic; font-size: 40px; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 22px; }
+.facts div { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; border-radius: 18px; background: #fff; }
+.facts small { color: var(--gold-d); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.facts b { color: var(--ink); font-size: 15px; font-weight: 600; line-height: 1.35; overflow-wrap: anywhere; }
+.heroNote { max-width: 74%; margin-top: 16px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .floatA, .floatB, .countLeafA, .countLeafB { animation: none; }
+}

@@ -1,0 +1,177 @@
+/* Ultah Ninja — ulang tahun anak bertema ninja cilik: atap genteng di bawah bulan purnama, bambu, lampion, gulungan kertas, bintang lempar dari busa, dan dua ninja cilik orisinal bergaya buku cerita. Riang, tidak menyeramkan. */
+.root, .cover {
+  --bg: #fff6e3; --paper: #fdeccb; --ivory: #fffbf2; --field: #fffdf7; --ink: #1d2459; --muted: #4f5785; --line: #1d2459;
+  --accent: #e8553e; --accent2: #c9402c; --gold: #ffd23f; --gold-l: #ffd23f; --gold-d: #c9402c;
+  --band-bg: #1d2459; --band-ink: #ffffff;
+  --display: "Lilita One", "Baloo 2", system-ui, sans-serif; --serif: "Baloo 2", system-ui, sans-serif; --script: "Lilita One", system-ui, sans-serif;
+  --night: url(/themes/art/ultah-ninja/night.webp);
+  --pop: 4px 4px 0 #1d2459;
+  --h2: 34px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e8553e; --t-accent-ink: #ffffff; --t-bg: #fff6e3; --t-ink: #1d2459; --t-muted: #4f5785; --t-line: #1d2459; --t-field: #fffdf7;
+  --t-radius: 18px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Lilita One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { display: inline-block; padding: 3px 12px; border-radius: 999px; background: var(--ink); color: var(--gold); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: none; }
+.head h2 { color: var(--ink); font-family: var(--display); letter-spacing: .01em; }
+.divider { width: 210px; }
+
+/* bamboo poles framing alternate sections */
+.bambooL, .bambooR { position: absolute; z-index: 0; top: 30px; width: 46px; height: auto; opacity: .9; pointer-events: none; }
+
+/* opening */
+.salamBlock { position: relative; padding: 56px 28px 60px; background: var(--paper); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.1; text-shadow: 2px 2px 0 var(--gold); }
+.intro { color: var(--muted); font-size: 18px; }
+
+/* celebrant */
+.couple { background: var(--bg); }
+.portrait { margin: 10px 0 18px; }
+.portraitArt { position: absolute; z-index: 2; top: -18px; right: -24px; width: 70px; height: auto; animation: spin 9s linear infinite; }
+.portraitFrame { width: 210px; height: 210px; padding: 0; border: 4px solid var(--ink); border-radius: 999px; background: #2cc1b5; box-shadow: var(--pop); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.person:hover .portraitFrame { box-shadow: 6px 6px 0 #1d2459; }
+.monogram { color: #fff; font-family: var(--display); font-size: 96px; text-shadow: 4px 4px 0 var(--ink); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 52px; text-shadow: 3px 3px 0 var(--gold); }
+.fullName { font-family: var(--serif); font-weight: 700; }
+.parents { font-size: 16px; }
+
+/* countdown: the night roof scene */
+.countBand { padding: 66px 18px 150px; background: linear-gradient(rgba(18, 22, 64, .6), rgba(18, 22, 64, .25) 60%, rgba(18, 22, 64, 0)), var(--night) 50% 100% / cover no-repeat, var(--ink); }
+.countNinja { position: absolute; z-index: -1; bottom: 18px; width: 120px; height: auto; }
+.countNinjaA { right: 18px; animation: hop 2.6s var(--m-spring, ease) infinite; }
+.countNinjaB { left: 16px; width: 112px; }
+.headLight .eyebrow { background: var(--gold); color: var(--ink); }
+.headLight h2 { color: #fff; font-family: var(--display); text-shadow: 3px 3px 0 #12163f; }
+.count { gap: 9px; }
+.count > div { height: 84px; border: 3px solid var(--ink); border-radius: 18px; background: #fff; box-shadow: var(--pop); }
+.count > div:nth-child(1) { background: var(--gold); }
+.count > div:nth-child(2) { background: #2cc1b5; }
+.count > div:nth-child(3) { background: #ff7aa8; }
+.count > div:nth-child(4) { background: #fff; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--ink); font-style: normal; font-weight: 800; font-size: 13px; }
+.countTba { color: #fff; }
+.ghostBtn { border: 3px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--serif); font-weight: 800; box-shadow: var(--pop); }
+.ghostBtn:hover { background: #ffe07a; translate: -1px -1px; }
+
+/* events: scroll-paper mission cards with wooden rods */
+.events { gap: 26px; }
+.event { padding: 34px 34px 26px; border: 0; border-radius: 6px; background: var(--ivory); box-shadow: 0 0 0 3px var(--ink), var(--pop); }
+.event::before { inset: 10px 26px auto; height: 6px; border: 0; border-radius: 3px; background: var(--accent); }
+.event::after { content: ""; position: absolute; inset: -6px -10px; border-left: 14px solid #b8733a; border-right: 14px solid #b8733a; border-radius: 10px; pointer-events: none; }
+.eventNo { top: auto; bottom: -16px; height: 32px; width: auto; padding: 0 14px; border: 3px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .04em; white-space: nowrap; }
+.eventNo::before { content: "Misi "; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 800; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.rule { width: 64px; height: 6px; border-radius: 3px; background: var(--gold); }
+.mapBtn { border: 3px solid var(--ink); background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 800; box-shadow: var(--pop); margin-bottom: 8px; }
+.mapBtn:hover { background: var(--accent2); translate: -1px -1px; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; border-radius: 2px; background: repeating-linear-gradient(var(--ink) 0 10px, transparent 10px 18px); }
+.node { width: 44px; height: 44px; border: 3px solid var(--ink); background: #fff; }
+.node img { width: 30px; animation: spin 10s linear infinite; }
+.storyBody small { color: var(--accent); font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; }
+.storyBody p { color: var(--muted); }
+
+/* gallery (only uploaded photos) */
+.tile, .tile:first-child { border: 3px solid var(--ink); border-radius: 18px; box-shadow: var(--pop); }
+
+/* wishes */
+.form { border: 3px solid var(--ink); border-radius: 22px; background: #fff; box-shadow: 6px 6px 0 #1d2459; }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-weight: 800; letter-spacing: .04em; }
+.field input, .field textarea { border: 2px solid var(--ink); border-radius: 14px; }
+.choices button { border: 2px solid var(--ink); color: var(--ink); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--accent); color: #fff; box-shadow: 3px 3px 0 #1d2459; translate: -1px -1px; }
+.step { border: 2px solid var(--ink); }
+.submit { border: 3px solid var(--ink); background: var(--accent); color: #fff; font-family: var(--display); font-size: 18px; letter-spacing: .04em; box-shadow: var(--pop); }
+.submit:not(:disabled):hover { background: var(--accent2); translate: -1px -1px; }
+.submit:not(:disabled):active { translate: 2px 2px; box-shadow: 1px 1px 0 #1d2459; }
+.sent { color: var(--ink); font-family: var(--display); font-style: normal; font-size: 22px; }
+.wish { border: 3px solid var(--ink); border-radius: 18px; background: #fff; }
+.wish:nth-child(3n + 1) { background: #fff3c4; }
+.wish:nth-child(3n + 2) { background: #dff6f3; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 17px; }
+.wish small { background: var(--ink); color: var(--gold); font-weight: 700; }
+
+/* gifts */
+.gift { border: 3px solid var(--ink); border-radius: 22px; background: #3b6fd8; box-shadow: var(--pop); }
+.gift:nth-of-type(odd) { background: var(--accent); }
+.gift::after { border-color: rgba(255, 255, 255, .12); }
+.giftIcon { border: 2px solid #fff; background: var(--ink); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 21px; letter-spacing: .02em; }
+.giftNo { color: #fff; font-family: var(--serif); font-weight: 800; font-size: 20px; line-height: 1.35; }
+.gift small { color: rgba(255, 255, 255, .92); }
+.copy { border: 2px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.copy:hover { background: #ffe07a; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--ink); }
+
+/* closing: night again, ninjas on the roof */
+.closing { padding: 70px 28px 0; background: linear-gradient(rgba(18, 22, 64, .78), rgba(18, 22, 64, .55) 55%, rgba(18, 22, 64, 0) 80%), var(--night) 50% 100% / cover no-repeat, var(--ink); }
+.closingEmblem { width: 90px; height: auto; animation: spin 8s linear infinite; }
+.thanks { color: var(--gold); font-family: var(--display); font-size: 42px; text-shadow: 3px 3px 0 #12163f, 0 0 18px rgba(18, 22, 64, .8); }
+.closingText { color: #fff; text-shadow: 0 1px 6px rgba(10, 12, 40, .7); }
+.family { color: #e8e9ff; font-family: var(--serif); font-weight: 700; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 36px; text-shadow: 3px 3px 0 var(--accent); }
+.made { color: rgba(255, 255, 255, .75); }
+.closingRoof { order: 99; position: relative; display: flex; justify-content: space-between; align-items: flex-end; width: calc(100% + 56px); height: 190px; margin: 16px -28px 0; padding: 0 22px 34px; }
+.closingRoof img { width: 120px; height: auto; }
+.closingRoof img:last-child { animation: hop 2.6s var(--m-spring, ease) infinite; }
+.music { border: 3px solid var(--ink); background: var(--accent); box-shadow: 3px 3px 0 #1d2459; }
+.sentBox img { width: 90px; animation: spin 6s linear infinite; }
+
+/* ── Cover: moonlit rooftop, a hanging scroll with the name, two little ninjas on the roof, foam stars ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 22px 20px 0; overflow: hidden; background: var(--ink) var(--night) 50% 100% / cover no-repeat; color: var(--ink); text-align: center; isolation: isolate; }
+.scrollWrap { position: relative; width: 100%; max-width: 350px; aspect-ratio: 480 / 225; animation: unroll 1s var(--m-spring, ease) both; }
+.scrollImg { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 8px 12px rgba(8, 10, 40, .5)); }
+.scrollText { position: absolute; inset: 15% 15% 14%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.kicker { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverDate { color: var(--ink); font-size: 14px; font-weight: 800; }
+.ageStar { position: absolute; z-index: 2; right: -6px; top: -14px; display: grid; place-items: center; width: 74px; height: 74px; animation: wobble 3s ease-in-out infinite; }
+.ageStar img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ageStar b { position: relative; color: var(--ink); font-family: var(--display); font-size: 28px; font-weight: 400; line-height: 1; }
+.ageStar small { position: absolute; bottom: -18px; padding: 1px 8px; border-radius: 999px; background: var(--ink); color: var(--gold); font-size: 11px; font-weight: 800; white-space: nowrap; }
+.guestCard { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 310px; margin-top: 26px; padding: 16px 18px 18px; border: 3px solid var(--ink); border-radius: 22px; background: #fffbf2; box-shadow: 5px 5px 0 #12163f; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; font-weight: 600; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border: 2px solid var(--ink); color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.openBtn { border: 3px solid var(--ink); background: var(--accent); color: #fff; font-family: var(--display); font-size: 18px; letter-spacing: .04em; box-shadow: var(--pop); }
+.openBtn:hover { background: var(--accent2); translate: -1px -1px; }
+.openBtn:active { translate: 2px 2px; box-shadow: 1px 1px 0 #1d2459; }
+.roof { position: relative; flex: 1; display: flex; justify-content: space-between; align-items: flex-end; width: calc(100% + 40px); min-height: 220px; padding: 0 16px 6dvh; }
+.ninjaA { width: 150px; height: auto; animation: hop 2.6s var(--m-spring, ease) infinite; }
+.ninjaB { width: 136px; height: auto; }
+.fly { position: absolute; z-index: 1; height: auto; animation: spin 7s linear infinite; }
+.flyA { top: 44%; left: 6%; width: 44px; filter: hue-rotate(150deg); }
+.flyB { top: 60%; right: 30%; width: 34px; filter: hue-rotate(290deg) saturate(1.2); animation-duration: 5s; }
+.flyC { top: 30%; right: 4%; width: 30px; animation-duration: 9s; animation-direction: reverse; }
+
+/* ── Hero: paper dojo board, the jumping ninja with the name, age on a foam star, note in a speech bubble ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 22px 44px; overflow: hidden; background: var(--paper); text-align: center; isolation: isolate; }
+.hero .bambooL { left: -8px; top: 0; }
+.hero .bambooR { right: -8px; top: 0; scale: -1 1; }
+.heroKicker { display: inline-block; padding: 4px 14px; border-radius: 999px; background: var(--ink); color: var(--gold); font-size: 14px; font-weight: 800; letter-spacing: .04em; }
+.heroStage { position: relative; width: 250px; height: 210px; margin-top: 10px; }
+.heroNinja { position: absolute; left: calc(50% - 95px); bottom: 0; width: 190px; height: auto; animation: hop 2.6s var(--m-spring, ease) infinite; }
+.heroAge { position: absolute; right: -12px; top: 8px; display: grid; place-items: center; width: 78px; height: 78px; }
+.heroAge img { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 12s linear infinite; }
+.heroAge b { position: relative; color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 400; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 56px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--gold), 6px 6px 0 #1d2459; }
+.heroDate { margin-top: 12px; padding: 4px 14px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; font-weight: 800; }
+.heroNote { position: relative; max-width: 320px; margin-top: 22px; padding: 14px 18px; border: 3px solid var(--ink); border-radius: 20px; background: #fff; color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.5; box-shadow: var(--pop); }
+.heroNote::before { content: ""; position: absolute; top: -13px; left: 50%; width: 20px; height: 20px; translate: -50% 0; rotate: 45deg; border-left: 3px solid var(--ink); border-top: 3px solid var(--ink); background: #fff; }
+
+@keyframes hop { 0%, 60%, 100% { translate: 0 0; } 30% { translate: 0 -12px; } }
+@keyframes wobble { 0%, 100% { rotate: -8deg; } 50% { rotate: 8deg; } }
+@keyframes unroll { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
+@media (prefers-reduced-motion: reduce) {
+  .ninjaA, .heroNinja, .countNinjaA, .closingRoof img, .fly, .ageStar, .heroAge img, .portraitArt, .node img, .closingEmblem, .scrollWrap, .sentBox img { animation: none; }
+}

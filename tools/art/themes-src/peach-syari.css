@@ -1,0 +1,159 @@
+/* Peach Syari — bunga cat air peach dan koral lembut (ranunculus, mawar taman, kuncup, bunga lilin) di atas kertas krem; sampul berkalung bunga asimetris, medali oval berinisial, kartu bertepi jahitan putus-putus, manis tapi anggun dan syar'i. */
+.root, .cover {
+  --bg: #fcf5ee; --paper: #f9e9de; --ivory: #fffaf6; --field: #ffffff; --ink: #4a2f2a; --muted: #7a5f58; --line: #efd3c4;
+  --accent: #b9524a; --accent2: #9c4038; --gold: #e98068; --gold-l: #fbdccb; --gold-d: #b25a46;
+  --band-bg: #f8e2d4; --band-ink: #4a2f2a;
+  --sage: #7f9470;
+  --display: "Bellefair", "Cormorant Garamond", Georgia, serif; --serif: "Mulish", "Helvetica Neue", sans-serif; --script: "Monsieur La Doulaise", cursive;
+  --wash: url("/themes/art/peach-syari/wash.webp") center / cover no-repeat;
+  --h2: 34px; --card-r: 28px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b9524a; --t-accent-ink: #ffffff; --t-bg: #fcf5ee; --t-ink: #4a2f2a; --t-muted: #7a5f58; --t-line: #efd3c4; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Mulish", sans-serif; --t-heading-font: "Bellefair", serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 200px; }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+.section { padding: 64px 24px; }
+
+/* opening */
+.salamBlock { position: relative; padding: 40px 28px 60px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: 0; }
+
+/* couple: round monograms floating on a watercolour pool */
+.couple { background: var(--paper); gap: 16px; }
+.personWrap + .personWrap { margin-top: 6px; }
+.portrait > img { position: absolute; z-index: 3; left: -20px; bottom: -6px; width: 92px; height: auto; rotate: -14deg; }
+.portraitFrame { width: 190px; height: 190px; padding: 0; border: 1px solid var(--gold); border-radius: 50%; background: var(--wash), var(--ivory); box-shadow: 0 0 0 7px var(--ivory), 0 0 0 8px var(--line), 0 16px 30px rgba(178, 90, 70, .14); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 92px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; }
+.fullName { color: var(--accent2); font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 66px; }
+.amp img { width: 46px; }
+
+/* countdown: peach paper band, tiles as round petals */
+.countBand { padding: 64px 18px 66px; background: var(--paper); color: var(--ink); }
+.countDecor { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
+.countDecor img { position: absolute; height: auto; }
+.countDecor img:first-child { top: -22px; right: -44px; width: 138px; }
+.countDecor img:last-child { bottom: -20px; left: -44px; width: 130px; rotate: 180deg; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: 74px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 4px rgba(255, 250, 246, .7); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .08em; }
+.countTba { color: var(--accent); }
+.ghostBtn { border-color: var(--gold); color: var(--accent); font-family: var(--serif); font-weight: 600; font-size: 13px; }
+.ghostBtn:hover { background: var(--ivory); }
+
+/* events: soft cards with a stitched inner edge */
+.events { gap: 26px; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: var(--card-r); background: var(--ivory); box-shadow: 0 2px 0 var(--line), 0 16px 32px rgba(178, 90, 70, .09); }
+.event::before { inset: 8px; border: 1px dashed color-mix(in srgb, var(--gold) 70%, transparent); border-radius: 21px; }
+.eventNo { top: -16px; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); color: #fff; font-family: var(--display); font-size: 15px; letter-spacing: 0; box-shadow: 0 0 0 4px var(--bg); }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 28px; }
+.eventDate { color: var(--accent2); font-style: normal; font-weight: 600; font-size: 15px; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.rule { width: 30px; height: 6px; background: radial-gradient(circle, var(--gold) 0 2.5px, transparent 3px) 0 0 / 10px 6px repeat-x; }
+.event strong { color: var(--ink); font-weight: 700; font-size: 16px; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 600; box-shadow: 0 8px 18px rgba(185, 82, 74, .25); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 1px; background: repeating-linear-gradient(var(--gold) 0 3px, transparent 3px 7px); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody { padding: 14px 16px; border-radius: 20px; background: var(--ivory); }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; }
+
+.tile { border-radius: 20px; }
+.tile:first-child { border-radius: 999px 999px 20px 20px; }
+
+/* wishes */
+.form { border: 0; border-radius: 26px; box-shadow: 0 16px 34px rgba(178, 90, 70, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 700; font-size: 11px; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.step { border-color: var(--gold); color: var(--accent); }
+.submit { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; font-size: 24px; }
+.wish { border: 0; border-radius: 20px; box-shadow: 0 1px 0 var(--line); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.wish small { background: var(--gold-l); color: var(--accent2); font-weight: 600; }
+
+/* gifts: light paper cards */
+.gifts { background: var(--bg); }
+.gift { padding: 26px 20px 22px; border-radius: var(--card-r); background: var(--wash), var(--ivory); color: var(--ink); box-shadow: 0 0 0 1px var(--line), 0 14px 28px rgba(178, 90, 70, .1); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold); background: var(--ivory); }
+.gift h3 { color: var(--accent2); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 23px; }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--gold); color: var(--accent); font-family: var(--serif); font-weight: 700; background: var(--ivory); }
+.copy:hover { background: var(--gold-l); }
+.copyOn, .copyOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.giftCopied { box-shadow: 0 0 0 2px var(--gold), 0 14px 28px rgba(178, 90, 70, .12); }
+
+/* closing */
+.closing { padding: 70px 28px 0; background: var(--paper); color: var(--ink); }
+.closingEmblem { width: 96px; height: auto; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--accent2); font-family: var(--serif); font-weight: 700; font-size: 13px; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 14px; letter-spacing: .04em; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 38px; }
+.made { position: relative; z-index: 1; color: var(--muted); }
+.closingGarland { order: 99; display: block; width: calc(100% + 56px); margin: 0 -28px 0; }
+.closingGarland img { display: block; width: 92%; height: auto; margin-left: auto; scale: -1 1; transform-origin: 50% 50%; }
+.music { background: var(--ivory); border-color: var(--gold); }
+
+/* ── Cover: cream paper, peach pool behind the names, a floral spray rising from the corner ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 54px 28px 0; overflow: hidden; background: radial-gradient(ellipse at 50% 35%, #fffaf5, #fbf1e8 70%); color: var(--ink); text-align: center; isolation: isolate; }
+.coverWash { position: absolute; z-index: -1; left: 50%; top: 40px; width: 330px; height: auto; translate: -50% 0; opacity: .95; animation: breathe 9s ease-in-out infinite; }
+.coverCorner { position: absolute; z-index: -1; top: -6px; right: -22px; width: 170px; height: auto; transform-origin: 100% 0; animation: sway 8s ease-in-out infinite alternate; }
+.coverGarland { position: absolute; z-index: 1; left: -9%; bottom: -2px; width: 112%; max-width: none; height: auto; transform-origin: 10% 100%; animation: sway 10s ease-in-out infinite alternate; pointer-events: none; }
+.bismillah { margin-top: 26px; color: var(--accent); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.kicker { margin-top: 10px; color: var(--gold-d); font-size: 11px; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin-top: 14px; color: var(--ink); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: -4px 0 -8px; color: var(--gold); font-family: var(--script); font-size: 58px; font-style: normal; line-height: 1.1; }
+.coverDate { margin-top: 16px; color: var(--accent2); font-size: 13px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.coverFoot { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin: 30px 0 max(200px, 26vh); }
+.guest { max-width: 290px; padding: 14px 18px; border-radius: 22px; background: rgba(255, 250, 246, .92); box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(178, 90, 70, .12); }
+.guest small { color: var(--muted); font-size: 13px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; }
+.table { border-color: var(--gold); color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; box-shadow: 0 10px 22px rgba(185, 82, 74, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: an oval cameo with the couple's initials ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 44px; background: var(--bg); text-align: center; overflow: hidden; }
+.heroCorner { position: absolute; top: -4px; left: -24px; width: 150px; height: auto; scale: -1 1; transform-origin: 50% 50%; }
+.cameo { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 230px; height: 296px; border-radius: 50%; background: var(--wash), var(--ivory); box-shadow: 0 0 0 1px var(--gold), 0 0 0 8px var(--bg), 0 0 0 9px var(--line), 0 20px 40px rgba(178, 90, 70, .14); }
+.cameoBloom { position: absolute; bottom: -40px; left: 50%; width: 120px; height: auto; translate: -50% 0; }
+.initials { display: flex; align-items: center; gap: 6px; margin-top: -26px; color: var(--accent); font-family: var(--display); font-size: 64px; line-height: 1; }
+.initials em { margin: 0; color: var(--gold); font-family: var(--script); font-size: 46px; font-style: normal; }
+.heroKicker { margin-top: 54px; color: var(--gold-d); font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-family: var(--script); font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--accent2); font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.7; }
+
+@keyframes sway { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }
+@keyframes breathe { 0%, 100% { scale: 1; opacity: .9; } 50% { scale: 1.04; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverWash, .coverCorner, .coverGarland { animation: none; }
+}

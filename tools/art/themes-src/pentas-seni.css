@@ -1,0 +1,170 @@
+/* Pentas Seni — undangan pentas seni sekolah: panggung aula dalam gouache (tirai toska, valans koral, lampu sorot), tiga murid tampil, gambar krayon anak yang ditempel selotip, dan kartu acara bergaris di atas kertas gambar. */
+.root, .cover {
+  --bg: #fbf3e1; --paper: #f6ead0; --ivory: #fffaf0; --field: #fffdf7; --ink: #2b2230; --muted: #5e5560; --line: #e3d3b2;
+  --accent: #1f6f70; --accent2: #2a8c8c; --gold: #eaa93a; --gold-l: #fff4d6; --gold-d: #c44a40;
+  --band-bg: #1f6f70; --band-ink: #fff8e8;
+  --display: "Titan One", "Arial Rounded MT Bold", sans-serif; --serif: "Baloo 2", system-ui, sans-serif; --script: "Patrick Hand", cursive;
+  --h2: 30px; --card-r: 10px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f6f70; --t-accent-ink: #fff8e8; --t-bg: #fbf3e1; --t-ink: #2b2230; --t-muted: #5e5560; --t-line: #e3d3b2; --t-field: #fffdf7;
+  --t-radius: 12px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Titan One", sans-serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg) radial-gradient(circle, rgba(196, 128, 31, .12) 1px, transparent 1.5px) 0 0 / 18px 18px; }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--script); font-size: 19px; letter-spacing: .02em; text-transform: none; }
+.head { position: relative; padding-top: 34px; }
+.head::before { content: ""; position: absolute; top: 0; left: 50%; width: 240px; height: 35px; translate: -50% 0; background: url(/themes/art/pentas-seni/bendera.webp) center top / 240px 35px no-repeat; }
+.head h2, .headLight h2 { color: var(--accent); font-weight: 400; }
+.divider { width: 44px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+.salamBlock { padding: 50px 28px 46px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.salamSub { color: var(--gold-d); font-family: var(--script); font-size: 20px; }
+
+/* hosts: kepala sekolah & panitia, each in a crayon-ringed badge holding a painted instrument */
+.couple { gap: 26px; background: transparent; }
+.portrait { margin-bottom: 10px; }
+.portrait > img { position: absolute; z-index: 2; right: -18px; top: -6px; width: 44px; height: auto; rotate: 12deg; }
+.portraitFrame { width: 150px; height: 150px; padding: 0; border: 3px dashed var(--gold); border-radius: 50%; background: var(--ivory) url(/themes/art/pentas-seni/rebana.webp) center / 92px no-repeat; box-shadow: 0 0 0 8px #fff3d4; }
+.personWrap:nth-child(3) .portraitFrame { border-color: var(--accent2); background-image: url(/themes/art/pentas-seni/angklung.webp); background-size: 70px; box-shadow: 0 0 0 8px #dff0ec; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 8px #fff3d4, 0 10px 24px rgba(0, 0, 0, .1); }
+.monogram { display: none; }
+.role { font-size: 20px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 32px; line-height: 1.1; }
+.fullName { color: var(--accent); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15.5px; }
+
+/* countdown: the curtain colour, a coral valance edge, stage lights for digits */
+.countBand { padding: 84px 16px 62px; background: linear-gradient(90deg, rgba(0, 0, 0, .1) 0 8%, transparent 8% 16%, rgba(0, 0, 0, .1) 16% 24%, transparent 24% 32%, rgba(0, 0, 0, .1) 32% 40%, transparent 40% 48%, rgba(0, 0, 0, .1) 48% 56%, transparent 56% 64%, rgba(0, 0, 0, .1) 64% 72%, transparent 72% 80%, rgba(0, 0, 0, .1) 80% 88%, transparent 88%), #1f6f70; }
+.countBand::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 34px; background: radial-gradient(circle at 50% 0, #e2574c 0 19px, transparent 20px) 0 0 / 40px 34px repeat-x, linear-gradient(#e2574c 0 12px, transparent 12px); }
+.count { gap: 8px; }
+.count > div { height: 76px; width: 76px; border: 3px solid #f6c65a; border-radius: 50%; background: radial-gradient(circle at 50% 40%, #fffbe8, #ffe08a 70%); box-shadow: 0 0 22px rgba(255, 224, 138, .55); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 26px; }
+.count small { color: var(--ink); font-size: 12px; font-style: normal; font-weight: 700; }
+.headLight .eyebrow { color: #ffe08a; }
+.headLight h2 { color: #fff8e8; }
+.ghostBtn { border: 2px solid #ffe08a; color: #fff8e8; font-family: var(--serif); font-weight: 700; font-size: 14px; }
+
+/* events: lined index cards taped to the page */
+.events { gap: 28px; background: transparent; }
+.event { padding: 34px 22px 24px; border: 0; border-radius: 4px; background: repeating-linear-gradient(transparent 0 27px, #cfe0ea 27px 28px) 0 54px, #fffdf7; box-shadow: 0 10px 22px rgba(80, 50, 20, .14); rotate: -.6deg; }
+.event:nth-child(odd) { rotate: .7deg; }
+.event::before { inset: 0 auto 0 26px; width: 2px; border: 0; border-radius: 0; background: rgba(226, 87, 76, .45); }
+.event::after { content: ""; position: absolute; top: -12px; left: 50%; width: 92px; height: 24px; translate: -50% 0; rotate: -3deg; background: rgba(239, 224, 176, .9); box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+.event:hover { translate: 0 -3px; box-shadow: 0 16px 28px rgba(80, 50, 20, .18); }
+.eventNo { top: 12px; left: auto; right: 12px; translate: none; width: 34px; height: 34px; border-radius: 50%; background: var(--gold); color: var(--ink); font-family: var(--display); font-size: 13px; rotate: 8deg; }
+.event h3 { color: var(--gold-d); font-family: var(--display); font-size: 23px; }
+.eventDate { color: var(--ink); font-family: var(--script); font-size: 21px; font-style: normal; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-size: 15px; font-weight: 700; }
+.rule { width: 70px; height: 4px; border-radius: 2px; background: var(--gold); }
+.event strong { color: var(--ink); font-size: 18px; font-weight: 700; }
+.mapBtn { border-radius: 12px; background: var(--accent); color: #fff8e8; font-family: var(--serif); font-size: 15px; font-weight: 700; box-shadow: 0 4px 0 #134849; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* programme (story): numbered acts with crayon stars */
+.story { background: rgba(255, 250, 240, .7); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(var(--gold) 0 8px, transparent 8px 14px); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 36px; }
+.storyBody small { align-self: flex-start; padding: 0 10px; border-radius: 999px; background: var(--accent); color: #fff8e8; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.storyBody h3 { color: var(--gold-d); font-family: var(--display); font-size: 20px; }
+.storyBody p { color: var(--muted); font-size: 16px; }
+
+/* gallery: the children's drawings pinned on a cork board */
+.gallery { background: #c8945c radial-gradient(circle, rgba(90, 52, 20, .25) 1px, transparent 1.6px) 0 0 / 7px 7px; }
+.gallery .head h2 { color: #fff8e8; text-shadow: 0 2px 0 rgba(60, 30, 10, .35); }
+.gallery .eyebrow { color: #fff1c4; }
+.mosaic { grid-auto-rows: 160px; gap: 12px; }
+.tile { border-radius: 0; object-fit: contain !important; filter: drop-shadow(0 6px 8px rgba(60, 30, 10, .3)); }
+.tile:first-child { border-radius: 0; }
+.tile:nth-child(2) { rotate: 3deg; }
+.tile:nth-child(3) { rotate: -2deg; }
+
+.wishes { background: transparent; }
+.form { border: 3px solid var(--ink); border-radius: 16px; background: var(--field); box-shadow: 6px 6px 0 var(--gold); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 10px; font-family: var(--serif); }
+.choices button { border: 2px solid var(--line); border-radius: 10px; font-family: var(--serif); font-weight: 700; font-size: 15px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--gold); color: var(--ink); box-shadow: 0 3px 0 var(--ink); }
+.step { border: 2px solid var(--ink); color: var(--ink); }
+.submit { border-radius: 12px; background: var(--gold-d); color: #fff8e8; font-family: var(--display); font-size: 16px; letter-spacing: .02em; box-shadow: 0 4px 0 #8a2f28; }
+.submit:not(:disabled):hover { background: #d4564b; }
+.sent { color: var(--accent); font-family: var(--script); font-size: 24px; font-style: normal; }
+.wishList { gap: 14px; }
+.wish { border: 0; border-radius: 2px; background: #fff1a8; box-shadow: 0 6px 12px rgba(80, 50, 20, .12); rotate: -.8deg; }
+.wish:nth-child(3n + 2) { background: #ffd6dc; rotate: .7deg; }
+.wish:nth-child(3n) { background: #cfeee8; rotate: -.3deg; }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 800; }
+.wish small { background: rgba(43, 34, 48, .1); color: var(--ink); font-weight: 700; }
+.wish p { color: var(--ink); font-family: var(--script); font-size: 19px; line-height: 1.35; }
+.sentBox img { width: 110px; }
+
+.gifts { background: transparent; }
+.gift { border: 3px solid var(--ink); border-radius: 16px; background: var(--accent); box-shadow: 6px 6px 0 var(--gold); }
+.gift::after { display: none; }
+.gift h3 { color: #fff8e8; font-family: var(--display); font-size: 18px; letter-spacing: 0; }
+.giftIcon { border-color: #ffe08a; }
+.giftNo { font-family: var(--display); letter-spacing: .04em; }
+.gift .giftNo:not(:has(+ small)) { font-family: var(--serif); font-size: 17px; letter-spacing: 0; line-height: 1.5; }
+.copy { border: 2px solid #ffe08a; color: #fff8e8; font-family: var(--serif); font-weight: 700; font-size: 13px; }
+.copyOn, .copyOn:hover { background: #ffe08a; color: var(--ink); }
+
+.closing { padding: 56px 26px 60px; background: #1f6f70; }
+.closingProps { display: flex; align-items: flex-end; justify-content: center; gap: 14px; }
+.closingProps img { height: auto; }
+.closingProps img:nth-child(1) { width: 92px; rotate: -12deg; }
+.closingProps img:nth-child(2) { width: 70px; }
+.closingProps img:nth-child(3) { width: 82px; rotate: 10deg; }
+.thanks { color: #ffe08a; font-family: var(--display); font-size: 36px; line-height: 1.15; }
+.closingText { color: #e8f4f0; }
+.closingSalam { color: #fff8e8; font-family: var(--script); font-size: 21px; letter-spacing: 0; }
+.closingNames { display: none; }
+.made { color: rgba(255, 248, 232, .6); }
+.music { border: 2px solid var(--ink); background: var(--gold-d); }
+
+/* ── Cover: the school stage at the top, a hand-made poster below it, children's drawings taped around ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 18px 40px; overflow: hidden; background: #fbf3e1 radial-gradient(circle, rgba(196, 128, 31, .14) 1px, transparent 1.5px) 0 0 / 18px 18px; color: var(--ink); text-align: center; isolation: isolate; }
+.stage { position: relative; width: calc(100% + 36px); max-width: 430px; flex-shrink: 0; }
+.stage img { display: block; width: 100%; height: auto; }
+.spot { position: absolute; inset: 8% 15% 14%; background: radial-gradient(40% 30% at 50% 72%, rgba(255, 241, 184, .35), transparent 70%); mix-blend-mode: screen; animation: spot 5s ease-in-out infinite alternate; pointer-events: none; }
+.poster { position: relative; z-index: 2; width: 100%; max-width: 340px; margin-top: -34px; padding: 26px 18px 20px; border: 3px solid var(--ink); border-radius: 6px; background: #fffaf0; box-shadow: 7px 7px 0 var(--gold); rotate: -1deg; }
+.poster::before, .poster::after { content: ""; position: absolute; top: -13px; width: 74px; height: 24px; background: rgba(239, 224, 176, .92); box-shadow: 0 1px 2px rgba(0, 0, 0, .1); }
+.poster::before { left: 14px; rotate: -8deg; }
+.poster::after { right: 14px; rotate: 7deg; }
+.kicker { display: inline-block; padding: 2px 14px; border-radius: 999px; background: var(--accent); color: #fff8e8; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.coverTitle { max-width: 100%; margin-top: 10px; color: var(--gold-d); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.coverHost { margin-top: 4px; color: var(--accent); font-family: var(--script); font-size: 21px; line-height: 1.2; }
+.coverDate { margin-top: 8px; color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 14px; padding-top: 14px; border-top: 2px dashed var(--line); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 19px; font-weight: 800; line-height: 1.25; }
+.table { border: 2px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--serif); font-weight: 800; }
+.openBtn { border: 3px solid var(--ink); border-radius: 14px; background: var(--gold-d); color: #fff8e8; font-family: var(--display); font-size: 16px; letter-spacing: .02em; box-shadow: 0 5px 0 var(--ink); }
+.openBtn:hover { translate: 0 -2px; box-shadow: 0 7px 0 var(--ink); }
+.drawL, .drawR { position: absolute; z-index: 1; height: auto; }
+.drawL { left: -26px; bottom: 14px; width: 118px; rotate: -9deg; }
+.drawR { right: -24px; bottom: 30px; width: 120px; rotate: 8deg; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 22px 34px; text-align: center; }
+.heroStage { width: calc(100% + 44px); max-width: 430px; height: auto; }
+.kickerDark { margin-top: 14px; padding: 2px 14px; border-radius: 999px; background: var(--accent); color: #fff8e8; font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.heroTitle { max-width: 100%; margin-top: 10px; color: var(--gold-d); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroDate { margin-top: 6px; color: var(--ink); font-size: 17px; font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 12px; color: var(--muted); font-family: var(--script); font-size: 20px; line-height: 1.35; text-wrap: balance; }
+
+@keyframes spot { from { translate: -14% 0; } to { translate: 14% 0; } }
+@keyframes wiggle { from { rotate: -6deg; } to { rotate: 6deg; } }
+.closingProps img:nth-child(2) { animation: wiggle 1.6s var(--m-spring) infinite alternate; }
+@media (prefers-reduced-motion: reduce) {
+  .spot, .closingProps img { animation: none; }
+}
+@media (max-height: 720px) {
+  .stage { width: 84%; }
+  .poster { margin-top: -22px; padding-top: 20px; }
+  .coverTitle { font-size: 30px; }
+}

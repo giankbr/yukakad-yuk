@@ -1,0 +1,172 @@
+/* Tenun Troso — tenun ikat pakan Troso, Jepara: kain merah bata, kunyit dan nila dengan corak wajik yang berpendar khas ikat, alat tenun bukan mesin dari kayu jati, dan sawah Jepara dengan kain dijemur. */
+.root, .cover {
+  --bg: #f1e6cf; --paper: #e9dbbd; --ivory: #fbf5e8; --field: #fffaf0; --ink: #2f1d14; --muted: #6a5242; --line: #d8c29a;
+  --accent: #93291f; --accent2: #6e1c16; --gold: #c98a2e; --gold-l: #f4d79a; --gold-d: #9a6318;
+  --band-bg: #26375c; --band-ink: #fbf5e8;
+  --indigo: #26375c; --indigo-d: #18233d;
+  --display: "Kurale", Georgia, serif; --serif: "Castoro", Georgia, serif; --script: "Kurale", Georgia, serif;
+  --ikat: url(/themes/art/tenun-troso/ikat.webp);
+  --band: url(/themes/art/tenun-troso/band.webp);
+  --fringe: url(/themes/art/tenun-troso/fringe.webp);
+  --warp: repeating-linear-gradient(90deg, rgba(147, 41, 31, .07) 0 1px, transparent 1px 5px);
+  --h2: 34px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #93291f; --t-accent-ink: #fbf5e8; --t-bg: #f1e6cf; --t-ink: #2f1d14; --t-muted: #6a5242; --t-line: #d8c29a; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Castoro", Georgia, serif; --t-heading-font: "Kurale", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) var(--warp); }
+
+/* woven label tag as the eyebrow */
+.eyebrow { display: inline-block; padding: 5px 14px 4px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-size: 11px; letter-spacing: .26em; outline: 1px dashed rgba(244, 215, 154, .7); outline-offset: -4px; }
+.head { gap: 12px; }
+.head h2 { color: var(--accent); line-height: 1.1; }
+.divider { width: 200px; }
+
+/* opening */
+.salamBlock { padding: 10px 28px 56px; }
+.arabic { color: var(--indigo); font-size: 27px; }
+.salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 13px; letter-spacing: .12em; text-transform: none; font-style: italic; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.salamSub { color: var(--indigo); font-family: var(--serif); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+.intro { color: var(--muted); }
+
+/* couple: horizontal swatch cards, portrait framed in a strip of ikat */
+.couple { gap: 20px; background: var(--paper) var(--warp); }
+.person { display: grid; grid-template-columns: 128px minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 18px; row-gap: 2px; align-items: start; padding: 16px; background: var(--ivory); text-align: left; box-shadow: 0 10px 24px rgba(60, 30, 10, .12); outline: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: -7px; }
+.personWrap:nth-of-type(3) .person { grid-template-columns: minmax(0, 1fr) 128px; text-align: right; }
+.personWrap:nth-of-type(3) .portrait { grid-column: 2; }
+.personWrap:nth-of-type(3) .person > :not(.portrait) { grid-column: 1; }
+.portrait { grid-row: 1 / span 5; margin: 0; }
+.portraitFrame { width: 128px; height: 168px; padding: 7px; border: 0; border-radius: 0; background: var(--accent) var(--ikat) 0 0 / 192px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portraitArt { position: absolute; z-index: 2; bottom: -14px; left: 50%; width: 38px; height: auto; translate: -50% 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 72px; }
+.role { padding-top: 6px; font-family: var(--serif); font-size: 11px; letter-spacing: .2em; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.05; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 700; line-height: 1.3; }
+.parents { max-width: none; font-size: 14px; line-height: 1.45; text-wrap: pretty; }
+.amp { margin: 0; color: var(--gold-d); font-family: var(--display); font-size: 44px; }
+.amp img { width: 44px; }
+
+/* countdown: nila cloth with cream wajik cells */
+.countBand { background: linear-gradient(rgba(24, 35, 61, .86), rgba(24, 35, 61, .86)), var(--ikat) 0 0 / 256px; padding: 70px 18px 72px; }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 28px; background: var(--band) repeat-x 0 50% / auto 64px; opacity: .95; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { background: var(--gold); color: var(--indigo-d); outline-color: rgba(24, 35, 61, .5); }
+.headLight h2 { color: var(--ivory); font-family: var(--display); }
+.count { grid-template-columns: repeat(4, 78px); gap: 4px; }
+.count > div { width: 78px; height: 78px; border: 0; border-radius: 0; background: var(--ivory); clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(201, 138, 46, .35) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 24px; line-height: 1; }
+.count small { color: var(--indigo); font-size: 10px; font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-radius: 4px; border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+
+/* events: cloth labels with an ikat selvedge on the left */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 22px 24px 40px; border: 0; border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 0 8px 22px rgba(60, 30, 10, .1); }
+.event::before { inset: 0 auto 0 0; width: 18px; border: 0; border-radius: 0; background: var(--accent) var(--ikat) 0 0 / 192px; }
+.event:hover { border-color: transparent; }
+.eventNo { top: 14px; right: 18px; left: auto; translate: none; width: auto; height: auto; background: none; color: color-mix(in srgb, var(--gold) 75%, transparent); font-family: var(--display); font-size: 40px; letter-spacing: 0; }
+.event h3 { padding-right: 50px; color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; height: 6px; margin: 10px 0; background: var(--band) repeat-x 0 50% / auto 40px; opacity: .85; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 700; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4px rgba(244, 215, 154, .6); }
+
+/* story */
+.story { background: var(--paper) var(--warp); }
+.timeline::before { left: 21px; width: 3px; background: repeating-linear-gradient(180deg, var(--accent) 0 6px, var(--gold) 6px 10px, var(--indigo) 10px 14px); }
+.node { width: 40px; height: 40px; border: 0; border-radius: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .16em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 23px; }
+.storyImg { border-radius: 0; }
+
+/* gallery: photos bordered by woven strips */
+.mosaic { gap: 10px; }
+.tile, .tile:first-child { border-radius: 0; border: 5px solid var(--ivory); box-shadow: 0 6px 16px rgba(60, 30, 10, .16); }
+.tile:first-child { border-color: var(--accent); }
+
+/* wishes */
+.wishes { background: var(--bg) var(--warp); }
+.form { border: 0; border-radius: 0; background: var(--ivory); outline: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: -7px; box-shadow: 0 10px 26px rgba(60, 30, 10, .1); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 700; color: var(--accent); }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.step { border-radius: 3px; }
+.submit { border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4px rgba(244, 215, 154, .6); }
+.sent { color: var(--accent); font-family: var(--display); }
+.wish { border: 0; border-left: 6px solid var(--accent); border-radius: 0; background: var(--ivory); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 19px; }
+.wish small { border-radius: 3px; background: rgba(38, 55, 92, .1); color: var(--indigo); }
+.sentBox img { width: 92px; }
+
+/* gifts: nila cloth cards */
+.gift { border-radius: 0; background: linear-gradient(rgba(24, 35, 61, .9), rgba(24, 35, 61, .9)), var(--ikat) 0 0 / 220px; }
+.gift::after { display: none; }
+.gift::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--band) repeat-x 0 50% / auto 40px; }
+.giftIcon { border-radius: 3px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 20px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); font-weight: 700; }
+.copy { border-radius: 3px; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { color: var(--indigo-d); }
+
+/* closing: deep madder cloth with knotted fringe */
+.closing { --band-bg: #5a1913; background: #5a1913 var(--warp); padding: 84px 28px 64px; }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 76px; background: var(--fringe) repeat-x 0 0 / auto 76px; }
+.closingEmblem { width: 96px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; }
+.closingSalam { font-family: var(--serif); font-style: italic; font-size: 15px; }
+.family { font-family: var(--serif); letter-spacing: .04em; }
+.closingNames { color: var(--ivory); font-family: var(--display); font-size: 32px; }
+.music { border-radius: 4px; border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: the cloth on the loom. Woven border at the top, bare warp in the middle where the names sit, the loom
+   with the growing ikat at the bottom. ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--bg) var(--warp); color: var(--ink); text-align: center; isolation: isolate; }
+.coverBand { position: relative; width: 100%; height: 96px; flex-shrink: 0; background: var(--band) repeat-x 0 0 / auto 96px; animation: advance 60s linear infinite; }
+.coverBand::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 50px; background: var(--fringe) repeat-x 0 -26px / auto 76px; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 46px 26px 0; }
+.kicker { color: var(--indigo); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 56px; font-weight: 400; line-height: .98; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-size: 34px; font-style: normal; line-height: 1.1; }
+.coverDate { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 16px; font-weight: 700; }
+.coverDate::before, .coverDate::after { content: ""; width: 10px; height: 10px; background: var(--gold); rotate: 45deg; box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--indigo); }
+.guest { margin-top: 10px; padding: 12px 18px; background: rgba(251, 245, 232, .92); outline: 1px dashed color-mix(in srgb, var(--accent) 50%, transparent); outline-offset: -5px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--accent); border-radius: 3px; color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 6px; border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 700; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4px rgba(244, 215, 154, .6), 0 10px 20px rgba(80, 20, 10, .28); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.coverLoomWrap { position: relative; z-index: 1; flex: 1; width: 100%; min-height: 230px; margin-top: 18px; overflow: hidden; }
+.coverLoom { position: absolute; bottom: 0; left: 50%; width: min(100%, 430px); height: auto; translate: -50% 0; }
+
+/* ── Hero: the Jepara fields with cloths drying, the photo framed in ikat ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 34px; background: var(--bg); text-align: center; }
+.heroScene { display: block; width: 100%; height: auto; }
+.heroFrame { position: relative; width: 250px; margin-top: -120px; padding: 9px; background: var(--accent) var(--ikat) 0 0 / 192px; box-shadow: 0 18px 34px rgba(60, 30, 10, .3); }
+.heroPhoto { display: grid; height: 310px; overflow: hidden; background: var(--paper); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--accent); font-family: var(--display); font-size: 72px; }
+.heroKicker { margin-top: 26px; color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 12px; max-width: 100%; padding: 4px 22px 0; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--ink); font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 14px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+[data-revealed] .portraitArt { animation: bloomIn 1.1s var(--m-ease) .3s both; }
+.closing::before { animation: tassel 7s ease-in-out infinite alternate; transform-origin: 50% 0; }
+@keyframes advance { to { background-position: -246px 0; } }
+@keyframes tassel { from { transform: skewX(-1.5deg); } to { transform: skewX(1.5deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .coverBand, .closing::before { animation: none; }
+}

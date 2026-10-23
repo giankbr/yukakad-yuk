@@ -1,0 +1,168 @@
+/* Rumah Limas — rumah limas Palembang bertingkat di tepi Sungai Musi saat senja, panel kayu ukir berlakuer merah-emas, songket limar, dan lacquer hitam berbingkai emas. */
+.root, .cover {
+  --bg: #f4e9d4; --paper: #ecdcbf; --ivory: #fbf4e6; --field: #fffaf0; --ink: #2a1410; --muted: #6a4a3a; --line: #d6bb8a;
+  --accent: #8e1c1c; --accent2: #5e1010; --gold: #c8983e; --gold-l: #f0d488; --gold-d: #8a5f1e;
+  --band-bg: #1c0f0c; --band-ink: #f6e9cc;
+  --display: "Prata", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Pinyon Script", cursive;
+  --lakuer: url(/themes/art/rumah-limas/lakuer.webp);
+  --songket: url(/themes/art/rumah-limas/songket.webp);
+  --lacquer: radial-gradient(120% 80% at 50% 0%, #3a1712 0%, #1c0f0c 60%, #140a08 100%);
+  --frame: linear-gradient(135deg, #f0d488, #b8862f 40%, #f3dc97 55%, #8a5f1e);
+  --roof: polygon(30% 0, 70% 0, 100% 19%, 100% 100%, 0 100%, 0 19%);
+  --h2: 30px; --card-r: 3px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e1c1c; --t-accent-ink: #f6e9cc; --t-bg: #f4e9d4; --t-ink: #2a1410; --t-muted: #6a4a3a; --t-line: #d6bb8a; --t-field: #fffaf0;
+  --t-radius: 3px; --t-font: "Lora", Georgia, serif; --t-heading-font: "Prata", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.divider { width: 230px; filter: drop-shadow(0 1px 0 rgba(255, 245, 220, .6)); }
+.head h2 { color: var(--accent); }
+
+/* opening */
+.salamBlock { position: relative; padding: 58px 28px 58px; background: var(--ivory); }
+.salamBlock::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--lakuer) repeat-x 0 50% / auto 40px; }
+.arabic { margin-top: 6px; color: var(--accent); font-size: 28px; }
+.salamKicker { letter-spacing: .08em; text-transform: none; font-style: italic; font-weight: 400; font-size: 16px; color: var(--muted); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: 16px; }
+
+/* couple: lacquered roof-shaped portrait panels */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin: 34px 0 18px; }
+.portraitArt { position: absolute; z-index: 2; top: -40px; left: 50%; width: 96px; height: auto; translate: -50% 0; filter: drop-shadow(0 3px 4px rgba(28, 15, 12, .35)); }
+.portraitFrame { width: 214px; height: 278px; padding: 7px; border: 0; border-radius: 0; background: var(--frame); clip-path: var(--roof); box-shadow: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--roof); }
+.person:hover .portraitFrame { box-shadow: none; filter: drop-shadow(0 14px 22px rgba(28, 15, 12, .28)); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.portraitFrame:has(.monogram) { background: var(--frame); }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; inset: 7px; z-index: -1; clip-path: var(--roof); background: var(--accent) var(--songket); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; line-height: 1.1; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 64px; margin: 18px 0 4px; }
+.amp img { width: 62px; }
+
+/* countdown: black lacquer between two carved lintels */
+.countBand { padding: 88px 20px 90px; background: var(--lacquer); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 34px; background: var(--lakuer) repeat-x 0 50% / auto 100%; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.countPanel { position: absolute; z-index: -1; top: 50%; width: 170px; height: auto; opacity: .22; translate: 0 -50%; }
+.countPanelL { left: -96px; }
+.countPanelR { right: -96px; }
+.headLight h2 { color: var(--gold-l); font-family: var(--display); }
+.headLight .eyebrow { color: #e9c77e; }
+.count { gap: 9px; }
+.count > div { height: 90px; border: 0; border-radius: 2px; background: var(--accent) var(--songket); box-shadow: inset 0 0 0 2px #1c0f0c, inset 0 0 0 3.5px var(--gold), inset 0 0 0 6px #1c0f0c, 0 8px 18px rgba(0, 0, 0, .4); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 31px; text-shadow: 0 2px 0 #3a0a08; }
+.count small { color: #f6e2b8; font-style: normal; font-size: 13px; letter-spacing: .06em; }
+.ghostBtn { border-radius: 2px; border-color: var(--gold); font-family: var(--serif); font-weight: 600; letter-spacing: .06em; }
+
+/* events: ivory lacquer cabinets with a carved lintel and a gold diamond number */
+.events { gap: 34px; }
+.event { padding: 92px 22px 26px; overflow: hidden; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 28px rgba(60, 30, 10, .12); }
+.event::before { inset: 0 0 auto; height: 30px; border: 0; border-radius: 0; background: var(--lakuer) repeat-x 0 50% / auto 100%; box-shadow: 0 2px 0 #1c0f0c; }
+.event::after { content: ""; position: absolute; inset: 38px 8px 8px; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); pointer-events: none; }
+.eventNo { top: 44px; width: 38px; height: 38px; background: none; color: var(--gold-l); font-family: var(--display); font-size: 13px; isolation: isolate; }
+.eventNo::before { content: ""; position: absolute; z-index: -1; inset: 3px; rotate: 45deg; border-radius: 2px; background: #1c0f0c; box-shadow: 0 0 0 2px var(--gold); }
+.event h3 { margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 90px; height: 3px; background: linear-gradient(90deg, transparent, var(--gold) 20% 80%, transparent); }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--gold), 0 6px 14px rgba(94, 16, 16, .25); }
+
+/* story */
+.story { background: var(--paper); }
+.node { width: 42px; height: 42px; border: 0; border-radius: 2px; rotate: 45deg; background: #1c0f0c; box-shadow: 0 0 0 2px var(--gold); }
+.node img { width: 34px; rotate: -45deg; }
+.timeline::before { left: 22px; width: 2px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 20%, transparent)); }
+.timeline li { gap: 20px; }
+.storyBody { padding-top: 6px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+.storyImg { border-radius: 2px; }
+
+/* gallery: gold-framed panels, the first under a limas roof */
+.mosaic { gap: 10px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 2px var(--gold), 0 0 0 4px #1c0f0c; }
+.tile:first-child { border-radius: 0; clip-path: var(--roof); box-shadow: none; }
+
+/* wishes */
+.form { border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), inset 0 4px 0 var(--accent), 0 14px 28px rgba(60, 30, 10, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.step { border-radius: 2px; }
+.submit { border-radius: 2px; background: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; box-shadow: inset 0 0 0 1.5px var(--gold); }
+.sent { font-family: var(--display); font-style: normal; font-size: 20px; }
+.wish { border: 0; border-radius: 2px; border-left: 3px solid var(--gold); background: var(--ivory); }
+.wish strong { color: var(--accent); font-family: var(--display); }
+
+/* gifts: songket red cases with gold frames */
+.gift { border-radius: 3px; background: linear-gradient(rgba(70, 10, 8, .55), rgba(40, 8, 6, .7)), var(--songket); box-shadow: inset 0 0 0 2px #1c0f0c, inset 0 0 0 3.5px var(--gold), inset 0 0 0 6px #1c0f0c, 0 14px 26px rgba(60, 20, 10, .25); padding: 28px 22px 24px; }
+.gift::after { display: none; }
+.giftIcon { border-radius: 2px; border-color: var(--gold); background: #1c0f0c; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; letter-spacing: .02em; }
+.giftNo { color: #fff6e2; font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: .03em; line-height: 1.4; }
+.gift small { color: rgba(255, 240, 214, .9); }
+.copy { border-radius: 2px; background: #1c0f0c; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: black lacquer above the Musi at dusk */
+.closing { padding: 74px 28px 0; background: var(--lacquer); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 34px; background: var(--lakuer) repeat-x 0 50% / auto 100%; }
+.closingEmblem { width: 132px; height: auto; margin-top: 10px; box-shadow: 0 12px 24px rgba(0, 0, 0, .45); }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 38px; }
+.closingSalam { font-family: var(--serif); font-style: italic; font-size: 15px; }
+.family { font-family: var(--serif); letter-spacing: .04em; font-size: 14px; }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 46px; }
+.closingScene { order: 99; display: block; width: calc(100% + 56px); max-width: none; height: 230px; margin: 12px -28px 0; object-fit: cover; object-position: 60% 30%; mask-image: linear-gradient(transparent, #000 30%); }
+.made { position: relative; z-index: 1; }
+.music { border-radius: 2px; rotate: 45deg; background: #1c0f0c; }
+.music svg { rotate: -45deg; }
+.sentBox img { width: 100px; }
+
+/* ── Cover: the rumah limas over the Musi, a carved lintel, then a black lacquer panel ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--lacquer); color: var(--band-ink); text-align: center; isolation: isolate; }
+.coverScene { position: relative; flex: 0 0 auto; height: 43dvh; min-height: 290px; overflow: hidden; }
+.coverSceneImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 36%; animation: kenburns 26s ease-in-out infinite alternate; }
+.coverScene::after { content: ""; position: absolute; inset: auto 0 0; height: 30%; background: linear-gradient(transparent, rgba(28, 15, 12, .55)); }
+.coverBand { position: relative; z-index: 1; flex: 0 0 auto; height: 46px; background: var(--lakuer) repeat-x 0 50% / auto 100%; box-shadow: 0 4px 0 #0d0604, 0 10px 20px rgba(0, 0, 0, .5); animation: slide 90s linear infinite; }
+.coverBody { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 22px 26px 30px; }
+.coverSimbar { width: 84px; height: auto; margin-bottom: 2px; }
+.kicker { color: #e9c77e; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 12px; max-width: 100%; color: var(--gold-l); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; text-shadow: 0 2px 12px rgba(0, 0, 0, .5); }
+.coverNames span { overflow-wrap: anywhere; }
+.coverNames em { color: #e9c77e; font-family: var(--script); font-size: 46px; font-style: normal; }
+.coverDate { color: #f6e9cc; font-family: var(--serif); font-size: 16px; letter-spacing: .06em; }
+.guestBox { width: 100%; max-width: 310px; margin-top: 12px; padding: 14px 16px; border: 1px solid var(--gold); outline: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); outline-offset: 3px; background: rgba(142, 28, 28, .28); }
+.guest small { color: #ead7b4; }
+.guest strong { color: #fff3da; font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: #f0d488; font-family: var(--serif); border-radius: 2px; }
+.openBtn { margin-top: 16px; border-radius: 2px; background: var(--accent); color: #fff3da; font-family: var(--serif); font-weight: 600; letter-spacing: .12em; box-shadow: inset 0 0 0 1.5px var(--gold), inset 0 0 0 4px var(--accent), inset 0 0 0 5px rgba(240, 212, 136, .5), 0 10px 22px rgba(0, 0, 0, .45); }
+.openBtn:hover { background: #a42424; translate: 0 -1px; }
+
+/* ── Hero: songket field, the photo inside a gilded limas-roof frame, names on a black lacquer plaque ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 64px 22px 0; background: #7c1717 var(--songket); text-align: center; }
+.heroSimbar { position: relative; z-index: 2; width: 110px; height: auto; margin-bottom: -26px; filter: drop-shadow(0 3px 5px rgba(0, 0, 0, .4)); }
+.heroFrame { position: relative; width: 290px; height: 360px; padding: 8px; background: var(--frame); clip-path: var(--roof); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; clip-path: var(--roof); background: #1c0f0c; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 76px; }
+.plaque { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: calc(100% + 44px); margin-top: -2px; padding: 28px 26px 40px; background: var(--lacquer); box-shadow: inset 0 3px 0 var(--gold); }
+.heroKicker { color: #e9c77e; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 12px; max-width: 100%; color: var(--gold-l); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.15; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: #e9c77e; font-family: var(--script); font-style: normal; font-size: 42px; }
+.heroDate { color: #f6e9cc; font-size: 16px; letter-spacing: .05em; }
+.heroNote { max-width: 320px; margin-top: 10px; color: rgba(246, 233, 204, .86); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes kenburns { from { scale: 1; } to { scale: 1.07; translate: -1.5% 0; } }
+@keyframes slide { to { background-position: -800px 50%; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverSceneImg, .coverBand { animation: none; }
+}
