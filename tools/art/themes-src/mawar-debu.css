@@ -1,0 +1,147 @@
+/* Mawar Debu — tanpa foto: seikat mawar kering berpita satin mauve di atas kartu kertas katun dusty rose; judul Bodoni miring rata kiri, medali kameo bermonogram, kartu acara berpita sudut. */
+.root, .cover {
+  --bg: #f3e7e3; --paper: #ecdcd7; --ivory: #fbf6f3; --field: #fffaf8; --ink: #4b3640; --muted: #7c6670; --line: #e3cfcc;
+  --accent: #8a6378; --accent2: #6f4a5e; --gold: #b98a8f; --gold-l: #f4e3e6; --gold-d: #9a6b75;
+  --band-bg: #6f4a5e; --band-ink: #fbf1f2;
+  --cotton: #f3e7e3 url(/themes/art/mawar-debu/paper.webp) repeat 0 0 / 256px;
+  --display: "Bodoni Moda", Didot, Georgia, serif; --serif: Lustria, Georgia, serif; --script: "Monsieur La Doulaise", cursive;
+  --h2: 30px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--cotton); line-height: normal;
+}
+.root {
+  --t-accent: #8a6378; --t-accent-ink: #fbf1f2; --t-bg: #f3e7e3; --t-ink: #4b3640; --t-muted: #7c6670; --t-line: #e3cfcc; --t-field: #fffaf8;
+  --t-radius: 4px; --t-font: Lustria, Georgia, serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: transparent; }
+
+/* type */
+.eyebrow, .salamKicker, .role, .storyBody small, .guestsLabel, .field > span, .diet { color: var(--gold-d); font-family: var(--serif); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.head { gap: 6px; }
+.head h2, .headLight h2 { font-family: var(--display); font-size: 31px; font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.divider { width: 210px; margin-top: 4px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.75; }
+.section { padding: 70px 26px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 30px 30px 64px; gap: 12px; }
+.arabic { color: var(--accent2); font-size: 27px; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 52px; line-height: 1.25; }
+
+/* ── People: cameo medallions with a satin bow ── */
+.couple { gap: 10px; background: transparent; }
+.couple::before { content: ""; position: absolute; inset: 22px 16px; z-index: -1; border: 1px solid var(--line); background: rgba(251, 246, 243, .55); }
+.couple { isolation: isolate; }
+.portrait { margin-bottom: 22px; padding-top: 40px; }
+.bowTop { position: absolute; z-index: 2; top: -4px; left: 50%; width: 66px; height: auto; translate: -50% 0; }
+.portraitFrame { width: 168px; height: 212px; padding: 7px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6px var(--line), 0 18px 30px -18px rgba(75, 54, 64, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #f6e9ea, #e7cfd3 70%); color: var(--accent2); font-family: var(--display); font-size: 92px; font-style: italic; }
+.role { font-size: 10.5px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 44px; font-style: italic; letter-spacing: -.01em; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; }
+.parents { font-size: 15.5px; }
+.amp { margin: 20px 0 16px; color: var(--gold); font-family: var(--script); font-size: 64px; }
+.amp img { width: 44px; }
+
+/* ── Countdown: mauve satin band ── */
+.countBand { padding: 74px 22px; background: #6f4a5e linear-gradient(170deg, #7d5569, #5e3d50); }
+.countRibbon { position: absolute; z-index: -1; top: -20px; width: 70px; height: calc(100% + 40px); object-fit: cover; opacity: .55; transform-origin: 50% 0; animation: sway 9s ease-in-out infinite alternate; }
+.countRibbonL { left: -6px; }
+.countRibbonR { right: -6px; scale: -1 1; animation-delay: -3s; }
+.headLight .eyebrow { color: #e7c9cf; }
+.headLight h2 { color: #fbf1f2; }
+.count { grid-template-columns: repeat(4, minmax(0, 70px)); gap: 0; }
+.count > div { height: 92px; border: 0; border-left: 1px solid rgba(244, 227, 230, .35); border-radius: 0; background: none; }
+.count > div:first-child { border-left: 0; }
+.count > div::after { display: none; }
+.count b { color: #fbf1f2; font-family: var(--display); font-size: 36px; font-style: italic; }
+.count small { color: #e7c9cf; font-family: var(--serif); font-size: 12px; font-style: normal; letter-spacing: .14em; }
+.ghostBtn { border-color: rgba(244, 227, 230, .6); color: #fbf1f2; font-family: var(--serif); }
+
+/* ── Events: note cards with a ribbon across the corner ── */
+.events { background: transparent; gap: 30px; }
+.event { padding: 40px 24px 30px; overflow: hidden; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 1px 2px rgba(75, 54, 64, .12), 0 18px 30px -20px rgba(75, 54, 64, .5); }
+.event::before { inset: 10px; border: 1px solid var(--line); border-radius: 2px; }
+.event::after { content: ""; position: absolute; top: 20px; right: -44px; width: 160px; height: 22px; rotate: 45deg; background: linear-gradient(180deg, #caa6b1, #a77f8f 55%, #c49caa); box-shadow: 0 2px 4px rgba(75, 54, 64, .2); }
+.eventNo { top: 22px; left: 26px; translate: 0 0; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: 0; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 27px; font-style: italic; }
+.eventDate { color: var(--ink); font-size: 17px; font-style: normal; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 15px; }
+.rule { width: 34px; background: var(--gold); }
+.event strong { font-family: var(--serif); font-size: 17px; font-weight: 400; color: var(--accent2); }
+.mapBtn, .submit { border-radius: 2px; background: var(--accent); color: #fbf1f2; font-family: var(--serif); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: rgba(236, 220, 215, .7); }
+.timeline::before { left: 23px; background: linear-gradient(var(--gold), rgba(185, 138, 143, .1)); }
+.node { width: 40px; height: 40px; border: 0; background: transparent; }
+.node img { width: 40px; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 22px; font-style: italic; }
+.storyBody p { font-size: 16px; line-height: 1.65; }
+
+/* ── Gallery (only when photos are uploaded) ── */
+.tile, .tile:first-child { border-radius: 3px; border: 6px solid var(--ivory); box-shadow: 0 10px 20px -12px rgba(75, 54, 64, .5); }
+
+/* ── Wishes ── */
+.wishes { background: transparent; }
+.form { border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 18px 30px -22px rgba(75, 54, 64, .5); }
+.field input, .field textarea { border-radius: 2px; font-family: var(--serif); }
+.choices button { border-radius: 2px; font-family: var(--serif); font-size: 15px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fbf1f2; }
+.step { border-radius: 2px; }
+.wish { border: 0; border-left: 2px solid var(--gold); border-radius: 0 3px 3px 0; background: rgba(251, 246, 243, .85); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-style: italic; font-size: 17px; }
+.wish small { background: #f1e1e4; color: var(--accent2); }
+.sentBox img { width: 120px; }
+.sent { color: var(--accent2); font-family: var(--display); }
+
+/* ── Gifts: envelopes ── */
+.gifts { background: rgba(236, 220, 215, .7); }
+.gift { border-radius: 3px; background: #6f4a5e linear-gradient(160deg, #7d5569, #5e3d50); padding-top: 34px; }
+.gift::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 46px; background: linear-gradient(to bottom right, transparent 49.5%, rgba(255, 240, 243, .1) 50%) left / 50% 100% no-repeat, linear-gradient(to bottom left, transparent 49.5%, rgba(255, 240, 243, .1) 50%) right / 50% 100% no-repeat; }
+.gift::after { display: none; }
+.gift h3 { color: #f4e3e6; font-family: var(--display); font-style: italic; font-size: 19px; letter-spacing: 0; }
+.giftNo { font-family: var(--serif); }
+.copy { border-color: rgba(244, 227, 230, .7); border-radius: 2px; color: #fbf1f2; font-family: var(--serif); }
+.copyOn, .copyOn:hover { background: #f4e3e6; color: var(--accent2); }
+
+/* ── Closing ── */
+.closing { padding: 40px 28px 60px; background: #5e3d50 radial-gradient(ellipse at 50% 20%, #7d5569, #5e3d50 70%); }
+.closingBundle { width: 200px; height: auto; margin-bottom: -6px; rotate: -6deg; filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .25)); }
+.thanks { color: #f4e3e6; font-family: var(--display); font-size: 40px; font-style: italic; }
+.closingSalam { color: #e7c9cf; font-family: var(--serif); font-size: 13px; }
+.closingNames { color: #fbf1f2; font-family: var(--script); font-size: 46px; }
+.music { border-color: #f4e3e6; border-radius: 50%; background: var(--accent); }
+
+/* ── Cover: a cotton note card with a dried bouquet resting on it ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 62px 0 0; overflow: hidden; background: var(--cotton); text-align: left; isolation: isolate; }
+.coverRibbon { position: absolute; z-index: 3; top: -30px; left: 10px; width: 64px; height: auto; transform-origin: 50% 0; animation: sway 8s ease-in-out infinite alternate; filter: drop-shadow(2px 4px 4px rgba(75, 54, 64, .2)); }
+.card { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 0; margin: 0 22px 0 40px; padding: 34px 26px 30px 30px; background: var(--ivory); rotate: -1.4deg; box-shadow: 0 1px 2px rgba(75, 54, 64, .12), 0 26px 40px -24px rgba(75, 54, 64, .55); }
+.card::before { content: ""; position: absolute; inset: 9px; border: 1px solid var(--line); pointer-events: none; }
+.kicker { color: var(--gold-d); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 18px; color: var(--accent2); font-family: var(--display); font-size: 54px; font-style: italic; font-weight: 400; line-height: 1.02; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 -4px 26px; color: var(--gold); font-family: var(--script); font-size: 54px; font-style: normal; line-height: 1; }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 16px; color: var(--ink); font-size: 15px; letter-spacing: .06em; }
+.coverDate::before { content: ""; width: 26px; height: 1px; background: var(--gold); }
+.guest { align-items: flex-start; margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line); text-align: left; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 18px; text-wrap: pretty; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { min-width: 0; margin-top: 20px; padding: 0 22px; border-radius: 2px; background: var(--accent); color: #fbf1f2; font-family: var(--serif); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 18px -8px rgba(111, 74, 94, .7); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.coverBundle { position: relative; z-index: 2; align-self: flex-end; width: 262px; height: auto; margin: -14px -34px -90px auto; rotate: -20deg; transform-origin: 50% 70%; filter: drop-shadow(-6px 14px 14px rgba(75, 54, 64, .22)); pointer-events: none; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 28px 12px; text-align: center; }
+.heroBow { width: 104px; height: auto; }
+.heroKicker { margin-top: 12px; color: var(--gold-d); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 10px; color: var(--accent2); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { padding: 0 8px; color: var(--gold); font-family: var(--script); font-style: normal; }
+.heroDate { margin-top: 12px; color: var(--ink); font-size: 15px; letter-spacing: .08em; }
+.heroNote { max-width: 310px; margin-top: 18px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.7; text-wrap: pretty; }
+
+@media (prefers-reduced-motion: reduce) {
+  .coverRibbon, .countRibbon { animation: none; }
+}

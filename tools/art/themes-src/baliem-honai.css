@@ -1,0 +1,157 @@
+/* Baliem Honai — pernikahan Kristen di Lembah Baliem: punggung gunung berlapis kabut, kebun ubi berbedeng dan sungai yang berkelok, sekelompok honai beratap jerami dengan pagar kayu, noken rajut berjalur warna, sulur daun ubi dan kabut yang melayang pelan; kartu acara tergantung pada tali seperti noken, angka hitung mundur di dalam kubah honai; Fraunces + Figtree, hijau lumut, abu kabut, tanah merah dan jerami. */
+.root, .cover {
+  --bg: #eef0ea; --paper: #e6e2d6; --ivory: #fbfaf5; --field: #ffffff; --ink: #22302a; --muted: #57605a; --line: #d3d4c6;
+  --accent: #2c4a36; --accent2: #1f3628; --gold: #b48a52; --gold-l: #e7cf9c; --gold-d: #8a6a3c;
+  --band-bg: #22392c; --band-ink: #eef0ea;
+  --earth: #9a4a2a; --thatch: #c9a46a; --orchid: #6a3a68; --mist: #e8ece8;
+  --display: Fraunces, Georgia, serif; --serif: Figtree, system-ui, sans-serif; --script: Fraunces, Georgia, serif;
+  --h2: 30px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2c4a36; --t-accent-ink: #eef0ea; --t-bg: #eef0ea; --t-ink: #22302a; --t-muted: #57605a; --t-line: #d3d4c6; --t-field: #ffffff;
+  --t-radius: 14px; --t-font: Figtree, system-ui, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 500; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.section { padding: 62px 22px; }
+.eyebrow, .salamKicker, .role { color: var(--earth); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-weight: 500; font-style: italic; letter-spacing: -.005em; }
+.divider { display: block; width: 150px; height: auto; }
+
+/* hero: the valley photograph fading into mist, honai at its foot */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 46px; overflow: hidden; text-align: center; isolation: isolate; }
+.heroPhoto { position: relative; width: 100%; height: 360px; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; mask-image: linear-gradient(180deg, #000 55%, transparent 98%); }
+.heroHonai { position: relative; z-index: 2; display: block; width: 230px; height: auto; margin-top: -70px; }
+.heroMist { position: absolute; z-index: 1; left: -10%; right: -10%; top: 250px; height: 110px; background: url(/themes/art/baliem-honai/mist.webp) 0 50% / 100% 100% no-repeat; opacity: .9; animation: mistDrift 22s ease-in-out infinite alternate; pointer-events: none; }
+.heroPlain { height: 120px; }
+.heroKicker { margin-top: 18px; color: var(--earth); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 500; line-height: 1.02; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-size: 30px; font-weight: 400; }
+.heroDate { margin-top: 12px; color: var(--ink); font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+.heroNote { max-width: 310px; margin-top: 14px; color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.5; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 26px 28px 58px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 500; font-style: italic; }
+.salamSub { color: var(--earth); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* couple: round portraits ringed with a noken knot border, a sweet-potato vine beneath */
+.couple { gap: 12px; background: linear-gradient(180deg, var(--bg), var(--paper)); }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 196px; height: 196px; padding: 9px; border: 0; border-radius: 50%; background: repeating-conic-gradient(from 0deg, #c49a5e 0 6deg, #8a6a3c 6deg 9deg, #c49a5e 9deg 15deg, #a8452c 15deg 18deg); box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4px var(--thatch), 0 16px 30px -12px rgba(34, 48, 42, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4px var(--thatch), 0 20px 34px -12px rgba(34, 48, 42, .5); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #3c6048, var(--accent2)); color: var(--gold-l); font-family: var(--display); font-size: 88px; font-style: italic; font-weight: 400; }
+.portraitVine { position: absolute; z-index: 2; left: 50%; bottom: -16px; display: block; width: 190px; height: auto; translate: -50% 0; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 500; font-style: italic; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.parents { color: var(--muted); }
+.amp { margin: 18px 0 6px; color: var(--earth); font-family: var(--display); font-size: 46px; font-style: italic; }
+.amp img { width: 70px; }
+
+/* countdown: moss band with mountains, numbers inside thatched honai domes */
+.countBand { padding: 70px 16px 64px; background: linear-gradient(180deg, rgba(34, 57, 44, .55), #22392c 70%), url(/themes/art/baliem-honai/valley.webp) 50% 44% / cover; }
+.countMist { position: absolute; z-index: -1; left: -20%; right: -20%; top: 34%; height: 120px; background: url(/themes/art/baliem-honai/mist.webp) 0 50% / 100% 100% no-repeat; opacity: .5; animation: mistDrift 26s ease-in-out infinite alternate; pointer-events: none; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, 74px); gap: 8px; }
+.count > div { width: 74px; height: 86px; justify-content: flex-end; padding-bottom: 10px; border: 0; border-radius: 50% 50% 8px 8px / 62% 62% 8px 8px; background: repeating-linear-gradient(100deg, rgba(94, 69, 36, .22) 0 2px, transparent 2px 6px), linear-gradient(180deg, #e0c28a, #b48a52 60%, #7a5a32); box-shadow: inset 0 -16px 0 -8px rgba(58, 36, 24, .35), 0 8px 16px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count b { color: #2a1a10; font-family: var(--display); font-size: 27px; font-weight: 600; }
+.count small { color: #3a2418; font-family: var(--serif); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .06em; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: cards hanging from a woven strap, like a noken on a peg */
+.events { gap: 48px; padding-top: 70px; isolation: isolate; }
+.event { margin-top: 26px; padding: 40px 22px 26px; border: 1px solid var(--line); border-radius: 22px; background: linear-gradient(180deg, var(--ivory), #f4f1e6); box-shadow: 0 16px 30px -20px rgba(34, 48, 42, .5); }
+.event::before { inset: -40px auto auto 50%; width: 150px; height: 70px; translate: -50% 0; border: 4px solid var(--thatch); border-bottom: 0; border-radius: 75px 75px 0 0; background: none; z-index: -1; }
+.event::after { content: ""; position: absolute; top: -48px; left: 50%; width: 26px; height: 10px; translate: -50% 0; border-radius: 3px; background: #5a3c26; }
+.event:hover { border-color: var(--thatch); }
+.eventNo { top: 14px; width: auto; height: auto; padding: 0; background: none; color: var(--earth); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; }
+.event h3 { margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 25px; font-weight: 500; font-style: italic; }
+.eventDate { color: var(--ink); font-size: 17px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--earth); font-family: var(--serif); font-weight: 600; }
+.rule { width: 60px; height: 6px; background: radial-gradient(circle, var(--thatch) 2px, transparent 2.5px) 0 0 / 10px 6px repeat-x; }
+.event strong { font-weight: 600; }
+.mapBtn { background: var(--accent); color: var(--band-ink); font-family: var(--serif); font-weight: 600; box-shadow: 0 6px 14px rgba(44, 74, 54, .3); }
+.mapBtn:hover { background: var(--earth); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; left: 23px; background: repeating-linear-gradient(180deg, var(--gold) 0 6px, transparent 6px 10px); }
+.node { width: 42px; height: 42px; border: 2px solid var(--thatch); background: var(--ivory); }
+.node img { width: 22px; }
+.storyBody small { color: var(--earth); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 500; font-style: italic; }
+
+/* gallery: misty-edged frames */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 170px; gap: 10px; }
+.tile { border-radius: 18px; }
+.tile:first-child { grid-column: span 2; grid-row: span 1; border-radius: 120px 120px 18px 18px; }
+
+/* wishes */
+.wishes { background: linear-gradient(180deg, var(--paper), var(--bg)); }
+.form { border-radius: 22px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 12px; }
+.choices button { font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--band-ink); }
+.step { border-color: var(--thatch); }
+.submit { background: var(--earth); color: #fff6ea; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.submit:not(:disabled):hover { background: #7e3a20; }
+.sentBox img { width: 90px; }
+.sent { color: var(--accent); font-family: var(--display); }
+.wish { border-radius: 16px; }
+.wish strong { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--earth) 12%, transparent); color: var(--earth); font-weight: 600; }
+
+/* gifts: noken-woven cards */
+.gifts { gap: 18px; }
+.gift { padding: 26px 20px 24px; border-radius: 22px; background: radial-gradient(circle at 1px 1px, rgba(231, 207, 156, .14) 1.2px, transparent 1.6px) 0 0 / 9px 9px, linear-gradient(160deg, #2c4a36, #1f3628); box-shadow: 0 16px 28px -14px rgba(31, 54, 40, .6); }
+.gift::after { right: -30px; bottom: -30px; border-color: rgba(201, 164, 106, .14); }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); font-weight: 500; }
+.copy { border-color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* closing: dusk in the valley */
+.closing { padding: 64px 26px 60px; background: linear-gradient(180deg, rgba(34, 57, 44, .45), #22392c 46%), url(/themes/art/baliem-honai/valley.webp) 50% 40% / cover; }
+.closingHonai { display: block; width: 240px; height: auto; margin: 0 0 4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 500; }
+.closingSalam { color: var(--gold-l); font-family: var(--display); font-size: 16px; font-style: italic; letter-spacing: 0; }
+.family { font-family: var(--serif); }
+.closingNames { font-family: var(--display); font-size: 32px; font-style: italic; }
+
+.music { border-color: var(--thatch); background: var(--accent); }
+
+/* ── Cover: the whole valley, names in the morning mist, honai below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 52px 22px 0; overflow: hidden; background: url(/themes/art/baliem-honai/valley.webp) 50% 100% / cover no-repeat, #d9e0dc; color: var(--ink); text-align: center; isolation: isolate; }
+.mistA, .mistB { position: absolute; z-index: 0; left: -30%; width: 160%; height: 130px; background: url(/themes/art/baliem-honai/mist.webp) 0 50% / 100% 100% no-repeat; pointer-events: none; }
+.mistA { top: 34%; opacity: .95; animation: mistDrift 20s ease-in-out infinite alternate; }
+.mistB { top: 47%; opacity: .7; animation: mistDrift 28s ease-in-out -9s infinite alternate-reverse; }
+.coverText { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.kicker { color: var(--earth); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 12px; color: var(--accent2); font-family: var(--display); font-size: 50px; font-weight: 500; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { display: block; margin: 4px 0; color: var(--gold-d); font-size: 30px; font-weight: 400; }
+.coverDate { margin-top: 12px; color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.coverFoot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: auto; padding-bottom: 6px; }
+.cardNoken { position: absolute; top: -78px; right: 10px; display: block; width: 58px; transform-origin: 50% 8%; animation: nokenSway 6s ease-in-out infinite alternate; }
+.cardNoken img { display: block; width: 100%; height: auto; }
+.guestCard { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 320px; padding: 18px 16px 16px; border-radius: 22px; background: rgba(246, 247, 242, .86); box-shadow: 0 14px 30px -12px rgba(20, 34, 26, .5); backdrop-filter: blur(6px); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--thatch); color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { margin-top: 14px; background: var(--earth); color: #fff6ea; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; box-shadow: 0 10px 20px rgba(154, 74, 42, .35); }
+.openBtn:hover { background: #7e3a20; translate: 0 -1px; }
+.coverHonai { display: block; width: 280px; height: auto; margin-top: 10px; }
+
+@keyframes mistDrift { from { translate: -6% 0; } to { translate: 6% -4px; } }
+@keyframes nokenSway { from { rotate: -2.5deg; } to { rotate: 2.5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .mistA, .mistB, .heroMist, .countMist, .cardNoken { animation: none; }
+}

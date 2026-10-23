@@ -1,0 +1,151 @@
+/* Banten Surosowan — Banten Lama di pagi yang lembut: atap tumpang lima Masjid Agung, menara putih yang ramping, dan reruntuhan tembok bata Keraton Surosowan; latar batik Banten berwarna pastel (ungu, abu kebiruan, merah bata). Tegak dan tenang seperti prasasti. */
+.root, .cover {
+  --bg: #f4efec; --paper: #f9f5f1; --ivory: #fffcf8; --field: #fffefb; --ink: #2e2630; --muted: #625a64; --line: #e0d6d4;
+  --accent: #8a4232; --accent2: #a5533c; --gold: #c9a46a; --gold-l: #f1dfc2; --gold-d: #8b5e3c;
+  --lilac: #b9a9c4; --lilac-d: #5d4b63; --teal: #6f9796; --brick: #a5533c;
+  --band-bg: #5d4b63; --band-ink: #f7efe8;
+  --display: "Forum", Georgia, serif; --serif: "Lustria", Georgia, serif; --script: "Forum", Georgia, serif;
+  --batik: url(/themes/art/banten-surosowan/batik.webp) 0 0 / 120px 120px repeat;
+  --bricks: repeating-linear-gradient(0deg, transparent 0 11px, rgba(60, 20, 14, .22) 11px 13px),
+            repeating-linear-gradient(90deg, transparent 0 30px, rgba(60, 20, 14, .18) 30px 32px);
+  --steps: polygon(0 26px, 8% 26px, 8% 14px, 16% 14px, 16% 0, 84% 0, 84% 14px, 92% 14px, 92% 26px, 100% 26px, 100% 100%, 0 100%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8a4232; --t-accent-ink: #fff7ee; --t-bg: #f4efec; --t-ink: #2e2630; --t-muted: #625a64; --t-line: #e0d6d4; --t-field: #fffefb;
+  --t-radius: 3px; --t-font: "Lustria", Georgia, serif; --t-heading-font: "Forum", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--teal); }
+.head h2 { font-family: var(--display); font-size: 32px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.section { padding: 64px 22px; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 210px; }
+.divider i { flex: 1; height: 6px; background: radial-gradient(circle, var(--gold) 1.6px, transparent 2px) 0 50% / 9px 6px repeat-x; }
+.divider img { width: 34px; height: auto; }
+
+/* opening: framed panel on the pale batik */
+.salamBlock { position: relative; margin: 0; padding: 60px 24px 58px; background: linear-gradient(rgba(249, 245, 241, .86), rgba(249, 245, 241, .86)), var(--batik); }
+.salamBlock > * { position: relative; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--teal); font-size: 12px; letter-spacing: .18em; }
+.salamTitle { font-family: var(--display); font-size: 31px; letter-spacing: .04em; color: var(--accent); }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.8; }
+
+/* couple: two round portraits side by side on lilac, each crowned with the rosette */
+.couple { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 28px 12px; padding: 64px 14px; background: linear-gradient(180deg, #ece5ee, var(--bg)); }
+.couple > .head { grid-column: 1 / -1; }
+.amp { display: none; }
+.person { gap: 4px; }
+.portrait { margin: 18px 0 14px; }
+.portraitFrame { width: 148px; height: 148px; padding: 5px; border: 1.5px solid var(--gold); border-radius: 999px; background: var(--ivory); box-shadow: 0 0 0 6px rgba(185, 169, 196, .35); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 999px; }
+.pRose { position: absolute; z-index: 2; left: 50%; top: -22px; width: 44px; height: auto; translate: -50% 0; pointer-events: none; }
+.monogram { font-family: var(--display); color: var(--accent); font-size: 70px; }
+.role { font-size: 10.5px; letter-spacing: .22em; }
+.nick { font-family: var(--display); font-size: 34px; letter-spacing: .04em; color: var(--accent); }
+.fullName { font-size: 15px; line-height: 1.35; text-wrap: balance; }
+.parents { font-size: 13.5px; line-height: 1.5; }
+
+/* countdown: aubergine with the batik ghosted through, round medallion digits */
+.countBand { padding: 68px 18px; background: linear-gradient(rgba(93, 75, 99, .9), rgba(93, 75, 99, .93)), var(--batik); }
+.headLight .eyebrow { color: var(--gold-l); font-family: var(--display); }
+.headLight h2 { font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; color: #fff; }
+.count { gap: 8px; }
+.count > div { width: 72px; height: 72px; border: 1px solid rgba(241, 223, 194, .7); border-radius: 999px; background: rgba(255, 255, 255, .06); box-shadow: inset 0 0 0 4px rgba(93, 75, 99, .9), inset 0 0 0 5px rgba(241, 223, 194, .3); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); font-size: 26px; color: #fff; line-height: 1; }
+.count small { font-family: var(--display); font-style: normal; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-l); }
+.ghostBtn { border-radius: 2px; border-color: var(--gold); font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; }
+
+/* events: cards crowned by a stepped brick parapet */
+.events { gap: 34px; background: var(--paper); }
+.event { padding: 50px 22px 26px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: 0 14px 28px rgba(46, 38, 48, .09); clip-path: var(--steps); }
+.event::before { inset: 0 0 auto; height: 26px; border: 0; border-radius: 0; background: var(--bricks), var(--brick); }
+.eventNo { top: 34px; width: 34px; height: 34px; border-radius: 999px; background: var(--lilac-d); color: var(--gold-l); font-family: var(--display); font-size: 13px; }
+.event h3 { margin-top: 18px; font-family: var(--display); font-size: 25px; letter-spacing: .05em; text-transform: uppercase; color: var(--accent); }
+.eventDate { font-style: normal; }
+.eventTime { font-family: var(--display); letter-spacing: .1em; color: var(--teal); }
+.rule { width: 70px; height: 6px; background: radial-gradient(circle, var(--gold) 1.6px, transparent 2px) 0 50% / 9px 6px repeat-x; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: #fff7ee; font-family: var(--display); letter-spacing: .14em; text-transform: uppercase; }
+.mapBtn:hover { background: var(--lilac-d); }
+
+.story { background: var(--bg); }
+.timeline::before { width: 2px; background: linear-gradient(var(--brick), var(--lilac)); }
+.node { border: 0; background: none; }
+.node img { width: 36px; }
+.storyBody small { font-family: var(--display); font-size: 13px; letter-spacing: .2em; color: var(--teal); }
+.storyBody h3 { font-family: var(--display); font-size: 22px; letter-spacing: .03em; color: var(--accent); }
+.storyImg { border-radius: 0; clip-path: var(--steps); }
+
+.gallery { background: linear-gradient(rgba(244, 239, 236, .9), rgba(244, 239, 236, .9)), var(--batik); }
+.tile { border-radius: 0; }
+.tile:first-child { border-radius: 0; clip-path: polygon(0 22px, 12% 22px, 12% 10px, 24% 10px, 24% 0, 76% 0, 76% 10px, 88% 10px, 88% 22px, 100% 22px, 100% 100%, 0 100%); }
+
+.wishes { background: var(--paper); }
+.form { border-radius: 3px; border-color: var(--line); box-shadow: 0 0 0 5px #ece5ee, 0 14px 28px rgba(46, 38, 48, .08); }
+.field > span, .diet, .guestsLabel { font-family: var(--display); font-size: 13px; letter-spacing: .14em; color: var(--accent); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--lilac-d); border-color: var(--lilac-d); color: #fff; }
+.submit { border-radius: 2px; background: var(--accent); color: #fff7ee; font-family: var(--display); font-size: 15px; letter-spacing: .18em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--lilac-d); }
+.sent { font-family: var(--display); font-style: normal; font-size: 22px; color: var(--accent); }
+.wish { border-radius: 2px; }
+.wish strong { font-family: var(--display); font-size: 17px; letter-spacing: .03em; color: var(--accent); }
+.wish small { border-radius: 2px; background: #ece5ee; color: var(--lilac-d); }
+
+.gifts { background: var(--bg); }
+.gift { border-radius: 0; background: linear-gradient(rgba(79, 111, 114, .92), rgba(79, 111, 114, .95)), var(--batik); clip-path: var(--steps); padding-top: 44px; }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--display); letter-spacing: .18em; text-transform: uppercase; color: var(--gold-l); }
+.giftIcon { border-color: rgba(241, 223, 194, .55); }
+.giftNo { font-family: var(--display); font-size: 22px; color: #fff; }
+.copy { border-radius: 2px; border-color: var(--gold-l); font-family: var(--display); letter-spacing: .12em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: #4f6f72; }
+
+/* closing: the ruined wall silhouette on top of the aubergine cloth */
+.closing { padding: 0 26px 60px; background: linear-gradient(rgba(93, 75, 99, .94), rgba(93, 75, 99, .97)), var(--batik); }
+.closingWall { width: calc(100% + 52px); margin: 0 -26px 14px; background: var(--bg); }
+.closingWall img { display: block; width: 100%; height: auto; }
+.closingRose { width: 70px; height: auto; margin-top: 4px; }
+.thanks { font-family: var(--display); font-size: 40px; letter-spacing: .06em; text-transform: uppercase; color: var(--gold-l); }
+.closingText { color: rgba(247, 239, 232, .86); }
+.closingSalam { font-family: var(--display); letter-spacing: .08em; color: var(--gold-l); }
+.family { font-family: var(--display); letter-spacing: .12em; }
+.closingNames { font-family: var(--display); font-size: 32px; letter-spacing: .08em; text-transform: uppercase; color: #fff; }
+.music { border-radius: 999px; background: var(--lilac-d); border-color: var(--gold); }
+
+/* ── Cover: salam + names on the pale batik, the Banten Lama panorama, then the brick panel under the ruins ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: linear-gradient(rgba(249, 245, 241, .82), rgba(249, 245, 241, .9)), var(--batik), #f4efec; color: var(--ink); text-align: center; isolation: isolate; }
+.coverTop { display: flex; flex-direction: column; align-items: center; padding: max(34px, 5dvh) 22px 0; }
+.arabicCover { font-family: Amiri, "Traditional Arabic", serif; font-size: 25px; line-height: 1.6; color: var(--accent); }
+.salam { font-family: var(--display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--teal); }
+.coverLabel { margin-top: 18px; padding: 4px 14px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--lilac-d); }
+.coverNames { margin-top: 12px; max-width: 100%; font-family: var(--display); font-size: clamp(40px, 12vw, 50px); font-weight: 400; letter-spacing: .08em; line-height: 1.04; text-transform: uppercase; color: var(--accent); overflow-wrap: anywhere; }
+.coverNames em { display: block; font-style: normal; font-size: .5em; letter-spacing: 0; color: var(--gold-d); }
+.coverDate { margin-top: 8px; font-family: var(--display); font-size: 15px; letter-spacing: .16em; color: var(--ink); }
+.panorama { position: relative; flex: 1 0 auto; min-height: 240px; margin-top: 10px; }
+.panorama img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%); mask-image: linear-gradient(180deg, transparent, #000 22%); }
+.coverPanel { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 22px 22px max(26px, 4dvh); background: var(--bricks), var(--accent2); color: #fff7ee; box-shadow: inset 0 10px 18px rgba(46, 18, 12, .35); }
+.cover .guest small { color: rgba(255, 247, 238, .8); }
+.cover .guest strong { font-family: var(--display); font-size: 22px; letter-spacing: .04em; color: #fff; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--display); border-radius: 2px; }
+.openBtn { border-radius: 2px; background: var(--ivory); color: var(--accent); font-family: var(--display); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 0 0 1px var(--gold), 0 0 0 5px rgba(255, 247, 238, .18), 0 10px 22px rgba(46, 18, 12, .35); }
+.openBtn:hover { background: #fff; }
+
+/* ── Hero: names over batik, the photo behind a stepped brick parapet, a slow-turning rosette ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 20px 46px; background: linear-gradient(rgba(249, 245, 241, .9), rgba(244, 239, 236, .96)), var(--batik); text-align: center; }
+.heroRose { width: 58px; height: auto; animation: roseTurn 60s linear infinite; }
+.heroKicker { margin-top: 12px; font-family: var(--display); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: var(--teal); }
+.heroNames { margin-top: 6px; font-family: var(--display); font-size: 42px; font-weight: 400; letter-spacing: .07em; line-height: 1.05; text-transform: uppercase; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--gold-d); padding: 0 6px; }
+.heroDate { margin-top: 8px; font-family: var(--display); font-size: 15px; letter-spacing: .16em; color: var(--ink); }
+.parapet { position: relative; width: 100%; margin-top: 28px; padding: 30px 10px 10px; background: var(--bricks), var(--brick); clip-path: var(--steps); box-shadow: 0 16px 30px rgba(46, 38, 48, .2); }
+.heroPhoto { height: 330px; overflow: hidden; background: var(--lilac-d); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { max-width: 320px; margin-top: 28px; font-size: 16.5px; font-style: italic; line-height: 1.75; color: var(--muted); }
+
+@keyframes roseTurn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .heroRose { animation: none; } }

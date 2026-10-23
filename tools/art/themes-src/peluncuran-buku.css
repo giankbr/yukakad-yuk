@@ -1,0 +1,166 @@
+/* Peluncuran Buku — Acara, undangan peluncuran & diskusi buku bergaya editorial modern: sampul seperti jaket buku (punggung buku vertikal, judul serif besar), tumpukan buku dan pena bulu, panggung diskusi dengan dua kursi dan mikrofon; navy tinta, terakota, mustard, sage di atas kertas hangat. */
+.root, .cover {
+  --bg: #f4ede1; --paper: #ebe2d1; --ivory: #faf6ee; --field: #fffdf8; --ink: #1d2437; --muted: #5a5e6a; --line: #d6cab4;
+  --accent: #c4573a; --accent2: #93391f; --gold: #e0a73a; --gold-l: #f3d08a; --gold-d: #9a6a18; --navy: #22304d; --sage: #86a183;
+  --band-bg: #22304d; --band-ink: #f4ede1;
+  --display: "Instrument Serif", Georgia, serif; --serif: "Hanken Grotesk", "Helvetica Neue", sans-serif; --script: "Instrument Serif", Georgia, serif;
+  --h2: 38px; --card-r: 2px;
+  --paper-tx: url(/themes/art/peluncuran-buku/paper.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--paper-tx) 0 0 / 256px, var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c4573a; --t-accent-ink: #faf6ee; --t-bg: #f4ede1; --t-ink: #1d2437; --t-muted: #5a5e6a; --t-line: #d6cab4; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: "Hanken Grotesk", "Helvetica Neue", sans-serif; --t-heading-font: "Instrument Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--paper-tx) 0 0 / 256px, var(--bg); }
+
+/* type: editorial, left-aligned, chapter kickers */
+.eyebrow, .salamKicker, .role { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .22em; }
+.head { align-items: flex-start; width: 100%; text-align: left; }
+.head h2, .headLight h2 { font-family: var(--display); font-weight: 400; line-height: 1; letter-spacing: -.01em; text-align: left; }
+.head h2 { color: var(--ink); }
+.section { align-items: flex-start; padding: 64px 24px; }
+.salamBlock { align-items: flex-start; padding: 46px 24px 60px; text-align: left; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 40px; line-height: 1.02; }
+.salamTitle::first-letter { color: var(--accent); }
+.intro { max-width: 340px; color: var(--muted); font-size: 16px; line-height: 1.7; text-align: left; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 42px; line-height: 1.02; }
+.fullName { color: var(--accent2); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.parents { max-width: 320px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.55; }
+.monogram { color: var(--gold); font-family: var(--display); font-size: 120px; line-height: .8; font-style: italic; }
+
+/* divider: a fountain pen and the line it just wrote */
+.divider { display: flex; align-items: center; gap: 0; width: 220px; }
+.divider img { width: 92px; height: auto; flex-shrink: 0; }
+.divider::before { content: ""; order: 2; flex: 1; height: 2px; margin-left: -2px; background: var(--ink); border-radius: 2px; transform-origin: 0 50%; opacity: .8; }
+[data-revealed] .divider { animation: none; }
+[data-revealed] .divider::before { animation: write 1.8s var(--m-ease) .3s both; }
+
+/* ── People: author portrait + publisher colophon ── */
+.couple { gap: 30px; background: var(--paper); }
+.person { align-items: flex-start; text-align: left; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 236px; height: 290px; padding: 0; border: 0; border-radius: 0; background: var(--navy); overflow: visible; box-shadow: 14px 14px 0 var(--accent); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; inset: 0; border-radius: 0; filter: grayscale(.85) sepia(.15); }
+.portraitFrame:has(.monogram) { width: 180px; height: 180px; box-shadow: 10px 10px 0 var(--gold); }
+.portraitFrame:has(.monogram)::after { content: ""; position: absolute; left: 16px; right: 16px; bottom: 18px; height: 2px; background: var(--gold); }
+.portraitFrame .monogram { position: static; margin: 0; }
+
+/* ── Countdown: navy page, big numerals between hairlines ── */
+.countBand { align-items: flex-start; padding: 70px 24px; background: var(--navy); }
+.countBand::before { content: ""; position: absolute; z-index: -1; right: -60px; bottom: -40px; width: 220px; height: 220px; border-radius: 50%; background: var(--accent); opacity: .9; }
+.headLight { align-items: flex-start; text-align: left; }
+.headLight .eyebrow { color: var(--gold); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; width: 100%; border-top: 1px solid rgba(244, 237, 225, .5); border-bottom: 1px solid rgba(244, 237, 225, .5); }
+.count > div { align-items: flex-start; height: 104px; padding-left: 10px; border: 0; border-radius: 0; background: none; }
+.count > div + div { border-left: 1px solid rgba(244, 237, 225, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--band-ink); font-family: var(--display); font-size: 46px; line-height: 1; }
+.count small { color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-radius: 2px; border-color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+
+/* ── Events: index cards ── */
+.events { gap: 18px; }
+.event { align-items: flex-start; padding: 24px 22px 22px; border: 0; border-top: 4px solid var(--accent); border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 var(--line), 0 14px 26px rgba(29, 36, 55, .07); }
+.event:nth-of-type(even) { border-top-color: var(--sage); }
+.event::before { display: none; }
+.event:hover { box-shadow: 0 1px 0 var(--line), 0 20px 34px rgba(29, 36, 55, .12); }
+.eventNo { position: static; translate: none; width: auto; height: auto; margin-bottom: 6px; background: none; color: var(--accent); font-family: var(--display); font-size: 26px; font-style: italic; letter-spacing: 0; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 28px; line-height: 1.05; }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-size: 14px; }
+.rule { width: 40px; height: 2px; background: var(--ink); }
+.event strong { font-weight: 700; }
+.eventAddr { text-align: left; }
+.mapBtn { border-radius: 2px; background: var(--ink); color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 600; box-shadow: none; }
+.mapBtn:hover { background: var(--accent); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: var(--ink); opacity: .5; }
+.node { border: 0; border-radius: 0; background: var(--ivory); box-shadow: 0 0 0 1px var(--line); }
+.node img { width: 30px; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.storyBody h3 { font-family: var(--display); font-size: 26px; color: var(--ink); }
+
+/* ── Gallery: magazine grid ── */
+.mosaic { gap: 10px; grid-auto-rows: 140px; }
+.tile { border-radius: 0; filter: sepia(.12); }
+.tile:first-child { border-radius: 0; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 0; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 12px 24px rgba(29, 36, 55, .06); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 0; border-width: 0 0 1.5px; background: transparent; padding-left: 2px; }
+.field input:focus, .field textarea:focus { box-shadow: none; }
+.choices button { border-radius: 2px; font-family: var(--serif); font-size: 14px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--ivory); }
+.step { color: var(--ink); border-color: var(--ink); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.wish { border: 0; border-left: 2px solid var(--accent); border-radius: 0; background: transparent; padding: 6px 0 6px 16px; }
+.wish:hover { box-shadow: none; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.wish small { border-radius: 2px; background: var(--paper); color: var(--ink); }
+.wish p { font-style: italic; }
+.sent { color: var(--ink); font-family: var(--display); font-size: 24px; font-style: normal; }
+.sentBox img { width: 140px; }
+
+/* ── Gifts ── */
+.gift { align-items: flex-start; padding: 22px 20px; border-radius: 2px; text-align: left; }
+.gift::after { right: 18px; bottom: 18px; width: 70px; height: 70px; border: 0; border-radius: 50%; background: var(--accent); box-shadow: none; opacity: .85; }
+.gift:nth-child(odd)::after { background: var(--gold); }
+.gift h3 { font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 26px; letter-spacing: .02em; }
+.copy { border-radius: 2px; font-family: var(--serif); font-weight: 600; }
+
+/* ── Closing ── */
+.closing { align-items: flex-start; padding: 80px 24px 100px; text-align: left; }
+.closingBooks { position: absolute; z-index: -1; right: -36px; bottom: 14px; width: 150px; height: auto; opacity: .95; }
+.closingBook { width: 120px; height: auto; }
+.thanks { max-width: 300px; color: var(--band-ink); font-family: var(--display); font-size: 44px; line-height: 1; }
+.thanks::first-letter { color: var(--gold); }
+.closingText { max-width: 260px; text-align: left; }
+.closingNames { max-width: 220px; font-family: var(--display); font-size: 28px; font-style: italic; }
+.made { font-style: normal; font-size: 13px; }
+.music { border-radius: 2px; background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: a book jacket ── */
+.cover { position: relative; display: grid; grid-template-columns: 46px 1fr; min-height: 100dvh; overflow: hidden; background: var(--paper-tx) 0 0 / 256px, var(--bg); }
+.spine { display: flex; align-items: center; justify-content: space-between; padding: 26px 0; background: var(--navy); color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; writing-mode: vertical-rl; rotate: 180deg; }
+.spine b { color: var(--band-ink); font-family: var(--display); font-size: 18px; font-weight: 400; letter-spacing: .04em; text-transform: none; }
+.jacket { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 26px 22px 26px 24px; }
+.jacketTop { display: flex; justify-content: space-between; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ink); color: var(--ink); font-family: var(--serif); font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.jacketTop span:last-child { color: var(--accent); }
+.kicker { margin-top: 26px; color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: clamp(46px, 15vw, 62px); font-weight: 400; line-height: .95; letter-spacing: -.015em; overflow-wrap: anywhere; }
+.coverWith { margin-top: 12px; color: var(--muted); font-size: 15px; }
+.coverWith em { color: var(--ink); font-family: var(--display); font-size: 21px; font-style: italic; }
+.coverNote { max-width: 250px; margin-top: 14px; padding-left: 12px; border-left: 2px solid var(--gold); color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.3; }
+.coverBooks { position: relative; z-index: 0; align-self: flex-end; width: 94%; height: auto; margin: -12px -22px 0 0; }
+.coverWhen { position: relative; z-index: 1; display: flex; align-items: baseline; gap: 10px; margin-top: 2px; }
+.coverWhen b { color: var(--accent); font-family: var(--display); font-size: 70px; font-weight: 400; line-height: .8; }
+.coverWhen span { display: flex; flex-direction: column; color: var(--ink); font-size: 13px; font-weight: 600; line-height: 1.4; }
+.coverWhen small { color: var(--muted); font-size: 12px; font-weight: 500; }
+.guestWrap { display: flex; flex-direction: column; align-items: stretch; gap: 14px; margin-top: auto; padding-top: 22px; }
+.guest { align-items: flex-start; max-width: none; padding-top: 12px; border-top: 1px solid var(--ink); text-align: left; }
+.guest small { color: var(--muted); font-style: normal; font-size: 12px; }
+.guest strong { font-family: var(--display); font-size: 24px; text-align: left; }
+.table { border-color: var(--ink); color: var(--ink); font-family: var(--serif); }
+.openBtn { justify-content: space-between; min-width: 0; width: 100%; border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(147, 57, 31, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: the stage ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 36px 0 44px; text-align: left; overflow: hidden; }
+.heroKicker { padding: 0 24px; color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; padding: 0 24px; color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.heroNames em { color: var(--muted); font-size: .55em; font-style: italic; }
+.heroStage { position: relative; width: 100%; margin-top: 22px; }
+.heroStage img { display: block; width: 100%; height: auto; }
+.heroStage::after { content: ""; position: absolute; left: 30%; top: 24%; width: 40%; height: 46%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 222, 160, .4), transparent); mix-blend-mode: screen; animation: spot 6s ease-in-out infinite alternate; pointer-events: none; }
+.heroDate { margin-top: 18px; padding: 0 24px; color: var(--ink); font-size: 14px; font-weight: 600; }
+.heroNote { max-width: 340px; margin-top: 12px; padding: 0 24px; color: var(--muted); font-family: var(--display); font-size: 20px; font-style: italic; line-height: 1.3; }
+
+@keyframes write { from { transform: scaleX(0); } }
+@keyframes spot { from { opacity: .4; scale: .92; } to { opacity: 1; scale: 1.04; } }

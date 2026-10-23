@@ -1,0 +1,144 @@
+/* Paisley Kashmir — Islami, selendang kani Kashmir: tata letak chand-dar (medalion bundar di tengah, seperempat medalion di sudut), pinggiran boteh yang rapat, foto berbingkai boteh tenun, merah kunyit, merah madder, dan hijau tua di atas pashmina gading. */
+.root, .cover {
+  --bg: #f2e7cf; --paper: #ebddbf; --ivory: #f8f0dc; --field: #fffaf0; --ink: #2e1a14; --muted: #6a5244; --line: #dcc7a0;
+  --accent: #8e2a24; --accent2: #6e1d1b; --gold: #d9962c; --gold-l: #efc56c; --gold-d: #9a6418; --green: #1f4b3a;
+  --band-bg: #6e1d1b; --band-ink: #f6ecd6;
+  --display: "Rozha One", Georgia, serif; --serif: Vollkorn, Georgia, serif; --script: "Rozha One", Georgia, serif;
+  --h2: 30px; --card-r: 6px;
+  --weave: url(/themes/art/paisley-kashmir/weave.webp); --border: url(/themes/art/paisley-kashmir/border.webp); --border-v: url(/themes/art/paisley-kashmir/border-v.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--weave) 0 0 / 200px, var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e2a24; --t-accent-ink: #f8f0dc; --t-bg: #f2e7cf; --t-ink: #2e1a14; --t-muted: #6a5244; --t-line: #dcc7a0; --t-field: #fffaf0;
+  --t-radius: 6px; --t-font: Vollkorn, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--weave) 0 0 / 200px, var(--bg); }
+
+/* type */
+.eyebrow, .salamKicker, .role { color: var(--green); font-family: var(--serif); font-size: 14px; font-style: italic; font-weight: 500; letter-spacing: .12em; text-transform: none; }
+.head h2 { color: var(--accent); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 31px; }
+.arabic { color: var(--green); font-size: 28px; }
+.intro { color: var(--muted); font-size: 18px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.parents { font-size: 17px; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+
+/* divider: a woven boteh between dotted saffron threads */
+.divider { display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 6px; background: radial-gradient(circle, var(--gold) 1.6px, transparent 2px) 0 50% / 9px 6px repeat-x, linear-gradient(var(--accent), var(--accent)) 0 50% / 100% 1px no-repeat; }
+.divider img { width: 28px; height: auto; rotate: -24deg; animation: breathe 7s ease-in-out infinite; }
+
+/* sections: woven border strips separate the shawl panels */
+.section { padding: 64px 24px; }
+.couple, .gallery { background: var(--border) 0 0 / 160px 50px repeat-x, var(--paper); padding-top: 96px; }
+
+/* ── People: round woven roundels ── */
+.portrait { filter: drop-shadow(0 10px 16px rgba(110, 29, 27, .18)); }
+.portraitFrame { width: 228px; height: 228px; padding: 9px; border: 0; border-radius: 50%; background: var(--border) 0 0 / 120px 38px, var(--accent); box-shadow: 0 0 0 3px var(--gold), 0 0 0 5px var(--ivory), 0 0 0 6px var(--green); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: 0 0 0 3px var(--ivory); }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 48px; }
+.amp img { width: 26px; rotate: -20deg; }
+.amp img:last-child { scale: -1 1; rotate: 20deg; }
+
+/* ── Countdown: madder field between two boteh borders, teardrop cells ── */
+.countBand { padding: 96px 22px; background: var(--border) 0 0 / 160px 50px repeat-x, var(--border) 0 100% / 160px 50px repeat-x, var(--band-bg); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 12px; }
+.count > div { width: 70px; height: 76px; border: 1.5px solid var(--gold); border-radius: 50% 50% 50% 50% / 58% 58% 42% 42%; border-top-left-radius: 6px; background: var(--ivory); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--green); font-size: 13px; }
+
+/* ── Events: left-aligned cards hemmed with a woven selvedge ── */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 20px 24px 62px; border: 0; border-radius: 4px; background: var(--border-v) 0 0 / 40px 128px repeat-y, var(--ivory); text-align: left; box-shadow: 0 0 0 1px var(--line), 0 12px 24px rgba(110, 29, 27, .07); }
+.event::before { inset: 6px 6px 6px 46px; border-color: color-mix(in srgb, var(--gold) 45%, transparent); border-radius: 2px; }
+.eventNo { position: static; display: block; translate: none; width: auto; height: auto; margin-bottom: 2px; background: none; color: var(--gold-d); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .1em; }
+.eventNo::before { content: "No. "; }
+.event h3 { font-size: 24px; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--green); font-family: var(--serif); font-size: 16px; }
+.rule { width: 70px; margin: 8px 0; height: 6px; background: radial-gradient(circle, var(--gold) 1.6px, transparent 2px) 0 50% / 9px 6px repeat-x; }
+.eventAddr { text-align: left; }
+.mapBtn { border-radius: 4px; background: var(--green); color: var(--ivory); font-family: var(--serif); font-size: 15px; }
+.mapBtn:hover { background: #163a2c; }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { width: 4px; left: 20px; background: radial-gradient(circle, var(--gold) 1.5px, transparent 2px) 50% 0 / 4px 8px repeat-y; }
+.node { border: 0; background: none; }
+.node img { width: 24px; rotate: -20deg; }
+.storyBody small { color: var(--green); font-family: var(--serif); font-size: 14px; font-style: italic; }
+.storyBody h3 { font-family: var(--display); }
+
+/* ── Gallery ── */
+.mosaic { gap: 8px; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 2px var(--gold), 0 0 0 4px var(--ivory); }
+.tile:first-child { border-radius: 50% 50% 50% 50% / 38% 38% 18% 18%; border-top-left-radius: 8px; box-shadow: none; }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border-radius: 6px; border-color: var(--line); background: var(--ivory); box-shadow: inset 0 0 0 4px var(--ivory), inset 0 0 0 5px var(--gold), 0 10px 22px rgba(110, 29, 27, .06); }
+.field > span, .diet, .guestsLabel { color: var(--green); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; font-weight: 600; letter-spacing: .04em; }
+.wish { border-radius: 4px; }
+.wish strong { font-family: var(--display); }
+.wish small { background: color-mix(in srgb, var(--gold) 22%, transparent); color: var(--accent2); }
+.sentBox img { width: 64px; }
+
+/* ── Gifts: madder cards edged with the border ── */
+.gift { padding: 26px 20px 60px; border-radius: 4px; background: var(--border) 0 100% / 128px 40px repeat-x, var(--band-bg); }
+.gift::after { display: none; }
+.gift h3 { font-family: var(--serif); font-size: 18px; font-style: italic; }
+.giftNo { font-family: var(--display); }
+.copy { font-family: var(--serif); font-size: 14px; }
+
+/* ── Closing: deep green end panel with corner medallions ── */
+.closing { padding: 96px 28px 110px; background: var(--border) 0 0 / 160px 50px repeat-x, var(--border) 0 100% / 160px 50px repeat-x, var(--green); }
+.closingCorner { position: absolute; z-index: -1; width: 130px; height: auto; opacity: .9; }
+.closingCorner:first-child { bottom: 50px; left: 0; scale: 1 -1; }
+.closingCorner:nth-child(2) { bottom: 50px; right: 0; scale: -1 -1; }
+.closingBoteh { width: 44px; height: auto; rotate: -20deg; }
+.thanks { font-family: var(--display); font-size: 40px; }
+.family { font-family: var(--serif); font-style: italic; font-size: 15px; }
+.closingNames { font-family: var(--display); font-size: 32px; }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: a chand-dar shawl ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 100dvh; padding: 62px 48px 60px; overflow: hidden; background: var(--border) 0 0 / 160px 50px repeat-x, var(--border) 0 100% / 160px 50px repeat-x, var(--border-v) 0 0 / 50px 160px repeat-y, var(--border-v) 100% 0 / 50px 160px repeat-y, var(--weave) 0 0 / 200px, var(--bg); text-align: center; isolation: isolate; }
+.coverCorner { position: absolute; z-index: -1; width: 104px; height: auto; }
+.cornerTL { top: 50px; left: 50px; }
+.cornerTR { top: 50px; right: 50px; scale: -1 1; }
+.cornerBL { bottom: 50px; left: 50px; scale: 1 -1; }
+.cornerBR { bottom: 50px; right: 50px; scale: -1 -1; }
+.coverArabic { color: var(--green); font-family: Amiri, serif; font-size: 21px; line-height: 1.6; }
+.kicker { color: var(--accent); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .08em; }
+.chand { position: relative; display: grid; place-items: center; width: 300px; max-width: calc(100vw - 64px); aspect-ratio: 1; margin: 4px 0; }
+.chandArt { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 240s linear infinite; }
+.coverNames { position: relative; display: flex; flex-direction: column; align-items: center; max-width: 52%; color: var(--accent2); font-family: var(--display); font-size: clamp(24px, 7.4vw, 30px); font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-family: var(--serif); font-size: .62em; font-style: italic; }
+.coverDate { color: var(--green); font-size: 17px; font-style: italic; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 6px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: var(--accent); font-family: var(--serif); font-style: italic; }
+.openBtn { min-width: 0; width: 100%; max-width: 230px; border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; font-weight: 600; box-shadow: inset 0 0 0 2px var(--accent), inset 0 0 0 3px var(--gold-l), 0 8px 18px rgba(110, 29, 27, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: photo woven into a boteh ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 34px 24px 44px; text-align: center; }
+.heroBoteh { position: relative; width: 270px; max-width: 76%; aspect-ratio: 480 / 720; }
+.heroPhoto { position: absolute; inset: 0; overflow: hidden; -webkit-mask: url(/themes/art/paisley-kashmir/mask.webp) 0 0 / 100% 100% no-repeat; mask: url(/themes/art/paisley-kashmir/mask.webp) 0 0 / 100% 100% no-repeat; background: var(--paper); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+.heroFrame { position: absolute; inset: 0; width: 100%; height: 100%; }
+.heroKicker { margin-top: 22px; color: var(--green); font-size: 16px; font-style: italic; letter-spacing: .08em; }
+.heroNames { max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: .7em; padding: 0 8px; }
+.heroDate { margin-top: 4px; color: var(--ink); font-style: italic; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.55; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@keyframes breathe { 0%, 100% { scale: 1; } 50% { scale: 1.08; } }

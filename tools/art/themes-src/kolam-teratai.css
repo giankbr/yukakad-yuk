@@ -1,0 +1,148 @@
+/* Kolam Teratai — kolam teratai pagi bergaya impresionis, sapuan warna terpisah (broken colour): pohon dedalu, jembatan kayu melengkung dan bayangannya, daun teratai, teratai merah muda, kilau cahaya di air; sampul lukisan penuh, potret berbentuk daun teratai bertakik, kartu acara seperti genangan berkabut; Marcellus + Gentium Book Plus + Ephesis. */
+.root, .cover {
+  --bg: #f4efe6; --paper: #ebe8f1; --ivory: #fffcf6; --field: #fffdf9; --ink: #2f3a4a; --muted: #5e6878; --line: #d9d5e3;
+  --accent: #4f6f8f; --accent2: #7a5f9a; --gold: #e48fa8; --gold-l: #f9dfe6; --gold-d: #b4587a;
+  --band-bg: #4f6f8f; --band-ink: #fbf7f0; --pad: #5f8f5a; --pad-l: #a7c98f; --water: #9fc0d6; --lilac: #a69dc6;
+  --display: Marcellus, "Cormorant Garamond", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: Ephesis, cursive;
+  --h2: 32px; --card-r: 28px;
+  --pond: url(/themes/art/kolam-teratai/pond.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4f6f8f; --t-accent-ink: #fffcf6; --t-bg: #f4efe6; --t-ink: #2f3a4a; --t-muted: #5e6878; --t-line: #d9d5e3; --t-field: #fffdf9;
+  --t-radius: 18px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: Marcellus, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: radial-gradient(90% 30% at 100% 10%, rgba(249, 223, 230, .5), transparent 60%), radial-gradient(90% 30% at 0% 60%, rgba(159, 192, 214, .25), transparent 60%), var(--bg); }
+.eyebrow, .salamKicker, .role { color: var(--accent2); font-family: var(--display); font-size: 12px; letter-spacing: .3em; }
+.head h2, .headLight h2 { font-family: var(--display); letter-spacing: .04em; }
+.divider { width: 160px; }
+
+.salamBlock { padding: 34px 30px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 52px; }
+.intro { color: var(--muted); }
+
+/* people: lily-pad portraits (round with a notch) floating with a lotus */
+.couple { background: transparent; }
+.portrait { margin-bottom: 46px; }
+.portraitFrame { width: 220px; height: 220px; padding: 0; border: 0; border-radius: 50%; background: var(--pad); -webkit-mask: radial-gradient(circle, #000 0 66%, transparent 66.5%), conic-gradient(from 138deg, transparent 0 22deg, #000 22deg); mask: radial-gradient(circle, #000 0 66%, transparent 66.5%), conic-gradient(from 138deg, transparent 0 22deg, #000 22deg); box-shadow: inset 0 0 0 6px var(--pad-l); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitLotus { position: absolute; z-index: 3; left: 50%; bottom: -38px; width: 140px; height: auto; translate: -50% 0; animation: bob 6s ease-in-out infinite alternate; }
+.personWrap:nth-child(3) .portraitFrame { -webkit-mask: radial-gradient(circle, #000 0 66%, transparent 66.5%), conic-gradient(from 200deg, transparent 0 22deg, #000 22deg); mask: radial-gradient(circle, #000 0 66%, transparent 66.5%), conic-gradient(from 200deg, transparent 0 22deg, #000 22deg); }
+.monogram { color: var(--ivory); font-family: var(--display); }
+.nick { color: var(--accent); font-family: var(--script); font-size: 60px; line-height: 1; }
+.fullName { font-family: var(--display); font-size: 19px; letter-spacing: .04em; }
+.parents { font-style: italic; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 64px; }
+.amp img { width: 80px; }
+.amp img:last-child { scale: -1 1; }
+
+/* countdown: a strip of the pond itself */
+.countBand { padding-bottom: 110px; background: linear-gradient(rgba(47, 58, 74, .45), rgba(79, 111, 143, .3)), var(--pond) 50% 72% / cover; }
+.countPads { position: absolute; z-index: -1; left: 50%; bottom: -6px; width: 520px; height: auto; translate: -50% 0; animation: padDrift 14s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { text-shadow: 0 2px 14px rgba(20, 30, 45, .6); }
+.count > div { height: 76px; border: 1px solid rgba(255, 255, 255, .55); border-radius: 50%; background: rgba(255, 252, 246, .18); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); aspect-ratio: 1; }
+.count > div::after { background: radial-gradient(circle at 30% 25%, rgba(255, 255, 255, .5), transparent 35%); translate: 0 0; animation: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 26px; }
+.count small { color: #f2eef8; font-size: 13px; }
+.ghostBtn { border-color: rgba(255, 255, 255, .7); color: #fff; font-family: var(--serif); font-size: 15px; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+
+/* events: misty pools */
+.events { gap: 34px; }
+.event { padding: 54px 24px 28px; border: 0; border-radius: 46% 54% 44% 56% / 14% 12% 16% 14%; background: radial-gradient(120% 70% at 50% 0%, rgba(166, 157, 198, .22), transparent 60%), var(--ivory); box-shadow: 0 18px 40px -26px rgba(79, 111, 143, .7); }
+.event::before { display: none; }
+.event:hover { box-shadow: 0 22px 44px -24px rgba(79, 111, 143, .8); }
+.eventNo { top: -30px; width: 120px; height: 80px; border-radius: 0; background: url(/themes/art/kolam-teratai/lotus.webp) center / contain no-repeat; color: transparent; font-size: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.eventDate { font-size: 17px; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-size: 16px; }
+.rule { width: 120px; height: 18px; background: url(/themes/art/kolam-teratai/dab.webp) center / contain no-repeat; }
+.event strong { font-family: var(--display); font-size: 19px; font-weight: 400; letter-spacing: .03em; }
+.mapBtn { border-radius: 999px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; }
+
+/* story */
+.story { background: linear-gradient(var(--bg), var(--paper) 30%, var(--paper)); }
+.timeline::before { left: 27px; background: linear-gradient(var(--water), rgba(159, 192, 214, .1)); width: 3px; border-radius: 3px; }
+.node { width: 56px; height: 40px; border: 0; background: none; }
+.node img { width: 56px; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+
+/* gallery: soft pond-shaped photos */
+.mosaic { grid-auto-rows: 150px; gap: 12px; }
+.tile { border-radius: 42% 58% 46% 54% / 40% 44% 56% 60%; }
+.tile:first-child { border-radius: 50% 50% 42% 58% / 34% 36% 64% 66%; }
+.tile:nth-child(4n + 4) { border-radius: 30px 90px 30px 90px; }
+.tile:nth-child(5):last-child { grid-column: span 2; border-radius: 90px 30px 90px 30px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 28px; background: rgba(255, 252, 246, .9); box-shadow: 0 20px 40px -28px rgba(79, 111, 143, .7); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--display); font-size: 12px; letter-spacing: .18em; }
+.field input, .field textarea { border-radius: 14px; font-family: var(--serif); font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; letter-spacing: .04em; }
+.wish { border: 0; border-radius: 22px; background: var(--ivory); box-shadow: 0 10px 24px -20px rgba(79, 111, 143, .8); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 17px; }
+.wish small { background: var(--gold-l); color: var(--gold-d); }
+.sent { color: var(--accent); font-family: var(--script); font-size: 40px; font-style: normal; }
+
+/* gifts: still water cards */
+.gift { border-radius: 30px; background: linear-gradient(160deg, #6f8fae, #4f6f8f 55%, #6d6598); box-shadow: 0 18px 30px -20px rgba(79, 111, 143, .9); }
+.gift::after { right: -20px; bottom: -14px; width: 130px; height: 86px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/kolam-teratai/lotus.webp) center / contain no-repeat; opacity: .7; }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 18px; }
+.giftNo { font-family: var(--display); font-size: 23px; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; line-height: 1.45; letter-spacing: 0; }
+.copy { border-color: rgba(255, 255, 255, .7); color: #fff; font-family: var(--serif); font-size: 14px; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--accent); }
+
+/* closing: back to the pond at morning */
+.closing { padding: 70px 28px 70px; background: linear-gradient(rgba(244, 239, 230, .94), rgba(244, 239, 230, .7) 45%, rgba(47, 58, 74, .2)), var(--pond) 50% 100% / cover; color: var(--ink); }
+.closingPads { position: absolute; z-index: -1; left: 50%; bottom: -10px; width: 560px; height: auto; translate: -50% 0; animation: padDrift 16s ease-in-out infinite alternate; }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 62px; }
+.closingText { color: var(--ink); }
+.closingSalam { color: var(--accent2); font-family: var(--serif); font-size: 16px; font-style: italic; letter-spacing: 0; }
+.family { color: var(--ink); font-family: var(--serif); font-size: 15px; }
+.closingNames { padding: 4px 14px; border-radius: 999px; background: rgba(255, 252, 246, .75); color: var(--accent); font-family: var(--display); font-size: 30px; }
+.made { color: var(--ink); opacity: .7; }
+.music { background: var(--accent); border-color: #fff; }
+
+/* ── Cover: the full painting, morning light on the water ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 100dvh; padding: clamp(40px, 9vh, 80px) 22px 30px; overflow: hidden; background: var(--pond) 50% 50% / cover, #c9d8e4; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(85% 34% at 50% 17%, rgba(255, 250, 240, .82), rgba(255, 250, 240, .4) 55%, transparent 80%); }
+.shimmer { position: absolute; z-index: -1; left: 0; right: 0; top: 44%; height: 30%; background: repeating-linear-gradient(176deg, transparent 0 14px, rgba(255, 246, 220, .22) 14px 16px, transparent 16px 30px); -webkit-mask: radial-gradient(60% 60% at 66% 40%, #000, transparent 75%); mask: radial-gradient(60% 60% at 66% 40%, #000, transparent 75%); animation: shimmer 7s ease-in-out infinite alternate; }
+.kicker { color: var(--accent2); font-family: var(--display); font-size: 12px; letter-spacing: .4em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--accent); font-family: var(--script); font-size: clamp(56px, 17vw, 74px); font-weight: 400; line-height: .95; text-shadow: 0 0 18px rgba(255, 250, 240, .9); overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--gold-d); font-family: var(--display); font-size: .4em; font-style: normal; line-height: 1.4; }
+.coverDate { color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .24em; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 250, 240, .9); }
+.coverSpacer { flex: 1; min-height: 20px; }
+.guest { width: min(300px, 84vw); max-width: none; padding: 14px 18px; border: 1px solid rgba(255, 255, 255, .7); border-radius: 30px; background: rgba(255, 252, 246, .82); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); color: var(--ink); box-shadow: 0 18px 30px -18px rgba(47, 58, 74, .6); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent); font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); }
+.openBtn { border-radius: 999px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; letter-spacing: .04em; box-shadow: 0 0 0 4px rgba(255, 252, 246, .55), 0 14px 26px -12px rgba(47, 58, 74, .8); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: a round pond view with the photo, lotus floating at the rim ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 46px 22px 40px; overflow: hidden; text-align: center; }
+.heroKicker { color: var(--accent2); font-family: var(--display); font-size: 12px; letter-spacing: .4em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--script); font-size: 76px; font-weight: 400; line-height: .9; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-family: var(--display); font-size: .32em; font-style: normal; line-height: 1.6; }
+.heroArt { position: relative; margin: 20px 0 40px; }
+.heroFrame { position: relative; width: 290px; height: 290px; padding: 10px; border-radius: 50%; background: var(--pond) 50% 80% / 200%; box-shadow: 0 26px 40px -22px rgba(47, 58, 74, .7); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.heroLotus { position: absolute; z-index: 2; bottom: -34px; width: 150px; height: auto; animation: bob 7s ease-in-out infinite alternate; }
+.heroLotusL { left: -26px; }
+.heroLotusR { right: -20px; width: 110px; bottom: -14px; scale: -1 1; animation-delay: -3s; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 18px; letter-spacing: .22em; text-transform: uppercase; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes bob { from { translate: -50% 0; rotate: -1.5deg; } to { translate: -50% -5px; rotate: 1.5deg; } }
+.heroLotus { animation-name: bobFree; }
+@keyframes bobFree { from { translate: 0 0; rotate: -2deg; } to { translate: 0 -6px; rotate: 2deg; } }
+@keyframes padDrift { from { translate: -52% 0; } to { translate: -48% -4px; } }
+@keyframes shimmer { from { translate: -10px 0; opacity: .7; } to { translate: 12px 3px; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .portraitLotus, .heroLotus, .countPads, .closingPads, .shimmer { animation: none; }
+}

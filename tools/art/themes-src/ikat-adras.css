@@ -1,0 +1,169 @@
+/* Ikat Adras — walimatul 'ursy bernuansa kain ikat sutra adras Asia Tengah: sampul asimetris dengan lajur kain adras (sisir, awan, almond, belah ketupat berpengait) bertepi kabur khas ikat lungsin dan medali almond yang menjembatani kain dan kertas gading; tata letak rata kiri seperti katalog wastra, potret bersudut takik berbingkai sutra, hitung mundur di atas kain bernila; Rozha One + Spectral + Amiri, magenta, kunyit, zamrud dan nila di atas gading. */
+.root, .cover {
+  --bg: #f7f0e2; --paper: #f1e7d3; --ivory: #fffaf0; --field: #fffdf8; --ink: #231a2a; --muted: #5e5262; --line: #e4d4b8;
+  --accent: #b0175a; --accent2: #8e0f45; --gold: #eba51e; --gold-l: #f7c95a; --gold-d: #a8700c;
+  --band-bg: #23306e; --band-ink: #f7f0e2;
+  --emerald: #0f7a52; --indigo: #23306e; --magenta: #c0185e;
+  --display: "Rozha One", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Rozha One", Georgia, serif;
+  --h2: 32px; --card-r: 0;
+  --notch: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  --silk: url(/themes/art/ikat-adras/adras.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b0175a; --t-accent-ink: #fffaf0; --t-bg: #f7f0e2; --t-ink: #231a2a; --t-muted: #5e5262; --t-line: #e4d4b8; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: Spectral, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+/* a woven selvedge runs down the left edge of the whole page */
+.main { position: relative; padding-left: 14px; background: var(--silk) 0 0 / 112px 168px repeat-y, var(--bg); background-size: 112px 168px, auto; background-clip: border-box; }
+.main > * { background-color: var(--bg); }
+.section { align-items: stretch; padding: 62px 24px 62px 22px; }
+
+/* headings: left aligned, like a textile catalogue */
+.head { align-items: flex-start; gap: 6px; text-align: left; }
+.eyebrow, .salamKicker, .role { color: var(--emerald); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-weight: 400; line-height: 1.1; text-align: left; }
+.divider { display: block; width: 160px; height: auto; margin: 4px 0 0 -6px; }
+
+/* hero: the wedding photo inside a silk frame with notched corners */
+.hero { display: flex; flex-direction: column; align-items: flex-start; padding: 28px 24px 46px 22px; text-align: left; }
+.heroFrame { width: 100%; padding: 9px; background: var(--silk) 0 0 / 128px 192px; clip-path: var(--notch); }
+.heroFrame > img { width: 100%; height: 300px; object-fit: cover; clip-path: var(--notch); cursor: zoom-in; }
+.heroKicker { margin-top: 24px; color: var(--emerald); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-family: var(--serif); font-size: 26px; font-style: italic; line-height: 1.3; }
+.heroDate { margin-top: 12px; color: var(--indigo); font-size: 17px; font-weight: 600; }
+.heroNote { max-width: 320px; margin-top: 16px; padding-left: 14px; border-left: 4px solid var(--gold); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.55; }
+
+/* opening */
+.salamBlock { align-items: flex-start; gap: 10px; padding: 18px 26px 56px 22px; text-align: left; }
+.arabic { color: var(--indigo); font-size: 28px; line-height: 1.6; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; line-height: 1.15; }
+.intro { max-width: 340px; color: var(--muted); font-size: 17px; text-align: left; }
+
+/* couple: portrait beside the name, framed in silk */
+.couple { gap: 18px; background-color: var(--paper) !important; }
+.person { display: grid; grid-template-columns: 128px minmax(0, 1fr); column-gap: 16px; align-items: start; text-align: left; }
+.portrait { grid-row: 1 / span 4; margin: 0; }
+.portraitFrame { width: 128px; height: 168px; padding: 6px; border: 0; border-radius: 0; background: var(--silk) 0 0 / 96px 144px; clip-path: var(--notch); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: var(--notch); }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 70px; clip-path: var(--notch); }
+.role { margin-top: 6px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.05; }
+.fullName { color: var(--indigo); font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { max-width: none; margin-top: 6px; font-size: 15px; text-wrap: pretty; }
+.amp { justify-content: flex-start; gap: 10px; margin: 4px 0; color: var(--gold-d); font-family: var(--serif); font-size: 40px; font-style: italic; }
+.amp img { width: 26px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: indigo cloth, numbers on ivory lozenge tags */
+.countBand { align-items: center; padding: 70px 16px 64px; background: linear-gradient(rgba(22, 31, 78, .86), rgba(22, 31, 78, .9)), var(--silk) 0 0 / 160px 240px !important; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); text-align: center; }
+.count { grid-template-columns: repeat(4, 72px); gap: 8px; }
+.count > div { width: 72px; height: 84px; border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--notch); box-shadow: none; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(235, 165, 30, .25) 50%, transparent 65%); }
+.count > div::before { content: ""; position: absolute; inset: auto 0 0; height: 6px; background: linear-gradient(90deg, var(--magenta) 0 25%, var(--gold) 25% 50%, var(--emerald) 50% 75%, var(--indigo) 75%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 600; letter-spacing: .06em; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: left-aligned cards with a silk selvedge on the left */
+.events { gap: 22px; }
+.event { align-items: flex-start; padding: 26px 20px 24px 34px; border: 0; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) 14px 0 / calc(100% - 14px) 100% no-repeat, var(--silk) 0 0 / 56px 84px; text-align: left; clip-path: var(--notch); box-shadow: none; }
+.event::before { display: none; }
+.event:hover { translate: 0 -2px; box-shadow: none; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .14em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 400; text-align: left; }
+.eventDate { color: var(--indigo); font-size: 17px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--emerald); font-family: var(--serif); font-weight: 600; }
+.rule { width: 90px; height: 4px; background: linear-gradient(90deg, var(--magenta) 0 25%, var(--gold) 25% 50%, var(--emerald) 50% 75%, var(--indigo) 75%); }
+.event strong { font-weight: 600; }
+.eventAddr { max-width: none; text-align: left; }
+.mapBtn { border-radius: 2px; background: var(--indigo); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent); }
+
+/* story */
+.story { background-color: var(--paper) !important; }
+.timeline::before { left: 19px; width: 3px; background: repeating-linear-gradient(180deg, var(--magenta) 0 10px, var(--gold) 10px 20px, var(--emerald) 20px 30px, var(--indigo) 30px 40px); }
+.node { width: 32px; height: 38px; border: 0; background: none; }
+.node img { width: 32px; }
+.storyBody small { color: var(--emerald); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+.storyImg { border-radius: 0; clip-path: var(--notch); }
+
+/* gallery */
+.mosaic { grid-auto-rows: 160px; gap: 8px; }
+.tile, .tile:first-child { border-radius: 0; clip-path: var(--notch); }
+.tile:first-child { grid-column: span 2; grid-row: span 1; }
+
+/* wishes */
+.wishes { background-color: var(--paper) !important; }
+.form { border: 0; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) 0 8px / 100% calc(100% - 8px) no-repeat, var(--silk) 0 0 / 64px 96px; padding-top: 30px; box-shadow: 0 14px 28px -18px rgba(35, 26, 42, .4); }
+.field > span, .diet, .guestsLabel { color: var(--indigo); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--ivory); }
+.step { border-color: var(--gold); border-radius: 2px; }
+.submit { border-radius: 2px; background: var(--indigo); color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.sentBox img { width: 120px; }
+.sent { color: var(--accent); font-family: var(--serif); }
+.wish { border: 0; border-left: 5px solid var(--gold); border-radius: 0; }
+.wish:nth-child(3n + 2) { border-left-color: var(--emerald); }
+.wish:nth-child(3n + 3) { border-left-color: var(--magenta); }
+.wish strong { color: var(--indigo); font-family: var(--display); }
+.wish small { border-radius: 2px; background: color-mix(in srgb, var(--emerald) 12%, transparent); color: var(--emerald); font-weight: 600; }
+.empty { align-self: flex-start; }
+
+/* gifts: magenta silk cards */
+.gift { align-items: flex-start; padding: 24px 22px 22px; border-radius: 0; background: linear-gradient(135deg, #c0185e, #8e0f45); text-align: left; clip-path: var(--notch); }
+.gift::after { right: -20px; bottom: -40px; width: 120px; height: 160px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/ikat-adras/medallion.webp) 50% / contain no-repeat; opacity: .35; }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { font-family: var(--serif); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 2px; border-color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { color: var(--accent2); }
+
+/* closing */
+.closing { align-items: center; padding: 64px 26px 60px; background: linear-gradient(90deg, transparent 0 18px, #23306e 18px calc(100% - 18px), transparent calc(100% - 18px)), var(--silk) 0 0 / 112px 168px !important; }
+.closingMedal { display: block; width: 104px; height: auto; animation: medalGlow 6s ease-in-out infinite alternate; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 42px; }
+.closingSalam { font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: 0; }
+.family { font-family: var(--serif); }
+.closingNames { font-family: var(--display); font-size: 30px; }
+
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: a column of adras silk, the almond medallion bridging cloth and ivory paper ── */
+.cover { position: relative; display: grid; grid-template-columns: 104px minmax(0, 1fr); min-height: 100dvh; overflow: hidden; background: var(--bg); color: var(--ink); isolation: isolate; }
+.cloth { position: relative; background: var(--silk) 0 0 / 104px 156px; box-shadow: inset -6px 0 10px -6px rgba(35, 26, 42, .4); animation: weave 40s linear infinite; }
+.coverMedal { position: absolute; z-index: 2; top: 50%; left: 104px; display: block; width: 92px; height: auto; translate: -50% -50%; filter: drop-shadow(0 8px 10px rgba(35, 26, 42, .3)); animation: medalGlow 6s ease-in-out infinite alternate; }
+.coverText { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; min-width: 0; padding: 40px 20px 36px 58px; text-align: left; }
+.coverArabic { color: var(--indigo); font-family: Amiri, serif; font-size: 22px; line-height: 1.5; }
+.kicker { margin-top: 8px; color: var(--emerald); font-size: 11px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: .95; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--gold-d); font-family: var(--serif); font-size: 26px; font-style: italic; line-height: 1.3; }
+.coverDate { margin-top: 12px; color: var(--indigo); font-size: 15px; font-weight: 600; }
+.coverBand { display: block; width: 150px; height: auto; margin: 16px 0 14px -4px; }
+.guest { align-items: flex-start; text-align: left; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; text-wrap: pretty; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 0; margin-top: 18px; border-radius: 2px; background: var(--indigo); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; box-shadow: 0 10px 20px rgba(35, 48, 110, .3); }
+.openBtn:hover { background: var(--accent); translate: 0 -1px; }
+
+@keyframes weave { to { background-position: 0 156px; } }
+@keyframes medalGlow { from { filter: drop-shadow(0 8px 10px rgba(35, 26, 42, .3)) saturate(1); } to { filter: drop-shadow(0 8px 14px rgba(192, 24, 94, .35)) saturate(1.15); } }
+@media (max-width: 370px) {
+  .cover { grid-template-columns: 88px minmax(0, 1fr); }
+  .coverMedal { left: 88px; width: 80px; }
+  .coverText { padding-left: 50px; padding-right: 16px; }
+  .coverNames { font-size: 42px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cloth, .coverMedal, .closingMedal { animation: none; }
+}

@@ -1,0 +1,157 @@
+/* Poster Wisata — poster wisata litografi lawas: pita langit bertingkat, gunung berasap, kapal uap dua cerobong, perahu layar, siluet kelapa, kereta uap di atas viaduk sawah; huruf poster tebal, kartu acara berpita langit, foto bergaya kartu pos dengan bayangan cetak; Big Shoulders Display + Josefin Sans + Fraunces italic. */
+.root, .cover {
+  --bg: #f3e6c9; --paper: #ecd9b4; --ivory: #fbf3e2; --field: #fffaf0; --ink: #1c2a3e; --muted: #5a5a5c; --line: #d9c49c;
+  --accent: #1d4f5c; --accent2: #d4573a; --gold: #ee8a4a; --gold-l: #f3c46e; --gold-d: #b5452c;
+  --band-bg: #1d4f5c; --band-ink: #fbf3e2; --teal-l: #5fa3a3; --navy: #1c2a3e;
+  --display: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif; --serif: "Josefin Sans", "Trebuchet MS", sans-serif; --script: Fraunces, Georgia, serif;
+  --h2: 44px; --card-r: 4px;
+  --sky: linear-gradient(#1f5866 0 16%, #2b6f7b 16% 32%, #4f938f 32% 48%, #9fbf9c 48% 62%, #f3d7a0 62% 76%, #f3c46e 76% 88%, #f2a75e 88%);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1d4f5c; --t-accent-ink: #fbf3e2; --t-bg: #f3e6c9; --t-ink: #1c2a3e; --t-muted: #5a5a5c; --t-line: #d9c49c; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Josefin Sans", sans-serif; --t-heading-font: "Big Shoulders Display", Impact, sans-serif; --t-heading-weight: 800; --t-heading-size: 40px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+.eyebrow, .salamKicker, .role { display: flex; align-items: center; gap: 10px; color: var(--accent2); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.eyebrow::before, .eyebrow::after, .salamKicker::before, .salamKicker::after { content: ""; width: 26px; height: 2px; background: currentColor; }
+.head h2, .headLight h2 { font-family: var(--display); font-weight: 800; line-height: .95; letter-spacing: .02em; text-transform: uppercase; }
+.divider { width: 150px; }
+
+.salamBlock { padding: 34px 30px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 34px; font-style: italic; }
+.intro { color: var(--ink); font-size: 17px; line-height: 1.7; }
+
+/* people: postcards with a stamp-perforated photo and a printed offset shadow */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 214px; height: 270px; padding: 10px 10px 34px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: 8px 8px 0 var(--accent2); rotate: -1.5deg; }
+.personWrap:nth-child(3) .portraitFrame { rotate: 1.5deg; box-shadow: -8px 8px 0 var(--accent); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portraitPalm { position: absolute; z-index: 3; right: -40px; bottom: -14px; width: 74px; height: auto; }
+.personWrap:nth-child(3) .portraitPalm { right: auto; left: -40px; scale: -1 1; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-weight: 800; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 60px; font-weight: 800; line-height: .95; text-transform: uppercase; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; letter-spacing: .04em; }
+.parents { font-size: 16px; }
+.amp { color: var(--accent2); font-family: var(--script); font-size: 64px; font-style: italic; }
+.amp img { width: 80px; }
+
+/* countdown: the train poster panel above stepped numerals */
+.countBand { padding-top: 34px; background: var(--accent); }
+.trainPanel { position: relative; width: 100%; padding: 8px; background: var(--ivory); box-shadow: 6px 6px 0 var(--navy); }
+.trainPanel img { display: block; width: 100%; height: auto; }
+.trainPanel span { position: absolute; left: 50%; bottom: 14px; padding: 4px 12px; background: var(--navy); color: var(--gold-l); font-family: var(--display); font-size: 15px; font-weight: 700; letter-spacing: .18em; translate: -50% 0; white-space: nowrap; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--ivory); }
+.count > div { height: 96px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: 5px 5px 0 var(--accent2); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 800; }
+.count small { color: var(--accent2); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border: 2px solid var(--gold-l); border-radius: 0; color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+
+/* events: mini posters with stepped sky bands */
+.events { gap: 30px; }
+.event { padding: 92px 22px 24px; border: 0; border-radius: 0; background: var(--sky) 0 0 / 100% 70px no-repeat, var(--ivory); box-shadow: 7px 7px 0 var(--accent); }
+.event::before { inset: 0 0 auto; height: 70px; border: 0; border-radius: 0; background: radial-gradient(circle at 50% 120%, #fbecc7 0 30px, transparent 31px); }
+.eventNo { top: 22px; white-space: nowrap; width: auto; height: auto; padding: 4px 12px; border-radius: 0; background: var(--navy); color: var(--gold-l); font-family: var(--display); font-size: 16px; font-weight: 700; letter-spacing: .16em; }
+.eventNo::before { content: "Tujuan "; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.eventDate { font-size: 16px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.rule { width: 100%; height: 0; margin: 8px 0; border-top: 2px dashed var(--line); background: none; }
+.event strong { font-family: var(--display); font-size: 22px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.mapBtn { border-radius: 0; background: var(--accent2); color: var(--ivory); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; box-shadow: 4px 4px 0 var(--navy); }
+
+/* story: ports of call along a dashed route */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; width: 0; border-left: 3px dashed var(--accent); background: none; }
+.node { width: 46px; height: 46px; border: 3px solid var(--accent); border-radius: 50%; background: var(--gold-l); overflow: hidden; }
+.node img { width: 56px; max-width: none; translate: 0 6px; }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 27px; font-weight: 800; text-transform: uppercase; }
+.storyBody p { color: var(--ink); font-size: 16px; }
+
+/* gallery: postcards with offset print shadows */
+.mosaic { grid-auto-rows: 150px; gap: 16px; }
+.tile, .tile:first-child, .tile:nth-child(4n + 4) { border: 7px solid var(--ivory); border-radius: 0; box-shadow: 6px 6px 0 var(--accent); }
+.tile:nth-child(3n + 2) { box-shadow: 6px 6px 0 var(--accent2); }
+.tile:nth-child(3n) { box-shadow: 6px 6px 0 var(--gold); }
+
+/* wishes: a postcard back */
+.wishes { background: var(--bg); }
+.form { border: 2px solid var(--navy); border-radius: 0; background: var(--ivory); box-shadow: 7px 7px 0 var(--navy); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .2em; }
+.field input, .field textarea { border-radius: 0; border-color: var(--line); font-family: var(--serif); font-size: 16px; }
+.choices button { border-radius: 0; font-family: var(--serif); font-size: 15px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.step { border-radius: 0; }
+.submit { border-radius: 0; background: var(--accent2); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.wish { border-radius: 0; border: 0; border-top: 4px solid var(--accent); background: var(--ivory); }
+.wish:nth-child(3n + 2) { border-top-color: var(--accent2); }
+.wish:nth-child(3n) { border-top-color: var(--gold); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 20px; font-weight: 700; text-transform: uppercase; }
+.wish small { border-radius: 0; background: var(--gold-l); color: var(--navy); font-weight: 600; }
+.sent { color: var(--accent); font-family: var(--script); font-size: 24px; }
+
+/* gifts: perforated stamps */
+.gift { padding: 28px 22px; border-radius: 0; background: var(--accent2); outline: 7px dotted var(--bg); outline-offset: -3px; }
+.gift:nth-of-type(odd) { background: var(--accent); }
+.gift::after { right: auto; left: 50%; bottom: auto; top: 50%; width: 220px; height: 220px; border: 2px solid rgba(251, 243, 226, .18); box-shadow: none; translate: -50% -50%; }
+.gift h3 { color: var(--ivory); font-family: var(--display); font-size: 24px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.giftIcon { border-color: rgba(251, 243, 226, .5); }
+.giftNo { font-family: var(--display); font-size: 30px; font-weight: 700; letter-spacing: .08em; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; line-height: 1.45; letter-spacing: 0; }
+.copy { border: 2px solid var(--ivory); border-radius: 0; color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--ivory); color: var(--accent2); }
+
+/* closing: night sea between two palms */
+.closing { padding: 70px 28px 64px; background: linear-gradient(#1f5866, #1d4f5c 55%, #163e49); }
+.closingPalm { position: absolute; z-index: -1; bottom: -10px; width: 150px; height: auto; opacity: .9; }
+.closingPalm:first-child { left: -50px; }
+.closingPalm:nth-child(2) { right: -50px; scale: -1 1; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 62px; font-weight: 800; line-height: .95; text-transform: uppercase; }
+.closingSalam { color: var(--gold-l); font-family: var(--script); font-size: 18px; font-style: italic; }
+.family { font-family: var(--serif); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.closingNames { color: var(--ivory); font-family: var(--display); font-size: 40px; font-weight: 800; text-transform: uppercase; }
+.music { border-radius: 0; background: var(--accent2); border-color: var(--ivory); }
+
+/* ── Cover: the poster itself ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(8px, 1.6vh, 14px); min-height: 100dvh; padding: 22px 18px 24px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.poster { position: relative; width: min(340px, 88vw, calc(50dvh * .72 + 24px)); padding: 12px 12px 0; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 9px 9px 0 var(--accent); rotate: -.6deg; }
+.posterTop { display: flex; justify-content: space-between; padding: 0 2px 8px; color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.posterArt { position: relative; overflow: hidden; }
+.posterArt img { display: block; width: 100%; height: auto; }
+.posterBand { margin: 0 -12px; padding: 12px 12px 14px; background: var(--accent2); color: var(--ivory); }
+.kicker { color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--ivory); font-family: var(--display); font-size: clamp(40px, 13vw, 56px); font-weight: 900; line-height: .9; letter-spacing: .02em; text-transform: uppercase; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-l); font-family: var(--script); font-size: .62em; font-style: italic; font-weight: 400; text-transform: none; }
+.coverDate { margin-top: 6px; color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.guest { width: min(320px, 86vw); max-width: none; padding: 10px 14px; border: 2px dashed var(--accent); background: var(--ivory); color: var(--ink); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--accent); font-family: var(--display); font-size: 23px; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
+.table { border: 0; border-radius: 0; background: var(--gold-l); color: var(--navy); font-family: var(--serif); font-weight: 600; }
+.openBtn { border-radius: 0; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; box-shadow: 5px 5px 0 var(--accent2); }
+.openBtn:hover { background: var(--navy); translate: -1px -1px; box-shadow: 6px 6px 0 var(--accent2); }
+
+/* ── Hero: second poster with the couple's photo + a round travel sticker ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 0 44px; overflow: hidden; text-align: center; }
+.heroSky { width: 100%; height: 54px; background: var(--sky); }
+.heroKicker { margin-top: 26px; color: var(--accent2); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.heroNames { max-width: 100%; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 72px; font-weight: 900; line-height: .86; text-transform: uppercase; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--accent2); font-family: var(--script); font-size: .5em; font-style: italic; font-weight: 400; line-height: 1.2; text-transform: none; }
+.heroArt { position: relative; margin: 20px 0 22px; }
+.heroFrame { position: relative; width: 290px; height: 370px; padding: 10px 10px 46px; background: var(--ivory); box-shadow: 9px 9px 0 var(--accent); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; object-fit: cover; }
+.heroCaption { position: absolute; left: 10px; right: 10px; bottom: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--accent); font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.sticker { position: absolute; z-index: 2; top: -26px; right: -30px; display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%; background: var(--gold-l); color: var(--navy); font-family: var(--display); font-size: 14px; font-weight: 800; line-height: 1.05; letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 0 0 4px var(--ivory), 0 0 0 6px var(--accent2), 4px 6px 0 6px rgba(28, 42, 62, .25); rotate: 12deg; animation: stickerBob 6s ease-in-out infinite alternate; }
+.sticker b { display: block; font-size: 26px; font-weight: 900; }
+.heroWaves { width: 180px; height: auto; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 26px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 16px; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes stickerBob { from { rotate: 9deg; translate: 0 0; } to { rotate: 15deg; translate: 0 -4px; } }
+@media (prefers-reduced-motion: reduce) {
+  .sticker { animation: none; }
+}

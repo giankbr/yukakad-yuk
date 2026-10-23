@@ -1,0 +1,156 @@
+/* Safir Malam — tanpa foto: langit safir yang tenang, roset khatam 8 sudut berjalin dari garis perak tipis, bulan sabit perak, bingkai monogram segi delapan; lapang, sunyi, rata kiri. */
+.root, .cover {
+  --bg: #eef1f6; --paper: #e4e9f1; --ivory: #f8f9fc; --field: #ffffff; --ink: #1b2a48; --muted: #56627c; --line: #ccd4e2;
+  --accent: #13254a; --accent2: #0b1733; --gold: #9aa6ba; --gold-l: #dfe5ee; --gold-d: #5e6c86;
+  --band-bg: #13254a; --band-ink: #eef1f6;
+  --night: #13254a url(/themes/art/safir-malam/sky.webp) center top / cover;
+  --display: Bellefair, "Times New Roman", serif; --serif: "Crimson Pro", Georgia, serif; --script: Bellefair, serif; --label: "Tenor Sans", "Helvetica Neue", sans-serif;
+  --h2: 30px; --card-r: 0;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #13254a; --t-accent-ink: #eef1f6; --t-bg: #eef1f6; --t-ink: #1b2a48; --t-muted: #56627c; --t-line: #ccd4e2; --t-field: #ffffff;
+  --t-radius: 0px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: Bellefair, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--bg); }
+.section { padding: 78px 30px; gap: 26px; }
+.section::before { content: ""; position: absolute; top: 0; left: 50%; width: 1px; height: 38px; background: linear-gradient(var(--gold), transparent); }
+
+/* type */
+.eyebrow, .salamKicker, .role, .storyBody small, .guestsLabel, .field > span, .diet, .eventTime, .family { font-family: var(--label); font-weight: 400; }
+.eyebrow { color: var(--gold-d); font-size: 10.5px; letter-spacing: .42em; }
+.head h2, .headLight h2 { font-family: var(--display); font-size: 31px; letter-spacing: .14em; text-transform: uppercase; }
+.divider { width: 220px; }
+.intro { color: var(--muted); font-size: 18px; line-height: 1.7; }
+
+/* ── Opening ── */
+.salamBlock { padding: 72px 34px 70px; gap: 14px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--gold-d); font-size: 10.5px; letter-spacing: .2em; text-transform: none; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 27px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ── People: octagonal silver frames on night ── */
+.couple { background: var(--night); color: var(--band-ink); gap: 14px; }
+.couple::before { background: linear-gradient(#dfe5ee, transparent); }
+.couple .eyebrow, .couple .role { color: #aebad0; }
+.couple .head h2 { color: #f4f6fa; }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 176px; height: 176px; padding: 1.5px; border: 0; border-radius: 0; background: linear-gradient(140deg, #f2f5f9, #8f9bb0 45%, #e6ebf2 70%, #8f9bb0); clip-path: polygon(29.3% 0, 70.7% 0, 100% 29.3%, 100% 70.7%, 70.7% 100%, 29.3% 100%, 0 70.7%, 0 29.3%); box-shadow: none; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: radial-gradient(circle at 50% 40%, #1f3a6e, #0b1733 75%); clip-path: inherit; color: #e6ebf2; font-family: var(--display); font-size: 82px; }
+.octStar { position: absolute; z-index: 2; left: 50%; bottom: -16px; width: 34px; height: auto; translate: -50% 0; }
+.nick { color: #f4f6fa; font-family: var(--display); font-size: 40px; letter-spacing: .16em; text-transform: uppercase; }
+.fullName { color: #dfe5ee; font-family: var(--serif); font-size: 18px; font-style: italic; }
+.parents { color: #aebad0; font-size: 16px; }
+.amp { margin: 22px 0; gap: 18px; color: #cdd4de; font-family: var(--display); font-size: 28px; }
+.amp img { width: 26px; }
+
+/* ── Countdown ── */
+.countBand { padding: 80px 24px; background: var(--accent2); }
+.countDecor { position: absolute; z-index: -1; top: 50%; left: 50%; width: 460px; height: auto; translate: -50% -50%; opacity: .2; animation: slowTurn 240s linear infinite; }
+.headLight .eyebrow { color: #aebad0; }
+.headLight h2 { color: #f4f6fa; }
+.count { grid-template-columns: repeat(4, minmax(0, 68px)); gap: 8px; }
+.count > div { height: 84px; border: 1px solid rgba(205, 212, 222, .35); border-radius: 0; background: rgba(11, 23, 51, .55); }
+.count > div::after { display: none; }
+.count b { color: #f4f6fa; font-family: var(--display); font-size: 32px; }
+.count small { color: #aebad0; font-family: var(--label); font-size: 10px; font-style: normal; letter-spacing: .2em; text-transform: uppercase; }
+.countTba { color: #dfe5ee; }
+.ghostBtn { border-color: rgba(205, 212, 222, .6); border-radius: 0; color: #eef1f6; font-family: var(--label); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; }
+
+/* ── Events: crisp slips with a silver star band ── */
+.events { background: var(--bg); gap: 22px; }
+.event { align-items: flex-start; padding: 40px 26px 28px 28px; border: 1px solid var(--line); border-radius: 0; background: var(--ivory); text-align: left; }
+.event::before { inset: 0 auto 0 0; width: 3px; border: 0; border-radius: 0; background: var(--accent); }
+.eventNo { top: 16px; left: auto; right: 18px; translate: 0 0; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--label); font-size: 11px; letter-spacing: .3em; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; letter-spacing: .1em; text-transform: uppercase; text-wrap: balance; }
+.eventDate { color: var(--ink); font-size: 18px; font-style: italic; }
+.eventTime { color: var(--gold-d); font-size: 12px; letter-spacing: .14em; }
+.rule { width: 44px; background: var(--gold); }
+.event strong { font-weight: 500; }
+.eventAddr { text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 0; background: var(--accent); color: #eef1f6; font-family: var(--label); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; box-shadow: none; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); box-shadow: 0 10px 20px -10px rgba(11, 23, 51, .6); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: linear-gradient(var(--accent), rgba(19, 37, 74, .1)); }
+.node { width: 36px; height: 36px; border: 0; border-radius: 0; background: var(--accent); clip-path: polygon(29.3% 0, 70.7% 0, 100% 29.3%, 100% 70.7%, 70.7% 100%, 29.3% 100%, 0 70.7%, 0 29.3%); }
+.node img { width: 24px; }
+.storyBody small { color: var(--gold-d); font-size: 10.5px; letter-spacing: .26em; text-transform: uppercase; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── Gallery (uploaded photos only) ── */
+.tile, .tile:first-child { border-radius: 0; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border-radius: 0; box-shadow: none; }
+.field input, .field textarea { border-radius: 0; font-family: var(--serif); font-size: 17px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-size: 10.5px; letter-spacing: .22em; }
+.choices button { border-radius: 0; font-family: var(--serif); font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #eef1f6; box-shadow: none; }
+.step { border-radius: 0; border-color: var(--line); }
+.wish { border-radius: 0; border-color: var(--line); background: var(--ivory); }
+.wish strong { font-family: var(--display); font-size: 17px; letter-spacing: .06em; }
+.wish small { border-radius: 0; background: var(--paper); color: var(--accent); font-family: var(--label); font-size: 10px; letter-spacing: .1em; }
+.sentBox img { width: 64px; }
+.sent { color: var(--accent); }
+
+/* ── Gifts ── */
+.gifts { background: var(--paper); }
+.gift { border-radius: 0; background: var(--night); }
+.gift::after { right: auto; bottom: auto; top: 50%; left: 50%; width: 190px; height: 190px; translate: -50% -50%; border: 0; box-shadow: none; background: url(/themes/art/safir-malam/rosette.webp) center / contain no-repeat; opacity: .14; }
+.giftIcon { border-color: rgba(205, 212, 222, .45); border-radius: 0; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { color: #dfe5ee; font-family: var(--label); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 24px; letter-spacing: .1em; }
+.copy { border-color: rgba(205, 212, 222, .6); border-radius: 0; color: #eef1f6; font-family: var(--label); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: #dfe5ee; color: var(--accent); }
+
+/* ── Closing ── */
+.closing { padding: 76px 30px 60px; background: var(--night); }
+.closingMoon { width: 64px; height: auto; margin-bottom: 4px; }
+.thanks { color: #f4f6fa; font-family: var(--display); font-size: 34px; letter-spacing: .12em; text-transform: uppercase; }
+.closingText { color: #c9d2e1; }
+.closingSalam { color: #aebad0; font-family: var(--label); font-size: 10.5px; letter-spacing: .14em; line-height: 1.7; }
+.family { font-family: var(--label); font-size: 11px; letter-spacing: .16em; }
+.closingNames { color: #f4f6fa; font-family: var(--display); font-size: 30px; letter-spacing: .14em; text-transform: uppercase; }
+.music { border-color: #cdd4de; background: var(--accent2); }
+
+/* ── Cover: a quiet night with one turning rosette ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 0 30px 46px; overflow: hidden; background: var(--night); color: #eef1f6; isolation: isolate; }
+.coverRosette { position: absolute; z-index: -1; top: -110px; right: -170px; width: 470px; height: auto; opacity: .55; animation: slowTurn 300s linear infinite; }
+.coverMoon { position: absolute; top: 112px; left: 34px; width: 62px; height: auto; animation: moonGlow 9s ease-in-out infinite; }
+.coverText { position: relative; display: flex; flex-direction: column; align-items: flex-start; margin-top: auto; padding: 6px 0 0 22px; text-align: left; }
+.coverText::before { content: ""; position: absolute; top: -90px; bottom: 6px; left: 0; width: 1px; background: linear-gradient(transparent, #cdd4de 22%, #cdd4de 80%, transparent); }
+.coverArabic { color: #dfe5ee; font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.kicker { margin-top: 18px; color: #aebad0; font-family: var(--label); font-size: 10.5px; letter-spacing: .4em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; gap: 2px; max-width: 100%; margin-top: 10px; color: #f4f6fa; font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.02; letter-spacing: .14em; text-transform: uppercase; overflow-wrap: anywhere; }
+.coverNames em { display: flex; align-items: center; gap: 10px; margin: 6px 0; color: #aebad0; font-family: var(--serif); font-size: 18px; font-style: italic; letter-spacing: .04em; text-transform: none; }
+.coverNames em::after { content: ""; width: 52px; height: 1px; background: #8f9bb0; }
+.coverDate { margin-top: 14px; color: #dfe5ee; font-family: var(--label); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.guest { align-items: flex-start; max-width: 100%; margin-top: 26px; text-align: left; }
+.guest small { color: #aebad0; font-size: 15px; }
+.guest strong { color: #f4f6fa; font-family: var(--serif); font-size: 20px; font-weight: 500; text-wrap: pretty; }
+.table { border-color: #8f9bb0; border-radius: 0; color: #dfe5ee; font-family: var(--label); }
+.openBtn { min-width: 0; margin-top: 22px; padding: 0 24px; border: 1px solid #cdd4de; border-radius: 0; background: rgba(11, 23, 51, .4); color: #f4f6fa; font-family: var(--label); font-size: 11px; letter-spacing: .26em; text-transform: uppercase; }
+.openBtn:hover { background: #eef1f6; color: var(--accent); translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 72px 30px 74px; overflow: hidden; background: var(--night); color: #eef1f6; text-align: center; isolation: isolate; }
+.heroRosette { position: absolute; z-index: -1; top: 50%; left: 50%; width: 420px; height: auto; translate: -50% -50%; opacity: .22; animation: slowTurn 300s linear infinite reverse; }
+.heroStar { width: 40px; height: auto; }
+.heroKicker { margin-top: 16px; color: #aebad0; font-family: var(--label); font-size: 10.5px; letter-spacing: .4em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 12px; color: #f4f6fa; font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.15; letter-spacing: .14em; text-transform: uppercase; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { display: block; color: #aebad0; font-family: var(--serif); font-size: 20px; font-style: italic; letter-spacing: 0; text-transform: none; }
+.heroDate { margin-top: 14px; color: #dfe5ee; font-family: var(--label); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 20px; color: #c9d2e1; font-size: 17px; font-style: italic; line-height: 1.65; text-wrap: pretty; }
+
+@keyframes slowTurn { to { rotate: 360deg; } }
+@keyframes moonGlow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.15) drop-shadow(0 0 10px rgba(205, 220, 245, .35)); } }
+@media (prefers-reduced-motion: reduce) {
+  .coverRosette, .coverMoon, .heroRosette, .countDecor { animation: none; }
+}
+.countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 22px; height: 15px; background: url(/themes/art/safir-malam/band.webp) repeat-x 0 0 / 120px 15px; opacity: .45; }

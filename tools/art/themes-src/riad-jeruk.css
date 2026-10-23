@@ -1,0 +1,146 @@
+/* Riad Jeruk — Islami, halaman riad Maroko dari atas: atap genteng hijau, lantai zellige pastel, air mancur marmer berpita zellige dan pohon jeruk di empat sudut; lengkung plester berukir bergigi, bunga jeruk, dan pita ubin. */
+.root, .cover {
+  --bg: #f6efe3; --paper: #efe5d4; --ivory: #fbf7ef; --field: #fffdf8; --ink: #24322f; --muted: #5d6762; --line: #ddd0bb;
+  --accent: #2f5f58; --accent2: #1f4540; --gold: #d98a3a; --gold-l: #f6cf98; --gold-d: #a95f22;
+  --band-bg: #2f5f58; --band-ink: #f6efe3; --blush: #e6b3a2; --mint: #a3cfbd; --sky: #93bcd2;
+  --display: Lustria, Georgia, serif; --serif: Lustria, Georgia, serif; --script: Lustria, Georgia, serif; --label: "Tenor Sans", "Trebuchet MS", sans-serif;
+  --h2: 30px; --card-r: 4px;
+  --tile: url(/themes/art/riad-jeruk/tile.webp); --frieze: url(/themes/art/riad-jeruk/frieze.webp);
+  --lobe: path("M0 268 L0 112 A32 32 0 0 1 22 62 A36 36 0 0 1 64 24 A46 46 0 0 1 146 24 A36 36 0 0 1 188 62 A32 32 0 0 1 210 112 L210 268 Z");
+  --lobe-in: path("M0 256 L0 107 A30 30 0 0 1 21 59 A34 34 0 0 1 61 23 A44 44 0 0 1 137 23 A34 34 0 0 1 177 59 A30 30 0 0 1 198 107 L198 256 Z");
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f5f58; --t-accent-ink: #fbf7ef; --t-bg: #f6efe3; --t-ink: #24322f; --t-muted: #5d6762; --t-line: #ddd0bb; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: Lustria, Georgia, serif; --t-heading-font: Lustria, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* type */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .28em; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 31px; }
+.arabic { color: var(--accent); font-size: 27px; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.7; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; }
+.fullName { font-size: 18px; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 84px; margin-top: 46px; }
+
+/* divider: an orange sprig between two thin painted lines */
+.divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 210px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--accent)); opacity: .5; }
+.divider::after { background: linear-gradient(270deg, transparent, var(--accent)); }
+.divider img { width: 74px; height: auto; transform-origin: 20% 80%; animation: bob 6s ease-in-out infinite alternate; }
+
+/* section rhythm: frieze strips mark the arcade between "rooms" */
+.section { padding: 70px 24px 64px; }
+.couple, .story, .wishes { background: var(--frieze) 0 0 / 180px 48px repeat-x, var(--paper); padding-top: 92px; }
+
+/* ── People: polylobed plaster windows ── */
+.portrait { filter: drop-shadow(0 12px 18px rgba(47, 95, 88, .18)); }
+.portraitFrame { width: 210px; height: 268px; padding: 0; border: 0; border-radius: 0; background: var(--mint); clip-path: var(--lobe); }
+.portraitFrame > img, .portraitFrame > div { position: absolute; top: 6px; left: 6px; width: 198px; height: 262px; border-radius: 0; clip-path: var(--lobe-in); }
+.portraitFrame:has(.monogram) { background: var(--tile) 0 0 / 96px; }
+.amp { color: var(--gold); font-family: var(--display); font-size: 44px; gap: 10px; }
+.amp img { width: 52px; }
+
+/* ── Countdown: deep teal hall between two tile friezes ── */
+.countBand { padding: 104px 22px; background: var(--tile) 0 0 / 96px 96px repeat-x, var(--tile) 0 100% / 96px 96px repeat-x, var(--band-bg); background-size: 96px 64px, 96px 64px, auto; }
+.headLight .eyebrow { color: var(--gold-l); font-family: var(--label); }
+.count { gap: 9px; }
+.count > div { height: 84px; border: 0; border-radius: 0; background: var(--ivory); clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(230, 179, 162, .35) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--gold-d); font-family: var(--label); font-style: normal; font-size: 11px; letter-spacing: .1em; }
+.ghostBtn { border-color: var(--gold-l); font-family: var(--label); font-size: 13px; }
+
+/* ── Events: plaster cards with a carved frieze head ── */
+.events { gap: 24px; }
+.event { padding: 70px 22px 26px; border: 0; border-radius: 0; background: var(--frieze) 0 0 / 150px 40px repeat-x, var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 14px 26px rgba(47, 95, 88, .07); }
+.event::before { inset: 48px 8px 8px; border-color: color-mix(in srgb, var(--mint) 80%, transparent); border-radius: 0; }
+.event:hover { box-shadow: 0 0 0 1px var(--mint), 0 18px 32px rgba(47, 95, 88, .12); }
+.eventNo { top: 50px; width: 30px; height: 30px; border-radius: 0; background: var(--blush); color: var(--accent2); font-family: var(--label); font-size: 12px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.event h3 { margin-top: 14px; font-size: 23px; }
+.eventTime { font-family: var(--label); }
+.rule { width: 56px; height: 6px; background: var(--tile) 0 0 / 24px; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); }
+
+/* ── Story ── */
+.timeline::before { background: linear-gradient(var(--gold), color-mix(in srgb, var(--mint) 60%, transparent)); width: 2px; }
+.node { border: 0; background: var(--ivory); box-shadow: 0 0 0 1px var(--mint); border-radius: 0; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); }
+.storyBody h3 { font-size: 21px; }
+
+/* ── Gallery ── */
+.mosaic { gap: 7px; }
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 0; clip-path: path("M0 308 L0 92 A26 26 0 0 1 18 50 A30 30 0 0 1 52 20 A40 40 0 0 1 120 20 A30 30 0 0 1 154 50 A26 26 0 0 1 172 92 L172 308 Z"); }
+
+/* ── Wishes ── */
+.form { border-radius: 2px; border: 0; box-shadow: 0 0 0 1px var(--line), inset 0 5px 0 var(--mint), 0 12px 24px rgba(47, 95, 88, .06); }
+.field > span, .diet, .guestsLabel { font-family: var(--label); font-size: 11px; color: var(--accent); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--label); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); }
+.wish { border-radius: 2px; border-left: 4px solid var(--blush); }
+.wish small { background: color-mix(in srgb, var(--mint) 40%, transparent); color: var(--accent2); font-family: var(--label); }
+.sentBox img { width: 150px; }
+
+/* ── Gifts: teal cards with a zellige lintel ── */
+.gift { padding: 50px 20px 26px; border-radius: 2px; background: var(--tile) 0 0 / 64px 32px repeat-x, var(--band-bg); }
+.gift::after { border-color: rgba(246, 207, 152, .08); }
+.gift h3 { font-family: var(--label); color: var(--gold-l); }
+.copy { border-radius: 2px; font-family: var(--label); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* ── Closing ── */
+.closing { padding: 100px 28px 140px; background: var(--tile) 0 0 / 96px 64px repeat-x, var(--band-bg); }
+.closingSprig { width: 110px; height: auto; animation: bob 6s ease-in-out infinite alternate; }
+.closingTree { position: absolute; z-index: -1; bottom: -8px; width: 104px; height: auto; transform-origin: 50% 100%; animation: sway 9s ease-in-out infinite alternate; opacity: .92; }
+.closingTree:first-child { left: -14px; }
+.closingTree:nth-child(2) { right: -14px; scale: -1 1; animation-delay: -4s; }
+.thanks { font-family: var(--display); font-size: 40px; }
+.closingSalam { font-family: var(--label); }
+.family { font-family: var(--label); font-size: 12px; }
+.closingNames { font-family: var(--display); font-size: 30px; }
+.music { border-color: var(--gold-l); border-radius: 0; clip-path: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%); }
+
+/* ── Cover: the courtyard from above ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 100dvh; padding: 40px 0 34px; overflow: hidden; background: var(--frieze) 0 0 / 180px 48px repeat-x, var(--frieze) 0 100% / 180px 48px repeat-x, var(--bg); text-align: center; }
+.coverTop { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 16px 24px 0; }
+.coverArabic { color: var(--accent); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.kicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.court { position: relative; width: calc(100% - 28px); max-width: 400px; aspect-ratio: 1; box-shadow: 0 18px 34px rgba(47, 95, 88, .22); }
+.courtArt { display: block; width: 100%; height: 100%; }
+.pool { position: absolute; inset: 27%; display: grid; place-items: center; border-radius: 50%; overflow: hidden; }
+.pool::before, .pool::after { content: ""; position: absolute; inset: 3%; border: 3px solid rgba(255, 255, 255, .5); border-radius: 50%; scale: .12; opacity: 0; animation: ripple 8s ease-out infinite; }
+.pool::after { animation-delay: -3.5s; }
+.coverNames { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 92%; color: var(--accent2); font-family: var(--display); font-size: clamp(24px, 8vw, 32px); font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-shadow: 0 0 12px rgba(230, 245, 241, .95), 0 0 3px rgba(230, 245, 241, .9); }
+.coverNames em { margin: 2px 0; color: var(--gold-d); font-style: normal; font-size: .7em; }
+.coverDate { color: var(--accent); font-family: var(--label); font-size: 14px; letter-spacing: .16em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 0 28px 24px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); }
+.table { border-color: var(--mint); color: var(--accent); font-family: var(--label); }
+.openBtn { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 14px; box-shadow: 0 8px 18px rgba(47, 95, 88, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: a carved plaster arch between two potted orange trees ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 18px 46px; background: var(--bg); text-align: center; overflow: hidden; }
+.heroArch { position: relative; width: 300px; max-width: 82%; aspect-ratio: 560 / 752; }
+.heroPhoto { position: absolute; top: 12%; left: 16%; right: 16%; bottom: 0; overflow: hidden; background: var(--mint); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroFrame { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; }
+.heroTree { position: absolute; z-index: 2; bottom: -6px; width: 34%; height: auto; transform-origin: 50% 100%; animation: sway 9s ease-in-out infinite alternate; }
+.heroTreeL { left: -22%; }
+.heroTreeR { right: -22%; scale: -1 1; animation-delay: -4s; }
+.heroKicker { margin-top: 26px; color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-style: normal; padding: 0 8px; }
+.heroDate { margin-top: 8px; color: var(--ink); font-family: var(--label); font-size: 14px; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 18px; color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+@keyframes bob { from { rotate: -3deg; } to { rotate: 3deg; translate: 0 -2px; } }
+@keyframes sway { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@keyframes ripple { 0% { scale: .12; opacity: 0; } 15% { opacity: .8; } 100% { scale: 1; opacity: 0; } }

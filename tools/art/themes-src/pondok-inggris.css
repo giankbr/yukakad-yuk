@@ -1,0 +1,166 @@
+/* Pondok Inggris — buku cerita bergambar cat air: pondok batu beratap jerami, mawar rambat, foxglove, delphinium, hollyhock, gerbang pagar putih; setiap bagian adalah "Bab" dengan huruf kapital hias, foto kameo oval, kartu bungkus benih, buku tamu bergaris; IM Fell English + Crimson Pro + Mrs Saint Delafield. */
+.root, .cover {
+  --bg: #f6f0e2; --paper: #efe6d2; --ivory: #fffaf0; --field: #fffcf5; --ink: #3d3a2f; --muted: #6d6656; --line: #dccfb4;
+  --accent: #56704c; --accent2: #3f5638; --gold: #c58a98; --gold-l: #f6e7e2; --gold-d: #9a5468;
+  --band-bg: #5f7a55; --band-ink: #fbf6ea; --delph: #5a73b8; --sage-l: #c9d6b6;
+  --display: "IM Fell English", "Crimson Pro", Georgia, serif; --serif: "Crimson Pro", Georgia, serif; --script: "Mrs Saint Delafield", cursive;
+  --h2: 34px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #56704c; --t-accent-ink: #fffaf0; --t-bg: #f6f0e2; --t-ink: #3d3a2f; --t-muted: #6d6656; --t-line: #dccfb4; --t-field: #fffcf5;
+  --t-radius: 6px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: "IM Fell English", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 18px;
+}
+.main {
+  background:
+    radial-gradient(120% 40% at 0% 0%, rgba(201, 214, 182, .25), transparent 60%),
+    radial-gradient(90% 30% at 100% 50%, rgba(241, 195, 200, .16), transparent 60%),
+    var(--bg);
+}
+/* chapter headings: "BAB II" kicker in letterspaced small caps, italic title, rose vine */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .34em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; letter-spacing: .01em; }
+.head { gap: 6px; }
+.head::before { content: "❦"; color: var(--gold); font-size: 20px; line-height: 1; rotate: 90deg; }
+.divider { width: 180px; }
+
+/* opening as the first page: drop cap */
+.salamBlock { padding: 30px 32px 54px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 30px; font-style: italic; }
+.intro { max-width: 340px; color: var(--ink); font-size: 18px; line-height: 1.7; }
+.salamBlock .intro { text-align: left; }
+.salamBlock .intro::first-letter { float: left; margin: 6px 10px 0 0; padding: 4px 10px 2px; border: 1.5px solid var(--accent); border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--display); font-size: 58px; line-height: .9; box-shadow: 0 0 0 3px var(--bg), 0 0 0 4.5px var(--gold); }
+
+/* people: oval cameo portraits with a rose at the base */
+.couple { background: transparent; }
+.portrait { margin-bottom: 30px; }
+.portraitFrame { width: 196px; height: 250px; padding: 7px; border: 0; border-radius: 50%; background: var(--ivory); box-shadow: inset 0 0 0 1.5px var(--gold), 0 0 0 6px var(--bg), 0 0 0 7.5px var(--accent), 0 0 0 11px var(--bg), 0 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent), 0 20px 30px -16px rgba(61, 58, 47, .5); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitRose { position: absolute; z-index: 3; left: 50%; bottom: -34px; width: 104px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 4px rgba(61, 58, 47, .18)); }
+.monogram { color: var(--accent); font-family: var(--display); font-style: italic; }
+.role { font-size: 12px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 46px; font-style: italic; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: .02em; }
+.parents { font-style: italic; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 70px; }
+
+/* countdown: sage lawn under a flower border */
+.countBand { padding-top: 150px; background: linear-gradient(var(--bg) 0 92px, var(--band-bg) 92px); }
+.countBorder { position: absolute; z-index: 0; top: 0; left: 50%; width: 560px; height: auto; translate: -50% 0; }
+.countBand > :not(.countBorder) { position: relative; z-index: 1; }
+.headLight .eyebrow { color: var(--sage-l); }
+.headLight h2 { font-family: var(--display); font-style: italic; }
+.count > div { height: 94px; border: 1.5px solid rgba(251, 246, 234, .55); border-radius: 50%; background: rgba(251, 246, 234, .1); }
+.count > div::after { display: none; }
+.count b { color: var(--ivory); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--sage-l); font-size: 14px; }
+.ghostBtn { border-color: var(--sage-l); color: var(--ivory); font-family: var(--serif); font-size: 16px; font-style: italic; }
+
+/* events: seed-packet cards with a scalloped flap */
+.events { gap: 30px; }
+.event { padding: 46px 24px 26px; border: 1px solid var(--line); border-radius: 0 0 6px 6px; background: linear-gradient(var(--sage-l) 0 18px, var(--ivory) 18px); box-shadow: 0 14px 26px -18px rgba(61, 58, 47, .5); }
+.event::before { inset: auto 0 calc(100% - 22px) 0; height: 12px; border: 0; border-radius: 0; background: radial-gradient(circle at 8px 0, transparent 7px, var(--sage-l) 7.5px) 0 0 / 16px 12px repeat-x; translate: 0 100%; }
+.eventNo { top: 28px; white-space: nowrap; width: auto; height: auto; padding: 2px 12px; border: 1px solid var(--gold); border-radius: 999px; background: var(--ivory); color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .2em; }
+.eventNo::before { content: "No. "; }
+.event h3 { margin-top: 14px; color: var(--accent2); font-family: var(--display); font-size: 25px; font-style: italic; }
+.eventDate { font-size: 18px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 16px; }
+.rule { width: 120px; height: 10px; background: url(/themes/art/pondok-inggris/vine.webp) center / contain no-repeat; }
+.event strong { font-family: var(--display); font-size: 20px; font-weight: 400; }
+.mapBtn { border-radius: 6px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 16px; letter-spacing: .04em; }
+
+/* story: left-aligned chapter pages with rose nodes */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; width: 0; border-left: 2px dotted var(--accent); background: none; }
+.node { width: 46px; height: 46px; border: 0; background: var(--paper); }
+.node img { width: 46px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 23px; font-style: italic; }
+.storyBody p { color: var(--ink); font-size: 17px; }
+
+/* gallery: pressed into an album with white borders */
+.mosaic { grid-auto-rows: 150px; gap: 14px; }
+.tile, .tile:first-child, .tile:nth-child(4n + 4) { border: 6px solid #fffdf8; border-radius: 2px; box-shadow: 0 8px 16px -8px rgba(61, 58, 47, .45); }
+.tile:nth-child(odd) { rotate: -1.2deg; }
+.tile:nth-child(even) { rotate: 1deg; }
+
+/* wishes: a ruled guestbook */
+.wishes { background: var(--paper); }
+.form { border-radius: 4px; background: repeating-linear-gradient(transparent 0 33px, rgba(90, 115, 184, .16) 33px 34px), var(--ivory); box-shadow: inset 34px 0 0 -32px rgba(197, 138, 152, .7), 0 12px 26px -16px rgba(61, 58, 47, .35); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--display); font-size: 13px; letter-spacing: .2em; }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 17px; }
+.choices button { border-radius: 4px; font-family: var(--serif); font-size: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.submit { border-radius: 4px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 17px; letter-spacing: .06em; }
+.wish { border-radius: 2px; border-left: 3px solid var(--gold); background: var(--ivory); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-size: 18px; font-style: italic; }
+.wish small { background: var(--sage-l); color: var(--accent2); }
+.sent { color: var(--accent2); font-family: var(--display); font-size: 24px; }
+
+/* gifts: garden plant labels with a punched hole */
+.gift { padding: 30px 20px 22px; border-radius: 10px 10px 40px 40px; background: var(--band-bg); box-shadow: 0 14px 24px -16px rgba(63, 86, 56, .8); }
+.gift::before { content: ""; position: absolute; top: 10px; left: 50%; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .35); translate: -50% 0; }
+.gift::after { right: -16px; bottom: -18px; width: 110px; height: 86px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/pondok-inggris/rose.webp) center / contain no-repeat; opacity: .55; }
+.gift h3 { color: var(--ivory); font-family: var(--display); font-size: 19px; font-style: italic; }
+.giftIcon { border-color: rgba(251, 246, 234, .5); }
+.giftNo { font-family: var(--display); font-size: 24px; letter-spacing: .06em; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 18px; line-height: 1.45; letter-spacing: 0; }
+.copy { border-color: var(--sage-l); color: var(--ivory); font-family: var(--serif); font-size: 15px; }
+.copyOn, .copyOn:hover { background: var(--ivory); color: var(--accent2); }
+
+/* closing: "and they lived happily", flowers along the bottom of the last page */
+.closing { padding: 56px 28px 210px; background: var(--paper); color: var(--ink); }
+.closingBorder { position: absolute; z-index: -1; bottom: 0; left: 50%; width: 600px; height: auto; translate: -50% 0; }
+.thanks { color: var(--accent2); font-family: var(--display); font-size: 44px; font-style: italic; }
+.closingText { color: var(--ink); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 17px; font-style: italic; letter-spacing: 0; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 15px; letter-spacing: .06em; }
+.closingNames { color: var(--accent2); font-family: var(--script); font-size: 54px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--accent2); }
+.music { background: var(--accent); border-color: var(--ivory); }
+
+/* ── Cover: a storybook title page ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(6px, 1.4vh, 12px); min-height: 100dvh; padding: 30px 22px 30px; overflow: hidden; background: radial-gradient(100% 60% at 50% 30%, #fbf7ec, var(--bg) 70%); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 12px; z-index: -1; border: 1px solid var(--line); outline: 1px solid var(--line); outline-offset: -6px; pointer-events: none; }
+.chapter { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .36em; text-transform: uppercase; }
+.cottage { position: relative; width: min(330px, 84vw, 44vh); }
+.cottage img { display: block; width: 100%; height: auto; }
+.coverFox { position: absolute; z-index: 0; bottom: 22px; width: 50px; opacity: .9; height: auto; transform-origin: 50% 100%; animation: foxSway 7s ease-in-out infinite alternate; }
+.coverFoxL { left: 16px; }
+.coverFoxR { right: 16px; scale: -1 1; animation-delay: -3s; }
+.kicker { color: var(--accent); font-family: var(--serif); font-size: 17px; font-style: italic; }
+.coverNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: clamp(38px, 11vw, 50px); font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { display: block; color: var(--gold-d); font-family: var(--script); font-size: .8em; font-style: normal; line-height: 1.1; }
+.coverDate { color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .2em; text-transform: uppercase; }
+.guest { position: relative; z-index: 1; width: min(290px, 80vw); padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px / 60%; background: rgba(255, 250, 240, .85); color: var(--ink); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 20px; font-style: italic; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-size: 12px; }
+.openBtn { border-radius: 6px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 17px; letter-spacing: .06em; box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent), 0 12px 22px -12px rgba(63, 86, 56, .8); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: opening page with an illuminated initial and a cameo photo ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 44px 24px 40px; overflow: hidden; text-align: center; }
+.heroChapter { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .36em; text-transform: uppercase; }
+.heroOnce { max-width: 320px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.5; }
+.heroNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 52px; font-weight: 400; font-style: italic; line-height: 1; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-d); font-family: var(--script); font-size: .8em; font-style: normal; line-height: 1.15; }
+.heroArt { position: relative; margin: 26px 0 34px; }
+.heroFrame { position: relative; width: 250px; height: 320px; padding: 8px; border-radius: 50%; background: var(--ivory); box-shadow: inset 0 0 0 1.5px var(--gold), 0 0 0 7px var(--bg), 0 0 0 8.5px var(--accent), 0 24px 34px -16px rgba(61, 58, 47, .5); }
+.heroFrame > img, .heroFrame > div { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.heroVine { position: absolute; z-index: 2; left: 50%; width: 300px; height: auto; translate: -50% 0; }
+.heroVineTop { top: -8px; }
+.heroVineBot { bottom: -10px; scale: -1 -1; }
+.heroFox { position: absolute; z-index: 2; bottom: -26px; width: 70px; height: auto; transform-origin: 50% 100%; animation: foxSway 8s ease-in-out infinite alternate; }
+.heroFoxL { left: -46px; }
+.heroFoxR { right: -46px; scale: -1 1; animation-delay: -4s; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 18px; letter-spacing: .18em; text-transform: uppercase; }
+.heroNote { max-width: 310px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; text-wrap: pretty; }
+
+@keyframes foxSway { from { rotate: -2deg; } to { rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverFox, .heroFox { animation: none; }
+}

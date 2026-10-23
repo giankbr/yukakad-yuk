@@ -1,0 +1,176 @@
+/* Ultah Robot — ulang tahun anak bertema robot: Bip si robot toska-oranye melambai dengan layar dada yang menampilkan umur, drone kuning berbaling-baling, roda gigi yang berputar, lampu antena berkedip, dan kue kepala robot; kertas cetak biru bergaris, panel bermur, layar LCD. Ceria dan memantul. */
+.root, .cover {
+  --bg: #e8f5f6; --paper: #fdf7ec; --ivory: #ffffff; --field: #ffffff; --ink: #22304f; --muted: #52607d; --line: #c9dbe0;
+  --accent: #2c3a5e; --accent2: #3d4f7c; --gold: #f28a4a; --gold-l: #f7c948; --gold-d: #c9622a;
+  --teal: #38b2a6; --teal-d: #23857c; --pink: #f59bb0; --lcd: #9ef2ff;
+  --band-bg: #2c3a5e; --band-ink: #eef7ff;
+  --display: "Righteous", system-ui, sans-serif; --serif: "Lexend", system-ui, sans-serif; --script: "Righteous", system-ui, sans-serif; --mono: "VT323", ui-monospace, monospace;
+  --grid: linear-gradient(rgba(44, 58, 94, .07) 1px, transparent 1px) 0 0 / 22px 22px, linear-gradient(90deg, rgba(44, 58, 94, .07) 1px, transparent 1px) 0 0 / 22px 22px;
+  --rivets: radial-gradient(circle at 12px 12px, #c3cbd6 3px, #7a8594 3.6px, transparent 4.4px), radial-gradient(circle at calc(100% - 12px) 12px, #c3cbd6 3px, #7a8594 3.6px, transparent 4.4px), radial-gradient(circle at 12px calc(100% - 12px), #c3cbd6 3px, #7a8594 3.6px, transparent 4.4px), radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), #c3cbd6 3px, #7a8594 3.6px, transparent 4.4px);
+  --pop: 4px 4px 0 var(--accent);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #f28a4a; --t-accent-ink: #ffffff; --t-bg: #e8f5f6; --t-ink: #22304f; --t-muted: #52607d; --t-line: #c9dbe0; --t-field: #ffffff;
+  --t-radius: 16px; --t-font: "Lexend", system-ui, sans-serif; --t-heading-font: "Righteous", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* headings: a terminal prompt over a chunky title */
+.eyebrow, .salamKicker { font-family: var(--mono); font-size: 20px; letter-spacing: .04em; text-transform: none; color: var(--teal-d); }
+.eyebrow::before, .salamKicker::before { content: "> "; color: var(--gold); }
+.role { font-family: var(--mono); font-size: 19px; letter-spacing: .04em; text-transform: none; color: var(--teal-d); }
+.head h2 { font-family: var(--display); font-size: 32px; color: var(--accent); line-height: 1.1; }
+.section { padding: 60px 20px; background-image: var(--grid); }
+.divider { display: flex; align-items: center; gap: 8px; width: 190px; }
+.divider i { flex: 1; height: 8px; background: radial-gradient(circle, var(--teal) 2.4px, transparent 3px) 100% 50% / 8px 8px no-repeat, linear-gradient(var(--teal), var(--teal)) 0 50% / 100% 2px no-repeat; }
+.divider i:last-child { scale: -1 1; }
+.divider img { width: 30px; height: auto; animation: gearSpin 8s linear infinite; }
+
+/* opening */
+.salamBlock { padding: 54px 26px; background: var(--paper); background-image: var(--grid); }
+.salamTitle { font-family: var(--display); font-size: 34px; line-height: 1.1; color: var(--gold); text-shadow: 2px 2px 0 var(--accent); }
+.intro { color: var(--muted); font-size: 16.5px; line-height: 1.7; }
+
+/* celebrant: a monitor-shaped portrait with the drone hovering over it */
+.couple { background-color: var(--bg); }
+.portrait { margin: 26px 0 16px; }
+.portraitFrame { width: 220px; height: 220px; padding: 10px; border: 3px solid var(--accent); border-radius: 30px; background: var(--rivets), var(--teal); box-shadow: var(--pop); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 20px; }
+.pDrone { position: absolute; z-index: 2; top: -48px; right: -60px; width: 104px; height: auto; animation: hover 3.2s ease-in-out infinite; pointer-events: none; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 20px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 110px; text-shadow: 0 0 18px rgba(158, 242, 255, .35); }
+.nick { font-family: var(--display); font-size: 46px; color: var(--gold); text-shadow: 3px 3px 0 var(--accent); }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 600; color: var(--accent); }
+.parents { font-size: 15px; }
+
+/* countdown: the control panel, LCD digits */
+.countBand { padding: 64px 18px; background: var(--accent); background-image: radial-gradient(rgba(158, 242, 255, .08) 1.2px, transparent 1.6px); background-size: 14px 14px; }
+.headLight .eyebrow { color: var(--lcd); }
+.headLight h2 { font-family: var(--display); color: #fff; }
+.count > div { height: 92px; border: 3px solid #1c2642; border-radius: 14px; background: #13304a; box-shadow: inset 0 0 18px rgba(158, 242, 255, .18), 0 3px 0 #f7c948; }
+.count > div::after { background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 2px, transparent 2px 4px); translate: 0 0; animation: none; }
+.count b { font-family: var(--mono); font-size: 46px; line-height: .9; color: var(--lcd); text-shadow: 0 0 10px rgba(158, 242, 255, .7); }
+.count small { font-family: var(--mono); font-size: 17px; font-style: normal; color: var(--gold-l); }
+.countTba { font-family: var(--mono); font-size: 24px; color: var(--lcd); }
+.ghostBtn { border: 3px solid var(--gold-l); border-radius: 14px; color: var(--gold-l); font-family: var(--display); font-size: 14px; letter-spacing: .02em; transition: background .25s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.ghostBtn:hover { background: rgba(247, 201, 72, .12); translate: 0 -2px; }
+.ghostBtn:active { scale: .95; }
+.countGear { position: absolute; z-index: -1; width: 150px; height: auto; opacity: .2; animation: gearSpin 18s linear infinite; }
+.countGear:first-child { top: -40px; left: -50px; }
+.countGear:nth-child(2) { right: -40px; bottom: -40px; width: 120px; animation-direction: reverse; }
+
+/* events: mission cards */
+.events { background-color: var(--paper); }
+.event { padding: 40px 20px 24px; border: 3px solid var(--accent); border-radius: 22px; background: var(--rivets), var(--ivory); box-shadow: var(--pop); transition: translate .3s var(--m-spring), box-shadow .3s var(--m-spring); }
+.event::before { display: none; }
+.event:hover { translate: -2px -2px; box-shadow: 6px 6px 0 var(--accent); border-color: var(--accent); }
+.eventNo { top: -17px; width: auto; height: auto; padding: 4px 14px; border: 3px solid var(--accent); border-radius: 12px; background: var(--gold-l); color: var(--accent); font-family: var(--mono); font-size: 20px; letter-spacing: .02em; }
+.eventNo { white-space: nowrap; }
+.eventNo::before { content: "MISI "; }
+.event h3 { font-family: var(--display); font-size: 26px; color: var(--accent); }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { font-family: var(--mono); font-size: 20px; color: var(--teal-d); }
+.rule { width: 80px; height: 6px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--gold) 0 10px, var(--gold-l) 10px 20px); }
+.mapBtn { border: 3px solid var(--accent); border-radius: 14px; background: var(--gold); color: #fff; font-family: var(--display); font-size: 14px; box-shadow: 3px 3px 0 var(--accent); transition: translate .25s var(--m-spring), box-shadow .25s var(--m-spring), scale .25s var(--m-spring), background .2s; }
+.mapBtn:hover { background: var(--gold-d); translate: -1px -1px; box-shadow: 4px 4px 0 var(--accent); }
+.mapBtn:active { scale: .95; translate: 2px 2px; box-shadow: 0 0 0 var(--accent); }
+
+.story { background-color: var(--bg); }
+.timeline::before { width: 4px; left: 20px; background: repeating-linear-gradient(180deg, var(--teal) 0 8px, transparent 8px 14px); }
+.node { border: 3px solid var(--accent); background: var(--gold-l); }
+.node img { width: 26px; animation: gearSpin 10s linear infinite; }
+.storyBody { padding: 12px 14px; border: 2px solid var(--line); border-radius: 16px; background: var(--ivory); }
+.storyBody small { font-family: var(--mono); font-size: 19px; letter-spacing: .02em; color: var(--gold-d); }
+.storyBody h3 { font-family: var(--display); font-size: 21px; color: var(--accent); }
+
+.gallery { background-color: var(--paper); }
+.tile, .tile:first-child { border: 3px solid var(--accent); border-radius: 18px; }
+
+.wishes { background-color: var(--bg); }
+.form { border: 3px solid var(--accent); border-radius: 22px; background: var(--rivets), var(--ivory); box-shadow: var(--pop); padding: 26px 18px 20px; }
+.field > span, .diet, .guestsLabel { font-family: var(--mono); font-size: 19px; letter-spacing: .02em; text-transform: none; color: var(--accent); }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 12px; }
+.field input:focus, .field textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(56, 178, 166, .2); }
+.choices button { border: 2px solid var(--line); border-radius: 12px; font-family: var(--display); font-size: 14px; transition: background .2s, color .2s, border-color .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.choices button:active { scale: .94; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--teal); border-color: var(--accent); color: #fff; box-shadow: 2px 2px 0 var(--accent); }
+.step { border: 2px solid var(--accent); }
+.submit { border: 3px solid var(--accent); border-radius: 14px; background: var(--gold); color: #fff; font-family: var(--display); font-size: 16px; letter-spacing: .02em; box-shadow: 3px 3px 0 var(--accent); transition: background .2s, box-shadow .25s var(--m-spring), scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.submit:not(:disabled):hover { background: var(--gold-d); }
+.submit:not(:disabled):active { scale: .96; translate: 2px 2px; box-shadow: 0 0 0 var(--accent); }
+.sent { font-family: var(--display); font-style: normal; font-size: 22px; color: var(--accent); }
+.sentBox img { width: 150px; }
+.wish { position: relative; padding-left: 34px; border: 2px solid var(--line); border-radius: 16px; }
+.wish::before { content: ""; position: absolute; left: 14px; top: 20px; width: 9px; height: 9px; border-radius: 99px; background: var(--teal); box-shadow: 0 0 8px var(--teal); animation: blink 2.4s steps(1) infinite; }
+.wish:nth-child(3n + 2)::before { background: var(--gold); box-shadow: 0 0 8px var(--gold); animation-delay: .8s; }
+.wish:nth-child(3n)::before { background: var(--pink); box-shadow: 0 0 8px var(--pink); animation-delay: 1.6s; }
+.wish strong { font-family: var(--display); color: var(--accent); }
+.wish small { border-radius: 8px; background: var(--gold-l); color: var(--accent); font-family: var(--mono); font-size: 16px; }
+
+.gifts { background-color: var(--paper); }
+.gift { border: 3px solid var(--accent); border-radius: 22px; background: var(--rivets), var(--teal); color: #fff; box-shadow: var(--pop); }
+.gift::after { border-color: rgba(255, 255, 255, .1); box-shadow: 0 0 0 14px rgba(255, 255, 255, .06); }
+.gift:nth-of-type(even) { background: var(--rivets), var(--gold); }
+.giftIcon { border: 2px solid rgba(255, 255, 255, .7); }
+.gift h3 { font-family: var(--display); color: #fff; font-size: 17px; }
+.giftNo { font-family: var(--mono); font-size: 27px; line-height: 1.05; letter-spacing: .03em; color: #fff; }
+.gift small { color: rgba(255, 255, 255, .9); }
+.copy { border: 2px solid #fff; border-radius: 12px; color: #fff; font-family: var(--display); transition: background .2s, color .2s, scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.copy:active { scale: .94; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--accent); }
+
+/* closing: navy control room, Bip and the cake */
+.closing { padding: 60px 24px 56px; background: var(--accent); background-image: radial-gradient(rgba(158, 242, 255, .08) 1.2px, transparent 1.6px); background-size: 14px 14px; }
+.closingStage { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 0; width: 100%; max-width: 340px; margin-bottom: 8px; }
+.closingBot { width: 150px; height: auto; animation: wobble 2.6s ease-in-out infinite; transform-origin: 50% 100%; }
+.closingCake { width: 170px; height: auto; margin-left: -10px; }
+.thanks { font-family: var(--display); font-size: 42px; color: var(--gold-l); text-shadow: 3px 3px 0 #1c2642; }
+.closingText { color: rgba(238, 247, 255, .88); }
+.family { font-family: var(--mono); font-size: 18px; letter-spacing: .02em; }
+.closingNames { font-family: var(--display); font-size: 34px; color: #fff; }
+.music { border: 3px solid var(--gold-l); border-radius: 14px; background: var(--gold); }
+
+/* ── Cover: blueprint paper, spinning gears, the drone, and Bip with the age on his chest screen ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; padding: max(28px, 4dvh) 20px max(22px, 3dvh); background: var(--grid), radial-gradient(120% 70% at 50% 100%, #d2eef0, transparent 70%), #e8f5f6; color: var(--ink); text-align: center; isolation: isolate; }
+.gearA, .gearB { position: absolute; z-index: -1; pointer-events: none; }
+.gearA { top: -46px; left: -50px; width: 150px; animation: gearSpin 14s linear infinite; }
+.gearB { top: 64px; left: 74px; width: 76px; animation: gearSpin 9.3s linear infinite reverse; }
+.coverDrone { position: absolute; z-index: 1; top: 40%; right: 8px; width: 84px; animation: hover 3s ease-in-out infinite; pointer-events: none; }
+.pill { position: relative; z-index: 2; padding: 6px 16px; border: 3px solid var(--accent); border-radius: 999px; background: var(--gold-l); color: var(--accent); font-family: var(--display); font-size: 14px; box-shadow: 3px 3px 0 var(--accent); }
+.coverName { position: relative; z-index: 2; margin-top: 14px; max-width: 100%; font-family: var(--display); font-size: clamp(52px, 16vw, 68px); font-weight: 400; line-height: .95; color: var(--gold); text-shadow: 4px 4px 0 var(--accent); overflow-wrap: anywhere; }
+.coverAge { position: relative; z-index: 2; margin-top: 8px; font-family: var(--display); font-size: 17px; color: var(--teal-d); }
+.coverDate { position: relative; z-index: 2; margin-top: 4px; font-size: 15px; font-weight: 500; color: var(--ink); }
+.bot { position: relative; z-index: 1; width: min(64vw, 32dvh, 270px); margin-top: auto; padding-top: 10px; }
+.botInner { position: relative; transform-origin: 50% 100%; animation: wobble 3s ease-in-out infinite; }
+.botInner > img { display: block; width: 100%; height: auto; }
+.screen { position: absolute; left: 31.4%; top: 46.5%; width: 37.9%; height: 19.7%; display: grid; place-items: center; font-family: var(--mono); font-size: min(14vw, 6.4dvh, 60px); line-height: 1; color: var(--lcd); text-shadow: 0 0 12px rgba(158, 242, 255, .8); pointer-events: none; }
+.screen small { font-size: .42em; color: var(--gold-l); text-shadow: none; }
+.antenna { position: absolute; left: 47.6%; top: .2%; width: 7%; aspect-ratio: 1; border-radius: 99px; background: #ff7a7a; box-shadow: 0 0 14px 4px rgba(255, 110, 110, .75); animation: blink 1.6s steps(1) infinite; pointer-events: none; }
+.coverPanel { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 340px; margin-top: -6px; padding: 20px 18px 18px; border: 3px solid var(--accent); border-radius: 22px; background: var(--rivets), var(--ivory); box-shadow: var(--pop); }
+.cover .guest small { font-size: 14px; color: var(--muted); }
+.cover .guest strong { font-family: var(--display); font-size: 21px; color: var(--accent); }
+.table { border: 2px solid var(--accent); border-radius: 10px; color: var(--accent); font-family: var(--mono); font-size: 16px; letter-spacing: .02em; }
+.openBtn { width: 100%; border: 3px solid var(--accent); border-radius: 16px; background: var(--gold); color: #fff; font-family: var(--display); font-size: 17px; letter-spacing: .02em; box-shadow: 3px 3px 0 var(--accent); transition: background .2s, box-shadow .25s var(--m-spring), scale .25s var(--m-spring), translate .25s var(--m-spring); }
+.openBtn:hover { background: var(--gold-d); }
+.openBtn:active { scale: .96; translate: 2px 2px; box-shadow: 0 0 0 var(--accent); }
+
+/* ── Hero: title over the blueprint, the cake between two gears, the drone's message on an LCD ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 20px 52px; background: var(--grid), var(--paper); text-align: center; overflow: hidden; }
+.heroKicker { font-family: var(--mono); font-size: 22px; color: var(--teal-d); }
+.heroName { margin-top: 4px; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1; color: var(--gold); text-shadow: 3px 3px 0 var(--accent); overflow-wrap: anywhere; }
+.heroDate { margin-top: 8px; font-weight: 500; }
+.heroStage { position: relative; width: 100%; max-width: 330px; height: 260px; margin-top: 18px; }
+.heroCake { position: absolute; left: 50%; bottom: 0; width: 240px; height: auto; translate: -50% 0; }
+.heroGearL { position: absolute; left: -6px; bottom: 30px; width: 86px; animation: gearSpin 12s linear infinite; }
+.heroGearR { position: absolute; right: 0; top: 4px; width: 62px; animation: gearSpin 8s linear infinite reverse; }
+.heroNote { position: relative; max-width: 330px; margin-top: 26px; padding: 16px 18px; border: 3px solid #1c2642; border-radius: 16px; background: #13304a; color: var(--lcd); font-family: var(--mono); font-size: 21px; line-height: 1.2; text-align: left; box-shadow: var(--pop); }
+.heroNote::after { content: "_"; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+
+@keyframes gearSpin { to { rotate: 360deg; } }
+@keyframes hover { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+@keyframes wobble { 0%, 100% { rotate: -1.5deg; } 50% { rotate: 1.5deg; } }
+@keyframes blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: .25; } }
+@media (prefers-reduced-motion: reduce) {
+  .divider img, .node img, .wish::before, .countGear, .pDrone, .closingBot, .gearA, .gearB, .coverDrone, .botInner, .antenna, .heroGearL, .heroGearR, .heroNote::after { animation: none; }
+}

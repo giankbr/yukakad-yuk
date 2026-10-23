@@ -1,0 +1,174 @@
+/* Pakpak Dairi — perbukitan Dairi yang hijau berkabut, rumah adat Pakpak beratap ijuk melengkung dengan tampuk muka berlukis merah-putih-hitam, kain oles bergaris, dan ranting kopi berbunga; sejuk, asimetris, seperti pagi di Sidikalang. */
+.root, .cover {
+  --bg: #eef1ea; --paper: #f6f5ee; --ivory: #fcfbf6; --field: #fffffb; --ink: #1f2a22; --muted: #56625a; --line: #d3d9cf;
+  --accent: #2c5236; --accent2: #3f6b45; --gold: #b2302a; --gold-l: #f2ece0; --gold-d: #9a2620;
+  --red: #b2302a; --black: #1d1a1a; --mist: #e3e9e1;
+  --band-bg: #1d1a1a; --band-ink: #f2ece0;
+  --display: "Young Serif", Georgia, serif; --serif: "Petrona", Georgia, serif; --script: "Young Serif", Georgia, serif; --label: "Jost", system-ui, sans-serif;
+  --oles: url(/themes/art/pakpak-dairi/oles.webp) 0 50% / auto 100% repeat-x #1d1a1a;
+  --oles-v: url(/themes/art/pakpak-dairi/oles-v.webp) 50% 0 / 100% auto repeat-y #1d1a1a;
+  --gable: polygon(50% 0, 100% 26%, 100% 100%, 0 100%, 0 26%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2c5236; --t-accent-ink: #f2ece0; --t-bg: #eef1ea; --t-ink: #1f2a22; --t-muted: #56625a; --t-line: #d3d9cf; --t-field: #fffffb;
+  --t-radius: 6px; --t-font: "Petrona", Georgia, serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+
+/* headings sit left, under a short oles tab — the whole theme leans on the left edge like the cover strip */
+.eyebrow, .role, .salamKicker { font-family: var(--label); font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--red); }
+.section { align-items: stretch; gap: 22px; padding: 62px 24px 62px 30px; }
+.head { align-items: flex-start; gap: 6px; text-align: left; }
+.head h2 { color: var(--accent); font-size: 31px; line-height: 1.15; text-wrap: balance; }
+.divider { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 230px; margin-top: 6px; }
+.divider i { flex: 1; height: 10px; background: var(--oles); border-radius: 1px; }
+.divider i:first-child { flex: 0 0 26px; }
+.divider img { width: 46px; height: auto; flex-shrink: 0; }
+
+/* opening: on mist, left-ruled block with the red tab */
+.salamBlock { position: relative; align-items: flex-start; gap: 10px; padding: 56px 28px 54px 42px; background: var(--paper); text-align: left; }
+.salamBlock::before { content: ""; position: absolute; top: 56px; bottom: 54px; left: 22px; width: 6px; background: var(--oles-v); border-radius: 1px; }
+.salamKicker { font-size: 13px; }
+.salamTitle { font-family: var(--display); font-size: 30px; line-height: 1.2; color: var(--accent); text-wrap: balance; }
+.salamBlock .divider { margin-top: 2px; }
+.intro { max-width: 340px; color: var(--muted); font-size: 17px; line-height: 1.72; text-align: left; }
+.gifts .intro { text-align: left; }
+
+/* couple: portraits cut like the house (gable top), an oles sash across the bottom; names left beside a red rule */
+.couple { gap: 34px; background: var(--bg); }
+.person { align-items: flex-start; text-align: left; gap: 3px; }
+.personWrap:nth-child(odd) .person { align-items: flex-end; text-align: right; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 216px; height: 270px; padding: 0; border: 0; border-radius: 0; background: var(--accent); clip-path: var(--gable); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.pSash { position: absolute; z-index: 2; left: -10px; right: -10px; bottom: 18px; height: 22px; background: var(--oles); box-shadow: 0 6px 14px rgba(29, 26, 26, .25); pointer-events: none; }
+.pGable { position: absolute; z-index: 2; left: 50%; top: -30px; width: 74px; height: auto; translate: -50% 0; pointer-events: none; }
+.monogram { font-family: var(--display); color: var(--gold-l); font-size: 92px; }
+.role { font-size: 11px; }
+.nick { font-family: var(--display); font-size: 44px; line-height: 1.05; color: var(--accent); }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); }
+.parents { max-width: 290px; font-size: 15.5px; text-wrap: pretty; }
+.amp { align-self: center; gap: 12px; margin: 0; color: var(--red); font-family: var(--display); font-size: 40px; }
+.amp img { width: 40px; }
+
+/* countdown: the painted hills under a dusk-green veil, square tablets edged in cream */
+.countBand { align-items: center; padding: 70px 20px 66px; background: linear-gradient(180deg, rgba(23, 44, 30, .82), rgba(23, 44, 30, .9)), url(/themes/art/pakpak-dairi/scene.webp) 60% 64% / cover no-repeat #23412b; }
+.countBand::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--oles); }
+.headLight .eyebrow { font-family: var(--label); color: #f1b4a8; }
+.headLight h2 { font-family: var(--display); color: var(--gold-l); }
+.count > div { height: 86px; border: 1px solid rgba(242, 236, 224, .5); border-radius: 2px; background: rgba(242, 236, 224, .06); }
+.count > div::after { display: none; }
+.count b { font-family: var(--display); color: var(--gold-l); font-size: 30px; }
+.count small { font-family: var(--label); font-style: normal; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 236, 224, .75); }
+.ghostBtn { border-radius: 2px; border-color: rgba(242, 236, 224, .6); color: var(--gold-l); font-family: var(--label); letter-spacing: .12em; text-transform: uppercase; font-size: 12px; }
+
+/* events: cards hung on a vertical oles strip, number set large at the top right */
+.events { gap: 22px; background: var(--paper); }
+.event { align-items: flex-start; gap: 5px; padding: 26px 22px 24px 40px; border: 0; border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 0 1px 0 var(--line), 0 14px 30px rgba(31, 42, 34, .08); overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 16px; border: 0; border-radius: 0; background: var(--oles-v); }
+.eventNo { top: 16px; right: 18px; left: auto; translate: none; width: auto; height: auto; background: none; color: color-mix(in srgb, var(--accent) 22%, transparent); font-family: var(--display); font-size: 40px; letter-spacing: 0; }
+.event h3 { max-width: calc(100% - 56px); font-family: var(--display); font-size: 24px; color: var(--accent); text-wrap: balance; }
+.eventDate { font-style: normal; font-weight: 600; color: var(--ink); }
+.eventTime { font-family: var(--label); color: var(--red); letter-spacing: .06em; }
+.rule { width: 44px; height: 3px; background: var(--red); }
+.event strong { font-size: 17.5px; }
+.eventAddr { max-width: 100%; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--label); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; box-shadow: none; }
+.mapBtn:hover { background: var(--red); }
+
+.story { background: var(--bg); }
+.timeline::before { left: 21px; width: 4px; background: var(--oles-v); opacity: .9; }
+.node { width: 38px; height: 38px; border: 0; border-radius: 0; background: var(--paper); }
+.node img { width: 34px; }
+.storyBody small { font-family: var(--label); font-size: 12px; letter-spacing: .2em; color: var(--red); }
+.storyBody h3 { font-family: var(--display); font-size: 21px; color: var(--accent); }
+.storyImg { border-radius: 2px; }
+
+/* gallery: misty green field; the first print is house-shaped */
+.gallery { background: linear-gradient(180deg, var(--paper), var(--mist)); }
+.mosaic { grid-auto-rows: 148px; gap: 10px; }
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 0; clip-path: var(--gable); }
+
+.wishes { background: var(--bg); }
+.form { position: relative; padding: 32px 18px 20px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 14px 30px rgba(31, 42, 34, .08); overflow: hidden; }
+.form::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: var(--oles); }
+.field > span, .diet, .guestsLabel { font-family: var(--label); font-size: 11px; letter-spacing: .2em; color: var(--accent); }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.submit { border-radius: 3px; background: var(--red); color: #fff9f0; font-family: var(--label); font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--gold-d); }
+.sent { font-family: var(--display); font-style: normal; font-size: 22px; color: var(--accent); }
+.sentBox img { width: 110px; }
+.wish { border-radius: 3px; border: 0; border-left: 4px solid var(--accent2); }
+.wish:nth-child(even) { border-left-color: var(--red); }
+.wish strong { font-family: var(--display); color: var(--accent); }
+.wish small { border-radius: 2px; background: var(--mist); color: var(--accent); font-family: var(--label); letter-spacing: .06em; }
+
+.gifts { background: var(--paper); }
+.gift { align-items: flex-start; padding: 30px 22px 22px; border-radius: 4px; background: var(--accent); text-align: left; }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: var(--oles); }
+.gift::after { right: -30px; bottom: -60px; border-color: rgba(242, 236, 224, .06); }
+.giftIcon { border-radius: 2px; border-color: rgba(242, 236, 224, .4); }
+.gift h3 { font-family: var(--label); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-l); }
+.giftNo { font-family: var(--display); color: #fff; font-size: 21px; }
+.copy { border-radius: 2px; border-color: rgba(242, 236, 224, .6); font-family: var(--label); letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: the coffee rows and blossoms of the painting, then the oles cloth */
+.closing { padding: 0 28px 60px; background: var(--black); }
+.closingHills { position: relative; width: calc(100% + 56px); height: 230px; margin: 0 -28px 18px; background: url(/themes/art/pakpak-dairi/scene.webp) 50% 94% / cover no-repeat; }
+.closingHills::after { content: ""; position: absolute; inset: auto 0 0; height: 22px; background: var(--oles); }
+.closingSprig { position: absolute; z-index: 1; top: 18px; left: -40px; width: 240px; height: auto; transform-origin: 0 60%; animation: sprigSway 10s ease-in-out infinite alternate; }
+.closingGable { width: 92px; height: auto; }
+.thanks { font-family: var(--display); font-size: 40px; color: var(--gold-l); }
+.closingText { color: rgba(242, 236, 224, .84); }
+.family { font-family: var(--label); letter-spacing: .12em; color: rgba(242, 236, 224, .74); }
+.closingNames { font-family: var(--display); color: #fff; font-size: 32px; }
+.music { border-radius: 3px; background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: the painting fills the screen; a vertical oles runs down the left; type set flush-left in the mist ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: #dfe7dc; color: var(--ink); text-align: left; isolation: isolate; }
+.coverArt { position: absolute; inset: 0; z-index: -2; }
+.coverArt img { width: 100%; height: 100%; object-fit: cover; object-position: 82% 100%; animation: coverDrift 30s ease-in-out infinite alternate; }
+.coverMist { position: absolute; z-index: -1; left: -30%; right: -30%; top: 50%; height: 110px; background: radial-gradient(closest-side, rgba(245, 247, 242, .7), transparent); filter: blur(8px); animation: mist 18s ease-in-out infinite alternate; pointer-events: none; }
+.coverStrip { position: absolute; z-index: 1; inset: 0 auto 0 18px; width: 22px; background: var(--oles-v); box-shadow: 4px 0 12px rgba(29, 26, 26, .18); }
+.coverTop { display: flex; flex-direction: column; align-items: flex-start; padding: max(46px, 7dvh) 26px 0 60px; }
+.njuah { font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--red); }
+.coverLabel { margin-top: 6px; font-family: var(--label); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: #3c4a40; }
+.coverNames { margin-top: 14px; max-width: 100%; font-family: var(--display); font-size: clamp(46px, 14vw, 60px); font-weight: 400; line-height: .98; color: var(--accent); overflow-wrap: anywhere; }
+.coverNames span { display: block; }
+.coverNames em { display: block; margin: 4px 0 2px 4px; font-style: normal; font-size: .5em; color: var(--red); }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 16px; font-family: var(--label); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.coverDate::before { content: ""; width: 26px; height: 3px; background: var(--red); }
+.coverCard { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: auto 18px max(26px, 4dvh) 52px; padding: 26px 20px 20px; border-radius: 4px; background: rgba(252, 251, 246, .93); box-shadow: 0 18px 40px rgba(18, 32, 22, .35); backdrop-filter: blur(4px); overflow: hidden; }
+.coverCard::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: var(--oles); }
+.cover .guest { align-items: flex-start; max-width: none; }
+.guest small { color: var(--muted); font-size: 14px; font-style: italic; }
+.guest strong { font-family: var(--display); font-size: 21px; color: var(--accent); text-wrap: balance; }
+.table { border-radius: 2px; border-color: var(--red); color: var(--red); font-family: var(--label); letter-spacing: .16em; text-transform: uppercase; }
+.openBtn { min-width: 0; width: 100%; border-radius: 3px; background: var(--accent); color: var(--gold-l); font-family: var(--label); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(28, 54, 36, .3); }
+.openBtn:hover { background: var(--red); }
+
+/* ── Hero: oles band, names flush left, the photo cut like the rumah adat with its painted gable above ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 34px 24px 48px 30px; background: linear-gradient(180deg, var(--mist), var(--bg)); }
+.hero::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--oles); }
+.heroKicker { margin-top: 16px; font-family: var(--label); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--red); }
+.heroNames { margin-top: 8px; font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.02; color: var(--accent); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-style: normal; color: var(--red); padding: 0 6px; }
+.heroDate { margin-top: 10px; font-family: var(--label); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.house { position: relative; align-self: center; width: 100%; max-width: 330px; margin-top: 64px; }
+.houseGable { position: absolute; z-index: 2; left: 50%; top: -46px; width: 132px; height: auto; translate: -50% 0; pointer-events: none; }
+.heroPhoto { height: 380px; overflow: hidden; clip-path: var(--gable); background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.houseSash { position: absolute; left: -12px; right: -12px; bottom: 26px; height: 24px; background: var(--oles); box-shadow: 0 8px 18px rgba(29, 26, 26, .28); }
+.heroSprig { position: absolute; z-index: 3; right: -54px; bottom: -40px; width: 220px; height: auto; rotate: -8deg; pointer-events: none; }
+.heroNote { max-width: 330px; margin-top: 44px; padding-left: 16px; border-left: 3px solid var(--red); font-size: 17px; font-style: italic; line-height: 1.7; color: var(--muted); }
+
+@keyframes sprigSway { from { rotate: -3deg; } to { rotate: 2deg; } }
+@keyframes mist { from { translate: -40px 0; opacity: .6; } to { translate: 50px 8px; opacity: 1; } }
+@keyframes coverDrift { from { scale: 1.04; translate: 0 0; } to { scale: 1.1; translate: -10px -6px; } }
+@media (prefers-reduced-motion: reduce) { .closingSprig, .coverMist, .coverArt img { animation: none; } }
