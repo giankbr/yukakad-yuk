@@ -20,6 +20,7 @@ export default async function TemplatesPage() {
     slug: template.slug,
     name: template.name,
     category: template.category || "Umum",
+    eventType: template.event_type,
     preview: templatePreview(template),
     demoHref: templateDemoHref(template),
     isPremium: template.is_premium,

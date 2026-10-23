@@ -193,7 +193,7 @@ export default async function Home() {
         {/* Themes */}
         <section className={styles.section} id="tema" style={{ paddingBottom: 0 }}>
           <ThemeGallery clip templates={templates.map(template => ({
-            id: template.id, name: template.name, category: template.category || "Umum",
+            id: template.id, name: template.name, category: template.category || "Umum", eventType: template.event_type,
             preview: templatePreview(template), href: `/templates/${template.slug}`,
             demoHref: templateDemoHref(template),
             isPremium: template.is_premium,

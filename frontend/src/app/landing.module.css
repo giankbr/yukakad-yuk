@@ -187,6 +187,25 @@
 .search input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; color: var(--rw-ink); font: inherit; font-size: 16px; padding: 0; }
 .search input::placeholder { color: var(--rw-muted); }
 .search kbd { padding: 2px 8px; border: 1px solid var(--rw-border-warm); border-radius: 4px; font-family: var(--rw-font-mono); font-size: 11px; }
+.themeFilters { display: grid; gap: 12px; min-width: 0; margin-top: -16px; }
+.themeFilters .tagBar { flex: 1; margin-top: 0; }
+.filterRow { display: flex; align-items: center; gap: 12px; min-width: 0; }
+@media (max-width: 720px) { .filterRow { flex-direction: column; align-items: stretch; } }
+.subTags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 4px; animation: subTagsIn 220ms cubic-bezier(.2, .8, .2, 1); }
+.subTags button { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px; border: 1px solid var(--rw-border-warm); border-radius: 999px; background: #fff; color: var(--rw-ink-2); font-size: 13px; font-weight: 500; white-space: nowrap; cursor: pointer; transition: border-color 150ms, background-color 150ms, color 150ms; }
+.subTags button small { color: var(--rw-muted); font-family: var(--rw-font-mono); font-size: 11px; }
+.subTags button:hover { border-color: var(--rw-ink-2); color: var(--rw-ink); }
+.subTags button:focus-visible { outline: 2px solid var(--rw-primary); outline-offset: 2px; }
+.subTags button[aria-pressed="true"] { border-color: var(--rw-primary-border); background: var(--rw-primary-soft); color: var(--rw-primary-hover); }
+.subTags button[aria-pressed="true"] small { color: var(--rw-primary); }
+.subTags .subMore { border-style: dashed; color: var(--rw-muted); }
+@keyframes subTagsIn { from { opacity: 0; translate: 0 -4px; } }
+@media (max-width: 720px) {
+  .subTags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+  .subTags::-webkit-scrollbar { display: none; }
+  .subTags button { flex: none; }
+}
+@media (prefers-reduced-motion: reduce) { .subTags { animation: none; } }
 .tagBar { position: relative; min-width: 0; margin-top: -16px; }
 .tags { display: flex; gap: 6px; padding: 4px; overflow-x: auto; border: 1px solid var(--rw-border-warm); border-radius: 999px; background: var(--rw-surface-2); scrollbar-width: none; scroll-behavior: smooth; }
 .tags::-webkit-scrollbar { display: none; }

@@ -6,10 +6,10 @@ import Link from "next/link";
 import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { IconPencil, IconSearch, IconSparkle } from "@/components/brand/icons";
-import { CategoryBar } from "@/components/landing/TemplateInteractions";
+import { ThemeFilters, filterLabel, matchesFilter, type ThemeFilter } from "@/components/landing/TemplateInteractions";
 
 export type BrowserTemplate = {
-  id: string; slug: string; name: string; category: string; preview?: string; demoHref: string; isPremium: boolean; price: string;
+  id: string; slug: string; name: string; category: string; eventType?: string; preview?: string; demoHref: string; isPremium: boolean; price: string;
 };
 
 const PAGE = 12;
@@ -41,15 +41,15 @@ export function ThemeCard({ template, names = "" }: { template: BrowserTemplate;
 
 export function ThemeBrowser({ templates }: { templates: BrowserTemplate[] }) {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("");
+  const [filter, setFilter] = useState<ThemeFilter>({ collection: "", category: "" });
   const [premiumOnly, setPremiumOnly] = useState(false);
   const [names, setNames] = useState("");
   const [limit, setLimit] = useState(PAGE);
   const search = useRef<HTMLInputElement>(null);
 
-  const counts = templates.reduce<Record<string, number>>((acc, t) => ({ ...acc, [t.category]: (acc[t.category] ?? 0) + 1 }), {});
   const needle = query.trim().toLowerCase();
-  const visible = templates.filter(t => (!category || t.category === category) && (!premiumOnly || t.isPremium)
+  const label = filterLabel(filter);
+  const visible = templates.filter(t => matchesFilter(t, filter) && (!premiumOnly || t.isPremium)
     && (!needle || `${t.name} ${t.category}`.toLowerCase().includes(needle)));
 
   useEffect(() => {
@@ -76,16 +76,16 @@ export function ThemeBrowser({ templates }: { templates: BrowserTemplate[] }) {
       </label>
     </div>
     <div className={browser.filterBar}>
-      <CategoryBar className={browser.tabs} categories={Object.keys(counts)} counts={counts} total={templates.length} value={category}
-        onChange={value => { setCategory(value); setLimit(PAGE); }} />
-      <button type="button" role="switch" className={browser.toggle} aria-checked={premiumOnly} onClick={() => { setPremiumOnly(v => !v); setLimit(PAGE); }}>
-        <IconSparkle size={15} weight="fill" />
-        <span>Hanya Premium</span>
-        <i aria-hidden />
-      </button>
+      <ThemeFilters className={browser.tabs} templates={templates} value={filter} onChange={value => { setFilter(value); setLimit(PAGE); }} trailing={
+        <button type="button" role="switch" className={browser.toggle} aria-checked={premiumOnly} onClick={() => { setPremiumOnly(v => !v); setLimit(PAGE); }}>
+          <IconSparkle size={15} weight="fill" />
+          <span>Hanya Premium</span>
+          <i aria-hidden />
+        </button>
+      } />
     </div>
     <div className={browser.results}>
-      <p className={browser.summary} role="status">Menampilkan {Math.min(limit, visible.length)} dari {visible.length} tema{category ? ` ${category}` : ""}</p>
+      <p className={browser.summary} role="status">Menampilkan {Math.min(limit, visible.length)} dari {visible.length} tema{label ? ` ${label}` : ""}</p>
       {visible.length === 0
         ? <p className={base.empty}>Belum ada tema yang cocok. Coba kata kunci lain.</p>
         : <div id="tema-grid" className={styles.grid4}>{visible.slice(0, limit).map(t => <ThemeCard key={t.id} template={t} names={names} />)}</div>}

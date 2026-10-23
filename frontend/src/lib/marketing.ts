@@ -6,7 +6,7 @@ export type Kontak = { heading?: string; subheading?: string; whatsapp?: string 
 export type FooterContent = { heading?: string; tagline?: string; columns?: { title: string; links: { label: string; href: string }[] }[]; payment_methods?: string[]; copyright?: string; instagram?: string; tiktok?: string };
 export type Feature = { id: string; title: string; description: string; icon?: string };
 export type Testimonial = { id: string; name: string; role?: string; quote: string; avatar_url?: string; is_sample?: boolean };
-export type Template = { id: string; name: string; slug: string; category: string; preview_image?: string; preview_url?: string; is_premium: boolean };
+export type Template = { id: string; name: string; slug: string; category: string; event_type?: string; preview_image?: string; preview_url?: string; is_premium: boolean };
 export type Plan = { id: string; name: string; max_guests: number; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean; price: number; duration_days?: number | null };
 
 import { themeList } from "@/components/invitation/themes/registry";
@@ -16,7 +16,7 @@ import type { LegalDoc } from "./legal";
 
 export const defaultTemplates: Template[] = [
   ...themeList.map(theme => ({
-    id: theme.id, name: theme.name, slug: theme.id, category: theme.category,
+    id: theme.id, name: theme.name, slug: theme.id, category: theme.category, event_type: theme.group === "acara" ? "lainnya" : "wedding",
     preview_image: `/themes/previews/${theme.id}.webp`, preview_url: `/invitation/demo?template=${theme.id}`, is_premium: theme.tier === "premium",
   })),
 ];

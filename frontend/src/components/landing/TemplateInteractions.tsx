@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
@@ -69,7 +69,7 @@ export function MobileMenu() {
 }
 
 export type GalleryTemplate = {
-  id: string; name: string; category: string; preview?: string; demoHref: string; isPremium: boolean; href?: string; price?: string;
+  id: string; name: string; category: string; eventType?: string; preview?: string; demoHref: string; isPremium: boolean; href?: string; price?: string;
 };
 
 const heights = [340, 260, 380, 280, 260, 360, 300, 340];
@@ -77,17 +77,13 @@ const heights = [340, 260, 380, 280, 260, 360, 300, 340];
 export function ThemeGallery({ templates, clip = false, title = "Cari tema yang kamu banget.", headingLevel = 2 }: {
   templates: GalleryTemplate[]; clip?: boolean; title?: string; headingLevel?: 1 | 2;
 }) {
-  const [category, setCategory] = useState("");
+  const [filter, setFilter] = useState<ThemeFilter>({ collection: "", category: "" });
   const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
   const search = useRef<HTMLInputElement>(null);
-  const counts = templates.reduce<Record<string, number>>((acc, template) => {
-    if (template.category) acc[template.category] = (acc[template.category] ?? 0) + 1;
-    return acc;
-  }, {});
-  const categories = Object.keys(counts);
   const needle = query.trim().toLowerCase();
-  const visible = templates.filter(template => (!category || template.category === category)
+  const label = filterLabel(filter);
+  const visible = templates.filter(template => matchesFilter(template, filter)
     && (!needle || `${template.name} ${template.category}`.toLowerCase().includes(needle)));
   const clipped = clip && !expanded && visible.length > 8;
   const Heading = headingLevel === 1 ? "h1" : "h2";
@@ -118,7 +114,7 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
           <kbd aria-hidden="true">⌘K</kbd>
         </label>
       </div>
-      <CategoryBar categories={categories} counts={counts} total={templates.length} value={category} onChange={setCategory} />
+      <ThemeFilters templates={templates} value={filter} onChange={value => { setFilter(value); setExpanded(false); }} />
       {visible.length === 0 ? (
         <p className={styles.empty} role="status">Belum ada tema yang cocok. Coba kata kunci lain.</p>
       ) : (
@@ -144,11 +140,11 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
           {visible.length < 4 && (
             <FewThemesCard
               span={4 - visible.length}
-              label={category || (needle ? `"${query.trim()}"` : "")}
+              label={label || (needle ? `"${query.trim()}"` : "")}
               count={visible.length}
               total={templates.length}
               suggestions={templates.filter(template => !visible.includes(template)).slice(0, 3)}
-              onReset={() => { setCategory(""); setQuery(""); }}
+              onReset={() => { setFilter({ collection: "", category: "" }); setQuery(""); }}
             />
           )}
         </div>
@@ -157,8 +153,97 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
         {clipped
           ? <button type="button" className={styles.btnPrimary} onClick={() => setExpanded(true)}>Muat {visible.length - 8} tema lainnya <IconArrowRight size={14} /></button>
           : clip && <Link href="/templates" className={styles.btnPrimary}>Lihat semua tema <IconArrowRight size={14} /></Link>}
-        <p role="status">{visible.length} tema{category ? ` ${category}` : ""}</p>
+        <p role="status">{visible.length} tema{label ? ` ${label}` : ""}</p>
       </div>}
+    </div>
+  );
+}
+
+/**
+ * Themes are filtered in two levels so the bar stays short however many categories exist:
+ * a handful of fixed collections, then the categories inside the chosen collection.
+ */
+const COLLECTIONS = [
+  { id: "pernikahan", label: "Pernikahan" },
+  { id: "adat", label: "Adat Nusantara" },
+  { id: "islami", label: "Islami & Syari" },
+  { id: "unik", label: "Kekinian" },
+  { id: "acara", label: "Acara lain" },
+] as const;
+export type CollectionId = (typeof COLLECTIONS)[number]["id"];
+
+const UNIK = new Set(["Aplikasi", "Hiburan", "Sosial Media", "Perjalanan", "Keuangan", "Belanja", "Unik", "Retro"]);
+
+export function collectionOf(category: string, eventType?: string): CollectionId {
+  if (eventType && eventType !== "wedding") return "acara";
+  if (category.startsWith("Adat ") || category === "Peranakan") return "adat";
+  if (category === "Islami" || category === "Syari") return "islami";
+  if (UNIK.has(category)) return "unik";
+  return "pernikahan";
+}
+
+export type ThemeFilter = { collection: CollectionId | ""; category: string };
+type Filterable = { category: string; eventType?: string };
+
+export function matchesFilter(template: Filterable, filter: ThemeFilter) {
+  if (filter.category) return template.category === filter.category;
+  return !filter.collection || collectionOf(template.category, template.eventType) === filter.collection;
+}
+
+export function filterLabel(filter: ThemeFilter) {
+  return filter.category || COLLECTIONS.find(item => item.id === filter.collection)?.label || "";
+}
+
+const SUB_VISIBLE = 10;
+
+/** Collection pills, plus the categories of the chosen collection as wrapping chips ("+N lainnya" past ten). */
+export function ThemeFilters({ templates, value, onChange, className, trailing }: {
+  templates: Filterable[]; value: ThemeFilter; onChange: (value: ThemeFilter) => void; className?: string;
+  /** Extra control shown at the end of the collection row (e.g. a premium switch). */
+  trailing?: ReactNode;
+}) {
+  const [showAll, setShowAll] = useState(false);
+  const collectionCounts: Record<string, number> = {};
+  const categoryCounts: Record<string, number> = {};
+  for (const template of templates) {
+    const collection = collectionOf(template.category, template.eventType);
+    collectionCounts[collection] = (collectionCounts[collection] ?? 0) + 1;
+    if (collection === value.collection) categoryCounts[template.category] = (categoryCounts[template.category] ?? 0) + 1;
+  }
+  const collections = COLLECTIONS.filter(item => collectionCounts[item.id]);
+  const labels = Object.fromEntries(collections.map(item => [item.label, item.id]));
+  const subcategories = Object.keys(categoryCounts).sort((a, b) => categoryCounts[b] - categoryCounts[a] || a.localeCompare(b, "id"));
+  // Keep the active chip visible even when it falls past the collapsed cut-off.
+  const collapsed = !showAll && subcategories.length > SUB_VISIBLE + 2;
+  const shown = collapsed
+    ? subcategories.slice(0, SUB_VISIBLE).concat(subcategories.slice(SUB_VISIBLE).filter(item => item === value.category))
+    : subcategories;
+
+  return (
+    <div className={`${styles.themeFilters} ${className ?? ""}`}>
+      <div className={styles.filterRow}>
+        <CategoryBar categories={collections.map(item => item.label)} total={templates.length} allLabel="Semua"
+          counts={Object.fromEntries(collections.map(item => [item.label, collectionCounts[item.id]]))}
+          value={COLLECTIONS.find(item => item.id === value.collection)?.label ?? ""}
+          onChange={label => { setShowAll(false); onChange({ collection: labels[label] ?? "", category: "" }); }} />
+        {trailing}
+      </div>
+      {subcategories.length > 1 && (
+        <div className={styles.subTags} role="group" aria-label={`Kategori ${filterLabel({ ...value, category: "" })}`}>
+          <button type="button" aria-pressed={!value.category} onClick={() => onChange({ ...value, category: "" })}>Semua</button>
+          {shown.map(item => (
+            <button type="button" key={item} aria-pressed={value.category === item}
+              onClick={() => onChange({ ...value, category: value.category === item ? "" : item })}>
+              {value.collection === "adat" ? item.replace(/^Adat /, "") : item}<small>{categoryCounts[item]}</small>
+            </button>
+          ))}
+          {subcategories.length > SUB_VISIBLE + 2 && (
+            <button type="button" className={styles.subMore} onClick={() => setShowAll(open => !open)} aria-expanded={showAll}>
+              {showAll ? "Ringkas" : `+${subcategories.length - shown.length} lainnya`}
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -192,7 +277,10 @@ export function CategoryBar({ categories, counts, total, value, onChange, allLab
       </button>
       <div ref={row} className={styles.tags} role="group" aria-label="Filter kategori tema">
         {["", ...categories].map(item => (
-          <button type="button" key={item || "all"} aria-pressed={value === item} onClick={() => onChange(item)}>
+          <button type="button" key={item || "all"} aria-pressed={value === item} onClick={event => {
+            event.currentTarget.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+            onChange(item);
+          }}>
             <span>{item || allLabel}</span>
             <small>{item ? counts[item] : total}</small>
           </button>
