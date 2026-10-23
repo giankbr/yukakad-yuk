@@ -33,7 +33,7 @@ func main() {
 		log.Fatalf("database unavailable: %v", err)
 	}
 	defer postgres.Close()
-	if err := db.MustMigrate(postgres, []string{db.Schema001, db.Schema002, db.Schema003, db.Schema004, db.Schema005, db.Schema006, db.Schema007, db.Schema008, db.Schema009, db.Schema010, db.Schema011, db.Schema012, db.Schema013, db.Schema014, db.Schema015, db.Schema016, db.Schema017, db.Schema018, db.Schema019, db.Schema020, db.Schema021, db.Schema022, db.Schema023, db.Schema024, db.Schema025, db.Schema026, db.Schema027, db.Schema028, db.Schema029, db.Schema030, db.Schema031, db.Schema032, db.Schema033, db.Schema034, db.Schema035, db.Schema036}); err != nil {
+	if err := db.MustMigrate(postgres, []string{db.Schema001, db.Schema002, db.Schema003, db.Schema004, db.Schema005, db.Schema006, db.Schema007, db.Schema008, db.Schema009, db.Schema010, db.Schema011, db.Schema012, db.Schema013, db.Schema014, db.Schema015, db.Schema016, db.Schema017, db.Schema018, db.Schema019, db.Schema020, db.Schema021, db.Schema022, db.Schema023, db.Schema024, db.Schema025, db.Schema026, db.Schema027, db.Schema028, db.Schema029, db.Schema030, db.Schema031, db.Schema032, db.Schema033, db.Schema034, db.Schema035, db.Schema036, db.Schema037}); err != nil {
 		log.Fatalf("database migration failed: %v", err)
 	}
 	dataStore := store.Store(store.NewPostgresStore(postgres))

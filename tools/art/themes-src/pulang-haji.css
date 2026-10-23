@@ -1,0 +1,163 @@
+/* Pulang Haji — tasyakuran kepulangan haji dalam putih dan hijau lembut: payung putih berumbai, kurma dan air zamzam, tasbih, dan bintang khatam bercat air. */
+.root, .cover {
+  --bg: #f8f7f1; --paper: #eef3ec; --ivory: #ffffff; --field: #fcfdfb; --ink: #23372c; --muted: #5a6c60; --line: #d9e4da;
+  --accent: #4f7d63; --accent2: #3d6650; --gold: #c8a45a; --gold-l: #ecd9a6; --gold-d: #957434;
+  --band-bg: #5f8a72; --band-ink: #fbfaf4;
+  --display: "El Messiri", Georgia, serif; --serif: "Gentium Book Plus", Georgia, serif; --script: "El Messiri", Georgia, serif;
+  --sage: #8fb29a; --sage-l: #cfe0d2;
+  --star: polygon(50% 0%, 61.5% 22.3%, 85.4% 14.6%, 77.7% 38.5%, 100% 50%, 77.7% 61.5%, 85.4% 85.4%, 61.5% 77.7%, 50% 100%, 38.5% 77.7%, 14.6% 85.4%, 22.3% 61.5%, 0% 50%, 22.3% 38.5%, 14.6% 14.6%, 38.5% 22.3%);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4f7d63; --t-accent-ink: #ffffff; --t-bg: #f8f7f1; --t-ink: #23372c; --t-muted: #5a6c60; --t-line: #d9e4da; --t-field: #fcfdfb;
+  --t-radius: 22px; --t-font: "Gentium Book Plus", Georgia, serif; --t-heading-font: "El Messiri", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--display); font-size: 12px; font-weight: 500; letter-spacing: .24em; color: var(--gold-d); }
+.head h2, .headLight h2 { font-weight: 500; }
+.head h2 { color: var(--accent2); }
+.divider { width: 180px; }
+.section { padding: 62px 22px 58px; }
+
+/* opening: the doa as a soft green panel */
+.salamBlock { padding: 30px 24px 56px; background: var(--bg); }
+.arabic { max-width: 330px; padding: 18px 16px 12px; border-radius: 26px; background: var(--paper); color: var(--accent2); font-size: 25px; line-height: 1.8; }
+.salamKicker { margin-top: 8px; }
+.salamTitle { font-family: var(--display); font-size: 36px; font-weight: 500; color: var(--accent2); }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: 15px; }
+.intro { color: var(--muted); }
+
+/* the two hajj returnees: star-framed monograms */
+.couple { background: linear-gradient(180deg, var(--paper), var(--bg)); gap: 28px; }
+.person { padding: 26px 18px 28px; border-radius: 30px; background: var(--ivory); box-shadow: 0 14px 34px rgba(35, 55, 44, .07); }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 132px; height: 132px; padding: 0; border: 0; border-radius: 0; clip-path: var(--star); background: radial-gradient(circle at 40% 35%, #a9c6b0, var(--accent) 75%); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portrait::before { content: ""; position: absolute; inset: -9px; clip-path: var(--star); background: var(--gold-l); z-index: 0; }
+.portraitFrame { z-index: 1; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: #fff; font-family: var(--display); font-size: 54px; font-weight: 500; }
+.role { color: var(--gold-d); }
+.nick { font-family: var(--display); font-size: 34px; font-weight: 500; color: var(--accent2); }
+.fullName { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--muted); }
+.parents { font-size: 15px; }
+
+/* countdown */
+.countBand { background: radial-gradient(90% 80% at 50% 0%, #7ea58c, var(--band-bg) 70%); padding: 68px 18px 116px; }
+.countTasbih { position: absolute; z-index: -1; left: 50%; bottom: 8px; width: 380px; height: auto; translate: -50% 0; opacity: .9; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count > div { height: 82px; border: 0; border-radius: 999px 999px 20px 20px; background: rgba(255, 255, 255, .95); box-shadow: 0 10px 20px rgba(30, 50, 40, .18); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-weight: 500; font-size: 29px; }
+.count small { color: var(--muted); font-style: normal; font-size: 13px; }
+.ghostBtn { border-color: rgba(255, 255, 255, .75); color: #fff; font-family: var(--display); }
+.ghostBtn:hover { background: rgba(255, 255, 255, .14); }
+
+/* events */
+.events { gap: 26px; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: 30px; background: var(--ivory); box-shadow: 0 14px 34px rgba(35, 55, 44, .08); }
+.event::before { inset: 8px; border: 1px dashed rgba(143, 178, 154, .7); border-radius: 24px; }
+.eventNo { position: static; translate: none; width: 44px; height: 44px; margin-bottom: 4px; clip-path: var(--star); border-radius: 0; background: var(--sage-l); color: var(--accent2); font-family: var(--display); font-size: 13px; }
+.event h3 { font-family: var(--display); font-weight: 500; font-size: 23px; color: var(--accent2); }
+.eventDate { font-style: normal; }
+.eventTime { color: var(--gold-d); font-family: var(--display); text-align: center; justify-content: center; }
+.rule { background: var(--sage); }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--display); }
+
+/* story: the journey */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--sage) 0 3px, transparent 3px 9px); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody small { font-family: var(--display); color: var(--gold-d); letter-spacing: .12em; }
+.storyBody h3 { font-family: var(--display); font-weight: 500; color: var(--accent2); }
+
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 24px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 30px; border: 0; padding: 24px 20px; box-shadow: 0 14px 34px rgba(35, 55, 44, .08); }
+.field > span, .diet, .guestsLabel { font-family: var(--display); color: var(--accent); letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.step { color: var(--accent); border-color: var(--sage); }
+.submit { background: var(--accent); color: #fff; font-family: var(--display); letter-spacing: .08em; }
+.sent { color: var(--accent2); }
+.wish { border: 0; border-radius: 20px; box-shadow: 0 6px 18px rgba(35, 55, 44, .06); }
+.wish strong { font-family: var(--display); font-weight: 500; color: var(--accent2); }
+.wish small { background: var(--paper); color: var(--accent); }
+
+/* gifts: sedekah card */
+.gifts { background: var(--paper); }
+.gift { border-radius: 30px; background: var(--ivory); color: var(--ink); box-shadow: 0 14px 34px rgba(35, 55, 44, .08); }
+.gift::after { right: auto; left: -50px; bottom: auto; top: -50px; width: 150px; height: 150px; border: 0; box-shadow: none; background: url(/themes/art/pulang-haji/corner.webp) no-repeat 0 0 / contain; opacity: .7; }
+.giftIcon { border-color: var(--sage); background: var(--accent); }
+.gift h3 { color: var(--accent2); font-family: var(--display); font-weight: 500; }
+.giftNo { color: var(--ink); font-family: var(--display); }
+.gift small { color: var(--muted); }
+.copy { border-color: var(--accent); color: var(--accent); font-family: var(--display); }
+.copy svg { stroke: var(--accent); }
+.copy:hover { background: var(--paper); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #fff; }
+.copyOn svg { stroke: #fff; }
+
+/* closing: two payung under a pale green sky */
+.closing { background: linear-gradient(180deg, var(--bg), var(--paper) 40%, #dbe8dd); color: var(--ink); padding: 60px 26px 60px; }
+.closingPayung { display: flex; justify-content: center; gap: 0; margin-bottom: 6px; }
+.closingPayung img { width: 120px; height: auto; transform-origin: 50% 100%; }
+.closingPayung img:first-child { rotate: -10deg; translate: 14px 0; }
+.closingPayung img:last-child { rotate: 10deg; translate: -14px 0; scale: -1 1; }
+.thanks { color: var(--accent2); font-family: var(--display); font-weight: 500; font-size: 42px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--display); }
+.family { color: var(--muted); font-family: var(--display); }
+.closingNames { color: var(--accent2); font-family: var(--display); font-weight: 500; font-size: 26px; line-height: 1.3; }
+.made { color: rgba(35, 55, 44, .5); }
+.made:hover { color: var(--accent); }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: two white payung over the names, tasbih garland below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; justify-content: center; padding: 30px 24px 46px; overflow: hidden; background: radial-gradient(90% 50% at 50% 30%, #ffffff, var(--bg) 60%, #e8efe7); color: var(--ink); text-align: center; isolation: isolate; }
+.cornerTL, .cornerBR { position: absolute; z-index: -1; width: 150px; height: auto; opacity: .85; }
+.cornerTL { top: 0; left: 0; }
+.cornerBR { right: 0; bottom: 0; rotate: 180deg; }
+.payungs { position: relative; display: flex; justify-content: center; width: 100%; height: 200px; flex-shrink: 0; }
+.payung { width: 150px; height: auto; transform-origin: 50% 100%; }
+.payungL { rotate: -12deg; translate: 16px 0; animation: tilt 8s ease-in-out infinite alternate; }
+.payungR { scale: -1 1; rotate: 12deg; translate: -16px 0; animation: tiltR 8s ease-in-out infinite alternate; }
+.coverKicker { margin-top: 4px; font-family: var(--display); font-size: 13px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-d); }
+.coverLabel { margin-top: 4px; font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--accent); }
+.coverNames { display: flex; flex-direction: column; align-items: center; gap: 2px; max-width: 100%; margin-top: 14px; font-family: var(--display); font-size: 31px; font-weight: 500; line-height: 1.15; color: var(--accent2); }
+.coverNames span { overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--gold-d); }
+.coverDate { margin-top: 12px; padding: 6px 18px; border-radius: 999px; background: var(--paper); font-family: var(--display); font-size: 14px; letter-spacing: .06em; color: var(--accent2); }
+.coverTasbih { width: 300px; height: auto; margin-top: 4px; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 4px; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { font-family: var(--display); font-weight: 500; font-size: 20px; color: var(--ink); }
+.table { border-color: var(--sage); color: var(--accent); font-family: var(--display); }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--display); font-size: 15px; letter-spacing: .06em; box-shadow: 0 10px 22px rgba(61, 102, 80, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: dates & zamzam still life, the welcome doa ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 46px; overflow: hidden; background: linear-gradient(180deg, #ffffff, var(--bg)); text-align: center; }
+.heroCorner { position: absolute; top: 0; right: 0; width: 130px; height: auto; scale: -1 1; opacity: .8; }
+.heroKicker { font-family: var(--display); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-d); }
+.heroNames { display: flex; flex-direction: column; align-items: center; margin-top: 8px; font-family: var(--display); font-size: 32px; font-weight: 500; line-height: 1.2; color: var(--accent2); }
+.heroNames span { overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-family: var(--serif); font-size: 21px; font-style: italic; color: var(--gold-d); }
+.heroDate { margin-top: 8px; color: var(--muted); font-style: italic; }
+.heroStill { width: 100%; max-width: 340px; height: auto; margin-top: 18px; }
+.heroNote { max-width: 316px; margin-top: 12px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+.doa { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; margin-top: 26px; padding: 24px 20px; border-radius: 30px; background: var(--paper); }
+.doa h2 { font-family: var(--display); font-size: 20px; font-weight: 500; color: var(--accent2); }
+.doaAr { color: var(--accent2); font-family: Amiri, "Traditional Arabic", serif; font-size: 24px; line-height: 1.8; }
+.doaId { color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.6; }
+.doaSrc { color: var(--gold-d); font-family: var(--display); font-size: 12px; letter-spacing: .12em; }
+.sentBox img { width: 60px; }
+
+@keyframes tilt { from { rotate: -13deg; } to { rotate: -10deg; } }
+@keyframes tiltR { from { rotate: 13deg; } to { rotate: 10deg; } }
+@keyframes swing { from { rotate: -1.2deg; } to { rotate: 1.2deg; } }

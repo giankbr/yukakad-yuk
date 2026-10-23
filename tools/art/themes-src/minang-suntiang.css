@@ -1,0 +1,154 @@
+/* Minang Suntiang — undangan baralek Minang: suntiang emas bertingkat (bunga-bunga emas bertangkai pegas, laca dan kote-kote) sebagai mahkota di atas nama, dilukis sebagai prada emas di atas beludru merah, dengan kilau emas yang menyapu pelan; pita songket balapak bermotif pucuak rabuang dan saik galamai sebagai pembatas, potret medali emas, kartu acara berpita songket; Rozha One + Lora + Imperial Script, merah beludru, emas, gading dan hitam. */
+.root, .cover {
+  --bg: #f8efe0; --paper: #f2e3c8; --ivory: #fffaf0; --field: #fffdf7; --ink: #2a120e; --muted: #6e4a3c; --line: #e5cf9f;
+  --accent: #8e1018; --accent2: #5e0a10; --gold: #d4a640; --gold-l: #f0d27e; --gold-d: #9a7224;
+  --band-bg: #7a0c14; --band-ink: #fbefd6;
+  --display: "Rozha One", "Playfair Display", Georgia, serif; --serif: Lora, Georgia, serif; --script: "Imperial Script", "Great Vibes", cursive;
+  --h2: 32px; --card-r: 6px;
+  --velvet: url(/themes/art/minang-suntiang/velvet.webp) 0 0 / 256px, radial-gradient(ellipse 90% 60% at 50% 30%, #9b1720, #5a080e);
+  --songket: url(/themes/art/minang-suntiang/songket.webp) 0 0 / auto 100% repeat-x;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e1018; --t-accent-ink: #fbefd6; --t-bg: #f8efe0; --t-ink: #2a120e; --t-muted: #6e4a3c; --t-line: #e5cf9f; --t-field: #fffdf7;
+  --t-radius: 6px; --t-font: Lora, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* headings: red italic kicker, Rozha title, a gold bungo spray */
+.eyebrow, .salamKicker, .role { color: var(--accent); font-family: var(--serif); font-size: 14px; font-style: italic; font-weight: 600; letter-spacing: .04em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 190px; margin-top: 4px; }
+
+/* songket strip between the big blocks */
+.songket { display: block; align-self: stretch; height: 30px; background: var(--songket); box-shadow: 0 1px 0 var(--gold-d), 0 -1px 0 var(--gold-d); }
+
+/* opening */
+.salamBlock { gap: 10px; padding: 54px 28px 58px; }
+.arabic { color: var(--accent); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 38px; line-height: 1.1; }
+.salamSub { max-width: 300px; color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: 0; line-height: 1.5; }
+
+/* couple: gold medallion portraits on velvet, a bungo at the foot */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 196px; height: 196px; padding: 8px; border: 2px solid var(--gold); border-radius: 50%; background: var(--velvet); box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px var(--gold-d), 0 16px 30px rgba(90, 8, 14, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitBungo { position: absolute; z-index: 2; left: 50%; bottom: -24px; width: 52px; translate: -50% 0; pointer-events: none; }
+.portraitBungo img { display: block; width: 100%; height: auto; animation: bungoTurn 14s linear infinite; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; line-height: 1.1; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 60px; }
+.amp img { width: 40px; }
+
+/* countdown: velvet with songket hems, gold medallion numbers */
+.countBand { padding: 74px 18px; background: var(--velvet); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 24px; background: var(--songket); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, 74px); gap: 8px; }
+.count > div { height: 74px; border: 2px solid var(--gold); border-radius: 50%; background: radial-gradient(circle at 40% 30%, #a3171f, #5a080e 75%); box-shadow: inset 0 0 0 3px rgba(240, 210, 126, .25), 0 8px 16px rgba(0, 0, 0, .35); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 28px; line-height: 1; }
+.count small { color: #f5dcae; font-family: var(--serif); font-size: 11px; font-style: italic; }
+.ghostBtn { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: cards with a songket header ribbon */
+.events { background: var(--bg); }
+.event { padding: 54px 22px 26px; border: 1px solid var(--gold); border-radius: 6px; background: var(--ivory); overflow: hidden; box-shadow: 0 14px 30px rgba(90, 8, 14, .08); }
+.event::before { inset: 0 0 auto 0; height: 28px; border: 0; border-radius: 0; background: var(--songket); box-shadow: 0 1px 0 var(--gold-d); }
+.eventNo { top: 12px; width: 46px; height: 32px; border: 2px solid var(--gold); background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 15px; translate: -50% 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 70px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--gold), color-mix(in srgb, var(--gold) 20%, transparent)); }
+.node { width: 38px; height: 38px; border: 0; background: transparent; }
+.node img { width: 34px; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-size: 13px; font-style: italic; font-weight: 600; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; }
+
+/* gallery: gold-edged tiles, first one a tall arch */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 6px; box-shadow: 0 0 0 2px var(--ivory), 0 0 0 3px var(--gold); }
+.tile:first-child { border-radius: 98px 98px 6px 6px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border-color: var(--gold); border-radius: 6px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.submit { background: linear-gradient(180deg, #a3171f, var(--accent2)); color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 600; box-shadow: inset 0 0 0 1px var(--gold); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); }
+.wish { border-color: var(--line); border-radius: 6px; }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 17px; }
+.wish small { background: var(--accent); color: var(--gold-l); }
+
+/* gifts: velvet cards */
+.gifts { background: var(--bg); }
+.gift { padding: 26px 20px 46px; border: 1px solid var(--gold); border-radius: 6px; background: var(--velvet); }
+.gift::after { z-index: 0; inset: auto 0 0 0; width: auto; height: 22px; border: 0; border-radius: 0; background: var(--songket); box-shadow: none; }
+.gift h3 { font-family: var(--display); font-size: 18px; letter-spacing: .02em; }
+.giftNo { font-family: var(--display); font-size: 23px; color: #fff4dc; }
+.copy { position: relative; z-index: 1; border-color: var(--gold); font-family: var(--serif); }
+
+/* closing: velvet, the suntiang again as the emblem */
+.closing { padding: 62px 26px 76px; background: var(--velvet); }
+.closing::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 26px; background: var(--songket); }
+.closingEmblem { display: block; width: 240px; max-width: 80%; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-style: italic; }
+.family { font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 48px; }
+
+.music { border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: suntiang crowning the names on red velvet ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 56px 22px 62px; overflow: hidden; background: var(--velvet); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; left: 0; right: 0; height: 30px; background: var(--songket); box-shadow: 0 1px 0 #5a080e; }
+.cover::before { top: 0; }
+.cover::after { bottom: 0; }
+.coverKicker { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .08em; }
+.crown { position: relative; width: 340px; max-width: 100%; margin-top: 10px; }
+.crown img { display: block; width: 100%; height: auto; transform-origin: 50% 80%; animation: tremble 6s ease-in-out infinite alternate; }
+.glint { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(105deg, transparent 38%, rgba(255, 246, 214, .75) 50%, transparent 62%) -200% 0 / 220% 100% no-repeat; -webkit-mask: url(/themes/art/minang-suntiang/suntiang.webp) 0 0 / 100% 100%; mask: url(/themes/art/minang-suntiang/suntiang.webp) 0 0 / 100% 100%; mix-blend-mode: soft-light; animation: glintSweep 7s ease-in-out 1.2s infinite; }
+.coverNames { max-width: 100%; margin-top: 4px; color: #fff0cf; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 2px 0 #4e070c, 0 8px 22px rgba(0, 0, 0, .35); }
+.coverNames span { display: block; margin: 2px 0; color: var(--gold); font-family: var(--script); font-size: 42px; line-height: 1; text-shadow: none; }
+.coverDate { margin-top: 14px; padding: 6px 18px; border-top: 1px solid rgba(240, 210, 126, .5); border-bottom: 1px solid rgba(240, 210, 126, .5); color: var(--gold-l); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.guestBox { width: 100%; max-width: 300px; margin-top: 20px; padding: 14px 16px; border: 1px solid rgba(240, 210, 126, .55); border-radius: 6px; background: rgba(40, 3, 6, .35); }
+.guestBox .guest { margin: 0 auto; }
+.guestBox .guest small { color: #f1d9ad; font-size: 14px; }
+.guestBox .guest strong { color: #fff0cf; font-family: var(--display); font-size: 20px; }
+.guestBox .table { border-color: var(--gold); color: var(--gold-l); font-family: var(--serif); }
+.openBtn { margin-top: 18px; background: linear-gradient(180deg, #f0d27e, #c3912f); color: #4e070c; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 0 0 1px #8f6a1e, 0 10px 24px rgba(0, 0, 0, .4); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 0 0 1px #8f6a1e, 0 14px 30px rgba(0, 0, 0, .45); }
+
+/* ── Hero: the suntiang set on top of the circular photo ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 46px; background: var(--bg); text-align: center; }
+.heroKicker { margin-top: 34px; color: var(--accent); font-family: var(--serif); font-size: 14px; font-style: italic; font-weight: 600; letter-spacing: .06em; }
+.heroCrown { position: relative; z-index: 2; width: 300px; max-width: 86%; margin-top: 8px; margin-bottom: -76px; }
+.heroCrown img { display: block; width: 100%; height: auto; }
+.heroPhoto { position: relative; z-index: 1; width: 250px; height: 250px; padding: 8px; border: 2px solid var(--gold); border-radius: 50%; background: var(--velvet); box-shadow: 0 0 0 5px var(--bg), 0 0 0 6px var(--gold-d), 0 20px 36px rgba(90, 8, 14, .25); }
+.heroPhoto > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.heroNoPhoto { margin-bottom: 0; }
+.heroNames { max-width: 100%; margin-top: 22px; padding: 0 22px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames i { color: var(--gold-d); font-family: var(--script); font-size: 38px; font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--ink); font-size: 17px; font-weight: 600; }
+.heroNote { max-width: 330px; margin-top: 10px; padding: 0 22px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes tremble { from { rotate: -.6deg; scale: 1; } to { rotate: .6deg; scale: 1.01; } }
+@keyframes glintSweep { 0%, 55% { background-position: -200% 0; } 100% { background-position: 260% 0; } }
+@keyframes bungoTurn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .crown img, .glint, .portraitBungo img { animation: none !important; }
+  .glint { display: none; }
+}

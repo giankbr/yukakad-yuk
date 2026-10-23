@@ -1,0 +1,172 @@
+/* Konser Amal — poster gig cetak sablon bergaya gouache: panggung malam dengan truss lampu, lampu untai, drum, keyboard, gitar dan ampli; lampu sorot yang menyapu, kerumunan yang mengangkat tangan; tiket robek berperforasi, stiker not, toples donasi; kartu seperti tiket dan poster yang ditempel selotip. */
+.root, .cover {
+  --bg: #f6efe2; --paper: #efe5d2; --ivory: #fffaf0; --field: #fffdf8; --ink: #1b1433; --muted: #554b6b; --line: #ddd0bb;
+  --accent: #2a2160; --accent2: #16113a; --gold: #ff6b4a; --gold-l: #ffe08a; --gold-d: #d84a35;
+  --amber: #ffc94a; --teal: #2ec4b6; --coral: #ff6b4a;
+  --band-bg: #2a2160; --band-ink: #fff6e8;
+  --display: "Bowlby One", "Arial Black", sans-serif; --serif: "Bricolage Grotesque", system-ui, sans-serif; --script: "Caveat Brush", cursive;
+  --h2: 30px; --card-r: 6px;
+  --paper-tex: #f6efe2 url(/themes/art/konser-amal/paper.webp) 0 0 / 320px;
+  --night: #1c1545;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2a2160; --t-accent-ink: #fff6e8; --t-bg: #f6efe2; --t-ink: #1b1433; --t-muted: #554b6b; --t-line: #ddd0bb; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: "Bricolage Grotesque", system-ui, sans-serif; --t-heading-font: "Bowlby One", "Arial Black", sans-serif; --t-heading-weight: 400; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--paper-tex); }
+
+/* type */
+.eyebrow, .role { display: inline-block; padding: 4px 10px 3px; background: var(--teal); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; rotate: -2deg; box-shadow: 2px 2px 0 var(--ink); }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 400; line-height: 1.05; text-transform: uppercase; letter-spacing: -.01em; }
+.divider { width: 170px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 17px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+
+/* opening: a hand-lettered shout */
+.salamBlock { padding: 52px 26px 58px; }
+.salamKicker { color: var(--coral); font-family: var(--script); font-size: 28px; letter-spacing: 0; text-transform: none; rotate: -3deg; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.05; text-transform: uppercase; text-wrap: balance; }
+
+/* line-up: polaroid-like portraits taped on the poster */
+.couple { gap: 22px; background: var(--paper); }
+.personWrap:nth-child(odd) .portrait { rotate: -3deg; }
+.personWrap:nth-child(even) .portrait { rotate: 2.5deg; }
+.portrait { margin-bottom: 12px; transition: rotate .4s var(--m-spring); }
+.person:hover .portrait { rotate: 0deg; }
+.portrait::before { content: ""; position: absolute; z-index: 3; top: -12px; left: 50%; width: 86px; height: 24px; translate: -50% 0; rotate: -4deg; background: rgba(255, 201, 74, .82); box-shadow: 0 1px 2px rgba(0, 0, 0, .15); }
+.portraitFrame { width: 236px; height: 270px; padding: 10px 10px 40px; border: 0; border-radius: 2px; background: #fffdf8; box-shadow: 0 10px 22px rgba(27, 20, 51, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--night); color: var(--amber); font-family: var(--display); font-size: 80px; }
+.portraitNote { position: absolute; z-index: 3; right: -18px; bottom: 4px; width: 58px; height: auto; rotate: 12deg; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.05; text-transform: uppercase; }
+.fullName { color: var(--coral); font-family: var(--script); font-size: 26px; }
+.parents { max-width: 310px; color: var(--muted); font-size: 16px; }
+
+/* countdown: the night stage band, crowd silhouette at the bottom */
+.countBand { padding: 64px 20px 150px; background: var(--night); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(122, 79, 176, .45), transparent 70%); }
+.countCrowd { position: absolute; z-index: -1; left: -10px; right: -10px; bottom: -8px; height: 120px; background: url(/themes/art/konser-amal/crowd.webp) center bottom / auto 100% repeat-x; animation: bob 1.1s ease-in-out infinite alternate; }
+.countBand .eyebrow { background: var(--amber); color: var(--ink); }
+.root blockquote p { font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.headLight h2 { color: #fff6e8; font-family: var(--display); text-transform: uppercase; }
+.count { gap: 8px; }
+.count > div { height: 86px; border: 0; border-radius: 6px; background: #fff6e8; box-shadow: 3px 3px 0 var(--coral); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--coral); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.countBand .ghostBtn { border: 2px solid var(--amber); border-radius: 999px; color: var(--amber); font-family: var(--serif); font-weight: 700; }
+.countTba { color: var(--amber); }
+
+/* events: ticket cards with a perforated stub */
+.events { gap: 26px; }
+.event { padding: 26px 20px 26px; border: 2px solid var(--ink); border-radius: 8px; background: #fffdf8; box-shadow: 5px 5px 0 var(--ink); text-align: left; align-items: flex-start; -webkit-mask: radial-gradient(circle 12px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 12px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat; mask: radial-gradient(circle 12px at 0 50%, transparent 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 12px at 100% 50%, transparent 98%, #000) right / 51% 100% no-repeat; }
+.event::before { inset: auto 14px 50% 14px; height: 0; border: 0; border-top: 2px dashed var(--line); border-radius: 0; }
+.event:hover { translate: 0 -2px; box-shadow: 7px 7px 0 var(--ink); border-color: var(--ink); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 3px 10px; border-radius: 4px; background: var(--coral); color: #fff6e8; font-family: var(--serif); font-weight: 800; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 23px; text-transform: uppercase; text-align: left; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--coral); font-family: var(--serif); font-weight: 800; }
+.rule { width: 100%; height: 0; margin: 18px 0 14px; background: none; }
+.event strong { font-weight: 800; }
+.eventAddr { text-align: left; }
+.mapBtn, .submit { border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .02em; box-shadow: 3px 3px 0 var(--ink); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #ff5532; box-shadow: 4px 4px 0 var(--ink); }
+
+/* story = the cause */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; border-radius: 2px; background: repeating-linear-gradient(var(--teal) 0 12px, var(--amber) 12px 24px, var(--coral) 24px 36px); }
+.node { width: 44px; height: 44px; border: 2px solid var(--ink); border-radius: 50%; background: #fffdf8; }
+.node img { width: 28px; }
+.storyBody small { color: var(--coral); font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 20px; text-transform: uppercase; }
+
+/* gallery: photos pinned on the board */
+.gallery { background: var(--paper-tex); }
+.mosaic { gap: 12px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 6px #fffdf8, 0 8px 18px rgba(27, 20, 51, .2); }
+.tile:nth-child(odd) { rotate: -1.5deg; }
+.tile:nth-child(even) { rotate: 1.5deg; }
+.tile:first-child { border-radius: 2px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 2px solid var(--ink); border-radius: 8px; background: #fffdf8; box-shadow: 5px 5px 0 var(--ink); }
+.field input, .field textarea { border-radius: 6px; border: 2px solid var(--line); }
+.choices button { border: 2px solid var(--line); border-radius: 999px; font-size: 14px; font-weight: 700; padding: 0 6px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff6e8; box-shadow: 2px 2px 0 var(--coral); }
+.step { border: 2px solid var(--ink); }
+.wish { border: 2px solid var(--ink); border-radius: 8px; background: #fffdf8; box-shadow: 3px 3px 0 var(--teal); }
+.wish:nth-child(3n + 2) { box-shadow: 3px 3px 0 var(--amber); }
+.wish:nth-child(3n) { box-shadow: 3px 3px 0 var(--coral); }
+.wish strong { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.wish small { background: var(--amber); color: var(--ink); font-weight: 700; }
+.sentBox img { width: 72px; animation: hop 700ms var(--m-spring) both; }
+
+/* gifts: donation */
+.gifts { background: var(--paper-tex); }
+.gift { border: 2px solid var(--ink); border-radius: 8px; background: var(--accent); box-shadow: 5px 5px 0 var(--coral); }
+.gift::after { border-color: rgba(255, 201, 74, .12); }
+.giftIcon { border: 2px solid var(--amber); background: transparent; }
+.gift h3 { color: var(--amber); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.giftNo { font-family: var(--serif); font-size: 20px; font-weight: 700; line-height: 1.3; }
+.copy { border: 2px solid var(--amber); color: var(--amber); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--amber); color: var(--ink); }
+
+/* closing */
+.closing { padding: 64px 26px 56px; background: var(--night); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 70% 50% at 50% 26%, rgba(255, 201, 74, .25), transparent 70%); }
+.closingMic { width: 88px; height: auto; rotate: -8deg; animation: sway 3.4s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.thanks { color: var(--amber); font-family: var(--display); font-size: 40px; line-height: 1.05; text-transform: uppercase; }
+.closingText { color: rgba(255, 246, 232, .86); }
+.closingSalam { color: var(--teal); font-family: var(--script); font-size: 26px; letter-spacing: 0; }
+.closingNames { display: none; }
+.made { color: rgba(255, 246, 232, .5); }
+.music { border: 2px solid var(--ink); background: var(--coral); box-shadow: 3px 3px 0 var(--ink); }
+
+/* ── Cover: a gig poster — title, the lit stage, and a tear-off ticket ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 100dvh; justify-content: center; padding: 30px 18px 28px; overflow: hidden; background: var(--paper-tex); text-align: center; isolation: isolate; }
+.tape { display: inline-block; padding: 5px 14px 4px; background: var(--teal); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; rotate: -2.5deg; box-shadow: 2px 2px 0 var(--ink); }
+.title { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: .98; text-transform: uppercase; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 3px 3px 0 var(--coral); }
+.stageBox { position: relative; width: 100%; aspect-ratio: 780 / 600; overflow: hidden; border: 3px solid var(--ink); border-radius: 10px; box-shadow: 6px 6px 0 var(--ink); background: var(--night); }
+.stageBox > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+.beam { position: absolute; z-index: 1; top: 13%; width: 30%; height: 92%; transform-origin: 50% 0; mix-blend-mode: screen; opacity: .9; }
+.beam img { display: block; width: 100%; height: 100%; }
+.beamL { left: 12%; rotate: -16deg; animation: sweepL 6s ease-in-out infinite alternate; }
+.beamR { right: 12%; rotate: 16deg; animation: sweepR 6.5s ease-in-out infinite alternate; }
+.crowd { position: absolute; z-index: 2; left: -4%; right: -4%; bottom: -6px; height: 34%; background: url(/themes/art/konser-amal/crowd.webp) center bottom / auto 100% repeat-x; animation: bob .9s ease-in-out infinite alternate; }
+.performers { position: absolute; z-index: 3; left: 10px; bottom: 10px; max-width: calc(100% - 20px); padding: 4px 10px; border-radius: 4px; background: var(--amber); color: var(--ink); font-family: var(--serif); font-size: 13px; font-weight: 800; text-align: left; box-shadow: 2px 2px 0 var(--ink); }
+.ticket { position: relative; display: grid; grid-template-columns: 1fr 86px; width: 100%; border: 2px solid var(--ink); border-radius: 8px; background: #fffdf8; box-shadow: 5px 5px 0 var(--ink); text-align: left; }
+.ticketMain { display: flex; flex-direction: column; gap: 3px; min-width: 0; padding: 12px 14px; }
+.ticketMain small { color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.ticketMain strong { color: var(--accent); font-size: 18px; font-weight: 800; line-height: 1.2; overflow-wrap: anywhere; }
+.ticketMain span { color: var(--coral); font-size: 14px; font-weight: 700; }
+.stub { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 8px 6px; border-left: 2px dashed var(--ink); background: var(--amber); border-radius: 0 6px 6px 0; }
+.stub small { color: var(--ink); font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.stub b { color: var(--ink); font-family: var(--display); font-size: 15px; font-weight: 400; line-height: 1.05; text-align: center; overflow-wrap: anywhere; }
+.openBtn { border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 16px; font-weight: 800; letter-spacing: .02em; box-shadow: 4px 4px 0 var(--ink); }
+.openBtn:hover { background: #ff5532; translate: 0 -2px; box-shadow: 5px 6px 0 var(--ink); }
+
+/* ── Hero: poster block with date, a note and the "kebaikan" meter ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 44px 22px 52px; text-align: center; }
+.heroTitle { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: .98; text-transform: uppercase; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 3px 3px 0 var(--amber); }
+.heroStage { position: relative; width: 100%; aspect-ratio: 780 / 600; overflow: hidden; border: 3px solid var(--ink); border-radius: 10px; box-shadow: 6px 6px 0 var(--coral); background: var(--night); }
+.heroStage > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.heroDate { padding: 6px 14px; border: 2px solid var(--ink); border-radius: 999px; background: #fffdf8; color: var(--ink); font-size: 15px; font-weight: 800; }
+.heroNote { max-width: 320px; color: var(--muted); font-size: 17px; line-height: 1.55; }
+.meter { position: relative; width: 100%; max-width: 320px; margin-top: 6px; padding-right: 44px; }
+.meterJar { position: absolute; right: -4px; bottom: -10px; width: 52px; height: auto; rotate: 6deg; }
+.meter p { margin: 0 0 6px; color: var(--coral); font-family: var(--script); font-size: 24px; rotate: -2deg; }
+.meterBar { position: relative; height: 22px; overflow: hidden; border: 2px solid var(--ink); border-radius: 999px; background: #fffdf8; }
+.meterBar span { position: absolute; inset: 0 auto 0 0; width: 78%; background: repeating-linear-gradient(-45deg, var(--teal) 0 10px, #4fd6c9 10px 20px); border-right: 2px solid var(--ink); animation: fill 2.4s var(--m-spring) .4s both; }
+
+@keyframes sweepL { from { rotate: -24deg; } to { rotate: 4deg; } }
+@keyframes sweepR { from { rotate: 22deg; } to { rotate: -6deg; } }
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -5px; } }
+@keyframes fill { from { width: 0; } }
+@keyframes hop { from { scale: .4; rotate: -20deg; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .beamL, .beamR, .crowd, .countCrowd, .closingMic, .meterBar span, .sentBox img { animation: none !important; }
+}

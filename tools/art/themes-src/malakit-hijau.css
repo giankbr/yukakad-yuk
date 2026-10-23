@@ -1,0 +1,171 @@
+/* Malakit Hijau — Luxury: lempeng batu malakit berpita konsentris yang dipoles dan dibelah-cermin (book-matched), tatahan garis emas, plakat onyx krem bersudut potong, kabosyon malakit berbingkai emas berbutir; kartu acara dari batu malakit, potret oval seperti liontin. */
+.root, .cover {
+  --bg: #efe8da; --paper: #e6dccb; --ivory: #f8f4ec; --field: #fbf8f2; --ink: #10261b; --muted: #545a50; --line: #d8cbb2;
+  --accent: #0f4a30; --accent2: #082b1b; --gold: #b8914a; --gold-l: #ecd59a; --gold-d: #8a6a2c;
+  --band-bg: #072116; --band-ink: #f3ecdc;
+  --display: "Bodoni Moda", Didot, Georgia, serif; --serif: "Bodoni Moda", Georgia, serif; --script: "Mea Culpa", cursive; --caps: "Tenor Sans", "Gill Sans", sans-serif;
+  --h2: 34px; --card-r: 0;
+  --onyx: url(/themes/art/malakit-hijau/onyx.webp) 0 0 / 256px;
+  --goldleaf: url(/themes/art/malakit-hijau/gold.webp) 0 0 / 128px;
+  --stone: url(/themes/art/malakit-hijau/band.webp) center / cover;
+  --deep: linear-gradient(rgba(3, 20, 12, .8), rgba(3, 20, 12, .86));
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0f4a30; --t-accent-ink: #f3ecdc; --t-bg: #efe8da; --t-ink: #10261b; --t-muted: #545a50; --t-line: #d8cbb2; --t-field: #fbf8f2;
+  --t-radius: 0px; --t-font: "Bodoni Moda", Georgia, serif; --t-heading-font: "Bodoni Moda", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: var(--onyx); }
+
+/* chamfered (cut-corner) plaques; --c is the cut size */
+.count > div, .count > div::before, .gift, .gift::after, .plaque, .plaqueRing, .plaqueLine, .plaqueCore, .openBtn {
+  clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% var(--c), 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, var(--c) 100%, 0 calc(100% - var(--c)), 0 var(--c));
+}
+
+/* type */
+.eyebrow, .role { color: var(--gold-d); font-family: var(--caps); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-style: italic; font-weight: 400; letter-spacing: -.01em; }
+.divider { width: 180px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 16px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--caps); font-size: 11px; letter-spacing: .2em; }
+
+/* opening: onyx, a gold-ruled quote block */
+.salamBlock { padding: 60px 30px 62px; }
+.salamKicker { color: var(--gold-d); font-family: var(--caps); font-size: 11px; letter-spacing: .34em; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; line-height: 1.15; text-wrap: balance; }
+
+/* couple: pendant portraits on a dark polished slab */
+.couple { gap: 18px; background: var(--deep), var(--stone); }
+.couple .eyebrow { color: var(--gold-l); }
+.couple .head h2 { color: #f3ecdc; }
+.portrait { margin-bottom: 26px; }
+.portraitFrame { width: 196px; height: 252px; padding: 6px; border: 0; border-radius: 50%; background: var(--goldleaf); box-shadow: 0 18px 34px rgba(0, 0, 0, .45), 0 0 0 6px rgba(3, 20, 12, .6), 0 0 0 7px rgba(236, 213, 154, .35); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; font-style: italic; }
+.portraitFrame:has(.monogram) { background: var(--goldleaf); }
+.portraitFrame .monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--stone); }
+.portraitGem { position: absolute; z-index: 2; bottom: -26px; left: 50%; width: 38px; height: auto; translate: -50% 0; }
+.couple .role { color: var(--gold-l); }
+.nick { color: #f6efdf; font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 400; }
+.fullName { color: var(--gold-l); font-family: var(--caps); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+.parents { color: rgba(243, 236, 220, .78); font-size: 15px; }
+.amp { color: var(--gold-l); font-family: var(--script); font-size: 64px; }
+.amp img { width: 26px; }
+
+/* countdown: open stone with onyx tiles */
+.countBand { padding: 66px 22px; background: var(--stone); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(3, 20, 12, .25), rgba(3, 20, 12, .7)); }
+.countBand .headLight .eyebrow { color: var(--gold-l); }
+.countBand .headLight h2 { color: #f6efdf; font-style: italic; }
+.count { gap: 8px; }
+.count > div { --c: 12px; height: 86px; border: 0; border-radius: 0; background: var(--onyx); box-shadow: none; }
+.count > div::before { content: ""; position: absolute; --c: 9px; inset: 4px; border: 1px solid var(--gold); pointer-events: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; font-weight: 500; }
+.count small { color: var(--gold-d); font-family: var(--caps); font-size: 10px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.countBand .ghostBtn { border-color: var(--gold-l); border-radius: 0; color: #f6efdf; font-family: var(--caps); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; background: rgba(3, 20, 12, .45); }
+.countTba { color: var(--gold-l); }
+
+/* events: malachite cards with gold inlay rule */
+.events { gap: 26px; }
+.event { padding: 34px 22px 28px; border: 1px solid var(--gold); border-radius: 0; background: var(--deep), var(--stone); color: #f3ecdc; box-shadow: 0 16px 30px rgba(3, 20, 12, .22); }
+.event::before { inset: 7px; border-color: rgba(236, 213, 154, .45); border-radius: 0; }
+.event:hover { border-color: var(--gold-l); }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold-l); font-family: var(--display); font-size: 38px; font-style: italic; letter-spacing: 0; line-height: 1; }
+.event h3 { color: #f6efdf; font-family: var(--display); font-size: 26px; font-style: italic; }
+.eventDate { color: var(--gold-l); font-family: var(--caps); font-size: 13px; font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+.eventTime { color: rgba(243, 236, 220, .85); font-family: var(--caps); font-size: 13px; letter-spacing: .08em; }
+.rule { width: 150px; height: 18px; margin: 8px 0; background: url(/themes/art/malakit-hijau/divider.webp) no-repeat center / contain; }
+.event strong { color: #f6efdf; font-family: var(--display); font-weight: 500; }
+.eventAddr { color: rgba(243, 236, 220, .74); }
+.mapBtn, .submit { border-radius: 0; background: var(--goldleaf); color: var(--accent2); font-family: var(--caps); font-size: 12px; font-weight: 400; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 6px 16px rgba(0, 0, 0, .25); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--goldleaf); filter: brightness(1.08); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 19px; width: 2px; background: var(--goldleaf); }
+.node { width: 40px; height: 46px; border: 0; background: none; }
+.node img { width: 32px; }
+.storyBody small { color: var(--gold-d); font-family: var(--caps); }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-style: italic; }
+
+/* gallery: framed like stones in a vitrine */
+.gallery { background: var(--deep), var(--stone); }
+.gallery .eyebrow { color: var(--gold-l); }
+.gallery .head h2 { color: #f6efdf; }
+.tile { border-radius: 0; box-shadow: 0 0 0 1px var(--gold), 0 0 0 5px rgba(3, 20, 12, .7), 0 0 0 6px rgba(236, 213, 154, .4); }
+.tile:first-child { border-radius: 999px 999px 0 0; }
+
+/* wishes */
+.form { border-radius: 0; border: 1px solid var(--line); background: var(--ivory); box-shadow: inset 0 3px 0 var(--gold), 0 12px 26px rgba(16, 38, 27, .08); }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; font-family: var(--caps); font-size: 13px; letter-spacing: .06em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.step { border-radius: 0; }
+.wish { border-radius: 0; border-color: var(--line); background: var(--ivory); box-shadow: inset 3px 0 0 var(--accent); }
+.wish strong { font-family: var(--display); font-style: italic; font-size: 17px; }
+.wish small { border-radius: 0; background: rgba(15, 74, 48, .1); color: var(--accent); font-family: var(--caps); font-size: 11px; letter-spacing: .06em; }
+.sentBox img { width: 56px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { --c: 18px; border-radius: 0; background: var(--deep), var(--stone); }
+.gift::after { inset: 6px; right: 6px; bottom: 6px; width: auto; height: auto; border: 1px solid rgba(236, 213, 154, .5); border-radius: 0; box-shadow: none; z-index: 0; pointer-events: none; }
+.giftIcon { border-radius: 0; rotate: 45deg; border-color: var(--gold); }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { color: var(--gold-l); font-family: var(--caps); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 21px; line-height: 1.35; }
+.copy { position: relative; z-index: 1; border-radius: 0; border-color: var(--gold); color: var(--gold-l); font-family: var(--caps); letter-spacing: .14em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing: the book-matched slab again */
+.closing { padding: 80px 26px 60px; background: linear-gradient(rgba(3, 20, 12, .55), rgba(3, 20, 12, .82)), url(/themes/art/malakit-hijau/slab.webp) center / cover; }
+.closingGem { width: 54px; height: auto; margin-bottom: 4px; }
+.thanks { color: #f6efdf; font-family: var(--display); font-size: 44px; font-style: italic; }
+.closingText { color: rgba(243, 236, 220, .86); }
+.family { color: var(--gold-l); font-family: var(--caps); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 38px; font-style: italic; }
+.made { color: rgba(243, 236, 220, .5); }
+.music { border-radius: 0; border-color: var(--gold-l); background: var(--accent2); rotate: 45deg; }
+.music svg { rotate: -45deg; }
+
+/* ── Cover: a book-matched malachite slab, an onyx plaque inlaid with gold, a cabochon on top ── */
+.cover { position: relative; display: flex; align-items: center; justify-content: center; min-height: 100dvh; padding: 64px 20px 34px; overflow: hidden; background: #04140c url(/themes/art/malakit-hijau/slab.webp) center / cover; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 70% 55% at 50% 50%, rgba(3, 20, 12, .1), rgba(3, 20, 12, .55)); }
+.plaqueWrap { position: relative; width: 100%; max-width: 352px; filter: drop-shadow(0 22px 30px rgba(0, 0, 0, .55)); }
+.coverGem { position: absolute; z-index: 2; top: -40px; left: 50%; width: 62px; height: auto; translate: -50% 0; }
+.plaque { --c: 30px; position: relative; padding: 5px; background: var(--goldleaf); }
+.plaque::after { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 38%, rgba(255, 246, 214, .55) 50%, transparent 62%) no-repeat; background-size: 250% 100%; background-position: 140% 0; mix-blend-mode: soft-light; animation: sheen 9s var(--m-ease) 1.2s infinite; pointer-events: none; }
+.plaqueRing { --c: 28px; padding: 7px; background: var(--onyx); }
+.plaqueLine { --c: 25px; padding: 1.5px; background: var(--goldleaf); }
+.plaqueCore { --c: 24px; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 46px 20px 26px; background: var(--onyx); }
+.kicker { color: var(--gold-d); font-family: var(--caps); font-size: 11px; letter-spacing: .38em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 400; line-height: 1; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.coverNames i { margin: 2px 0 -2px; color: var(--gold); font-family: var(--script); font-size: 54px; font-style: normal; line-height: .9; }
+.coverRule { width: 170px; height: auto; }
+.coverDate { color: var(--ink); font-family: var(--caps); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
+.guest { margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--line); max-width: none; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; font-style: italic; }
+.table { border-color: var(--gold); border-radius: 0; color: var(--gold-d); font-family: var(--caps); }
+.openBtn { --c: 10px; margin-top: 8px; border-radius: 0; background: var(--deep), var(--stone); color: var(--gold-l); font-family: var(--caps); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.openBtn:hover { filter: brightness(1.15); translate: 0 -1px; }
+
+/* ── Hero: tall photo set in a malachite bevel with gold inlay ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 56px 24px 58px; text-align: center; }
+.heroKicker { color: var(--gold-d); font-family: var(--caps); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 286px; height: 380px; margin: 18px 0 14px; padding: 14px; background: var(--stone); box-shadow: 0 22px 40px rgba(3, 20, 12, .3), inset 0 0 0 1px rgba(0, 0, 0, .4); }
+.heroFrame::before { content: ""; position: absolute; z-index: 1; inset: 9px; border: 2px solid transparent; background: var(--goldleaf) border-box; -webkit-mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) padding-box exclude, linear-gradient(#000 0 0); pointer-events: none; }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; background: var(--accent2); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroGem { position: absolute; z-index: 2; left: 50%; bottom: -24px; width: 44px; height: auto; translate: -50% 0; }
+.heroNames { max-width: 100%; margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--gold); font-family: var(--script); font-style: normal; }
+.heroDate { color: var(--ink); font-family: var(--caps); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 12px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes sheen { 0%, 70% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .plaque::after { animation: none !important; display: none; }
+}

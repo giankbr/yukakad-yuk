@@ -1,0 +1,213 @@
+/* Pesawat Kertas — ceria dan ringan: langit biru dengan awan gouache yang hanyut, pesawat kertas dari kertas airmail (tepi bergaris merah-biru) yang melayang, jejak garis putus yang berjalan, bingkai sampul bergaris airmail, peta penerbangan dua nama dengan pesawat kecil yang terbang di jalurnya; kartu kertas berlipat yang miring kesana-kemari; Bricolage Grotesque + Lexend + Gochi Hand. */
+.root, .cover {
+  --bg: #eef6fb; --paper: #fbfaf5; --ivory: #ffffff; --field: #ffffff; --ink: #1f3354; --muted: #56688a; --line: #cddbea;
+  --accent: #2e64b0; --accent2: #1f4f94; --gold: #d9493b; --gold-l: #ffffff; --gold-d: #d9493b;
+  --band-bg: #5aa3d6; --band-ink: #ffffff;
+  --sky: #bfe0f4; --sky-d: #8fc3e8; --red: #d9493b; --sun: #f5c451;
+  --airmail: repeating-linear-gradient(135deg, #d9493b 0 12px, #ffffff 12px 18px, #2e64b0 18px 30px, #ffffff 30px 36px);
+  --display: "Bricolage Grotesque", "Outfit", sans-serif; --serif: Lexend, "Nunito", sans-serif; --script: "Gochi Hand", cursive;
+  --h2: 32px; --card-r: 20px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2e64b0; --t-accent-ink: #ffffff; --t-bg: #eef6fb; --t-ink: #1f3354; --t-muted: #56688a; --t-line: #cddbea; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: Lexend, sans-serif; --t-heading-font: "Bricolage Grotesque", sans-serif; --t-heading-weight: 800; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 15.5px; font-weight: 300;
+}
+.main { background: var(--bg); }
+.eyebrow { color: var(--red); font-family: var(--script); font-size: 22px; letter-spacing: 0; text-transform: none; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-size: var(--h2); font-weight: 800; letter-spacing: -.02em; }
+.section { padding: 62px 22px; }
+.section:nth-of-type(even)::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 7px; background: var(--airmail); }
+
+/* divider: a dashed trail with a little plane at its tip */
+.divider { position: relative; display: block; width: 170px; height: 34px; }
+.divider::before { content: ""; position: absolute; left: 0; right: 40px; top: 60%; border-top: 2px dashed color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 50%; }
+.divider img { position: absolute; right: 0; top: 0; width: 50px; height: auto; rotate: -6deg; }
+[data-revealed] .divider { animation: none; }
+[data-revealed] .divider img { animation: hop 900ms var(--m-spring) both; }
+
+/* ── Hero: a little flight map between two names ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 22px 56px; overflow: hidden; background: linear-gradient(var(--sky), var(--bg)); text-align: center; isolation: isolate; }
+.heroCloud { position: absolute; z-index: -1; top: 14px; left: -70px; width: 240px; height: auto; opacity: .85; animation: driftA 26s var(--m-ease) infinite alternate; }
+.map { position: relative; width: 300px; height: 132px; margin-bottom: 6px; }
+.route { position: absolute; inset: 0 0 auto; width: 300px; height: 120px; overflow: visible; }
+.route path, .trail path { fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 7 8; animation: march 1.6s linear infinite; }
+.flyer { position: absolute; top: 0; left: 0; width: 58px; offset-path: path("M28 96 C 80 20, 160 20, 170 70 C 178 112, 120 112, 140 76 C 160 40, 230 30, 272 50"); offset-rotate: auto 14deg; offset-anchor: 50% 50%; offset-distance: 58%; animation: fly 9s var(--m-ease) infinite; }
+.flyer img { display: block; width: 100%; height: auto; filter: drop-shadow(0 6px 4px rgba(31, 51, 84, .18)); }
+.pin { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 2px; translate: -50% -9px; color: var(--ink); font-family: var(--script); font-size: 20px; line-height: 1; white-space: nowrap; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+.pin b { order: -1; width: 18px; height: 18px; border: 4px solid var(--red); border-radius: 50%; background: #fff; box-shadow: 0 3px 6px rgba(31, 51, 84, .25); }
+.pinA { left: 28px; top: 96px; }
+.pinB { left: 272px; top: 50px; flex-direction: column-reverse; translate: -50% calc(-100% + 9px); }
+.pinB b { order: 0; }
+.heroKicker { padding: 4px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; }
+.heroNames { color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 800; letter-spacing: -.03em; line-height: 1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--red); font-family: var(--script); font-style: normal; font-weight: 400; }
+.heroDate { color: var(--accent); font-weight: 500; letter-spacing: .04em; }
+.heroNote { max-width: 320px; color: var(--muted); font-family: var(--script); font-size: 21px; line-height: 1.3; }
+.heroPhoto { width: 100%; max-width: 330px; aspect-ratio: 4 / 3; margin-top: 12px; padding: 8px; border-radius: 20px; background: var(--airmail); rotate: -2deg; box-shadow: 0 20px 30px -18px rgba(31, 51, 84, .6); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 13px; object-fit: cover; }
+
+/* ── Opening ── */
+.salamBlock { padding: 26px 28px 56px; }
+.salamKicker { color: var(--red); font-family: var(--script); font-size: 24px; letter-spacing: 0; text-transform: none; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; }
+.intro { color: var(--muted); font-size: 16px; }
+
+/* ── Couple: photos in airmail-bordered frames, a paper plane landing on each ── */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 210px; height: 250px; padding: 8px; border: 0; border-radius: 22px; background: var(--airmail); box-shadow: 0 18px 28px -16px rgba(31, 51, 84, .55); rotate: -2.5deg; transition: rotate 600ms var(--m-spring), box-shadow 600ms var(--m-ease); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 2.5deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 15px; }
+.person:hover .portraitFrame { rotate: 0deg; }
+.portraitPlane { position: absolute; z-index: 2; top: -18px; right: -42px; width: 80px; pointer-events: none; animation: bob 3.2s var(--m-spring) infinite alternate; }
+.personWrap:nth-child(3) .portraitPlane { right: auto; left: -40px; scale: -1 1; }
+.portraitPlane img { width: 100%; height: auto; }
+.monogram { color: #fff; font-family: var(--display); font-weight: 800; text-shadow: 0 2px 0 var(--accent2); }
+.portraitFrame:has(.monogram) { background: var(--airmail); }
+.role { color: var(--red); font-family: var(--script); font-size: 20px; letter-spacing: 0; text-transform: none; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.fullName { color: var(--accent); font-family: var(--serif); font-size: 16px; font-weight: 500; }
+.parents { font-size: 14.5px; }
+.amp { color: var(--red); font-family: var(--script); font-size: 46px; }
+.amp img { width: 44px; }
+.amp img:first-child { scale: -1 1; }
+.amp img:last-child { scale: 1 1; }
+
+/* ── Countdown: paper squares tossed on the sky ── */
+.countBand { padding: 66px 18px 70px; background: linear-gradient(#5aa3d6, #8fc3e8); }
+.countCloudA { position: absolute; z-index: -1; top: 10px; right: -90px; width: 260px; height: auto; opacity: .9; animation: driftA 30s var(--m-ease) infinite alternate; }
+.countCloudB { position: absolute; z-index: -1; bottom: 4px; left: -50px; width: 170px; height: auto; opacity: .85; animation: driftB 24s var(--m-ease) infinite alternate; }
+.headLight .eyebrow { color: #fff; }
+.headLight h2 { color: #fff; text-shadow: 0 2px 0 rgba(31, 79, 148, .35); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 10px; }
+.count > div { height: 82px; border: 0; border-radius: 6px; background: url(/themes/art/pesawat-kertas/paper.webp) 0 0 / 200px 200px, #fbfaf5; box-shadow: 0 10px 16px -8px rgba(31, 51, 84, .5); rotate: -3deg; overflow: visible; }
+.count > div:nth-child(2) { rotate: 2deg; }
+.count > div:nth-child(3) { rotate: -1deg; }
+.count > div:nth-child(4) { rotate: 3deg; }
+.count > div::after { display: none; }
+.count > div::before { content: ""; position: absolute; top: 0; right: 0; width: 16px; height: 16px; background: linear-gradient(225deg, var(--sky-d) 50%, #e3e8ee 50%); border-radius: 0 6px 0 4px; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 800; }
+.count small { color: var(--red); font-family: var(--script); font-size: 16px; font-style: normal; }
+.countTba { color: #fff; }
+.ghostBtn { border: 2px solid #fff; background: rgba(255, 255, 255, .18); color: #fff; font-family: var(--serif); font-weight: 500; }
+.ghostBtn:hover { background: rgba(255, 255, 255, .3); }
+
+/* ── Events: paper route cards with an airmail edge and a folded corner ── */
+.events { gap: 26px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 18px; background: url(/themes/art/pesawat-kertas/paper.webp) 0 0 / 260px 260px, var(--paper); box-shadow: 0 16px 26px -18px rgba(31, 51, 84, .55); transition: rotate 500ms var(--m-spring), translate 500ms var(--m-spring), box-shadow 500ms var(--m-ease); }
+.event:nth-child(odd) { rotate: -1deg; }
+.event:nth-child(even) { rotate: 1deg; }
+.event::before { inset: 0 0 auto; height: 8px; border: 0; border-radius: 18px 18px 0 0; background: var(--airmail); }
+.event::after { content: ""; position: absolute; right: 0; bottom: 0; width: 30px; height: 30px; border-radius: 0 0 18px 0; background: linear-gradient(315deg, var(--bg) 50%, #dfe5ec 50%); }
+.event:hover { rotate: 0deg; translate: 0 -4px; }
+.eventNo { display: flex; gap: 4px; top: 18px; white-space: nowrap; width: auto; height: auto; padding: 3px 12px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .16em; }
+.eventNo::before { content: "RUTE"; }
+.event h3 { margin-top: 18px; color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 800; letter-spacing: -.02em; }
+.eventDate { color: var(--ink); font-size: 16px; font-style: normal; font-weight: 500; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 500; }
+.rule { width: 90px; height: 0; border-top: 2px dashed var(--red); background: none; }
+.event strong { color: var(--ink); font-weight: 600; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 500; box-shadow: 0 5px 0 var(--accent2); }
+.mapBtn:hover { background: var(--accent); translate: 0 2px; box-shadow: 0 3px 0 var(--accent2); }
+.mapBtn:active { translate: 0 5px; box-shadow: 0 0 0 var(--accent2); }
+
+/* ── Story: a dashed flight line ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 0; border-left: 2px dashed var(--accent); background: none; }
+.node { border: 0; background: transparent; }
+.node img { width: 42px; rotate: 60deg; }
+.storyBody small { color: var(--red); font-family: var(--script); font-size: 19px; letter-spacing: 0; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 800; }
+.storyImg { border-radius: 16px; }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 16px; box-shadow: 0 10px 18px -12px rgba(31, 51, 84, .5); transition: rotate 500ms var(--m-spring), scale 500ms var(--m-spring), filter 700ms var(--m-ease); }
+.tile:first-child { border-radius: 16px; }
+.tile:hover { rotate: -1.5deg; scale: 1.02; }
+
+/* ── Wishes: notes on paper ── */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 20px; background: url(/themes/art/pesawat-kertas/paper.webp) 0 0 / 260px 260px, #fff; box-shadow: 0 16px 28px -20px rgba(31, 51, 84, .6); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border-width: 2px; font-family: var(--serif); font-weight: 500; transition: background 300ms var(--m-ease), color 300ms var(--m-ease), border-color 300ms var(--m-ease), scale 400ms var(--m-spring), translate 400ms var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--red); background: var(--red); color: #fff; scale: 1.04; }
+.step { border: 2px solid var(--accent); }
+.submit { background: var(--red); color: #fff; font-family: var(--serif); font-weight: 600; letter-spacing: .06em; box-shadow: 0 5px 0 #a93226; transition: background 300ms var(--m-ease), box-shadow 300ms var(--m-ease), scale 400ms var(--m-spring), translate 400ms var(--m-spring); }
+.submit:not(:disabled):hover { background: var(--red); translate: 0 2px; box-shadow: 0 3px 0 #a93226; }
+.sentBox img { width: 110px; animation: launch 1.2s var(--m-spring) both; }
+.sent { color: var(--ink); font-family: var(--script); font-size: 24px; font-style: normal; }
+.wish { border: 0; border-radius: 16px; background: #fff; box-shadow: 0 8px 16px -12px rgba(31, 51, 84, .5); }
+.wish:nth-child(odd) { rotate: -.6deg; }
+.wish:nth-child(even) { rotate: .6deg; }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.wish small { background: var(--sky); color: var(--accent2); }
+
+/* ── Gifts ── */
+.gifts { background: var(--bg); }
+.gift { padding: 26px 20px 24px; border: 0; background: var(--accent); box-shadow: inset 0 0 0 6px var(--accent), inset 0 0 0 7px rgba(255, 255, 255, .5), 0 14px 24px -16px rgba(31, 51, 84, .7); }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 7px; background: var(--airmail); }
+.gift::after { right: -30px; bottom: -36px; border-color: rgba(255, 255, 255, .08); }
+.giftIcon { border-color: rgba(255, 255, 255, .5); }
+.gift h3 { color: #fff; font-family: var(--display); font-weight: 600; }
+.giftNo { font-family: var(--display); font-weight: 800; letter-spacing: .02em; }
+.copy { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-weight: 500; transition: background 300ms var(--m-ease), color 300ms var(--m-ease), scale 400ms var(--m-spring), translate 400ms var(--m-spring); }
+.copy:active { scale: .94; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--accent); }
+
+/* ── Closing: the big plane climbs into the clouds ── */
+.closing { padding: 40px 26px 70px; background: linear-gradient(#8fc3e8, #5aa3d6); }
+.closeCloudA { position: absolute; z-index: -1; top: 40px; left: -100px; width: 280px; height: auto; animation: driftB 28s var(--m-ease) infinite alternate; }
+.closeCloudB { position: absolute; z-index: -1; bottom: 20px; right: -60px; width: 200px; height: auto; opacity: .9; animation: driftA 22s var(--m-ease) infinite alternate; }
+.closePlane { display: block; width: 210px; margin: 0 0 6px 40px; animation: bob 3.6s var(--m-spring) infinite alternate; }
+.closePlane img { width: 100%; height: auto; filter: drop-shadow(0 14px 10px rgba(31, 51, 84, .25)); }
+.thanks { color: #fff; font-family: var(--display); font-size: 46px; font-weight: 800; letter-spacing: -.03em; text-shadow: 0 3px 0 rgba(31, 79, 148, .35); }
+.closingText { color: #fff; font-weight: 400; }
+.family { color: rgba(255, 255, 255, .9); font-family: var(--serif); }
+.closingNames { color: #fff; font-family: var(--script); font-size: 34px; }
+.made { color: rgba(255, 255, 255, .75); }
+.made:hover { color: #fff; }
+.music { border: 2px solid #fff; background: var(--red); }
+
+/* ── Cover: airmail-striped frame, a sky, a paper plane and its looping trail ── */
+.cover { position: relative; display: flex; min-height: 100dvh; padding: 10px; background: var(--airmail); color: var(--ink); isolation: isolate; }
+.sky { position: relative; display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 26px 22px 28px; overflow: hidden; border-radius: 16px; background: radial-gradient(70% 40% at 85% 8%, #fff6d8 0, transparent 60%), linear-gradient(#a9d5f1, #d6ecf8 70%, #eef6fb); isolation: isolate; }
+.cloudA { position: absolute; z-index: -2; top: 220px; left: -120px; width: 300px; height: auto; animation: driftA 30s var(--m-ease) infinite alternate; }
+.cloudB { position: absolute; z-index: -2; top: 30px; right: -60px; width: 170px; height: auto; opacity: .9; animation: driftB 24s var(--m-ease) infinite alternate; }
+.cloudC { position: absolute; z-index: -2; bottom: 210px; right: -40px; width: 200px; height: auto; animation: driftA 26s var(--m-ease) infinite alternate-reverse; }
+.trail { position: absolute; z-index: -1; left: 0; top: 0; width: 200px; height: 580px; overflow: visible; opacity: .75; }
+.trailPin { position: absolute; z-index: -1; left: 4px; top: 550px; width: 20px; height: 20px; border: 5px solid var(--red); border-radius: 50%; background: #fff; }
+.coverPlane { position: absolute; z-index: 0; top: 60px; left: 138px; width: 236px; animation: bob 3s var(--m-spring) infinite alternate; }
+.coverPlane img { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 12px rgba(31, 51, 84, .22)); }
+.coverKicker { position: relative; padding: 5px 14px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 10.5px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { position: relative; display: flex; flex-direction: column; width: 100%; margin-top: 168px; color: var(--ink); font-family: var(--display); font-size: 62px; font-weight: 800; letter-spacing: -.04em; line-height: .9; overflow-wrap: anywhere; }
+.nameB { align-self: flex-end; text-align: right; }
+.coverNames em { align-self: center; margin: 2px 0; color: var(--red); font-family: var(--script); font-size: 44px; font-style: normal; font-weight: 400; letter-spacing: 0; line-height: 1; rotate: -8deg; }
+.coverDate { position: relative; align-self: flex-end; margin-top: 14px; padding: 6px 14px; border-radius: 6px; background: #fff; color: var(--accent2); font-size: 14px; font-weight: 500; box-shadow: 0 6px 12px -6px rgba(31, 51, 84, .4); rotate: 2deg; }
+.coverNote { position: relative; align-self: center; margin: 54px 0 24px 40px; color: var(--accent2); font-family: var(--script); font-size: 24px; rotate: -4deg; }
+.cover .guest { position: relative; align-items: flex-start; align-self: stretch; max-width: none; margin-top: auto; padding: 14px 16px; border-radius: 16px; background: url(/themes/art/pesawat-kertas/paper.webp) 0 0 / 220px 220px, #fff; box-shadow: 0 14px 24px -16px rgba(31, 51, 84, .6); text-align: left; rotate: -1deg; }
+.cover .guest small { color: var(--muted); font-size: 13px; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; font-weight: 600; }
+.table { border: 0; background: var(--sky); color: var(--accent2); font-family: var(--serif); font-weight: 500; }
+.openBtn { position: relative; align-self: stretch; margin-top: 14px; background: var(--red); color: #fff; font-family: var(--serif); font-weight: 600; letter-spacing: .06em; box-shadow: 0 5px 0 #a93226; }
+.openBtn:hover { translate: 0 2px; box-shadow: 0 3px 0 #a93226; }
+.openBtn:active { translate: 0 5px; box-shadow: 0 0 0 #a93226; }
+
+@keyframes march { to { stroke-dashoffset: -30; } }
+@keyframes bob { from { translate: 0 -6px; rotate: -2deg; } to { translate: 0 6px; rotate: 2deg; } }
+@keyframes driftA { from { translate: -10px 0; } to { translate: 40px -6px; } }
+@keyframes driftB { from { translate: 10px 0; } to { translate: -36px 6px; } }
+@keyframes fly { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; } 85% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+@keyframes hop { from { translate: -60px 10px; opacity: 0; rotate: -20deg; } }
+@keyframes launch { from { translate: -80px 40px; rotate: -20deg; opacity: 0; } }
+@media (max-width: 370px) {
+  .coverNames { font-size: 54px; margin-top: 150px; }
+  .coverPlane { left: 118px; width: 220px; }
+  .count { grid-template-columns: repeat(4, minmax(0, 68px)); gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route path, .trail path, .flyer, .heroCloud, .portraitPlane, .countCloudA, .countCloudB, .closeCloudA, .closeCloudB, .closePlane, .cloudA, .cloudB, .cloudC, .coverPlane, .divider img, .sentBox img { animation: none; }
+  .flyer { offset-distance: 58%; }
+}

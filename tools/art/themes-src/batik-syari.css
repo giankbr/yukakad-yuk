@@ -1,0 +1,184 @@
+/* Batik Syari — batik parang dan kawung yang lembut dalam cat air pastel (sage, biru debu, krem pasir) untuk undangan syar'i yang modern: sampul asimetris dengan selendang parang tegak di tepi kiri yang mengalir pelan, nama rata kiri, medali kawung berputar di sudut; kartu acara bertepi parang, monogram dalam ubin parang, pita hitung mundur sage berkisi kawung; Tenor Sans + Lustria + Italiana. */
+.root, .cover {
+  --bg: #f6f1e7; --paper: #edf1ea; --ivory: #fbf8f1; --field: #fffdf8; --ink: #33424f; --muted: #67767d; --line: #d8ddd2;
+  --accent: #56735f; --accent2: #3f5848; --gold: #b49d72; --gold-l: #f1e8d6; --gold-d: #8a7550;
+  --band-bg: #627f6b; --band-ink: #f7f4ec;
+  --sage: #9db4a0; --blue: #8ea6bc; --blue-d: #5c7690; --sand: #d9c9a8; --slate: #46596a;
+  --display: "Tenor Sans", "Jost", sans-serif; --serif: Lustria, Georgia, serif; --script: Italiana, "Tenor Sans", serif;
+  --h2: 30px; --card-r: 20px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #56735f; --t-accent-ink: #f7f4ec; --t-bg: #f6f1e7; --t-ink: #33424f; --t-muted: #67767d; --t-line: #d8ddd2; --t-field: #fffdf8;
+  --t-radius: 18px; --t-font: Lustria, Georgia, serif; --t-heading-font: "Tenor Sans", sans-serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+
+/* ── Headings: left-aligned, modern ── */
+.section { align-items: stretch; padding: 64px 24px; }
+.head { align-items: flex-start; text-align: left; gap: 10px; }
+.head h2, .headLight h2 { font-family: var(--display); font-size: var(--h2); letter-spacing: .01em; text-wrap: balance; }
+.eyebrow { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .3em; }
+.divider { width: 150px; height: auto; margin-left: -6px; }
+.headLight { align-items: flex-start; text-align: left; }
+
+/* ── Hero: a cream card on a kawung-latticed sage ground, parang hem below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 54px 22px 92px; overflow: hidden; background: var(--paper); isolation: isolate; }
+.heroLattice { position: absolute; inset: 0; z-index: -2; background: var(--sage); opacity: .22; -webkit-mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 120px 120px repeat; mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 120px 120px repeat; }
+.heroHem { position: absolute; left: 0; right: 0; bottom: 0; z-index: -1; height: 56px; background: url(/themes/art/batik-syari/parang-h.webp) 0 0 / auto 56px repeat-x; box-shadow: inset 0 2px 0 var(--sand); }
+.heroMedal { width: 176px; height: auto; margin-bottom: -60px; filter: drop-shadow(0 10px 16px rgba(70, 89, 106, .16)); }
+.heroCard { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; width: 100%; padding: 76px 26px 28px; border-radius: 28px 28px 28px 6px; background: var(--ivory); box-shadow: 10px 10px 0 color-mix(in srgb, var(--blue) 30%, transparent); text-align: left; }
+.heroKicker { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-direction: column; color: var(--accent); font-family: var(--script); font-size: 52px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-family: var(--serif); font-size: 28px; font-style: italic; line-height: 1.2; }
+.heroDate { display: flex; align-items: center; gap: 10px; color: var(--slate); font-family: var(--display); font-size: 14px; letter-spacing: .14em; }
+.heroDate::before { content: ""; width: 26px; height: 1.5px; background: var(--sage); }
+.heroNote { color: var(--muted); font-size: 15.5px; font-style: italic; line-height: 1.6; }
+
+/* ── Opening ── */
+.salamBlock { align-items: flex-start; padding: 52px 28px 54px; text-align: left; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--gold-d); font-size: 11px; letter-spacing: .22em; line-height: 1.6; }
+.salamTitle { color: var(--accent); font-family: var(--script); font-size: 44px; }
+.intro { max-width: none; color: var(--muted); font-size: 16.5px; text-align: left; }
+.salamBlock .intro { max-width: 330px; }
+.section > .intro { text-align: left; }
+
+/* ── Couple: horizontal cards, monogram on a parang tile ── */
+.couple { gap: 14px; background: var(--paper); }
+.person { flex-direction: row; align-items: center; gap: 18px; padding: 16px; border-radius: 24px; background: var(--ivory); text-align: left; }
+.personWrap:nth-child(odd) .person { flex-direction: row-reverse; text-align: right; }
+.personWrap:nth-child(odd) .person > :not(.portrait) { align-self: stretch; }
+.person > :not(.portrait) { min-width: 0; }
+.person { display: grid; grid-template-columns: 104px minmax(0, 1fr); grid-template-rows: repeat(4, auto); column-gap: 16px; row-gap: 3px; align-items: center; }
+.person .portrait { grid-row: 1 / span 4; margin: 0; }
+.personWrap:nth-child(odd) .person { grid-template-columns: minmax(0, 1fr) 104px; }
+.personWrap:nth-child(odd) .person .portrait { grid-column: 2; }
+.personWrap:nth-child(odd) .person > :not(.portrait) { grid-column: 1; }
+.portraitFrame { width: 104px; height: 128px; padding: 0; border: 0; border-radius: 52px 52px 16px 16px; background: url(/themes/art/batik-syari/parang.webp) 0 0 / 110px auto repeat; box-shadow: inset 0 0 0 3px var(--ivory), 0 0 0 1px var(--line); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 52px 52px 16px 16px; }
+.monogram { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%; background: var(--ivory); color: var(--accent); font-family: var(--script); font-size: 40px; box-shadow: 0 4px 10px rgba(70, 89, 106, .18); }
+.role { color: var(--gold-d); font-size: 10px; letter-spacing: .26em; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 38px; line-height: 1.05; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 15px; line-height: 1.35; }
+.parents { max-width: none; margin-top: 2px; font-size: 13.5px; line-height: 1.5; text-wrap: pretty; }
+.amp { align-self: center; gap: 10px; margin: 2px 0; color: var(--gold); font-family: var(--serif); font-size: 30px; font-style: italic; }
+.amp img { width: 26px; }
+.person:hover .portraitFrame { box-shadow: inset 0 0 0 3px var(--ivory), 0 0 0 1px var(--sage), 0 12px 24px rgba(70, 89, 106, .16); }
+
+/* ── Countdown: sage band with a kawung lattice ── */
+.countBand { align-items: stretch; padding: 64px 22px; background: var(--band-bg); }
+.countLattice { position: absolute; inset: 0; z-index: -1; background: #f1e8d6; opacity: .1; -webkit-mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 96px 96px repeat; mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 96px 96px repeat; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 18px 18px 18px 4px; background: var(--ivory); box-shadow: 0 10px 18px -10px rgba(0, 0, 0, .45); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(157, 180, 160, .25) 50%, transparent 65%); }
+.count b { color: var(--slate); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { align-self: flex-start; border-color: var(--gold-l); color: var(--gold-l); font-family: var(--display); }
+
+/* ── Events: cards with a parang selvedge ── */
+.events { gap: 18px; }
+.event { align-items: flex-start; gap: 6px; padding: 26px 22px 24px 44px; border: 0; border-radius: 6px 22px 22px 6px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 16px 26px -20px rgba(70, 89, 106, .5); text-align: left; overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 22px; border: 0; border-radius: 0; background: url(/themes/art/batik-syari/parang.webp) 0 0 / 66px auto repeat-y; box-shadow: inset -2px 0 0 var(--sand); }
+.eventNo { position: absolute; top: 18px; left: auto; right: 18px; translate: none; width: auto; height: auto; background: none; color: var(--sage); font-family: var(--display); font-size: 26px; letter-spacing: .04em; }
+.event h3 { padding-right: 40px; color: var(--accent); font-family: var(--display); font-size: 22px; }
+.eventDate { color: var(--slate); font-size: 16px; font-style: normal; }
+.eventTime { color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .06em; }
+.rule { width: 40px; height: 2px; margin: 8px 0; border-radius: 2px; background: var(--blue); }
+.event strong { color: var(--ink); font-size: 16.5px; }
+.eventAddr { max-width: none; font-size: 14.5px; text-wrap: pretty; }
+.mapBtn { background: var(--accent); color: var(--ivory); font-family: var(--display); box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--sage), var(--blue)); }
+.node { border: 0; background: var(--ivory); box-shadow: 0 0 0 4px var(--paper); }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 11px; letter-spacing: .22em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 19px; }
+.storyBody p { font-size: 15.5px; }
+
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 20px 20px 20px 4px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 24px 24px 24px 6px; background: var(--ivory); box-shadow: 0 18px 30px -24px rgba(70, 89, 106, .6); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices button { font-family: var(--display); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--ivory); }
+.step { border-color: var(--sage); }
+.submit { background: var(--accent); color: var(--ivory); font-family: var(--display); letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sentBox img { width: 64px; }
+.sent { color: var(--accent); font-family: var(--serif); }
+.wish { border: 0; border-left: 3px solid var(--sage); border-radius: 4px 16px 16px 4px; background: var(--ivory); }
+.wish:nth-child(even) { border-left-color: var(--blue); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 15px; }
+.wish small { background: var(--paper); color: var(--accent); }
+
+/* ── Gifts: dusty-blue cards with a kawung watermark ── */
+.gifts { background: var(--paper); }
+.gift { align-items: flex-start; padding: 24px 22px; border-radius: 22px 22px 22px 6px; background: var(--blue-d); text-align: left; }
+.gift::after { inset: 0; right: auto; bottom: auto; width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; background: #fff; opacity: .08; -webkit-mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 90px 90px repeat; mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 90px 90px repeat; }
+.giftIcon { border-color: rgba(241, 232, 214, .45); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); letter-spacing: .1em; }
+.giftNo { font-family: var(--display); font-size: 22px; letter-spacing: .08em; }
+.copy { border-color: var(--gold-l); font-family: var(--display); }
+.copyOn, .copyOn:hover { color: var(--blue-d); }
+
+/* ── Closing ── */
+.closing { padding: 92px 26px 60px; background: var(--band-bg); }
+.closeHem { position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 44px; background: url(/themes/art/batik-syari/parang-h.webp) 0 0 / auto 44px repeat-x; box-shadow: inset 0 -2px 0 var(--sand); opacity: .95; }
+.closeLattice { position: absolute; inset: 0; z-index: -2; background: #f1e8d6; opacity: .08; -webkit-mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 96px 96px repeat; mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 96px 96px repeat; }
+.closeMedal { width: 150px; height: auto; margin-bottom: 6px; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 40px; }
+.closingText { color: rgba(247, 244, 236, .88); }
+.closingSalam { color: var(--gold-l); font-family: var(--display); letter-spacing: .08em; line-height: 1.6; }
+.family { white-space: pre-line; }
+.closingNames { font-family: var(--script); font-size: 34px; }
+.music { border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Cover: a parang selendang down the left edge, names flush left beside it ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: stretch; justify-content: center; min-height: 100dvh; padding: 28px 14px 120px 104px; overflow: hidden; background: var(--bg); color: var(--ink); isolation: isolate; }
+.coverLattice { position: absolute; inset: 0; z-index: -3; background: var(--sage); opacity: .1; -webkit-mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 140px 140px repeat; mask: url(/themes/art/batik-syari/tile.webp) 0 0 / 140px 140px repeat; }
+.selendang { position: absolute; z-index: -1; top: 0; bottom: 0; left: 0; width: 84px; background: url(/themes/art/batik-syari/parang.webp) 0 0 / 110px auto repeat-y; box-shadow: 3px 0 0 var(--ivory), 5px 0 0 var(--sand), 14px 0 24px -10px rgba(70, 89, 106, .3); animation: flow 70s linear infinite; }
+.selendang::after { content: ""; position: absolute; top: 0; bottom: 0; right: -16px; width: 9px; background: repeating-linear-gradient(180deg, var(--sand) 0 2px, transparent 2px 6px); opacity: .8; }
+.coverMedal { position: absolute; z-index: -2; right: -118px; bottom: -112px; width: 330px; height: auto; opacity: .95; animation: turn 140s linear infinite; }
+.coverPanel { display: flex; flex-direction: column; align-items: flex-start; padding: 26px 18px 24px; border-radius: 26px 26px 26px 6px; background: rgba(251, 248, 241, .96); box-shadow: 0 0 0 1px var(--line), 0 18px 34px -22px rgba(70, 89, 106, .55); }
+.coverArabic { color: var(--accent2); font-family: Amiri, serif; font-size: 24px; line-height: 1.5; }
+.coverSalam { margin-top: 2px; color: #4b585e; font-family: var(--display); font-size: 10.5px; letter-spacing: .2em; line-height: 1.6; text-transform: uppercase; }
+.coverKicker { margin-top: 30px; color: #6b5735; font-family: var(--display); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 10px; color: var(--accent2); font-family: var(--script); font-size: 54px; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { margin: 4px 0 2px; color: #806a40; font-family: var(--serif); font-size: 26px; font-style: italic; line-height: 1.2; }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 18px; color: var(--slate); font-family: var(--display); font-size: 13.5px; letter-spacing: .12em; }
+.coverDate::before { content: ""; width: 24px; height: 1.5px; background: var(--accent); }
+.cover .guest { align-items: flex-start; max-width: none; margin-top: 24px; padding: 12px 14px; border-radius: 16px 16px 16px 4px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); text-align: left; }
+.cover .guest small { color: #4b585e; font-size: 13.5px; }
+.cover .guest strong { color: var(--ink); font-family: var(--serif); font-size: 18px; }
+.table { border-color: var(--accent); color: var(--accent2); font-family: var(--display); }
+.openBtn { min-width: 0; margin-top: 18px; background: var(--accent); color: var(--ivory); font-family: var(--display); font-size: 13px; letter-spacing: .14em; box-shadow: 0 12px 20px -12px rgba(63, 88, 72, .8); }
+.openBtn:hover { background: var(--accent2); }
+
+@keyframes flow { to { background-position: 0 800px; } }
+@keyframes turn { to { rotate: 360deg; } }
+.heroMedal { animation: turn 160s linear infinite; }
+.closeMedal { animation: turn 120s linear infinite reverse; }
+@media (max-width: 370px) {
+  .cover { padding-left: 90px; padding-right: 10px; }
+  .coverPanel { padding: 22px 14px 20px; }
+  .selendang { width: 74px; }
+  .coverNames { font-size: 46px; }
+  .person, .personWrap:nth-child(odd) .person { grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; }
+  .personWrap:nth-child(odd) .person { grid-template-columns: minmax(0, 1fr) 92px; }
+  .portraitFrame { width: 92px; height: 116px; }
+  .nick { font-size: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .selendang, .coverMedal, .heroMedal, .closeMedal { animation: none; }
+}

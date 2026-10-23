@@ -1,0 +1,155 @@
+/* Renda Putih — Syari: renda putih berlapis di atas satin gading, dilukis sampai ke helai benangnya: jaring tulle segi enam, bunga anyaman rapat, benang timbul (cordonnet), tepi berpico, dan bayangan lembut di satin; jendela oval di tengah tirai renda, monogram dalam medali guipure, pita renda menjuntai di setiap bagian. */
+.root, .cover {
+  --bg: #f3ede2; --paper: #ebe2d3; --ivory: #fbf8f2; --field: #fffdf9; --ink: #3d3236; --muted: #6e6064; --line: #ddd0c0;
+  --accent: #6d5560; --accent2: #533f48; --gold: #b49a7a; --gold-l: #f4ece0; --gold-d: #8f7357;
+  --mauve: #a78a93;
+  --band-bg: #5d4a52; --band-ink: #f8f2ea;
+  --display: "Cormorant SC", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: "WindSong", cursive;
+  --h2: 27px; --card-r: 4px;
+  --satin: #f3ede2 url(/themes/art/renda-putih/satin.webp) 0 0 / 512px;
+  --trim: url(/themes/art/renda-putih/trim.webp) repeat-x 0 0 / 120px 50px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6d5560; --t-accent-ink: #fbf8f2; --t-bg: #f3ede2; --t-ink: #3d3236; --t-muted: #6e6064; --t-line: #ddd0c0; --t-field: #fffdf9;
+  --t-radius: 4px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: "Cormorant SC", Georgia, serif; --t-heading-weight: 500; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--satin); }
+
+/* lace trim hangs from the top edge of alternate sections (layered lace) */
+.couple, .events, .story, .wishes, .closing { position: relative; padding-top: 86px; }
+.couple::before, .events::before, .story::before, .wishes::before, .closing::before { content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 50px; background: var(--trim); filter: drop-shadow(1px 2px 1.5px rgba(93, 74, 82, .28)); pointer-events: none; }
+
+/* type */
+.eyebrow, .role { color: var(--gold-d); font-family: var(--display); font-size: 13px; font-weight: 500; letter-spacing: .22em; text-transform: lowercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 500; letter-spacing: .04em; }
+.divider { width: 180px; }
+.divider img { display: block; width: 100%; height: auto; filter: drop-shadow(1px 1px 1px rgba(93, 74, 82, .3)); }
+.intro { color: var(--muted); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .1em; text-transform: lowercase; }
+
+/* opening */
+.salamBlock { padding: 54px 28px 60px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-style: italic; letter-spacing: .01em; text-transform: none; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 31px; font-weight: 500; line-height: 1.2; text-wrap: balance; }
+.root blockquote p { font-family: var(--serif); font-size: 18px; }
+
+/* couple: monograms inside guipure medallions */
+.couple { gap: 14px; background: var(--paper); }
+.portrait { display: grid; place-items: center; width: 232px; height: 232px; margin-bottom: 6px; }
+.portraitDoily { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(2px 3px 3px rgba(93, 74, 82, .25)); }
+.portraitFrame { z-index: 1; width: 132px; height: 132px; padding: 0; border: 0; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fffdf9, #f1e9dd); box-shadow: inset 0 0 0 1px rgba(180, 154, 122, .4), 0 2px 6px rgba(93, 74, 82, .15); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--accent); font-family: var(--script); font-size: 76px; line-height: 1; translate: 0 6px; }
+.nick { color: var(--accent); font-family: var(--script); font-size: 58px; line-height: 1.1; }
+.fullName { font-family: var(--display); font-size: 21px; font-weight: 500; }
+.amp { color: var(--mauve); font-family: var(--script); font-size: 60px; }
+.amp img { width: 40px; }
+
+/* countdown: mauve satin band edged with white lace on both sides */
+.countBand { padding: 84px 22px 90px; background: linear-gradient(180deg, #66525b, #4f3d45); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 50px; background: var(--trim); filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .35)); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; scale: 1 -1; }
+.count > div { height: 84px; border: 1px solid rgba(244, 236, 224, .55); border-radius: 50%; background: rgba(255, 253, 249, .07); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 29px; font-weight: 500; }
+.count small { color: rgba(248, 242, 234, .8); font-size: 14px; }
+.headLight .eyebrow { color: #e8d8c4; }
+.headLight h2 { color: #fbf8f2; font-family: var(--display); font-weight: 500; }
+.countBand .ghostBtn { border-color: rgba(244, 236, 224, .6); color: #fbf8f2; font-family: var(--display); font-size: 15px; }
+
+/* events: ivory cards with a lace edge at the top */
+.events { gap: 26px; background: var(--satin); }
+.event { padding: 62px 22px 28px; border-color: var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 12px 26px rgba(93, 74, 82, .08); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 50px; border: 0; border-radius: 0; background: var(--trim); filter: drop-shadow(1px 2px 1.5px rgba(93, 74, 82, .25)); }
+.eventNo { position: relative; top: auto; left: auto; translate: none; width: auto; height: auto; background: none; color: var(--gold-d); font-family: var(--display); font-size: 15px; letter-spacing: .2em; }
+.event h3 { color: var(--accent); font-family: var(--script); font-size: 40px; line-height: 1.15; }
+.eventDate { color: var(--ink); }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 16px; }
+.rule { width: 150px; height: 16px; background: url(/themes/art/renda-putih/divider.webp) no-repeat center / contain; }
+.mapBtn, .submit { border-radius: 4px; background: var(--accent); color: #fbf8f2; font-family: var(--display); font-size: 16px; font-weight: 500; letter-spacing: .06em; text-transform: lowercase; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 1px; background: repeating-linear-gradient(var(--gold) 0 3px, transparent 3px 7px); }
+.node { width: 44px; height: 50px; border: 0; background: none; }
+.node img { width: 40px; filter: drop-shadow(1px 1px 1px rgba(93, 74, 82, .3)); }
+.storyBody small { color: var(--gold-d); font-family: var(--display); font-size: 14px; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 500; }
+
+/* gallery (only shown when photos are uploaded) */
+.tile { border-radius: 4px; box-shadow: 0 0 0 5px var(--ivory), 0 4px 14px rgba(93, 74, 82, .15); }
+.tile:first-child { border-radius: 999px 999px 4px 4px; }
+
+/* wishes */
+.wishes { background: var(--satin); }
+.form { border-radius: 4px; border-color: var(--line); background: var(--ivory); }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; font-family: var(--serif); }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fbf8f2; }
+.wish { border-radius: 4px; border-color: var(--line); background: var(--ivory); }
+.wish strong { font-family: var(--display); font-size: 17px; font-weight: 600; }
+.wish small { border-radius: 4px; background: rgba(167, 138, 147, .16); color: var(--accent2); }
+.sentBox img { width: 80px; }
+
+/* gifts: mauve satin cards */
+.gifts { background: var(--paper); }
+.gift { border-radius: 4px; background: linear-gradient(170deg, #6d5862, #4f3d45); padding-top: 60px; }
+.gift::after { inset: 0 0 auto; right: 0; bottom: auto; width: auto; height: 50px; border: 0; border-radius: 0; box-shadow: none; background: var(--trim); filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3)); z-index: 0; }
+.giftTop, .giftNo, .gift small, .copy { position: relative; z-index: 1; }
+.giftIcon { border-color: rgba(244, 236, 224, .5); }
+.gift h3 { color: #f1e3d2; font-family: var(--display); font-size: 18px; font-weight: 500; }
+.copy { border-color: rgba(244, 236, 224, .6); color: #fbf8f2; font-family: var(--display); font-size: 14px; }
+.copyOn, .copyOn:hover { background: #fbf8f2; color: var(--accent2); }
+
+/* closing */
+.closing { background: var(--satin); color: var(--ink); padding-bottom: 60px; }
+.closingDoily { width: 150px; height: auto; filter: drop-shadow(2px 3px 3px rgba(93, 74, 82, .25)); }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 54px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: var(--muted); font-family: var(--display); font-size: 15px; }
+.closingNames { color: var(--accent); font-family: var(--script); font-size: 50px; }
+.made { color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.made:hover { color: var(--accent); }
+
+/* ── Cover: a lace curtain over satin, the names in its oval window ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--satin); text-align: center; isolation: isolate; }
+.veil { position: relative; width: 100%; aspect-ratio: 624 / 848; filter: drop-shadow(1.5px 3px 2px rgba(93, 74, 82, .3)); }
+.veilNet { position: absolute; inset: 0; background: url(/themes/art/renda-putih/tulle.webp) 0 0 / 18px 20.78px; -webkit-mask: url(/themes/art/renda-putih/veilmask.webp) 0 0 / 100% 100% no-repeat; mask: url(/themes/art/renda-putih/veilmask.webp) 0 0 / 100% 100% no-repeat; }
+.veil > img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.veil > img { animation: settle 2.4s var(--m-ease) both; }
+.window { position: absolute; z-index: 1; left: 50%; top: 44.3%; width: 58%; height: 52%; translate: -50% -50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.bism { color: var(--accent); font-family: Amiri, serif; font-size: 18px; line-height: 1.6; }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .2em; text-transform: lowercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin: 2px 0; color: var(--accent); font-family: var(--script); font-size: 50px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames i { color: var(--mauve); font-size: 34px; font-style: normal; line-height: .9; }
+.coverDate { color: var(--ink); font-family: var(--display); font-size: 15px; font-weight: 500; letter-spacing: .12em; }
+.coverFoot { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 14px; margin-top: -6px; width: 100%; padding: 4px 24px 34px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--accent2); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
+.openBtn { border-radius: 4px; background: var(--accent); color: #fbf8f2; font-family: var(--display); font-size: 16px; font-weight: 500; letter-spacing: .08em; text-transform: lowercase; box-shadow: 0 10px 20px rgba(93, 74, 82, .22), inset 0 0 0 3px #6d5560, inset 0 0 0 4px rgba(244, 236, 224, .45); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: guipure medallion with the initials (or the couple photo in an oval when one is uploaded) ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 48px 24px 56px; text-align: center; }
+.heroKicker { color: var(--gold-d); font-family: var(--display); font-size: 14px; font-weight: 500; letter-spacing: .2em; text-transform: lowercase; }
+.heroMedal { position: relative; display: grid; place-items: center; width: 280px; height: 280px; margin: 12px 0 4px; }
+.heroMedal > img { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(2px 4px 4px rgba(93, 74, 82, .25)); }
+.heroInitials { position: relative; display: grid; place-items: center; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fffdf9, #efe6d9); box-shadow: inset 0 0 0 1px rgba(180, 154, 122, .45); color: var(--accent); font-family: var(--script); font-size: 44px; line-height: 1; white-space: nowrap; }
+.heroPhoto { position: relative; width: 200px; height: 250px; overflow: hidden; border-radius: 50%; box-shadow: 0 0 0 6px #fffdf9, 0 0 0 7px var(--gold), 0 12px 26px rgba(93, 74, 82, .2); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--script); font-size: 56px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--mauve); font-style: normal; }
+.heroDate { color: var(--ink); font-family: var(--display); font-size: 16px; font-weight: 500; letter-spacing: .12em; }
+.heroNote { max-width: 320px; margin-top: 10px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes settle { from { opacity: 0; translate: 0 -10px; } }
+@media (prefers-reduced-motion: reduce) {
+  .veil > img { animation: none !important; }
+}
+.footSprig { width: 54px; height: auto; filter: drop-shadow(1px 2px 1.5px rgba(93, 74, 82, .3)); }

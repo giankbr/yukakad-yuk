@@ -1,0 +1,177 @@
+/* Hujan Kota — malam kota yang hujan dalam lukisan gouache: deret ruko dengan jendela kuning hangat, papan nama yang menyala tanpa tulisan, lampu jalan, sepasang payung, dan jalan basah yang memantulkan semuanya; titik hujan di kaca dan gerimis yang turun (berhenti saat gerak dikurangi). Kartu acara seperti jendela yang menyala dengan pelat nomor rumah, hitung mundur di jendela-jendela ruko; Instrument Serif + Hanken Grotesk + Homemade Apple. */
+.root, .cover {
+  --bg: #151c28; --paper: #1b2331; --ivory: #222b3a; --field: #1a2130; --ink: #efe8dc; --muted: #aab1bc; --line: rgba(239, 232, 220, .14);
+  --accent: #f0b765; --accent2: #ffcf87; --gold: #e3a95d; --gold-l: #ffdcaa; --gold-d: #e9b46e;
+  --band-bg: #0f141d; --band-ink: #efe8dc; --on-amber: #241a10;
+  --terra: #c25a40; --mustard: #d3a443; --glass: rgba(30, 40, 56, .55);
+  --display: "Instrument Serif", "DM Serif Display", serif; --serif: "Hanken Grotesk", "Inter", sans-serif; --script: "Homemade Apple", cursive;
+  --h2: 38px; --card-r: 16px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #f0b765; --t-accent-ink: #241a10; --t-bg: #151c28; --t-ink: #efe8dc; --t-muted: #aab1bc; --t-line: rgba(239, 232, 220, .18); --t-field: #1a2130;
+  --t-radius: 16px; --t-font: "Hanken Grotesk", sans-serif; --t-heading-font: "Instrument Serif", serif; --t-heading-weight: 400; --t-heading-size: 36px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+.main { background: var(--bg); }
+.eyebrow { color: var(--gold-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .32em; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-size: var(--h2); font-style: italic; line-height: 1.05; }
+.divider { width: 170px; height: auto; opacity: .9; }
+.section { padding: 66px 22px; }
+
+/* ── Hero: the couple seen through a rain-beaded window, rooftops reflected below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 22px 200px; overflow: hidden; background: linear-gradient(#10161f, #1a2230 70%); text-align: center; isolation: isolate; }
+.heroWindow { position: relative; width: 100%; max-width: 320px; aspect-ratio: 4 / 5; padding: 10px; border-radius: 10px; background: #2a3342; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06), 0 30px 50px -20px rgba(0, 0, 0, .7), 0 0 60px -10px rgba(240, 183, 101, .25); }
+.heroWindow > div, .heroWindow > img { width: 100%; height: 100%; border-radius: 4px; object-fit: cover; }
+.heroWindow::before { content: ""; position: absolute; z-index: 2; left: 50%; top: 10px; bottom: 10px; width: 8px; translate: -50% 0; background: #2a3342; pointer-events: none; }
+.heroWindow::after { content: ""; position: absolute; z-index: 2; left: 10px; right: 10px; top: 42%; height: 8px; background: #2a3342; pointer-events: none; }
+.heroDrops { position: absolute; z-index: 1; inset: 10px; border-radius: 4px; background: url(/themes/art/hujan-kota/drops.webp) 0 0 / 200px 200px repeat, linear-gradient(rgba(150, 170, 195, .1), rgba(20, 28, 40, .25)); pointer-events: none; animation: bead 50s linear infinite; }
+.heroPair { display: grid; place-items: end center; width: 100%; height: 100%; padding-bottom: 12%; border-radius: 4px; background: radial-gradient(80% 60% at 50% 30%, #3b3540, #141b27); }
+.heroPair img { width: 68%; height: auto; }
+.heroKicker { margin-top: 22px; color: var(--gold-d); font-size: 11px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.heroNames { color: var(--ink); font-family: var(--display); font-size: 54px; font-style: italic; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 0 30px rgba(240, 183, 101, .25); }
+.heroNames em { padding: 0 12px; color: var(--accent); font-family: var(--script); font-size: 22px; font-style: normal; vertical-align: middle; }
+.heroDate { color: var(--muted); font-size: 14px; letter-spacing: .16em; text-transform: uppercase; }
+.heroNote { max-width: 320px; color: var(--muted); font-family: var(--display); font-size: 19px; font-style: italic; line-height: 1.45; }
+.heroRoofs { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+
+/* ── Opening ── */
+.salamBlock { padding: 30px 30px 60px; }
+.salamKicker { color: var(--gold-d); font-family: var(--serif); font-weight: 600; letter-spacing: .3em; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 42px; font-style: italic; line-height: 1.1; }
+.intro { color: var(--muted); font-size: 16.5px; }
+
+/* ── Couple: portraits behind wet glass ── */
+.couple { background: var(--paper); }
+.portraitFrame { width: 220px; height: 280px; padding: 0; border: 0; border-radius: 6px; background: #2a3342; box-shadow: 0 0 0 8px #2a3342, 0 26px 40px -18px rgba(0, 0, 0, .8), 0 0 50px -12px rgba(240, 183, 101, .3); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.portraitFrame::after { content: ""; position: absolute; inset: 0; background: url(/themes/art/hujan-kota/drops.webp) 40px 0 / 180px 180px repeat; opacity: .75; pointer-events: none; transition: opacity 900ms var(--m-ease); }
+.person:hover .portraitFrame::after { opacity: .25; }
+.monogram { color: var(--accent); font-family: var(--display); font-style: italic; }
+.role { color: var(--gold-d); font-family: var(--serif); font-size: 10.5px; font-weight: 600; letter-spacing: .3em; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 50px; font-style: italic; line-height: 1; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 500; }
+.parents { color: var(--muted); font-size: 15px; }
+.amp { color: var(--accent); font-family: var(--script); font-size: 30px; }
+.amp img { width: 46px; }
+
+/* ── Countdown: the numbers are lit windows over a reflected street ── */
+.countBand { padding: 66px 18px 200px; background: linear-gradient(#0f141d, #1a2230); }
+.countRoofs { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+.countRain { position: absolute; z-index: -1; inset: 0; background: url(/themes/art/hujan-kota/rain.webp) 0 0 / 200px 300px repeat; opacity: .55; animation: fall 1.4s linear infinite; }
+.headLight .eyebrow { color: var(--gold-d); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 10px; }
+.count > div { height: 86px; border: 0; border-radius: 4px; background: radial-gradient(120% 90% at 30% 20%, #ffd9a0, #f0b765 55%, #c97f3c); box-shadow: 0 0 0 5px #2a3342, 0 0 34px rgba(240, 183, 101, .45); }
+.count > div::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent calc(50% - 1px), rgba(42, 51, 66, .55) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)); pointer-events: none; }
+.count > div::after { display: none; }
+.count b { position: relative; color: var(--on-amber); font-family: var(--display); font-size: 34px; line-height: 1; }
+.count small { position: relative; color: rgba(36, 26, 16, .75); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--accent); color: var(--gold-l); font-family: var(--serif); background: rgba(15, 20, 29, .5); backdrop-filter: blur(4px); }
+
+/* ── Events: glass cards lit from a window, with an enamel house-number plate ── */
+.events { gap: 26px; }
+.event { padding: 46px 22px 26px; border: 1px solid var(--line); border-radius: var(--card-r); background: radial-gradient(130% 80% at 0 0, rgba(240, 183, 101, .2), transparent 60%), var(--ivory); box-shadow: 0 24px 40px -26px rgba(0, 0, 0, .9); }
+.event::before { inset: auto; top: 0; left: 18px; right: 18px; height: 2px; border: 0; border-radius: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.event:hover { border-color: rgba(240, 183, 101, .45); box-shadow: 0 24px 40px -26px rgba(0, 0, 0, .9), 0 0 40px -14px rgba(240, 183, 101, .45); }
+.eventNo { top: -16px; width: 52px; height: 34px; border: 2px solid #f6f1e6; border-radius: 6px; background: #2c4a78; color: #f6f1e6; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .06em; box-shadow: 0 0 0 2px #2c4a78, 0 8px 14px rgba(0, 0, 0, .4); }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 30px; font-style: italic; }
+.eventDate { color: var(--ink); font-size: 16px; font-style: normal; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.rule { width: 46px; background: rgba(239, 232, 220, .3); }
+.event strong { color: var(--ink); font-weight: 600; }
+.eventAddr { color: var(--muted); }
+.mapBtn { background: var(--accent); color: var(--on-amber); font-family: var(--serif); font-weight: 600; box-shadow: 0 0 24px -6px rgba(240, 183, 101, .6); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: linear-gradient(var(--accent), rgba(240, 183, 101, .1)); }
+.node { border: 0; background: transparent; }
+.node img { width: 34px; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 26px; font-style: italic; }
+.storyBody p { color: var(--muted); }
+.storyImg { border-radius: 6px; }
+
+.gallery { background: var(--bg); }
+.mosaic { gap: 6px; }
+.tile { border-radius: 4px; }
+.tile:first-child { border-radius: 4px; }
+
+/* ── Wishes: fogged glass ── */
+.wishes { background: var(--paper); }
+.form { border: 1px solid var(--line); border-radius: 18px; background: rgba(42, 51, 66, .6); box-shadow: 0 24px 40px -28px rgba(0, 0, 0, .9); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-weight: 600; letter-spacing: .16em; }
+.field input, .field textarea { border-color: rgba(239, 232, 220, .16); background: rgba(15, 20, 29, .55); color: var(--ink); }
+.field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240, 183, 101, .2); }
+.choices button { border-color: rgba(239, 232, 220, .2); background: transparent; color: var(--muted); }
+.choices button:hover { border-color: var(--accent); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--on-amber); box-shadow: 0 0 22px -6px rgba(240, 183, 101, .7); }
+.guests { color: var(--ink); }
+.step { border-color: rgba(239, 232, 220, .3); background: transparent; color: var(--ink); }
+.step:hover { background: rgba(240, 183, 101, .15); }
+.submit { background: var(--accent); color: var(--on-amber); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--ink); font-family: var(--display); font-size: 24px; }
+.sentBox img { width: 110px; }
+.closed { border-color: rgba(239, 232, 220, .25); }
+.error { color: #ff9b85; }
+.empty { color: var(--muted); }
+.wish { border: 1px solid var(--line); border-radius: 16px 16px 16px 4px; background: rgba(42, 51, 66, .55); }
+.wish:hover { border-color: rgba(240, 183, 101, .4); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-weight: 600; }
+.wish small { background: rgba(240, 183, 101, .16); color: var(--gold-l); }
+
+/* ── Gifts: glowing shop-sign cards ── */
+.gifts { background: var(--bg); }
+.gift { border: 1px solid rgba(240, 183, 101, .4); background: linear-gradient(160deg, #273041, #1b2230); box-shadow: 0 0 36px -14px rgba(240, 183, 101, .5); }
+.gift::after { right: -30px; bottom: -50px; border-color: rgba(240, 183, 101, .08); box-shadow: 0 0 0 14px rgba(240, 183, 101, .04); }
+.gift h3 { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); font-size: 28px; letter-spacing: .04em; }
+.copy { border-color: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--accent); color: var(--on-amber); }
+
+/* ── Closing ── */
+.closing { padding: 60px 26px 230px; background: linear-gradient(#0f141d, #161d29); }
+.closeRoofs { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; opacity: .9; }
+.closeRain { position: absolute; z-index: -1; inset: 0; background: url(/themes/art/hujan-kota/rain.webp) 0 0 / 200px 300px repeat; opacity: .4; animation: fall 1.6s linear infinite; }
+.closePair { width: 170px; height: auto; margin-bottom: 4px; animation: shelter 7s var(--m-ease) infinite alternate; transform-origin: 50% 100%; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 52px; font-style: italic; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--script); font-size: 26px; line-height: 1.6; }
+.made { color: rgba(239, 232, 220, .45); }
+.music { border-color: var(--accent); background: #1b2331; box-shadow: 0 0 22px -4px rgba(240, 183, 101, .6); }
+
+/* ── Cover: a painted rainy street behind beaded glass ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 100dvh; padding: 52px 22px 26px; overflow: hidden; background: #10161f; color: var(--ink); text-align: center; isolation: isolate; }
+.coverScene { position: absolute; z-index: -3; inset: 0; background: url(/themes/art/hujan-kota/street.webp) 62% 100% / cover no-repeat; }
+.coverRain { position: absolute; z-index: -2; inset: 0; background: url(/themes/art/hujan-kota/rain.webp) 0 0 / 200px 300px repeat, url(/themes/art/hujan-kota/rain.webp) 70px 40px / 140px 210px repeat; opacity: .8; animation: fall2 1.1s linear infinite; }
+.coverGlass { position: absolute; z-index: -1; inset: 0; opacity: .8; background: url(/themes/art/hujan-kota/drops.webp) 0 0 / 320px 320px repeat, linear-gradient(180deg, rgba(16, 22, 31, .55), rgba(16, 22, 31, 0) 40%, rgba(16, 22, 31, 0) 70%, rgba(16, 22, 31, .7)); animation: bead 60s linear infinite; pointer-events: none; }
+.coverTop { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.coverKicker { color: var(--gold-l); font-size: 11px; font-weight: 600; letter-spacing: .36em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; color: #fbf6ee; font-family: var(--display); font-size: 66px; font-style: italic; font-weight: 400; line-height: .92; overflow-wrap: anywhere; text-shadow: 0 2px 24px rgba(0, 0, 0, .5), 0 0 40px rgba(240, 183, 101, .3); }
+.coverNames em { margin: 10px 0 4px; color: var(--accent); font-family: var(--script); font-size: 24px; font-style: normal; line-height: 1.4; }
+.coverDate { padding: 6px 16px; border-top: 1px solid rgba(255, 220, 170, .4); border-bottom: 1px solid rgba(255, 220, 170, .4); color: #f4ede2; font-size: 13px; letter-spacing: .2em; text-transform: uppercase; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 330px; padding: 16px 16px 18px; border: 1px solid rgba(255, 255, 255, .14); border-radius: 22px; background: var(--glass); -webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, .8); }
+.cover .guest small { color: var(--muted); font-size: 14px; }
+.cover .guest strong { color: #fbf6ee; font-family: var(--display); font-size: 24px; font-style: italic; }
+.table { border-color: rgba(240, 183, 101, .6); color: var(--gold-l); font-family: var(--serif); }
+.openBtn { width: 100%; background: var(--accent); color: var(--on-amber); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; box-shadow: 0 0 30px -6px rgba(240, 183, 101, .7); }
+.openBtn:hover { background: var(--accent2); }
+
+@keyframes fall { to { background-position: 0 600px; } }
+@keyframes fall2 { to { background-position: 0 600px, 70px 460px; } }
+@keyframes bead { to { background-position: 0 640px, 0 0; } }
+@keyframes shelter { from { rotate: -1.5deg; } to { rotate: 1.5deg; } }
+.heroDrops { animation-name: bead2; }
+@keyframes bead2 { to { background-position: 0 400px, 0 0; } }
+@media (max-width: 370px) {
+  .coverNames { font-size: 58px; }
+  .count { grid-template-columns: repeat(4, minmax(0, 68px)); gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coverRain, .coverGlass, .heroDrops, .countRain, .closeRain, .closePair { animation: none; }
+  .coverRain { opacity: .35; }
+}

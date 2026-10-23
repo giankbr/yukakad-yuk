@@ -1,0 +1,162 @@
+/* Jali Merah — kisi-kisi jali batu pasir merah ala Fatehpur Sikri, cahaya keemasan yang menembus dan berpola di lantai, kubah chhatri, dan tatahan marmer krem. */
+.root, .cover {
+  --bg: #f5e9d6; --paper: #ecd9bd; --ivory: #fcf5e9; --field: #fffaf1; --ink: #3a1a10; --muted: #6e4a3a; --line: #dcc2a2;
+  --accent: #9a3f27; --accent2: #7d321f; --gold: #c9a24e; --gold-l: #f3d9a0; --gold-d: #8f6a28;
+  --band-bg: #8a3a24; --band-ink: #fbeedd;
+  --display: "Rozha One", Georgia, serif; --serif: Spectral, Georgia, serif; --script: "Rozha One", Georgia, serif;
+  --marble: #f1e6d2; --stone-d: #5a2214;
+  --stone: url(/themes/art/jali-merah/stone.webp) repeat 0 0 / 256px 256px;
+  --inlay: url(/themes/art/jali-merah/band.webp) repeat-x 0 50% / auto 100%;
+  --arch: 50% 50% 4px 4px / 34% 34% 4px 4px;
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #9a3f27; --t-accent-ink: #fbeedd; --t-bg: #f5e9d6; --t-ink: #3a1a10; --t-muted: #6e4a3a; --t-line: #dcc2a2; --t-field: #fffaf1;
+  --t-radius: 4px; --t-font: Spectral, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; color: var(--gold-d); }
+.head h2 { color: var(--accent2); }
+.divider { width: 170px; }
+.section { padding: 64px 22px 60px; }
+
+/* red stone rooms */
+.countBand, .gallery, .gifts, .closing { background: var(--band-bg) var(--stone); color: var(--band-ink); }
+.gallery .head h2, .gifts .head h2 { color: var(--band-ink); }
+.gallery .eyebrow, .gifts .eyebrow { color: var(--gold-l); }
+.countBand::before, .gallery::before, .gifts::before, .closing::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 16px; background: var(--inlay); box-shadow: 0 2px 0 rgba(58, 26, 16, .35); }
+
+/* opening */
+.salamBlock { padding: 50px 30px 58px; background: radial-gradient(70% 60% at 50% 20%, #fff6e2, var(--bg)); }
+.arabic { color: var(--accent); font-size: 30px; }
+.salamTitle { font-family: var(--display); font-size: 30px; color: var(--accent2); }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* couple: photos behind a carved cusped arch */
+.couple { background: var(--paper); gap: 20px; }
+.portrait { width: 210px; height: 283px; margin-bottom: 14px; }
+.portraitArch { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; filter: drop-shadow(0 12px 16px rgba(58, 26, 16, .25)); }
+.portraitFrame { position: absolute; inset: 4% 5% 3%; width: auto; height: auto; padding: 0; border: 0; border-radius: var(--arch); background: var(--accent2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: var(--arch); }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { position: relative; z-index: 1; color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.nick { font-family: var(--display); font-size: 42px; color: var(--accent2); }
+.fullName { font-family: var(--serif); font-weight: 600; font-size: 18px; }
+.parents { font-size: 16px; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 70px; }
+
+/* countdown: stone band with the light coming through */
+.countBand { padding: 74px 18px 70px; }
+.countLight { position: absolute; z-index: -1; inset: -80px 0 auto 50%; width: 340px; height: auto; translate: -50% 0; mix-blend-mode: screen; opacity: .55; animation: shimmer 9s ease-in-out infinite alternate; }
+.countChhatri { position: absolute; z-index: -1; bottom: 0; width: 86px; height: auto; opacity: .9; }
+.countChhatriL { left: -6px; }
+.countChhatriR { right: -6px; scale: -1 1; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); }
+.count > div { height: 92px; border: 0; border-radius: var(--arch); background: var(--marble); box-shadow: inset 0 0 0 3px rgba(201, 162, 78, .55), 0 8px 18px rgba(30, 10, 4, .3); padding-top: 10px; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 224, 160, .5) 50%, transparent 65%); }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--muted); font-style: normal; font-size: 13px; }
+.ghostBtn { border-color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+
+/* events: cream panels edged with inlay */
+.events { gap: 24px; }
+.event { padding: 44px 22px 36px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(58, 26, 16, .08); }
+.event::before { inset: 0; border: 0; border-radius: 4px; background: var(--inlay) top / auto 12px repeat-x, var(--inlay) bottom / auto 12px repeat-x; }
+.eventNo { top: 22px; width: 30px; height: 30px; border-radius: 3px; rotate: 45deg; background: var(--accent); color: var(--marble); font-family: var(--serif); font-weight: 700; font-size: 11px; letter-spacing: 0; }
+.eventNo { display: grid; }
+.event h3 { margin-top: 18px; font-family: var(--display); font-size: 25px; color: var(--accent2); }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.mapBtn { border-radius: 4px; background: var(--accent); color: var(--marble); font-family: var(--serif); font-weight: 600; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: linear-gradient(var(--accent), rgba(154, 63, 39, .2)); width: 2px; }
+.node { border: 0; border-radius: 0; background: none; width: 36px; }
+.node img { width: 34px; }
+.storyBody small { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.storyBody h3 { font-family: var(--display); font-size: 21px; color: var(--accent2); }
+.storyImg { border-radius: 4px; }
+
+/* gallery in stone with marble inlay rims */
+.mosaic { grid-auto-rows: 150px; gap: 10px; }
+.tile { border-radius: 3px; border: 3px solid var(--marble); }
+.tile:first-child { border-radius: var(--arch); }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border-radius: 4px; border: 0; box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(58, 26, 16, .07); padding-top: 32px; position: relative; }
+.form::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px; background: var(--inlay); border-radius: 4px 4px 0 0; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--marble); }
+.submit { border-radius: 4px; background: var(--accent); color: var(--marble); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent2); }
+.wish { border-radius: 4px; border-left: 3px solid var(--accent); }
+.wish strong { font-family: var(--display); color: var(--accent2); }
+.wish small { background: rgba(154, 63, 39, .1); color: var(--accent); }
+
+/* gifts */
+.gifts .intro { color: rgba(251, 238, 221, .82); }
+.gift { border-radius: 4px; background: rgba(58, 18, 8, .45); border: 1px solid rgba(241, 230, 210, .25); padding-top: 34px; }
+.gift::after { inset: 0 0 auto; width: auto; height: 12px; border: 0; border-radius: 0; box-shadow: none; background: var(--inlay); }
+.gift h3 { font-family: var(--serif); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); }
+.copy { border-radius: 4px; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { color: var(--accent2); }
+
+/* closing */
+.closing { padding: 80px 26px 64px; }
+.closingLight { position: absolute; z-index: -1; left: 50%; top: 0; width: 420px; max-width: none; height: auto; translate: -50% 0; mix-blend-mode: screen; opacity: .45; animation: shimmer 10s ease-in-out infinite alternate; }
+.closingChhatri { width: 120px; height: auto; margin-bottom: 6px; filter: drop-shadow(0 10px 12px rgba(20, 6, 2, .45)); }
+.thanks { font-family: var(--display); font-size: 42px; color: var(--gold-l); }
+.closingSalam { font-family: var(--serif); color: var(--gold-l); }
+.family { font-family: var(--serif); }
+.closingNames { font-family: var(--display); }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: inside a red sandstone pavilion, light pouring through the jali ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; justify-content: center; padding: 40px 24px 40px; overflow: hidden; background: radial-gradient(80% 50% at 50% 30%, rgba(160, 70, 40, .2), transparent 70%), linear-gradient(180deg, rgba(58, 18, 8, .25), rgba(58, 18, 8, .55)), var(--band-bg) var(--stone); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; left: 0; right: 0; height: 18px; background: var(--inlay); }
+.cover::before { top: 0; }
+.cover::after { bottom: 0; }
+.coverLight { position: absolute; z-index: 3; left: 50%; top: 70px; width: 420px; height: auto; translate: -50% 0; mix-blend-mode: screen; opacity: .55; pointer-events: none; animation: shimmer 8s ease-in-out infinite alternate; }
+.coverArabic { color: var(--gold-l); font-family: Amiri, "Traditional Arabic", serif; font-size: 22px; line-height: 1.6; }
+.coverKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-l); }
+.jaliWrap { position: relative; z-index: 4; width: 236px; aspect-ratio: 420 / 600; margin-top: 14px; flex-shrink: 0; background: radial-gradient(52% 46% at 50% 56%, #fffbe6 0%, #ffe6a6 45%, rgba(255, 206, 120, .85) 72%, transparent 100%); }
+.jali { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chhatri { position: absolute; z-index: 1; top: 34%; width: 74px; height: auto; filter: drop-shadow(0 8px 10px rgba(30, 8, 2, .4)); }
+.chhatriL { left: -64px; }
+.chhatriR { right: -64px; scale: -1 1; }
+.coverNames { position: relative; z-index: 4; max-width: 100%; margin-top: 18px; font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.05; color: #fff3df; text-shadow: 0 2px 12px rgba(30, 8, 2, .5); overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { padding: 0 8px; color: var(--gold-l); font-style: normal; font-size: 30px; }
+.coverDate { position: relative; z-index: 4; margin-top: 6px; font-size: 15px; font-style: italic; color: var(--gold-l); }
+.guestWrap { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: 16px; }
+.guest small { color: rgba(251, 238, 221, .75); font-size: 14px; }
+.guest strong { font-family: var(--display); font-size: 20px; color: #fff3df; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); border-radius: 3px; }
+.openBtn { min-width: 0; padding: 0 24px; border-radius: 4px; background: var(--marble); color: var(--accent2); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 3px rgba(241, 230, 210, .25), 0 12px 24px rgba(20, 6, 2, .5); }
+.openBtn:hover { background: #fff8ea; }
+
+/* ── Hero: cream courtyard, photo behind a carved arch ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 54px; overflow: hidden; background: radial-gradient(90% 50% at 50% 30%, #fff6e2, var(--bg)); text-align: center; }
+.heroChhatri { width: 92px; height: auto; }
+.heroKicker { margin-top: 10px; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-d); }
+.heroNames { margin-top: 6px; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.05; color: var(--accent2); overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { display: block; font-size: 26px; font-style: normal; color: var(--gold-d); }
+.heroDate { margin-top: 8px; font-style: italic; color: var(--muted); }
+.heroArch { position: relative; width: 262px; aspect-ratio: 390 / 525; margin-top: 24px; }
+.heroArchFrame { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; filter: drop-shadow(0 16px 20px rgba(58, 26, 16, .28)); }
+.heroPhoto { position: absolute; inset: 4% 5% 3%; border-radius: var(--arch); overflow: hidden; background: var(--accent2); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { max-width: 316px; margin-top: 22px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+.sentBox img { width: 120px; }
+
+@keyframes shimmer { from { opacity: .45; translate: -52% 0; } to { opacity: .75; translate: -48% 0; } }

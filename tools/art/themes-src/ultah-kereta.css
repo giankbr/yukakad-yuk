@@ -1,0 +1,178 @@
+/* Ultah Kereta — ulang tahun anak: kereta mainan kayu bercat (lokomotif merah-biru-hijau, gerbong berisi balok huruf nama), stasiun kecil berjam, rel kayu, tiket berlubang dan gerbong kue berbalon; langit biru berawan dan tanah krem. */
+.root, .cover {
+  --bg: #fff6e6; --paper: #fdeccf; --ivory: #fffcf5; --field: #fffdf8; --ink: #3a2a22; --muted: #6e5a4c; --line: #f0dcb8;
+  --accent: #e0483a; --accent2: #275ea3; --gold: #f6c23e; --gold-l: #fff1c4; --gold-d: #c2851a;
+  --blue: #3a7fd0; --green: #4fb06b; --sky: #9fd8f2;
+  --band-bg: #275ea3; --band-ink: #fff6e6;
+  --display: Sniglet, "Comic Sans MS", sans-serif; --serif: Outfit, system-ui, sans-serif; --script: Sniglet, sans-serif;
+  --h2: 32px; --card-r: 18px;
+  --rails: url(/themes/art/ultah-kereta/track.webp);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e0483a; --t-accent-ink: #fffcf5; --t-bg: #fff6e6; --t-ink: #3a2a22; --t-muted: #6e5a4c; --t-line: #f0dcb8; --t-field: #fffdf8;
+  --t-radius: 16px; --t-font: Outfit, system-ui, sans-serif; --t-heading-font: Sniglet, sans-serif; --t-heading-weight: 800; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+.eyebrow, .role, .salamKicker { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--accent2); color: var(--ivory); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 800; text-shadow: 0 3px 0 var(--gold-l); }
+.divider { display: block; width: 200px; height: 30px; background: var(--rails) 0 50% / auto 30px repeat-x; border-radius: 6px; }
+.divider img { display: none; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* opening */
+.salamBlock { padding: 46px 30px 52px; background: var(--bg); }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 800; line-height: 1.1; }
+
+/* celebrant: a carriage window */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 26px; }
+.portraitFrame { width: 220px; height: 200px; padding: 10px; border: 0; border-radius: 30px; background: var(--accent); box-shadow: 0 10px 0 #b02f25, 0 18px 24px rgba(58, 42, 34, .15); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 22px; }
+.portraitFrame::before { content: ""; position: absolute; inset: 10px; border-radius: 22px; background: linear-gradient(160deg, #d9f2fb, #a9dcf3); }
+.monogram { position: relative; color: var(--accent2); font-family: var(--display); font-size: 110px; font-weight: 800; }
+.peek { position: absolute; z-index: 2; right: -64px; bottom: -40px; width: 96px; height: auto; rotate: 6deg; }
+.role { margin-top: 8px; background: var(--green); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 52px; font-weight: 800; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+
+/* countdown: every number rides in its own carriage */
+.countBand { padding: 60px 18px 82px; background: linear-gradient(180deg, #3a7fd0, var(--accent2)); }
+.countRails { position: absolute; z-index: -1; inset: auto 0 14px; height: 30px; background: var(--rails) 0 0 / auto 30px repeat-x; opacity: .95; }
+.headLight .eyebrow { background: var(--gold); color: var(--ink); }
+.headLight h2 { font-family: var(--display); font-weight: 800; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { overflow: visible; height: 84px; border: 0; border-radius: 14px; background: var(--accent); box-shadow: inset 0 -8px 0 rgba(0, 0, 0, .14); }
+.count > div:nth-child(2) { background: #e5a41a; }
+.count > div:nth-child(3) { background: var(--green); }
+.count > div:nth-child(4) { background: #9b6fd0; }
+.count > div::after { content: ""; position: absolute; inset: auto 8px -16px; height: 20px; translate: none; animation: none; background: radial-gradient(circle at 14px 10px, #3a2a22 0 8px, #fff1c4 8.5px 10px, transparent 10.5px), radial-gradient(circle at calc(100% - 14px) 10px, #3a2a22 0 8px, #fff1c4 8.5px 10px, transparent 10.5px); }
+.count b { color: var(--ivory); font-family: var(--display); font-size: 32px; font-weight: 800; }
+.count small { color: var(--ivory); font-size: 12px; font-style: normal; font-weight: 600; }
+.countTba { color: var(--ivory); font-family: var(--display); }
+.ghostBtn { border: 2px solid var(--gold); color: var(--ivory); font-family: var(--serif); font-weight: 600; }
+.ghostBtn:hover { background: rgba(255, 241, 196, .15); }
+
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+
+/* events: punched tickets */
+.events { background: var(--bg); }
+.event { padding: 30px 22px 26px; border: 0; border-radius: 16px; background: var(--ivory); box-shadow: 0 6px 0 var(--line), 0 14px 26px rgba(58, 42, 34, .08);
+  -webkit-mask: radial-gradient(circle at 0 50%, transparent 13px, #000 13.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 13px, #000 13.5px) 100% 0 / 51% 100% no-repeat;
+  mask: radial-gradient(circle at 0 50%, transparent 13px, #000 13.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 13px, #000 13.5px) 100% 0 / 51% 100% no-repeat; }
+.event::before { inset: 0 0 auto; height: 12px; border: 0; border-radius: 0; background: repeating-linear-gradient(90deg, var(--accent) 0 22px, var(--gold) 22px 44px, var(--blue) 44px 66px, var(--green) 66px 88px); }
+.eventNo { top: 22px; left: 22px; translate: none; width: auto; height: 26px; padding: 0 10px; border-radius: 8px; background: var(--accent2); color: var(--ivory); font-family: var(--display); font-size: 13px; }
+.event h3 { margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 800; }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--accent2); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; height: 2px; margin: 10px 0; background: repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 14px); }
+.mapBtn, .submit { border-radius: 14px; background: var(--accent); color: var(--ivory); font-family: var(--display); font-size: 16px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 5px 0 #b02f25; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #ea5546; translate: 0 -2px; box-shadow: 0 7px 0 #b02f25; }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 2px 0 #b02f25; }
+
+/* story: a rail line with puff stops */
+.story { background: var(--paper); }
+.timeline::before { left: 14px; width: 18px; background: linear-gradient(90deg, #7d8a96 0 3px, transparent 3px 15px, #7d8a96 15px), repeating-linear-gradient(180deg, #c98a52 0 7px, transparent 7px 18px); transform-origin: 50% 0; }
+.node { width: 44px; height: 36px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody small { color: var(--accent2); font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 800; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 20px; background: var(--ivory); box-shadow: 0 6px 0 var(--line); }
+.field input, .field textarea { border-radius: 12px; }
+.choices button { border-radius: 12px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent2); border-color: var(--accent2); color: var(--ivory); box-shadow: 0 4px 0 #173f73; }
+.wish { border: 0; border-radius: 16px; box-shadow: 0 4px 0 var(--line); }
+.wish:nth-child(3n + 1) { border-top: 6px solid var(--accent); }
+.wish:nth-child(3n + 2) { border-top: 6px solid var(--gold); }
+.wish:nth-child(3n) { border-top: 6px solid var(--green); }
+.wish strong { color: var(--accent2); font-family: var(--display); font-weight: 800; }
+.wish small { background: var(--gold-l); color: var(--ink); }
+.sentBox img { width: 120px; }
+
+/* gifts: luggage tags */
+.gifts { background: var(--paper); }
+.gift { border-radius: 18px; background: var(--accent2); box-shadow: 0 6px 0 #173f73; }
+.gift::after { right: 50%; bottom: auto; top: 10px; width: 14px; height: 14px; translate: 50% 0; border: 3px solid var(--gold); border-radius: 50%; box-shadow: none; background: var(--paper); }
+.giftTop { margin-top: 18px; }
+.gift h3 { color: var(--gold); font-family: var(--display); font-size: 18px; font-weight: 800; }
+.giftNo { font-family: var(--serif); font-size: 23px; font-weight: 700; letter-spacing: .04em; line-height: 1.25; }
+.copy { border: 2px solid var(--gold); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold); color: var(--ink); }
+
+/* closing: the whole train leaves the station */
+.closing { padding: 56px 18px 60px; background: linear-gradient(180deg, var(--sky) 0, #d9f2fb 172px, var(--accent2) 172px); }
+.closingRails { display: none; }
+.closingTrain { margin: 0 0 46px; }
+.closingTrain::after { content: ""; position: absolute; z-index: -1; left: -30px; right: -30px; bottom: -14px; height: 26px; background: var(--rails) 0 0 / auto 26px repeat-x; }
+.thanks { color: var(--gold); font-family: var(--display); font-size: 48px; font-weight: 800; }
+.closingNames { color: var(--ivory); font-family: var(--display); font-size: 34px; font-weight: 800; }
+.family { font-family: var(--serif); }
+.music { border-radius: 14px; background: var(--accent); border-color: var(--gold); }
+
+/* ── Train (cover + closing): letter carriages behind the locomotive ── */
+.train { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: center; width: 100%; padding: 0 4px; }
+.car { position: relative; flex: 0 1 78px; min-width: 0; margin-right: -5px; container-type: inline-size; transform-origin: 50% 100%; }
+.car > img, .loco > img { display: block; width: 100%; height: auto; }
+.car b { position: absolute; left: 50%; top: 39%; translate: -50% -52%; color: var(--accent); font-family: var(--display); font-size: 40cqw; font-weight: 800; line-height: 1; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
+.car:nth-child(4n + 2) b { color: var(--accent2); }
+.car:nth-child(4n + 3) b { color: #2f8a4c; }
+.car:nth-child(4n + 4) b { color: #9b4fc0; }
+.loco { position: relative; flex: 0 0 124px; }
+.steam { position: absolute; top: -34px; right: 6px; width: 44px; opacity: .9; animation: steam 2.6s ease-out infinite; }
+.steam img { display: block; width: 100%; height: auto; }
+.rails { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; height: 26px; background: var(--rails) 0 0 / auto 26px repeat-x; }
+
+/* ── Cover: blue sky with clouds, the name, a little station, the train on the rails and a punched ticket ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 0 0 34px; overflow: hidden; background: linear-gradient(180deg, var(--sky), #d9f2fb 70%); text-align: center; isolation: isolate; }
+.cloud { position: absolute; z-index: 0; width: 92px; opacity: .95; animation: drift 18s ease-in-out infinite alternate; }
+.cloud img { display: block; width: 100%; height: auto; }
+.cloud1 { top: 26px; left: -14px; }
+.cloud2 { top: 150px; right: -18px; width: 72px; animation-duration: 23s; animation-direction: alternate-reverse; }
+.coverTop { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 40px 24px 0; }
+.tag { padding: 7px 18px; border-radius: 10px; background: var(--ivory); color: var(--accent2); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 4px 0 rgba(39, 94, 163, .25);
+  -webkit-mask: radial-gradient(circle at 0 50%, transparent 7px, #000 7.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 7px, #000 7.5px) 100% 0 / 51% 100% no-repeat;
+  mask: radial-gradient(circle at 0 50%, transparent 7px, #000 7.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 7px, #000 7.5px) 100% 0 / 51% 100% no-repeat; }
+.coverName { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 78px; font-weight: 800; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 #fff, 0 8px 0 rgba(39, 94, 163, .25); }
+.ageRow { display: flex; align-items: center; gap: 10px; color: var(--accent2); font-family: var(--display); font-size: 20px; font-weight: 800; }
+.ageClock { font-family: var(--serif); font-weight: 800; display: grid; place-items: center; width: 62px; height: 62px; border: 5px solid var(--accent2); border-radius: 50%; background: var(--ivory); color: var(--accent); font-size: 34px; box-shadow: 0 4px 0 rgba(39, 94, 163, .3); }
+.coverDate { color: var(--ink); font-size: 15px; font-weight: 600; }
+.line { position: relative; z-index: 1; width: 100%; height: 210px; margin-top: 6px; }
+.line::after { content: ""; position: absolute; z-index: -1; top: calc(100% - 14px); left: 0; right: 0; height: 100vh; background: linear-gradient(#fff3dc, var(--bg)); }
+.coverStation { position: absolute; z-index: 0; left: 8px; bottom: 54px; width: 150px; height: auto; }
+.coverTrain { position: absolute; left: 0; bottom: 14px; animation: arrive 2.6s var(--m-spring) .2s both; }
+.coverTrain .car { animation: bob .5s ease-in-out calc(var(--i) * 80ms) infinite alternate; }
+.ticket { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: calc(100% - 44px); max-width: 340px; margin-top: 12px; padding: 0 18px 20px; border-radius: 18px; background: var(--ivory); box-shadow: 0 6px 0 var(--line), 0 18px 30px rgba(58, 42, 34, .12);
+  -webkit-mask: radial-gradient(circle at 0 64%, transparent 12px, #000 12.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 64%, transparent 12px, #000 12.5px) 100% 0 / 51% 100% no-repeat;
+  mask: radial-gradient(circle at 0 64%, transparent 12px, #000 12.5px) 0 0 / 51% 100% no-repeat, radial-gradient(circle at 100% 64%, transparent 12px, #000 12.5px) 100% 0 / 51% 100% no-repeat; }
+.ticketHead { width: calc(100% + 36px); padding: 9px 0; border-radius: 18px 18px 0 0; background: var(--accent2); color: var(--gold); font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 800; }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 16px; background: linear-gradient(90deg, var(--accent), #f0604f, var(--accent)) 0 0 / 200% 100%; color: var(--ivory); font-family: var(--display); font-size: 18px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 6px 0 #b02f25; }
+.openBtn:hover { background-position: 100% 0; translate: 0 -2px; box-shadow: 0 8px 0 #b02f25; }
+.openBtn:active { translate: 0 4px; box-shadow: 0 2px 0 #b02f25; }
+
+/* ── Hero: platform sign, the cake car at the station ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px 24px 0; overflow: hidden; background: linear-gradient(180deg, var(--sky), #d9f2fb 70%, #fff3dc 70%); text-align: center; isolation: isolate; }
+.heroKicker { padding: 6px 16px; border-radius: 10px; background: var(--accent2); color: var(--gold); font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.heroName { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 64px; font-weight: 800; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 #fff; }
+.heroAge { color: var(--accent2); font-family: var(--display); font-size: 22px; font-weight: 800; }
+.heroAge b { font-family: var(--serif); display: inline-grid; place-items: center; width: 46px; height: 46px; margin: 0 4px; border-radius: 50%; background: var(--gold); color: var(--ink); }
+.heroDate { color: var(--ink); font-size: 15px; font-weight: 600; }
+.heroNote { max-width: 320px; margin-top: 6px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 252, 245, .85); color: var(--muted); font-size: 16px; line-height: 1.55; }
+.heroLine { position: relative; width: calc(100% + 48px); height: 220px; margin-top: 10px; }
+.heroStation { position: absolute; left: 16px; bottom: 22px; width: 210px; height: auto; }
+.heroCake { position: absolute; right: 26px; bottom: 6px; width: 112px; height: auto; }
+[data-revealed] .heroCake, .hero[data-revealed] .heroCake { animation: roll 1.6s var(--m-spring) .2s both; }
+
+@keyframes arrive { from { translate: 110% 0; } }
+@keyframes roll { from { translate: 160px 0; } }
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -2px; } }
+@keyframes steam { 0% { opacity: 0; scale: .4; translate: 0 10px; } 30% { opacity: .9; } 100% { opacity: 0; scale: 1.2; translate: 14px -26px; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverTrain, .coverTrain .car, .steam, .cloud, [data-revealed] .heroCake, .hero[data-revealed] .heroCake { animation: none !important; }
+}
