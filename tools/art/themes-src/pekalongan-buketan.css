@@ -1,0 +1,152 @@
+/* Pekalongan Buketan — batik pesisir Pekalongan: buket bunga Eropa, kupu-kupu dan burung kecil bergaris canting, pastel cerah di atas mori krem, pita pinggiran biru-merah muda. */
+.root, .cover {
+  --bg: #f8f0e1; --paper: #fbf4e8; --ivory: #fffaf1; --field: #fffdf8; --ink: #33243a; --muted: #66566b; --line: #e3d3c4;
+  --accent: #7a2f5a; --accent2: #c2456f; --gold: #4f9ccb; --gold-l: #fff3e2; --gold-d: #2f6f9f;
+  --band-bg: #2f6f9f; --band-ink: #fff6ea;
+  --display: "Yeseva One", Georgia, serif; --serif: "Sorts Mill Goudy", Georgia, serif; --script: "Parisienne", cursive;
+  --h2: 30px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a2f5a; --t-accent-ink: #fff6ea; --t-bg: #f8f0e1; --t-ink: #33243a; --t-muted: #66566b; --t-line: #e3d3c4; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: "Sorts Mill Goudy", Georgia, serif; --t-heading-font: "Yeseva One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: #f8f0e1 url(/themes/art/pekalongan-buketan/mori.webp); }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-style: italic; letter-spacing: .16em; text-transform: none; }
+.head h2 { color: var(--accent); font-size: 30px; }
+.divider { width: 170px; }
+.intro { font-size: 17px; line-height: 1.7; }
+
+
+.salamBlock { padding: 56px 28px 50px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { max-width: 290px; line-height: 1.6; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 31px; line-height: 1.2; }
+
+/* couple: oval portraits ringed with canting dots, butterfly perched on the rim */
+.couple { background: transparent; gap: 14px; }
+.portrait { margin-bottom: 18px; }
+.portrait > img { position: absolute; z-index: 2; top: -6px; right: -26px; width: 66px; height: auto; rotate: 18deg; animation: flutter 5s ease-in-out infinite; transform-origin: 50% 70%; }
+.portraitFrame { width: 196px; height: 250px; padding: 7px; border: 2px solid var(--accent2); border-radius: 50%; background: var(--ivory); outline: 3px dotted var(--gold); outline-offset: 6px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 80px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 400; font-style: italic; }
+.parents { font-size: 16px; }
+.amp { margin: 18px 0 8px; color: var(--accent2); font-family: var(--script); font-size: 60px; }
+.amp img { width: 46px; }
+
+/* countdown: indigo-blue cloth strip with pinggiran on both edges */
+.countBand { padding: 84px 22px; background: var(--band-bg); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; width: 100%; height: 40px; background: url(/themes/art/pekalongan-buketan/pinggir.webp) 0 0 / auto 40px repeat-x; }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; scale: 1 -1; }
+.headLight .eyebrow { color: #cfe8f6; font-family: var(--serif); font-style: italic; letter-spacing: .14em; text-transform: none; font-size: 13px; }
+.headLight h2 { font-size: 28px; }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 84px; border: 0; border-radius: 6px; background: #fff6ea; box-shadow: inset 0 0 0 3px #fff6ea, inset 0 0 0 4.5px #e97c9c; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .7) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--gold-d); font-size: 13px; }
+.countTba { color: #fff6ea; }
+.ghostBtn { border-color: #cfe8f6; color: #fff6ea; font-family: var(--serif); font-size: 15px; letter-spacing: .02em; }
+
+/* events: square handkerchief cards with a printed border on top */
+.events { background: transparent; gap: 30px; }
+.event { padding: 58px 22px 26px; overflow: hidden; border: 2px solid var(--gold-d); border-radius: 4px; background: var(--ivory); box-shadow: 6px 6px 0 rgba(233, 124, 156, .35); }
+.event::before { inset: 46px 8px 8px; border: 1.5px dotted var(--accent2); border-radius: 2px; }
+.event::after { content: ""; position: absolute; inset: 0 0 auto; height: 36px; background: url(/themes/art/pekalongan-buketan/pinggir.webp) 0 0 / auto 36px repeat-x; }
+.event:hover { box-shadow: 8px 8px 0 rgba(233, 124, 156, .45); }
+.eventNo { top: 48px; left: auto; right: 16px; translate: 0 0; width: 34px; height: 34px; border-radius: 50%; background: var(--accent2); color: #fff6ea; font-family: var(--display); font-size: 13px; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { font-size: 17px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 15px; }
+.rule { width: 90px; height: 6px; background: radial-gradient(circle, var(--accent2) 1.6px, transparent 2px) 0 50% / 9px 6px repeat-x; }
+.mapBtn { border-radius: 4px; background: var(--gold-d); color: #fff6ea; font-family: var(--serif); font-size: 15px; letter-spacing: .02em; }
+.mapBtn:hover { background: var(--accent); }
+
+.story { background: rgba(79, 156, 203, .07); }
+.timeline::before { left: 21px; width: 0; border-left: 2px dotted var(--accent2); background: none; }
+.node { width: 44px; height: 44px; border: 2px solid var(--gold); background: var(--ivory); }
+.node img { width: 30px; }
+.storyBody small { color: var(--accent2); font-family: var(--display); font-size: 13px; letter-spacing: .1em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+
+.gallery { background: transparent; }
+.mosaic { grid-auto-rows: 160px; gap: 16px; padding: 7px; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 5px var(--ivory), 0 0 0 7px var(--gold); }
+.tile:first-child { border-radius: 999px 999px 4px 4px; }
+
+.wishes { background: rgba(233, 124, 156, .07); }
+.form { border: 2px solid var(--accent); border-radius: 4px; box-shadow: 6px 6px 0 rgba(79, 156, 203, .3); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .04em; text-transform: none; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: #fff6ea; }
+.submit { border-radius: 4px; background: var(--accent2); color: #fff; font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.wish { border-radius: 4px; border-left: 4px solid var(--gold); }
+.wish strong { font-family: var(--display); font-size: 16px; }
+.sentBox img { width: 80px; }
+
+.gifts { background: transparent; }
+.gift { border-radius: 4px; background: var(--accent); }
+.gift::after { right: -10px; bottom: -14px; width: 92px; height: 82px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/pekalongan-buketan/kupu.webp) center / contain no-repeat; opacity: .5; rotate: -16deg; }
+.gift h3 { color: #fff6ea; font-family: var(--display); font-size: 18px; letter-spacing: .02em; }
+.giftNo { font-family: var(--display); font-size: 22px; }
+.gift:has(.copy) .giftNo { font-size: 21px; }
+.gift .giftNo:not(:has(+ small)) { font-family: var(--serif); font-size: 18px; letter-spacing: .01em; line-height: 1.45; }
+.copy { border-radius: 4px; border-color: #f4a6bb; color: #fff6ea; font-family: var(--serif); font-size: 14px; }
+.copyOn, .copyOn:hover { background: #fff6ea; color: var(--accent); }
+
+.closing { padding: 74px 28px 60px; background: var(--band-bg); }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 40px; background: url(/themes/art/pekalongan-buketan/pinggir.webp) 0 0 / auto 40px repeat-x; }
+.closingBuket { width: 190px; height: auto; margin: 6px 0 4px; padding: 16px; border-radius: 50%; background: #fbf4e8; box-shadow: 0 0 0 4px #fbf4e8, 0 0 0 6px #e97c9c; }
+.thanks { color: #fff6ea; font-family: var(--display); font-size: 40px; }
+.closingSalam { color: #cfe8f6; font-family: var(--serif); font-size: 14px; font-style: italic; }
+.family { font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+.closingNames { font-family: var(--script); font-size: 44px; }
+.music { background: var(--accent2); border-color: #fff6ea; }
+
+/* ── Cover: a length of batik cloth with the bouquet painted in the middle ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 56px 22px 58px; overflow: hidden; background: #f8f0e1 url(/themes/art/pekalongan-buketan/mori.webp); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; left: 0; width: 100%; height: 40px; background: url(/themes/art/pekalongan-buketan/pinggir.webp) 0 0 / auto 40px repeat-x; }
+.cover::before { top: 0; }
+.cover::after { bottom: 0; scale: 1 -1; }
+.kicker { position: relative; z-index: 1; color: var(--gold-d); font-size: 14px; font-style: italic; letter-spacing: .1em; }
+.buketBox { position: relative; z-index: 0; width: min(70vw, 280px, 38dvh); margin-top: 6px; }
+.buket { display: block; width: 100%; height: auto; transform-origin: 50% 100%; animation: bloom 1.8s var(--m-ease) both; }
+.kupu { position: absolute; top: 4%; right: -16%; width: 22%; height: auto; transform-origin: 50% 70%; animation: flutter 4.5s ease-in-out infinite, wander 14s ease-in-out infinite alternate; }
+.burung { position: absolute; top: 8%; left: -30%; width: 38%; height: auto; animation: glide 9s ease-in-out infinite alternate; }
+.coverNames { position: relative; z-index: 1; max-width: 100%; margin-top: 4px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.05; overflow-wrap: break-word; text-wrap: balance; }
+.coverNames em { display: block; margin: -2px 0 -4px; color: var(--accent2); font-family: var(--script); font-size: 46px; font-style: normal; line-height: 1.1; }
+.coverDate { position: relative; z-index: 1; margin-top: 12px; padding: 6px 18px; border-radius: 3px; background: var(--gold-d); color: #fff6ea; font-size: 15px; letter-spacing: .06em; box-shadow: 4px 4px 0 rgba(233, 124, 156, .45); }
+.guestWrap { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 320px; margin-top: 18px; padding: 14px 16px 16px; border: 1.5px dotted var(--accent2); border-radius: 4px; background: rgba(255, 250, 241, .92); }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-size: 12px; letter-spacing: .08em; }
+.openBtn { border-radius: 4px; background: var(--accent); color: #fff6ea; font-family: var(--display); font-size: 15px; letter-spacing: .04em; box-shadow: 4px 4px 0 rgba(79, 156, 203, .55); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: the couple photo framed like a printed cloth panel ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 46px; text-align: center; }
+.heroPanel { position: relative; width: calc(100% - 44px); margin: 30px 0 0; padding: 30px 12px 12px; background: var(--ivory); border: 2px solid var(--gold-d); box-shadow: 8px 8px 0 rgba(233, 124, 156, .35); }
+.heroPanel::before { content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: url(/themes/art/pekalongan-buketan/pinggir.webp) 0 0 / auto 22px repeat-x; }
+.heroPhoto { width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 2px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKupu { position: absolute; z-index: 2; right: -14px; bottom: -22px; width: 76px; height: auto; rotate: -14deg; animation: flutter 5s ease-in-out infinite; transform-origin: 50% 70%; }
+.kickerDark { margin-top: 34px; color: var(--gold-d); font-size: 14px; font-style: italic; letter-spacing: .1em; }
+.heroNames { max-width: 100%; margin-top: 6px; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.1; overflow-wrap: break-word; text-wrap: balance; }
+.heroNames em { color: var(--accent2); font-family: var(--script); font-size: 44px; font-style: normal; padding: 0 6px; }
+.heroDate { margin-top: 10px; color: var(--gold-d); font-size: 16px; letter-spacing: .06em; }
+.heroSprig { width: 180px; height: auto; margin-top: 16px; }
+.heroNote { max-width: 310px; margin-top: 14px; padding: 0 20px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: balance; }
+
+@keyframes bloom { from { opacity: 0; scale: .86; } }
+@keyframes flutter { 0%, 100% { scale: 1 1; } 50% { scale: .72 1; } }
+@keyframes wander { from { translate: 0 0; } to { translate: -18px 14px; } }
+@keyframes glide { from { translate: 0 6px; rotate: -3deg; } to { translate: 14px -8px; rotate: 3deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .buket, .kupu, .burung, .heroKupu, .portrait > img { animation: none; }
+}

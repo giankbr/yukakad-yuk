@@ -1,0 +1,168 @@
+/* Loft Industri — loft industrial yang hangat: bata ekspos, jendela rangka baja hitam berkisi, bohlam Edison di ujung kabel, lantai beton, dan sirih gading menjuntai. */
+.root, .cover {
+  --bg: #e7e3dc; --paper: #ddd8d0; --ivory: #f4f1ec; --field: #fbfaf7; --ink: #1f1c1a; --muted: #57504a; --line: #c7c0b6;
+  --accent: #1f1d1b; --accent2: #a84a2a; --gold: #e09a3a; --gold-l: #ffd18a; --gold-d: #9a561c;
+  --band-bg: #1c1a19; --band-ink: #f1e8da;
+  --display: "Big Shoulders Display", "Arial Narrow", sans-serif; --serif: "Hanken Grotesk", system-ui, sans-serif; --script: "Homemade Apple", cursive;
+  --brick: #2a1c16 url(/themes/art/loft-industri/bata.webp) 0 0 / 230px;
+  --h2: 34px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f1d1b; --t-accent-ink: #ffd18a; --t-bg: #e7e3dc; --t-ink: #1f1c1a; --t-muted: #57504a; --t-line: #c7c0b6; --t-field: #fbfaf7;
+  --t-radius: 2px; --t-font: "Hanken Grotesk", system-ui, sans-serif; --t-heading-font: "Big Shoulders Display", "Arial Narrow", sans-serif; --t-heading-weight: 800; --t-heading-size: 30px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: #e7e3dc url(/themes/art/loft-industri/beton.webp) 0 0 / 260px; }
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .28em; }
+.head { align-items: flex-start; width: 100%; text-align: left; }
+.head h2, .headLight h2 { font-weight: 800; font-size: 38px; line-height: 1; letter-spacing: .01em; text-transform: uppercase; }
+.divider { width: 150px; margin-left: -6px; }
+.section { align-items: stretch; padding: 64px 24px; }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+
+.salamBlock { align-items: flex-start; padding: 56px 26px 52px; text-align: left; }
+.salamBlock .intro { text-align: left; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 800; line-height: .98; text-transform: uppercase; }
+.salamSub { color: var(--accent2); font-family: var(--script); font-size: 16px; letter-spacing: 0; }
+
+/* couple: steel-framed portraits under a single hanging bulb */
+.couple { gap: 26px; background: var(--brick); }
+.couple::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(28, 22, 18, .62), rgba(28, 22, 18, .78)); pointer-events: none; }
+.couple .head, .couple .person, .couple .amp { position: relative; }
+.couple .head h2 { color: #f6eee2; }
+.couple .eyebrow { color: var(--gold-l); }
+.person { align-items: center; }
+.portrait { display: grid; justify-items: center; margin-bottom: 18px; }
+.portrait > img { width: 52px; height: auto; margin: -150px 0 -8px; filter: drop-shadow(0 0 20px rgba(255, 181, 77, .45)); }
+.portraitFrame { width: 222px; height: 278px; padding: 9px; border: 0; border-radius: 0; background: #1c1d1f; box-shadow: 0 18px 36px rgba(0, 0, 0, .45), inset 0 0 0 1px #4d5054; }
+.portraitFrame::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 4.5px 4.5px, #6a6d71 2.2px, transparent 2.8px), radial-gradient(circle at calc(100% - 4.5px) 4.5px, #6a6d71 2.2px, transparent 2.8px), radial-gradient(circle at 4.5px calc(100% - 4.5px), #6a6d71 2.2px, transparent 2.8px), radial-gradient(circle at calc(100% - 4.5px) calc(100% - 4.5px), #6a6d71 2.2px, transparent 2.8px); pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 110px; font-weight: 800; }
+.role { color: var(--gold-l); }
+.nick { color: #f6eee2; font-family: var(--display); font-size: 54px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.fullName { color: #e7dccb; font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.parents { color: #cbbfae; font-size: 15px; }
+.amp { color: var(--gold-l); font-family: var(--serif); font-size: 44px; font-weight: 300; }
+.amp img { display: none; }
+
+/* countdown: amber numerals glowing on blackened steel plates */
+.countBand { align-items: center; padding: 70px 22px; background: #161413; }
+.countBand::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url(/themes/art/loft-industri/pipa.webp) 50% 22px / 260px auto no-repeat, url(/themes/art/loft-industri/pipa.webp) 50% calc(100% - 22px) / 260px auto no-repeat; opacity: .9; }
+.headLight h2 { color: #f6eee2; }
+.headLight .eyebrow { color: var(--gold); }
+.count { gap: 8px; grid-template-columns: repeat(4, minmax(0, 76px)); }
+.count > div { height: 96px; border: 1px solid #3a3a3c; border-radius: 2px; background: linear-gradient(#262628, #1a1a1b); box-shadow: inset 0 1px 0 #4d5054; }
+.count > div::after { display: none; }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 40px; font-weight: 700; text-shadow: 0 0 12px rgba(255, 170, 60, .75), 0 0 2px #ffb54d; }
+.count small { color: #a8a096; font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+
+/* events: concrete slabs held by a black steel spine */
+.events { gap: 20px; background: transparent; }
+.event { align-items: flex-start; padding: 26px 22px 24px 30px; border: 0; border-left: 8px solid var(--accent); border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 0 10px 22px rgba(40, 30, 20, .12); }
+.event::before { display: none; }
+.event:hover { border-color: var(--accent2); translate: 4px 0; box-shadow: 0 12px 26px rgba(40, 30, 20, .16); }
+.eventNo { top: 18px; left: auto; right: 18px; translate: 0 0; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--display); font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: 0; }
+.event h3 { padding-right: 56px; color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 800; line-height: 1; text-transform: uppercase; }
+.eventDate { color: var(--ink); font-size: 16px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 48px; height: 3px; background: var(--accent2); }
+.event strong { font-size: 17px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+.mapBtn:hover { background: var(--accent2); color: #fff; }
+
+.story { background: var(--paper); }
+.timeline::before { left: 20px; width: 4px; background: #1c1d1f; }
+.node { width: 42px; height: 42px; border: 3px solid #1c1d1f; background: radial-gradient(circle, #fff0c2 0, #ffb54d 38%, #9a561c 70%); box-shadow: 0 0 16px rgba(255, 170, 60, .6); }
+.storyBody small { color: var(--accent2); font-family: var(--serif); font-weight: 700; letter-spacing: .2em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 800; text-transform: uppercase; }
+
+.gallery { background: transparent; }
+.mosaic { gap: 6px; padding: 6px; background: #1c1d1f; grid-auto-rows: 140px; }
+.tile, .tile:first-child { border-radius: 0; }
+
+.wishes { background: var(--paper); }
+.form { border: 0; border-top: 8px solid var(--accent); border-radius: 2px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; font-size: 11px; letter-spacing: .18em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); color: var(--gold-l); }
+.step { border-color: var(--accent); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); color: #fff; }
+.wish { border-radius: 2px; border-left: 4px solid var(--gold); }
+.wish strong { font-family: var(--display); font-size: 19px; font-weight: 800; text-transform: uppercase; }
+.sentBox img { width: 60px; }
+
+.gifts { background: transparent; }
+.gift { align-items: flex-start; border-radius: 2px; background: #1c1a19; text-align: left; }
+.gift::after { right: -14px; bottom: -30px; width: 120px; height: 120px; border: 0; border-radius: 0; box-shadow: none; background: radial-gradient(circle, rgba(255, 170, 60, .22), transparent 65%); }
+.giftTop { margin-bottom: 4px; }
+.giftIcon { border-radius: 2px; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 22px; font-weight: 800; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 28px; font-weight: 700; }
+.gift .giftNo:not(:has(+ small)) { max-width: 260px; font-family: var(--serif); font-size: 17px; font-weight: 500; line-height: 1.5; }
+.copy { border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: #1c1a19; }
+
+.closing { padding: 0 28px 60px; background: var(--brick); }
+.closing::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 40% at 50% 26%, rgba(255, 170, 60, .2), transparent 70%), linear-gradient(rgba(24, 18, 15, .7), rgba(24, 18, 15, .9)); }
+.closingBulbs { display: flex; justify-content: center; gap: 34px; height: 210px; margin-bottom: 8px; }
+.closingBulbs img { width: 60px; height: auto; transform-origin: 50% 0; animation: swing 6s ease-in-out infinite alternate; }
+.closingBulbs img:nth-child(2) { margin-top: -40px; animation-delay: -2s; }
+.closingBulbs img:nth-child(3) { margin-top: -80px; animation-delay: -4s; }
+.thanks { color: #f6eee2; font-family: var(--display); font-size: 52px; font-weight: 800; text-transform: uppercase; }
+.closingText { color: #e1d6c6; }
+.family { color: #cbbfae; font-family: var(--serif); font-size: 13px; }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 26px; line-height: 1.8; }
+.made { color: rgba(241, 232, 218, .55); }
+.music { border-radius: 2px; background: #1c1a19; border-color: var(--gold); }
+
+/* ── Cover: the loft wall at dusk — bulbs, the steel window with the couple behind the glass, a concrete sill ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 34px; overflow: hidden; background: var(--brick); color: var(--ink); isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(70% 34% at 50% 26%, rgba(255, 170, 60, .28), transparent 70%), linear-gradient(rgba(24, 18, 15, .5), rgba(24, 18, 15, .25) 40%, rgba(24, 18, 15, .7)); }
+.bulbs { position: absolute; z-index: 3; inset: 0 0 auto; height: 0; }
+.bulbs img { position: absolute; top: 0; width: 64px; height: auto; transform-origin: 50% 0; }
+.bulbs img:nth-child(1) { left: 4%; top: -110px; animation: swing 6s ease-in-out infinite alternate; }
+.bulbs img:nth-child(2) { left: 50%; margin-left: -29px; top: -150px; width: 58px; animation: swing 7s ease-in-out -2s infinite alternate; }
+.bulbs img:nth-child(3) { right: 4%; top: -76px; animation: swing 6.5s ease-in-out -4s infinite alternate; }
+.window { position: relative; z-index: 1; width: min(262px, 66vw); aspect-ratio: 320 / 410; margin-top: 64px; }
+.windowPhoto { position: absolute; inset: 3%; overflow: hidden; background: #3a2a22; }
+.windowPhoto > img, .windowPhoto > div { width: 100%; height: 100%; object-fit: cover; filter: sepia(.18) saturate(.95) brightness(.95); }
+.grid { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sill { position: relative; z-index: 2; width: min(300px, 76vw); height: 16px; background: #8f8a83 url(/themes/art/loft-industri/beton.webp) 0 0 / 160px; box-shadow: 0 8px 14px rgba(0, 0, 0, .45); }
+.plant { position: absolute; z-index: 3; right: -14px; top: -90px; width: 104px; height: auto; transform-origin: 50% 0; }
+.slab { position: relative; z-index: 2; width: calc(100% - 36px); max-width: 360px; margin-top: 22px; padding: 18px 20px 20px; background: #d9d4cc url(/themes/art/loft-industri/beton.webp) 0 0 / 220px; box-shadow: 0 16px 30px rgba(0, 0, 0, .4), inset 0 0 0 1px rgba(255, 255, 255, .35); text-align: left; }
+.slab::before, .slab::after { content: ""; position: absolute; top: 10px; width: 7px; height: 7px; border-radius: 50%; background: #5c5f63; box-shadow: 0 1px 0 rgba(255, 255, 255, .4); }
+.slab::before { left: 10px; }
+.slab::after { right: 10px; }
+.kicker { color: var(--accent2); font-family: var(--serif); font-size: 11px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; margin-top: 6px; color: #1b1917; font-family: var(--display); font-size: 54px; font-weight: 800; line-height: .92; overflow-wrap: break-word; text-transform: uppercase; }
+.coverNames em { display: block; margin: 0; color: var(--accent2); font-family: var(--serif); font-size: 34px; font-weight: 300; font-style: normal; line-height: 1.1; }
+.coverDate { margin-top: 10px; color: #2b2622; font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: calc(100% - 36px); max-width: 360px; margin-top: 18px; color: #f1e8da; text-align: center; }
+.guest small { color: #d9cdbb; font-size: 14px; font-style: normal; }
+.guest strong { color: #fff6e8; font-family: var(--display); font-size: 24px; font-weight: 700; letter-spacing: .02em; }
+.table { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 2px; background: var(--gold); color: #1c1a19; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 0 24px rgba(255, 170, 60, .45); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 46px 24px 46px; overflow: hidden; background: transparent; }
+.heroKicker { color: var(--accent2); font-size: 11px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 64px; font-weight: 800; line-height: .9; overflow-wrap: break-word; text-transform: uppercase; }
+.heroNames em { display: block; color: var(--accent2); font-family: var(--serif); font-size: 36px; font-weight: 300; font-style: normal; line-height: 1.1; }
+.heroDate { margin-top: 12px; padding-top: 10px; border-top: 3px solid var(--accent); color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.heroFrame { position: relative; align-self: stretch; margin-top: 26px; padding: 8px; background: #1c1d1f; box-shadow: 0 16px 30px rgba(0, 0, 0, .25); }
+.heroPhoto { aspect-ratio: 4 / 3; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroBulb { position: absolute; z-index: 2; top: -210px; right: 18px; width: 62px; height: auto; transform-origin: 50% 0; animation: swing 7s ease-in-out infinite alternate; }
+.heroNote { max-width: 320px; margin-top: 18px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+
+@keyframes swing { from { rotate: -2.4deg; } to { rotate: 2.4deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .bulbs img, .heroBulb, .closingBulbs img { animation: none; }
+}

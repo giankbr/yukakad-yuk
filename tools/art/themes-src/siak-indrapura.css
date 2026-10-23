@@ -1,0 +1,172 @@
+/* Siak Indrapura — Melayu Riau dalam ungu tua dan emas: Istana Siak berkubah di tepi Sungai Siak dilukis gouache saat senja di dalam jendela wajik, sampan berkajang yang hanyut, dan songket Siak bertenun benang emas. */
+.root, .cover {
+  --bg: #f7ecdc; --paper: #efe0cb; --ivory: #fffaf1; --field: #fffdf8; --ink: #2e1029; --muted: #6c5463; --line: #e0cdb8;
+  --accent: #5a1f4c; --accent2: #3b1534; --gold: #d6a74a; --gold-l: #f0d28a; --gold-d: #8f6620; --rose: #b84a6c;
+  --band-bg: #3b1534; --band-ink: #f7ecdc;
+  --display: "Cormorant SC", Georgia, serif; --serif: "Vollkorn", Georgia, serif; --script: "Mea Culpa", cursive;
+  --hex: polygon(50% 0, 100% 17%, 100% 83%, 50% 100%, 0 83%, 0 17%);
+  --oct: polygon(28% 0, 72% 0, 100% 20%, 100% 80%, 72% 100%, 28% 100%, 0 80%, 0 20%);
+  --chamfer: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+  --songket: linear-gradient(rgba(36, 10, 32, .42), rgba(36, 10, 32, .42)), url(/themes/art/siak-indrapura/songket.webp) 0 0 / 120px 120px;
+  --pucuk: url(/themes/art/siak-indrapura/pucuk.webp);
+  --h2: 31px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a1f4c; --t-accent-ink: #f7ecdc; --t-bg: #f7ecdc; --t-ink: #2e1029; --t-muted: #6c5463; --t-line: #e0cdb8; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "Vollkorn", Georgia, serif; --t-heading-font: "Cormorant SC", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--rose); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent2); font-weight: 600; letter-spacing: .02em; }
+.divider { width: 220px; }
+.section { padding: 64px 22px; }
+.songketBand { background: var(--songket); color: var(--band-ink); }
+.couple::before, .events::before, .wishes::before { content: ""; position: absolute; inset: 0 0 auto; height: 22px; background: var(--pucuk) repeat-x 0 0 / auto 22px; filter: drop-shadow(0 1px 0 rgba(59, 21, 52, .15)); rotate: 180deg; }
+.couple::before, .events::before, .wishes::before { background-color: var(--accent2); }
+
+/* opening */
+.salamBlock { padding: 46px 26px 58px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 27px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 33px; font-weight: 600; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-size: 16px; font-style: italic; }
+
+/* couple: octagonal gold frames, side by side rhythm stacked */
+.couple { background: var(--paper); gap: 8px; padding-top: 78px; }
+.portrait { margin: 26px 0 18px; }
+.portrait::before { content: ""; position: absolute; inset: -7px; clip-path: var(--oct); background: linear-gradient(160deg, var(--gold-l), var(--gold) 45%, var(--gold-d)); }
+.portraitFrame { z-index: 1; width: 196px; height: 236px; padding: 0; border: 0; border-radius: 0; clip-path: var(--oct); background: var(--accent2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.person:hover .portraitFrame { box-shadow: none; }
+.portraitBunga { position: absolute; z-index: 2; bottom: -22px; left: 50%; width: 46px; height: auto; translate: -50% 0; filter: drop-shadow(0 2px 4px rgba(36, 10, 32, .35)); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.nick { margin-bottom: 8px; color: var(--accent2); font-family: var(--script); font-size: 62px; line-height: 1.05; }
+.fullName { font-family: var(--display); font-size: 21px; font-weight: 600; color: var(--ink); }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { margin: 18px 0 4px; color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 30px; }
+
+/* countdown on songket */
+.countBand { background: var(--songket); padding: 70px 18px; }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 0; right: 0; height: 22px; background: var(--pucuk) repeat-x 0 0 / auto 22px; }
+.countBand::before { top: 0; rotate: 180deg; }
+.countBand::after { bottom: 0; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff6e6; font-weight: 600; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 92px; border: 0; border-radius: 0; clip-path: var(--hex); background: linear-gradient(var(--gold-l), var(--gold)); }
+.count > div::after { display: none; }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 31px; font-weight: 600; }
+.count small { color: var(--accent); font-size: 12.5px; font-style: normal; font-weight: 600; letter-spacing: .06em; }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; background: rgba(36, 10, 32, .5); }
+
+/* events: kain cards with a vertical songket tumpal */
+.events { gap: 20px; background: var(--bg); padding-top: 82px; }
+.event { align-items: flex-start; padding: 22px 18px 22px 72px; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 0 10px 24px rgba(46, 16, 41, .07); }
+.event::before { display: none; }
+.eventNo { position: absolute; top: 0; bottom: 0; left: 0; translate: none; width: 54px; height: auto; padding-top: 22px; place-items: start center; border-radius: 0; background: var(--songket); color: var(--gold-l); font-family: var(--display); font-size: 20px; font-weight: 600; writing-mode: vertical-rl; letter-spacing: .3em; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 24px; font-weight: 600; }
+.eventDate { font-size: 16.5px; }
+.eventTime { color: var(--rose); font-family: var(--serif); font-weight: 600; }
+.rule { width: 46px; height: 3px; background: var(--gold); }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { align-self: flex-start; background: var(--accent2); color: var(--gold-l); font-family: var(--serif); font-weight: 600; border-radius: 4px; box-shadow: none; }
+.mapBtn:hover { background: var(--accent); }
+.event:hover { border-color: var(--gold); }
+
+/* story: songket night */
+.story { background: var(--songket); color: var(--band-ink); }
+.story .eyebrow { color: var(--gold-l); }
+.story .head h2 { color: #fff6e6; }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--gold-l), var(--gold-d)); }
+.node { width: 40px; height: 40px; border: 0; border-radius: 0; clip-path: var(--hex); background: var(--gold-l); }
+.node img { width: 28px; }
+.storyBody { padding: 16px 16px 18px; background: rgba(36, 10, 32, .6); border: 1px solid rgba(240, 210, 138, .35); clip-path: var(--chamfer); }
+.storyBody small { color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: #fff6e6; font-family: var(--display); font-weight: 600; font-size: 21px; }
+.storyBody p { color: rgba(247, 236, 220, .86); }
+
+/* gallery */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 0; clip-path: var(--chamfer); }
+.tile:first-child { border-radius: 0; clip-path: var(--hex); }
+
+/* wishes */
+.wishes { background: var(--bg); padding-top: 82px; }
+.form { border: 0; border-top: 5px solid var(--accent2); border-radius: 4px; box-shadow: 0 12px 28px rgba(46, 16, 41, .08); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent2); border-color: var(--accent2); color: var(--gold-l); }
+.submit { border-radius: 4px; background: var(--accent2); color: var(--gold-l); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent); }
+.sent { color: var(--accent2); }
+.wish { border: 0; border-left: 4px solid var(--gold); border-radius: 2px 10px 10px 2px; }
+.wish strong { font-family: var(--display); font-weight: 600; font-size: 17px; color: var(--accent2); }
+.wish small { background: #f2e1e8; color: var(--accent); }
+.sentBox img { width: 70px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 0; clip-path: var(--chamfer); background: var(--songket); padding: 28px 20px 24px; }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold-l); background: rgba(36, 10, 32, .6); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-weight: 600; font-size: 18px; }
+.giftNo { font-family: var(--serif); font-size: 20px; color: #fff6e6; text-shadow: 0 1px 6px rgba(20, 4, 18, .8); }
+.gift small { color: rgba(247, 236, 220, .92); }
+.copy { border-color: var(--gold-l); color: var(--gold-l); background: rgba(36, 10, 32, .65); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent2); }
+
+/* closing */
+.closing { background: var(--songket); padding: 0 26px 34px; gap: 10px; }
+.closingWin { position: relative; width: 210px; aspect-ratio: 210 / 244; margin: 46px 0 10px; padding: 5px; clip-path: var(--hex); background: linear-gradient(160deg, var(--gold-l), var(--gold-d)); }
+.closingWin > span { display: block; width: 100%; height: 100%; clip-path: var(--hex); background: url(/themes/art/siak-indrapura/scene.webp) 50% 58% / cover; }
+.closingEmblem { width: 54px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--script); font-size: 64px; }
+.closingText { color: rgba(247, 236, 220, .92); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+.family { color: rgba(247, 236, 220, .86); font-family: var(--serif); }
+.closingNames { color: #fff6e6; font-family: var(--display); font-size: 30px; font-weight: 600; }
+.made { color: rgba(247, 236, 220, .6); }
+.music { background: var(--accent2); border-color: var(--gold); }
+
+/* ── Cover: songket field, a wajik window onto the palace at dusk, names in gold ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; min-height: 100dvh; padding: 34px 20px 30px; overflow: hidden; background: var(--songket); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 24px; background: var(--pucuk) repeat-x 0 0 / auto 24px; }
+.cover::before { top: 0; rotate: 180deg; }
+.cover::after { bottom: 0; }
+.coverGlow { position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse 70% 40% at 50% 74%, rgba(36, 10, 32, .85), transparent 75%); }
+.kicker { color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.coverArabic { margin-bottom: 8px; color: var(--gold-l); font-family: Amiri, serif; font-size: 20px; line-height: 1.5; }
+.win { position: relative; height: clamp(200px, 38dvh, 330px); aspect-ratio: 608 / 704; margin: 12px 0 14px; padding: 6px; clip-path: var(--hex); background: linear-gradient(160deg, var(--gold-l), var(--gold) 40%, var(--gold-d)); flex-shrink: 0; }
+.winIn { position: relative; width: 100%; height: 100%; overflow: hidden; clip-path: var(--hex); background: #3b1534; }
+.winIn > img:first-child { display: block; width: 100%; height: 100%; object-fit: cover; }
+.boat { position: absolute; bottom: 18%; left: 0; width: 34%; height: auto; animation: drift 26s linear infinite; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--gold-l); font-family: var(--display); font-size: 39px; font-weight: 600; line-height: 1.02; letter-spacing: .02em; text-shadow: 0 2px 12px rgba(20, 4, 18, .85); }
+.coverNames span { overflow-wrap: anywhere; }
+.coverNames em { margin: -2px 0 -6px; color: #f6e3b4; font-family: var(--script); font-size: 46px; font-style: normal; font-weight: 400; letter-spacing: 0; }
+.coverDate { margin-top: 10px; padding: 4px 16px; border-top: 1px solid rgba(240, 210, 138, .55); border-bottom: 1px solid rgba(240, 210, 138, .55); color: #fff6e6; font-size: 15px; letter-spacing: .14em; text-transform: uppercase; background: rgba(36, 10, 32, .55); }
+.guest { margin-top: 14px; padding: 10px 16px; background: rgba(36, 10, 32, .62); clip-path: var(--chamfer); }
+.guest small { color: rgba(247, 236, 220, .86); font-size: 14px; }
+.guest strong { color: #fff6e6; font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.openBtn { margin-top: 12px; border-radius: 4px; background: linear-gradient(var(--gold-l), var(--gold)); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .1em; box-shadow: 0 8px 20px rgba(0, 0, 0, .35); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 12px 24px rgba(0, 0, 0, .4); }
+
+/* ── Hero: wide photo with a pucuk rebung hem, names on cream ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 0 40px; background: var(--bg); text-align: center; }
+.heroPhoto { position: relative; display: grid; width: 100%; height: 430px; overflow: hidden; background: var(--accent2); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroHem { position: relative; width: 100%; height: 26px; margin-top: -26px; background: var(--pucuk) repeat-x 0 0 / auto 26px; filter: drop-shadow(0 -2px 3px rgba(20, 4, 18, .3)); }
+.heroBand { width: 100%; height: 10px; background: var(--accent2); }
+.heroMono { display: grid; place-items: center; height: 100%; background: var(--songket); color: var(--gold-l); font-family: var(--display); font-size: 80px; }
+.heroKicker { margin-top: 30px; color: var(--rose); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 10px; max-width: 100%; margin-top: 8px; padding: 0 20px; color: var(--accent2); font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.1; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-size: 44px; font-style: normal; font-weight: 400; }
+.heroDate { margin-top: 6px; color: var(--muted); font-style: italic; }
+.heroNote { max-width: 330px; margin: 22px 22px 0; padding: 18px 20px; border: 1px solid var(--line); background: var(--ivory); clip-path: var(--chamfer); color: var(--accent2); font-size: 16px; font-style: italic; line-height: 1.7; white-space: pre-line; }
+
+@keyframes drift { from { translate: -110% 0; } to { translate: 310% 0; } }
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -3px; } }

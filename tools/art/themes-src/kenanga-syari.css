@@ -1,0 +1,149 @@
+/* Kenanga Syari — syari tanpa foto: setangkai kenanga cat air (kelopak panjang menjuntai kuning-hijau, daun hijau zaitun) masuk dari pojok kanan atas di atas kertas krem yang tenang; tipografi rata kiri seperti label herbarium, monogram di atas sapuan cat air, kartu bergaris rambut ganda. */
+.root, .cover {
+  --bg: #f6f1e3; --paper: #efe9d6; --ivory: #fbf8ef; --field: #fffdf7; --ink: #34331f; --muted: #6f6b55; --line: #dcd5bb;
+  --accent: #55612e; --accent2: #6a7738; --gold: #b6ae4e; --gold-l: #e7e2a6; --gold-d: #7f7a2c;
+  --leaf: #58784a; --petal: #d9d36a;
+  --band-bg: #55612e; --band-ink: #f6f1e3;
+  --display: "Gilda Display", Georgia, serif; --serif: "Petrona", Georgia, serif; --script: "Ephesis", cursive;
+  --h2: 30px; --card-r: 0px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #55612e; --t-accent-ink: #fbf8ef; --t-bg: #f6f1e3; --t-ink: #34331f; --t-muted: #6f6b55; --t-line: #dcd5bb; --t-field: #fffdf7;
+  --t-radius: 0px; --t-font: "Petrona", Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+.root { background: var(--bg) radial-gradient(130% 60% at 100% 0%, rgba(217, 211, 106, .1), transparent 60%); }
+
+/* ── type: left-aligned like a herbarium label ── */
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+.section { align-items: stretch; padding: 64px 28px; }
+.head { align-items: flex-start; gap: 8px; text-align: left; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { display: flex; align-items: center; gap: 10px; width: 170px; }
+.divider img { width: 40px; height: auto; order: 2; }
+.divider::before { content: ""; order: 1; flex: 1; height: 1px; background: var(--gold); }
+.intro { max-width: none; color: var(--muted); font-size: 17px; text-align: left; }
+
+/* ── Cover: the branch hangs into the page, names sit low on the left ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 100dvh; padding: 40px 30px 34px; overflow: hidden; background: var(--bg); color: var(--ink); text-align: left; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -2; inset: 14px; border: 1px solid var(--line); box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--line); pointer-events: none; }
+.branch { position: absolute; z-index: -1; top: 0; right: -18px; width: 286px; height: auto; transform-origin: 100% 0; }
+.coverArabic { max-width: 54%; color: var(--accent); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.coverSalam { margin-top: 2px; color: var(--muted); font-size: 14px; font-style: italic; }
+.coverText { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: auto; padding-top: 40px; max-width: 100%; }
+.kicker { color: var(--gold-d); font-size: 12px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 58px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; }
+.coverNames i { margin: 2px 0 0 40px; color: var(--gold-d); font-family: var(--script); font-size: 54px; font-style: normal; line-height: .9; }
+.coverDate { margin-top: 14px; padding-left: 12px; border-left: 2px solid var(--petal); color: var(--ink); font-size: 16px; font-weight: 500; letter-spacing: .06em; }
+.coverFoot { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; width: 100%; margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--line); }
+.guest { align-items: flex-start; max-width: 100%; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; text-align: left; }
+.table { border-color: var(--gold); border-radius: 0; color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 210px; border-radius: 0; background: var(--accent); color: var(--bg); font-family: var(--serif); font-weight: 500; letter-spacing: .12em; box-shadow: 4px 4px 0 var(--gold-l); }
+.openBtn:hover { background: var(--accent2); translate: -1px -1px; box-shadow: 6px 6px 0 var(--gold-l); }
+
+/* ── Hero: a herbarium sheet — sprig, names, date, a pressed note ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 54px 28px 50px; background: var(--bg); }
+.heroSheet { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; width: 100%; padding: 150px 22px 26px; border: 1px solid var(--line); background: var(--ivory); box-shadow: 0 18px 40px rgba(52, 51, 31, .08); }
+.heroSprig { position: absolute; top: -26px; left: 10px; width: 300px; max-width: 92%; height: auto; transform-origin: 30% 30%; }
+.heroKicker { color: var(--gold-d); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames i { color: var(--gold-d); font-family: var(--script); font-style: normal; }
+.heroDate { color: var(--muted); font-size: 16px; letter-spacing: .06em; }
+.heroLabel { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; width: 100%; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 13px; }
+.heroLabel dt { color: var(--gold-d); letter-spacing: .14em; text-transform: uppercase; }
+.heroLabel dd { margin: 0; color: var(--ink); font-style: italic; }
+.heroNote { margin-top: 12px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* ── Opening ── */
+.salamBlock { align-items: flex-start; padding: 20px 28px 60px; text-align: left; }
+.arabic { color: var(--accent); font-size: 26px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.15; }
+
+/* ── Couple: monograms on a watercolour wash, a blossom hangs over each ── */
+.couple { gap: 30px; background: var(--paper); }
+.person { align-items: flex-start; text-align: left; }
+.portrait { margin-bottom: 16px; }
+.portraitFrame { width: 180px; height: 180px; padding: 0; border: 0; border-radius: 50%; background: url(/themes/art/kenanga-syari/wash.webp) center / contain no-repeat; overflow: visible; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; color: var(--accent); font-family: var(--display); font-size: 92px; line-height: 1; }
+.portraitArt { position: absolute; z-index: 2; top: -30px; left: 112px; width: 110px; height: auto; transform-origin: 30% 0; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.parents { text-align: left; }
+.amp { align-self: flex-start; margin: 0 0 0 60px; color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { display: none; }
+
+/* ── Countdown: an olive band, petal-shaped counters ── */
+.countBand { align-items: flex-start; padding: 60px 28px; background: var(--accent); }
+.headLight { align-items: flex-start; text-align: left; }
+.headLight h2 { color: var(--bg); font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 10px; width: 100%; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.count > div { height: 92px; border: 0; border-radius: 46px 46px 46px 6px; background: rgba(246, 241, 227, .1); box-shadow: inset 0 0 0 1px rgba(231, 226, 166, .45); }
+.count b { color: var(--bg); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--gold-l); font-size: 13px; font-style: italic; }
+.countBand .ghostBtn { border-radius: 0; border-color: var(--gold-l); color: var(--bg); font-family: var(--serif); }
+.countSprig { position: absolute; z-index: -1; right: -40px; bottom: -30px; width: 230px; height: auto; opacity: .5; rotate: -12deg; }
+
+/* ── Events: herbarium labels with double hairlines ── */
+.events { gap: 20px; }
+.event { align-items: flex-start; padding: 26px 22px 24px; border: 1px solid var(--line); border-radius: 0; background: var(--ivory); text-align: left; }
+.event::before { inset: 5px; border-color: var(--line); border-radius: 0; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--script); font-size: 30px; letter-spacing: 0; line-height: 1; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; text-wrap: pretty; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 40px; background: var(--petal); height: 2px; }
+.eventAddr { text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 0; background: var(--accent); color: var(--bg); font-family: var(--serif); letter-spacing: .06em; box-shadow: 3px 3px 0 var(--gold-l); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: linear-gradient(var(--gold), transparent); }
+.node { border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+
+/* ── Wishes ── */
+.form { border-radius: 0; background: var(--ivory); box-shadow: 6px 6px 0 var(--paper); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.field input, .field textarea, .choices button, .step { border-radius: 0; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.wish { border-radius: 0; border-width: 0 0 1px; background: transparent; padding: 14px 2px; }
+.wish:hover { box-shadow: none; }
+.wish small { border-radius: 0; background: rgba(217, 211, 106, .3); color: var(--accent); }
+.sentBox img { width: 120px; }
+
+/* ── Gifts ── */
+.gift { align-items: flex-start; border-radius: 0; background: var(--accent); text-align: left; }
+.gift::after { border-color: rgba(231, 226, 166, .1); }
+.giftIcon { border-radius: 0; border-color: var(--gold-l); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-family: var(--display); font-size: 19px; line-height: 1.35; letter-spacing: .03em; }
+.copy { border-radius: 0; border-color: var(--gold-l); color: var(--bg); font-family: var(--serif); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* ── Closing: cream, the sprig as the emblem ── */
+.closing { align-items: flex-start; padding: 70px 28px 56px; background: var(--paper); color: var(--ink); text-align: left; }
+.closingEmblem { width: 260px; height: auto; margin-left: -10px; transform-origin: 40% 10%; }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 54px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 34px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--accent); }
+.music { border-radius: 50% 50% 50% 6px; border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Signature motion: the hanging kenanga stirs in a slow breeze ── */
+.branch { animation: hang 9s var(--m-ease) infinite alternate; }
+.heroSprig, .closingEmblem { animation: hang 11s var(--m-ease) -4s infinite alternate; }
+.portraitArt { animation: hang 7s var(--m-ease) infinite alternate-reverse; }
+@keyframes hang { from { rotate: -1.4deg; } to { rotate: 1.2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .branch, .heroSprig, .closingEmblem, .portraitArt { animation: none !important; }
+}

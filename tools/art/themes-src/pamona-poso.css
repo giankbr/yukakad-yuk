@@ -1,0 +1,157 @@
+/* Pamona Poso — adat Pamona (Sulawesi Tengah): Danau Poso yang jernih di atas pasir putih, jembatan kayu Pamona tempat danau menjadi Sungai Poso, wayamasapi di arus, dan rumah panggung Pamona beratap curam dilukis cat air; manik-manik Pamona (merah, kuning, hitam, putih, toska) sebagai pita, cincin potret bundar, dan medali. Bagian berganti antara pasir terang dan air danau toska. */
+.root, .cover {
+  --bg: #f6f0e2; --paper: #ede4cf; --ivory: #fffbf2; --field: #fffdf8; --ink: #17323a; --muted: #4f6166; --line: #dccfb4;
+  --accent: #0f4652; --accent2: #1f6f78; --gold: #e0a52a; --gold-l: #ffe1a0; --gold-d: #9a6a16;
+  --red: #b8322a; --turq: #3aa7a4; --shallow: #bfe6dd; --wood: #6b3f24;
+  --band-bg: #0f4652; --band-ink: #f3fbf8;
+  --display: "Kurale", Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: "Kurale", Georgia, serif;
+  --beads: url(/themes/art/pamona-poso/beads.webp) 0 50% / auto 100% repeat-x;
+  --water: url(/themes/art/pamona-poso/water.webp) 0 0 / 300px 300px;
+  --h2: 31px; --card-r: 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0f4652; --t-accent-ink: #fffbf2; --t-bg: #f6f0e2; --t-ink: #17323a; --t-muted: #4f6166; --t-line: #dccfb4; --t-field: #fffdf8;
+  --t-radius: 18px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: "Kurale", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+
+.beadBand { display: block; height: 22px; background: var(--beads); }
+.eyebrow, .role, .salamKicker { color: var(--red); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { display: block; width: 132px; height: 14px; border-radius: 99px; background: var(--beads); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--gold); }
+.intro { color: var(--muted); font-size: 18px; }
+.section { padding: 64px 22px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 48px 28px 58px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; }
+.salamSub { color: var(--accent2); font-family: var(--serif); font-size: 15px; font-style: italic; }
+
+/* ── Couple: round lake-portraits ringed with beads ── */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 230px; height: 230px; padding: 12px; border: 0; border-radius: 50%; background: radial-gradient(circle, transparent 60%, rgba(0, 0, 0, .1) 61%), conic-gradient(from 0deg, var(--red) 0 12.5%, var(--gold) 0 25%, #1f1a18 0 37.5%, var(--turq) 0 50%, var(--red) 0 62.5%, var(--gold) 0 75%, #1f1a18 0 87.5%, var(--turq) 0); box-shadow: 0 0 0 3px var(--ivory), 0 0 0 5px var(--accent), 0 18px 34px rgba(15, 70, 82, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: 0 0 0 4px var(--ivory); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--water); color: var(--ivory); font-family: var(--display); font-size: 92px; }
+.portraitArt { position: absolute; z-index: 2; right: -6px; bottom: -4px; width: 64px; height: auto; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .2)); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; }
+.fullName { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.parents { font-size: 17px; }
+.amp { color: var(--red); font-family: var(--display); font-size: 46px; margin: 14px 0 6px; }
+.amp img { width: 34px; }
+
+/* ── Countdown: in the clear lake water ── */
+.countBand { padding: 72px 18px 78px; background: var(--water); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 40px; background: radial-gradient(28px 20px at 50% 0, var(--paper) 96%, transparent) 0 0 / 56px 40px repeat-x; }
+.countBand::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 30px; background: radial-gradient(28px 18px at 50% 100%, var(--bg) 96%, transparent) 14px 100% / 56px 30px repeat-x; }
+.headLight h2 { color: #f3fbf8; font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 9px; }
+.count > div { height: 82px; border: 0; border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 4px rgba(255, 251, 242, .35), 0 10px 18px rgba(4, 30, 36, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.countBand .ghostBtn { border: 2px solid rgba(255, 251, 242, .8); color: #fff; font-family: var(--serif); font-weight: 700; background: rgba(15, 70, 82, .45); }
+.countTba { color: #fff; }
+
+/* ── Events: pebble cards, bead medallion as the number ── */
+.events { gap: 30px; }
+.event { padding: 50px 22px 28px; border: 0; border-radius: 34px 34px 26px 26px; background: var(--ivory); box-shadow: 0 14px 30px rgba(15, 70, 82, .12), inset 0 -10px 0 var(--shallow); }
+.event::before { display: none; }
+.eventNo { top: -24px; width: 52px; height: 52px; border-radius: 50%; background: var(--accent) url(/themes/art/pamona-poso/emblem.webp) center / 100% 100% no-repeat; color: transparent; font-size: 0; box-shadow: 0 0 0 4px var(--bg); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.rule { width: 72px; height: 10px; border-radius: 99px; background: var(--beads); }
+.mapBtn, .submit { border-radius: 99px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* ── Story: the river line ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 6px; border-radius: 6px; background: linear-gradient(var(--turq), var(--shallow)); }
+.node { width: 44px; height: 44px; border: 0; background: transparent; }
+.node img { width: 44px; }
+.storyBody small { color: var(--red); font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+.storyImg { border-radius: 20px; }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 140px; gap: 10px; }
+.tile { border-radius: 20px; }
+.tile:first-child { border-radius: 50%; box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--turq); }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 14px 30px rgba(15, 70, 82, .1); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wish { border: 0; border-radius: 20px; box-shadow: 0 6px 16px rgba(15, 70, 82, .07); }
+.wish strong { font-family: var(--display); }
+.wish small { background: var(--shallow); color: var(--accent); font-weight: 700; }
+.sentBox img { width: 80px; }
+
+/* ── Gifts: on the lake ── */
+.gifts { background: var(--water); }
+.gifts .head h2, .gifts .intro { color: #f3fbf8; }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts .divider { box-shadow: 0 0 0 2px var(--accent), 0 0 0 3px var(--gold-l); }
+.gift { border-radius: 26px; background: var(--ivory); color: var(--ink); box-shadow: 0 16px 30px rgba(4, 30, 36, .3); }
+.gift::after { border-color: rgba(58, 167, 164, .12); box-shadow: 0 0 0 14px rgba(58, 167, 164, .08); }
+.giftIcon { border: 0; background: var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--display); font-size: 18px; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 20px; line-height: 1.3; }
+.gift small { color: var(--muted); }
+.copy { border: 2px solid var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: var(--shallow); }
+.copyOn, .copyOn:hover { background: var(--accent); color: #fff; }
+
+/* ── Closing: the house on the shore ── */
+.closing { padding: 0 26px 64px; background: var(--bg); color: var(--ink); }
+.closing > .beadBand { align-self: stretch; margin: 0 -26px 40px; }
+.closingEmblem { width: 210px; height: auto; margin-bottom: -6px; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 42px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--red); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--serif); font-size: 14px; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.made { color: var(--muted); }
+.music { border: 0; background: var(--accent); box-shadow: 0 0 0 3px var(--gold), 0 6px 16px rgba(0, 0, 0, .25); }
+
+/* ── Cover: the painted lake, names in the pale morning sky, guest on the white sand ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 54px 24px 0; overflow: hidden; background: #f3ecdc url(/themes/art/pamona-poso/scene.webp) no-repeat 50% 0 / 100% auto; color: var(--ink); text-align: center; isolation: isolate; }
+.coverText { display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: 100%; }
+.kicker { color: var(--red); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
+.coverNames i { display: block; color: var(--red); font-size: 30px; font-style: normal; }
+.coverDate { margin-top: 4px; color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: .08em; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: calc(100% + 48px); margin: auto -24px 0; padding: 18px 24px 22px; }
+.guest { padding: 14px 20px; border-radius: 22px; background: rgba(255, 251, 242, .88); box-shadow: 0 8px 22px rgba(15, 70, 82, .12); backdrop-filter: blur(2px); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border: 0; background: var(--shallow); color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.openBtn { min-width: 220px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .1em; box-shadow: 0 0 0 3px var(--gold), 0 12px 24px rgba(15, 70, 82, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.cover > .beadBand { align-self: stretch; margin: 0 -24px; }
+
+/* ── Hero: wide lake photo with bead bands, names under ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 36px 0 50px; background: var(--bg); text-align: center; }
+.heroKicker { color: var(--red); font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.heroFrame { position: relative; width: calc(100% - 36px); margin: 12px 0 18px; padding: 22px 0; border-radius: 30px; background: var(--beads), var(--beads), var(--accent); background-position: 0 0, 0 100%, 0 0; background-size: auto 22px, auto 22px, auto; background-repeat: repeat-x, repeat-x, no-repeat; box-shadow: 0 18px 34px rgba(15, 70, 82, .2); }
+.heroPhoto { height: 300px; overflow: hidden; background: var(--water); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroHouse { position: absolute; left: 50%; bottom: -46px; translate: -50% 0; width: 92px; height: auto; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .25)); }
+.heroNames { max-width: calc(100% - 40px); margin-top: 34px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames i { color: var(--red); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 17px; font-weight: 700; letter-spacing: .06em; }
+.heroNote { max-width: 330px; margin-top: 10px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* signature motion: lake light shimmering over the water bands, beads rolling slowly */
+@keyframes lakeShimmer { from { background-position: 0 0; } to { background-position: 300px 60px; } }
+@keyframes beadRoll { from { background-position: 0 50%; } to { background-position: 254px 50%; } }
+.countBand, .gifts { animation: lakeShimmer 40s linear infinite alternate; }
+.cover > .beadBand { animation: beadRoll 22s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .countBand, .gifts, .cover > .beadBand { animation: none !important; }
+}

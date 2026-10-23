@@ -1,0 +1,192 @@
+/* Cetak Biru — modern: gambar kerja arsitek untuk rumah impian; garis putih hasil cetak diazo (tampak depan, denah, garis ukur, huruf tangan) di atas kertas biru sian berbintik dan bergrid, kop gambar berisi nama dan tanggal, alat gambar dilukis gouache; potret sebagai "detail" bertanda pojok potong. */
+.root, .cover {
+  --bg: #1f5fa6; --paper: #1b5596; --ivory: rgba(10, 40, 84, .28); --field: #f3f9ff; --ink: #ffffff; --muted: #d3e4f7; --line: rgba(243, 249, 255, .5);
+  --accent: #ffffff; --accent2: #e2efff; --gold: #f3f9ff; --gold-l: #ffffff; --gold-d: #bcd6f3;
+  --navy: #10335f; --cyan: #9ed0ff;
+  --band-bg: #174c8a; --band-ink: #ffffff;
+  --display: "Architects Daughter", "Comic Neue", cursive; --serif: "Barlow", system-ui, sans-serif; --script: "Architects Daughter", cursive; --tech: "Barlow Condensed", "Barlow", sans-serif;
+  --blueprint: url(/themes/art/cetak-biru/paper.webp) 0 0 / 256px 256px;
+  --h2: 30px; --card-r: 0px;
+  font-family: var(--serif); color: var(--ink); background: var(--blueprint), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #ffffff; --t-accent-ink: #10335f; --t-bg: #1f5fa6; --t-ink: #ffffff; --t-muted: #d3e4f7; --t-line: rgba(243, 249, 255, .5); --t-field: #f3f9ff;
+  --t-radius: 0px; --t-font: "Barlow", system-ui, sans-serif; --t-heading-font: "Architects Daughter", cursive; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main, .section, .salamBlock { background: transparent; }
+.couple, .story, .wishes { background: rgba(10, 40, 84, .16); }
+
+/* ── type: tech caps + hand lettering, left aligned ── */
+.eyebrow, .role, .salamKicker { color: var(--cyan); font-family: var(--tech); font-size: 13px; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; }
+.section { align-items: stretch; padding: 64px 24px; }
+.head { align-items: flex-start; gap: 6px; text-align: left; }
+.head h2 { color: #fff; font-family: var(--display); letter-spacing: .01em; }
+.intro { max-width: none; color: var(--muted); font-size: 17px; text-align: left; }
+/* divider = a dimension string */
+.divider { position: relative; display: block; width: 170px; height: 18px; }
+.divider::before { content: ""; position: absolute; left: 0; right: 0; top: 9px; height: 1.5px; background: rgba(243, 249, 255, .8); }
+.divider i, .divider b { position: absolute; top: 3px; width: 1.5px; height: 13px; background: #fff; rotate: 45deg; }
+.divider i { left: 0; }
+.divider b { right: 0; }
+.divider em { position: absolute; left: 50%; top: -9px; translate: -50% 0; padding: 0 6px; background: var(--bg); color: var(--cyan); font-family: var(--tech); font-size: 11px; font-style: normal; letter-spacing: .12em; line-height: 1; }
+.head .divider em, .salamBlock .divider em { background: transparent; text-shadow: 0 0 4px var(--bg), 0 0 4px var(--bg); }
+
+/* ── Cover: the drawing sheet — elevation on top, names hand-lettered, title block at the foot ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: stretch; min-height: 100dvh; padding: 26px 22px 24px; overflow: hidden; background: var(--blueprint), var(--bg); color: #fff; text-align: left; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 10px; border: 2px solid rgba(243, 249, 255, .85); box-shadow: inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(243, 249, 255, .4); pointer-events: none; }
+.sheetHead { display: flex; justify-content: space-between; gap: 10px; padding: 2px 4px 8px; border-bottom: 1px solid rgba(243, 249, 255, .5); color: var(--cyan); font-family: var(--tech); font-size: 12px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; }
+.elevationWrap { position: relative; margin: 18px -4px 0; }
+.elevation { display: block; width: 100%; height: auto; }
+.note { position: absolute; top: 2px; right: 6px; color: #fff; font-family: var(--display); font-size: 15px; rotate: -4deg; }
+.note::after { content: ""; position: absolute; left: -26px; top: 18px; width: 30px; height: 18px; border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff; border-radius: 0 0 0 16px; rotate: -20deg; }
+.coverText { display: flex; flex-direction: column; gap: 2px; margin-top: 16px; padding: 0 4px; }
+.kicker { color: var(--cyan); font-family: var(--tech); font-size: 13px; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; max-width: 100%; color: #fff; font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-shadow: 0 2px 0 rgba(10, 40, 84, .35); }
+.coverNames i { color: var(--cyan); font-style: normal; font-size: 40px; }
+.coverTools { align-self: flex-end; width: 230px; max-width: 64%; height: auto; margin: auto -6px -26px 0; }
+.titleBlock { position: relative; z-index: 1; display: grid; grid-template-columns: 92px 1fr; border: 2px solid #fff; background: rgba(16, 51, 95, .72); font-family: var(--tech); }
+.titleBlock > * { min-width: 0; padding: 7px 10px; border-bottom: 1px solid rgba(243, 249, 255, .55); }
+.titleBlock dt { border-right: 1px solid rgba(243, 249, 255, .55); color: var(--cyan); font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; display: flex; align-items: center; }
+.titleBlock dd { margin: 0; color: #fff; font-size: 16px; font-weight: 500; letter-spacing: .04em; overflow-wrap: anywhere; }
+.titleBlock .tbGuest { display: flex; flex-direction: column; gap: 2px; }
+.titleBlock .tbGuest small { color: var(--muted); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: 0; }
+.titleBlock .tbGuest strong { font-family: var(--display); font-size: 19px; font-weight: 400; line-height: 1.25; letter-spacing: 0; }
+.titleBlock .tbLast { border-bottom: 0; }
+.table { align-self: flex-start; margin-top: 4px; border-color: var(--cyan); border-radius: 0; color: var(--cyan); font-family: var(--tech); font-weight: 600; }
+.openBtn { align-self: stretch; height: 50px; margin-top: 12px; border-radius: 0; background: #fff; color: var(--navy); font-family: var(--tech); font-size: 15px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; box-shadow: 5px 5px 0 rgba(10, 40, 84, .5); }
+.openBtn:hover { background: #e9f4ff; translate: -1px -1px; box-shadow: 7px 7px 0 rgba(10, 40, 84, .5); }
+
+/* ── Hero: a pinned print with dimension strings, and the floor plan ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 48px 24px 40px; }
+.heroKicker { color: var(--cyan); font-family: var(--tech); font-size: 13px; letter-spacing: .26em; text-transform: uppercase; }
+.heroFigure { position: relative; margin: 22px 0 6px 26px; }
+.heroFigure::before { content: "3.600"; position: absolute; left: 0; right: 0; top: -20px; height: 1.5px; background: rgba(243, 249, 255, .8); color: #fff; font-family: var(--display); font-size: 12px; line-height: 0; text-align: center; }
+.heroFigure::after { content: ""; position: absolute; top: 0; bottom: 0; left: -18px; width: 1.5px; background: rgba(243, 249, 255, .8); }
+.heroPhoto { width: 100%; height: 300px; padding: 8px; background: #f3f9ff; box-shadow: 8px 10px 0 rgba(10, 40, 84, .45); rotate: -1deg; }
+.heroPhoto > img, .heroPhoto > div { display: block; width: 100%; height: 100%; object-fit: cover; background: var(--navy); }
+.heroTag { position: absolute; z-index: 1; right: -8px; bottom: -14px; padding: 6px 10px; background: var(--navy); border: 1.5px solid #fff; color: #fff; font-family: var(--tech); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; rotate: 2deg; }
+.heroNames { margin-top: 28px; color: #fff; font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames i { color: var(--cyan); font-style: normal; }
+.heroDate { color: var(--muted); font-family: var(--tech); font-size: 17px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.heroNote { margin-top: 10px; padding-left: 14px; border-left: 2px solid var(--cyan); color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+.plan { display: block; width: calc(100% + 16px); height: auto; margin: 26px -8px 0; }
+.planCaption { display: flex; justify-content: space-between; color: var(--cyan); font-family: var(--tech); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+
+/* ── Opening ── */
+.salamBlock { align-items: flex-start; padding: 26px 24px 60px; text-align: left; }
+.salamTitle { color: #fff; font-family: var(--display); font-size: 34px; line-height: 1.2; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; }
+
+/* ── Couple: portraits as "details" with crop marks and a callout bubble ── */
+.couple { gap: 34px; }
+.person { align-items: flex-start; text-align: left; }
+.portrait { margin: 8px 0 18px 8px; }
+.portraitFrame { width: 220px; height: 270px; padding: 6px; border: 0; border-radius: 0; background: #f3f9ff; box-shadow: 7px 8px 0 rgba(10, 40, 84, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portrait::before, .portrait::after { content: ""; position: absolute; z-index: 1; width: 22px; height: 22px; border: 0 solid #fff; pointer-events: none; }
+.portrait::before { top: -10px; left: -10px; border-width: 1.5px 0 0 1.5px; }
+.portrait::after { right: -10px; bottom: -10px; border-width: 0 1.5px 1.5px 0; }
+.callout { position: absolute; z-index: 2; top: -16px; right: -18px; display: grid; place-items: center; width: 44px; height: 44px; border: 1.5px solid #fff; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--display); font-size: 20px; }
+.couple { counter-reset: det; }
+.person { counter-increment: det; }
+.callout::before { content: counter(det, upper-alpha); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--navy); color: #fff; font-family: var(--display); font-size: 90px; }
+.nick { color: #fff; font-family: var(--display); font-size: 44px; }
+.fullName { color: #fff; font-family: var(--tech); font-size: 20px; font-weight: 500; letter-spacing: .04em; }
+.parents { color: var(--muted); text-align: left; }
+.amp { align-self: flex-start; margin: 0 0 0 4px; color: var(--cyan); font-family: var(--display); font-size: 52px; }
+.amp img { display: none; }
+
+/* ── Countdown: the schedule table ── */
+.countBand { align-items: stretch; padding: 56px 24px; background: rgba(10, 40, 84, .4); }
+.headLight { align-items: flex-start; text-align: left; }
+.headLight h2 { color: #fff; font-family: var(--display); }
+.headLight .eyebrow { color: var(--cyan); }
+.count { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 2px solid #fff; }
+.count > div { height: 86px; border: 0; border-right: 1px solid rgba(243, 249, 255, .55); border-radius: 0; background: transparent; }
+.count > div:last-child { border-right: 0; }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--tech); font-size: 34px; font-weight: 500; }
+.count small { color: var(--cyan); font-family: var(--tech); font-size: 12px; font-style: normal; letter-spacing: .16em; text-transform: uppercase; }
+.countBand .ghostBtn { align-self: flex-start; border-radius: 0; border-color: #fff; color: #fff; font-family: var(--tech); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.countTools { position: absolute; z-index: -1; right: -24px; bottom: -18px; width: 210px; height: auto; opacity: .9; }
+
+/* ── Events: detail callout boxes ── */
+.events { gap: 24px; }
+.event { align-items: flex-start; padding: 26px 20px 22px 22px; border: 1.5px solid #fff; border-radius: 0; background: rgba(16, 51, 95, .45); text-align: left; }
+.event::before { inset: 4px; border: 1px solid rgba(243, 249, 255, .35); border-radius: 0; }
+.eventNo { top: -18px; left: auto; right: 16px; translate: none; width: 40px; height: 40px; border: 1.5px solid #fff; border-radius: 50%; background: var(--bg); color: #fff; font-family: var(--display); font-size: 15px; letter-spacing: 0; }
+.event h3 { color: #fff; font-family: var(--display); font-size: 25px; text-wrap: pretty; }
+.eventDate { color: #fff; font-style: normal; font-family: var(--tech); font-weight: 500; letter-spacing: .06em; }
+.eventTime { color: var(--cyan); font-family: var(--tech); font-weight: 500; letter-spacing: .06em; }
+.rule { width: 100%; height: 0; border-top: 1.5px dashed rgba(243, 249, 255, .6); background: none; }
+.event strong { color: #fff; font-family: var(--tech); font-size: 19px; font-weight: 600; letter-spacing: .03em; }
+.eventAddr { color: var(--muted); text-wrap: pretty; }
+.mapBtn, .submit { border-radius: 0; background: #fff; color: var(--navy); font-family: var(--tech); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 4px 4px 0 rgba(10, 40, 84, .5); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #e9f4ff; }
+.mapBtn svg { color: var(--navy); }
+
+/* ── Story: grid-line bubbles A, B, C ── */
+.timeline { counter-reset: ax; }
+.timeline li { counter-increment: ax; }
+.timeline::before { left: 21px; width: 0; border-left: 1.5px dashed rgba(243, 249, 255, .7); background: none; }
+.node { width: 40px; height: 40px; border: 1.5px solid #fff; background: var(--bg); color: #fff; font-family: var(--display); font-size: 17px; }
+.node::before { content: counter(ax, upper-alpha); }
+.storyBody small { color: var(--cyan); font-family: var(--tech); font-weight: 500; letter-spacing: .2em; }
+.storyBody h3 { color: #fff; font-family: var(--display); font-size: 23px; }
+.storyBody p { color: var(--muted); }
+.storyImg { border-radius: 0; border: 4px solid #f3f9ff; }
+
+/* ── Gallery: prints pinned to the sheet ── */
+.mosaic { gap: 10px; grid-auto-rows: 150px; }
+.tile, .tile:first-child { border-radius: 0; border: 5px solid #f3f9ff; box-shadow: 5px 6px 0 rgba(10, 40, 84, .45); }
+
+/* ── Wishes ── */
+.form { border: 1.5px solid #fff; border-radius: 0; background: rgba(16, 51, 95, .5); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--cyan); font-family: var(--tech); font-weight: 500; letter-spacing: .16em; }
+.field input, .field textarea { border: 0; border-radius: 0; background: #f3f9ff; color: var(--navy); font-family: var(--serif); }
+.field input::placeholder, .field textarea::placeholder { color: #6f88a8; }
+.field input:focus, .field textarea:focus { box-shadow: 0 0 0 3px var(--cyan); }
+.choices button { border-radius: 0; border-color: rgba(243, 249, 255, .6); background: transparent; color: #fff; font-family: var(--tech); font-weight: 500; letter-spacing: .06em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: #fff; border-color: #fff; color: var(--navy); }
+.guests { color: #fff; }
+.step { border-radius: 0; border-color: #fff; background: transparent; color: #fff; }
+.step:hover { background: rgba(255, 255, 255, .12); }
+.closed { border-color: rgba(243, 249, 255, .6); color: #fff; }
+.wish { border-radius: 0; border-color: rgba(243, 249, 255, .45); background: rgba(16, 51, 95, .35); }
+.wish strong { color: #fff; font-family: var(--display); }
+.wish small { border-radius: 0; background: rgba(158, 208, 255, .2); color: var(--cyan); font-family: var(--tech); letter-spacing: .06em; }
+.wish p, .empty, .sentNote { color: var(--muted); }
+.sent { color: #fff; font-family: var(--display); font-style: normal; }
+.sentBox img { width: 180px; animation: none; }
+
+/* ── Gifts ── */
+.gift { align-items: flex-start; border: 1.5px solid #fff; border-radius: 0; background: rgba(16, 51, 95, .55); text-align: left; }
+.gift::after { display: none; }
+.giftIcon { border-radius: 50%; border-color: #fff; }
+.gift h3 { color: var(--cyan); font-family: var(--tech); font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { font-family: var(--tech); font-weight: 500; font-size: 22px; line-height: 1.3; }
+.copy { border-radius: 0; border-color: #fff; color: #fff; font-family: var(--tech); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--navy); }
+
+/* ── Closing: the sheet signed off ── */
+.closing { align-items: flex-start; padding: 64px 24px 50px; background: rgba(10, 40, 84, .4); text-align: left; }
+.closingEmblem { display: block; width: 100%; height: auto; margin-bottom: 6px; }
+.thanks { color: #fff; font-family: var(--display); font-size: 46px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--cyan); font-family: var(--tech); font-size: 14px; letter-spacing: .1em; }
+.family { color: var(--muted); font-family: var(--tech); letter-spacing: .12em; text-transform: uppercase; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 36px; }
+.made { color: rgba(243, 249, 255, .6); }
+.music { border-radius: 50%; border-color: #fff; background: var(--navy); }
+
+/* ── Signature motion: the drawing is "plotted" line by line; a pencil hovers over the sheet ── */
+.elevation { animation: plot 2.6s var(--m-ease) .3s both; }
+[data-revealed] .plan, .plan[data-revealed] { animation: plot 2.4s var(--m-ease) .2s both; }
+.countTools { animation: tool 9s var(--m-ease) infinite alternate; }
+@keyframes plot { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes tool { from { translate: 0 0; rotate: 0deg; } to { translate: -10px -6px; rotate: -2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .elevation, .plan, .countTools { animation: none !important; }
+}

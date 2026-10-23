@@ -1,0 +1,180 @@
+/* Tuban Gedog — tenun gedog Tuban dari kapas pintal tangan: kain putih alam yang kasar, batik gedog biru indigo bermotif ganggeng, kijing miring dan burung, jahitan jelujur, laut utara Jawa dengan perahu nelayan Palang. */
+.root, .cover {
+  --bg: #e7dcc3; --paper: #dccfb1; --ivory: #f3ecdb; --field: #fbf7ee; --ink: #1d2536; --muted: #5a5547; --line: #c9b994;
+  --accent: #22395c; --accent2: #152742; --gold: #9c3b2a; --gold-l: #f3ecdb; --gold-d: #9c3b2a;
+  --band-bg: #22395c; --band-ink: #f3ecdb;
+  --sea: #2e5560;
+  --display: "Instrument Serif", Georgia, serif; --serif: "Vollkorn", Georgia, serif; --script: "Instrument Serif", Georgia, serif;
+  --weave: url(/themes/art/tuban-gedog/weave.webp);
+  --indigo: url(/themes/art/tuban-gedog/indigo.webp);
+  --edge: url(/themes/art/tuban-gedog/edge.webp);
+  --indigo-mute: linear-gradient(rgba(21, 39, 66, .8), rgba(21, 39, 66, .8)), var(--indigo) repeat;
+  --stitch: repeating-linear-gradient(90deg, var(--accent) 0 9px, transparent 9px 15px);
+  --h2: 38px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #22395c; --t-accent-ink: #f3ecdb; --t-bg: #e7dcc3; --t-ink: #1d2536; --t-muted: #5a5547; --t-line: #c9b994; --t-field: #fbf7ee;
+  --t-radius: 3px; --t-font: "Vollkorn", Georgia, serif; --t-heading-font: "Instrument Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 34px; --t-heading-align: left; --t-heading-style: italic;
+  font-size: 17px;
+}
+.main { background: var(--bg) var(--weave) repeat; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; color: var(--gold-d); }
+.divider { width: 220px; margin-left: -8px; }
+
+/* left-aligned editorial rhythm: heads sit on the left with a running stitch */
+.section { align-items: stretch; padding: 64px 26px 60px; }
+.head { align-items: flex-start; text-align: left; }
+.head h2 { color: var(--accent); font-style: italic; line-height: 1.05; }
+
+/* opening */
+.salamBlock { align-items: flex-start; padding: 44px 26px 54px; text-align: left; }
+.arabic { color: var(--accent); font-size: 25px; }
+.salamKicker { letter-spacing: .1em; text-transform: none; font-style: italic; font-size: 16px; font-weight: 400; color: var(--muted); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 48px; font-style: italic; line-height: 1; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.intro { max-width: none; color: var(--muted); font-size: 18px; text-align: left; }
+
+/* couple: two pinned cloth swatches side by side */
+.couple { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 26px 14px; align-items: start; background: var(--paper) var(--weave) repeat; }
+.couple > .head { grid-column: 1 / -1; }
+.amp { display: none; }
+.person { align-items: flex-start; text-align: left; gap: 3px; }
+.portrait { margin-bottom: 14px; rotate: -2.2deg; }
+.personWrap:nth-of-type(odd) .portrait { rotate: 2deg; }
+.portraitArt { position: absolute; z-index: 2; top: -16px; left: 50%; width: 46px; height: auto; translate: -50% 0; }
+.portraitFrame { width: 100%; max-width: 160px; height: 200px; padding: 8px; border: 0; border-radius: 0; background: var(--ivory) var(--weave) repeat; box-shadow: 0 10px 18px rgba(40, 30, 10, .2), inset 0 0 0 4px var(--ivory), inset 0 0 0 5.5px transparent; outline: 1.5px dashed var(--accent); outline-offset: -5px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--accent); font-family: var(--display); font-style: italic; font-size: 84px; }
+.role { font-size: 11px; letter-spacing: .16em; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 38px; font-style: italic; line-height: 1; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 600; line-height: 1.3; }
+.parents { margin-top: 6px; font-size: 14px; line-height: 1.45; text-wrap: pretty; }
+
+/* countdown: indigo batik cloth, cream patches */
+.countBand { align-items: center; background: var(--accent) var(--indigo) repeat; padding: 76px 18px 78px; }
+.countDecor { position: absolute; z-index: -1; right: -40px; bottom: -30px; width: 200px; height: auto; opacity: .35; rotate: 8deg; }
+.headLight { padding: 12px 22px; background: var(--ivory) var(--weave); color: var(--accent); outline: 1.5px dashed var(--accent); outline-offset: -6px; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--accent); font-style: italic; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 2px; background: var(--ivory) var(--weave); clip-path: polygon(0 3%, 12% 0, 30% 2%, 52% 0, 74% 3%, 100% 0, 98% 30%, 100% 62%, 97% 100%, 70% 97%, 44% 100%, 20% 97%, 0 100%, 3% 64%, 0 34%); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .45) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; }
+.count small { color: var(--gold-d); font-style: normal; font-size: 13px; font-weight: 600; }
+.countTba { color: var(--ivory); }
+.ghostBtn { border: 1.5px dashed var(--ivory); background: var(--accent2); border-radius: 2px; color: var(--ivory); font-family: var(--serif); font-weight: 600; font-size: 14px; }
+.ghostBtn:hover { background: #0e1c31; }
+
+/* events: cream cloth tickets with a stitched inner border and a big italic numeral */
+.events { gap: 24px; }
+.event { align-items: flex-start; padding: 26px 22px 24px; border: 0; border-radius: 2px; background: var(--ivory) var(--weave) repeat; text-align: left; box-shadow: 0 10px 22px rgba(40, 30, 10, .12); }
+.event::before { inset: 7px; border: 1.5px dashed color-mix(in srgb, var(--accent) 70%, transparent); border-radius: 0; }
+.event:nth-child(even) { rotate: .6deg; }
+.event:nth-child(odd) { rotate: -.5deg; }
+.event:hover { translate: 0 -3px; box-shadow: 0 16px 28px rgba(40, 30, 10, .18); }
+.eventNo { position: absolute; top: 10px; right: 18px; left: auto; translate: none; width: auto; height: auto; background: none; color: color-mix(in srgb, var(--gold-d) 80%, transparent); font-family: var(--display); font-size: 54px; font-style: italic; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 32px; font-style: italic; }
+.eventDate { font-style: normal; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 100%; height: 2px; margin: 10px 0; background: var(--stitch); opacity: .6; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 600; font-size: 14px; box-shadow: inset 0 0 0 3px var(--accent), inset 0 0 0 4.5px rgba(243, 236, 219, .5); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper) var(--weave) repeat; }
+.timeline::before { left: 19px; width: 2px; background: repeating-linear-gradient(180deg, var(--accent) 0 9px, transparent 9px 15px); }
+.node { width: 40px; height: 40px; border: 0; border-radius: 4px; background: var(--accent) var(--indigo); }
+.node img { width: 36px; border-radius: 3px; }
+.node { background: none; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; letter-spacing: .12em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 27px; font-style: italic; }
+.storyImg { border-radius: 0; border: 6px solid var(--ivory); box-shadow: 0 6px 14px rgba(40, 30, 10, .18); }
+
+/* gallery: photos pinned on cloth */
+.mosaic { gap: 12px; }
+.tile, .tile:first-child { border-radius: 0; border: 6px solid var(--ivory); box-shadow: 0 8px 16px rgba(40, 30, 10, .18); }
+.tile:nth-child(2) { rotate: 1.5deg; }
+.tile:nth-child(3) { rotate: -1.4deg; }
+
+/* wishes */
+.form { border: 0; border-radius: 2px; background: var(--ivory) var(--weave) repeat; box-shadow: 0 10px 22px rgba(40, 30, 10, .12); outline: 1.5px dashed var(--accent); outline-offset: -7px; padding: 24px 20px; }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.step { border-radius: 2px; border-color: var(--accent); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 600; font-size: 15px; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.wish { border: 0; border-left: 4px solid var(--accent); border-radius: 0; background: rgba(243, 236, 219, .86); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 21px; font-style: italic; }
+.wish small { border-radius: 2px; background: rgba(34, 57, 92, .1); color: var(--accent); }
+
+/* gifts: indigo batik swatches */
+.gift { align-items: flex-start; border-radius: 2px; background: var(--indigo-mute); padding: 26px 22px 22px; text-align: left; outline: 1.5px dashed rgba(243, 236, 219, .7); outline-offset: -7px; }
+.gift::after { display: none; }
+.giftTop { position: relative; }
+.giftIcon { border-radius: 2px; border-color: rgba(243, 236, 219, .6); background: var(--accent2); }
+.gift h3 { color: var(--ivory); font-family: var(--display); font-size: 24px; font-style: italic; letter-spacing: 0; }
+.giftNo { position: relative; color: #fffaf0; font-family: var(--serif); font-weight: 600; font-size: 19px; }
+.gift small { position: relative; color: rgba(243, 236, 219, .9); }
+.copy { position: relative; border-radius: 2px; border-color: var(--ivory); background: var(--accent2); color: var(--ivory); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--ivory); color: var(--accent); }
+
+/* closing: indigo cloth over the sea */
+.closing { align-items: flex-start; text-align: left; background: var(--indigo-mute); padding: 72px 26px 0; gap: 12px; }
+.closing::before { content: ""; position: absolute; inset: 0 0 auto; height: 26px; background: var(--edge) repeat-x 0 0 / auto 26px; scale: 1 -1; }
+.closingEmblem { width: 110px; height: auto; rotate: -4deg; box-shadow: 0 10px 18px rgba(0, 0, 0, .3); }
+.thanks { color: var(--ivory); font-family: var(--display); font-style: italic; font-size: 56px; text-shadow: 0 2px 10px rgba(10, 20, 40, .6); }
+.closingText, .closingSalam, .family, .closingNames { position: relative; }
+.closingText { max-width: none; color: rgba(243, 236, 219, .92); }
+.closingSalam { color: var(--ivory); font-family: var(--serif); font-style: italic; font-size: 16px; }
+.family { color: rgba(243, 236, 219, .86); font-family: var(--serif); font-size: 15px; letter-spacing: .02em; }
+.closingNames { color: var(--ivory); font-family: var(--display); font-style: italic; font-size: 36px; }
+.made { position: relative; z-index: 1; margin: 16px 0; color: rgba(243, 236, 219, .7); }
+.closingSea { order: 99; display: block; width: calc(100% + 52px); max-width: none; height: 200px; margin: 0 -26px; object-fit: cover; object-position: 50% 62%; }
+.music { border-radius: 2px; background: var(--accent); border: 1.5px dashed var(--ivory); }
+.sentBox img { width: 110px; }
+
+/* ── Cover: the Tuban sea at morning above, the frayed natural cloth below with an indigo batik selvedge ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--bg) var(--weave) repeat; color: var(--ink); isolation: isolate; }
+.coverSea { position: relative; height: 40dvh; min-height: 280px; overflow: hidden; }
+.coverSeaImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 40%; }
+.coverBoat { position: absolute; z-index: 1; right: 6%; bottom: 14%; width: 46%; height: auto; transform-origin: 50% 90%; animation: bob 5s ease-in-out infinite alternate; }
+.coverCloth { position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 30px 84px 34px 26px; text-align: left; }
+.coverCloth::before { content: ""; position: absolute; z-index: 2; left: 0; right: 0; top: -40px; height: 46px; background: var(--edge) repeat-x 0 0 / auto 46px; }
+.selvedge { position: absolute; top: -10px; right: 18px; bottom: 0; width: 50px; background: var(--accent) var(--indigo) repeat 0 0 / 240px; box-shadow: -3px 0 0 var(--ivory), -6px 0 0 var(--accent); }
+.kicker { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 62px; font-style: italic; font-weight: 400; line-height: .92; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 2px 38px; color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.coverDate { margin-top: 8px; color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.coverRule { width: 100%; height: 2px; margin: 6px 0; background: var(--stitch); opacity: .7; }
+.guest { align-items: flex-start; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 25px; font-style: italic; }
+.table { border-color: var(--accent); border-radius: 2px; color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { align-self: flex-start; min-width: 0; margin-top: 10px; border-radius: 2px; background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .08em; box-shadow: inset 0 0 0 4px var(--accent), inset 0 0 0 5.5px rgba(243, 236, 219, .55), 0 8px 16px rgba(20, 30, 50, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: indigo batik field, the photo pinned on a cream mat ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: flex-start; padding: 48px 26px 40px; background: var(--accent) var(--indigo) repeat; color: var(--ivory); text-align: left; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 30px; background: var(--edge) repeat-x 0 0 / auto 30px; }
+.heroKicker, .heroNames, .heroDate, .heroNote { position: relative; padding: 2px 10px; background: rgba(21, 39, 66, .86); }
+.heroKicker { color: var(--ivory); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.heroFrame { align-self: center; width: 286px; margin: 20px 0 24px; padding: 12px 12px 40px; background: var(--ivory) var(--weave); rotate: -2deg; box-shadow: 0 16px 30px rgba(0, 0, 0, .35); outline: 1.5px dashed var(--accent); outline-offset: -6px; }
+.heroPhoto { display: grid; height: 320px; overflow: hidden; background: var(--paper); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--accent); font-family: var(--display); font-style: italic; font-size: 80px; }
+.heroNames { display: flex; flex-wrap: wrap; gap: 0 12px; max-width: 100%; color: var(--ivory); font-family: var(--display); font-size: 48px; font-style: italic; font-weight: 400; line-height: 1.05; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: #e9b9a5; }
+.heroDate { margin-top: 4px; color: var(--ivory); font-weight: 600; }
+.heroNote { max-width: 330px; margin: 14px 0 20px; color: rgba(243, 236, 219, .92); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes bob { 0% { translate: 0 0; rotate: -1.2deg; } 100% { translate: 0 -5px; rotate: 1.4deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverBoat { animation: none; }
+}

@@ -1,0 +1,153 @@
+/* Venesia Kanal — pemandangan: kanal kecil Venesia dilukis cat air longgar di atas kertas, fasad pastel (mawar, oker, persik, terakota), jendela lengkung bertirai hijau, jembatan batu, menara lonceng, tiang tambat bergaris, pantulan yang pecah, dan gondola yang mengayun. Lukisan larut ke kertas kosong di atas dan bawah; potret berbingkai lengkung gotik Venesia, kartu seperti kartu pos bercap. */
+.root, .cover {
+  --bg: #fbf6ee; --paper: #f3ebdd; --ivory: #fffdf8; --field: #fffdf8; --ink: #22344d; --muted: #5d6672; --line: #e2d6c2;
+  --accent: #22344d; --accent2: #314a6b; --gold: #c98a4a; --gold-l: #f6dcc0; --gold-d: #a5573a;
+  --terra: #b5523b; --rose: #e7a99a; --ochre: #efc57e; --canal: #5f9a94; --canal-d: #3f7470; --shut: #5f8a6a;
+  --band-bg: #3f7470; --band-ink: #fbf6ee;
+  --display: "Bodoni Moda", Didot, Georgia, serif; --serif: "Libre Caslon Text", Georgia, serif; --script: "Italianno", cursive;
+  --ogee: polygon(0% 100%, 0% 36%, 4.2% 34.4%, 8.3% 31.5%, 12.5% 27.8%, 16.7% 23.8%, 20.8% 19.5%, 25% 15.3%, 29.2% 11.3%, 33.3% 7.7%, 37.5% 4.6%, 42% 2.6%, 46.5% 2.2%, 50% 0%, 53.5% 2.2%, 58% 2.6%, 62.5% 4.6%, 66.7% 7.7%, 70.8% 11.3%, 75% 15.3%, 79.2% 19.5%, 83.3% 23.8%, 87.5% 27.8%, 91.7% 31.5%, 95.8% 34.4%, 100% 36%, 100% 100%);
+  --h2: 32px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #22344d; --t-accent-ink: #fbf6ee; --t-bg: #fbf6ee; --t-ink: #22344d; --t-muted: #5d6672; --t-line: #e2d6c2; --t-field: #fffdf8;
+  --t-radius: 4px; --t-font: "Libre Caslon Text", Georgia, serif; --t-heading-font: "Bodoni Moda", Didot, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 16px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--terra); font-family: var(--serif); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-style: italic; }
+.divider { display: block; width: 92px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.75; }
+.section { padding: 64px 24px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 40px 30px 56px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 34px; font-style: italic; }
+.salamSub { color: var(--terra); font-family: var(--script); font-size: 30px; letter-spacing: 0; }
+
+/* ── Couple: gothic lancet windows ── */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 22px; padding: 10px 10px 0; background: var(--rose); clip-path: var(--ogee); }
+.personWrap:nth-child(3) .portrait { background: var(--ochre); }
+.portraitFrame { width: 200px; height: 270px; padding: 0; border: 0; border-radius: 0; clip-path: var(--ogee); background: var(--canal); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.portraitSill { display: block; width: 250px; height: 10px; margin: -22px auto 22px; background: var(--ink); box-shadow: 0 6px 12px rgba(34, 52, 77, .18); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--canal); color: var(--bg); font-family: var(--display); font-size: 92px; font-style: italic; }
+.role { margin-top: 4px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; }
+.fullName { font-family: var(--serif); font-size: 17px; }
+.amp { color: var(--terra); font-family: var(--script); font-size: 76px; margin: 8px 0 0; }
+.amp img { width: 56px; }
+
+/* ── Countdown: canal water with the row of houses on top ── */
+.countBand { padding: 170px 18px 66px; background: linear-gradient(var(--bg) 0 120px, var(--canal) 120px, var(--canal-d)); }
+.countHouses { position: absolute; z-index: -1; top: 0; left: 0; width: 100%; height: 132px; object-fit: cover; object-position: 50% 100%; }
+.headLight h2 { color: var(--bg); font-family: var(--display); font-style: italic; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 0; border-radius: 0; background: var(--bg); clip-path: polygon(0 100%, 0 30%, 50% 0, 100% 30%, 100% 100%); padding-top: 12px; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--terra); font-size: 11px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.countBand .ghostBtn { border: 1px solid rgba(251, 246, 238, .8); border-radius: 2px; color: var(--bg); font-family: var(--serif); }
+.countTba { color: var(--bg); }
+
+/* ── Events: postcards with a stamp ── */
+.events { gap: 26px; }
+.event { align-items: flex-start; padding: 26px 22px 24px; border: 0; border-radius: 3px; background: var(--ivory); text-align: left; box-shadow: 5px 5px 0 var(--rose), 0 14px 30px rgba(34, 52, 77, .12); }
+.events .event:nth-of-type(2n) { box-shadow: 5px 5px 0 var(--ochre), 0 14px 30px rgba(34, 52, 77, .12); }
+.event::before { inset: 16px 16px auto auto; width: 54px; height: 64px; border: 0; border-radius: 0; background: var(--bg) url(/themes/art/venesia-kanal/poles.webp) 50% 60% / 80% auto no-repeat; outline: 2px dotted var(--line); outline-offset: -4px; rotate: 4deg; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--terra); font-family: var(--script); font-size: 30px; letter-spacing: 0; }
+.event h3 { max-width: calc(100% - 70px); color: var(--ink); font-family: var(--display); font-size: 25px; font-style: italic; }
+.eventDate { font-style: normal; }
+.eventTime { color: var(--canal-d); font-family: var(--serif); }
+.rule { width: 100%; height: 0; margin: 10px 0; border-top: 1px dashed var(--line); background: none; }
+.eventAddr { max-width: none; text-align: left; }
+.mapBtn, .submit { border-radius: 2px; background: var(--ink); color: var(--bg); font-family: var(--serif); font-size: 13px; letter-spacing: .1em; box-shadow: 3px 3px 0 var(--terra); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--bg); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--canal) 0 10px, transparent 10px 16px); }
+.node { width: 44px; height: 44px; border: 0; border-radius: 0; background: var(--rose); clip-path: var(--ogee); }
+.node img { width: 26px; margin-top: 8px; }
+.storyBody small { color: var(--terra); font-family: var(--script); font-size: 24px; letter-spacing: 0; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; font-style: italic; }
+.storyImg { border-radius: 2px; }
+
+/* ── Gallery: windows along the canal ── */
+.gallery { background: var(--paper); }
+.mosaic { grid-auto-rows: 150px; gap: 10px; }
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 0; clip-path: var(--ogee); }
+
+/* ── Wishes ── */
+.form { border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 5px 5px 0 var(--canal), 0 12px 26px rgba(34, 52, 77, .08); }
+.field > span, .diet, .guestsLabel { color: var(--terra); font-family: var(--serif); letter-spacing: .16em; }
+.field input, .field textarea, .choices button, .step { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.wish { border-radius: 2px; }
+.wish strong { font-family: var(--display); font-style: italic; }
+.wish small { border-radius: 2px; background: rgba(95, 154, 148, .16); color: var(--canal-d); }
+.sentBox img { width: 110px; }
+
+/* ── Gifts: rose-coloured facade cards ── */
+.gifts { background: var(--bg); }
+.gift { padding: 30px 22px 24px; border-radius: 2px; background: var(--ink); box-shadow: 5px 5px 0 var(--terra); }
+.gift::after { right: auto; left: 50%; top: -60px; bottom: auto; translate: -50% 0; width: 120px; height: 120px; border: 0; border-radius: 0; background: rgba(251, 246, 238, .06); clip-path: var(--ogee); box-shadow: none; }
+.giftIcon { border: 0; border-radius: 0; background: var(--terra); clip-path: var(--ogee); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; font-style: italic; letter-spacing: .02em; }
+.giftNo { font-family: var(--serif); font-size: 20px; line-height: 1.35; }
+.copy { border-radius: 2px; border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--ink); }
+
+/* ── Closing: houses + the gondola again ── */
+.closing { padding: 0 26px 64px; background: linear-gradient(var(--paper) 0 150px, var(--canal) 150px, var(--canal-d)); }
+.closingHouses { display: block; align-self: stretch; width: calc(100% + 52px); max-width: none; height: 160px; margin: 0 -26px; object-fit: cover; object-position: 50% 100%; }
+.closingEmblem { width: 230px; height: auto; margin: 8px 0 12px; animation: bob 5s ease-in-out infinite alternate; }
+.thanks { color: var(--bg); font-family: var(--script); font-size: 64px; }
+.closingText { color: rgba(251, 246, 238, .9); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-style: italic; }
+.family { color: rgba(251, 246, 238, .85); font-family: var(--serif); }
+.closingNames { color: var(--bg); font-family: var(--display); font-size: 32px; font-style: italic; }
+.made { color: rgba(251, 246, 238, .6); }
+.music { border: 0; border-radius: 2px; background: var(--ink); box-shadow: 3px 3px 0 var(--terra), 0 6px 16px rgba(0, 0, 0, .25); }
+
+/* ── Cover: names on bare paper, the canal painting dissolving into it ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 46px 22px 28px; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.kicker { color: var(--terra); font-family: var(--serif); font-size: 11px; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 52px; font-style: italic; font-weight: 400; line-height: .98; overflow-wrap: anywhere; }
+.coverNames i { color: var(--terra); font-family: var(--script); font-size: 54px; font-style: normal; line-height: .9; }
+.coverScene { position: relative; width: calc(100% + 44px); max-width: none; margin: -86px -22px -84px; pointer-events: none; }
+.coverScene > img:first-child { display: block; width: 100%; height: auto; }
+.coverGondola { position: absolute; left: 30%; bottom: 13%; width: 62%; height: auto; animation: bob 5s ease-in-out infinite alternate; }
+.coverFoot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; margin-top: auto; }
+.coverDate { color: var(--ink); font-family: var(--display); font-size: 19px; font-style: italic; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-style: italic; }
+.table { border-radius: 2px; border-color: var(--canal); color: var(--canal-d); font-family: var(--serif); }
+.openBtn { min-width: 220px; border-radius: 2px; background: var(--ink); color: var(--bg); font-family: var(--serif); font-size: 13px; letter-spacing: .16em; box-shadow: 4px 4px 0 var(--terra); }
+.openBtn:hover { background: var(--accent2); translate: -1px -1px; box-shadow: 5px 5px 0 var(--terra); }
+
+/* ── Hero: a postcard ── */
+.hero { display: flex; flex-direction: column; align-items: center; padding: 40px 22px 52px; background: var(--bg); text-align: center; }
+.postcard { position: relative; width: 100%; padding: 12px 12px 18px; background: var(--ivory); box-shadow: 6px 6px 0 var(--canal), 0 18px 34px rgba(34, 52, 77, .16); rotate: -1.2deg; }
+.heroPhoto { height: 300px; overflow: hidden; background: var(--canal); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.postcard figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding: 12px 4px 0; color: var(--muted); font-size: 13px; font-style: italic; }
+.postcard figcaption b { color: var(--terra); font-family: var(--script); font-size: 28px; font-style: normal; font-weight: 400; }
+.stamp { position: absolute; top: -14px; right: 14px; width: 66px; height: 78px; padding: 6px; background: var(--bg); box-shadow: 0 4px 10px rgba(0, 0, 0, .12); rotate: 6deg; outline: 2px dotted var(--line); outline-offset: -4px; }
+.stamp img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.heroKicker { margin-top: 34px; color: var(--terra); font-size: 11px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 42px; font-style: italic; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames i { color: var(--terra); font-family: var(--script); font-size: 48px; font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--canal-d); font-size: 15px; letter-spacing: .08em; }
+.heroNote { max-width: 330px; margin-top: 14px; color: var(--muted); font-size: 15px; font-style: italic; line-height: 1.7; text-wrap: pretty; }
+
+/* signature motion: the gondola bobs on the water */
+@keyframes bob { from { translate: 0 0; rotate: -.8deg; } to { translate: 0 4px; rotate: .8deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverGondola, .closingEmblem { animation: none !important; }
+}

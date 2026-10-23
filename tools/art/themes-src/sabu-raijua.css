@@ -1,0 +1,157 @@
+/* Sabu Raijua — adat NTT (Sabu, Rai Hawu): tenun ikat Sabu berdasar nila-cokelat gelap dengan bunga putih dan merah mengkudu, jendela bundar berisi laut Sawu, pulau karang, rumah adat dan pohon lontar yang dilukis tangan; foto dalam bingkai belah ketupat, potret bundar berbingkai tenun. */
+.root, .cover {
+  --bg: #f1e7d4; --paper: #e8dcc4; --ivory: #fbf5ea; --field: #fffcf6; --ink: #221a16; --muted: #66574a; --line: #d9c8ab;
+  --accent: #1e1b2a; --accent2: #2c2840; --gold: #c98f3c; --gold-l: #ebc98a; --gold-d: #8e5a1e;
+  --red: #b0322a; --red-d: #7c1f1a; --cream: #efe6d2; --sea: #24607e; --brown: #4a2c1e;
+  --band-bg: #1e1b2a; --band-ink: #efe6d2;
+  --display: "Gloock", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Gloock", Georgia, serif;
+  --ikat: url(/themes/art/sabu-raijua/ikat.webp);
+  --h2: 31px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b0322a; --t-accent-ink: #fbf5ea; --t-bg: #f1e7d4; --t-ink: #221a16; --t-muted: #66574a; --t-line: #d9c8ab; --t-field: #fffcf6;
+  --t-radius: 2px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Gloock", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+/* ── shared bits ── */
+.eyebrow, .role, .salamKicker { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.band { display: block; align-self: stretch; height: 60px; background: var(--ikat) 0 -8px / 160px 160px repeat-x, var(--accent); box-shadow: inset 0 3px 0 var(--red-d), inset 0 -3px 0 var(--red-d); }
+.divider { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; width: 190px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--red) 0 10px, transparent 10px 14px, var(--accent) 14px 18px, transparent 18px 22px); }
+.divider img { width: 30px; height: auto; }
+.head h2 { color: var(--accent); font-family: var(--display); letter-spacing: .01em; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* ── Cover: a sarong laid out — woven bands top and bottom, a round window onto the Savu Sea ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: radial-gradient(120% 70% at 50% 40%, #2a2638, #1e1b2a 60%, #15131e); color: var(--cream); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .018) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(0, 0, 0, .08) 0 1px, transparent 1px 3px); pointer-events: none; }
+.cover > .band { height: 70px; }
+.window { position: relative; flex-shrink: 0; width: 300px; height: 300px; margin-top: -30px; border-radius: 50%; box-shadow: 0 0 0 5px var(--cream), 0 0 0 9px var(--red), 0 0 0 11px var(--cream), 0 24px 50px rgba(0, 0, 0, .5); overflow: hidden; background: #f1dbb4; }
+.window img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.windowFlower { position: absolute; z-index: 2; top: 316px; left: 50%; width: 48px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4)); }
+.coverText { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 34px 24px 0; max-width: 100%; }
+.kicker { color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; column-gap: 14px; max-width: 100%; color: #fff8ec; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames i { color: #e3584c; font-family: var(--serif); font-size: 34px; font-style: italic; }
+.coverDate { display: flex; align-items: center; gap: 10px; color: var(--cream); font-size: 15px; font-weight: 600; letter-spacing: .08em; }
+.coverDate::before, .coverDate::after { content: ""; width: 9px; height: 9px; rotate: 45deg; background: var(--red); box-shadow: 0 0 0 2px var(--cream); }
+.coverFoot { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 24px 24px 30px; }
+.guest small { color: rgba(239, 230, 210, .8); }
+.guest strong { color: #fff8ec; font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 210px; border-radius: 2px; background: var(--red); color: #fff8ec; font-family: var(--serif); font-weight: 600; letter-spacing: .12em; box-shadow: 0 0 0 2px var(--cream), 0 0 0 4px var(--red-d), 0 14px 26px rgba(0, 0, 0, .4); }
+.openBtn:hover { background: #c23a30; translate: 0 -1px; }
+.cover > .band:last-child { margin-top: auto; }
+
+/* ── Hero: photo in a woven lozenge between two lontar palms ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 0 56px; background: var(--bg); text-align: center; overflow: hidden; }
+.hero > .band { margin-bottom: 26px; }
+.heroKicker { color: var(--red); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.heroStage { position: relative; display: grid; place-items: center; width: 100%; height: 330px; margin: 6px 0 4px; }
+.lozenge { width: 226px; height: 226px; rotate: 45deg; padding: 9px; background: var(--ikat) 0 0 / 120px 120px, var(--accent); box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--red), 0 22px 40px rgba(30, 27, 42, .28); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { display: block; width: 100%; height: 100%; object-fit: cover; transform: rotate(-45deg) scale(1.42); }
+.lontarL, .lontarR { position: absolute; bottom: -6px; width: 84px; height: auto; }
+.lontarL { left: -4px; height: 250px; width: auto; }
+.lontarR { right: 4px; scale: -1 1; height: 270px; width: auto; }
+.heroNames { max-width: 100%; padding: 0 24px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames i { color: var(--red); font-family: var(--serif); font-size: 30px; font-style: italic; }
+.heroDate { color: var(--gold-d); font-size: 16px; font-weight: 600; letter-spacing: .08em; }
+.heroNote { max-width: 320px; margin: 10px 24px 0; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+/* ── Opening ── */
+.salamBlock { padding: 10px 30px 60px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 38px; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-size: 15px; font-style: italic; }
+
+/* ── Couple: round portraits ringed with ikat ── */
+.couple { gap: 22px; background: var(--paper); }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 216px; height: 216px; padding: 12px; border: 0; border-radius: 50%; background: var(--ikat) 0 0 / 120px 120px, var(--accent); box-shadow: 0 0 0 3px var(--cream), 0 0 0 5px var(--red), 0 18px 34px rgba(30, 27, 42, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: 0 0 0 3px var(--cream); }
+.portraitArt { position: absolute; z-index: 2; left: 50%; bottom: -24px; width: 48px; height: auto; translate: -50% 0; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--accent); color: var(--cream); font-family: var(--display); font-size: 80px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.amp { color: var(--red); font-family: var(--serif); font-size: 46px; font-style: italic; }
+.amp img { width: 26px; }
+
+/* ── Countdown: indigo cloth with the woven band on top ── */
+.countBand { padding: 0 20px 64px; background: var(--accent); }
+.countBand > .band { margin: 0 -20px 30px; }
+.count { gap: 10px; }
+.count > div { height: 86px; border: 0; border-radius: 2px; background: rgba(239, 230, 210, .06); box-shadow: inset 0 0 0 1px rgba(235, 201, 138, .45), inset 0 -4px 0 var(--red); }
+.count b { color: #fff8ec; font-family: var(--display); font-size: 30px; }
+.count small { color: rgba(239, 230, 210, .8); font-size: 12px; font-style: normal; letter-spacing: .1em; text-transform: uppercase; }
+.headLight h2 { color: #fff8ec; font-family: var(--display); }
+.headLight .eyebrow { color: var(--gold-l); }
+.countBand .ghostBtn { border-radius: 2px; border-color: var(--gold-l); color: #fff8ec; font-family: var(--serif); font-weight: 600; }
+
+/* ── Events: cream cards with a woven head band ── */
+.events { gap: 26px; }
+.event { padding: 64px 22px 26px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: inset 0 0 0 1px var(--line), 0 14px 30px rgba(30, 27, 42, .1); overflow: hidden; }
+.event::before { inset: 0 0 auto 0; height: 38px; border: 0; border-radius: 0; background: var(--ikat) 0 -26px / 120px 120px repeat-x, var(--accent); box-shadow: inset 0 -3px 0 var(--red); }
+.eventNo { top: 26px; width: 40px; height: 26px; border-radius: 2px; background: var(--red); color: #fff8ec; font-family: var(--display); box-shadow: 0 0 0 2px var(--cream); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 70px; height: 4px; background: repeating-linear-gradient(90deg, var(--red) 0 8px, transparent 8px 12px); }
+.mapBtn, .submit { border-radius: 2px; background: var(--accent); color: var(--cream); font-family: var(--serif); font-weight: 600; letter-spacing: .05em; box-shadow: inset 0 -3px 0 var(--red), 0 6px 16px rgba(30, 27, 42, .2); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { width: 2px; background: repeating-linear-gradient(var(--red) 0 8px, transparent 8px 12px, var(--accent) 12px 16px, transparent 16px 20px); }
+.node { width: 44px; height: 44px; border: 0; background: none; margin-left: -4px; }
+.node img { width: 40px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+.storyImg { border-radius: 2px; }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 140px; gap: 6px; }
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 2px; box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--red); }
+
+/* ── Wishes ── */
+.form { border: 0; border-radius: 2px; background: var(--ivory); box-shadow: inset 0 0 0 1px var(--line), 0 12px 28px rgba(30, 27, 42, .08); }
+.field > span, .diet, .guestsLabel { color: var(--red); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea, .choices button, .step { border-radius: 2px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--cream); box-shadow: inset 0 -3px 0 var(--red); }
+.wish { border-radius: 2px; box-shadow: inset 0 3px 0 var(--accent); }
+.wish small { border-radius: 2px; background: rgba(176, 50, 42, .1); color: var(--red); }
+.sentBox img { width: 60px; }
+
+/* ── Gifts: indigo cards with a woven foot ── */
+.gift { padding: 24px 20px 46px; border-radius: 2px; background: var(--accent); box-shadow: 0 16px 30px rgba(30, 27, 42, .25); }
+.gift::after { inset: auto 0 0 0; z-index: 0; width: auto; height: 24px; border: 0; border-radius: 0; box-shadow: inset 0 3px 0 var(--red); background: var(--ikat) 0 -74px / 120px 120px repeat-x; }
+.giftIcon { border: 0; border-radius: 2px; background: var(--red); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-size: 20px; line-height: 1.3; text-wrap: balance; }
+.copy { border-radius: 2px; border-color: var(--gold); color: var(--cream); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* ── Closing: evening on the island — indigo, palms in silhouette ── */
+.closing { padding: 0 26px 0; background: var(--accent); }
+.closing > .band { margin: 0 -26px 48px; }
+.closingEmblem { width: 210px; height: 210px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 4px var(--cream), 0 0 0 7px var(--red); }
+.closingEmblem img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.thanks { margin-top: 18px; color: #fff8ec; font-family: var(--display); font-size: 42px; }
+.closingText { color: rgba(239, 230, 210, .88); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; }
+.family { color: rgba(239, 230, 210, .85); font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 32px; }
+.made { margin: 14px 0 26px; color: rgba(239, 230, 210, .55); }
+.music { border: 0; border-radius: 2px; rotate: 45deg; background: var(--red); box-shadow: 0 0 0 2px var(--cream), 0 6px 16px rgba(0, 0, 0, .3); }
+.music svg { rotate: -45deg; }
+
+/* ── Signature motion: the sea in the window glimmers; lontar heads sway in the trade wind ── */
+.window img { animation: seaBreath 14s var(--m-ease) infinite alternate; }
+.lontarL { transform-origin: 50% 100%; animation: palmSway 7s var(--m-ease) infinite alternate; }
+.lontarR { transform-origin: 50% 100%; animation: palmSway 8s var(--m-ease) -3s infinite alternate-reverse; }
+@keyframes seaBreath { from { scale: 1.02; } to { scale: 1.07; translate: -6px -2px; } }
+@keyframes palmSway { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .window img, .lontarL, .lontarR { animation: none !important; }
+}

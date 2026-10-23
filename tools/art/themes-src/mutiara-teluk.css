@@ -1,0 +1,156 @@
+/* Mutiara Teluk — warisan penyelam mutiara di Teluk saat senja keemasan: kapal dhow berlayar lateen, kota batu karang bermenara angin di cakrawala, kerang terbuka berisi mutiara, dan untaian mutiara; pasir, emas senja, dan biru teluk. */
+.root, .cover {
+  --bg: #f8f2e8; --paper: #efe3cf; --ivory: #fffcf6; --field: #fffdf9; --ink: #142a3d; --muted: #5e6a74; --line: #e3d6c0;
+  --accent: #14304a; --accent2: #0d2236; --gold: #e2a64b; --gold-l: #f6d79a; --gold-d: #a8702a; --rose: #c46f66;
+  --band-bg: #14304a; --band-ink: #f8f2e8;
+  --display: "Prata", Georgia, serif; --serif: "Petrona", Georgia, serif; --script: "Monsieur La Doulaise", cursive;
+  --nacre: conic-gradient(from 210deg, #f6efe6, #f1d7d6, #e5eee6, #dfe3ef, #f6e6cf, #f6efe6);
+  --dusk: linear-gradient(170deg, #f6c77c, #e79a68 45%, #b0697a);
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #14304a; --t-accent-ink: #f8f2e8; --t-bg: #f8f2e8; --t-ink: #142a3d; --t-muted: #5e6a74; --t-line: #e3d6c0; --t-field: #fffdf9;
+  --t-radius: 22px; --t-font: "Petrona", Georgia, serif; --t-heading-font: "Prata", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.head h2 { color: var(--accent); }
+.divider { width: 230px; }
+.section { padding: 66px 22px; }
+
+/* opening */
+.salamBlock { padding: 56px 26px 60px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-style: italic; }
+
+/* couple: pearl portraits in a nacre ring */
+.couple { background: var(--paper); gap: 10px; }
+.personWrap { display: block; width: 100%; }
+.person { padding: 30px 18px 28px; border-radius: 160px 160px 28px 28px; background: var(--ivory); box-shadow: 0 14px 30px rgba(20, 42, 61, .07); }
+.portrait { margin-bottom: 14px; }
+.portrait::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; background: var(--nacre); box-shadow: 0 10px 24px rgba(20, 42, 61, .15); }
+.portraitFrame { z-index: 1; width: 176px; height: 176px; padding: 0; border: 2px solid #fff; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #ffffff, #f3ebe0 40%, #d8cbc2 78%, #b9aca8); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: none; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 74px; text-shadow: 0 1px 0 #fff; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.fullName { color: var(--gold-d); font-family: var(--serif); font-size: 17px; font-weight: 600; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { justify-content: center; margin: 16px 0; color: var(--gold-d); font-family: var(--script); font-size: 64px; }
+.amp img { width: 26px; }
+
+/* countdown: night over the gulf, the dhow crossing */
+.countBand { background: radial-gradient(1.5px 1.5px at 12% 18%, #fff6dc 50%, transparent), radial-gradient(1px 1px at 32% 30%, #fff6dc 50%, transparent), radial-gradient(1.5px 1.5px at 72% 14%, #fff6dc 50%, transparent), radial-gradient(1px 1px at 86% 34%, #fff6dc 50%, transparent), radial-gradient(1px 1px at 56% 24%, #fff6dc 50%, transparent), linear-gradient(#0d2236, #14304a 60%, #2a4a68); padding: 70px 18px 128px; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fffaf0; }
+.count > div { height: 80px; border: 0; border-radius: 999px; background: radial-gradient(circle at 34% 28%, #ffffff, #f4ece2 45%, #d9cdc6 85%); box-shadow: 0 10px 20px rgba(0, 0, 0, .3); }
+.count > div::after { display: none; }
+.count { gap: 12px; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 600; }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.countSea { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(#2a4a68, #0d2236); }
+.countDhow { position: absolute; z-index: -1; bottom: 50px; left: 50%; width: 120px; height: auto; margin-left: -60px; animation: sail 40s linear infinite; }
+
+/* events: dusk-headed cards */
+.events { gap: 24px; background: var(--bg); }
+.event { padding: 0 0 26px; overflow: hidden; border: 0; border-radius: 28px; background: var(--ivory); box-shadow: 0 14px 32px rgba(20, 42, 61, .09); }
+.event::before { display: none; }
+.eventNo { position: relative; top: 0; left: 0; translate: none; width: 100%; height: 86px; border-radius: 0 0 50% 50% / 0 0 28px 28px; background: var(--dusk); color: #fffaf0; font-family: var(--display); font-size: 18px; letter-spacing: .14em; }
+.eventNo::after { content: ""; position: absolute; left: 50%; bottom: -14px; width: 28px; height: 28px; margin-left: -14px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #fff, #f1e9df 50%, #cbbdb6); box-shadow: 0 4px 10px rgba(20, 42, 61, .25); }
+.event h3 { margin-top: 26px; padding: 0 18px; color: var(--accent); font-family: var(--display); font-size: 23px; }
+.event > * { margin-left: 18px; margin-right: 18px; }
+.event > .eventNo { margin: 0; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 70px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story: a pearl strand timeline */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 1.5px; background: repeating-linear-gradient(var(--gold-d) 0 3px, transparent 3px 7px); }
+.node { border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody { padding: 16px 18px; border-radius: 22px; background: var(--ivory); }
+.storyBody small { color: var(--rose); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); }
+
+/* gallery: pebble tiles */
+.gallery { background: var(--bg); }
+.mosaic { grid-auto-rows: 170px; gap: 10px; }
+.tile { border-radius: 26px; }
+.tile:first-child { border-radius: 999px 999px 26px 26px; }
+.tile:nth-child(3) { border-radius: 26px 26px 999px 999px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 28px; box-shadow: 0 14px 30px rgba(20, 42, 61, .07); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--gold-l); }
+.submit { background: var(--accent); color: var(--gold-l); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent); }
+.wish { border: 0; border-radius: 22px; }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { background: #f5e6cd; color: var(--gold-d); }
+.sentBox img { width: 120px; }
+
+/* gifts: navy cards, a pearl on each */
+.gifts { background: var(--bg); }
+.gift { border-radius: 28px; background: linear-gradient(160deg, #1d3e5c, #0d2236); padding: 26px 20px; }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold-l); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { color: #fffaf0; font-family: var(--serif); font-weight: 600; }
+.copy { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: sand, the oyster and the wind-tower quarter */
+.closing { background: var(--paper); color: var(--ink); padding: 62px 26px 0; gap: 10px; }
+.closingEmblem { width: 150px; height: auto; margin-bottom: 4px; animation: breathe 7s var(--m-ease) infinite; }
+.thanks { color: var(--accent); font-family: var(--script); font-size: 60px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+.family { color: var(--muted); font-family: var(--serif); }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 28px; }
+.made { margin-bottom: 18px; color: rgba(20, 42, 61, .55); }
+.made:hover { color: var(--accent); }
+.closingTown { order: 99; display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 6px -26px 0; }
+.music { background: var(--accent); border-color: var(--gold); }
+
+/* ── Cover: the gulf at dusk, names under the first stars, the dhow on the horizon ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 52px 24px 34px; overflow: hidden; background: #14304a url(/themes/art/mutiara-teluk/dusk.webp) 38% 100% / cover no-repeat; color: #fffaf0; text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 34%; background: linear-gradient(transparent, rgba(11, 29, 48, .78) 55%); }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 21px; line-height: 1.5; }
+.kicker { margin-top: 10px; color: #f3e5cb; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 14px; color: #fffaf0; font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.08; text-shadow: 0 2px 16px rgba(8, 20, 36, .7); }
+.coverNames span { overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-l); font-family: var(--script); font-size: 54px; font-style: normal; line-height: .9; }
+.coverDate { margin-top: 12px; color: var(--gold-l); font-size: 16px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-shadow: 0 1px 8px rgba(8, 20, 36, .7); }
+.dhow { position: absolute; z-index: 0; left: 50%; bottom: calc(37.5% - 6px); width: 150px; height: auto; margin-left: -128px; animation: bob 5s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.coverFoot { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: auto; }
+.guest small { color: rgba(255, 250, 240, .86); font-size: 14px; }
+.guest strong { color: #fffaf0; font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: radial-gradient(circle at 30% 20%, #ffffff, #f6efe4 45%, #e2d6cc); color: var(--accent); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .1em; box-shadow: 0 10px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { translate: 0 -1px; }
+
+/* ── Hero: a tall pearl-drop photo on sand ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 24px 34px; background: var(--bg); text-align: center; }
+.heroDrop { position: relative; width: 262px; padding: 8px; border-radius: 999px 999px 999px 999px / 640px 640px 400px 400px; background: var(--nacre); box-shadow: 0 16px 34px rgba(20, 42, 61, .15); }
+.heroPhoto { display: grid; height: 350px; overflow: hidden; border-radius: inherit; background: var(--accent); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMono { display: grid; place-items: center; height: 100%; color: var(--gold-l); font-family: var(--display); font-size: 70px; }
+.heroOyster { position: absolute; bottom: -34px; left: 50%; width: 104px; height: auto; margin-left: -52px; filter: drop-shadow(0 6px 8px rgba(20, 42, 61, .25)); }
+.heroKicker { margin-top: 50px; color: var(--gold-d); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 12px; max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.15; }
+.heroNames span { overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-size: 46px; font-style: normal; }
+.heroDate { margin-top: 6px; color: var(--muted); font-style: italic; }
+.heroNote { max-width: 330px; margin-top: 20px; color: var(--accent); font-size: 17px; font-style: italic; line-height: 1.65; white-space: pre-line; }
+
+@keyframes bob { from { translate: 0 0; rotate: -1.2deg; } to { translate: 0 -4px; rotate: 1.2deg; } }
+@keyframes sail { from { translate: 260px 0; } to { translate: -260px 0; } }

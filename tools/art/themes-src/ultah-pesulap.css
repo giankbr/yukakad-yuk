@@ -1,0 +1,168 @@
+/* Ultah Pesulap — ulang tahun anak bertema pertunjukan sulap, gouache: panggung malam nila dengan tirai beludru ungu berumbai emas, topi tinggi dengan kelinci putih yang mengintip, tongkat ajaib berbintang, kartu remi berkipas. Kartu acara seperti kartu remi, bingkai potret berlampu panggung, bintang emas sebagai penanda; gerak lincah dan memantul. */
+.root, .cover {
+  --bg: #f6f1fb; --paper: #ece3f6; --ivory: #ffffff; --field: #fffdfd; --ink: #231d45; --muted: #5d5878; --line: #ddd2ec;
+  --accent: #1d1a45; --accent2: #3a2f78; --gold: #eab54a; --gold-l: #f8dc8a; --gold-d: #a8721e;
+  --violet: #7a2e98; --violet-d: #45145e; --red: #c8324a; --night: #1d1a45;
+  --band-bg: #1d1a45; --band-ink: #fbf7f2;
+  --display: "Cherry Swash", "Baloo 2", cursive; --serif: "Baloo 2", system-ui, sans-serif; --script: "Cherry Swash", cursive;
+  --stars: radial-gradient(1.6px 1.6px at 12% 22%, #f8dc8a 50%, transparent 51%), radial-gradient(1.2px 1.2px at 30% 70%, #fff 50%, transparent 51%), radial-gradient(1.8px 1.8px at 68% 14%, #f8dc8a 50%, transparent 51%), radial-gradient(1.2px 1.2px at 84% 62%, #fff 50%, transparent 51%), radial-gradient(1.4px 1.4px at 50% 44%, #f8dc8a 50%, transparent 51%), radial-gradient(1px 1px at 92% 30%, #fff 50%, transparent 51%);
+  --bulbs: radial-gradient(circle, #fff3c4 0 3px, #eab54a 3.5px 5px, transparent 5.5px) 0 0 / 22px 22px;
+  --h2: 32px; --card-r: 18px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a2e98; --t-accent-ink: #ffffff; --t-bg: #f6f1fb; --t-ink: #231d45; --t-muted: #5d5878; --t-line: #ddd2ec; --t-field: #fffdfd;
+  --t-radius: 16px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Cherry Swash", cursive; --t-heading-weight: 700; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+
+.eyebrow, .role, .salamKicker { color: var(--violet); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-weight: 700; }
+.divider { display: block; width: 92px; }
+.divider img { display: block; width: 100%; height: auto; }
+.intro { color: var(--muted); font-size: 17px; }
+.section { padding: 62px 22px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 44px 26px 56px; }
+.salamTitle { color: var(--violet); font-family: var(--display); font-size: 34px; font-weight: 700; }
+
+/* ── Celebrant: a "magic mirror" framed by marquee bulbs ── */
+.couple { gap: 14px; background: var(--paper); }
+.portrait::before { content: ""; position: absolute; inset: 0; border-radius: 30px; background: var(--bulbs); animation: bulbChase 1.6s steps(2) infinite; }
+.portrait { margin-bottom: 26px; padding: 14px; border-radius: 30px; background: var(--violet-d); box-shadow: 0 16px 34px rgba(29, 26, 69, .28); }
+.portraitFrame { width: 200px; height: 230px; padding: 0; border: 0; border-radius: 20px; background: var(--night); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 20px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--stars), radial-gradient(circle at 50% 40%, #3a2f78, var(--night)); color: var(--gold-l); font-family: var(--display); font-size: 110px; font-weight: 700; text-shadow: 0 4px 0 var(--violet); }
+.portraitArt { position: absolute; z-index: 2; right: -34px; bottom: -22px; width: 120px; height: auto; rotate: 10deg; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .25)); }
+.nick { color: var(--violet); font-family: var(--display); font-size: 50px; font-weight: 700; }
+.fullName { font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.parents { font-size: 16px; }
+
+/* ── Countdown: starry stage with the valance ── */
+.countBand { padding: 96px 18px 64px; background: var(--stars), var(--night); background-size: 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, auto; }
+.countValance { position: absolute; z-index: -1; inset: 0 0 auto; height: 64px; background: url(/themes/art/ultah-pesulap/valance.webp) 0 0 / auto 64px repeat-x; }
+.headLight h2 { color: #fff; font-family: var(--display); font-weight: 700; }
+.headLight .eyebrow { color: var(--gold-l); }
+.count { gap: 9px; }
+.count > div { height: 92px; border: 0; border-radius: 12px; background: #fff; box-shadow: 0 6px 0 var(--violet), 0 12px 20px rgba(0, 0, 0, .35); rotate: -3deg; }
+.count > div:nth-child(2n) { rotate: 3deg; }
+.count > div::after { display: none; }
+.count b { color: var(--red); font-family: var(--display); font-size: 30px; font-weight: 700; }
+.count > div:nth-child(2n) b { color: var(--ink); }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 700; }
+.countBand .ghostBtn { border: 2px solid var(--gold); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.countTba { color: var(--gold-l); }
+
+/* ── Events: oversized playing cards with star pips ── */
+.events { gap: 24px; }
+.event { padding: 40px 26px 30px; border: 0; border-radius: 20px; background: #fff; box-shadow: 0 0 0 2px var(--line), 0 14px 0 -4px var(--violet), 0 20px 30px rgba(29, 26, 69, .14); rotate: -1.2deg; transition: rotate .3s var(--m-spring), translate .3s var(--m-spring), box-shadow .3s; }
+.event:hover { rotate: 0deg; translate: 0 -4px; }
+.event::before { inset: 10px; border: 2px solid var(--red); border-radius: 12px; opacity: .5; }
+.eventNo { top: 16px; left: 18px; translate: none; width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: #fff; font-family: var(--display); font-size: 14px; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 24px; font-weight: 700; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--violet); font-family: var(--serif); font-weight: 800; }
+.rule { width: 60px; height: 6px; border-radius: 6px; background: var(--gold); }
+.mapBtn, .submit { border-radius: 99px; background: var(--violet); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 0 5px 0 var(--violet-d); transition: background .2s, scale .3s var(--m-spring), translate .3s var(--m-spring), box-shadow .2s; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #8d3aad; translate: 0 -2px; box-shadow: 0 7px 0 var(--violet-d); }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 2px 0 var(--violet-d); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; border-radius: 4px; background: repeating-linear-gradient(var(--gold) 0 8px, transparent 8px 14px); }
+.node { width: 44px; height: 44px; border: 0; background: transparent; }
+.node img { width: 42px; }
+.storyBody small { color: var(--red); font-weight: 800; letter-spacing: .12em; }
+.storyBody h3 { color: var(--violet); font-family: var(--display); font-size: 22px; font-weight: 700; }
+
+/* ── Gallery ── */
+.tile, .tile:first-child { border-radius: 18px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 22px; background: #fff; box-shadow: 0 0 0 2px var(--line), 0 10px 0 -2px var(--gold), 0 16px 26px rgba(29, 26, 69, .1); }
+.field > span, .diet, .guestsLabel { color: var(--violet); font-family: var(--serif); font-weight: 800; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 14px; }
+.choices button { transition: background .2s, color .2s, border-color .2s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices button:active { scale: .94; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--violet); border-color: var(--violet); color: #fff; scale: 1.04; }
+.wish { border: 0; border-radius: 18px; box-shadow: 0 0 0 2px var(--line); }
+.wish strong { font-family: var(--display); font-weight: 700; color: var(--ink); }
+.wish small { background: #fbeebf; color: var(--gold-d); font-weight: 800; }
+.sentBox img { width: 150px; }
+
+/* ── Gifts: night stage ── */
+.gifts { background: var(--stars), var(--night); background-size: 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, auto; }
+.gifts .head h2, .gifts .intro { color: #fff; }
+.gifts .eyebrow { color: var(--gold-l); }
+.gift { border-radius: 20px; background: #fff; color: var(--ink); box-shadow: 0 8px 0 var(--violet), 0 16px 30px rgba(0, 0, 0, .3); }
+.gift::after { border-color: rgba(122, 46, 152, .08); box-shadow: 0 0 0 14px rgba(122, 46, 152, .05); }
+.giftIcon { border: 0; background: var(--red); }
+.gift h3 { color: var(--violet); font-family: var(--display); font-size: 19px; font-weight: 700; }
+.giftNo { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 800; line-height: 1.3; }
+.gift small { color: var(--muted); }
+.copy { border: 2px solid var(--violet); color: var(--violet); font-family: var(--serif); font-weight: 800; transition: background .2s, color .2s, scale .3s var(--m-spring); }
+.copy:active { scale: .92; }
+.copyOn, .copyOn:hover { background: var(--violet); color: #fff; }
+
+/* ── Closing: curtain call ── */
+.closing { padding: 92px 26px 64px; background: var(--stars), var(--night); background-size: 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, auto; }
+.closingValance { position: absolute; z-index: -1; inset: 0 0 auto; height: 64px; background: url(/themes/art/ultah-pesulap/valance.webp) 0 0 / auto 64px repeat-x; }
+.closingEmblem { width: 250px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; font-weight: 700; text-shadow: 0 4px 0 var(--violet); }
+.closingText { color: rgba(251, 247, 242, .9); }
+.family { color: rgba(251, 247, 242, .82); font-family: var(--serif); }
+.closingNames { color: #fff; font-family: var(--display); font-size: 34px; font-weight: 700; }
+.made { color: rgba(251, 247, 242, .6); }
+.music { border: 0; background: var(--violet); box-shadow: 0 0 0 3px var(--gold), 0 6px 16px rgba(0, 0, 0, .3); }
+
+/* ── Cover: the stage before the show ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 78px 24px 26px; overflow: hidden; background: var(--stars), radial-gradient(120% 70% at 50% 62%, #3a2f78, var(--night) 70%); background-size: 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, auto; color: #fff; text-align: center; isolation: isolate; }
+.valance { position: absolute; z-index: 2; inset: 0 0 auto; height: 70px; background: url(/themes/art/ultah-pesulap/valance.webp) 0 0 / auto 70px repeat-x; }
+.curtainL, .curtainR { position: absolute; z-index: 0; top: 30px; width: 92px; height: calc(100% - 30px); object-fit: fill; transform-origin: 50% 0; }
+.curtainL { left: -6px; }
+.curtainR { right: -6px; scale: -1 1; }
+.marquee { position: relative; z-index: 1; padding: 6px 16px; border-radius: 99px; background: var(--red); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 #8c1f33; }
+.coverName { position: relative; z-index: 1; max-width: 100%; margin-top: 12px; color: var(--gold-l); font-family: var(--display); font-size: 66px; font-weight: 700; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 5px 0 var(--violet), 0 10px 22px rgba(0, 0, 0, .45); }
+.coverAge { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; margin-top: 8px; color: #fff; font-size: 16px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.ageStar { position: relative; display: grid; place-items: center; width: 60px; height: 58px; }
+.ageStar img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.ageStar b { position: relative; color: var(--violet-d); font-family: var(--display); font-size: 24px; margin-top: 4px; }
+.stage { position: relative; z-index: 1; width: 100%; max-width: 330px; margin: 2px 0 -10px; }
+.stage img { display: block; width: 100%; height: auto; }
+.coverDate { position: relative; z-index: 1; color: #fff; font-size: 17px; font-weight: 800; letter-spacing: .04em; }
+.ticket { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; max-width: 300px; margin-top: 12px; padding: 14px 22px; border-radius: 16px; background: #fff; color: var(--ink); box-shadow: 0 6px 0 var(--violet), 0 14px 24px rgba(0, 0, 0, .35); rotate: -1.5deg; }
+.ticket::before, .ticket::after { content: ""; position: absolute; width: 18px; height: 18px; background: url(/themes/art/ultah-pesulap/star.webp) center / contain no-repeat; }
+.ticket::before { top: 8px; left: 10px; }
+.ticket::after { bottom: 8px; right: 10px; }
+.guest small { color: var(--muted); font-style: normal; font-weight: 600; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 700; }
+.table { border-color: var(--violet); color: var(--violet); font-family: var(--serif); font-weight: 800; }
+.openBtn { position: relative; z-index: 1; min-width: 230px; margin-top: 20px; background: var(--gold); color: var(--night); font-family: var(--serif); font-size: 16px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 5px 0 var(--gold-d), 0 12px 22px rgba(0, 0, 0, .35); transition: background .2s, scale .3s var(--m-spring), translate .3s var(--m-spring), box-shadow .2s; }
+.openBtn:hover { background: #f2c460; translate: 0 -2px; box-shadow: 0 7px 0 var(--gold-d), 0 14px 24px rgba(0, 0, 0, .35); }
+.openBtn:active { translate: 0 3px; box-shadow: 0 2px 0 var(--gold-d); }
+
+/* ── Hero: playbill ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 22px 52px; background: var(--bg); text-align: center; }
+.bill { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; padding: 30px 22px 26px; border-radius: 26px; background: var(--stars), var(--night); background-size: 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, 180px 180px, auto; color: #fff; box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--gold), 0 20px 36px rgba(29, 26, 69, .3); }
+.bill::before { content: ""; position: absolute; inset: 8px; border-radius: 20px; background: var(--bulbs); -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); padding: 11px; pointer-events: none; opacity: .9; }
+.heroKicker { color: var(--gold-l); font-size: 13px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.heroName { max-width: 100%; color: #fff; font-family: var(--display); font-size: 54px; font-weight: 700; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 4px 0 var(--violet); }
+.heroAge { color: var(--gold-l); font-size: 18px; font-weight: 800; }
+.heroAge b { font-family: var(--display); font-size: 30px; }
+.heroDate { color: #fff; font-size: 16px; font-weight: 700; }
+.heroCards { width: 170px; height: auto; margin-top: -2px; }
+.heroNote { max-width: 340px; margin-top: 18px; color: var(--muted); font-size: 17px; line-height: 1.6; text-wrap: pretty; }
+
+/* signature motion: the wand-star twinkles, bulbs chase, the rabbit pops */
+@keyframes bulbChase { 0%, 100% { opacity: .95; } 50% { opacity: .55; } }
+@keyframes hop { 0%, 100% { translate: 0 0; } 40% { translate: 0 -6px; } 55% { translate: 0 0; } }
+@keyframes peek { from { opacity: 0; translate: 0 26px; scale: .92; } to { opacity: 1; translate: 0 0; scale: 1; } }
+.stage img { animation: peek .9s var(--m-spring) .25s both, hop 3.6s ease-in-out 1.4s infinite; }
+.bill::before { animation: bulbChase 1.6s steps(2) infinite; }
+.curtainL, .curtainR { animation: sway 6s ease-in-out infinite alternate; }
+.curtainR { animation-delay: -3s; }
+@media (prefers-reduced-motion: reduce) {
+  .stage img, .bill::before, .portrait::before, .curtainL, .curtainR { animation: none !important; }
+}

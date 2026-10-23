@@ -1,0 +1,163 @@
+/* Terakota Syari — tanpa foto, modern bersahaja: lengkung terakota bertekstur tanah liat, deretan arkade, daun palem kering dan pampas dalam vas gerabah, medali bintang delapan, dinding plester krem hangat. */
+.root, .cover {
+  --bg: #f3e9dc; --paper: #ead9c4; --ivory: #fbf5ec; --field: #fffaf3; --ink: #3b2418; --muted: #7a6352; --line: #dcc6ab;
+  --accent: #a94a28; --accent2: #7a3218; --gold: #c8a36d; --gold-l: #f3e9dc; --gold-d: #8c6a3c;
+  --band-bg: #9a4324; --band-ink: #f6ece0;
+  --display: "Prata", Georgia, serif; --serif: "Hanken Grotesk", "Segoe UI", sans-serif; --script: "Prata", Georgia, serif;
+  --plaster: url(/themes/art/terakota-syari/plaster.webp);
+  --clay: radial-gradient(circle at 20% 30%, rgba(255, 220, 190, .08), transparent 40%), radial-gradient(circle at 80% 70%, rgba(60, 20, 5, .12), transparent 50%), #9a4324;
+  --h2: 30px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #a94a28; --t-accent-ink: #fbf5ec; --t-bg: #f3e9dc; --t-ink: #3b2418; --t-muted: #7a6352; --t-line: #dcc6ab; --t-field: #fffaf3;
+  --t-radius: 999px; --t-font: "Hanken Grotesk", sans-serif; --t-heading-font: "Prata", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.main { background: var(--bg) var(--plaster) repeat; }
+.eyebrow, .role, .salamKicker { font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .28em; color: var(--accent); }
+.head h2 { color: var(--ink); }
+.divider { width: 220px; }
+.section { padding: 66px 24px 62px; }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* opening */
+.salamBlock { padding: 50px 28px 58px; }
+.arabic { color: var(--accent2); font-size: 28px; }
+.salamKicker { letter-spacing: .12em; text-transform: none; font-size: 15px; font-weight: 500; color: var(--muted); }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 36px; }
+.salamSub { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+
+/* couple: arch niches beside the names */
+.couple { gap: 30px; background: var(--paper); }
+.person { display: grid; grid-template-columns: 116px minmax(0, 1fr); grid-template-rows: repeat(4, auto); column-gap: 18px; row-gap: 3px; align-items: center; align-content: center; text-align: left; }
+.personWrap:nth-of-type(odd) .person { grid-template-columns: minmax(0, 1fr) 116px; text-align: right; }
+.personWrap:nth-of-type(odd) .portrait { grid-column: 2; }
+.portrait { grid-row: 1 / span 4; margin: 0; }
+.portraitArt { position: absolute; z-index: 1; bottom: -14px; left: 50%; width: 46px; height: auto; translate: -50% 0; filter: drop-shadow(0 3px 4px rgba(60, 25, 10, .3)); }
+.portraitFrame { width: 116px; height: 158px; padding: 0; border: 0; border-radius: 58px 58px 6px 6px; background: var(--clay); box-shadow: inset 0 0 0 5px var(--accent), inset 0 0 0 7px #e8a684, 0 10px 18px rgba(90, 40, 15, .2); }
+.monogram { color: var(--band-ink); font-family: var(--display); font-size: 58px; translate: 0 6px; }
+.role { grid-column: auto; letter-spacing: .2em; font-size: 11px; }
+.nick { color: var(--accent2); font-family: var(--display); font-size: 34px; line-height: 1.1; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.parents { max-width: none; margin-top: 2px; font-size: 14px; line-height: 1.45; text-wrap: pretty; }
+.amp { justify-content: center; margin: -6px 0; color: var(--accent); font-family: var(--display); font-size: 36px; }
+.amp img { width: 34px; }
+.amp img:last-child { scale: 1 1; }
+
+/* countdown: clay block with arched plaster tiles */
+.countBand { background: var(--clay); padding: 72px 18px 76px; }
+.countDecor { position: absolute; z-index: -1; left: 50%; top: 50%; width: 360px; height: auto; translate: -50% -50%; opacity: .12; }
+.headLight .eyebrow { color: #f0c9ae; }
+.headLight h2 { color: var(--band-ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 9px; }
+.count > div { height: 98px; border: 0; border-radius: 37px 37px 6px 6px; background: var(--ivory) var(--plaster); box-shadow: 0 8px 14px rgba(40, 12, 2, .25); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .5) 50%, transparent 65%); }
+.count b { color: var(--accent2); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--muted); font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border-color: rgba(246, 236, 224, .6); color: var(--band-ink); font-family: var(--serif); font-weight: 600; }
+.ghostBtn:hover { background: rgba(246, 236, 224, .14); border-color: var(--band-ink); }
+
+/* events: arched cards */
+.events { gap: 24px; }
+.event { padding: 66px 22px 28px; border: 0; border-radius: 170px 170px 14px 14px; background: var(--ivory) var(--plaster); box-shadow: 0 12px 26px rgba(90, 40, 15, .1), inset 0 0 0 1px var(--line); }
+.event::before { inset: 9px; border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: 162px 162px 9px 9px; }
+.event:hover { translate: 0 -2px; box-shadow: 0 18px 32px rgba(90, 40, 15, .16), inset 0 0 0 1px var(--accent); }
+.eventNo { top: 26px; width: 40px; height: 40px; background: var(--accent); color: var(--band-ink); font-family: var(--display); font-size: 14px; letter-spacing: 0; border-radius: 50%; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 24px; }
+.eventDate { font-style: normal; font-weight: 600; color: var(--ink); }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { width: 46px; height: 3px; border-radius: 2px; background: var(--accent); }
+.mapBtn { background: var(--accent); color: var(--band-ink); font-family: var(--serif); font-weight: 600; letter-spacing: .04em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 20%, transparent)); }
+.node { width: 44px; height: 44px; border: 0; background: none; }
+.node img { width: 44px; }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-weight: 600; letter-spacing: .16em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-size: 21px; }
+
+.mosaic { gap: 8px; }
+.tile, .tile:first-child { border-radius: 10px; }
+.tile:first-child { border-radius: 120px 120px 10px 10px; }
+
+/* wishes */
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 12px 26px rgba(90, 40, 15, .1), inset 0 0 0 1px var(--line); }
+.field > span, .diet, .guestsLabel { font-family: var(--serif); font-weight: 600; color: var(--accent); }
+.field input, .field textarea { border-radius: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--accent); border-color: var(--accent); color: var(--ivory); }
+.step { border-color: var(--accent); }
+.submit { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--accent2); font-family: var(--display); font-style: normal; }
+.wish { border: 0; border-radius: 20px; background: rgba(251, 245, 236, .9); box-shadow: inset 0 0 0 1px var(--line); }
+.wish strong { color: var(--accent2); font-family: var(--display); }
+.wish small { background: rgba(169, 74, 40, .1); color: var(--accent2); font-weight: 600; }
+
+/* gifts: clay cards with an arch window */
+.gift { border-radius: 26px 26px 14px 14px; background: var(--clay); padding: 30px 22px 24px; }
+.gift::after { right: auto; left: 50%; bottom: auto; top: -70px; width: 180px; height: 120px; translate: -50% 0; border: 0; border-radius: 0 0 90px 90px; background: rgba(255, 230, 205, .07); box-shadow: none; }
+.giftIcon { border-color: rgba(246, 236, 224, .5); }
+.gift h3 { color: var(--band-ink); font-family: var(--display); letter-spacing: .02em; }
+.giftNo { color: #fffaf3; font-family: var(--display); font-size: 20px; }
+.copy { border-color: rgba(246, 236, 224, .7); color: var(--band-ink); font-family: var(--serif); font-weight: 600; }
+.copy:hover { background: rgba(246, 236, 224, .14); }
+.copyOn, .copyOn:hover { background: var(--band-ink); color: var(--accent2); }
+
+/* closing */
+.closing { background: var(--clay); padding: 72px 28px 0; gap: 12px; }
+.closingEmblem { width: 110px; height: auto; filter: drop-shadow(0 8px 12px rgba(40, 12, 2, .35)); }
+.thanks { color: var(--band-ink); font-family: var(--display); font-size: 40px; }
+.closingText { color: rgba(246, 236, 224, .9); }
+.closingSalam { color: #f0c9ae; font-family: var(--serif); font-size: 14px; font-weight: 500; letter-spacing: .04em; }
+.family { color: rgba(246, 236, 224, .82); font-family: var(--serif); font-size: 14px; letter-spacing: .04em; }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 30px; }
+.made { position: relative; z-index: 1; margin: 16px 0 18px; color: rgba(246, 236, 224, .6); }
+.closingArcade { order: 99; display: block; width: calc(100% + 56px); margin: 4px -28px 0; background: var(--bg) var(--plaster); }
+.closingArcade img { display: block; width: 100%; height: auto; }
+.music { background: var(--accent); border-color: var(--band-ink); }
+.sentBox img { width: 90px; }
+
+/* ── Cover: a terracotta portal on warm plaster, dried palms and pampas leaning in ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px; min-height: 100dvh; padding: 34px 20px 36px; overflow: hidden; background: var(--bg) var(--plaster) repeat; color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -3; left: 50%; top: 14%; width: 520px; height: 520px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, rgba(212, 130, 92, .22), transparent 66%); }
+.portal { position: relative; display: grid; place-items: center; width: min(86vw, 336px); aspect-ratio: 600 / 879; }
+.portal::after { content: ""; position: absolute; left: -14%; right: -14%; bottom: -14px; height: 16px; border-radius: 4px; background: linear-gradient(#c76a43, #8f3f20); box-shadow: 0 8px 14px rgba(90, 40, 15, .2); }
+.portalArch { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 14px 18px rgba(90, 40, 15, .22)); }
+.portalInner { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 76%; padding-top: 26%; }
+.coverArabic { color: var(--accent2); font-family: Amiri, serif; font-size: 22px; line-height: 1.5; }
+.kicker { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.coverMono { display: grid; place-items: center; width: 74px; height: 74px; margin: 6px 0 2px; border-radius: 50%; background: var(--clay); color: var(--band-ink); font-family: var(--display); font-size: 26px; letter-spacing: .04em; box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--accent); }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.12; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { color: var(--gold-d); font-family: var(--display); font-size: 22px; font-style: normal; }
+.coverDate { margin-top: 6px; color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.vaseArt { position: absolute; z-index: 2; left: -78px; bottom: -14px; width: 190px; height: auto; transform-origin: 46% 100%; animation: sway 9s ease-in-out infinite alternate; }
+.pampasArt { position: absolute; z-index: 2; right: -58px; bottom: -6px; width: 118px; height: auto; transform-origin: 30% 100%; animation: sway 11s ease-in-out -3s infinite alternate-reverse; }
+.coverFoot { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+.guest { padding: 12px 18px; border-radius: 18px; background: rgba(251, 245, 236, .92); box-shadow: inset 0 0 0 1px var(--line); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--serif); font-weight: 600; }
+.openBtn { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 20px rgba(122, 50, 24, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: clay wall with a plaster arch niche holding the monogram, arcade below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 0; background: var(--clay); color: var(--band-ink); text-align: center; }
+.heroKicker { color: #f0c9ae; font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNiche { display: grid; place-items: center; width: 200px; height: 250px; margin: 20px 0 22px; border-radius: 100px 100px 8px 8px; background: var(--bg) var(--plaster); box-shadow: inset 0 10px 18px rgba(90, 40, 15, .25), 0 0 0 6px #b75a35, 0 0 0 8px rgba(246, 236, 224, .4); }
+.heroMono { color: var(--accent2); font-family: var(--display); font-size: 64px; line-height: 1; translate: 0 12px; }
+.heroMono em { display: block; margin: 2px 0; color: var(--gold-d); font-size: 30px; font-style: normal; }
+.heroNames { max-width: 100%; color: var(--band-ink); font-family: var(--display); font-size: 34px; font-weight: 400; line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; }
+.heroDate { margin-top: 8px; color: #f0c9ae; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; font-size: 14px; }
+.heroNote { max-width: 320px; margin-top: 14px; color: rgba(246, 236, 224, .88); font-size: 16px; line-height: 1.65; }
+.arcadeWrap { display: block; width: calc(100% + 48px); margin: 34px -24px -1px; background: var(--bg) var(--plaster); }
+.arcadeWrap img { display: block; width: 100%; height: auto; }
+
+@keyframes sway { from { rotate: -1.6deg; } to { rotate: 1.8deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .vaseArt, .pampasArt { animation: none; }
+}
