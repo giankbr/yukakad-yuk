@@ -452,9 +452,6 @@ const loaders: Record<string, () => Promise<DemoModule>> = {
   "tujuh-bulanan": () => import("./tujuh-bulanan/demo"),
 };
 
-/** Themes that render their own music button (the page then skips the generic <MusicPlayer>). */
-export const themesWithOwnMusic = new Set(["jawa"]);
-
 /** Theme used for invitations whose template is missing or retired. */
 export const FALLBACK_THEME = "linen-putih";
 
