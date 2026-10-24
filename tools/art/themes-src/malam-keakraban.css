@@ -1,0 +1,171 @@
+/* Malam Keakraban — undangan makrab mahasiswa bergaya poster risograf: tinta biru, merah muda neon, kuning, dan toska yang bertumpuk di atas kertas krem dengan raster titik dan sedikit meleset; sampul berupa poster dengan judul besar bertumpuk, ilustrasi villa di gunung, api unggun yang berkedip, lingkaran siluet mahasiswa dengan gitar, untaian lampion, dan tiket masuk berlubang sobek; kartu bergaris biru berbayangan merah muda, susunan acara sebagai rundown, iuran sebagai patungan; Rubik Mono One + Space Grotesk + Gochi Hand. Bukan undangan pernikahan. */
+.root, .cover {
+  --bg: #f3ebd9; --paper: #ece2cb; --ivory: #fbf6ea; --field: #ffffff; --ink: #1f2f66; --muted: #4a5170; --line: #2f4fa2;
+  --accent: #2f4fa2; --accent2: #233d84; --gold: #ff4fa8; --gold-l: #ffd31a; --gold-d: #d6338a;
+  --band-bg: #2f4fa2; --band-ink: #fbf6ea;
+  --pink: #ff4fa8; --yellow: #ffd31a; --teal: #0a9a8e; --blue: #2f4fa2;
+  --display: "Rubik Mono One", "Arial Black", sans-serif; --serif: "Space Grotesk", system-ui, sans-serif; --script: "Gochi Hand", cursive;
+  --lights: url("/themes/art/malam-keakraban/lights.webp");
+  --dots: radial-gradient(circle, rgba(47, 79, 162, .13) 1.3px, transparent 1.8px) 0 0 / 7px 7px;
+  --misreg: 4px 4px 0 var(--pink);
+  --h2: 22px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f4fa2; --t-accent-ink: #ffffff; --t-bg: #f3ebd9; --t-ink: #1f2f66; --t-muted: #4a5170; --t-line: #2f4fa2; --t-field: #ffffff;
+  --t-radius: 6px; --t-font: "Space Grotesk", system-ui, sans-serif; --t-heading-font: "Rubik Mono One", "Arial Black", sans-serif; --t-heading-weight: 400; --t-heading-size: 21px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role { color: var(--gold-d); font-family: var(--script); font-size: 23px; letter-spacing: 0; text-transform: none; }
+.head h2, .headLight h2 { color: var(--blue); font-family: var(--display); font-size: var(--h2); line-height: 1.2; text-transform: uppercase; text-shadow: 2px 2px 0 rgba(255, 79, 168, .55); }
+.headLight h2 { color: var(--yellow); text-shadow: 2px 2px 0 var(--pink); }
+.headLight .eyebrow { color: #ffd0e8; }
+.divider { width: 150px; }
+
+/* opening */
+.salamBlock { padding: 50px 28px 54px; background: var(--dots), var(--bg); }
+.salamKicker { color: var(--gold-d); font-family: var(--script); font-size: 26px; letter-spacing: 0; text-transform: none; }
+.salamTitle { color: var(--blue); font-family: var(--display); font-size: 22px; line-height: 1.15; text-transform: uppercase; text-shadow: 3px 3px 0 rgba(255, 79, 168, .6); }
+.salamSub { color: var(--teal); font-family: var(--serif); font-size: 15px; font-weight: 700; }
+.intro { color: var(--muted); font-size: 16px; }
+
+/* hosts: the committee card */
+.couple { background: var(--paper); }
+.person { padding: 26px 18px 24px; border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); box-shadow: var(--misreg); }
+.portrait { margin-bottom: 8px; }
+.portraitArt { position: absolute; z-index: 2; right: -30px; top: -14px; width: 46px; height: auto; rotate: 10deg; }
+.portraitFrame { width: 116px; height: 116px; padding: 0; border: 2px solid var(--blue); border-radius: 50%; background: var(--yellow); box-shadow: 3px 3px 0 var(--pink); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--blue); font-family: var(--display); font-size: 50px; }
+.nick { color: var(--blue); font-family: var(--display); font-size: 22px; line-height: 1.2; text-transform: uppercase; }
+.fullName { color: var(--gold-d); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15px; }
+
+/* countdown: night band with lanterns, yellow ticket digits */
+.countBand { padding: 104px 20px 60px; background: radial-gradient(circle, rgba(255, 255, 255, .1) 1.3px, transparent 1.8px) 0 0 / 7px 7px, linear-gradient(#233d84, #2f4fa2); }
+.countBand::before { content: ""; position: absolute; inset: 0 -10px auto; height: 110px; background: var(--lights) repeat-x 0 0 / auto 110px; animation: glowLights 2.6s ease-in-out infinite alternate; }
+.count > div { height: 86px; border: 2px solid var(--yellow); border-radius: 6px; background: var(--yellow); box-shadow: 3px 3px 0 var(--pink); }
+.count > div::after { display: none; }
+.count b { color: var(--blue); font-family: var(--display); font-size: 25px; }
+.count small { color: var(--blue); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .06em; }
+.countTba { color: var(--yellow); }
+.ghostBtn { border: 2px solid var(--yellow); border-radius: 6px; background: transparent; color: var(--yellow); font-family: var(--serif); font-weight: 700; }
+.ghostBtn:hover { background: rgba(255, 211, 26, .14); border-color: var(--yellow); }
+
+/* events: two tickets */
+.events { background: var(--dots), var(--bg); }
+.event { align-items: flex-start; padding: 26px 20px 22px; border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); text-align: left; box-shadow: var(--misreg); }
+.event::before { inset: 0 auto 0 auto; right: 64px; width: 0; border: 0; border-right: 2px dashed rgba(47, 79, 162, .35); border-radius: 0; }
+.event:hover { border-color: var(--blue); box-shadow: 6px 6px 0 var(--pink); translate: -2px -2px; }
+.eventNo { top: 18px; right: 12px; left: auto; translate: 0 0; width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); color: var(--blue); font-family: var(--display); font-size: 14px; rotate: -8deg; }
+.event h3 { padding-right: 70px; color: var(--blue); font-family: var(--display); font-size: 18px; line-height: 1.25; text-transform: uppercase; }
+.eventDate { padding-right: 70px; color: var(--ink); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: calc(100% - 70px); height: 0; border-top: 2px dotted rgba(47, 79, 162, .4); background: none; }
+.event strong { padding-right: 70px; color: var(--ink); }
+.eventAddr { max-width: none; padding-right: 70px; text-align: left; }
+.mapBtn { border-radius: 6px; background: var(--blue); color: #fff; font-family: var(--serif); font-weight: 700; box-shadow: 3px 3px 0 var(--pink); }
+.mapBtn:hover { background: var(--accent2); translate: -1px -1px; box-shadow: 4px 4px 0 var(--pink); }
+
+/* story = rundown: time chips on a dotted fuse */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 0; border-left: 3px dotted var(--pink); background: none; }
+.node { width: 44px; height: 44px; border: 2px solid var(--blue); background: var(--yellow); }
+.node img { width: 30px; }
+.storyBody { padding: 12px 14px 14px; border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); box-shadow: 3px 3px 0 var(--pink); }
+.storyBody small { align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--blue); color: var(--yellow); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .02em; }
+.storyBody h3 { color: var(--blue); font-family: var(--display); font-size: 15px; line-height: 1.3; text-transform: uppercase; }
+.storyBody p { font-size: 15px; }
+
+/* gallery (uploaded only) */
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border: 2px solid var(--blue); border-radius: 6px; }
+
+/* wishes */
+.wishes { background: var(--dots), var(--bg); }
+.form { border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); box-shadow: var(--misreg); }
+.field > span, .diet, .guestsLabel { color: var(--blue); font-family: var(--serif); font-weight: 700; letter-spacing: .08em; }
+.field input, .field textarea { border: 2px solid rgba(47, 79, 162, .5); border-radius: 6px; }
+.choices button { border: 2px solid var(--blue); border-radius: 6px; color: var(--blue); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--blue); background: var(--pink); color: #fff; box-shadow: 2px 2px 0 var(--blue); }
+.step { border: 2px solid var(--blue); border-radius: 6px; color: var(--blue); }
+.submit { border-radius: 6px; background: var(--blue); color: #fff; font-family: var(--display); font-size: 14px; letter-spacing: .02em; box-shadow: 3px 3px 0 var(--pink); }
+.submit:not(:disabled):hover { background: var(--accent2); box-shadow: 4px 4px 0 var(--pink); }
+.sent { color: var(--blue); font-family: var(--serif); font-weight: 700; font-style: normal; }
+.wish { border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); }
+.wish:nth-child(even) { rotate: .5deg; }
+.wish:hover { border-color: var(--blue); box-shadow: 3px 3px 0 var(--pink); }
+.wish strong { color: var(--blue); font-family: var(--serif); font-weight: 700; }
+.wish small { background: var(--yellow); color: var(--blue); font-weight: 700; }
+
+/* gifts: iuran */
+.gifts { background: var(--paper); }
+.gift { border: 2px solid var(--blue); border-radius: 6px; background: var(--yellow); color: var(--blue); box-shadow: var(--misreg); }
+.gift::after { border-color: rgba(47, 79, 162, .1); box-shadow: none; }
+.giftIcon { border: 2px solid var(--blue); background: var(--blue); }
+.gift h3 { color: var(--blue); font-family: var(--display); font-size: 16px; }
+.giftNo { color: var(--blue); font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.gift small { color: var(--ink); }
+.copy { border: 2px solid var(--blue); border-radius: 6px; background: var(--blue); color: #fff; font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: var(--accent2); }
+.copyOn, .copyOn:hover { background: var(--pink); color: #fff; }
+
+/* closing: back at the fire */
+.closing { padding: 110px 24px 56px; background: radial-gradient(circle, rgba(255, 255, 255, .1) 1.3px, transparent 1.8px) 0 0 / 7px 7px, linear-gradient(#233d84, #2f4fa2 60%, #1f3478); }
+.closing::before { content: ""; position: absolute; inset: 0 -10px auto; height: 110px; background: var(--lights) repeat-x 0 0 / auto 110px; animation: glowLights 3s ease-in-out infinite alternate; }
+.campfire { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 18px; }
+.campfire img:first-child { width: 58px; height: auto; transform-origin: 50% 100%; animation: flicker 1.6s ease-in-out infinite alternate; }
+.campfire img:last-child { width: 46px; height: auto; }
+.thanks { color: var(--yellow); font-family: var(--display); font-size: 26px; line-height: 1.2; text-transform: uppercase; text-shadow: 3px 3px 0 var(--pink); }
+.closingText { color: rgba(251, 246, 234, .9); }
+.closingNames { color: #fff; font-family: var(--script); font-size: 30px; }
+.made { color: rgba(251, 246, 234, .6); }
+.made:hover { color: var(--yellow); }
+.music { border: 2px solid var(--blue); background: var(--pink); box-shadow: 2px 2px 0 var(--blue); }
+.sentBox img { width: 60px; }
+
+/* ── Cover: a riso poster ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 20px 26px; overflow: hidden; background: var(--dots), var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.coverLights { width: calc(100% + 40px); height: 70px; margin: 0 -20px; background: var(--lights) repeat-x 10px -6px / auto 80px; animation: glowLights 2.4s ease-in-out infinite alternate; }
+.org { max-width: 320px; margin-top: 2px; color: var(--teal); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .14em; line-height: 1.4; text-transform: uppercase; }
+.title { position: relative; display: flex; flex-direction: column; align-items: center; margin-top: 8px; color: var(--blue); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.02; text-transform: uppercase; text-shadow: 3px 3px 0 var(--pink); }
+.title span { max-width: 100%; overflow-wrap: anywhere; }
+.title span:first-child { font-size: .72em; }
+.year { position: absolute; right: -26px; top: -30px; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: var(--yellow); color: var(--blue); font-family: var(--display); font-size: 13px; text-shadow: none; rotate: 12deg; box-shadow: 2px 2px 0 var(--pink); }
+.coverDate { margin-top: 10px; padding: 4px 14px; border: 2px solid var(--blue); border-radius: 999px; background: var(--ivory); color: var(--blue); font-size: 14px; font-weight: 700; }
+.poster { position: relative; width: 100%; max-width: 350px; margin-top: 14px; border: 2px solid var(--blue); border-radius: 6px; overflow: hidden; box-shadow: var(--misreg); }
+.poster > img:first-child { display: block; width: 100%; height: auto; }
+.fire { position: absolute; left: 43.4%; bottom: 23%; width: 15%; height: auto; translate: -50% 0; mix-blend-mode: multiply; transform-origin: 50% 100%; animation: flicker 1.4s ease-in-out infinite alternate; }
+.ticket { position: relative; display: flex; width: 100%; max-width: 350px; margin-top: 16px; border: 2px solid var(--blue); border-radius: 6px; background: var(--ivory); text-align: left; }
+.ticket::before, .ticket::after { content: ""; position: absolute; left: 72%; width: 18px; height: 18px; translate: -50% 0; border: 2px solid var(--blue); border-radius: 50%; background: var(--bg); }
+.ticket::before { top: -11px; clip-path: inset(50% 0 0 0); }
+.ticket::after { bottom: -11px; clip-path: inset(0 0 50% 0); }
+.ticket .guest { flex: 1; align-items: flex-start; max-width: none; padding: 10px 14px; border-right: 2px dashed rgba(47, 79, 162, .45); }
+.guest small { color: var(--muted); font-size: 12.5px; font-style: normal; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.guest strong { color: var(--blue); font-family: var(--serif); font-size: 19px; font-weight: 700; text-align: left; }
+.table { margin-top: 4px; border: 2px solid var(--pink); border-radius: 6px; color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .04em; }
+.stub { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 28%; padding: 8px 6px; color: var(--blue); font-family: var(--display); font-size: 10px; line-height: 1.3; text-align: center; text-transform: uppercase; }
+.stub b { color: var(--gold-d); font-size: 18px; font-weight: 400; }
+.openBtn { margin-top: 16px; border-radius: 6px; background: var(--blue); color: #fff; font-family: var(--display); font-size: 14px; letter-spacing: .02em; box-shadow: 4px 4px 0 var(--pink); }
+.openBtn:hover { background: var(--accent2); translate: -1px -1px; box-shadow: 5px 5px 0 var(--pink); }
+
+/* ── Hero: zine header with a date block ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 84px 22px 44px; background: var(--dots), var(--bg); text-align: center; }
+.hero::before { content: ""; position: absolute; inset: 0 -10px auto; height: 80px; background: var(--lights) repeat-x 0 -6px / auto 80px; animation: glowLights 2.8s ease-in-out infinite alternate; }
+.heroOrg { color: var(--teal); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroTitle { max-width: 100%; margin-top: 8px; color: var(--blue); font-family: var(--display); font-size: 30px; font-weight: 400; line-height: 1.08; text-transform: uppercase; text-shadow: 3px 3px 0 var(--pink); overflow-wrap: anywhere; }
+.heroHosts { margin-top: 8px; color: var(--gold-d); font-family: var(--script); font-size: 24px; line-height: 1.2; }
+.dateBlock { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 12px 18px; border: 2px solid var(--blue); border-radius: 6px; background: var(--yellow); box-shadow: var(--misreg); }
+.dateBlock img { width: 40px; height: auto; }
+.dateBlock p { color: var(--blue); font-size: 16px; font-weight: 700; }
+.heroNote { max-width: 310px; margin-top: 18px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.props { display: flex; align-items: flex-end; justify-content: center; gap: 22px; margin-top: 20px; }
+.props img { width: 72px; height: auto; }
+.props img:nth-child(2) { width: 44px; }
+
+@media (max-height: 780px) { .poster { max-width: 290px; } .title { font-size: 36px; } }
+@keyframes flicker { 0% { scale: 1 1; filter: brightness(1); } 50% { scale: .96 1.06; } 100% { scale: 1.04 .95; filter: brightness(1.08); } }
+@keyframes glowLights { from { filter: saturate(.9) brightness(.95); } to { filter: saturate(1.15) brightness(1.08); } }
+@media (prefers-reduced-motion: reduce) {
+  .fire, .campfire img:first-child, .coverLights, .hero::before, .countBand::before, .closing::before { animation: none; }
+}

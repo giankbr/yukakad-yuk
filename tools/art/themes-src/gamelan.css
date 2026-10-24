@@ -1,0 +1,162 @@
+/* Gamelan — seperangkat gamelan perunggu di pendopo malam: gong ageng tergantung di gayor berukir merah-emas, bonang dan saron di atas rancakan, kendang berlapis kulit; potret dan hitung mundur berbentuk gong dan pencon perunggu, riak bunyi gong yang perlahan menyebar. */
+.root, .cover {
+  --bg: #f2e6d0; --paper: #ead9bb; --ivory: #fbf4e6; --field: #fffaf0; --ink: #2a1a12; --muted: #6a4d3a; --line: #d9c19c;
+  --accent: #8f2417; --accent2: #6b170d; --gold: #c08f40; --gold-l: #efcd85; --gold-d: #7c5418;
+  --night: #1b110c; --night-2: #2b1a12; --lac: #8f2417;
+  --bronze: radial-gradient(circle at 34% 30%, #ffe7ad 0%, #d7a456 22%, #9a6428 52%, #5c3412 78%, #2f1a0a 100%);
+  --bronze-ring: conic-gradient(from 200deg, #6b3f16, #e9c27a, #a26c2c, #4a2a10, #c99550, #f3d899, #7c4a1a, #6b3f16);
+  --band-bg: #1b110c; --band-ink: #f4e6cc;
+  --display: "Gloock", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Gloock", Georgia, serif; --sc: "Marcellus SC", Georgia, serif;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8f2417; --t-accent-ink: #fbf4e6; --t-bg: #ead9bb; --t-ink: #2a1a12; --t-muted: #6a4d3a; --t-line: #d9c19c; --t-field: #fffaf0;
+  --t-radius: 14px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Gloock", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--sc); font-size: 12px; letter-spacing: .26em; }
+.head h2, .headLight h2 { font-size: 34px; line-height: 1.12; }
+.head h2 { color: var(--night-2); }
+.divider { width: 190px; }
+.section { padding: 64px 22px; }
+
+/* ── hero: a small gong of a photo, hung from a red-lacquer bar ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 24px 0; background: var(--night) url(/themes/art/gamelan/pendopo.webp) center top / cover; color: var(--band-ink); text-align: center; overflow: hidden; isolation: isolate; }
+.hangBar { position: relative; width: 268px; height: 22px; margin-top: 34px; border-radius: 6px; background: linear-gradient(180deg, #b8442a, #8f2417 55%, #4e100a); box-shadow: inset 0 2px 0 rgba(255, 210, 160, .35), 0 6px 12px rgba(0, 0, 0, .4); }
+.hangBar::before, .hangBar::after { content: ""; position: absolute; top: 20px; width: 3px; height: 40px; border-radius: 2px; background: #a8321f; }
+.hangBar::before { left: 96px; rotate: 16deg; transform-origin: top; }
+.hangBar::after { right: 96px; rotate: -16deg; transform-origin: top; }
+.heroGong { position: relative; width: 236px; height: 236px; margin-top: 22px; padding: 14px; border-radius: 50%; background: var(--bronze-ring); box-shadow: 0 18px 40px rgba(0, 0, 0, .55), inset 0 0 0 2px rgba(255, 230, 170, .4); transform-origin: 50% -40px; }
+.heroGong .heroPhoto { width: 100%; height: 100%; overflow: hidden; border-radius: 50%; box-shadow: inset 0 0 0 3px rgba(40, 20, 8, .6); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { margin-top: 18px; color: var(--gold-l); font-family: var(--sc); font-size: 12px; letter-spacing: .3em; }
+.heroNames { color: #fbeed2; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.04; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { display: block; color: var(--gold-l); font-family: var(--serif); font-size: 30px; font-style: italic; }
+.heroDate { color: var(--gold-l); font-family: var(--sc); font-size: 15px; letter-spacing: .12em; }
+.heroNote { max-width: 300px; margin-top: 6px; color: rgba(244, 230, 204, .88); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: pretty; }
+.heroSaron { display: block; width: 330px; max-width: 92%; height: auto; margin-top: 18px; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .45)); }
+
+/* ── opening ── */
+.salamBlock { padding: 56px 28px 60px; background: var(--bg); }
+.arabic { color: var(--accent2); }
+.salamKicker { letter-spacing: .08em; font-size: 14px; text-transform: none; font-family: var(--serif); font-style: italic; color: var(--muted); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 38px; }
+.intro { color: var(--muted); }
+
+/* ── couple: portraits are gongs ── */
+.couple { background: var(--paper); gap: 14px; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 214px; padding: 13px; border: 0; border-radius: 50%; background: var(--bronze-ring); box-shadow: 0 16px 30px rgba(60, 30, 10, .35), inset 0 0 0 2px rgba(255, 230, 170, .45); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: inset 0 0 0 3px rgba(40, 20, 8, .5); }
+.portrait::before { content: ""; position: absolute; left: 50%; top: -26px; width: 2px; height: 30px; background: #a8321f; translate: -50% 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { color: var(--gold-d); font-family: var(--serif); font-style: italic; font-size: 46px; margin: 14px 0 22px; }
+.amp img { width: 46px; }
+
+/* ── countdown: four bronze kettles on a night band ── */
+.countBand { padding: 66px 18px 150px; background: radial-gradient(ellipse 80% 50% at 50% 30%, rgba(200, 120, 50, .22), transparent 70%), var(--night); }
+.count { grid-template-columns: repeat(4, 76px); gap: 10px; }
+.count > div { height: 76px; border: 0; border-radius: 50%; background: var(--bronze); box-shadow: 0 8px 16px rgba(0, 0, 0, .5), inset 0 -4px 8px rgba(40, 20, 6, .5); }
+.count > div::after { border-radius: 50%; }
+.count b { color: #24120a; font-family: var(--display); font-size: 26px; text-shadow: 0 1px 0 rgba(255, 235, 190, .5); }
+.count small { color: #2a160a; font-family: var(--sc); font-size: 10px; font-style: normal; letter-spacing: .12em; }
+.ghostBtn { position: relative; z-index: 1; border-color: var(--gold); font-family: var(--sc); }
+.countBonang { position: absolute; z-index: -1; left: 50%; bottom: -14px; width: 440px; max-width: none; height: auto; translate: -50% 0; opacity: .92; }
+
+/* ── events: rancakan cards — red lacquer lid, cream body ── */
+.events { background: var(--bg); gap: 30px; }
+.event { padding: 0 20px 26px; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--ivory); box-shadow: 0 14px 28px rgba(60, 30, 10, .1); }
+.event::before { inset: 0 0 auto; height: 54px; border: 0; border-radius: 0; background: linear-gradient(180deg, #a83420, #8f2417 60%, #6b170d); box-shadow: inset 0 -3px 0 var(--gold); }
+.eventNo { position: relative; top: auto; left: auto; translate: none; width: 64px; height: 64px; margin: 20px 0 6px; border-radius: 50%; background: var(--bronze); color: #24120a; font-family: var(--display); font-size: 20px; letter-spacing: 0; box-shadow: 0 6px 12px rgba(40, 20, 6, .4); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--sc); }
+.rule { width: 70px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.mapBtn { background: var(--night-2); color: var(--gold-l); font-family: var(--sc); }
+.mapBtn:hover { background: var(--accent); }
+
+/* ── story: pencon nodes ── */
+.story { background: var(--paper); }
+.timeline::before { left: 25px; width: 2px; background: linear-gradient(var(--accent), color-mix(in srgb, var(--accent) 20%, transparent)); }
+.node { width: 46px; height: 32px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody small { color: var(--accent); font-family: var(--sc); }
+.storyBody h3 { color: var(--night-2); font-family: var(--display); font-size: 23px; }
+.storyBody p { color: var(--muted); }
+
+/* ── gallery: a gong of a photo, then a row of kettles ── */
+.gallery { background: var(--bg); }
+.mosaic { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; gap: 10px; }
+.tile { border-radius: 8px; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; justify-self: center; width: 320px; max-width: 100%; height: 320px; border-radius: 50%; border: 10px solid #a26c2c; box-shadow: 0 0 0 2px #f0cc84 inset, 0 14px 28px rgba(60, 30, 10, .3); }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+
+
+/* ── wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 0; border-top: 6px solid var(--accent); border-radius: 6px 6px 16px 16px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--sc); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--night-2); background: var(--night-2); color: var(--gold-l); }
+.submit { background: var(--accent); color: #fff4dc; font-family: var(--sc); letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border-left: 4px solid var(--gold); border-radius: 4px 14px 14px 4px; }
+.wish strong { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.sent { color: var(--accent); }
+.sentBox img { width: 110px; }
+
+/* ── gifts: lacquer boxes ── */
+.gifts { background: var(--bg); }
+.gift { border-radius: 10px; background: linear-gradient(180deg, #8f2417, #5e140b); box-shadow: inset 0 0 0 1px rgba(239, 205, 133, .45), inset 0 0 0 6px #8f2417, inset 0 0 0 7px rgba(239, 205, 133, .3), 0 14px 26px rgba(60, 20, 8, .25); }
+.gift::after { border-color: rgba(239, 205, 133, .08); }
+.gift h3 { font-family: var(--sc); }
+.giftNo { color: #fff1d2; font-family: var(--display); }
+.copy { font-family: var(--sc); }
+.copyOn, .copyOn:hover { color: var(--accent2); }
+
+/* ── closing: the gong strikes once more ── */
+.closing { padding: 60px 26px 210px; background: var(--night) url(/themes/art/gamelan/pendopo.webp) center / cover; }
+.closing .gongWrap { width: 200px; margin-bottom: 8px; }
+.closingInstr { position: absolute; z-index: -1; left: 0; right: 0; bottom: 10px; display: flex; align-items: flex-end; justify-content: center; gap: 0; pointer-events: none; }
+.closingInstr img:first-child { width: 150px; height: auto; margin-right: -18px; }
+.closingInstr img:last-child { width: 250px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; }
+.closingNames { color: #fbeed2; font-family: var(--display); font-size: 32px; }
+.family { font-family: var(--sc); }
+.made { position: relative; z-index: 1; padding: 3px 10px; border-radius: 999px; background: rgba(27, 17, 12, .7); }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── cover: the pendopo at night, the gong ageng, the bonang in front ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 26px 22px 0; overflow: hidden; background: var(--night) url(/themes/art/gamelan/pendopo.webp) center top / cover; color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: auto 0 0; height: 46%; background: linear-gradient(180deg, transparent, rgba(20, 12, 8, .75) 40%, rgba(20, 12, 8, .9)); }
+.kicker { color: var(--gold-l); font-family: var(--sc); font-size: 12px; letter-spacing: .3em; text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+.gongWrap { position: relative; width: 226px; margin-top: 10px; }
+.gongWrap img { display: block; width: 100%; height: auto; filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .55)); }
+.gongSwing { transform-origin: 50% 18%; }
+.ripple { position: absolute; left: 50%; top: 57.5%; width: 64%; aspect-ratio: 1; border: 2px solid rgba(240, 204, 132, .55); border-radius: 50%; translate: -50% -50%; scale: .5; opacity: 0; pointer-events: none; }
+.coverNames { margin-top: 14px; color: #fdf0d4; font-family: var(--display); font-size: 52px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-wrap: balance; text-shadow: 0 2px 14px rgba(0, 0, 0, .7); }
+.coverNames em { display: block; margin: 2px 0; color: var(--gold-l); font-family: var(--serif); font-size: 30px; font-style: italic; }
+.coverDate { margin-top: 8px; color: var(--gold-l); font-family: var(--sc); font-size: 15px; letter-spacing: .14em; text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 18px; width: 100%; }
+.guest { padding: 12px 18px; border-radius: 10px; background: rgba(27, 17, 12, .78); box-shadow: inset 0 0 0 1px rgba(239, 205, 133, .35); }
+.guest small { color: rgba(244, 230, 204, .85); font-size: 14px; }
+.guest strong { color: #fff3da; font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--sc); }
+.openBtn { min-width: 210px; background: linear-gradient(180deg, #f6d894, #d29c4c 45%, #a26a2a); color: #24120a; font-family: var(--sc); font-size: 14px; font-weight: 400; letter-spacing: .1em; box-shadow: 0 10px 22px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 248, 220, .8); }
+.openBtn:hover { translate: 0 -1px; box-shadow: 0 14px 28px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 248, 220, .8); }
+.coverBonang { position: relative; z-index: 1; width: 470px; max-width: none; height: auto; margin-top: auto; margin-bottom: -26px; padding-top: 18px; filter: drop-shadow(0 -6px 18px rgba(0, 0, 0, .4)); }
+
+/* ── motion: the gong breathes and its sound ripples out; the hero gong swings ── */
+.gongSwing { animation: gongSway 7s ease-in-out infinite alternate; }
+.heroGong { animation: gongSway 8s ease-in-out infinite alternate; }
+.ripple { animation: ripple 5.4s cubic-bezier(.2, .6, .3, 1) infinite; }
+.ripple:nth-of-type(2) { animation-delay: 1.8s; }
+.ripple:nth-of-type(3) { animation-delay: 3.6s; }
+@keyframes gongSway { from { rotate: -.8deg; } to { rotate: .8deg; } }
+@keyframes ripple { 0% { scale: .45; opacity: 0; } 12% { opacity: .9; } 100% { scale: 1.9; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .gongSwing, .heroGong, .ripple { animation: none; }
+  .ripple { display: none; }
+}

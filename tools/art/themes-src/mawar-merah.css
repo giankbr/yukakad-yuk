@@ -1,0 +1,131 @@
+/* Mawar Merah — mawar taman merah tua yang rimbun dengan daun gelap dan kuncup, dilukis gouache pekat di atas kertas krem hangat. Kartu bergaris ganda merah anggur, nama dalam serif italik tebal, potret oval. Romantis. */
+.root, .cover {
+  --bg: #f6ecdc; --paper: #f1e3cc; --ivory: #fcf6ec; --field: #fffaf2; --ink: #2e1612; --muted: #6b4a42; --line: #e0c9b0;
+  --accent: #7a1420; --accent2: #5a0e17; --gold: #a8323a; --gold-l: #f6e3cc; --gold-d: #8a1a24;
+  --leaf: #2f3b28;
+  --band-bg: #4a0c14; --band-ink: #f8ead8;
+  --display: "Playfair Display", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Playfair Display", Georgia, serif;
+  --rule: 3px double var(--accent);
+  --h2: 32px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #7a1420; --t-accent-ink: #f8ead8; --t-bg: #f6ecdc; --t-ink: #2e1612; --t-muted: #6b4a42; --t-line: #e0c9b0; --t-field: #fffaf2;
+  --t-radius: 4px; --t-font: "Lora", Georgia, serif; --t-heading-font: "Playfair Display", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.head h2, .headLight h2 { font-family: var(--display); font-style: italic; font-weight: 600; }
+.divider { width: 240px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 30px 30px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; font-style: italic; font-weight: 600; }
+.intro { color: var(--muted); }
+
+/* ── Couple: oval portraits ringed with a double rule, a rose at the foot ── */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 42px; }
+.portraitFrame { width: 196px; height: 250px; padding: 7px; border: var(--rule); border-radius: 50%; background: transparent; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitFrame > span { width: 100%; height: 100%; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #8e1b26, var(--band-bg)); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; font-style: italic; font-weight: 600; }
+.portraitRose { position: absolute; z-index: 2; left: 50%; bottom: -30px; width: 88px; height: auto; translate: -50% 0; filter: drop-shadow(0 4px 6px rgba(46, 22, 18, .25)); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 600; }
+.fullName { font-family: var(--serif); font-weight: 600; }
+.amp { color: var(--gold); font-family: var(--display); font-style: italic; }
+.amp img { width: 44px; }
+
+/* ── Countdown: wine band with roses tucked at the corners ── */
+.countBand { padding: 66px 18px; background: radial-gradient(120% 90% at 50% 0, #6a1420, var(--band-bg)); }
+.countRose { position: absolute; z-index: -1; width: 170px; height: auto; opacity: .9; }
+.countRoseL { left: -64px; top: -46px; rotate: 160deg; }
+.countRoseR { right: -64px; bottom: -50px; rotate: -20deg; }
+.headLight .eyebrow { color: #f0b9a8; }
+.count > div { height: 92px; border: 1px solid rgba(246, 227, 204, .5); border-radius: 4px; background: rgba(252, 246, 236, .06); box-shadow: inset 0 0 0 4px var(--band-bg), inset 0 0 0 5px rgba(246, 227, 204, .3); }
+.count b { font-family: var(--display); font-size: 30px; font-weight: 600; }
+.count small { font-family: var(--serif); }
+.ghostBtn { border-color: rgba(246, 227, 204, .6); font-family: var(--serif); font-weight: 600; }
+
+/* ── Events: letterpress cards with a double rule ── */
+.event { padding: 34px 22px 26px; border: var(--rule); border-radius: 2px; background: var(--ivory); }
+.event::before { inset: 7px; border: 1px solid var(--line); border-radius: 0; }
+.eventNo { top: -15px; width: auto; height: 30px; padding: 0 14px; border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 14px; font-style: italic; }
+.event h3 { font-family: var(--display); font-size: 25px; font-style: italic; font-weight: 600; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.rule { background: var(--gold); }
+.mapBtn { border-radius: 2px; background: var(--accent); font-family: var(--serif); font-weight: 600; }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { background: linear-gradient(var(--leaf), color-mix(in srgb, var(--leaf) 20%, transparent)); width: 2px; }
+.node { border: 0; background: none; }
+.node img { width: 40px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { font-family: var(--display); font-style: italic; font-weight: 600; }
+
+/* ── Gallery ── */
+.tile { border-radius: 2px; }
+.tile:first-child { border-radius: 999px 999px 2px 2px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: var(--rule); border-radius: 2px; background: var(--ivory); }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--serif); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 17px; font-style: italic; font-weight: 600; letter-spacing: .02em; }
+.wish { border-radius: 2px; border-left: 3px solid var(--gold); }
+.wish strong { font-family: var(--display); font-style: italic; font-weight: 600; }
+
+/* ── Gifts ── */
+.gift { border-radius: 2px; box-shadow: inset 0 0 0 6px var(--band-bg), inset 0 0 0 7px rgba(246, 227, 204, .35); }
+.gift h3 { font-family: var(--display); font-style: italic; font-weight: 600; font-size: 19px; }
+.giftNo { font-family: var(--serif); font-weight: 600; }
+.copy { border-radius: 2px; font-family: var(--serif); font-weight: 600; }
+
+/* ── Closing ── */
+.closing { padding-top: 0; }
+.closingBank { display: block; width: calc(100% + 56px); max-width: none; height: auto; margin: -40px -28px 8px; }
+.thanks { font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 600; }
+.closingNames { font-family: var(--display); font-style: italic; font-weight: 600; }
+.music { border-color: var(--gold-l); }
+
+/* ── Cover: letterpress card with a bank of roses spilling over its top edge ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 26px; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 14px; border: var(--rule); pointer-events: none; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 21px; border: 1px solid var(--line); pointer-events: none; }
+.bank { display: block; width: 112%; max-width: none; height: auto; margin: -6px -6% 0; transform-origin: 50% 0; animation: bankIn 1.6s var(--m-ease) both; }
+.coverBody { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; padding: 0 36px; margin: auto 0; animation: rise 1.3s var(--m-ease) .35s both; }
+.kicker { color: var(--gold-d); font-size: 12px; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold); font-size: 30px; font-weight: 500; }
+.coverDate { display: flex; align-items: center; gap: 12px; color: var(--ink); font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.coverDivider { width: 230px; height: auto; margin-top: 8px; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 10px 36px 78px; animation: rise 1.3s var(--m-ease) .6s both; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 600; letter-spacing: .1em; }
+.openBtn { position: relative; z-index: 2; border-radius: 2px; background: var(--accent); color: var(--gold-l); font-family: var(--display); font-size: 17px; font-style: italic; font-weight: 600; letter-spacing: .02em; box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--accent), 0 12px 22px rgba(74, 12, 20, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.coverSpray { position: absolute; z-index: 1; right: -30px; bottom: -40px; width: 200px; height: auto; rotate: 8deg; pointer-events: none; animation: sway 7s ease-in-out infinite alternate; transform-origin: 100% 100%; }
+.coverSprayL { right: auto; left: -40px; scale: -1 1; rotate: -8deg; transform-origin: 50% 100%; width: 150px; bottom: -34px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 48px 26px 40px; overflow: hidden; background: var(--bg); text-align: center; isolation: isolate; }
+.heroFrame { position: relative; width: 260px; margin-bottom: 50px; }
+.heroPhoto { display: grid; width: 260px; height: 340px; padding: 8px; overflow: hidden; border: var(--rule); border-radius: 130px 130px 2px 2px; grid-template: minmax(0, 1fr) / minmax(0, 1fr); }
+.heroPhoto > img { width: 100%; height: 100%; border-radius: 122px 122px 0 0; object-fit: cover; }
+.heroSpray { position: absolute; z-index: 2; left: -58px; bottom: -44px; width: 190px; height: auto; scale: -1 1; animation: sway 8s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+.heroRose { position: absolute; z-index: 2; right: -18px; top: 26px; width: 74px; height: auto; rotate: 18deg; }
+.heroKicker { color: var(--gold-d); font-size: 12px; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 600; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--gold); font-weight: 500; }
+.heroDate { font-weight: 600; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.heroNote { max-width: 320px; margin-top: 8px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes bankIn { from { opacity: 0; translate: 0 -24px; } }
+@keyframes rise { from { opacity: 0; translate: 0 12px; } }
+@media (prefers-reduced-motion: reduce) {
+  .bank, .coverBody, .guestWrap, .coverSpray, .heroSpray { animation: none; }
+}

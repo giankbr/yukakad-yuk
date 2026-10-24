@@ -1,0 +1,156 @@
+/* Sape Dayak — sape Dayak berukir (badan perahu bercat sulur kelawit hitam-merah) berdiri di tepi sungai berkabut, hutan hujan, dan lamin di kejauhan. Kartu acara bergaris fret, potret berbentuk badan sape, judul rata kiri. */
+.root, .cover {
+  --bg: #eef0e9; --paper: #f4ecdc; --ivory: #fbf7ee; --field: #fffdf8; --ink: #17261f; --muted: #4a5a52; --line: #d9d2bf;
+  --accent: #1f3a30; --accent2: #142821; --gold: #b0341f; --gold-l: #f3e6c8; --gold-d: #a8321e;
+  --wood: #8c4a25; --wood-d: #4a2412; --fret: #d4a868;
+  --band-bg: #1a2d25; --band-ink: #f3ecdc;
+  --display: "Young Serif", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Young Serif", Georgia, serif;
+  --sans: "Alegreya Sans", system-ui, sans-serif;
+  --h2: 32px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f3a30; --t-accent-ink: #f3ecdc; --t-bg: #eef0e9; --t-ink: #17261f; --t-muted: #4a5a52; --t-line: #d9d2bf; --t-field: #fffdf8;
+  --t-radius: 14px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: left; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.divider { width: 210px; }
+
+/* left-aligned section heads with a red sape-string rule */
+.head { align-items: flex-start; width: 100%; padding-left: 16px; border-left: 3px solid var(--gold); text-align: left; }
+.head h2 { color: var(--ink); text-wrap: balance; }
+.head .divider { margin-left: -6px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 46px 28px 56px; background: linear-gradient(var(--paper), var(--bg)); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; line-height: 1.15; }
+.salamSub { color: var(--muted); font-family: var(--serif); font-style: italic; }
+.intro { color: var(--muted); }
+
+/* ── Couple: portrait beside the text, alternating sides ── */
+.couple { align-items: stretch; gap: 22px; background: var(--paper); }
+.person { display: grid; grid-template-columns: 128px minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 18px; row-gap: 3px; align-items: start; text-align: left; }
+.person > :not(.portrait) { grid-column: 2; }
+.portrait { grid-column: 1; grid-row: 1 / span 4; margin: 0; }
+.personWrap:last-child .person { grid-template-columns: minmax(0, 1fr) 128px; text-align: right; }
+.personWrap:last-child .person > :not(.portrait) { grid-column: 1; justify-self: end; }
+.personWrap:last-child .portrait { grid-column: 2; }
+.portraitFrame { width: 128px; height: 184px; padding: 4px; border: 0; border-radius: 50% 50% 46% 46% / 26% 26% 74% 74%; background: var(--wood); box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--wood-d), 0 14px 24px rgba(23, 38, 31, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50% 50% 46% 46% / 26% 26% 74% 74%; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 64px; }
+.role { margin-top: 18px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 38px; line-height: 1.05; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { max-width: none; font-size: 15px; text-wrap: pretty; }
+.amp { justify-content: center; margin: 2px 0; color: var(--gold); font-family: var(--serif); font-size: 42px; font-style: italic; }
+.amp img { width: 46px; }
+
+/* ── Countdown: night river, lens-shaped (perahu) counters ── */
+.countBand { padding: 64px 20px 66px; background: radial-gradient(120% 70% at 50% 110%, #2c4a3d, var(--band-bg) 70%); }
+.countDecor { position: absolute; z-index: -1; width: 170px; height: auto; opacity: .16; filter: invert(1) sepia(.4); }
+.countDecorL { top: -50px; left: -60px; }
+.countDecorR { right: -60px; bottom: -50px; }
+.headLight .eyebrow { color: #e9b39f; }
+.headLight h2 { font-family: var(--display); font-size: 30px; }
+.count > div { height: 92px; border: 1.5px solid rgba(243, 230, 200, .45); border-radius: 50% / 34%; background: rgba(243, 236, 220, .06); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 28px; }
+.count small { font-family: var(--sans); font-size: 12px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(243, 230, 200, .6); color: var(--gold-l); font-family: var(--sans); font-weight: 700; letter-spacing: .06em; }
+
+/* ── Events: cards with a fretted sape-neck edge ── */
+.events { align-items: stretch; background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 20px 24px 36px; border: 1px solid var(--line); border-radius: 6px 22px 22px 6px; background: var(--ivory); text-align: left; overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 16px; border: 0; border-radius: 0; background: repeating-linear-gradient(var(--wood) 0 26px, var(--fret) 26px 31px); box-shadow: inset -3px 0 0 var(--wood-d); }
+.event:hover { border-color: var(--wood); }
+.eventNo { top: 18px; right: 18px; left: auto; width: auto; height: auto; translate: none; background: none; color: var(--gold); font-family: var(--display); font-size: 26px; letter-spacing: 0; }
+.event h3 { max-width: 82%; color: var(--accent); font-family: var(--display); font-size: 23px; text-wrap: balance; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--sans); font-weight: 700; }
+.rule { width: 46px; height: 3px; background: var(--gold); }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { background: var(--accent); color: var(--gold-l); font-family: var(--sans); font-weight: 700; letter-spacing: .04em; }
+
+/* ── Story ── */
+.story { align-items: stretch; background: var(--paper); }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--wood) 0 22px, var(--fret) 22px 26px); }
+.node { width: 38px; height: 38px; border: 2px solid var(--wood); background: var(--ivory); }
+.node img { width: 28px; }
+.storyBody small { color: var(--gold-d); font-family: var(--sans); font-weight: 700; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+
+/* ── Gallery ── */
+.gallery { align-items: stretch; background: var(--bg); }
+.mosaic { grid-auto-rows: 140px; }
+.tile { border-radius: 6px; }
+.tile:first-child { border-radius: 50% 50% 46% 46% / 22% 22% 30% 30%; }
+
+/* ── Wishes ── */
+.wishes { align-items: stretch; background: var(--paper); }
+.form { border: 1px solid var(--line); border-top: 6px solid var(--wood); border-radius: 6px 6px 18px 18px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--sans); font-weight: 700; }
+.choices button { font-family: var(--sans); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.submit { background: var(--gold-d); color: #fff; font-family: var(--sans); font-size: 16px; font-weight: 700; letter-spacing: .06em; }
+.submit:not(:disabled):hover { background: #8e2816; }
+.sent { color: var(--accent); }
+.wish { border-left: 4px solid var(--gold); border-radius: 4px 14px 14px 4px; }
+.wish strong { color: var(--accent); font-family: var(--sans); font-weight: 700; }
+.wish small { background: color-mix(in srgb, var(--gold) 12%, transparent); color: var(--gold-d); font-family: var(--sans); font-weight: 700; }
+
+/* ── Gifts ── */
+.gifts { align-items: stretch; background: var(--bg); }
+.gift { border-radius: 6px 22px 22px 6px; background: var(--band-bg); }
+.gift::after { right: -30px; bottom: -30px; border-color: rgba(212, 168, 104, .1); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); }
+.giftNo { font-family: var(--display); font-size: 21px; }
+.copy { border-color: rgba(243, 230, 200, .6); font-family: var(--sans); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* ── Closing: back to the river at dusk ── */
+.closing { padding: 74px 28px 64px; background: linear-gradient(rgba(20, 36, 29, .62), rgba(20, 36, 29, .94) 62%), url(/themes/art/sape-dayak/scene.webp) 50% 100% / cover; }
+.medal { display: grid; place-items: center; width: 92px; height: 92px; border: 2px solid var(--fret); border-radius: 999px; background: var(--paper); box-shadow: 0 0 0 6px rgba(243, 236, 220, .12); }
+.medal img { width: 70px; height: auto; animation: turn 40s linear infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 42px; }
+.closingSalam { color: #e9b39f; font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.family { font-family: var(--sans); }
+.closingNames { font-family: var(--display); font-size: 32px; }
+.music { border-color: var(--gold-l); background: var(--gold-d); }
+
+/* ── Cover: misty river forest, the sape standing on the right, text in the mist on the left ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 100dvh; padding: 44px 22px 26px; overflow: hidden; background: #dfe5df url(/themes/art/sape-dayak/scene.webp) 50% 100% / cover no-repeat; color: var(--ink); text-align: left; isolation: isolate; }
+.mist { position: absolute; z-index: 0; inset: 30% -30% 20%; background: radial-gradient(40% 30% at 30% 50%, rgba(240, 243, 236, .7), transparent 70%), radial-gradient(35% 25% at 75% 60%, rgba(240, 243, 236, .55), transparent 70%); pointer-events: none; animation: drift 16s ease-in-out infinite alternate; }
+.coverText { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; max-width: 64%; animation: rise 1.4s var(--m-ease) both; }
+.kicker { color: var(--gold-d); font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.04; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold); font-family: var(--serif); font-size: 32px; font-weight: 700; }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 6px; color: var(--accent); font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .06em; }
+.coverDate::before { content: ""; width: 26px; height: 3px; background: var(--gold); }
+.coverCurl { width: 54px; height: auto; margin-top: 6px; animation: turn 50s linear infinite; }
+.sapeWrap { position: absolute; z-index: 1; right: 16px; bottom: 2.5dvh; height: min(74dvh, 620px); aspect-ratio: 240 / 1058; rotate: 4deg; transform-origin: 50% 100%; }
+.sape { display: block; width: 100%; height: 100%; transform-origin: 50% 92%; animation: sway 6.5s ease-in-out infinite alternate; }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; width: 66%; margin-top: auto; animation: rise 1.4s var(--m-ease) .3s both; }
+.guest { align-items: flex-start; padding: 12px 14px; border-left: 4px solid var(--gold); border-radius: 4px 14px 14px 4px; background: rgba(251, 247, 238, .94); box-shadow: 0 10px 24px rgba(23, 38, 31, .18); text-align: left; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; text-wrap: pretty; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--sans); font-weight: 700; }
+.openBtn { min-width: 0; width: 100%; background: var(--accent); color: var(--gold-l); font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: .08em; box-shadow: 0 10px 22px rgba(23, 38, 31, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 46px 24px 50px; overflow: hidden; background: linear-gradient(#dfe6df, var(--bg) 70%); text-align: center; isolation: isolate; }
+.heroPhotoWrap { position: relative; margin-bottom: 8px; }
+.heroPhoto { display: grid; width: 230px; height: 320px; padding: 5px; overflow: hidden; border-radius: 50% 50% 46% 46% / 26% 26% 74% 74%; background: var(--wood); box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--wood-d), 0 22px 40px rgba(23, 38, 31, .25); grid-template: minmax(0, 1fr) / minmax(0, 1fr); }
+.heroPhoto > img { width: 100%; height: 100%; border-radius: 50% 50% 46% 46% / 26% 26% 74% 74%; object-fit: cover; }
+.heroCurl { position: absolute; z-index: 2; left: 50%; bottom: -22px; width: 58px; height: auto; translate: -50% 0; filter: drop-shadow(0 0 0 var(--bg)) drop-shadow(0 2px 3px rgba(0, 0, 0, .2)); animation: turn 50s linear infinite; }
+.heroKicker { margin-top: 18px; color: var(--gold-d); font-family: var(--sans); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--gold); font-family: var(--serif); font-weight: 700; }
+.heroDate { color: var(--accent); font-family: var(--sans); font-weight: 700; letter-spacing: .06em; }
+.heroNote { max-width: 320px; margin-top: 6px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+@keyframes rise { from { opacity: 0; translate: 0 14px; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .mist, .coverText, .guestWrap, .sape, .coverCurl, .heroCurl, .medal img { animation: none; }
+}

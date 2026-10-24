@@ -1,0 +1,164 @@
+/* Pacu Jalur — walimah Melayu Kuantan Singingi bergaya lukisan gouache rakyat: jalur panjang berukir dengan haluan bercat kuning-merah dan barisan anak pacu yang mendayung di Batang Kuantan, tepian penuh penonton dan rumah panggung, umbul-umbul bambu yang berkibar, bendera segitiga; potret berbentuk umbul-umbul, hitung mundur berlajur seperti lintasan pacu, kartu acara bergaya papan nomor jalur. */
+.root, .cover {
+  --bg: #f6ead0; --paper: #efdfbb; --ivory: #fffaec; --field: #fffdf5; --ink: #2a1a12; --muted: #5c4a3c; --line: #dcc69a;
+  --accent: #1f4d3c; --accent2: #2a6450; --gold: #e9b52c; --gold-l: #f6d36a; --gold-d: #9a6a12;
+  --band-bg: #24493d; --band-ink: #fbf3df;
+  --red: #c0352a; --red-d: #8a2219; --yel: #e9b52c; --grn: #2f7a4c; --teak: #5a3420;
+  --display: "Alegreya", Georgia, serif; --serif: "Alegreya Sans", system-ui, sans-serif; --script: "Alegreya", Georgia, serif; --label: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --stripe: linear-gradient(90deg, var(--red) 0 25%, var(--yel) 25% 50%, var(--grn) 50% 75%, #f3ecdc 75%);
+  --h2: 33px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f4d3c; --t-accent-ink: #fbf3df; --t-bg: #f6ead0; --t-ink: #2a1a12; --t-muted: #5c4a3c; --t-line: #dcc69a; --t-field: #fffdf5;
+  --t-radius: 6px; --t-font: "Alegreya Sans", system-ui, sans-serif; --t-heading-font: "Alegreya", Georgia, serif; --t-heading-weight: 800; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--red); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 800; letter-spacing: -.01em; }
+.divider { width: 200px; }
+
+/* ── Cover: bunting across the sky, umbul-umbul on both banks, names on a race board, the jalur racing below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 74px 24px 0; overflow: hidden; background: radial-gradient(120% 60% at 50% 0, #fbf3df, transparent 70%), var(--bg); text-align: center; isolation: isolate; }
+.bunting { position: absolute; z-index: 0; top: -4px; left: -10px; width: calc(100% + 20px); height: auto; transform-origin: 50% 0; animation: flutter 5s ease-in-out infinite alternate; }
+.umbul { position: absolute; z-index: 0; top: 26px; width: 50px; height: auto; transform-origin: 30% 100%; animation: sway 4.5s ease-in-out infinite alternate; }
+.umbulL { left: 2px; }
+.umbulR { right: 2px; scale: -1 1; transform-origin: 50% 100%; animation-delay: -2s; }
+.kicker { position: relative; z-index: 1; padding: 6px 16px 6px 20px; background: var(--red); color: #fff; font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%); }
+.place { position: relative; z-index: 1; margin-top: 10px; color: var(--accent); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.coverNames { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; max-width: 270px; margin-top: 12px; color: var(--accent); font-family: var(--display); font-size: 54px; font-weight: 800; line-height: .98; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--red); font-size: 34px; font-style: italic; font-weight: 500; }
+.board { position: relative; z-index: 1; display: flex; align-items: stretch; margin-top: 18px; border: 2.5px solid var(--teak); border-radius: 4px; background: var(--yel); box-shadow: 4px 4px 0 var(--teak); }
+.board span { display: grid; place-items: center; padding: 0 10px; background: var(--teak); color: var(--yel); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.board strong { padding: 7px 14px; color: var(--ink); font-family: var(--label); font-size: 17px; font-weight: 700; letter-spacing: .04em; }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 310px; margin-top: 22px; }
+.cover .guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 700; }
+.table { border: 1.5px solid var(--grn); color: var(--accent); font-family: var(--label); font-size: 12px; font-weight: 600; }
+.openBtn { background: var(--accent); color: #fff; font-family: var(--label); font-size: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 5px 0 var(--yel), 0 10px 20px rgba(31, 77, 60, .3); }
+.openBtn:hover { background: var(--accent2); }
+.stage { position: relative; z-index: 0; width: calc(100% + 48px); margin: auto -24px 0; padding-top: 18px; aspect-ratio: 780 / 470; }
+.river { position: absolute; inset: auto 0 0; width: 100%; height: auto; }
+.boat { position: absolute; left: 0; bottom: 6%; width: 100%; height: auto; animation: row 3.2s ease-in-out infinite; }
+
+/* ── Hero: a landscape photo under umbul stripes ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 22px 40px; background: var(--bg); text-align: center; }
+.heroKicker { color: var(--red); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 800; line-height: 1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--red); font-style: italic; font-weight: 500; }
+.heroDate { margin-top: 10px; color: var(--muted); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 100%; margin-top: 26px; padding: 12px 0 0; background: var(--stripe) 0 0 / 100% 12px no-repeat; box-shadow: 0 12px 26px rgba(42, 26, 18, .16); }
+.heroPhoto { display: grid; width: 100%; height: 230px; overflow: hidden; border: 3px solid var(--teak); border-top: 0; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroMini { width: 230px; height: auto; margin-top: 24px; }
+.heroNote { max-width: 320px; margin-top: 18px; color: var(--muted); font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.5; text-wrap: balance; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 26px 28px 56px; background: var(--bg); }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 25px; font-weight: 700; line-height: 1.3; }
+.intro { font-size: 16.5px; }
+
+/* couple: portraits cut like umbul-umbul banners with a forked tail */
+.couple { gap: 16px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 270px; padding: 0; border: 0; border-radius: 0; background: var(--stripe) 0 0 / 100% 14px no-repeat, var(--teak); clip-path: polygon(0 0, 100% 0, 100% 88%, 75% 100%, 50% 90%, 25% 100%, 0 88%); padding: 14px 6px 6px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% 87%, 75% 99%, 50% 89%, 25% 99%, 0 87%); }
+.person:hover .portraitFrame { box-shadow: none; }
+.portraitPole { position: absolute; z-index: 2; top: -16px; right: -46px; width: 40px; height: auto; transform-origin: 30% 100%; animation: sway 5s ease-in-out infinite alternate; }
+.monogram { color: var(--yel); font-family: var(--display); font-size: 96px; font-weight: 800; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 800; }
+.fullName { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.parents { font-size: 15.5px; }
+.amp { color: var(--red); font-family: var(--display); font-size: 46px; font-style: italic; }
+.amp img { width: 34px; }
+
+/* countdown: four lanes of the race course */
+.countBand { gap: 22px; padding: 62px 22px 64px; background: repeating-linear-gradient(180deg, transparent 0 46px, rgba(255, 255, 255, .05) 46px 48px), var(--band-bg); }
+.headLight .eyebrow { color: var(--yel); }
+.headLight h2 { font-family: var(--display); font-weight: 800; }
+.count { grid-template-columns: 1fr; gap: 8px; width: 100%; max-width: 320px; }
+.count > div { flex-direction: row; justify-content: space-between; height: 56px; padding: 0 18px 0 14px; border: 0; border-left: 8px solid var(--c, var(--red)); border-radius: 3px; background: rgba(255, 250, 236, .08); }
+.count > div:nth-child(2) { --c: var(--yel); }
+.count > div:nth-child(3) { --c: var(--grn); }
+.count > div:nth-child(4) { --c: #f3ecdc; }
+.count > div::before { content: ""; position: absolute; left: 70px; right: 104px; top: 50%; height: 0; border-top: 2px dotted rgba(246, 211, 106, .5); }
+.count b { color: #fff; font-family: var(--label); font-size: 32px; font-weight: 700; }
+.count small { color: var(--yel); font-family: var(--label); font-size: 14px; font-style: normal; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.countTba { color: var(--yel); font-family: var(--label); }
+.ghostBtn { border: 2px solid var(--yel); color: #fff; font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .08em; }
+
+/* events: race-number boards */
+.events { gap: 22px; background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 20px 22px 26px; border: 2px solid var(--teak); border-left: 10px solid var(--red); border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: 5px 5px 0 rgba(90, 52, 32, .2); }
+.event:nth-child(odd of .event) { border-left-color: var(--grn); }
+.event::before { display: none; }
+.event:hover { border-color: var(--teak); }
+.eventNo { top: 14px; right: 14px; left: auto; translate: none; width: auto; height: auto; padding: 4px 10px; border-radius: 2px; background: var(--yel); color: var(--ink); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .1em; }
+.eventNo::before { content: "Jalur "; }
+.event h3 { max-width: calc(100% - 90px); color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 800; text-wrap: wrap; }
+.eventDate { color: var(--ink); font-family: var(--display); font-size: 17px; font-weight: 500; }
+.eventTime { color: var(--red); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+.rule { width: 100%; height: 6px; margin: 8px 0; background: var(--stripe) 0 0 / 120px 6px repeat-x; opacity: .85; }
+.event strong { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; box-shadow: 3px 3px 0 var(--yel); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(var(--red) 0 10px, var(--yel) 10px 20px, var(--grn) 20px 30px); }
+.node { width: 40px; height: 40px; border: 2px solid var(--teak); background: var(--ivory); }
+.node img { width: 22px; }
+.storyBody small { color: var(--red); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 800; }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 3px; border: 2px solid var(--teak); }
+.tile:first-child { border-radius: 3px; clip-path: polygon(0 0, 100% 0, 100% 92%, 50% 100%, 0 92%); }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 2px solid var(--teak); border-radius: 4px; box-shadow: 5px 5px 0 rgba(90, 52, 32, .2); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .12em; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; font-family: var(--label); font-size: 16px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: inset 0 -4px 0 var(--yel); }
+.step { border: 2px solid var(--accent); border-radius: 3px; }
+.submit { border-radius: 3px; background: var(--red); color: #fff; font-family: var(--label); font-size: 16px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--red-d); }
+.sentBox img { width: 200px; }
+.sent { font-family: var(--display); font-size: 21px; }
+.wish { border-left: 5px solid var(--yel); border-radius: 3px; }
+.wish strong { font-family: var(--display); font-weight: 700; }
+.wish small { background: rgba(47, 122, 76, .14); color: var(--accent); font-family: var(--label); font-size: 13px; font-weight: 600; }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: 4px; background: var(--stripe) 0 0 / 100% 8px no-repeat, var(--band-bg); padding-top: 28px; }
+.gift::after { border-color: rgba(246, 211, 106, .08); }
+.gift h3 { color: var(--yel); font-family: var(--label); font-size: 17px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.giftIcon { border-color: rgba(246, 211, 106, .5); }
+.giftNo { font-family: var(--label); font-size: 24px; font-weight: 700; letter-spacing: .06em; line-height: 1.25; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; font-weight: 500; letter-spacing: 0; line-height: 1.5; }
+.copy { border: 2px solid var(--yel); border-radius: 3px; color: #fff; font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .08em; }
+.copyOn, .copyOn:hover { background: var(--yel); color: var(--ink); }
+
+/* closing: the river again, the jalur crossing the finish */
+.closing { padding: 60px 24px 0; background: var(--bg); color: var(--ink); }
+.closing .thanks { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 800; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--red); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .1em; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 800; }
+.closingEmblem { width: 220px; height: auto; }
+.closingStage { position: relative; order: 10; width: calc(100% + 48px); margin: 18px -24px 0; aspect-ratio: 780 / 430; }
+.closingStage .river { bottom: 0; }
+.made { order: 11; width: calc(100% + 48px); margin: 0 -24px; padding: 4px 0 18px; background: #33584a; color: rgba(251, 243, 223, .8); }
+.made:hover { color: var(--yel); }
+.music { border-color: var(--yel); background: var(--accent); }
+
+@keyframes row { 0%, 100% { translate: -6px 0; rotate: 0deg; } 50% { translate: 8px -4px; rotate: -.6deg; } }
+@keyframes flutter { from { rotate: -.6deg; } to { rotate: .6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .bunting, .umbul, .boat, .portraitPole { animation: none; }
+}

@@ -1,0 +1,159 @@
+/* Gading Syari — kartu gading tanpa foto dengan garis foil emas setipis rambut, medali geometri bintang delapan yang kecil, sudut foil, dan ruang kosong yang lapang. Bersih, tenang, dan syar'i. */
+.root, .cover {
+  --bg: #f7f1e3; --paper: #f3ecdb; --ivory: #fbf8ef; --field: #fffdf7; --ink: #2f2a22; --muted: #6a6152; --line: #e3d7bd;
+  --accent: #3a3328; --accent2: #2a241c; --gold: #b38c48; --gold-l: #f3e6c4; --gold-d: #8a6a32;
+  --band-bg: #efe6d1; --band-ink: #2f2a22;
+  --display: "Prata", Georgia, serif; --serif: "EB Garamond", Georgia, serif; --script: "Gilda Display", Georgia, serif; --label: "Tenor Sans", system-ui, sans-serif;
+  --foil: url(/themes/art/gading-syari/foil.webp) 0 0 / 256px 256px;
+  --h2: 28px; --card-r: 0;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) url(/themes/art/gading-syari/paper.webp) 0 0 / 120px 120px; line-height: normal;
+}
+.root {
+  --t-accent: #3a3328; --t-accent-ink: #fbf8ef; --t-bg: #f7f1e3; --t-ink: #2f2a22; --t-muted: #6a6152; --t-line: #e3d7bd; --t-field: #fffdf7;
+  --t-radius: 0px; --t-font: "EB Garamond", Georgia, serif; --t-heading-font: "Prata", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--label); font-size: 11px; letter-spacing: .34em; }
+.head { gap: 12px; }
+.head h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 230px; }
+.section { padding: 76px 30px; }
+
+/* ── Opening ── */
+.salamBlock { gap: 14px; padding: 76px 34px 70px; }
+.arabic { color: var(--gold-d); font-size: 28px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 26px; line-height: 1.35; }
+.intro { color: var(--muted); font-size: 18px; }
+
+/* ── Couple: monogram seals in a foil hairline ring, a faint medallion behind ── */
+.couple { gap: 20px; background: transparent; }
+.portrait { margin-bottom: 18px; isolation: isolate; }
+.portraitFrame { width: 176px; height: 176px; padding: 0; border: 1px solid transparent; border-radius: 50%; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--foil) border-box; box-shadow: 0 0 0 7px var(--bg), 0 0 0 8px rgba(179, 140, 72, .55); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 0 0 7px var(--bg), 0 0 0 8px var(--gold); }
+.portraitMedal { position: absolute; z-index: -1; left: 50%; top: 50%; width: 250px; height: auto; translate: -50% -50%; opacity: .6; animation: turn 160s linear infinite; }
+.monogram { color: var(--gold-d); font-family: var(--display); font-size: 70px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 36px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 19px; font-weight: 500; }
+.parents { color: var(--muted); }
+.amp { margin: 22px 0 18px; color: var(--gold-d); font-family: var(--script); font-size: 34px; }
+.amp img { width: 26px; }
+
+/* ── Countdown: champagne band, four foil-edged cells ── */
+.countBand { padding: 70px 24px; background: var(--band-bg); }
+.countBand::before, .countBand::after { content: ""; position: absolute; left: 24px; right: 24px; height: 1px; background: var(--foil); }
+.countBand::before { top: 14px; }
+.countBand::after { bottom: 14px; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--ink); }
+.count { gap: 10px; }
+.count > div { height: 90px; border: 1px solid transparent; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--foil) border-box; }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(230, 200, 130, .22) 50%, transparent 65%); }
+.count b { color: var(--ink); font-family: var(--display); font-size: 28px; }
+.count small { color: var(--muted); font-family: var(--label); font-size: 11px; font-style: normal; letter-spacing: .14em; }
+.countTba { color: var(--gold-d); }
+.ghostBtn { border-color: var(--gold); color: var(--ink); font-family: var(--label); font-size: 12px; letter-spacing: .14em; }
+.ghostBtn:hover { background: rgba(179, 140, 72, .1); }
+
+/* ── Events: ivory cards in a double foil hairline ── */
+.events { gap: 26px; background: transparent; }
+.event { padding: 40px 24px 30px; border: 1px solid transparent; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--foil) border-box; }
+.event::before { inset: 6px; border: 1px solid rgba(179, 140, 72, .45); border-radius: 0; }
+.event:hover { box-shadow: 0 16px 34px rgba(90, 70, 30, .08); }
+.eventNo { top: -12px; width: 38px; height: 24px; border-radius: 0; background: var(--bg); color: var(--gold-d); font-family: var(--label); font-size: 11px; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 22px; }
+.eventDate { color: var(--ink); font-style: normal; }
+.eventTime { color: var(--gold-d); font-family: var(--label); font-size: 13px; letter-spacing: .06em; }
+.rule { width: 46px; background: var(--foil); }
+.event strong { font-weight: 500; }
+.mapBtn { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); font-size: 12px; letter-spacing: .14em; box-shadow: none; }
+.mapBtn:hover { background: #4a4234; }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: var(--foil); }
+.node { border: 0; background: transparent; }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); font-size: 11px; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 19px; }
+
+.gallery { background: transparent; }
+.tile, .tile:first-child { border-radius: 0; }
+
+/* ── Wishes ── */
+.wishes { background: transparent; }
+.form { border: 1px solid transparent; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--foil) border-box; box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--label); font-size: 11px; letter-spacing: .18em; }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; font-family: var(--label); font-size: 13px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--ivory); }
+.step { border-color: var(--gold); color: var(--ink); }
+.submit { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); font-size: 12px; letter-spacing: .2em; }
+.submit:not(:disabled):hover { background: #4a4234; box-shadow: none; }
+.wish { border-radius: 0; background: var(--ivory); border-color: var(--line); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 15px; }
+.wish small { border-radius: 0; background: transparent; border: 1px solid var(--gold); color: var(--gold-d); font-family: var(--label); font-size: 10px; letter-spacing: .1em; }
+
+/* ── Gifts ── */
+.gifts { background: var(--paper); }
+.gift { border: 1px solid transparent; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--foil) border-box; color: var(--ink); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold); }
+.gift h3 { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .24em; text-transform: uppercase; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.gift small { color: var(--muted); }
+.copy { border-radius: 0; border-color: var(--gold); color: var(--ink); font-family: var(--label); font-size: 11px; letter-spacing: .14em; }
+.copy:hover { background: rgba(179, 140, 72, .1); }
+.copyOn, .copyOn:hover { background: var(--ink); border-color: var(--ink); color: var(--ivory); }
+
+/* ── Closing ── */
+.closing { gap: 14px; padding: 80px 30px 70px; background: var(--bg); color: var(--ink); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 18px; border: 1px solid transparent; background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--foil) border-box; }
+.closingEmblem { width: 96px; height: auto; margin-bottom: 6px; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--label); font-size: 11px; letter-spacing: .2em; }
+.family { color: var(--muted); font-family: var(--label); font-size: 12px; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 28px; }
+.made { color: rgba(47, 42, 34, .5); }
+.made:hover { color: var(--gold-d); }
+.music { border-color: var(--gold); background: var(--ivory); }
+
+/* ── Cover: ivory card, a foil double frame with corner knots, a small medallion, lots of air ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 64px 40px 60px; overflow: hidden; background: var(--bg) url(/themes/art/gading-syari/paper.webp) 0 0 / 120px 120px; color: var(--ink); text-align: center; isolation: isolate; }
+.frame { position: absolute; z-index: -1; inset: 16px; border: 1px solid transparent; animation: sheen 14s linear infinite; background: url(/themes/art/gading-syari/paper.webp) 0 0 / 120px 120px padding-box, var(--foil) border-box; }
+.frame::after { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(179, 140, 72, .5); }
+.corner { position: absolute; z-index: 0; width: 92px; height: auto; }
+.cTL { top: 8px; left: 8px; }
+.cTR { top: 8px; right: 8px; scale: -1 1; }
+.cBL { bottom: 8px; left: 8px; scale: 1 -1; }
+.cBR { bottom: 8px; right: 8px; scale: -1 -1; }
+.medal { width: 112px; height: auto; animation: turn 160s linear infinite; }
+.arabicTop { margin-top: 26px; color: var(--gold-d); font-family: Amiri, serif; font-size: 25px; line-height: 1.6; }
+.kicker { margin-top: 14px; color: var(--gold-d); font-family: var(--label); font-size: 11px; letter-spacing: .4em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 22px; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.12; overflow-wrap: anywhere; }
+.coverNames em { color: var(--gold-d); font-family: var(--script); font-size: 26px; font-style: normal; }
+.coverDivider { width: 200px; height: auto; margin-top: 22px; }
+.coverDate { margin-top: 14px; color: var(--ink); font-family: var(--label); font-size: 13px; letter-spacing: .24em; text-transform: uppercase; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 290px; margin-top: 34px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); }
+.openBtn { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); font-size: 13px; letter-spacing: .2em; text-transform: uppercase; box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px var(--gold); }
+.openBtn:hover { background: #4a4234; }
+
+/* ── Hero (no photo): medallion, names, note ── */
+.hero { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 72px 30px 30px; text-align: center; }
+.heroMedal { width: 132px; height: auto; margin-bottom: 8px; animation: turn 160s linear infinite; }
+.heroKicker { color: var(--gold-d); font-family: var(--label); font-size: 11px; letter-spacing: .36em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-style: normal; }
+.heroDate { color: var(--muted); font-family: var(--label); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; }
+.heroNote { max-width: 300px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.6; }
+
+@keyframes turn { to { rotate: 360deg; } }
+@keyframes sheen { to { background-position: 0 0, 256px 256px; } }
+@media (prefers-reduced-motion: reduce) {
+  .medal, .heroMedal, .portraitMedal, .frame { animation: none; }
+}

@@ -1,0 +1,180 @@
+/* Anniversary Pertama — syukuran satu tahun pernikahan, ulang tahun kertas: surat cinta di kertas bergaris yang menyembul dari amplop kraft bersegel lilin koral, polaroid hari pernikahan berselotip washi, mawar kertas, hati origami yang melayang, dan label hitung mundur dari karton. */
+.root, .cover {
+  --bg: #f6ede0; --paper: #efe2cf; --ivory: #fffdf8; --field: #fffdf8; --ink: #2d3a5c; --muted: #6a6158; --line: #e0d0b8;
+  --accent: #2d3a5c; --accent2: #1f2a46; --gold: #d66f60; --gold-l: #f6c9bd; --gold-d: #b2493c;
+  --coral: #d66f60; --coral-d: #b2493c; --kraft: #c39a6b; --kraft-d: #8e6a44; --blush: #f2c9bf;
+  --band-bg: #2d3a5c; --band-ink: #fbf3e8;
+  --display: "Fraunces", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Caveat", cursive; --hand: "Caveat", cursive;
+  --lined: repeating-linear-gradient(180deg, transparent 0 27px, rgba(45, 58, 92, .13) 27px 28px);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2d3a5c; --t-accent-ink: #fffdf8; --t-bg: #efe2cf; --t-ink: #2d3a5c; --t-muted: #6a6158; --t-line: #e0d0b8; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Fraunces", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) radial-gradient(rgba(45, 58, 92, .07) 1px, transparent 1.4px) 0 0 / 22px 22px; }
+.eyebrow, .role { color: var(--coral-d); font-family: var(--hand); font-size: 22px; letter-spacing: 0; text-transform: none; }
+.head h2, .headLight h2 { font-family: var(--display); font-size: 32px; font-weight: 600; line-height: 1.15; }
+.head h2 { color: var(--ink); }
+.divider { width: 220px; }
+.section { padding: 60px 22px; }
+
+/* ── hero: the wedding-day polaroid, a year on ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 50px 24px 58px; text-align: center; }
+.heroPolaroid { position: relative; width: 250px; margin: 0; padding: 12px 12px 48px; background: #fffdf8; rotate: -3deg; box-shadow: 0 16px 30px rgba(60, 40, 20, .2); }
+.heroPolaroid .heroPhoto { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: var(--paper); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroPolaroid figcaption { position: absolute; left: 0; right: 0; bottom: 8px; color: var(--ink); font-family: var(--hand); font-size: 23px; }
+.heroTape { position: absolute; top: -14px; left: 50%; width: 120px; height: auto; translate: -50% 0; rotate: 4deg; }
+.heroHeart { position: absolute; right: 30px; top: 40px; width: 58px; height: auto; rotate: 12deg; }
+.heroKicker { margin-top: 26px; color: var(--coral-d); font-family: var(--hand); font-size: 26px; }
+.heroNames { color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--coral); font-style: italic; font-weight: 500; }
+.heroDate { color: var(--muted); font-size: 15px; letter-spacing: .08em; text-transform: uppercase; }
+.heroNote { max-width: 320px; margin-top: 10px; padding: 14px 18px; background: #fffdf8 var(--lined); background-position: 0 8px; color: var(--ink); font-family: var(--hand); font-size: 23px; line-height: 28px; box-shadow: 0 8px 18px rgba(60, 40, 20, .1); rotate: 1deg; }
+
+/* ── opening: a letter on lined paper ── */
+.salamBlock { margin: 0 18px; padding: 40px 26px 44px; background: #fffdf8 var(--lined); background-position: 0 12px; box-shadow: 0 14px 30px rgba(60, 40, 20, .1); border-left: 2px solid rgba(214, 111, 96, .45); }
+.salamKicker { color: var(--coral-d); font-family: var(--hand); font-size: 24px; letter-spacing: 0; text-transform: none; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; font-weight: 600; font-style: italic; }
+.intro { color: var(--ink); font-size: 16px; line-height: 28px; }
+
+/* ── couple: two polaroids, taped ── */
+.couple { gap: 10px; background: transparent; }
+.portrait { margin-bottom: 18px; padding: 10px 10px 40px; background: #fffdf8; box-shadow: 0 14px 26px rgba(60, 40, 20, .18); rotate: -3deg; }
+.personWrap:nth-child(3) .portrait { rotate: 3deg; }
+.portrait::before { content: ""; position: absolute; z-index: 2; top: -12px; left: 50%; width: 92px; height: 24px; translate: -50% 0; rotate: -4deg; background: rgba(233, 184, 168, .82) repeating-linear-gradient(45deg, transparent 0 6px, rgba(255, 253, 248, .5) 6px 9px); }
+.portraitFrame { width: 196px; height: 220px; padding: 0; border: 0; border-radius: 0; background: var(--paper); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--coral); font-family: var(--display); }
+.nick { color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.fullName { font-size: 17px; }
+.amp { color: var(--coral); font-family: var(--display); font-style: italic; font-size: 44px; }
+.amp img { width: 40px; }
+.amp img:last-child { scale: 1; rotate: 14deg; }
+
+/* ── countdown: cardboard tags on a kraft band ── */
+.countBand { padding: 66px 16px; background: #c39a6b radial-gradient(rgba(90, 60, 30, .12) 1px, transparent 1.5px) 0 0 / 7px 7px; }
+.headLight .eyebrow { color: #fff5e6; }
+.headLight h2 { color: #fffaf2; text-shadow: 0 1px 8px rgba(80, 50, 20, .35); }
+.count { gap: 10px; }
+.count > div { height: 96px; padding-top: 12px; border: 0; border-radius: 6px 6px 10px 10px; background: #fffdf8; clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 100%, 0 100%, 0 16%); box-shadow: none; rotate: -3deg; }
+.count > div:nth-child(even) { rotate: 3deg; }
+.count > div::before { content: ""; position: absolute; top: 8px; left: 50%; width: 8px; height: 8px; translate: -50% 0; border-radius: 50%; background: #c39a6b; box-shadow: inset 0 0 0 2px rgba(90, 60, 30, .3); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.count small { color: var(--coral-d); font-family: var(--hand); font-size: 18px; font-style: normal; }
+.ghostBtn { border-color: #fffaf2; color: #fffaf2; background: rgba(45, 58, 92, .25); font-family: var(--serif); }
+.ghostBtn:hover { background: rgba(45, 58, 92, .45); }
+
+/* ── events: postcards with a stamp ── */
+.events { background: transparent; }
+.event { align-items: flex-start; padding: 26px 22px 24px; border: 0; border-radius: 4px; background: #fffdf8; text-align: left; box-shadow: 0 14px 28px rgba(60, 40, 20, .12); }
+.event::before { inset: auto 14px 14px auto; width: 64px; height: 76px; border: 2px dashed var(--coral); border-radius: 2px; background: radial-gradient(circle at 50% 46%, rgba(214, 111, 96, .18) 0 18px, transparent 19px); opacity: .8; }
+.event::after { content: ""; position: absolute; top: 26px; right: 18px; width: 70px; height: 22px; background: repeating-linear-gradient(180deg, transparent 0 4px, rgba(45, 58, 92, .35) 4px 5.5px); border-radius: 50%; opacity: .6; }
+.eventNo { position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--coral-d); font-family: var(--hand); font-size: 22px; letter-spacing: 0; }
+.eventNo::before { content: "Kartu pos no. "; }
+.event h3 { max-width: 230px; color: var(--ink); font-family: var(--display); font-size: 26px; font-weight: 600; text-align: left; }
+.eventDate { font-style: normal; }
+.eventTime { color: var(--coral-d); font-family: var(--serif); }
+.rule { width: 100%; height: 0; border-top: 1px dashed var(--line); background: none; }
+.eventAddr { max-width: 210px; text-align: left; }
+.mapBtn { border-radius: 4px; background: var(--ink); color: #fffaf2; font-family: var(--serif); }
+.mapBtn:hover { background: var(--coral-d); }
+
+/* ── story: twelve months as diary notes ── */
+.story { background: transparent; }
+.timeline::before { left: 20px; width: 0; border-left: 2px dashed rgba(45, 58, 92, .35); background: none; }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 34px; }
+.storyBody { padding: 14px 16px 16px; background: #fffdf8 var(--lined); background-position: 0 10px; box-shadow: 0 8px 18px rgba(60, 40, 20, .08); }
+.timeline li:nth-child(even) .storyBody { rotate: .6deg; }
+.timeline li:nth-child(odd) .storyBody { rotate: -.6deg; }
+.storyBody small { color: var(--coral-d); font-family: var(--hand); font-size: 20px; letter-spacing: 0; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.storyBody p { color: var(--ink); font-size: 15px; line-height: 28px; }
+
+/* ── gallery: a scatter of polaroids ── */
+.mosaic { grid-template-columns: 1fr 1fr; grid-auto-rows: 168px; gap: 16px 14px; }
+.tile { border: 8px solid #fffdf8; border-bottom-width: 26px; border-radius: 0; box-shadow: 0 10px 20px rgba(60, 40, 20, .16); rotate: -2deg; }
+.tile:nth-child(even) { rotate: 2.5deg; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 0; rotate: -1deg; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+
+/* ── wishes ── */
+.wishes { background: transparent; }
+.form { border: 0; border-radius: 4px; background: #fffdf8; box-shadow: 0 14px 30px rgba(60, 40, 20, .1); }
+.field > span, .diet, .guestsLabel { color: var(--coral-d); font-family: var(--hand); font-size: 20px; letter-spacing: 0; text-transform: none; }
+.diet input { font-family: var(--serif); }
+.field input, .field textarea { border-radius: 4px; }
+.field textarea { background: #fffdf8 var(--lined); line-height: 28px; padding-top: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: #fffaf2; }
+.submit { border-radius: 4px; background: var(--coral); color: #fffaf2; font-family: var(--serif); font-weight: 600; }
+.submit:not(:disabled):hover { background: var(--coral-d); }
+.wish { border: 0; border-radius: 2px; background: #fff7d6; box-shadow: 0 6px 14px rgba(60, 40, 20, .1); rotate: -.8deg; }
+.wish:nth-child(even) { background: #fde3dc; rotate: .8deg; }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.wish p { color: var(--ink); font-family: var(--hand); font-size: 21px; line-height: 1.3; }
+.sent { color: var(--ink); font-family: var(--hand); font-size: 26px; font-style: normal; }
+.sentBox img { width: 70px; }
+
+/* ── gifts: no presents, sharing instead ── */
+.gifts { background: transparent; }
+.gift { border-radius: 4px; background: var(--ink); box-shadow: 0 14px 26px rgba(30, 40, 70, .22); }
+.gift::after { border-color: rgba(246, 201, 189, .08); }
+.gift h3 { color: var(--blush); font-family: var(--serif); }
+.giftNo { color: #fffaf2; font-family: var(--display); font-weight: 600; }
+.copy { border-color: var(--blush); color: var(--blush); font-family: var(--serif); }
+.copyOn, .copyOn:hover { background: var(--blush); color: var(--ink); }
+
+/* ── closing ── */
+.closing { padding: 64px 26px 70px; background: var(--ink); }
+.closingFlowers { width: 230px; height: auto; margin-bottom: 8px; }
+.closingGarland { position: absolute; z-index: -1; top: 0; left: 50%; width: 400px; max-width: none; height: auto; translate: -50% 0; opacity: .9; }
+.thanks { color: var(--blush); font-family: var(--display); font-size: 42px; font-weight: 600; font-style: italic; }
+.closingNames { color: #fffaf2; font-family: var(--hand); font-size: 40px; }
+.music { background: var(--coral); border-color: #fffaf2; }
+
+/* ── cover: a love letter rising out of a kraft envelope ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 70px 20px 30px; overflow: hidden; background: #f6ede0 radial-gradient(rgba(45, 58, 92, .08) 1px, transparent 1.4px) 0 0 / 22px 22px; color: var(--ink); text-align: center; isolation: isolate; }
+.garland { position: absolute; top: -6px; left: 50%; width: 420px; max-width: none; height: auto; translate: -50% 0; }
+.envelope { position: relative; width: 340px; margin-top: auto; padding-bottom: 14px; clip-path: inset(-600px -200px 0 -200px); }
+.envBack, .envFront { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; pointer-events: none; }
+.envBack { z-index: 0; }
+.envFront { z-index: 2; }
+.letter { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 262px; margin: 0 auto; padding: 22px 18px 136px; background: #fffdf8 var(--lined); background-position: 0 16px; box-shadow: 0 10px 24px rgba(60, 40, 20, .16); rotate: -1.5deg; }
+.letterHi { align-self: flex-start; color: var(--ink); font-family: var(--hand); font-size: 22px; }
+.kicker { margin-top: 4px; color: var(--coral-d); font-family: var(--serif); font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; text-wrap: balance; }
+.one { display: flex; align-items: center; gap: 8px; margin-top: 2px; }
+.one b { color: var(--coral); font-family: var(--display); font-size: 104px; font-weight: 600; font-style: italic; line-height: .95; }
+.one span { color: var(--ink); font-family: var(--hand); font-size: 28px; line-height: .95; text-align: left; }
+.coverNames { color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.coverNames em { color: var(--coral); font-style: italic; font-weight: 500; }
+.coverDate { margin-top: 6px; color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.polaroid { position: absolute; z-index: 3; left: -14px; bottom: 6px; width: 104px; padding: 6px 6px 22px; background: #fffdf8; rotate: -9deg; box-shadow: 0 10px 18px rgba(60, 40, 20, .25); }
+.polaroid .heroPhoto { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: var(--paper); }
+.polaroid > img { position: absolute; top: -10px; left: 50%; width: 70px; height: auto; translate: -50% 0; rotate: -6deg; }
+.flowers { position: absolute; z-index: 3; right: -30px; bottom: 0; width: 150px; height: auto; pointer-events: none; }
+.float { position: absolute; z-index: 1; height: auto; pointer-events: none; }
+.f1 { left: 18px; top: 92px; width: 44px; rotate: -16deg; }
+.f2 { right: 16px; top: 160px; width: 52px; rotate: 14deg; }
+.f3 { left: 12px; top: 330px; width: 36px; rotate: 8deg; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin: 26px 0 auto; padding-top: 0; }
+.guest small { color: var(--muted); font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 600; }
+.table { border-color: var(--coral); color: var(--coral-d); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 210px; border-radius: 6px; background: var(--coral); color: #fffaf2; font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .04em; box-shadow: 0 4px 0 var(--coral-d), 0 12px 22px rgba(160, 70, 50, .3); }
+.openBtn:hover { background: #df7b6c; translate: 0 -1px; }
+
+/* ── motion: hearts float, the letter rises out of the envelope ── */
+.float { animation: floaty 6s ease-in-out infinite alternate; }
+.f2 { animation-duration: 7.5s; animation-delay: -2s; }
+.f3 { animation-duration: 5.2s; animation-delay: -3.5s; }
+.letter { animation: rise 1.6s var(--m-ease) .3s both; }
+.heroHeart { animation: floaty 6.5s ease-in-out infinite alternate; }
+@keyframes floaty { from { translate: 0 0; } to { translate: 4px -12px; } }
+@keyframes rise { from { translate: 0 70px; } to { translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .float, .letter, .heroHeart { animation: none; }
+}

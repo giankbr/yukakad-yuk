@@ -1,0 +1,176 @@
+/* Ultah Kebun — pesta ulang tahun tukang kebun cilik dalam cat gouache: papan nama kayu, pot tanah liat berisi usia, gembor yang menyiram tetes air, pagar kebun dengan wortel, tomat, terong, dan lobak yang tersenyum, serta tunas di setiap pembatas. Hijau daun, oranye wortel, merah tomat, dan cokelat tanah. */
+.root, .cover {
+  --bg: #e8f2d9; --paper: #f4f8ea; --ivory: #fffbef; --field: #fffdf6; --ink: #3a2a20; --muted: #6a5646; --line: #d6dcc0;
+  --accent: #3f7a2c; --accent2: #2f5f20; --gold: #f2b632; --gold-l: #fff3d6; --gold-d: #b9761e;
+  --tomat: #d9442f; --tomat-d: #b8321f; --wortel: #f08a2c; --tanah: #6b4630; --tanah-d: #4e3121;
+  --band-bg: #6b4630; --band-ink: #fff3d6;
+  --display: "Sniglet", system-ui, sans-serif; --serif: "Nunito", system-ui, sans-serif; --script: "Gochi Hand", cursive; --label: "Nunito", system-ui, sans-serif;
+  --h2: 30px; --card-r: 22px;
+  --seeds: radial-gradient(circle at 20% 30%, rgba(111, 160, 74, .16) 0 2.5px, transparent 3px) 0 0 / 46px 46px, radial-gradient(circle at 70% 75%, rgba(240, 138, 44, .14) 0 2px, transparent 2.5px) 0 0 / 58px 58px;
+  font-family: var(--serif); color: var(--ink); background: var(--seeds), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3f7a2c; --t-accent-ink: #ffffff; --t-bg: #e8f2d9; --t-ink: #3a2a20; --t-muted: #6a5646; --t-line: #d6dcc0; --t-field: #fffdf6;
+  --t-radius: 18px; --t-font: "Nunito", system-ui, sans-serif; --t-heading-font: "Sniglet", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--tomat); font-family: var(--script); font-size: 21px; letter-spacing: .02em; text-transform: none; }
+.head h2 { color: var(--accent2); font-family: var(--display); font-weight: 800; }
+.divider { width: 220px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 60px 28px 56px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 32px; font-weight: 800; line-height: 1.2; }
+.intro { color: var(--muted); }
+
+/* ── Celebrant: a seed-badge monogram with a carrot friend peeking out ── */
+.couple { gap: 12px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 200px; padding: 8px; border: 4px dashed var(--accent); border-radius: 50%; background: var(--ivory); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 12px 24px rgba(63, 122, 44, .2); }
+.portraitArt { position: absolute; z-index: 1; right: -38px; bottom: -14px; width: 74px; height: auto; transform-origin: 50% 100%; animation: wiggle 2.6s var(--m-spring) infinite; }
+.monogram { color: var(--wortel); font-family: var(--display); font-size: 104px; font-weight: 800; }
+.nick { color: var(--tomat); font-family: var(--display); font-size: 52px; font-weight: 800; }
+.fullName { font-family: var(--serif); font-weight: 800; }
+.parents { color: var(--muted); }
+.amp { color: var(--wortel); font-family: var(--display); }
+.amp img { width: 40px; }
+
+/* ── Countdown: a soil bed with sprouts on top, seed-packet cells ── */
+.countBand { padding: 96px 20px 60px; background: linear-gradient(var(--bg) 0 46px, var(--tanah) 46px); }
+.countTunas { position: absolute; z-index: -1; top: 4px; left: 50%; width: 360px; height: auto; translate: -50% 0; }
+.headLight .eyebrow { color: var(--gold); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); font-weight: 800; }
+.count { gap: 8px; }
+.count > div { height: 94px; padding-top: 10px; border: 0; border-radius: 14px; background: var(--ivory); box-shadow: 0 5px 0 rgba(0, 0, 0, .18); }
+.count > div::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: var(--accent); }
+.count > div:nth-child(2)::before { background: var(--wortel); }
+.count > div:nth-child(3)::before { background: var(--tomat); }
+.count > div:nth-child(4)::before { background: #7a4a8e; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 32px; font-weight: 800; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 13px; font-style: normal; font-weight: 700; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 2px solid var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.ghostBtn:hover { background: rgba(255, 243, 214, .14); }
+
+/* ── Events: garden-marker cards ── */
+.events { gap: 30px; background: transparent; }
+.event { padding: 36px 20px 26px; border: 3px solid var(--accent); border-radius: 22px; background: var(--ivory); box-shadow: 0 6px 0 var(--accent2); }
+.event::before { display: none; }
+.event:hover { translate: 0 -3px; box-shadow: 0 9px 0 var(--accent2); }
+.event { transition: box-shadow 400ms var(--m-spring), translate 400ms var(--m-spring), scale 300ms var(--m-spring); }
+.eventNo { top: -18px; width: 52px; height: 34px; background: var(--tomat); color: #fff; font-family: var(--display); font-size: 15px; font-weight: 800; box-shadow: 0 3px 0 var(--tomat-d); }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 25px; font-weight: 800; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--wortel); font-family: var(--serif); font-weight: 800; }
+.rule { width: 70px; height: 4px; border-radius: 4px; background: repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 16px); }
+.event strong { font-weight: 800; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 800; box-shadow: 0 4px 0 var(--accent2); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 4px; border-radius: 4px; background: repeating-linear-gradient(var(--tanah) 0 8px, transparent 8px 14px); }
+.node { width: 46px; height: 54px; border: 0; background: transparent; }
+.node img { width: 34px; }
+.storyBody small { color: var(--wortel); font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--display); font-weight: 800; }
+
+.gallery { background: transparent; }
+.tile { border-radius: 18px; border: 4px solid var(--ivory); }
+.tile:first-child { border-radius: 90px 90px 18px 18px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 3px dashed var(--accent); border-radius: 24px; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; letter-spacing: .04em; text-transform: none; font-size: 14px; }
+.field input, .field textarea { border-width: 2px; border-radius: 14px; }
+.choices button { border-width: 2px; font-weight: 800; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--accent2); }
+.step { border: 2px solid var(--accent); color: var(--accent); }
+.submit { background: var(--tomat); color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 5px 0 var(--tomat-d); }
+.submit:not(:disabled):hover { background: var(--tomat-d); box-shadow: 0 5px 0 #8f2416; }
+.wish { border: 2px solid var(--line); border-radius: 18px; }
+.wish strong { color: var(--accent2); font-family: var(--display); font-weight: 800; }
+.wish small { background: #fde3c8; color: var(--gold-d); font-weight: 800; }
+
+/* ── Gifts: soil-brown cards ── */
+.gifts { background: transparent; }
+.gift { border-radius: 22px; background: var(--tanah); box-shadow: 0 6px 0 var(--tanah-d); }
+.gift::after { border-color: rgba(255, 243, 214, .08); }
+.gift h3 { color: var(--gold); font-family: var(--display); font-size: 18px; font-weight: 800; }
+.giftNo { color: var(--gold-l); font-family: var(--display); font-weight: 800; }
+.copy { border: 2px solid var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--tanah-d); }
+
+.giftNo { font-family: var(--serif); font-size: 20px; font-weight: 800; letter-spacing: .02em; }
+.wish strong, .storyBody h3 { font-family: var(--serif); font-weight: 800; }
+.storyBody h3 { font-size: 20px; }
+.choices button { font-size: 14px; }
+
+/* ── Closing: back to the garden ── */
+.closing { padding: 64px 26px 230px; background: var(--bg); color: var(--ink); }
+.closingScene { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+.closingEmblem { width: 130px; height: auto; transform-origin: 30% 70%; animation: pour 3.6s var(--m-ease) infinite; }
+.thanks { color: var(--tomat); font-family: var(--display); font-size: 46px; font-weight: 800; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--accent2); font-family: var(--display); font-size: 36px; font-weight: 800; }
+.made { color: rgba(58, 42, 32, .6); }
+.made:hover { color: var(--tomat); }
+.music { border: 2px solid #fff; background: var(--tomat); }
+
+/* ── Cover: wooden name sign with an age pot, a watering can sprinkling, the fence garden below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 20px 200px; overflow: hidden; background: var(--seeds), linear-gradient(#dff0f7 0, var(--bg) 46%); color: var(--ink); text-align: center; isolation: isolate; }
+.can { position: absolute; z-index: 2; top: 54px; right: -6px; width: 112px; transform-origin: 30% 70%; animation: pour 3.6s var(--m-ease) infinite; }
+.can img { width: 100%; height: auto; }
+.drops { position: absolute; z-index: 1; top: 120px; right: 92px; width: 40px; height: 90px; pointer-events: none; }
+.drops i { position: absolute; top: 0; width: 8px; height: 11px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%; background: #6cbbe0; box-shadow: inset -2px -2px 0 rgba(30, 110, 160, .3); animation: drip 1.8s linear infinite; }
+.drops i:nth-child(1) { left: 4px; }
+.drops i:nth-child(2) { left: 18px; animation-delay: .6s; }
+.drops i:nth-child(3) { left: 30px; animation-delay: 1.2s; }
+.kicker { padding: 7px 18px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 4px 0 var(--accent2); }
+.sign { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 330px; margin-top: 46px; padding: 26px 22px 24px; background: url(/themes/art/ultah-kebun/papan.webp) 50% 50% / 100% 100% no-repeat; filter: drop-shadow(0 8px 10px rgba(80, 50, 20, .25)); }
+.sign::before, .sign::after { content: ""; position: absolute; z-index: -1; bottom: -34px; width: 14px; height: 44px; border-radius: 0 0 4px 4px; background: #a8743f; }
+.sign::before { left: 26%; }
+.sign::after { right: 26%; }
+.signLabel { color: var(--accent2); font-family: var(--script); font-size: 22px; line-height: 1; }
+.coverName { max-width: 100%; margin-top: 4px; color: #4a2a16; font-family: var(--display); font-size: 58px; font-weight: 800; line-height: 1.02; overflow-wrap: anywhere; }
+.ageRow { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px; }
+.agePot { position: relative; width: 58px; flex-shrink: 0; }
+.agePot img { width: 100%; height: auto; }
+.agePot b { position: absolute; left: 0; right: 0; bottom: 6px; color: #fff; font-family: var(--display); font-size: 26px; font-weight: 800; line-height: 1; text-shadow: 0 2px 0 rgba(120, 50, 20, .45); }
+.ageText { color: #4a2a16; font-family: var(--display); font-size: 21px; font-weight: 800; text-align: left; line-height: 1.1; }
+.ageText small { display: block; color: #7a4a26; font-family: var(--script); font-size: 18px; font-weight: 400; }
+.coverDate { margin-top: 44px; padding: 7px 16px; border-radius: 999px; background: var(--ivory); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 0 3px 0 var(--line); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 320px; margin-top: 16px; }
+.guest { position: relative; padding: 22px 18px 14px; border: 2px dashed var(--accent); border-radius: 16px; background: var(--ivory); }
+.guest::before { content: ""; position: absolute; top: 7px; left: 50%; width: 10px; height: 10px; translate: -50% 0; border: 2px solid var(--accent); border-radius: 50%; background: var(--bg); }
+.guest small { color: var(--muted); font-style: normal; font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; font-weight: 800; }
+.table { border-color: var(--wortel); color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.openBtn { border-radius: 999px; background: var(--tomat); color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 5px 0 var(--tomat-d); }
+.openBtn:hover { background: var(--tomat-d); }
+.scene { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 50px 24px 40px; background: linear-gradient(#dff0f7, var(--bg)); text-align: center; }
+.heroWortel { width: 92px; height: auto; transform-origin: 50% 100%; animation: hop 2.4s var(--m-spring) infinite; }
+.heroKicker { color: var(--tomat); font-family: var(--script); font-size: 24px; }
+.heroName { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 48px; font-weight: 800; line-height: 1.05; overflow-wrap: anywhere; }
+.heroAge { color: var(--wortel); font-family: var(--display); font-size: 24px; font-weight: 800; }
+.heroDate { color: var(--muted); font-weight: 700; }
+.heroTunas { width: 230px; height: auto; margin-top: 6px; }
+.heroNote { max-width: 310px; margin-top: 6px; color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+@keyframes pour { 0%, 100% { rotate: 0deg; } 40%, 60% { rotate: -9deg; } }
+@keyframes drip { 0% { translate: 0 0; opacity: 0; } 15% { opacity: 1; } 100% { translate: -6px 80px; opacity: 0; } }
+@keyframes wiggle { 0%, 100% { rotate: -4deg; } 50% { rotate: 5deg; } }
+@keyframes hop { 0%, 60%, 100% { translate: 0 0; } 30% { translate: 0 -10px; } }
+@media (prefers-reduced-motion: reduce) {
+  .can, .drops i, .portraitArt, .heroWortel, .closingEmblem { animation: none; }
+  .drops { display: none; }
+}

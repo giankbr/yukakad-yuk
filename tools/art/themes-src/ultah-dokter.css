@@ -1,0 +1,162 @@
+/* Ultah Dokter — pesta ulang tahun dokter cilik: sampul berupa papan klip "Kartu Pasien" dengan isian tulisan tangan (nama, umur, diagnosa: ulang tahun!), stetoskop merah tersampir, kotak P3K, boneka beruang pasien berperban; hitung mundur di atas plester, kartu acara bergaya kartu berobat berlubang, form ucapan bergaya kertas resep; latar biru muda bertabur tanda tambah putih; ilustrasi gouache anak bergaris ungu tua. */
+.root, .cover {
+  --bg: #fff6ec; --paper: #eaf5fb; --ivory: #fffdf8; --field: #ffffff; --ink: #3b2a4a; --muted: #6a5a78; --line: #e6d8cc;
+  --accent: #e5483b; --accent2: #cf3a2e; --gold: #3f8fc4; --gold-l: #ffcf4a; --gold-d: #2f76a8;
+  --band-bg: #3f8fc4; --band-ink: #ffffff;
+  --plum: #3b2a4a; --red: #e5483b; --sky: #8fc9ea; --sky-d: #3f8fc4; --tan: #f2c48d; --honey: #ffcf4a;
+  --display: "Baloo 2", system-ui, sans-serif; --serif: "Nunito", system-ui, sans-serif; --script: "Patrick Hand", "Comic Sans MS", cursive; --hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --plus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M19 14h6v5h5v6h-5v5h-6v-5h-5v-6h5z' fill='%23ffffff' fill-opacity='.55'/%3E%3C/svg%3E") 0 0 / 44px 44px;
+  --plus-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Cpath d='M19 14h6v5h5v6h-5v5h-6v-5h-5v-6h5z' fill='%23ffffff' fill-opacity='.16'/%3E%3C/svg%3E") 0 0 / 44px 44px;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e5483b; --t-accent-ink: #ffffff; --t-bg: #fff6ec; --t-ink: #3b2a4a; --t-muted: #6a5a78; --t-line: #e6d8cc; --t-field: #ffffff;
+  --t-radius: 16px; --t-font: "Nunito", system-ui, sans-serif; --t-heading-font: "Baloo 2", system-ui, sans-serif; --t-heading-weight: 800; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { color: var(--sky-d); font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.head h2 { color: var(--plum); font-family: var(--display); font-weight: 800; line-height: 1.1; }
+.divider { width: 120px; rotate: -4deg; }
+
+/* ── Cover: a clipboard patient card on a sky-blue ward wall ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 40px 18px 0; overflow: hidden; background: var(--plus), var(--sky); text-align: center; isolation: isolate; }
+.board { position: relative; z-index: 1; margin-top: max(8px, 3vh); width: 100%; max-width: 340px; padding: 26px 14px 14px; border: 3px solid var(--plum); border-radius: 22px; background: #d79a5e; box-shadow: 0 8px 0 rgba(59, 42, 74, .25); rotate: -1.2deg; }
+.clip { position: absolute; z-index: 2; top: -18px; left: 50%; width: 110px; height: 36px; translate: -50% 0; border: 3px solid var(--plum); border-radius: 10px 10px 14px 14px; background: linear-gradient(#e6edf3, #b9c6d3); }
+.clip::after { content: ""; position: absolute; top: 7px; left: 50%; width: 34px; height: 10px; translate: -50% 0; border: 3px solid var(--plum); border-radius: 8px; background: var(--sky); }
+.sheet { display: flex; flex-direction: column; align-items: stretch; gap: 0; padding: 14px 16px 18px; border: 2.5px solid var(--plum); border-radius: 8px; background: repeating-linear-gradient(transparent 0 31px, rgba(63, 143, 196, .2) 31px 32px), var(--ivory); text-align: left; }
+.sheetHead { display: flex; justify-content: space-between; align-items: center; margin: -14px -16px 10px; padding: 8px 14px; border-bottom: 2.5px solid var(--plum); border-radius: 6px 6px 0 0; background: var(--red); color: #fff; font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.sheetHead span:last-child { display: flex; align-items: center; gap: 4px; }
+.row { display: flex; align-items: baseline; gap: 8px; min-height: 32px; }
+.row > span { flex-shrink: 0; color: var(--muted); font-family: var(--display); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.row > b { min-width: 0; color: var(--plum); font-family: var(--hand); font-size: 21px; font-weight: 400; line-height: 1.25; overflow-wrap: anywhere; }
+.coverName { margin: 2px 0 4px; color: var(--red); font-family: var(--display); font-size: 58px; font-weight: 800; line-height: .95; overflow-wrap: anywhere; text-align: center; text-shadow: 3px 3px 0 var(--honey); }
+.stamp { align-self: flex-end; margin-top: 6px; padding: 3px 10px; border: 2.5px solid var(--sky-d); border-radius: 8px; color: var(--sky-d); font-family: var(--display); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; rotate: -6deg; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 2px dashed var(--line); text-align: center; }
+.cover .guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.cover .guest strong { color: var(--plum); font-family: var(--display); font-size: 22px; font-weight: 700; }
+.table { border: 2px solid var(--sky-d); color: var(--sky-d); font-family: var(--display); font-weight: 700; }
+.openBtn { min-width: 220px; border: 3px solid var(--plum); background: var(--red); color: #fff; font-family: var(--display); font-size: 17px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 5px 0 var(--plum); }
+.openBtn:hover { background: #ef5a4d; }
+.steto { width: 104px; height: auto; margin-bottom: 4px; transform-origin: 30% 10%; animation: swing 3.6s ease-in-out infinite alternate; }
+.floor { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: flex-end; width: calc(100% + 36px); margin: auto -18px 0; padding: 0 10px; min-height: 150px; background: linear-gradient(transparent 62%, #f6e3cf 62%); }
+.kit { width: 118px; height: auto; margin-bottom: 14px; }
+.teddy { width: 160px; height: auto; margin-bottom: 8px; transform-origin: 50% 100%; animation: wobble 4s ease-in-out infinite alternate; }
+
+/* ── Hero: the cake, the name and the age ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 40px; background: var(--plus), var(--sky); text-align: center; }
+.heroCake { width: 150px; height: auto; }
+.heroKicker { margin-top: 10px; padding: 4px 14px; border: 2.5px solid var(--plum); border-radius: 999px; background: var(--honey); color: var(--plum); font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.heroName { max-width: 100%; margin-top: 10px; color: #fff; font-family: var(--display); font-size: 54px; font-weight: 800; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--plum); -webkit-text-stroke: 1.5px var(--plum); paint-order: stroke fill; }
+.heroDate { margin-top: 12px; color: var(--plum); font-family: var(--display); font-size: 16px; font-weight: 700; }
+.heroNote { max-width: 320px; margin-top: 20px; padding: 16px 18px; border: 2.5px solid var(--plum); border-radius: 16px; background: var(--ivory); color: var(--ink); font-family: var(--hand); font-size: 20px; line-height: 1.35; rotate: 1deg; box-shadow: 0 5px 0 rgba(59, 42, 74, .2); }
+
+/* opening */
+.salamBlock { gap: 10px; padding: 34px 26px 54px; background: var(--bg); }
+.salamKicker { color: var(--red); }
+.salamTitle { color: var(--plum); font-family: var(--display); font-size: 32px; font-weight: 800; line-height: 1.15; }
+.intro { font-size: 16.5px; }
+
+/* the little doctor: round portrait with the stethoscope hanging over it */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 196px; height: 196px; padding: 8px; border: 3px solid var(--plum); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, var(--sky) 72%); box-shadow: 0 6px 0 var(--plum); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--red); font-family: var(--display); font-size: 100px; font-weight: 800; }
+.portraitArt { position: absolute; z-index: 2; right: -54px; bottom: -14px; width: 110px; height: auto; rotate: 8deg; }
+.nick { color: var(--plum); font-family: var(--display); font-size: 48px; font-weight: 800; }
+.fullName { font-size: 17px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { color: var(--red); font-family: var(--display); }
+
+/* countdown: numbers printed on plasters */
+.countBand { gap: 22px; padding: 60px 18px 64px; background: var(--plus-soft), var(--sky-d); }
+.headLight .eyebrow { color: var(--honey); }
+.headLight h2 { color: #fff; font-family: var(--display); font-weight: 800; }
+.count { grid-template-columns: repeat(2, minmax(0, 150px)); gap: 14px 12px; }
+.count > div { flex-direction: row; gap: 8px; height: 58px; border: 2.5px solid var(--plum); border-radius: 30px; background: radial-gradient(circle, rgba(214, 154, 94, .55) 1.6px, transparent 2px) 0 0 / 9px 9px, var(--tan); box-shadow: 0 4px 0 rgba(59, 42, 74, .35); }
+.count > div:nth-child(odd) { rotate: -3deg; }
+.count > div:nth-child(even) { rotate: 3deg; }
+.count > div::before { content: ""; position: absolute; inset: 9px 34%; border-radius: 6px; background: #fbe6c8; }
+.count > div::after { display: none; }
+.count b { position: relative; color: var(--plum); font-family: var(--display); font-size: 28px; font-weight: 800; }
+.count small { position: relative; color: var(--plum); font-family: var(--display); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.countTba { color: #fff; }
+.ghostBtn { border: 2.5px solid #fff; color: #fff; font-family: var(--display); font-size: 15px; font-weight: 700; }
+
+/* events: appointment cards with a punched hole and a tear line */
+.events { gap: 22px; background: var(--bg); }
+.event { padding: 22px 20px 22px 44px; border: 2.5px solid var(--plum); border-radius: 18px; background: var(--ivory); align-items: flex-start; text-align: left; box-shadow: 0 6px 0 rgba(59, 42, 74, .2); }
+.event::before { inset: 0 auto 0 26px; width: 0; border: 0; border-left: 2.5px dashed var(--line); border-radius: 0; }
+.event::after { content: ""; position: absolute; left: 7px; top: 50%; width: 12px; height: 12px; translate: 0 -50%; border: 2.5px solid var(--plum); border-radius: 50%; background: var(--sky); }
+.eventNo { top: -15px; left: auto; right: 18px; translate: none; width: auto; height: auto; padding: 3px 12px; border: 2.5px solid var(--plum); border-radius: 999px; background: var(--red); color: #fff; font-family: var(--display); font-size: 13px; font-weight: 800; letter-spacing: .06em; white-space: nowrap; }
+.eventNo::before { content: "Antrean "; }
+.event h3 { color: var(--plum); font-family: var(--display); font-size: 26px; font-weight: 800; text-wrap: wrap; }
+.eventDate { color: var(--red); font-family: var(--display); font-size: 17px; font-style: normal; font-weight: 700; }
+.eventTime { color: var(--muted); font-family: var(--display); font-weight: 700; }
+.rule { width: 70px; height: 4px; border-radius: 4px; background: var(--sky); }
+.event strong { font-size: 17px; font-weight: 800; }
+.eventAddr { max-width: none; font-size: 15px; text-wrap: pretty; }
+.mapBtn { border: 2.5px solid var(--plum); background: var(--sky-d); color: #fff; font-family: var(--display); font-size: 14px; font-weight: 700; box-shadow: 0 4px 0 var(--plum); }
+.mapBtn:hover { background: #4b9dd2; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; border-radius: 3px; background: repeating-linear-gradient(var(--red) 0 8px, transparent 8px 14px); }
+.node { width: 42px; height: 42px; border: 2.5px solid var(--plum); background: #fff; }
+.node img { width: 32px; rotate: -30deg; }
+.storyBody small { color: var(--red); font-family: var(--display); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.storyBody h3 { color: var(--plum); font-family: var(--display); font-size: 22px; font-weight: 800; }
+
+.gallery { background: var(--bg); }
+.tile { border: 2.5px solid var(--plum); border-radius: 18px; }
+.tile:first-child { border-radius: 18px; }
+
+/* wishes: a prescription pad */
+.wishes { background: var(--bg); }
+.form { position: relative; padding-top: 52px; border: 2.5px solid var(--plum); border-radius: 18px; background: repeating-linear-gradient(transparent 0 31px, rgba(229, 72, 59, .1) 31px 32px), var(--ivory); box-shadow: 0 6px 0 rgba(59, 42, 74, .2); }
+.form:not(.sentBox)::before { content: "Rx  Resep Ucapan"; position: absolute; top: 0; left: 0; right: 0; padding: 8px 16px; border-bottom: 2.5px solid var(--plum); border-radius: 15px 15px 0 0; background: var(--sky); color: var(--plum); font-family: var(--display); font-size: 15px; font-weight: 800; letter-spacing: .06em; }
+.sentBox { padding-top: 28px; }
+.field > span, .diet, .guestsLabel { color: var(--plum); font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 12px; }
+.choices button { border-width: 2px; font-family: var(--display); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--plum); background: var(--sky-d); color: #fff; }
+.step { border: 2px solid var(--plum); }
+.submit { border: 2.5px solid var(--plum); background: var(--red); color: #fff; font-family: var(--display); font-size: 16px; font-weight: 800; box-shadow: 0 4px 0 var(--plum); }
+.submit:not(:disabled):hover { background: #ef5a4d; box-shadow: 0 4px 0 var(--plum); }
+.sentBox img { width: 120px; }
+.sent { color: var(--plum); font-family: var(--display); font-style: normal; font-weight: 700; }
+.wish { border: 2px solid var(--line); border-radius: 16px; background: #fff; }
+.wish strong { color: var(--plum); font-family: var(--display); font-weight: 700; }
+.wish small { background: rgba(143, 201, 234, .35); color: var(--plum); font-weight: 700; }
+
+/* gifts: first-aid kit cards */
+.gifts { background: var(--paper); }
+.gift { padding-top: 34px; border: 2.5px solid var(--plum); border-radius: 18px; background: linear-gradient(var(--red) 0 18px, var(--ivory) 18px); color: var(--ink); box-shadow: 0 6px 0 rgba(59, 42, 74, .2); }
+.gift::after { right: 14px; bottom: 14px; width: 34px; height: 34px; border: 0; border-radius: 0; box-shadow: none; background: linear-gradient(var(--red), var(--red)) 50% / 10px 100% no-repeat, linear-gradient(var(--red), var(--red)) 50% / 100% 10px no-repeat; opacity: .18; z-index: 0; }
+.giftIcon { border: 2px solid var(--plum); background: var(--sky-d); }
+.gift h3 { color: var(--plum); font-family: var(--display); font-size: 17px; font-weight: 800; }
+.giftNo { color: var(--plum); font-family: var(--display); font-size: 23px; font-weight: 800; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 16px; font-weight: 700; line-height: 1.5; }
+.gift small { color: var(--muted); }
+.copy { border: 2px solid var(--plum); background: var(--sky-d); color: #fff; font-family: var(--display); font-size: 13px; font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--honey); color: var(--plum); }
+
+/* closing */
+.closing { padding: 56px 26px 40px; background: var(--plus-soft), var(--sky); color: var(--plum); }
+.closingArt { display: flex; align-items: flex-end; justify-content: center; gap: 4px; }
+.closingArt img:first-child { width: 110px; height: auto; }
+.closingArt img:last-child { width: 130px; height: auto; transform-origin: 50% 100%; animation: wobble 4s ease-in-out infinite alternate; }
+.closing .thanks { color: #fff; font-family: var(--display); font-size: 48px; font-weight: 800; -webkit-text-stroke: 1.5px var(--plum); paint-order: stroke fill; text-shadow: 3px 3px 0 var(--plum); }
+.closingText { color: var(--ink); font-weight: 600; }
+.family { color: var(--muted); font-family: var(--display); font-weight: 700; }
+.closingNames { color: var(--red); font-family: var(--display); font-size: 36px; font-weight: 800; }
+.made { color: var(--muted); }
+.made:hover { color: var(--red); }
+.music { border: 2.5px solid var(--plum); background: var(--red); }
+
+@keyframes swing { from { rotate: -6deg; } to { rotate: 4deg; } }
+@keyframes wobble { from { rotate: -3deg; } to { rotate: 3deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .steto, .teddy, .closingArt img:last-child { animation: none; }
+}

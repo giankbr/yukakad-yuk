@@ -1,0 +1,162 @@
+/* Batik Garutan — kain batik Garutan krem gumading: lereng diagonal soga-biru-hijau yang menyilang sudut sampul seperti kain terlipat, bunga canting berisen cecek, dan lanskap cat air Gunung Cikuray serta kebun teh Garut. Kalem, hangat, dan bersahaja. */
+.root, .cover {
+  --bg: #efe2c3; --paper: #f4ead2; --ivory: #f8f1df; --field: #fbf6ea; --ink: #33251a; --muted: #66523f; --line: #d9c6a0;
+  --accent: #7e4b29; --accent2: #6b3f22; --gold: #a8784c; --gold-l: #f1e2bf; --gold-d: #7e5634;
+  --biru: #36536b; --biru-d: #29425a; --hijau: #6e8259;
+  --band-bg: #2f4a62; --band-ink: #f4ead2;
+  --display: "Castoro", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Castoro", Georgia, serif; --label: "Marcellus SC", Georgia, serif;
+  --h2: 30px; --card-r: 2px;
+  --kain: url(/themes/art/batik-garutan/kain.webp);
+  --lereng: url(/themes/art/batik-garutan/lereng.webp) 0 0 / 180px 180px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--kain) 0 0 / 160px 160px; line-height: normal;
+}
+.root {
+  --t-accent: #7e4b29; --t-accent-ink: #f8f1df; --t-bg: #efe2c3; --t-ink: #33251a; --t-muted: #66523f; --t-line: #d9c6a0; --t-field: #fbf6ea;
+  --t-radius: 2px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Castoro", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--label); font-size: 13px; letter-spacing: .22em; text-transform: none; }
+.head h2 { color: var(--ink); }
+.divider { width: 220px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 64px 30px 60px; background: var(--paper) var(--kain) 0 0 / 160px 160px; }
+.arabic { color: var(--accent); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; font-style: italic; }
+.salamSub { color: var(--muted); font-family: var(--label); font-size: 14px; letter-spacing: .1em; }
+.intro { color: var(--muted); }
+
+/* ── Couple: portraits cut on the diagonal (like a folded kain), a lereng strip tucked behind one corner ── */
+.couple { gap: 16px; padding-bottom: 72px; background: transparent; }
+.portrait { margin-bottom: 20px; isolation: isolate; }
+.portraitFrame { width: 216px; height: 280px; padding: 0; border: 0; border-radius: 0; background: var(--accent); clip-path: polygon(0 14%, 14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; clip-path: polygon(0 13.6%, 13.6% 0, 100% 0, 100% 86.4%, 86.4% 100%, 0 100%); scale: .955; }
+.person:hover .portraitFrame { box-shadow: none; }
+.portraitSash { position: absolute; z-index: -1; right: -26px; bottom: -22px; width: 150px; height: 150px; background: var(--lereng); clip-path: polygon(100% 0, 100% 100%, 0 100%); box-shadow: inset 0 0 0 2px var(--accent); }
+.portraitSash::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, transparent calc(50% - 1.5px), var(--accent2) calc(50% - 1.5px), var(--accent2) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+.person:nth-child(even) .portraitSash { right: auto; left: -26px; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.person:nth-child(even) .portraitSash::before { background: linear-gradient(45deg, transparent calc(50% - 1.5px), var(--accent2) calc(50% - 1.5px), var(--accent2) calc(50% + 1.5px), transparent calc(50% + 1.5px)); }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-weight: 700; }
+.parents { color: var(--muted); }
+.amp { margin: 18px 0 14px; color: var(--biru); font-family: var(--display); font-size: 42px; font-style: italic; }
+.amp img { width: 38px; }
+.amp img:last-child { scale: 1; }
+
+/* ── Countdown: indigo cloth with a lereng selvedge on top ── */
+.countBand { padding: 84px 22px 64px; background: var(--band-bg); }
+.countLereng { position: absolute; z-index: -1; inset: 0 0 auto; height: 26px; background: var(--lereng); border-bottom: 3px solid var(--accent2); }
+.headLight .eyebrow { color: #e0c79d; }
+.headLight h2 { color: var(--band-ink); }
+.count { gap: 8px; }
+.count > div { height: 92px; border: 1px solid rgba(241, 226, 191, .4); border-radius: 0; background: rgba(241, 226, 191, .06); clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+.count > div::after { background: linear-gradient(135deg, transparent 40%, rgba(241, 226, 191, .16) 50%, transparent 60%); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; }
+.count small { color: #d9c7a4; font-family: var(--label); font-size: 12px; font-style: normal; letter-spacing: .1em; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border-color: #e0c79d; color: var(--gold-l); font-family: var(--label); letter-spacing: .08em; }
+
+/* ── Events: cream cloth cards with a lereng corner tab ── */
+.events { gap: 30px; padding-top: 70px; background: transparent; }
+.event { padding: 34px 22px 26px; border: 1px solid var(--line); border-radius: 0; background: var(--ivory); box-shadow: 0 10px 24px rgba(80, 55, 30, .08); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%); overflow: hidden; }
+.event::before { inset: 0 auto auto 0; width: 74px; height: 74px; border: 0; border-radius: 0; background: var(--lereng); clip-path: polygon(0 0, 100% 0, 0 100%); }
+.event::after { content: ""; position: absolute; left: 0; top: 0; width: 74px; height: 74px; background: linear-gradient(135deg, transparent calc(50% - 1.5px), var(--accent2) calc(50% - 1.5px), var(--accent2) calc(50% + 1px), transparent calc(50% + 1px)); pointer-events: none; }
+.event:hover { border-color: var(--gold); box-shadow: 0 16px 32px rgba(80, 55, 30, .13); }
+.eventNo { top: 14px; left: auto; right: 16px; translate: 0 0; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--label); font-size: 15px; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { color: var(--ink); }
+.eventTime { color: var(--biru); font-family: var(--label); }
+.rule { width: 90px; height: 3px; background: repeating-linear-gradient(90deg, var(--accent) 0 3px, transparent 3px 7px); }
+.mapBtn { border-radius: 0; background: var(--biru); color: var(--gold-l); font-family: var(--label); letter-spacing: .08em; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); padding: 10px 22px; box-shadow: none; }
+.mapBtn:hover { background: var(--biru-d); }
+
+/* ── Story ── */
+.story { background: var(--paper) var(--kain) 0 0 / 160px 160px; }
+.timeline::before { left: 21px; width: 2px; background: repeating-linear-gradient(var(--accent) 0 4px, transparent 4px 9px); }
+.node { border: 0; background: transparent; }
+.node img { width: 42px; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); }
+
+/* ── Gallery: tiles cut on the diagonal ── */
+.gallery { background: transparent; }
+.tile, .tile:first-child { border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%); }
+.tile:first-child { clip-path: polygon(0 26px, 26px 0, 100% 0, 100% 100%, 0 100%); }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper) var(--kain) 0 0 / 160px 160px; }
+.form { border: 1px solid var(--line); border-top: 6px solid transparent; border-image: none; border-radius: 0; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--lereng) border-box; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); letter-spacing: .1em; text-transform: none; font-size: 14px; }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--biru); background: var(--biru); color: var(--gold-l); }
+.submit { border-radius: 0; background: var(--accent); color: var(--gold-l); font-family: var(--label); letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.step { border-color: var(--accent); }
+.wish { border-radius: 0; background: var(--ivory); border-left: 4px solid var(--hijau); }
+.wish strong { color: var(--accent); font-family: var(--display); }
+.wish small { background: rgba(54, 83, 107, .12); color: var(--biru); font-family: var(--label); }
+
+/* ── Gifts: indigo cards with a lereng hem ── */
+.gifts { background: transparent; }
+.gift { border-radius: 0; background: var(--band-bg); padding-bottom: 34px; }
+.gift::after { right: 0; bottom: 0; left: 0; width: auto; height: 14px; border: 0; border-top: 2px solid var(--accent2); border-radius: 0; box-shadow: none; background: var(--lereng); }
+.gift h3 { color: #e0c79d; font-family: var(--label); letter-spacing: .14em; }
+.giftNo { color: var(--gold-l); font-family: var(--display); }
+.copy { border-color: #e0c79d; border-radius: 0; color: var(--gold-l); font-family: var(--label); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--biru-d); }
+
+/* ── Closing: cream again, the Cikuray landscape at the foot ── */
+.closing { padding: 76px 28px 230px; background: linear-gradient(var(--paper), var(--bg)); color: var(--ink); }
+.closingEmblem { width: 220px; height: auto; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--biru); font-family: var(--label); letter-spacing: .06em; font-size: 14px; }
+.family { color: var(--muted); font-family: var(--label); }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.closingLand { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+.made { color: rgba(51, 37, 26, .55); }
+.made:hover { color: var(--accent); }
+.music { border-color: var(--gold-l); background: var(--biru); }
+
+/* ── Cover: the cloth folded at two corners, lereng showing on the fold; a canting flower spray ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 210px 26px 150px; overflow: hidden; background: var(--bg) var(--kain) 0 0 / 160px 160px; color: var(--ink); text-align: center; isolation: isolate; }
+.sashTL, .sashBR { position: absolute; z-index: -1; background: var(--lereng); filter: drop-shadow(0 0 0 transparent); }
+.sashTL { inset: 0 auto auto 0; width: 82%; height: 200px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.sashBR { inset: auto 0 0 auto; width: 74%; height: 160px; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.sashTL::after, .sashBR::after { content: ""; position: absolute; inset: 0; }
+.sashTL::after { background: linear-gradient(to bottom right, transparent calc(50% - 3px), var(--accent2) calc(50% - 3px), var(--accent2) calc(50% + 1px), var(--gold-l) calc(50% + 1px), var(--gold-l) calc(50% + 4px), transparent calc(50% + 4px)); }
+.sashBR::after { background: linear-gradient(to top left, transparent calc(50% - 3px), var(--accent2) calc(50% - 3px), var(--accent2) calc(50% + 1px), var(--gold-l) calc(50% + 1px), var(--gold-l) calc(50% + 4px), transparent calc(50% + 4px)); }
+.coverKembang { position: absolute; top: 34px; right: -14px; width: 230px; height: auto; rotate: 8deg; transform-origin: 70% 30%; animation: sway 9s var(--m-ease) infinite alternate; }
+.kicker { color: var(--biru); font-family: var(--label); font-size: 15px; letter-spacing: .26em; }
+.coverLabel { margin-top: 6px; color: var(--gold-d); font-family: var(--label); font-size: 13px; letter-spacing: .2em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin-top: 14px; max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 54px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--biru); font-size: 34px; }
+.coverDate { margin-top: 16px; padding: 7px 18px; background: var(--biru); color: var(--gold-l); font-family: var(--label); font-size: 14px; letter-spacing: .12em; clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 320px; margin-top: 24px; }
+.guest { padding: 14px 16px; border: 1px solid var(--line); background: rgba(248, 241, 223, .82); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--accent); color: var(--accent); font-family: var(--label); }
+.openBtn { border-radius: 0; background: var(--accent2); color: var(--gold-l); font-family: var(--label); font-size: 15px; letter-spacing: .12em; box-shadow: 0 8px 18px rgba(60, 35, 15, .28); clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+.openBtn:hover { background: var(--accent); }
+
+/* ── Hero: the photo framed in lereng cloth; Cikuray below ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 56px 24px 0; background: transparent; text-align: center; }
+.heroKicker { color: var(--biru); font-family: var(--label); font-size: 14px; letter-spacing: .22em; }
+.heroNames { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { color: var(--biru); }
+.heroDate { color: var(--muted); font-family: var(--label); font-size: 15px; letter-spacing: .1em; }
+.heroFrame { position: relative; width: 100%; margin-top: 16px; padding: 12px; background: var(--lereng); box-shadow: 0 14px 30px rgba(60, 40, 20, .18); }
+.heroPhoto { display: grid; width: 100%; height: 400px; overflow: hidden; outline: 3px solid var(--accent2); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+.heroKuncup { position: absolute; right: -14px; bottom: -22px; width: 76px; height: auto; animation: spinSlow 40s linear infinite; }
+.heroNote { max-width: 310px; margin-top: 24px; color: var(--muted); font-size: 18px; font-style: italic; line-height: 1.6; }
+.heroLand { width: calc(100% + 48px); max-width: none; height: auto; margin: 4px -24px 0; }
+
+@keyframes spinSlow { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverKembang, .heroKuncup { animation: none; }
+}

@@ -1,0 +1,182 @@
+/* Upacara Teh — upacara teh Jepang yang tenang: dinding shoji berkisi kayu di atas kertas washi, gulungan kakejiku berbingkai kain matcha berisi nama, satu kamelia merah dalam vas seladon, dan lantai tatami tempat ketel besi, mangkuk matcha berbuih, pengaduk bambu, sendok, dan wadah lak hitam (garis sumi + cat air); uap tipis naik pelan; potret berbingkai kisi kayu, kartu acara seperti nampan, sapuan kuas matcha sebagai pemisah, cap merah berinisial; Shippori Mincho + Zen Kaku Gothic New, washi, matcha, kayu, tatami, merah kamelia. */
+.root, .cover {
+  --bg: #f4efe3; --paper: #ece5d3; --ivory: #fbf8ef; --field: #fffdf8; --ink: #2b2a26; --muted: #625d52; --line: #d9cfb6;
+  --accent: #4f6128; --accent2: #3d4c1d; --gold: #8a6e4b; --gold-l: #efe8d0; --gold-d: #7a5f40;
+  --band-bg: #d3c894; --band-ink: #2b2a26;
+  --red: #a8322d; --wood: #7a5f40; --wood-d: #4e3c28; --heri: #2f3a22;
+  --display: "Shippori Mincho", "Noto Serif", serif; --serif: "Zen Kaku Gothic New", system-ui, sans-serif; --script: "Shippori Mincho", serif;
+  --washi: url("/themes/art/upacara-teh/washi.webp");
+  --tatami: url("/themes/art/upacara-teh/tatami.webp");
+  --h2: 28px; --card-r: 0px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--washi); line-height: normal;
+}
+.root {
+  --t-accent: #4f6128; --t-accent-ink: #ffffff; --t-bg: #f4efe3; --t-ink: #2b2a26; --t-muted: #625d52; --t-line: #d9cfb6; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: "Zen Kaku Gothic New", system-ui, sans-serif; --t-heading-font: "Shippori Mincho", serif; --t-heading-weight: 600; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.main { background: var(--bg) var(--washi); }
+.eyebrow, .role { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; }
+.head h2, .headLight h2 { color: var(--ink); font-family: var(--display); font-size: var(--h2); font-weight: 600; letter-spacing: .04em; }
+.divider { width: 150px; }
+.section { padding: 64px 26px; }
+
+/* opening */
+.salamBlock { padding: 60px 32px 60px; }
+.salamKicker { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.35; }
+.salamSub { color: var(--red); font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: .12em; }
+.intro { color: var(--muted); font-size: 15.5px; line-height: 1.9; }
+
+/* couple: photos in thin shoji frames, side by side feel through rhythm */
+.couple { background: transparent; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 250px; padding: 8px; border: 0; border-radius: 0; background: var(--wood); box-shadow: inset 0 0 0 1px var(--wood-d), 0 18px 30px rgba(43, 42, 38, .14); }
+.portraitFrame::after { content: ""; position: absolute; inset: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .25); pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 15.5px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15px; }
+.amp { gap: 18px; margin: 18px 0 8px; color: var(--red); font-family: var(--display); font-size: 40px; }
+.amp img { width: 26px; }
+.amp img:last-child { scale: 1; }
+
+/* countdown: a tatami mat with dark heri edges */
+.countBand { padding: 60px 20px 58px; background: var(--tatami) 0 0 / 256px, var(--band-bg); border-block: 12px solid var(--heri); box-shadow: inset 0 3px 0 rgba(255, 255, 255, .15), inset 0 -3px 0 rgba(0, 0, 0, .08); }
+.headLight .eyebrow { color: var(--accent2); }
+.headLight h2 { color: var(--ink); }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 10px; }
+.count > div { height: 84px; border: 0; border-radius: 0; background: var(--ivory); box-shadow: 0 0 0 3px var(--wood), 0 8px 14px rgba(43, 42, 38, .18); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 28px; font-weight: 600; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; }
+.countTba { color: var(--ink); }
+.ghostBtn { border: 1.5px solid var(--heri); border-radius: 2px; background: var(--heri); color: #f4f1e2; font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+.ghostBtn:hover { background: #1f2716; border-color: var(--heri); }
+
+/* events: low trays — a matcha header strip and a wide washi body */
+.events { background: transparent; }
+.event { align-items: flex-start; gap: 6px; padding: 54px 22px 24px; border: 1px solid var(--line); border-radius: 0; background: var(--ivory); text-align: left; box-shadow: 0 2px 0 var(--line), 0 14px 24px rgba(43, 42, 38, .07); }
+.event::before { inset: 0 0 auto; height: 34px; border: 0; border-radius: 0; background: linear-gradient(90deg, var(--accent), #6b7f3a); }
+.event:hover { border-color: var(--gold); }
+.eventNo { top: 0; left: 22px; translate: 0 0; width: auto; height: 34px; padding: 0; border-radius: 0; background: none; display: flex; align-items: center; color: #f4f1e2; font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; white-space: nowrap; }
+.eventNo::before { content: "Acara "; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 600; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 700; font-size: 16px; }
+.eventTime { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.rule { width: 40px; height: 2px; background: var(--red); }
+.event strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.eventAddr { max-width: none; text-align: left; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .06em; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; background: var(--wood); }
+.node { width: 42px; height: 42px; border: 0; border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 1px var(--line); }
+.node img { width: 32px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.storyBody p { font-size: 15.5px; line-height: 1.7; }
+.storyImg { border-radius: 0; }
+
+/* gallery: a shoji grid */
+.gallery { background: transparent; }
+.mosaic { gap: 6px; padding: 6px; background: var(--wood); }
+.tile, .tile:first-child { border-radius: 0; }
+
+/* wishes */
+.wishes { background: transparent; }
+.form { border-color: var(--line); border-radius: 0; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 0; }
+.choices button { border-radius: 0; color: var(--ink); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.step { border-radius: 0; color: var(--ink); border-color: var(--wood); }
+.submit { border-radius: 0; background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--ink); font-family: var(--display); font-style: normal; }
+.wish { border-radius: 0; border-color: var(--line); border-left: 3px solid var(--accent); background: var(--ivory); }
+.wish strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.wish small { border-radius: 0; background: rgba(79, 97, 40, .1); color: var(--accent2); font-weight: 700; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 0; background: linear-gradient(160deg, #4f6128, #36451a); color: #f4f1e2; box-shadow: 0 12px 24px rgba(43, 42, 38, .18); }
+.gift::after { border-color: rgba(244, 241, 226, .08); border-radius: 0; box-shadow: none; }
+.giftIcon { border-radius: 0; border-color: rgba(244, 241, 226, .5); }
+.gift h3 { color: #f4f1e2; font-family: var(--display); font-size: 19px; font-weight: 600; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 19px; font-weight: 700; letter-spacing: .06em; }
+.gift small { color: #e3e6cc; }
+.copy { border-radius: 0; border-color: rgba(244, 241, 226, .7); color: #f4f1e2; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: #f4f1e2; color: var(--accent2); }
+
+/* closing: the alcove again, with the camellia */
+.closing { padding: 64px 28px 0; background: var(--bg) var(--washi); color: var(--ink); }
+.closing::before { content: ""; position: absolute; inset: 0; z-index: -1; background: repeating-linear-gradient(90deg, transparent 0 62px, rgba(122, 95, 64, .16) 62px 65px), repeating-linear-gradient(0deg, transparent 0 82px, rgba(122, 95, 64, .16) 82px 85px); }
+.closing::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at 50% 45%, rgba(251, 248, 239, .95) 30%, rgba(251, 248, 239, .4) 70%, transparent); }
+.closingFlower { width: 72px; height: auto; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 36px; font-weight: 600; letter-spacing: .04em; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.closingFloor { order: 99; position: relative; width: calc(100% + 56px); height: 110px; margin: 110px -28px 0; border-top: 10px solid var(--heri); background: var(--tatami) 0 0 / 256px, var(--band-bg); }
+.closingFloor img { position: absolute; left: 50%; top: -76px; width: 300px; height: auto; translate: -50% 0; }
+.made { position: relative; z-index: 1; order: 100; width: calc(100% + 56px); margin: -12px -28px 0; padding: 12px 0 18px; background: var(--heri); color: rgba(244, 241, 226, .7); }
+.made:hover { color: #fff; }
+.music { border-color: var(--gold-l); background: var(--accent); border-radius: 2px; }
+.sentBox img { width: 90px; }
+
+/* ── Cover: shoji wall, a hanging scroll with the names, tatami floor with the tea things ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.room { position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; padding: 34px 20px 92px; border-top: 16px solid var(--wood-d); background: repeating-linear-gradient(90deg, transparent 0 62px, rgba(122, 95, 64, .5) 62px 65px), repeating-linear-gradient(0deg, transparent 0 82px, rgba(122, 95, 64, .5) 82px 85px), var(--bg) var(--washi); }
+.room::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 38%, rgba(255, 253, 244, .85), rgba(255, 253, 244, .25) 60%, transparent 80%); pointer-events: none; }
+.scroll { position: relative; z-index: 2; width: 236px; padding: 30px 14px 34px; background: linear-gradient(90deg, #5d6b3c, #6f7d4a 20%, #6f7d4a 80%, #5d6b3c); box-shadow: 0 16px 26px rgba(43, 42, 38, .25); transform-origin: 50% -30px; animation: hang 7s ease-in-out infinite alternate; }
+.scroll::before, .scroll::after { content: ""; position: absolute; left: -10px; right: -10px; height: 12px; border-radius: 6px; background: linear-gradient(#3a2c1c, #5a4430 50%, #2e2216); }
+.scroll::before { top: -6px; }
+.scroll::after { bottom: -6px; height: 14px; }
+.cord { position: absolute; top: -46px; left: 50%; width: 120px; height: 42px; translate: -50% 0; background: linear-gradient(to top right, transparent calc(50% - 1px), #5a4430 50%, transparent calc(50% + 1px)) 0 0 / 50% 100% no-repeat, linear-gradient(to top left, transparent calc(50% - 1px), #5a4430 50%, transparent calc(50% + 1px)) 100% 0 / 50% 100% no-repeat; }
+.cord::before { content: ""; position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; translate: -50% 0; border-radius: 50%; background: var(--wood-d); }
+.paper { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 26px 14px 22px; background: #fbf8ef var(--washi); box-shadow: inset 0 0 0 1px rgba(122, 95, 64, .18); }
+.kicker { color: var(--accent); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 600; line-height: 1.1; letter-spacing: .02em; }
+.coverNames span { max-width: 100%; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--red); font-size: 26px; font-style: normal; font-weight: 500; }
+.coverStroke { width: 120px; height: auto; }
+.coverDate { color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .06em; }
+.seal { display: grid; place-items: center; width: 34px; height: 34px; margin-top: 4px; border-radius: 3px; background: var(--red); color: #fbf1e8; font-family: var(--display); font-size: 13px; font-weight: 700; letter-spacing: .02em; box-shadow: inset 0 0 0 2px rgba(251, 241, 232, .35); rotate: 3deg; }
+.coverFlower { position: absolute; z-index: 1; left: 6px; bottom: 4px; width: 68px; height: auto; }
+.floor { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0 22px 26px; border-top: 10px solid var(--heri); background: var(--tatami) 0 0 / 256px, var(--band-bg); }
+.teaset { position: relative; align-self: flex-end; width: 312px; max-width: 86%; margin: -72px -8px 0 0; }
+.teaset img { display: block; width: 100%; height: auto; }
+.steam { position: absolute; bottom: 70%; width: 30px; height: auto; opacity: 0; animation: steam 6s ease-out infinite; }
+.steam1 { left: 22%; }
+.steam2 { left: 50%; animation-delay: -3s; }
+.cover .guest { max-width: 320px; padding: 12px 18px; background: rgba(251, 248, 239, .94); box-shadow: 0 0 0 1px rgba(122, 95, 64, .3), 0 8px 16px rgba(43, 42, 38, .12); }
+.guest small { color: var(--muted); font-style: normal; font-size: 13.5px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; font-weight: 600; }
+.table { border-radius: 0; border-color: var(--red); color: var(--red); font-family: var(--serif); font-weight: 700; }
+.openBtn { border-radius: 0; background: var(--heri); color: #fbf8ef; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; box-shadow: 0 8px 18px rgba(43, 42, 38, .25); }
+.openBtn:hover { background: #1f2716; translate: 0 -1px; }
+
+/* ── Hero: a quiet alcove — vertical label, the names, the bowl on a tray ── */
+.hero { position: relative; display: grid; grid-template-columns: 34px 1fr; gap: 0 14px; padding: 58px 26px 40px 22px; border-top: 16px solid var(--wood-d); }
+.heroSide { grid-row: span 6; align-self: start; padding: 14px 0; border-right: 1px solid var(--line); color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .4em; writing-mode: vertical-rl; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 46px; font-weight: 600; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--red); font-size: 28px; font-style: normal; font-weight: 500; }
+.heroStroke { width: 170px; height: auto; margin: 14px 0 10px; }
+.heroDate { color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.heroNote { max-width: 300px; margin-top: 12px; color: var(--muted); font-size: 15.5px; line-height: 1.8; }
+.tray { display: flex; align-items: flex-end; justify-content: center; gap: 22px; margin-top: 24px; padding: 18px 20px 10px; border-bottom: 8px solid var(--wood-d); background: linear-gradient(transparent 70%, rgba(122, 95, 64, .12)); }
+.tray img:first-child { width: 120px; height: auto; }
+.tray img:last-child { width: 40px; height: auto; }
+.heroPhoto { grid-column: 2; width: 100%; height: 200px; margin-top: 22px; padding: 6px; background: var(--wood); }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; }
+
+@keyframes steam { 0% { opacity: 0; translate: 0 10px; scale: .8 .9; } 30% { opacity: .75; } 100% { opacity: 0; translate: 8px -60px; scale: 1.2 1.15; } }
+@keyframes hang { from { rotate: -.5deg; } to { rotate: .5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .steam { display: none; }
+  .scroll { animation: none; }
+}

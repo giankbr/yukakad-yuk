@@ -1,0 +1,167 @@
+/* Ukiran Botani — lempeng ilustrasi botani bergaya ukiran tembaga: peoni, kuncup, daun, dan pakis yang digores garis sejajar, arsir silang, dan titik-titik, dicetak tinta hitam di atas kertas tua. Sampul berupa "Tab." dengan gambar dan keterangan Latin rekaan, foto bernada sepia. */
+.root, .cover {
+  --bg: #efe5cf; --paper: #e9dec4; --ivory: #f6efdd; --field: #faf5e8; --ink: #1e1a16; --muted: #554b40; --line: #c9bb9c;
+  --accent: #1e1a16; --accent2: #3a332b; --gold: #6f5a3e; --gold-l: #efe5cf; --gold-d: #5b4a33;
+  --band-bg: #1f1c18; --band-ink: #efe5cf;
+  --display: "IM Fell English", Georgia, serif; --serif: "Old Standard TT", Georgia, serif; --script: "IM Fell English", Georgia, serif; --label: "Old Standard TT", Georgia, serif;
+  --paperbg: url(/themes/art/ukiran-botani/paper.webp) 0 0 / 256px 256px;
+  --h2: 32px; --card-r: 0;
+  font-family: var(--serif); color: var(--ink); background: var(--bg) var(--paperbg); line-height: normal;
+}
+.root {
+  --t-accent: #1e1a16; --t-accent-ink: #f6efdd; --t-bg: #efe5cf; --t-ink: #1e1a16; --t-muted: #554b40; --t-line: #c9bb9c; --t-field: #faf5e8;
+  --t-radius: 0px; --t-font: "Old Standard TT", Georgia, serif; --t-heading-font: "IM Fell English", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.root img:not([data-nolightbox]) { filter: grayscale(1) sepia(.28) contrast(1.06) brightness(.98); }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .26em; }
+.head h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 236px; }
+.section { padding: 66px 26px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 64px 30px 60px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; font-style: italic; }
+.salamSub { color: var(--muted); font-family: var(--label); font-style: italic; }
+.intro { color: var(--muted); }
+
+/* ── Couple: oval cameo plates with a double rule ── */
+.couple { gap: 14px; background: var(--paper) var(--paperbg); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 262px; padding: 6px; border: 3px double var(--ink); border-radius: 50%; background: var(--ivory); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: 0 14px 28px rgba(30, 26, 22, .16); }
+.portraitArt { position: absolute; z-index: 1; right: -46px; bottom: -14px; width: 70px; height: auto; rotate: 12deg; }
+.person:nth-child(even) .portraitArt { right: auto; left: -46px; rotate: -12deg; scale: -1 1; }
+.monogram { color: var(--ink); font-family: var(--display); font-size: 90px; }
+.role { font-style: italic; letter-spacing: .14em; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; }
+.fullName { font-family: var(--serif); font-size: 17px; letter-spacing: .02em; }
+.parents { color: var(--muted); font-style: italic; }
+.amp { margin: 16px 0 12px; color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; }
+.amp img { width: 34px; }
+
+/* ── Countdown: an inked plate ── */
+.countBand { padding: 66px 22px; background: var(--band-bg); }
+.countBand::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(239, 229, 207, .35); outline: 1px solid rgba(239, 229, 207, .2); outline-offset: -5px; pointer-events: none; }
+.headLight .eyebrow { color: #cdbf9f; font-style: italic; }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count > div { border: 1px solid rgba(239, 229, 207, .45); border-radius: 0; background: transparent; }
+.count > div::after { display: none; }
+.count b { color: var(--band-ink); font-family: var(--display); font-size: 34px; }
+.count small { color: #cdbf9f; font-family: var(--label); font-size: 13px; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border-color: rgba(239, 229, 207, .6); border-radius: 0; color: var(--band-ink); font-family: var(--label); }
+.ghostBtn:hover { background: rgba(239, 229, 207, .1); }
+
+/* ── Events: specimen labels ── */
+.events { gap: 26px; background: transparent; }
+.event { padding: 30px 22px 24px; border: 1px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 3px 4px 0 rgba(30, 26, 22, .12); }
+.event::before { inset: 5px; border: 1px solid rgba(30, 26, 22, .5); border-radius: 0; }
+.event:hover { box-shadow: 5px 7px 0 rgba(30, 26, 22, .14); }
+.eventNo { top: -13px; width: auto; height: 26px; padding: 0 12px; border: 1px solid var(--ink); border-radius: 0; background: var(--ivory); color: var(--ink); font-family: var(--label); font-size: 12px; font-style: italic; white-space: nowrap; }
+.eventNo::before { content: "No. "; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; }
+.eventDate { color: var(--ink); }
+.eventTime { color: var(--gold-d); font-family: var(--label); }
+.rule { width: 100%; max-width: 220px; height: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding-top: 2px; background: none; }
+.mapBtn { border: 1px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); letter-spacing: .08em; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper) var(--paperbg); }
+.timeline::before { left: 21px; background: var(--ink); width: 1px; }
+.node { width: 40px; height: 52px; border: 0; background: transparent; }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); font-style: italic; letter-spacing: .1em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.storyBody p { color: var(--muted); }
+
+/* ── Gallery: tipped-in plates ── */
+.gallery { background: transparent; }
+.mosaic { gap: 12px; }
+.tile, .tile:first-child { border-radius: 0; border: 6px solid var(--ivory); outline: 1px solid var(--ink); box-shadow: 2px 3px 0 rgba(30, 26, 22, .12); }
+.tile:first-child { border-radius: 50% / 40%; }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper) var(--paperbg); }
+.form { border: 1px solid var(--ink); border-radius: 0; background: var(--ivory); box-shadow: 3px 4px 0 rgba(30, 26, 22, .1); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--label); font-style: italic; letter-spacing: .06em; text-transform: none; font-size: 14px; }
+.field input, .field textarea { border-radius: 0; border-color: var(--line); }
+.choices button { border-radius: 0; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--ivory); }
+.step { border-color: var(--ink); color: var(--ink); }
+.submit { border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); letter-spacing: .12em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border-radius: 0; background: var(--ivory); border-color: var(--line); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 17px; }
+.wish small { border-radius: 0; background: transparent; border: 1px solid var(--ink); color: var(--ink); font-style: italic; }
+
+/* ── Gifts ── */
+.gifts { background: transparent; }
+.gift { border-radius: 0; background: var(--band-bg); }
+.gift::after { right: 8px; bottom: 8px; left: 8px; top: 8px; width: auto; height: auto; border: 1px solid rgba(239, 229, 207, .3); border-radius: 0; box-shadow: none; z-index: -1; }
+.gift h3 { color: #cdbf9f; font-family: var(--label); font-style: italic; letter-spacing: .08em; }
+.giftNo { color: var(--band-ink); font-family: var(--display); font-size: 23px; }
+.copy { border-color: rgba(239, 229, 207, .6); border-radius: 0; color: var(--band-ink); font-family: var(--label); }
+.copyOn, .copyOn:hover { background: var(--band-ink); color: var(--ink); }
+
+/* ── Closing ── */
+.closing { padding: 70px 64px 64px; background: var(--paper) var(--paperbg); color: var(--ink); }
+.closing::before { content: ""; position: absolute; inset: 14px; border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -5px; pointer-events: none; }
+.closingDecor { position: absolute; z-index: -1; bottom: 22px; width: 44px; height: auto; opacity: .85; }
+.closingFernL { left: 24px; }
+.closingFernR { right: 24px; scale: -1 1; }
+.closingEmblem { width: 110px; height: auto; }
+.thanks { color: var(--ink); font-family: var(--display); font-size: 46px; font-style: italic; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--label); font-style: italic; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 34px; }
+.made { color: rgba(30, 26, 22, .55); }
+.made:hover { color: var(--ink); }
+.music { border-color: var(--ink); background: var(--ink); }
+
+/* ── Cover: a botanical plate — header rule, the engraved figure with its legend beside it ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 18px; overflow: hidden; background: var(--bg) var(--paperbg); color: var(--ink); isolation: isolate; }
+.sheet { position: relative; display: flex; flex: 1; flex-direction: column; padding: 16px 16px 22px; border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 4px; }
+.plateHead { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-bottom: 8px; border-bottom: 3px double var(--ink); font-family: var(--label); font-size: 12px; letter-spacing: .08em; }
+.plateHead span:nth-child(2) { font-family: var(--display); font-size: 15px; font-style: italic; letter-spacing: 0; }
+.plateBody { display: grid; grid-template-columns: 56% 1fr; align-items: center; gap: 6px; flex: 1; margin-top: 14px; }
+.figure { position: relative; display: grid; place-items: center; }
+.figure img { width: 100%; max-height: 60dvh; height: auto; object-fit: contain; transform-origin: 50% 100%; animation: breathe 9s var(--m-ease) infinite; }
+.figTag { position: absolute; font-family: var(--display); font-size: 13px; font-style: italic; }
+.figTag1 { top: 6%; right: -4px; }
+.figTag2 { bottom: 24%; left: -2px; }
+.legend { display: flex; flex-direction: column; gap: 4px; text-align: center; }
+.legendSmall { color: var(--muted); font-family: var(--label); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin: 10px 0 6px; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 4px 0; font-size: 28px; }
+.coverDate { padding: 6px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); font-family: var(--label); font-size: 13px; letter-spacing: .04em; }
+.latin { margin-top: 10px; color: var(--muted); font-family: var(--display); font-size: 14px; font-style: italic; line-height: 1.5; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 14px; padding-top: 14px; border-top: 3px double var(--ink); text-align: center; }
+.guest { max-width: 320px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--ink); color: var(--ink); font-family: var(--label); font-style: italic; letter-spacing: .04em; }
+.openBtn { border: 1px solid var(--ink); border-radius: 0; background: var(--ink); color: var(--ivory); font-family: var(--label); font-size: 14px; letter-spacing: .14em; box-shadow: 3px 4px 0 rgba(30, 26, 22, .18); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: an oval cameo between two fern fronds ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 56px 24px 54px; text-align: center; }
+.heroKicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { font-style: italic; }
+.heroDate { color: var(--muted); font-family: var(--label); font-size: 15px; font-style: italic; }
+.cameo { position: relative; width: 250px; margin-top: 18px; }
+.heroPhoto { display: grid; width: 250px; height: 320px; padding: 7px; overflow: hidden; border: 3px double var(--ink); border-radius: 50%; background: var(--ivory); }
+.heroPhoto > img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.fern { position: absolute; bottom: -18px; width: 66px; height: auto; transform-origin: 50% 100%; animation: sway 8s var(--m-ease) infinite alternate; }
+.fernL { left: -58px; }
+.fernR { right: -58px; scale: -1 1; }
+.heroCaption { margin-top: 20px; color: var(--muted); font-family: var(--display); font-size: 14px; font-style: italic; }
+.heroNote { max-width: 300px; color: var(--ink); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@media (prefers-reduced-motion: reduce) {
+  .figure img, .fern { animation: none; }
+}

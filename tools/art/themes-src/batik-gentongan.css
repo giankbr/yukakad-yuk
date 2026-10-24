@@ -1,0 +1,159 @@
+/* Batik Gentongan — walimah Madura dari Tanjung Bumi: seluruh sampul adalah selembar kain gentongan merah mengkudu dengan bunga pesisir, burung, sulur dan cecek, retak lilin biru nila; label kain krem bertepi gerigi berisi nama, gentong tanah liat berselampir kain di kakinya, pinggiran tumpal-ombak, kartu acara berupa contoh kain (swatch), potret terhampar di atas kain. */
+.root, .cover {
+  --bg: #f3e9d6; --paper: #eadcc1; --ivory: #fbf5e8; --field: #fffcf4; --ink: #2a1712; --muted: #5e4537; --line: #dcc7a3;
+  --accent: #8e1e17; --accent2: #a8291f; --gold: #8a5428; --gold-l: #efe2c4; --gold-d: #7a4520;
+  --band-bg: #1f2e57; --band-ink: #f6eedd;
+  --nila: #1f2e57; --nila-d: #131c38; --soga: #8a5428; --mengkudu: #8e1e17;
+  --display: "Gloock", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Gloock", Georgia, serif; --label: "Karla", system-ui, sans-serif;
+  --kain: url(/themes/art/batik-gentongan/kain.webp) 0 0 / 200px repeat;
+  --tepi: url(/themes/art/batik-gentongan/tepi.webp) 0 0 / auto 36px repeat-x;
+  --pinked: radial-gradient(circle at 50% 50%, #000 4.6px, transparent 5px) 0 0 / 12px 12px;
+  --h2: 32px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e1e17; --t-accent-ink: #fbf5e8; --t-bg: #f3e9d6; --t-ink: #2a1712; --t-muted: #5e4537; --t-line: #dcc7a3; --t-field: #fffcf4;
+  --t-radius: 2px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Gloock", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { color: var(--nila); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 220px; }
+
+/* ── Cover: the whole screen is the cloth, a cream cloth-label carries the names, gentong jars at its foot ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 56px 18px 150px; overflow: hidden; background: radial-gradient(90% 70% at 50% 45%, transparent 40%, rgba(40, 6, 4, .45)), var(--kain), var(--mengkudu); text-align: center; isolation: isolate; }
+.cover::before, .cover::after { content: ""; position: absolute; left: 0; right: 0; height: 36px; background: var(--tepi); }
+.cover::before { top: 0; }
+.cover::after { bottom: 0; }
+.label { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 330px; padding: 30px 22px 26px; background: var(--ivory); box-shadow: 0 0 0 7px var(--ivory), 0 0 0 9px var(--nila), 0 18px 40px rgba(20, 6, 4, .5); }
+.label::before { content: ""; position: absolute; inset: 7px; border: 1px solid color-mix(in srgb, var(--nila) 45%, transparent); pointer-events: none; }
+.labelBird { width: 120px; height: auto; margin-top: -6px; }
+.kicker { margin-top: 8px; color: var(--nila); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 4px 0; color: var(--nila); font-family: var(--serif); font-size: 22px; font-style: italic; }
+.coverDate { margin-top: 12px; padding: 5px 14px; border-top: 1.5px solid var(--soga); border-bottom: 1.5px solid var(--soga); color: var(--ink); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; margin-top: 18px; }
+.cover .guest small { color: var(--muted); font-size: 14px; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 20px; }
+.table { border-color: var(--soga); color: var(--soga); font-family: var(--label); font-weight: 700; }
+.openBtn { border-radius: 2px; background: var(--nila); color: #fff; font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4.5px var(--nila); }
+.openBtn:hover { background: #2a3d70; }
+.jars { position: absolute; z-index: 2; left: 0; right: 0; bottom: 26px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 10px; pointer-events: none; }
+.jar { width: 150px; height: auto; filter: drop-shadow(0 6px 8px rgba(20, 6, 4, .45)); }
+.jarSmall { width: 104px; scale: -1 1; }
+
+/* ── Hero: the photo laid on a folded cloth ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 26px 42px; background: var(--bg); text-align: center; }
+.heroKicker { color: var(--nila); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--nila); font-family: var(--serif); font-size: .55em; font-style: italic; }
+.heroDate { margin-top: 10px; color: var(--muted); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .08em; }
+.heroCloth { position: relative; width: 100%; margin-top: 26px; padding: 16px; background: var(--kain), var(--mengkudu); rotate: -1.5deg; box-shadow: 0 14px 30px rgba(42, 23, 18, .25); }
+.heroPhoto { display: grid; height: 300px; overflow: hidden; border: 5px solid var(--ivory); rotate: 2.5deg; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroNote { max-width: 320px; margin-top: 26px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: balance; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 26px 28px 58px; background: var(--bg); }
+.arabic { color: var(--nila); font-size: 28px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 26px; line-height: 1.3; }
+.intro { font-size: 16px; }
+
+/* couple: square portraits laid on a swatch of the cloth */
+.couple { gap: 16px; background: var(--paper); }
+.portrait { margin-bottom: 18px; padding: 14px; background: var(--kain), var(--mengkudu); box-shadow: 0 10px 22px rgba(42, 23, 18, .2); }
+.personWrap:nth-of-type(odd) .portrait { rotate: -2deg; }
+.personWrap:nth-of-type(even) .portrait { rotate: 2deg; }
+.portraitFrame { width: 210px; height: 250px; padding: 0; border: 5px solid var(--ivory); border-radius: 0; background: var(--ivory); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 96px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.parents { font-size: 15px; }
+.amp { color: var(--nila); font-family: var(--serif); font-size: 40px; font-style: italic; }
+.amp img { width: 70px; }
+
+/* countdown: indigo band hemmed with the tumpal border, numbers on red swatches */
+.countBand { gap: 24px; padding: 76px 22px 78px; background: var(--tepi), var(--tepi), var(--nila); background-position: 0 0, 0 100%, 0 0; background-repeat: repeat-x, repeat-x, no-repeat; }
+.headLight .eyebrow { color: #e9c89a; }
+.headLight h2 { font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 84px; border: 0; border-radius: 0; background: var(--kain), var(--mengkudu); background-size: 150px; box-shadow: inset 0 0 0 30px rgba(94, 18, 14, .55), 0 0 0 3px var(--ivory); }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; }
+.count small { color: var(--gold-l); font-family: var(--label); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 1.5px solid var(--gold-l); border-radius: 2px; color: var(--gold-l); font-family: var(--label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+
+/* events: swatch cards — a strip of the cloth pinned along the left edge */
+.events { gap: 22px; background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 18px 22px 74px; border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); text-align: left; box-shadow: 0 8px 20px rgba(42, 23, 18, .08); }
+.event::before { inset: 0 auto 0 0; width: 54px; border: 0; border-radius: 0; background: var(--kain), var(--mengkudu); background-size: 160px; box-shadow: inset -3px 0 0 var(--nila); }
+.eventNo { top: 18px; left: 27px; translate: -50% 0; width: 36px; height: 36px; border-radius: 50%; background: var(--ivory); color: var(--accent); font-family: var(--display); font-size: 15px; letter-spacing: 0; box-shadow: 0 0 0 2px var(--nila); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; text-wrap: wrap; }
+.eventDate { color: var(--ink); font-size: 16px; }
+.eventTime { color: var(--nila); font-family: var(--label); font-weight: 700; }
+.rule { width: 70px; height: 2px; background: var(--soga); }
+.event strong { font-size: 17px; }
+.eventAddr { max-width: none; font-size: 14.5px; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; background: var(--nila); color: #fff; font-family: var(--label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; }
+.mapBtn:hover { background: #2a3d70; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(var(--mengkudu) 0 6px, transparent 6px 10px); }
+.node { width: 40px; height: 40px; border: 2px solid var(--nila); background: var(--ivory); }
+.node img { width: 30px; }
+.storyBody small { color: var(--accent); font-family: var(--label); font-weight: 700; letter-spacing: .16em; }
+.storyBody h3 { color: var(--nila); font-family: var(--display); font-size: 22px; }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 0; box-shadow: 0 0 0 3px var(--ivory), 0 0 0 4px var(--line); }
+.tile:first-child { border-radius: 0; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 0; box-shadow: 0 0 0 1px var(--line), 0 10px 26px rgba(42, 23, 18, .08); border-top: 8px solid var(--mengkudu); }
+.field > span, .diet, .guestsLabel { color: var(--nila); font-family: var(--label); font-weight: 700; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--label); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--nila); background: var(--nila); color: #fff; }
+.step { border-radius: 2px; border-color: var(--nila); }
+.submit { border-radius: 2px; background: var(--accent); color: #fff; font-family: var(--label); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { font-family: var(--display); font-style: normal; }
+.sentBox img { width: 200px; }
+.wish { border-radius: 0; border-left: 4px solid var(--nila); }
+.wish strong { font-family: var(--display); }
+.wish small { border-radius: 2px; background: rgba(142, 30, 23, .1); color: var(--accent); font-family: var(--label); font-weight: 700; }
+
+/* gifts */
+.gifts { background: var(--bg); }
+.gift { border-radius: 0; background: var(--kain), var(--mengkudu); background-size: 180px; box-shadow: inset 0 0 0 999px rgba(31, 46, 87, .82); }
+.gift::after { display: none; }
+.gift h3 { color: var(--gold-l); font-family: var(--label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; }
+.giftNo { font-family: var(--display); font-size: 23px; letter-spacing: .04em; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 16px; line-height: 1.5; letter-spacing: 0; }
+.copy { border-color: var(--gold-l); border-radius: 2px; color: #fff; font-family: var(--label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--nila); }
+
+/* closing: back on the cloth, a cream label and the gentong */
+.closing { padding: 70px 34px 200px; background: radial-gradient(90% 70% at 50% 45%, transparent 40%, rgba(40, 6, 4, .45)), var(--kain), var(--mengkudu); color: var(--ink); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 40px 22px 178px; background: var(--ivory); box-shadow: 0 0 0 7px var(--ivory), 0 0 0 9px var(--nila), 0 18px 40px rgba(20, 6, 4, .5); }
+.closingBird { width: 120px; height: auto; }
+.closing .thanks { color: var(--accent); font-family: var(--display); font-size: 46px; }
+.closingText { color: var(--muted); font-size: 16px; }
+.closingSalam { color: var(--nila); font-family: var(--label); font-weight: 700; }
+.family { color: var(--muted); font-family: var(--label); font-weight: 700; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 30px; }
+.made { position: absolute; z-index: 3; bottom: 12px; left: 0; right: 0; margin: 0; color: rgba(255, 245, 230, .85); font-size: 13px; }
+.closing .jars { bottom: 30px; }
+.music { border-color: var(--gold-l); background: var(--nila); }
+
+/* signature motion: the cloth slowly drifts like it is being lifted out of the dye */
+.cover { animation: soak 40s linear infinite; }
+@keyframes soak { from { background-position: 0 0, 0 0, 0 0; } to { background-position: 0 0, 200px 200px, 0 0; } }
+.labelBird, .closingBird { animation: hop 5s ease-in-out infinite alternate; }
+@keyframes hop { from { translate: 0 0; rotate: -2deg; } to { translate: 0 -4px; rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .cover, .labelBird, .closingBird { animation: none; }
+}

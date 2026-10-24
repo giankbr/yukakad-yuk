@@ -1,0 +1,173 @@
+/* Wayang Golek — panggung wayang golek Sunda: kelir hijau tua dengan rumbai beludru merah, sepasang golek kayu orisinal (wajah dicat, makuta & siger berlapis emas, kain batik) tertancap di gedebog, gong degung dalam ancak berukir dan kendang; kartu-kartu seperti papan lakon kayu; Yeseva One + Alegreya + Federant. */
+.root, .cover {
+  --bg: #f3e6c8; --paper: #ead9b4; --ivory: #fbf3e2; --field: #fffaf0; --ink: #2a1a10; --muted: #6a5038; --line: #d8c29a;
+  --accent: #8e2a20; --accent2: #6e1a15; --gold: #cf9d3c; --gold-l: #f1d491; --gold-d: #9a6a1e;
+  --kelir: #173f3c; --kelir-d: #0f2b29; --wood: #4a2a14;
+  --band-bg: #173f3c; --band-ink: #f6ead0;
+  --display: "Yeseva One", Georgia, serif; --serif: Alegreya, Georgia, serif; --script: Federant, Georgia, serif;
+  --h2: 32px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #8e2a20; --t-accent-ink: #fbf3e2; --t-bg: #f3e6c8; --t-ink: #2a1a10; --t-muted: #6a5038; --t-line: #d8c29a; --t-field: #fffaf0;
+  --t-radius: 6px; --t-font: Alegreya, Georgia, serif; --t-heading-font: "Yeseva One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) radial-gradient(120% 60% at 50% 0, rgba(255, 250, 235, .6), transparent 70%); }
+
+/* type */
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); line-height: 1.15; }
+.intro { color: var(--muted); }
+
+/* divider: a gilt braid with a tiny gong in the middle */
+.divider { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; width: 200px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 5px; border-block: 1.5px solid var(--gold); background: repeating-linear-gradient(90deg, var(--accent) 0 6px, transparent 6px 10px) center / 100% 2px no-repeat; }
+.divider img { width: 30px; height: auto; }
+.headLight .divider::before, .headLight .divider::after { border-color: var(--gold-l); }
+
+/* opening: a framed lakon placard */
+.salamBlock { position: relative; gap: 12px; margin: 0 18px; padding: 48px 26px 50px; border: 2px solid var(--gold); border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 6px var(--ivory), 0 0 0 7px var(--line); margin-bottom: 40px; }
+.arabic { color: var(--kelir); font-size: 27px; }
+
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 42px; line-height: 1.05; }
+
+/* couple: portraits are little stages: valance on top, gilt frame */
+.couple { gap: 20px; padding-top: 64px; background: var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 280px; padding: 8px; border: 3px solid var(--gold); border-radius: 4px; background: var(--kelir); box-shadow: 0 16px 30px rgba(42, 26, 16, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 2px; }
+.portraitValance { position: absolute; z-index: 2; top: -14px; left: -14px; right: -14px; height: 56px; background: url(/themes/art/wayang-golek/valance.webp) 0 0 / 120px 38px repeat-x; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .25)); pointer-events: none; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.parents { color: var(--muted); }
+.amp { margin: 14px 0 6px; color: var(--gold-d); font-family: var(--display); font-size: 46px; }
+.amp img { width: 70px; }
+
+/* countdown: the kelir at night, gong + kendang */
+.countBand { padding: 66px 18px 70px; background: radial-gradient(80% 70% at 50% 40%, #215450, var(--kelir) 60%, var(--kelir-d)); }
+.countBand::before { content: ""; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 40px; background: url(/themes/art/wayang-golek/valance.webp) 0 0 / 120px 38px repeat-x; }
+.countGong { position: absolute; z-index: -1; right: -40px; bottom: -14px; width: 170px; height: auto; opacity: .55; }
+.countKendang { position: absolute; z-index: -1; left: -26px; bottom: 6px; width: 150px; height: auto; opacity: .5; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff7e4; font-family: var(--display); }
+.count > div { border: 1.5px solid var(--gold); border-radius: 4px; background: rgba(8, 26, 24, .55); box-shadow: inset 0 0 0 3px rgba(207, 157, 60, .18); }
+.count b { color: var(--gold-l); font-family: var(--display); font-size: 32px; }
+.count small { color: #e9dcc0; font-family: var(--serif); font-style: italic; }
+.ghostBtn { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .04em; }
+
+/* events: wooden lakon boards with a red valance top */
+.events { gap: 30px; padding-top: 70px; }
+.event { padding: 46px 22px 26px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 2px var(--gold), 0 0 0 7px var(--wood), 0 18px 30px rgba(42, 26, 16, .22); }
+.event::before { inset: 0 0 auto 0; height: 30px; border: 0; border-radius: 0; background: url(/themes/art/wayang-golek/valance.webp) 0 0 / 90px 29px repeat-x; }
+.eventNo { top: auto; bottom: -16px; height: 30px; border: 2px solid var(--gold); background: var(--kelir); color: var(--gold-l); font-family: var(--display); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 90px; height: 5px; border-block: 1.5px solid var(--gold); background: none; }
+.mapBtn, .submit { border-radius: 4px; background: var(--accent); color: #fff3dc; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .03em; box-shadow: 0 3px 0 var(--accent2); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #a3352a; }
+
+/* story: a lakon script on the kelir */
+.story { background: var(--kelir); }
+.story .head h2 { color: #fff3dc; }
+.story .eyebrow { color: var(--gold-l); }
+.timeline::before { background: linear-gradient(var(--gold-l), rgba(241, 212, 145, .2)); }
+.node { width: 40px; height: 40px; border: 1.5px solid var(--gold-l); background: var(--kelir-d); }
+.node img { width: 30px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 4px; background: var(--ivory); box-shadow: 0 0 0 1.5px var(--gold); }
+.storyBody small { color: var(--accent); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--kelir); font-family: var(--display); font-size: 21px; }
+
+/* gallery: stage-framed tiles */
+.mosaic { gap: 10px; }
+.tile { border: 3px solid var(--wood); border-radius: 3px; box-shadow: 0 0 0 1.5px var(--gold); }
+.tile:first-child { border-radius: 3px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 2px solid var(--gold); border-radius: 4px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 4px; }
+.choices button { border-radius: 4px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--kelir); background: var(--kelir); color: var(--gold-l); }
+.step { border-radius: 4px; }
+.wish { border: 0; border-left: 4px solid var(--accent); border-radius: 4px; }
+.wish:nth-child(even) { border-left-color: var(--kelir); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 17px; }
+.wish small { background: color-mix(in srgb, var(--kelir) 12%, transparent); color: var(--kelir); }
+.sentBox img { width: 90px; }
+
+/* gifts: kelir cards with gilt edge */
+.gift { border-radius: 4px; box-shadow: inset 0 0 0 2px var(--gold), inset 0 0 0 6px var(--kelir), inset 0 0 0 7px rgba(241, 212, 145, .35); }
+.gift::after { border-color: rgba(241, 212, 145, .08); }
+.gift h3 { font-family: var(--display); font-size: 18px; letter-spacing: .02em; }
+.giftNo { font-family: var(--serif); font-weight: 700; letter-spacing: .05em; }
+.gifts .gift:last-of-type .giftNo { font-size: 18px; line-height: 1.4; letter-spacing: .01em; }
+.copy { border-radius: 4px; font-family: var(--serif); font-weight: 700; }
+
+/* closing: the stage again, both golek bow at the end */
+.closing { padding-top: 0; background: var(--kelir); }
+.closing::before { content: ""; position: absolute; z-index: -1; top: 0; left: 0; right: 0; height: 40px; background: url(/themes/art/wayang-golek/valance.webp) 0 0 / 120px 38px repeat-x; }
+.closingStage { position: relative; width: calc(100% + 56px); height: 290px; margin: 30px -28px 10px; overflow: hidden; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: 0; }
+.family { font-family: var(--serif); font-size: 15px; letter-spacing: .02em; }
+.closingNames { color: #fff3dc; font-family: var(--display); font-size: 32px; }
+.music { border-color: var(--gold-l); background: var(--kelir); }
+
+/* ── shared stage (cover, hero, closing) ── */
+.stage { position: relative; width: 100%; height: 340px; flex-shrink: 0; overflow: hidden; }
+.stageGong { position: absolute; left: 50%; bottom: 86px; width: 150px; height: auto; translate: -50% 0; transform-origin: 50% 0; }
+.golek { position: absolute; bottom: -128px; width: 118px; height: auto; transform-origin: 50% 82%; filter: drop-shadow(6px 10px 8px rgba(0, 0, 0, .35)); }
+.golekL { left: 7%; animation: wgSway 5.5s ease-in-out infinite alternate; }
+.golekR { right: 9%; animation: wgSway 6.2s ease-in-out -2s infinite alternate-reverse; }
+.gedebog { position: absolute; left: 50%; bottom: 28px; width: 500px; max-width: none; height: auto; translate: -50% 0; }
+.plank { position: absolute; left: 0; right: 0; bottom: 0; height: 38px; background: linear-gradient(#5a3418, #3a200e); box-shadow: inset 0 3px 0 rgba(255, 220, 160, .18), inset 0 -2px 0 rgba(0, 0, 0, .3); }
+.plank::after { content: ""; position: absolute; inset: 9px 0 auto; height: 6px; border-block: 1.5px solid var(--gold); opacity: .7; }
+
+/* ── Cover: kelir with a velvet valance, big names, guest placard, puppets on the gedebog ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 64px 22px 0; overflow: hidden; background: radial-gradient(90% 55% at 50% 38%, #24605b 0%, var(--kelir) 55%, var(--kelir-d) 100%); color: #fff3dc; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .025) 0 2px, transparent 2px 7px); }
+.valance { position: absolute; z-index: 3; top: 0; left: 0; right: 0; height: 58px; background: url(/themes/art/wayang-golek/valance.webp) 0 0 / 150px 47px repeat-x; filter: drop-shadow(0 5px 6px rgba(0, 0, 0, .35)); }
+.sampur { color: var(--gold-l); font-family: var(--script); font-size: 17px; letter-spacing: .12em; }
+.kicker { margin-top: 6px; color: #e9dcc0; font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .04em; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 8px; color: #fff3dc; font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; text-shadow: 0 3px 0 rgba(8, 26, 24, .55); overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--gold-l); font-family: var(--script); font-size: 30px; font-style: normal; }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 12px; color: var(--gold-l); font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: .06em; }
+.coverDate::before, .coverDate::after { content: ""; width: 22px; height: 5px; border-block: 1.5px solid var(--gold); }
+.placard { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 310px; margin-top: 20px; padding: 16px 16px 18px; border-radius: 4px; background: var(--ivory); color: var(--ink); box-shadow: 0 0 0 2px var(--gold), 0 0 0 6px var(--wood), 0 16px 30px rgba(0, 0, 0, .35); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--accent); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+.openBtn { min-width: 210px; border-radius: 4px; background: var(--accent); color: #fff3dc; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 4px 0 var(--accent2), 0 10px 18px rgba(0, 0, 0, .25); }
+.openBtn:hover { background: #a3352a; }
+.cover .stage { width: calc(100% + 44px); margin: auto -22px 0; padding-top: 18px; }
+
+/* ── Hero (top of the opened page): photo in a stage frame under the valance ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 0 22px 40px; overflow: hidden; background: linear-gradient(var(--kelir) 0 300px, transparent 300px); text-align: center; isolation: isolate; }
+.hero .valance { position: relative; width: calc(100% + 44px); margin: 0 -22px; }
+.heroFrame { position: relative; width: 250px; margin-top: 10px; padding: 9px; border: 3px solid var(--gold); border-radius: 4px; background: var(--wood); box-shadow: 0 22px 40px rgba(0, 0, 0, .3); }
+.heroPhoto { width: 100%; height: 320px; overflow: hidden; border-radius: 2px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKendang { width: 150px; height: auto; margin-top: -30px; position: relative; z-index: 2; }
+.heroKicker { margin-top: 18px; color: var(--gold-d); font-family: var(--script); font-size: 15px; letter-spacing: .12em; }
+.heroNames { max-width: 100%; margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 42px; font-weight: 400; line-height: 1.08; text-wrap: balance; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--script); font-size: 28px; font-style: normal; }
+.heroDate { margin-top: 8px; color: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: .04em; }
+.heroNote { max-width: 300px; margin-top: 10px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.5; }
+
+@keyframes wgSway { from { rotate: -2deg; } to { rotate: 2.4deg; } }
+@keyframes wgGong { 0%, 100% { rotate: 0deg; } 50% { rotate: 1.2deg; } }
+.stageGong { animation: wgGong 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .golekL, .golekR, .stageGong { animation: none; }
+}
+@media (max-width: 370px) {
+  .coverNames { font-size: 44px; }
+  .golek { width: 106px; bottom: -116px; }
+  .golekL { left: 4%; }
+  .golekR { right: 5%; }
+}
+.heroStage { height: 320px; background: var(--kelir); }
