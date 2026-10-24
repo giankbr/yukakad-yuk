@@ -4,7 +4,7 @@ import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FaqSection, FinalCta, MarketingPage, PricingPlans, SplitTitle } from "@/components/landing/Sections";
 import { IconCheck, IconGlobe, IconMinus, IconPrinter, IconReceipt, IconShield, IconUsers, IconVideo, IconWallet } from "@/components/brand/icons";
-import { getPlans, getLandingContent, getSiteContact, priceLabel, planHref, type Plan } from "@/lib/marketing";
+import { getPlans, getLandingContent, getSiteContact, priceLabel, planHref, activeLabel, type Plan } from "@/lib/marketing";
 
 export const metadata: Metadata = {
   title: "Harga | Rawuh",
@@ -19,7 +19,7 @@ const groups: { title: string; rows: Row[] }[] = [
     title: "Undangan",
     rows: [
       { label: "Jumlah tamu", value: plan => `${plan.max_guests.toLocaleString("id-ID")} tamu` },
-      { label: "Masa aktif paket", value: plan => plan.duration_days ? `${plan.duration_days} hari` : "—" },
+      { label: "Masa aktif paket", value: plan => plan.price > 0 ? activeLabel(plan.duration_days).replace("Aktif ", "") : "—" },
       { label: "Tanpa watermark Rawuh", value: plan => !plan.has_watermark },
       { label: "Tema Premium", value: plan => Boolean(plan.premium_templates_allowed) },
     ],
@@ -31,6 +31,7 @@ const groups: { title: string; rows: Row[] }[] = [
       { label: "Buku ucapan", value: () => true },
       { label: "QR check-in di venue", value: () => true },
       { label: "Amplop digital", value: plan => plan.payment_gateway_allowed },
+      { label: "Kolaborasi tim (keluarga, WO)", value: plan => plan.max_team_members === 0 ? "Tanpa batas" : plan.max_team_members ? `${plan.max_team_members} orang` : "—" },
     ],
   },
   {
@@ -58,7 +59,7 @@ function Value({ cell }: { cell: Cell }) {
 
 export default async function HargaPage() {
   const [plans, { waLink }, landing] = await Promise.all([getPlans(), getSiteContact(), getLandingContent()]);
-  const featuredIndex = plans.length >= 3 ? 1 : plans.length - 1;
+  const featuredIndex = plans.findIndex(plan => plan.id === "premium") >= 0 ? plans.findIndex(plan => plan.id === "premium") : plans.length >= 3 ? 1 : plans.length - 1;
   return (
     <MarketingPage current="harga">
       <section className={base.section} style={{ paddingTop: 64 }} aria-labelledby="harga-title">

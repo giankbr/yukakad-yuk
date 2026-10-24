@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	"yukakad/internal/store"
 )
 
 // Landing page blocks editable from the admin CMS (stored as free-form JSON per section).
@@ -207,5 +209,12 @@ func (s *Server) handlePublicPlans(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]any{"items": s.store.ListPlans()})
+	// Only plans that are for sale; hidden ones still serve their existing subscribers.
+	items := make([]*store.Plan, 0)
+	for _, plan := range s.store.ListPlans() {
+		if plan.Active {
+			items = append(items, plan)
+		}
+	}
+	writeJSON(w, http.StatusOK, map[string]any{"items": items})
 }

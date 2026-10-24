@@ -7,7 +7,7 @@ import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FinalCta, MarketingPage, SplitTitle } from "@/components/landing/Sections";
 import { ThemeCard, TryNameForm } from "@/components/landing/ThemeBrowser";
 import { IconArrowRight, IconCalendar, IconCheck, IconImages, IconQr } from "@/components/brand/icons";
-import { getPlans, getTemplates, planForTemplate, planHref, priceLabel, shortPrice, templateDemoHref, templatePreview } from "@/lib/marketing";
+import { getPlans, getTemplates, planForTemplate, planHref, priceLabel, shortPrice, templateDemoHref, templatePreview, activeLabel } from "@/lib/marketing";
 
 async function findTemplate(slug: string) {
   const templates = await getTemplates();
@@ -71,7 +71,7 @@ export default async function TemplateDetailPage({ params }: PageProps<"/templat
               <li><span><IconImages size={12} /></span>Galeri foto</li>
               <li><span><IconCalendar size={12} /></span>RSVP, ucapan &amp; amplop digital</li>
               <li><span><IconQr width={12} height={12} /></span>QR check-in tamu</li>
-              {plan.duration_days && <li><span><IconCheck size={12} /></span>Aktif {plan.duration_days} hari</li>}
+              {plan.price > 0 && <li><span><IconCheck size={12} /></span>{activeLabel(plan.duration_days)}</li>}
             </ul>
             {plan.price > 0 && <Link href={planHref(plan)} className={styles.textLink}>Lihat detail paket {plan.name} <IconArrowRight size={14} /></Link>}
           </div>

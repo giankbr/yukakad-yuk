@@ -22,7 +22,7 @@ function perks(plan: Plan) {
     typeof plan.max_team_members === "number"
       ? plan.max_team_members === 0 ? "Tim tanpa batas" : `Tim hingga ${plan.max_team_members.toLocaleString("id-ID")} anggota`
       : "",
-    plan.duration_days ? `Aktif ${plan.duration_days} hari` : "Aktif selamanya",
+    !plan.duration_days ? "Aktif selamanya" : plan.duration_days % 365 === 0 ? `Aktif ${plan.duration_days / 365} tahun` : plan.duration_days % 30 === 0 ? `Aktif ${plan.duration_days / 30} bulan` : `Aktif ${plan.duration_days} hari`,
     plan.premium_templates_allowed ? "Semua tema Premium" : "Tema gratis",
     plan.payment_gateway_allowed ? "Amplop online lewat Rawuh" : "",
     plan.custom_domain_allowed ? "Domain pribadi" : "",

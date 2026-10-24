@@ -7,7 +7,7 @@ export type FooterContent = { heading?: string; tagline?: string; columns?: { ti
 export type Feature = { id: string; title: string; description: string; icon?: string };
 export type Testimonial = { id: string; name: string; role?: string; quote: string; avatar_url?: string; is_sample?: boolean };
 export type Template = { id: string; name: string; slug: string; category: string; event_type?: string; preview_image?: string; preview_url?: string; is_premium: boolean };
-export type Plan = { id: string; name: string; max_guests: number; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean; price: number; duration_days?: number | null };
+export type Plan = { id: string; name: string; max_guests: number; has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed?: boolean; max_team_members?: number; price: number; duration_days?: number | null };
 
 import { themeList } from "@/components/invitation/themes/registry";
 import { mergeProducts } from "./products";
@@ -23,8 +23,10 @@ export const defaultTemplates: Template[] = [
 ];
 
 export const defaultPlans: Plan[] = [
-  { id: "free", name: "Mulai", max_guests: 100, has_watermark: true, custom_domain_allowed: false, payment_gateway_allowed: false, price: 0 },
-  { id: "pro", name: "Rayakan", max_guests: 1000, has_watermark: false, custom_domain_allowed: true, payment_gateway_allowed: true, price: 149000, duration_days: 30 },
+  { id: "free", name: "Free", max_guests: 50, max_team_members: 2, has_watermark: true, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, price: 0 },
+  { id: "basic", name: "Basic", max_guests: 300, max_team_members: 3, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, price: 49000, duration_days: 180 },
+  { id: "premium", name: "Premium", max_guests: 1000, max_team_members: 10, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: true, premium_templates_allowed: true, price: 129000, duration_days: 365 },
+  { id: "prioritas", name: "Prioritas", max_guests: 5000, max_team_members: 0, has_watermark: false, custom_domain_allowed: true, payment_gateway_allowed: true, premium_templates_allowed: true, price: 249000, duration_days: 365 },
 ];
 
 
@@ -125,13 +127,23 @@ export function priceLabel(amount: number) {
   return price.unit ? `${price.unit}${price.value}` : price.value;
 }
 
+/** "Aktif 6 bulan" / "Aktif 1 tahun" reads better than a day count. */
+export function activeLabel(days?: number | null) {
+  if (!days) return "Aktif selamanya";
+  if (days % 365 === 0) return `Aktif ${days / 365} tahun`;
+  if (days % 30 === 0 || days === 180) return `Aktif ${Math.round(days / 30)} bulan`;
+  return `Aktif ${days} hari`;
+}
+
 export function planPerks(plan: Plan) {
-  const perks = [`Hingga ${plan.max_guests.toLocaleString("id-ID")} tamu`, "RSVP & buku ucapan", "Kirim via WhatsApp"];
+  const perks = [`Hingga ${plan.max_guests.toLocaleString("id-ID")} tamu`, "RSVP, buku ucapan & QR check-in", "Kirim via WhatsApp"];
   perks.push(plan.has_watermark ? "Dengan watermark Rawuh" : "Tanpa watermark");
-  if (plan.custom_domain_allowed) perks.push("Domain pribadi .id");
-  if (plan.premium_templates_allowed) perks.push("Akses tema Premium");
-  if (plan.payment_gateway_allowed) perks.push("Amplop digital");
-  if (plan.duration_days) perks.push(`Aktif ${plan.duration_days} hari`);
+  if (plan.premium_templates_allowed) perks.push("Semua tema Premium");
+  if (plan.payment_gateway_allowed) perks.push("Amplop digital (transfer, e-wallet, QRIS)");
+  if (plan.custom_domain_allowed) perks.push("Domain sendiri (namakalian.com)");
+  if (plan.max_team_members === 0) perks.push("Kolaborasi tim tanpa batas");
+  else if (plan.max_team_members) perks.push(`Kolaborasi ${plan.max_team_members} orang`);
+  if (plan.price > 0) perks.push(activeLabel(plan.duration_days));
   return perks;
 }
 

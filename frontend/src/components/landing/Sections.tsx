@@ -79,8 +79,18 @@ export function StepsSection() {
   );
 }
 
+function planBlurb(plan: Plan, index: number, featured: boolean, count: number) {
+  if (plan.price <= 0) return "Untuk mencoba & acara sederhana.";
+  if (featured) return "Paling dipilih untuk pernikahan.";
+  if (index === count - 1 && plan.custom_domain_allowed) return "Semua fitur, dengan domain sendiri.";
+  if (index < count - 1) return "Undangan rapi tanpa watermark.";
+  return "Lebih lengkap untuk acara besar.";
+}
+
 export function PricingPlans({ plans }: { plans: Plan[] }) {
-  const featuredIndex = plans.length >= 3 ? 1 : plans.length - 1;
+  // "Premium" is the plan to steer people to; without it, the middle of the line-up.
+  const premiumIndex = plans.findIndex(plan => plan.id === "premium");
+  const featuredIndex = premiumIndex >= 0 ? premiumIndex : plans.length >= 3 ? 1 : plans.length - 1;
   return <>
     <div className={styles.plans} style={{ "--plans": plans.length } as CSSProperties}>
       {plans.map((plan, index) => {
@@ -91,7 +101,7 @@ export function PricingPlans({ plans }: { plans: Plan[] }) {
             {featured && <div className={styles.planRibbon}>✦ PALING DIPILIH</div>}
             <div className={styles.planHead}>
               <h3>{plan.name}</h3>
-              <p>{plan.price <= 0 ? "Untuk mencoba & acara sederhana." : featured ? "Paling dipilih untuk pernikahan." : "Lebih lengkap untuk acara besar."}</p>
+              <p>{planBlurb(plan, index, featured, plans.length)}</p>
               <div className={styles.price}>
                 {price.unit && <small>{price.unit}</small>}<strong>{price.value}</strong>
                 <span>{plan.price > 0 ? "sekali bayar" : "tanpa biaya"}</span>

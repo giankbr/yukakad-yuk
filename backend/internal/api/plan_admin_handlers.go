@@ -26,17 +26,24 @@ func (s *Server) handleAdminPlans(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "method not allowed"})
 		return
 	}
-	var plan store.Plan
-	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 8192)).Decode(&plan); err != nil {
+	// "active" is optional in the payload: absent keeps the current value (or true for a new plan).
+	var payload struct {
+		store.Plan
+		Active *bool `json:"active"`
+	}
+	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 8192)).Decode(&payload); err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid payload"})
 		return
 	}
+	plan := payload.Plan
+	plan.Active = true
 	if id != "" {
 		plan.ID = id
 		exists := false
 		for _, item := range s.store.ListPlans() {
 			if item.ID == id {
 				exists = true
+				plan.Active = item.Active
 				break
 			}
 		}
@@ -56,6 +63,9 @@ func (s *Server) handleAdminPlans(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
+	}
+	if payload.Active != nil {
+		plan.Active = *payload.Active
 	}
 	plan.Name = strings.TrimSpace(plan.Name)
 	if plan.Name == "" || plan.Price < 0 || plan.MaxGuests < 0 || plan.MaxTeamMembers < 0 || (plan.DurationDays != nil && *plan.DurationDays < 0) {

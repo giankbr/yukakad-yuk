@@ -10,6 +10,8 @@ import { useAdminAuth } from "@/lib/useAuthToken";
 type Plan = {
   id: string; name: string; price: number; max_guests: number; max_team_members?: number; duration_days?: number | null;
   has_watermark: boolean; custom_domain_allowed: boolean; payment_gateway_allowed: boolean; premium_templates_allowed: boolean;
+  /** Shown and sold on the pricing page; hidden plans keep serving existing subscribers. */
+  active?: boolean;
 };
 type Draft = Plan & { isNew?: boolean };
 
@@ -73,10 +75,10 @@ export default function AdminPlansPage() {
         <div>
           <p className="dashboard-kicker">Bisnis</p>
           <h1>Paket &amp; harga</h1>
-          <p className="dashboard-subtitle">Harga, kuota tamu, dan fitur tiap paket. Tampil di halaman Harga dan dipakai untuk membatasi akun.</p>
+          <p className="dashboard-subtitle">Harga, kuota tamu, dan fitur tiap paket. Paket yang dijual tampil di halaman Harga; paket yang disembunyikan tetap berlaku untuk pelanggan lamanya.</p>
         </div>
         {!draft && (
-          <button type="button" className="dashboard-action" onClick={() => setDraft({ id: "", name: "", price: 0, max_guests: 100, max_team_members: 5, duration_days: 30, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, isNew: true })}>
+          <button type="button" className="dashboard-action" onClick={() => setDraft({ id: "", name: "", price: 0, max_guests: 100, max_team_members: 5, duration_days: 180, has_watermark: false, custom_domain_allowed: false, payment_gateway_allowed: false, premium_templates_allowed: false, active: true, isNew: true })}>
             + Paket baru
           </button>
         )}
@@ -102,6 +104,9 @@ export default function AdminPlansPage() {
               </div>
               <div className={styles.row}>
                 <label className={styles.field}><span>Masa aktif (hari, kosongkan = selamanya)</span><input type="number" min={0} value={draft.duration_days ?? ""} onChange={(e) => set("duration_days", e.target.value ? Number(e.target.value) : null)} /></label>
+                <label className={styles.check}>
+                  <input type="checkbox" checked={draft.active !== false} onChange={(e) => set("active", e.target.checked)} /> Dijual di halaman Harga
+                </label>
               </div>
               <div className={styles.row}>
                 {FLAGS.map(([key, label]) => (
@@ -120,11 +125,12 @@ export default function AdminPlansPage() {
 
           <div className="dashboard-table-wrap">
             <table className="dashboard-table" style={{ minWidth: 640 }}>
-              <thead><tr><th>Paket</th><th>Harga</th><th>Tamu</th><th>Tim</th><th>Masa aktif</th><th>Fitur</th><th><span className="sr-only">Aksi</span></th></tr></thead>
+              <thead><tr><th>Paket</th><th>Status</th><th>Harga</th><th>Tamu</th><th>Tim</th><th>Masa aktif</th><th>Fitur</th><th><span className="sr-only">Aksi</span></th></tr></thead>
               <tbody>
                 {plans.map((plan) => (
                   <tr key={plan.id}>
                     <td><strong>{plan.name}</strong><span>{plan.id}</span></td>
+                    <td><span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 999, fontSize: 12, fontWeight: 600, background: plan.active === false ? "#f1efec" : "#ecf8ef", color: plan.active === false ? "#6b645e" : "#1d6b35" }}>{plan.active === false ? "Disembunyikan" : "Dijual"}</span></td>
                     <td>{rupiah(plan.price)}</td>
                     <td>{plan.max_guests.toLocaleString("id-ID")}</td>
                     <td>{plan.max_team_members === 0 ? "Bebas" : `${plan.max_team_members ?? 15} orang`}</td>

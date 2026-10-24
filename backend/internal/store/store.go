@@ -323,6 +323,8 @@ type Plan struct {
 	PremiumTemplatesAllowed bool    `json:"premium_templates_allowed"`
 	Price                   float64 `json:"price"`
 	DurationDays            *int    `json:"duration_days,omitempty"`
+	// Active plans are for sale on the pricing page; inactive ones only serve existing subscribers.
+	Active bool `json:"active"`
 }
 
 type Subscription struct {
@@ -2018,6 +2020,7 @@ func (s *MemoryStore) SeedPlans() {
 		MaxGuests:      50,
 		MaxTeamMembers: 2,
 		HasWatermark:   true,
+		Active:         true,
 	}
 	s.plans["pro"] = &Plan{
 		ID:                      "pro",
@@ -2029,6 +2032,7 @@ func (s *MemoryStore) SeedPlans() {
 		PremiumTemplatesAllowed: true,
 		Price:                   99000,
 		DurationDays:            &durationDays,
+		Active:                  true,
 	}
 	s.plans["premium"] = &Plan{
 		ID:                      "premium",
@@ -2041,6 +2045,7 @@ func (s *MemoryStore) SeedPlans() {
 		PremiumTemplatesAllowed: true,
 		Price:                   249000,
 		DurationDays:            &durationDays,
+		Active:                  true,
 	}
 }
 

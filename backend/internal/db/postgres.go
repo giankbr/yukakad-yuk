@@ -58,5 +58,5 @@ func MustMigrate(db *sql.DB, migrations []string) error {
 			return fmt.Errorf("commit migration %d: %w", i+1, err)
 		}
 	}
-	return nil
+	return applyOnceChanges(db)
 }
