@@ -55,6 +55,8 @@ function FeatureVisual({ title }: { title: string }) {
 }
 import styles from "./landing.module.css";
 
+const EVENT_TICKER = ["Pernikahan", "Khitanan", "Aqiqah", "Ulang tahun", "Syukuran", "Tunangan", "Wisuda", "Reuni", "Pengajian"];
+
 const sampleVoices: Voice[] = [
   { id: "s-dinda", name: "Dinda & Arif", role: "Pernikahan · Bandung", messages: ["Kak, undangannya udah kesebar ke 600 tamu 😭", "Hemat 4 juta dari cetak, makasih banyak!"], time: "19.42", isSample: true },
   { id: "s-hasan", name: "Keluarga Hasan", role: "Aqiqah · Depok", messages: ["RSVP 3 sesi langsung kepisah otomatis. Ibu saya juga bisa ngecek sendiri 👍"], time: "08.15", isSample: true },
@@ -126,9 +128,13 @@ export default async function Home() {
           ))}
         </section>
 
-        <div className={styles.banner} aria-label="Semua acaramu, satu link">
-          <div className={styles.marquee} aria-hidden>
-            {Array.from({ length: 2 }, (_, copy) => ["Semua acaramu, satu link", "Pernikahan", "Khitan", "Aqiqah", "Ulang tahun", "Syukuran"].map(text => <span key={`${copy}-${text}`}>{text === "Semua acaramu, satu link" && <IconLink size={16} />}{text}</span>))}
+        <div className={styles.banner}>
+          <p className={styles.bannerLabel}><IconLink size={16} /> Satu link untuk</p>
+          <p className="sr-only">Pernikahan, khitanan, aqiqah, ulang tahun, syukuran, tunangan, wisuda, reuni, dan pengajian.</p>
+          <div className={styles.bannerTrack} aria-hidden>
+            <div className={styles.marquee}>
+              {Array.from({ length: 2 }, (_, copy) => EVENT_TICKER.map(text => <span key={`${copy}-${text}`}>{text}</span>))}
+            </div>
           </div>
         </div>
 
@@ -157,9 +163,19 @@ export default async function Home() {
                 <div className={styles.cardCopy}><h3>Kirim sekali klik</h3><p>Ratusan tamu, masing-masing dengan namanya — langsung lewat WhatsApp.</p></div>
               </article>
               <article className={`${styles.card} ${styles.cardDark}`}>
-                <div className={`${styles.cardVisual} ${styles.rsvpCount}`} aria-hidden>
-                  <strong>248</strong><span>dari 320 tamu konfirmasi hadir</span>
-                  <div className={styles.bar}><i style={{ width: "78%" }} /></div>
+                <div className={`${styles.cardVisual} ${styles.rsvpBoard}`} aria-hidden>
+                  <div className={styles.rsvpHead}>
+                    <span className={styles.rsvpLive}><i />Live</span>
+                    <span>320 undangan</span>
+                  </div>
+                  <p className={styles.rsvpTotal}><strong>248</strong><span>tamu hadir</span></p>
+                  <div className={styles.rsvpBar}><i data-tone="yes" style={{ width: "77.5%" }} /><i data-tone="maybe" style={{ width: "7.5%" }} /><i data-tone="no" style={{ width: "15%" }} /></div>
+                  <ul className={styles.rsvpLegend}>
+                    <li data-tone="yes">Hadir <b>248</b></li>
+                    <li data-tone="maybe">Ragu <b>24</b></li>
+                    <li data-tone="no">Tidak <b>48</b></li>
+                  </ul>
+                  <p className={styles.rsvpLatest}><span className={styles.av}>SN</span><span><b>Sinta</b> hadir · 2 orang</span><small>baru saja</small></p>
                 </div>
                 <div className={styles.cardCopy}><h3>RSVP real-time</h3><p>Pantau siapa yang hadir, jumlah tamu, dan pesan menu.</p></div>
               </article>

@@ -123,7 +123,10 @@
 .stat strong { color: var(--rw-ink); font-family: var(--rw-font-mono); font-size: clamp(32px, 3.4vw, 44px); font-weight: 500; line-height: 1; letter-spacing: -.03em; }
 .stat p { color: var(--rw-muted); font-size: 15px; line-height: 1.55; }
 
-.banner { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 16px var(--gutter); background: var(--rw-primary-fill); color: #fff; font-family: var(--rw-font-mono); font-size: 13px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
+.banner { display: flex; align-items: center; gap: 24px; padding: 18px 0 18px var(--gutter); background: var(--rw-primary-fill); color: #fff; overflow: hidden; }
+.bannerLabel { display: inline-flex; flex: none; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, .12); color: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.bannerLabel svg { color: #f3d58f; }
+.bannerTrack { flex: 1; min-width: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 64px, #000 calc(100% - 64px), transparent); }
 
 /* ── Features ────────────────────────────── */
 .features { display: grid; gap: 48px; }
@@ -152,9 +155,30 @@
 .status[data-tone="info"] i { background: var(--rw-info); }
 .status[data-tone="warn"] i { background: var(--rw-warning); }
 
-.rsvpCount { display: grid; gap: 12px; }
-.rsvpCount strong { font-family: var(--rw-font-mono); font-size: 48px; font-weight: 400; line-height: 1; letter-spacing: -.03em; }
-.rsvpCount span { color: var(--rw-muted-2); font-size: 14px; }
+.rsvpBoard { display: grid; align-content: center; gap: 14px; }
+.rsvpHead { display: flex; justify-content: space-between; align-items: center; color: var(--rw-muted-2); font-size: 12px; }
+.rsvpLive { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: rgba(52, 195, 143, .14); color: #34c38f; font-family: var(--rw-font-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.rsvpLive i { width: 6px; height: 6px; border-radius: 999px; background: currentColor; animation: rsvp-pulse 1.8s ease-out infinite; }
+@keyframes rsvp-pulse { 0% { box-shadow: 0 0 0 0 rgba(52, 195, 143, .6); } 100% { box-shadow: 0 0 0 8px rgba(52, 195, 143, 0); } }
+.rsvpTotal { display: flex; align-items: baseline; gap: 10px; }
+.rsvpTotal strong { font-size: 56px; font-weight: 600; line-height: 1; letter-spacing: -.04em; }
+.rsvpTotal span { color: var(--rw-muted-2); font-size: 15px; }
+.rsvpBar { display: flex; gap: 3px; height: 10px; }
+.rsvpBar i { display: block; height: 100%; border-radius: 3px; transform-origin: left; }
+.rsvpBar i:first-child { border-radius: 999px 3px 3px 999px; }
+.rsvpBar i:last-child { border-radius: 3px 999px 999px 3px; }
+.rsvpBar [data-tone="yes"], .rsvpLegend [data-tone="yes"]::before { background: #7d8ff0; }
+.rsvpBar [data-tone="maybe"], .rsvpLegend [data-tone="maybe"]::before { background: #e0a83b; }
+.rsvpBar [data-tone="no"], .rsvpLegend [data-tone="no"]::before { background: rgba(255, 255, 255, .28); }
+.rsvpLegend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; padding: 0; list-style: none; color: var(--rw-muted-2); font-size: 13px; }
+.rsvpLegend li { display: inline-flex; align-items: center; gap: 6px; }
+.rsvpLegend li::before { content: ""; width: 8px; height: 8px; border-radius: 2px; }
+.rsvpLegend b { color: #fff; font-weight: 600; }
+.rsvpLatest { display: flex; align-items: center; gap: 10px; margin-top: 4px; padding: 10px 12px; border: 1px solid rgba(255, 255, 255, .08); border-radius: var(--rw-radius-md); background: rgba(255, 255, 255, .04); font-size: 13px; color: rgba(255, 255, 255, .78); }
+.rsvpLatest > span:nth-child(2) { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rsvpLatest b { color: #fff; font-weight: 600; }
+.rsvpLatest small { flex: none; color: var(--rw-muted-2); font-family: var(--rw-font-mono); font-size: 11px; }
+.rsvpLatest .av { flex: none; }
 .bar { height: 8px; border-radius: 999px; background: rgba(255, 255, 255, .1); overflow: hidden; }
 .bar i { display: block; height: 100%; border-radius: inherit; background: var(--rw-primary-fill); }
 
@@ -506,10 +530,9 @@ details[open] .faqToggle { background: var(--rw-primary-fill); color: #fff; }
 .chipRight { animation-delay: 1250ms, 4.8s; }
 .phone:hover { z-index: 3; }
 
-.banner { overflow: hidden; padding-inline: 0; }
 .marquee { display: flex; width: max-content; animation: rw-marquee 28s linear infinite; }
-.marquee span { display: inline-flex; align-items: center; gap: 10px; padding: 0 28px; white-space: nowrap; }
-.marquee span::after { content: "✦"; margin-left: 28px; opacity: .7; }
+.marquee span { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-size: 22px; font-weight: 400; letter-spacing: -.01em; white-space: nowrap; }
+.marquee span::after { content: ""; width: 7px; height: 7px; border-radius: 2px; background: #e0a83b; rotate: 45deg; }
 .banner:hover .marquee { animation-play-state: paused; }
 
 .btnPrimary { position: relative; overflow: hidden; }
@@ -523,7 +546,7 @@ details[open] .faqToggle { background: var(--rw-primary-fill); color: #fff; }
 .wave i[data-on]:nth-child(2n) { animation-delay: -.4s; }
 .wave i[data-on]:nth-child(3n) { animation-delay: -.8s; }
 @keyframes rw-wave { from { transform: scaleY(.55); } to { transform: scaleY(1); } }
-.bar i { transform-origin: left; animation: rw-grow 1.4s cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
+.rsvpBar i { animation: rw-grow 1.4s cubic-bezier(.2, .7, .2, 1) both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
 @keyframes rw-grow { from { transform: scaleX(0); } to { transform: none; } }
 .stat { transition: border-color 200ms; }
 .stat:hover { border-left-color: var(--rw-ink); }
@@ -537,7 +560,7 @@ details[open] .faqToggle { rotate: 180deg; }
 .giant { transition: color 600ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero > *, .phoneLeft, .phoneRight, .phoneCenter, .chip, .marquee, .hero .signup, .wave i[data-on], .bar i, .faqList details p { animation: none !important; }
+  .hero > *, .phoneLeft, .phoneRight, .phoneCenter, .chip, .marquee, .hero .signup, .wave i[data-on], .bar i, .rsvpBar i, .rsvpLive i, .faqList details p { animation: none !important; }
   .btnPrimary:hover::after { animation: none; }
   .card:hover, .themeCard:hover, .btnPrimary:hover, .btnOutline:hover { transform: none; translate: none; }
 }
