@@ -113,9 +113,9 @@ export default async function Home() {
             Dipakai 120.000+ pasangan &amp; keluarga
           </div>
           <div className={styles.phoneFan} aria-hidden>
-            <div className={`${styles.phone} ${styles.phoneLeft}`}><Image src="/rawuh/phone-senja.webp" alt="" fill sizes="240px" preload /></div>
-            <div className={`${styles.phone} ${styles.phoneCenter}`}><Image src="/rawuh/phone-kirana.webp" alt="" fill sizes="240px" preload /></div>
-            <div className={`${styles.phone} ${styles.phoneRight}`}><Image src="/rawuh/phone-lentera.webp" alt="" fill sizes="240px" preload /></div>
+            <div className={`${styles.phone} ${styles.phoneLeft}`}><Image src="/rawuh/hero-jawa.webp" alt="" fill sizes="240px" preload /></div>
+            <div className={`${styles.phone} ${styles.phoneCenter}`}><Image src="/rawuh/hero-mawar-blush.webp" alt="" fill sizes="240px" preload /></div>
+            <div className={`${styles.phone} ${styles.phoneRight}`}><Image src="/rawuh/hero-syari-zamrud.webp" alt="" fill sizes="240px" preload /></div>
             <span className={`${styles.chip} ${styles.chipLeft}`}><i />248 tamu hadir</span>
             <span className={`${styles.chip} ${styles.chipRight}`}><IconSend size={14} />600 undangan terkirim</span>
           </div>
