@@ -210,7 +210,7 @@ export default async function Home() {
               <h2 id="harga-title" className={styles.pricingTitle}><span>Sekali bayar, </span><span>tanpa langganan.</span></h2>
               <p className={styles.pricingDesc}>Hemat hingga 90% dibanding undangan cetak. Bayar hanya saat undangan siap dikirim.</p>
             </div>
-            <PricingPlans plans={plans} waLink={waLink} />
+            <PricingPlans plans={plans} />
           </div>
         </section>
 

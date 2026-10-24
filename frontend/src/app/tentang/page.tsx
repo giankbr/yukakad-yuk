@@ -97,7 +97,7 @@ export default async function TentangPage() {
         <div><IconPin size={16} /><small>Kantor</small><p>{about.address}</p></div>
         <div><IconMail size={16} /><small>Email</small><a href={`mailto:${about.email}`}>{about.email}</a></div>
         <div><IconWhatsapp size={16} /><small>WhatsApp</small>{waLink ? <a href={waLink} target="_blank" rel="noreferrer">{whatsappLabel}</a> : <p>{whatsappLabel}</p>}</div>
-        <div><IconHandshake size={16} /><small>Kemitraan</small>{waLink ? <a href={waLink} target="_blank" rel="noreferrer">Reseller &amp; Wedding Organizer</a> : <p>Reseller &amp; Wedding Organizer</p>}</div>
+        <div><IconHandshake size={16} /><small>Kemitraan</small><a href="/reseller">Reseller &amp; Wedding Organizer</a></div>
       </div>
 
       <FinalCta />

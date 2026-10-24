@@ -68,7 +68,7 @@ export default async function HargaPage() {
             <SplitTitle as="h1" id="harga-title" className={base.splitInline} lead="Sekali bayar," mono="tanpa langganan." />
             <p className={base.pricingDesc}>Hemat hingga 90% dibanding undangan cetak. Bayar hanya saat undangan siap dikirim.</p>
           </div>
-          <PricingPlans plans={plans} waLink={waLink} />
+          <PricingPlans plans={plans} />
         </div>
       </section>
 

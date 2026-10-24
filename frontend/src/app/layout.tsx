@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { THEME_SCRIPT } from "@/components/landing/ThemeToggle";
 
 // Fonts are self-hosted (SIL OFL, see fonts/OFL*.txt) so builds don't depend on Google Fonts.
 const beVietnamPro = localFont({
@@ -39,7 +40,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="id" className={`${beVietnamPro.variable} ${geistMono.variable} h-full antialiased`}>
+    // data-theme is set before paint by THEME_SCRIPT (marketing dark mode), so React mustn't fight over it.
+    <html lang="id" className={`${beVietnamPro.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <head><script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} /></head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

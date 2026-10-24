@@ -2,13 +2,15 @@ import Link from "next/link";
 import { defaultAnnouncement, type Announcement } from "@/lib/marketing";
 import { defaultProducts } from "@/lib/products";
 import styles from "@/app/landing.module.css";
-import { IconArrowRight, IconChevronDown, IconHeart, IconInstagram, IconTiktok, IconWhatsapp } from "@/components/brand/icons";
+import { IconArrowRight, IconInstagram, IconTiktok, IconWhatsapp } from "@/components/brand/icons";
+import { RawuhTile } from "@/components/brand/RawuhMark";
+import { ThemeToggle } from "./ThemeToggle";
 import { MobileMenu } from "./TemplateInteractions";
 
-export function RawuhLogo({ label = "RAWUH", href = "/" }: { label?: string; href?: string }) {
+export function RawuhLogo({ label = "rawuh", href = "/" }: { label?: string; href?: string }) {
   return (
     <Link href={href} className={styles.logo} aria-label="Rawuh, ke beranda">
-      <IconHeart size={20} strokeWidth={2.2} />
+      <RawuhTile size={32} />
       {label}
     </Link>
   );
@@ -31,13 +33,15 @@ export function AnnouncementBar({ announcement }: { announcement?: Announcement 
   );
 }
 
-export type NavKey = "tema" | "fitur" | "harga" | "tentang" | "produk" | undefined;
+export type NavKey = "tema" | "fitur" | "harga" | "tentang" | "produk" | "reseller" | undefined;
 
 export function SiteHeader({ current }: { current?: NavKey }) {
-  const links: { key: NavKey; href: string; label: string; menu?: boolean }[] = [
-    { key: "tema", href: "/templates", label: "Tema", menu: true },
+  const links: { key: NavKey; href: string; label: string }[] = [
+    { key: "tema", href: "/templates", label: "Tema" },
     { key: "fitur", href: "/fitur", label: "Fitur" },
-    { key: "harga", href: "/harga", label: "Harga", menu: true },
+    { key: "harga", href: "/harga", label: "Harga" },
+    { key: "reseller", href: "/reseller", label: "Reseller" },
+    { key: "tentang", href: "/tentang", label: "Tentang" },
   ];
   return (
     <header className={styles.header}>
@@ -46,11 +50,12 @@ export function SiteHeader({ current }: { current?: NavKey }) {
         <div className={styles.navLinks}>
           {links.map(link => (
             <Link key={link.label} href={link.href} aria-current={current === link.key ? "page" : undefined}>
-              {link.label}{link.menu && <IconChevronDown size={14} />}
+              {link.label}
             </Link>
           ))}
         </div>
         <div className={styles.navActions}>
+          <ThemeToggle />
           <Link href="/auth/login" className={styles.btnOutline}>Masuk</Link>
           <Link href="/auth/register" className={styles.btnPrimary}>Buat Undangan</Link>
           <MobileMenu />
@@ -65,7 +70,7 @@ export type FooterColumn = { title: string; links: { label: string; href: string
 /** Footer link columns after "Produk"; "contact" as href opens the admin WhatsApp. Admins edit them in /admin/footer. */
 export const defaultFooterColumns: FooterColumn[] = [
   { title: "Acara", links: [{ label: "Pernikahan", href: "/templates" }, { label: "Khitan", href: "/templates" }, { label: "Aqiqah", href: "/templates" }, { label: "Ulang Tahun", href: "/templates" }, { label: "Syukuran", href: "/templates" }] },
-  { title: "Perusahaan", links: [{ label: "Tentang kami", href: "/tentang" }, { label: "Program Reseller", href: "/tentang#kontak" }, { label: "Tim", href: "/tentang#tim" }, { label: "Fitur", href: "/fitur" }] },
+  { title: "Perusahaan", links: [{ label: "Tentang kami", href: "/tentang" }, { label: "Program Reseller", href: "/reseller" }, { label: "Tim", href: "/tentang#tim" }, { label: "Fitur", href: "/fitur" }] },
   { title: "Bantuan", links: [{ label: "Pusat bantuan", href: "/harga#faq" }, { label: "Panduan membuat", href: "/fitur#cara-kerja" }, { label: "Hubungi kami", href: "contact" }] },
 ];
 export const defaultPaymentMethods = ["QRIS", "Virtual Account", "GoPay", "OVO", "Kartu Kredit"];

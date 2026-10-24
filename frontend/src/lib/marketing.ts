@@ -12,7 +12,7 @@ export type Plan = { id: string; name: string; max_guests: number; has_watermark
 import { themeList } from "@/components/invitation/themes/registry";
 import { mergeProducts } from "./products";
 import { varietyOrder } from "./theme-collections";
-import { legalSection, mergeAbout, mergeLegal, type AboutContent, type LegalContent } from "./site-content";
+import { legalSection, mergeAbout, mergeLegal, mergeReseller, type AboutContent, type LegalContent, type ResellerContent } from "./site-content";
 import type { LegalDoc } from "./legal";
 
 export const defaultTemplates: Template[] = [
@@ -156,6 +156,10 @@ export async function getProducts() {
 
 export async function getAbout() {
   return mergeAbout(await getJSON<Partial<AboutContent>>("/api/public/site-content/about", {}));
+}
+
+export async function getReseller() {
+  return mergeReseller(await getJSON<Partial<ResellerContent>>("/api/public/site-content/reseller", {}));
 }
 
 export async function getLegal(doc: LegalDoc) {

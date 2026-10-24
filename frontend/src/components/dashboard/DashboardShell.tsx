@@ -7,8 +7,8 @@ import { apiFetch, AUTH_EVENT, clearSession, getToken } from "@/lib/api";
 import { can, clearAccessCache, landingPath, PAGE_PERMISSION, ROLE_LABELS, useInvitationAccess } from "@/lib/invitation-access";
 import shell from "./shell.module.css";
 import theme from "@/components/ui/workspace-theme.module.css";
-import { IconHeart } from "@/components/brand/icons";
-import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, UsersThree as PhUsersThree, LockSimple as PhLockSimple, CreditCard as PhCreditCard, Receipt as PhReceipt, Notebook as PhNotebook, Monitor as PhMonitor, Confetti as PhConfetti, Camera as PhCamera, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers, Globe as PhGlobe } from "@phosphor-icons/react/ssr";
+import { RawuhMark } from "@/components/brand/RawuhMark";
+import { Article as PhArticle, Megaphone as PhMegaphone, Tag as PhTag, Info as PhInfo, Handshake as PhHandshake, UsersThree as PhUsersThree, LockSimple as PhLockSimple, CreditCard as PhCreditCard, Receipt as PhReceipt, Notebook as PhNotebook, Monitor as PhMonitor, Confetti as PhConfetti, Camera as PhCamera, HandCoins as PhHandCoins, Package as PhPackage, Scales as PhScales, BookOpenText as PhBookOpenText, Browser as PhBrowser, CalendarBlank as PhCalendarBlank, ChatCircleText as PhChatCircleText, CheckSquare as PhCheckSquare, EnvelopeSimple as PhEnvelopeSimple, Eye as PhEye, Gear as PhGear, Gift as PhGift, Heart as PhHeart, Images as PhImages, MagnifyingGlass as PhMagnifyingGlass, MusicNotes as PhMusicNotes, Stack as PhStack, Palette as PhPalette, Phone as PhPhone, QrCode as PhQrCode, SignOut as PhSignOut, SidebarSimple as PhSidebarSimple, List as PhList, X as PhX, ArrowLeft as PhArrowLeft, SquaresFour as PhSquaresFour, Star as PhStar, Users as PhUsers, Globe as PhGlobe } from "@phosphor-icons/react/ssr";
 
 type NavItem = { key: string; label: string; href: string; icon: ReactNode };
 
@@ -62,6 +62,7 @@ const adminNav: NavItem[] = [
 const pagesNav: NavItem[] = [
 	{ key: "about", label: "Tentang kami", href: "/admin/about", icon: <PhInfo size={16} /> },
 	{ key: "products", label: "Produk", href: "/admin/products", icon: <PhPackage size={16} /> },
+	{ key: "reseller", label: "Reseller", href: "/admin/reseller", icon: <PhHandshake size={16} /> },
 	{ key: "legal", label: "Legal", href: "/admin/legal", icon: <PhScales size={16} /> },
 ];
 
@@ -239,8 +240,8 @@ export function DashboardShell({
 					<PhList size={20} />
 				</button>
 				<Link href={home} className={shell.logo}>
-					<span className={shell.logoIcon} aria-hidden="true"><IconHeart size={16} strokeWidth={2.2} /></span>
-					<span>RAWUH</span>
+					<span className={shell.logoIcon} aria-hidden="true"><RawuhMark size={22} color="#fff" /></span>
+					<span>rawuh</span>
 				</Link>
 				<span className={shell.avatar} aria-hidden="true">{initials || "RW"}</span>
 			</header>
@@ -251,8 +252,8 @@ export function DashboardShell({
 			<aside id="dashboard-rail" className={shell.rail} data-open={drawerOpen || undefined} aria-label="Navigasi dashboard">
 				<div className={shell.railHead}>
 					<Link href={home} className={shell.logo} title="Rawuh">
-						<span className={shell.logoIcon} aria-hidden="true"><IconHeart size={16} strokeWidth={2.2} /></span>
-						<span className={shell.label}>RAWUH</span>
+						<span className={shell.logoIcon} aria-hidden="true"><RawuhMark size={22} color="#fff" /></span>
+						<span className={shell.label}>rawuh</span>
 					</Link>
 					<button type="button" className={`${shell.iconButton} ${shell.collapseButton}`} onClick={toggleCollapsed}
 						aria-label={collapsed ? "Lebarkan sidebar" : "Ciutkan sidebar"} aria-pressed={collapsed} title={`${collapsed ? "Lebarkan" : "Ciutkan"} sidebar (Ctrl/⌘ B)`}>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight as PhArrowRight, ArrowSquareOut as PhArrowSquareOut, Article as PhArticle, Browser as PhBrowser,
-  ChatCircleText as PhChatCircleText, Info as PhInfo, Receipt as PhReceipt, HandCoins as PhHandCoins, Megaphone as PhMegaphone, Package as PhPackage, Scales as PhScales, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
+  ChatCircleText as PhChatCircleText, Info as PhInfo, Handshake as PhHandshake, Receipt as PhReceipt, HandCoins as PhHandCoins, Megaphone as PhMegaphone, Package as PhPackage, Scales as PhScales, Palette as PhPalette, Phone as PhPhone, Star as PhStar, Tag as PhTag, Users as PhUsers,
 } from "@phosphor-icons/react/ssr";
 import { DashboardShell } from "@/components/dashboard/DashboardShell";
 import { apiFetch } from "@/lib/api";
@@ -26,6 +26,7 @@ const sections: Section[] = [
 const pages: Section[] = [
   { key: "about", href: "/admin/about", label: "Tentang kami", description: "Cerita, angka, prinsip, perjalanan, tim, dan alamat kantor.", icon: <PhInfo size={20} /> },
   { key: "products", href: "/admin/products", label: "Produk", description: "Isi halaman Undangan Website, Video 3D, QR Check-in, dan Cetak.", icon: <PhPackage size={20} /> },
+  { key: "reseller", href: "/admin/reseller", label: "Reseller", description: "Isi halaman Program Reseller: keuntungan, cara kerja, ketentuan & komisi.", icon: <PhHandshake size={20} /> },
   { key: "legal", href: "/admin/legal", label: "Legal", description: "Syarat & Ketentuan dan Kebijakan Privasi.", icon: <PhScales size={20} /> },
 ];
 

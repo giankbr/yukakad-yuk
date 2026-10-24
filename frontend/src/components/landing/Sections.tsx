@@ -79,7 +79,7 @@ export function StepsSection() {
   );
 }
 
-export function PricingPlans({ plans, waLink }: { plans: Plan[]; waLink?: string }) {
+export function PricingPlans({ plans }: { plans: Plan[] }) {
   const featuredIndex = plans.length >= 3 ? 1 : plans.length - 1;
   return <>
     <div className={styles.plans} style={{ "--plans": plans.length } as CSSProperties}>
@@ -111,7 +111,7 @@ export function PricingPlans({ plans, waLink }: { plans: Plan[]; waLink?: string
       <span><IconInfinity size={16} /> Revisi sepuasnya</span>
       <span><IconSend size={16} /> Kirim via WhatsApp</span>
       <span><IconShield size={16} /> Garansi 7 hari uang kembali</span>
-      <a href={waLink ?? "/tentang#kontak"} {...(waLink ? { target: "_blank", rel: "noreferrer" } : {})}>Vendor WO? Program reseller <IconArrowRight size={14} /></a>
+      <a href="/reseller">Vendor WO? Program reseller <IconArrowRight size={14} /></a>
     </div>
   </>;
 }

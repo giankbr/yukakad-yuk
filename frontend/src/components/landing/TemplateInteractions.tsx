@@ -6,10 +6,11 @@ import Link from "next/link";
 import { createPortal } from "react-dom";
 import styles from "@/app/landing.module.css";
 import { COLLECTIONS, collectionOf, type CollectionId } from "@/lib/theme-collections";
-import { IconArrowRight, IconClose, IconHeart, IconMenu, IconMessage, IconSearch } from "@/components/brand/icons";
+import { RawuhTile } from "@/components/brand/RawuhMark";
+import { IconArrowRight, IconClose, IconMenu, IconMessage, IconSearch } from "@/components/brand/icons";
 
 const MOBILE_LINKS: [string, string][] = [
-  ["Tema", "/templates"], ["Fitur", "/fitur"], ["Harga", "/harga"], ["Produk", "/produk/undangan-website"], ["Tentang kami", "/tentang"],
+  ["Tema", "/templates"], ["Fitur", "/fitur"], ["Harga", "/harga"], ["Produk", "/produk/undangan-website"], ["Reseller", "/reseller"], ["Tentang kami", "/tentang"],
 ];
 
 /** Hamburger button that opens a full-screen menu (mobile only; hidden on desktop by CSS). */
@@ -47,7 +48,7 @@ export function MobileMenu() {
     {mounted && open && createPortal(
       <div ref={panel} id="mobile-menu" className={styles.mobilePanel} role="dialog" aria-modal="true" aria-label="Menu">
         <div className={styles.mobilePanelTop}>
-          <Link href="/" className={styles.logo} onClick={close} aria-label="Rawuh, ke beranda"><IconHeart size={20} strokeWidth={2.2} />RAWUH</Link>
+          <Link href="/" className={styles.logo} onClick={close} aria-label="Rawuh, ke beranda"><RawuhTile size={32} />rawuh</Link>
           <button type="button" className={styles.menuButton} aria-label="Tutup menu" onClick={() => { close(); button.current?.focus(); }}>
             <IconClose size={22} />
           </button>

@@ -154,3 +154,71 @@ export function mergeAbout(content: Partial<AboutContent>): AboutContent {
 }
 
 export const isRemoteImage = (src: string) => /^https?:\/\//.test(src);
+
+/* ── Reseller page (/reseller, edited in /admin/reseller) ───────────────────────────────────────────────── */
+
+export type QA = { q: string; a: string };
+export type ResellerContent = {
+  title_lead: string;
+  title_mono: string;
+  lead: string;
+  audiences: TitledText[];
+  benefits: TitledText[];
+  steps: TitledText[];
+  /** Commission, prices and other terms; shown as a highlighted note when filled in. */
+  terms: string;
+  faq: QA[];
+  cta_heading: string;
+  /** Prefilled WhatsApp message for "Daftar jadi reseller". */
+  wa_message: string;
+};
+
+// Defaults only describe what the product really does; commission and prices come from the admin (terms).
+export const defaultReseller: ResellerContent = {
+  title_lead: "Tawarkan undangan digital,",
+  title_mono: "pakai Rawuh di balik layar.",
+  lead: "Program kemitraan untuk wedding organizer, vendor, percetakan, dan siapa pun yang ingin menawarkan undangan digital ke klien tanpa repot membangun sendiri.",
+  audiences: [
+    { title: "Wedding organizer", text: "Lengkapi paket WO-mu dengan undangan digital, RSVP, dan QR check-in tamu di hari H." },
+    { title: "Vendor & fotografer", text: "Tambahkan undangan website sebagai bonus atau layanan tambahan untuk klienmu." },
+    { title: "Percetakan undangan", text: "Tawarkan versi digital di samping undangan cetak, dari satu desain yang sama." },
+    { title: "Perorangan", text: "Bantu teman dan keluarga membuat undangan, sambil menambah penghasilan." },
+  ],
+  benefits: [
+    { title: "Harga khusus mitra", text: "Paket dengan harga mitra untuk kamu jual kembali. Rinciannya kami kirim saat pendaftaran." },
+    { title: "Ratusan tema siap pakai", text: "Pernikahan, adat Nusantara, islami, sampai ulang tahun. Klien tinggal pilih, kamu tinggal isi." },
+    { title: "Kelola dari satu akun", text: "Buat undangan klien dari dashboard-mu, lalu undang klien sebagai anggota tim lewat menu Tim & akses." },
+    { title: "Didampingi tim kami", text: "Ada pertanyaan teknis atau butuh bantuan? Tim Rawuh siap membantu lewat WhatsApp." },
+  ],
+  steps: [
+    { title: "Daftar lewat WhatsApp", text: "Kirim pesan ke tim kami: ceritakan usahamu dan perkiraan jumlah klien." },
+    { title: "Terima penawaran", text: "Kami kirim harga mitra, ketentuan, dan cara pembayarannya." },
+    { title: "Buat undangan klien", text: "Pilih tema, isi data acara, lalu bagikan pratinjau ke klien untuk disetujui." },
+    { title: "Kirim ke tamu", text: "Klien menyebar undangan lewat WhatsApp; kamu memantau RSVP dari dashboard." },
+  ],
+  terms: "",
+  faq: [
+    { q: "Bagaimana cara mendaftar?", a: "Hubungi tim kami lewat tombol WhatsApp di halaman ini. Kami akan menjelaskan ketentuan dan harga mitra." },
+    { q: "Apakah klien bisa ikut mengubah undangannya?", a: "Bisa. Undang klien sebagai anggota tim di menu Tim & akses, lalu atur perannya sesuai kebutuhan." },
+    { q: "Apakah semua tema bisa saya tawarkan?", a: "Semua tema di galeri bisa dipakai. Tema premium mengikuti paket yang dipilih." },
+  ],
+  cta_heading: "Siap jadi mitra Rawuh?",
+  wa_message: "Halo Rawuh, saya tertarik jadi reseller/mitra.",
+};
+
+export function mergeReseller(content: Partial<ResellerContent>): ResellerContent {
+  const d = defaultReseller;
+  const titled = (value: unknown, fallback: TitledText[]) => list<TitledText>(value, (t) => filled(t.title) && filled(t.text), fallback);
+  return {
+    title_lead: text(content.title_lead, d.title_lead),
+    title_mono: text(content.title_mono, d.title_mono),
+    lead: text(content.lead, d.lead),
+    audiences: titled(content.audiences, d.audiences),
+    benefits: titled(content.benefits, d.benefits),
+    steps: titled(content.steps, d.steps),
+    terms: typeof content.terms === "string" ? content.terms : d.terms,
+    faq: list<QA>(content.faq, (f) => filled(f.q) && filled(f.a), d.faq),
+    cta_heading: text(content.cta_heading, d.cta_heading),
+    wa_message: text(content.wa_message, d.wa_message),
+  };
+}
