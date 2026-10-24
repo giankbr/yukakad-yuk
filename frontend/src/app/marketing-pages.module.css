@@ -367,3 +367,48 @@
 .browserSummary { color: var(--rw-muted); font-size: 14px; }
 .browserMore { display: flex; justify-content: center; padding-top: 16px; }
 @media (max-width: 900px) { .browserControls { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── Reseller CTA: indigo panel, copy + WhatsApp preview ─────────────────── */
+.partnerCta {
+  position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); align-items: center; gap: 48px;
+  padding: clamp(32px, 5vw, 56px); overflow: hidden; border-radius: var(--rw-radius-xl);
+  background: var(--rw-primary-fill); color: #fff; isolation: isolate;
+}
+.partnerMark { position: absolute; right: -40px; bottom: -70px; z-index: -1; color: rgba(255, 255, 255, .07); pointer-events: none; }
+.partnerCopy { display: grid; gap: 16px; justify-items: start; }
+.partnerKicker { display: inline-flex; align-items: center; gap: 8px; color: #f3d58f; font-family: var(--rw-font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.partnerKicker::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: #e0a83b; }
+.partnerCopy h2 { font-size: clamp(30px, 3.4vw, 42px); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; }
+.partnerCopy > p { max-width: 480px; color: rgba(255, 255, 255, .82); font-size: 16px; line-height: 1.6; }
+.partnerPerks { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; color: rgba(255, 255, 255, .9); font-size: 14px; }
+.partnerPerks li { display: flex; align-items: center; gap: 8px; }
+.partnerPerks svg { flex: none; padding: 3px; border-radius: 999px; background: #e0a83b; color: #1a1817; box-sizing: content-box; }
+.partnerActions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.partnerPrimary {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 22px; border-radius: 999px;
+  background: #fff; color: #1f2c7a !important; font-size: 15px; font-weight: 600; box-shadow: 0 10px 24px -12px rgba(0, 0, 0, .45);
+  transition: translate 180ms var(--m-spring, cubic-bezier(.34, 1.56, .64, 1)), box-shadow 180ms;
+}
+.partnerPrimary svg { color: #1aa357; }
+.partnerPrimary:hover { translate: 0 -2px; box-shadow: 0 16px 30px -14px rgba(0, 0, 0, .5); }
+.partnerGhost { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; color: #fff !important; font-size: 15px; font-weight: 500; transition: border-color 150ms, background 150ms; }
+.partnerGhost:hover { border-color: #fff; background: rgba(255, 255, 255, .08); }
+.partnerPrimary:focus-visible, .partnerGhost:focus-visible { outline: 2px solid #f3d58f; outline-offset: 3px; }
+
+.partnerChat { display: grid; gap: 12px; justify-self: end; width: min(100%, 340px); padding: 16px; border-radius: 20px; background: #efe9df; color: #1a1817; box-shadow: 0 24px 50px -24px rgba(0, 0, 0, .55); rotate: 2deg; }
+.partnerChatHead { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid rgba(26, 24, 23, .1); }
+.partnerChatHead span { display: grid; line-height: 1.2; }
+.partnerChatHead b { font-size: 14px; }
+.partnerChatHead small { color: #6b645e; font-size: 12px; }
+.partnerBubble { display: grid; gap: 4px; justify-self: end; max-width: 88%; padding: 10px 12px 8px; border-radius: 14px 14px 4px 14px; background: #d9fdd3; font-size: 14px; line-height: 1.45; }
+.partnerBubble small { justify-self: end; color: #5f6f5c; font-size: 11px; }
+.partnerTyping { display: inline-flex; gap: 4px; justify-self: start; padding: 10px 12px; border-radius: 14px 14px 14px 4px; background: #fff; }
+.partnerTyping i { width: 6px; height: 6px; border-radius: 999px; background: #a39c95; animation: partner-typing 1.2s ease-in-out infinite; }
+.partnerTyping i:nth-child(2) { animation-delay: .15s; }
+.partnerTyping i:nth-child(3) { animation-delay: .3s; }
+@keyframes partner-typing { 0%, 60%, 100% { translate: 0 0; opacity: .5; } 30% { translate: 0 -3px; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .partnerTyping i { animation: none; } .partnerPrimary { transition: none; } }
+@media (max-width: 860px) {
+  .partnerCta { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .partnerChat { justify-self: start; rotate: none; }
+}

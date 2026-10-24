@@ -3,7 +3,8 @@ import Link from "next/link";
 import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FaqSection, MarketingPage, SplitTitle } from "@/components/landing/Sections";
-import { IconArrowRight, IconWhatsapp } from "@/components/brand/icons";
+import { IconArrowRight, IconCheck, IconWhatsapp } from "@/components/brand/icons";
+import { RawuhMark, RawuhTile } from "@/components/brand/RawuhMark";
 import { getReseller, getSiteContact } from "@/lib/marketing";
 import type { TitledText } from "@/lib/site-content";
 
@@ -77,16 +78,27 @@ export default async function ResellerPage() {
       <FaqSection waLink={waLink} items={content.faq} />
 
       <section className={base.section} style={{ borderBottom: 0 }} aria-labelledby="join-title">
-        <div className={styles.darkCta}>
-          <div>
-            <p className={base.eyebrow}>Gabung</p>
-            <h2 id="join-title"><span>{content.cta_heading}</span><span>Ngobrol dulu, gratis.</span></h2>
-            <p>Ceritakan usahamu ke tim kami. Kami kirim penawaran dan ketentuan mitra lewat WhatsApp.</p>
+        <div className={styles.partnerCta}>
+          <div className={styles.partnerCopy}>
+            <p className={styles.partnerKicker}>Gabung jadi mitra</p>
+            <h2 id="join-title">{content.cta_heading}</h2>
+            <p>Ceritakan usahamu ke tim kami. Penawaran harga mitra dan ketentuannya kami kirim lewat WhatsApp.</p>
+            <ul className={styles.partnerPerks}>
+              <li><IconCheck size={14} weight="bold" /> Tanya-tanya dulu, tanpa komitmen</li>
+              <li><IconCheck size={14} weight="bold" /> Dibalas langsung oleh tim Rawuh</li>
+            </ul>
+            <div className={styles.partnerActions}>
+              <a href={join} className={styles.partnerPrimary} {...external}><IconWhatsapp size={18} /> Daftar via WhatsApp</a>
+              <Link href="/templates" className={styles.partnerGhost}>Lihat tema <IconArrowRight size={14} /></Link>
+            </div>
           </div>
-          <div>
-            <a href={join} className={base.btnPrimary} {...external}><IconWhatsapp size={16} /> Daftar via WhatsApp</a>
-            <Link href="/templates" className={styles.btnDarkOutline}>Lihat tema <IconArrowRight size={14} /></Link>
+          {/* What the button does: WhatsApp opens with this message already typed. */}
+          <div className={styles.partnerChat} aria-hidden="true">
+            <div className={styles.partnerChatHead}><RawuhTile size={28} /><span><b>Rawuh</b><small>Tim kemitraan</small></span></div>
+            <div className={styles.partnerBubble}>{content.wa_message}<small>Terisi otomatis</small></div>
+            <div className={styles.partnerTyping}><i /><i /><i /></div>
           </div>
+          <span className={styles.partnerMark} aria-hidden="true"><RawuhMark size={260} color="currentColor" door="currentColor" /></span>
         </div>
       </section>
     </MarketingPage>
