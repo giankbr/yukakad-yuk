@@ -1,0 +1,155 @@
+/* Ultah Hutan — pesta ulang tahun penjelajah cilik di hutan dalam cat gouache: dua batang pohon tinggi membingkai sampul dengan untaian bendera, burung hantu bertengger, usia di atas irisan kayu, serta rubah, rusa, landak, dan jamur merah di lantai hutan. Hijau lumut, oranye rubah, cokelat kayu, dan krem. */
+.root, .cover {
+  --bg: #eef3e0; --paper: #fbf5e6; --ivory: #fffbf1; --field: #fffdf7; --ink: #2f2a20; --muted: #5e5848; --line: #d8dcc2;
+  --accent: #3d6b3f; --accent2: #2a4d2d; --gold: #e0a33a; --gold-l: #fff3d6; --gold-d: #a8541f;
+  --rubah: #e57a35; --rubah-d: #c25d22; --kayu: #7a5236; --kayu-d: #553823; --jamur: #d2483a;
+  --band-bg: #2f5233; --band-ink: #fff6e2;
+  --display: "Lilita One", system-ui, sans-serif; --serif: "Baloo 2", system-ui, sans-serif; --script: "Patrick Hand", cursive; --label: "Baloo 2", system-ui, sans-serif;
+  --h2: 31px; --card-r: 22px;
+  --leaves: radial-gradient(ellipse 5px 9px at 30% 30%, rgba(110, 154, 74, .14) 98%, transparent) 0 0 / 70px 64px, radial-gradient(ellipse 4px 7px at 70% 72%, rgba(229, 122, 53, .11) 98%, transparent) 0 0 / 88px 80px;
+  font-family: var(--serif); color: var(--ink); background: var(--leaves), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #3d6b3f; --t-accent-ink: #ffffff; --t-bg: #eef3e0; --t-ink: #2f2a20; --t-muted: #5e5848; --t-line: #d8dcc2; --t-field: #fffdf7;
+  --t-radius: 18px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Lilita One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--rubah-d); font-family: var(--script); font-size: 22px; letter-spacing: .01em; text-transform: none; }
+.head h2 { color: var(--accent2); font-family: var(--display); }
+.divider { width: 240px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 60px 28px 56px; }
+.salamTitle { color: var(--accent2); font-family: var(--display); font-size: 33px; line-height: 1.15; }
+.intro { color: var(--muted); }
+
+/* ── Celebrant: monogram on a log slice, owl perched on top ── */
+.couple { gap: 12px; background: var(--paper); }
+.portrait { margin: 40px 0 18px; }
+.portraitFrame { width: 214px; height: 214px; padding: 30px; border: 0; border-radius: 50%; background: url(/themes/art/ultah-hutan/irisan.webp) 50% / 100% 100% no-repeat; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.person:hover .portraitFrame { box-shadow: none; }
+.portraitArt { position: absolute; z-index: 1; top: -70px; right: -34px; width: 104px; height: auto; transform-origin: 30% 100%; animation: perch 4s var(--m-spring) infinite; }
+.monogram { color: var(--kayu-d); font-family: var(--display); font-size: 96px; }
+.nick { color: var(--rubah); font-family: var(--display); font-size: 52px; text-shadow: 0 3px 0 rgba(85, 56, 35, .18); }
+.fullName { font-family: var(--serif); font-weight: 800; }
+.amp { color: var(--rubah); font-family: var(--display); }
+.amp img { width: 34px; }
+
+/* ── Countdown: forest band, tree-ring cells ── */
+.countBand { padding: 66px 18px 70px; background: var(--leaves), linear-gradient(#2f5233, #26452a); }
+.countJamur { position: absolute; z-index: -1; bottom: 0; width: 70px; height: auto; }
+.countJamurL { left: 10px; }
+.countJamurR { right: 10px; scale: -1 1; }
+.headLight .eyebrow { color: var(--gold); }
+.headLight h2 { font-family: var(--display); }
+.count { gap: 8px; }
+.count > div { height: 80px; width: 80px; justify-self: center; border: 5px solid var(--kayu); border-radius: 50%; background: repeating-radial-gradient(circle, #f1d6a8 0 6px, #e8c58e 6px 8px); box-shadow: 0 4px 0 rgba(0, 0, 0, .22); }
+.count { grid-template-columns: repeat(4, minmax(0, 80px)); }
+.count > div::after { display: none; }
+.count b { color: var(--kayu-d); font-family: var(--display); font-size: 27px; line-height: 1; }
+.count small { color: var(--kayu); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 800; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 2px solid var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 800; letter-spacing: .02em; }
+
+/* ── Events: wooden signboards with nails ── */
+.events { gap: 30px; background: transparent; }
+.event { padding: 34px 20px 26px; border: 5px solid var(--kayu); border-radius: 12px; background: var(--ivory); box-shadow: 0 6px 0 var(--kayu-d); }
+.event::before { inset: 8px; border: 0; border-radius: 0; background: radial-gradient(circle 4px at 8px 8px, var(--kayu-d) 98%, transparent) 0 0 / 100% 100% no-repeat, radial-gradient(circle 4px at calc(100% - 8px) 8px, var(--kayu-d) 98%, transparent) 0 0 / 100% 100% no-repeat, radial-gradient(circle 4px at 8px calc(100% - 8px), var(--kayu-d) 98%, transparent) 0 0 / 100% 100% no-repeat, radial-gradient(circle 4px at calc(100% - 8px) calc(100% - 8px), var(--kayu-d) 98%, transparent) 0 0 / 100% 100% no-repeat; }
+.event:hover { translate: 0 -3px; box-shadow: 0 9px 0 var(--kayu-d); border-color: var(--kayu); }
+.event { transition: box-shadow 400ms var(--m-spring), translate 400ms var(--m-spring), scale 300ms var(--m-spring); }
+.eventNo { top: -20px; width: 50px; height: 34px; background: var(--jamur); color: #fff; font-family: var(--display); font-size: 16px; box-shadow: 0 3px 0 #a83429; }
+.event h3 { color: var(--accent2); font-family: var(--display); font-size: 26px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--rubah-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 70px; height: 4px; border-radius: 4px; background: repeating-linear-gradient(90deg, var(--accent) 0 10px, transparent 10px 16px); }
+.event strong { font-weight: 800; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 800; box-shadow: 0 4px 0 var(--accent2); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 4px; border-radius: 4px; background: repeating-linear-gradient(var(--kayu) 0 8px, transparent 8px 14px); }
+.node { width: 46px; height: 50px; border: 0; background: transparent; }
+.node img { width: 38px; }
+.storyBody small { color: var(--rubah-d); font-family: var(--display); font-size: 15px; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent2); font-family: var(--serif); font-size: 20px; font-weight: 800; }
+
+.tile { border-radius: 18px; border: 4px solid var(--ivory); }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 3px solid var(--accent); border-radius: 24px; background: var(--ivory); box-shadow: 0 6px 0 var(--accent2); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--serif); font-weight: 800; letter-spacing: .02em; text-transform: none; font-size: 15px; }
+.field input, .field textarea { border-width: 2px; border-radius: 14px; }
+.choices button { border-width: 2px; font-weight: 800; font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--accent2); }
+.step { border: 2px solid var(--accent); color: var(--accent); }
+.submit { background: var(--rubah); color: #fff; font-family: var(--display); font-size: 18px; letter-spacing: .02em; box-shadow: 0 5px 0 var(--rubah-d); }
+.submit:not(:disabled):hover { background: var(--rubah-d); box-shadow: 0 5px 0 #8f4316; }
+.wish { border: 2px solid var(--line); border-radius: 18px; }
+.wish strong { color: var(--accent2); font-family: var(--serif); font-weight: 800; }
+.wish small { background: #fde3c8; color: var(--gold-d); font-weight: 800; }
+
+/* ── Gifts: bark cards ── */
+.gifts { background: transparent; }
+.gift { border-radius: 22px; background: var(--kayu); box-shadow: 0 6px 0 var(--kayu-d); }
+.gift::after { border-color: rgba(241, 214, 168, .12); box-shadow: 0 0 0 14px rgba(241, 214, 168, .07); }
+.gift h3 { color: var(--gold); font-family: var(--display); font-size: 19px; }
+.giftNo { color: var(--gold-l); font-family: var(--serif); font-size: 20px; font-weight: 800; letter-spacing: .02em; }
+.copy { border: 2px solid var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--kayu-d); }
+
+/* ── Closing: back to the forest floor ── */
+.closing { padding: 64px 26px 200px; background: linear-gradient(#2f5233, #3d6b3f 70%); }
+.closingScene { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+.closingEmblem { width: 120px; height: auto; transform-origin: 50% 100%; animation: perch 4s var(--m-spring) infinite; }
+.thanks { color: var(--gold); font-family: var(--display); font-size: 48px; }
+.closingText { color: rgba(255, 246, 226, .92); }
+.family { font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 36px; }
+.made { position: relative; z-index: 1; color: rgba(255, 255, 255, .8); text-shadow: 0 1px 2px rgba(0, 0, 0, .4); }
+.music { border: 2px solid #fff; background: var(--rubah); }
+
+/* ── Cover: two trunks frame a clearing, bunting between them, the forest friends below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100dvh; padding: 86px 46px 190px; overflow: hidden; background: var(--leaves), linear-gradient(#dfeccd, var(--bg) 40%); color: var(--ink); text-align: center; isolation: isolate; }
+.trunk { position: absolute; z-index: -1; top: 0; width: 70px; height: calc(100% - 50px); object-fit: cover; object-position: 50% 100%; }
+.trunkL { left: -14px; }
+.trunkR { right: -14px; scale: -1 1; }
+.bunting { position: absolute; z-index: 1; top: 10px; left: 0; width: 100%; height: auto; transform-origin: 50% 0; animation: flutter 3.4s var(--m-ease) infinite alternate; }
+.owl { position: absolute; z-index: 2; top: 60px; left: 22px; width: 84px; height: auto; transform-origin: 40% 100%; animation: perch 4s var(--m-spring) infinite; }
+.kicker { padding: 6px 16px; border-radius: 999px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 4px 0 var(--accent2); }
+.coverLead { margin-top: 12px; color: var(--rubah-d); font-family: var(--script); font-size: 23px; line-height: 1; }
+.coverName { max-width: 100%; margin-top: 4px; color: var(--rubah); font-family: var(--display); font-size: 64px; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 #8f4316; }
+.ageRow { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; }
+.slice { position: relative; display: grid; place-items: center; width: 92px; height: 92px; flex-shrink: 0; }
+.slice img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.slice b { position: relative; color: var(--kayu-d); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1; }
+.ageText { color: var(--accent2); font-family: var(--display); font-size: 21px; line-height: 1.1; text-align: left; }
+.ageText small { display: block; color: var(--muted); font-family: var(--script); font-size: 18px; }
+.coverDate { margin-top: 14px; padding: 6px 16px; border-radius: 999px; background: var(--ivory); color: var(--accent2); font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 0 3px 0 var(--line); }
+.guestWrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 300px; margin-top: 14px; }
+.guest { padding: 12px 16px; border: 4px solid var(--kayu); border-radius: 12px; background: var(--ivory); box-shadow: 0 4px 0 var(--kayu-d); }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 19px; font-weight: 800; }
+.table { border-color: var(--rubah); color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.openBtn { background: var(--rubah); color: #fff; font-family: var(--display); font-size: 18px; letter-spacing: .02em; box-shadow: 0 5px 0 var(--rubah-d); }
+.openBtn:hover { background: var(--rubah-d); }
+.scene { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 70px 24px 36px; overflow: hidden; background: linear-gradient(#dfeccd, var(--bg)); text-align: center; isolation: isolate; }
+.heroBunting { position: absolute; top: 0; left: 0; width: 100%; height: auto; }
+.heroOwl { width: 110px; height: auto; transform-origin: 40% 100%; animation: perch 4s var(--m-spring) infinite; }
+.heroKicker { color: var(--rubah-d); font-family: var(--script); font-size: 24px; }
+.heroName { max-width: 100%; color: var(--accent2); font-family: var(--display); font-size: 50px; line-height: 1.05; overflow-wrap: anywhere; }
+.heroAge { color: var(--rubah); font-family: var(--display); font-size: 24px; }
+.heroDate { color: var(--muted); font-weight: 700; }
+.heroNote { max-width: 310px; margin-top: 6px; color: var(--muted); font-size: 17px; line-height: 1.6; }
+
+@keyframes perch { 0%, 70%, 100% { rotate: 0deg; translate: 0 0; } 78% { rotate: -6deg; translate: 0 -4px; } 86% { rotate: 4deg; } }
+@keyframes flutter { from { rotate: -.6deg; } to { rotate: .6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .portraitArt, .closingEmblem, .bunting, .owl, .heroOwl { animation: none; }
+}

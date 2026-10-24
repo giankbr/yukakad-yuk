@@ -1,0 +1,156 @@
+/* Pantai Kei — adat Maluku, Kepulauan Kei: pasir putih sehalus tepung di Ngurbloat, laut tosca berlapis, perahu kayu Evav berhaluan ukir, nyiur condong, dan pita tenun Kei merah-hitam-oker; sampul berupa cakrawala laut di atas, nama di atas hamparan pasir. */
+.root, .cover {
+  --bg: #fbf8f1; --paper: #ffffff; --ivory: #fffdf9; --field: #ffffff; --ink: #12343c; --muted: #4a666b; --line: #d6e5e2;
+  --accent: #0f5f6e; --accent2: #0b4a56; --gold: #3cbfb9; --gold-l: #c9f2eb; --gold-d: #a63f2b;
+  --turq: #3cbfb9; --sea: #168f97; --red: #b1442e;
+  --band-bg: #0f5f6e; --band-ink: #f3fbf8;
+  --display: "Fraunces", Georgia, serif; --serif: "Karla", system-ui, sans-serif; --script: "Fraunces", Georgia, serif;
+  --h2: 30px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #0f5f6e; --t-accent-ink: #ffffff; --t-bg: #fbf8f1; --t-ink: #12343c; --t-muted: #4a666b; --t-line: #d6e5e2; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Karla", system-ui, sans-serif; --t-heading-font: "Fraunces", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) url(/themes/art/pantai-kei/sand.webp) 0 0 / 360px; }
+
+/* type */
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 600; letter-spacing: -.01em; }
+.divider { width: 132px; height: 16px; border-radius: 3px; background: url(/themes/art/pantai-kei/tenun.webp) 0 50% / auto 100% repeat-x; box-shadow: 0 2px 6px rgba(18, 52, 60, .15); }
+.intro { color: var(--muted); font-size: 17px; }
+
+/* opening: wide sand with a quiet sea line */
+.salamBlock { padding: 46px 28px 58px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 600; line-height: 1.05; }
+.salamSub { color: var(--sea); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+
+/* couple: pebble portraits on white */
+.couple { gap: 22px; background: var(--paper); }
+.couple::before { content: ""; position: absolute; inset: 0 0 auto; height: 6px; background: url(/themes/art/pantai-kei/tenun.webp) 0 50% / auto 100% repeat-x; opacity: .9; }
+.portrait { margin-bottom: 12px; }
+.portraitFrame { width: 214px; height: 250px; padding: 0; border: 0; border-radius: 52% 48% 46% 54% / 58% 50% 50% 42%; background: var(--turq); box-shadow: 0 0 0 7px #fff, 0 0 0 9px var(--turq), 0 18px 30px rgba(15, 95, 110, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: inherit; }
+.personWrap:nth-child(odd) .portraitFrame { border-radius: 46% 54% 56% 44% / 50% 56% 44% 50%; }
+.portraitShell { position: absolute; z-index: 2; right: -22px; bottom: -14px; width: 92px; height: auto; rotate: -8deg; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .12)); }
+.personWrap:nth-child(odd) .portraitShell { right: auto; left: -22px; scale: -1 1; }
+.monogram { color: #fff; font-family: var(--display); font-style: italic; font-weight: 600; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 600; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.amp { color: var(--turq); font-family: var(--display); font-style: italic; font-size: 48px; }
+.amp img { width: 46px; }
+
+/* countdown: the sea itself */
+.countBand { padding: 70px 20px 62px; background: linear-gradient(180deg, #0d5664 0%, #168f97 55%, #3cbfb9 100%); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-radial-gradient(ellipse 60px 8px at 50% 0, rgba(255, 255, 255, .16) 0 1.5px, transparent 2px 16px); background-size: 120px 28px; opacity: .7; animation: tide 14s linear infinite; }
+.countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: -1px; height: 36px; background: var(--bg); -webkit-mask: radial-gradient(28px 20px at 50% 100%, #000 98%, transparent) 0 0 / 56px 36px repeat-x; mask: radial-gradient(28px 20px at 50% 100%, #000 98%, transparent) 0 0 / 56px 36px repeat-x; }
+.countBoat { position: absolute; z-index: -1; top: 26px; right: 18px; width: 92px; height: auto; opacity: .85; animation: bob 6s ease-in-out infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; font-family: var(--display); font-weight: 600; }
+.count { gap: 10px; }
+.count > div { height: 80px; border: 0; border-radius: 999px 999px 18px 18px; background: rgba(255, 255, 255, .94); box-shadow: 0 8px 18px rgba(6, 50, 58, .25); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 28px; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.ghostBtn { border: 1.5px solid #fff; color: #fff; font-family: var(--serif); font-weight: 700; letter-spacing: .02em; }
+.ghostBtn:hover { background: rgba(255, 255, 255, .16); }
+
+/* events: white cards with a woven tenun hem */
+.events { gap: 26px; padding-top: 48px; }
+.event { align-items: flex-start; padding: 40px 22px 24px; border: 0; border-radius: 6px 6px var(--card-r) var(--card-r); background: var(--paper); text-align: left; box-shadow: 0 12px 28px rgba(18, 52, 60, .09); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 0; background: url(/themes/art/pantai-kei/tenun.webp) 0 50% / auto 100% repeat-x; }
+.eventNo { top: 26px; right: 18px; left: auto; translate: none; width: auto; height: auto; padding: 0; background: none; color: color-mix(in srgb, var(--turq) 55%, transparent); font-family: var(--display); font-size: 40px; font-style: italic; font-weight: 600; letter-spacing: 0; }
+.event h3 { padding-right: 52px; color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 600; text-align: left; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--sea); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; height: 0; margin: 10px 0 8px; border-top: 1.5px dashed var(--line); background: none; }
+.eventAddr { text-align: left; }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--sea); }
+
+/* story: footprints in the sand */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 3px; background: radial-gradient(circle, var(--turq) 1.4px, transparent 1.8px) 0 0 / 3px 10px repeat-y; }
+.node { width: 38px; height: 38px; border: 0; background: #fff; box-shadow: 0 0 0 2px var(--turq); }
+.node img { width: 30px; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-weight: 600; font-size: 21px; }
+.storyImg { border-radius: 14px; }
+
+/* gallery: postcards */
+.mosaic { gap: 10px; }
+.tile, .tile:first-child { border: 5px solid #fff; border-radius: 6px; box-shadow: 0 6px 16px rgba(18, 52, 60, .14); }
+.tile:nth-child(odd) { rotate: -1deg; }
+.tile:nth-child(even) { rotate: 1.2deg; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 22px; background: #fff; box-shadow: 0 12px 30px rgba(18, 52, 60, .09); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--turq); border-color: var(--turq); color: #06323a; font-weight: 700; }
+.wish { border: 0; border-left: 4px solid var(--turq); border-radius: 6px 16px 16px 6px; background: #fff; }
+.wish strong { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--turq) 18%, transparent); color: var(--accent); }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 8px 8px 22px 22px; background: linear-gradient(170deg, #0f5f6e, #0b4a56); padding-top: 34px; }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: url(/themes/art/pantai-kei/tenun.webp) 0 50% / auto 100% repeat-x; }
+.gift::after { border-color: rgba(201, 242, 235, .08); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 13px; }
+.giftNo { font-family: var(--display); font-weight: 600; }
+.copy { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: evening sea */
+.closing { padding: 70px 28px 60px; background: linear-gradient(180deg, #0b4a56, #0f5f6e 60%, #168f97); }
+.closingPalm { position: absolute; z-index: -1; right: -60px; bottom: -40px; width: 230px; height: auto; opacity: .3; filter: saturate(.6) brightness(.7); transform-origin: 80% 100%; animation: sway 9s ease-in-out infinite alternate; }
+.closingBoat { width: 150px; height: auto; animation: bob 6s ease-in-out infinite; }
+.thanks { color: #fff; font-family: var(--display); font-style: italic; font-weight: 600; font-size: 46px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-style: italic; letter-spacing: .02em; }
+.family { color: rgba(243, 251, 248, .85); font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-style: italic; font-weight: 600; font-size: 34px; }
+.music { border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Cover: sea horizon above, names written on the sand ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--bg) url(/themes/art/pantai-kei/sand.webp) 0 0 / 360px; text-align: center; isolation: isolate; }
+.coverSea { position: relative; width: 100%; height: min(47dvh, 400px); flex-shrink: 0; overflow: hidden; }
+.coverSea > img:first-child { position: absolute; inset: 0 0 auto; width: 100%; height: auto; min-height: 100%; object-fit: cover; object-position: 50% 0; }
+.coverBoat { position: absolute; left: 12%; top: 46%; width: 128px; height: auto; animation: bob 6s ease-in-out infinite; }
+.coverPalm { position: absolute; z-index: 3; top: 30px; right: -78px; width: 236px; height: auto; transform-origin: 85% 100%; animation: sway 9s ease-in-out infinite alternate; }
+.coverText { position: relative; z-index: 2; display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: -24px; padding: 0 22px 54px; }
+.coverShell { position: absolute; z-index: 1; left: 14px; bottom: 18px; width: 84px; height: auto; rotate: -10deg; opacity: .95; }
+.kicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 0 14px; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: clamp(44px, 13vw, 58px); font-weight: 600; line-height: 1.02; letter-spacing: -.015em; overflow-wrap: anywhere; }
+.coverNames em { color: var(--turq); font-style: italic; font-weight: 500; }
+.coverDate { display: flex; align-items: center; gap: 10px; color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 30px; height: 10px; border-radius: 2px; background: url(/themes/art/pantai-kei/tenun.webp) 0 50% / auto 100% repeat-x; }
+.guest { margin-top: 16px; color: var(--ink); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--display); font-weight: 600; }
+.table { border-color: var(--turq); color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 12px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 10px 22px rgba(15, 95, 110, .28); }
+.openBtn:hover { background: var(--sea); translate: 0 -2px; }
+
+/* ── Hero: a postcard from Kei ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 0 46px; overflow: hidden; text-align: center; }
+.heroSea { position: relative; width: 100%; height: 250px; overflow: hidden; }
+.heroSea > img { position: absolute; inset: 0 0 auto; width: 100%; height: auto; }
+.heroSea .coverBoat { top: 40%; width: 100px; }
+.postcard { position: relative; z-index: 2; width: 268px; margin-top: -120px; padding: 10px 10px 40px; background: #fff; box-shadow: 0 18px 36px rgba(18, 52, 60, .22); rotate: -2deg; }
+.postcard::after { content: "Salam dari Kei"; position: absolute; left: 0; right: 0; bottom: 10px; color: var(--sea); font-family: var(--display); font-size: 17px; font-style: italic; }
+.heroPhoto { display: grid; height: 300px; overflow: hidden; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.postShell { position: absolute; z-index: 3; top: -18px; right: -26px; width: 90px; height: auto; rotate: 14deg; }
+.heroKicker { margin-top: 16px; color: var(--gold-d); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { max-width: 100%; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--turq); font-style: italic; font-weight: 500; }
+.heroDate { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; padding: 0 12px; color: var(--muted); font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.5; }
+
+@keyframes bob { 0%, 100% { translate: 0 0; rotate: -1deg; } 50% { translate: 0 -5px; rotate: 1.5deg; } }
+@keyframes tide { to { background-position: 120px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverBoat, .coverPalm, .countBoat, .closingPalm, .closingBoat, .countBand::before { animation: none !important; }
+}

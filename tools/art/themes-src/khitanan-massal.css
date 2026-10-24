@@ -1,0 +1,160 @@
+/* Khitanan Massal — undangan khitanan massal dari panitia sosial bergaya gouache ceria: tenda bergaris hijau-putih dengan rumbai kuning, spanduk acara yang tergantung di bawahnya, anak-anak bersarung dan berpeci yang melambai, tumpukan bingkisan, balon, dan bendera untai; pendaftaran anak, donasi, dan susunan program. */
+.root, .cover {
+  --bg: #fffaf0; --paper: #eaf6ef; --ivory: #ffffff; --field: #ffffff; --ink: #1f3329; --muted: #55685d; --line: #d5e8dc;
+  --accent: #1f7a50; --accent2: #2f9e6b; --gold: #f7c948; --gold-l: #fff1bf; --gold-d: #c94f40;
+  --green: #2f9e6b; --yel: #f7c948; --coral: #ef6f5e; --sky: #d9f0f6;
+  --band-bg: #1f7a50; --band-ink: #fffaf0;
+  --display: "Baloo 2", "Arial Rounded MT Bold", sans-serif; --serif: "Plus Jakarta Sans", system-ui, sans-serif; --script: "Baloo 2", sans-serif;
+  --h2: 31px; --card-r: 24px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f7a50; --t-accent-ink: #ffffff; --t-bg: #fffaf0; --t-ink: #1f3329; --t-muted: #55685d; --t-line: #d5e8dc; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Plus Jakarta Sans", system-ui, sans-serif; --t-heading-font: "Baloo 2", sans-serif; --t-heading-weight: 800; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg); }
+
+.eyebrow, .role { display: inline-block; padding: 4px 12px 3px; border-radius: 999px; background: var(--yel); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 800; line-height: 1.05; }
+.divider { width: 190px; }
+.intro { color: var(--muted); }
+.arabic { color: var(--accent); }
+
+/* opening */
+.salamBlock { padding: 40px 26px 54px; background: var(--paper); }
+.salamKicker { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; text-wrap: balance; max-width: 300px; line-height: 1.6; }
+.salamTitle { color: var(--gold-d); font-family: var(--display); font-size: 36px; font-weight: 800; line-height: 1.02; text-wrap: balance; }
+
+/* hosts: committee badges */
+.couple { gap: 20px; background: var(--bg); }
+.personWrap .person { padding: 28px 18px 24px; border: 3px solid var(--line); border-radius: 28px; background: var(--ivory); box-shadow: 0 8px 0 var(--line); }
+.portrait { margin-bottom: 10px; }
+.portraitFrame { width: 132px; height: 132px; padding: 0; border: 6px solid #fff; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px var(--yel), 0 10px 20px rgba(31, 51, 41, .15); }
+.personWrap:nth-child(odd) .portraitFrame { background: var(--coral); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitGift { position: absolute; z-index: 2; right: -18px; bottom: -6px; width: 54px; height: auto; transform-origin: 50% 100%; animation: hop 2.8s var(--m-spring) infinite; }
+.monogram { color: #fff; font-family: var(--display); font-size: 66px; font-weight: 800; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 29px; font-weight: 800; line-height: 1.1; text-wrap: balance; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.parents { max-width: 300px; color: var(--muted); font-size: 15px; }
+
+/* countdown */
+.countBand { padding: 76px 18px 56px; background: var(--green); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .07) 0 22px, transparent 22px 44px); }
+.countBunting { position: absolute; z-index: -1; top: -2px; left: -10px; right: -10px; height: 38px; background: url(/themes/art/khitanan-massal/bunting.webp) center top / auto 100% repeat-x; }
+.countBalloon { position: absolute; z-index: -1; right: 12px; bottom: 16px; width: 64px; height: auto; animation: floaty 5s ease-in-out infinite; }
+.headLight .eyebrow { background: var(--yel); color: var(--ink); }
+.headLight h2 { color: #fff; font-family: var(--display); font-weight: 800; }
+.count { gap: 8px; }
+.count > div { height: 86px; border: 0; border-radius: 20px; background: #fff; box-shadow: 0 5px 0 rgba(15, 60, 38, .35); }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 800; line-height: 1; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 11px; font-style: normal; font-weight: 800; text-transform: uppercase; }
+.ghostBtn { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-weight: 800; }
+
+/* events: tickets with a yellow tab */
+.events { gap: 26px; }
+.event { align-items: flex-start; padding: 34px 20px 22px; border: 3px solid var(--line); border-radius: 24px; background: #fff; text-align: left; box-shadow: 0 8px 0 var(--line); }
+.event::before { display: none; }
+.event:hover { translate: 0 -3px; }
+.eventNo { top: -15px; left: 20px; translate: none; width: auto; height: auto; padding: 4px 12px; border-radius: 10px; background: var(--yel); color: var(--ink); font-family: var(--serif); font-weight: 800; rotate: -3deg; white-space: nowrap; display: block; }
+.eventNo::before { content: "Agenda "; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 24px; font-weight: 800; text-align: left; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 100%; height: 0; margin: 10px 0 8px; border-top: 2px dashed var(--line); background: none; }
+.eventAddr { text-align: left; }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 0 4px 0 #135436; transition: background .3s, box-shadow .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); translate: 0 -2px; box-shadow: 0 6px 0 #135436; }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 1px 0 #135436; }
+
+/* story = programme */
+.story { background: var(--paper); }
+.timeline::before { left: 23px; width: 4px; border-radius: 2px; background: repeating-linear-gradient(var(--green) 0 10px, transparent 10px 16px); }
+.node { width: 48px; height: 48px; border: 3px solid var(--green); background: #fff; }
+.node img { width: 30px; }
+.storyBody { padding: 12px 16px 14px; border-radius: 18px; background: #fff; box-shadow: 0 5px 0 var(--line); }
+.storyBody small { display: inline-block; align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; font-weight: 800; }
+
+.tile, .tile:first-child { border-radius: 20px; }
+
+/* wishes = registration */
+.wishes { background: var(--bg); }
+.form { border: 3px solid var(--green); border-radius: 24px; background: #fff; box-shadow: 0 8px 0 var(--line); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 800; letter-spacing: .08em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border: 2px solid var(--line); font-weight: 800; transition: background .3s, color .3s, border-color .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices button:active { scale: .93; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--yel); border-color: var(--yel); color: var(--ink); box-shadow: 0 4px 0 #c99b1c; }
+.step { border: 2px solid var(--green); }
+.wish { border: 0; border-radius: 20px; background: var(--paper); }
+.wish strong { color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.wish small { background: var(--green); color: #fff; font-weight: 700; }
+.sentBox img { width: 70px; animation: hop 900ms var(--m-spring) both; }
+
+/* gifts = donations */
+.gifts { background: var(--paper); }
+.gift { border-radius: 24px; background: var(--coral); box-shadow: 0 6px 0 #b34536; }
+.gift::after { border-color: rgba(255, 255, 255, .14); }
+.gift h3 { color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.giftIcon { border: 2px solid #fff; }
+.giftNo { font-family: var(--display); font-size: 22px; font-weight: 800; line-height: 1.2; }
+.gift small { color: rgba(255, 255, 255, .9); }
+.copy { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--gold-d); }
+
+/* closing */
+.closing { padding: 70px 24px 58px; background: var(--accent); }
+.closing::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(circle at 50% 18%, rgba(247, 201, 72, .3), transparent 50%); }
+.closingBunting { position: absolute; z-index: -1; top: -2px; left: -10px; right: -10px; height: 38px; background: url(/themes/art/khitanan-massal/bunting.webp) center top / auto 100% repeat-x; }
+.emblem { width: 92px; height: auto; animation: floaty 5s ease-in-out infinite; }
+.thanks { color: #fff; font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1.05; text-wrap: balance; }
+.closingText { color: rgba(255, 250, 240, .92); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 700; }
+.closingNames { color: var(--yel); font-family: var(--display); font-size: 25px; font-weight: 800; line-height: 1.2; }
+.made { color: rgba(255, 250, 240, .6); }
+.music { border: 2px solid var(--yel); background: var(--accent); }
+
+/* ── Cover: under the community tent, a hanging spanduk, kids waving ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 18px 28px; overflow: hidden; background: linear-gradient(180deg, #cfeef5 0%, #e9f7f1 40%, #fff3d2 62%, #f6e6bf 100%); text-align: center; isolation: isolate; }
+.tent { position: relative; z-index: 1; width: calc(100% + 36px); max-width: none; height: auto; margin: 0 -18px; }
+.spanduk { position: relative; z-index: 2; width: 100%; max-width: 320px; margin-top: -64px; padding: 14px 14px 12px; border: 4px solid var(--green); border-radius: 6px; background: #fffef8; box-shadow: 0 8px 16px rgba(31, 51, 41, .15); rotate: -1.2deg; }
+.spanduk::before, .spanduk::after { content: ""; position: absolute; top: -40px; width: 2px; height: 40px; background: #6b5a4a; }
+.spanduk::before { left: 24px; }
+.spanduk::after { right: 24px; }
+.org { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.title { max-width: 100%; margin: 2px 0; color: var(--gold-d); font-family: var(--display); font-size: clamp(38px, 11.5vw, 46px); font-weight: 800; line-height: .95; overflow-wrap: anywhere; text-shadow: 0 3px 0 var(--gold-l); }
+.coverDate { display: inline-block; margin-top: 6px; padding: 4px 12px; border-radius: 999px; background: var(--yel); color: var(--ink); font-size: 14px; font-weight: 800; }
+.kids { position: relative; z-index: 1; width: 118%; max-width: none; height: auto; margin-top: 4px; }
+.balloonL, .balloonR { position: absolute; z-index: 0; height: auto; }
+.balloonL { left: -6px; top: 41%; width: 70px; animation: floaty 5s ease-in-out infinite; }
+.balloonR { right: -4px; top: 36%; width: 62px; animation: floaty 6s ease-in-out -2s infinite; }
+.guest { position: relative; z-index: 2; margin-top: auto; padding: 10px 16px; border-radius: 18px; background: #fff; box-shadow: 0 5px 0 var(--line); }
+.guest small { color: var(--muted); font-style: normal; font-weight: 600; font-size: 14px; }
+.guest strong { color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1.15; }
+.table { border: 2px solid var(--green); color: var(--accent); font-family: var(--serif); font-weight: 800; }
+.openBtn { position: relative; z-index: 2; margin-top: 16px; margin-bottom: auto; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 16px; font-weight: 800; letter-spacing: .02em; box-shadow: 0 5px 0 #135436; }
+.openBtn:hover { background: var(--accent2); translate: 0 -2px; }
+.openBtn:active { translate: 0 3px; box-shadow: 0 2px 0 #135436; }
+
+/* ── Hero: the poster ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 46px 18px 44px; overflow: hidden; background: linear-gradient(#e9f7f1, var(--bg)); text-align: center; }
+.heroBunting { position: absolute; top: -2px; left: 50%; width: 112%; max-width: 480px; height: auto; translate: -50% 0; }
+.heroOrg { margin-top: 8px; color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.heroTitle { max-width: 100%; color: var(--gold-d); font-family: var(--display); font-size: 42px; font-weight: 800; line-height: .98; overflow-wrap: anywhere; text-shadow: 0 3px 0 var(--gold-l); }
+.heroKids { width: 104%; max-width: 400px; height: auto; }
+.heroDate { padding: 6px 14px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 15px; font-weight: 800; box-shadow: 0 0 0 2px var(--green); }
+.heroNote { max-width: 330px; color: var(--muted); font-size: 16px; line-height: 1.55; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.chips span { padding: 6px 12px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 800; box-shadow: 0 3px 0 var(--line); transition: rotate .3s var(--m-spring), scale .3s var(--m-spring); }
+.chips span:nth-child(odd) { rotate: -2deg; }
+.chips span:nth-child(even) { rotate: 2deg; }
+.chips span:hover { rotate: 0deg; scale: 1.06; }
+
+@keyframes hop { 0%, 70%, 100% { translate: 0 0; } 80% { translate: 0 -8px; } 90% { translate: 0 0; } }
+@keyframes floaty { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -10px; rotate: 2deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .balloonL, .balloonR, .countBalloon, .emblem, .portraitGift, .sentBox img { animation: none !important; }
+}

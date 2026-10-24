@@ -1,0 +1,172 @@
+/* Lurik Klaten — kain lurik tenun ATBM dari Pedan–Cawas, Klaten: garis benang nila, cokelat soga, krem, dan hitam; label linen yang dijahit di atas kain lurik, pita tenun berumbai, teropong kayu yang melintas, dan desa Klaten dengan Merapi di kejauhan. */
+.root, .cover {
+  --bg: #f1e8d3; --paper: #e9dec4; --ivory: #f8f2e3; --field: #fffaf0; --ink: #2a221c; --muted: #5e5142; --line: #d3c3a2;
+  --accent: #2d3b5e; --accent2: #1c2742; --gold: #a4512e; --gold-l: #f1e3c4; --gold-d: #7a4e2c;
+  --soga: #7a4e2c; --soga-d: #563420; --rust: #a4512e; --indigo: #2d3b5e;
+  --band-bg: #2d3b5e; --band-ink: #f4ead2;
+  --display: "Zilla Slab", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Alegreya", Georgia, serif; --label: "Barlow Condensed", system-ui, sans-serif;
+  --h2: 32px; --card-r: 4px;
+  --lurik: url(/themes/art/lurik-klaten/lurik.webp) 0 0 / 220px auto repeat;
+  --sogan: url(/themes/art/lurik-klaten/sogan.webp) 0 0 / 185px auto repeat;
+  --weft: repeating-linear-gradient(0deg, rgba(122, 78, 44, .045) 0 1px, transparent 1px 3px), repeating-linear-gradient(90deg, rgba(45, 59, 94, .035) 0 1px, transparent 1px 4px);
+  font-family: var(--serif); color: var(--ink); background: var(--weft), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2d3b5e; --t-accent-ink: #f8f2e3; --t-bg: #f1e8d3; --t-ink: #2a221c; --t-muted: #5e5142; --t-line: #d3c3a2; --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Zilla Slab", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--soga); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 600; }
+.divider { width: 210px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 56px 28px 56px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { font-size: 13px; letter-spacing: .12em; line-height: 1.5; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; font-weight: 600; }
+.salamSub { color: var(--soga); font-family: var(--serif); font-size: 17px; font-style: italic; }
+.intro { color: var(--muted); }
+
+/* ── Couple: rectangular portraits taped with a strip of lurik ── */
+.couple { gap: 14px; background: var(--weft), var(--paper); }
+.portrait { margin: 8px 0 18px; }
+.portraitFrame { width: 206px; height: 258px; padding: 8px; border: 0; border-radius: 2px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 14px 26px rgba(42, 34, 28, .16); rotate: -1.2deg; }
+.personWrap:nth-child(odd) .portraitFrame { rotate: 1.4deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 1px; }
+.portraitArt { position: absolute; z-index: 2; top: -12px; left: 50%; width: 150px; height: auto; translate: -50% 0; rotate: -3deg; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .2)); }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 96px; font-weight: 600; }
+.portraitFrame:has(.monogram) { background: var(--lurik); }
+.portraitFrame:has(.monogram) .monogram { display: grid; place-items: center; width: 120px; height: 120px; background: var(--ivory); color: var(--accent); }
+.role { margin-top: 4px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.parents { color: var(--muted); }
+.amp { gap: 18px; margin: 18px 0 8px; color: var(--rust); font-family: var(--serif); font-size: 46px; font-style: italic; }
+.amp img { width: 30px; }
+.amp img:last-child { scale: 1 1; }
+
+/* ── Countdown: indigo band hemmed with woven lurik, a shuttle passing through the weft ── */
+.countBand { padding: 78px 20px 70px; background: var(--accent); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 26px; background: var(--sogan); box-shadow: 0 2px 4px rgba(0, 0, 0, .25); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.shuttle { position: absolute; z-index: 1; top: 0; left: 0; width: 120px; height: auto; animation: shuttle 9s var(--m-ease) infinite alternate; }
+.headLight .eyebrow { color: #e7c9a0; }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); font-weight: 600; }
+.count { gap: 10px; }
+.count > div { height: 92px; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 6px 0 rgba(0, 0, 0, .22); }
+.count > div::before { content: ""; position: absolute; inset: 5px; border: 1.5px dashed color-mix(in srgb, var(--soga) 55%, transparent); border-radius: 2px; pointer-events: none; }
+.count > div::after { display: none; }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { color: var(--soga); font-family: var(--label); font-size: 13px; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border: 1.5px solid #e7c9a0; border-radius: 3px; color: var(--band-ink); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+
+/* ── Events: linen labels with a woven selvage on the left ── */
+.events { gap: 26px; background: transparent; }
+.event { align-items: flex-start; padding: 26px 22px 24px 38px; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 10px 22px rgba(42, 34, 28, .08); text-align: left; overflow: hidden; }
+.event::before { inset: 0 auto 0 0; width: 16px; border: 0; border-radius: 0; background: var(--sogan); background-size: 185px auto; }
+.event:hover { box-shadow: 0 1px 0 var(--line), 0 16px 30px rgba(42, 34, 28, .14); }
+.eventNo { display: block; position: static; translate: none; width: auto; height: auto; padding: 0; background: none; color: var(--rust); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .24em; }
+.eventNo::before { content: "Acara "; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; font-weight: 600; text-align: left; }
+.eventDate { color: var(--ink); font-style: italic; }
+.eventTime { color: var(--soga); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.rule { width: 100%; height: 2px; margin: 8px 0; background: repeating-linear-gradient(90deg, var(--soga) 0 6px, transparent 6px 10px); }
+.event strong { font-weight: 700; }
+.eventAddr { max-width: none; text-align: left; }
+.mapBtn { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 4px 0 var(--accent2); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story: a loose thread with spools ── */
+.story { background: var(--weft), var(--paper); }
+.timeline::before { left: 21px; width: 0; border-left: 2px dashed var(--soga); background: none; }
+.node { width: 44px; height: 50px; border: 0; border-radius: 0; background: transparent; }
+.node img { width: 30px; }
+.storyBody small { color: var(--rust); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .2em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; font-weight: 600; }
+
+/* ── Gallery: photos pinned like swatches ── */
+.gallery { background: transparent; }
+.mosaic { gap: 10px; }
+.tile { border: 5px solid var(--ivory); border-radius: 2px; box-shadow: 0 6px 14px rgba(42, 34, 28, .14); }
+.tile:first-child { border-radius: 2px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--weft), var(--paper); }
+.form { border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 0 0 1px var(--line), 0 10px 26px rgba(42, 34, 28, .08); position: relative; }
+.form::before { content: ""; position: absolute; inset: 6px; border: 1.5px dashed color-mix(in srgb, var(--soga) 35%, transparent); border-radius: 2px; pointer-events: none; }
+.field > span, .diet, .guestsLabel { color: var(--soga); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--ivory); }
+.step { border-radius: 3px; border-color: var(--soga); }
+.submit { border-radius: 3px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 16px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 var(--accent2); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border-radius: 3px; border-left: 4px solid var(--soga); }
+.wish strong { color: var(--accent); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.wish small { border-radius: 2px; background: color-mix(in srgb, var(--soga) 14%, transparent); color: var(--soga-d); font-family: var(--label); font-weight: 600; letter-spacing: .06em; }
+
+/* ── Gifts: indigo cloth cards with a woven hem ── */
+.gifts { background: transparent; }
+.gift { padding-top: 34px; border-radius: 3px; background: var(--accent); }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--sogan); }
+.gift::after { display: none; }
+.gift h3 { color: var(--band-ink); font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: .02em; }
+.giftIcon { border-radius: 3px; }
+.giftNo { color: #fff; font-family: var(--display); font-weight: 600; }
+.copy { border-radius: 3px; border-color: #e7c9a0; color: var(--band-ink); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--band-ink); color: var(--accent); }
+
+/* ── Closing: back to the village ── */
+.closing { padding: 0 26px 56px; background: var(--bg); color: var(--ink); }
+.closingScene { display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px 4px; }
+.closingEmblem { width: 150px; height: auto; margin-top: -6px; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--soga); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .1em; }
+.closingNames { color: var(--accent); font-family: var(--display); font-size: 34px; font-weight: 600; }
+.made { color: rgba(42, 34, 28, .6); }
+.made:hover { color: var(--rust); }
+.music { border-radius: 4px; border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Cover: a linen label sewn onto a bolt of indigo lurik, the village painted at its head ── */
+.cover { position: relative; display: grid; place-items: center; min-height: 100dvh; padding: 34px 18px; overflow: hidden; background: var(--lurik); color: var(--ink); isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 40%, rgba(20, 16, 12, .35)); }
+.label { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 344px; padding: 0 0 26px; background: var(--weft), var(--ivory); text-align: center; box-shadow: 0 2px 0 rgba(0, 0, 0, .12), 0 22px 44px rgba(10, 8, 6, .45); rotate: -.8deg; }
+.label::after { content: ""; position: absolute; inset: 7px; border: 1.5px dashed color-mix(in srgb, var(--soga) 60%, transparent); pointer-events: none; }
+.labelScene { position: relative; width: 100%; height: 196px; overflow: hidden; }
+.labelScene img { display: block; width: 100%; height: auto; }
+.labelTape { position: absolute; z-index: 2; top: -15px; left: 50%; width: 260px; height: auto; translate: -50% 0; rotate: 1.5deg; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .3)); }
+.kicker { margin-top: 2px; padding: 0 16px; color: var(--soga-d); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 6px; padding: 0 18px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0; color: var(--rust); font-family: var(--serif); font-size: 32px; font-weight: 400; }
+.coverDate { margin-top: 14px; padding: 6px 16px; background: var(--accent); color: var(--ivory); font-family: var(--label); font-size: 16px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.guest { margin-top: 18px; padding: 0 18px; }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.table { border-color: var(--soga); color: var(--soga-d); font-family: var(--label); font-size: 13px; font-weight: 600; }
+.openBtn { margin-top: 18px; border-radius: 3px; background: var(--soga-d); color: #fbf3e2; font-family: var(--label); font-size: 17px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 #3a2213; }
+.openBtn:hover { background: #3f2516; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 28px 22px 48px; overflow: hidden; text-align: center; }
+.heroCloth { width: 100%; max-width: 360px; height: auto; margin-bottom: 4px; }
+.heroKicker { color: var(--soga); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1.05; overflow-wrap: anywhere; max-width: 100%; }
+.heroNames em { color: var(--rust); font-family: var(--serif); font-size: 34px; font-weight: 400; padding: 0 8px; }
+.heroDate { color: var(--ink); font-family: var(--label); font-size: 17px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.heroSnap { position: relative; width: 300px; max-width: 100%; height: 210px; margin-top: 16px; padding: 7px; background: var(--ivory); box-shadow: 0 14px 28px rgba(42, 34, 28, .18); rotate: 1.2deg; }
+.heroPic { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.heroSnap::before, .heroSnap::after { content: ""; position: absolute; z-index: 1; width: 86px; height: 22px; background: var(--sogan); background-size: 120px auto; box-shadow: 0 2px 3px rgba(0, 0, 0, .25); opacity: .95; pointer-events: none; }
+.heroSnap::before { top: 2px; left: -24px; rotate: -38deg; }
+.heroSnap::after { right: -24px; bottom: 4px; rotate: -38deg; }
+.heroNote { max-width: 316px; margin-top: 14px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes shuttle { 0%, 8% { translate: -130px 0; } 92%, 100% { translate: calc(min(100vw, 430px) + 10px) 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .shuttle { animation: none; translate: 20px 0; }
+}

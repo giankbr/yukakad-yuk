@@ -1,0 +1,163 @@
+/* Bintang Duabelas — dinding riad dari plester kapur gading: medali rosette bintang dua belas berukir di tengah, nama dalam huruf kufi geometris hijau toska, dan dado ubin zellige (bintang 12 toska, bintang 6 terakota, tali putih) di kaki dinding; monogram mempelai di dalam bingkai bintang dua belas, hitung mundur di ubin segi delapan, kartu acara berlis zellige; Reem Kufi + Lustria + Amiri. */
+.root, .cover {
+  --bg: #f1e9d8; --paper: #e9dfc9; --ivory: #fbf6ea; --field: #fffcf4; --ink: #1d2f2e; --muted: #556260; --line: #dccfb4;
+  --accent: #1f6d6a; --accent2: #14504e; --gold: #d2a24c; --gold-l: #f4e3b6; --gold-d: #8c6420;
+  --teal: #1f6d6a; --teal-d: #14504e; --terra: #b4532e; --terra-d: #8c3b1f;
+  --band-bg: #14504e; --band-ink: #fbf6ea;
+  --display: "Reem Kufi", "Trebuchet MS", sans-serif; --serif: Lustria, Georgia, serif; --script: "Reem Kufi", sans-serif;
+  --plaster: url(/themes/art/bintang-duabelas/plaster.webp) 0 0 / 256px 256px;
+  --zellige: url(/themes/art/bintang-duabelas/tile.webp) 0 0 / 220px 381px;
+  --h2: 31px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f6d6a; --t-accent-ink: #fbf6ea; --t-bg: #f1e9d8; --t-ink: #1d2f2e; --t-muted: #556260; --t-line: #dccfb4; --t-field: #fffcf4;
+  --t-radius: 4px; --t-font: Lustria, Georgia, serif; --t-heading-font: "Reem Kufi", sans-serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--plaster), var(--bg); }
+
+.eyebrow, .salamKicker, .role { color: var(--terra); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.head h2 { color: var(--teal-d); font-family: var(--display); font-weight: 600; letter-spacing: .01em; line-height: 1.15; }
+.divider { display: flex; align-items: center; gap: 10px; width: 210px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 7px; border-top: 1.5px solid var(--teal); border-bottom: 1.5px solid var(--terra); }
+.divider img { width: 26px; height: auto; transition: rotate 1.2s var(--m-ease); }
+.head:hover .divider img { rotate: 30deg; }
+.intro { color: var(--muted); }
+
+/* opening: a framed plaster panel with zellige lintels */
+.salamBlock { position: relative; margin: 34px 18px 50px; padding: 44px 24px 40px; border: 1.5px solid var(--teal); background: var(--ivory); box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6.5px var(--terra), 0 14px 30px rgba(29, 47, 46, .1); }
+.salamBlock::before, .salamBlock::after { content: ""; position: absolute; left: 0; right: 0; height: 14px; background: var(--zellige); background-size: 110px 190px; }
+.salamBlock::before { top: 0; border-bottom: 1.5px solid var(--teal); }
+.salamBlock::after { bottom: 0; border-top: 1.5px solid var(--teal); }
+.arabic { color: var(--teal-d); font-size: 28px; }
+.salamTitle { color: var(--teal-d); font-family: var(--display); font-size: 30px; font-weight: 600; line-height: 1.2; }
+
+/* couple: monograms set inside twelve-point stars */
+.couple { gap: 18px; background: var(--plaster), var(--paper); }
+.portrait { margin-bottom: 18px; padding: 10px; }
+.portraitFrame { width: 196px; height: 196px; padding: 0; border: 0; border-radius: 0; background: var(--teal); clip-path: polygon(50.0% 0.0%, 60.6% 10.4%, 75.0% 6.7%, 79.0% 21.0%, 93.3% 25.0%, 89.6% 39.4%, 100.0% 50.0%, 89.6% 60.6%, 93.3% 75.0%, 79.0% 79.0%, 75.0% 93.3%, 60.6% 89.6%, 50.0% 100.0%, 39.4% 89.6%, 25.0% 93.3%, 21.0% 79.0%, 6.7% 75.0%, 10.4% 60.6%, 0.0% 50.0%, 10.4% 39.4%, 6.7% 25.0%, 21.0% 21.0%, 25.0% 6.7%, 39.4% 10.4%); transition: rotate 1.4s var(--m-ease); }
+.personWrap:nth-child(3) .portraitFrame { background: var(--terra); }
+.person:hover .portraitFrame { rotate: 15deg; box-shadow: none; }
+.person:hover .monogram { rotate: -15deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; }
+.monogram { display: grid; place-items: center; width: 62%; height: 62%; border-radius: 50%; background: var(--ivory); color: var(--teal-d); font-family: var(--display); font-size: 58px; font-weight: 600; transition: rotate 1.4s var(--m-ease); box-shadow: 0 0 0 4px rgba(251, 246, 234, .4); }
+.personWrap:nth-child(3) .monogram { color: var(--terra-d); }
+.nick { color: var(--teal-d); font-family: var(--display); font-size: 40px; font-weight: 600; line-height: 1.1; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { margin: 8px 0 14px; color: var(--terra); font-family: var(--display); font-size: 44px; }
+.amp img { width: 30px; }
+
+/* countdown: teal-glazed band over the zellige, numbers on ivory octagon tiles */
+.countBand { padding: 64px 18px 68px; background: linear-gradient(rgba(20, 80, 78, .9), rgba(16, 64, 62, .94)), var(--zellige); }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-weight: 600; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 10px; }
+.count > div { height: 80px; border: 0; border-radius: 0; background: var(--ivory); clip-path: polygon(29.3% 0, 70.7% 0, 100% 29.3%, 100% 70.7%, 70.7% 100%, 29.3% 100%, 0 70.7%, 0 29.3%); }
+.count > div::after { display: none; }
+.count b { color: var(--teal-d); font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1; }
+.count small { color: var(--terra); font-family: var(--display); font-size: 11px; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border: 1.5px solid var(--gold-l); color: var(--band-ink); font-family: var(--display); font-weight: 600; letter-spacing: .08em; }
+
+/* events: ivory plaques with a zellige lintel */
+.events { gap: 26px; }
+.event { padding: 44px 22px 26px; border: 1.5px solid var(--teal); border-radius: 0; background: var(--ivory); box-shadow: 0 12px 26px rgba(29, 47, 46, .08); }
+.event::before { inset: 0 0 auto; height: 18px; border: 0; border-bottom: 1.5px solid var(--teal); border-radius: 0; background: var(--zellige); background-size: 110px 190px; }
+.eventNo { top: 8px; width: 40px; height: 40px; border-radius: 0; background: var(--terra); color: var(--ivory); font-family: var(--display); font-size: 14px; font-weight: 600; letter-spacing: 0; clip-path: polygon(29.3% 0, 70.7% 0, 100% 29.3%, 100% 70.7%, 70.7% 100%, 29.3% 100%, 0 70.7%, 0 29.3%); }
+.event h3 { margin-top: 12px; color: var(--teal-d); font-family: var(--display); font-size: 23px; font-weight: 600; }
+.eventDate { font-style: normal; }
+.eventTime { color: var(--terra); font-family: var(--display); font-weight: 500; }
+.rule { width: 90px; height: 7px; background: none; border-top: 1.5px solid var(--teal); border-bottom: 1.5px solid var(--terra); }
+.mapBtn { border-radius: 2px; background: var(--teal); color: var(--ivory); font-family: var(--display); font-weight: 500; letter-spacing: .08em; }
+.mapBtn:hover { background: var(--teal-d); }
+
+/* story */
+.story { background: var(--plaster), var(--paper); }
+.timeline::before { width: 2px; background: repeating-linear-gradient(180deg, var(--teal) 0 6px, transparent 6px 10px); }
+.node { width: 40px; height: 40px; border: 0; background: none; }
+.node img { width: 38px; }
+.storyBody { padding: 14px 16px; border-left: 3px solid var(--terra); background: var(--ivory); }
+.storyBody small { color: var(--terra); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .16em; }
+.storyBody h3 { color: var(--teal-d); font-family: var(--display); font-size: 20px; font-weight: 600; }
+
+/* gallery (uploaded only) */
+.tile, .tile:first-child { border-radius: 0; }
+
+/* wishes */
+.wishes { background: var(--plaster), var(--paper); }
+.form { border: 1.5px solid var(--teal); border-radius: 0; box-shadow: 0 0 0 4px var(--ivory), 0 0 0 5.5px var(--terra); }
+.field > span, .diet, .guestsLabel { color: var(--teal-d); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--display); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--teal); background: var(--teal); color: var(--ivory); }
+.step { border-radius: 2px; border-color: var(--teal); color: var(--teal); }
+.submit { border-radius: 2px; background: var(--terra); color: var(--ivory); font-family: var(--display); font-size: 15px; font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--terra-d); }
+.wish { border-radius: 0; border: 0; border-top: 3px solid var(--teal); }
+.wish:nth-child(even) { border-top-color: var(--terra); }
+.wish strong { color: var(--teal-d); font-family: var(--display); font-size: 17px; font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--teal) 12%, transparent); color: var(--teal-d); }
+.sentBox img { width: 64px; }
+.sent { color: var(--teal-d); font-style: normal; }
+
+/* gifts: teal glazed tiles with a zellige corner */
+.gift { border-radius: 0; background: var(--teal); box-shadow: 0 0 0 4px var(--ivory), 0 0 0 5.5px var(--teal); }
+.gift::after { right: -30px; bottom: -30px; width: 120px; height: 120px; border: 0; border-radius: 0; box-shadow: none; background: var(--zellige); background-size: 110px 190px; opacity: .35; clip-path: polygon(50.0% 0.0%, 60.6% 10.4%, 75.0% 6.7%, 79.0% 21.0%, 93.3% 25.0%, 89.6% 39.4%, 100.0% 50.0%, 89.6% 60.6%, 93.3% 75.0%, 79.0% 79.0%, 75.0% 93.3%, 60.6% 89.6%, 50.0% 100.0%, 39.4% 89.6%, 25.0% 93.3%, 21.0% 79.0%, 6.7% 75.0%, 10.4% 60.6%, 0.0% 50.0%, 10.4% 39.4%, 6.7% 25.0%, 21.0% 21.0%, 25.0% 6.7%, 39.4% 10.4%); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 16px; font-weight: 600; letter-spacing: .1em; }
+.giftNo { font-family: var(--display); font-size: 22px; font-weight: 600; letter-spacing: .06em; }
+.gifts .gift:last-of-type .giftNo { font-family: var(--serif); font-size: 16px; letter-spacing: 0; line-height: 1.5; }
+.copy { border-radius: 2px; border-color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+
+/* closing: the rosette above, the zellige dado below */
+.closing { padding: 56px 26px 0; background: var(--plaster), var(--bg); color: var(--ink); }
+.closingRosette { width: 190px; height: auto; margin-bottom: 6px; animation: bdTurn 240s linear infinite; }
+.thanks { color: var(--teal-d); font-family: var(--display); font-size: 40px; font-weight: 600; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--terra); font-family: var(--display); font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+.family { color: var(--muted); font-family: var(--display); }
+.closingNames { color: var(--teal-d); font-family: var(--display); font-size: 30px; font-weight: 600; }
+.made { margin-top: 18px; color: var(--muted); }
+.closing::after { content: ""; flex-shrink: 0; width: calc(100% + 52px); height: 150px; margin: 28px -26px 0; border-top: 6px solid var(--ivory); box-shadow: 0 -1.5px 0 var(--teal), inset 0 1.5px 0 var(--terra); background: var(--zellige); }
+.music { border: 2px solid var(--ivory); background: var(--teal); }
+
+/* ── Cover: plaster wall, carved rosette, kufic names, zellige dado with the guest plaque ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 0 22px; overflow: hidden; background: var(--plaster), var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.frieze { width: calc(100% + 44px); height: 22px; margin: 0 -22px; flex-shrink: 0; background: var(--zellige); background-size: 110px 190px; border-bottom: 1.5px solid var(--teal); box-shadow: 0 4px 0 var(--ivory), 0 5.5px 0 var(--terra); }
+.arabicCover { margin-top: 24px; color: var(--teal-d); font-family: Amiri, serif; font-size: 23px; line-height: 1.6; }
+.kicker { margin-top: 2px; color: var(--terra); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.medal { position: relative; width: 250px; height: 250px; margin-top: 18px; flex-shrink: 0; }
+.medal img { width: 100%; height: 100%; animation: bdTurn 240s linear infinite; }
+.names { max-width: 100%; margin-top: 20px; color: var(--teal-d); font-family: var(--display); font-size: 46px; font-weight: 600; line-height: 1.04; letter-spacing: .01em; overflow-wrap: anywhere; text-wrap: balance; }
+.names em { color: var(--terra); font-style: normal; font-weight: 500; }
+.coverDate { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 15px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 10px; height: 10px; background: var(--terra); rotate: 45deg; }
+.spacer { flex: 1 0 24px; }
+.dadoCover { position: relative; display: flex; justify-content: center; width: calc(100% + 44px); margin: 0 -22px; padding: 40px 22px 30px; border-top: 6px solid var(--ivory); box-shadow: 0 -1.5px 0 var(--teal), inset 0 1.5px 0 var(--terra); background: var(--zellige); }
+.plaque { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 330px; padding: 20px 20px 22px; border: 1.5px solid var(--teal); background: var(--plaster), var(--ivory); box-shadow: 0 0 0 4px var(--ivory), 0 0 0 5.5px var(--terra), 0 18px 34px rgba(0, 0, 0, .28); }
+.guest small { color: var(--muted); font-family: var(--serif); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; font-weight: 600; }
+.table { border-color: var(--terra); border-radius: 0; color: var(--terra-d); font-family: var(--display); font-weight: 600; }
+.openBtn { width: 100%; border-radius: 2px; background: var(--terra); color: var(--ivory); font-family: var(--display); font-size: 15px; font-weight: 600; letter-spacing: .12em; box-shadow: inset 0 0 0 3px var(--terra), inset 0 0 0 4.5px rgba(251, 246, 234, .7); }
+.openBtn:hover { background: var(--terra-d); }
+
+/* ── Hero: rosette + names, a zellige frieze ── */
+.hero { display: flex; flex-direction: column; align-items: center; padding: 0 22px 40px; text-align: center; }
+.hero .frieze { margin-bottom: 30px; }
+.heroMedal { width: 150px; height: auto; animation: bdTurn 240s linear infinite; }
+.heroKicker { margin-top: 18px; color: var(--terra); font-family: var(--display); font-size: 12px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--teal-d); font-family: var(--display); font-size: 42px; font-weight: 600; line-height: 1.08; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--terra); font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; }
+.heroNote { max-width: 310px; margin-top: 16px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes bdTurn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .medal img, .heroMedal, .closingRosette { animation: none; }
+  .portraitFrame, .monogram, .divider img { transition: none; }
+}
+@media (max-width: 370px) {
+  .names { font-size: 40px; }
+  .medal { width: 180px; height: 180px; }
+}

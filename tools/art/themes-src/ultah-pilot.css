@@ -1,0 +1,156 @@
+/* Ultah Pilot — pesta ulang tahun pilot cilik dalam gouache cerah tanpa garis tepi: langit biru dengan awan yang melayang, pesawat baling-baling merah bermuka ramah yang menarik spanduk berisi nama, landasan pacu dengan lampu, hanggar, menara kontrol dan kantong angin; topi pilot di atas bingkai foto bundar, hitung mundur berupa jam instrumen kokpit dengan jarum bergerak, kartu acara bergaya rencana penerbangan, lencana sayap sebagai pembatas. */
+.root, .cover {
+  --bg: #eef8fe; --paper: #ffffff; --ivory: #fffaf0; --field: #ffffff; --ink: #1f3a68; --muted: #4b5f82; --line: #cfe3f0;
+  --accent: #e8473c; --accent2: #d43a30; --gold: #ffc93c; --gold-l: #ffe08a; --gold-d: #c97f00;
+  --band-bg: #22427a; --band-ink: #ffffff;
+  --navy: #22427a; --navy-d: #162c55; --sky: #8fd0f2; --sky-l: #c9ebfb; --red: #e8473c; --sun: #ffc93c;
+  --display: "Lilita One", "Arial Rounded MT Bold", system-ui, sans-serif; --serif: "Fredoka", system-ui, sans-serif; --script: "Gochi Hand", "Comic Sans MS", cursive;
+  --h2: 34px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e8473c; --t-accent-ink: #ffffff; --t-bg: #eef8fe; --t-ink: #1f3a68; --t-muted: #4b5f82; --t-line: #cfe3f0; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Fredoka", system-ui, sans-serif; --t-heading-font: "Lilita One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.head h2 { color: var(--navy); font-family: var(--display); font-weight: 400; letter-spacing: .01em; }
+.divider { width: 150px; }
+
+/* ── Cover: sky, the plane towing the name banner, the airfield ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-top: 30px; overflow: hidden; background: linear-gradient(#7cc6ee, #a8dcf6 55%, #c9ebfb); text-align: center; isolation: isolate; }
+.cloud { position: absolute; z-index: 0; height: auto; pointer-events: none; animation: drift 30s linear infinite alternate; }
+.cloud1 { top: 118px; left: -40px; width: 150px; }
+.cloud2 { top: 300px; right: -50px; width: 170px; animation-duration: 38s; animation-direction: alternate-reverse; }
+.cloud3 { top: 26px; right: 30px; width: 96px; opacity: .85; animation-duration: 24s; }
+.chip { position: relative; z-index: 2; margin-top: auto; padding: 6px 16px; border-radius: 999px; background: var(--navy); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.flight { position: relative; z-index: 2; width: 362px; height: 128px; margin-top: 6px; animation: fly 6s ease-in-out infinite; }
+.banner { position: absolute; left: 0; top: 40px; width: 210px; }
+.bannerArt { display: block; width: 210px; height: auto; transform-origin: 100% 50%; animation: flap 2.4s ease-in-out infinite alternate; }
+.bannerText { position: absolute; left: 10px; top: 13px; width: 150px; height: 30px; display: grid; place-items: center; overflow: hidden; color: var(--red); font-family: var(--display); line-height: 1; white-space: nowrap; text-overflow: ellipsis; }
+.plane { position: absolute; left: 212px; top: 40px; width: 140px; }
+.planeArt { display: block; width: 140px; height: auto; }
+.prop { position: absolute; right: -3px; top: 12px; width: 9px; height: 42px; border-radius: 50%; background: radial-gradient(closest-side, rgba(60, 60, 80, .55), rgba(60, 60, 80, .15) 70%, transparent); animation: prop .18s linear infinite; }
+.captain { position: relative; z-index: 2; margin-top: 4px; color: var(--navy); font-family: var(--script); font-size: 26px; line-height: 1; }
+.coverName { position: relative; z-index: 2; max-width: 100%; padding: 0 16px; color: #fff; font-family: var(--display); font-size: 58px; line-height: 1; overflow-wrap: anywhere; -webkit-text-stroke: 2px var(--navy); paint-order: stroke fill; text-shadow: 0 5px 0 var(--navy); }
+.age { position: relative; z-index: 2; display: flex; align-items: center; gap: 10px; margin-top: 12px; color: var(--navy); font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.age b { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: var(--sun); color: var(--navy); font-family: var(--display); font-size: 28px; font-weight: 400; box-shadow: 0 4px 0 #e09a1c; rotate: -8deg; }
+.coverDate { position: relative; z-index: 2; margin-top: 12px; padding: 6px 16px; border-radius: 999px; background: rgba(255, 255, 255, .85); color: var(--navy); font-size: 16px; font-weight: 600; }
+.guestWrap { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; width: calc(100% - 44px); max-width: 330px; margin-top: 16px; padding: 14px 16px 18px; border-radius: 22px; background: #fff; box-shadow: 0 6px 0 rgba(34, 66, 122, .18); }
+.cover .guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.cover .guest strong { color: var(--navy); font-family: var(--display); font-size: 22px; font-weight: 400; }
+.table { border: 2px solid var(--sky); color: var(--navy); font-family: var(--serif); font-weight: 600; }
+.openBtn { min-width: 220px; height: 50px; background: var(--red); color: #fff; font-family: var(--display); font-size: 19px; font-weight: 400; letter-spacing: .03em; box-shadow: 0 5px 0 #a8271f; }
+.openBtn:hover { background: #f05a4f; }
+.field2 { position: relative; z-index: 1; width: 100%; margin-top: auto; padding-top: 10px; }
+.field2 img { display: block; width: 100%; height: auto; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 24px 46px; overflow: hidden; background: linear-gradient(#a8dcf6, var(--bg)); text-align: center; }
+.heroCap { width: 180px; height: auto; transform-origin: 50% 90%; animation: tip 4s ease-in-out infinite alternate; }
+.heroKicker { margin-top: 12px; padding: 5px 14px; border-radius: 999px; background: var(--sun); color: var(--navy); font-size: 15px; font-weight: 600; letter-spacing: .04em; box-shadow: 0 3px 0 #e09a1c; }
+.heroName { max-width: 100%; margin-top: 12px; color: #fff; font-family: var(--display); font-size: 54px; line-height: 1; overflow-wrap: anywhere; -webkit-text-stroke: 2px var(--navy); paint-order: stroke fill; text-shadow: 0 5px 0 var(--navy); }
+.heroDate { margin-top: 12px; color: var(--navy); font-size: 17px; font-weight: 600; }
+.heroNote { max-width: 320px; margin-top: 18px; padding: 14px 18px; border-radius: 20px; background: #fff; color: var(--ink); font-family: var(--script); font-size: 21px; line-height: 1.3; box-shadow: 0 5px 0 rgba(34, 66, 122, .15); rotate: -1deg; }
+
+.salamBlock { padding: 30px 26px 54px; }
+.salamTitle { color: var(--navy); font-family: var(--display); font-size: 34px; line-height: 1.1; }
+
+/* the little captain: round frame wearing the cap */
+.couple { background: var(--paper); }
+.portrait { margin: 66px 0 14px; }
+.portraitFrame { width: 190px; height: 190px; padding: 8px; border: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, var(--sky-l) 70%); box-shadow: 0 0 0 6px var(--sky), 0 8px 0 6px rgba(34, 66, 122, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--red); font-family: var(--display); font-size: 96px; }
+.portraitCap { position: absolute; z-index: 2; left: 50%; top: -58px; width: 170px; height: auto; translate: -50% 0; rotate: -6deg; }
+.nick { color: var(--navy); font-family: var(--display); font-size: 46px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.parents { font-size: 15.5px; }
+.amp { color: var(--red); font-family: var(--display); }
+
+/* countdown: cockpit instrument dials */
+.countBand { padding: 60px 16px 64px; background: radial-gradient(circle at 50% 0, #2f5596, transparent 70%), var(--navy-d); }
+.headLight .eyebrow { color: var(--sun); }
+.headLight h2 { color: #fff; font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 78px)); gap: 8px; }
+.count > div { height: 78px; border: 4px solid #e9eef5; border-radius: 50%; background: repeating-conic-gradient(from -2deg, rgba(255, 255, 255, .55) 0 4deg, transparent 4deg 30deg) content-box, radial-gradient(circle, #1d2f57 58%, #142242); padding: 3px; box-shadow: 0 4px 0 rgba(0, 0, 0, .35), inset 0 0 0 2px #0e1a33; overflow: hidden; }
+.count > div::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: radial-gradient(circle, #1d2f57 64%, transparent 66%); }
+.count > div::after { inset: auto; left: 50%; top: 50%; width: 3px; height: 30px; translate: -50% -100%; border-radius: 3px; background: linear-gradient(var(--red), #ff9a8c); transform-origin: 50% 100%; animation: needle 5s ease-in-out infinite alternate; opacity: .9; }
+.count > div:nth-child(2)::after { animation-delay: -1.2s; }
+.count > div:nth-child(3)::after { animation-delay: -2.4s; }
+.count > div:nth-child(4)::after { animation-duration: 1.6s; }
+.count b { position: relative; z-index: 1; color: #fff; font-family: var(--display); font-size: 24px; font-weight: 400; text-shadow: 0 2px 0 #0e1a33; }
+.count small { position: relative; z-index: 1; color: var(--sun); font-size: 10.5px; font-style: normal; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.countTba { color: #fff; }
+.ghostBtn { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-weight: 600; }
+
+/* events: flight-plan cards */
+.events { background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 20px 22px 26px; border: 0; border-radius: 22px; background: #fff; text-align: left; box-shadow: 0 6px 0 rgba(34, 66, 122, .14); }
+.event::before { inset: 16px auto 16px 10px; width: 5px; border: 0; border-radius: 3px; background: repeating-linear-gradient(var(--sky) 0 12px, transparent 12px 20px); }
+.eventNo { display: block; top: -14px; left: auto; right: 18px; translate: none; width: auto; height: auto; padding: 4px 12px; background: var(--sun); color: var(--navy); font-family: var(--display); font-size: 14px; letter-spacing: .04em; box-shadow: 0 3px 0 #e09a1c; white-space: nowrap; }
+.eventNo::before { content: "Rute "; }
+.event h3 { color: var(--navy); font-family: var(--display); font-size: 27px; text-wrap: wrap; }
+.eventDate { color: var(--red); font-size: 17px; font-style: normal; font-weight: 600; }
+.eventTime { color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.rule { width: 60px; height: 4px; border-radius: 4px; background: var(--sun); }
+.event strong { font-size: 17px; }
+.eventAddr { max-width: none; text-wrap: pretty; }
+.mapBtn { background: var(--navy); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 600; box-shadow: 0 4px 0 var(--navy-d); }
+.mapBtn:hover { background: #2d5396; }
+
+.story { background: var(--paper); }
+.timeline::before { width: 3px; background: repeating-linear-gradient(var(--sky) 0 10px, transparent 10px 16px); }
+.node { border: 3px solid var(--sky); background: #fff; }
+.node img { width: 30px; }
+.storyBody small { color: var(--red); font-family: var(--serif); font-weight: 600; }
+.storyBody h3 { color: var(--navy); font-family: var(--display); }
+
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 20px; }
+
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 22px; box-shadow: 0 6px 0 rgba(34, 66, 122, .14); }
+.field > span, .diet, .guestsLabel { color: var(--navy); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border-width: 2px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--navy); background: var(--navy); color: #fff; }
+.step { border: 2px solid var(--sky); }
+.submit { background: var(--red); color: #fff; font-family: var(--display); font-size: 18px; box-shadow: 0 4px 0 #a8271f; }
+.submit:not(:disabled):hover { background: #f05a4f; box-shadow: 0 4px 0 #a8271f; }
+.sentBox img { width: 140px; }
+.sent { color: var(--navy); font-style: normal; font-weight: 600; }
+.wish { border: 0; border-radius: 18px; background: #fff; box-shadow: 0 4px 0 rgba(34, 66, 122, .1); }
+.wish strong { color: var(--navy); font-family: var(--serif); font-weight: 600; }
+.wish small { background: var(--sky-l); color: var(--navy); font-weight: 600; }
+
+.gifts { background: var(--paper); }
+.gift { border-radius: 22px; background: radial-gradient(circle at 100% 0, #2f5596, transparent 60%), var(--navy); }
+.gift h3 { color: var(--sun); font-family: var(--display); font-size: 18px; }
+.giftNo { font-family: var(--display); }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 16.5px; font-weight: 500; letter-spacing: 0; line-height: 1.5; }
+.copy { border: 2px solid var(--sun); color: #fff; font-family: var(--serif); font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--sun); color: var(--navy); }
+
+.closing { padding: 56px 24px 40px; background: linear-gradient(#a8dcf6, #7cc6ee); color: var(--navy); }
+.closingArt { position: relative; width: 300px; height: 120px; margin-bottom: 4px; }
+.closingArt .planeArt { position: absolute; right: 10px; top: 8px; width: 140px; animation: fly 6s ease-in-out infinite; }
+.closingArt .cloudArt { position: absolute; left: 0; bottom: 0; width: 150px; }
+.closing .thanks { color: #fff; font-family: var(--display); font-size: 46px; -webkit-text-stroke: 2px var(--navy); paint-order: stroke fill; text-shadow: 0 4px 0 var(--navy); }
+.closingText { color: var(--ink); font-weight: 500; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 600; }
+.closingNames { color: var(--red); font-family: var(--display); font-size: 38px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--red); }
+.music { border: 3px solid #fff; background: var(--red); }
+
+@keyframes fly { 0%, 100% { translate: 0 0; rotate: -1deg; } 50% { translate: 4px -8px; rotate: 1deg; } }
+@keyframes flap { from { skew: 0 1.5deg; } to { skew: 0 -1.5deg; } }
+@keyframes prop { 0% { scale: 1 1; } 50% { scale: 1 .25; } 100% { scale: 1 1; } }
+@keyframes drift { from { translate: -14px 0; } to { translate: 26px 0; } }
+@keyframes tip { from { rotate: -5deg; } to { rotate: 4deg; } }
+@keyframes needle { from { rotate: -70deg; } to { rotate: 80deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .cloud, .flight, .bannerArt, .prop, .heroCap, .count > div::after, .closingArt .planeArt { animation: none; }
+  .count > div::after { display: block; rotate: 20deg; }
+}

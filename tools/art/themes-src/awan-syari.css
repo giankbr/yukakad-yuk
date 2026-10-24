@@ -1,0 +1,155 @@
+/* Awan Syari — syar'i modern tanpa foto: langit biru pucat yang dilukis, cahaya matahari persik yang lembut, gumpalan awan putih yang melayang, dan hamparan awan tempat nama tamu bersandar; kartu-kartu bulat seperti awan, tipografi Prata yang tenang. */
+.root, .cover {
+  --bg: #f2f7fb; --paper: #e5eff8; --ivory: #ffffff; --field: #fbfdff; --ink: #233a52; --muted: #586d83; --line: #d2e0ed;
+  --accent: #2c5072; --accent2: #3d6890; --gold: #e2b77d; --gold-l: #fde9c9; --gold-d: #a8763a;
+  --sky: #c6def0; --navy: #233f5c;
+  --band-bg: #2c5072; --band-ink: #f7fbff;
+  --display: "Prata", Georgia, serif; --serif: "Nunito Sans", system-ui, sans-serif; --script: "Prata", Georgia, serif;
+  --h2: 29px; --card-r: 28px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2c5072; --t-accent-ink: #ffffff; --t-bg: #f2f7fb; --t-ink: #233a52; --t-muted: #586d83; --t-line: #d2e0ed; --t-field: #fbfdff;
+  --t-radius: 24px; --t-font: "Nunito Sans", system-ui, sans-serif; --t-heading-font: "Prata", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 27px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: linear-gradient(180deg, #e3eef8 0, var(--bg) 900px); }
+
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.salamKicker { max-width: 300px; font-size: 11px; letter-spacing: .16em; line-height: 1.7; text-wrap: balance; }
+.head h2 { color: var(--navy); font-family: var(--display); }
+.divider { width: 150px; opacity: .95; }
+.intro { color: var(--muted); }
+.arabic { color: var(--navy); font-size: 28px; }
+
+/* opening */
+.salamBlock { padding: 30px 28px 60px; }
+.salamTitle { color: var(--navy); font-family: var(--display); font-size: 25px; line-height: 1.4; text-wrap: balance; }
+
+/* couple: round sky-window monograms */
+.couple { gap: 20px; background: transparent; }
+.personWrap .person { padding: 30px 20px 28px; border-radius: 120px 120px 32px 32px; background: rgba(255, 255, 255, .78); box-shadow: 0 18px 40px rgba(44, 80, 114, .1); }
+.portraitFrame { width: 170px; height: 170px; padding: 0; border: 0; border-radius: 50%; background: url(/themes/art/awan-syari/sky.webp) 50% 20% / cover; box-shadow: 0 0 0 8px #fff, 0 0 0 9px var(--line), 0 14px 30px rgba(44, 80, 114, .16); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitCloud { position: absolute; z-index: 2; left: 50%; bottom: -22px; width: 150px; height: auto; translate: -50% 0; animation: floaty 7s ease-in-out infinite; }
+.monogram { color: var(--navy); font-family: var(--display); font-size: 74px; text-shadow: 0 2px 0 rgba(255, 255, 255, .7); }
+.nick { color: var(--navy); font-family: var(--display); font-size: 40px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 40px; }
+.amp img { width: 70px; }
+
+/* countdown: clouds on the open sky */
+.countBand { padding: 66px 18px 64px; background: url(/themes/art/awan-syari/sky.webp) 50% 30% / cover; color: var(--navy); }
+.countSun { position: absolute; z-index: -1; top: -40px; right: -50px; width: 200px; height: auto; animation: glowPulse 9s ease-in-out infinite; }
+.headLight .eyebrow { color: var(--gold-d); }
+.headLight h2 { color: var(--navy); font-family: var(--display); }
+.count { gap: 8px; }
+.count > div { height: 84px; border: 0; border-radius: 40px 40px 26px 26px; background: rgba(255, 255, 255, .9); box-shadow: 0 10px 22px rgba(44, 80, 114, .14); }
+.count > div::after { display: none; }
+.count b { color: var(--navy); font-family: var(--display); font-size: 27px; }
+.count small { color: var(--muted); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .06em; }
+.countTba { color: var(--navy); }
+.ghostBtn { border: 1.5px solid var(--navy); background: rgba(255, 255, 255, .6); color: var(--navy); font-family: var(--serif); font-weight: 700; }
+.ghostBtn svg { stroke: var(--navy); }
+.ghostBtn:hover { background: #fff; }
+
+/* events: soft cloud cards */
+.events { gap: 22px; background: transparent; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: 34px; background: #fff; box-shadow: 0 16px 36px rgba(44, 80, 114, .1); }
+.event::before { inset: auto 20% -1px; height: 3px; border: 0; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.eventNo { top: -15px; width: 50px; height: 30px; background: var(--sky); color: var(--navy); font-family: var(--serif); font-weight: 800; box-shadow: 0 0 0 4px #fff; }
+.event h3 { color: var(--navy); font-family: var(--display); font-size: 23px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 46px; height: 3px; border-radius: 3px; background: var(--sky); }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); }
+
+/* story */
+.story { background: var(--paper); border-radius: 48px 48px 0 0; }
+.timeline::before { left: 21px; width: 2px; background: linear-gradient(var(--gold), var(--sky)); }
+.node { width: 38px; height: 38px; border: 0; background: #fff; box-shadow: 0 4px 12px rgba(44, 80, 114, .12); }
+.node img { width: 32px; }
+.storyBody { padding: 14px 16px; border-radius: 22px; background: #fff; }
+.storyBody small { color: var(--gold-d); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; }
+.storyBody h3 { color: var(--navy); font-family: var(--display); font-size: 19px; }
+.storyImg { border-radius: 18px; }
+
+/* gallery (uploaded photos only) */
+.tile, .tile:first-child { border-radius: 26px; }
+.tile:first-child { border-radius: 999px 999px 26px 26px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 30px; background: #fff; box-shadow: 0 14px 34px rgba(44, 80, 114, .1); }
+.field > span, .diet, .guestsLabel { color: var(--navy); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--navy); border-color: var(--navy); color: #fff; }
+.wish { border: 0; border-radius: 24px; background: #fff; }
+.wish strong { color: var(--navy); font-family: var(--display); font-size: 15px; }
+.wish small { background: var(--paper); color: var(--navy); }
+
+/* gifts: white cloud cards */
+.gifts { background: var(--paper); padding-top: 20px; }
+.gift { border: 0; border-radius: 30px; background: #fff; color: var(--ink); box-shadow: 0 14px 32px rgba(44, 80, 114, .1); }
+.gift::after { right: -30px; bottom: -50px; width: 170px; height: 90px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/awan-syari/cloud.webp) 0 0 / contain no-repeat; opacity: .55; }
+.giftIcon { border: 0; background: var(--navy); }
+.gift h3 { color: var(--navy); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.giftNo { color: var(--navy); font-family: var(--display); }
+.gift small { color: var(--muted); }
+.copy { border: 1.5px solid var(--navy); background: var(--navy); color: #fff; font-family: var(--serif); font-weight: 700; }
+.copy:hover { background: var(--accent2); }
+.copyOn, .copyOn:hover { background: var(--gold-l); border-color: var(--gold); color: var(--navy); }
+
+/* closing: back into the sky */
+.closing { padding: 72px 28px 150px; background: url(/themes/art/awan-syari/sky.webp) 50% 0 / cover; color: var(--navy); }
+.closingBank { position: absolute; z-index: -1; left: -6%; bottom: -2px; width: 112%; max-width: none; height: auto; }
+.closingSun { width: 120px; height: auto; margin-bottom: -40px; animation: glowPulse 9s ease-in-out infinite; }
+.thanks { color: var(--navy); font-family: var(--display); font-size: 38px; }
+.closingText { color: var(--ink); }
+.closingSalam { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--navy); font-family: var(--display); font-size: 30px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--navy); }
+.music { border-color: #fff; background: var(--navy); }
+
+/* ── Cover: open sky, sun glow, names on the air, guest seated on the cloud bank ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 54px 22px 0; overflow: hidden; background: #c6def0 url(/themes/art/awan-syari/sky.webp) 50% 0 / cover; color: var(--navy); text-align: center; isolation: isolate; }
+.coverSun { position: absolute; z-index: -1; top: 30px; right: -60px; width: 260px; height: auto; animation: glowPulse 9s ease-in-out infinite; }
+.cloudA, .cloudB { position: absolute; z-index: -1; height: auto; }
+.cloudA { top: 47%; left: -40px; width: 150px; opacity: .9; animation: drift 26s ease-in-out infinite alternate; }
+.cloudB { top: 15%; right: 18px; width: 104px; opacity: .85; animation: drift 34s ease-in-out -8s infinite alternate-reverse; }
+.coverArabic { color: var(--navy); font-family: Amiri, "Traditional Arabic", serif; font-size: 25px; line-height: 1.6; }
+.kicker { margin-top: 14px; color: var(--gold-d); font-size: 12px; font-weight: 800; letter-spacing: .32em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 16px; max-width: 100%; color: var(--navy); font-family: var(--display); font-size: clamp(44px, 13vw, 56px); font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(255, 255, 255, .7); }
+.coverNames em { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--gold-d); font-size: 22px; font-style: normal; box-shadow: 0 6px 16px rgba(44, 80, 114, .15); }
+.coverDate { margin-top: 18px; padding: 7px 18px; border-radius: 999px; background: rgba(255, 255, 255, .72); color: var(--navy); font-size: 14px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.coverFoot { position: relative; align-self: stretch; margin: auto -22px 0; padding-top: 150px; }
+.coverBank { position: absolute; z-index: 0; left: -8%; top: 0; width: 116%; max-width: none; height: auto; animation: rise 1.6s var(--m-ease) both; }
+.coverFoot .guest, .coverFoot .openBtn { position: relative; z-index: 1; }
+.coverFoot { display: flex; flex-direction: column; align-items: center; padding-bottom: 34px; background: linear-gradient(transparent 60%, #fff 60%); }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--navy); font-family: var(--display); }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-weight: 800; }
+.openBtn { margin-top: 16px; background: var(--navy); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 10px 22px rgba(35, 63, 92, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -2px; }
+
+/* ── Hero: a round sky window ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 50px 24px 30px; text-align: center; }
+.heroWindow { position: relative; width: 250px; height: 250px; margin-bottom: 8px; overflow: hidden; border-radius: 50%; background: url(/themes/art/awan-syari/sky.webp) 50% 18% / 160%; box-shadow: 0 0 0 10px #fff, 0 0 0 11px var(--line), 0 24px 46px rgba(44, 80, 114, .18); }
+.heroWindow .heroSun { position: absolute; top: 18px; right: 24px; width: 120px; height: auto; animation: glowPulse 9s ease-in-out infinite; }
+.heroWindow .heroCloud1 { position: absolute; left: -20px; bottom: 50px; width: 170px; height: auto; animation: drift 22s ease-in-out infinite alternate; }
+.heroWindow .heroCloud2 { position: absolute; right: -36px; bottom: 16px; width: 150px; height: auto; animation: drift 28s ease-in-out infinite alternate-reverse; }
+.heroKicker { color: var(--gold-d); font-size: 12px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--navy); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.15; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; }
+
+@keyframes floaty { 0%, 100% { translate: -50% 0; } 50% { translate: -50% -5px; } }
+@keyframes glowPulse { 0%, 100% { opacity: .85; scale: 1; } 50% { opacity: 1; scale: 1.05; } }
+@keyframes rise { from { opacity: 0; translate: 0 30px; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverSun, .cloudA, .cloudB, .coverBank, .countSun, .closingSun, .portraitCloud, .heroSun, .heroCloud1, .heroCloud2 { animation: none !important; }
+}

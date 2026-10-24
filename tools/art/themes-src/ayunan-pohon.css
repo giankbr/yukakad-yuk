@@ -1,0 +1,159 @@
+/* Ayunan Pohon — buku cerita gouache saat golden hour: pohon tua raksasa di atas bukit dengan ayunan tali yang berayun pelan, padang rumput berbunga liar, matahari rendah di balik bukit jauh, lalu senja dan kunang-kunang. Krem kertas, hijau zaitun, kuning madu, oranye bata, dan biru senja. */
+.root, .cover {
+  --bg: #f7ecd6; --paper: #f1e2c3; --ivory: #fffaf0; --field: #fffcf5; --ink: #3b2414; --muted: #6d5642; --line: #e3d0ab;
+  --accent: #4e6a35; --accent2: #3a5127; --gold: #d9a84e; --gold-l: #fbe7b5; --gold-d: #a8682e;
+  --brick: #c2643c; --brick-d: #9b4a28; --dusk: #2f3358; --dusk2: #4c4878;
+  --band-bg: #2f3358; --band-ink: #fbefd8;
+  --display: "DM Serif Display", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Patrick Hand", cursive;
+  --h2: 33px; --card-r: 22px;
+  --grain: radial-gradient(circle at 30% 40%, rgba(168, 104, 46, .06) 0 1px, transparent 1.5px) 0 0 / 7px 7px;
+  font-family: var(--serif); color: var(--ink); background: var(--grain), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4e6a35; --t-accent-ink: #fffaf0; --t-bg: #f7ecd6; --t-ink: #3b2414; --t-muted: #6d5642; --t-line: #e3d0ab; --t-field: #fffcf5;
+  --t-radius: 18px; --t-font: "Literata", Georgia, serif; --t-heading-font: "DM Serif Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--brick); font-family: var(--script); font-size: 21px; letter-spacing: .02em; text-transform: none; }
+.head h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 210px; }
+
+/* ── Opening: first page of the storybook ── */
+.salamBlock { padding: 60px 30px 56px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 38px; }
+.salamSub { color: var(--accent); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+.intro { color: var(--muted); }
+.salamBlock .intro { text-align: left; }
+.salamBlock .intro::first-letter { float: left; margin: 6px 8px 0 0; color: var(--brick); font-family: var(--display); font-size: 54px; line-height: .8; }
+
+/* ── Couple: pebble-shaped portraits with a wildflower posy ── */
+.couple { gap: 14px; background: var(--grain), var(--paper); }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 250px; padding: 7px; border: 0; border-radius: 58% 42% 52% 48% / 46% 54% 46% 54%; background: var(--ivory); box-shadow: 0 14px 30px rgba(80, 50, 20, .16); }
+.personWrap:nth-child(odd) .portraitFrame { border-radius: 44% 56% 46% 54% / 54% 44% 56% 46%; }
+.portraitFrame > img, .portraitFrame > div { border-radius: inherit; }
+.portraitArt { position: absolute; z-index: 2; right: -22px; bottom: -14px; width: 70px; height: auto; rotate: 12deg; }
+.personWrap:nth-child(odd) .portraitArt { right: auto; left: -22px; rotate: -12deg; }
+.monogram { color: var(--accent); font-family: var(--display); font-size: 96px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 48px; }
+.fullName { font-family: var(--serif); font-weight: 600; }
+.amp { color: var(--brick); font-family: var(--script); font-size: 46px; }
+.amp img { width: 42px; }
+
+/* ── Countdown: dusk falls, fireflies come out ── */
+.countBand { padding: 70px 20px 64px; background: linear-gradient(#e8a467 0, #b77c7c 22%, var(--dusk2) 55%, var(--dusk) 100%); }
+.fireflies { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
+.fireflies i { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: #fff3a8; box-shadow: 0 0 8px 3px rgba(255, 228, 120, .55); animation: firefly 7s var(--m-ease) infinite alternate; }
+.fireflies i:nth-child(1) { left: 12%; top: 62%; }
+.fireflies i:nth-child(2) { left: 28%; top: 82%; animation-delay: -2s; animation-duration: 9s; }
+.fireflies i:nth-child(3) { left: 52%; top: 70%; animation-delay: -4s; }
+.fireflies i:nth-child(4) { left: 74%; top: 86%; animation-delay: -1s; animation-duration: 8s; }
+.fireflies i:nth-child(5) { left: 88%; top: 58%; animation-delay: -5s; animation-duration: 10s; }
+.fireflies i:nth-child(6) { left: 40%; top: 50%; animation-delay: -3s; animation-duration: 11s; }
+.headLight .eyebrow { color: #fff1cf; }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 90px; border: 0; border-radius: 20px; background: rgba(255, 250, 240, .94); box-shadow: 0 8px 18px rgba(20, 20, 50, .25); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--brick); font-family: var(--script); font-size: 17px; font-style: normal; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border-color: var(--gold-l); color: var(--band-ink); font-family: var(--serif); font-size: 14px; font-weight: 600; }
+
+/* ── Events: storybook cards with a twig on top ── */
+.events { gap: 30px; }
+.event { padding: 44px 22px 26px; border: 0; border-radius: 24px; background: var(--ivory); box-shadow: 0 1px 0 var(--line), 0 14px 28px rgba(80, 50, 20, .1); }
+.event::before { inset: auto; top: -16px; left: 50%; width: 170px; height: 34px; translate: -50% 0; border: 0; border-radius: 0; background: url(/themes/art/ayunan-pohon/ranting.webp) 50% 50% / contain no-repeat; }
+.eventNo { top: auto; bottom: -14px; background: var(--brick); color: #fff; font-family: var(--script); font-size: 17px; letter-spacing: 0; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 27px; }
+.eventDate { color: var(--accent2); font-family: var(--serif); font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-size: 15px; font-weight: 600; }
+.rule { width: 46px; height: 3px; border-radius: 3px; background: var(--gold); }
+.mapBtn { background: var(--accent); color: var(--ivory); font-family: var(--serif); font-size: 14px; font-weight: 600; letter-spacing: .02em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story ── */
+.story { background: var(--grain), var(--paper); }
+.timeline::before { left: 22px; width: 3px; border-radius: 3px; background: repeating-linear-gradient(var(--gold-d) 0 10px, transparent 10px 16px); opacity: .55; }
+.node { width: 46px; height: 52px; border: 0; background: transparent; }
+.node img { width: 36px; }
+.storyBody small { color: var(--brick); font-family: var(--script); font-size: 19px; letter-spacing: .02em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 24px; }
+
+.gallery { background: transparent; }
+.tile { border-radius: 20px; }
+.tile:first-child { border-radius: 120px 120px 20px 20px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--grain), var(--paper); }
+.form { border: 0; border-radius: 24px; background: var(--ivory); }
+.field > span, .diet, .guestsLabel { color: var(--accent2); font-family: var(--script); font-size: 18px; letter-spacing: .02em; text-transform: none; }
+.field input, .field textarea { border-radius: 14px; }
+.choices button { font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--ivory); }
+.submit { background: var(--brick); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.submit:not(:disabled):hover { background: var(--brick-d); }
+.wish { border: 0; border-radius: 18px; box-shadow: 0 1px 0 var(--line); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.wish small { background: color-mix(in srgb, var(--gold) 22%, transparent); color: var(--gold-d); font-weight: 600; }
+
+/* ── Gifts: dusk cards ── */
+.gifts { background: transparent; }
+.gift { border-radius: 24px; background: linear-gradient(160deg, var(--dusk2), var(--dusk)); }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 19px; letter-spacing: .02em; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 21px; font-weight: 600; }
+.copy { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 600; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--dusk); }
+
+/* ── Closing: the hill again, then night ── */
+.closing { padding: 0 26px 60px; background: linear-gradient(var(--bg) 0, var(--bg) 120px, var(--dusk2) 380px, var(--dusk) 100%); }
+.closingScene { display: block; width: calc(100% + 52px); max-width: none; height: 330px; margin: 0 -26px 10px; object-fit: cover; object-position: 50% 30%; -webkit-mask: linear-gradient(transparent, #000 14%, #000 70%, transparent); mask: linear-gradient(transparent, #000 14%, #000 70%, transparent); }
+.closingEmblem { width: 76px; height: auto; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 48px; }
+.closingText { color: rgba(251, 239, 216, .9); }
+.family { color: rgba(251, 239, 216, .8); font-family: var(--serif); font-weight: 600; letter-spacing: .04em; }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 36px; }
+.music { border-color: var(--gold-l); background: var(--accent); }
+
+/* ── Cover: the whole picture-book spread, names in the evening sky, a paper card on the meadow ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: max(100dvh, 780px); padding: 34px 20px 24px; overflow: hidden; background: linear-gradient(#efae78, #f2c086 260px); color: var(--ink); text-align: center; isolation: isolate; }
+.scene { position: absolute; z-index: -1; left: 0; right: 0; bottom: -40px; aspect-ratio: 780 / 1400; }
+.sceneImg { display: block; width: 100%; height: auto; }
+.swing { position: absolute; left: 16.67%; top: 33.29%; width: 25.64%; transform-origin: 50% 0; animation: swing 4.8s var(--m-ease) infinite alternate; }
+.swing img { display: block; width: 100%; height: auto; }
+.coverFlies { position: absolute; inset: 52% 0 0; pointer-events: none; }
+.coverFlies i { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #fff6b8; box-shadow: 0 0 9px 3px rgba(255, 233, 130, .7); animation: firefly 6s var(--m-ease) infinite alternate; }
+.coverFlies i:nth-child(1) { left: 8%; top: 18%; }
+.coverFlies i:nth-child(2) { left: 46%; top: 8%; animation-delay: -2s; }
+.coverFlies i:nth-child(3) { left: 70%; top: 26%; animation-delay: -3.5s; animation-duration: 8s; }
+.coverFlies i:nth-child(4) { left: 90%; top: 12%; animation-delay: -1s; }
+.kicker { padding: 4px 16px; border-radius: 999px; background: rgba(255, 248, 232, .78); color: var(--brick-d); font-family: var(--script); font-size: 20px; line-height: 1.2; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; max-width: 100%; margin-top: 10px; color: #3a2010; font-family: var(--display); font-size: 52px; line-height: 1.02; text-shadow: 0 1px 0 rgba(255, 240, 210, .6); }
+.coverNames em { padding: 0 8px; color: var(--brick-d); font-family: var(--script); font-size: 40px; font-style: normal; }
+.coverDate { margin-top: 8px; color: #4a2a14; font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: .02em; }
+.card { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 330px; margin-top: auto; padding: 22px 18px 20px; border-radius: 26px 26px 22px 22px; background: rgba(255, 250, 240, .95); box-shadow: 0 16px 34px rgba(40, 50, 20, .3); }
+.guest small { color: var(--muted); font-size: 15px; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--serif); font-size: 12px; font-weight: 600; }
+.openBtn { border-radius: 999px; background: var(--accent); color: #fffaf0; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .04em; box-shadow: 0 6px 0 var(--accent2); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 46px 24px 50px; text-align: center; }
+.heroKicker { color: var(--brick); font-family: var(--script); font-size: 22px; }
+.heroNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; max-width: 100%; color: var(--ink); font-family: var(--display); font-size: 50px; line-height: 1.05; }
+.coverNames span, .heroNames span { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.heroNames em { padding: 0 8px; color: var(--brick); font-family: var(--script); font-size: 38px; font-style: normal; }
+.heroDate { color: var(--accent2); font-weight: 600; }
+.heroWindow { position: relative; width: 300px; max-width: 100%; height: 340px; margin-top: 18px; padding: 8px; border-radius: 150px 150px 28px 28px; background: var(--ivory); box-shadow: 0 18px 36px rgba(80, 50, 20, .18); }
+.heroPic { width: 100%; height: 100%; border-radius: 142px 142px 22px 22px; cursor: zoom-in; }
+.heroPosy { position: absolute; z-index: 1; left: -26px; bottom: -20px; width: 86px; pointer-events: none; }
+.heroPosy img { display: block; width: 100%; height: auto; }
+.heroNote { max-width: 318px; margin-top: 20px; color: var(--muted); font-family: var(--script); font-size: 21px; line-height: 1.45; }
+
+@keyframes swing { from { rotate: -4deg; } to { rotate: 4deg; } }
+@keyframes firefly { 0% { translate: 0 0; opacity: .2; } 40% { opacity: 1; } 100% { translate: 14px -26px; opacity: .35; } }
+@media (prefers-reduced-motion: reduce) {
+  .swing, .coverFlies i, .fireflies i { animation: none; }
+}

@@ -13,10 +13,8 @@ import kit from "./kit.module.css";
 import { autoReveal, revealChildren } from "@/lib/reveal";
 import { celebrate, toast } from "@/lib/celebrate";
 import { DietaryField, ReadingAids, ThankYouBanner, useInvitation, useThankYou } from "./extras";
-import { Ambient, FEEDBACK_EVENT, Lightbox, ScrollProgress, Toaster, boop, enhanceCover, enhanceMain, feedback, leaveCover, useLightbox } from "./motion-layer";
+import { Lightbox, ScrollProgress, Toaster, enhanceCover, enhanceMain, useLightbox } from "./motion-layer";
 import { motionOf } from "./motion";
-import { themeMood } from "./mood";
-import { OPEN_EVENT, useMusic } from "./music";
 
 export type ThemeProps = {
   data: InvitationData;
@@ -28,7 +26,7 @@ export type ThemeProps = {
   skipCover?: boolean;
 };
 
-export { OPEN_EVENT, useMusic } from "./music";
+export const OPEN_EVENT = "rawuh:invitation-open";
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
@@ -54,9 +52,7 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
   const [coverMounted, setCoverMounted] = useState(!skipCover);
   const coverRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
-  const themeId = useInvitation()?.theme;
-  const motion = motionOf(themeId);
-  const mood = themeMood(themeId);
+  const motion = motionOf(useInvitation()?.theme);
   const lightbox = useLightbox(mainRef, opened);
   // Cover: stagger its content in on first paint, then add the Ken Burns photo + breathing open button.
   useEffect(() => {
@@ -73,26 +69,13 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
     return () => { stop(); parallax(); };
   }, [opened, motion]);
   const open = useCallback(() => {
-    // `open` is handed to the theme's cover during render, so it finds the cover and page through the DOM, not refs.
-    const button = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    const dialog = button?.closest<HTMLElement>('[aria-label="Sampul undangan"]') ?? document.querySelector<HTMLElement>('[aria-label="Sampul undangan"]');
-    const main = dialog?.parentElement?.querySelector<HTMLElement>(":scope > [data-invitation-main]") ?? null;
     setOpened(true);
+    // Let the cover slide away before unmounting it.
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setTimeout(() => setCoverMounted(false), reduce ? 0 : 650);
     window.scrollTo({ top: 0 });
-    // Let the cover leave in the theme's own way (doors, iris, curtain, pop) before unmounting it.
-    setTimeout(() => setCoverMounted(false), leaveCover(mood.cover, dialog, main));
-    if (mood.burst && button && dialog?.contains(button)) celebrate(button);
     // Opening the cover is a user gesture, so background music may start now (see <MusicPlayer>).
     window.dispatchEvent(new Event(OPEN_EVENT));
-  }, [mood]);
-  // RSVP / wish accepted: a theme-flavoured burst from the submit button (celebrate() skips repeats).
-  useEffect(() => {
-    const onFeedback = (event: Event) => {
-      const from = (event as CustomEvent<{ from: HTMLElement | null }>).detail?.from;
-      celebrate(from && mainRef.current?.contains(from) ? from : mainRef.current);
-    };
-    window.addEventListener(FEEDBACK_EVENT, onFeedback);
-    return () => window.removeEventListener(FEEDBACK_EVENT, onFeedback);
   }, []);
   // Deep links from table QR cards (e.g. #extra-foto-tamu) open the invitation straight to that section.
   useEffect(() => {
@@ -117,7 +100,7 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
       {fontHref && <link rel="stylesheet" href={fontHref} />}
       <div className={className} data-motion={motion} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh", overflowX: "clip", ...style }}>
         {coverMounted && (
-          <div role="dialog" aria-modal="true" aria-label="Sampul undangan" className={opened && mood.cover === "lift" ? kit.coverLeave : undefined}
+          <div role="dialog" aria-modal="true" aria-label="Sampul undangan" className={opened ? kit.coverLeave : undefined}
             style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", justifyContent: "center", background: opened ? "transparent" : background, overflowY: "auto", pointerEvents: opened ? "none" : undefined }}>
             <div ref={coverRef} style={{ position: "relative", width: "100%", maxWidth: width, minHeight: "100dvh" }}>{cover(open)}</div>
           </div>
@@ -125,7 +108,6 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
         <div ref={mainRef} data-invitation-main aria-hidden={!opened} style={opened ? undefined : { visibility: "hidden", height: "100dvh", overflow: "hidden" }}><ThankYouBanner />{children}</div>
         {opened && <ReadingAids />}
         {opened && <ScrollProgress width={width} />}
-        {opened && <Ambient kind={mood.ambient} width={width} />}
         <Toaster />
         {lightbox.state && <Lightbox {...lightbox.state} onClose={lightbox.close} onIndex={lightbox.setIndex} />}
       </div>
@@ -256,7 +238,7 @@ export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "g
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error" | "closed">("idle");
   const submit = useCallback(async (input: RsvpInput) => {
     if (status === "sending") return;
-    if (demo) { feedback("rsvp"); setStatus("sent"); return; }
+    if (demo) { setStatus("sent"); return; }
     setStatus("sending");
     try {
       const response = await fetch(`${API}/api/public/invitation/${encodeURIComponent(slug)}/rsvp`, {
@@ -269,7 +251,7 @@ export function useRsvp({ slug, guestToken, demo }: Pick<ThemeProps, "slug" | "g
           message: `${input.name}: ${input.message ?? ""}${input.diet ? ` [Catatan makanan: ${input.diet}]` : ""}`.trim(),
         }),
       });
-      if (response.ok) { feedback("rsvp"); setStatus("sent"); return; }
+      if (response.ok) { setStatus("sent"); return; }
       if (response.status === 409) {
         const body = await response.json().catch(() => null) as { code?: string } | null;
         if (body?.code === "rsvp_closed") { setStatus("closed"); return; }
@@ -319,7 +301,6 @@ export function useWishes({ slug, guestToken, demo, seed = [] }: Pick<ThemeProps
     if (demo) {
       setWishes(list => [{ id: `local-${Date.now()}`, name, message, created_at: new Date().toISOString() }, ...list]);
       setPending(false);
-      feedback("wish");
       setStatus("sent");
       return;
     }
@@ -335,7 +316,6 @@ export function useWishes({ slug, guestToken, demo, seed = [] }: Pick<ThemeProps
       const published = wish?.status === "published";
       setPending(!published);
       if (published && wish?.id) setWishes(list => [{ id: wish.id, name: wish.name ?? name, message: wish.message ?? message, created_at: wish.created_at }, ...list.filter(item => item.id !== wish.id)]);
-      feedback("wish");
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -379,9 +359,7 @@ export function useCopy() {
   const copy = useCallback(async (value?: string) => {
     if (!value) return;
     try {
-      const button = document.activeElement;
       await navigator.clipboard.writeText(value);
-      boop(button);
       setCopied(value);
       toast("Disalin");
       navigator.vibrate?.(8);
@@ -619,13 +597,68 @@ export function GuestCount({ label = "Jumlah tamu", max = 10, className, buttonC
   );
 }
 
-/** Generic floating music toggle, rendered by the invitation page; hides itself when the theme has its own player. */
+/** Background music from the dashboard (Pengaturan → musik): starts when the cover is opened if autoplay is on. */
+export function useMusic(music?: InvitationData["music"]) {
+  const audio = useRef<HTMLAudioElement | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const [opened, setOpened] = useState(false);
+  /** The track couldn't be loaded or played (broken link, unsupported format). */
+  const [failed, setFailed] = useState(false);
+  const url = safeUrl(music?.url) ?? (music?.url?.startsWith("/") ? music.url : undefined);
+  useEffect(() => {
+    if (!url) return;
+    const element = new Audio(url);
+    element.loop = true;
+    element.preload = "none";
+    audio.current = element;
+    const onPlay = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    const onError = () => { setFailed(true); setPlaying(false); };
+    element.addEventListener("play", onPlay);
+    element.addEventListener("pause", onPause);
+    element.addEventListener("error", onError);
+    const onOpen = () => {
+      setOpened(true);
+      if (music?.autoplay) void element.play().catch(playFailed(onError));
+    };
+    window.addEventListener(OPEN_EVENT, onOpen);
+    // Rendered without a cover (?open=1): show the toggle straight away.
+    const timer = setTimeout(() => { if (!document.querySelector('[aria-label="Sampul undangan"]')) setOpened(true); }, 600);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener(OPEN_EVENT, onOpen);
+      element.pause();
+      element.removeEventListener("play", onPlay);
+      element.removeEventListener("pause", onPause);
+      element.removeEventListener("error", onError);
+      audio.current = null;
+      setFailed(false);
+    };
+  }, [url, music?.autoplay]);
+  const toggle = useCallback(() => {
+    const element = audio.current;
+    if (!element) return;
+    if (element.paused) void element.play().catch(playFailed(() => { setFailed(true); setPlaying(false); }));
+    else element.pause();
+  }, []);
+  return { available: Boolean(url), visible: Boolean(url) && opened, playing: playing && !failed, failed, toggle };
+}
+
+/** `play()` rejection handler: autoplay blocks (NotAllowedError) and interrupted loads (AbortError) aren't failures. */
+function playFailed(onFail: () => void) {
+  return (error: unknown) => {
+    const name = error instanceof DOMException ? error.name : "";
+    if (name !== "NotAllowedError" && name !== "AbortError") onFail();
+  };
+}
+
+/** Generic floating music toggle, rendered by the invitation page next to themes without their own player. */
 export function MusicPlayer({ music, accent = "rgba(17,16,16,.72)" }: { music?: InvitationData["music"]; accent?: string }) {
-  const player = useMusic(music, { generic: true });
+  const player = useMusic(music);
   // A broken track: drop the toggle instead of offering a button that does nothing.
-  if (!player.visible || player.failed || player.ownedByTheme) return null;
+  if (!player.visible || player.failed) return null;
   return (
-    <button type="button" onClick={player.toggle} aria-pressed={player.playing} {...player.attrs} aria-label={player.playing ? "Jeda musik" : "Putar musik"}
+    <button type="button" onClick={player.toggle} aria-pressed={player.playing} aria-label={player.playing ? "Jeda musik" : "Putar musik"}
       style={{ position: "fixed", right: "max(14px, calc(50% - 215px + 14px))", bottom: 104, zIndex: 60, width: 44, height: 44, display: "grid", placeItems: "center", border: "1px solid rgba(255,255,255,.35)", borderRadius: 999, background: accent, color: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,.25)", backdropFilter: "blur(8px)", cursor: "pointer" }}>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />{!player.playing && <path d="M2 2l20 20" />}

@@ -442,6 +442,30 @@ const loaders: Record<string, () => Promise<DemoModule>> = {
   "anniversary-pertama": () => import("./anniversary-pertama/demo"),
   "lomba-catur": () => import("./lomba-catur/demo"),
   "malam-keakraban": () => import("./malam-keakraban/demo"),
+  "pasar-terapung": () => import("./pasar-terapung/demo"),
+  "lurik-klaten": () => import("./lurik-klaten/demo"),
+  "songket-aceh": () => import("./songket-aceh/demo"),
+  "danau-maninjau": () => import("./danau-maninjau/demo"),
+  "rumah-baloy": () => import("./rumah-baloy/demo"),
+  "pantai-kei": () => import("./pantai-kei/demo"),
+  "toska-syari": () => import("./toska-syari/demo"),
+  "burgundy-syari": () => import("./burgundy-syari/demo"),
+  "cintamani": () => import("./cintamani/demo"),
+  "bintang-duabelas": () => import("./bintang-duabelas/demo"),
+  "bunga-rampai": () => import("./bunga-rampai/demo"),
+  "awan-syari": () => import("./awan-syari/demo"),
+  "danau-angsa": () => import("./danau-angsa/demo"),
+  "ayunan-pohon": () => import("./ayunan-pohon/demo"),
+  "ballroom-kristal": () => import("./ballroom-kristal/demo"),
+  "film-noir": () => import("./film-noir/demo"),
+  "dermaga-kayu": () => import("./dermaga-kayu/demo"),
+  "pasar-bunga": () => import("./pasar-bunga/demo"),
+  "ultah-pilot": () => import("./ultah-pilot/demo"),
+  "ultah-sepeda": () => import("./ultah-sepeda/demo"),
+  "ultah-hutan": () => import("./ultah-hutan/demo"),
+  "gala-dinner": () => import("./gala-dinner/demo"),
+  "lomba-layangan": () => import("./lomba-layangan/demo"),
+  "khitanan-massal": () => import("./khitanan-massal/demo"),
   "khitan-ceria": () => import("./khitan-ceria/demo"),
   "aqiqah-bintang": () => import("./aqiqah-bintang/demo"),
   "ultah-balon": () => import("./ultah-balon/demo"),
@@ -451,6 +475,9 @@ const loaders: Record<string, () => Promise<DemoModule>> = {
   "wisuda-toga": () => import("./wisuda-toga/demo"),
   "tujuh-bulanan": () => import("./tujuh-bulanan/demo"),
 };
+
+/** Themes that render their own music button (the page then skips the generic <MusicPlayer>). */
+export const themesWithOwnMusic = new Set(["jawa"]);
 
 /** Theme used for invitations whose template is missing or retired. */
 export const FALLBACK_THEME = "linen-putih";

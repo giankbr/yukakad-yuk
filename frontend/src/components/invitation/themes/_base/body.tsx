@@ -56,6 +56,8 @@ export type JawiCopy = {
   giftAddressTitle?: string;
   /** Label of the wish textarea; defaults to "Ucapan & Doa". */
   wishLabel?: string;
+  /** Label of the guest-count stepper; defaults to "Jumlah tamu". */
+  guestsLabel?: string;
   /** Label above the family names in the closing; `null` hides the family line. */
   familyLabel?: string | null;
 };
@@ -306,7 +308,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
                   ))}
                 </div>
               )}
-              {!rsvpClosed && attendance !== "no" && <GuestCount label="Jumlah tamu" className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
+              {!rsvpClosed && attendance !== "no" && <GuestCount label={copy.guestsLabel ?? "Jumlah tamu"} className={s.guests} labelClassName={s.guestsLabel} buttonClassName={s.step} />}
               {!rsvpClosed && attendance !== "no" && <DietaryField className={`${s.field} ${s.diet}`} />}
               {wishes.status === "error" && <p className={s.error} role="alert">Belum terkirim. Coba lagi sebentar lagi.</p>}
               <button type="submit" className={s.submit} disabled={wishes.status === "sending"}>{wishes.status === "sending" ? "Mengirim…" : "Kirim Ucapan"}</button>
@@ -368,7 +370,7 @@ export function ThemeBody({ data, slug, guestToken, demo, s, copy = DEFAULT_COPY
       </main>
 
       {music.visible && !music.failed && (
-        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} {...music.attrs} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
+        <button type="button" className={music.playing ? `${s.music} ${s.musicOn}` : s.music} onClick={music.toggle} aria-pressed={music.playing} aria-label={music.playing ? "Matikan musik" : "Putar musik"}>
           <Lucide icon={ic.music} size={18} color={light} />
         </button>
       )}

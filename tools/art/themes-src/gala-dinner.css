@@ -1,0 +1,138 @@
+/* Gala Dinner — undangan gala dinner tahunan perusahaan bernuansa black tie: biru malam dan hitam dengan emas; sampul berupa lukisan panggung (panel latar bergaris emas, podium, meja trofi, sorot lampu yang menyapu pelan) di atas ruang meja bundar, lalu kartu program hitam berbingkai emas berisi nama perusahaan, judul acara, dan segel nomor meja untuk tamu; trofi emas sebagai lambang, susunan acara sebagai program malam, tanpa amplop; Playfair Display + Manrope. Bukan undangan pernikahan. */
+.root, .cover {
+  --bg: #0b1226; --paper: #0e1730; --ivory: #121d3b; --field: #0a1022; --ink: #f1ead9; --muted: #b7b2a6; --line: rgba(200, 162, 79, .35);
+  --accent: #c8a24f; --accent2: #e0bf6e; --gold: #c8a24f; --gold-l: #e9cf8e; --gold-d: #c8a24f;
+  --band-bg: #06080f; --band-ink: #f1ead9;
+  --navy: #14203f; --black: #06080f;
+  --display: "Playfair Display", Georgia, serif; --serif: "Manrope", system-ui, sans-serif; --script: "Playfair Display", Georgia, serif;
+  --stage: url("/themes/art/gala-dinner/stage.webp");
+  --foil: linear-gradient(100deg, #a7833a, #ecd497 32%, #c8a24f 52%, #f3e0a6 72%, #b08b41);
+  --h2: 28px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #c8a24f; --t-accent-ink: #06080f; --t-bg: #0b1226; --t-ink: #f1ead9; --t-muted: #b7b2a6; --t-line: rgba(200, 162, 79, .35); --t-field: #0a1022;
+  --t-radius: 2px; --t-font: "Manrope", system-ui, sans-serif; --t-heading-font: "Playfair Display", Georgia, serif; --t-heading-weight: 700; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: #fbf4e2; font-family: var(--display); font-weight: 700; }
+.divider { width: 160px; }
+
+/* opening */
+.salamBlock { padding: 56px 30px 60px; background: linear-gradient(var(--black), var(--bg)); }
+.salamTitle { color: #fbf4e2; font-family: var(--display); font-size: 30px; font-weight: 700; line-height: 1.2; text-wrap: balance; }
+.salamSub { color: var(--gold-l); font-family: var(--display); font-size: 18px; font-style: italic; }
+.intro { color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+/* hosts */
+.couple { background: var(--paper); }
+.person { padding: 28px 20px 26px; border: 1px solid var(--line); background: linear-gradient(160deg, #15224a, #0b1226); }
+.portrait { margin-bottom: 10px; }
+.portraitArt { position: absolute; z-index: 2; right: -34px; bottom: -6px; width: 52px; height: auto; }
+.portraitFrame { width: 120px; height: 120px; padding: 0; border: 2px solid var(--gold); border-radius: 50%; background: var(--black); box-shadow: 0 0 0 5px rgba(200, 162, 79, .14); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 54px; font-weight: 700; }
+.nick { color: #fbf4e2; font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1.2; }
+.fullName { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 600; letter-spacing: .04em; }
+.parents { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+/* countdown: black band, foil digits */
+.countBand { padding: 60px 18px; background: var(--black); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.count > div { height: 90px; border: 1px solid var(--line); border-radius: 2px; background: #0d1530; }
+.count b { color: transparent; background: var(--foil); -webkit-background-clip: text; background-clip: text; font-family: var(--display); font-size: 34px; font-weight: 700; }
+.count small { color: var(--muted); font-size: 11px; font-style: normal; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ghostBtn { border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+
+/* events: programme cards */
+.events { background: var(--bg); }
+.event { align-items: flex-start; padding: 26px 22px 24px 22px; border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 2px; background: var(--ivory); text-align: left; }
+.event::before { display: none; }
+.event:hover { border-color: var(--gold); box-shadow: 0 18px 30px rgba(0, 0, 0, .35); }
+.eventNo { position: static; display: block; translate: none; width: auto; height: auto; white-space: nowrap; padding: 0; margin-bottom: 4px; background: none; color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .28em; }
+.eventNo::before { content: "Sesi "; }
+.event h3 { color: #fbf4e2; font-family: var(--display); font-size: 22px; font-weight: 700; text-wrap: balance; }
+.eventDate { color: var(--ink); font-style: normal; font-size: 15px; font-weight: 600; }
+.eventTime { color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.rule { width: 40px; height: 2px; }
+.event strong { color: var(--ink); font-size: 16px; }
+.eventAddr { max-width: none; color: var(--muted); font-size: 14px; text-align: left; }
+.mapBtn { border-radius: 2px; background: var(--foil); color: var(--black); font-family: var(--serif); font-weight: 700; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.mapBtn:hover { background: var(--gold-l); }
+
+/* story = the evening programme */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; background: linear-gradient(var(--gold), rgba(200, 162, 79, .15)); }
+.node { width: 40px; height: 40px; border: 1px solid var(--gold); background: var(--black); }
+.node img { width: 26px; }
+.storyBody small { align-self: flex-start; padding: 3px 10px; border: 1px solid var(--gold); border-radius: 2px; color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .1em; }
+.storyBody h3 { color: #fbf4e2; font-family: var(--display); font-size: 19px; font-weight: 700; }
+.storyBody p { color: var(--muted); font-size: 15px; }
+
+/* rsvp + messages */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); box-shadow: none; }
+.field > span, .diet, .guestsLabel { color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 11px; letter-spacing: .2em; }
+.field input, .field textarea { border-color: rgba(200, 162, 79, .3); border-radius: 2px; background: var(--field); color: var(--ink); }
+.field input::placeholder, .field textarea::placeholder { color: rgba(183, 178, 166, .6); }
+.field input:focus, .field textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200, 162, 79, .18); }
+.choices button { border-color: rgba(200, 162, 79, .35); border-radius: 2px; background: var(--field); color: var(--muted); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--gold); background: var(--foil); color: var(--black); font-weight: 700; }
+.guests { color: var(--ink); }
+.step { border-radius: 2px; background: var(--field); color: var(--gold-l); }
+.step:hover { background: var(--ivory); }
+.submit { border-radius: 2px; background: var(--foil); color: var(--black); font-family: var(--serif); font-weight: 800; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--gold-l); }
+.sent { color: #fbf4e2; }
+.sentBox img { width: 70px; }
+.closed { color: var(--ink); }
+.empty { color: var(--muted); }
+.wish { border-radius: 2px; border-color: var(--line); background: var(--ivory); }
+.wish strong { color: #fbf4e2; font-family: var(--serif); font-weight: 700; font-size: 15px; }
+.wish small { background: rgba(200, 162, 79, .16); color: var(--gold-l); }
+.wish p { color: var(--muted); font-size: 15px; }
+
+/* closing: the stage again, awards on a dark plinth */
+.closing { padding: 64px 26px 58px; background: radial-gradient(ellipse 70% 40% at 50% 20%, rgba(255, 230, 170, .14), transparent 70%), linear-gradient(var(--black), #0b1226); border-top: 1px solid var(--line); }
+.closeTrophy { width: 110px; height: auto; filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .6)); }
+.thanks { color: #fbf4e2; font-family: var(--display); font-size: 34px; font-weight: 700; text-wrap: balance; }
+.closingText { color: var(--muted); }
+.closingNames { color: transparent; background: var(--foil); -webkit-background-clip: text; background-clip: text; font-family: var(--display); font-size: 24px; font-weight: 700; }
+.made { color: rgba(241, 234, 217, .45); }
+.music { border-radius: 2px; border-color: var(--gold); background: var(--black); }
+
+/* ── Cover: the stage, then the programme card ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 24px; overflow: hidden; background: var(--black); color: var(--ink); text-align: center; isolation: isolate; }
+.stageWrap { position: relative; width: 100%; height: 48dvh; min-height: 300px; overflow: hidden; background: var(--stage) 50% 0 / cover no-repeat, #0a1128; }
+.stageWrap::after { content: ""; position: absolute; inset: auto 0 0; height: 40%; background: linear-gradient(transparent, var(--black)); }
+.beam { position: absolute; top: -10%; width: 90px; height: 120%; background: linear-gradient(rgba(255, 241, 204, .22), rgba(255, 241, 204, 0) 85%); clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%); transform-origin: 50% 0; mix-blend-mode: screen; animation: sweep 7s ease-in-out infinite alternate; pointer-events: none; }
+.beamL { left: 18%; }
+.beamR { right: 18%; animation-delay: -3.5s; animation-direction: alternate-reverse; }
+.programme { position: relative; width: calc(100% - 40px); max-width: 350px; margin-top: -54px; padding: 26px 22px 22px; border: 1px solid var(--gold); background: #070a13; box-shadow: 0 0 0 4px var(--black), 0 0 0 5px rgba(200, 162, 79, .45), 0 30px 60px rgba(0, 0, 0, .6); }
+.org { color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.title { max-width: 100%; margin-top: 10px; color: #fbf4e2; font-family: var(--display); font-size: 38px; font-weight: 700; line-height: 1.06; overflow-wrap: anywhere; text-wrap: balance; }
+.sub { margin-top: 8px; color: var(--gold-l); font-family: var(--display); font-size: 17px; font-style: italic; }
+.coverDate { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .12em; }
+.coverPlace { margin-top: 4px; color: var(--muted); font-size: 13.5px; }
+.invite { display: flex; align-items: center; gap: 14px; width: calc(100% - 40px); max-width: 350px; margin-top: 18px; padding: 12px 14px; border: 1px solid var(--line); background: #0d1530; text-align: left; }
+.invite .guest { flex: 1; align-items: flex-start; max-width: none; }
+.invite .guest small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.invite .guest strong { color: #fbf4e2; font-family: var(--display); font-size: 19px; font-weight: 700; text-align: left; }
+.seal { display: grid; flex-shrink: 0; place-items: center; align-content: center; width: 66px; height: 66px; border-radius: 50%; background: var(--foil); color: var(--black); box-shadow: inset 0 0 0 3px rgba(6, 8, 15, .25), 0 6px 14px rgba(0, 0, 0, .5); }
+.seal small { font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.seal b { max-width: 60px; font-family: var(--display); font-size: 18px; line-height: 1; overflow-wrap: anywhere; }
+.openBtn { margin-top: 18px; border-radius: 2px; background: var(--foil); background-size: 200% 100%; color: var(--black); font-family: var(--serif); font-size: 13px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; box-shadow: 0 10px 24px rgba(0, 0, 0, .5); }
+.openBtn:hover { background-position: 100% 0; }
+
+/* ── Hero: awards night title with the trophy in a spotlight ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 56px 24px 52px; overflow: hidden; background: radial-gradient(ellipse 55% 42% at 50% 30%, rgba(255, 236, 190, .16), transparent 70%), linear-gradient(#06080f, #0b1226); text-align: center; isolation: isolate; }
+.hero::before { content: ""; position: absolute; z-index: -1; top: 0; left: 50%; width: 260px; height: 330px; translate: -50% 0; background: linear-gradient(rgba(255, 241, 204, .14), transparent); clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%); }
+.heroTrophy { width: 130px; height: auto; filter: drop-shadow(0 14px 22px rgba(0, 0, 0, .6)); }
+.heroOrg { margin-top: 22px; color: var(--gold-l); font-family: var(--serif); font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroTitle { max-width: 100%; margin-top: 10px; color: #fbf4e2; font-family: var(--display); font-size: 34px; font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroDate { margin-top: 12px; color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .12em; }
+.heroNote { max-width: 310px; margin-top: 16px; color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes sweep { from { rotate: -9deg; } to { rotate: 9deg; } }
+@media (max-height: 760px) { .stageWrap { height: 38dvh; min-height: 250px; } .title { font-size: 32px; } }
+@media (prefers-reduced-motion: reduce) { .beam { animation: none; } }

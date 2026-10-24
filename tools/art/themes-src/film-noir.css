@@ -1,0 +1,201 @@
+/* Film Noir — undangan bergaya film noir 1940-an hitam-putih: jalan basah berhujan di bawah lampu besi tuang, jendela berkerai menyala, siluet bertopi fedora dan mantel panjang berbagi payung; kartu judul Art Deco bergaris ganda di atas hitam, bayangan kerai melintas, cahaya lampu berkedip, hitung mundur sebagai lingkaran pita pembuka film, foto hitam-putih berbutir; Limelight + Old Standard TT. */
+.root, .cover {
+  --bg: #121213; --paper: #e9e7e1; --ivory: #f3f1ec; --field: #fbfaf7; --ink: #121213; --muted: #55555a; --line: #c9c6bf;
+  --accent: #121213; --accent2: #000; --gold: #b9b7b2; --gold-l: #efede7; --gold-d: #6b6a66;
+  --night: #121213; --char: #1d1d1f; --silver: #b9b7b2; --white: #efede7;
+  --band-bg: #0b0b0c; --band-ink: #efede7;
+  --display: Limelight, "Times New Roman", serif; --serif: "Old Standard TT", Georgia, serif; --script: Limelight, serif;
+  --deco: 0 0 0 1px var(--white), 0 0 0 5px var(--night), 0 0 0 6px var(--white);
+  --h2: 32px; --card-r: 0;
+  font-family: var(--serif); color: var(--white); background: var(--night); line-height: normal;
+}
+.root {
+  --t-accent: #efede7; --t-accent-ink: #121213; --t-bg: #121213; --t-ink: #efede7; --t-muted: #b9b7b2; --t-line: #3a3a3d; --t-field: #1d1d1f;
+  --t-radius: 0; --t-font: "Old Standard TT", Georgia, serif; --t-heading-font: Limelight, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { position: relative; background: var(--night); }
+.main::before { content: ""; position: fixed; z-index: 30; inset: 0; pointer-events: none; opacity: .07; background: repeating-radial-gradient(circle at 17% 31%, #fff 0 .6px, transparent .6px 3px), repeating-radial-gradient(circle at 71% 63%, #000 0 .7px, transparent .7px 2.6px); }
+
+.eyebrow, .salamKicker, .role { color: var(--silver); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .14em; text-transform: none; }
+.head h2, .headLight h2 { color: var(--white); font-family: var(--display); font-weight: 400; letter-spacing: .04em; line-height: 1.15; }
+.divider { display: flex; align-items: center; gap: 12px; width: 220px; }
+.divider::before, .divider::after { content: ""; flex: 1; height: 5px; border-top: 1px solid var(--silver); border-bottom: 1px solid var(--silver); }
+.divider img { width: 54px; height: auto; filter: invert(1) brightness(.92); }
+.intro { color: var(--silver); font-size: 17px; }
+
+/* opening: an intertitle card, white double rule on black */
+.salamBlock { position: relative; margin: 44px 22px 56px; padding: 40px 24px 38px; background: var(--night); box-shadow: var(--deco); }
+.salamBlock::before, .salamBlock::after { content: ""; position: absolute; width: 26px; height: 26px; border: 1px solid var(--white); }
+.salamBlock::before { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.salamBlock::after { right: 10px; bottom: 10px; border-left: 0; border-top: 0; }
+.salamKicker { color: var(--silver); }
+.salamTitle { color: var(--white); font-family: var(--display); font-size: 34px; letter-spacing: .03em; }
+.intro { font-style: italic; }
+
+/* couple: two film stills on silver paper, the blinds' shadow falling across */
+.couple { gap: 20px; overflow: hidden; background: var(--paper); color: var(--ink); isolation: isolate; }
+.couple .head h2, .couple .nick { color: var(--ink); }
+.couple .eyebrow, .couple .role { color: var(--muted); }
+.couple .divider::before, .couple .divider::after { border-color: var(--ink); }
+.couple .divider img { filter: none; }
+.couple::before { content: ""; position: absolute; z-index: -1; top: -40px; right: -170px; width: 560px; height: 500px; background: url(/themes/art/film-noir/blinds.webp) 0 0 / 100% auto no-repeat; filter: invert(1); mix-blend-mode: multiply; opacity: .45; animation: fnBlinds 24s ease-in-out infinite alternate; pointer-events: none; }
+.portraitFrame { width: 220px; height: 280px; padding: 0; border: 8px solid var(--field); border-bottom-width: 34px; border-radius: 0; background: #ccc; box-shadow: 0 16px 30px rgba(0, 0, 0, .3); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 0; filter: grayscale(1) contrast(1.15) brightness(.95); }
+.person:nth-of-type(1) .portraitFrame { rotate: -1.5deg; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--night); color: var(--white); font-family: var(--display); font-size: 84px; }
+.nick { font-family: var(--display); font-size: 42px; font-weight: 400; letter-spacing: .03em; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 19px; font-style: italic; }
+.parents { color: var(--muted); }
+.amp { color: var(--ink); font-family: var(--display); font-size: 46px; }
+.amp img { width: 44px; }
+
+/* countdown: film-leader circles */
+.countBand { padding: 66px 16px 70px; background: radial-gradient(ellipse at 50% 0%, #2c2c2f, var(--band-bg) 70%); }
+.countGlow { position: absolute; z-index: -1; top: -70px; left: 50%; width: 300px; height: auto; translate: -50% 0; opacity: .5; animation: fnFlicker 7s steps(1) infinite; }
+.headLight .eyebrow { color: var(--silver); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: auto; aspect-ratio: 1; border: 1.5px solid var(--white); border-radius: 50%; background: radial-gradient(circle, transparent 0 56%, rgba(239, 237, 231, .5) 56% 57.5%, transparent 57.5%), linear-gradient(var(--white), var(--white)) 50% 0 / 1px 100% no-repeat, linear-gradient(var(--white), var(--white)) 0 50% / 100% 1px no-repeat, #1a1a1c; }
+.count > div::after { display: none; }
+.count b { position: relative; padding: 0 4px; background: #1a1a1c; color: var(--white); font-family: var(--display); font-size: 26px; font-weight: 400; line-height: 1; }
+.count small { position: relative; padding: 0 3px; background: #1a1a1c; color: var(--silver); font-size: 11px; font-style: italic; }
+.countTba { color: var(--white); font-family: var(--display); }
+.ghostBtn { border: 1px solid var(--white); border-radius: 0; color: var(--white); font-family: var(--serif); font-size: 14px; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 0 0 3px var(--band-bg), 0 0 0 4px rgba(239, 237, 231, .5); }
+
+/* events: title cards */
+.events { gap: 34px; background: var(--night); }
+.event { padding: 40px 22px 28px; border: 0; background: var(--char); box-shadow: var(--deco); }
+.event::before { inset: 10px; border: 1px solid rgba(239, 237, 231, .25); border-radius: 0; }
+.eventNo { top: -15px; display: flex; align-items: center; gap: .3em; width: auto; height: 30px; padding: 0 14px; border-radius: 0; background: var(--white); color: var(--night); font-family: var(--display); font-size: 13px; letter-spacing: .1em; white-space: nowrap; }
+.eventNo::before { content: "Adegan"; }
+.event h3 { color: var(--white); font-family: var(--display); font-size: 24px; letter-spacing: .03em; }
+.eventDate { color: var(--white); }
+.eventTime { color: var(--silver); font-family: var(--serif); }
+.rule { width: 70px; height: 5px; background: none; border-top: 1px solid var(--silver); border-bottom: 1px solid var(--silver); }
+.event strong { color: var(--white); font-weight: 700; }
+.eventAddr { color: var(--silver); }
+.mapBtn { border-radius: 0; background: var(--white); color: var(--night); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; box-shadow: none; }
+.mapBtn:hover { background: #fff; box-shadow: 0 0 0 3px var(--char), 0 0 0 4px var(--white); }
+
+/* story: scenes in a script */
+.story { background: var(--paper); color: var(--ink); }
+.story .head h2 { color: var(--ink); }
+.story .eyebrow { color: var(--muted); }
+.story .divider::before, .story .divider::after { border-color: var(--ink); }
+.story .divider img { filter: none; }
+.timeline::before { left: 21px; width: 1px; background: var(--ink); }
+.node { width: 44px; height: 44px; border: 1px solid var(--ink); background: var(--night); }
+.node img { width: 32px; filter: invert(1); }
+.storyBody { padding: 14px 16px; background: var(--field); box-shadow: 0 0 0 1px var(--ink), 4px 4px 0 var(--ink); }
+.storyBody small { color: var(--muted); font-family: var(--serif); font-size: 13px; font-style: italic; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; letter-spacing: .02em; }
+.storyBody p { color: #38383c; }
+
+/* gallery: black-and-white stills */
+.gallery { background: var(--night); }
+.mosaic { gap: 6px; }
+.tile, .tile:first-child { border-radius: 0; filter: grayscale(1) contrast(1.15); box-shadow: 0 0 0 1px rgba(239, 237, 231, .35); }
+.tile:hover { filter: grayscale(1) contrast(1.25) brightness(1.06); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes: typed on silver paper */
+.wishes { background: var(--paper); color: var(--ink); }
+.wishes .head h2 { color: var(--ink); }
+.wishes .eyebrow { color: var(--muted); }
+.wishes .divider::before, .wishes .divider::after { border-color: var(--ink); }
+.wishes .divider img { filter: none; }
+.form { border: 1px solid var(--ink); border-radius: 0; background: var(--field); box-shadow: 6px 6px 0 var(--ink); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 0; border-color: #9a9892; color: var(--ink); background: #fff; }
+.field input:focus, .field textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(18, 18, 19, .12); }
+.choices button { border-radius: 0; border-color: #9a9892; color: var(--ink); background: #fff; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--white); }
+.guests { color: var(--ink); }
+.step { border-radius: 0; border-color: var(--ink); color: var(--ink); background: #fff; }
+.submit { border-radius: 0; background: var(--ink); color: var(--white); font-family: var(--display); font-size: 15px; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: #000; }
+.closed { border-color: var(--ink); color: var(--ink); }
+.closed p { color: var(--muted); }
+.empty { color: var(--muted); }
+.wish { border: 0; border-radius: 0; background: var(--field); box-shadow: 0 0 0 1px #9a9892; }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .02em; }
+.wish small { border-radius: 0; background: var(--ink); color: var(--white); }
+.wish p { color: #38383c; }
+.sentBox img { width: 90px; }
+.sent { color: var(--ink); }
+.sentNote { color: var(--muted); }
+
+/* gifts: title cards */
+.gifts { background: var(--night); }
+.gift { border-radius: 0; background: var(--char); box-shadow: var(--deco); }
+.gift::after { display: none; }
+.giftIcon { border: 1px solid var(--white); border-radius: 0; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.gift h3 { color: var(--white); font-family: var(--display); font-size: 18px; letter-spacing: .06em; }
+.giftNo { font-family: var(--serif); font-size: 22px; font-weight: 700; letter-spacing: .08em; }
+.gifts .gift:last-of-type .giftNo { font-size: 16px; font-weight: 400; letter-spacing: 0; line-height: 1.5; }
+.gift small { color: var(--silver); }
+.copy { border-radius: 0; border-color: var(--white); color: var(--white); font-family: var(--serif); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--white); color: var(--night); }
+
+/* closing: TAMAT — the couple under the lamp */
+.closing { padding: 0 26px 56px; background: radial-gradient(ellipse at 50% 18%, #3a3a3d 0, var(--band-bg) 60%); }
+.closingScene { position: relative; display: grid; place-items: end center; width: 100%; height: 300px; margin-bottom: 8px; }
+.closingScene .cGlow { position: absolute; top: 0; left: 50%; width: 320px; height: auto; translate: -50% 0; opacity: .5; animation: fnFlicker 7s steps(1) infinite; }
+.closingScene .cCouple { position: relative; width: 150px; height: auto; filter: drop-shadow(0 10px 0 rgba(0, 0, 0, .5)); }
+.endCard { padding: 6px 18px; color: var(--white); font-family: var(--display); font-size: 15px; letter-spacing: .4em; box-shadow: var(--deco); }
+.thanks { margin-top: 18px; color: var(--white); font-family: var(--display); font-size: 42px; letter-spacing: .03em; }
+.closingText { color: var(--silver); font-style: italic; }
+.closingSalam { color: var(--white); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .04em; }
+.family { color: var(--silver); font-family: var(--serif); }
+.closingNames { color: var(--white); font-family: var(--display); font-size: 30px; letter-spacing: .04em; }
+.made { color: rgba(239, 237, 231, .5); }
+.music { border: 1px solid var(--white); border-radius: 0; background: var(--night); box-shadow: 0 0 0 3px var(--night), 0 0 0 4px var(--white); }
+
+/* ── Cover: the rainy street, a deco title card above, credits below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 30px 20px 26px; overflow: hidden; background: var(--night); color: var(--white); text-align: center; isolation: isolate; }
+.sceneBox { position: absolute; z-index: -3; top: 9%; left: 50%; translate: -50% 0; height: 100%; min-width: 100%; aspect-ratio: 760 / 1560; }
+.sceneBox > img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.lampGlow { position: absolute; z-index: 1; left: 19.7%; top: 28.2%; width: 70%; height: auto; translate: -50% -50%; mix-blend-mode: screen; opacity: .7; animation: fnFlicker 7s steps(1) infinite; }
+.coverBlinds { position: absolute; z-index: -2; top: -6%; left: -30%; width: 150%; max-width: none; height: auto; opacity: .16; mix-blend-mode: screen; animation: fnBlinds 24s ease-in-out infinite alternate; }
+.cover::after { content: ""; position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(10, 10, 11, .55), transparent 34%, transparent 60%, rgba(10, 10, 11, .75) 82%); }
+.titleCard { position: relative; width: 100%; max-width: 330px; padding: 20px 16px 18px; background: rgba(12, 12, 13, .8); box-shadow: var(--deco); }
+.titleCard::before, .titleCard::after { content: ""; position: absolute; left: 50%; width: 46px; height: 12px; translate: -50% 0; background: linear-gradient(var(--white), var(--white)) 50% 50% / 100% 1px no-repeat; }
+.titleCard::before { top: 8px; }
+.titleCard::after { bottom: 8px; }
+.presents { color: var(--silver); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .06em; }
+.names { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 6px; color: var(--white); font-family: var(--display); font-size: 48px; line-height: 1.02; letter-spacing: .03em; overflow-wrap: anywhere; }
+.names em { margin: 4px 0; font-family: var(--serif); font-size: 24px; font-style: italic; }
+.coverDate { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 12px; color: var(--white); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .1em; white-space: nowrap; text-transform: uppercase; }
+.coverDate::before, .coverDate::after { content: ""; width: 18px; height: 5px; border-top: 1px solid var(--silver); border-bottom: 1px solid var(--silver); }
+.spacer { flex: 1 0 230px; }
+.credits { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; max-width: 330px; }
+.guest small { color: var(--silver); font-family: var(--serif); font-size: 14px; font-style: italic; }
+.guest strong { color: var(--white); font-family: var(--display); font-size: 22px; letter-spacing: .03em; text-shadow: 0 2px 8px #000; }
+.table { border: 1px solid var(--white); border-radius: 0; color: var(--white); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+.openBtn { width: 100%; max-width: 280px; border-radius: 0; background: var(--white); color: var(--night); font-family: var(--display); font-size: 16px; letter-spacing: .12em; box-shadow: 0 0 0 4px var(--night), 0 0 0 5px var(--white); }
+.openBtn:hover { background: #fff; }
+
+/* ── Hero: opening still ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 50px 22px 40px; overflow: hidden; background: var(--night); text-align: center; isolation: isolate; }
+.heroBlinds { position: absolute; z-index: -1; top: -60px; left: -120px; width: 620px; max-width: none; height: auto; opacity: .2; mix-blend-mode: screen; animation: fnBlinds 24s ease-in-out infinite alternate; }
+.heroKicker { color: var(--silver); font-family: var(--serif); font-size: 14px; font-style: italic; letter-spacing: .08em; }
+.heroNames { max-width: 100%; margin-top: 8px; color: var(--white); font-family: var(--display); font-size: 44px; line-height: 1.05; letter-spacing: .03em; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { font-family: var(--serif); font-size: .6em; font-style: italic; }
+.heroDate { margin-top: 10px; color: var(--silver); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.still { position: relative; width: 100%; max-width: 340px; margin-top: 26px; padding: 8px; background: var(--night); box-shadow: var(--deco); }
+.heroPhoto { display: grid; height: 240px; overflow: hidden; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.2); cursor: zoom-in; }
+.stillCap { position: absolute; left: 50%; bottom: -14px; translate: -50% 0; padding: 4px 12px; background: var(--white); color: var(--night); font-family: var(--display); font-size: 12px; letter-spacing: .14em; white-space: nowrap; }
+.heroNote { max-width: 320px; margin-top: 30px; color: var(--silver); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes fnFlicker { 0%, 100% { opacity: .7; } 41% { opacity: .7; } 42% { opacity: .35; } 43% { opacity: .72; } 44% { opacity: .45; } 45% { opacity: .7; } 78% { opacity: .62; } }
+@keyframes fnBlinds { from { translate: 0 0; } to { translate: -18px 10px; } }
+@media (prefers-reduced-motion: reduce) {
+  .lampGlow, .coverBlinds, .heroBlinds, .couple::before, .countGlow, .closingScene .cGlow { animation: none; }
+}
+@media (max-width: 370px) {
+  .names { font-size: 42px; }
+}

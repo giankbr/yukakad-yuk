@@ -1,0 +1,179 @@
+/* Danau Maninjau — Danau Maninjau dari Kelok 44 dalam cat air di kertas: dinding kawah hijau berlapis kabut, danau biru ultramarin dengan keramba, sawah dan rumah gadang bergonjong di tepi air, jalan berkelok di lereng depan; kartu tamu berupa rambu petunjuk jalan hijau, hitung mundur di patok kelok putih bertopi merah, alur kisah sebagai jalan aspal bergaris; Vollkorn + Mulish. */
+
+.root, .cover {
+  font-variant-numeric: lining-nums;
+  --bg: #f6f1e6; --paper: #ece5d6; --ivory: #fffcf5; --field: #fffdf8; --ink: #17334f; --muted: #4f5d66; --line: #d9d0bd;
+  --accent: #2a5f8f; --accent2: #1f4e78; --gold: #c9962f; --gold-l: #f3dc9a; --gold-d: #8a6220;
+  --lake: #2a5f8f; --lake-d: #173f6a; --sign: #11603f; --sign-d: #0b4a30; --post: #c0392b; --road: #9a9384; --green: #4f8a4a; --clay: #a85e38;
+  --band-bg: #173f6a; --band-ink: #fbf7ee;
+  --display: Vollkorn, Georgia, serif; --serif: Mulish, system-ui, sans-serif; --script: Vollkorn, Georgia, serif;
+  --h2: 34px; --card-r: 6px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2a5f8f; --t-accent-ink: #fffcf5; --t-bg: #f6f1e6; --t-ink: #17334f; --t-muted: #4f5d66; --t-line: #d9d0bd; --t-field: #fffdf8;
+  --t-radius: 6px; --t-font: Mulish, system-ui, sans-serif; --t-heading-font: Vollkorn, Georgia, serif; --t-heading-weight: 600; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) radial-gradient(rgba(23, 51, 79, .035) 1px, transparent 1.4px) 0 0 / 5px 5px; }
+
+.eyebrow, .salamKicker, .role { color: var(--lake); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-weight: 600; letter-spacing: -.01em; line-height: 1.1; }
+.divider { width: 196px; height: auto; margin-top: 4px; }
+.intro { color: var(--muted); font-size: 16.5px; }
+
+/* opening: a calm lakeside note with the road sweeping under it */
+.salamBlock { padding: 46px 28px 56px; }
+.arabic { color: var(--ink); font-size: 27px; }
+.salamKicker { color: var(--green); }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 38px; font-style: italic; font-weight: 500; line-height: 1.1; }
+
+/* couple: two postcards pinned slightly askew, a padi sprig tucked at a corner */
+.couple { gap: 22px; background: linear-gradient(180deg, var(--paper), #e3ebe9); }
+.person { gap: 3px; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 214px; height: 270px; padding: 9px 9px 34px; border: 0; border-radius: 3px; background: var(--ivory); box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 14px 28px rgba(23, 51, 79, .18); rotate: -2.2deg; transition: rotate .9s var(--m-ease), box-shadow .9s var(--m-ease); }
+.personWrap:nth-child(3) .portraitFrame { rotate: 2deg; }
+.person:hover .portraitFrame { rotate: 0deg; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 1px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--lake); color: var(--ivory); font-family: var(--display); font-size: 90px; }
+.pSprig { position: absolute; z-index: 2; right: -26px; bottom: -6px; width: 64px; height: auto; rotate: 14deg; }
+.personWrap:nth-child(3) .pSprig { right: auto; left: -26px; scale: -1 1; rotate: -14deg; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 44px; font-weight: 600; line-height: 1.05; }
+.fullName { color: var(--lake-d); font-family: var(--display); font-size: 19px; font-style: italic; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { gap: 10px; margin: 6px 0 14px; color: var(--gold); font-family: var(--display); font-size: 52px; font-style: italic; }
+.amp img { width: 34px; }
+
+/* countdown: the lake at dusk, numbers on white kelok posts with red caps */
+.countBand { padding: 66px 18px 70px; background: linear-gradient(180deg, #1d4a72 0%, var(--lake-d) 55%, #10304f 100%); }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-linear-gradient(180deg, transparent 0 22px, rgba(255, 255, 255, .05) 22px 23px); }
+.countMist { position: absolute; z-index: -1; left: -30%; top: 36%; width: 160%; max-width: none; height: auto; opacity: .5; animation: dmDrift 34s ease-in-out infinite alternate; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); font-weight: 600; }
+.count { grid-template-columns: repeat(4, minmax(0, 70px)); gap: 12px; }
+.count > div { height: 100px; padding-top: 14px; border: 0; border-radius: 12px 12px 3px 3px; background: var(--ivory); box-shadow: 0 6px 0 rgba(0, 0, 0, .22); }
+.count > div::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 16px; background: var(--post); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 32px; font-weight: 700; font-variant-numeric: lining-nums tabular-nums; }
+.count small { color: var(--muted); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.countTba { color: var(--band-ink); }
+.ghostBtn { border: 1.5px solid rgba(251, 247, 238, .7); color: var(--band-ink); font-family: var(--serif); font-weight: 700; }
+
+/* events: kilometre-post badges, map button as a green road sign */
+.events { gap: 30px; }
+.event { align-items: flex-start; padding: 34px 22px 24px; border: 0; border-radius: 4px; background: var(--ivory); text-align: left; box-shadow: inset 6px 0 0 var(--lake), 0 10px 24px rgba(23, 51, 79, .1); }
+.event::before { display: none; }
+.eventNo { top: -16px; left: 22px; translate: 0; display: flex; align-items: center; gap: .35em; width: auto; height: 32px; padding: 0 12px; border-radius: 8px 8px 2px 2px; background: var(--ivory); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; box-shadow: inset 0 7px 0 var(--post), 0 3px 8px rgba(0, 0, 0, .12); padding-top: 6px; white-space: nowrap; }
+.eventNo::before { content: "KELOK"; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 600; text-align: left; }
+.eventDate { font-style: italic; font-family: var(--display); }
+.eventTime { color: var(--lake); font-family: var(--serif); font-weight: 700; }
+.rule { width: 100%; height: 6px; margin: 8px 0; background: repeating-linear-gradient(90deg, var(--road) 0 14px, transparent 14px 22px); border-radius: 3px; opacity: .55; }
+.eventAddr { text-align: left; }
+.mapBtn { border-radius: 6px; background: var(--sign); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .02em; box-shadow: inset 0 0 0 2px var(--sign), inset 0 0 0 3.5px rgba(255, 255, 255, .85), 0 6px 14px rgba(11, 74, 48, .25); }
+.mapBtn:hover { background: var(--sign-d); }
+
+/* story: an asphalt road with a dashed centre line */
+.story { background: linear-gradient(180deg, #e3ebe9, var(--paper)); }
+.timeline::before { left: 16px; width: 14px; border-radius: 7px; background: repeating-linear-gradient(180deg, #f6efd8 0 10px, transparent 10px 22px) 6px 0 / 2px 100% no-repeat, var(--road); }
+.node { width: 46px; height: 46px; border: 3px solid var(--ivory); background: var(--sign); box-shadow: 0 4px 10px rgba(0, 0, 0, .15); }
+.node img { width: 30px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 4px; background: var(--ivory); box-shadow: 0 8px 20px rgba(23, 51, 79, .08); }
+.storyBody small { color: var(--clay); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 22px; font-weight: 600; }
+
+/* gallery: postcards */
+.gallery { background: var(--bg); }
+.mosaic { gap: 12px; grid-auto-rows: 140px; }
+.tile, .tile:first-child { border: 7px solid var(--ivory); border-radius: 3px; box-shadow: 0 8px 18px rgba(23, 51, 79, .14); }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(5n + 5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 4px; box-shadow: inset 0 5px 0 var(--sign), 0 12px 26px rgba(23, 51, 79, .1); padding-top: 26px; }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.choices button { border-radius: 6px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--lake); background: var(--lake); color: #fff; }
+.step { border-color: var(--lake); color: var(--lake); }
+.submit { border-radius: 6px; background: var(--lake); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+.submit:not(:disabled):hover { background: var(--lake-d); }
+.wish { border: 0; border-radius: 4px; box-shadow: inset 4px 0 0 var(--green); }
+.wish strong { color: var(--ink); font-family: var(--display); font-size: 18px; font-weight: 600; }
+.wish small { background: color-mix(in srgb, var(--green) 14%, transparent); color: var(--sign); font-weight: 700; }
+.sentBox img { width: 80px; }
+.sent { color: var(--ink); font-family: var(--display); }
+
+/* gifts: green road signs with a white inner border */
+.gift { border-radius: 8px; background: var(--sign); color: #fff; box-shadow: inset 0 0 0 6px var(--sign), inset 0 0 0 8px rgba(255, 255, 255, .9), 0 10px 22px rgba(11, 74, 48, .22); }
+.gift::after { display: none; }
+.giftIcon { border: 2px solid #fff; }
+.gift h3 { color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.giftNo { font-family: var(--serif); font-size: 22px; font-weight: 800; letter-spacing: .06em; }
+.gifts .gift:last-of-type .giftNo { font-size: 16px; font-weight: 600; letter-spacing: 0; line-height: 1.5; }
+.gift small { color: rgba(255, 255, 255, .85); }
+.copy { border: 2px solid #fff; border-radius: 6px; color: #fff; font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--sign); }
+
+/* closing: the rumah gadang on the shore, then the lake */
+.closing { padding: 0 26px 56px; background: linear-gradient(180deg, var(--bg) 0 162px, #c9d9e1 168px, #3a6d99 270px, var(--lake-d) 100%); }
+.closingScene { width: calc(100% + 52px); margin: 0 -26px 10px; padding: 26px 0 0; }
+.closingScene img { display: block; width: 100%; max-width: 380px; height: auto; margin: 0 auto; }
+.thanks { color: #fff; font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 600; }
+.closingText { color: rgba(251, 247, 238, .9); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.family { color: rgba(251, 247, 238, .85); font-family: var(--serif); }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 34px; font-weight: 600; }
+.made { color: rgba(251, 247, 238, .55); }
+.music { border: 2px solid #fff; background: var(--sign); }
+
+/* ── Cover: the painted view from Kelok 44, names in the sky, a green road sign for the guest ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 34px 22px 26px; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.scene { position: absolute; z-index: -2; inset: 0; background: url(/themes/art/danau-maninjau/scene.webp) center top / cover no-repeat; transform-origin: 50% 40%; animation: dmBreath 30s ease-in-out infinite alternate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 46%; background: linear-gradient(180deg, rgba(246, 241, 230, .82) 0%, rgba(246, 241, 230, .55) 55%, rgba(246, 241, 230, 0)); }
+.coverMist { position: absolute; z-index: -1; left: -40%; top: 42%; width: 180%; max-width: none; height: auto; opacity: .75; animation: dmDrift 26s ease-in-out infinite alternate; }
+.arabicCover { color: var(--ink); font-family: Amiri, serif; font-size: 22px; line-height: 1.6; }
+.kicker { margin-top: 6px; color: var(--lake-d); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.names { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 58px; font-weight: 600; line-height: .98; letter-spacing: -.015em; overflow-wrap: anywhere; text-shadow: 0 1px 0 rgba(246, 241, 230, .8), 0 0 18px rgba(246, 241, 230, .9); }
+.names em { margin: 2px 0; color: var(--gold-d); font-size: 36px; font-weight: 500; }
+.coverDate { margin-top: 12px; padding: 6px 14px; border-radius: 999px; background: rgba(255, 252, 245, .88); color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 4px 12px rgba(23, 51, 79, .12); }
+.spacer { flex: 1 0 200px; }
+.sign { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 12px; width: 100%; max-width: 336px; padding: 16px 18px 18px; border-radius: 10px; background: var(--sign); color: #fff; text-align: left; box-shadow: inset 0 0 0 5px var(--sign), inset 0 0 0 7px #fff, 0 18px 34px rgba(0, 0, 0, .35); }
+.sign::before, .sign::after { content: ""; position: absolute; z-index: -1; bottom: -46px; width: 7px; height: 52px; background: linear-gradient(90deg, #8b8f93, #c9ccd0 50%, #7c8084); }
+.sign::before { left: 22%; }
+.sign::after { right: 22%; }
+.signRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.signRow svg { flex-shrink: 0; }
+.guest { align-items: flex-start; max-width: 100%; text-align: left; }
+.guest small { color: rgba(255, 255, 255, .88); font-family: var(--serif); font-size: 14px; font-style: normal; }
+.guest strong { color: #fff; font-family: var(--serif); font-size: 21px; font-weight: 800; line-height: 1.25; }
+.table { border: 1.5px solid #fff; color: #fff; font-family: var(--serif); font-size: 11px; font-weight: 800; }
+.openBtn { width: 100%; min-width: 0; border-radius: 6px; background: #fff; color: var(--sign-d); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 4px 0 var(--sign-d); }
+.openBtn:hover { translate: 0 -1px; background: #f2f6f2; }
+
+/* ── Hero: a postcard of the shore with a postmark ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 22px 30px; background: linear-gradient(180deg, #dfeaf0 0, var(--bg) 260px); text-align: center; }
+.heroKicker { color: var(--lake); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 10px; color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--gold-d); font-weight: 500; }
+.heroDate { margin-top: 10px; color: var(--muted); font-family: var(--display); font-size: 18px; font-style: italic; }
+.postcard { position: relative; width: 100%; max-width: 344px; margin-top: 26px; padding: 10px 10px 40px; background: var(--ivory); box-shadow: 0 16px 34px rgba(23, 51, 79, .2); rotate: -1.6deg; }
+.heroPhoto { display: grid; height: 228px; overflow: hidden; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.postLine { position: absolute; left: 14px; bottom: 12px; color: var(--muted); font-family: var(--display); font-size: 15px; font-style: italic; }
+.stamp { position: absolute; right: -10px; bottom: 6px; display: grid; place-items: center; width: 82px; height: 82px; border: 2px solid var(--clay); border-radius: 50%; color: var(--clay); font-family: var(--serif); font-size: 9.5px; font-weight: 800; letter-spacing: .14em; line-height: 1.35; text-transform: uppercase; rotate: 12deg; opacity: .85; box-shadow: inset 0 0 0 4px var(--ivory), inset 0 0 0 5.5px var(--clay); background: rgba(255, 252, 245, .6); }
+.heroRoad { width: 230px; height: auto; margin-top: 22px; }
+.heroNote { max-width: 320px; margin-top: 14px; color: var(--muted); font-family: var(--display); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+@keyframes dmDrift { from { translate: -6% 0; } to { translate: 8% -6px; } }
+@keyframes dmBreath { from { scale: 1; } to { scale: 1.045; } }
+@media (prefers-reduced-motion: reduce) {
+  .scene, .coverMist, .countMist { animation: none; }
+  .portraitFrame { transition: none; }
+}
+@media (max-width: 370px) {
+  .names { font-size: 50px; }
+  .count { gap: 8px; }
+}

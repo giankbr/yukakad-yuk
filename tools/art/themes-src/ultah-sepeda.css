@@ -1,0 +1,160 @@
+/* Ultah Sepeda — pesta ulang tahun anak bertema gowes di taman lalu lintas, dalam cat poster gouache bergaris pensil: sepeda kecil dengan helm tergantung di setang dan pita di pegangan, seikat balon yang terikat di setang (usia tertulis di balon kuning), lintasan taman dengan cone dan bendera, teman-teman bersepeda, untaian bendera segitiga, dan hitung mundur di dalam roda. Biru langit, hijau rumput, koral, kuning matahari, tosca. */
+.root, .cover {
+  --bg: #eaf6fb; --paper: #fff7e8; --ivory: #ffffff; --field: #ffffff; --ink: #233554; --muted: #4f5d78; --line: #cfdbe6;
+  --accent: #1fa4a0; --accent2: #14807d; --gold: #ffc93c; --gold-l: #fff3c9; --gold-d: #b97f0c;
+  --coral: #ff6b4a; --coral-d: #d9472c; --grape: #8f6bd6; --lime: #8fd15a; --sky: #bfe6f2; --track: #7f899e;
+  --band-bg: #8fd15a; --band-ink: #233554;
+  --display: "Lilita One", system-ui, sans-serif; --serif: "Baloo 2", system-ui, sans-serif; --script: "Lilita One", system-ui, sans-serif;
+  --h2: 32px; --card-r: 22px;
+  --sticker: 0 0 0 2.5px var(--ink), 4px 5px 0 2.5px var(--ink);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1fa4a0; --t-accent-ink: #ffffff; --t-bg: #eaf6fb; --t-ink: #233554; --t-muted: #4f5d78; --t-line: #cfdbe6; --t-field: #ffffff;
+  --t-radius: 18px; --t-font: "Baloo 2", system-ui, sans-serif; --t-heading-font: "Lilita One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--coral); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); }
+.divider { width: 190px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 58px 28px 54px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; line-height: 1.1; }
+.intro { color: var(--muted); }
+
+/* ── Celebrant: a wheel-shaped badge ── */
+.couple { gap: 12px; background: var(--paper); }
+.portrait { margin-bottom: 20px; }
+.portraitFrame { width: 196px; height: 196px; padding: 10px; border: 0; border-radius: 50%; background: repeating-conic-gradient(var(--ink) 0 2deg, transparent 2deg 30deg), radial-gradient(circle, #fff 0 60%, #3a3d4a 60.5% 72%, #fff 72.5%); box-shadow: 0 0 0 10px #3a3d4a, 0 0 0 13px var(--ink); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitFrame:has(.monogram) { background: radial-gradient(circle, var(--gold) 0 46%, #fff 46.5% 52%, transparent 52.5%), repeating-conic-gradient(#a3a9b6 0 2deg, #fff 2deg 30deg); }
+.monogram { color: var(--ink); font-family: var(--display); font-size: 74px; }
+.portraitArt { position: absolute; z-index: 2; top: -22px; right: -30px; width: 92px; height: auto; rotate: 14deg; }
+.nick { color: var(--coral); font-family: var(--display); font-size: 54px; }
+.fullName { font-weight: 800; }
+.parents { color: var(--muted); }
+.amp { color: var(--coral); font-family: var(--display); }
+.amp img { width: 48px; }
+
+/* ── Countdown: four wheels rolling on the park track ── */
+.countBand { padding: 64px 16px 70px; background: linear-gradient(var(--lime) 0, var(--lime) 50%, var(--track) 50%, var(--track) 82%, var(--lime) 82%); }
+.countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; top: 66%; height: 6px; background: repeating-linear-gradient(90deg, #fff 0 26px, transparent 26px 46px); animation: road 1.6s linear infinite; }
+.headLight .eyebrow { color: #fff; text-shadow: 0 2px 0 rgba(35, 53, 84, .35); }
+.headLight h2 { color: var(--ink); font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 80px)); gap: 8px; }
+.count > div { overflow: visible; height: 80px; border: 7px solid #3a3d4a; border-radius: 50%; background: repeating-conic-gradient(#d7dbe3 0 3deg, #fff 3deg 45deg); box-shadow: 0 0 0 2px var(--ink), 0 6px 0 2px rgba(35, 53, 84, .35); }
+.count > div::after { display: none; }
+.count b { position: relative; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--gold); color: var(--ink); font-family: var(--display); font-size: 22px; line-height: 1; }
+.count > div:nth-child(2) b { background: var(--coral); color: #fff; }
+.count > div:nth-child(3) b { background: var(--accent); color: #fff; }
+.count > div:nth-child(4) b { background: var(--grape); color: #fff; }
+.count small { position: absolute; bottom: -36px; padding: 0 8px; border-radius: 999px; background: #fff; color: var(--ink); font-family: var(--serif); font-size: 14px; font-style: normal; font-weight: 800; }
+.count { margin-bottom: 26px; }
+.countTba { color: var(--ink); }
+.ghostBtn { border: 2.5px solid var(--ink); background: var(--ink); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 3px 4px 0 var(--ink); }
+.ghostBtn:hover { background: #33496f; }
+
+/* ── Events: sticker cards with a chequered flag tab ── */
+.events { gap: 30px; }
+.event { padding: 40px 20px 26px; border: 0; border-radius: 22px; background: #fff; box-shadow: var(--sticker); }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 22px 22px 0 0; background: repeating-conic-gradient(var(--ink) 0 25%, #fff 0 50%) 0 0 / 14px 14px; }
+.event:hover { translate: 0 -3px; box-shadow: 0 0 0 2.5px var(--ink), 5px 8px 0 2.5px var(--ink); }
+.event { transition: box-shadow 400ms var(--m-spring), translate 400ms var(--m-spring), scale 300ms var(--m-spring); }
+.eventNo { top: -16px; width: 48px; height: 32px; border: 2.5px solid var(--ink); background: var(--gold); color: var(--ink); font-family: var(--display); font-size: 16px; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 27px; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--coral); font-family: var(--serif); font-weight: 800; }
+.rule { width: 80px; height: 6px; border-radius: 6px; background: repeating-linear-gradient(90deg, var(--track) 0 12px, #fff 12px 18px); box-shadow: 0 0 0 2px var(--track); }
+.event strong { font-weight: 800; }
+.mapBtn { border: 2.5px solid var(--ink); background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; box-shadow: 3px 4px 0 var(--ink); }
+.mapBtn:hover { background: var(--accent2); }
+
+/* ── Story: a little road ── */
+.story { background: var(--paper); }
+.timeline::before { left: 16px; width: 12px; border-radius: 6px; background: repeating-linear-gradient(transparent 0 6px, #fff 6px 16px) 50% 0 / 3px 100% no-repeat, var(--track); }
+.node { width: 46px; height: 34px; border: 0; background: transparent; }
+.node img { width: 44px; }
+.storyBody small { color: var(--coral); font-family: var(--display); font-size: 16px; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-family: var(--serif); font-size: 20px; font-weight: 800; }
+
+.gallery { background: transparent; }
+.tile { border-radius: 18px; box-shadow: var(--sticker); }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 22px; background: #fff; box-shadow: var(--sticker); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 14px; }
+.choices button { border-width: 2px; font-weight: 800; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--accent); color: #fff; box-shadow: 2px 3px 0 var(--ink); }
+.step { border: 2px solid var(--ink); color: var(--ink); }
+.submit { border: 2.5px solid var(--ink); background: var(--coral); color: #fff; font-family: var(--display); font-size: 18px; letter-spacing: .02em; box-shadow: 3px 4px 0 var(--ink); }
+.submit:not(:disabled):hover { background: var(--coral-d); }
+.wish { border: 2px solid var(--line); border-radius: 18px; }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 800; }
+.wish small { background: var(--gold-l); color: var(--gold-d); font-weight: 800; }
+
+/* ── Gifts ── */
+.gifts { background: transparent; }
+.gift { border-radius: 22px; background: var(--accent); box-shadow: var(--sticker); color: #fff; }
+.gift:nth-of-type(odd) { background: var(--grape); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 19px; letter-spacing: .02em; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 22px; font-weight: 800; }
+.gift small { color: rgba(255, 255, 255, .9); }
+.copy { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--ink); }
+
+/* ── Closing: back to the park ── */
+.closing { padding: 56px 24px 300px; background: linear-gradient(var(--bg), var(--sky)); color: var(--ink); }
+.closingScene { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; height: auto; }
+.closingEmblem { width: 110px; height: auto; animation: bob 3s var(--m-spring) infinite alternate; }
+.thanks { color: var(--coral); font-family: var(--display); font-size: 48px; }
+.closingText { color: var(--muted); }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 800; letter-spacing: .04em; }
+.closingNames { color: var(--ink); font-family: var(--display); font-size: 38px; }
+.made { color: rgba(35, 53, 84, .6); }
+.made:hover { color: var(--coral); }
+.music { border: 2.5px solid var(--ink); background: var(--coral); }
+
+/* ── Cover: bunting, the name on the left, a balloon bunch tied to the bike's handlebar, the park track below ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; padding: 62px 20px 26px; overflow: hidden; background: linear-gradient(var(--sky) 0, #d8f0f8 380px, var(--lime) 560px); color: var(--ink); isolation: isolate; }
+.bunting { position: absolute; z-index: 3; top: -6px; left: 50%; width: 520px; height: auto; translate: -50% 0; transform-origin: 50% 0; animation: flutter 3.4s var(--m-ease) infinite alternate; pointer-events: none; }
+.coverHead { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; max-width: 54%; }
+.kicker { padding: 5px 12px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .04em; white-space: nowrap; text-transform: uppercase; }
+.coverName { max-width: 100%; color: var(--coral); font-family: var(--display); font-size: 60px; line-height: .95; overflow-wrap: anywhere; text-shadow: 3px 3px 0 #fff, 5px 5px 0 var(--ink); }
+.ageText { color: var(--ink); font-family: var(--display); font-size: 22px; line-height: 1.1; }
+.coverDate { margin-top: 4px; padding: 4px 12px; border: 2.5px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font-family: var(--serif); font-size: 14px; font-weight: 800; box-shadow: 2px 3px 0 var(--ink); }
+.stage { position: relative; height: 196px; margin: 24px 0 70px; }
+.park { position: absolute; z-index: -1; top: 70px; left: -20px; right: -20px; height: auto; -webkit-mask: linear-gradient(#000 78%, transparent); mask: linear-gradient(#000 78%, transparent); }
+.park img { display: block; width: 100%; height: auto; }
+.bike { position: absolute; right: -14px; bottom: 0; width: 292px; }
+.bike > img { display: block; width: 100%; height: auto; }
+.balloons { position: absolute; left: calc(57% - 84px); bottom: calc(91% - 6px); width: 160px; transform-origin: 53% 98%; animation: bob 3.2s var(--m-ease) infinite alternate; }
+.balloons img { display: block; width: 100%; height: auto; }
+.balloonAge { position: absolute; left: 63.9%; top: 21.2%; translate: -50% -50%; color: #fff; font-family: var(--display); font-size: 36px; line-height: 1; text-shadow: 0 2px 0 rgba(150, 100, 0, .55); }
+.card { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 330px; margin: auto auto 0; padding: 20px 18px; border-radius: 24px; background: #fff; text-align: center; box-shadow: var(--sticker); }
+.guest small { color: var(--muted); font-size: 15px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 800; }
+.table { border: 2px solid var(--ink); color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; }
+.openBtn { border: 2.5px solid var(--ink); background: var(--coral); color: #fff; font-family: var(--display); font-size: 19px; letter-spacing: .02em; box-shadow: 3px 4px 0 var(--ink); }
+.openBtn:hover { background: var(--coral-d); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 70px 24px 44px; overflow: hidden; background: linear-gradient(var(--sky), var(--bg)); text-align: center; }
+.heroBunting { position: absolute; top: -4px; left: 50%; width: 480px; height: auto; translate: -50% 0; }
+.heroKicker { color: var(--ink); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.heroName { max-width: 100%; color: var(--coral); font-family: var(--display); font-size: 56px; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 #fff, 5px 5px 0 var(--ink); }
+.heroAge { color: var(--ink); font-family: var(--display); font-size: 24px; }
+.heroDate { color: var(--muted); font-weight: 700; }
+.heroBike { width: 280px; height: auto; margin-top: 8px; animation: roll 5s var(--m-ease) infinite alternate; }
+.heroNote { max-width: 316px; margin-top: 8px; color: var(--muted); font-size: 17px; line-height: 1.55; }
+
+@keyframes bob { from { translate: 0 0; rotate: -2deg; } to { translate: 0 -8px; rotate: 2deg; } }
+@keyframes flutter { from { rotate: -1deg; } to { rotate: 1deg; } }
+@keyframes road { to { background-position: -46px 0; } }
+@keyframes roll { from { translate: -10px 0; } to { translate: 10px 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .bunting, .balloons, .closingEmblem, .heroBike, .countBand::after { animation: none; }
+}

@@ -1,0 +1,131 @@
+/* Danau Angsa — danau tenang di pagi merah muda dalam cat air romantis: tirai daun dedalu menjuntai dari atas sampul, nama dalam huruf sambung di tengah kabut, sepasang angsa putih yang lehernya membentuk hati di danau bawah, ilalang dan bunga ekor kucing; foto dalam bingkai oval, hitung mundur di dalam riak air, bulu angsa sebagai pembatas. */
+.root, .cover {
+  --bg: #fbf5f1; --paper: #f5ece8; --ivory: #fffdfb; --field: #fffefd; --ink: #3d3a4d; --muted: #696476; --line: #e7d9d6;
+  --accent: #4f5a78; --accent2: #5f6a8a; --gold: #c49482; --gold-l: #f3d8cc; --gold-d: #96604f;
+  --band-bg: #5a6d85; --band-ink: #f9f2ef;
+  --sage: #7f9a80; --lake: #b4c7d1;
+  --display: "Gilda Display", Georgia, serif; --serif: "Lora", Georgia, serif; --script: "Pinyon Script", cursive; --label: "Tenor Sans", system-ui, sans-serif;
+  --h2: 30px; --card-r: 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #4f5a78; --t-accent-ink: #ffffff; --t-bg: #fbf5f1; --t-ink: #3d3a4d; --t-muted: #696476; --t-line: #e7d9d6; --t-field: #fffefd;
+  --t-radius: 18px; --t-font: "Lora", Georgia, serif; --t-heading-font: "Gilda Display", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 29px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 150px; }
+
+/* ── Cover: willow curtain above, names in the mist, the swans on the lake below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: linear-gradient(#fbefe9 0%, #fbf3ef 40%, #f2f1f1 70%, #e9eef0 100%); text-align: center; isolation: isolate; }
+.willowL, .willowR { position: absolute; z-index: 2; top: -14px; width: 250px; height: auto; transform-origin: 50% 0; animation: willow 8s ease-in-out infinite alternate; pointer-events: none; }
+.willowL { left: -40px; }
+.willowR { right: -40px; scale: -1 1; animation-delay: -3s; }
+.coverText { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 128px; padding: 0 24px; }
+.kicker { color: var(--gold-d); font-family: var(--label); font-size: 12.5px; letter-spacing: .34em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; margin-top: 4px; color: #3a3550; font-family: var(--script); font-size: 64px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 1px 0 rgba(255, 255, 255, .8); }
+.coverNames em { margin: -6px 0 -4px; color: var(--gold-d); font-family: var(--display); font-size: 22px; font-style: italic; }
+.feather { width: 120px; height: auto; margin: 10px 0 2px; }
+.coverDate { color: var(--accent); font-family: var(--display); font-size: 19px; letter-spacing: .06em; }
+.guestWrap { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 22px; padding: 0 24px; }
+.cover .guest small { color: var(--muted); font-size: 14.5px; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); }
+.openBtn { min-width: 210px; height: 48px; background: var(--accent); color: #fff; font-family: var(--label); font-size: 13.5px; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 10px 24px rgba(79, 90, 120, .3); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+.lake { position: relative; z-index: 1; width: 100%; margin-top: auto; padding-top: 8px; }
+.lake img { display: block; width: 100%; height: auto; }
+.lakeMist { position: absolute; inset: 22% -30% 40%; background: radial-gradient(45% 50% at 35% 50%, rgba(255, 255, 255, .75), transparent 70%), radial-gradient(35% 40% at 80% 60%, rgba(255, 255, 255, .6), transparent 70%); animation: mist 26s ease-in-out infinite alternate; pointer-events: none; }
+
+/* ── Hero: oval photo under a willow fringe ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 40px 24px 50px; overflow: hidden; background: linear-gradient(#f3e5e0, var(--bg) 70%); text-align: center; }
+.heroWillow { position: absolute; top: -10px; left: -30px; width: 200px; height: auto; opacity: .9; }
+.heroWillowR { position: absolute; top: -10px; right: -30px; width: 200px; height: auto; opacity: .9; scale: -1 1; }
+.heroPhoto { position: relative; z-index: 1; display: grid; width: 240px; height: 320px; padding: 6px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); box-shadow: 0 16px 34px rgba(79, 90, 120, .18); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.heroKicker { margin-top: 16px; color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: #3a3550; font-family: var(--script); font-size: 52px; font-weight: 400; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-family: var(--display); font-size: 22px; font-style: italic; }
+.heroDate { color: var(--accent); font-family: var(--display); font-size: 18px; }
+.heroNote { max-width: 320px; margin-top: 8px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; }
+
+.salamBlock { padding: 30px 28px 56px; }
+.salamTitle { max-width: 100%; padding: 0 10px; color: #3a3550; font-family: var(--script); font-size: 40px; line-height: 1.2; }
+
+/* couple: oval frames with reeds */
+.couple { background: var(--paper); }
+.portraitFrame { width: 200px; height: 262px; border: 1px solid var(--gold); border-radius: 50%; background: var(--ivory); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitArt { position: absolute; z-index: 2; bottom: -8px; left: -36px; width: 82px; height: auto; transform-origin: 50% 100%; animation: reed 6s ease-in-out infinite alternate; }
+.personWrap + .personWrap .portraitArt { left: auto; right: -36px; scale: -1 1; }
+.monogram { color: var(--accent); }
+.nick { color: #3a3550; font-family: var(--script); font-size: 50px; }
+.fullName { font-family: var(--display); font-size: 19px; }
+.amp { color: var(--gold-d); font-family: var(--script); font-size: 54px; }
+.amp img { width: 70px; }
+
+/* countdown: digits floating in ripples */
+.countBand { background: radial-gradient(70% 50% at 50% 0, rgba(255, 255, 255, .12), transparent 70%), linear-gradient(#5a6d85, #4c5e75); }
+.count { gap: 8px; }
+.count > div { height: 76px; border: 1px solid rgba(243, 216, 204, .7); border-radius: 50%; background: rgba(255, 255, 255, .06); overflow: visible; }
+.count > div::before { content: ""; position: absolute; inset: -6px; border: 1px solid rgba(243, 216, 204, .28); border-radius: 50%; animation: ripple 5s ease-out infinite; }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 27px; }
+.count small { color: var(--gold-l); font-family: var(--label); font-size: 10.5px; font-style: normal; letter-spacing: .1em; text-transform: uppercase; }
+.ghostBtn { font-family: var(--label); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* events */
+.events { background: var(--bg); }
+.event { padding-top: 42px; border-color: var(--line); background: linear-gradient(#f6eeeb, var(--ivory) 90px); }
+.event::before { border-color: rgba(196, 148, 130, .25); }
+.eventNo { display: block; top: 14px; width: auto; white-space: nowrap; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; }
+.eventNo::before { content: "— "; }
+.eventNo::after { content: " —"; }
+.event h3 { color: #3a3550; font-family: var(--script); font-size: 38px; line-height: 1.15; }
+.eventTime { font-family: var(--label); }
+.rule { width: 90px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.mapBtn { color: #fff; font-family: var(--label); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; box-shadow: none; }
+
+.story { background: var(--paper); }
+.node { border-color: var(--line); }
+.node img { width: 30px; rotate: -30deg; }
+.storyBody small { font-family: var(--label); }
+.storyBody h3 { font-family: var(--display); }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 22px; }
+.tile:first-child { border-radius: 999px 999px 22px 22px; }
+
+.wishes { background: var(--paper); }
+.form { border-radius: 26px; }
+.field > span, .diet, .guestsLabel { font-family: var(--label); font-size: 11.5px; }
+.field input, .field textarea { border-radius: 14px; }
+.choices button { font-family: var(--label); font-size: 13.5px; }
+.choices .choiceOn, .choices .choiceOn:hover { color: #fff; }
+.submit { color: #fff; font-family: var(--label); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.sentBox img { width: 170px; }
+.wish { border-radius: 20px; }
+.wish strong { font-family: var(--display); }
+
+.gift { border-radius: 26px; }
+.gift h3 { font-family: var(--label); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 16.5px; letter-spacing: 0; line-height: 1.5; }
+.copy { font-family: var(--label); }
+
+.closing { background: linear-gradient(#5a6d85, #46566b); }
+.closingEmblem { width: 210px; height: auto; margin-bottom: 4px; border-radius: 50%; }
+.closingSwans { display: grid; place-items: center; width: 240px; height: 150px; margin-bottom: 4px; border-radius: 50%; background: radial-gradient(closest-side, rgba(251, 245, 241, .95), rgba(251, 245, 241, .55) 70%, transparent); }
+.closingSwans img { width: 200px; height: auto; }
+.closing .thanks { color: #fff; font-family: var(--script); font-size: 54px; }
+.closingNames { color: var(--gold-l); font-family: var(--script); font-size: 40px; }
+.music { border-color: var(--gold-l); background: var(--accent); }
+
+@keyframes willow { from { rotate: -1.6deg; } to { rotate: 1.4deg; } }
+@keyframes reed { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes mist { from { translate: -8% 0; } to { translate: 8% -6px; } }
+@keyframes ripple { 0% { scale: .9; opacity: 0; } 30% { opacity: 1; } 100% { scale: 1.25; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .willowL, .willowR, .portraitArt, .lakeMist, .count > div::before { animation: none; }
+}

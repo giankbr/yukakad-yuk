@@ -1,0 +1,162 @@
+/* Pasar Bunga — kios pasar bunga yang ceria: buket besar terbungkus kertas kraft dengan tali merah, kartu nama yang diikat di bungkusnya, deretan ember seng penuh tulip, bunga matahari, krisan dan lavender, papan harga kapur, dan tenda bergaris hijau; cat air dan gouache di atas kertas. */
+.root, .cover {
+  --bg: #f7f1e6; --paper: #efe3cd; --ivory: #fffcf6; --field: #ffffff; --ink: #2e2a24; --muted: #6b6155; --line: #e3d5bd;
+  --accent: #2f5a3f; --accent2: #3f7351; --gold: #e2704b; --gold-l: #fbe3c6; --gold-d: #b8465f;
+  --slate: #2f3733; --chalk: #f4f1e8; --kraft: #c9a06c; --pink: #ef9fb2; --yel: #f5cf5a;
+  --band-bg: #2f3733; --band-ink: #f4f1e8;
+  --display: "Young Serif", Georgia, serif; --serif: "DM Sans", system-ui, sans-serif; --script: "Caveat Brush", cursive;
+  --h2: 30px; --card-r: 16px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f5a3f; --t-accent-ink: #ffffff; --t-bg: #f7f1e6; --t-ink: #2e2a24; --t-muted: #6b6155; --t-line: #e3d5bd; --t-field: #ffffff;
+  --t-radius: 14px; --t-font: "DM Sans", system-ui, sans-serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) url(/themes/art/pasar-bunga/kraft.webp) 0 0 / 320px; }
+
+.eyebrow, .role { color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: .01em; text-transform: none; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 170px; }
+.intro { color: var(--muted); }
+
+/* opening: a florist card */
+.salamBlock { margin: 34px 22px 50px; padding: 34px 24px 32px; border-radius: 6px; background: var(--ivory); box-shadow: 0 10px 26px rgba(70, 50, 30, .1); rotate: -.6deg; position: relative; }
+.salamBlock::before { content: ""; position: absolute; top: 12px; left: 50%; width: 12px; height: 12px; translate: -50% 0; border-radius: 50%; background: var(--bg); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25); }
+.salamKicker { margin-top: 10px; color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; text-transform: none; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; line-height: 1.15; text-wrap: balance; }
+
+/* couple: portraits wrapped like bouquets */
+.couple { gap: 18px; background: transparent; }
+.portrait { margin-bottom: 18px; }
+.portraitFrame { width: 200px; height: 250px; padding: 8px; border: 0; border-radius: 100px 100px 10px 10px; background: url(/themes/art/pasar-bunga/kraft.webp) 0 0 / 200px, var(--kraft); box-shadow: 0 14px 30px rgba(70, 50, 30, .18); }
+.portraitFrame { background-color: var(--kraft); background-blend-mode: multiply; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 94px 94px 6px 6px; }
+.portraitPosy { position: absolute; z-index: 2; right: -40px; bottom: -26px; width: 128px; height: auto; transform-origin: 50% 90%; animation: wiggle 5s ease-in-out infinite; }
+.personWrap:nth-child(odd) .portraitPosy { right: auto; left: -40px; scale: -1 1; }
+.monogram { color: #fff; font-family: var(--display); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.amp { color: var(--gold); font-family: var(--script); font-size: 54px; }
+.amp img { width: 70px; }
+
+/* countdown: the chalkboard under the awning */
+.countBand { padding: 84px 18px 56px; background: radial-gradient(ellipse at 30% 40%, #3b4540, var(--slate) 70%); }
+.countBand::before { content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 42px; background: url(/themes/art/pasar-bunga/awning.webp) 0 0 / auto 100% repeat-x; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .3)); }
+.headLight .eyebrow { color: var(--yel); font-family: var(--script); font-size: 24px; letter-spacing: 0; text-transform: none; }
+.headLight h2 { color: var(--chalk); font-family: var(--script); font-size: 40px; }
+.count { gap: 8px; }
+.count > div { height: 90px; border: 2px dashed rgba(244, 241, 232, .55); border-radius: 12px; background: rgba(255, 255, 255, .04); }
+.count > div::after { display: none; }
+.count b { color: var(--chalk); font-family: var(--script); font-size: 40px; font-weight: 400; line-height: 1; }
+.count small { color: var(--pink); font-family: var(--script); font-size: 18px; font-style: normal; }
+.countTba { color: var(--chalk); font-family: var(--script); font-size: 24px; }
+.ghostBtn { border: 2px solid var(--chalk); color: var(--chalk); font-family: var(--serif); font-weight: 700; letter-spacing: .02em; }
+.ghostBtn:hover { background: rgba(244, 241, 232, .1); }
+
+/* events: kraft tickets with a chalk number tag */
+.events { gap: 30px; }
+.event { padding: 40px 22px 26px; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 10px 24px rgba(70, 50, 30, .12); }
+.event::before { inset: 0 0 auto; height: 10px; border: 0; border-radius: 4px 4px 0 0; background: repeating-linear-gradient(90deg, var(--accent2) 0 18px, #f6eedd 18px 36px); }
+.events article:nth-of-type(even) { rotate: .8deg; }
+.events article:nth-of-type(odd) { rotate: -.6deg; }
+.eventNo { top: -18px; width: 58px; height: 38px; border: 3px solid #a07a4c; border-radius: 6px; background: var(--slate); color: var(--chalk); font-family: var(--script); font-size: 22px; letter-spacing: 0; rotate: -4deg; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 23px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70%; height: 0; margin: 10px 0 8px; border-top: 2px dotted var(--line); background: none; }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; box-shadow: 0 4px 0 #1f3d2a; transition: background .3s, box-shadow .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: var(--accent2); translate: 0 -2px; box-shadow: 0 6px 0 #1f3d2a; }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 3px; box-shadow: 0 1px 0 #1f3d2a; }
+
+/* story: red baker's twine */
+.story { background: transparent; }
+.timeline::before { left: 22px; width: 3px; background: repeating-linear-gradient(var(--gold-d) 0 6px, #fff 6px 10px); border-radius: 2px; }
+.node { width: 46px; height: 46px; border: 0; background: var(--ivory); box-shadow: 0 4px 10px rgba(70, 50, 30, .15); }
+.node img { width: 40px; }
+.storyBody { padding: 12px 16px 14px; border-radius: 4px; background: var(--ivory); box-shadow: 0 6px 16px rgba(70, 50, 30, .08); }
+.storyBody small { color: var(--gold-d); font-family: var(--script); font-size: 20px; letter-spacing: 0; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 20px; }
+.storyImg { border-radius: 6px; }
+
+/* gallery */
+.mosaic { gap: 10px; }
+.tile, .tile:first-child { border: 6px solid var(--ivory); border-radius: 8px; box-shadow: 0 8px 18px rgba(70, 50, 30, .14); }
+.tile:first-child { border-radius: 110px 110px 8px 8px; }
+
+/* wishes: florist gift cards */
+.wishes { background: transparent; }
+.form { border: 0; border-radius: 6px; background: var(--ivory); box-shadow: 0 10px 26px rgba(70, 50, 30, .12); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; letter-spacing: .1em; }
+.choices button { transition: background .3s, color .3s, border-color .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices button:active { scale: .93; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--pink); border-color: var(--pink); color: #4a1e2a; font-weight: 700; }
+.wish { position: relative; border: 0; border-radius: 4px; background: var(--ivory); box-shadow: 0 6px 14px rgba(70, 50, 30, .08); padding-left: 34px; }
+.wish::before { content: ""; position: absolute; left: 12px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); box-shadow: inset 0 1px 2px rgba(0, 0, 0, .3); }
+.wishList .wish:nth-child(3n + 1) { rotate: -.5deg; }
+.wishList .wish:nth-child(3n + 2) { rotate: .6deg; }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 15px; }
+.wish small { background: color-mix(in srgb, var(--pink) 35%, transparent); color: #6d2238; }
+
+/* gifts: chalkboard price boards */
+.gifts { background: transparent; }
+.gift { border: 6px solid #a07a4c; border-radius: 10px; background: radial-gradient(ellipse at 30% 30%, #3b4540, var(--slate) 75%); }
+.gift::after { display: none; }
+.giftIcon { border: 2px dashed rgba(244, 241, 232, .6); }
+.gift h3 { color: var(--yel); font-family: var(--script); font-size: 24px; letter-spacing: 0; }
+.giftNo { color: var(--chalk); font-family: var(--script); font-size: 30px; letter-spacing: .02em; line-height: 1.1; }
+.gift small { color: rgba(244, 241, 232, .8); }
+.copy { border: 2px solid var(--chalk); color: var(--chalk); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--chalk); color: var(--slate); }
+
+/* closing: back at the stall */
+.closing { padding: 82px 24px 210px; background: var(--paper) url(/themes/art/pasar-bunga/kraft.webp) 0 0 / 320px; color: var(--ink); }
+.closing::before { content: ""; position: absolute; z-index: 1; top: 0; left: 0; right: 0; height: 42px; background: url(/themes/art/pasar-bunga/awning.webp) 0 0 / auto 100% repeat-x; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .2)); }
+.closingBuckets { position: absolute; z-index: -1; left: 50%; bottom: 0; width: 112%; max-width: none; height: auto; translate: -50% 0; }
+.closingEmblem { width: 110px; height: auto; animation: wiggle 5s ease-in-out infinite; }
+.thanks { color: var(--accent); font-family: var(--display); font-size: 40px; }
+.closingText { color: var(--ink); }
+.closingSalam { color: var(--gold-d); font-family: var(--script); font-size: 22px; letter-spacing: 0; }
+.family { color: var(--muted); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: var(--accent); font-family: var(--script); font-size: 38px; }
+.made { color: var(--muted); }
+.made:hover { color: var(--accent); }
+.music { border: 2px solid var(--chalk); background: var(--slate); }
+
+/* ── Cover: a bouquet with the names on its gift card, stall buckets below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 30px 20px 0; overflow: hidden; background: var(--bg) url(/themes/art/pasar-bunga/kraft.webp) 0 0 / 320px; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; left: 50%; top: 40px; width: 520px; height: 520px; translate: -50% 0; border-radius: 50%; background: radial-gradient(circle, rgba(239, 159, 178, .32), transparent 62%); }
+.kicker { color: var(--gold-d); font-family: var(--script); font-size: 26px; line-height: 1; }
+.bouquetWrap { position: relative; width: 280px; margin-top: 4px; }
+.coverBouquet { display: block; width: 100%; height: auto; transform-origin: 50% 95%; animation: wiggle 6s ease-in-out infinite; }
+.card { position: absolute; left: 50%; top: 61%; width: 250px; padding: 14px 14px 12px; translate: -50% 0; rotate: -4deg; border-radius: 4px; background: var(--ivory); box-shadow: 0 10px 22px rgba(70, 50, 30, .28); }
+.card::before { content: ""; position: absolute; top: 9px; right: 12px; width: 9px; height: 9px; border-radius: 50%; background: #e9dcc4; box-shadow: inset 0 1px 2px rgba(0, 0, 0, .3); }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: clamp(34px, 10vw, 40px); font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: -2px 0 -6px; color: var(--gold); font-family: var(--script); font-size: 34px; font-style: normal; }
+.coverDate { margin-top: 8px; padding-top: 7px; border-top: 1.5px dotted var(--line); color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.board { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; max-width: 300px; margin-top: 52px; padding: 12px 16px 14px; border: 6px solid #a07a4c; border-radius: 10px; background: radial-gradient(ellipse at 30% 30%, #3b4540, var(--slate) 75%); color: var(--chalk); box-shadow: 0 10px 20px rgba(40, 30, 20, .25); }
+.board small { color: var(--yel); font-family: var(--script); font-size: 19px; }
+.board strong { max-width: 100%; font-family: var(--script); font-size: 27px; font-weight: 400; line-height: 1.12; overflow-wrap: anywhere; text-wrap: balance; }
+.board .table { margin-top: 6px; border: 1.5px dashed rgba(244, 241, 232, .7); color: var(--chalk); font-family: var(--serif); font-weight: 700; }
+.openBtn { position: relative; z-index: 2; margin-top: 16px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .02em; box-shadow: 0 5px 0 #1f3d2a; }
+.openBtn:hover { background: var(--accent2); translate: 0 -2px; }
+.openBtn:active { translate: 0 3px; box-shadow: 0 2px 0 #1f3d2a; }
+.coverBuckets { position: relative; z-index: 1; width: 118%; max-width: none; height: auto; margin-top: auto; margin-bottom: -4px; padding-top: 6px; }
+
+/* ── Hero: the stall front with the market photo ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0 22px 44px; text-align: center; }
+.heroAwning { align-self: stretch; height: 46px; margin: 0 -22px; background: url(/themes/art/pasar-bunga/awning.webp) 0 0 / auto 100% repeat-x; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, .2)); }
+.heroFrame { position: relative; width: 290px; margin-top: 18px; padding: 8px; border-radius: 4px; background: var(--ivory); box-shadow: 0 14px 30px rgba(70, 50, 30, .2); rotate: 1.5deg; }
+.heroPhoto { display: grid; height: 330px; overflow: hidden; border-radius: 2px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroPosy { position: absolute; left: -34px; bottom: -36px; width: 130px; height: auto; }
+.heroKicker { margin-top: 18px; color: var(--gold-d); font-family: var(--script); font-size: 26px; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-family: var(--script); font-style: normal; }
+.heroDate { color: var(--ink); font-size: 14px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; color: var(--muted); font-family: var(--script); font-size: 22px; line-height: 1.3; }
+
+@keyframes wiggle { 0%, 100% { rotate: -1.5deg; } 50% { rotate: 1.5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .coverBouquet, .portraitPosy, .closingEmblem { animation: none !important; }
+}
