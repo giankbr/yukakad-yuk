@@ -35,10 +35,11 @@ Near (big, blurred) petals are confined to the frame edges; all other petals sit
 
 ## Gallery styles (`--style`)
 
-`--style blush` (default) is the main demo above. Six more presets render 15 s, 720x1280 gallery clips
+`--style blush` (default) is the main demo above. Twelve more presets render 15 s, 720x1280 gallery clips
 to `frontend/public/rawuh/video-contoh/<slug>.mp4` + `<slug>-poster.webp` (poster at 4.9 s, names reveal):
 
-    python3 tools/video/demo_video.py --gallery                      # all six (~1.5 min)
+    python3 tools/video/demo_video.py --gallery                      # all twelve (~3 min)
+    python3 tools/video/demo_video.py --styles minang-gadang,wisuda-toga  # a subset
     python3 tools/video/demo_video.py --style navy-malam --out /tmp/x.mp4
     python3 tools/video/demo_video.py --style bali-kuning --still 1.6 4.9 10.8   # debug stills
 
@@ -50,7 +51,9 @@ to `frontend/public/rawuh/video-contoh/<slug>.mp4` + `<slug>-poster.webp` (poste
 | `ultah-ceria` | gift box, lid pops off | bunting + candy "Arka" | balloons + confetti | big "7" pop + confetti burst | ceria |
 | `navy-malam` | card flies in under stars, crescent moon, shooting star | navy art-deco frame, fan motifs | gold glitter, twinkling stars | countdown (deco tiles) | khidmat |
 | `bali-kuning` | candi bentar split gate parts, "Om Swastyastu", penjor | stepped candi-top card, kamboja, patra band | frangipani | countdown | gamelan |
-
-Gallery timeline (15 s): 0–3.2 intro · 3.2–6.3 names · 6.3–9 flip to details · 9.4–12.4 highlight ·
-12.3–15 closing, fading back to the opening frame. Large near particles stay in edge bands; everything
-else passes behind the card and text.
+| `minang-gadang` | rumah gadang (gonjong roof) rises, then sinks away | black card with gonjong top, red songket band | gold sequins | countdown | nusantara |
+| `sunda-siger` | "Sampurasun" + siger crown, melati strings drape in, mega mendung clouds drift | siger-peaked card | melati blossoms | countdown | gamelan |
+| `modern-minimal` | hairline frame draws itself, card snaps in | sharp off-white / charcoal card, DIN type | none (grain only) | countdown | romantis |
+| `watercolor-lavender` | lavender washes bleed in with wet edges, wisteria hangs | deckle-edged paper with washes | butterflies | countdown | romantis |
+| `aqiqah-bintang` | crescent-moon cradle with a sleeping star bobs, then lifts away | cloud-topped card | pastel stars + twinkles | countdown (cloud tiles) | religi |
+| `wisuda-toga` | mortarboard tossed up spinning, diploma scroll unrolls | parchment diploma with laurel + medal | gold confetti | countdown | khidmat |

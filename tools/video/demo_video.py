@@ -1782,6 +1782,11 @@ def draw_hangers(frame, hangers, t, amp=1.6, alpha=1.0, glow_flicker=False):
         ang = amp * math.sin(2 * math.pi * t * (4 + i) / GTL + i) * hg.get("sc", 1)
         img = hg["img"].rotate(ang, resample=Image.BICUBIC, center=hg["pivot"])
         a = alpha * ((0.9 + 0.1 * math.sin(2 * math.pi * t * 17 / GTL + i * 2)) if glow_flicker else 1.0)
+        if hg.get("drop"):  # drapes in at the start, pulls back up at the end (loop)
+            off = int(round(img.height * (1 - seg(t, 0.1, 1.5) + seg(t, 13.9, 14.9))))
+            if off >= img.height:
+                continue
+            img = img.crop((0, off, img.width, img.height))
         frame.alpha_composite(fade_rgba(img, a), dest=(hg["x"], 0))
 
 
@@ -2128,10 +2133,732 @@ def style_bali():
                 sprites=dict(kamboja=[kamboja_tex()]))
 
 
+# ---------------------------------------------------------------- gallery batch 2: helpers
+GF.update(
+    luminari=(SUP + "Luminari.ttf", 0), palatino=(SPL + "Palatino.ttc", 0), palatino_i=(SPL + "Palatino.ttc", 1),
+    bask_i=(SUP + "Baskerville.ttc", 5), bask=(SUP + "Baskerville.ttc", 0), bask_it=(SUP + "Baskerville.ttc", 2),
+    gill=(SUP + "GillSans.ttc", 4), gill_l=(SUP + "GillSans.ttc", 7),
+    din=(SUP + "DIN Condensed Bold.ttf", 0), hn_med=(SPL + "HelveticaNeue.ttc", 10), hn_light=(SPL + "HelveticaNeue.ttc", 7),
+    hn_ul=(SPL + "HelveticaNeue.ttc", 5), zapfino=(SUP + "Zapfino.ttf", 0), athelas=(SUP + "Athelas.ttc", 0), athelas_i=(SUP + "Athelas.ttc", 1),
+    bradley=(SUP + "Bradley Hand Bold.ttf", 0), seravek=(SUP + "Seravek.ttc", 3), seravek_l=(SUP + "Seravek.ttc", 5), seravek_li=(SUP + "Seravek.ttc", 4),
+    caslon=(SUP + "BigCaslon.ttf", 0), charter=(SUP + "Charter.ttc", 0), charter_b=(SUP + "Charter.ttc", 3), charter_i=(SUP + "Charter.ttc", 1),
+)
+RADIUS["sharp"] = 0
+
+M_LAV = [(0.0, (176, 150, 214)), (0.4, (110, 82, 156)), (0.7, (146, 116, 190)), (1.0, (96, 70, 140))]
+M_HONEY = [(0.0, (252, 206, 120)), (0.45, (232, 150, 96)), (0.75, (246, 184, 110)), (1.0, (226, 140, 90))]
+M_ROYAL = [(0.0, (52, 86, 168)), (0.45, (16, 38, 100)), (0.75, (40, 70, 148)), (1.0, (18, 40, 104))]
+
+
+def shape_poly2(kind, w, h, a):
+    x0, y0, x1, y1 = a, a, w - a, h - a
+    cx = (x0 + x1) / 2
+    us = np.linspace(0, 1, 80)
+    if kind == "gonjong":  # saddle top with horn corners (rumah gadang ridge)
+        drop = 0.10 * (x1 - x0)
+        top = [(x0 + (x1 - x0) * u, y0 + drop * (1 - abs(2 * u - 1) ** 3)) for u in us]
+        return [(x0, y1)] + top + [(x1, y1)]
+    if kind == "siger":  # crown peak in the middle of the top edge
+        pk = 0.12 * (x1 - x0)
+        top = [(x0 + (x1 - x0) * u, y0 + pk * min(1.0, abs(2 * u - 1) / 0.62) ** 1.3) for u in us]
+        return [(x0, y1)] + top + [(x1, y1)]
+    if kind == "cloud":  # scalloped top
+        amp = 0.055 * (x1 - x0)
+        top = [(x0 + (x1 - x0) * u, y0 + amp - amp * abs(math.sin(math.pi * 4 * u)) ** 0.6) for u in np.linspace(0, 1, 160)]
+        return [(x0, y1)] + top + [(x1, y1)]
+    if kind == "deckle":  # torn watercolour-paper edge
+        rng = np.random.default_rng(77)
+        pts = []
+        per = 2 * ((x1 - x0) + (y1 - y0))
+        n = int(per / 7)
+        jit = rng.normal(0, 1, n)
+        jit = np.convolve(jit, np.ones(3) / 3, mode="same") * 3.2
+        for i in range(n):
+            dpos = per * i / n
+            if dpos < x1 - x0:
+                pts.append((x0 + dpos, y0 + jit[i]))
+            elif dpos < (x1 - x0) + (y1 - y0):
+                pts.append((x1 + jit[i], y0 + dpos - (x1 - x0)))
+            elif dpos < 2 * (x1 - x0) + (y1 - y0):
+                pts.append((x1 - (dpos - (x1 - x0) - (y1 - y0)), y1 + jit[i]))
+            else:
+                pts.append((x0 + jit[i], y1 - (dpos - 2 * (x1 - x0) - (y1 - y0))))
+        return pts
+    return None
+
+
+_shape_poly1 = shape_poly
+
+
+def shape_poly(kind, w, h, a):  # noqa: F811 (extends the batch-1 shapes)
+    p = shape_poly2(kind, w, h, a)
+    return p if p is not None else _shape_poly1(kind, w, h, a)
+
+
+def songket(d, s, w, h, cell, lw):
+    lwp = max(1, int(lw * s))
+    for i in range(-int(h / cell) - 2, int(w / cell) + int(h / cell) + 2):
+        d.line([((i * cell) * s, 0), ((i * cell + h) * s, h * s)], fill=255, width=lwp)
+        d.line([((i * cell) * s, 0), ((i * cell - h) * s, h * s)], fill=255, width=lwp)
+    for gy in range(0, int(h / cell) + 2):
+        for gx in range(0, int(w / cell) + 2):
+            cx, cy = gx * cell + cell / 2, gy * cell
+            r = cell * 0.16
+            d.polygon([(cx * s, (cy - r) * s), ((cx + r) * s, cy * s), (cx * s, (cy + r) * s), ((cx - r) * s, cy * s)], fill=255)
+
+
+def pucuk_rebung(d, s, x0, x1, y, hgt, step, lw):
+    """row of tall triangles (pucuak rabuang) used on songket borders"""
+    lwp = max(1, int(lw * s))
+    x = x0
+    while x + step <= x1 + 0.1:
+        d.line([(x * s, y * s), ((x + step / 2) * s, (y - hgt) * s), ((x + step) * s, y * s)], fill=255, width=lwp)
+        d.line([((x + step / 2) * s, (y - hgt * 0.75) * s), ((x + step / 2) * s, y * s)], fill=255, width=lwp)
+        x += step
+
+
+def gonjong_roof(d, s, x0, x1, ybot, scale=1.0, fill=255, ytop=None):
+    w = x1 - x0
+    ytop = (ybot - 470 * scale) if ytop is None else ytop
+    span = ybot - ytop
+    horns = [(x0 + 0.03 * w, 0.0), (x0 + 0.27 * w, 0.24), (x0 + 0.73 * w, 0.24), (x0 + 0.97 * w, 0.0)]
+    top = []
+    for x in np.linspace(x0, x1, 160):
+        yy = min(ytop + span * (ty + 1.85 * (abs(x - hx) / w) ** 0.78) for hx, ty in horns)
+        top.append((x, min(yy, ybot - span * 0.07)))
+    poly = top + [(x1 - 0.02 * w, ybot), (x0 + 0.02 * w, ybot)]
+    d.polygon([(x * s, y * s) for x, y in poly], fill=fill)
+    return top
+
+
+def siger_crown(d, s, cx, cy, w, h, fill=255, holes=0):
+    """Sundanese siger: arched band + five peaks, cut-out dots"""
+    pts = []
+    for u in np.linspace(0, 1, 120):
+        x = cx - w / 2 + w * u
+        v = abs(2 * u - 1)
+        peaks = h * (0.95 * math.exp(-(v / 0.12) ** 2) + 0.55 * math.exp(-((v - 0.42) / 0.10) ** 2) + 0.32 * math.exp(-((v - 0.78) / 0.08) ** 2))
+        base = h * 0.18 * (1 - v ** 2)
+        pts.append((x, cy - base - peaks - h * 0.08))
+    band = [(cx - w / 2 + w * u, cy - h * 0.18 * (1 - (2 * u - 1) ** 2) + h * 0.10) for u in np.linspace(1, 0, 120)]
+    d.polygon([(x * s, y * s) for x, y in pts + band], fill=fill)
+    for u in np.linspace(0.12, 0.88, 9):
+        x = cx - w / 2 + w * u
+        y = cy - h * 0.18 * (1 - (2 * u - 1) ** 2) - h * 0.02
+        r = h * 0.035
+        d.ellipse([(x - r) * s, (y - r) * s, (x + r) * s, (y + r) * s], fill=holes)
+    for v, hh in ((0.0, 0.62), (0.42, 0.36), (-0.42, 0.36)):
+        x = cx + v * w / 2
+        y = cy - h * 0.18 - hh * h * 0.55
+        r = h * 0.06
+        d.ellipse([(x - r) * s, (y - r) * s, (x + r) * s, (y + r) * s], fill=holes)
+
+
+def star5_pts(cx, cy, ro, ri, rot=-math.pi / 2):
+    return [(cx + (ro if i % 2 == 0 else ri) * math.cos(rot + i * math.pi / 5), cy + (ro if i % 2 == 0 else ri) * math.sin(rot + i * math.pi / 5)) for i in range(10)]
+
+
+def cloud_puffs(d, s, cx, cy, sc, fill=255):
+    for dx, dy, r in ((0, 0, 60), (55, 10, 46), (-50, 14, 40), (20, -30, 44), (-20, -18, 36)):
+        d.ellipse([(cx + (dx - r) * sc) * s, (cy + (dy - r) * sc) * s, (cx + (dx + r) * sc) * s, (cy + (dy + r) * sc) * s], fill=fill)
+
+
+def wash_blob(w, h, blobs, seed, ss=1):
+    """watercolour wash: list of (cx, cy, r, rgb, strength) in design px on (w, h) -> RGBA real px with soft
+    granulated body and darker dried edge"""
+    rw, rh = R(w), R(h)
+    rng = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:rh, 0:rw].astype(np.float32) / S
+    acc = np.zeros((rh, rw, 3), np.float32)
+    aa = np.zeros((rh, rw), np.float32)
+    nz = np.asarray(Image.fromarray(rng.normal(0, 1, (rh // R(24) + 2, rw // R(24) + 2)).astype(np.float32), "F").resize((rw, rh), Image.BICUBIC))
+    gran = rng.normal(0, 1, (rh, rw)).astype(np.float32)
+    gran = np.asarray(Image.fromarray(np.uint8(np.clip(128 + gran * 40, 0, 255))).filter(ImageFilter.GaussianBlur(1.2 * S)), np.float32) / 128 - 1
+    for cx, cy, r, col, st in blobs:
+        ang = np.arctan2(yy - cy, xx - cx)
+        wob = 1 + 0.16 * np.sin(3 * ang + rng.uniform(0, 6)) + 0.08 * np.sin(7 * ang + rng.uniform(0, 6)) + 0.10 * nz
+        dd = np.sqrt((xx - cx) ** 2 + (yy - cy) ** 2) / (r * wob)
+        body = np.clip(1 - dd, 0, 1) ** 0.6
+        edge = np.exp(-((dd - 0.97) / 0.05) ** 2) * (dd < 1.05)
+        a = np.clip(body * 0.55 + edge * 0.5, 0, 1) * st * (1 + 0.12 * gran)
+        acc = acc * (1 - a[..., None]) + np.array(col, np.float32) * a[..., None]
+        aa = aa + a * (1 - aa)
+    rgb = np.where(aa[..., None] > 1e-4, acc / np.maximum(aa[..., None], 1e-4), 0)
+    return rgba_from(rgb, Image.fromarray(np.clip(aa * 255, 0, 255).astype(np.uint8)))
+
+
+# ---------------------------------------------------------------- batch 2 sprites
+def sequin_tex():
+    n = 64
+    yy, xx = np.mgrid[0:n, 0:n].astype(np.float32) - (n - 1) / 2
+    r = np.sqrt(xx ** 2 + yy ** 2) / (n / 2)
+    a = np.clip((0.95 - r) * 30, 0, 1)
+    lit = np.clip(1.1 - 0.5 * ((xx / n + 0.25) ** 2 + (yy / n + 0.25) ** 2) * 6, 0.5, 1.2)
+    rim = np.exp(-((r - 0.82) / 0.06) ** 2)
+    col = np.array((236, 194, 96), np.float32) * lit[..., None] * (1 - 0.3 * rim[..., None])
+    hole = np.clip((r - 0.14) * 30, 0, 1)
+    return Tex(rgba_from(col, Image.fromarray((a * hole * 255).astype(np.uint8))), min_w=8)
+
+
+def melati_tex():
+    n = 120
+    im = Image.new("RGBA", (n, n), (0, 0, 0, 0))
+    m = ss_mask(n, n, lambda d, s: [d.polygon([(x * s, y * s) for x, y in _oval(n / 2 + 26 * math.cos(a), n / 2 + 26 * math.sin(a), 28, 12, a, 20)], fill=255)
+                                    for a in np.linspace(0, 2 * math.pi, 6)[:-1] + 0.3], k=1.0).filter(ImageFilter.GaussianBlur(0.6))
+    yy, xx = np.mgrid[0:n, 0:n].astype(np.float32) - n / 2
+    r = np.sqrt(xx ** 2 + yy ** 2) / (n / 2)
+    col = np.stack([255 - 14 * r, 255 - 10 * r, 250 - 26 * (1 - r)], -1)
+    body = rgba_from(col, m)
+    im.alpha_composite(body)
+    paint(im, ss_mask(n, n, lambda d, s: d.ellipse([(n / 2 - 8) * s, (n / 2 - 8) * s, (n / 2 + 8) * s, (n / 2 + 8) * s], fill=255), k=1.0), (214, 220, 150))
+    return Tex(im, min_w=8)
+
+
+def butterfly_tex(c0, c1):
+    w, h = 220, 180
+    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    wings = [(-1, 62, 60, 58, 46, -0.5), (-1, 58, 120, 40, 32, 0.6), (1, 62, 60, 58, 46, 0.5), (1, 58, 120, 40, 32, -0.6)]
+    for sg, dx, cy, a, b, ang in wings:
+        cx = w / 2 + sg * dx
+        m = ss_mask(w, h, lambda d, s: d.polygon([(x * s, y * s) for x, y in _oval(cx, cy, a, b, ang, 30)], fill=255), k=1.0).filter(ImageFilter.GaussianBlur(0.8))
+        yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+        dd = np.sqrt(((xx - cx) / a) ** 2 + ((yy - cy) / b) ** 2)
+        col = np.array(c0, np.float32) * (1 - np.clip(dd, 0, 1)[..., None]) + np.array(c1, np.float32) * np.clip(dd, 0, 1)[..., None]
+        edge = np.exp(-((dd - 0.92) / 0.08) ** 2)[..., None]
+        col = col * (1 - 0.25 * edge)
+        layer = rgba_from(col, Image.fromarray((np.asarray(m, np.float32) * 0.88).astype(np.uint8)))
+        im.alpha_composite(layer)
+    paint(im, ss_mask(w, h, lambda d, s: (d.ellipse([(w / 2 - 5) * s, 40 * s, (w / 2 + 5) * s, 150 * s], fill=255),
+                                          d.line([(w / 2 * s, 44 * s), ((w / 2 - 22) * s, 14 * s)], fill=255, width=int(2 * s)),
+                                          d.line([(w / 2 * s, 44 * s), ((w / 2 + 22) * s, 14 * s)], fill=255, width=int(2 * s))), k=1.0), (70, 52, 80))
+    return Tex(im, min_w=10)
+
+
+def star5_tex(col=(255, 222, 120)):
+    n = 120
+    im = Image.new("RGBA", (n, n), (0, 0, 0, 0))
+    glow = ss_mask(n, n, lambda d, s: d.ellipse([10 * s, 10 * s, (n - 10) * s, (n - 10) * s], fill=255), ss=1, k=1.0).filter(ImageFilter.GaussianBlur(14))
+    paint(im, glow, (255, 240, 190), 0.45)
+    m = ss_mask(n, n, lambda d, s: d.polygon([(x * s, y * s) for x, y in star5_pts(n / 2, n / 2 + 3, 40, 19)], fill=255, outline=255, width=int(8 * s)), k=1.0)
+    paint(im, m.filter(ImageFilter.GaussianBlur(1.2)), col)
+    return Tex(im, min_w=8)
+
+
+# ---------------------------------------------------------------- batch 2 intro objects
+def build_gadang():
+    """rumah gadang facade: gonjong roof + red carved body on stilts (design 1400 x 1100 = 700 x 550 world)"""
+    w, h = 1400, 1100
+    rw, rh = R(w), R(h)
+    red, gold, black = (150, 26, 34), (226, 184, 96), (30, 22, 20)
+    im = Image.new("RGBA", (rw, rh), (0, 0, 0, 0))
+    roof_y = 470
+    roof = ss_mask(w, h, lambda d, s: gonjong_roof(d, s, 20, 1380, roof_y))
+    thatch = rgba_from(wood(rw, rh, 401, black, 0.25, 1.6), 255)
+    thatch.putalpha(roof)
+    im.alpha_composite(thatch)
+    topline = []
+    ss_mask(w, h, lambda d, s: topline.extend(gonjong_roof(d, s, 20, 1380, roof_y)))
+    paint(im, ss_mask(w, h, lambda d, s: (d.line([(x * s, (y + 6) * s) for x, y in topline], fill=255, width=int(7 * s)),
+                                           d.line([(40 * s, roof_y * s), (1360 * s, roof_y * s)], fill=255, width=int(6 * s)))), gold)
+    body = ss_mask(w, h, lambda d, s: d.rectangle([150 * s, roof_y * s, 1250 * s, 960 * s], fill=255))
+    bwood = rgba_from(wood(rw, rh, 402, red, 0.04, 1.2), 255)
+    bwood.putalpha(body)
+    im.alpha_composite(bwood)
+    for y0 in (roof_y + 10, 890):
+        band = ss_mask(w, h, lambda d, s: d.rectangle([150 * s, y0 * s, 1250 * s, (y0 + 60) * s], fill=255))
+        paint(im, band, black, 0.9)
+        pat = ss_mask(w, h, lambda d, s: pucuk_rebung(d, s, 160, 1240, y0 + 52, 40, 44, 1.6))
+        paint(im, pat, gold, 0.95)
+    win = ss_mask(w, h, lambda d, s: [d.rectangle([x * s, 610 * s, (x + 110) * s, 810 * s], fill=255) for x in (200, 360, 520, 770, 930, 1090)])
+    paint(im, win, (40, 16, 14))
+    paint(im, ss_mask(w, h, lambda d, s: [(d.rectangle([x * s, 610 * s, (x + 110) * s, 810 * s], outline=255, width=int(5 * s)),
+                                            d.line([((x + 55) * s, 610 * s), ((x + 55) * s, 810 * s)], fill=255, width=int(3 * s)),
+                                            d.line([(x * s, 690 * s), ((x + 110) * s, 690 * s)], fill=255, width=int(3 * s)))
+                                           for x in (200, 360, 520, 770, 930, 1090)]), gold)
+    door = ss_mask(w, h, lambda d, s: d.rectangle([660 * s, 640 * s, 740 * s, 890 * s], fill=255))
+    paint(im, door, (60, 20, 16))
+    paint(im, ss_mask(w, h, lambda d, s: d.rectangle([660 * s, 640 * s, 740 * s, 890 * s], outline=255, width=int(4 * s))), gold)
+    stilts = ss_mask(w, h, lambda d, s: [d.rectangle([x * s, 950 * s, (x + 34) * s, 1090 * s], fill=255) for x in (170, 400, 630, 740, 970, 1196)]
+                     + [d.rectangle([600 * s, (960 + i * 34) * s, 800 * s, (976 + i * 34) * s], fill=255) for i in range(4)])
+    paint(im, stilts, (50, 26, 20))
+    a = mask_max(mask_max(roof, body), stilts)
+    im.putalpha(mask_max(im.getchannel("A"), a))
+    return dict(facade=Tex(im))
+
+
+def build_cradle():
+    w, h = 520, 560
+    im = Image.new("RGBA", (R(w), R(h)), (0, 0, 0, 0))
+    cres = mask_sub(ss_mask(w, h, lambda d, s: d.ellipse([50 * s, 80 * s, 470 * s, 500 * s], fill=255)),
+                    ss_mask(w, h, lambda d, s: d.ellipse([70 * s, -40 * s, 500 * s, 380 * s], fill=255)))
+    glow = cres.filter(ImageFilter.GaussianBlur(18 * S))
+    paint(im, glow, (255, 236, 170), 0.6)
+    yy = np.linspace(0, 1, R(h))[:, None] * np.ones((1, R(w)))
+    col = gradient_stops(256, [(0, (255, 240, 170)), (1, (246, 196, 104))])[np.clip(yy * 255, 0, 255).astype(np.int32)]
+    paint(im, cres, Image.fromarray(col.astype(np.uint8)))
+    star = ss_mask(w, h, lambda d, s: d.polygon([(x * s, y * s) for x, y in star5_pts(270, 300, 92, 46, -math.pi / 2 + 0.25)], fill=255, outline=255, width=int(16 * s)))
+    paint(im, offset_mask(star, 3 * S, 6 * S).filter(ImageFilter.GaussianBlur(5 * S)), (200, 140, 60), 0.35)
+    paint(im, star, (255, 214, 96))
+    paint(im, ss_mask(w, h, lambda d, s: [d.arc([(x - 15) * s, 290 * s, (x + 15) * s, 314 * s], 20, 160, fill=255, width=int(4 * s)) for x in (246, 300)]), (120, 80, 50))
+    paint(im, ss_mask(w, h, lambda d, s: [d.ellipse([(x - 13) * s, 320 * s, (x + 13) * s, 338 * s], fill=255) for x in (226, 320)]), (246, 160, 160), 0.7)
+    paint(im, ss_mask(w, h, lambda d, s: (cloud_puffs(d, s, 140, 470, 1.0), cloud_puffs(d, s, 380, 480, 0.8))), (255, 255, 255), 0.95)
+    paint(im, ss_mask(w, h, lambda d, s: [d.polygon([(x * s, y * s) for x, y in star5_pts(cx, cy, 14, 6)], fill=255) for cx, cy in ((430, 140), (110, 200), (470, 260))]), (255, 230, 150))
+    rope = Image.new("RGBA", (R(12), R(400)), (255, 252, 246, 255))
+    return dict(cradle=Tex(im), rope=Tex(rope))
+
+
+def build_toss():
+    bw = 600
+    board = rgba_from(paper(R(bw), R(bw), (28, 30, 44), 501, 0.6), 255)
+    paint(board, ss_mask(bw, bw, lambda d, s: d.polygon([(0, 0), (bw * 0.55 * s, 0), (0, bw * 0.55 * s)], fill=255)).filter(ImageFilter.GaussianBlur(60 * S)), (110, 120, 160), 0.35)
+    paint(board, ss_mask(bw, bw, lambda d, s: d.rectangle([4 * s, 4 * s, (bw - 4) * s, (bw - 4) * s], outline=255, width=int(5 * s))), (60, 64, 84))
+    metal_text(board, ss_mask(bw, bw, lambda d, s: d.ellipse([280 * s, 280 * s, 320 * s, 320 * s], fill=255)), [(280, 320)], M_BRIGHT, sop=0)
+    cap = rgba_from(paper(R(420), R(170), (22, 24, 36), 502, 0.5), 255)
+    paint(cap, Image.linear_gradient("L").rotate(90).resize(cap.size).point(lambda v: int(abs(v - 128) * 0.9)), (0, 0, 0), 0.6)
+    cap.putalpha(ss_mask(420, 170, lambda d, s: d.polygon([(0, 0), (420 * s, 0), (395 * s, 170 * s), (25 * s, 170 * s)], fill=255)))
+    tw, th = 60, 220
+    tassel = Image.new("RGBA", (R(tw), R(th)), (0, 0, 0, 0))
+    tm = ss_mask(tw, th, lambda d, s: (d.line([(30 * s, 0), (30 * s, 130 * s)], fill=255, width=int(3 * s)),
+                                        d.polygon([(22 * s, 120 * s), (38 * s, 120 * s), (52 * s, 215 * s), (8 * s, 215 * s)], fill=255)))
+    metal_text(tassel, tm, [(0, 220)], M_BRIGHT, sop=0)
+    rl_w, rl_h = 1160, 90
+    yy = np.linspace(-1, 1, R(rl_h))[:, None] * np.ones((1, R(rl_w)))
+    sh = np.clip(1 - 0.55 * yy ** 2 + 0.25 * np.exp(-((yy + 0.4) / 0.2) ** 2), 0.3, 1.25)
+    roll = rgba_from(np.array((240, 226, 190), np.float32) * sh[..., None], 255)
+    paint(roll, ss_mask(rl_w, rl_h, lambda d, s: (d.rounded_rectangle([0, 6 * s, 50 * s, (rl_h - 6) * s], radius=14 * s, fill=255),
+                                                  d.rounded_rectangle([(rl_w - 50) * s, 6 * s, rl_w * s, (rl_h - 6) * s], radius=14 * s, fill=255))), (190, 140, 60))
+    roll.putalpha(ss_mask(rl_w, rl_h, lambda d, s: d.rounded_rectangle([0, 0, rl_w * s, rl_h * s], radius=40 * s, fill=255)))
+    return dict(board=Tex(board), cap=Tex(cap), tassel=Tex(tassel), roll=Tex(roll))
+
+
+def build_melati_strings():
+    out = []
+    w, h = 220, 760
+    im = Image.new("RGBA", (R(w), R(h)), (0, 0, 0, 0))
+    strands = [(26, 700), (70, 560), (112, 440), (150, 330), (186, 240)]
+    sm = ss_mask(w, h, lambda d, s: [d.line([(x * s, 0), ((x + 4 * math.sin(L / 90)) * s, L * s)], fill=255, width=max(1, int(1.4 * s))) for x, L in strands])
+    paint(im, sm, (150, 170, 120), 0.9)
+    for x, L in strands:
+        buds = ss_mask(w, h, lambda d, s: [d.polygon([(px * s, py * s) for px, py in star5_pts(x + 4 * math.sin(y / 90), y, 9, 4.2, -math.pi / 2 + y)], fill=255)
+                                            for y in range(24, L, 24)])
+        paint(im, offset_mask(buds, 1 * S, 2 * S).filter(ImageFilter.GaussianBlur(1.5 * S)), (90, 110, 80), 0.35)
+        paint(im, buds, (255, 254, 246))
+        paint(im, ss_mask(w, h, lambda d, s: [d.ellipse([(x + 4 * math.sin(y / 90) - 2.2) * s, (y - 2.2) * s, (x + 4 * math.sin(y / 90) + 2.2) * s, (y + 2.2) * s], fill=255) for y in range(24, L, 24)]), (226, 214, 120))
+        tip = ss_mask(w, h, lambda d, s: [d.polygon([(px * s, py * s) for px, py in _oval(x + o, L + 10, 9, 16, math.pi / 2 + o / 20)], fill=255) for o in (-8, 8)])
+        paint(im, tip, (150, 180, 120))
+    from PIL import ImageOps
+    out.append(dict(img=im, x=0, pivot=(0, 0), sc=1, drop=True))
+    out.append(dict(img=ImageOps.mirror(im), x=W - R(w), pivot=(R(w), 0), sc=-1, drop=True))
+    return out
+
+
+def build_wisteria():
+    out = []
+    w, h = 300, 420
+    rng = np.random.default_rng(611)
+    im = Image.new("RGBA", (R(w), R(h)), (0, 0, 0, 0))
+    vine = [(x, 18 + 22 * math.sin(x / 70)) for x in np.linspace(-10, w + 10, 60)]
+    paint(im, ss_mask(w, h, lambda d, s: d.line([(x * s, y * s) for x, y in vine], fill=255, width=int(4 * s))), (120, 96, 80))
+    rac = [(20, 360), (70, 300), (118, 380), (170, 250), (220, 200), (268, 140)]
+    for i, (x, L) in enumerate(rac):
+        y0 = 18 + 22 * math.sin(x / 70)
+        n = int(L / 9)
+        cols = gradient_stops(n, [(0, (120, 90, 170)), (0.5, (170, 140, 210)), (1, (222, 206, 240))])
+        for j in range(n):
+            u = j / max(1, n - 1)
+            yy = y0 + 10 + L * u
+            spread = 26 * (1 - u) ** 0.8 + 4
+            for _ in range(2):
+                px = x + rng.uniform(-spread, spread) + 6 * math.sin(yy / 40)
+                r = rng.uniform(4.5, 8.0) * (1 - 0.4 * u)
+                m = ss_mask(w, h, lambda d, s: d.ellipse([(px - r) * s, (yy - r * 0.8) * s, (px + r) * s, (yy + r * 0.8) * s], fill=255), ss=2)
+                paint(im, m, tuple(int(c) for c in cols[j]), 0.85)
+        lv = ss_mask(w, h, lambda d, s: [d.polygon([(px * s, py * s) for px, py in _oval(x + sg * 22, y0 + 8, 18, 7, sg * 0.5)], fill=255) for sg in (-1, 1)])
+        paint(im, lv, (130, 160, 110), 0.9)
+    from PIL import ImageOps
+    out.append(dict(img=im, x=0, pivot=(0, 0), sc=1))
+    out.append(dict(img=ImageOps.mirror(im), x=W - R(w), pivot=(R(w), 0), sc=-1))
+    return out
+
+
+# ---------------------------------------------------------------- batch 2 styles
+def style_minang():
+    w, h = DW_, DH_
+    red, black, gold_l, cream = (156, 28, 36), (26, 16, 16), (228, 188, 104), (246, 234, 210)
+
+    def frame(im):
+        band = mask_sub(shape_mask(w, h, "gonjong", 30), shape_mask(w, h, "gonjong", 112))
+        paint(im, band, red, 0.95)
+        pat = ss_mask(w, h, lambda d, s: songket(d, s, w, h, 40, 1.2), ss=2)
+        paint(im, Image.fromarray((np.asarray(pat, np.float32) * np.asarray(band, np.float32) / 255).astype(np.uint8)), gold_l, 0.7)
+        paint(im, ring_mask(w, h, "gonjong", 24, 4.5), gold_l)
+        paint(im, ring_mask(w, h, "gonjong", 112, 2.2), gold_l)
+        paint(im, ring_mask(w, h, "gonjong", 122, 1.0), gold_l, 0.7)
+        pr = ss_mask(w, h, lambda d, s: pucuk_rebung(d, s, 140, w - 140, h - 140, 70, 50, 1.6))
+        paint(im, pr, gold_l, 0.6)
+
+    front, fa = card_canvas(black, 181, "gonjong", 0.9)
+    frame(front)
+    roof = ss_mask(w, h, lambda d, s: gonjong_roof(d, s, w / 2 - 150, w / 2 + 150, 340, ytop=210))
+    metal_text(front, roof, [(230, 330)], M_BRIGHT, sop=0.4)
+    paint(front, ss_mask(w, h, lambda d, s: (ornament(d, s, w / 2, 492, 140), ornament(d, s, w / 2, 1080, 200, gap=18, dia=8))), gold_l)
+    names = lines_onto(front, w, h, [(450, "BARALEK GADANG", "palatino", 28, gold_l, 10), (700, "Puti", "luminari", 190, ("metal", M_BRIGHT, (560, 710))),
+                                     (820, "&", "luminari", 96, (214, 90, 90)), (990, "Rangga", "luminari", 170, ("metal", M_BRIGHT, (860, 1000))),
+                                     (1172, "17 · 07 · 2027", "palatino", 48, cream, 4), (1236, "TANAH DATAR", "palatino", 24, cream, 10, 0.75)])
+    back, ba = card_canvas(black, 182, "gonjong", 0.9)
+    frame(back)
+    paint(back, ss_mask(w, h, lambda d, s: (ornament(d, s, w / 2, 340, 150), ornament(d, s, w / 2, 730, 90, gap=12, dia=6, lw=1.6, dots=False))), gold_l)
+    lines_onto(back, w, h, [(300, "AKAD NIKAH & BARALEK", "palatino", 26, gold_l, 8), (480, "Sabtu, 17 Juli 2027", "palatino", 64, cream),
+                            (570, "Rumah Gadang Pagaruyung,", "palatino_i", 46, gold_l), (630, "Tanah Datar", "palatino_i", 46, gold_l)])
+    panel(back, w, h, 850, 1280, (110, 20, 26), 0.6, gold_l)
+    guest_block(back, w, h, "palatino", gold_l, "palatino_i", cream, gold_l, "palatino_i", cream, cap_size=26, name_size=58)
+
+    bg = grad_bg((96, 16, 22), (18, 8, 8), (150, 40, 40), 0.45, 0.38)
+    overlay_pattern(bg, lambda d, s: songket(d, s, 720, 1280, 54, 1.0), (226, 180, 96), 0.06)
+    overlay_pattern(bg, lambda d, s: (pucuk_rebung(d, s, 0, 720, 1280, 90, 60, 1.4), pucuk_rebung(d, s, 0, 720, 96, 70, 46, 1.2)), (226, 180, 96), 0.12)
+    cd = dict(head=[(565, "Menanti hari baik", "luminari", 58, ("metal", M_BRIGHT, (515, 575))), (612, "SABTU, 17 JULI 2027", "palatino", 15, gold_l, 6)],
+              head_extra=lambda im: metal_text(im, ss_mask(720, 1280, lambda d, s: gonjong_roof(d, s, 310, 410, 494, ytop=450)), [(450, 494)], M_BRIGHT, sop=0),
+              foot=[(975, "Puti & Rangga", "palatino_i", 30, gold_l)], foot_extra=lambda im: orn_layer(im, lambda d, s: ornament(d, s, 360, 918, 150, gap=14, dia=6, lw=1.2), gold_l),
+              tile=dict(shape="rect", fill=(30, 18, 18), grain=0.9, border=(228, 188, 104), accent=(196, 40, 48), num_font="palatino", num_col=cream,
+                        lab_font="palatino", lab_col=gold_l, shadow=(0, 0, 0), shadow_op=0.5),
+              start=(266, 9, 12, 3))
+    closing = closing_layer([(1240, "Tarimo kasih", "luminari", 150, ("metal", M_BRIGHT, (1110, 1250))),
+                             (1350, "atas doa dan kehadiran dunsanak", "palatino_i", 46, cream), (1540, "PUTI & RANGGA", "palatino", 30, gold_l, 14)], cream)
+    return dict(front=finish(front, fa), names=names, back=finish(back, ba), bg=bg, cd=cd, closing=closing,
+                bokeh=((255, 210, 130), (220, 60, 60), (255, 236, 190)), bokeh_a=(0.06, 0.18), vig=((0, 0, 0), 0.4),
+                intro="roof", sparkle=True,
+                parts=[("sequin", gen_parts(281, 56, 2.4, 13.0, "sequin", 1, (12, 18), dur_near=4.5, dur_far=8.0, tumble=1.8))],
+                sprites=dict(sequin=[sequin_tex()]))
+
+
+def build_mega_mendung():
+    m = 120
+    w, h = 720 + 2 * m, 1280 + 2 * m
+    im = Image.new("RGBA", (R(w), R(h)), (0, 0, 0, 0))
+    clouds = [(200, 260, 1.0), (640, 520, 0.8), (260, 1150, 1.15), (760, 1330, 0.9), (120, 760, 0.6)]
+    cols = [(126, 162, 132), (150, 184, 154), (176, 206, 178), (202, 226, 202), (226, 240, 224)]
+    for cx, cy, sc in clouds:
+        circles = [(-120, 20, 70), (-50, -30, 80), (40, -40, 84), (120, 0, 66), (180, 40, 44), (-180, 50, 44), (0, 40, 70)]
+        for k, col in enumerate(cols):
+            mk = ss_mask(w, h, lambda d, s: [d.ellipse([(cx + (dx - (r - k * 11)) * sc) * s, (cy + (dy - (r - k * 11)) * sc) * s,
+                                                        (cx + (dx + (r - k * 11)) * sc) * s, (cy + (dy + (r - k * 11)) * sc) * s], fill=255)
+                                             for dx, dy, r in circles if r - k * 11 > 4], ss=2)
+            paint(im, mk, col, 0.30)
+        outline = ss_mask(w, h, lambda d, s: [d.ellipse([(cx + (dx - r) * sc) * s, (cy + (dy - r) * sc) * s, (cx + (dx + r) * sc) * s, (cy + (dy + r) * sc) * s], outline=255, width=max(1, int(1.4 * s)))
+                                              for dx, dy, r in circles], ss=2)
+        paint(im, outline, (196, 160, 80), 0.18)
+    return im.convert("RGBa"), R(m)
+
+
+def style_sunda():
+    w, h = DW_, DH_
+    green, gold_l, ink = (60, 104, 72), (196, 156, 70), (40, 70, 52)
+    front, fa = card_canvas((246, 248, 238), 191, "siger", 0.6)
+
+    def frame(im):
+        paint(im, vgrad(im.size, 0.18), (200, 224, 196), 1.0)
+        paint(im, ring_mask(w, h, "siger", 24, 4), gold_l)
+        paint(im, ring_mask(w, h, "siger", 42, 1.4), gold_l, 0.8)
+        paint(im, ss_mask(w, h, lambda d, s: [d.line([(x * s, (h - 70) * s), ((x + 30) * s, (h - 100) * s)], fill=255, width=int(1.4 * s)) for x in range(90, w - 120, 30)]), green, 0.25)
+
+    frame(front)
+    cm = ss_mask(w, h, lambda d, s: siger_crown(d, s, w / 2, 310, 300, 170))
+    paint(front, offset_mask(cm, 2 * S, 5 * S).filter(ImageFilter.GaussianBlur(4 * S)), (90, 70, 30), 0.3)
+    metal_text(front, cm, [(150, 330)], M_GOLD, sop=0)
+    paint(front, ss_mask(w, h, lambda d, s: (ornament(d, s, w / 2, 470, 140), ornament(d, s, w / 2, 1080, 200, gap=18, dia=8))), gold_l)
+    names = lines_onto(front, w, h, [(430, "KAWINAN", "gill", 28, green, 14), (690, "Sinta", "bask_i", 180, ("metal", M_GOLD, (560, 700))),
+                                     (800, "&", "bask_it", 90, green), (970, "Asep", "bask_i", 180, ("metal", M_GOLD, (840, 980))),
+                                     (1170, "22 · 08 · 2027", "gill_l", 46, ink, 5), (1236, "BANDUNG", "gill", 24, ink, 12, 0.75)])
+    back, ba = card_canvas((246, 248, 238), 192, "siger", 0.6)
+    frame(back)
+    metal_text(back, ss_mask(w, h, lambda d, s: siger_crown(d, s, w / 2, 250, 200, 110)), [(140, 260)], M_GOLD, sop=0)
+    paint(back, ss_mask(w, h, lambda d, s: (ornament(d, s, w / 2, 380, 150), ornament(d, s, w / 2, 680, 90, gap=12, dia=6, lw=1.6, dots=False))), gold_l)
+    lines_onto(back, w, h, [(340, "DILAKSANAKAN PADA", "gill", 26, green, 10), (500, "Minggu, 22 Agustus 2027", "bask", 62, ink),
+                            (585, "Gedung Sate, Bandung", "bask_it", 52, gold_l)])
+    panel(back, w, h, 840, 1290, (220, 236, 214), 0.7, gold_l)
+    guest_block(back, w, h, "gill", green, "bask_it", ink, gold_l, "bask_it", ink, cap_size=26, name_size=58)
+
+    bg = grad_bg((232, 242, 226), (190, 214, 186), (250, 252, 244), 0.5)
+    mm, mmm = build_mega_mendung()
+    intro_txt = text_layer([(700, "Sampurasun", "bask_i", 76, ("metal", M_GOLD, (640, 710))), (750, "wilujeng sumping", "gill_l", 20, ink, 6, 0.8)],
+                           lambda im: metal_text(im, ss_mask(720, 1280, lambda d, s: siger_crown(d, s, 360, 590, 200, 110)), [(480, 600)], M_GOLD))
+
+    def bg_anim(frame_, t):
+        ox = 46 * S * math.sin(2 * math.pi * t / GTL)
+        draw_layer_affine(frame_, mm, mmm, 1.0, ox, 0)
+
+    cd = dict(head=[(565, "Tinggal menghitung hari", "bask_i", 54, ("metal", M_GOLD, (520, 575))), (612, "MINGGU, 22 AGUSTUS 2027", "gill", 15, green, 6)],
+              head_extra=lambda im: metal_text(im, ss_mask(720, 1280, lambda d, s: siger_crown(d, s, 360, 490, 110, 64)), [(426, 498)], M_GOLD, sop=0),
+              foot=[(975, "Sinta & Asep", "bask_it", 32, green)], foot_extra=lambda im: orn_layer(im, lambda d, s: ornament(d, s, 360, 918, 150, gap=14, dia=6, lw=1.2), gold_l),
+              tile=dict(shape="round", fill=(248, 250, 242), grain=0.5, border=gold_l, accent=gold_l, num_font="bask", num_col=ink,
+                        lab_font="gill", lab_col=green, shadow=(60, 90, 60), shadow_op=0.25),
+              start=(301, 15, 40, 3))
+    closing = closing_layer([(1240, "Hatur nuhun", "bask_i", 150, ("metal", M_GOLD, (1110, 1250))),
+                             (1350, "atas doa restu dan kehadirannya", "bask_it", 48, ink), (1540, "SINTA & ASEP", "gill", 30, green, 16)], ink, 0.55)
+    return dict(front=finish(front, fa), names=names, back=finish(back, ba), bg=bg, cd=cd, closing=closing, intro_txt=intro_txt, bg_anim=bg_anim,
+                intro_txt_t=(0.2, 1.1, 1.6, 2.3),
+                bokeh=((255, 255, 250), (230, 214, 150), (210, 236, 210)), bokeh_a=(0.06, 0.16), vig=((40, 70, 40), 0.14),
+                intro="text", sparkle=True, hangers=build_melati_strings(),
+                parts=[("melati", gen_parts(291, 32, 2.4, 13.0, "melati", 1, (16, 24), dur_near=5, dur_far=9, tumble=0.8))],
+                sprites=dict(melati=[melati_tex()]))
+
+
+def style_modern():
+    w, h = DW_, DH_
+    char, grey, off = (38, 38, 40), (128, 126, 122), (250, 249, 246)
+    front, fa = card_canvas(off, 201, "sharp", 0.35)
+    paint(front, ring_mask(w, h, "sharp", 46, 1.4), char, 0.9)
+    paint(front, ss_mask(w, h, lambda d, s: (d.ellipse([(w / 2 - 92) * s, (788 - 92) * s, (w / 2 + 92) * s, (788 + 92) * s], outline=255, width=max(1, int(1.4 * s))),
+                                             d.line([(w / 2 * s, 140 * s), (w / 2 * s, 300 * s)], fill=255, width=max(1, int(1.4 * s))))), char, 0.8)
+    lines_onto(front, w, h, [(370, "KAMI MENIKAH", "hn_med", 24, char, 9), (650, "ALYA", "din", 270, char), (820, "&", "hn_ul", 110, char),
+                             (1080, "BIMA", "din", 270, char), (1210, "05.11.2027", "hn_light", 44, char, 10), (1270, "JAKARTA", "hn_med", 20, grey, 12)])
+    back, ba = card_canvas(char, 202, "sharp", 0.35)
+    paint(back, ring_mask(w, h, "sharp", 46, 1.4), (230, 228, 222), 0.6)
+    lines_onto(back, w, h, [(300, "RESEPSI", "hn_med", 24, (190, 188, 182), 12), (440, "JUMAT", "din", 130, (250, 249, 246)),
+                            (540, "5 November 2027", "hn_light", 58, (250, 249, 246)), (660, "Hutan Kota by Plataran,", "hn_light", 40, (190, 188, 182)),
+                            (712, "Jakarta", "hn_light", 40, (190, 188, 182))])
+    paint(back, ss_mask(w, h, lambda d, s: d.line([((w / 2 - 60) * s, 780 * s), ((w / 2 + 60) * s, 780 * s)], fill=255, width=max(1, int(1.4 * s)))), (250, 249, 246), 0.8)
+    paint(back, ss_mask(w, h, lambda d, s: d.rectangle([130 * s, 860 * s, (w - 130) * s, 1290 * s], outline=255, width=max(1, int(1.4 * s)))), (230, 228, 222), 0.6)
+    guest_block(back, w, h, "hn_med", (190, 188, 182), "hn_light", (250, 249, 246), (190, 188, 182), "hn_light", (190, 188, 182), cap_size=24, name_size=54)
+
+    bg = grad_bg((246, 244, 240), (232, 230, 225), (252, 251, 248), 0.4)
+    overlay_pattern(bg, lambda d, s: (d.ellipse([500 * s, -140 * s, 900 * s, 260 * s], outline=255, width=max(1, int(1 * s))),
+                                      d.line([(0, 1060 * s), (720 * s, 1060 * s)], fill=255, width=max(1, int(1 * s))),
+                                      d.line([(80 * s, 0), (80 * s, 1280 * s)], fill=255, width=max(1, int(1 * s)))), char, 0.10)
+    arr = np.asarray(bg, np.float32)
+    arr[..., :3] += np.random.default_rng(203).normal(0, 2.2, (H, W, 1))
+    bg = Image.frombytes("RGBA", (W, H), np.clip(arr, 0, 255).astype(np.uint8).tobytes())
+
+    def lines_anim(frame_, t):
+        a = 1 - seg(t, 2.4, 2.9)
+        if a <= 0.003:
+            return
+        p = seg(t, 0.15, 1.35)
+        q = Pose(0, -12, 1370).project(rect_pts(CW, CH))
+        x0, y0 = q[0]
+        x1, y1 = q[2]
+        per = [(x0, y0), (x1, y0), (x1, y1), (x0, y1), (x0, y0)]
+        segs = [(per[i], per[i + 1]) for i in range(4)]
+        lens = [math.hypot(b[0] - a_[0], b[1] - a_[1]) for a_, b in segs]
+        tot = sum(lens) * p
+        ss = 3
+        m = Image.new("L", (W * ss, H * ss), 0)
+        d = ImageDraw.Draw(m)
+        for (a_, b), ln in zip(segs, lens):
+            if tot <= 0:
+                break
+            f = min(1.0, tot / ln)
+            d.line([(a_[0] * ss, a_[1] * ss), ((a_[0] + (b[0] - a_[0]) * f) * ss, (a_[1] + (b[1] - a_[1]) * f) * ss)], fill=255, width=max(1, int(1.5 * S * ss)))
+            tot -= ln
+        c = 26 * S * seg(t, 0.9, 1.4)
+        for (cx, cy), (sx, sy) in (((x0, y0), (-1, -1)), ((x1, y0), (1, -1)), ((x1, y1), (1, 1)), ((x0, y1), (-1, 1))):
+            d.line([((cx + sx * 8 * S) * ss, cy * ss), ((cx + sx * (8 * S + c)) * ss, cy * ss)], fill=255, width=max(1, int(1.2 * S * ss)))
+            d.line([(cx * ss, (cy + sy * 8 * S) * ss), (cx * ss, (cy + sy * (8 * S + c)) * ss)], fill=255, width=max(1, int(1.2 * S * ss)))
+        m = m.resize((W, H), Image.BOX)
+        paint(frame_, m, char, a)
+        ta = seg(t, 0.6, 1.0) * (1 - seg(t, 1.35, 1.65))
+        if ta > 0.003:
+            frame_.alpha_composite(fade_rgba(A_MODERN_TXT[0], ta))
+
+    global A_MODERN_TXT
+    A_MODERN_TXT = [text_layer([(640, "05.11.2027", "din", 72, char), (690, "SAVE THE DATE", "hn_med", 16, grey, 10)]).convert("RGBA")]
+    cd = dict(head=[(570, "HITUNG MUNDUR", "din", 64, char), (612, "JUMAT, 5 NOVEMBER 2027", "hn_med", 14, grey, 7)],
+              head_extra=lambda im: paint(im, ss_mask(720, 1280, lambda d, s: d.line([(330 * s, 488 * s), (390 * s, 488 * s)], fill=255, width=max(1, int(1.6 * s)))), char),
+              foot=[(975, "ALYA & BIMA", "hn_med", 18, char, 10)], foot_extra=lambda im: paint(im, ss_mask(720, 1280, lambda d, s: d.line([(110 * s, 918 * s), (610 * s, 918 * s)], fill=255, width=max(1, int(1 * s)))), char, 0.6),
+              tile=dict(shape="sharp", fill=(252, 251, 249), grain=0.3, border=char, accent=(200, 198, 192), num_font="din", num_col=char, num_size=78,
+                        lab_font="hn_med", lab_col=grey, shadow=(60, 60, 60), shadow_op=0.12, num_base=96),
+              start=(388, 2, 45, 3))
+    closing = closing_layer([(1250, "Sampai bertemu.", "din", 150, char), (1350, "ALYA & BIMA", "hn_med", 30, grey, 16)], char, 0.5)
+    return dict(front=finish(front, fa), names=None, back=finish(back, ba), bg=bg, cd=cd, closing=closing, bg_anim=lines_anim,
+                bokeh=((255, 255, 255),), bokeh_a=(0.0, 0.0), no_bokeh=True, vig=((40, 40, 40), 0.06),
+                intro="snap", sparkle=False, parts=[], sprites={})
+
+
+def style_lavender():
+    w, h = DW_, DH_
+    purple, lilac, ink = (96, 72, 140), (170, 140, 206), (76, 64, 96)
+    front, fa = card_canvas((254, 253, 251), 211, "deckle", 0.7)
+    front.alpha_composite(wash_blob(w, h, [(80, 90, 260, (196, 170, 226), 0.9), (230, 30, 160, (220, 200, 240), 0.8), (1010, 1440, 300, (186, 160, 220), 0.85),
+                                           (860, 1500, 180, (230, 200, 230), 0.7)], 212))
+    names = lines_onto(front, w, h, [(400, "dengan penuh sukacita", "athelas_i", 40, ink), (690, "Nayla", "zapfino", 110, ("metal", M_LAV, (560, 700))),
+                                     (800, "&", "athelas_i", 80, lilac), (980, "Fajar", "zapfino", 110, ("metal", M_LAV, (850, 990))),
+                                     (1170, "26 · 06 · 2027", "athelas", 46, ink, 4), (1232, "CIANJUR", "athelas", 24, ink, 12, 0.7)])
+    paint(front, ss_mask(w, h, lambda d, s: ornament(d, s, w / 2, 1080, 160, gap=16, dia=6, lw=1.4)), lilac, 0.9)
+    back, ba = card_canvas((254, 253, 251), 213, "deckle", 0.7)
+    back.alpha_composite(wash_blob(w, h, [(1000, 100, 240, (196, 170, 226), 0.85), (90, 1450, 260, (210, 186, 236), 0.8)], 214))
+    lines_onto(back, w, h, [(320, "WAKTU & TEMPAT", "athelas", 26, lilac, 10), (480, "Sabtu, 26 Juni 2027", "athelas", 64, ink),
+                            (570, "Taman Bunga Nusantara,", "athelas_i", 48, purple), (630, "Cianjur", "athelas_i", 48, purple)])
+    paint(back, ss_mask(w, h, lambda d, s: ornament(d, s, w / 2, 720, 100, gap=14, dia=6, lw=1.4)), lilac)
+    back.alpha_composite(wash_blob(w, h, [(w / 2, 1070, 380, (230, 216, 244), 0.75)], 215))
+    guest_block(back, w, h, "athelas", purple, "athelas_i", ink, lilac, "athelas_i", ink, cap_size=26, name_size=58)
+
+    bg = grad_bg((252, 250, 252), (244, 238, 246), (255, 255, 255), 0.4)
+    bgp = paper(W, H, (0, 0, 0), 216, 0.6)
+    arr = np.asarray(bg, np.float32)
+    arr[..., :3] += bgp
+    bg = Image.frombytes("RGBA", (W, H), np.clip(arr, 0, 255).astype(np.uint8).tobytes())
+    wash = wash_blob(720, 1280, [(40, 1100, 330, (200, 176, 230), 0.8), (700, 1220, 300, (220, 196, 236), 0.75), (690, 420, 220, (226, 210, 242), 0.6),
+                                 (30, 520, 200, (214, 194, 236), 0.6), (380, 1320, 260, (190, 166, 222), 0.7)], 217)
+    wash_np = np.asarray(wash.convert("RGBa"), np.float32)
+    rng = np.random.default_rng(218)
+    nz = np.asarray(Image.fromarray(rng.normal(0, 1, (H // R(40) + 2, W // R(40) + 2)).astype(np.float32), "F").resize((W, H), Image.BICUBIC))
+    field = np.clip(1 - wash_np[..., 3] / 255 * 1.25, 0, 1) * 0.8 + nz * 0.08 + 0.1
+    wash_full = Image.frombytes("RGBa", (W, H), wash_np.astype(np.uint8).tobytes()).convert("RGBA")
+
+    def bg_anim(frame_, t):
+        r = seg(t, 0.1, 2.6) * 1.15
+        out = 1 - seg(t, 13.9, 14.85)
+        if r <= 0 or out <= 0:
+            return
+        if r >= 1.149:
+            frame_.alpha_composite(fade_rgba(wash_full, out))
+            return
+        a = np.clip((r - field) / 0.08, 0, 1)
+        wet = np.exp(-((r - field) / 0.03) ** 2) * 0.35
+        arr_ = wash_np * a[..., None] * out
+        arr_[..., :3] *= (1 - wet[..., None])
+        frame_.alpha_composite(to_rgba(np.clip(arr_, 0, 255).astype(np.uint8)))
+
+    cd = dict(head=[(548, "Hari yang dinanti", "zapfino", 38, ("metal", M_LAV, (486, 558))), (640, "SABTU, 26 JUNI 2027", "athelas", 15, purple, 6)],
+              foot=[(975, "Nayla & Fajar", "athelas_i", 32, purple)], foot_extra=lambda im: orn_layer(im, lambda d, s: ornament(d, s, 360, 918, 150, gap=14, dia=6, lw=1.2), lilac),
+              tile=dict(shape="round", fill=(250, 246, 252), grain=0.6, border=lilac, accent=lilac, num_font="athelas", num_col=ink,
+                        lab_font="athelas", lab_col=purple, shadow=(120, 90, 150), shadow_op=0.18),
+              start=(244, 18, 7, 3))
+    closing = closing_layer([(1230, "Terima kasih", "zapfino", 100, ("metal", M_LAV, (1090, 1240))),
+                             (1360, "telah menjadi bagian dari kisah kami", "athelas_i", 44, ink), (1540, "NAYLA & FAJAR", "athelas", 30, purple, 16)], ink, 0.55)
+    return dict(front=finish(front, fa), names=names, back=finish(back, ba), bg=bg, cd=cd, closing=closing, bg_anim=bg_anim,
+                bokeh=((255, 255, 255), (230, 214, 246)), bokeh_a=(0.05, 0.14), vig=((90, 70, 110), 0.10),
+                intro="text", intro_e=(1.7, 2.9), sparkle=False, hangers=build_wisteria(),
+                parts=[("butterfly", gen_parts(221 + 9, 12, 1.5, 12.5, "butterfly", -1, (44, 60), near_every=6, dur_near=6, dur_far=10, tumble=0, amp=(40, 90), variants=2))],
+                sprites=dict(butterfly=[butterfly_tex((226, 206, 244), (140, 106, 190)), butterfly_tex((240, 214, 236), (176, 120, 176))]))
+
+
+def style_aqiqah():
+    w, h = DW_, DH_
+    mint, teal, ink, pink = (150, 210, 190), (70, 140, 130), (70, 92, 96), (236, 160, 160)
+    front, fa = card_canvas((255, 252, 244), 221, "cloud", 0.5)
+    paint(front, ring_mask(w, h, "cloud", 26, 3.5), mint)
+    paint(front, ss_mask(w, h, lambda d, s: [d.ellipse([(x - 4) * s, (h - 70 - 4) * s, (x + 4) * s, (h - 70 + 4) * s], fill=255) for x in range(120, w - 100, 40)]), mint, 0.8)
+    moon = mask_sub(ss_mask(w, h, lambda d, s: d.ellipse([(w / 2 - 70) * s, 210 * s, (w / 2 + 70) * s, 350 * s], fill=255)),
+                    ss_mask(w, h, lambda d, s: d.ellipse([(w / 2 - 40) * s, 190 * s, (w / 2 + 90) * s, 320 * s], fill=255)))
+    paint(front, moon, (250, 210, 110))
+    paint(front, ss_mask(w, h, lambda d, s: d.polygon([(x * s, y * s) for x, y in star5_pts(w / 2 + 34, 262, 22, 10)], fill=255)), (250, 200, 90))
+    paint(front, ss_mask(w, h, lambda d, s: (cloud_puffs(d, s, 170, 1360, 1.1), cloud_puffs(d, s, 900, 1380, 0.9))), (224, 242, 236), 0.9)
+    names = lines_onto(front, w, h, [(450, "AQIQAH ANANDA", "seravek", 30, teal, 10), (700, "Zahra", "bradley", 210, ("metal", M_HONEY, (560, 710))),
+                                     (820, "putri tercinta kami", "seravek_li", 40, ink), (1150, "11 · 04 · 2027", "seravek_l", 46, ink, 4),
+                                     (1216, "DEPOK", "seravek", 24, teal, 12, 0.8)])
+    paint(front, ss_mask(w, h, lambda d, s: [d.polygon([(x * s, y * s) for x, y in star5_pts(cx, 960, 14, 6)], fill=255) for cx in (w / 2 - 60, w / 2, w / 2 + 60)]), (250, 210, 110))
+    back, ba = card_canvas((246, 252, 248), 222, "cloud", 0.5)
+    paint(back, ring_mask(w, h, "cloud", 26, 3.5), mint)
+    lines_onto(back, w, h, [(320, "INSYA ALLAH DILAKSANAKAN PADA", "seravek", 22, teal, 6), (480, "Ahad, 11 April 2027", "seravek", 62, ink),
+                            (566, "Kediaman Keluarga Hasan,", "seravek_li", 46, teal), (626, "Depok", "seravek_li", 46, teal)])
+    paint(back, ss_mask(w, h, lambda d, s: [d.polygon([(x * s, y * s) for x, y in star5_pts(cx, 720, 12, 5)], fill=255) for cx in (w / 2 - 40, w / 2, w / 2 + 40)]), (250, 210, 110))
+    panel(back, w, h, 840, 1290, (226, 244, 236), 0.8, mint)
+    guest_block(back, w, h, "seravek", teal, "bradley", ink, mint, "seravek_li", ink, cap_size=26, name_size=60)
+
+    bg = grad_bg((214, 240, 228), (252, 246, 232), (255, 255, 250), 0.5)
+    cl = Image.new("L", (W, H), 0)
+    d = ImageDraw.Draw(cl)
+    for cx, cy, sc in ((110, 250, 1.1), (610, 330, 0.9), (640, 1060, 1.2), (80, 1180, 0.9), (380, 1250, 0.7)):
+        for dx, dy, r in ((0, 0, 60), (55, 10, 46), (-50, 14, 40), (20, -30, 44)):
+            d.ellipse([R(cx + (dx - r) * sc), R(cy + (dy - r) * sc), R(cx + (dx + r) * sc), R(cy + (dy + r) * sc)], fill=255)
+    paint(bg, cl.filter(ImageFilter.GaussianBlur(10 * S)), (255, 255, 255), 0.7)
+    rng = np.random.default_rng(223)
+    tw = [(rng.uniform(20, 700), rng.uniform(20, 1260), rng.uniform(8, 16), rng.uniform(1.4, 3.0), rng.uniform(0, 6)) for _ in range(22)]
+    intro_txt = text_layer([(1020, "Alhamdulillah,", "bradley", 60, ("metal", M_HONEY, (975, 1030))), (1068, "telah lahir buah hati kami", "seravek_l", 22, ink, 2)])
+    cd = dict(head=[(565, "Menuju hari syukuran", "bradley", 58, ("metal", M_HONEY, (515, 575))), (612, "AHAD, 11 APRIL 2027", "seravek", 15, teal, 6)],
+              head_extra=lambda im: paint(im, ss_mask(720, 1280, lambda d, s: d.polygon([(x * s, y * s) for x, y in star5_pts(360, 476, 16, 7)], fill=255)), (250, 200, 90)),
+              foot=[(975, "untuk Zahra", "bradley", 34, teal)], foot_extra=lambda im: paint(im, ss_mask(720, 1280, lambda d, s: [d.ellipse([(x - 3) * s, 915 * s, (x + 3) * s, 921 * s], fill=255) for x in range(230, 500, 20)]), mint),
+              tile=dict(shape="cloud", h=166, fill=(255, 255, 252), grain=0.4, border=(150, 210, 190), accent=(150, 210, 190), num_font="seravek", num_col=ink,
+                        lab_font="seravek", lab_col=pink, shadow=(70, 120, 110), shadow_op=0.18, win=(24, 110), num_base=94, line_y=124, label_y=148),
+              start=(158, 11, 30, 3))
+    closing = closing_layer([(1240, "Terima kasih", "bradley", 140, ("metal", M_HONEY, (1120, 1250))),
+                             (1350, "atas doa terbaik untuk buah hati kami", "seravek_l", 44, ink), (1540, "AQIQAH ANANDA ZAHRA", "seravek", 30, teal, 12)], ink, 0.55)
+    return dict(front=finish(front, fa), names=names, back=finish(back, ba), bg=bg, cd=cd, closing=closing, twinkles=tw, intro_txt=intro_txt,
+                intro_txt_t=(0.4, 1.2, 1.7, 2.3),
+                bokeh=((255, 255, 255), (255, 236, 170), (200, 236, 222)), bokeh_a=(0.08, 0.22), vig=((70, 110, 100), 0.10),
+                intro="cradle", sparkle=True, bob=True,
+                parts=[("star5", gen_parts(231, 30, 2.4, 13.0, "star5", 1, (18, 30), near_every=6, dur_near=5, dur_far=9, tumble=0, amp=(15, 40), twinkle=True))],
+                sprites=dict(star5=[star5_tex(), star5_tex((255, 240, 200))]))
+
+
+def style_wisuda():
+    w, h = DW_, DH_
+    blue, gold_l, cream, brown = (18, 44, 112), (222, 182, 92), (246, 236, 210), (120, 84, 40)
+
+    def parchment(seed):
+        im, a = card_canvas((246, 236, 210), seed, "rect", 1.3)
+        yy, xx = np.mgrid[0:im.size[1], 0:im.size[0]].astype(np.float32)
+        r = np.sqrt(((xx - im.size[0] / 2) / (im.size[0] * 0.6)) ** 2 + ((yy - im.size[1] / 2) / (im.size[1] * 0.6)) ** 2)
+        paint(im, Image.fromarray((np.clip(r - 0.5, 0, 1) * 180).astype(np.uint8)), (190, 150, 90), 0.5)
+        paint(im, ring_mask(w, h, "rect", 34, 4), gold_l)
+        paint(im, ring_mask(w, h, "rect", 52, 1.4), (170, 130, 60), 0.8)
+        return im, a
+
+    front, fa = parchment(241)
+    laurel = ss_mask(w, h, lambda d, s: [d.polygon([(x * s, y * s) for x, y in _oval(w / 2 + sg * 120 * math.cos(a), 300 - 110 * math.sin(a) + 40, 18, 8, a * sg + (math.pi / 2 if sg > 0 else -math.pi / 2), 18)], fill=255)
+                                         for sg in (-1, 1) for a in np.linspace(0.25, 1.9, 9)])
+    metal_text(front, laurel, [(180, 420)], M_GOLD, sop=0.2)
+    cap = ss_mask(w, h, lambda d, s: (d.polygon([((w / 2 - 70) * s, 300 * s), (w / 2 * s, 270 * s), ((w / 2 + 70) * s, 300 * s), (w / 2 * s, 330 * s)], fill=255),
+                                      d.polygon([((w / 2 - 40) * s, 318 * s), ((w / 2 + 40) * s, 318 * s), ((w / 2 + 36) * s, 350 * s), ((w / 2 - 36) * s, 350 * s)], fill=255)))
+    paint(front, cap, blue)
+    names = lines_onto(front, w, h, [(500, "SYUKURAN WISUDA", "charter_b", 30, blue, 10), (700, "Rizky Pratama,", "caslon", 118, ("metal", M_ROYAL, (600, 710))),
+                                     (830, "S.T.", "caslon", 92, ("metal", M_ROYAL, (750, 840))), (1180, "28 · 08 · 2027", "charter", 44, brown, 4),
+                                     (1244, "YOGYAKARTA", "charter_b", 22, brown, 12, 0.8)])
+    paint(front, ss_mask(w, h, lambda d, s: ornament(d, s, w / 2, 900, 200, gap=18, dia=8)), gold_l)
+    seal = ss_mask(w, h, lambda d, s: (d.polygon([((w / 2 - 70) * s, 1010 * s), ((w / 2 - 40) * s, 1120 * s), ((w / 2 - 20) * s, 1060 * s)], fill=255),
+                                       d.polygon([((w / 2 + 70) * s, 1010 * s), ((w / 2 + 40) * s, 1120 * s), ((w / 2 + 20) * s, 1060 * s)], fill=255)))
+    paint(front, seal, (170, 40, 50))
+    medal = ss_mask(w, h, lambda d, s: d.polygon([(x * s, y * s) for x, y in [(w / 2 + (52 if i % 2 == 0 else 44) * math.cos(i * math.pi / 12), 1010 + (52 if i % 2 == 0 else 44) * math.sin(i * math.pi / 12)) for i in range(24)]], fill=255))
+    paint(front, offset_mask(medal, 2 * S, 4 * S).filter(ImageFilter.GaussianBlur(3 * S)), (90, 60, 20), 0.35)
+    metal_text(front, medal, [(958, 1062)], M_BRIGHT, sop=0)
+    paint(front, ss_mask(w, h, lambda d, s: d.polygon([(x * s, y * s) for x, y in star5_pts(w / 2, 1012, 20, 9)], fill=255)), (176, 130, 50))
+    back, ba = parchment(242)
+    lines_onto(back, w, h, [(300, "UNDANGAN SYUKURAN", "charter_b", 26, blue, 10), (480, "Sabtu, 28 Agustus 2027", "charter", 62, blue),
+                            (566, "Aula Graha Sabha Pramana,", "charter_i", 46, brown), (626, "Yogyakarta", "charter_i", 46, brown)])
+    paint(back, ss_mask(w, h, lambda d, s: (ornament(d, s, w / 2, 350, 150), ornament(d, s, w / 2, 720, 90, gap=12, dia=6, lw=1.6, dots=False))), gold_l)
+    panel(back, w, h, 840, 1290, (236, 222, 190), 0.7, gold_l)
+    guest_block(back, w, h, "charter_b", blue, "charter_i", blue, gold_l, "charter_i", brown, cap_size=24, name_size=56)
+
+    bg = grad_bg((22, 56, 136), (6, 18, 56), (60, 100, 190), 0.4, 0.4)
+    rays = Image.new("RGBA", (R(1500), R(1500)), (0, 0, 0, 0))
+    rm = ss_mask(1500, 1500, lambda d, s: [d.polygon([(750 * s, 750 * s), ((750 + 1100 * math.cos(a - 0.035)) * s, (750 + 1100 * math.sin(a - 0.035)) * s),
+                                                      ((750 + 1100 * math.cos(a + 0.035)) * s, (750 + 1100 * math.sin(a + 0.035)) * s)], fill=255)
+                                           for a in np.linspace(0, 2 * math.pi, 28)[:-1]], ss=1).filter(ImageFilter.GaussianBlur(6 * S))
+    radial = Image.fromarray((np.clip(1 - np.sqrt(((np.mgrid[0:R(1500), 0:R(1500)][0] - R(750)) ** 2 + (np.mgrid[0:R(1500), 0:R(1500)][1] - R(750)) ** 2)) / R(750), 0, 1) * 255).astype(np.uint8))
+    rm = Image.fromarray((np.asarray(rm, np.float32) * np.asarray(radial, np.float32) / 255).astype(np.uint8))
+    paint(rays, rm, (230, 196, 110), 0.10)
+
+    def bg_anim(frame_, t):
+        ang = 6 * math.sin(2 * math.pi * t / GTL)
+        r_ = rays.rotate(ang, resample=Image.BILINEAR)
+        x0, y0 = R(750) - W // 2, R(750) - H // 2 + R(80)
+        frame_.alpha_composite(r_.crop((x0, y0, x0 + W, y0 + H)))
+
+    cd = dict(head=[(565, "Hitung mundur syukuran", "caslon", 50, ("metal", M_BRIGHT, (525, 575))), (612, "SABTU, 28 AGUSTUS 2027", "charter_b", 14, gold_l, 7)],
+              head_extra=lambda im: paint(im, ss_mask(720, 1280, lambda d, s: (d.polygon([(320 * s, 480 * s), (360 * s, 462 * s), (400 * s, 480 * s), (360 * s, 498 * s)], fill=255),
+                                                                                d.polygon([(342 * s, 490 * s), (378 * s, 490 * s), (376 * s, 508 * s), (344 * s, 508 * s)], fill=255))), gold_l),
+              foot=[(975, "Rizky Pratama, S.T.", "charter_i", 30, gold_l)], foot_extra=lambda im: orn_layer(im, lambda d, s: ornament(d, s, 360, 918, 150, gap=14, dia=6, lw=1.2), gold_l),
+              tile=dict(shape="rect", fill=(20, 48, 118), grain=0.6, border=gold_l, accent=gold_l, num_font="caslon", num_col=cream,
+                        lab_font="charter_b", lab_col=gold_l, shadow=(0, 0, 20), shadow_op=0.45),
+              start=(310, 7, 25, 3))
+    closing = closing_layer([(1230, "Terima kasih", "caslon", 140, ("metal", M_BRIGHT, (1110, 1240))),
+                             (1350, "atas doa & dukungannya", "charter_i", 50, cream), (1540, "RIZKY PRATAMA, S.T.", "charter_b", 30, gold_l, 12)], cream, 0.55)
+    return dict(front=finish(front, fa), names=names, back=finish(back, ba), bg=bg, cd=cd, closing=closing, bg_anim=bg_anim,
+                bokeh=((255, 220, 140), (140, 170, 255), (255, 240, 200)), bokeh_a=(0.05, 0.16), vig=((0, 4, 20), 0.35),
+                intro="toss", sparkle=True,
+                parts=[("goldconf", gen_parts(251 + 9, 64, 1.8, 13.0, "goldconf", 1, (12, 18), near_every=8, dur_near=4, dur_far=7, tumble=2.6, variants=4))],
+                sprites=dict(goldconf=[confetti_tex(c) for c in ((236, 196, 100), (250, 226, 150), (210, 160, 70), (255, 248, 230))]))
+
+
 STYLES = {"jawa-keraton": style_keraton, "islami-zamrud": style_islami, "rustic-garden": style_rustic,
-          "ultah-ceria": style_ultah, "navy-malam": style_navy, "bali-kuning": style_bali}
+          "ultah-ceria": style_ultah, "navy-malam": style_navy, "bali-kuning": style_bali,
+          "minang-gadang": style_minang, "sunda-siger": style_sunda, "modern-minimal": style_modern,
+          "watercolor-lavender": style_lavender, "aqiqah-bintang": style_aqiqah, "wisuda-toga": style_wisuda}
 STYLE_MUSIC = {"jawa-keraton": "gamelan.mp3", "islami-zamrud": "religi.mp3", "rustic-garden": "akustik.mp3",
-               "ultah-ceria": "ceria.mp3", "navy-malam": "khidmat.mp3", "bali-kuning": "gamelan.mp3"}
+               "ultah-ceria": "ceria.mp3", "navy-malam": "khidmat.mp3", "bali-kuning": "gamelan.mp3",
+               "minang-gadang": "nusantara.mp3", "sunda-siger": "gamelan.mp3", "modern-minimal": "romantis.mp3",
+               "watercolor-lavender": "romantis.mp3", "aqiqah-bintang": "religi.mp3", "wisuda-toga": "khidmat.mp3"}
 
 
 def build_gallery_assets(slug):
@@ -2151,7 +2878,8 @@ def build_gallery_assets(slug):
     if "cd" in st:
         A["cd"] = build_cd_style(st["cd"])
     intro = st["intro"]
-    A["intro_assets"] = {"doors": build_doors, "split": build_candi, "box": build_box, "sign": build_sign}.get(intro, lambda: {})()
+    A["intro_assets"] = {"doors": build_doors, "split": build_candi, "box": build_box, "sign": build_sign,
+                         "roof": build_gadang, "cradle": build_cradle, "toss": build_toss}.get(intro, lambda: {})()
     A["parts"] = []
     for _, defs in st["parts"]:
         A["parts"] += defs
@@ -2183,8 +2911,20 @@ def g_intro_state(t, A):
         e = seg(t, 1.7, 3.0)
         return dict(pose=dict(X=lerp(-60, 0, e), Y=lerp(1000, 300, e), Z=1500, rx=lerp(-30, -8, e), ry=0, rz=lerp(-14, 6, e)), grouped=False, clip=None, alpha=1.0)
     if kind == "text":
-        e = seg(t, 2.1, 3.0)
-        return dict(pose=dict(X=0, Y=lerp(260, 60, e), Z=lerp(4800, 2400, e), rx=lerp(35, 8, e), ry=0, rz=0), grouped=False, clip=None, alpha=seg(t, 2.1, 2.8))
+        e0, e1 = A["st"].get("intro_e", (2.1, 3.0))
+        e = seg(t, e0, e1)
+        return dict(pose=dict(X=0, Y=lerp(260, 60, e), Z=lerp(4800, 2400, e), rx=lerp(35, 8, e), ry=0, rz=0), grouped=False, clip=None, alpha=seg(t, e0, e1 - 0.2))
+    if kind == "roof":
+        return dict(pose=hero_far, grouped=True, clip=None, alpha=seg(t, 1.7, 2.4))
+    if kind == "snap":
+        u = clamp((t - 1.6) / 0.8)
+        x = 900 * (1 - ease_out_back(u)) if u < 1 else 0.0
+        return dict(pose=dict(X=x, Y=-12, Z=1370, rx=0, ry=0, rz=0), grouped=False, clip=None, alpha=1.0, no_swing=True)
+    if kind == "cradle":
+        e = seg(t, 1.8, 3.0)
+        return dict(pose=dict(X=lerp(40, 0, e), Y=lerp(1050, 300, e), Z=1500, rx=lerp(-24, -6, e), ry=0, rz=lerp(8, -3, e)), grouped=False, clip=None, alpha=1.0, bob=True)
+    if kind == "toss":
+        return dict(pose=dict(X=0, Y=-12, Z=1370, rx=0, ry=0, rz=0), grouped=False, clip=None, alpha=seg(t, 1.75, 1.95), no_swing=True, unroll=seg(t, 1.9, 3.0))
     if kind == "fly":
         e = seg(t, 0.2, 2.6)
         return dict(pose=dict(X=lerp(-520, -40, e), Y=lerp(-420, 0, e), Z=lerp(5600, 2000, e), rx=lerp(28, 6, e), ry=lerp(-58, -16, e), rz=lerp(-18, -2, e)),
@@ -2204,8 +2944,11 @@ def g_card_state(t, ist):
     C[1] -= 120 * rec
     sway_w = seg(t, 4.0, 4.8) * (1 - seg(t, 5.6, 6.3))
     sway_b = seg(t, 7.4, 8.0) * (1 - seg(t, 8.4, 9.0))
-    ry = 14 * math.sin(math.pi * L) + 180 * flip + 4.5 * math.sin(2 * math.pi * (t - 4.0) / 2.3) * sway_w + 4 * math.sin(2 * math.pi * (t - 7.4) / 1.6) * sway_b
-    rx = -10 * math.sin(math.pi * L) + 2 * math.sin(2 * math.pi * (t - 4.0) / 2.3) * sway_w - 6 * rec
+    swing = 0.0 if ist.get("no_swing") else 1.0
+    ry = 14 * swing * math.sin(math.pi * L) + 180 * flip + 4.5 * math.sin(2 * math.pi * (t - 4.0) / 2.3) * sway_w + 4 * math.sin(2 * math.pi * (t - 7.4) / 1.6) * sway_b
+    rx = -10 * swing * math.sin(math.pi * L) + 2 * math.sin(2 * math.pi * (t - 4.0) / 2.3) * sway_w - 6 * rec
+    if ist.get("bob"):
+        C[1] += 9 * math.sin(2 * math.pi * (t - 3.6) / 2.6) * seg(t, 3.6, 4.4) * (1 - seg(t, 8.6, 9.2))
     rz = -2 * math.sin(math.pi * flip)
     pose = dict(X=C[0], Y=C[1], Z=C[2], rx=rx + sp["rx"] * (1 - L), ry=ry + sp["ry"] * (1 - L), rz=rz + sp["rz"] * (1 - L))
     alpha = ist["alpha"] * (1 - seg(t, 9.0, 9.8))
@@ -2214,7 +2957,7 @@ def g_card_state(t, ist):
     return pose, alpha, 7 * S * rec, clip, lifted
 
 
-def g_draw_card(frame, A, pose, alpha, blur, clip, t):
+def g_draw_card(frame, A, pose, alpha, blur, clip, t, unroll=None):
     quad = pose.project(rect_pts(CW, CH))
     front = facing(quad)
     sh = lambert(pose.normal(), back=not front)
@@ -2231,6 +2974,11 @@ def g_draw_card(frame, A, pose, alpha, blur, clip, t):
             r = int(P + clip / CH * h)
             if r < arr.shape[0]:
                 arr[max(r, 0):] = 0
+        if unroll is not None and unroll < 1:
+            half = unroll * h / 2
+            a0, a1 = int(P + h / 2 - half), int(P + h / 2 + half)
+            arr[:max(a0, 0)] = 0
+            arr[max(a1, 0):] = 0
         need_shine = front and A["has_shine"] and -0.2 < shine_p < 1.3
         if need_shine or sheen > 0.01:
             hh, ww = arr.shape[:2]
@@ -2370,7 +3118,53 @@ def g_draw_intro(frame, A, t, ist, card_cb):
         shadow(frame, [q], (10, 22), 20, 0.3)
         draw_quad(frame, IA["sign"], q, shade=lambert(pose.normal()))
         return
-    if kind in ("text", "fly"):
+    if kind == "roof":
+        ga = seg(t, 0.0, 0.6) * (1 - seg(t, 2.6, 3.4))
+        if ga <= 0.003:
+            if seg(t, *G_LIFT) <= 0:
+                card_cb(frame)
+            return
+        grp = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        if seg(t, *G_LIFT) <= 0:
+            card_cb(grp)
+        e = seg(t, 0.0, 1.6)
+        sk = seg(t, 2.1, 3.2)
+        pose = Pose(0, lerp(1100, 90, e) + 520 * sk, 1650 + 300 * sk, lerp(14, 0, e) - 6 * sk, lerp(-10, 0, e), 0)
+        q = pose.project(rect_pts(700, 550))
+        shadow(grp, [q], (8, 18), 20, 0.3)
+        draw_quad(grp, IA["facade"], q, blur=8 * S * sk, shade=lambert(pose.normal()))
+        frame.alpha_composite(fade_rgba(grp, ga))
+        return
+    if kind == "cradle":
+        drop = 1 - seg(t, 0.0, 1.2)
+        up = seg(t, 1.9, 2.8)
+        if up >= 1:
+            return
+        bob = 12 * math.sin(2 * math.pi * t / 1.6)
+        rz = 5 * math.sin(2 * math.pi * t / 2.1)
+        Y = -120 - 1000 * drop - 1200 * up + bob
+        pose = Pose(10, Y, 1500, 0, 0, rz)
+        q = pose.project(rect_pts(520, 560))
+        for x, y in ((-170, -150), (190, -170)):
+            rq = pose.project([(x - 3, -1500, 1), (x + 3, -1500, 1), (x + 3, y, 1), (x - 3, y, 1)])
+            draw_quad(frame, IA["rope"], rq, alpha=0.9)
+        draw_quad(frame, IA["cradle"], q)
+        return
+    if kind == "toss":
+        u = clamp((t - 0.15) / 1.75)
+        if 0 < u < 1:
+            Y = 900 - 2300 * 4 * u * (1 - u) * 0.62
+            pose = Pose(lerp(-120, 90, u), Y, 1600, 32 + 12 * math.sin(u * 6), 560 * u, 10 * math.sin(u * 5))
+            board = pose.project([(-150, 0, -150), (150, 0, -150), (150, 0, 150), (-150, 0, 150)])
+            capq = pose.project([(-105, 0, 0), (105, 0, 0), (98, 85, 0), (-98, 85, 0)])
+            draw_quad(frame, IA["cap"], capq, shade=0.9)
+            fr = facing(board)
+            draw_quad(frame, IA["board"], board if fr else board[[1, 0, 3, 2]], shade=lambert(pose.R @ np.array([0, -1.0, 0]), back=not fr))
+            tip = pose.project([(150, 0, 0)])[0]
+            hz = 20 * S
+            draw_quad(frame, IA["tassel"], [(tip[0] - hz, tip[1]), (tip[0] + hz, tip[1]), (tip[0] + hz, tip[1] + 140 * S), (tip[0] - hz, tip[1] + 140 * S)])
+        return
+    if kind in ("text", "fly", "snap"):
         return
 
 
@@ -2398,11 +3192,32 @@ def g_draw_parts(frame, A, t, parts, zf, pal):
             q = Pose(p.C[0], p.C[1], p.C[2]).project(pts)
             draw_quad(frame, tex, q, alpha=a, blur=blur, resample=Image.BILINEAR)
             continue
+        if kind == "butterfly":
+            s = pd["size"]
+            tt = t - pd["t0"]
+            flap = 0.22 + 0.78 * abs(math.cos(2 * math.pi * 2.6 * tt + pd["ph"]))
+            ang = math.radians(12 * math.sin(2 * math.pi * pd["fr"] * tt + pd["ph"]))
+            pts = []
+            for lx, ly in ((-s * flap, -s * 0.8), (s * flap, -s * 0.8), (s * flap, s * 0.8), (-s * flap, s * 0.8)):
+                pts.append((lx * math.cos(ang) - ly * math.sin(ang), lx * math.sin(ang) + ly * math.cos(ang), 0))
+            q = Pose(p.C[0], p.C[1], p.C[2]).project(pts)
+            draw_quad(frame, tex, q, alpha=a, blur=blur, resample=Image.BILINEAR)
+            continue
+        if kind == "star5":
+            s = pd["size"]
+            ang = math.radians(pd["tph"] * 50 + 40 * (t - pd["t0"]))
+            pts = [(lx * math.cos(ang) - ly * math.sin(ang), lx * math.sin(ang) + ly * math.cos(ang), 0) for lx, ly in ((-s, -s), (s, -s), (s, s), (-s, s))]
+            q = Pose(p.C[0], p.C[1], p.C[2]).project(pts)
+            draw_quad(frame, tex, q, alpha=a, blur=blur * 0.6, resample=Image.BILINEAR)
+            continue
         s = pd["size"]
-        asp = {"leaf": 1.35, "confetti": 1.6, "kamboja": 1.0}.get(kind, 1.2)
+        asp = {"leaf": 1.35, "confetti": 1.6, "kamboja": 1.0, "sequin": 1.0, "melati": 1.0, "goldconf": 1.6}.get(kind, 1.2)
         quad = p.project(rect_pts(s, s * asp))
         fr = facing(quad)
         sh = lambert(p.normal(), back=not fr) * (1.0 if fr else 0.9)
+        if kind == "sequin":
+            nf = p.normal() * (1 if fr else -1)
+            sh *= 1 + 0.9 * max(0.0, float(np.dot(nf, LIGHT))) ** 10
         draw_quad(frame, tex, quad, alpha=a, blur=blur, shade=sh, resample=Image.BILINEAR)
 
 
@@ -2412,10 +3227,13 @@ def render_gallery(t_out, A):
     frame = A["bg"].copy()
     z = 1 + 0.05 * (seg(t, 2.4, 4.6) - seg(t, 12.0, 14.6))
     ph = 2 * math.pi * t / GTL
-    bf, mf = A["bokeh_far"]
-    bn, mn = A["bokeh_near"]
-    draw_layer_affine(frame, bf, mf, 1 + (z - 1) * 0.5, 22 * S * math.sin(ph), 30 * S * math.sin(ph + 1.3))
-    draw_layer_affine(frame, bn, mn, z, -40 * S * math.sin(ph + 0.6), -55 * S * math.sin(ph))
+    if not st.get("no_bokeh"):
+        bf, mf = A["bokeh_far"]
+        bn, mn = A["bokeh_near"]
+        draw_layer_affine(frame, bf, mf, 1 + (z - 1) * 0.5, 22 * S * math.sin(ph), 30 * S * math.sin(ph + 1.3))
+        draw_layer_affine(frame, bn, mn, z, -40 * S * math.sin(ph + 0.6), -55 * S * math.sin(ph))
+    if "bg_anim" in st and st["intro"] != "snap":
+        st["bg_anim"](frame, t)
 
     if "twinkles" in st:  # navy: twinkling stars + shooting star
         for x, y, sz, per, phs in st["twinkles"]:
@@ -2424,7 +3242,7 @@ def render_gallery(t_out, A):
                 c = (CX + (x - 360) * S, CY + (y - 640) * S)
                 hz = sz * S * (0.6 + 0.4 * a)
                 draw_quad(frame, A["sparkle"], [(c[0] - hz, c[1] - hz), (c[0] + hz, c[1] - hz), (c[0] + hz, c[1] + hz), (c[0] - hz, c[1] + hz)], alpha=a * 0.9, resample=Image.BILINEAR)
-        sp = (t - 0.7) / 0.8
+        sp = (t - 0.7) / 0.8 if st["intro"] == "fly" else -1
         if 0 <= sp <= 1:
             a = math.sin(math.pi * sp)
             x0, y0 = lerp(80, 420, ease(sp)), lerp(90, 300, ease(sp))
@@ -2459,20 +3277,34 @@ def render_gallery(t_out, A):
     thresh = cpose.C[2] if card_vis else NEAR_Z
     g_draw_parts(frame, A, t, [p for p in parts if p[0] > thresh], zf, pal)
 
+    unroll = ist.get("unroll")
+
     def card_cb(target):
-        g_draw_card(target, A, cpose, calpha, cblur, clip, t)
+        g_draw_card(target, A, cpose, calpha, cblur, clip, t, unroll)
 
     g_draw_intro(frame, A, t, ist, card_cb)
     if lifted and calpha > 0.003:
         L = seg(t, *G_LIFT)
         rec = seg(t, 9.0, 9.9)
-        cq = cpose.project(rect_pts(CW, CH))
+        cq = cpose.project(rect_pts(CW, CH * (1.0 if unroll is None else max(unroll, 0.02))))
         shadow(frame, [cq], (lerp(6, 16, L), lerp(10, 30, L) * (1 - 0.6 * rec)), lerp(10, 34, L), 0.26 * calpha)
-        g_draw_card(frame, A, cpose, calpha, cblur, None, t)
+        g_draw_card(frame, A, cpose, calpha, cblur, None, t, unroll)
+        if unroll is not None and calpha > 0.003:
+            ra = 1 - seg(t, 3.0, 3.4)
+            if ra > 0.003:
+                for sg in (-1, 1):
+                    yc = sg * (unroll * CH / 2 + 12)
+                    rq = cpose.project(rect_pts(CW + 40, 46, 0, yc, -14))
+                    draw_quad(frame, A["intro_assets"]["roll"], rq, alpha=ra * calpha, shade=lambert(cpose.normal()))
+    if st["intro"] == "snap":
+        st["bg_anim"](frame, t)
 
     # intro text overlays
     if "intro_txt" in st:
-        if st["intro"] == "text":
+        if "intro_txt_t" in st:
+            i0, i1, o0, o1 = st["intro_txt_t"]
+            ia = seg(t, i0, i1) * (1 - seg(t, o0, o1))
+        elif st["intro"] == "text":
             ia = seg(t, 0.2, 1.1) * (1 - seg(t, 1.5, 2.2))
         else:
             ia = seg(t, 0.3, 1.1) * (1 - seg(t, 2.2, 2.9))
@@ -2614,6 +3446,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--style", default="blush", choices=["blush"] + list(STYLES), help="preset; blush = the main 30 s demo")
     ap.add_argument("--gallery", action="store_true", help="render all gallery styles to frontend/public/rawuh/video-contoh/")
+    ap.add_argument("--styles", default=None, help="comma-separated subset of gallery styles to render")
     ap.add_argument("--out", default=None, help="output .mp4 path (poster is written next to it as <stem>-poster.webp)")
     ap.add_argument("--width", type=int, default=None, help="output width (height = 16:9 portrait); default 1080 blush / 720 gallery")
     ap.add_argument("--duration", type=float, default=None, help="seconds; default 30 blush / 15 gallery (timeline is time-scaled)")
@@ -2623,7 +3456,10 @@ def main():
     ap.add_argument("--still-dir", default=None, help="dir for --still output")
     ap.add_argument("--workers", type=int, default=max(1, (os.cpu_count() or 4) - 2))
     args = ap.parse_args()
-    styles = list(STYLES) if args.gallery else [args.style]
+    styles = list(STYLES) if args.gallery else ([x.strip() for x in args.styles.split(",")] if args.styles else [args.style])
+    bad = [x for x in styles if x != "blush" and x not in STYLES]
+    if bad:
+        sys.exit(f"unknown style(s): {bad}")
     for style in styles:
         gallery = style != "blush"
         cfg = (args.width or (720 if gallery else DEF_WIDTH), args.duration or (GTL if gallery else DEF_DUR), args.fps)
@@ -2640,7 +3476,7 @@ def main():
                 _render(t * DUR / tl, A).save(p)
                 print(p)
             continue
-        if args.out and not args.gallery:
+        if args.out and len(styles) == 1:
             out = Path(args.out)
         else:
             out = (GAL_DIR / f"{style}.mp4") if gallery else OUT_MP4
