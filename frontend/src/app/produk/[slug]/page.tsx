@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FinalCta, MarketingPage, SplitTitle } from "@/components/landing/Sections";
+import { ProductVideo } from "@/components/landing/ProductVideo";
 import {
   IconArrowRight, IconCalendar, IconDownload, IconFile, IconGift, IconGlobe, IconImages, IconLink, IconMail, IconMusic,
   IconPin, IconPrinter, IconQr, IconRefresh, IconSparkle, IconTruck, IconUser, IconUsers, IconVideo, IconWifiOff,
@@ -57,6 +58,7 @@ export default async function ProductPage({ params }: PageProps<"/produk/[slug]"
         </div>
         <div className={styles.productVisual}>
           <Image src={product.image} alt={product.name} unoptimized={isRemoteImage(product.image)} fill sizes="(max-width: 900px) 100vw, 560px" preload />
+          {product.video && <ProductVideo src={product.video.src} poster={product.video.poster} label={`Contoh ${product.name}`} />}
           <span className={styles.productBadge}><span>{icon(product.icon, 14)}</span>{product.name}</span>
         </div>
       </section>

@@ -412,3 +412,20 @@
   .partnerCta { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .partnerChat { justify-self: start; rotate: none; }
 }
+
+/* Product example video: a 9:16 phone over the product photo. */
+.productVisual:has(.phoneVideo) img { filter: blur(6px) saturate(1.1); scale: 1.06; }
+.productVisual:has(.phoneVideo) .productBadge { top: 20px; bottom: auto; z-index: 2; }
+.phoneVideo {
+  position: absolute; top: 50%; left: 50%; z-index: 1; width: min(54%, 300px); aspect-ratio: 9 / 16; translate: -50% -50%;
+  overflow: hidden; border: 8px solid #141312; border-radius: 34px; background: #141312; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55);
+}
+.phoneVideo video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.phoneVideoControls { position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; justify-content: space-between; gap: 8px; }
+.phoneVideoControls button {
+  display: inline-flex; align-items: center; gap: 6px; min-width: 40px; height: 40px; justify-content: center; padding: 0 12px; border: 0; border-radius: 999px;
+  background: rgba(20, 19, 18, .62); color: #fff; font-size: 13px; font-weight: 600; backdrop-filter: blur(8px); cursor: pointer;
+}
+.phoneVideoControls button:hover { background: rgba(20, 19, 18, .8); }
+.phoneVideoControls button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.phoneVideoControls button[aria-pressed="true"] { background: rgba(255, 255, 255, .92); color: #141312; }

@@ -9,6 +9,8 @@ export type ProductContent = {
   lead: string;
   price: string;
   image: string;
+  /** Optional looping example video (9:16) shown in a phone frame over the image. */
+  video?: { src: string; poster: string };
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
   stats: Pair[];
@@ -41,6 +43,7 @@ export const defaultProducts: ProductContent[] = [
     lead: "Video 30 detik dengan animasi 3D, nama kalian, dan musik pilihan. Siap untuk story Instagram & status WhatsApp.",
     price: "Rp99rb / video",
     image: "/rawuh/product-video.webp",
+    video: { src: "/rawuh/video-ucapan-demo.mp4", poster: "/rawuh/video-ucapan-demo-poster.webp" },
     primary: { label: "Pesan video", href: "contact" },
     secondary: { label: "Lihat tema", href: "/templates" },
     stats: [["30 dtk", "durasi optimal story"], ["1080p", "kualitas HD vertikal"], ["24 jam", "jadi & siap kirim"]],
