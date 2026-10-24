@@ -1,0 +1,147 @@
+/* Angklung Saung — saung Sunda terbuka: sampul dengan teritis atap kirai dan balok bambu tempat lima angklung tergantung dan berayun, nama mempelai di bawahnya, kartu tamu di dalam nyiru anyaman bambu, rumpun awi berkabut cat air di dasar; hitung mundur di tabung angklung yang tingginya bertangga nada, kartu acara berpita bilik, garis waktu tiang bambu, penutup di tepi kebun bambu. */
+.root, .cover {
+  --bg: #f4ecd6; --paper: #efe4c6; --ivory: #fbf6e7; --field: #fffcf2; --ink: #2f2214; --muted: #5f4c37; --line: #dccb9f;
+  --accent: #34552e; --accent2: #426b3a; --gold: #c9a457; --gold-l: #ecd38f; --gold-d: #7a5526;
+  --band-bg: #2f4a2b; --band-ink: #f7efd8;
+  --wood: #5a3a1c; --awi: #6f9a4f;
+  --display: "Kurale", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Kurale", Georgia, serif; --label: "Karla", system-ui, sans-serif;
+  --h2: 32px; --card-r: 4px;
+  --bilik: url("/themes/art/angklung-saung/bilik.webp");
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #34552e; --t-accent-ink: #f7efd8; --t-bg: #f4ecd6; --t-ink: #2f2214; --t-muted: #5f4c37; --t-line: #dccb9f; --t-field: #fffcf2;
+  --t-radius: 4px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Kurale", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16.5px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 200px; }
+
+/* ── Cover: thatched eave + swinging angklung, names, guest card in a woven nyiru, bamboo grove ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: radial-gradient(90% 40% at 50% 46%, #fbf5e2, transparent 70%), linear-gradient(#efe4c8 0%, #f6eedb 30%, #f1ead3 62%, #e2e4c4 100%); text-align: center; isolation: isolate; }
+.eave { position: relative; z-index: 3; width: 100%; height: 150px; flex-shrink: 0; }
+.eave img { position: absolute; inset: 0 0 auto; display: block; width: 100%; height: auto; }
+.chimes { position: absolute; z-index: 2; inset: 124px 0 auto; height: 160px; pointer-events: none; }
+.chime { position: absolute; top: 0; height: auto; transform-origin: 50% 0; animation: swing 4.8s ease-in-out infinite alternate; }
+.chime:nth-child(1) { left: 3%; width: 54px; top: 4px; animation-delay: -1.2s; }
+.chime:nth-child(2) { left: 20%; width: 64px; top: 16px; animation-delay: -3s; animation-duration: 5.6s; }
+.chime:nth-child(3) { left: calc(50% - 39px); width: 78px; top: 0; animation-delay: -.4s; animation-duration: 6.2s; }
+.chime:nth-child(4) { right: 20%; width: 64px; top: 16px; animation-delay: -2.2s; animation-duration: 5.2s; }
+.chime:nth-child(5) { right: 3%; width: 54px; top: 4px; animation-delay: -4s; }
+.coverText { position: relative; z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 128px; padding: 0 22px; }
+.sampurasun { color: var(--accent); font-family: var(--label); font-size: 13px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; }
+.kicker { color: var(--gold-d); font-family: var(--display); font-size: 18px; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 1px 0 #fffaf0; }
+.coverNames em { margin: 2px 0; color: var(--gold-d); font-size: 30px; font-style: normal; }
+.coverDate { margin-top: 6px; padding: 5px 16px; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); color: var(--ink); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .1em; }
+.grove { position: absolute; z-index: 1; inset: auto 0 0; display: block; width: 100%; height: auto; pointer-events: none; }
+.nyiru { position: relative; z-index: 3; display: grid; place-items: center; width: 218px; height: 218px; margin-top: 18px; padding: 14px; border-radius: 50%; background: var(--bilik) center / 96px; box-shadow: 0 0 0 5px #b58f45, 0 0 0 8px #7a5526, 0 18px 34px rgba(47, 34, 20, .3); }
+.nyiru::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 4px solid #b58f45; pointer-events: none; }
+.cover .guest { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 172px; height: 172px; max-width: none; padding: 14px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fffcf2, #f6ecd2); box-shadow: inset 0 0 0 1px #dccb9f, inset 0 4px 10px rgba(122, 85, 38, .18); }
+.cover .guest small { color: var(--muted); font-size: 12.5px; font-style: italic; line-height: 1.3; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 18px; line-height: 1.2; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); font-weight: 700; }
+.openBtn { position: relative; z-index: 3; margin: 18px 0 30px; height: 50px; background: var(--accent); color: #f7efd8; font-family: var(--label); font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 0 0 3px #f4ecd6, 0 0 0 5px var(--gold), 0 12px 24px rgba(31, 49, 27, .35); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: under the eave, a window of the saung looking out ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 0 50px; background: linear-gradient(var(--paper), var(--bg) 70%); text-align: center; }
+.heroEave { display: block; width: 100%; height: auto; margin-bottom: -6px; position: relative; z-index: 2; }
+.heroWindow { position: relative; width: calc(100% - 48px); margin: -12px 0 18px; padding: 10px; background: var(--bilik) center / 80px; box-shadow: 0 0 0 3px #7a5526, 0 16px 30px rgba(47, 34, 20, .22); }
+.heroPhoto { display: grid; width: 100%; height: 300px; overflow: hidden; box-shadow: 0 0 0 2px #7a5526; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroKicker { color: var(--gold-d); font-family: var(--label); font-size: 12.5px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.heroNames { max-width: 100%; padding: 0 20px; color: var(--accent); font-family: var(--display); font-size: 44px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold-d); font-size: .62em; font-style: normal; }
+.heroDate { color: var(--ink); font-family: var(--label); font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+.heroNote { max-width: 320px; margin-top: 8px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; text-wrap: balance; }
+
+/* opening */
+.salamBlock { padding: 30px 28px 58px; background: var(--bg); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; }
+
+/* couple: bamboo-lashed rectangular frames with a little angklung hanging at the corner */
+.couple { background: linear-gradient(rgba(239, 228, 198, .9), rgba(239, 228, 198, .9)), var(--bilik) 0 0 / 120px; }
+.portrait { margin-bottom: 14px; }
+.portraitFrame { width: 206px; height: 262px; padding: 8px; border: 0; border-radius: 3px; background: linear-gradient(90deg, #d9bd74, #f0dc9e 30%, #c9a457 70%, #b08a41); box-shadow: 0 0 0 2px #7a5526, 0 14px 26px rgba(47, 34, 20, .22); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 1px; }
+.portraitArt { position: absolute; z-index: 2; right: -34px; top: -10px; width: 46px; height: auto; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
+.monogram { color: var(--gold-l); font-family: var(--display); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 44px; }
+.fullName { font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.amp { color: var(--gold-d); font-family: var(--display); font-size: 48px; }
+.amp img { width: 64px; }
+
+/* countdown: four angklung tubes stepping down like a scale */
+.countBand { padding: 62px 18px 64px; background: linear-gradient(rgba(47, 74, 43, .93), rgba(47, 74, 43, .97)), var(--bilik) 0 0 / 110px; }
+.count { align-items: end; grid-template-columns: repeat(4, minmax(0, 70px)); gap: 12px; }
+.count > div { height: 118px; justify-content: flex-end; padding-bottom: 12px; border: 0; border-radius: 28px 28px 6px 6px / 14px 14px 6px 6px; background: linear-gradient(90deg, #b8964c, #f0dc9e 28%, #e3c57c 55%, #a8853f); box-shadow: inset 0 10px 0 -4px rgba(74, 46, 20, .55), 0 8px 16px rgba(0, 0, 0, .25); }
+.count > div:nth-child(2) { height: 104px; }
+.count > div:nth-child(3) { height: 92px; }
+.count > div:nth-child(4) { height: 82px; }
+.count > div::before { content: ""; position: absolute; inset: auto 0 38%; height: 3px; background: rgba(122, 85, 38, .55); }
+.count b { color: #2f2214; font-family: var(--display); font-size: 30px; }
+.count small { color: #4b3317; font-family: var(--label); font-size: 11.5px; font-style: normal; font-weight: 700; letter-spacing: .06em; }
+.ghostBtn { border-color: var(--gold-l); font-family: var(--label); font-weight: 700; }
+
+/* events: cream cards headed by a woven bilik strip */
+.events { background: var(--bg); }
+.event { padding: 40px 22px 26px; border: 1px solid var(--line); border-radius: 4px; background: var(--ivory); box-shadow: 0 10px 24px rgba(47, 34, 20, .08); }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 3px 3px 0 0; background: var(--bilik) 0 0 / 64px; box-shadow: inset 0 -2px 0 #b58f45; }
+.eventNo { top: 26px; left: auto; right: 16px; translate: none; width: 36px; height: 36px; border-radius: 50%; background: var(--accent); color: #f7efd8; font-family: var(--label); font-size: 13px; font-weight: 800; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventTime { color: var(--gold-d); font-family: var(--label); font-weight: 700; }
+.rule { width: 120px; height: 6px; background: url("/themes/art/angklung-saung/daun.webp") center / contain no-repeat; }
+.mapBtn { background: var(--accent); color: #f7efd8; font-family: var(--label); font-size: 14px; font-weight: 700; }
+
+/* story: a bamboo pole with nodes */
+.story { background: var(--paper); }
+.timeline::before { left: 19px; width: 8px; border-radius: 4px; background: repeating-linear-gradient(transparent 0 74px, rgba(90, 58, 28, .7) 74px 77px), linear-gradient(90deg, #b8964c, #f0dc9e 35%, #c9a457); }
+.node { width: 46px; height: 46px; border: 0; background: none; }
+.node img { width: 26px; transform-origin: 50% 0; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); font-weight: 700; }
+.storyBody h3 { font-family: var(--display); font-size: 21px; }
+
+.gallery { background: var(--bg); }
+.tile { border-radius: 2px; box-shadow: 0 0 0 4px #e3c57c, 0 0 0 6px #7a5526; }
+.tile:first-child { border-radius: 2px; }
+.mosaic { gap: 14px; padding: 6px; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 4px; box-shadow: 0 0 0 1px var(--line), 0 12px 26px rgba(47, 34, 20, .08); padding-top: 30px; position: relative; overflow: hidden; }
+.form::before { content: ""; position: absolute; inset: 0 0 auto; height: 10px; background: var(--bilik) 0 0 / 64px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); font-size: 12px; font-weight: 700; }
+.choices button { border-radius: 4px; font-family: var(--label); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { color: #f7efd8; }
+.submit { border-radius: 4px; color: #f7efd8; font-family: var(--label); font-size: 15px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.sentBox img { width: 70px; }
+.wish { border-radius: 4px; border-left: 4px solid var(--gold); }
+.wish strong { font-family: var(--display); font-size: 17px; }
+
+/* gifts */
+.gift { border-radius: 4px; background: linear-gradient(rgba(47, 74, 43, .94), rgba(47, 74, 43, .94)), var(--bilik) 0 0 / 90px; box-shadow: inset 0 0 0 3px #c9a457; }
+.gift::after { display: none; }
+.gift h3 { color: var(--gold-l); font-family: var(--label); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; letter-spacing: 0; line-height: 1.5; }
+.copy { border-color: var(--gold-l); font-family: var(--label); font-weight: 700; }
+
+/* closing: at the edge of the bamboo grove */
+.closing { padding: 60px 26px 300px; background: linear-gradient(var(--bg), #ece6cb); color: var(--ink); }
+.closingGrove { position: absolute; z-index: -1; inset: auto 0 0; display: block; width: 100%; height: auto; }
+.closingEmblem { width: 64px; height: auto; transform-origin: 50% 0; animation: swing 5s ease-in-out infinite alternate; }
+.closing .thanks { color: var(--accent); font-family: var(--display); font-size: 46px; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--label); font-size: 13px; font-weight: 700; }
+.family { color: var(--muted); font-family: var(--label); font-weight: 700; }
+.closingNames { color: var(--accent); font-family: var(--display); }
+.made { color: rgba(47, 34, 20, .6); position: relative; z-index: 1; padding: 4px 12px; border-radius: 999px; background: rgba(251, 246, 231, .8); }
+.made:hover { color: var(--accent); }
+.music { border-color: var(--gold); background: var(--accent); }
+
+@keyframes swing { from { rotate: -3.5deg; } to { rotate: 3.5deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .chime, .portraitArt, .closingEmblem { animation: none; }
+}

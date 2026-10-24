@@ -1,0 +1,179 @@
+/* Botol Attar — toko parfum Arab: botol attar kaca zamrud, delima, nila, dan kecubung bertutup filigri emas di atas rak kayu berukir, mabkhara kuningan dengan gaharu yang berasap, kelopak mawar, dan beludru ungu tua dalam cahaya lampu yang hangat. */
+.root, .cover {
+  --bg: #34122b; --paper: #2a0e23; --ivory: #f8eedb; --field: #fffaf0; --ink: #2c1426; --muted: #6a4a5c; --line: #e2cfae;
+  --accent: #34122b; --accent2: #23091c; --gold: #c9a052; --gold-l: #f1d99c; --gold-d: #8a6424;
+  --cream: #f3e3c8; --rose: #9e1c34; --emerald: #1f6a50;
+  --band-bg: #5a1230; --band-ink: #f8eedb;
+  --display: "Cinzel Decorative", Georgia, serif; --serif: "Cormorant Garamond", Georgia, serif; --script: "Cinzel Decorative", Georgia, serif; --label: "El Messiri", system-ui, sans-serif;
+  --h2: 28px; --card-r: 4px;
+  --velvet: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(243, 184, 106, .14), transparent 70%), repeating-linear-gradient(100deg, rgba(255, 255, 255, .018) 0 2px, transparent 2px 5px), radial-gradient(ellipse at 30% 60%, #3d1633, #2a0e23 80%);
+  --notch: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px);
+  font-family: var(--serif); color: var(--cream); background: var(--velvet); line-height: normal;
+}
+.root {
+  --t-accent: #c9a052; --t-accent-ink: #23091c; --t-bg: #34122b; --t-ink: #f3e3c8; --t-muted: #d8bfae; --t-line: rgba(201, 160, 82, .45); --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Cormorant Garamond", Georgia, serif; --t-heading-font: "Cinzel Decorative", Georgia, serif; --t-heading-weight: 700; --t-heading-size: 26px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 19px; font-weight: 500;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--gold); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.head h2 { color: var(--gold-l); font-family: var(--display); font-weight: 700; }
+.divider { width: 230px; }
+.intro, .parents, .storyBody p, .closingText { font-size: 19px; }
+.intro { color: rgba(243, 227, 200, .88); }
+
+/* ── Opening ── */
+.salamBlock { padding: 52px 26px 58px; }
+.arabic { color: var(--gold-l); font-size: 30px; }
+.salamKicker { font-size: 13px; letter-spacing: .1em; line-height: 1.6; }
+.salamTitle { color: var(--cream); font-family: var(--display); font-size: 32px; font-weight: 700; }
+.salamSub { color: var(--gold); font-family: var(--serif); font-size: 19px; font-style: italic; }
+
+/* ── Couple: monograms inside glass flasks ── */
+.couple { gap: 16px; background: rgba(20, 4, 14, .35); }
+.couple .head h2 { color: var(--gold-l); }
+.portrait { margin: 8px 0 26px; }
+.portraitFrame { width: 196px; height: 250px; padding: 6px; border: 2px solid var(--gold); border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; background: var(--paper); box-shadow: 0 0 0 5px rgba(201, 160, 82, .18), 0 0 40px rgba(243, 184, 106, .25); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; background: radial-gradient(ellipse at 40% 75%, #4fb08a, #1f7a5a 45%, #0d3a2a 95%); color: var(--gold-l); font-family: var(--display); font-size: 88px; font-weight: 700; text-shadow: 0 2px 8px rgba(0, 0, 0, .4); box-shadow: inset 8px 0 14px rgba(255, 255, 255, .14), inset -10px 0 16px rgba(0, 0, 0, .3); }
+.personWrap:last-child .monogram { background: radial-gradient(ellipse at 40% 75%, #e0587a, #a8243a 45%, #4a0a1a 95%); }
+.portraitFrame::before { content: ""; position: absolute; z-index: 2; top: -22px; left: 50%; width: 30px; height: 34px; translate: -50% 0; background: linear-gradient(90deg, #8a6424, #f1d99c 40%, #c9a052 60%, #8a6424); clip-path: polygon(50% 0, 64% 34%, 76% 46%, 64% 58%, 100% 100%, 0 100%, 36% 58%, 24% 46%, 36% 34%); }
+.portraitFrame { overflow: visible; }
+.portraitArt { position: absolute; z-index: 3; bottom: -26px; left: 50%; width: 210px; height: auto; translate: -50% 0; }
+.nick { color: var(--gold-l); font-family: var(--display); font-size: 40px; font-weight: 700; }
+.fullName { color: var(--cream); font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.parents { color: rgba(243, 227, 200, .82); }
+.amp { gap: 14px; margin: 16px 0 10px; color: var(--gold); font-family: var(--display); font-size: 40px; }
+.amp img { width: 34px; }
+.amp img:last-child { scale: 1 1; }
+
+/* ── Countdown: four little flasks on a velvet band ── */
+.countBand { padding: 66px 18px 62px; background: radial-gradient(ellipse at 50% 40%, #7a1a3c, #4a0d26 80%); border-block: 1.5px solid var(--gold); }
+.smoke { position: absolute; z-index: -1; bottom: 40px; width: 90px; height: auto; opacity: .55; animation: rise 9s var(--m-ease) infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--ivory); font-family: var(--display); font-weight: 700; }
+.count { gap: 12px; margin-top: 16px; }
+.count > div { height: 92px; overflow: visible; border: 1.5px solid var(--gold); border-radius: 50% 50% 40% 40% / 40% 40% 60% 60%; background: radial-gradient(ellipse at 40% 80%, rgba(255, 240, 210, .28), rgba(255, 255, 255, .06) 60%), rgba(20, 4, 14, .35); }
+.count > div::before { content: ""; position: absolute; top: -16px; left: 50%; width: 16px; height: 18px; translate: -50% 0; background: linear-gradient(90deg, #8a6424, #f1d99c 45%, #8a6424); clip-path: polygon(50% 0, 70% 45%, 100% 100%, 0 100%, 30% 45%); }
+.count > div::after { display: none; }
+.count b { color: var(--gold-l); font-family: var(--serif); font-size: 34px; font-weight: 700; }
+.count small { color: var(--cream); font-family: var(--label); font-size: 13px; font-style: normal; font-weight: 600; letter-spacing: .08em; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 1.5px solid var(--gold); border-radius: 4px; color: var(--gold-l); font-family: var(--label); font-size: 15px; font-weight: 600; }
+
+/* ── Events: perfume labels with notched corners ── */
+.events { gap: 24px; }
+.event { padding: 32px 24px 28px; border: 0; border-radius: 0; background: var(--gold); clip-path: var(--notch); color: var(--ink); }
+.event::before { inset: 2px; border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--notch); z-index: -1; }
+.event { isolation: isolate; }
+.event::after { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(138, 100, 36, .55); clip-path: var(--notch); pointer-events: none; }
+.event:hover { box-shadow: none; translate: 0 -2px; }
+.eventNo { top: 12px; width: auto; height: auto; padding: 0; background: none; color: var(--gold-d); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .3em; }
+.event h3 { margin-top: 6px; color: var(--accent); font-family: var(--display); font-size: 25px; font-weight: 700; }
+.eventDate { color: var(--ink); font-size: 19px; font-weight: 600; }
+.eventTime { color: var(--rose); font-family: var(--label); font-size: 16px; font-weight: 600; }
+.rule { width: 70px; background: var(--gold); }
+.event strong { color: var(--accent); font-size: 20px; font-weight: 700; }
+.eventAddr { color: var(--muted); font-size: 17px; font-weight: 500; }
+.mapBtn { position: relative; z-index: 1; border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--label); font-size: 15px; font-weight: 600; }
+.mapBtn:hover { background: var(--rose); }
+
+/* ── Story ── */
+.story { background: rgba(20, 4, 14, .3); }
+.timeline::before { left: 21px; background: linear-gradient(var(--gold), rgba(201, 160, 82, .15)); }
+.node { width: 44px; height: 56px; border: 0; border-radius: 0; background: transparent; }
+.node img { width: 26px; }
+.storyBody small { color: var(--gold); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .16em; }
+.storyBody h3 { color: var(--gold-l); font-family: var(--display); font-size: 21px; font-weight: 700; }
+.storyBody p { color: rgba(243, 227, 200, .86); }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 160px; }
+.tile { border-radius: 4px; box-shadow: 0 0 0 1.5px var(--gold); }
+.tile:first-child { border-radius: 50% 50% 4px 4px / 32% 32% 4px 4px; }
+
+/* ── Wishes ── */
+.form { border: 0; border-radius: 0; background: var(--ivory); clip-path: var(--notch); box-shadow: none; color: var(--ink); padding: 26px 20px; }
+.field > span, .diet, .guestsLabel { color: var(--rose); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .12em; }
+.field input, .field textarea { border-radius: 4px; font-family: var(--serif); font-size: 18px; font-weight: 500; }
+.choices button { border-radius: 4px; color: var(--muted); font-family: var(--label); font-size: 15px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.guests { color: var(--ink); }
+.step { border-radius: 4px; border-color: var(--gold-d); color: var(--accent); }
+.submit { border-radius: 4px; background: var(--accent); color: var(--gold-l); font-family: var(--label); font-size: 16px; font-weight: 600; letter-spacing: .1em; }
+.submit:not(:disabled):hover { background: var(--rose); }
+.sent { color: var(--accent); }
+.closed { color: var(--ink); }
+.closed p { color: var(--muted); }
+.empty { color: var(--cream); }
+.wish { border: 1px solid rgba(201, 160, 82, .4); border-radius: 4px; background: rgba(248, 238, 219, .06); }
+.wish strong { color: var(--gold-l); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.wish small { border-radius: 4px; background: rgba(201, 160, 82, .18); color: var(--gold-l); font-family: var(--label); font-weight: 600; }
+.wish p { color: rgba(243, 227, 200, .88); font-size: 18px; }
+
+/* ── Gifts: emerald velvet with gold ── */
+.gifts .intro { color: rgba(243, 227, 200, .88); }
+.gift { border: 1.5px solid var(--gold); border-radius: 4px; background: radial-gradient(ellipse at 50% 0, #2c7a5c, #13402f 85%); }
+.gift::after { border-color: rgba(241, 217, 156, .08); }
+.gift h3 { color: var(--gold-l); font-family: var(--label); font-size: 18px; font-weight: 600; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 23px; font-weight: 700; }
+.gift small { font-size: 17px; }
+.gift:last-of-type .giftNo { font-size: 20px; line-height: 1.35; }
+.copy { border-radius: 4px; border-color: var(--gold); color: var(--gold-l); font-family: var(--label); font-size: 14px; font-weight: 600; }
+
+/* ── Closing ── */
+.closing { padding: 34px 26px 60px; background: transparent; }
+.closingScene { display: block; width: calc(100% + 52px); max-width: none; height: auto; margin: 0 -26px 10px; }
+.closingEmblem { position: relative; width: 120px; height: 160px; }
+.closingEmblem > img:first-child { position: absolute; bottom: 0; left: 0; width: 120px; height: auto; }
+.closingEmblem > img:last-child { position: absolute; bottom: 90px; left: 32px; width: 56px; height: auto; opacity: .7; animation: rise 8s var(--m-ease) infinite; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 38px; font-weight: 700; }
+.closingSalam { color: var(--gold); font-family: var(--label); font-size: 14px; }
+.family { font-family: var(--label); font-size: 15px; }
+.closingNames { color: var(--cream); font-family: var(--display); font-size: 30px; font-weight: 700; }
+.music { border-radius: 50% 50% 40% 40%; border-color: var(--gold); background: var(--rose); }
+
+/* ── Cover: the shelf of attar, a perfume label, the mabkhara smoking at its foot ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 20px 30px; overflow: hidden; text-align: center; isolation: isolate; }
+.shelf { width: calc(100% + 40px); margin: 0 -20px; }
+.shelf img { display: block; width: 100%; height: auto; }
+.label { position: relative; z-index: 1; width: 100%; max-width: 340px; margin-top: -4px; padding: 2px; background: var(--gold); clip-path: var(--notch); }
+.labelIn { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 24px 20px 22px; background: radial-gradient(ellipse at 50% 0, #fffaf0, var(--ivory) 70%); clip-path: var(--notch); color: var(--ink); }
+.labelIn::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(138, 100, 36, .6); clip-path: var(--notch); pointer-events: none; }
+.coverArabic { color: var(--rose); font-family: Amiri, serif; font-size: 22px; line-height: 1.5; }
+.kicker { color: var(--gold-d); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 38px; font-weight: 700; line-height: 1.12; overflow-wrap: anywhere; }
+.coverNames em { color: var(--rose); font-family: var(--serif); font-size: 30px; font-style: italic; font-weight: 600; }
+.coverDate { padding: 4px 14px; border-block: 1px solid var(--gold); color: var(--ink); font-family: var(--label); font-size: 16px; font-weight: 600; letter-spacing: .06em; }
+.guest small { color: var(--muted); font-size: 16px; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 700; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); font-size: 13px; font-weight: 600; }
+.openBtn { position: relative; z-index: 1; margin-top: 22px; border: 1.5px solid var(--gold-l); border-radius: 4px; background: linear-gradient(180deg, #e2bd6c, #b98a3c); color: var(--accent2); font-family: var(--label); font-size: 16px; font-weight: 700; letter-spacing: .1em; box-shadow: 0 8px 22px rgba(0, 0, 0, .4); }
+.openBtn:hover { background: linear-gradient(180deg, #f1d99c, #c9a052); }
+.burner { position: absolute; z-index: 0; bottom: 6px; left: -14px; width: 104px; }
+.burner img:first-child { display: block; width: 100%; height: auto; }
+.burner img:last-child { position: absolute; bottom: 58px; left: 28px; width: 48px; height: auto; opacity: .7; animation: rise 8s var(--m-ease) infinite; }
+.petals { position: absolute; z-index: 0; right: -30px; bottom: 4px; width: 180px; height: auto; opacity: .95; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 22px 46px; text-align: center; }
+.heroKicker { color: var(--gold); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--gold-l); font-family: var(--display); font-size: 40px; font-weight: 700; line-height: 1.1; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--cream); font-family: var(--serif); font-size: 28px; font-weight: 500; }
+.heroDate { color: var(--cream); font-family: var(--label); font-size: 17px; font-weight: 600; letter-spacing: .1em; }
+.heroStill { position: relative; width: 300px; max-width: 100%; height: 300px; margin-top: 18px; }
+.heroStill::before { content: ""; position: absolute; inset: 20% 4% 6%; border-radius: 50%; background: radial-gradient(circle, rgba(243, 184, 106, .45), transparent 70%); }
+.heroStill img { position: absolute; height: auto; }
+.heroBottle { bottom: 18px; left: 50%; width: 140px; translate: -58% 0; }
+.heroBurner { bottom: 10px; right: 6px; width: 104px; }
+.heroSmoke { bottom: 132px; right: 34px; width: 52px; opacity: .65; animation: rise 8s var(--m-ease) 2s infinite; }
+.heroPetals { bottom: 0; left: -10px; width: 170px; }
+.heroNote { max-width: 320px; margin-top: 8px; color: rgba(243, 227, 200, .88); font-size: 20px; font-style: italic; line-height: 1.55; }
+
+@keyframes rise { 0% { opacity: 0; translate: 0 18px; scale: .9 .85; } 30% { opacity: .75; } 100% { opacity: 0; translate: 6px -40px; scale: 1.1 1.15; } }
+@media (prefers-reduced-motion: reduce) {
+  .burner img:last-child, .heroSmoke, .smoke, .closingEmblem > img:last-child { animation: none; opacity: .5; }
+}
+
+/* the quote extra reads better in the body serif than in the decorative caps */
+.root blockquote p { font-family: var(--serif); font-size: 19px; font-weight: 500; }

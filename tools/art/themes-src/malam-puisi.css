@@ -1,0 +1,155 @@
+/* Malam Puisi — undangan malam puisi komunitas sastra (bukan pernikahan): panggung kecil kedai-teater dalam lukisan gouache hangat, dinding papan, tirai beludru marun, untaian bohlam, satu sorot lampu pada mikrofon antik, dua kursi kayu, buku catatan terbuka dan lilin; sampul seperti selebaran acara: lukisan panggung di atas, judul IM Fell English krem dan baris mesin tik Courier Prime, karcis bergerigi untuk tamu; halaman berganti antara kertas buku bergaris dengan garis margin merah dan panggung gelap; lilin yang berkedip pelan. */
+.root, .cover {
+  --bg: #1d1210; --paper: #f4ead6; --ivory: #fbf4e6; --field: #fffaf0; --ink: #2b1a14; --muted: #6a5546; --line: rgba(43, 26, 20, .18);
+  --accent: #6e1620; --accent2: #8a2029; --gold: #c99a45; --gold-l: #f0cf8e; --gold-d: #9a6f2a;
+  --band-bg: #1d1210; --band-ink: #f4ead6;
+  --stage: #1d1210; --stage2: #2a1914; --cream: #f4ead6; --muted-d: #c7b49b; --marun: #6e1620;
+  --display: "IM Fell English", Georgia, serif; --serif: "Crimson Pro", Georgia, serif; --script: "IM Fell English", Georgia, serif; --type: "Courier Prime", ui-monospace, monospace;
+  --scene: url("/themes/art/malam-puisi/panggung.webp");
+  --ruled: linear-gradient(90deg, transparent 34px, rgba(184, 53, 44, .4) 34px 35.5px, transparent 35.5px), repeating-linear-gradient(180deg, transparent 0 33px, rgba(96, 128, 160, .22) 33px 34px);
+  --h2: 34px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #6e1620; --t-accent-ink: #f4ead6; --t-bg: #f4ead6; --t-ink: #2b1a14; --t-muted: #6a5546; --t-line: rgba(43, 26, 20, .2); --t-field: #fffaf0;
+  --t-radius: 4px; --t-font: "Crimson Pro", Georgia, serif; --t-heading-font: "IM Fell English", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 18px;
+}
+.main { background: var(--ruled), var(--paper); }
+.eyebrow, .role, .salamKicker { color: var(--accent); font-family: var(--type); font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); font-weight: 400; }
+.headLight h2 { color: var(--cream); font-family: var(--display); font-weight: 400; }
+.headLight .eyebrow { color: var(--gold-l); }
+.divider { width: 190px; }
+
+/* opening: a page torn from the notebook */
+.salamBlock { padding: 56px 30px 60px; }
+.salamTitle { color: var(--ink); font-family: var(--display); font-size: 36px; font-style: italic; line-height: 1.15; text-wrap: balance; }
+.intro { max-width: 320px; color: var(--muted); font-size: 18px; line-height: 1.85; }
+
+/* hosts: featured poet + community, on a dark stage with spotlit monograms */
+.couple { gap: 30px; padding: 64px 24px 70px; background: radial-gradient(ellipse 70% 30% at 50% 0, rgba(255, 200, 120, .18), transparent 70%), var(--stage); }
+.couple .head h2 { color: var(--cream); }
+.couple .eyebrow { color: var(--gold-l); }
+.person { padding: 30px 20px 26px; border: 1px solid rgba(240, 207, 142, .3); background: linear-gradient(180deg, #2c1a15, #1d1210); }
+.portrait { margin-bottom: 14px; }
+.portraitArt { position: absolute; z-index: 2; right: -40px; bottom: -6px; width: 48px; height: auto; rotate: 8deg; }
+.portraitFrame { width: 136px; height: 136px; padding: 0; border: 1.5px solid var(--gold); border-radius: 50%; background: radial-gradient(circle at 50% 35%, #ffe2a8, #e0a24f 45%, #6e3a1c 80%); box-shadow: 0 0 40px rgba(255, 190, 110, .35); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { color: #2b1a14; font-family: var(--display); font-size: 70px; }
+.role { color: var(--gold-l); }
+.nick { color: var(--cream); font-family: var(--display); font-size: 36px; line-height: 1.1; }
+.fullName { color: var(--gold-l); font-family: var(--type); font-size: 13.5px; letter-spacing: .04em; }
+.parents { max-width: 290px; margin-top: 8px; color: var(--muted-d); font-size: 17px; font-style: italic; line-height: 1.5; }
+
+/* countdown under the bulbs */
+.countBand { padding: 66px 18px 62px; background: linear-gradient(rgba(29, 18, 16, .5), rgba(29, 18, 16, .92) 70%), var(--scene) 50% 4% / 140% auto no-repeat, var(--stage); border-top: 3px double rgba(240, 207, 142, .35); }
+.count > div { height: 92px; border: 1px solid rgba(240, 207, 142, .4); border-radius: 2px; background: rgba(43, 26, 20, .7); }
+.count > div::after { display: none; }
+.count b { color: var(--cream); font-family: var(--type); font-size: 32px; font-weight: 700; }
+.count small { color: var(--gold-l); font-family: var(--type); font-size: 11px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--cream); font-family: var(--type); }
+.ghostBtn { border-radius: 2px; border-color: var(--gold); color: var(--cream); font-family: var(--type); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+
+/* events: admission tickets on the dark stage */
+.events { background: var(--stage); }
+.events .head h2 { color: var(--cream); }
+.events .eyebrow { color: var(--gold-l); }
+.event { align-items: flex-start; padding: 24px 22px 22px 26px; border: 0; border-radius: 4px; background: radial-gradient(circle at 0 50%, var(--stage) 11px, transparent 12px), radial-gradient(circle at 100% 50%, var(--stage) 11px, transparent 12px), var(--ivory); text-align: left; box-shadow: 0 16px 30px rgba(0, 0, 0, .45); }
+.event::before { inset: 10px 10px 10px auto; width: 0; border: 0; border-left: 2px dashed rgba(110, 22, 32, .3); border-radius: 0; right: 64px; left: auto; }
+.event:hover { box-shadow: 0 20px 36px rgba(0, 0, 0, .55); }
+.eventNo { position: absolute; top: 50%; right: 14px; left: auto; translate: 0 -50%; display: block; width: auto; height: auto; padding: 0; background: none; color: var(--accent); font-family: var(--type); font-size: 13px; font-weight: 700; letter-spacing: .1em; writing-mode: vertical-rl; rotate: 180deg; white-space: nowrap; }
+.eventNo::before { content: "KARCIS No. "; }
+.event h3 { max-width: calc(100% - 50px); color: var(--ink); font-family: var(--display); font-size: 25px; text-align: left; }
+.eventDate { color: var(--accent); font-family: var(--type); font-size: 14px; font-style: normal; font-weight: 700; }
+.eventTime { color: var(--ink); font-family: var(--type); font-size: 14px; }
+.rule { width: 50px; height: 2px; background: var(--accent); }
+.event strong { max-width: calc(100% - 50px); color: var(--ink); font-size: 18px; font-weight: 600; }
+.eventAddr { max-width: calc(100% - 50px); color: var(--muted); font-size: 16px; text-align: left; }
+.mapBtn { border-radius: 2px; background: var(--accent); color: var(--cream); font-family: var(--type); font-size: 13px; font-weight: 700; letter-spacing: .04em; box-shadow: none; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story = the line-up, written in the notebook */
+.story { background: transparent; }
+.timeline { gap: 22px; }
+.timeline::before { left: 21px; width: 0; border-left: 1.5px dashed rgba(43, 26, 20, .4); background: none; }
+.node { width: 42px; height: 42px; border: 1px solid var(--ink); background: var(--ivory); }
+.node img { width: 16px; }
+.storyBody small { color: var(--accent); font-family: var(--type); font-size: 15px; font-weight: 700; letter-spacing: .04em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 23px; }
+.storyBody p { color: var(--muted); font-size: 17px; }
+
+/* wishes = audience notes */
+.wishes { background: transparent; }
+.form { border: 1px solid var(--line); border-radius: 2px; background: var(--ivory); box-shadow: 4px 6px 0 rgba(43, 26, 20, .12); rotate: -.4deg; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--type); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+.field input, .field textarea { border-color: rgba(43, 26, 20, .25); border-radius: 2px; font-family: var(--serif); font-size: 17px; }
+.field input:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(110, 22, 32, .14); }
+.choices button { border-color: rgba(43, 26, 20, .25); border-radius: 2px; font-family: var(--type); font-size: 13px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+.step { border-color: var(--ink); border-radius: 2px; color: var(--ink); }
+.submit { border-radius: 2px; background: var(--accent); color: var(--cream); font-family: var(--type); font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--ink); font-family: var(--display); }
+.wish { border-radius: 2px; border-color: var(--line); background: #fffbf0; box-shadow: 2px 3px 0 rgba(43, 26, 20, .08); }
+.wish:nth-child(even) { rotate: .5deg; }
+.wish:nth-child(odd) { rotate: -.4deg; }
+.wish strong { color: var(--ink); font-family: var(--type); font-size: 14px; font-weight: 700; }
+.wish small { border-radius: 2px; background: rgba(110, 22, 32, .1); color: var(--accent); font-family: var(--type); }
+.wish p { color: var(--ink); font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.45; }
+
+/* donations */
+.gifts { background: var(--stage); }
+.gifts .head h2 { color: var(--cream); }
+.gifts .eyebrow { color: var(--gold-l); }
+.gifts .intro { color: var(--muted-d); }
+.gift { border: 1px solid rgba(240, 207, 142, .3); border-radius: 2px; background: #2a1914; }
+.gift h3 { color: var(--gold-l); font-family: var(--type); font-size: 14px; font-weight: 700; }
+.giftNo { color: var(--cream); font-family: var(--type); font-size: 22px; font-weight: 700; }
+.copy { border-radius: 2px; color: var(--gold-l); font-family: var(--type); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--ink); }
+
+/* closing: one candle left burning */
+.closing { padding: 74px 28px 62px; background: radial-gradient(ellipse 60% 34% at 50% 18%, rgba(255, 190, 110, .22), transparent 70%), var(--stage); border-top: 3px double rgba(240, 207, 142, .3); }
+.candle { position: relative; width: 70px; height: 105px; }
+.candle img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.candle img:last-child { transform-origin: 50% 70%; animation: flicker 2.6s ease-in-out infinite; }
+.thanks { color: var(--cream); font-family: var(--display); font-size: 44px; font-style: italic; }
+.closingText { color: var(--muted-d); font-size: 18px; }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-size: 28px; }
+.made { color: rgba(244, 234, 214, .5); }
+.music { border-radius: 2px; border-color: var(--gold); background: var(--stage); }
+
+/* ── Cover: event flyer — the painted stage, then typewritten programme ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 22px 26px; overflow: hidden; background: var(--scene) 50% 0 / 100% auto no-repeat, var(--stage); color: var(--cream); text-align: center; isolation: isolate; container-type: inline-size; }
+.beam { position: absolute; z-index: -1; top: 0; left: 50%; width: 70%; height: 46%; translate: -50% 0; background: radial-gradient(ellipse 50% 100% at 50% 0, rgba(255, 214, 150, .16), transparent 70%); animation: breathe 6s ease-in-out infinite; pointer-events: none; }
+.stageGap { flex: 0 0 auto; height: min(112cqw, 54dvh); }
+.flyer { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; padding-top: 6px; }
+.flyer::before { content: ""; position: absolute; z-index: -1; inset: -40px -22px auto; height: 160px; background: linear-gradient(rgba(29, 18, 16, 0), rgba(29, 18, 16, .85) 45%, var(--stage)); }
+.presents { color: var(--gold-l); font-family: var(--type); font-size: 12.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-shadow: 0 1px 6px rgba(0, 0, 0, .8); }
+.title { max-width: 100%; margin-top: 4px; color: var(--cream); font-family: var(--display); font-size: 62px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 2px 16px rgba(0, 0, 0, .7); }
+.with { margin-top: 8px; color: var(--gold-l); font-family: var(--display); font-size: 21px; font-style: italic; }
+.with b { color: var(--cream); font-weight: 400; }
+.meta { display: flex; flex-direction: column; align-items: center; gap: 2px; margin-top: 12px; color: var(--cream); font-family: var(--type); font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+.ticket { position: relative; display: flex; align-items: stretch; width: 100%; max-width: 330px; margin-top: 22px; border-radius: 3px; background: radial-gradient(circle at 74% 0, var(--stage) 9px, transparent 10px), radial-gradient(circle at 74% 100%, var(--stage) 9px, transparent 10px), var(--ivory); color: var(--ink); text-align: left; box-shadow: 0 12px 26px rgba(0, 0, 0, .5); }
+.ticket .guest { flex: 1; align-items: flex-start; max-width: none; padding: 14px 10px 14px 16px; }
+.ticket .guest small { color: var(--muted); font-family: var(--type); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .04em; }
+.ticket .guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; text-align: left; }
+.stub { display: grid; place-items: center; width: 26%; padding: 8px; border-left: 2px dashed rgba(110, 22, 32, .35); color: var(--accent); font-family: var(--type); font-size: 11px; font-weight: 700; letter-spacing: .06em; line-height: 1.3; text-align: center; text-transform: uppercase; }
+.stub b { display: block; font-size: 15px; }
+.openBtn { margin-top: 20px; border-radius: 2px; background: var(--gold-l); color: var(--ink); font-family: var(--type); font-size: 14px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 0 26px rgba(255, 200, 120, .3); }
+.openBtn:hover { background: #ffe0a6; }
+
+/* ── Hero: the notebook on the page ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 58px 26px 30px; text-align: center; }
+.heroBook { width: 280px; height: auto; rotate: -3deg; filter: drop-shadow(0 12px 14px rgba(43, 26, 20, .25)); }
+.heroLabel { margin-top: 22px; color: var(--accent); font-family: var(--type); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroTitle { max-width: 100%; margin-top: 6px; color: var(--ink); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.heroWith { margin-top: 8px; color: var(--muted); font-family: var(--display); font-size: 20px; font-style: italic; }
+.heroWith b { color: var(--ink); font-weight: 400; }
+.heroDate { margin-top: 12px; padding: 4px 10px; background: var(--ink); color: var(--cream); font-family: var(--type); font-size: 14px; font-weight: 700; }
+.heroNote { max-width: 300px; margin-top: 18px; color: var(--ink); font-family: var(--display); font-size: 20px; font-style: italic; line-height: 1.5; }
+
+@keyframes flicker { 0%, 100% { opacity: 1; scale: 1; } 30% { opacity: .82; scale: .97 1.03; } 55% { opacity: .95; scale: 1.02 .98; } 75% { opacity: .85; scale: .98 1.02; } }
+@media (max-height: 740px) { .stageGap { height: 40dvh; } .title { font-size: 52px; } }
+@media (prefers-reduced-motion: reduce) { .beam, .candle img:last-child { animation: none; } }

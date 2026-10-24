@@ -1,0 +1,171 @@
+/* Pasar Malam — Poster gouache retro pasar malam Indonesia: langit malam hijau-biru tua dengan bulan dan kabut lampu jingga, bianglala besar bergondola warna-warni, komidi putar berkuda kayu, deretan lapak beratap belang, untaian lampu bohlam; kartu tamu berupa gondola yang berayun, potret dalam gondola, acara di bawah tenda lapak, foto ala photobox; Shrikhand + Bricolage Grotesque. */
+
+.root, .cover {
+  font-variant-numeric: lining-nums;
+  --bg: #fbf1df; --paper: #f5e4c6; --ivory: #fffaf0; --field: #fffdf8; --ink: #13303c; --muted: #4f5f63; --line: #e6d3b2;
+  --accent: #13303c; --accent2: #0c2430; --gold: #f2b632; --gold-l: #ffd77a; --gold-d: #b9801a;
+  --night: #0f2a36; --night-2: #173f4b; --coral: #e8553f; --coral-d: #c23f2f; --mustard: #f2b632; --mint: #6cc2a6; --pink: #f39bb5; --sky: #4f8fc0;
+  --band-bg: #0f2a36; --band-ink: #fbefd8;
+  --display: Shrikhand, Georgia, serif; --serif: "Bricolage Grotesque", system-ui, sans-serif; --script: Shrikhand, Georgia, serif;
+  --h2: 32px; --card-r: 16px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #e8553f; --t-accent-ink: #ffffff; --t-bg: #fbf1df; --t-ink: #13303c; --t-muted: #4f5f63; --t-line: #e6d3b2; --t-field: #fffdf8;
+  --t-radius: 14px; --t-font: "Bricolage Grotesque", system-ui, sans-serif; --t-heading-font: Shrikhand, Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) repeating-linear-gradient(90deg, transparent 0 36px, rgba(232, 85, 63, .035) 36px 72px); }
+
+.eyebrow, .salamKicker, .role { color: var(--coral); font-family: var(--serif); font-size: 12.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); line-height: 1.12; text-shadow: 2px 2px 0 var(--gold-l); }
+.divider { width: 190px; height: auto; margin-top: 2px; }
+.intro { color: var(--muted); }
+
+/* opening */
+.salamBlock { padding: 46px 28px 56px; }
+.salamKicker { color: var(--night-2); }
+.salamTitle { color: var(--coral); font-family: var(--display); font-size: 36px; line-height: 1.12; }
+.salamSub { color: var(--ink); font-weight: 700; }
+
+/* couple: each portrait rides a gondola — cabin with a roof and a hanger bar */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; padding-top: 44px; }
+.roof { position: absolute; z-index: 2; top: 14px; left: 50%; width: 238px; height: 40px; translate: -50% 0; border-radius: 120px 120px 8px 8px / 40px 40px 8px 8px; background: repeating-linear-gradient(90deg, var(--coral) 0 22px, var(--ivory) 22px 44px); box-shadow: 0 4px 0 var(--coral-d); }
+.roof::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 4px; height: 16px; margin-left: -2px; background: var(--night); }
+.portraitFrame { width: 214px; height: 262px; padding: 9px; border: 0; border-radius: 10px 10px 70px 70px; background: var(--mustard); box-shadow: inset 0 -8px 0 rgba(0, 0, 0, .12), 0 16px 30px rgba(15, 42, 54, .22); }
+.personWrap:nth-child(3) .portraitFrame { background: var(--mint); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 6px 6px 62px 62px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--night); color: var(--gold-l); font-family: var(--display); font-size: 84px; }
+.nick { color: var(--ink); font-family: var(--display); font-size: 46px; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { margin: 6px 0 10px; color: var(--coral); font-family: var(--display); font-size: 46px; }
+.amp img { width: 34px; }
+
+/* countdown: four little gondolas swinging under the night sky */
+.countBand { padding: 80px 18px 70px; background: linear-gradient(180deg, var(--night), var(--night-2)); }
+.countLampu { position: absolute; z-index: -1; top: -6px; left: -5%; width: 110%; max-width: none; height: auto; animation: pmTwinkle 2.6s steps(2, end) infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 10px; padding-top: 18px; }
+.count > div { height: 92px; overflow: visible; border: 0; border-radius: 8px 8px 30px 30px; background: var(--coral); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .14); transform-origin: 50% -18px; animation: pmSwing 4.5s ease-in-out infinite alternate; }
+.count > div:nth-child(2) { background: var(--mustard); animation-delay: -1.2s; }
+.count > div:nth-child(3) { background: var(--mint); animation-delay: -2.1s; }
+.count > div:nth-child(4) { background: var(--pink); animation-delay: -3s; }
+.count > div::before { content: ""; position: absolute; bottom: 100%; left: 50%; width: 3px; height: 16px; margin-left: -1.5px; background: var(--band-ink); opacity: .8; }
+.count > div::after { display: none; }
+.count b { color: var(--night); font-family: var(--display); font-size: 30px; line-height: 1.1; }
+.count small { color: var(--night); font-size: 11.5px; font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 2px solid var(--gold-l); color: var(--band-ink); font-family: var(--serif); font-weight: 800; }
+
+/* events: each card is a lapak with a striped scalloped awning */
+.events { gap: 30px; }
+.event { padding: 98px 22px 26px; overflow: hidden; border: 0; border-radius: 16px; background: var(--ivory); box-shadow: 0 12px 26px rgba(15, 42, 54, .12), inset 0 0 0 2px var(--line); }
+.event::before { inset: 0 0 auto; height: 40px; border: 0; border-radius: 0; background: repeating-linear-gradient(90deg, var(--coral) 0 22px, var(--ivory) 22px 44px); -webkit-mask: radial-gradient(circle at 11px 30px, #000 10.5px, transparent 11px) 0 0 / 22px 40px repeat-x, linear-gradient(#000, #000) 0 0 / 100% 30px no-repeat; mask: radial-gradient(circle at 11px 30px, #000 10.5px, transparent 11px) 0 0 / 22px 40px repeat-x, linear-gradient(#000, #000) 0 0 / 100% 30px no-repeat; }
+.events .event:nth-of-type(2n)::before { background: repeating-linear-gradient(90deg, var(--mint) 0 22px, var(--ivory) 22px 44px); }
+.eventNo { top: 48px; width: 40px; height: 40px; border-radius: 50%; background: var(--night); color: var(--gold-l); font-family: var(--display); font-size: 15px; letter-spacing: 0; }
+.event h3 { color: var(--ink); font-family: var(--display); font-size: 25px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--coral-d); font-family: var(--serif); font-weight: 800; }
+.rule { width: 100%; height: 3px; background: radial-gradient(circle, var(--mustard) 1.6px, transparent 2px) 0 0 / 12px 3px repeat-x; }
+.mapBtn { border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 800; box-shadow: 0 4px 0 var(--coral-d); }
+.mapBtn:hover { background: var(--coral-d); }
+
+/* story: a dotted bulb wire, gulali as nodes */
+.story { background: var(--paper); }
+.timeline::before { left: 21px; width: 4px; background: radial-gradient(circle, var(--coral) 2px, transparent 2.4px) 0 0 / 4px 12px repeat-y; }
+.node { width: 40px; height: 40px; border: 3px solid var(--ivory); background: var(--pink); }
+.node img { width: 18px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 14px; background: var(--ivory); box-shadow: 0 6px 0 var(--line); }
+.storyBody small { color: var(--coral); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; }
+
+/* gallery: photobox prints, slightly askew */
+.mosaic { gap: 12px; grid-auto-rows: 140px; }
+.tile, .tile:first-child { border: 7px solid #fff; border-radius: 4px; box-shadow: 0 8px 16px rgba(15, 42, 54, .16); }
+.tile:nth-child(odd) { rotate: -1.4deg; }
+.tile:nth-child(even) { rotate: 1.2deg; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 18px; box-shadow: inset 0 0 0 2px var(--line), 0 8px 0 var(--line); }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.choices button { border-radius: 999px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--night); background: var(--night); color: var(--gold-l); }
+.step { border-color: var(--night); color: var(--night); }
+.submit { border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 15.5px; font-weight: 800; box-shadow: 0 4px 0 var(--coral-d); }
+.submit:not(:disabled):hover { background: var(--coral-d); }
+.wish { border: 0; border-radius: 14px; box-shadow: inset 0 0 0 2px var(--line); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 16.5px; font-weight: 800; }
+.wish small { background: color-mix(in srgb, var(--mint) 28%, transparent); color: #1f5e4c; font-weight: 700; }
+.sentBox img { width: 70px; }
+.sent { color: var(--ink); font-family: var(--display); font-style: normal; }
+
+/* gifts: night signboards rimmed with bulbs */
+.gift { border-radius: 16px; background: var(--night); outline: 4px dotted var(--gold-l); outline-offset: -10px; }
+.gift::after { display: none; }
+.gift h3 { color: var(--gold-l); font-family: var(--display); font-size: 18px; letter-spacing: .02em; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 22px; font-weight: 800; letter-spacing: .06em; }
+.gifts .gift:last-of-type .giftNo { font-size: 16px; font-weight: 600; letter-spacing: 0; line-height: 1.5; }
+.copy { border: 2px solid var(--gold-l); border-radius: 999px; color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--night); }
+
+/* closing: the carousel under the stars */
+.closing { padding: 36px 26px 60px; background: linear-gradient(180deg, var(--bg) 0 60px, var(--night) 60px, var(--night-2)); }
+.closingKomidi { width: 240px; height: auto; margin-bottom: 6px; }
+.closingLapak { position: absolute; z-index: -1; left: -10%; bottom: 0; width: 120%; max-width: none; height: auto; opacity: .35; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 44px; text-shadow: 3px 3px 0 var(--coral); }
+.family { color: rgba(251, 239, 216, .85); font-family: var(--serif); }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 32px; }
+.made { color: rgba(251, 239, 216, .6); }
+.music { border: 2px solid var(--gold-l); background: var(--coral); }
+
+/* ── Cover: night fair poster; names glowing like a marquee, guest card hangs as a gondola ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 58px 20px 24px; overflow: hidden; background: url(/themes/art/pasar-malam/langit.webp) center bottom / cover no-repeat, var(--night); color: var(--band-ink); text-align: center; isolation: isolate; }
+.lampu { position: absolute; z-index: 1; top: -4px; left: -6%; width: 112%; max-width: none; height: auto; animation: pmTwinkle 2.6s steps(2, end) infinite; }
+.kicker { padding: 6px 14px; border-radius: 999px; background: var(--mustard); color: var(--night); font-size: 12.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; box-shadow: 0 3px 0 var(--gold-d); }
+.names { max-width: 100%; margin-top: 14px; color: #fff3dc; font-family: var(--display); font-size: 54px; line-height: 1.05; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--coral), 0 0 22px rgba(255, 200, 120, .35); text-wrap: balance; }
+.names em { color: var(--gold-l); font-size: .62em; font-style: normal; }
+.coverDate { position: relative; z-index: 1; margin-top: 12px; color: var(--band-ink); text-shadow: 0 2px 8px rgba(5, 20, 28, .9); font-size: 15px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.fair { position: relative; width: calc(100% + 40px); height: 282px; margin: 10px -20px 0; }
+.wheel { position: absolute; right: -44px; bottom: 28px; width: 236px; height: auto; }
+.carousel { position: absolute; left: -6px; bottom: 6px; width: 184px; height: auto; }
+.stalls { position: absolute; left: 0; right: 0; bottom: -6px; width: 100%; height: auto; }
+.gulaliC { position: absolute; left: 172px; bottom: 30px; width: 34px; height: auto; rotate: -8deg; }
+.gondola { position: relative; z-index: 2; width: 100%; max-width: 330px; margin-top: 24px; padding: 26px 18px 26px; border-radius: 14px 14px 46px 46px; background: var(--ivory); color: var(--ink); box-shadow: inset 0 -8px 0 var(--paper), 0 20px 36px rgba(0, 0, 0, .4); transform-origin: 50% -26px; animation: pmSwing 5s ease-in-out infinite alternate; }
+.gondola::before { content: ""; position: absolute; left: -8px; right: -8px; top: -14px; height: 30px; border-radius: 160px 160px 8px 8px / 30px 30px 8px 8px; background: repeating-linear-gradient(90deg, var(--coral) 0 24px, var(--ivory) 24px 48px); box-shadow: 0 4px 0 var(--coral-d); }
+.gondola::after { content: ""; position: absolute; left: 50%; top: -30px; width: 4px; height: 18px; margin-left: -2px; border-radius: 2px; background: var(--band-ink); }
+.guest { max-width: 100%; margin: 0 auto; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 800; }
+.table { border: 2px solid var(--coral); color: var(--coral-d); font-family: var(--serif); font-size: 11.5px; font-weight: 800; }
+.openBtn { position: relative; z-index: 2; width: 100%; max-width: 300px; margin-top: 22px; border-radius: 999px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 15.5px; font-weight: 800; letter-spacing: .04em; box-shadow: 0 4px 0 var(--coral-d); }
+.openBtn:hover { background: var(--coral-d); translate: 0 -1px; }
+
+/* ── Hero: the photo in a round window ringed with bulbs ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 70px 22px 36px; overflow: hidden; background: linear-gradient(180deg, var(--night) 0 300px, var(--bg) 300px); text-align: center; isolation: isolate; }
+.heroLampu { position: absolute; z-index: -1; top: -4px; left: -6%; width: 112%; max-width: none; height: auto; }
+.heroKicker { color: var(--gold-l); font-size: 12.5px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 8px; color: #fff3dc; font-family: var(--display); font-size: 44px; line-height: 1.08; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--coral); text-wrap: balance; }
+.heroNames em { color: var(--gold-l); font-style: normal; }
+.heroRing { position: relative; display: grid; width: 290px; height: 290px; margin-top: 22px; padding: 10px; border: 7px dotted var(--gold-l); border-radius: 50%; background: var(--night-2); box-shadow: 0 0 0 6px var(--night-2), 0 0 34px rgba(255, 210, 120, .45); }
+.heroPhoto { display: grid; overflow: hidden; border-radius: 50%; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.heroDate { margin-top: 18px; padding: 6px 16px; border-radius: 999px; background: var(--coral); color: #fff; font-size: 15px; font-weight: 800; letter-spacing: .06em; }
+.heroNote { max-width: 320px; margin-top: 16px; color: var(--muted); font-size: 16.5px; line-height: 1.6; }
+
+@keyframes pmTwinkle { 0% { filter: brightness(1); } 50% { filter: brightness(1.25) saturate(1.1); } 100% { filter: brightness(1); } }
+@keyframes pmSwing { from { rotate: -1.6deg; } to { rotate: 1.6deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .lampu, .countLampu, .count > div, .gondola { animation: none; }
+}
+@media (max-width: 370px) {
+  .names { font-size: 46px; }
+  .count { gap: 7px; }
+  .fair { height: 266px; }
+}

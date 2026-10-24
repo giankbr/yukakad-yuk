@@ -1,0 +1,146 @@
+/* Air Terjun — air terjun di hutan hujan tropis (gouache): tebing basal berlumut, kolam toska, pakis di latar depan, kabut dan berkas cahaya; aliran air berkilau bergerak pelan. */
+.root, .cover {
+  --bg: #f1f5ec; --paper: #e3ede1; --ivory: #fbfcf7; --field: #ffffff; --ink: #14302a; --muted: #4c625a; --line: #c9d9cc;
+  --accent: #1f4a3a; --accent2: #13716f; --gold: #2fb3a8; --gold-l: #9fe4da; --gold-d: #13716f;
+  --moss: #6f9a3c; --deep: #123a2e; --pool: #2fb3a8; --pool-d: #13716f; --mist: #eef5ea; --rock: #4c5a54;
+  --band-bg: linear-gradient(170deg, #1e8f88 0%, #13716f 45%, #0f4c47 100%); --band-ink: #f1fbf7;
+  --display: Fraunces, "Playfair Display", Georgia, serif; --serif: Karla, "Helvetica Neue", Arial, sans-serif; --script: Fraunces, Georgia, serif;
+  --h2: 34px; --card-r: 26px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #13716f; --t-accent-ink: #ffffff; --t-bg: #f1f5ec; --t-ink: #14302a; --t-muted: #4c625a; --t-line: #c9d9cc; --t-field: #ffffff;
+  --t-radius: 22px; --t-font: Karla, Arial, sans-serif; --t-heading-font: Fraunces, Georgia, serif; --t-heading-weight: 600; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* ── type ── */
+.eyebrow, .salamKicker, .role { color: var(--pool-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .24em; }
+.head h2 { color: var(--accent); font-weight: 600; font-variation-settings: "SOFT" 100; line-height: 1.12; }
+.headLight h2 { color: #fff; font-weight: 600; }
+.headLight .eyebrow { color: var(--gold-l); }
+.divider { width: 170px; }
+.intro { font-size: 17px; line-height: 1.7; }
+
+/* opening */
+.salamBlock { padding: 56px 30px 56px; background: var(--bg); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 32px; font-style: italic; font-weight: 500; line-height: 1.2; }
+
+/* couple: river-stone portraits */
+.couple { gap: 18px; background: var(--paper); }
+.portraitFrame { width: 200px; height: 236px; padding: 0; border: 0; border-radius: 46% 54% 48% 52% / 54% 48% 52% 46%; background: linear-gradient(160deg, #6b7a72, #3f4c46); box-shadow: 0 0 0 5px var(--paper), 0 0 0 8px var(--pool), 0 18px 30px rgba(20, 48, 42, .2); }
+.portraitFrame > img, .portraitFrame > div { border-radius: inherit; }
+.personWrap:nth-child(3) .portraitFrame { border-radius: 54% 46% 52% 48% / 46% 54% 46% 54%; }
+.monogram { color: #e3f3ec; font-family: var(--display); font-size: 92px; font-weight: 500; font-style: italic; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; font-weight: 600; }
+.fullName { font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.parents { font-size: 15px; }
+.amp { color: var(--pool); font-family: var(--display); font-style: italic; font-size: 48px; }
+.amp img { width: 46px; }
+.portraitFern { position: absolute; z-index: 2; left: -34px; bottom: -14px; width: 110px; height: auto; pointer-events: none; }
+.personWrap:nth-child(3) .portraitFern { left: auto; right: -34px; scale: -1 1; }
+
+/* countdown: plunge-pool band with drifting ripples */
+.countBand { padding: 66px 22px; }
+.countBand::before { content: ""; position: absolute; z-index: -1; inset: 0; background: repeating-radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, .07) 0 2px, transparent 2px 26px); animation: ripple 9s linear infinite; }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 10px; }
+.count > div { height: 88px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 46% 54% 50% 50% / 52% 48% 52% 48%; background: rgba(255, 255, 255, .12); backdrop-filter: blur(2px); }
+.count > div::after { display: none; }
+.count b { color: #fff; font-family: var(--display); font-size: 30px; font-weight: 600; }
+.count small { color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.ghostBtn { border-color: rgba(255, 255, 255, .6); color: #fff; font-family: var(--serif); font-weight: 700; }
+
+/* events: smooth river stones */
+.events { gap: 24px; }
+.event { padding: 30px 22px 24px; border: 0; border-radius: 34px 26px 38px 24px; background: var(--ivory); box-shadow: 0 16px 34px rgba(20, 48, 42, .1), inset 0 -6px 0 rgba(47, 179, 168, .25); }
+.event::before { display: none; }
+.event:hover { box-shadow: 0 22px 40px rgba(20, 48, 42, .16), inset 0 -6px 0 rgba(47, 179, 168, .45); }
+.eventNo { position: static; translate: none; width: auto; height: auto; margin-bottom: 4px; padding: 3px 12px; border-radius: 999px; background: var(--paper); color: var(--pool-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .2em; }
+.event h3 { color: var(--accent); font-size: 26px; font-weight: 600; }
+.eventDate { font-family: var(--display); font-style: italic; }
+.eventTime { color: var(--pool-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 60px; height: 3px; border-radius: 3px; background: var(--moss); }
+.event strong { font-weight: 700; }
+.mapBtn { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; }
+.mapBtn:hover { background: var(--pool-d); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; border-radius: 3px; background: linear-gradient(var(--pool), color-mix(in srgb, var(--pool) 15%, transparent)); }
+.node { border: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { color: var(--pool-d); font-family: var(--serif); font-weight: 700; }
+.storyBody h3 { font-size: 22px; font-weight: 600; }
+.storyImg { border-radius: 22px; }
+
+/* gallery */
+.mosaic { grid-auto-rows: 150px; gap: 10px; }
+.tile { border-radius: 22px; }
+.tile:first-child { grid-row: span 2; border-radius: 999px 999px 26px 26px; }
+.tile:nth-child(4n + 4) { grid-column: span 2; border-radius: 26px 26px 999px 999px; }
+
+/* wishes */
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 16px 34px rgba(20, 48, 42, .08); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 16px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--pool-d); border-color: var(--pool-d); color: #fff; }
+.submit { background: var(--accent); color: #fff; font-family: var(--serif); font-weight: 700; }
+.submit:not(:disabled):hover { background: var(--pool-d); }
+.sent { color: var(--accent); font-family: var(--display); }
+.wish { border: 0; border-radius: 22px; background: var(--ivory); }
+.wish strong { font-family: var(--serif); font-weight: 700; }
+
+/* gifts */
+.gift { border-radius: 28px; background: linear-gradient(160deg, #1f4a3a, #123a2e); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.giftNo { font-family: var(--display); font-weight: 600; }
+.copy { border-color: var(--gold-l); color: #fff; font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--deep); }
+
+/* closing: back to the falls */
+.closing { padding: 84px 28px 64px; background: linear-gradient(180deg, rgba(14, 42, 32, .55), rgba(14, 42, 32, .92) 55%), url(/themes/art/air-terjun/scene.webp) 50% 40% / cover; }
+.closingFrond { width: 160px; height: auto; }
+.thanks { color: #fff; font-family: var(--display); font-size: 48px; font-style: italic; font-weight: 500; }
+.closingNames { color: var(--gold-l); font-family: var(--display); font-weight: 600; }
+.music { background: var(--accent); border-color: var(--gold-l); }
+
+/* ── Cover: the falls, names in the mist, a frosted panel over the ferns ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: #2c5240; color: var(--ink); text-align: center; isolation: isolate; container-type: inline-size; }
+.stage { position: absolute; z-index: -1; left: 50%; bottom: 0; height: max(100%, 180cqw); aspect-ratio: 600 / 1080; translate: -50% 0; }
+.scene { display: block; width: 100%; height: 100%; }
+.falls { position: absolute; left: 40.3%; top: 32.8%; width: 19.4%; height: 41.8%; background: url(/themes/art/air-terjun/falls.webp) repeat-y 0 0 / 100% 150px; clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%); mask-image: linear-gradient(transparent, #000 6%, #000 88%, transparent); opacity: .7; animation: fall 1.6s linear infinite; }
+.spray { position: absolute; left: 30%; top: 66%; width: 40%; height: 14%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 255, 255, .7), transparent); filter: blur(4px); animation: spray 3.4s ease-in-out infinite alternate; }
+.coverTop { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 34px 22px 0; }
+.kicker { color: var(--pool-d); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; text-shadow: 0 0 12px rgba(246, 243, 223, .9); }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 12px; color: var(--deep); font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1.02; text-shadow: 0 0 14px rgba(246, 243, 223, .95), 0 0 30px rgba(246, 243, 223, .8); overflow-wrap: anywhere; }
+.coverNames span { max-width: 100%; }
+.coverNames em { color: var(--pool-d); font-size: 40px; font-style: italic; font-weight: 500; }
+.panel { display: flex; flex-direction: column; align-items: center; gap: 10px; margin: auto 18px 22px; padding: 20px 18px 22px; border: 1px solid rgba(159, 228, 218, .35); border-radius: 30px; background: rgba(12, 40, 30, .74); backdrop-filter: blur(8px); color: #fff; }
+.coverDate { color: var(--gold-l); font-family: var(--display); font-size: 19px; font-style: italic; font-weight: 500; }
+.guest small { color: rgba(255, 255, 255, .82); font-size: 14px; font-style: normal; }
+.guest strong { color: #fff; font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 4px; background: #f6f3df; color: var(--deep); font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 10px 22px rgba(0, 0, 0, .3); }
+.openBtn:hover { background: #fff; translate: 0 -2px; }
+
+/* ── Hero: pill photo with a fern ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 24px 56px; overflow: hidden; background: linear-gradient(var(--mist), var(--bg)); text-align: center; }
+.heroKicker { color: var(--pool-d); font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 250px; margin-top: 10px; }
+.heroPhoto { width: 250px; height: 340px; overflow: hidden; border-radius: 999px; box-shadow: 0 0 0 6px var(--ivory), 0 0 0 8px var(--pool), 0 22px 40px rgba(20, 48, 42, .22); }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroFern { position: absolute; left: -64px; bottom: -40px; width: 150px; height: auto; }
+.heroFern2 { position: absolute; right: -60px; top: 40px; width: 120px; height: auto; scale: -1 1; rotate: 20deg; }
+.heroArt { width: 220px; height: auto; }
+.heroNames { margin-top: 18px; color: var(--accent); font-family: var(--display); font-size: 50px; font-weight: 600; line-height: 1.02; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--pool); font-size: 38px; font-style: italic; font-weight: 500; }
+.heroDate { color: var(--pool-d); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.heroNote { max-width: 320px; color: var(--muted); font-family: var(--display); font-size: 18px; font-style: italic; line-height: 1.55; }
+.sentBox img { width: 140px; }
+
+.root .event, .root .mapBtn, .root .submit, .cover .openBtn { transition: background 600ms var(--m-ease), box-shadow 600ms var(--m-ease), scale 400ms var(--m-ease), translate 400ms var(--m-ease); }
+@keyframes fall { to { background-position: 0 150px; } }
+@keyframes spray { from { opacity: .55; scale: .92 1; } to { opacity: .95; scale: 1.08 1.15; } }
+@keyframes ripple { to { background-position: 0 26px; } }
+@media (prefers-reduced-motion: reduce) { .falls, .spray, .countBand::before { animation: none; } }
+@media (max-width: 370px) { .coverNames { font-size: 42px; } }

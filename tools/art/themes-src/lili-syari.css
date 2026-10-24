@@ -1,0 +1,142 @@
+/* Lili Syari — tanpa foto: sampul terbelah dua, satu ikat lili calla dan lili Madonna putih bertangkai panjang diikat pita emas di kolom kiri, nama dan kartu tamu di kolom kanan di atas krem gading; bingkai garis emas bersudut takik, monogram dalam lengkung ramping, hitung mundur di kelopak lonjong pada pita hijau daun, kartu acara bertangkai kuncup calla. */
+.root, .cover {
+  --bg: #f6f0e2; --paper: #f0e8d6; --ivory: #fffcf4; --field: #fffdf8; --ink: #22372b; --muted: #56655a; --line: #e2d8bf;
+  --accent: #2f5a43; --accent2: #3a6b51; --gold: #b8914a; --gold-l: #ecd9a8; --gold-d: #8a6a2c;
+  --band-bg: #4f6e55; --band-ink: #fbf7ec;
+  --display: "Castoro", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Castoro", Georgia, serif; --label: "Tenor Sans", system-ui, sans-serif;
+  --h2: 32px; --card-r: 2px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f5a43; --t-accent-ink: #fbf7ec; --t-bg: #f6f0e2; --t-ink: #22372b; --t-muted: #56655a; --t-line: #e2d8bf; --t-field: #fffdf8;
+  --t-radius: 2px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Castoro", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: italic;
+  font-size: 17px;
+}
+.eyebrow, .role, .salamKicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-style: italic; }
+.divider { width: 210px; }
+
+/* ── Cover: bouquet column on the left, text column on the right ── */
+.cover { position: relative; display: flex; flex-direction: column; min-height: 100dvh; overflow: hidden; background: radial-gradient(70% 50% at 70% 40%, #fffcf4, transparent 70%), linear-gradient(#f8f3e7, #f1e9d6); isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 12px; border: 1px solid rgba(184, 145, 74, .55); pointer-events: none; }
+.cover::after { content: ""; position: absolute; inset: 17px; border: 1px solid rgba(184, 145, 74, .3); pointer-events: none; }
+.bismillah { position: relative; z-index: 2; margin-top: 40px; color: var(--accent); font-family: Amiri, serif; font-size: 25px; line-height: 1.5; text-align: center; }
+.split { position: relative; z-index: 2; flex: 1; display: grid; grid-template-columns: 40% 60%; }
+.bouquet { position: relative; }
+.bouquet img { position: absolute; left: 6px; bottom: 14px; width: auto; height: min(640px, 100%); max-width: none; transform-origin: 50% 100%; animation: lean 9s ease-in-out infinite alternate; }
+.col { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 10px; padding: 16px 30px 40px 8px; }
+.kicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .28em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: flex-start; max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 46px; font-style: italic; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; }
+.coverNames em { margin: 2px 0 2px 18px; color: var(--gold); font-size: 30px; }
+.coverDate { display: flex; align-items: center; gap: 10px; color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.coverDate::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
+.cover .guest { align-items: flex-start; gap: 4px; margin-top: 12px; padding: 14px 16px; border-left: 2px solid var(--gold); background: rgba(255, 252, 244, .8); text-align: left; }
+.cover .guest small { color: var(--muted); font-size: 13.5px; }
+.cover .guest strong { color: var(--ink); font-family: var(--display); font-size: 19px; font-style: italic; text-wrap: pretty; }
+.table { border-color: var(--gold); color: var(--gold-d); font-family: var(--label); font-size: 11px; }
+.openBtn { min-width: 0; height: 48px; margin-top: 8px; padding: 0 20px; white-space: nowrap; border-radius: 2px; background: var(--accent); color: #fbf7ec; font-family: var(--label); font-size: 13.5px; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 0 0 1px var(--gold), 0 0 0 4px #f6f0e2, 0 0 0 5px rgba(184, 145, 74, .6), 0 12px 24px rgba(34, 55, 43, .25); }
+.openBtn:hover { background: var(--accent2); translate: 0 -1px; }
+
+/* ── Hero: Madonna lily over a notched gold frame ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 48px 26px 54px; background: linear-gradient(var(--paper), var(--bg)); text-align: center; }
+.heroLily { width: 200px; height: auto; margin-bottom: -40px; position: relative; z-index: 2; }
+.frame { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 58px 22px 34px; background: var(--ivory); clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 16px 100%, 0 calc(100% - 16px), 0 16px); box-shadow: inset 0 0 0 1px var(--gold); }
+.frame::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(184, 145, 74, .45); pointer-events: none; }
+.heroKicker { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; font-weight: 400; line-height: 1.08; overflow-wrap: anywhere; }
+.heroNames em { color: var(--gold); font-size: .65em; }
+.heroDate { color: var(--ink); font-size: 17px; font-weight: 600; }
+.heroNote { max-width: 300px; margin-top: 6px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.55; text-wrap: balance; }
+
+/* opening */
+.salamBlock { padding: 26px 28px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 34px; font-style: italic; }
+
+/* couple: slender monogram arches with a calla bud leaning on them */
+.couple { background: var(--paper); }
+.portrait { margin-bottom: 10px; }
+.portraitFrame { width: 150px; height: 220px; padding: 6px; border: 1px solid var(--gold); border-radius: 75px 75px 2px 2px; background: var(--ivory); }
+.portraitFrame > div { border-radius: 70px 70px 1px 1px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 70px 70px 1px 1px; background: radial-gradient(circle at 50% 40%, #fffdf8, #efe7d2); color: var(--accent); font-family: var(--display); font-size: 92px; font-style: italic; box-shadow: inset 0 0 0 1px rgba(184, 145, 74, .4); }
+.portraitArt { position: absolute; z-index: 2; left: -34px; bottom: -6px; width: 54px; height: auto; rotate: -14deg; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 42px; font-style: italic; }
+.fullName { font-size: 18px; font-weight: 600; }
+.amp { color: var(--gold); font-family: var(--display); font-size: 44px; font-style: italic; }
+.amp img { width: 90px; }
+
+/* countdown: oval petals on a leaf-green band */
+.countBand { padding: 60px 18px 62px; background: radial-gradient(90% 70% at 50% 0, #5e7e63, transparent 70%), var(--band-bg); }
+.count { grid-template-columns: repeat(4, minmax(0, 68px)); gap: 12px; }
+.count > div { height: 100px; border: 1px solid rgba(236, 217, 168, .7); border-radius: 50%; background: rgba(255, 252, 244, .1); }
+.count b { color: #fffdf6; font-family: var(--display); font-size: 30px; }
+.count small { color: var(--gold-l); font-family: var(--label); font-size: 11px; font-style: normal; letter-spacing: .08em; }
+.ghostBtn { border-color: var(--gold-l); border-radius: 2px; font-family: var(--label); }
+
+/* events: ivory cards, left aligned, a calla bud at the corner */
+.events { background: var(--bg); }
+.event { align-items: flex-start; padding: 30px 22px 24px 26px; border: 0; border-left: 2px solid var(--gold); border-radius: 0; background: var(--ivory); box-shadow: 0 8px 24px rgba(34, 55, 43, .07); text-align: left; overflow: hidden; }
+.event::before { inset: auto -10px -20px auto; width: 70px; height: 170px; border: 0; border-radius: 0; background: url("/themes/art/lili-syari/kuncup.webp") center / contain no-repeat; opacity: .55; rotate: 14deg; }
+.eventNo { top: 18px; left: auto; right: 18px; translate: none; width: auto; height: auto; background: none; color: var(--gold); font-family: var(--display); font-size: 26px; font-style: italic; letter-spacing: 0; }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 26px; font-style: italic; }
+.eventTime { color: var(--gold-d); font-family: var(--label); font-size: 13px; }
+.rule { width: 50px; background: var(--gold); }
+.eventAddr { max-width: 250px; text-wrap: pretty; }
+.mapBtn { border-radius: 2px; color: #fbf7ec; font-family: var(--label); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { background: var(--gold); opacity: .6; }
+.node { width: 40px; height: 40px; border: 1px solid var(--gold); background: var(--ivory); }
+.node img { width: 15px; }
+.storyBody small { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .14em; }
+.storyBody h3 { font-family: var(--display); font-size: 22px; font-style: italic; }
+
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border-radius: 2px; }
+
+/* wishes */
+.wishes { background: var(--bg); }
+.form { border: 1px solid var(--gold); border-radius: 2px; box-shadow: 0 0 0 5px var(--ivory), 0 0 0 6px rgba(184, 145, 74, .35); }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); font-size: 11.5px; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 2px; }
+.choices button { border-radius: 2px; font-family: var(--label); font-size: 13.5px; }
+.choices .choiceOn, .choices .choiceOn:hover { color: #fbf7ec; }
+.submit { border-radius: 2px; color: #fbf7ec; font-family: var(--label); font-size: 13.5px; letter-spacing: .14em; text-transform: uppercase; }
+.sentBox img { width: 150px; }
+.wish { border-radius: 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; padding: 14px 4px; }
+.wish strong { font-family: var(--display); font-size: 18px; font-style: italic; }
+.wish small { border-radius: 2px; }
+
+/* gifts */
+.gifts { background: var(--paper); }
+.gift { border-radius: 2px; background: var(--ivory); color: var(--ink); box-shadow: inset 0 0 0 1px var(--gold), inset 0 0 0 6px var(--ivory), inset 0 0 0 7px rgba(184, 145, 74, .35); }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold); background: var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--label); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 23px; }
+.gift small { color: var(--muted); }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; letter-spacing: 0; line-height: 1.5; }
+.copy { border-color: var(--gold); border-radius: 2px; background: var(--accent); color: #fbf7ec; font-family: var(--label); }
+.copy:hover { background: var(--accent2); }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--accent); }
+
+/* closing: cream, flanked by two bouquets */
+.closing { padding: 64px 28px 70px; background: linear-gradient(var(--bg), var(--paper)); color: var(--ink); }
+.closingFlank { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
+.closingFlank img { position: absolute; bottom: -30px; width: auto; height: 340px; opacity: .4; }
+.closingFlank img:first-child { left: -62px; rotate: -8deg; }
+.closingFlank img:last-child { right: -62px; scale: -1 1; rotate: 8deg; }
+.closingEmblem { width: 150px; height: auto; }
+.closing .thanks { color: var(--accent); font-family: var(--display); font-size: 44px; font-style: italic; }
+.closingText { color: var(--muted); }
+.closingSalam { color: var(--gold-d); font-family: var(--label); font-size: 12px; letter-spacing: .12em; }
+.family { color: var(--muted); font-family: var(--label); font-size: 12px; }
+.closingNames { color: var(--accent); font-family: var(--display); font-style: italic; }
+.made { color: rgba(34, 55, 43, .55); }
+.made:hover { color: var(--accent); }
+.music { border-color: var(--gold); border-radius: 2px; background: var(--accent); }
+
+@keyframes lean { from { rotate: -1.2deg; } to { rotate: 1.4deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .bouquet img { animation: none; }
+}

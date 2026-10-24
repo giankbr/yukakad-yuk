@@ -1,0 +1,187 @@
+/* Ultah Pantai — pesta ulang tahun anak di pantai (guas cerah dengan kontur krayon cokelat, desain orisinal): langit, laut berbuih, nama ditulis di pasir, istana pasir dengan bendera usia, payung pantai, bola pantai, kepiting ramah, ember & sekop; kartu handuk pantai bergaris, hitung mundur bola pantai, pelampung untuk potret, huruf Lilita One & Quicksand. */
+.root, .cover {
+  --bg: #fff4dc; --paper: #ffe9c2; --ivory: #fffaf0; --field: #fffdf7; --ink: #4a2c1c; --muted: #7a5a44; --line: #f1d6a6;
+  --accent: #ff6f5e; --accent2: #e8503f; --gold: #ffc93c; --gold-l: #fff3c4; --gold-d: #168ea2;
+  --band-bg: #29b0c2; --band-ink: #ffffff; --sea: #29b0c2; --sea2: #5fd3d6; --sand: #f6d9a0; --sand-d: #94541f; --brown: #8a4a2a; --blue: #2fa6d8;
+  --display: "Lilita One", "Arial Rounded MT Bold", sans-serif; --serif: Quicksand, system-ui, sans-serif; --script: "Lilita One", sans-serif;
+  --h2: 34px; --card-r: 22px;
+  --towel: repeating-linear-gradient(90deg, var(--accent) 0 14px, #fffaf0 14px 22px, var(--gold) 22px 36px, #fffaf0 36px 44px);
+  --foam: radial-gradient(circle at 50% 0, transparent 13px, #000 14px) 0 0 / 28px 100%;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #ff6f5e; --t-accent-ink: #ffffff; --t-bg: #fff4dc; --t-ink: #4a2c1c; --t-muted: #7a5a44; --t-line: #f1d6a6; --t-field: #fffdf7;
+  --t-radius: 20px; --t-font: Quicksand, system-ui, sans-serif; --t-heading-font: "Lilita One", sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px; font-weight: 600;
+}
+.main { background: var(--bg); }
+.main > [data-extras] > section { position: relative; margin: 0 16px 20px; padding-top: 34px; border-radius: 24px; background: var(--ivory); box-shadow: 0 6px 0 var(--line); overflow: hidden; }
+.main > [data-extras] > section::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--towel); }
+
+/* headings */
+.eyebrow, .salamKicker, .role { display: inline-block; padding: 4px 14px; border-radius: 999px; background: var(--gold-d); color: #fff; font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.head h2, .headLight h2 { color: var(--accent); font-family: var(--display); font-weight: 400; line-height: 1.05; text-shadow: 0 3px 0 rgba(138, 74, 42, .18); }
+.headLight h2 { color: #fff; text-shadow: 0 3px 0 rgba(10, 80, 100, .35); }
+.divider { width: 190px; }
+[data-revealed] .divider { animation: pop .8s var(--m-spring) calc(var(--rd, 0ms) + 150ms) both; }
+.section { padding: 62px 22px; }
+
+/* opening */
+.salamBlock { padding: 40px 24px 56px; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 38px; line-height: 1.05; }
+.salamBlock .intro { max-width: 340px; padding: 18px 20px; border-radius: 24px; background: var(--ivory); color: var(--ink); box-shadow: 0 6px 0 var(--line); }
+
+/* celebrant: a life ring */
+.couple { gap: 18px; background: linear-gradient(180deg, var(--bg), var(--paper)); }
+.portrait { margin: 10px 0 14px; }
+.portraitFrame { width: 230px; height: 230px; padding: 24px; border: 0; border-radius: 50%; background: repeating-conic-gradient(var(--accent) 0 45deg, #fffaf0 45deg 90deg); box-shadow: 0 10px 0 -2px rgba(138, 74, 42, .25), inset 0 0 0 3px rgba(138, 74, 42, .3); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; box-shadow: 0 0 0 3px rgba(138, 74, 42, .3); }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--sea2), var(--sea) 70%); color: #fff; font-family: var(--display); font-size: 92px; text-shadow: 0 4px 0 rgba(10, 80, 100, .35); box-shadow: 0 0 0 3px rgba(138, 74, 42, .3); }
+.portraitCrab { position: absolute; z-index: 2; right: -60px; bottom: -6px; width: 92px; height: auto; animation: scuttle 5s ease-in-out infinite; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 62px; line-height: 1; text-shadow: 0 4px 0 rgba(138, 74, 42, .2); }
+.fullName { color: var(--ink); font-size: 20px; font-weight: 700; }
+.parents { color: var(--muted); font-weight: 600; }
+
+/* countdown: beach balls on the sea */
+.countBand { padding: 74px 20px 70px; background: linear-gradient(180deg, var(--sea2), var(--sea)); }
+.countBand::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 18px; background: var(--paper); -webkit-mask: var(--foam); mask: var(--foam); rotate: 180deg; }
+.count { gap: 10px; grid-template-columns: repeat(4, minmax(0, 74px)); }
+.count > div { height: 74px; border: 0; border-radius: 50%; background: radial-gradient(circle, #fffaf0 0 46%, transparent 47%), repeating-conic-gradient(from 20deg, var(--accent) 0 60deg, #fffaf0 60deg 120deg, var(--gold) 120deg 180deg, #fffaf0 180deg 240deg, var(--blue) 240deg 300deg, #fffaf0 300deg 360deg); box-shadow: 0 6px 0 rgba(10, 80, 100, .3), inset 0 0 0 2px rgba(138, 74, 42, .35); animation: bounce 2.4s var(--m-spring) infinite; }
+.count > div:nth-child(2) { animation-delay: -.6s; }
+.count > div:nth-child(3) { animation-delay: -1.2s; }
+.count > div:nth-child(4) { animation-delay: -1.8s; }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 25px; font-weight: 400; line-height: 1; }
+.count small { color: var(--brown); font-size: 10px; font-weight: 700; font-style: normal; }
+.countTba { color: #fff; font-family: var(--display); font-size: 22px; }
+.countBall { position: absolute; z-index: -1; right: 14px; bottom: 18px; width: 54px; height: auto; animation: bounce 2.8s var(--m-spring) infinite; }
+.ghostBtn { border: 2.5px solid #fff; background: rgba(255, 255, 255, .18); color: #fff; font-family: var(--serif); font-weight: 700; transition: background .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.ghostBtn:hover { background: rgba(255, 255, 255, .3); translate: 0 -2px; }
+
+/* events: striped beach towels */
+.events { gap: 28px; background: var(--bg); }
+.event { padding: 40px 22px 34px; border: 0; border-radius: 22px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--towel) border-box; border-top: 14px solid transparent; border-bottom: 14px solid transparent; box-shadow: 0 8px 0 var(--line); transition: translate .4s var(--m-spring), rotate .4s var(--m-spring), box-shadow .4s var(--m-spring); }
+.event::before { display: none; }
+.event:hover { translate: 0 -4px; rotate: -.6deg; box-shadow: 0 12px 0 var(--line); }
+.eventNo { top: -26px; width: 44px; height: 44px; border-radius: 50%; background: var(--gold); color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: 0; box-shadow: 0 4px 0 rgba(138, 74, 42, .3); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 27px; }
+.eventDate { font-style: normal; font-weight: 700; }
+.eventTime { color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 80px; height: 8px; background: radial-gradient(circle, var(--sea) 3px, transparent 3.5px) 0 50% / 12px 8px repeat-x; }
+.mapBtn, .submit { background: var(--accent); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 700; box-shadow: 0 5px 0 var(--accent2); transition: background .3s, box-shadow .3s var(--m-spring), scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.mapBtn:hover, .submit:not(:disabled):hover { background: #ff8270; translate: 0 -2px; box-shadow: 0 7px 0 var(--accent2); }
+.mapBtn:active, .submit:not(:disabled):active { translate: 0 4px; box-shadow: 0 1px 0 var(--accent2); }
+
+/* story: footprints across the sand */
+.story { background: var(--paper); }
+.timeline::before { left: 16px; width: 12px; background: radial-gradient(ellipse 4px 6px at 30% 25%, rgba(148, 84, 31, .35) 98%, transparent) 0 0 / 12px 30px, radial-gradient(ellipse 4px 6px at 70% 75%, rgba(148, 84, 31, .35) 98%, transparent) 0 0 / 12px 30px; }
+.node { border: 0; background: none; }
+.node img { width: 40px; animation: bounce 2.6s var(--m-spring) infinite; }
+.storyBody { padding: 14px 16px; border-radius: 20px; background: var(--ivory); box-shadow: 0 5px 0 var(--line); }
+.storyBody small { align-self: flex-start; padding: 2px 10px; border-radius: 999px; background: var(--gold); color: var(--ink); font-weight: 700; letter-spacing: .04em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 22px; }
+.storyBody p { font-weight: 600; }
+
+/* gallery */
+.gallery { background: var(--bg); }
+.tile, .tile:first-child { border: 6px solid #fffaf0; border-radius: 20px; box-shadow: 0 6px 0 var(--line); }
+
+/* wishes: on the shallow water */
+.wishes { background: linear-gradient(180deg, var(--sea2), #8fe0de); }
+.wishes::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 18px; background: var(--paper); -webkit-mask: var(--foam); mask: var(--foam); rotate: 180deg; }
+.wishes .eyebrow { background: var(--accent); }
+.wishes .head h2 { color: #fff; text-shadow: 0 3px 0 rgba(10, 80, 100, .35); }
+.form { border: 0; border-radius: 26px; background: var(--ivory); box-shadow: 0 7px 0 rgba(10, 80, 100, .25); }
+.field > span, .diet, .guestsLabel { color: var(--gold-d); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+.field input, .field textarea { border: 2px solid var(--line); border-radius: 16px; }
+.choices button { border: 2px solid var(--line); font-weight: 700; transition: background .3s var(--m-spring), color .3s, border-color .3s, scale .3s var(--m-spring), translate .3s var(--m-spring); }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent2); background: var(--accent); color: #fff; box-shadow: 0 4px 0 var(--accent2); }
+.step { border: 2px solid var(--accent); color: var(--accent); font-weight: 700; }
+.wish { border: 0; border-radius: 20px 20px 20px 6px; box-shadow: 0 5px 0 rgba(10, 80, 100, .2); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 18px; }
+.wish small { background: var(--gold-l); color: var(--brown); font-weight: 700; }
+.wish p { font-weight: 600; }
+.wishes > .empty { color: #fff; }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; }
+.sentBox img { width: 140px; }
+
+/* gifts: buckets of treasure */
+.gifts { background: var(--bg); }
+.gift { border-radius: 24px; background: linear-gradient(170deg, #ffe07a, var(--gold)); color: var(--ink); box-shadow: 0 7px 0 #d9a52a; }
+.gift::after { right: -14px; bottom: -14px; width: 110px; height: 110px; border: 0; border-radius: 0; box-shadow: none; background: url(/themes/art/ultah-pantai/bucket.webp) no-repeat center / contain; opacity: .35; rotate: -10deg; }
+.gift h3 { color: var(--ink); font-family: var(--display); font-size: 19px; letter-spacing: .01em; }
+.giftIcon { border: 0; background: var(--accent); }
+.giftNo { color: var(--ink); font-family: var(--display); font-size: 25px; }
+.gift small { color: #6a4a2a; font-weight: 700; }
+.gift:not(:has(small)) .giftNo { font-family: var(--serif); font-size: 17px; font-weight: 700; line-height: 1.45; letter-spacing: 0; }
+.copy { border: 0; background: #fff; color: var(--ink); font-family: var(--serif); font-weight: 700; box-shadow: 0 3px 0 #d9a52a; }
+.copy svg { stroke: var(--ink); }
+.copyOn, .copyOn:hover { background: var(--sea); color: #fff; }
+.copyOn svg { stroke: #fff; }
+
+/* closing: the castle at sunset tide */
+.closing { gap: 12px; padding: 66px 24px 0; background: linear-gradient(180deg, #ffb27a 0, #ffcf8a 40%, var(--sea2) 64%, var(--sea) 100%); color: var(--ink); }
+.thanks { color: #fff; font-family: var(--display); font-size: 54px; text-shadow: 0 4px 0 rgba(232, 80, 63, .5); }
+.closingText { color: var(--ink); font-weight: 700; }
+.family { color: var(--ink); font-family: var(--serif); font-weight: 700; }
+.closingNames { color: #fff; font-family: var(--display); font-size: 38px; text-shadow: 0 3px 0 rgba(10, 80, 100, .35); }
+.closingBeach { order: 20; position: relative; width: calc(100% + 48px); height: 250px; margin-top: 10px; background: linear-gradient(180deg, transparent 0 40%, transparent 40%), var(--sand) url(/themes/art/ultah-pantai/sand.webp) 0 0 / 128px; background-clip: border-box; }
+.closingBeach .waves { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+.closingCastle { position: absolute; right: 18px; bottom: 16px; width: 180px; height: auto; }
+.closingUmbrella { position: absolute; left: 22px; bottom: 34px; width: 112px; height: auto; transform-origin: 60% 100%; animation: tilt 5s ease-in-out infinite alternate; }
+.made { order: 21; margin: 0; padding: 10px 0 16px; width: calc(100% + 48px); background: var(--sand); color: rgba(74, 44, 28, .7); }
+.made:hover { color: var(--ink); }
+.music { border: 0; background: var(--accent); box-shadow: 0 4px 0 var(--accent2); }
+
+/* ── Cover: sky, sea, and the name written in the sand ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0; overflow: hidden; background: var(--sand) url(/themes/art/ultah-pantai/sand.webp) 0 0 / 128px; text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; inset: 0 0 auto; height: 170px; z-index: -1; background: linear-gradient(180deg, #a9e2f2, #dff5fa); }
+.sun { position: absolute; top: 22px; right: 26px; width: 66px; height: 66px; border-radius: 50%; background: radial-gradient(circle, #ffe07a 0 55%, #ffc93c 56%); box-shadow: 0 0 0 10px rgba(255, 224, 122, .35), 0 0 0 22px rgba(255, 224, 122, .15); animation: sunPulse 4s ease-in-out infinite; }
+.kicker { position: relative; z-index: 2; margin-top: 30px; padding: 7px 16px; border-radius: 999px; background: #fff; color: var(--accent2); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; box-shadow: 0 4px 0 rgba(22, 142, 162, .25); }
+.coverDate { position: relative; z-index: 2; margin-top: 10px; padding: 4px 14px; border-radius: 999px; background: rgba(255, 255, 255, .7); color: var(--ink); font-size: 15px; font-weight: 700; }
+.coverSea { position: relative; z-index: 1; width: 100%; margin-top: 12px; }
+.coverSea .waves { display: block; width: 100%; height: auto; }
+.seaBall { position: absolute; left: 14%; top: 34px; width: 48px; height: auto; animation: float 3.4s ease-in-out infinite; }
+.sandArea { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 0 22px; margin-top: -26px; }
+.coverName { max-width: 100%; color: var(--sand-d); font-family: var(--display); font-size: clamp(62px, 19vw, 82px); font-weight: 400; line-height: .95; overflow-wrap: anywhere; letter-spacing: .02em; text-shadow: 0 -2px 0 rgba(120, 60, 20, .35), 0 2px 0 rgba(255, 248, 228, .9); }
+.ageRow { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 16px; font-weight: 700; }
+.age { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%; background: radial-gradient(circle, #fffaf0 0 44%, transparent 45%), repeating-conic-gradient(var(--accent) 0 45deg, #fffaf0 45deg 90deg); color: var(--accent2); font-family: var(--display); font-size: 24px; box-shadow: 0 4px 0 rgba(138, 74, 42, .25); }
+.towel { position: relative; width: 100%; max-width: 310px; margin-top: 8px; padding: 14px 16px; border-radius: 16px; background: linear-gradient(var(--ivory), var(--ivory)) padding-box, var(--towel) border-box; border-left: 12px solid transparent; border-right: 12px solid transparent; box-shadow: 0 6px 0 rgba(148, 84, 31, .25); }
+.guest { color: var(--ink); max-width: none; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; font-weight: 600; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.table { border: 2px solid var(--gold-d); color: var(--gold-d); font-family: var(--serif); font-weight: 700; }
+.openBtn { margin-top: 10px; background: var(--accent); color: #fff; font-family: var(--serif); font-size: 17px; font-weight: 700; box-shadow: 0 6px 0 var(--accent2); }
+.openBtn:hover { translate: 0 -2px; box-shadow: 0 8px 0 var(--accent2); }
+.openBtn:active { translate: 0 5px; box-shadow: 0 1px 0 var(--accent2); }
+.beach { position: relative; z-index: 1; width: 100%; height: 236px; margin-top: auto; flex-shrink: 0; }
+.umbrella { position: absolute; left: -8px; bottom: 62px; width: 150px; height: auto; transform-origin: 60% 100%; animation: tilt 5s ease-in-out infinite alternate; }
+.castle { position: absolute; right: 4px; bottom: 6px; width: 226px; height: auto; }
+.flag { position: absolute; right: 37px; bottom: 150px; width: 80px; transform-origin: 0 50%; animation: flutter 1.6s ease-in-out infinite alternate; }
+.flag img { display: block; width: 100%; height: auto; }
+.flag span { position: absolute; left: 10px; top: 50%; translate: 0 -55%; color: #fff; font-family: var(--display); font-size: 17px; text-shadow: 0 2px 0 rgba(138, 74, 42, .4); }
+.bucket { position: absolute; left: 33%; bottom: 10px; width: 92px; height: auto; }
+.crab { position: absolute; left: 6%; bottom: 6px; width: 80px; height: auto; animation: scuttle 6s ease-in-out infinite; }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 30px 22px 0; overflow: hidden; background: linear-gradient(180deg, #a9e2f2, #dff5fa); text-align: center; }
+.heroKicker { padding: 5px 14px; border-radius: 999px; background: #fff; color: var(--accent2); font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.heroName { max-width: 100%; color: var(--accent); font-family: var(--display); font-size: 64px; font-weight: 400; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 4px 0 rgba(138, 74, 42, .2); }
+.heroAge { display: block; color: var(--gold-d); font-size: .42em; }
+.heroDate { padding: 4px 14px; border-radius: 999px; background: rgba(255, 255, 255, .75); color: var(--ink); font-weight: 700; }
+.heroNote { position: relative; z-index: 2; max-width: 320px; margin-top: 12px; padding: 14px 18px; border-radius: 22px 22px 22px 6px; background: var(--ivory); color: var(--ink); font-size: 16px; font-weight: 600; line-height: 1.55; text-wrap: pretty; box-shadow: 0 5px 0 var(--line); }
+.heroBeach { position: relative; width: calc(100% + 44px); height: 150px; margin-top: 70px; background: linear-gradient(180deg, #dff5fa 70px, transparent 70px), var(--sand) url(/themes/art/ultah-pantai/sand.webp) 0 0 / 128px; }
+.heroBeach .waves { position: absolute; left: 0; top: -60px; width: 100%; height: auto; }
+.heroCrab { position: absolute; left: 50%; bottom: 10px; width: 92px; height: auto; translate: -50% 0; animation: scuttle 6s ease-in-out infinite; }
+
+@keyframes bounce { 0%, 100% { translate: 0 0; } 45% { translate: 0 -8px; } 60% { translate: 0 0; scale: 1.06 .94; } }
+@keyframes float { 0%, 100% { translate: 0 0; rotate: -8deg; } 50% { translate: 6px -6px; rotate: 10deg; } }
+@keyframes scuttle { 0%, 100% { translate: 0 0; } 25% { translate: 18px 0; } 30% { translate: 18px -3px; } 50% { translate: 36px 0; } 75% { translate: 14px 0; } }
+@keyframes tilt { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes flutter { from { scale: 1 1; skew: 0 2deg; } to { scale: .9 1; skew: 0 -4deg; } }
+@keyframes sunPulse { 0%, 100% { scale: 1; } 50% { scale: 1.06; } }
+@keyframes pop { from { opacity: 0; scale: .4; } }
+@media (prefers-reduced-motion: reduce) {
+  .portraitCrab, .count > div, .countBall, .node img, .closingUmbrella, .sun, .seaBall, .umbrella, .flag, .crab, .heroCrab, .divider { animation: none; }
+  .event, .mapBtn, .submit, .choices button, .ghostBtn { transition: none; }
+}

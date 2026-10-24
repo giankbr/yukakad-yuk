@@ -1,0 +1,162 @@
+/* Sarung Samarinda — tenun sarung sutra Samarinda: kotak-kotak halus merah tua, hitam, emas, dan hijau toska yang ditenun di gedokan, serta Sungai Mahakam yang lebar saat senja dengan ketinting dan tongkang. */
+.root, .cover {
+  --bg: #f4ead6; --paper: #ecdfc5; --ivory: #fbf5e8; --field: #fffaf1; --ink: #2a1418; --muted: #61484a; --line: #dccbac;
+  --accent: #5a1420; --accent2: #3e0c16; --gold: #c8973a; --gold-l: #f0d9a6; --gold-d: #8a6420;
+  --teal: #1e5f5e; --black: #16100f;
+  --band-bg: #3e0c16; --band-ink: #f6ead2;
+  --display: "Marcellus", Georgia, serif; --serif: "Spectral", Georgia, serif; --script: "Marcellus", Georgia, serif; --label: "Tenor Sans", system-ui, sans-serif;
+  --h2: 32px; --card-r: 6px;
+  --kotak: url(/themes/art/sarung-samarinda/kotak.webp) 0 0 / 100px 100px repeat;
+  --kepala: url(/themes/art/sarung-samarinda/kepala.webp) 0 0 / 87px 87px repeat;
+  --silk: linear-gradient(115deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, .35) 48%, rgba(255, 255, 255, 0) 62%);
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #5a1420; --t-accent-ink: #fbf5e8; --t-bg: #f4ead6; --t-ink: #2a1418; --t-muted: #61484a; --t-line: #dccbac; --t-field: #fffaf1;
+  --t-radius: 6px; --t-font: "Spectral", Georgia, serif; --t-heading-font: "Marcellus", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--gold-d); font-family: var(--label); font-size: 13px; letter-spacing: .26em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); }
+.divider { width: 150px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 54px 28px 56px; }
+.arabic { color: var(--accent); font-size: 28px; }
+.salamKicker { font-size: 12px; letter-spacing: .14em; line-height: 1.6; }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; }
+.salamSub { color: var(--teal); font-family: var(--serif); font-size: 17px; font-style: italic; }
+
+/* ── Couple: portraits wrapped in a fold of sarung ── */
+.couple { gap: 16px; background: var(--paper); }
+.couple::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: var(--kepala); }
+.portrait { margin: 8px 0 30px; }
+.portraitFrame { width: 216px; height: 276px; padding: 12px; border: 0; border-radius: 8px; background: var(--kotak); box-shadow: 0 0 0 1.5px var(--gold), 0 18px 32px rgba(62, 12, 22, .3); }
+.portraitFrame::after { content: ""; position: absolute; inset: 0; background: var(--silk); pointer-events: none; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 3px; box-shadow: 0 0 0 2px var(--gold-l); }
+.portraitArt { position: absolute; z-index: 2; left: 50%; bottom: -40px; width: 50px; height: auto; translate: -50% 0; animation: swing 5s var(--m-ease) infinite alternate; transform-origin: 50% 0; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; background: var(--accent2); color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.nick { color: var(--accent); font-family: var(--display); font-size: 48px; }
+.fullName { font-family: var(--serif); font-size: 19px; font-weight: 600; }
+.amp { gap: 16px; margin: 18px 0 10px; color: var(--gold-d); font-family: var(--display); font-size: 44px; }
+.amp img { width: 30px; }
+.amp img:last-child { scale: 1 1; }
+
+/* ── Countdown: a length of the sarung itself ── */
+.countBand { padding: 70px 20px 66px; background: linear-gradient(rgba(36, 6, 12, .62), rgba(36, 6, 12, .72)), var(--kotak); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 18px; background: var(--kepala); box-shadow: 0 0 0 1px var(--gold); }
+.countBand::before { top: 0; }
+.countBand::after { bottom: 0; }
+.drift { position: absolute; z-index: -1; bottom: 28px; left: 0; width: 150px; height: auto; opacity: .9; animation: row 26s linear infinite; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: var(--band-ink); font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 90px; border: 1.5px solid var(--gold); border-radius: 6px; background: rgba(251, 245, 232, .96); }
+.count > div::after { background: linear-gradient(115deg, transparent 35%, rgba(200, 151, 58, .25) 50%, transparent 65%); }
+.count b { color: var(--accent); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--teal); font-family: var(--label); font-size: 12px; font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { margin-bottom: 18px; border: 1.5px solid var(--gold); border-radius: 6px; background: rgba(36, 6, 12, .5); color: var(--gold-l); font-family: var(--label); font-size: 14px; letter-spacing: .1em; }
+
+/* ── Events: deep-maroon cards with a woven head panel ── */
+.events { gap: 22px; }
+.event { padding: 36px 22px 26px; border: 0; border-radius: 6px; background: var(--accent); color: var(--band-ink); box-shadow: 0 14px 28px rgba(62, 12, 22, .22); overflow: hidden; }
+.event::before { inset: 0 0 auto; height: 14px; border: 0; border-radius: 0; background: var(--kepala); }
+.event:hover { border-color: transparent; box-shadow: 0 20px 34px rgba(62, 12, 22, .3); }
+.eventNo { top: 22px; left: auto; right: 18px; translate: none; width: auto; height: auto; padding: 0; background: none; color: rgba(240, 217, 166, .55); font-family: var(--display); font-size: 30px; letter-spacing: 0; }
+.event h3 { color: var(--gold-l); font-family: var(--display); font-size: 28px; }
+.eventDate { color: var(--band-ink); }
+.eventTime { color: var(--gold-l); font-family: var(--label); font-size: 15px; }
+.rule { width: 90px; height: 3px; background: linear-gradient(90deg, var(--gold) 0 30%, var(--teal) 30% 40%, var(--gold) 40% 70%, var(--teal) 70% 80%, var(--gold) 80%); }
+.event strong { color: #fff; }
+.eventAddr { color: rgba(246, 234, 210, .82); }
+.mapBtn { border-radius: 6px; background: var(--gold); color: var(--accent2); font-family: var(--label); font-size: 14px; font-weight: 700; letter-spacing: .08em; box-shadow: 0 4px 0 #8a6420; }
+.mapBtn:hover { background: var(--gold-l); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 3px; background: repeating-linear-gradient(var(--accent) 0 8px, var(--gold) 8px 10px, var(--black) 10px 16px, var(--gold) 16px 18px); }
+.node { width: 44px; height: 54px; border: 0; border-radius: 0; background: transparent; }
+.node img { width: 38px; }
+.storyBody small { color: var(--teal); font-family: var(--label); font-size: 14px; letter-spacing: .2em; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 23px; }
+
+/* ── Gallery ── */
+.mosaic { grid-auto-rows: 140px; gap: 6px; padding: 6px; border-radius: 8px; background: var(--kotak); box-shadow: 0 0 0 1.5px var(--gold); }
+.tile { border-radius: 4px; }
+.tile:first-child { border-radius: 4px; }
+
+/* ── Wishes ── */
+.form { border: 1.5px solid var(--line); border-radius: 8px; background: var(--ivory); box-shadow: 0 12px 28px rgba(62, 12, 22, .08); overflow: hidden; padding-top: 30px; position: relative; }
+.form::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: var(--kotak); background-size: 60px 60px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--label); font-size: 13px; letter-spacing: .14em; }
+.field input, .field textarea { border-radius: 6px; }
+.choices button { border-radius: 6px; font-family: var(--label); font-size: 14px; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: var(--gold-l); }
+.step { border-radius: 6px; }
+.submit { border-radius: 6px; background: var(--accent); color: var(--gold-l); font-family: var(--label); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.wish { border-radius: 8px; }
+.wish strong { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.wish small { border-radius: 4px; background: rgba(30, 95, 94, .12); color: var(--teal); font-family: var(--label); }
+
+/* ── Gifts ── */
+.gift { padding: 34px 20px 24px; border: 1.5px solid var(--gold); border-radius: 8px; background: var(--ivory); color: var(--ink); }
+.gift::before { content: ""; position: absolute; inset: 0 0 auto; height: 14px; background: var(--kotak); background-size: 60px 60px; }
+.gift::after { display: none; }
+.giftIcon { border-color: var(--gold); background: var(--accent); }
+.gift h3 { color: var(--accent); font-family: var(--display); font-size: 20px; letter-spacing: .02em; }
+.giftNo { color: var(--ink); font-family: var(--serif); font-weight: 600; }
+.gift small { color: var(--muted); }
+.gift:last-of-type .giftNo { font-size: 18px; line-height: 1.45; }
+.copy { border-radius: 6px; border-color: var(--accent); color: var(--accent); font-family: var(--label); font-size: 13px; letter-spacing: .08em; }
+.copy:hover { background: rgba(90, 20, 32, .08); }
+.copyOn, .copyOn:hover { background: var(--accent); color: var(--gold-l); }
+.gift .copy svg { stroke: currentColor; }
+
+/* ── Closing: the river at dusk ── */
+.closing { padding: 0 28px 58px; background: var(--accent2); }
+.closingScene { display: block; width: calc(100% + 56px); max-width: none; height: auto; margin: 0 -28px 10px; -webkit-mask-image: linear-gradient(#000 78%, transparent); mask-image: linear-gradient(#000 78%, transparent); }
+.closingEmblem { width: 46px; height: auto; margin-top: -4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; }
+.closingSalam { color: var(--gold-l); font-family: var(--label); font-size: 13px; }
+.family { font-family: var(--label); }
+.closingNames { font-family: var(--display); font-size: 34px; }
+.music { border-radius: 8px; border-color: var(--gold); background: var(--accent); }
+
+/* ── Cover: the gedokan loom — warp threads running into the woven sarung, the names on the cloth below ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 46px; overflow: hidden; background: radial-gradient(ellipse at 50% 0, #6a1a28, var(--accent2) 70%); color: var(--band-ink); text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 22px; background: var(--kepala); box-shadow: 0 -1.5px 0 var(--gold); }
+.loom { position: relative; width: 100%; overflow: hidden; }
+.loom img { display: block; width: 122%; max-width: none; margin-left: -11%; height: auto; -webkit-mask-image: linear-gradient(#000 82%, transparent); mask-image: linear-gradient(#000 82%, transparent); }
+.coverText { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; margin: auto 0; padding: 10px 24px 0; }
+.kicker { color: var(--gold-l); font-family: var(--label); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; }
+.coverNames { display: flex; flex-direction: column; align-items: center; max-width: 100%; color: #fff6e6; font-family: var(--display); font-size: 52px; font-weight: 400; line-height: 1.02; overflow-wrap: anywhere; text-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+.coverNames em { color: var(--gold); font-family: var(--serif); font-size: 30px; font-style: italic; }
+.coverDate { color: var(--gold-l); font-family: var(--serif); font-size: 18px; font-weight: 600; letter-spacing: .06em; }
+.guest { margin-top: 8px; padding: 12px 18px; border-block: 1px solid rgba(200, 151, 58, .5); }
+.guest small { color: rgba(246, 234, 210, .82); }
+.guest strong { color: #fff6e6; font-family: var(--serif); font-size: 20px; font-weight: 600; }
+.table { border-color: var(--gold); color: var(--gold-l); font-family: var(--label); font-size: 12px; }
+.openBtn { margin-top: 10px; border-radius: 6px; background: var(--gold); color: var(--accent2); font-family: var(--label); font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 4px 0 #8a6420, 0 12px 24px rgba(0, 0, 0, .35); }
+.openBtn:hover { background: var(--gold-l); }
+
+/* ── Hero: dusk over the Mahakam, a photo bound in sarung ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 0 22px 52px; text-align: center; }
+.heroRiver { position: relative; width: calc(100% + 44px); margin: 0 -22px; }
+.heroRiver img { display: block; width: 100%; height: auto; }
+.heroHead { position: absolute; inset: 16px 16px auto; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.heroKicker { color: var(--gold-l); font-family: var(--label); font-size: 13px; letter-spacing: .28em; text-transform: uppercase; text-shadow: 0 1px 6px rgba(0, 0, 0, .5); }
+.heroNames { max-width: 100%; color: #fff6e6; font-family: var(--display); font-size: 40px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; text-shadow: 0 2px 12px rgba(40, 10, 30, .6); }
+.heroNames em { padding: 0 8px; color: var(--gold-l); font-family: var(--serif); font-size: 30px; }
+.heroDate { margin-top: 18px; color: var(--accent); font-family: var(--label); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; }
+.heroWrap { position: relative; width: 280px; max-width: 100%; margin-top: 12px; padding: 12px; border-radius: 8px; background: var(--kotak); box-shadow: 0 0 0 1.5px var(--gold), 0 18px 30px rgba(62, 12, 22, .25); rotate: -1.5deg; }
+.heroPic { display: block; width: 100%; height: 330px; border-radius: 3px; object-fit: cover; cursor: zoom-in; }
+.heroNote { max-width: 318px; margin-top: 18px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes swing { from { rotate: -5deg; } to { rotate: 5deg; } }
+@keyframes row { from { translate: -170px 0; } to { translate: calc(min(100vw, 430px) + 20px) 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .portraitArt, .drift { animation: none; }
+  .drift { translate: 20px 0; }
+}

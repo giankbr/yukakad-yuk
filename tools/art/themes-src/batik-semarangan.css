@@ -1,0 +1,166 @@
+/* Batik Semarangan — batik pesisir Semarang: pohon asem arang berpolong, burung kuntul, cecek pitu, ombak, dan tumpal; merah soga dan nila di atas krem, digambar ulang sebagai batik tulis (malam, remukan, titik canting). */
+.root, .cover {
+  --bg: #f3e8d0; --paper: #ebdcbc; --ivory: #fbf4e4; --field: #fffaf0; --ink: #2a1d18; --muted: #5f4a3d; --line: #d9c49c;
+  --accent: #1d2a52; --accent2: #131c3a; --gold: #b03a2b; --gold-l: #f1e5c8; --gold-d: #8e2c20;
+  --red: #b03a2b; --red-d: #7e2219; --ochre: #d29a3e; --indigo: #1d2a52;
+  --band-bg: #1d2a52; --band-ink: #f1e5c8;
+  --display: "Kurale", Georgia, serif; --serif: "Literata", Georgia, serif; --script: "Kurale", Georgia, serif; --label: "Josefin Sans", system-ui, sans-serif;
+  --h2: 34px; --card-r: 2px;
+  --tumpal: url(/themes/art/batik-semarangan/tumpal.webp) 0 0 / 120px 40px repeat-x;
+  --cecek: radial-gradient(circle at 50% 50%, rgba(176, 58, 43, .16) 1.3px, transparent 1.9px) 0 0 / 22px 22px, radial-gradient(circle at 50% 50%, rgba(29, 42, 82, .1) 1.1px, transparent 1.7px) 11px 11px / 22px 22px;
+  --nila-dots: radial-gradient(circle, rgba(142, 160, 204, .32) 1.2px, transparent 1.8px) 0 0 / 20px 20px;
+  font-family: var(--serif); color: var(--ink); background: var(--cecek), var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b03a2b; --t-accent-ink: #fbf4e4; --t-bg: #f3e8d0; --t-ink: #2a1d18; --t-muted: #5f4a3d; --t-line: #d9c49c; --t-field: #fffaf0;
+  --t-radius: 2px; --t-font: "Literata", Georgia, serif; --t-heading-font: "Kurale", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: transparent; }
+.eyebrow, .salamKicker, .role { color: var(--red); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .26em; text-transform: uppercase; }
+.head h2 { color: var(--indigo); font-family: var(--display); }
+.divider { width: 220px; }
+
+/* ── Opening ── */
+.salamBlock { padding: 50px 28px 56px; }
+.arabic { color: var(--red-d); font-size: 28px; }
+.salamKicker { font-size: 12px; letter-spacing: .14em; line-height: 1.6; }
+.salamTitle { color: var(--indigo); font-family: var(--display); font-size: 38px; }
+.salamSub { color: var(--red-d); font-family: var(--serif); font-size: 17px; font-style: italic; }
+
+/* ── Couple: indigo cloth, round medallion portraits ringed with canting dots ── */
+.couple { gap: 16px; padding-top: 74px; padding-bottom: 74px; background: var(--nila-dots), var(--indigo); color: var(--band-ink); }
+.couple::before, .couple::after { content: ""; position: absolute; left: 0; right: 0; height: 40px; background: var(--tumpal); }
+.couple::before { top: 0; scale: 1 -1; }
+.couple::after { bottom: 0; }
+.couple .head h2 { color: var(--band-ink); }
+.couple .eyebrow { color: #f0b49f; }
+.portrait { margin: 6px 0 22px; }
+.portraitFrame { width: 214px; height: 214px; padding: 7px; border: 2px solid var(--gold-l); border-radius: 50%; background: var(--red); box-shadow: 0 0 0 6px var(--indigo), 0 0 0 8px rgba(241, 229, 200, .5), 0 18px 34px rgba(0, 0, 0, .35); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.portraitArt { position: absolute; z-index: 2; left: 50%; bottom: -26px; width: 52px; height: auto; translate: -50% 0; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .35)); }
+.monogram { color: var(--gold-l); font-family: var(--display); font-size: 92px; }
+.role { color: #f0b49f; }
+.nick { color: var(--band-ink); font-family: var(--display); font-size: 50px; }
+.fullName { color: var(--band-ink); font-family: var(--serif); font-size: 18px; font-weight: 600; }
+.parents { color: rgba(241, 229, 200, .82); }
+.amp { gap: 14px; margin: 22px 0 14px; color: var(--ochre); font-family: var(--display); font-size: 46px; }
+.amp img { width: 38px; }
+.amp img:last-child { scale: 1 1; }
+
+/* ── Countdown: soga-red band hemmed with tumpal teeth ── */
+.countBand { padding: 76px 20px 72px; background: var(--cecek), var(--red); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 40px; background: var(--tumpal); filter: hue-rotate(0deg) saturate(.9); }
+.countBand::before { top: 0; scale: 1 -1; }
+.countBand::after { bottom: 0; }
+.rosette { position: absolute; z-index: -1; width: 120px; height: auto; opacity: .22; animation: turn 60s linear infinite; }
+.rosette:first-child { top: 40px; left: -36px; }
+.headLight .eyebrow { color: #fbdcb8; }
+.headLight h2 { color: var(--ivory); font-family: var(--display); }
+.count { gap: 10px; }
+.count > div { height: 92px; border: 0; border-radius: 46px 46px 4px 4px; background: var(--ivory); box-shadow: inset 0 0 0 3px var(--ivory), inset 0 0 0 4.5px var(--red), 0 6px 0 var(--red-d); }
+.count > div::after { display: none; }
+.count b { color: var(--indigo); font-family: var(--display); font-size: 32px; }
+.count small { color: var(--red-d); font-family: var(--label); font-size: 12px; font-style: normal; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.countTba { color: var(--ivory); }
+.ghostBtn { border: 1.5px solid var(--ivory); border-radius: 2px; color: var(--ivory); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+
+/* ── Events: cream cards with an indigo head strip ── */
+.events { gap: 28px; }
+.event { padding: 0 22px 26px; border: 1.5px solid var(--indigo); border-radius: 2px; background: var(--ivory); box-shadow: 6px 6px 0 var(--red); overflow: hidden; }
+.event::before { inset: auto; top: 54px; left: 8px; right: 8px; bottom: 8px; border: 1px dashed color-mix(in srgb, var(--red) 45%, transparent); border-radius: 0; }
+.event:hover { border-color: var(--indigo); box-shadow: 9px 9px 0 var(--red); translate: -2px -2px; }
+.eventNo { position: static; translate: none; display: block; width: calc(100% + 44px); height: auto; margin: 0 -22px 14px; padding: 12px 0; border-radius: 0; background: var(--nila-dots), var(--indigo); color: var(--gold-l); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .3em; }
+.eventNo::before { content: "Acara · "; }
+.event h3 { color: var(--red-d); font-family: var(--display); font-size: 30px; }
+.eventDate { font-family: var(--serif); }
+.eventTime { color: var(--indigo); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .06em; }
+.rule { width: 120px; height: 8px; margin: 6px 0; background: radial-gradient(circle, var(--red) 2px, transparent 2.5px) 0 50% / 12px 8px repeat-x; }
+.event strong { color: var(--indigo); font-weight: 700; }
+.mapBtn { border-radius: 2px; background: var(--red); color: var(--ivory); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; box-shadow: 0 4px 0 var(--red-d); }
+.mapBtn:hover { background: var(--red-d); }
+
+/* ── Story ── */
+.story { background: var(--paper); }
+.timeline::before { left: 22px; width: 0; border-left: 2px dotted var(--red); background: none; }
+.node { width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--ivory); box-shadow: 0 0 0 2px var(--indigo); }
+.node img { width: 34px; }
+.storyBody small { color: var(--red); font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .22em; }
+.storyBody h3 { color: var(--indigo); font-family: var(--display); font-size: 24px; }
+.storyBody p { color: var(--muted); }
+
+/* ── Gallery: photos mounted on indigo with a cream wax line ── */
+.gallery .mosaic { gap: 10px; }
+.tile { border-radius: 2px; box-shadow: 0 0 0 4px var(--ivory), 0 0 0 6px var(--indigo); }
+.tile:first-child { border-radius: 110px 110px 2px 2px; }
+
+/* ── Wishes ── */
+.wishes { background: var(--paper); }
+.form { border: 1.5px solid var(--indigo); border-radius: 2px; background: var(--ivory); box-shadow: 6px 6px 0 var(--indigo); }
+.field > span, .diet, .guestsLabel { color: var(--red-d); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .16em; }
+.field input, .field textarea { border-radius: 2px; border-color: #cdb68a; }
+.choices button { border-radius: 2px; font-family: var(--label); font-size: 15px; font-weight: 600; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--red); background: var(--red); color: var(--ivory); }
+.step { border-radius: 2px; border-color: var(--red); }
+.submit { border-radius: 2px; background: var(--indigo); color: var(--ivory); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 4px 0 var(--red); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border-radius: 2px; border-color: #dcc7a0; border-left: 4px solid var(--red); }
+.wish strong { color: var(--indigo); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.wish small { border-radius: 2px; background: rgba(176, 58, 43, .12); color: var(--red-d); font-family: var(--label); font-weight: 600; }
+
+/* ── Gifts: soga-red cloth cards ── */
+.gift { padding: 30px 20px 24px; border-radius: 2px; background: var(--cecek), var(--red); }
+.gift::after { inset: 8px; right: 8px; bottom: 8px; width: auto; height: auto; border: 1px dashed rgba(241, 229, 200, .55); border-radius: 0; box-shadow: none; }
+.gift h3 { color: var(--ivory); font-family: var(--display); font-size: 21px; }
+.giftIcon { border-color: rgba(241, 229, 200, .6); }
+.giftNo { color: #fff; font-family: var(--serif); font-weight: 700; }
+.gift small { color: rgba(251, 244, 228, .86); }
+.gift:last-of-type .giftNo { font-size: 18px; line-height: 1.4; }
+.copy { position: relative; z-index: 1; border-radius: 2px; border-color: var(--ivory); color: var(--ivory); font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.copyOn, .copyOn:hover { background: var(--ivory); color: var(--red-d); }
+
+/* ── Closing: indigo cloth, the egret flying home ── */
+.closing { padding: 78px 28px 60px; background: var(--nila-dots), var(--indigo); }
+.closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--tumpal); scale: 1 -1; }
+.closingEmblem { width: 150px; height: auto; animation: hover 7s var(--m-ease) infinite alternate; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 50px; }
+.closingSalam { color: #f0b49f; font-family: var(--label); font-size: 13px; font-weight: 600; letter-spacing: .06em; }
+.family { font-family: var(--label); font-size: 14px; font-weight: 600; letter-spacing: .1em; }
+.closingNames { font-family: var(--display); font-size: 36px; }
+.music { border-radius: 50%; border-color: var(--gold-l); background: var(--red); }
+
+/* ── Cover: the cloth on top (asem tree, egrets, ombak), the names dyed below on cream ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding-bottom: 54px; overflow: hidden; text-align: center; isolation: isolate; }
+.cover::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; height: 40px; background: var(--tumpal); }
+.coverKain { position: relative; width: 100%; height: clamp(260px, 48dvh, 440px); overflow: hidden; box-shadow: 0 6px 0 var(--red-d); }
+.coverKain img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+.coverText { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; padding: 26px 22px 0; }
+.kicker { color: var(--red); font-family: var(--label); font-size: 13px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.coverNames { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 14px; max-width: 100%; color: var(--indigo); font-family: var(--display); font-size: 52px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.coverNames em { color: var(--red); font-family: var(--serif); font-size: 38px; font-style: italic; }
+.coverDate { padding: 6px 14px; border-block: 2px solid var(--red); color: var(--ink); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.guest { margin-top: 6px; }
+.guest small { color: var(--muted); }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.table { border-color: var(--red); color: var(--red-d); font-family: var(--label); font-size: 12px; font-weight: 600; }
+.openBtn { margin-top: 8px; border-radius: 2px; background: var(--red); color: var(--ivory); font-family: var(--label); font-size: 15px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; box-shadow: 0 0 0 3px var(--bg), 0 0 0 4.5px var(--red), 0 8px 18px rgba(126, 34, 25, .3); }
+.openBtn:hover { background: var(--red-d); }
+
+/* ── Hero ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 66px 22px 50px; text-align: center; }
+.hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--tumpal); scale: 1 -1; }
+.heroKicker { color: var(--red); font-family: var(--label); font-size: 13px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; color: var(--indigo); font-family: var(--display); font-size: 50px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { padding: 0 10px; color: var(--red); font-family: var(--serif); font-size: 34px; }
+.heroDate { color: var(--ink); font-family: var(--label); font-size: 15px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.heroFrame { position: relative; width: 292px; max-width: 100%; margin-top: 22px; padding: 10px; background: var(--nila-dots), var(--indigo); box-shadow: 8px 8px 0 var(--red); }
+.heroPic { display: block; width: 100%; height: 360px; object-fit: cover; outline: 1.5px solid var(--gold-l); outline-offset: -6px; cursor: zoom-in; }
+.heroBird { position: absolute; z-index: 2; top: -40px; right: -34px; width: 110px; height: auto; filter: drop-shadow(0 6px 8px rgba(0, 0, 0, .25)); animation: hover 6s var(--m-ease) infinite alternate; }
+.heroBird img { display: block; width: 100%; height: auto; }
+.heroNote { max-width: 318px; margin-top: 22px; color: var(--muted); font-size: 17px; font-style: italic; line-height: 1.6; }
+
+@keyframes hover { from { translate: 0 0; rotate: -2deg; } to { translate: -6px -8px; rotate: 2deg; } }
+@keyframes turn { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .heroBird, .closingEmblem, .rosette { animation: none; }
+}

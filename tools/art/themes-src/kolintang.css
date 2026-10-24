@@ -1,0 +1,181 @@
+/* Kolintang — Dataran tinggi Tomohon saat senja dalam cat air (Gunung Lokon dan Empung berasap tipis, kabut, petak-petak kebun krisan, rumah panggung Woloan) dan sebuah kolintang melodi kayu yang dilukis gouache di sampul hijau tua; bilah kayu bertingkat sebagai hitung mundur, kartu bertepi bilah, rel merah sebagai alur kisah; Young Serif + Hanken Grotesk. */
+
+.root, .cover {
+  font-variant-numeric: lining-nums;
+  --bg: #f5efe3; --paper: #ece4d2; --ivory: #fffaf0; --field: #fffdf7; --ink: #1d2b22; --muted: #56604f; --line: #dcd2bd;
+  --accent: #2f5a3c; --accent2: #234a30; --gold: #c98a3c; --gold-l: #f4d58e; --gold-d: #8a5420;
+  --forest: #173828; --forest-2: #1e4432; --wood: #b9783a; --wood-l: #dca364; --wood-d: #6a3a17; --coral: #d9505e; --mari: #eba23a; --rail: #a8323a;
+  --band-bg: #173828; --band-ink: #f6ead2;
+  --display: "Young Serif", Georgia, serif; --serif: "Hanken Grotesk", system-ui, sans-serif; --script: "Young Serif", Georgia, serif;
+  --h2: 33px; --card-r: 10px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #2f5a3c; --t-accent-ink: #fffaf0; --t-bg: #f5efe3; --t-ink: #1d2b22; --t-muted: #56604f; --t-line: #dcd2bd; --t-field: #fffdf7;
+  --t-radius: 10px; --t-font: "Hanken Grotesk", system-ui, sans-serif; --t-heading-font: "Young Serif", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 31px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) radial-gradient(rgba(29, 43, 34, .035) 1px, transparent 1.4px) 0 0 / 6px 6px; }
+
+.eyebrow, .salamKicker, .role { color: var(--coral); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .24em; text-transform: uppercase; }
+.head h2 { color: var(--accent); font-family: var(--display); font-weight: 400; letter-spacing: -.005em; line-height: 1.12; }
+.divider { width: 168px; height: auto; margin-top: 6px; }
+.intro { color: var(--muted); font-size: 16.5px; }
+
+/* opening */
+.salamBlock { padding: 50px 28px 58px; }
+.salamKicker { color: var(--wood-d); }
+.salamTitle { color: var(--accent); font-family: var(--display); font-size: 36px; line-height: 1.1; }
+.salamSub { color: var(--coral); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .04em; }
+
+/* couple: portraits are tall kolintang bars, pinned by two nails, a krisan sprig at the foot */
+.couple { gap: 20px; background: linear-gradient(180deg, var(--paper), #e6ead9); }
+.portrait { margin-bottom: 22px; }
+.portraitFrame { width: 196px; height: 268px; padding: 10px; border: 0; border-radius: 16px; background: url(/themes/art/kolintang/kayu.webp) center / 240px auto, var(--wood); box-shadow: inset 0 -6px 0 rgba(62, 31, 12, .45), 0 16px 30px rgba(23, 56, 40, .22); }
+.portraitFrame::before, .portraitFrame::after { content: ""; position: absolute; z-index: 2; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #3a1c0a; box-shadow: 0 1px 0 rgba(255, 240, 210, .5); }
+.portraitFrame::before { top: 3px; }
+.portraitFrame::after { bottom: 3px; }
+.portraitFrame > img, .portraitFrame > div { border-radius: 8px; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 8px; background: var(--forest); color: var(--gold-l); font-family: var(--display); font-size: 86px; }
+.pSprig { position: absolute; z-index: 3; right: -54px; bottom: -26px; width: 116px; height: auto; }
+.personWrap:nth-child(3) .pSprig { right: auto; left: -54px; scale: -1 1; }
+.role { color: var(--coral); }
+.nick { color: var(--accent); font-family: var(--display); font-size: 46px; line-height: 1.05; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15.5px; }
+.amp { gap: 12px; margin: 8px 0 12px; color: var(--coral); font-family: var(--display); font-size: 44px; }
+.amp img { width: 70px; }
+
+/* countdown: four bars of a kolintang, longest (days) to shortest (seconds), struck one by one */
+.countBand { padding: 66px 18px 72px; background: radial-gradient(120% 70% at 50% 0%, #24503a, var(--forest) 70%); }
+.countBand::before { content: ""; position: absolute; z-index: -1; left: 6%; right: 6%; top: 50%; height: 120px; margin-top: -40px; background: linear-gradient(var(--rail), var(--rail)) 0 14px / 100% 4px no-repeat, linear-gradient(var(--rail), var(--rail)) 0 98px / 100% 4px no-repeat; opacity: .75; }
+.countKrisan { position: absolute; z-index: -1; right: -40px; bottom: -30px; width: 170px; height: auto; opacity: .9; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { font-family: var(--display); color: var(--band-ink); }
+.count { align-items: center; grid-template-columns: repeat(4, minmax(0, 70px)); gap: 12px; }
+.count > div { height: 128px; border: 0; border-radius: 10px; background: url(/themes/art/kolintang/kayu.webp) center / 200px auto, var(--wood); box-shadow: inset 0 -5px 0 rgba(62, 31, 12, .5), 0 8px 16px rgba(0, 0, 0, .3); animation: kgStrike 6s var(--m-ease) infinite; }
+.count > div:nth-child(2) { height: 116px; animation-delay: .35s; }
+.count > div:nth-child(3) { height: 104px; animation-delay: .7s; }
+.count > div:nth-child(4) { height: 92px; animation-delay: 1.05s; }
+.count > div::before { content: ""; position: absolute; top: 8px; left: 50%; width: 6px; height: 6px; margin-left: -3px; border-radius: 50%; background: #3a1c0a; }
+.count > div::after { background: radial-gradient(60% 40% at 50% 50%, rgba(255, 238, 200, .5), transparent 70%); translate: 0; opacity: 0; animation: kgRing 6s var(--m-ease) infinite; }
+.count > div:nth-child(2)::after { animation-delay: .35s; }
+.count > div:nth-child(3)::after { animation-delay: .7s; }
+.count > div:nth-child(4)::after { animation-delay: 1.05s; }
+.count b { color: #2a1406; font-family: var(--display); font-size: 31px; text-shadow: 0 1px 0 rgba(255, 236, 200, .55); }
+.count small { color: #3e1f0c; font-size: 11.5px; font-style: normal; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.countTba { color: var(--gold-l); }
+.ghostBtn { border: 1.5px solid var(--gold-l); color: var(--band-ink); font-family: var(--serif); font-weight: 700; }
+
+/* events: a wooden bar on top of each card carries the number */
+.events { gap: 34px; }
+.event { padding: 46px 22px 26px; border: 0; border-radius: 12px; background: var(--ivory); box-shadow: 0 12px 28px rgba(23, 56, 40, .1), inset 0 0 0 1px var(--line); }
+.event::before { inset: 0 0 auto; height: 26px; border: 0; border-radius: 12px 12px 0 0; background: url(/themes/art/kolintang/kayu.webp) center / 300px auto, var(--wood); box-shadow: inset 0 -4px 0 rgba(62, 31, 12, .35); }
+.eventNo { top: 12px; width: auto; height: 30px; padding: 0 14px; border-radius: 6px; background: var(--forest); color: var(--gold-l); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; box-shadow: 0 4px 10px rgba(0, 0, 0, .18); }
+.event h3 { color: var(--accent); font-family: var(--display); font-size: 25px; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 600; }
+.eventTime { color: var(--wood-d); font-family: var(--serif); font-weight: 700; }
+.rule { width: 72px; height: 4px; border-radius: 2px; background: var(--rail); }
+.mapBtn { border-radius: 8px; background: var(--forest); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 700; }
+.mapBtn:hover { background: var(--accent); }
+
+/* story: the red felt rail of the instrument, small bars as nodes */
+.story { background: linear-gradient(180deg, #e6ead9, var(--paper)); }
+.timeline::before { left: 19px; width: 4px; border-radius: 2px; background: var(--rail); }
+.node { width: 42px; height: 26px; margin-top: 4px; border: 0; border-radius: 6px; background: url(/themes/art/kolintang/kayu.webp) center / 120px auto, var(--wood); box-shadow: inset 0 -3px 0 rgba(62, 31, 12, .45), 0 4px 8px rgba(0, 0, 0, .16); }
+.node::before, .node::after { content: ""; position: absolute; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: #3a1c0a; }
+.node::before { left: 6px; }
+.node::after { right: 6px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 10px; background: var(--ivory); box-shadow: 0 8px 20px rgba(23, 56, 40, .08); }
+.storyBody small { color: var(--coral); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.storyBody h3 { color: var(--accent); font-family: var(--display); font-size: 21px; }
+
+/* gallery */
+.mosaic { grid-template-columns: 1fr 1fr 1fr; grid-auto-rows: 118px; gap: 8px; }
+.tile, .tile:first-child { border-radius: 10px; }
+.tile:first-child { grid-column: span 3; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:nth-child(2) { grid-column: span 2; }
+.tile:nth-child(5) { grid-column: span 2; }
+
+/* wishes */
+.wishes { background: var(--paper); }
+.form { border: 0; border-radius: 12px; box-shadow: inset 0 6px 0 var(--wood), 0 12px 26px rgba(23, 56, 40, .1); padding-top: 26px; }
+.field > span, .diet, .guestsLabel { color: var(--accent); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.choices button { border-radius: 8px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.step { border-color: var(--accent); color: var(--accent); }
+.submit { border-radius: 8px; background: var(--coral); color: #fff; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+.submit:not(:disabled):hover { background: #c03f4d; }
+.wish { border: 0; border-radius: 10px; box-shadow: inset 4px 0 0 var(--wood); }
+.wish strong { color: var(--accent); font-family: var(--display); font-size: 17px; }
+.wish small { background: color-mix(in srgb, var(--mari) 22%, transparent); color: var(--wood-d); font-weight: 700; }
+.sentBox img { width: 130px; }
+.sent { color: var(--accent); font-family: var(--display); font-style: normal; }
+
+/* gifts: forest cards with a wooden bar down the left edge */
+.gift { align-items: flex-start; padding: 22px 20px 22px 40px; border-radius: 12px; background: var(--forest); text-align: left; }
+.gift::after { inset: 10px auto 10px 10px; width: 16px; height: auto; border: 0; border-radius: 5px; background: url(/themes/art/kolintang/kayu.webp) center / 80px auto, var(--wood); box-shadow: none; z-index: 0; }
+.giftIcon { border-color: rgba(244, 213, 142, .6); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-size: 14px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.giftNo { font-family: var(--display); font-size: 22px; letter-spacing: .04em; }
+.gifts .gift:last-of-type .giftNo { font-family: var(--serif); font-size: 16px; font-weight: 600; letter-spacing: 0; line-height: 1.5; }
+.copy { border: 1.5px solid var(--gold-l); border-radius: 8px; color: var(--gold-l); font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--forest); }
+
+/* closing: the instrument again, under the krisan */
+.closing { padding: 40px 26px 60px; background: linear-gradient(180deg, var(--bg) 0 70px, var(--forest) 70px); }
+.closingKol { width: calc(100% + 30px); max-width: 400px; height: auto; margin: 0 -15px 6px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 46px; }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .06em; }
+.family { color: rgba(246, 234, 210, .85); font-family: var(--serif); }
+.closingNames { color: var(--band-ink); font-family: var(--display); font-size: 32px; }
+.made { color: rgba(246, 234, 210, .55); }
+.music { border: 2px solid var(--gold-l); background: var(--forest); }
+
+/* ── Cover: dusk over Lokon and Empung, names in the sky, the kolintang on the forest floor ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 40px 22px 30px; overflow: hidden; background: var(--forest); color: var(--band-ink); text-align: center; isolation: isolate; }
+.scene { position: absolute; z-index: -2; inset: 0 0 auto; height: 100%; background: url(/themes/art/kolintang/scene.webp) center top / 100% auto no-repeat; -webkit-mask-image: linear-gradient(#000 0, #000 calc(min(100vw, 430px) * 1.3), transparent calc(min(100vw, 430px) * 1.5)); mask-image: linear-gradient(#000 0, #000 calc(min(100vw, 430px) * 1.3), transparent calc(min(100vw, 430px) * 1.5)); transform-origin: 50% 30%; animation: kgBreath 32s ease-in-out infinite alternate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0 0 auto; height: 40%; background: linear-gradient(180deg, rgba(16, 40, 30, .55), rgba(16, 40, 30, 0)); }
+.syalom { padding: 5px 14px; border: 1.5px solid rgba(244, 213, 142, .75); border-radius: 999px; color: var(--gold-l); font-size: 12px; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; }
+.kicker { margin-top: 14px; color: rgba(246, 234, 210, .92); font-size: 13px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+.names { display: flex; flex-direction: column; align-items: center; max-width: 100%; margin-top: 10px; color: #fff8ea; font-family: var(--display); font-size: 60px; line-height: 1; overflow-wrap: anywhere; text-shadow: 0 2px 14px rgba(10, 30, 20, .45); }
+.names em { margin: 4px 0; color: var(--gold-l); font-size: 34px; font-style: normal; }
+.coverDate { margin-top: 14px; padding: 7px 16px; border-radius: 6px; background: url(/themes/art/kolintang/kayu.webp) center / 260px auto, var(--wood); color: #2a1406; font-size: 14px; font-weight: 800; letter-spacing: .08em; box-shadow: inset 0 -3px 0 rgba(62, 31, 12, .45), 0 6px 14px rgba(0, 0, 0, .25); }
+.spacer { flex: 1 0 150px; }
+.instrument { position: relative; width: calc(100% + 24px); max-width: 420px; margin: 0 -12px -6px; }
+.instrument img { display: block; width: 100%; height: auto; }
+.strike { position: absolute; inset: 12% 6% 38% 6%; background: linear-gradient(90deg, transparent 0 40%, rgba(255, 236, 190, .55) 48%, transparent 56%) 0 0 / 300% 100% no-repeat; mix-blend-mode: soft-light; animation: kgSweep 7s var(--m-ease) 1.6s infinite; pointer-events: none; }
+.guestCard { position: relative; width: 100%; max-width: 340px; padding: 26px 20px 20px; border-radius: 12px; background: var(--ivory); color: var(--ink); box-shadow: 0 18px 36px rgba(0, 0, 0, .35); }
+.guestCard::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; border-radius: 12px 12px 0 0; background: url(/themes/art/kolintang/kayu.webp) center / 300px auto, var(--wood); }
+.guest { max-width: 100%; margin: 0 auto; }
+.guest small { color: var(--muted); font-size: 14px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--display); font-size: 21px; }
+.table { border: 1.5px solid var(--coral); color: var(--coral); font-family: var(--serif); font-size: 11px; font-weight: 800; }
+.openBtn { width: 100%; margin-top: 16px; border-radius: 10px; background: var(--forest); color: #fff8ea; font-family: var(--serif); font-size: 15px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 4px 0 #0c2016; }
+.openBtn:hover { background: var(--accent); translate: 0 -1px; }
+
+/* ── Hero: the photo held in a tall wooden bar frame, krisan at its foot ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 46px 24px 34px; background: linear-gradient(180deg, #e3e9da, var(--bg) 300px); text-align: center; }
+.heroKicker { color: var(--coral); font-size: 12px; font-weight: 800; letter-spacing: .26em; text-transform: uppercase; }
+.heroNames { max-width: 100%; margin-top: 10px; color: var(--accent); font-family: var(--display); font-size: 48px; line-height: 1.02; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames em { color: var(--coral); font-style: normal; }
+.heroDate { margin-top: 10px; color: var(--wood-d); font-size: 16px; font-weight: 700; letter-spacing: .06em; }
+.heroFrame { position: relative; width: 100%; max-width: 330px; margin-top: 26px; padding: 12px; border-radius: 20px; background: url(/themes/art/kolintang/kayu.webp) center / 320px auto, var(--wood); box-shadow: inset 0 -7px 0 rgba(62, 31, 12, .45), 0 18px 34px rgba(23, 56, 40, .22); }
+.heroPhoto { display: grid; height: 360px; overflow: hidden; border-radius: 12px; }
+.heroPhoto > img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.heroKrisan { position: absolute; z-index: 2; left: -48px; bottom: -42px; width: 150px; height: auto; }
+.heroBilah { width: 200px; height: auto; margin-top: 40px; }
+.heroNote { max-width: 320px; margin-top: 14px; color: var(--muted); font-size: 16.5px; line-height: 1.6; }
+
+@keyframes kgBreath { from { scale: 1; } to { scale: 1.04; } }
+@keyframes kgSweep { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0 0; } }
+@keyframes kgStrike { 0%, 3% { translate: 0; } 5% { translate: 0 3px; } 9%, 100% { translate: 0; } }
+@keyframes kgRing { 0%, 3% { opacity: 0; } 6% { opacity: 1; } 18%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .scene, .strike, .count > div, .count > div::after { animation: none; }
+}
+@media (max-width: 370px) {
+  .names { font-size: 52px; }
+  .count { gap: 8px; }
+}

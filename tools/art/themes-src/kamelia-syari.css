@@ -1,0 +1,163 @@
+/* Kamelia Syari — tanpa foto (foto opsional): kertas merah muda pudar dengan bunga kamelia merah muda semi-ganda dan daun hijau tua mengilap dalam cat gouache, benang sari emas; sampul berupa kanopi hijau tua berpinggir renda bergerigi yang menjuntaikan rangkaian kamelia, nama dalam Fraunces hijau tua di atas kertas; pita hijau tua untuk hitung mundur, kado, dan penutup; potret berbentuk kelopak. Flora saja, tanpa figur. */
+.root, .cover {
+  --bg: #f7e6e1; --paper: #fbefeb; --ivory: #fffaf8; --field: #fffdfc; --ink: #2a2622; --muted: #6c5f5a; --line: rgba(45, 92, 69, .2);
+  --accent: #1f4a37; --accent2: #2d5c45; --gold: #c99a45; --gold-l: #ecd39a; --gold-d: #9a7230;
+  --band-bg: #1f4a37; --band-ink: #fbefeb;
+  --pink: #d9718e; --pink-d: #a5304f; --pink-l: #f7c9d3; --green: #1f4a37; --green-d: #163426;
+  --display: "Fraunces", Georgia, serif; --serif: "Alegreya", Georgia, serif; --script: "Fraunces", Georgia, serif;
+  --paper-tex: url("/themes/art/kamelia-syari/kertas.webp");
+  --h2: 30px; --card-r: 22px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f4a37; --t-accent-ink: #fbefeb; --t-bg: #f7e6e1; --t-ink: #2a2622; --t-muted: #6c5f5a; --t-line: rgba(45, 92, 69, .22); --t-field: #fffdfc;
+  --t-radius: 18px; --t-font: "Alegreya", Georgia, serif; --t-heading-font: "Fraunces", Georgia, serif; --t-heading-weight: 600; --t-heading-size: 28px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--paper-tex) 0 0 / 512px, var(--bg); }
+.eyebrow, .role, .salamKicker { color: var(--pink-d); font-family: var(--serif); font-size: 13px; font-weight: 700; font-style: italic; letter-spacing: .08em; text-transform: none; }
+.head h2 { color: var(--green); font-family: var(--display); font-weight: 600; letter-spacing: -.01em; }
+.headLight h2 { color: #fbefeb; font-family: var(--display); font-weight: 600; }
+.headLight .eyebrow { color: var(--pink-l); }
+.divider { width: 210px; }
+
+/* opening */
+.salamBlock { gap: 12px; padding: 56px 28px 60px; }
+.arabic { color: var(--green); font-size: 28px; }
+.salamTitle { color: var(--green); font-family: var(--display); font-size: 32px; font-weight: 600; font-style: italic; }
+.intro { color: var(--muted); font-size: 17px; line-height: 1.7; }
+
+/* couple: petal-shaped portraits on paper */
+.couple { gap: 14px; padding-bottom: 70px; background: transparent; }
+.person { padding: 0 6px 6px; }
+.portrait { margin-bottom: 14px; }
+.portraitArt { position: absolute; z-index: 2; right: -38px; bottom: -14px; width: 96px; height: auto; rotate: -14deg; filter: drop-shadow(0 6px 8px rgba(60, 20, 30, .18)); }
+.portraitFrame { width: 196px; height: 236px; padding: 7px; border: 0; border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; background: linear-gradient(160deg, var(--gold-l), var(--gold) 45%, var(--gold-d)); box-shadow: 0 18px 34px rgba(80, 30, 45, .16); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50% 50% 46% 46% / 58% 58% 42% 42%; background: radial-gradient(circle at 50% 40%, #fff6f6, #f6d5dc 70%); color: var(--pink-d); font-family: var(--display); font-size: 92px; font-weight: 600; font-style: italic; }
+.nick { color: var(--green); font-family: var(--display); font-size: 44px; font-weight: 600; letter-spacing: -.01em; }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 16px; }
+.amp { color: var(--pink); font-family: var(--display); font-size: 50px; font-style: italic; font-weight: 500; }
+.amp img { width: 70px; }
+
+/* countdown: deep green band with lace edges */
+.countBand { margin: 14px 0; padding: 70px 18px 66px; background: var(--green); }
+.countBand::before, .countBand::after { content: ""; position: absolute; z-index: -1; left: 0; right: 0; height: 14px; }
+.countBand::before { top: 0; background: radial-gradient(circle at 50% 0, var(--bg) 9px, transparent 10px) 0 0 / 22px 14px repeat-x; }
+.countBand::after { bottom: 0; background: radial-gradient(circle at 50% 100%, var(--bg) 9px, transparent 10px) 0 100% / 22px 14px repeat-x; }
+.countDeco { position: absolute; z-index: -1; width: 150px; height: auto; opacity: .9; }
+.countDeco:first-child { top: -26px; left: -56px; rotate: 24deg; }
+.countDeco:nth-child(2) { right: -56px; bottom: -26px; rotate: 204deg; }
+.count { grid-template-columns: repeat(4, minmax(0, 70px)); gap: 10px; }
+.count > div { height: 92px; border: 1px solid rgba(236, 211, 154, .5); border-radius: 50% 50% 14px 14px / 40% 40% 14px 14px; background: rgba(255, 240, 242, .08); }
+.count b { color: #fff3f5; font-family: var(--display); font-size: 32px; font-weight: 600; }
+.count small { color: var(--gold-l); font-size: 13px; }
+.ghostBtn { border-color: var(--gold-l); color: #fff3f5; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+
+/* events: card with a green scalloped header */
+.events { gap: 30px; background: transparent; }
+.event { padding: 0 0 26px; overflow: hidden; border: 1px solid var(--line); border-radius: 26px; background: var(--ivory); box-shadow: 0 14px 30px rgba(80, 30, 45, .07); }
+.event::before { inset: auto; display: none; }
+.eventNo { position: static; display: block; translate: none; width: 100%; height: auto; padding: 16px 0 24px; border-radius: 0; background: radial-gradient(circle at 50% 100%, var(--ivory) 8px, transparent 9px) 0 100% / 20px 10px repeat-x, var(--green); color: var(--gold-l); font-family: var(--serif); font-size: 13px; font-weight: 700; font-style: italic; letter-spacing: .06em; }
+.eventNo::before { content: "Acara "; }
+.event h3 { margin-top: 10px; padding: 0 18px; color: var(--green); font-family: var(--display); font-size: 25px; font-weight: 600; }
+.eventDate { color: var(--pink-d); font-style: italic; font-weight: 700; }
+.eventTime { color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.rule { width: 46px; height: 2px; border-radius: 2px; background: var(--pink); }
+.event strong { padding: 0 18px; color: var(--ink); font-size: 18px; font-weight: 700; }
+.eventAddr { padding: 0 18px; }
+.mapBtn { background: var(--green); color: #fff3f5; font-family: var(--serif); font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+.mapBtn:hover { background: var(--accent2); }
+
+/* story */
+.story { background: rgba(255, 250, 248, .55); }
+.timeline::before { left: 23px; width: 2px; background: linear-gradient(var(--pink), rgba(217, 113, 142, .15)); }
+.node { width: 46px; height: 46px; border: 0; background: none; }
+.node img { width: 46px; }
+.storyBody { padding: 12px 16px 14px; border-radius: 4px 20px 20px 20px; background: var(--ivory); border: 1px solid var(--line); }
+.storyBody small { color: var(--pink-d); font-family: var(--serif); font-size: 14px; font-weight: 700; font-style: italic; letter-spacing: .02em; }
+.storyBody h3 { color: var(--green); font-family: var(--display); font-size: 21px; font-weight: 600; }
+
+/* gallery: optional photos in petal tiles */
+.gallery { background: transparent; }
+.mosaic { grid-template-columns: 1fr 1fr 1fr; grid-auto-rows: 120px; gap: 8px; }
+.tile, .tile:first-child { border-radius: 40px 40px 10px 10px; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+
+/* wishes */
+.wishes { background: transparent; }
+.form { border-radius: 24px; border-color: var(--line); background: var(--ivory); box-shadow: 0 16px 34px rgba(80, 30, 45, .08); }
+.field > span, .diet, .guestsLabel { color: var(--green); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .02em; text-transform: none; }
+.field input, .field textarea { border-color: rgba(45, 92, 69, .22); border-radius: 14px; }
+.field input:focus, .field textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(217, 113, 142, .18); }
+.choices button { border-color: rgba(45, 92, 69, .22); font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--green); background: var(--green); color: #fff3f5; }
+.step { border-color: var(--pink); color: var(--green); }
+.submit { background: var(--green); color: #fff3f5; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .02em; }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.sent { color: var(--green); }
+.wish { border-radius: 4px 18px 18px 18px; background: var(--ivory); }
+.wish strong { color: var(--green); font-family: var(--serif); font-size: 17px; font-weight: 700; }
+.wish small { background: rgba(217, 113, 142, .14); color: var(--pink-d); font-weight: 700; }
+
+/* gifts */
+.gifts { background: transparent; }
+.gift { border-radius: 24px; background: var(--green); }
+.gift::after { right: -30px; bottom: -36px; border-color: rgba(247, 201, 211, .1); box-shadow: 0 0 0 14px rgba(247, 201, 211, .06); }
+.gift h3 { color: var(--pink-l); font-family: var(--serif); font-size: 17px; font-weight: 700; letter-spacing: .02em; }
+.gift:last-child .giftNo { font-size: 18px; letter-spacing: .02em; }
+.giftNo { color: #fff3f5; font-family: var(--display); font-weight: 600; }
+.giftIcon { border-color: rgba(247, 201, 211, .45); }
+.copy { border-color: var(--pink-l); color: #fff3f5; font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+.copyOn, .copyOn:hover { background: var(--pink-l); color: var(--green); }
+
+/* closing */
+.closing { margin-top: 18px; padding: 78px 28px 64px; background: var(--green); }
+.closing::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 14px; background: radial-gradient(circle at 50% 0, var(--bg) 9px, transparent 10px) 0 0 / 22px 14px repeat-x; }
+.closeBloom { width: 150px; height: auto; filter: drop-shadow(0 10px 14px rgba(0, 0, 0, .3)); }
+.thanks { color: #fff3f5; font-family: var(--display); font-size: 36px; font-weight: 600; font-style: italic; text-wrap: balance; }
+.closingText { color: rgba(251, 239, 235, .88); }
+.closingSalam { color: var(--gold-l); font-family: var(--serif); font-size: 15px; font-weight: 700; font-style: italic; }
+.family { color: rgba(251, 239, 235, .8); font-family: var(--serif); font-size: 15px; letter-spacing: .02em; }
+.closingNames { color: var(--pink-l); font-family: var(--display); font-size: 34px; font-weight: 600; }
+.music { border-color: var(--pink-l); background: var(--green); }
+
+/* ── Cover: green lace canopy dripping camellias, names on blush paper ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; padding: 0 0 28px; overflow: hidden; background: var(--paper-tex) 0 0 / 512px, var(--bg); text-align: center; isolation: isolate; }
+.canopy { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; padding: 42px 24px 92px; background: radial-gradient(ellipse 80% 70% at 50% 0, #2d5c45, var(--green) 70%); }
+.canopy::after { content: ""; position: absolute; left: 0; right: 0; bottom: -13px; height: 14px; background: radial-gradient(circle at 50% 0, var(--green) 9px, transparent 10px) 0 0 / 22px 14px repeat-x; }
+.coverArabic { color: var(--gold-l); font-family: Amiri, serif; font-size: 25px; line-height: 1.6; }
+.coverKicker { color: #fff3f5; font-family: var(--serif); font-size: 15px; font-weight: 700; font-style: italic; letter-spacing: .06em; }
+.coverBloom { position: relative; z-index: 1; width: 112%; max-width: none; height: auto; margin: -78px 0 -8px; filter: drop-shadow(0 12px 16px rgba(60, 20, 30, .18)); }
+.coverBloom img { display: block; width: 100%; height: auto; }
+.coverSprig { position: absolute; z-index: -1; right: -60px; bottom: -40px; width: 230px; height: auto; rotate: 200deg; opacity: .95; }
+.coverSprigL { right: auto; left: -70px; bottom: 60px; width: 170px; rotate: 14deg; scale: -1 1; opacity: .8; }
+.names { display: flex; flex-direction: column; align-items: center; padding: 0 20px; }
+.names h1 { max-width: 100%; color: var(--green); font-family: var(--display); font-size: 54px; font-weight: 600; line-height: 1.02; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.names span { color: var(--pink); font-family: var(--display); font-size: 34px; font-style: italic; font-weight: 500; line-height: 1.1; }
+.coverDate { margin-top: 12px; padding: 6px 16px; border-top: 1.5px solid var(--gold); border-bottom: 1.5px solid var(--gold); color: var(--ink); font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.cover .guest { margin-top: 20px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 250, 248, .82); }
+.cover .guest small { color: var(--muted); font-size: 15px; }
+.cover .guest strong { color: var(--green); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+.table { border-color: var(--pink); color: var(--pink-d); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .04em; }
+.openBtn { margin-top: 18px; background: var(--green); color: #fff3f5; font-family: var(--serif); font-size: 16px; font-weight: 700; letter-spacing: .03em; box-shadow: 0 10px 22px rgba(31, 74, 55, .3); }
+.openBtn:hover { background: var(--accent2); }
+
+/* ── Hero: framed card between two sprigs ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 70px 26px 40px; overflow: hidden; text-align: center; }
+.heroSprig { position: absolute; width: 200px; height: auto; pointer-events: none; }
+.heroSprigA { top: -10px; left: -50px; rotate: 196deg; scale: -1 1; }
+.heroSprigB { right: -48px; bottom: -6px; }
+.heroCard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; max-width: 310px; padding: 36px 20px 30px; border: 1.5px solid var(--gold); border-radius: 160px 160px 20px 20px; background: rgba(255, 250, 248, .88); box-shadow: 0 0 0 6px rgba(255, 250, 248, .88), 0 0 0 7px rgba(201, 154, 69, .55); }
+.heroLabel { color: var(--pink-d); font-family: var(--serif); font-size: 15px; font-weight: 700; font-style: italic; }
+.heroNames { max-width: 100%; color: var(--green); font-family: var(--display); font-size: 38px; font-weight: 600; line-height: 1.1; overflow-wrap: anywhere; text-wrap: balance; }
+.heroNames i { color: var(--pink); font-weight: 500; }
+.heroDate { color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: .04em; }
+.heroNote { max-width: 260px; margin-top: 6px; color: var(--muted); font-size: 16px; font-style: italic; line-height: 1.6; text-wrap: pretty; }
+
+@keyframes kSway { from { rotate: -1.4deg; } to { rotate: 1.4deg; } }
+.coverBloom { transform-origin: 50% 0; animation: kSway 7s var(--m-ease) infinite alternate; }
+@media (max-height: 740px) { .canopy { padding: 30px 24px 80px; } .names h1 { font-size: 46px; } .coverBloom { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .coverBloom { animation: none; } }

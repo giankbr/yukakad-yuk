@@ -1,0 +1,166 @@
+/* Keraton Sumenep — gerbang Labang Mesem berwarna cerah (merah, kuning, hijau giok) di atas krem, lampion merah bergoyang, ukiran Madura bercat, dan batik Madura hijau tua. */
+.root, .cover {
+  --bg: #fbf3e2; --paper: #f4e8cf; --ivory: #fffaf0; --field: #fffdf7; --ink: #2a1a12; --muted: #5d4a3c; --line: #dcc9a4;
+  --accent: #b5262b; --accent2: #8e1b20; --gold: #e8b42a; --gold-l: #f7d66a; --gold-d: #a8770f;
+  --red: #b5262b; --red-d: #7a1419; --yel: #e8b42a; --grn: #2f7a52; --grn-d: #174334; --cream: #fff6e0;
+  --batik: url(/themes/art/keraton-sumenep/batik.webp) repeat 0 0 / 240px;
+  --band-bg: linear-gradient(rgba(16, 48, 36, .74), rgba(16, 48, 36, .74)), var(--batik); --band-ink: #fff6e0;
+  --display: "Rozha One", "Playfair Display", Georgia, serif; --serif: Alegreya, Georgia, serif; --script: "Rozha One", Georgia, serif;
+  --h2: 36px; --card-r: 4px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #b5262b; --t-accent-ink: #fff6e0; --t-bg: #fbf3e2; --t-ink: #2a1a12; --t-muted: #5d4a3c; --t-line: #dcc9a4; --t-field: #fffdf7;
+  --t-radius: 4px; --t-font: Alegreya, Georgia, serif; --t-heading-font: "Rozha One", Georgia, serif; --t-heading-weight: 400; --t-heading-size: 32px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 16px;
+}
+
+/* ── type ── */
+.eyebrow, .salamKicker, .role { color: var(--red); font-family: var(--serif); font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-size: var(--h2); line-height: 1.1; }
+.headLight h2 { color: var(--cream); font-size: 34px; line-height: 1.1; }
+.headLight .eyebrow { color: var(--gold-l); }
+.divider { width: 180px; }
+.intro { font-size: 17px; color: var(--muted); }
+
+/* opening: cream card hung like a palace plaque */
+.salamBlock { position: relative; margin: 0 18px; padding: 40px 24px 38px; border: 2px solid var(--red); border-top: 0; background: var(--ivory); box-shadow: inset 0 0 0 5px var(--ivory), inset 0 0 0 7px var(--yel); }
+.arabic { color: var(--grn); font-size: 25px; }
+.salamTitle { color: var(--red); font-size: 34px; line-height: 1.1; }
+.main > .salamBlock { margin-top: 0; }
+
+/* couple: side by side under gate-arch frames */
+.couple { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); align-items: start; column-gap: 6px; row-gap: 22px; padding: 64px 14px; background: var(--paper); }
+.couple > .head { grid-column: 1 / -1; }
+.couple::before { content: ""; position: absolute; inset: 0 0 auto; height: 12px; background: var(--batik); background-size: 120px; }
+.person { gap: 3px; }
+.portrait { margin-bottom: 12px; }
+.portraitFrame { width: 100%; max-width: 156px; height: 210px; margin: 0 auto; padding: 5px; border: 3px solid var(--yel); border-radius: 80px 80px 4px 4px; background: var(--red); box-shadow: 0 0 0 3px var(--red), 0 12px 24px rgba(90, 30, 20, .18); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 74px 74px 2px 2px; }
+.portrait { width: 100%; }
+.portrait::after { content: ""; position: absolute; left: 50%; bottom: -10px; width: 22px; height: 22px; translate: -50% 0; rotate: 45deg; border: 2px solid var(--red); background: var(--yel); }
+.role { font-size: 11px; letter-spacing: .14em; margin-top: 8px; }
+.nick { color: var(--red); font-family: var(--display); font-size: 34px; line-height: 1.1; }
+.fullName { font-family: var(--serif); font-size: 15px; font-weight: 700; line-height: 1.3; }
+.parents { font-size: 14px; line-height: 1.45; }
+.monogram { color: var(--yel); font-family: var(--display); font-size: 74px; }
+.amp { align-self: center; flex-direction: column; gap: 4px; margin: 90px 0 0; color: var(--grn); font-family: var(--display); font-size: 34px; }
+.amp img { display: none; }
+
+/* countdown: green batik courtyard with red plaques */
+.countBand { padding: 58px 20px; }
+.countBand::after { content: ""; position: absolute; inset: auto 0 0; height: 10px; background: linear-gradient(90deg, var(--red) 0 33%, var(--yel) 33% 66%, var(--grn) 66%); }
+.count { grid-template-columns: repeat(4, minmax(0, 74px)); gap: 8px; }
+.count > div { height: 84px; border: 2px solid var(--yel); border-radius: 2px; background: var(--red); box-shadow: inset 0 0 0 3px var(--red), inset 0 0 0 4px rgba(247, 214, 106, .6); }
+.count b { color: var(--cream); font-size: 32px; }
+.count small { color: var(--gold-l); font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.ghostBtn { border-color: var(--yel); border-radius: 2px; color: var(--cream); font-family: var(--serif); font-weight: 700; letter-spacing: .06em; }
+
+/* events: lacquered plaques with diamond numbers */
+.events { gap: 30px; }
+.event { padding: 38px 20px 24px; border: 2px solid var(--red); border-radius: 4px; background: var(--ivory); box-shadow: 6px 6px 0 var(--grn); }
+.event::before { inset: 6px; border: 1px solid var(--yel); border-radius: 2px; }
+.event:hover { border-color: var(--red); box-shadow: 9px 9px 0 var(--grn); translate: -2px -2px; }
+.eventNo { top: -18px; width: 36px; height: 36px; border: 2px solid var(--yel); border-radius: 3px; background: var(--red); color: var(--cream); font-size: 14px; letter-spacing: 0; rotate: 45deg; }
+.event h3 { color: var(--red); font-size: 28px; }
+.eventDate { font-style: italic; }
+.eventTime { color: var(--grn); font-family: var(--serif); font-weight: 700; }
+.rule { width: 80px; height: 4px; background: linear-gradient(90deg, var(--red) 0 33%, var(--yel) 33% 66%, var(--grn) 66%); }
+.mapBtn { border-radius: 3px; background: var(--grn); color: var(--cream); font-family: var(--serif); font-weight: 700; letter-spacing: .04em; }
+.mapBtn:hover { background: var(--red); }
+
+/* story */
+.story { background: var(--paper); }
+.timeline::before { width: 3px; left: 20px; background: linear-gradient(var(--red), var(--yel), var(--grn)); }
+.node { width: 38px; height: 38px; border: 0; background: none; }
+.node img { width: 38px; }
+.storyBody small { color: var(--grn); font-family: var(--serif); font-size: 14px; font-weight: 700; letter-spacing: .14em; }
+.storyBody h3 { color: var(--red); font-size: 24px; }
+.storyImg { border-radius: 2px; border: 3px solid var(--yel); }
+
+/* gallery: first tile is the gate opening */
+.mosaic { grid-auto-rows: 140px; gap: 8px; }
+.tile { border-radius: 3px; }
+.tile:first-child { grid-column: span 2; grid-row: span 2; border-radius: 150px 150px 3px 3px; border: 4px solid var(--yel); outline: 3px solid var(--red); outline-offset: -1px; }
+.tile:nth-child(4n + 4) { grid-column: auto; }
+.tile:last-child:nth-child(even) { grid-column: span 2; }
+
+/* wishes */
+.form { border: 2px solid var(--red); border-radius: 4px; box-shadow: 6px 6px 0 var(--yel); }
+.field > span, .diet, .guestsLabel { color: var(--red); font-family: var(--serif); font-weight: 700; }
+.field input, .field textarea { border-radius: 3px; }
+.choices button { border-radius: 3px; }
+.choices .choiceOn, .choices .choiceOn:hover { background: var(--grn); border-color: var(--grn); color: var(--cream); }
+.step { border-radius: 3px; border-color: var(--red); }
+.submit { border-radius: 3px; background: var(--red); color: var(--cream); font-family: var(--serif); font-size: 16px; font-weight: 700; }
+.submit:not(:disabled):hover { background: var(--red-d); }
+.sent { color: var(--red); }
+.wish { border: 0; border-left: 5px solid var(--grn); border-radius: 3px; }
+.wish:nth-child(3n + 2) { border-left-color: var(--red); }
+.wish:nth-child(3n + 3) { border-left-color: var(--yel); }
+.wish strong { color: var(--red); font-family: var(--serif); font-weight: 700; }
+
+/* gifts: red lacquer boxes */
+.gift { border: 3px solid var(--yel); border-radius: 4px; background: var(--red); color: var(--cream); box-shadow: inset 0 0 0 4px var(--red), inset 0 0 0 5px rgba(247, 214, 106, .55); }
+.gift::after { border-color: rgba(247, 214, 106, .12); }
+.gift h3 { color: var(--gold-l); font-family: var(--serif); font-weight: 700; font-size: 17px; }
+.giftNo { font-family: var(--serif); font-weight: 700; }
+.giftIcon { border-color: var(--gold-l); border-radius: 3px; rotate: 45deg; }
+.giftIcon svg { rotate: -45deg; }
+.copy { border-color: var(--gold-l); border-radius: 3px; color: var(--cream); font-family: var(--serif); font-weight: 700; }
+.copyOn, .copyOn:hover { background: var(--gold-l); color: var(--red-d); }
+
+/* closing */
+.closing { padding: 64px 26px 150px; }
+.closingEmblem { width: 120px; height: auto; margin-bottom: 4px; }
+.thanks { color: var(--gold-l); font-family: var(--display); font-size: 42px; }
+.closingNames { color: var(--cream); font-family: var(--display); font-size: 34px; }
+.family { font-family: var(--serif); font-weight: 700; }
+.closingUkir { position: absolute; z-index: -1; left: 0; right: 0; bottom: 0; width: 100%; height: auto; }
+.music { border: 2px solid var(--yel); border-radius: 4px; background: var(--red); rotate: 45deg; }
+.music svg { rotate: -45deg; }
+
+/* ── Cover: Labang Mesem gate standing on a batik courtyard ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100dvh; overflow: hidden; background: var(--bg); color: var(--ink); text-align: center; isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: -1; inset: 0; background: radial-gradient(120% 60% at 50% 30%, #fffaf0, transparent 70%); }
+.ukirTop { display: block; width: 100%; height: auto; flex-shrink: 0; }
+.lanterns { position: absolute; z-index: 2; inset: 30px 0 auto; height: 0; }
+.lantern { position: absolute; top: 0; width: 46px; height: auto; transform-origin: 50% 0; animation: lanternSway 4.6s ease-in-out infinite alternate; }
+.lantern:first-child { left: 22px; }
+.lantern:last-child { right: 22px; animation-delay: -2.3s; }
+.coverHead { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 18px; padding: 0 80px; }
+.kicker { color: var(--grn); font-family: var(--serif); font-size: 15px; font-style: italic; font-weight: 500; }
+.coverLabel { color: var(--red); font-family: var(--serif); font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; }
+.gate { position: relative; z-index: 1; display: block; width: 92%; height: auto; margin: 10px auto -6px; }
+.ground { position: relative; display: flex; flex: 1; flex-direction: column; align-items: center; gap: 14px; width: 100%; padding: 0 20px 34px; background: var(--band-bg); color: var(--cream); }
+.ground::before { content: ""; position: absolute; inset: 0 0 auto; height: 8px; background: linear-gradient(90deg, var(--red) 0 33%, var(--yel) 33% 66%, var(--grn) 66%); }
+.plaque { position: relative; width: 100%; max-width: 340px; margin-top: -2px; padding: 22px 18px 18px; border: 3px solid var(--yel); background: var(--red); box-shadow: inset 0 0 0 4px var(--red), inset 0 0 0 6px rgba(247, 214, 106, .7), 0 14px 26px rgba(10, 30, 22, .35); }
+.coverNames { display: flex; flex-direction: column; align-items: center; color: var(--cream); font-family: var(--display); font-size: 46px; font-weight: 400; line-height: 1.02; text-shadow: 0 2px 0 var(--red-d); overflow-wrap: anywhere; }
+.coverNames span { max-width: 100%; }
+.coverNames em { margin: 2px 0; color: var(--gold-l); font-size: 28px; font-style: normal; }
+.coverDate { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(247, 214, 106, .6); color: var(--gold-l); font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+.guest { margin-top: 6px; color: var(--cream); }
+.guest small { color: rgba(255, 246, 224, .86); font-size: 14px; }
+.guest strong { color: #fff; font-family: var(--serif); font-size: 19px; font-weight: 700; }
+.table { border-color: var(--gold-l); color: var(--gold-l); font-family: var(--serif); font-weight: 700; }
+.openBtn { border: 2px solid var(--gold-l); border-radius: 3px; background: var(--yel); color: var(--red-d); font-family: var(--serif); font-size: 16px; font-weight: 800; letter-spacing: .06em; box-shadow: 0 0 0 4px rgba(232, 180, 42, .25), 0 10px 20px rgba(0, 0, 0, .3); }
+.openBtn:hover { background: var(--gold-l); translate: 0 -2px; }
+
+/* ── Hero: batik courtyard + photo in the gate opening ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 44px 24px 0; overflow: hidden; background: var(--band-bg); color: var(--cream); text-align: center; isolation: isolate; }
+.heroKicker { color: var(--gold-l); font-size: 13px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.heroArch { position: relative; width: 230px; height: 300px; margin-top: 8px; padding: 6px; border: 4px solid var(--yel); border-radius: 115px 115px 3px 3px; background: var(--red); box-shadow: 0 0 0 4px var(--red), 0 18px 34px rgba(0, 0, 0, .35); }
+.heroPhoto { width: 100%; height: 100%; overflow: hidden; border-radius: 108px 108px 1px 1px; }
+.heroPhoto > img, .heroPhoto > div { width: 100%; height: 100%; object-fit: cover; }
+.heroEmblem { width: 140px; height: auto; margin-top: 8px; }
+.heroNames { margin-top: 10px; color: var(--cream); font-family: var(--display); font-size: 48px; font-weight: 400; line-height: 1.05; overflow-wrap: anywhere; }
+.heroNames em { display: block; color: var(--gold-l); font-size: 28px; font-style: normal; }
+.heroDate { padding: 6px 14px; border: 1px solid var(--gold-l); color: var(--gold-l); font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+.heroNote { max-width: 320px; color: rgba(255, 246, 224, .9); font-size: 17px; font-style: italic; line-height: 1.55; }
+.heroUkir { display: block; width: calc(100% + 48px); height: auto; margin: 26px -24px 0; }
+.sentBox img { width: 110px; }
+
+.root .event, .root .mapBtn, .root .submit, .cover .openBtn { transition: background 500ms var(--m-ease), box-shadow 500ms var(--m-ease), border-color 500ms var(--m-ease), scale 400ms var(--m-ease), translate 400ms var(--m-ease); }
+@keyframes lanternSway { from { rotate: -4deg; } to { rotate: 4deg; } }
+@media (prefers-reduced-motion: reduce) { .lantern { animation: none; } }
+@media (max-width: 370px) { .coverNames { font-size: 40px; } .nick { font-size: 28px; } }

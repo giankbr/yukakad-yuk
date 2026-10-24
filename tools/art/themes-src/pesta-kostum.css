@@ -1,0 +1,162 @@
+/* Pesta Kostum — Kolase kertas guntingan berwarna cerah (tepi sobek putih, bayangan lembut): rak baju dandan berisi jubah merah, jubah bintang ungu, rok tutu, tunik ksatria karton, baju beruang, topeng kertas, dan mahkota; tiga anak berkostum di panggung kecil berbendera; kartu tamu berupa stiker nama, potret di cermin dandan bermahkota, hitung mundur dan acara sebagai label baju bergantung, form bertepi jahitan; Titan One + Lexend. */
+
+.root, .cover {
+  font-variant-numeric: lining-nums;
+  --bg: #fdf3e1; --paper: #f8e6c8; --ivory: #ffffff; --field: #fffdf8; --ink: #2d2440; --muted: #5f566e; --line: #ecdcc0;
+  --accent: #ef5b3f; --accent2: #d9452f; --gold: #ffc53a; --gold-l: #ffe08a; --gold-d: #c98a10;
+  --tomato: #ef5b3f; --sun: #ffc53a; --teal: #1f9e9a; --violet: #7a4fb5; --pink: #ff8fb1; --sky: #5aa9e6;
+  --band-bg: #7a4fb5; --band-ink: #fffaf0;
+  --display: "Titan One", system-ui, sans-serif; --serif: Lexend, system-ui, sans-serif; --script: "Titan One", system-ui, sans-serif;
+  --h2: 32px; --card-r: 18px;
+  font-family: var(--serif); color: var(--ink); background: var(--bg); line-height: normal;
+}
+.root {
+  --t-accent: #1f9e9a; --t-accent-ink: #ffffff; --t-bg: #fdf3e1; --t-ink: #2d2440; --t-muted: #5f566e; --t-line: #ecdcc0; --t-field: #fffdf8;
+  --t-radius: 16px; --t-font: Lexend, system-ui, sans-serif; --t-heading-font: "Titan One", system-ui, sans-serif; --t-heading-weight: 400; --t-heading-size: 30px; --t-heading-align: center; --t-heading-style: normal;
+  font-size: 17px;
+}
+.main { background: var(--bg) radial-gradient(circle, rgba(239, 91, 63, .12) 2px, transparent 2.5px) 0 0 / 28px 28px; }
+
+.eyebrow, .salamKicker, .role { color: var(--teal); font-family: var(--serif); font-size: 12.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.head h2 { color: var(--ink); font-family: var(--display); line-height: 1.12; }
+.divider { width: 92px; height: auto; margin-top: 4px; rotate: -4deg; }
+.intro { color: var(--muted); font-size: 16.5px; }
+
+/* opening */
+.salamBlock { padding: 46px 26px 56px; }
+.salamTitle { color: var(--tomato); font-family: var(--display); font-size: 34px; line-height: 1.12; }
+
+/* celebrant: a dress-up mirror with a paper crown on top */
+.couple { gap: 18px; background: var(--paper); }
+.portrait { margin-bottom: 18px; padding-top: 54px; }
+.pCrown { position: absolute; z-index: 2; top: 0; left: 50%; width: 120px; height: auto; margin-left: -60px; rotate: -6deg; animation: pkWobble 3.4s ease-in-out infinite; }
+.portraitFrame { width: 214px; height: 262px; padding: 12px; border: 0; border-radius: 50%; background: var(--sun); box-shadow: inset 0 0 0 6px #f2ad20, 0 0 0 6px #fff, 0 14px 0 rgba(45, 36, 64, .12); }
+.portraitFrame > img, .portraitFrame > div { border-radius: 50%; }
+.monogram { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #cfeef0, #9fd9db 60%, #7cc6c8); color: var(--violet); font-family: var(--display); font-size: 96px; text-shadow: 4px 4px 0 #fff; }
+.nick { color: var(--tomato); font-family: var(--display); font-size: 50px; text-shadow: 3px 3px 0 var(--sun); }
+.fullName { color: var(--ink); font-family: var(--serif); font-size: 18px; font-weight: 700; }
+.parents { color: var(--muted); font-size: 15.5px; }
+
+/* countdown: four costume hang-tags swinging on strings */
+.countBand { padding: 70px 18px 74px; background: var(--violet) radial-gradient(circle, rgba(255, 255, 255, .12) 2px, transparent 2.5px) 0 0 / 24px 24px; }
+.countMask { position: absolute; z-index: -1; width: 110px; height: auto; opacity: .9; animation: pkFloat 5s ease-in-out infinite alternate; }
+.countMaskL { left: -24px; top: 26px; rotate: -16deg; }
+.countMaskR { right: -24px; bottom: 30px; rotate: 14deg; animation-delay: -2s; }
+.headLight .eyebrow { color: var(--gold-l); }
+.headLight h2 { color: #fff; font-family: var(--display); }
+.count { grid-template-columns: repeat(4, minmax(0, 72px)); gap: 10px; padding-top: 10px; }
+.count > div { height: 100px; padding-top: 14px; overflow: visible; border: 0; border-radius: 10px; background: #fff; clip-path: polygon(22% 0, 78% 0, 100% 16%, 100% 100%, 0 100%, 0 16%); transform-origin: 50% 0; animation: pkTag 3.2s ease-in-out infinite alternate; }
+.count > div:nth-child(2) { background: var(--gold-l); animation-delay: -.8s; }
+.count > div:nth-child(3) { background: #bfe8e6; animation-delay: -1.6s; }
+.count > div:nth-child(4) { background: #ffd0de; animation-delay: -2.4s; }
+.count > div::before { content: ""; position: absolute; top: 7px; left: 50%; width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--violet); }
+.count > div::after { display: none; }
+.count b { color: var(--ink); font-family: var(--display); font-size: 30px; }
+.count small { color: var(--ink); font-size: 11.5px; font-style: normal; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.countTba { color: #fff; }
+.ghostBtn { border: 2px solid #fff; color: #fff; font-family: var(--serif); font-weight: 700; }
+
+/* event: a big label tag with a punched hole and a stitched edge */
+.events { gap: 26px; }
+.event { padding: 50px 22px 26px; border: 0; border-radius: 18px; background: #fff; clip-path: polygon(14% 0, 86% 0, 100% 10%, 100% 100%, 0 100%, 0 10%); box-shadow: none; filter: drop-shadow(0 8px 0 var(--line)); }
+.event::before { inset: 8px; border: 2px dashed color-mix(in srgb, var(--teal) 55%, transparent); border-radius: 12px; }
+.eventNo { top: 16px; width: 20px; height: 20px; padding: 0; border-radius: 50%; background: var(--bg); color: transparent; box-shadow: inset 0 2px 3px rgba(0, 0, 0, .15); font-size: 0; }
+.event h3 { color: var(--tomato); font-family: var(--display); font-size: 26px; }
+.eventDate { color: var(--ink); font-style: normal; font-weight: 700; }
+.eventTime { color: var(--teal); font-family: var(--serif); font-weight: 700; }
+.rule { width: 70px; height: 6px; border-radius: 3px; background: var(--sun); }
+.mapBtn { border-radius: 999px; background: var(--teal); color: #fff; font-family: var(--serif); font-size: 14px; font-weight: 700; box-shadow: 0 4px 0 #157a77; }
+.mapBtn:hover { background: #178a87; }
+
+/* story: star-wand nodes on a dotted line */
+.story { background: var(--paper); }
+.timeline::before { left: 20px; width: 3px; background: radial-gradient(circle, var(--violet) 1.5px, transparent 2px) 0 0 / 3px 10px repeat-y; }
+.node { width: 40px; height: 40px; border: 3px solid #fff; background: var(--sun); }
+.node img { width: 14px; }
+.storyBody { padding: 14px 16px 16px; border-radius: 16px; background: #fff; box-shadow: 0 6px 0 var(--line); }
+.storyBody small { color: var(--violet); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.storyBody h3 { color: var(--ink); font-family: var(--display); font-size: 21px; }
+
+/* wishes: a stitched fabric card */
+.wishes { background: var(--bg); }
+.form { border: 0; border-radius: 20px; background: #fff; box-shadow: inset 0 0 0 8px #fff, inset 0 0 0 10px transparent, 0 8px 0 var(--line); outline: 2px dashed color-mix(in srgb, var(--tomato) 55%, transparent); outline-offset: -10px; }
+.field > span, .diet, .guestsLabel { color: var(--ink); font-family: var(--serif); font-size: 12px; font-weight: 800; letter-spacing: .1em; }
+.field input, .field textarea { border-radius: 12px; }
+.choices button { border-radius: 999px; font-weight: 700; }
+.choices .choiceOn, .choices .choiceOn:hover { border-color: var(--teal); background: var(--teal); color: #fff; }
+.step { border-color: var(--teal); color: var(--teal); }
+.submit { border-radius: 999px; background: var(--tomato); color: #fff; font-family: var(--display); font-size: 17px; letter-spacing: .02em; box-shadow: 0 5px 0 var(--accent2); }
+.submit:not(:disabled):hover { background: var(--accent2); }
+.wish { border: 0; border-radius: 16px; box-shadow: 0 5px 0 var(--line); }
+.wish strong { color: var(--ink); font-family: var(--serif); font-size: 16.5px; font-weight: 800; }
+.wish small { background: color-mix(in srgb, var(--sun) 40%, transparent); color: #7a5208; font-weight: 700; }
+.sentBox img { width: 120px; }
+.sent { color: var(--ink); font-family: var(--display); font-style: normal; }
+
+/* gifts: teal cards with a stitched inner edge */
+.gift { border-radius: 20px; background: var(--teal); outline: 2px dashed rgba(255, 255, 255, .65); outline-offset: -9px; }
+.gift::after { display: none; }
+.giftIcon { border-color: rgba(255, 255, 255, .7); }
+.gift h3 { color: #fff; font-family: var(--display); font-size: 19px; }
+.giftNo { color: #fff; font-family: var(--serif); font-size: 22px; font-weight: 800; letter-spacing: .05em; }
+.gifts .gift:last-of-type .giftNo { font-size: 16px; font-weight: 600; letter-spacing: 0; line-height: 1.5; }
+.gift small { color: rgba(255, 255, 255, .9); }
+.copy { border: 2px solid #fff; border-radius: 999px; color: #fff; font-family: var(--serif); font-weight: 800; }
+.copyOn, .copyOn:hover { background: #fff; color: var(--teal); }
+
+/* closing: the little stage again */
+.closing { padding: 30px 22px 60px; background: linear-gradient(180deg, var(--bg) 0 150px, var(--violet) 150px); }
+.closingStage { width: calc(100% + 20px); max-width: 400px; height: auto; margin: 0 -10px 4px; animation: pkHop 2.8s ease-in-out infinite; }
+.thanks { color: var(--sun); font-family: var(--display); font-size: 46px; text-shadow: 3px 3px 0 var(--tomato); }
+.family { color: rgba(255, 250, 240, .9); font-family: var(--serif); }
+.closingNames { color: #fff; font-family: var(--display); font-size: 34px; }
+.made { color: rgba(255, 250, 240, .65); }
+.music { border: 3px solid #fff; background: var(--tomato); }
+
+/* ── Cover: the dress-up rack, the name under a paper crown, a name-tag sticker for the guest ── */
+.cover { position: relative; display: flex; flex-direction: column; align-items: center; min-height: 100svh; padding: 18px 20px 30px; overflow: hidden; background: var(--bg) radial-gradient(circle, rgba(122, 79, 181, .12) 2px, transparent 2.5px) 0 0 / 26px 26px; color: var(--ink); text-align: center; isolation: isolate; }
+.rack { width: calc(100% + 16px); max-width: 410px; height: auto; margin: 0 -8px; }
+.mask { position: absolute; z-index: 1; width: 92px; height: auto; animation: pkFloat 4s ease-in-out infinite alternate; }
+.maskA { top: 57%; left: 6px; rotate: -16deg; }
+.wand { position: absolute; z-index: 1; top: 52%; right: 14px; width: 44px; height: auto; rotate: 16deg; animation: pkFloat 4.6s ease-in-out -1.5s infinite alternate; }
+.kicker { margin-top: -8px; padding: 6px 16px; background: var(--teal); color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; rotate: -2deg; box-shadow: 3px 3px 0 var(--ink); }
+.name { max-width: 100%; margin-top: 14px; color: var(--tomato); font-family: var(--display); font-size: 70px; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--sun), 6px 6px 0 var(--ink); text-wrap: balance; }
+.ageRow { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 14px; }
+.crownAge { position: relative; width: 108px; flex-shrink: 0; animation: pkWobble 3s ease-in-out infinite; }
+.crownAge img { display: block; width: 100%; height: auto; }
+.crownAge b { position: absolute; left: 0; right: 0; top: 30%; color: var(--ink); font-family: var(--display); font-size: 38px; font-weight: 400; line-height: 1; text-shadow: 2px 2px 0 #fff; }
+.ageText { color: var(--ink); font-size: 18px; font-weight: 700; line-height: 1.25; text-align: left; }
+.ageText small { display: block; color: var(--violet); font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.coverDate { margin-top: 14px; padding: 6px 16px; border-radius: 999px; background: #fff; color: var(--ink); font-size: 16px; font-weight: 700; box-shadow: 0 0 0 2px var(--ink), 0 4px 0 2px var(--ink); }
+.spacer { flex: 1 0 18px; max-height: 80px; }
+.sticker { position: relative; width: 100%; max-width: 320px; overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--ink), 6px 8px 0 6px var(--ink); rotate: 1.2deg; }
+.stickerHead { padding: 8px 12px 6px; background: var(--tomato); color: #fff; }
+.stickerHead b { display: block; font-family: var(--display); font-size: 22px; font-weight: 400; letter-spacing: .04em; }
+.stickerHead small { font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.guest { max-width: 100%; margin: 0 auto; padding: 12px 14px 14px; }
+.guest small { color: var(--muted); font-size: 13.5px; font-style: normal; }
+.guest strong { color: var(--ink); font-family: var(--serif); font-size: 21px; font-weight: 800; }
+.table { border: 2px solid var(--teal); color: var(--teal); font-family: var(--serif); font-size: 11.5px; font-weight: 800; }
+.openBtn { margin-top: 24px; border-radius: 999px; background: var(--sun); color: var(--ink); font-family: var(--display); font-size: 17px; letter-spacing: .02em; box-shadow: 0 0 0 3px var(--ink), 0 6px 0 3px var(--ink); }
+.openBtn:hover { translate: 0 -2px; }
+
+/* ── Hero: the little stage with three kids in costumes ── */
+.hero { position: relative; display: flex; flex-direction: column; align-items: center; padding: 44px 18px 30px; background: var(--bg); text-align: center; }
+.heroKicker { padding: 5px 14px; background: var(--violet); color: #fff; font-size: 12.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; rotate: 2deg; }
+.heroName { max-width: 100%; margin-top: 12px; color: var(--tomato); font-family: var(--display); font-size: 54px; line-height: 1; overflow-wrap: anywhere; text-shadow: 3px 3px 0 var(--sun); }
+.heroAge { margin-top: 8px; color: var(--ink); font-family: var(--display); font-size: 22px; }
+.heroDate { margin-top: 6px; color: var(--muted); font-size: 16px; font-weight: 700; }
+.heroStage { width: calc(100% + 16px); max-width: 410px; height: auto; margin: 18px -8px 0; }
+.heroNote { max-width: 330px; margin-top: 16px; color: var(--muted); font-size: 16.5px; line-height: 1.6; }
+
+@keyframes pkWobble { 0%, 100% { rotate: -6deg; } 50% { rotate: 4deg; } }
+@keyframes pkFloat { from { translate: 0 0; } to { translate: 0 -10px; } }
+@keyframes pkTag { from { rotate: -3deg; } to { rotate: 3deg; } }
+@keyframes pkHop { 0%, 80%, 100% { translate: 0 0; } 88% { translate: 0 -6px; } }
+@media (prefers-reduced-motion: reduce) {
+  .pCrown, .countMask, .count > div, .closingStage, .mask, .wand, .crownAge { animation: none; }
+}
+@media (max-width: 370px) {
+  .name { font-size: 56px; }
+  .count { gap: 7px; }
+}
