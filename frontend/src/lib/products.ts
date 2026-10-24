@@ -11,6 +11,8 @@ export type ProductContent = {
   image: string;
   /** Optional looping example video (9:16) shown in a phone frame over the image. */
   video?: { src: string; poster: string };
+  /** Extra example videos shown as a grid ("Contoh video"). */
+  gallery?: { slug: string; title: string; note: string }[];
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
   stats: Pair[];
@@ -44,6 +46,15 @@ export const defaultProducts: ProductContent[] = [
     price: "Rp99rb / video",
     image: "/rawuh/product-video.webp",
     video: { src: "/rawuh/video-ucapan-demo.mp4", poster: "/rawuh/video-ucapan-demo-poster.webp" },
+    // Files: /rawuh/video-contoh/<slug>.mp4 and <slug>-poster.webp (tools/video/demo_video.py --style <slug>).
+    gallery: [
+      { slug: "jawa-keraton", title: "Jawa Keraton", note: "Gebyok terbuka, gunungan & batik kawung" },
+      { slug: "islami-zamrud", title: "Islami Zamrud", note: "Lengkung mihrab & cahaya lentera" },
+      { slug: "rustic-garden", title: "Rustic Garden", note: "Kertas kraft & daun eukaliptus" },
+      { slug: "ultah-ceria", title: "Ulang Tahun Ceria", note: "Balon, confetti & kado yang terbuka" },
+      { slug: "navy-malam", title: "Navy Malam", note: "Langit berbintang & bingkai art-deco" },
+      { slug: "bali-kuning", title: "Bali Kuning", note: "Candi bentar & bunga kamboja" },
+    ],
     primary: { label: "Pesan video", href: "contact" },
     secondary: { label: "Lihat tema", href: "/templates" },
     stats: [["30 dtk", "durasi optimal story"], ["1080p", "kualitas HD vertikal"], ["24 jam", "jadi & siap kirim"]],

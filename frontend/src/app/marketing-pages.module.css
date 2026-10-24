@@ -429,3 +429,16 @@
 .phoneVideoControls button:hover { background: rgba(20, 19, 18, .8); }
 .phoneVideoControls button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 .phoneVideoControls button[aria-pressed="true"] { background: rgba(255, 255, 255, .92); color: #141312; }
+
+/* Example video grid (product pages with `gallery`). */
+.videoGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 24px; }
+.videoTile { display: grid; gap: 14px; margin: 0; }
+.videoTileFrame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border: 6px solid #141312; border-radius: 28px; background: #141312; box-shadow: 0 20px 44px -24px rgba(0, 0, 0, .45); transition: translate 220ms var(--m-spring, cubic-bezier(.34, 1.56, .64, 1)), box-shadow 220ms; }
+.videoTile:hover .videoTileFrame { translate: 0 -4px; box-shadow: 0 28px 56px -26px rgba(0, 0, 0, .5); }
+.videoTileFrame video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.videoTile figcaption { display: grid; gap: 2px; padding-inline: 4px; }
+.videoTile figcaption strong { color: var(--rw-ink); font-size: 16px; font-weight: 600; }
+.videoTile figcaption small { color: var(--rw-muted); font-size: 14px; }
+@media (max-width: 900px) { .videoGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; } }
+@media (max-width: 480px) { .videoTileFrame { border-width: 4px; border-radius: 20px; } .videoTile .phoneVideoControls button span { display: none; } }
+@media (prefers-reduced-motion: reduce) { .videoTileFrame { transition: none; } }

@@ -32,3 +32,25 @@ Timeline (30 s): 0–6 s envelope turns in, flap opens, card slides out · 6–1
 panel) · 19–25 s countdown "Menuju hari bahagia" (Hari/Jam/Menit/Detik tiles, digits roll each second)
 · 25–30 s closing line + "Dibuat dengan Rawuh · rawuh.id", fade to the opening background (seamless loop).
 Near (big, blurred) petals are confined to the frame edges; all other petals sit behind the card/text.
+
+## Gallery styles (`--style`)
+
+`--style blush` (default) is the main demo above. Six more presets render 15 s, 720x1280 gallery clips
+to `frontend/public/rawuh/video-contoh/<slug>.mp4` + `<slug>-poster.webp` (poster at 4.9 s, names reveal):
+
+    python3 tools/video/demo_video.py --gallery                      # all six (~1.5 min)
+    python3 tools/video/demo_video.py --style navy-malam --out /tmp/x.mp4
+    python3 tools/video/demo_video.py --style bali-kuning --still 1.6 4.9 10.8   # debug stills
+
+| slug | intro | card | particles | highlight | music |
+|---|---|---|---|---|---|
+| `jawa-keraton` | carved gebyok doors with gunungan + kawung swing open | sogan brown, kawung border | rising gold dust | countdown (dark wood tiles) | gamelan |
+| `islami-zamrud` | "Bismillahirrahmanirrahim" line, hanging lanterns | emerald mihrab arch, 8-point star pattern | lantern glows | countdown (arch tiles) | religi |
+| `rustic-garden` | hanging wooden sign swings in on ropes | polaroid with painted landscape / kraft back | eucalyptus leaves | countdown (kraft tags) | akustik |
+| `ultah-ceria` | gift box, lid pops off | bunting + candy "Arka" | balloons + confetti | big "7" pop + confetti burst | ceria |
+| `navy-malam` | card flies in under stars, crescent moon, shooting star | navy art-deco frame, fan motifs | gold glitter, twinkling stars | countdown (deco tiles) | khidmat |
+| `bali-kuning` | candi bentar split gate parts, "Om Swastyastu", penjor | stepped candi-top card, kamboja, patra band | frangipani | countdown | gamelan |
+
+Gallery timeline (15 s): 0–3.2 intro · 3.2–6.3 names · 6.3–9 flip to details · 9.4–12.4 highlight ·
+12.3–15 closing, fading back to the opening frame. Large near particles stay in edge bands; everything
+else passes behind the card and text.

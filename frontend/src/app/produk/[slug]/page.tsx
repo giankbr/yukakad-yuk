@@ -7,6 +7,7 @@ import base from "@/app/landing.module.css";
 import styles from "@/app/marketing-pages.module.css";
 import { Breadcrumb, FinalCta, MarketingPage, SplitTitle } from "@/components/landing/Sections";
 import { ProductVideo } from "@/components/landing/ProductVideo";
+import { VideoGallery } from "@/components/landing/VideoGallery";
 import {
   IconArrowRight, IconCalendar, IconDownload, IconFile, IconGift, IconGlobe, IconImages, IconLink, IconMail, IconMusic,
   IconPin, IconPrinter, IconQr, IconRefresh, IconSparkle, IconTruck, IconUser, IconUsers, IconVideo, IconWifiOff,
@@ -66,6 +67,19 @@ export default async function ProductPage({ params }: PageProps<"/produk/[slug]"
       <div className={styles.statThree}>
         {product.stats.map(([value, label]) => <div key={label}><strong>{value}</strong><small>{label}</small></div>)}
       </div>
+
+      {product.gallery?.length ? (
+        <section className={base.section} aria-labelledby="gallery-title">
+          <div className={styles.rowHead} style={{ marginBottom: 32 }}>
+            <div className={base.titleGroup}>
+              <p className={base.eyebrow}>Contoh video</p>
+              <h2 id="gallery-title" className={base.sectionTitle}>Satu cerita, banyak gaya.</h2>
+            </div>
+            <p className={styles.lead} style={{ maxWidth: 420, fontSize: 16 }}>Setiap gaya bisa disesuaikan dengan nama, tanggal, foto, dan warna acaramu. Ketuk “Suara” untuk mendengar musiknya.</p>
+          </div>
+          <VideoGallery videos={product.gallery} />
+        </section>
+      ) : null}
 
       <section className={base.section} aria-labelledby="how-title">
         <div className={base.titleGroup} style={{ marginBottom: 40 }}>
