@@ -11,6 +11,7 @@ export type Plan = { id: string; name: string; max_guests: number; has_watermark
 
 import { themeList } from "@/components/invitation/themes/registry";
 import { mergeProducts } from "./products";
+import { varietyOrder } from "./theme-collections";
 import { legalSection, mergeAbout, mergeLegal, type AboutContent, type LegalContent } from "./site-content";
 import type { LegalDoc } from "./legal";
 
@@ -39,7 +40,9 @@ export async function getJSON<T>(path: string, fallback: T): Promise<T> {
 
 export async function getTemplates() {
   const result = await getJSON<{ items?: Template[] }>("/api/templates", {});
-  return result.items?.length ? result.items : defaultTemplates;
+  const items = result.items?.length ? result.items : defaultTemplates;
+  // Galleries show a varied mix (weddings, adat, islami, events, app-style) instead of catalogue batches.
+  return varietyOrder(items, template => ({ category: template.category, eventType: template.event_type }));
 }
 
 export async function getPlans() {

@@ -9,7 +9,6 @@ import { createPortal } from "react-dom";
 import { TOAST_EVENT } from "@/lib/celebrate";
 import m from "./motion-layer.module.css";
 import type { AmbientKind, CoverExit } from "./mood";
-import { useMusicState } from "./music";
 
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -420,27 +419,6 @@ export function Ambient({ kind, width }: { kind: AmbientKind; width: number }) {
   }, [kind]);
   if (kind === "none") return null;
   return <canvas ref={canvas} className={m.ambient} style={{ "--col": `${width}px` } as CSSProperties} aria-hidden="true" />;
-}
-
-/* ── Now playing ────────────────────────────────────────────────── */
-
-/** "♪ Gamelan Keraton" — announces the track for a moment the first time the backsound starts. */
-export function MusicChip() {
-  const music = useMusicState();
-  const [shown, setShown] = useState<number>(0);
-  useEffect(() => {
-    if (!music.announced || !music.title) return;
-    const show = setTimeout(() => setShown(music.announced), 0);
-    const hide = setTimeout(() => setShown(0), 3200);
-    return () => { clearTimeout(show); clearTimeout(hide); };
-  }, [music.announced, music.title]);
-  if (!shown || !music.title) return null;
-  return (
-    <div className={m.musicChip} role="status" aria-live="polite" key={shown}>
-      <span className={m.eq} aria-hidden="true"><i /><i /><i /></span>
-      <span>{music.title}</span>
-    </div>
-  );
 }
 
 /* ── Action feedback ────────────────────────────────────────────── */

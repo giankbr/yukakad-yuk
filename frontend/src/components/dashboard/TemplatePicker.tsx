@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { API_URL, apiFetch } from "@/lib/api";
+import { varietyOrder } from "@/lib/theme-collections";
 import { ThemeButton, ThemeGrid, type DashboardTemplate } from "./ThemeGrid";
 
 export function TemplatePicker({
@@ -26,7 +27,7 @@ export function TemplatePicker({
   useEffect(() => {
     fetch(`${API_URL}/api/templates`)
       .then((response) => { if (!response.ok) throw new Error(); return response.json(); })
-      .then((body: { items?: DashboardTemplate[] }) => setTemplates(body.items ?? []))
+      .then((body: { items?: DashboardTemplate[] }) => setTemplates(varietyOrder(body.items ?? [], t => ({ category: t.category, eventType: t.event_type }))))
       .catch(() => setError("Tema gagal dimuat. Coba muat ulang halaman."))
       .finally(() => setLoading(false));
   }, []);

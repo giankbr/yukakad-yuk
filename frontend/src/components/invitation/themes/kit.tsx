@@ -13,7 +13,7 @@ import kit from "./kit.module.css";
 import { autoReveal, revealChildren } from "@/lib/reveal";
 import { celebrate, toast } from "@/lib/celebrate";
 import { DietaryField, ReadingAids, ThankYouBanner, useInvitation, useThankYou } from "./extras";
-import { Ambient, FEEDBACK_EVENT, Lightbox, MusicChip, ScrollProgress, Toaster, boop, enhanceCover, enhanceMain, feedback, leaveCover, useLightbox } from "./motion-layer";
+import { Ambient, FEEDBACK_EVENT, Lightbox, ScrollProgress, Toaster, boop, enhanceCover, enhanceMain, feedback, leaveCover, useLightbox } from "./motion-layer";
 import { motionOf } from "./motion";
 import { themeMood } from "./mood";
 import { OPEN_EVENT, useMusic } from "./music";
@@ -127,7 +127,6 @@ export function ThemeShell({ cover, children, background = "#f4f4f4", width = 43
         {opened && <ScrollProgress width={width} />}
         {opened && <Ambient kind={mood.ambient} width={width} />}
         <Toaster />
-        <MusicChip />
         {lightbox.state && <Lightbox {...lightbox.state} onClose={lightbox.close} onIndex={lightbox.setIndex} />}
       </div>
     </div>

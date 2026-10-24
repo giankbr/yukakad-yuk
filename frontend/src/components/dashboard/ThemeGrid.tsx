@@ -9,6 +9,7 @@ export type DashboardTemplate = {
   name: string;
   slug: string;
   category: string;
+  event_type?: string;
   preview_image?: string;
   preview_url?: string;
   is_premium: boolean;

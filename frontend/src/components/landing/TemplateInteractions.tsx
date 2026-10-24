@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import styles from "@/app/landing.module.css";
+import { COLLECTIONS, collectionOf, type CollectionId } from "@/lib/theme-collections";
 import { IconArrowRight, IconClose, IconHeart, IconMenu, IconMessage, IconSearch } from "@/components/brand/icons";
 
 const MOBILE_LINKS: [string, string][] = [
@@ -163,24 +164,7 @@ export function ThemeGallery({ templates, clip = false, title = "Cari tema yang 
  * Themes are filtered in two levels so the bar stays short however many categories exist:
  * a handful of fixed collections, then the categories inside the chosen collection.
  */
-const COLLECTIONS = [
-  { id: "pernikahan", label: "Pernikahan" },
-  { id: "adat", label: "Adat Nusantara" },
-  { id: "islami", label: "Islami & Syari" },
-  { id: "unik", label: "Kekinian" },
-  { id: "acara", label: "Acara lain" },
-] as const;
-export type CollectionId = (typeof COLLECTIONS)[number]["id"];
-
-const UNIK = new Set(["Aplikasi", "Hiburan", "Sosial Media", "Perjalanan", "Keuangan", "Belanja", "Unik", "Retro"]);
-
-export function collectionOf(category: string, eventType?: string): CollectionId {
-  if (eventType && eventType !== "wedding") return "acara";
-  if (category.startsWith("Adat ") || category === "Peranakan") return "adat";
-  if (category === "Islami" || category === "Syari") return "islami";
-  if (UNIK.has(category)) return "unik";
-  return "pernikahan";
-}
+export { collectionOf, type CollectionId } from "@/lib/theme-collections";
 
 export type ThemeFilter = { collection: CollectionId | ""; category: string };
 type Filterable = { category: string; eventType?: string };

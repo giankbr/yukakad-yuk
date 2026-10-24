@@ -16,13 +16,9 @@ type State = {
   opened: boolean;
   /** Theme-rendered players currently mounted (the generic one doesn't count). */
   owners: number;
-  title?: string;
-  bpm?: number;
-  /** Bumps when playback starts for the first time, so <MusicChip> can announce the track. */
-  announced: number;
 };
 
-const initial: State = { playing: false, failed: false, opened: false, owners: 0, announced: 0 };
+const initial: State = { playing: false, failed: false, opened: false, owners: 0 };
 let state = initial;
 const listeners = new Set<() => void>();
 function set(patch: Partial<State>) {
@@ -34,13 +30,9 @@ let audio: HTMLAudioElement | null = null;
 let source = "";
 let autoplay = false;
 let users = 0;
-let everPlayed = false;
 let timer: ReturnType<typeof setTimeout> | undefined;
 
-const onPlay = () => {
-  set({ playing: true, ...(everPlayed ? {} : { announced: Date.now() }) });
-  everPlayed = true;
-};
+const onPlay = () => set({ playing: true });
 const onPause = () => set({ playing: false });
 const onError = () => set({ failed: true, playing: false });
 const onOpen = () => {
@@ -65,7 +57,6 @@ function teardown() {
   }
   audio = null;
   source = "";
-  everPlayed = false;
   document.documentElement.style.removeProperty("--music-beat");
   set({ ...initial, owners: state.owners });
 }
@@ -84,7 +75,7 @@ function attach(url: string, music: NonNullable<MusicSource>) {
   window.addEventListener(OPEN_EVENT, onOpen);
   // The pulse on the music button follows the track's tempo when it's known (demo tracks), else a calm default.
   document.documentElement.style.setProperty("--music-beat", `${(60 / (music.bpm || 66)).toFixed(3)}s`);
-  set({ failed: false, playing: false, opened: false, title: music.title, bpm: music.bpm });
+  set({ failed: false, playing: false, opened: false });
   // Rendered without a cover (?open=1): show the toggle straight away.
   timer = setTimeout(() => { if (!document.querySelector('[aria-label="Sampul undangan"]')) set({ opened: true }); }, 600);
 }

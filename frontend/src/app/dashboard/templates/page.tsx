@@ -7,6 +7,7 @@ import { ThemeGrid, ThemeLink, type DashboardTemplate } from "@/components/dashb
 import { API_URL } from "@/lib/api";
 import { useAuthToken } from "@/lib/useAuthToken";
 import { friendlyError } from "@/lib/errors";
+import { varietyOrder } from "@/lib/theme-collections";
 
 export default function DashboardTemplatesPage() {
   const { ready } = useAuthToken();
@@ -21,7 +22,7 @@ export default function DashboardTemplatesPage() {
         if (!response.ok) throw new Error("Tema gagal dimuat");
         return response.json();
       })
-      .then((body: { items?: DashboardTemplate[] }) => setTemplates(body.items ?? []))
+      .then((body: { items?: DashboardTemplate[] }) => setTemplates(varietyOrder(body.items ?? [], t => ({ category: t.category, eventType: t.event_type }))))
       .catch((err: Error) => setError(friendlyError(err.message, "Gagal memuat. Coba muat ulang halaman.")))
       .finally(() => setLoading(false));
   }, [ready]);
